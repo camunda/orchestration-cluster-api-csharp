@@ -1,0 +1,36 @@
+## .NET
+bin/
+obj/
+nupkgs/
+
+## IDE
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+
+## Rider
+.idea/
+*.sln.iml
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Build artifacts
+_logs/
+_gen-drift.patch
+release-assets/
+
+## Spec fetching
+external-spec/tmp-clone/
+
+## Test results
+TestResults/
+*.trx
+coverage/
+
+## DocFX generated output
+docs/_site/
+docs/api/

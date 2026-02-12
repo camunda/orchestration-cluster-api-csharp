@@ -1,0 +1,142 @@
+name: PR & Branch CI
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      matrix:
+        dotnet: ['8.0.x']
+        stack: [simple]
+        include:
+          - dotnet: '8.0.x'
+            stack: full
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET ${{ matrix.dotnet }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      - name: Setup Node.js (for swagger-cli)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Fetch & Bundle spec
+        run: |
+          bash scripts/fetch-spec.sh
+          bash scripts/bundle-spec.sh
+
+      - name: Generate SDK
+        run: dotnet run --project src/Camunda.Client.Generator
+
+      - name: Format Generated Code
+        run: dotnet format src/Camunda.Client/Camunda.Client.csproj --no-restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Lint Check
+        run: dotnet format --verify-no-changes
+
+      - name: Detect Generation Drift (non-blocking)
+        id: drift
+        run: |
+          if ! git diff --quiet; then
+            echo 'drift=true' >> $GITHUB_OUTPUT
+            echo 'Generation produced changes (reporting only).' >&2
+            git diff --name-only | sed 's/^/CHANGED: /'
+            git diff > _gen-drift.patch || true
+          else
+            echo 'drift=false' >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload Drift Patch
+        if: steps.drift.outputs.drift == 'true' && matrix.stack == 'simple'
+        uses: actions/upload-artifact@v4
+        with:
+          name: generation-drift
+          path: _gen-drift.patch
+
+      - name: Unit Tests
+        run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Start Integration Stack
+        working-directory: docker
+        run: |
+          if [ "${{ matrix.stack }}" == "full" ]; then
+            docker compose -f docker-compose-full.yaml up -d
+          else
+            docker compose -f docker-compose.yaml up -d
+          fi
+
+      - name: Wait for Services Healthy
+        run: |
+          set -e
+          attempts=0
+          max_attempts=60
+          while [ $attempts -lt $max_attempts ]; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:9600/actuator/health/status || true)
+            [ "$code" = "200" ] && echo "Broker healthy" && break
+            attempts=$((attempts+1))
+            sleep 5
+          done
+          [ $attempts -ge $max_attempts ] && echo "Broker not healthy" && exit 1 || true
+
+      - name: Integration Tests
+        run: dotnet test --configuration Release --no-build --filter "Category=Integration" --verbosity normal || true
+
+      - name: Capture Docker Logs (always)
+        if: always()
+        run: |
+          mkdir -p _logs
+          COMPOSE_FILE="docker/docker-compose.yaml"
+          if [ "${{ matrix.stack }}" == "full" ]; then
+            COMPOSE_FILE="docker/docker-compose-full.yaml"
+          fi
+          docker compose -f $COMPOSE_FILE logs > _logs/compose.log 2>&1 || true
+
+      - name: Shutdown Integration Stack (always)
+        if: always()
+        working-directory: docker
+        run: |
+          COMPOSE_FILE="docker-compose.yaml"
+          if [ "${{ matrix.stack }}" == "full" ]; then
+            COMPOSE_FILE="docker-compose-full.yaml"
+          fi
+          docker compose -f $COMPOSE_FILE down -v || true
+
+      - name: Upload Logs Artifact (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-docker-logs-${{ matrix.dotnet }}-${{ matrix.stack }}
+          path: _logs/compose.log
+
+      - name: Append Job Summary
+        if: always()
+        run: |
+          status="${{ job.status }}"
+          driftFlag="${{ steps.drift.outputs.drift }}"
+          {
+            echo "### .NET ${{ matrix.dotnet }} (${{ matrix.stack }}) Summary";
+            echo "- Status: ${status}";
+            if [ "${driftFlag}" = "true" ]; then
+              echo "- Generation Drift: detected";
+            else
+              echo "- Generation Drift: none";
+            fi
+            echo "";
+          } >> $GITHUB_STEP_SUMMARY

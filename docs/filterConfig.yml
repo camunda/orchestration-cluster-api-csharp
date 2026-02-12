@@ -1,0 +1,7 @@
+apiRules:
+  - exclude:
+      uidRegex: ^Camunda\.Client\.Generator
+      type: Namespace
+  - include:
+      uidRegex: ^Camunda\.Client
+      type: Namespace

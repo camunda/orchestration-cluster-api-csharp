@@ -1,0 +1,13 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Enforce .editorconfig style rules during build (warnings) -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+
+    <!-- Treat all analyzer warnings as warnings (not errors) during build.
+         CI will gate separately via dotnet format with verify-no-changes. -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+</Project>

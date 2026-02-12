@@ -1,0 +1,235 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+      - 'stable/**'
+  workflow_dispatch:
+
+concurrency:
+  group: orchestration-cluster-api-csharp-release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
+  issues: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate:
+    name: Generate & Test (.NET ${{ matrix.dotnet }} ${{ matrix.stack }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dotnet: ['8.0.x']
+        stack: [simple]
+        include:
+          - dotnet: '8.0.x'
+            stack: full
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Export stable line config
+        run: |
+          echo "CAMUNDA_SDK_CURRENT_STABLE_MINOR=${{ vars['CAMUNDA_SDK_CURRENT_STABLE_MINOR'] }}" >> $GITHUB_ENV
+
+      - name: Setup .NET ${{ matrix.dotnet }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      - name: Setup Node.js (for swagger-cli)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Fetch & Bundle spec
+        run: |
+          bash scripts/fetch-spec.sh
+          bash scripts/bundle-spec.sh
+
+      - name: Generate SDK
+        run: dotnet run --project src/Camunda.Client.Generator
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Unit Tests
+        run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Start Integration Stack
+        working-directory: docker
+        run: |
+          if [ "${{ matrix.stack }}" == "full" ]; then
+            docker compose -f docker-compose-full.yaml up -d
+          else
+            docker compose -f docker-compose.yaml up -d
+          fi
+
+      - name: Wait for Services Healthy
+        run: |
+          set -e
+          attempts=0
+          max_attempts=60
+          while [ $attempts -lt $max_attempts ]; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:9600/actuator/health/status || true)
+            [ "$code" = "200" ] && echo "Broker healthy" && break
+            sleep 5
+            attempts=$((attempts+1))
+          done
+          [ $attempts -ge $max_attempts ] && echo "Broker not healthy" && exit 1 || true
+
+      - name: Integration Tests
+        run: dotnet test --configuration Release --no-build --filter "Category=Integration" --verbosity normal || true
+
+      - name: Snapshot Spec & Metadata
+        run: |
+          set -e
+          SPEC_DIR=external-spec/upstream/zeebe/gateway-protocol/src/main/proto/v2
+          HASH=$(find "$SPEC_DIR" -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | cut -d ' ' -f1)
+          SNAP=spec-snapshots/spec-${HASH}.tgz
+          mkdir -p spec-snapshots
+          if [ ! -f "$SNAP" ]; then
+            tar -czf "$SNAP" -C "$SPEC_DIR" .
+            echo "Created new spec snapshot: $SNAP"
+          else
+            echo "Spec snapshot already exists: $SNAP (no overwrite)"
+          fi
+          echo "spec snapshot: spec-snapshots/spec-${HASH}.tgz"
+
+      - name: Detect generated drift
+        id: detect
+        run: |
+          if git diff --quiet; then echo "changed=false" >> $GITHUB_OUTPUT; else echo "changed=true" >> $GITHUB_OUTPUT; fi
+
+      - name: Commit generated artifacts (canonical)
+        if: steps.detect.outputs.changed == 'true' && matrix.stack == 'simple'
+        run: |
+          git config user.name 'github-actions'
+          git config user.email 'actions@github.com'
+          git add -A
+          git commit -m "fix(gen): regenerate artifacts"
+          git push origin "HEAD:${{ github.ref_name }}"
+
+      - name: Upload logs (always)
+        if: always()
+        working-directory: docker
+        run: docker compose logs || true
+
+      - name: Shutdown Integration Stack (always)
+        if: always()
+        working-directory: docker
+        run: docker compose down -v || true
+
+    outputs:
+      changed: ${{ steps.detect.outputs.changed }}
+
+  publish:
+    name: Version & Publish (${{ github.ref_name }})
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Export stable line config
+        run: |
+          echo "CAMUNDA_SDK_CURRENT_STABLE_MINOR=${{ vars['CAMUNDA_SDK_CURRENT_STABLE_MINOR'] }}" >> $GITHUB_ENV
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Determine version from MinVer
+        id: version
+        run: |
+          set -euo pipefail
+          dotnet restore
+          # MinVer computes version from git tags and branch
+          VER=$(dotnet msbuild src/Camunda.Client/Camunda.Client.csproj -getProperty:Version -t:MinVerVersion 2>/dev/null || dotnet msbuild src/Camunda.Client/Camunda.Client.csproj -getProperty:Version)
+          echo "version=$VER" >> $GITHUB_OUTPUT
+          echo "Computed version: $VER"
+
+          # Check if this version already has a tag
+          if git tag -l "v$VER" | grep -q "v$VER"; then
+            echo "publish_needed=false" >> $GITHUB_OUTPUT
+            echo "Tag v$VER already exists; no publish needed"
+          else
+            echo "publish_needed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build Release
+        if: steps.version.outputs.publish_needed == 'true'
+        run: dotnet build --configuration Release
+
+      - name: Smoke tests (post-build)
+        if: steps.version.outputs.publish_needed == 'true'
+        run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Pack NuGet
+        if: steps.version.outputs.publish_needed == 'true'
+        run: |
+          dotnet pack src/Camunda.Client/Camunda.Client.csproj \
+            --configuration Release \
+            --no-build \
+            --output nupkgs \
+            /p:PackageVersion=${{ steps.version.outputs.version }}
+
+      - name: Publish to NuGet
+        if: steps.version.outputs.publish_needed == 'true'
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet nuget push nupkgs/*.nupkg \
+            --api-key "$NUGET_API_KEY" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
+      - name: Tag release
+        if: steps.version.outputs.publish_needed == 'true'
+        run: |
+          git config user.name 'github-actions'
+          git config user.email 'actions@github.com'
+          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
+          git push origin "v${{ steps.version.outputs.version }}"
+
+      - name: Create GitHub Release
+        if: steps.version.outputs.publish_needed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ steps.version.outputs.version }}" \
+            --title "v${{ steps.version.outputs.version }}" \
+            --generate-notes \
+            nupkgs/*.nupkg nupkgs/*.snupkg || true
+
+      - name: Build Docs
+        if: github.ref_name == 'main'
+        run: bash scripts/build-docs.sh
+
+      - name: Deploy Docs
+        if: github.ref_name == 'main'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs/_site
+          branch: gh-pages
+
+      - name: Upload release analysis logs (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-analysis
+          path: |
+            nupkgs/
