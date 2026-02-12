@@ -5,8 +5,10 @@ This repo generates a C# SDK from a multi-file OpenAPI spec sourced from the Cam
 ## Key flows (what to run)
 
 - Build (fetches upstream spec): `bash scripts/build.sh`
+- Build pinned to a specific spec ref: `SPEC_REF=my-branch bash scripts/build.sh`
 - Build using already-fetched spec (fast local iteration): `bash scripts/build-local.sh`
 - Only fetch spec: `bash scripts/fetch-spec.sh`
+- Only fetch spec at a pinned ref: `SPEC_REF=my-sha bash scripts/fetch-spec.sh`
 - Only bundle spec: `bash scripts/bundle-spec.sh`
 - Only regenerate SDK sources: `dotnet run --project src/Camunda.Client.Generator`
 

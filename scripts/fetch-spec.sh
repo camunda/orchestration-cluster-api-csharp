@@ -5,7 +5,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 UPSTREAM_REPO="https://github.com/camunda/camunda.git"
-UPSTREAM_BRANCH="main"
+UPSTREAM_BRANCH="${SPEC_REF:-main}"
 UPSTREAM_SPEC_DIR="zeebe/gateway-protocol/src/main/proto/v2"
 UPSTREAM_SPEC_ENTRY="rest-api.yaml"
 

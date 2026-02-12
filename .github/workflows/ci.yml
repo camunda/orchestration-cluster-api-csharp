@@ -4,6 +4,15 @@ on:
   push:
     branches-ignore:
       - main
+  workflow_dispatch:
+    inputs:
+      spec_ref:
+        description: 'Git ref (branch/tag/SHA) in camunda/camunda to fetch spec from'
+        required: false
+        default: 'main'
+
+env:
+  SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
 
 jobs:
   test:
@@ -20,6 +29,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Validate SPEC_REF override
+        if: env.SPEC_REF != 'main'
+        run: |
+          echo "SPEC_REF is pinned to '${SPEC_REF}' (not main)"
+          ACK="${{ vars.SPEC_REF_OVERRIDE_ACK }}"
+          EXPIRES="${{ vars.SPEC_REF_OVERRIDE_EXPIRES }}"
+          if [ "$ACK" != "true" ]; then
+            echo "::error::SPEC_REF_OVERRIDE is set but SPEC_REF_OVERRIDE_ACK is not 'true'. Set the repo variable to acknowledge the override."
+            exit 1
+          fi
+          if [ -z "$EXPIRES" ]; then
+            echo "::error::SPEC_REF_OVERRIDE_EXPIRES repo variable is not set. Set it to a YYYY-MM-DD date."
+            exit 1
+          fi
+          TODAY=$(date +%Y-%m-%d)
+          if [[ "$TODAY" > "$EXPIRES" ]]; then
+            echo "::error::SPEC_REF_OVERRIDE expired on $EXPIRES (today is $TODAY). Remove the override or extend the expiry."
+            exit 1
+          fi
+          echo "Override valid (expires $EXPIRES)"
 
       - name: Setup .NET ${{ matrix.dotnet }}
         uses: actions/setup-dotnet@v4
@@ -133,6 +163,7 @@ jobs:
           {
             echo "### .NET ${{ matrix.dotnet }} (${{ matrix.stack }}) Summary";
             echo "- Status: ${status}";
+            echo "- Spec ref: ${SPEC_REF}";
             if [ "${driftFlag}" = "true" ]; then
               echo "- Generation Drift: detected";
             else

@@ -6,6 +6,14 @@ on:
       - main
       - 'stable/**'
   workflow_dispatch:
+    inputs:
+      spec_ref:
+        description: 'Git ref (branch/tag/SHA) in camunda/camunda to fetch spec from'
+        required: false
+        default: 'main'
+
+env:
+  SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
 
 concurrency:
   group: orchestration-cluster-api-csharp-release-${{ github.ref_name }}
@@ -36,6 +44,27 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Validate SPEC_REF override
+        if: env.SPEC_REF != 'main'
+        run: |
+          echo "SPEC_REF is pinned to '${SPEC_REF}' (not main)"
+          ACK="${{ vars.SPEC_REF_OVERRIDE_ACK }}"
+          EXPIRES="${{ vars.SPEC_REF_OVERRIDE_EXPIRES }}"
+          if [ "$ACK" != "true" ]; then
+            echo "::error::SPEC_REF_OVERRIDE is set but SPEC_REF_OVERRIDE_ACK is not 'true'. Set the repo variable to acknowledge the override."
+            exit 1
+          fi
+          if [ -z "$EXPIRES" ]; then
+            echo "::error::SPEC_REF_OVERRIDE_EXPIRES repo variable is not set. Set it to a YYYY-MM-DD date."
+            exit 1
+          fi
+          TODAY=$(date +%Y-%m-%d)
+          if [[ "$TODAY" > "$EXPIRES" ]]; then
+            echo "::error::SPEC_REF_OVERRIDE expired on $EXPIRES (today is $TODAY). Remove the override or extend the expiry."
+            exit 1
+          fi
+          echo "Override valid (expires $EXPIRES)"
+
       - name: Export stable line config
         run: |
           echo "CAMUNDA_SDK_CURRENT_STABLE_MINOR=${{ vars['CAMUNDA_SDK_CURRENT_STABLE_MINOR'] }}" >> $GITHUB_ENV
@@ -61,8 +90,14 @@ jobs:
       - name: Generate SDK
         run: dotnet run --project src/Camunda.Client.Generator
 
+      - name: Format Generated Code
+        run: dotnet format src/Camunda.Client/Camunda.Client.csproj --no-restore
+
       - name: Build
         run: dotnet build --configuration Release --no-restore
+
+      - name: Lint Check
+        run: dotnet format --verify-no-changes
 
       - name: Unit Tests
         run: dotnet test --configuration Release --no-build --verbosity normal

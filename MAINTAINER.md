@@ -17,6 +17,15 @@ This document covers building, testing, and releasing the C# SDK. For end-user d
 bash scripts/build.sh
 ```
 
+### Pinned to a specific spec ref
+
+If upstream `main` breaks the spec, pin to a known-good commit, branch, or tag:
+
+```bash
+SPEC_REF=abc123 bash scripts/build.sh
+SPEC_REF=my-fix-branch bash scripts/build.sh
+```
+
 ### Local iteration (uses cached spec)
 
 ```bash
@@ -26,8 +35,8 @@ bash scripts/build-local.sh
 ### Individual steps
 
 ```bash
-# Fetch upstream OpenAPI spec
-bash scripts/fetch-spec.sh
+# Fetch upstream OpenAPI spec (optionally pinned)
+SPEC_REF=my-branch bash scripts/fetch-spec.sh
 
 # Bundle multi-file spec to single JSON
 bash scripts/bundle-spec.sh
@@ -149,6 +158,38 @@ The build scripts (`build.sh`, `build-local.sh`) automatically run `dotnet forma
 
 - **CA1848** (Use LoggerMessage delegates) — globally suppressed; the SDK does minimal logging and the refactoring burden is not justified.
 - **CA1707** (Identifiers should not contain underscores) — suppressed for test projects; `Should_Do_Something_When_Condition` is standard xUnit naming convention.
+
+## Pinning the Upstream Spec (SPEC_REF)
+
+If the upstream `camunda/camunda` spec on `main` breaks the build, you can pin to a known-good git ref (branch, tag, or commit SHA).
+
+### Locally
+
+```bash
+SPEC_REF=abc123def bash scripts/build.sh
+```
+
+### In CI (persistent override)
+
+Set these GitHub repository variables:
+
+| Variable | Value | Purpose |
+|---|---|---|
+| `SPEC_REF_OVERRIDE` | The git ref (e.g. `abc123def`) | Overrides the default `main` for all CI runs |
+| `SPEC_REF_OVERRIDE_ACK` | `true` | Acknowledgement that the override is intentional |
+| `SPEC_REF_OVERRIDE_EXPIRES` | `YYYY-MM-DD` | Expiry date — CI fails if today is past this date |
+
+The expiry guard prevents stale overrides from silently pinning the spec forever.
+
+### In CI (one-off manual run)
+
+Both `ci.yml` and `release.yml` support `workflow_dispatch` with a `spec_ref` input. This takes priority over `SPEC_REF_OVERRIDE` for that single run.
+
+### Priority order
+
+1. `workflow_dispatch` input `spec_ref` (highest — manual trigger only)
+2. `vars.SPEC_REF_OVERRIDE` repo variable (persistent)
+3. `main` (default)
 
 ## Release Strategy
 

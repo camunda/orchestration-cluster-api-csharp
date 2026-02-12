@@ -2141,7 +2141,7 @@ public enum AuditLogOperationTypeEnum
 /// <summary>
 /// Audit log item.
 /// </summary>
-public sealed class AuditLogResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class AuditLogResult
 {
     /// <summary>
     /// The unique key of the audit log entry.
@@ -2304,9 +2304,6 @@ public sealed class AuditLogResult : global::Camunda.Client.Runtime.ITenantIdSet
     /// </summary>
     [JsonPropertyName("resourceKey")]
     public ResourceKey? ResourceKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -3501,7 +3498,7 @@ public sealed class ClockPinRequest
 /// <summary>
 /// ClusterVariableResult
 /// </summary>
-public sealed class ClusterVariableResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ClusterVariableResult
 {
     /// <summary>
     /// Full value of this cluster variable.
@@ -3527,15 +3524,12 @@ public sealed class ClusterVariableResult : global::Camunda.Client.Runtime.ITena
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= tenantId; }
-
 }
 
 /// <summary>
 /// Cluster variable response item.
 /// </summary>
-public sealed class ClusterVariableResultBase : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ClusterVariableResultBase
 {
     /// <summary>
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
@@ -3554,9 +3548,6 @@ public sealed class ClusterVariableResultBase : global::Camunda.Client.Runtime.I
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= tenantId; }
 
 }
 
@@ -3683,7 +3674,7 @@ public sealed class ClusterVariableSearchQuerySortRequest
 /// <summary>
 /// Cluster variable search response item.
 /// </summary>
-public sealed class ClusterVariableSearchResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ClusterVariableSearchResult
 {
     /// <summary>
     /// Value of this cluster variable. Can be truncated.
@@ -3714,9 +3705,6 @@ public sealed class ClusterVariableSearchResult : global::Camunda.Client.Runtime
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= tenantId; }
 
 }
 
@@ -4123,7 +4111,7 @@ public sealed class DateTimeFilterProperty
 /// <summary>
 /// Decision definition search filter.
 /// </summary>
-public sealed class DecisionDefinitionFilter : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DecisionDefinitionFilter
 {
     /// <summary>
     /// The DMN ID of the decision definition.
@@ -4187,9 +4175,6 @@ public sealed class DecisionDefinitionFilter : global::Camunda.Client.Runtime.IT
     /// </summary>
     [JsonPropertyName("decisionRequirementsVersion")]
     public int? DecisionRequirementsVersion { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -4259,7 +4244,7 @@ public sealed class DecisionDefinitionKeyFilterProperty
 /// <summary>
 /// DecisionDefinitionResult
 /// </summary>
-public sealed class DecisionDefinitionResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DecisionDefinitionResult
 {
     /// <summary>
     /// The DMN ID of the decision definition.
@@ -4314,9 +4299,6 @@ public sealed class DecisionDefinitionResult : global::Camunda.Client.Runtime.IT
     /// </summary>
     [JsonPropertyName("decisionRequirementsVersion")]
     public int? DecisionRequirementsVersion { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -4545,7 +4527,7 @@ public sealed class DecisionEvaluationKeyFilterProperty
 /// <summary>
 /// Decision instance search filter.
 /// </summary>
-public sealed class DecisionInstanceFilter : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DecisionInstanceFilter
 {
     /// <summary>
     /// The key of the decision evaluation instance.
@@ -4638,15 +4620,12 @@ public sealed class DecisionInstanceFilter : global::Camunda.Client.Runtime.ITen
     [JsonPropertyName("rootDecisionDefinitionKey")]
     public DecisionDefinitionKeyFilterProperty? RootDecisionDefinitionKey { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
 /// DecisionInstanceGetQueryResult
 /// </summary>
-public sealed class DecisionInstanceGetQueryResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DecisionInstanceGetQueryResult
 {
     /// <summary>
     /// System-generated key for a decision evaluation instance.
@@ -4758,9 +4737,6 @@ public sealed class DecisionInstanceGetQueryResult : global::Camunda.Client.Runt
     [JsonPropertyName("matchedRules")]
     public List<MatchedDecisionRuleItem>? MatchedRules { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
@@ -4794,7 +4770,7 @@ public readonly record struct DecisionInstanceKey : global::Camunda.Client.Runti
 /// <summary>
 /// DecisionInstanceResult
 /// </summary>
-public sealed class DecisionInstanceResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DecisionInstanceResult
 {
     /// <summary>
     /// System-generated key for a decision evaluation instance.
@@ -4892,9 +4868,6 @@ public sealed class DecisionInstanceResult : global::Camunda.Client.Runtime.ITen
     [JsonPropertyName("rootDecisionDefinitionKey")]
     public DecisionDefinitionKey? RootDecisionDefinitionKey { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
@@ -4984,7 +4957,7 @@ public sealed class DecisionInstanceStateFilterProperty
 /// <summary>
 /// Decision requirements search filter.
 /// </summary>
-public sealed class DecisionRequirementsFilter : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DecisionRequirementsFilter
 {
     /// <summary>
     /// The DMN name of the decision requirements.
@@ -5021,9 +4994,6 @@ public sealed class DecisionRequirementsFilter : global::Camunda.Client.Runtime.
     /// </summary>
     [JsonPropertyName("resourceName")]
     public string? ResourceName { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -5065,7 +5035,7 @@ public sealed class DecisionRequirementsKeyFilterProperty
 /// <summary>
 /// DecisionRequirementsResult
 /// </summary>
-public sealed class DecisionRequirementsResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DecisionRequirementsResult
 {
     /// <summary>
     /// The DMN name of the decision requirements.
@@ -5102,9 +5072,6 @@ public sealed class DecisionRequirementsResult : global::Camunda.Client.Runtime.
     /// </summary>
     [JsonPropertyName("decisionRequirementsKey")]
     public DecisionRequirementsKey? DecisionRequirementsKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -5241,7 +5208,7 @@ public sealed class DeleteResourceResponse
 /// <summary>
 /// Deployed decision requirements.
 /// </summary>
-public sealed class DeploymentDecisionRequirementsResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DeploymentDecisionRequirementsResult
 {
     [JsonPropertyName("decisionRequirementsId")]
     public string? DecisionRequirementsId { get; set; }
@@ -5268,15 +5235,12 @@ public sealed class DeploymentDecisionRequirementsResult : global::Camunda.Clien
     [JsonPropertyName("decisionRequirementsKey")]
     public DecisionRequirementsKey? DecisionRequirementsKey { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
 /// A deployed decision.
 /// </summary>
-public sealed class DeploymentDecisionResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DeploymentDecisionResult
 {
     /// <summary>
     /// The dmn decision ID, as parsed during deployment, together with the version forms a
@@ -5325,15 +5289,12 @@ public sealed class DeploymentDecisionResult : global::Camunda.Client.Runtime.IT
     [JsonPropertyName("decisionRequirementsKey")]
     public DecisionRequirementsKey? DecisionRequirementsKey { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
 /// A deployed form.
 /// </summary>
-public sealed class DeploymentFormResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DeploymentFormResult
 {
     /// <summary>
     /// The form ID, as parsed during deployment, together with the version forms a
@@ -5360,9 +5321,6 @@ public sealed class DeploymentFormResult : global::Camunda.Client.Runtime.ITenan
     /// </summary>
     [JsonPropertyName("formKey")]
     public FormKey? FormKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -5480,7 +5438,7 @@ public sealed class DeploymentProcessResult
 /// <summary>
 /// A deployed Resource.
 /// </summary>
-public sealed class DeploymentResourceResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class DeploymentResourceResult
 {
     [JsonPropertyName("resourceId")]
     public string? ResourceId { get; set; }
@@ -5502,9 +5460,6 @@ public sealed class DeploymentResourceResult : global::Camunda.Client.Runtime.IT
     /// </summary>
     [JsonPropertyName("resourceKey")]
     public ResourceKey? ResourceKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -5783,7 +5738,7 @@ public readonly record struct ElementId : global::Camunda.Client.Runtime.ICamund
 /// <summary>
 /// Element instance filter.
 /// </summary>
-public sealed class ElementInstanceFilter : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ElementInstanceFilter
 {
     /// <summary>
     /// The process definition ID associated to this element instance.
@@ -5870,9 +5825,6 @@ public sealed class ElementInstanceFilter : global::Camunda.Client.Runtime.ITena
     /// </summary>
     [JsonPropertyName("elementInstanceScopeKey")]
     public string? ElementInstanceScopeKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -6181,7 +6133,7 @@ public sealed class EvaluatedDecisionOutputItem
 /// <summary>
 /// A decision that was evaluated.
 /// </summary>
-public sealed class EvaluatedDecisionResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class EvaluatedDecisionResult
 {
     /// <summary>
     /// The ID of the decision which was evaluated.
@@ -6243,9 +6195,6 @@ public sealed class EvaluatedDecisionResult : global::Camunda.Client.Runtime.ITe
     /// </summary>
     [JsonPropertyName("decisionEvaluationInstanceKey")]
     public DecisionEvaluationInstanceKey? DecisionEvaluationInstanceKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -6448,7 +6397,7 @@ public sealed class FormKeyFilterProperty
 /// <summary>
 /// FormResult
 /// </summary>
-public sealed class FormResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class FormResult
 {
     /// <summary>
     /// The tenant ID of the form.
@@ -6479,9 +6428,6 @@ public sealed class FormResult : global::Camunda.Client.Runtime.ITenantIdSettabl
     /// </summary>
     [JsonPropertyName("formKey")]
     public FormKey? FormKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -7107,7 +7053,7 @@ public sealed class IncidentProcessInstanceStatisticsByDefinitionQuerySortReques
 /// <summary>
 /// IncidentProcessInstanceStatisticsByDefinitionResult
 /// </summary>
-public sealed class IncidentProcessInstanceStatisticsByDefinitionResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class IncidentProcessInstanceStatisticsByDefinitionResult
 {
     /// <summary>
     /// Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.
@@ -7146,9 +7092,6 @@ public sealed class IncidentProcessInstanceStatisticsByDefinitionResult : global
     /// </summary>
     [JsonPropertyName("activeInstancesWithErrorCount")]
     public long? ActiveInstancesWithErrorCount { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -7255,7 +7198,7 @@ public sealed class IncidentResolutionRequest
 /// <summary>
 /// IncidentResult
 /// </summary>
-public sealed class IncidentResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class IncidentResult
 {
     /// <summary>
     /// The process definition ID associated to this incident.
@@ -7319,9 +7262,6 @@ public sealed class IncidentResult : global::Camunda.Client.Runtime.ITenantIdSet
     /// </summary>
     [JsonPropertyName("jobKey")]
     public JobKey? JobKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -8716,7 +8656,7 @@ public sealed class MessageCorrelationRequest : global::Camunda.Client.Runtime.I
 /// correlated with.
 /// 
 /// </summary>
-public sealed class MessageCorrelationResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class MessageCorrelationResult
 {
     /// <summary>
     /// The tenant ID of the correlated message
@@ -8735,9 +8675,6 @@ public sealed class MessageCorrelationResult : global::Camunda.Client.Runtime.IT
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -8820,7 +8757,7 @@ public sealed class MessagePublicationRequest : global::Camunda.Client.Runtime.I
 /// <summary>
 /// The message key of the published message.
 /// </summary>
-public sealed class MessagePublicationResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class MessagePublicationResult
 {
     /// <summary>
     /// The tenant ID of the message.
@@ -8833,9 +8770,6 @@ public sealed class MessagePublicationResult : global::Camunda.Client.Runtime.IT
     /// </summary>
     [JsonPropertyName("messageKey")]
     public MessageKey? MessageKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -8950,7 +8884,7 @@ public sealed class MessageSubscriptionKeyFilterProperty
 /// <summary>
 /// MessageSubscriptionResult
 /// </summary>
-public sealed class MessageSubscriptionResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class MessageSubscriptionResult
 {
     /// <summary>
     /// The message subscription key associated with this message subscription.
@@ -9017,9 +8951,6 @@ public sealed class MessageSubscriptionResult : global::Camunda.Client.Runtime.I
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId? TenantId { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -9401,7 +9332,7 @@ public sealed class ProcessDefinitionElementStatisticsQueryResult
 /// <summary>
 /// Process definition search filter.
 /// </summary>
-public sealed class ProcessDefinitionFilter : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ProcessDefinitionFilter
 {
     /// <summary>
     /// Name of this process definition.
@@ -9459,9 +9390,6 @@ public sealed class ProcessDefinitionFilter : global::Camunda.Client.Runtime.ITe
     /// </summary>
     [JsonPropertyName("hasStartForm")]
     public bool? HasStartForm { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -9550,7 +9478,7 @@ public sealed class ProcessDefinitionInstanceStatisticsQuerySortRequest
 /// <summary>
 /// Process definition instance statistics response.
 /// </summary>
-public sealed class ProcessDefinitionInstanceStatisticsResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ProcessDefinitionInstanceStatisticsResult
 {
     /// <summary>
     /// Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.
@@ -9588,24 +9516,18 @@ public sealed class ProcessDefinitionInstanceStatisticsResult : global::Camunda.
     [JsonPropertyName("activeInstancesWithIncidentCount")]
     public long? ActiveInstancesWithIncidentCount { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
 /// Process definition instance version statistics search filter.
 /// </summary>
-public sealed class ProcessDefinitionInstanceVersionStatisticsFilter : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ProcessDefinitionInstanceVersionStatisticsFilter
 {
     /// <summary>
     /// Tenant ID of this process definition.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId? TenantId { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -9794,7 +9716,7 @@ public sealed class ProcessDefinitionMessageSubscriptionStatisticsQueryResult
 /// <summary>
 /// ProcessDefinitionMessageSubscriptionStatisticsResult
 /// </summary>
-public sealed class ProcessDefinitionMessageSubscriptionStatisticsResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ProcessDefinitionMessageSubscriptionStatisticsResult
 {
     /// <summary>
     /// The process definition ID associated with this message subscription.
@@ -9826,15 +9748,12 @@ public sealed class ProcessDefinitionMessageSubscriptionStatisticsResult : globa
     [JsonPropertyName("activeSubscriptions")]
     public long? ActiveSubscriptions { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
 /// ProcessDefinitionResult
 /// </summary>
-public sealed class ProcessDefinitionResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ProcessDefinitionResult
 {
     /// <summary>
     /// Name of this process definition.
@@ -9883,9 +9802,6 @@ public sealed class ProcessDefinitionResult : global::Camunda.Client.Runtime.ITe
     /// </summary>
     [JsonPropertyName("hasStartForm")]
     public bool? HasStartForm { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -11178,7 +11094,7 @@ public sealed class ProcessInstanceSearchQuerySortRequest
 /// <summary>
 /// Process instance sequence flow result.
 /// </summary>
-public sealed class ProcessInstanceSequenceFlowResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ProcessInstanceSequenceFlowResult
 {
     /// <summary>
     /// The sequence flow id.
@@ -11215,9 +11131,6 @@ public sealed class ProcessInstanceSequenceFlowResult : global::Camunda.Client.R
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId? TenantId { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -11293,7 +11206,7 @@ public sealed class ResourceKeyFilterProperty
 /// <summary>
 /// ResourceResult
 /// </summary>
-public sealed class ResourceResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class ResourceResult
 {
     /// <summary>
     /// The resource name from which this resource was parsed.
@@ -11330,9 +11243,6 @@ public sealed class ResourceResult : global::Camunda.Client.Runtime.ITenantIdSet
     /// </summary>
     [JsonPropertyName("resourceKey")]
     public ResourceKey? ResourceKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -12285,7 +12195,7 @@ public sealed class TenantCreateRequest
 /// <summary>
 /// TenantCreateResult
 /// </summary>
-public sealed class TenantCreateResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class TenantCreateResult
 {
     /// <summary>
     /// The unique identifier of the tenant.
@@ -12305,15 +12215,12 @@ public sealed class TenantCreateResult : global::Camunda.Client.Runtime.ITenantI
     [JsonPropertyName("description")]
     public string? Description { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
 /// Tenant filter request
 /// </summary>
-public sealed class TenantFilter : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class TenantFilter
 {
     /// <summary>
     /// The unique identifier of the tenant.
@@ -12326,9 +12233,6 @@ public sealed class TenantFilter : global::Camunda.Client.Runtime.ITenantIdSetta
     /// </summary>
     [JsonPropertyName("name")]
     public string? Name { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -12433,7 +12337,7 @@ public readonly record struct TenantId : global::Camunda.Client.Runtime.ICamunda
 /// <summary>
 /// Tenant search response item.
 /// </summary>
-public sealed class TenantResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class TenantResult
 {
     /// <summary>
     /// The tenant name.
@@ -12452,9 +12356,6 @@ public sealed class TenantResult : global::Camunda.Client.Runtime.ITenantIdSetta
     /// </summary>
     [JsonPropertyName("description")]
     public string? Description { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -12543,7 +12444,7 @@ public sealed class TenantUpdateRequest
 /// <summary>
 /// TenantUpdateResult
 /// </summary>
-public sealed class TenantUpdateResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class TenantUpdateResult
 {
     /// <summary>
     /// The unique identifier of the tenant.
@@ -12562,9 +12463,6 @@ public sealed class TenantUpdateResult : global::Camunda.Client.Runtime.ITenantI
     /// </summary>
     [JsonPropertyName("description")]
     public string? Description { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -13275,7 +13173,7 @@ public sealed class UserTaskProperties
 /// <summary>
 /// UserTaskResult
 /// </summary>
-public sealed class UserTaskResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class UserTaskResult
 {
     /// <summary>
     /// The name for this user task.
@@ -13414,9 +13312,6 @@ public sealed class UserTaskResult : global::Camunda.Client.Runtime.ITenantIdSet
     /// </summary>
     [JsonPropertyName("tags")]
     public TagSet? Tags { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -13676,7 +13571,7 @@ public sealed class UseSourceParentKeyInstruction : AncestorScopeInstruction
 /// <summary>
 /// Variable filter request.
 /// </summary>
-public sealed class VariableFilter : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class VariableFilter
 {
     /// <summary>
     /// Name of the variable.
@@ -13720,9 +13615,6 @@ public sealed class VariableFilter : global::Camunda.Client.Runtime.ITenantIdSet
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
@@ -13763,7 +13655,7 @@ public sealed class VariableKeyFilterProperty
 /// <summary>
 /// Variable search response item.
 /// </summary>
-public sealed class VariableResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class VariableResult
 {
     /// <summary>
     /// Full value of this variable.
@@ -13801,15 +13693,12 @@ public sealed class VariableResult : global::Camunda.Client.Runtime.ITenantIdSet
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
 /// Variable response item.
 /// </summary>
-public sealed class VariableResultBase : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class VariableResultBase
 {
     /// <summary>
     /// Name of this variable.
@@ -13840,9 +13729,6 @@ public sealed class VariableResultBase : global::Camunda.Client.Runtime.ITenantI
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -13912,7 +13798,7 @@ public sealed class VariableSearchQuerySortRequest
 /// <summary>
 /// Variable search response item.
 /// </summary>
-public sealed class VariableSearchResult : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class VariableSearchResult
 {
     /// <summary>
     /// Value of this variable. Can be truncated.
@@ -13955,9 +13841,6 @@ public sealed class VariableSearchResult : global::Camunda.Client.Runtime.ITenan
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -14055,7 +13938,7 @@ public sealed class DeleteProcessInstancesBatchOperationRequest
 /// <summary>
 /// Audit log item.
 /// </summary>
-public sealed class GetAuditLogResponse : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class GetAuditLogResponse
 {
     /// <summary>
     /// The unique key of the audit log entry.
@@ -14219,9 +14102,6 @@ public sealed class GetAuditLogResponse : global::Camunda.Client.Runtime.ITenant
     [JsonPropertyName("resourceKey")]
     public ResourceKey? ResourceKey { get; set; }
 
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
-
 }
 
 /// <summary>
@@ -14343,7 +14223,7 @@ public sealed class GetProcessInstanceStatisticsResponse
 /// <summary>
 /// GetUserTaskFormResponse
 /// </summary>
-public sealed class GetUserTaskFormResponse : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class GetUserTaskFormResponse
 {
     /// <summary>
     /// The tenant ID of the form.
@@ -14374,9 +14254,6 @@ public sealed class GetUserTaskFormResponse : global::Camunda.Client.Runtime.ITe
     /// </summary>
     [JsonPropertyName("formKey")]
     public object? FormKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -14421,7 +14298,7 @@ public sealed class ModifyProcessInstancesBatchOperationRequest
 /// <summary>
 /// The message key of the published message.
 /// </summary>
-public sealed class PublishMessageResponse : global::Camunda.Client.Runtime.ITenantIdSettable
+public sealed class PublishMessageResponse
 {
     /// <summary>
     /// The tenant ID of the message.
@@ -14434,9 +14311,6 @@ public sealed class PublishMessageResponse : global::Camunda.Client.Runtime.ITen
     /// </summary>
     [JsonPropertyName("messageKey")]
     public object? MessageKey { get; set; }
-
-    /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
 
 }
 
