@@ -74,13 +74,16 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
-      - name: Setup Node.js (for swagger-cli)
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
 
       - name: Restore dependencies
         run: dotnet restore
+
+      - name: Install Node dependencies
+        run: npm ci
 
       - name: Fetch & Bundle spec
         run: |
