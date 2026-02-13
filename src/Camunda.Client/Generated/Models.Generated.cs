@@ -16,7 +16,7 @@ public sealed class ActivatedJobResult
     /// The type of the job (should match what was requested).
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = null!;
 
     /// <summary>
     /// The bpmn process ID of the job's process definition.
@@ -40,13 +40,13 @@ public sealed class ActivatedJobResult
     /// A set of custom headers defined during modelling; returned as a serialized JSON document.
     /// </summary>
     [JsonPropertyName("customHeaders")]
-    public object CustomHeaders { get; set; }
+    public object CustomHeaders { get; set; } = null!;
 
     /// <summary>
     /// The name of the worker which activated this job.
     /// </summary>
     [JsonPropertyName("worker")]
-    public string Worker { get; set; }
+    public string Worker { get; set; } = null!;
 
     /// <summary>
     /// The amount of retries left to this job (should always be positive).
@@ -64,7 +64,7 @@ public sealed class ActivatedJobResult
     /// All variables visible to the task scope, computed at activation time.
     /// </summary>
     [JsonPropertyName("variables")]
-    public object Variables { get; set; }
+    public object Variables { get; set; } = null!;
 
     /// <summary>
     /// The ID of the tenant that owns the job.
@@ -128,7 +128,7 @@ public sealed class AdHocSubProcessActivateActivitiesInstruction
     /// Activities to activate.
     /// </summary>
     [JsonPropertyName("elements")]
-    public List<AdHocSubProcessActivateActivityReference> Elements { get; set; }
+    public List<AdHocSubProcessActivateActivityReference> Elements { get; set; } = null!;
 
     /// <summary>
     /// Whether to cancel remaining instances of the ad-hoc sub-process.
@@ -1797,10 +1797,10 @@ public sealed class AdvancedVariableKeyFilter
 /// </list>
 /// </remarks>
 /// <seealso cref="DirectAncestorKeyInstruction"/>
-[JsonDerivedType(typeof(DirectAncestorKeyInstruction))]
 /// <seealso cref="InferredAncestorKeyInstruction"/>
-[JsonDerivedType(typeof(InferredAncestorKeyInstruction))]
 /// <seealso cref="UseSourceParentKeyInstruction"/>
+[JsonDerivedType(typeof(DirectAncestorKeyInstruction))]
+[JsonDerivedType(typeof(InferredAncestorKeyInstruction))]
 [JsonDerivedType(typeof(UseSourceParentKeyInstruction))]
 public abstract class AncestorScopeInstruction { }
 
@@ -2419,7 +2419,7 @@ public sealed class AuditLogSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -2432,7 +2432,7 @@ public sealed class AuditLogSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -2501,7 +2501,7 @@ public sealed class AuthorizationIdBasedRequest : AuthorizationRequest
     /// The ID of the owner of the permissions.
     /// </summary>
     [JsonPropertyName("ownerId")]
-    public string OwnerId { get; set; }
+    public string OwnerId { get; set; } = null!;
 
     /// <summary>
     /// The type of the owner of permissions.
@@ -2513,19 +2513,19 @@ public sealed class AuthorizationIdBasedRequest : AuthorizationRequest
     /// The ID of the resource to add permissions to.
     /// </summary>
     [JsonPropertyName("resourceId")]
-    public string ResourceId { get; set; }
+    public string ResourceId { get; set; } = null!;
 
     /// <summary>
     /// The type of resource to add permissions to.
     /// </summary>
     [JsonPropertyName("resourceType")]
-    public string ResourceType { get; set; }
+    public string ResourceType { get; set; } = null!;
 
     /// <summary>
     /// The permission types to add.
     /// </summary>
     [JsonPropertyName("permissionTypes")]
-    public List<PermissionTypeEnum> PermissionTypes { get; set; }
+    public List<PermissionTypeEnum> PermissionTypes { get; set; } = null!;
 
 }
 
@@ -2566,7 +2566,7 @@ public sealed class AuthorizationPropertyBasedRequest : AuthorizationRequest
     /// The ID of the owner of the permissions.
     /// </summary>
     [JsonPropertyName("ownerId")]
-    public string OwnerId { get; set; }
+    public string OwnerId { get; set; } = null!;
 
     /// <summary>
     /// The type of the owner of permissions.
@@ -2578,19 +2578,19 @@ public sealed class AuthorizationPropertyBasedRequest : AuthorizationRequest
     /// The name of the resource property on which this authorization is based.
     /// </summary>
     [JsonPropertyName("resourcePropertyName")]
-    public string ResourcePropertyName { get; set; }
+    public string ResourcePropertyName { get; set; } = null!;
 
     /// <summary>
     /// The type of resource to add permissions to.
     /// </summary>
     [JsonPropertyName("resourceType")]
-    public string ResourceType { get; set; }
+    public string ResourceType { get; set; } = null!;
 
     /// <summary>
     /// The permission types to add.
     /// </summary>
     [JsonPropertyName("permissionTypes")]
-    public List<PermissionTypeEnum> PermissionTypes { get; set; }
+    public List<PermissionTypeEnum> PermissionTypes { get; set; } = null!;
 
 }
 
@@ -2607,8 +2607,8 @@ public sealed class AuthorizationPropertyBasedRequest : AuthorizationRequest
 /// </list>
 /// </remarks>
 /// <seealso cref="AuthorizationIdBasedRequest"/>
-[JsonDerivedType(typeof(AuthorizationIdBasedRequest))]
 /// <seealso cref="AuthorizationPropertyBasedRequest"/>
+[JsonDerivedType(typeof(AuthorizationIdBasedRequest))]
 [JsonDerivedType(typeof(AuthorizationPropertyBasedRequest))]
 public abstract class AuthorizationRequest { }
 
@@ -2695,7 +2695,7 @@ public sealed class AuthorizationSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -2720,7 +2720,7 @@ public sealed class AuthorizationSearchResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -3093,7 +3093,7 @@ public sealed class BatchOperationItemSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -3106,7 +3106,7 @@ public sealed class BatchOperationItemSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -3280,7 +3280,7 @@ public sealed class BatchOperationSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -3293,7 +3293,7 @@ public sealed class BatchOperationSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -3382,7 +3382,7 @@ public sealed class BrokerInfo
     /// The hostname for reaching the broker.
     /// </summary>
     [JsonPropertyName("host")]
-    public string Host { get; set; }
+    public string Host { get; set; } = null!;
 
     /// <summary>
     /// The port for reaching the broker.
@@ -3394,13 +3394,13 @@ public sealed class BrokerInfo
     /// A list of partitions managed or replicated on this broker.
     /// </summary>
     [JsonPropertyName("partitions")]
-    public List<Partition> Partitions { get; set; }
+    public List<Partition> Partitions { get; set; } = null!;
 
     /// <summary>
     /// The broker version.
     /// </summary>
     [JsonPropertyName("version")]
-    public string Version { get; set; }
+    public string Version { get; set; } = null!;
 
 }
 
@@ -3437,31 +3437,31 @@ public sealed class CamundaUserResult
     /// The tenants the user is a member of.
     /// </summary>
     [JsonPropertyName("tenants")]
-    public List<TenantResult> Tenants { get; set; }
+    public List<TenantResult> Tenants { get; set; } = null!;
 
     /// <summary>
     /// The groups assigned to the user.
     /// </summary>
     [JsonPropertyName("groups")]
-    public List<string> Groups { get; set; }
+    public List<string> Groups { get; set; } = null!;
 
     /// <summary>
     /// The roles assigned to the user.
     /// </summary>
     [JsonPropertyName("roles")]
-    public List<string> Roles { get; set; }
+    public List<string> Roles { get; set; } = null!;
 
     /// <summary>
     /// The plan of the user.
     /// </summary>
     [JsonPropertyName("salesPlanType")]
-    public string SalesPlanType { get; set; }
+    public string SalesPlanType { get; set; } = null!;
 
     /// <summary>
     /// The links to the components in the C8 stack.
     /// </summary>
     [JsonPropertyName("c8Links")]
-    public Dictionary<string, string> C8Links { get; set; }
+    public Dictionary<string, string> C8Links { get; set; } = null!;
 
     /// <summary>
     /// Flag for understanding if the user is able to perform logout.
@@ -3568,13 +3568,13 @@ public sealed class ClusterVariableResult
     /// Full value of this cluster variable.
     /// </summary>
     [JsonPropertyName("value")]
-    public string Value { get; set; }
+    public string Value { get; set; } = null!;
 
     /// <summary>
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The scope of a cluster variable.
@@ -3599,7 +3599,7 @@ public sealed class ClusterVariableResultBase
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The scope of a cluster variable.
@@ -3712,7 +3712,7 @@ public sealed class ClusterVariableSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -3725,7 +3725,7 @@ public sealed class ClusterVariableSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -3744,7 +3744,7 @@ public sealed class ClusterVariableSearchResult
     /// Value of this cluster variable. Can be truncated.
     /// </summary>
     [JsonPropertyName("value")]
-    public string Value { get; set; }
+    public string Value { get; set; } = null!;
 
     /// <summary>
     /// Whether the value is truncated or not.
@@ -3756,7 +3756,7 @@ public sealed class ClusterVariableSearchResult
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The scope of a cluster variable.
@@ -3797,7 +3797,7 @@ public sealed class ConditionalEvaluationInstruction : global::Camunda.Client.Ru
     /// 
     /// </summary>
     [JsonPropertyName("variables")]
-    public object Variables { get; set; }
+    public object Variables { get; set; } = null!;
 
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
@@ -3920,7 +3920,7 @@ public sealed class CorrelatedMessageSubscriptionResult
     /// The correlation key of the message.
     /// </summary>
     [JsonPropertyName("correlationKey")]
-    public string CorrelationKey { get; set; }
+    public string CorrelationKey { get; set; } = null!;
 
     /// <summary>
     /// The time when the message was correlated.
@@ -3932,7 +3932,7 @@ public sealed class CorrelatedMessageSubscriptionResult
     /// The element ID that received the message.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public string ElementId { get; set; }
+    public string ElementId { get; set; } = null!;
 
     /// <summary>
     /// The element instance key that received the message.
@@ -3950,7 +3950,7 @@ public sealed class CorrelatedMessageSubscriptionResult
     /// The name of the message.
     /// </summary>
     [JsonPropertyName("messageName")]
-    public string MessageName { get; set; }
+    public string MessageName { get; set; } = null!;
 
     /// <summary>
     /// The partition ID that correlated the message.
@@ -4039,7 +4039,7 @@ public sealed class CorrelatedMessageSubscriptionSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -4052,7 +4052,7 @@ public sealed class CorrelatedMessageSubscriptionSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -4071,13 +4071,13 @@ public sealed class CreateClusterVariableRequest
     /// The name of the cluster variable. Must be unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
     /// </summary>
     [JsonPropertyName("value")]
-    public object Value { get; set; }
+    public object Value { get; set; } = null!;
 
 }
 
@@ -4111,7 +4111,7 @@ public sealed class CreateProcessInstanceResult
     /// All the variables visible in the root scope.
     /// </summary>
     [JsonPropertyName("variables")]
-    public object Variables { get; set; }
+    public object Variables { get; set; } = null!;
 
     /// <summary>
     /// The key of the process definition which was used to create the process instance.
@@ -4415,7 +4415,7 @@ public sealed class DecisionDefinitionSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -4428,7 +4428,7 @@ public sealed class DecisionDefinitionSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -4557,8 +4557,8 @@ public sealed class DecisionEvaluationInstanceKeyFilterProperty
 /// </list>
 /// </remarks>
 /// <seealso cref="DecisionEvaluationById"/>
-[JsonDerivedType(typeof(DecisionEvaluationById))]
 /// <seealso cref="DecisionEvaluationByKey"/>
+[JsonDerivedType(typeof(DecisionEvaluationById))]
 [JsonDerivedType(typeof(DecisionEvaluationByKey))]
 public abstract class DecisionEvaluationInstruction { }
 
@@ -4606,7 +4606,7 @@ public sealed class DecisionInstanceDeletionBatchOperationRequest
     /// The decision instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public DecisionInstanceFilter Filter { get; set; }
+    public DecisionInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -5028,7 +5028,7 @@ public sealed class DecisionInstanceSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -5041,7 +5041,7 @@ public sealed class DecisionInstanceSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -5233,7 +5233,7 @@ public sealed class DecisionRequirementsSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -5246,7 +5246,7 @@ public sealed class DecisionRequirementsSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -5552,7 +5552,7 @@ public sealed class DeploymentProcessResult
     /// The resource name from which this process was parsed.
     /// </summary>
     [JsonPropertyName("resourceName")]
-    public string ResourceName { get; set; }
+    public string ResourceName { get; set; } = null!;
 
     /// <summary>
     /// The tenant ID of the deployed process.
@@ -5617,7 +5617,7 @@ public sealed class DeploymentResult
     /// Items deployed by the request.
     /// </summary>
     [JsonPropertyName("deployments")]
-    public List<DeploymentMetadataResult> Deployments { get; set; }
+    public List<DeploymentMetadataResult> Deployments { get; set; } = null!;
 
 }
 
@@ -5630,7 +5630,7 @@ public sealed class DirectAncestorKeyInstruction : AncestorScopeInstruction
     /// The type of ancestor scope instruction.
     /// </summary>
     [JsonPropertyName("ancestorScopeType")]
-    public string AncestorScopeType { get; set; }
+    public string AncestorScopeType { get; set; } = null!;
 
     /// <summary>
     /// The key of the ancestor scope the element instance should be created in.
@@ -5640,7 +5640,7 @@ public sealed class DirectAncestorKeyInstruction : AncestorScopeInstruction
     /// 
     /// </summary>
     [JsonPropertyName("ancestorElementInstanceKey")]
-    public object AncestorElementInstanceKey { get; set; }
+    public object AncestorElementInstanceKey { get; set; } = null!;
 
 }
 
@@ -6029,13 +6029,13 @@ public sealed class ElementInstanceResult
     /// The element name for this element instance.
     /// </summary>
     [JsonPropertyName("elementName")]
-    public string ElementName { get; set; }
+    public string ElementName { get; set; } = null!;
 
     /// <summary>
     /// Type of element as defined set of values.
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = null!;
 
     /// <summary>
     /// State of element instance as defined set of values.
@@ -6130,7 +6130,7 @@ public sealed class ElementInstanceSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -6143,7 +6143,7 @@ public sealed class ElementInstanceSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -6230,7 +6230,7 @@ public sealed class EvaluateConditionalResult
     /// List of process instances created. If no root-level conditional start events evaluated to true, the list will be empty.
     /// </summary>
     [JsonPropertyName("processInstances")]
-    public List<ProcessInstanceReference> ProcessInstances { get; set; }
+    public List<ProcessInstanceReference> ProcessInstances { get; set; } = null!;
 
 }
 
@@ -6355,7 +6355,7 @@ public sealed class EvaluateDecisionResult
     /// The name of the decision which was evaluated.
     /// </summary>
     [JsonPropertyName("decisionDefinitionName")]
-    public string DecisionDefinitionName { get; set; }
+    public string DecisionDefinitionName { get; set; } = null!;
 
     /// <summary>
     /// The version of the decision which was evaluated.
@@ -6367,14 +6367,14 @@ public sealed class EvaluateDecisionResult
     /// The ID of the decision requirements graph that the decision which was evaluated is part of.
     /// </summary>
     [JsonPropertyName("decisionRequirementsId")]
-    public string DecisionRequirementsId { get; set; }
+    public string DecisionRequirementsId { get; set; } = null!;
 
     /// <summary>
     /// JSON document that will instantiate the result of the decision which was evaluated.
     /// 
     /// </summary>
     [JsonPropertyName("output")]
-    public string Output { get; set; }
+    public string Output { get; set; } = null!;
 
     /// <summary>
     /// The ID of the decision which failed during evaluation.
@@ -6386,7 +6386,7 @@ public sealed class EvaluateDecisionResult
     /// Message describing why the decision which was evaluated failed.
     /// </summary>
     [JsonPropertyName("failureMessage")]
-    public string FailureMessage { get; set; }
+    public string FailureMessage { get; set; } = null!;
 
     /// <summary>
     /// The tenant ID of the evaluated decision.
@@ -6422,7 +6422,7 @@ public sealed class EvaluateDecisionResult
     /// Decisions that were evaluated within the requested decision evaluation.
     /// </summary>
     [JsonPropertyName("evaluatedDecisions")]
-    public List<EvaluatedDecisionResult> EvaluatedDecisions { get; set; }
+    public List<EvaluatedDecisionResult> EvaluatedDecisions { get; set; } = null!;
 
 }
 
@@ -6435,7 +6435,7 @@ public sealed class ExpressionEvaluationRequest : global::Camunda.Client.Runtime
     /// The expression to evaluate (e.g., "=x + y")
     /// </summary>
     [JsonPropertyName("expression")]
-    public string Expression { get; set; }
+    public string Expression { get; set; } = null!;
 
     /// <summary>
     /// Required when the expression references tenant-scoped cluster variables
@@ -6457,19 +6457,19 @@ public sealed class ExpressionEvaluationResult
     /// The evaluated expression
     /// </summary>
     [JsonPropertyName("expression")]
-    public string Expression { get; set; }
+    public string Expression { get; set; } = null!;
 
     /// <summary>
     /// The result value. Its type can vary.
     /// </summary>
     [JsonPropertyName("result")]
-    public object Result { get; set; }
+    public object Result { get; set; } = null!;
 
     /// <summary>
     /// List of warnings generated during expression evaluation
     /// </summary>
     [JsonPropertyName("warnings")]
-    public List<string> Warnings { get; set; }
+    public List<string> Warnings { get; set; } = null!;
 
 }
 
@@ -6582,19 +6582,19 @@ public sealed class GlobalJobStatisticsQueryResult
     /// Metric for a single job status.
     /// </summary>
     [JsonPropertyName("created")]
-    public StatusMetric Created { get; set; }
+    public StatusMetric Created { get; set; } = null!;
 
     /// <summary>
     /// Metric for a single job status.
     /// </summary>
     [JsonPropertyName("completed")]
-    public StatusMetric Completed { get; set; }
+    public StatusMetric Completed { get; set; } = null!;
 
     /// <summary>
     /// Metric for a single job status.
     /// </summary>
     [JsonPropertyName("failed")]
-    public StatusMetric Failed { get; set; }
+    public StatusMetric Failed { get; set; } = null!;
 
     /// <summary>
     /// True if some data is missing because internal limits were reached and some metrics were not recorded.
@@ -6645,7 +6645,7 @@ public sealed class GroupClientSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -6670,7 +6670,7 @@ public sealed class GroupClientSearchResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -6683,13 +6683,13 @@ public sealed class GroupCreateRequest
     /// The ID of the new group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; }
+    public string GroupId { get; set; } = null!;
 
     /// <summary>
     /// The display name of the new group.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the new group.
@@ -6808,7 +6808,7 @@ public sealed class GroupSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -6821,7 +6821,7 @@ public sealed class GroupSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -6840,7 +6840,7 @@ public sealed class GroupUpdateRequest
     /// The new name of the group.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The new description of the group.
@@ -6916,7 +6916,7 @@ public sealed class GroupUserSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -6941,7 +6941,7 @@ public sealed class GroupUserSearchResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -7089,7 +7089,7 @@ public sealed class IncidentProcessInstanceStatisticsByDefinitionQuery
     /// Filter criteria for the aggregated process instance statistics.
     /// </summary>
     [JsonPropertyName("filter")]
-    public IncidentProcessInstanceStatisticsByDefinitionFilter Filter { get; set; }
+    public IncidentProcessInstanceStatisticsByDefinitionFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// Pagination parameters for the aggregated process instance statistics.
@@ -7122,7 +7122,7 @@ public sealed class IncidentProcessInstanceStatisticsByDefinitionQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -7135,7 +7135,7 @@ public sealed class IncidentProcessInstanceStatisticsByDefinitionQuerySortReques
     /// The aggregated field by which the process instance statistics are sorted.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -7226,7 +7226,7 @@ public sealed class IncidentProcessInstanceStatisticsByErrorQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -7239,7 +7239,7 @@ public sealed class IncidentProcessInstanceStatisticsByErrorQuerySortRequest
     /// The field to sort the incident error statistics by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -7409,7 +7409,7 @@ public sealed class IncidentSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -7422,7 +7422,7 @@ public sealed class IncidentSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -7456,7 +7456,7 @@ public sealed class InferredAncestorKeyInstruction : AncestorScopeInstruction
     /// The type of ancestor scope instruction.
     /// </summary>
     [JsonPropertyName("ancestorScopeType")]
-    public string AncestorScopeType { get; set; }
+    public string AncestorScopeType { get; set; } = null!;
 
 }
 
@@ -7476,7 +7476,7 @@ public sealed class JobActivationRequest
     /// The job type, as defined in the BPMN process (e.g. &lt;zeebe:taskDefinition type="payment-service" /&gt;)
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = null!;
 
     /// <summary>
     /// The name of the worker activating the jobs, mostly used for logging purposes.
@@ -7527,7 +7527,7 @@ public sealed class JobActivationResult
     /// The activated jobs.
     /// </summary>
     [JsonPropertyName("jobs")]
-    public List<ActivatedJobResult> Jobs { get; set; }
+    public List<ActivatedJobResult> Jobs { get; set; } = null!;
 
 }
 
@@ -7580,7 +7580,7 @@ public sealed class JobErrorRequest
     /// 
     /// </summary>
     [JsonPropertyName("errorCode")]
-    public string ErrorCode { get; set; }
+    public string ErrorCode { get; set; } = null!;
 
     /// <summary>
     /// An error message that provides additional context.
@@ -7870,8 +7870,8 @@ public sealed class JobListenerEventTypeFilterProperty
 /// </list>
 /// </remarks>
 /// <seealso cref="JobResultUserTask"/>
-[JsonDerivedType(typeof(JobResultUserTask))]
 /// <seealso cref="JobResultAdHocSubProcess"/>
+[JsonDerivedType(typeof(JobResultUserTask))]
 [JsonDerivedType(typeof(JobResultAdHocSubProcess))]
 public abstract class JobResult { }
 
@@ -8068,7 +8068,7 @@ public sealed class JobSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -8081,7 +8081,7 @@ public sealed class JobSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -8100,7 +8100,7 @@ public sealed class JobSearchResult
     /// A set of custom headers defined during modelling.
     /// </summary>
     [JsonPropertyName("customHeaders")]
-    public Dictionary<string, string> CustomHeaders { get; set; }
+    public Dictionary<string, string> CustomHeaders { get; set; } = null!;
 
     /// <summary>
     /// If the job has been activated, when it will next be available to be activated.
@@ -8223,13 +8223,13 @@ public sealed class JobSearchResult
     /// The type of the job.
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = null!;
 
     /// <summary>
     /// The name of the worker of this job.
     /// </summary>
     [JsonPropertyName("worker")]
-    public string Worker { get; set; }
+    public string Worker { get; set; } = null!;
 
     /// <summary>
     /// When the job was created. Field is present for jobs created after 8.9.
@@ -8285,7 +8285,7 @@ public sealed class JobUpdateRequest
     /// JSON object with changed job attribute values. The job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead.
     /// </summary>
     [JsonPropertyName("changeset")]
-    public JobChangeset Changeset { get; set; }
+    public JobChangeset Changeset { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -8312,7 +8312,7 @@ public sealed class LicenseResponse
     /// Will return the license type property of the Camunda license
     /// </summary>
     [JsonPropertyName("licenseType")]
-    public string LicenseType { get; set; }
+    public string LicenseType { get; set; } = null!;
 
     /// <summary>
     /// Will be false when a license contains a non-commerical=true property
@@ -8414,25 +8414,25 @@ public sealed class MappingRuleCreateRequest
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; }
+    public string MappingRuleId { get; set; } = null!;
 
     /// <summary>
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
 }
 
@@ -8476,19 +8476,19 @@ public sealed class MappingRuleCreateUpdateRequest
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
 }
 
@@ -8625,7 +8625,7 @@ public sealed class MappingRuleSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -8638,7 +8638,7 @@ public sealed class MappingRuleSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -8657,19 +8657,19 @@ public sealed class MappingRuleUpdateRequest
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
 }
 
@@ -8739,7 +8739,7 @@ public sealed class MessageCorrelationRequest : global::Camunda.Client.Runtime.I
     /// 
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The correlation key of the message.
@@ -8828,7 +8828,7 @@ public sealed class MessagePublicationRequest : global::Camunda.Client.Runtime.I
     /// The name of the message.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The correlation key of the message.
@@ -9116,7 +9116,7 @@ public sealed class MessageSubscriptionSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -9129,7 +9129,7 @@ public sealed class MessageSubscriptionSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -9193,7 +9193,7 @@ public sealed class ModifyProcessInstanceVariableInstruction
     /// 
     /// </summary>
     [JsonPropertyName("variables")]
-    public object Variables { get; set; }
+    public object Variables { get; set; } = null!;
 
     /// <summary>
     /// The id of the element in which scope the variables should be created.
@@ -9291,13 +9291,13 @@ public sealed class Partition
     /// Describes the Raft role of the broker for a given partition.
     /// </summary>
     [JsonPropertyName("role")]
-    public string Role { get; set; }
+    public string Role { get; set; } = null!;
 
     /// <summary>
     /// Describes the current health of the partition.
     /// </summary>
     [JsonPropertyName("health")]
-    public string Health { get; set; }
+    public string Health { get; set; } = null!;
 
 }
 
@@ -9574,7 +9574,7 @@ public sealed class ProcessDefinitionInstanceStatisticsQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -9587,7 +9587,7 @@ public sealed class ProcessDefinitionInstanceStatisticsQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -9680,7 +9680,7 @@ public sealed class ProcessDefinitionInstanceVersionStatisticsQuery
     /// The process definition instance version statistics search filters.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessDefinitionInstanceVersionStatisticsFilter Filter { get; set; }
+    public ProcessDefinitionInstanceVersionStatisticsFilter Filter { get; set; } = null!;
 
 }
 
@@ -9699,7 +9699,7 @@ public sealed class ProcessDefinitionInstanceVersionStatisticsQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -9712,7 +9712,7 @@ public sealed class ProcessDefinitionInstanceVersionStatisticsQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -9743,7 +9743,7 @@ public sealed class ProcessDefinitionInstanceVersionStatisticsResult
     /// The name of the process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionName")]
-    public string ProcessDefinitionName { get; set; }
+    public string ProcessDefinitionName { get; set; } = null!;
 
     /// <summary>
     /// The tenant ID associated with the process definition.
@@ -9837,7 +9837,7 @@ public sealed class ProcessDefinitionMessageSubscriptionStatisticsQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -9973,7 +9973,7 @@ public sealed class ProcessDefinitionSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -9986,7 +9986,7 @@ public sealed class ProcessDefinitionSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -10199,7 +10199,7 @@ public sealed class ProcessInstanceCallHierarchyEntry
     /// The name of the process definition (fall backs to the process definition id if not available).
     /// </summary>
     [JsonPropertyName("processDefinitionName")]
-    public string ProcessDefinitionName { get; set; }
+    public string ProcessDefinitionName { get; set; } = null!;
 
 }
 
@@ -10212,7 +10212,7 @@ public sealed class ProcessInstanceCancellationBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -10237,8 +10237,8 @@ public sealed class ProcessInstanceCancellationBatchOperationRequest
 /// </list>
 /// </remarks>
 /// <seealso cref="ProcessInstanceCreationInstructionById"/>
-[JsonDerivedType(typeof(ProcessInstanceCreationInstructionById))]
 /// <seealso cref="ProcessInstanceCreationInstructionByKey"/>
+[JsonDerivedType(typeof(ProcessInstanceCreationInstructionById))]
 [JsonDerivedType(typeof(ProcessInstanceCreationInstructionByKey))]
 public abstract class ProcessInstanceCreationInstruction { }
 
@@ -10499,7 +10499,7 @@ public sealed class ProcessInstanceDeletionBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -10745,7 +10745,7 @@ public sealed class ProcessInstanceIncidentResolutionBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -10808,7 +10808,7 @@ public sealed class ProcessInstanceMigrationBatchOperationPlan
     /// The mapping instructions.
     /// </summary>
     [JsonPropertyName("mappingInstructions")]
-    public List<MigrateProcessInstanceMappingInstruction> MappingInstructions { get; set; }
+    public List<MigrateProcessInstanceMappingInstruction> MappingInstructions { get; set; } = null!;
 
 }
 
@@ -10821,13 +10821,13 @@ public sealed class ProcessInstanceMigrationBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// The migration plan.
     /// </summary>
     [JsonPropertyName("migrationPlan")]
-    public ProcessInstanceMigrationBatchOperationPlan MigrationPlan { get; set; }
+    public ProcessInstanceMigrationBatchOperationPlan MigrationPlan { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -10855,7 +10855,7 @@ public sealed class ProcessInstanceMigrationInstruction
     /// Element mappings from the source process instance to the target process instance.
     /// </summary>
     [JsonPropertyName("mappingInstructions")]
-    public List<MigrateProcessInstanceMappingInstruction> MappingInstructions { get; set; }
+    public List<MigrateProcessInstanceMappingInstruction> MappingInstructions { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -10907,13 +10907,13 @@ public sealed class ProcessInstanceModificationBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// Instructions for moving tokens between elements.
     /// </summary>
     [JsonPropertyName("moveInstructions")]
-    public List<ProcessInstanceModificationMoveBatchOperationInstruction> MoveInstructions { get; set; }
+    public List<ProcessInstanceModificationMoveBatchOperationInstruction> MoveInstructions { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -10995,7 +10995,7 @@ public sealed class ProcessInstanceModificationMoveInstruction
     /// 
     /// </summary>
     [JsonPropertyName("sourceElementInstruction")]
-    public SourceElementInstruction SourceElementInstruction { get; set; }
+    public SourceElementInstruction SourceElementInstruction { get; set; } = null!;
 
     /// <summary>
     /// The target element id.
@@ -11058,8 +11058,8 @@ public sealed class ProcessInstanceModificationTerminateByKeyInstruction : Proce
 /// </list>
 /// </remarks>
 /// <seealso cref="ProcessInstanceModificationTerminateByIdInstruction"/>
-[JsonDerivedType(typeof(ProcessInstanceModificationTerminateByIdInstruction))]
 /// <seealso cref="ProcessInstanceModificationTerminateByKeyInstruction"/>
+[JsonDerivedType(typeof(ProcessInstanceModificationTerminateByIdInstruction))]
 [JsonDerivedType(typeof(ProcessInstanceModificationTerminateByKeyInstruction))]
 public abstract class ProcessInstanceModificationTerminateInstruction { }
 
@@ -11097,7 +11097,7 @@ public sealed class ProcessInstanceResult
     /// The process definition name.
     /// </summary>
     [JsonPropertyName("processDefinitionName")]
-    public string ProcessDefinitionName { get; set; }
+    public string ProcessDefinitionName { get; set; } = null!;
 
     [JsonPropertyName("processDefinitionVersion")]
     public int ProcessDefinitionVersion { get; set; }
@@ -11207,13 +11207,13 @@ public sealed class ProcessInstanceSearchQueryResult
     /// The matching process instances.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ProcessInstanceResult> Items { get; set; }
+    public List<ProcessInstanceResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -11226,7 +11226,7 @@ public sealed class ProcessInstanceSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -11489,7 +11489,7 @@ public sealed class RoleClientSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -11514,7 +11514,7 @@ public sealed class RoleClientSearchResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -11527,13 +11527,13 @@ public sealed class RoleCreateRequest
     /// The ID of the new role.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string RoleId { get; set; }
+    public string RoleId { get; set; } = null!;
 
     /// <summary>
     /// The display name of the new role.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the new role.
@@ -11628,7 +11628,7 @@ public sealed class RoleGroupSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -11653,7 +11653,7 @@ public sealed class RoleGroupSearchResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -11722,7 +11722,7 @@ public sealed class RoleSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -11735,7 +11735,7 @@ public sealed class RoleSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -11754,7 +11754,7 @@ public sealed class RoleUpdateRequest
     /// The display name of the new role.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the new role.
@@ -11830,7 +11830,7 @@ public sealed class RoleUserSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -11855,7 +11855,7 @@ public sealed class RoleUserSearchResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -11938,12 +11938,12 @@ public sealed class ScopeKeyFilterProperty
 /// </list>
 /// </remarks>
 /// <seealso cref="LimitPagination"/>
-[JsonDerivedType(typeof(LimitPagination))]
 /// <seealso cref="OffsetPagination"/>
-[JsonDerivedType(typeof(OffsetPagination))]
 /// <seealso cref="CursorForwardPagination"/>
-[JsonDerivedType(typeof(CursorForwardPagination))]
 /// <seealso cref="CursorBackwardPagination"/>
+[JsonDerivedType(typeof(LimitPagination))]
+[JsonDerivedType(typeof(OffsetPagination))]
+[JsonDerivedType(typeof(CursorForwardPagination))]
 [JsonDerivedType(typeof(CursorBackwardPagination))]
 public abstract class SearchQueryPageRequest { }
 
@@ -12002,7 +12002,7 @@ public sealed class SearchQueryResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -12015,7 +12015,7 @@ public sealed class SetVariableRequest
     /// JSON object representing the variables to set in the element’s scope.
     /// </summary>
     [JsonPropertyName("variables")]
-    public object Variables { get; set; }
+    public object Variables { get; set; } = null!;
 
     /// <summary>
     /// If set to true, the variables are merged strictly into the local scope (as specified by the `elementInstanceKey`).
@@ -12053,7 +12053,7 @@ public sealed class SignalBroadcastRequest : global::Camunda.Client.Runtime.ITen
     /// The name of the signal to broadcast.
     /// </summary>
     [JsonPropertyName("signalName")]
-    public string SignalName { get; set; }
+    public string SignalName { get; set; } = null!;
 
     /// <summary>
     /// The signal variables as a JSON object.
@@ -12143,7 +12143,7 @@ public sealed class SourceElementIdInstruction : SourceElementInstruction
     /// The type of source element instruction.
     /// </summary>
     [JsonPropertyName("sourceType")]
-    public string SourceType { get; set; }
+    public string SourceType { get; set; } = null!;
 
     /// <summary>
     /// The id of the source element for the move instruction.
@@ -12165,7 +12165,7 @@ public sealed class SourceElementInstanceKeyInstruction : SourceElementInstructi
     /// The type of source element instruction.
     /// </summary>
     [JsonPropertyName("sourceType")]
-    public string SourceType { get; set; }
+    public string SourceType { get; set; } = null!;
 
     /// <summary>
     /// The source element instance key for the move instruction.
@@ -12188,8 +12188,8 @@ public sealed class SourceElementInstanceKeyInstruction : SourceElementInstructi
 /// </list>
 /// </remarks>
 /// <seealso cref="SourceElementIdInstruction"/>
-[JsonDerivedType(typeof(SourceElementIdInstruction))]
 /// <seealso cref="SourceElementInstanceKeyInstruction"/>
+[JsonDerivedType(typeof(SourceElementIdInstruction))]
 [JsonDerivedType(typeof(SourceElementInstanceKeyInstruction))]
 public abstract class SourceElementInstruction { }
 
@@ -12323,7 +12323,7 @@ public sealed class TenantClientSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -12348,7 +12348,7 @@ public sealed class TenantClientSearchResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -12361,13 +12361,13 @@ public sealed class TenantCreateRequest
     /// The unique ID for the tenant. Must be 255 characters or less. Can contain letters, numbers, [`_`, `-`, `+`, `.`, `@`].
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public string TenantId { get; set; }
+    public string TenantId { get; set; } = null!;
 
     /// <summary>
     /// The name of the tenant.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the tenant.
@@ -12462,7 +12462,7 @@ public sealed class TenantGroupSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -12487,7 +12487,7 @@ public sealed class TenantGroupSearchResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -12584,7 +12584,7 @@ public sealed class TenantSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -12597,7 +12597,7 @@ public sealed class TenantSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -12616,7 +12616,7 @@ public sealed class TenantUpdateRequest
     /// The new name of the tenant.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The new description of the tenant.
@@ -12692,7 +12692,7 @@ public sealed class TenantUserSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -12717,7 +12717,7 @@ public sealed class TenantUserSearchResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -12730,7 +12730,7 @@ public sealed class TopologyResponse
     /// A list of brokers that are part of this cluster.
     /// </summary>
     [JsonPropertyName("brokers")]
-    public List<BrokerInfo> Brokers { get; set; }
+    public List<BrokerInfo> Brokers { get; set; } = null!;
 
     /// <summary>
     /// The cluster Id.
@@ -12760,13 +12760,13 @@ public sealed class TopologyResponse
     /// The version of the Zeebe Gateway.
     /// </summary>
     [JsonPropertyName("gatewayVersion")]
-    public string GatewayVersion { get; set; }
+    public string GatewayVersion { get; set; } = null!;
 
     /// <summary>
     /// ID of the last completed change
     /// </summary>
     [JsonPropertyName("lastCompletedChangeId")]
-    public string LastCompletedChangeId { get; set; }
+    public string LastCompletedChangeId { get; set; } = null!;
 
 }
 
@@ -12779,7 +12779,7 @@ public sealed class UpdateClusterVariableRequest
     /// The new value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
     /// </summary>
     [JsonPropertyName("value")]
-    public object Value { get; set; }
+    public object Value { get; set; } = null!;
 
 }
 
@@ -12932,13 +12932,13 @@ public sealed class UserRequest
     /// The password of the user.
     /// </summary>
     [JsonPropertyName("password")]
-    public string Password { get; set; }
+    public string Password { get; set; } = null!;
 
     /// <summary>
     /// The username of the user.
     /// </summary>
     [JsonPropertyName("username")]
-    public string Username { get; set; }
+    public string Username { get; set; } = null!;
 
     /// <summary>
     /// The name of the user.
@@ -13013,7 +13013,7 @@ public sealed class UserSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -13032,13 +13032,13 @@ public sealed class UserSearchResult
     /// The matching users.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<UserResult> Items { get; set; }
+    public List<UserResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -13562,7 +13562,7 @@ public sealed class UserTaskSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -13575,7 +13575,7 @@ public sealed class UserTaskSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -13701,7 +13701,7 @@ public sealed class UserTaskVariableSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -13771,7 +13771,7 @@ public sealed class UseSourceParentKeyInstruction : AncestorScopeInstruction
     /// The type of ancestor scope instruction.
     /// </summary>
     [JsonPropertyName("ancestorScopeType")]
-    public string AncestorScopeType { get; set; }
+    public string AncestorScopeType { get; set; } = null!;
 
 }
 
@@ -13997,7 +13997,7 @@ public sealed class VariableSearchQueryResult
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -14010,7 +14010,7 @@ public sealed class VariableSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -14087,13 +14087,13 @@ public sealed class VariableValueFilterProperty
     /// Name of the variable.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The value of the variable.
     /// </summary>
     [JsonPropertyName("value")]
-    public StringFilterProperty Value { get; set; }
+    public StringFilterProperty Value { get; set; } = null!;
 
 }
 
@@ -14106,7 +14106,7 @@ public sealed class ActivateJobsResponse
     /// The activated jobs.
     /// </summary>
     [JsonPropertyName("jobs")]
-    public List<ActivatedJobResult> Jobs { get; set; }
+    public List<ActivatedJobResult> Jobs { get; set; } = null!;
 
 }
 
@@ -14119,7 +14119,7 @@ public sealed class CancelProcessInstancesBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -14152,7 +14152,7 @@ public sealed class CreateDeploymentResponse
     /// Items deployed by the request.
     /// </summary>
     [JsonPropertyName("deployments")]
-    public List<DeploymentMetadataResult> Deployments { get; set; }
+    public List<DeploymentMetadataResult> Deployments { get; set; } = null!;
 
 }
 
@@ -14165,7 +14165,7 @@ public sealed class DeleteDecisionInstancesBatchOperationRequest
     /// The decision instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public object Filter { get; set; }
+    public object Filter { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -14186,7 +14186,7 @@ public sealed class DeleteProcessInstancesBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -14430,13 +14430,13 @@ public sealed class GetElementInstanceResponse
     /// The element name for this element instance.
     /// </summary>
     [JsonPropertyName("elementName")]
-    public string ElementName { get; set; }
+    public string ElementName { get; set; } = null!;
 
     /// <summary>
     /// Type of element as defined set of values.
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = null!;
 
     /// <summary>
     /// State of element instance as defined set of values.
@@ -14601,7 +14601,7 @@ public sealed class GetProcessDefinitionInstanceVersionStatisticsRequest
     /// The process definition instance version statistics search filters.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessDefinitionInstanceVersionStatisticsFilter Filter { get; set; }
+    public ProcessDefinitionInstanceVersionStatisticsFilter Filter { get; set; } = null!;
 
 }
 
@@ -14649,7 +14649,7 @@ public sealed class GetProcessInstanceResponse
     /// The process definition name.
     /// </summary>
     [JsonPropertyName("processDefinitionName")]
-    public string ProcessDefinitionName { get; set; }
+    public string ProcessDefinitionName { get; set; } = null!;
 
     [JsonPropertyName("processDefinitionVersion")]
     public int ProcessDefinitionVersion { get; set; }
@@ -15025,7 +15025,7 @@ public sealed class MigrateProcessInstanceRequest
     /// Element mappings from the source process instance to the target process instance.
     /// </summary>
     [JsonPropertyName("mappingInstructions")]
-    public List<MigrateProcessInstanceMappingInstruction> MappingInstructions { get; set; }
+    public List<MigrateProcessInstanceMappingInstruction> MappingInstructions { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -15046,13 +15046,13 @@ public sealed class MigrateProcessInstancesBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// The migration plan.
     /// </summary>
     [JsonPropertyName("migrationPlan")]
-    public ProcessInstanceMigrationBatchOperationPlan MigrationPlan { get; set; }
+    public ProcessInstanceMigrationBatchOperationPlan MigrationPlan { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -15108,13 +15108,13 @@ public sealed class ModifyProcessInstancesBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// Instructions for moving tokens between elements.
     /// </summary>
     [JsonPropertyName("moveInstructions")]
-    public List<ProcessInstanceModificationMoveBatchOperationInstruction> MoveInstructions { get; set; }
+    public List<ProcessInstanceModificationMoveBatchOperationInstruction> MoveInstructions { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -15154,7 +15154,7 @@ public sealed class ResolveIncidentsBatchOperationRequest
     /// The process instance filter.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; }
+    public ProcessInstanceFilter Filter { get; set; } = null!;
 
     /// <summary>
     /// A reference key chosen by the user that will be part of all records resulting from this operation.
@@ -15181,7 +15181,7 @@ public sealed class SearchAuditLogsResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15225,7 +15225,7 @@ public sealed class SearchBatchOperationItemsResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15288,7 +15288,7 @@ public sealed class SearchClientsForGroupResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15370,7 +15370,7 @@ public sealed class SearchClusterVariablesResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15389,7 +15389,7 @@ public sealed class SearchCorrelatedMessageSubscriptionsResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15433,7 +15433,7 @@ public sealed class SearchDecisionInstancesResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15452,7 +15452,7 @@ public sealed class SearchElementInstanceIncidentsResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15471,7 +15471,7 @@ public sealed class SearchElementInstancesResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15528,7 +15528,7 @@ public sealed class SearchIncidentsResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15547,7 +15547,7 @@ public sealed class SearchJobsResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15591,7 +15591,7 @@ public sealed class SearchMessageSubscriptionsResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15635,7 +15635,7 @@ public sealed class SearchProcessInstanceIncidentsResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15673,13 +15673,13 @@ public sealed class SearchProcessInstancesResponse
     /// The matching process instances.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ProcessInstanceResult> Items { get; set; }
+    public List<ProcessInstanceResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15742,7 +15742,7 @@ public sealed class SearchUsersForGroupResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15849,7 +15849,7 @@ public sealed class SearchUserTaskAuditLogsResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15893,7 +15893,7 @@ public sealed class SearchUserTasksResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15937,7 +15937,7 @@ public sealed class SearchUserTaskVariablesResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15981,7 +15981,7 @@ public sealed class SearchVariablesResponse
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; }
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15994,19 +15994,19 @@ public sealed class UpdateMappingRuleRequest
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
 }
 

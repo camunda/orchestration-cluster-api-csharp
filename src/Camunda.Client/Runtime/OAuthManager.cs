@@ -6,7 +6,7 @@ namespace Camunda.Client.Runtime;
 /// OAuth token management with singleflight refresh, caching, and retry.
 /// Mirrors the JS SDK's OAuthManager.
 /// </summary>
-internal sealed class OAuthManager
+internal sealed class OAuthManager : IDisposable
 {
     private readonly CamundaConfig _config;
     private readonly ILogger _logger;
@@ -64,7 +64,12 @@ internal sealed class OAuthManager
         _token = null;
     }
 
-    private bool ShouldRefresh(OAuthToken token)
+    public void Dispose()
+    {
+        _refreshLock.Dispose();
+    }
+
+    private static bool ShouldRefresh(OAuthToken token)
     {
         var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         const int refreshLeadMs = 5000;
@@ -198,13 +203,14 @@ public sealed class CamundaAuthException : Exception
 // JSON deserialization helper using snake_case for OAuth responses
 internal static class HttpContentExtensions
 {
+    private static readonly System.Text.Json.JsonSerializerOptions s_snakeCaseOptions = new()
+    {
+        PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.SnakeCaseLower,
+    };
+
     public static async Task<T?> ReadFromJsonAsync<T>(this HttpContent content, CancellationToken ct = default)
     {
-        var options = new System.Text.Json.JsonSerializerOptions
-        {
-            PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.SnakeCaseLower,
-        };
         var stream = await content.ReadAsStreamAsync(ct);
-        return await System.Text.Json.JsonSerializer.DeserializeAsync<T>(stream, options, ct);
+        return await System.Text.Json.JsonSerializer.DeserializeAsync<T>(stream, s_snakeCaseOptions, ct);
     }
 }

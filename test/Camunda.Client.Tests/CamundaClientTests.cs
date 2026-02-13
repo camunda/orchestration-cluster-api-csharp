@@ -69,7 +69,11 @@ public class CamundaClientTests : IDisposable
         client.Config.Auth.Strategy.Should().Be(Runtime.AuthStrategy.None);
     }
 
-    public void Dispose() => _client.Dispose();
+    public void Dispose()
+    {
+        _client.Dispose();
+        GC.SuppressFinalize(this);
+    }
 }
 
 /// <summary>

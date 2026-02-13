@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <RootNamespace>Camunda.Client.Generator</RootNamespace>
     <LangVersion>12</LangVersion>
+    <NoWarn>CA1305</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

@@ -180,7 +180,7 @@ public class JobWorkerTests
             AutoStart = false,
         };
 
-        var worker = client.CreateJobWorker(config, async (job, ct) => null);
+        var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
 
         client.GetWorkers().Should().ContainSingle();
         client.GetWorkers()[0].Should().BeSameAs(worker);
@@ -197,7 +197,7 @@ public class JobWorkerTests
             AutoStart = false,
         };
 
-        var worker = client.CreateJobWorker(config, async (job, ct) => null);
+        var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
 
         worker.Name.Should().StartWith("worker-payment-");
     }
@@ -214,7 +214,7 @@ public class JobWorkerTests
             AutoStart = false,
         };
 
-        var worker = client.CreateJobWorker(config, async (job, ct) => null);
+        var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
 
         worker.Name.Should().Be("my-custom-worker");
     }
@@ -230,7 +230,7 @@ public class JobWorkerTests
             AutoStart = false,
         };
 
-        var worker = client.CreateJobWorker(config, async (job, ct) => null);
+        var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
 
         worker.IsRunning.Should().BeFalse();
         worker.ActiveJobs.Should().Be(0);
@@ -247,8 +247,8 @@ public class JobWorkerTests
             AutoStart = false,
         };
 
-        var w1 = client.CreateJobWorker(config, async (job, ct) => null);
-        var w2 = client.CreateJobWorker(config, async (job, ct) => null);
+        var w1 = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
+        var w2 = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
 
         // Start them
         w1.Start();
@@ -297,7 +297,7 @@ public class JobWorkerTests
             AutoStart = false,
         };
 
-        var worker = client.CreateJobWorker(config, async (job, ct) => null);
+        var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
         worker.Start();
         worker.IsRunning.Should().BeTrue();
 
@@ -309,21 +309,22 @@ public class JobWorkerTests
 
     // ---- Helpers ----
 
+    private static readonly JsonSerializerOptions s_testJsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        PropertyNameCaseInsensitive = true,
+        Converters =
+        {
+            new Runtime.TolerantEnumConverterFactory(),
+            new Runtime.CamundaKeyJsonConverterFactory(),
+            new Runtime.CamundaLongKeyJsonConverterFactory(),
+        },
+    };
+
     private static ActivatedJob CreateTestJob(
         string? variables = null,
         string? customHeaders = null)
     {
-        var jsonOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-            Converters =
-            {
-                new Runtime.TolerantEnumConverterFactory(),
-                new Runtime.CamundaKeyJsonConverterFactory(),
-                new Runtime.CamundaLongKeyJsonConverterFactory(),
-            },
-        };
 
         var jobJson = $$"""
         {
@@ -346,7 +347,7 @@ public class JobWorkerTests
         }
         """;
 
-        var raw = JsonSerializer.Deserialize<ActivatedJobResult>(jobJson, jsonOptions)!;
+        var raw = JsonSerializer.Deserialize<ActivatedJobResult>(jobJson, s_testJsonOptions)!;
         return new ActivatedJob(raw);
     }
 

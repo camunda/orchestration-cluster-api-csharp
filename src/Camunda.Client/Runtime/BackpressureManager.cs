@@ -6,7 +6,7 @@ namespace Camunda.Client.Runtime;
 /// Adaptive backpressure management. Mirrors the JS SDK's BackpressureManager.
 /// Tracks HTTP 429/503 signals and limits concurrent requests.
 /// </summary>
-internal sealed class BackpressureManager
+internal sealed class BackpressureManager : IDisposable
 {
     private readonly ILogger _logger;
     private readonly BackpressureConfig _config;
@@ -74,6 +74,11 @@ internal sealed class BackpressureManager
                 _permitsMax = newMax;
             }
         }
+    }
+
+    public void Dispose()
+    {
+        _semaphore?.Dispose();
     }
 
     public BackpressureState GetState() => new()

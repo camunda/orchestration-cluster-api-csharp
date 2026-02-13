@@ -11,6 +11,22 @@ namespace Camunda.Client.Tests;
 /// </summary>
 public class TypedVariableTests
 {
+    private static readonly JsonSerializerOptions s_camelCaseOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+    };
+
+    private static readonly JsonSerializerOptions s_camelCaseOnlyOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    };
+
+    private static readonly JsonSerializerOptions s_caseInsensitiveOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+    };
+
     // ---- Sample DTOs ----
 
     public record OrderInput(string OrderId, decimal Amount);
@@ -119,11 +135,7 @@ public class TypedVariableTests
             Variables = new OrderInput("ord-100", 50.0m),
         };
 
-        var json = JsonSerializer.Serialize(request, new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-        });
+        var json = JsonSerializer.Serialize(request, s_camelCaseOptions);
 
         // The variables should be serialized as the DTO's properties
         json.Should().Contain("\"orderId\":\"ord-100\"");
@@ -139,11 +151,7 @@ public class TypedVariableTests
             Variables = new Dictionary<string, object> { ["myVar"] = "hello" },
         };
 
-        var json = JsonSerializer.Serialize(request, new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-        });
+        var json = JsonSerializer.Serialize(request, s_camelCaseOptions);
 
         json.Should().Contain("\"myVar\":\"hello\"");
     }
@@ -157,18 +165,14 @@ public class TypedVariableTests
         var input = new OrderInput("ord-rt", 77.77m);
 
         // Serialize as API would send
-        var jsonOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        };
-        var serialized = JsonSerializer.Serialize(input, jsonOptions);
+        var serialized = JsonSerializer.Serialize(input, s_camelCaseOnlyOptions);
 
         // Deserialize as API would return (into an object property → JsonElement)
         var responseJson = $$"""{"variables":{{serialized}}}""";
-        var response = JsonSerializer.Deserialize<FakeResponse>(responseJson, jsonOptions);
+        var response = JsonSerializer.Deserialize<FakeResponse>(responseJson, s_camelCaseOnlyOptions);
 
         // Extract typed variables
-        var output = response!.Variables.DeserializeAs<OrderInput>(jsonOptions);
+        var output = response!.Variables.DeserializeAs<OrderInput>(s_camelCaseOnlyOptions);
 
         output.Should().NotBeNull();
         output!.OrderId.Should().Be("ord-rt");
@@ -179,8 +183,7 @@ public class TypedVariableTests
     public void CustomHeaders_DeserializeAs()
     {
         var json = """{"customHeaders":{"region":"eu-west","priority":5}}""";
-        var response = JsonSerializer.Deserialize<FakeJobResponse>(json,
-            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        var response = JsonSerializer.Deserialize<FakeJobResponse>(json, s_caseInsensitiveOptions);
 
         var headers = response!.CustomHeaders.DeserializeAs<JobHeaders>();
 
@@ -190,12 +193,12 @@ public class TypedVariableTests
     }
 
     // Helper types to simulate API responses
-    private class FakeResponse
+    private sealed class FakeResponse
     {
         public object? Variables { get; set; }
     }
 
-    private class FakeJobResponse
+    private sealed class FakeJobResponse
     {
         public object? CustomHeaders { get; set; }
     }

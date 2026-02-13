@@ -199,7 +199,7 @@ public static class ConfigurationHydrator
         // Validate integers
         int ParseInt(string key, int fallback)
         {
-            var raw = rawMap.GetValueOrDefault(key, fallback.ToString())!;
+            var raw = rawMap.GetValueOrDefault(key, fallback.ToString(System.Globalization.CultureInfo.InvariantCulture))!;
             if (int.TryParse(raw, out var val))
                 return val;
             errors.Add(new ConfigErrorDetail

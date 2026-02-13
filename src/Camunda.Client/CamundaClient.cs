@@ -271,7 +271,7 @@ public partial class CamundaClient : IDisposable
     {
         if (bodyDict == null)
             return;
-        if (!bodyDict.ContainsKey("tenantId") || bodyDict["tenantId"] != null)
+        if (!bodyDict.TryGetValue("tenantId", out var tenantId) || tenantId != null)
             return;
         bodyDict["tenantId"] = _config.DefaultTenantId;
         _logger.LogTrace("tenant.default.inject: {Tenant}", _config.DefaultTenantId);
@@ -281,6 +281,8 @@ public partial class CamundaClient : IDisposable
     {
         if (_ownsHttpClient)
             _httpClient.Dispose();
+        _bp.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     private static ILoggerFactory CreateDefaultLoggerFactory(string sdkLogLevel)

@@ -52,7 +52,7 @@ public partial class CamundaClient : IAsyncDisposable
     /// <param name="gracePeriod">
     /// Time to wait for in-flight jobs to finish during shutdown. Default: 10 seconds.
     /// </param>
-    public async Task RunWorkersAsync(CancellationToken ct = default, TimeSpan? gracePeriod = null)
+    public async Task RunWorkersAsync(TimeSpan? gracePeriod = null, CancellationToken ct = default)
     {
         gracePeriod ??= TimeSpan.FromSeconds(10);
 
@@ -94,5 +94,7 @@ public partial class CamundaClient : IAsyncDisposable
 
         if (_ownsHttpClient)
             _httpClient.Dispose();
+        _bp.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

@@ -439,10 +439,9 @@ internal static class CSharpClientGenerator
                 sb.AppendLine($"/// </list>");
                 sb.AppendLine($"/// </remarks>");
                 foreach (var variant in variants)
-                {
                     sb.AppendLine($"/// <seealso cref=\"{variant}\"/>");
+                foreach (var variant in variants)
                     sb.AppendLine($"[JsonDerivedType(typeof({variant}))]");
-                }
                 sb.AppendLine($"public abstract class {typeName} {{ }}");
                 sb.AppendLine();
                 continue;
@@ -502,7 +501,8 @@ internal static class CSharpClientGenerator
                 }
 
                 sb.AppendLine($"    [JsonPropertyName(\"{propName}\")]");
-                sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}");
+                var initializer = IsReferenceType(csharpType, doc) ? " = null!;" : "";
+                sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
                 sb.AppendLine();
             }
 
@@ -571,7 +571,8 @@ internal static class CSharpClientGenerator
             }
 
             sb.AppendLine($"    [JsonPropertyName(\"{propName}\")]");
-            sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}");
+            var initializer = IsReferenceType(csharpType, doc) ? " = null!;" : "";
+            sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
             sb.AppendLine();
         }
 
@@ -842,6 +843,44 @@ internal static class CSharpClientGenerator
     }
 
     /// <summary>
+    /// Returns true if a C# type string represents a reference type that needs a null-forgiving
+    /// initializer (= null!;) to avoid CS8618 warnings.
+    /// </summary>
+    private static bool IsReferenceType(string csharpType, OpenApiDocument? doc)
+    {
+        if (csharpType.EndsWith('?'))
+            return false;
+        // Known value types
+        if (csharpType is "int" or "long" or "double" or "float" or "bool"
+            or "DateTimeOffset" or "DateOnly" or "byte" or "short")
+            return false;
+        // Known reference types
+        if (csharpType is "string" or "object" or "byte[]"
+            || csharpType.StartsWith("List<", StringComparison.Ordinal)
+            || csharpType.StartsWith("Dictionary<", StringComparison.Ordinal))
+            return true;
+        // Check if it's an enum or domain struct (value type) in the spec
+        if (doc?.Components?.Schemas != null)
+        {
+            foreach (var (name, schema) in doc.Components.Schemas)
+            {
+                if (SanitizeTypeName(name) != csharpType)
+                    continue;
+                // Enums are value types
+                if (schema.Enum?.Count > 0 && schema.Type == "string")
+                    return false;
+                // Domain key structs (primitive wrappers) are value types
+                if (IsPrimitiveSchemaResolved(schema, doc))
+                    return false;
+                // Everything else is a class (reference type)
+                return true;
+            }
+        }
+        // Unknown type — assume reference type to be safe
+        return true;
+    }
+
+    /// <summary>
     /// Returns true if the schema is a primitive scalar (string, integer, number, boolean)
     /// with no object properties — i.e. it should map to a strongly-typed wrapper, not a class.
     /// </summary>
@@ -1033,13 +1072,13 @@ internal static class CSharpClientGenerator
     {
         if (schema.Type != "object" && schema.Properties?.Count == 0)
             return false;
-        if (schema.Properties == null || !schema.Properties.ContainsKey("tenantId"))
+        if (schema.Properties == null || !schema.Properties.TryGetValue("tenantId", out var tenantPropSchema))
             return false;
         var required = schema.Required ?? new HashSet<string>();
         if (required.Contains("tenantId"))
             return false;
         // Only match when tenantId is a simple string or branded key, not complex filter types
-        var tenantType = MapType(schema.Properties["tenantId"]);
+        var tenantType = MapType(tenantPropSchema);
         return tenantType == "string" || tenantType == "TenantId";
     }
 

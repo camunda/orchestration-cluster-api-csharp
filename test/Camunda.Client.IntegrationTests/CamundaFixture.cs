@@ -139,4 +139,4 @@ public sealed class CamundaFixture : IAsyncLifetime
 /// xUnit collection definition — all integration tests share a single <see cref="CamundaFixture"/>.
 /// </summary>
 [CollectionDefinition("Camunda")]
-public class CamundaCollection : ICollectionFixture<CamundaFixture>;
+public class CamundaTests : ICollectionFixture<CamundaFixture>;

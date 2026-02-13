@@ -33,6 +33,7 @@ public class DeploymentTests : IDisposable
         try
         { Directory.Delete(_tempDir, true); }
         catch { /* best effort */ }
+        GC.SuppressFinalize(this);
     }
 
     private string CreateTempFile(string fileName, string content)

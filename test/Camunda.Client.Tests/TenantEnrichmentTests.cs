@@ -321,5 +321,6 @@ public class TenantEnrichmentTests : IDisposable
     {
         _client.Dispose();
         _clientCustomTenant.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
