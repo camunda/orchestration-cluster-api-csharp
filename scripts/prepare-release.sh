@@ -15,8 +15,8 @@ echo "Updated ${CSPROJ} to version ${VERSION}"
 # Build
 dotnet build --configuration Release
 
-# Smoke tests
-dotnet test --configuration Release --no-build --verbosity normal
+# Smoke tests (unit only – integration tests already passed in the generate job)
+dotnet test test/Camunda.Client.Tests --configuration Release --no-build --verbosity normal
 
 # Pack
 mkdir -p release-assets
