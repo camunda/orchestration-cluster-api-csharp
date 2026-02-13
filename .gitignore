@@ -27,7 +27,7 @@ _gen-drift.patch
 release-assets/
 
 ## Spec fetching
-external-spec/tmp-clone/
+external-spec/**/*
 
 ## Test results
 TestResults/

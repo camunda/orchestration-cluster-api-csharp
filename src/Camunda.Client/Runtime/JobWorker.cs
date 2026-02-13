@@ -355,7 +355,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             var result = await _handler(job, ct).ConfigureAwait(false);
 
             // Auto-complete with the returned variables
-            await _client.CompleteJobAsync(job.JobKey, new CompleteJobRequest
+            await _client.CompleteJobAsync(job.JobKey, new JobCompletionRequest
             {
                 Variables = result,
             }, ct: ct).ConfigureAwait(false);

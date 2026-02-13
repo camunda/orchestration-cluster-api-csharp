@@ -1908,6 +1908,8 @@ public enum AuditLogEntityTypeEnum
     USERTASK,
     [JsonPropertyName("VARIABLE")]
     VARIABLE,
+    [JsonPropertyName("CLIENT")]
+    CLIENT,
 }
 
 /// <summary>
@@ -2064,6 +2066,24 @@ public sealed class AuditLogFilter
     /// </summary>
     [JsonPropertyName("decisionEvaluationKey")]
     public DecisionEvaluationKeyFilterProperty? DecisionEvaluationKey { get; set; }
+
+    /// <summary>
+    /// The related entity key search filter.
+    /// </summary>
+    [JsonPropertyName("relatedEntityKey")]
+    public AuditLogEntityKeyFilterProperty? RelatedEntityKey { get; set; }
+
+    /// <summary>
+    /// The related entity type search filter.
+    /// </summary>
+    [JsonPropertyName("relatedEntityType")]
+    public EntityTypeFilterProperty? RelatedEntityType { get; set; }
+
+    /// <summary>
+    /// The entity description filter.
+    /// </summary>
+    [JsonPropertyName("entityDescription")]
+    public StringFilterProperty? EntityDescription { get; set; }
 
 }
 
@@ -2240,6 +2260,15 @@ public sealed class AuditLogResult
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
     /// The key of the element instance.
     /// </summary>
     [JsonPropertyName("elementInstanceKey")]
@@ -2304,6 +2333,30 @@ public sealed class AuditLogResult
     /// </summary>
     [JsonPropertyName("resourceKey")]
     public ResourceKey? ResourceKey { get; set; }
+
+    /// <summary>
+    /// The key of the related entity. The content depends on the operation type and entity type.
+    /// For example, for authorization operations, this will contain the ID of the owner (e.g., user or group) the authorization belongs to.
+    /// 
+    /// </summary>
+    [JsonPropertyName("relatedEntityKey")]
+    public AuditLogEntityKey? RelatedEntityKey { get; set; }
+
+    /// <summary>
+    /// The type of the related entity. The content depends on the operation type and entity type.
+    /// For example, for authorization operations, this will contain the type of the owner (e.g., USER or GROUP) the authorization belongs to.
+    /// 
+    /// </summary>
+    [JsonPropertyName("relatedEntityType")]
+    public AuditLogEntityTypeEnum? RelatedEntityType { get; set; }
+
+    /// <summary>
+    /// Additional description of the entity affected by the operation.
+    /// For example, for variable operations, this will contain the variable name.
+    /// 
+    /// </summary>
+    [JsonPropertyName("entityDescription")]
+    public string? EntityDescription { get; set; }
 
 }
 
@@ -2972,6 +3025,15 @@ public sealed class BatchOperationItemResponse
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
     /// State of the item.
     /// </summary>
     [JsonPropertyName("state")]
@@ -3282,6 +3344,8 @@ public enum BatchOperationTypeEnum
     CANCELPROCESSINSTANCE,
     [JsonPropertyName("DELETE_DECISION_DEFINITION")]
     DELETEDECISIONDEFINITION,
+    [JsonPropertyName("DELETE_DECISION_INSTANCE")]
+    DELETEDECISIONINSTANCE,
     [JsonPropertyName("DELETE_PROCESS_DEFINITION")]
     DELETEPROCESSDEFINITION,
     [JsonPropertyName("DELETE_PROCESS_INSTANCE")]
@@ -3913,6 +3977,15 @@ public sealed class CorrelatedMessageSubscriptionResult
     public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
     /// The subscription key that received the message.
     /// </summary>
     [JsonPropertyName("subscriptionKey")]
@@ -4525,6 +4598,27 @@ public sealed class DecisionEvaluationKeyFilterProperty
 }
 
 /// <summary>
+/// The decision instance filter that defines which decision instances should be deleted.
+/// </summary>
+public sealed class DecisionInstanceDeletionBatchOperationRequest
+{
+    /// <summary>
+    /// The decision instance filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public DecisionInstanceFilter Filter { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
+
+}
+
+/// <summary>
 /// Decision instance search filter.
 /// </summary>
 public sealed class DecisionInstanceFilter
@@ -4620,6 +4714,12 @@ public sealed class DecisionInstanceFilter
     [JsonPropertyName("rootDecisionDefinitionKey")]
     public DecisionDefinitionKeyFilterProperty? RootDecisionDefinitionKey { get; set; }
 
+    /// <summary>
+    /// The key of the decision requirements definition.
+    /// </summary>
+    [JsonPropertyName("decisionRequirementsKey")]
+    public DecisionRequirementsKeyFilterProperty? DecisionRequirementsKey { get; set; }
+
 }
 
 /// <summary>
@@ -4704,6 +4804,15 @@ public sealed class DecisionInstanceGetQueryResult
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the decision.
@@ -4849,6 +4958,15 @@ public sealed class DecisionInstanceResult
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the decision.
@@ -5135,6 +5253,21 @@ public sealed class DecisionRequirementsSearchQuerySortRequest
     /// </summary>
     [JsonPropertyName("order")]
     public SortOrderEnum? Order { get; set; }
+
+}
+
+/// <summary>
+/// DeleteDecisionInstanceRequest
+/// </summary>
+public sealed class DeleteDecisionInstanceRequest
+{
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
 
 }
 
@@ -5935,6 +6068,15 @@ public sealed class ElementInstanceResult
     public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
     /// The process definition key associated to this element instance.
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
@@ -6432,36 +6574,9 @@ public sealed class FormResult
 }
 
 /// <summary>
-/// Filters for global job statistics query.
+/// Global job statistics query result.
 /// </summary>
-public sealed class GlobalJobStatisticsFilter
-{
-    /// <summary>
-    /// Start of the time window to filter metrics. ISO 8601 date-time format.
-    /// 
-    /// </summary>
-    [JsonPropertyName("from")]
-    public DateTimeOffset From { get; set; }
-
-    /// <summary>
-    /// End of the time window to filter metrics. ISO 8601 date-time format.
-    /// 
-    /// </summary>
-    [JsonPropertyName("to")]
-    public DateTimeOffset To { get; set; }
-
-    /// <summary>
-    /// Optional job type to limit the aggregation to a single job type.
-    /// </summary>
-    [JsonPropertyName("jobType")]
-    public string? JobType { get; set; }
-
-}
-
-/// <summary>
-/// Aggregated job metrics for a time bucket.
-/// </summary>
-public sealed class GlobalJobStatisticsItem
+public sealed class GlobalJobStatisticsQueryResult
 {
     /// <summary>
     /// Metric for a single job status.
@@ -6481,31 +6596,11 @@ public sealed class GlobalJobStatisticsItem
     [JsonPropertyName("failed")]
     public StatusMetric Failed { get; set; }
 
-}
-
-/// <summary>
-/// GlobalJobStatisticsQuery
-/// </summary>
-public sealed class GlobalJobStatisticsQuery
-{
     /// <summary>
-    /// Filters for global job statistics query.
+    /// True if some data is missing because internal limits were reached and some metrics were not recorded.
     /// </summary>
-    [JsonPropertyName("filter")]
-    public GlobalJobStatisticsFilter Filter { get; set; }
-
-}
-
-/// <summary>
-/// Global job statistics query result.
-/// </summary>
-public sealed class GlobalJobStatisticsQueryResult
-{
-    /// <summary>
-    /// List of aggregated job statistics.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GlobalJobStatisticsItem> Items { get; set; }
+    [JsonPropertyName("isIncomplete")]
+    public bool IsIncomplete { get; set; }
 
 }
 
@@ -6751,7 +6846,7 @@ public sealed class GroupUpdateRequest
     /// The new description of the group.
     /// </summary>
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
 }
 
@@ -7250,6 +7345,15 @@ public sealed class IncidentResult
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The element instance key associated to this incident.
@@ -8089,6 +8193,15 @@ public sealed class JobSearchResult
     public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
     /// The amount of retries left to this job.
     /// </summary>
     [JsonPropertyName("retries")]
@@ -8911,6 +9024,15 @@ public sealed class MessageSubscriptionResult
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
     /// The element ID associated with this message subscription.
     /// </summary>
     [JsonPropertyName("elementId")]
@@ -9524,6 +9646,12 @@ public sealed class ProcessDefinitionInstanceStatisticsResult
 public sealed class ProcessDefinitionInstanceVersionStatisticsFilter
 {
     /// <summary>
+    /// The ID of the process definition to retrieve version statistics for.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
     /// Tenant ID of this process definition.
     /// </summary>
     [JsonPropertyName("tenantId")]
@@ -9552,7 +9680,7 @@ public sealed class ProcessDefinitionInstanceVersionStatisticsQuery
     /// The process definition instance version statistics search filters.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessDefinitionInstanceVersionStatisticsFilter? Filter { get; set; }
+    public ProcessDefinitionInstanceVersionStatisticsFilter Filter { get; set; }
 
 }
 
@@ -10223,6 +10351,14 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
     public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// As the version is already identified by the `processDefinitionKey`, the value of this field is ignored.
+    /// It's here for backwards-compatibility only as previous releases accepted it in request bodies.
+    /// 
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int? ProcessDefinitionVersion { get; set; }
 
     /// <summary>
     /// JSON object that will instantiate the variables for the root variable scope
@@ -11021,6 +11157,15 @@ public sealed class ProcessInstanceResult
     public ElementInstanceKey? ParentElementInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
@@ -11107,6 +11252,15 @@ public sealed class ProcessInstanceSequenceFlowResult
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The process definition key.
@@ -11606,7 +11760,7 @@ public sealed class RoleUpdateRequest
     /// The description of the new role.
     /// </summary>
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
 }
 
@@ -11703,6 +11857,37 @@ public sealed class RoleUserSearchResult
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; }
 
+}
+
+/// <summary>
+/// The key of the root process instance. The root process instance is the top-level
+/// ancestor in the process instance hierarchy. This field is only present for data
+/// belonging to process instance hierarchies created in version 8.9 or later.
+/// 
+/// </summary>
+public readonly record struct RootProcessInstanceKey : global::Camunda.Client.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private RootProcessInstanceKey(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="RootProcessInstanceKey"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static RootProcessInstanceKey AssumeExists(string value)
+    {
+        global::Camunda.Client.Runtime.CamundaKeyValidation.AssertConstraints(value, "RootProcessInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new RootProcessInstanceKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Client.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -12437,7 +12622,7 @@ public sealed class TenantUpdateRequest
     /// The new description of the tenant.
     /// </summary>
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
 }
 
@@ -12582,6 +12767,19 @@ public sealed class TopologyResponse
     /// </summary>
     [JsonPropertyName("lastCompletedChangeId")]
     public string LastCompletedChangeId { get; set; }
+
+}
+
+/// <summary>
+/// UpdateClusterVariableRequest
+/// </summary>
+public sealed class UpdateClusterVariableRequest
+{
+    /// <summary>
+    /// The new value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
+    /// </summary>
+    [JsonPropertyName("value")]
+    public object Value { get; set; }
 
 }
 
@@ -12987,7 +13185,7 @@ public sealed class UserTaskFilter
     /// 
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public StringFilterProperty? Name { get; set; }
 
     /// <summary>
     /// The candidate group for this user task.
@@ -13300,6 +13498,15 @@ public sealed class UserTaskResult
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the form.
@@ -13693,6 +13900,15 @@ public sealed class VariableResult
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
 }
 
 /// <summary>
@@ -13729,6 +13945,15 @@ public sealed class VariableResultBase
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -13842,6 +14067,15 @@ public sealed class VariableSearchResult
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
 }
 
 /// <summary>
@@ -13881,25 +14115,19 @@ public sealed class ActivateJobsResponse
 /// </summary>
 public sealed class CancelProcessInstancesBatchOperationRequest
 {
-}
-
-/// <summary>
-/// CompleteJobRequest
-/// </summary>
-public sealed class CompleteJobRequest
-{
     /// <summary>
-    /// The variables to complete the job with.
+    /// The process instance filter.
     /// </summary>
-    [JsonPropertyName("variables")]
-    public object? Variables { get; set; }
+    [JsonPropertyName("filter")]
+    public ProcessInstanceFilter Filter { get; set; }
 
     /// <summary>
-    /// The result of the completed job as determined by the worker.
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
     /// 
     /// </summary>
-    [JsonPropertyName("result")]
-    public object? Result { get; set; }
+    [JsonPropertyName("operationReference")]
+    public long? OperationReference { get; set; }
 
 }
 
@@ -13929,10 +14157,45 @@ public sealed class CreateDeploymentResponse
 }
 
 /// <summary>
+/// The decision instance filter that defines which decision instances should be deleted.
+/// </summary>
+public sealed class DeleteDecisionInstancesBatchOperationRequest
+{
+    /// <summary>
+    /// The decision instance filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public object Filter { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
+
+}
+
+/// <summary>
 /// The process instance filter that defines which process instances should be deleted.
 /// </summary>
 public sealed class DeleteProcessInstancesBatchOperationRequest
 {
+    /// <summary>
+    /// The process instance filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ProcessInstanceFilter Filter { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public long? OperationReference { get; set; }
+
 }
 
 /// <summary>
@@ -14037,6 +14300,12 @@ public sealed class GetAuditLogResponse
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// System-generated key for a process instance.
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
     /// The key of the element instance.
     /// </summary>
     [JsonPropertyName("elementInstanceKey")]
@@ -14102,6 +14371,197 @@ public sealed class GetAuditLogResponse
     [JsonPropertyName("resourceKey")]
     public ResourceKey? ResourceKey { get; set; }
 
+    /// <summary>
+    /// The key of the related entity. The content depends on the operation type and entity type.
+    /// For example, for authorization operations, this will contain the ID of the owner (e.g., user or group) the authorization belongs to.
+    /// 
+    /// </summary>
+    [JsonPropertyName("relatedEntityKey")]
+    public AuditLogEntityKey? RelatedEntityKey { get; set; }
+
+    /// <summary>
+    /// The type of the related entity. The content depends on the operation type and entity type.
+    /// For example, for authorization operations, this will contain the type of the owner (e.g., USER or GROUP) the authorization belongs to.
+    /// 
+    /// </summary>
+    [JsonPropertyName("relatedEntityType")]
+    public AuditLogEntityTypeEnum? RelatedEntityType { get; set; }
+
+    /// <summary>
+    /// Additional description of the entity affected by the operation.
+    /// For example, for variable operations, this will contain the variable name.
+    /// 
+    /// </summary>
+    [JsonPropertyName("entityDescription")]
+    public string? EntityDescription { get; set; }
+
+}
+
+/// <summary>
+/// GetElementInstanceResponse
+/// </summary>
+public sealed class GetElementInstanceResponse
+{
+    /// <summary>
+    /// The process definition ID associated to this element instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// Date when element instance started.
+    /// </summary>
+    [JsonPropertyName("startDate")]
+    public DateTimeOffset StartDate { get; set; }
+
+    /// <summary>
+    /// Date when element instance finished.
+    /// </summary>
+    [JsonPropertyName("endDate")]
+    public DateTimeOffset? EndDate { get; set; }
+
+    /// <summary>
+    /// The element ID for this element instance.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId ElementId { get; set; }
+
+    /// <summary>
+    /// The element name for this element instance.
+    /// </summary>
+    [JsonPropertyName("elementName")]
+    public string ElementName { get; set; }
+
+    /// <summary>
+    /// Type of element as defined set of values.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string Type { get; set; }
+
+    /// <summary>
+    /// State of element instance as defined set of values.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public ElementInstanceStateEnum State { get; set; }
+
+    /// <summary>
+    /// Shows whether this element instance has an incident. If true also an incidentKey is provided.
+    /// </summary>
+    [JsonPropertyName("hasIncident")]
+    public bool HasIncident { get; set; }
+
+    /// <summary>
+    /// The tenant ID of the incident.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// The assigned key, which acts as a unique identifier for this element instance.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The process instance key associated to this element instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// System-generated key for a process instance.
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The process definition key associated to this element instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// Incident key associated with this element instance.
+    /// </summary>
+    [JsonPropertyName("incidentKey")]
+    public IncidentKey? IncidentKey { get; set; }
+
+}
+
+/// <summary>
+/// GetIncidentResponse
+/// </summary>
+public sealed class GetIncidentResponse
+{
+    /// <summary>
+    /// The process definition ID associated to this incident.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
+
+    [JsonPropertyName("errorType")]
+    public IncidentErrorTypeEnum? ErrorType { get; set; }
+
+    /// <summary>
+    /// Error message which describes the error in more detail.
+    /// </summary>
+    [JsonPropertyName("errorMessage")]
+    public string? ErrorMessage { get; set; }
+
+    /// <summary>
+    /// The element ID associated to this incident.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId? ElementId { get; set; }
+
+    [JsonPropertyName("creationTime")]
+    public DateTimeOffset? CreationTime { get; set; }
+
+    [JsonPropertyName("state")]
+    public IncidentStateEnum? State { get; set; }
+
+    /// <summary>
+    /// The tenant ID of the incident.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// The assigned key, which acts as a unique identifier for this incident.
+    /// </summary>
+    [JsonPropertyName("incidentKey")]
+    public IncidentKey? IncidentKey { get; set; }
+
+    /// <summary>
+    /// The process definition key associated to this incident.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The process instance key associated to this incident.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// System-generated key for a process instance.
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The element instance key associated to this incident.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey? ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The job key, if exists, associated with this incident.
+    /// </summary>
+    [JsonPropertyName("jobKey")]
+    public JobKey? JobKey { get; set; }
+
 }
 
 /// <summary>
@@ -14116,7 +14576,7 @@ public sealed class GetProcessDefinitionInstanceStatisticsRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
 }
 
@@ -14135,13 +14595,13 @@ public sealed class GetProcessDefinitionInstanceVersionStatisticsRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The process definition instance version statistics search filters.
     /// </summary>
     [JsonPropertyName("filter")]
-    public ProcessDefinitionInstanceVersionStatisticsFilter? Filter { get; set; }
+    public ProcessDefinitionInstanceVersionStatisticsFilter Filter { get; set; }
 
 }
 
@@ -14175,23 +14635,91 @@ public sealed class GetProcessDefinitionStatisticsRequest
 }
 
 /// <summary>
-/// Process definition element statistics query response.
-/// </summary>
-public sealed class GetProcessDefinitionStatisticsResponse
-{
-    /// <summary>
-    /// The element statistics.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<object>? Items { get; set; }
-
-}
-
-/// <summary>
 /// Process instance search response item.
 /// </summary>
 public sealed class GetProcessInstanceResponse
 {
+    /// <summary>
+    /// Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The process definition name.
+    /// </summary>
+    [JsonPropertyName("processDefinitionName")]
+    public string ProcessDefinitionName { get; set; }
+
+    [JsonPropertyName("processDefinitionVersion")]
+    public int ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// The process definition version tag.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersionTag")]
+    public string? ProcessDefinitionVersionTag { get; set; }
+
+    [JsonPropertyName("startDate")]
+    public DateTimeOffset StartDate { get; set; }
+
+    [JsonPropertyName("endDate")]
+    public DateTimeOffset? EndDate { get; set; }
+
+    /// <summary>
+    /// Process instance states
+    /// </summary>
+    [JsonPropertyName("state")]
+    public ProcessInstanceStateEnum State { get; set; }
+
+    /// <summary>
+    /// Whether this process instance has a related incident or not.
+    /// </summary>
+    [JsonPropertyName("hasIncident")]
+    public bool HasIncident { get; set; }
+
+    /// <summary>
+    /// The unique identifier of the tenant.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// The key of this process instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The process definition key.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The parent process instance key.
+    /// </summary>
+    [JsonPropertyName("parentProcessInstanceKey")]
+    public ProcessInstanceKey? ParentProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The parent element instance key.
+    /// </summary>
+    [JsonPropertyName("parentElementInstanceKey")]
+    public ElementInstanceKey? ParentElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// System-generated key for a process instance.
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<string>? Tags { get; set; }
+
 }
 
 /// <summary>
@@ -14208,15 +14736,39 @@ public sealed class GetProcessInstanceSequenceFlowsResponse
 }
 
 /// <summary>
-/// Process instance element statistics query response.
+/// GetStartProcessFormResponse
 /// </summary>
-public sealed class GetProcessInstanceStatisticsResponse
+public sealed class GetStartProcessFormResponse
 {
     /// <summary>
-    /// The element statistics.
+    /// The tenant ID of the form.
     /// </summary>
-    [JsonPropertyName("items")]
-    public List<ProcessElementStatisticsResult>? Items { get; set; }
+    [JsonPropertyName("tenantId")]
+    public object? TenantId { get; set; }
+
+    /// <summary>
+    /// The user-provided identifier of the form.
+    /// </summary>
+    [JsonPropertyName("formId")]
+    public object? FormId { get; set; }
+
+    /// <summary>
+    /// The form content.
+    /// </summary>
+    [JsonPropertyName("schema")]
+    public object? Schema { get; set; }
+
+    /// <summary>
+    /// The version of the the deployed form.
+    /// </summary>
+    [JsonPropertyName("version")]
+    public long? Version { get; set; }
+
+    /// <summary>
+    /// The assigned key, which acts as a unique identifier for this form.
+    /// </summary>
+    [JsonPropertyName("formKey")]
+    public object? FormKey { get; set; }
 
 }
 
@@ -14262,6 +14814,199 @@ public sealed class GetUserTaskFormResponse
 /// </summary>
 public sealed class GetUserTaskResponse
 {
+    /// <summary>
+    /// The name for this user task.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// The state of the user task.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public UserTaskStateEnum? State { get; set; }
+
+    /// <summary>
+    /// The assignee of the user task.
+    /// </summary>
+    [JsonPropertyName("assignee")]
+    public string? Assignee { get; set; }
+
+    /// <summary>
+    /// The element ID of the user task.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId? ElementId { get; set; }
+
+    /// <summary>
+    /// The candidate groups for this user task.
+    /// </summary>
+    [JsonPropertyName("candidateGroups")]
+    public List<string>? CandidateGroups { get; set; }
+
+    /// <summary>
+    /// The candidate users for this user task.
+    /// </summary>
+    [JsonPropertyName("candidateUsers")]
+    public List<string>? CandidateUsers { get; set; }
+
+    /// <summary>
+    /// The ID of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The creation date of a user task.
+    /// </summary>
+    [JsonPropertyName("creationDate")]
+    public DateTimeOffset? CreationDate { get; set; }
+
+    /// <summary>
+    /// The completion date of a user task.
+    /// </summary>
+    [JsonPropertyName("completionDate")]
+    public DateTimeOffset? CompletionDate { get; set; }
+
+    /// <summary>
+    /// The follow date of a user task.
+    /// </summary>
+    [JsonPropertyName("followUpDate")]
+    public DateTimeOffset? FollowUpDate { get; set; }
+
+    /// <summary>
+    /// The due date of a user task.
+    /// </summary>
+    [JsonPropertyName("dueDate")]
+    public DateTimeOffset? DueDate { get; set; }
+
+    /// <summary>
+    /// The unique identifier of the tenant.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// The external form reference.
+    /// </summary>
+    [JsonPropertyName("externalFormReference")]
+    public string? ExternalFormReference { get; set; }
+
+    /// <summary>
+    /// The version of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int? ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// Custom headers for the user task.
+    /// </summary>
+    [JsonPropertyName("customHeaders")]
+    public Dictionary<string, string>? CustomHeaders { get; set; }
+
+    /// <summary>
+    /// The priority of a user task. The higher the value the higher the priority.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int? Priority { get; set; }
+
+    /// <summary>
+    /// The key of the user task.
+    /// </summary>
+    [JsonPropertyName("userTaskKey")]
+    public UserTaskKey? UserTaskKey { get; set; }
+
+    /// <summary>
+    /// The key of the element instance.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey? ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The name of the process definition.
+    /// </summary>
+    [JsonPropertyName("processName")]
+    public string? ProcessName { get; set; }
+
+    /// <summary>
+    /// The key of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The key of the process instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// System-generated key for a process instance.
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the form.
+    /// </summary>
+    [JsonPropertyName("formKey")]
+    public object? FormKey { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<string>? Tags { get; set; }
+
+}
+
+/// <summary>
+/// Variable search response item.
+/// </summary>
+public sealed class GetVariableResponse
+{
+    /// <summary>
+    /// Full value of this variable.
+    /// </summary>
+    [JsonPropertyName("value")]
+    public string? Value { get; set; }
+
+    /// <summary>
+    /// Name of this variable.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// Tenant ID of this variable.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// The key for this variable.
+    /// </summary>
+    [JsonPropertyName("variableKey")]
+    public VariableKey? VariableKey { get; set; }
+
+    /// <summary>
+    /// The key of the scope of this variable.
+    /// </summary>
+    [JsonPropertyName("scopeKey")]
+    public ScopeKey? ScopeKey { get; set; }
+
+    /// <summary>
+    /// The key of the process instance of this variable.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// System-generated key for a process instance.
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
 }
 
 /// <summary>
@@ -14270,6 +15015,26 @@ public sealed class GetUserTaskResponse
 /// </summary>
 public sealed class MigrateProcessInstanceRequest
 {
+    /// <summary>
+    /// The key of process definition to migrate the process instance to.
+    /// </summary>
+    [JsonPropertyName("targetProcessDefinitionKey")]
+    public ProcessDefinitionKey TargetProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// Element mappings from the source process instance to the target process instance.
+    /// </summary>
+    [JsonPropertyName("mappingInstructions")]
+    public List<MigrateProcessInstanceMappingInstruction> MappingInstructions { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public long? OperationReference { get; set; }
+
 }
 
 /// <summary>
@@ -14277,6 +15042,26 @@ public sealed class MigrateProcessInstanceRequest
 /// </summary>
 public sealed class MigrateProcessInstancesBatchOperationRequest
 {
+    /// <summary>
+    /// The process instance filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ProcessInstanceFilter Filter { get; set; }
+
+    /// <summary>
+    /// The migration plan.
+    /// </summary>
+    [JsonPropertyName("migrationPlan")]
+    public ProcessInstanceMigrationBatchOperationPlan MigrationPlan { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public long? OperationReference { get; set; }
+
 }
 
 /// <summary>
@@ -14284,6 +15069,32 @@ public sealed class MigrateProcessInstancesBatchOperationRequest
 /// </summary>
 public sealed class ModifyProcessInstanceRequest
 {
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public long? OperationReference { get; set; }
+
+    /// <summary>
+    /// Instructions describing which elements to activate in which scopes and which variables to create or update.
+    /// </summary>
+    [JsonPropertyName("activateInstructions")]
+    public List<ProcessInstanceModificationActivateInstruction>? ActivateInstructions { get; set; }
+
+    /// <summary>
+    /// Instructions describing which elements to move from one scope to another.
+    /// </summary>
+    [JsonPropertyName("moveInstructions")]
+    public List<ProcessInstanceModificationMoveInstruction>? MoveInstructions { get; set; }
+
+    /// <summary>
+    /// Instructions describing which elements to terminate.
+    /// </summary>
+    [JsonPropertyName("terminateInstructions")]
+    public List<ProcessInstanceModificationTerminateInstruction>? TerminateInstructions { get; set; }
+
 }
 
 /// <summary>
@@ -14293,6 +15104,26 @@ public sealed class ModifyProcessInstanceRequest
 /// </summary>
 public sealed class ModifyProcessInstancesBatchOperationRequest
 {
+    /// <summary>
+    /// The process instance filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ProcessInstanceFilter Filter { get; set; }
+
+    /// <summary>
+    /// Instructions for moving tokens between elements.
+    /// </summary>
+    [JsonPropertyName("moveInstructions")]
+    public List<ProcessInstanceModificationMoveBatchOperationInstruction> MoveInstructions { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public long? OperationReference { get; set; }
+
 }
 
 /// <summary>
@@ -14319,6 +15150,20 @@ public sealed class PublishMessageResponse
 /// </summary>
 public sealed class ResolveIncidentsBatchOperationRequest
 {
+    /// <summary>
+    /// The process instance filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ProcessInstanceFilter Filter { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public long? OperationReference { get; set; }
+
 }
 
 /// <summary>
@@ -14330,7 +15175,7 @@ public sealed class SearchAuditLogsResponse
     /// The matching audit logs.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<object>? Items { get; set; }
+    public List<AuditLogResult>? Items { get; set; }
 
     /// <summary>
     /// Pagination information about the search results.
@@ -14362,6 +15207,25 @@ public sealed class SearchBatchOperationItemsRequest
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchBatchOperationItemsResponse
+/// </summary>
+public sealed class SearchBatchOperationItemsResponse
+{
+    /// <summary>
+    /// The matching batch operation items.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<BatchOperationItemResponse>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
 
 }
 
@@ -14437,7 +15301,13 @@ public sealed class SearchClientsForRoleRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14450,7 +15320,13 @@ public sealed class SearchClientsForTenantRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14499,6 +15375,25 @@ public sealed class SearchClusterVariablesResponse
 }
 
 /// <summary>
+/// SearchCorrelatedMessageSubscriptionsResponse
+/// </summary>
+public sealed class SearchCorrelatedMessageSubscriptionsResponse
+{
+    /// <summary>
+    /// The matching correlated message subscriptions.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<CorrelatedMessageSubscriptionResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
+
+}
+
+/// <summary>
 /// SearchDecisionInstancesRequest
 /// </summary>
 public sealed class SearchDecisionInstancesRequest
@@ -14524,6 +15419,63 @@ public sealed class SearchDecisionInstancesRequest
 }
 
 /// <summary>
+/// SearchDecisionInstancesResponse
+/// </summary>
+public sealed class SearchDecisionInstancesResponse
+{
+    /// <summary>
+    /// The matching decision instances.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<DecisionInstanceResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchElementInstanceIncidentsResponse
+/// </summary>
+public sealed class SearchElementInstanceIncidentsResponse
+{
+    /// <summary>
+    /// The matching incidents.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<IncidentResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchElementInstancesResponse
+/// </summary>
+public sealed class SearchElementInstancesResponse
+{
+    /// <summary>
+    /// The matching element instances.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<ElementInstanceResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
+
+}
+
+/// <summary>
 /// SearchGroupIdsForTenantRequest
 /// </summary>
 public sealed class SearchGroupIdsForTenantRequest
@@ -14532,7 +15484,13 @@ public sealed class SearchGroupIdsForTenantRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14545,7 +15503,32 @@ public sealed class SearchGroupsForRoleRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchIncidentsResponse
+/// </summary>
+public sealed class SearchIncidentsResponse
+{
+    /// <summary>
+    /// The matching incidents.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<IncidentResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
 
 }
 
@@ -14577,13 +15560,19 @@ public sealed class SearchMessageSubscriptionsRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The incident search filters.
     /// </summary>
     [JsonPropertyName("filter")]
     public object? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14615,13 +15604,38 @@ public sealed class SearchProcessDefinitionsRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The process definition search filters.
     /// </summary>
     [JsonPropertyName("filter")]
     public ProcessDefinitionFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchProcessInstanceIncidentsResponse
+/// </summary>
+public sealed class SearchProcessInstanceIncidentsResponse
+{
+    /// <summary>
+    /// The matching incidents.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<IncidentResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
 
 }
 
@@ -14634,13 +15648,19 @@ public sealed class SearchProcessInstancesRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The process instance search filters.
     /// </summary>
     [JsonPropertyName("filter")]
     public object? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14653,7 +15673,7 @@ public sealed class SearchProcessInstancesResponse
     /// The matching process instances.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<object> Items { get; set; }
+    public List<ProcessInstanceResult> Items { get; set; }
 
     /// <summary>
     /// Pagination information about the search results.
@@ -14672,13 +15692,19 @@ public sealed class SearchTenantsRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The tenant search filters.
     /// </summary>
     [JsonPropertyName("filter")]
     public TenantFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14729,7 +15755,13 @@ public sealed class SearchUsersForRoleRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14742,7 +15774,13 @@ public sealed class SearchUsersForTenantRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14755,13 +15793,19 @@ public sealed class SearchUsersRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The user search filters.
     /// </summary>
     [JsonPropertyName("filter")]
     public UserFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14774,13 +15818,38 @@ public sealed class SearchUserTaskAuditLogsRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The user task audit log search filters.
     /// </summary>
     [JsonPropertyName("filter")]
     public UserTaskAuditLogFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
+
+}
+
+/// <summary>
+/// Audit log search response.
+/// </summary>
+public sealed class SearchUserTaskAuditLogsResponse
+{
+    /// <summary>
+    /// The matching audit logs.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<AuditLogResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
 
 }
 
@@ -14793,13 +15862,19 @@ public sealed class SearchUserTasksRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The user task search filters.
     /// </summary>
     [JsonPropertyName("filter")]
     public object? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
 
 }
 
@@ -14812,7 +15887,7 @@ public sealed class SearchUserTasksResponse
     /// The matching user tasks.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<object>? Items { get; set; }
+    public List<UserTaskResult>? Items { get; set; }
 
     /// <summary>
     /// Pagination information about the search results.
@@ -14831,13 +15906,38 @@ public sealed class SearchUserTaskVariablesRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The user task variable search filters.
     /// </summary>
     [JsonPropertyName("filter")]
     public object? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
+
+}
+
+/// <summary>
+/// Variable search query response.
+/// </summary>
+public sealed class SearchUserTaskVariablesResponse
+{
+    /// <summary>
+    /// The matching variables.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<object>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
 
 }
 
@@ -14850,13 +15950,38 @@ public sealed class SearchVariablesRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<object>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The variable search filters.
     /// </summary>
     [JsonPropertyName("filter")]
     public object? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public object? Page { get; set; }
+
+}
+
+/// <summary>
+/// Variable search query response.
+/// </summary>
+public sealed class SearchVariablesResponse
+{
+    /// <summary>
+    /// The matching variables.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<object>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; }
 
 }
 
@@ -14865,6 +15990,24 @@ public sealed class SearchVariablesRequest
 /// </summary>
 public sealed class UpdateMappingRuleRequest
 {
+    /// <summary>
+    /// The name of the claim to map.
+    /// </summary>
+    [JsonPropertyName("claimName")]
+    public string ClaimName { get; set; }
+
+    /// <summary>
+    /// The value of the claim to map.
+    /// </summary>
+    [JsonPropertyName("claimValue")]
+    public string ClaimValue { get; set; }
+
+    /// <summary>
+    /// The name of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
+
 }
 
 /// <summary>
@@ -14872,5 +16015,29 @@ public sealed class UpdateMappingRuleRequest
 /// </summary>
 public sealed class UpdateMappingRuleResponse
 {
+    /// <summary>
+    /// The name of the claim to map.
+    /// </summary>
+    [JsonPropertyName("claimName")]
+    public string? ClaimName { get; set; }
+
+    /// <summary>
+    /// The value of the claim to map.
+    /// </summary>
+    [JsonPropertyName("claimValue")]
+    public string? ClaimValue { get; set; }
+
+    /// <summary>
+    /// The name of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// The unique ID of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("mappingRuleId")]
+    public string? MappingRuleId { get; set; }
+
 }
 

@@ -261,7 +261,7 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: completeJob</remarks>
-    public async Task CompleteJobAsync(JobKey jobKey, CompleteJobRequest body, CancellationToken ct = default)
+    public async Task CompleteJobAsync(JobKey jobKey, JobCompletionRequest body, CancellationToken ct = default)
     {
         var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}/completion";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "completeJob", true, ct);
@@ -524,6 +524,45 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Delete decision instance
+    /// Delete all associated decision evaluations based on provided key.
+    /// </summary>
+    /// <remarks>Operation: deleteDecisionInstance</remarks>
+    public async Task DeleteDecisionInstanceAsync(DecisionInstanceKey decisionInstanceKey, DeleteProcessInstanceRequest body, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/decision-instances/{Uri.EscapeDataString(decisionInstanceKey.ToString()!)}/deletion";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            await EventualPoller.PollAsync("deleteDecisionInstance", false,
+                async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return new object(); },
+                consistency!, _logger, ct);
+            return;
+        }
+
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "deleteDecisionInstance", false, ct);
+    }
+
+    /// <summary>
+    /// Delete decision instances (batch)
+    /// Delete multiple decision instances. This will delete the historic data from secondary storage.
+    /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+    /// 
+    /// </summary>
+    /// <remarks>Operation: deleteDecisionInstancesBatchOperation</remarks>
+    public async Task<BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(DeleteDecisionInstancesBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/decision-instances/deletion";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("deleteDecisionInstancesBatchOperation", false,
+                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "deleteDecisionInstancesBatchOperation", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "deleteDecisionInstancesBatchOperation", false, ct);
+    }
+
+    /// <summary>
     /// Delete document
     /// Delete a document from the Camunda 8 cluster.
     /// 
@@ -577,17 +616,18 @@ public partial class CamundaClient
     /// Deletes a process instance. Only instances that are completed or terminated can be deleted.
     /// </summary>
     /// <remarks>Operation: deleteProcessInstance</remarks>
-    public async Task<BatchOperationCreatedResult> DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    public async Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/deletion";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
-            return await EventualPoller.PollAsync("deleteProcessInstance", false,
-                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "deleteProcessInstance", false, ct),
+            await EventualPoller.PollAsync("deleteProcessInstance", false,
+                async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return new object(); },
                 consistency!, _logger, ct);
+            return;
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "deleteProcessInstance", false, ct);
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "deleteProcessInstance", false, ct);
     }
 
     /// <summary>
@@ -846,17 +886,17 @@ public partial class CamundaClient
     /// Returns a decision instance.
     /// </summary>
     /// <remarks>Operation: getDecisionInstance</remarks>
-    public async Task<DecisionInstanceGetQueryResult> GetDecisionInstanceAsync(DecisionInstanceKey decisionEvaluationInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<object> GetDecisionInstanceAsync(DecisionInstanceKey decisionEvaluationInstanceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-instances/{Uri.EscapeDataString(decisionEvaluationInstanceKey.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getDecisionInstance", true,
-                () => InvokeWithRetryAsync(() => SendAsync<DecisionInstanceGetQueryResult>(HttpMethod.Get, path, null, ct), "getDecisionInstance", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getDecisionInstance", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<DecisionInstanceGetQueryResult>(HttpMethod.Get, path, null, ct), "getDecisionInstance", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getDecisionInstance", false, ct);
     }
 
     /// <summary>
@@ -917,17 +957,17 @@ public partial class CamundaClient
     /// Returns element instance as JSON.
     /// </summary>
     /// <remarks>Operation: getElementInstance</remarks>
-    public async Task<ElementInstanceResult> GetElementInstanceAsync(ElementInstanceKey elementInstanceKey, ConsistencyOptions<ElementInstanceResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GetElementInstanceResponse> GetElementInstanceAsync(ElementInstanceKey elementInstanceKey, ConsistencyOptions<GetElementInstanceResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/{Uri.EscapeDataString(elementInstanceKey.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getElementInstance", true,
-                () => InvokeWithRetryAsync(() => SendAsync<ElementInstanceResult>(HttpMethod.Get, path, null, ct), "getElementInstance", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GetElementInstanceResponse>(HttpMethod.Get, path, null, ct), "getElementInstance", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<ElementInstanceResult>(HttpMethod.Get, path, null, ct), "getElementInstance", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GetElementInstanceResponse>(HttpMethod.Get, path, null, ct), "getElementInstance", false, ct);
     }
 
     /// <summary>
@@ -953,17 +993,21 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getGlobalJobStatistics</remarks>
-    public async Task<GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(GlobalJobStatisticsQuery body, ConsistencyOptions<GlobalJobStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(DateTimeOffset from, DateTimeOffset to, string? jobType = null, ConsistencyOptions<GlobalJobStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/jobs/statistics/global";
+        var queryParts = new List<string>();
+        queryParts.Add($"from={Uri.EscapeDataString(from.ToString()!)}");
+        queryParts.Add($"to={Uri.EscapeDataString(to.ToString()!)}");
+        if (jobType != null) queryParts.Add($"jobType={Uri.EscapeDataString(jobType.ToString()!)}");
+        var path = queryParts.Count > 0 ? $"/jobs/statistics/global?{string.Join("&", queryParts)}" : $"/jobs/statistics/global";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
-            return await EventualPoller.PollAsync("getGlobalJobStatistics", false,
-                () => InvokeWithRetryAsync(() => SendAsync<GlobalJobStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getGlobalJobStatistics", false, ct),
+            return await EventualPoller.PollAsync("getGlobalJobStatistics", true,
+                () => InvokeWithRetryAsync(() => SendAsync<GlobalJobStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getGlobalJobStatistics", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<GlobalJobStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getGlobalJobStatistics", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GlobalJobStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getGlobalJobStatistics", false, ct);
     }
 
     /// <summary>
@@ -990,17 +1034,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getIncident</remarks>
-    public async Task<IncidentResult> GetIncidentAsync(IncidentKey incidentKey, ConsistencyOptions<IncidentResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GetIncidentResponse> GetIncidentAsync(IncidentKey incidentKey, ConsistencyOptions<GetIncidentResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/incidents/{Uri.EscapeDataString(incidentKey.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getIncident", true,
-                () => InvokeWithRetryAsync(() => SendAsync<IncidentResult>(HttpMethod.Get, path, null, ct), "getIncident", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GetIncidentResponse>(HttpMethod.Get, path, null, ct), "getIncident", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<IncidentResult>(HttpMethod.Get, path, null, ct), "getIncident", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GetIncidentResponse>(HttpMethod.Get, path, null, ct), "getIncident", false, ct);
     }
 
     /// <summary>
@@ -1073,12 +1117,13 @@ public partial class CamundaClient
     /// <summary>
     /// Get process instance statistics by version
     /// Get statistics about process instances, grouped by version for a given process definition.
+    /// The process definition ID must be provided as a required field in the request body filter.
     /// 
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionInstanceVersionStatistics</remarks>
-    public async Task<ProcessDefinitionInstanceVersionStatisticsQueryResult> GetProcessDefinitionInstanceVersionStatisticsAsync(ProcessDefinitionId processDefinitionId, GetProcessDefinitionInstanceVersionStatisticsRequest body, ConsistencyOptions<ProcessDefinitionInstanceVersionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionInstanceVersionStatisticsQueryResult> GetProcessDefinitionInstanceVersionStatisticsAsync(GetProcessDefinitionInstanceVersionStatisticsRequest body, ConsistencyOptions<ProcessDefinitionInstanceVersionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionId.ToString()!)}/statistics/process-instances";
+        var path = $"/process-definitions/statistics/process-instances-by-version";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessDefinitionInstanceVersionStatistics", false,
@@ -1113,17 +1158,17 @@ public partial class CamundaClient
     /// Get statistics about elements in currently running process instances by process definition key and search filter.
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionStatistics</remarks>
-    public async Task<GetProcessDefinitionStatisticsResponse> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, GetProcessDefinitionStatisticsRequest body, ConsistencyOptions<GetProcessDefinitionStatisticsResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, GetProcessDefinitionStatisticsRequest body, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/statistics/element-instances";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessDefinitionStatistics", false,
-                () => InvokeWithRetryAsync(() => SendAsync<GetProcessDefinitionStatisticsResponse>(HttpMethod.Post, path, body, ct), "getProcessDefinitionStatistics", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionElementStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionStatistics", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<GetProcessDefinitionStatisticsResponse>(HttpMethod.Post, path, body, ct), "getProcessDefinitionStatistics", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionElementStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionStatistics", false, ct);
     }
 
     /// <summary>
@@ -1203,17 +1248,17 @@ public partial class CamundaClient
     /// Get statistics about elements by the process instance key.
     /// </summary>
     /// <remarks>Operation: getProcessInstanceStatistics</remarks>
-    public async Task<GetProcessInstanceStatisticsResponse> GetProcessInstanceStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<GetProcessInstanceStatisticsResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessInstanceElementStatisticsQueryResult> GetProcessInstanceStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/statistics/element-instances";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessInstanceStatistics", true,
-                () => InvokeWithRetryAsync(() => SendAsync<GetProcessInstanceStatisticsResponse>(HttpMethod.Get, path, null, ct), "getProcessInstanceStatistics", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<ProcessInstanceElementStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceStatistics", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<GetProcessInstanceStatisticsResponse>(HttpMethod.Get, path, null, ct), "getProcessInstanceStatistics", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<ProcessInstanceElementStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceStatistics", false, ct);
     }
 
     /// <summary>
@@ -1312,17 +1357,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getStartProcessForm</remarks>
-    public async Task<object> GetStartProcessFormAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task<GetStartProcessFormResponse> GetStartProcessFormAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<GetStartProcessFormResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/form";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getStartProcessForm", true,
-                () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getStartProcessForm", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GetStartProcessFormResponse>(HttpMethod.Get, path, null, ct), "getStartProcessForm", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getStartProcessForm", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GetStartProcessFormResponse>(HttpMethod.Get, path, null, ct), "getStartProcessForm", false, ct);
     }
 
     /// <summary>
@@ -1466,17 +1511,17 @@ public partial class CamundaClient
     /// Get the variable by the variable key.
     /// </summary>
     /// <remarks>Operation: getVariable</remarks>
-    public async Task<VariableResult> GetVariableAsync(VariableKey variableKey, ConsistencyOptions<VariableResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GetVariableResponse> GetVariableAsync(VariableKey variableKey, ConsistencyOptions<GetVariableResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/variables/{Uri.EscapeDataString(variableKey.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getVariable", true,
-                () => InvokeWithRetryAsync(() => SendAsync<VariableResult>(HttpMethod.Get, path, null, ct), "getVariable", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GetVariableResponse>(HttpMethod.Get, path, null, ct), "getVariable", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<VariableResult>(HttpMethod.Get, path, null, ct), "getVariable", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GetVariableResponse>(HttpMethod.Get, path, null, ct), "getVariable", false, ct);
     }
 
     /// <summary>
@@ -1726,17 +1771,17 @@ public partial class CamundaClient
     /// Search for batch operation items based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchBatchOperationItems</remarks>
-    public async Task<BatchOperationItemSearchQueryResult> SearchBatchOperationItemsAsync(SearchBatchOperationItemsRequest body, ConsistencyOptions<BatchOperationItemSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchBatchOperationItemsResponse> SearchBatchOperationItemsAsync(SearchBatchOperationItemsRequest body, ConsistencyOptions<SearchBatchOperationItemsResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/batch-operation-items/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchBatchOperationItems", false,
-                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationItemSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchBatchOperationItems", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchBatchOperationItemsResponse>(HttpMethod.Post, path, body, ct), "searchBatchOperationItems", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<BatchOperationItemSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchBatchOperationItems", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchBatchOperationItemsResponse>(HttpMethod.Post, path, body, ct), "searchBatchOperationItems", false, ct);
     }
 
     /// <summary>
@@ -1835,17 +1880,17 @@ public partial class CamundaClient
     /// Search correlated message subscriptions based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchCorrelatedMessageSubscriptions</remarks>
-    public async Task<CorrelatedMessageSubscriptionSearchQueryResult> SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery body, ConsistencyOptions<CorrelatedMessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchCorrelatedMessageSubscriptionsResponse> SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery body, ConsistencyOptions<SearchCorrelatedMessageSubscriptionsResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/correlated-message-subscriptions/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchCorrelatedMessageSubscriptions", false,
-                () => InvokeWithRetryAsync(() => SendAsync<CorrelatedMessageSubscriptionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchCorrelatedMessageSubscriptions", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchCorrelatedMessageSubscriptionsResponse>(HttpMethod.Post, path, body, ct), "searchCorrelatedMessageSubscriptions", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<CorrelatedMessageSubscriptionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchCorrelatedMessageSubscriptions", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchCorrelatedMessageSubscriptionsResponse>(HttpMethod.Post, path, body, ct), "searchCorrelatedMessageSubscriptions", false, ct);
     }
 
     /// <summary>
@@ -1871,17 +1916,17 @@ public partial class CamundaClient
     /// Search for decision instances based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchDecisionInstances</remarks>
-    public async Task<DecisionInstanceSearchQueryResult> SearchDecisionInstancesAsync(SearchDecisionInstancesRequest body, ConsistencyOptions<DecisionInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchDecisionInstancesResponse> SearchDecisionInstancesAsync(SearchDecisionInstancesRequest body, ConsistencyOptions<SearchDecisionInstancesResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-instances/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchDecisionInstances", false,
-                () => InvokeWithRetryAsync(() => SendAsync<DecisionInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchDecisionInstances", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchDecisionInstancesResponse>(HttpMethod.Post, path, body, ct), "searchDecisionInstances", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<DecisionInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchDecisionInstances", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchDecisionInstancesResponse>(HttpMethod.Post, path, body, ct), "searchDecisionInstances", false, ct);
     }
 
     /// <summary>
@@ -1914,17 +1959,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchElementInstanceIncidents</remarks>
-    public async Task<IncidentSearchQueryResult> SearchElementInstanceIncidentsAsync(ElementInstanceKey elementInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchElementInstanceIncidentsResponse> SearchElementInstanceIncidentsAsync(ElementInstanceKey elementInstanceKey, IncidentSearchQuery body, ConsistencyOptions<SearchElementInstanceIncidentsResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/{Uri.EscapeDataString(elementInstanceKey.ToString()!)}/incidents/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchElementInstanceIncidents", false,
-                () => InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceIncidents", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchElementInstanceIncidentsResponse>(HttpMethod.Post, path, body, ct), "searchElementInstanceIncidents", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceIncidents", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchElementInstanceIncidentsResponse>(HttpMethod.Post, path, body, ct), "searchElementInstanceIncidents", false, ct);
     }
 
     /// <summary>
@@ -1932,17 +1977,17 @@ public partial class CamundaClient
     /// Search for element instances based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchElementInstances</remarks>
-    public async Task<ElementInstanceSearchQueryResult> SearchElementInstancesAsync(ElementInstanceSearchQuery body, ConsistencyOptions<ElementInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchElementInstancesResponse> SearchElementInstancesAsync(ElementInstanceSearchQuery body, ConsistencyOptions<SearchElementInstancesResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchElementInstances", false,
-                () => InvokeWithRetryAsync(() => SendAsync<ElementInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstances", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchElementInstancesResponse>(HttpMethod.Post, path, body, ct), "searchElementInstances", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<ElementInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstances", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchElementInstancesResponse>(HttpMethod.Post, path, body, ct), "searchElementInstances", false, ct);
     }
 
     /// <summary>
@@ -2005,17 +2050,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchIncidents</remarks>
-    public async Task<IncidentSearchQueryResult> SearchIncidentsAsync(IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchIncidentsResponse> SearchIncidentsAsync(IncidentSearchQuery body, ConsistencyOptions<SearchIncidentsResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/incidents/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchIncidents", false,
-                () => InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchIncidents", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchIncidentsResponse>(HttpMethod.Post, path, body, ct), "searchIncidents", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchIncidents", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchIncidentsResponse>(HttpMethod.Post, path, body, ct), "searchIncidents", false, ct);
     }
 
     /// <summary>
@@ -2156,17 +2201,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchProcessInstanceIncidents</remarks>
-    public async Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchProcessInstanceIncidentsResponse> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<SearchProcessInstanceIncidentsResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/incidents/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchProcessInstanceIncidents", false,
-                () => InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessInstanceIncidents", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchProcessInstanceIncidentsResponse>(HttpMethod.Post, path, body, ct), "searchProcessInstanceIncidents", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessInstanceIncidents", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchProcessInstanceIncidentsResponse>(HttpMethod.Post, path, body, ct), "searchProcessInstanceIncidents", false, ct);
     }
 
     /// <summary>
@@ -2264,17 +2309,17 @@ public partial class CamundaClient
     /// Search for user task audit logs based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchUserTaskAuditLogs</remarks>
-    public async Task<object> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, SearchUserTaskAuditLogsRequest body, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchUserTaskAuditLogsResponse> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, SearchUserTaskAuditLogsRequest body, ConsistencyOptions<SearchUserTaskAuditLogsResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/audit-logs/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUserTaskAuditLogs", false,
-                () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Post, path, body, ct), "searchUserTaskAuditLogs", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchUserTaskAuditLogsResponse>(HttpMethod.Post, path, body, ct), "searchUserTaskAuditLogs", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Post, path, body, ct), "searchUserTaskAuditLogs", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchUserTaskAuditLogsResponse>(HttpMethod.Post, path, body, ct), "searchUserTaskAuditLogs", false, ct);
     }
 
     /// <summary>
@@ -2282,7 +2327,7 @@ public partial class CamundaClient
     /// Search for user task variables based on given criteria. By default, long variable values in the response are truncated.
     /// </summary>
     /// <remarks>Operation: searchUserTaskVariables</remarks>
-    public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchUserTaskVariablesResponse> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<SearchUserTaskVariablesResponse>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
@@ -2290,11 +2335,11 @@ public partial class CamundaClient
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUserTaskVariables", false,
-                () => InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskVariables", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchUserTaskVariablesResponse>(HttpMethod.Post, path, body, ct), "searchUserTaskVariables", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskVariables", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchUserTaskVariablesResponse>(HttpMethod.Post, path, body, ct), "searchUserTaskVariables", false, ct);
     }
 
     /// <summary>
@@ -2392,7 +2437,7 @@ public partial class CamundaClient
     /// Search for process and local variables based on given criteria. By default, long variable values in the response are truncated.
     /// </summary>
     /// <remarks>Operation: searchVariables</remarks>
-    public async Task<VariableSearchQueryResult> SearchVariablesAsync(SearchVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchVariablesResponse> SearchVariablesAsync(SearchVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<SearchVariablesResponse>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
@@ -2400,11 +2445,11 @@ public partial class CamundaClient
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchVariables", false,
-                () => InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchVariables", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchVariablesResponse>(HttpMethod.Post, path, body, ct), "searchVariables", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchVariables", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchVariablesResponse>(HttpMethod.Post, path, body, ct), "searchVariables", false, ct);
     }
 
     /// <summary>
@@ -2608,6 +2653,19 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Update a global-scoped cluster variable
+    /// Updates the value of an existing global cluster variable.
+    /// The variable must exist, otherwise a 404 error is returned.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: updateGlobalClusterVariable</remarks>
+    public async Task<ClusterVariableResult> UpdateGlobalClusterVariableAsync(string name, UpdateClusterVariableRequest body, CancellationToken ct = default)
+    {
+        var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Put, path, body, ct), "updateGlobalClusterVariable", false, ct);
+    }
+
+    /// <summary>
     /// Update group
     /// Update a group with the given ID.
     /// </summary>
@@ -2661,6 +2719,19 @@ public partial class CamundaClient
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}";
         return await InvokeWithRetryAsync(() => SendAsync<TenantUpdateResult>(HttpMethod.Put, path, body, ct), "updateTenant", false, ct);
+    }
+
+    /// <summary>
+    /// Update a tenant-scoped cluster variable
+    /// Updates the value of an existing tenant-scoped cluster variable.
+    /// The variable must exist, otherwise a 404 error is returned.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: updateTenantClusterVariable</remarks>
+    public async Task<ClusterVariableResult> UpdateTenantClusterVariableAsync(TenantId tenantId, string name, UpdateClusterVariableRequest body, CancellationToken ct = default)
+    {
+        var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Put, path, body, ct), "updateTenantClusterVariable", false, ct);
     }
 
     /// <summary>

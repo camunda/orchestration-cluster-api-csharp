@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Camunda.Client.Api;
 using FluentAssertions;
 
@@ -49,7 +48,7 @@ public class JobTests(CamundaFixture fixture)
             var jobKey = job.JobKey;
 
             // Complete the job
-            await fixture.Client.CompleteJobAsync(jobKey, new CompleteJobRequest
+            await fixture.Client.CompleteJobAsync(jobKey, new JobCompletionRequest
             {
                 Variables = new Dictionary<string, object> { ["completed"] = true },
             });
@@ -95,10 +94,7 @@ public class JobTests(CamundaFixture fixture)
         // Should return empty or null jobs list — not an error
     }
 
-    private static bool HasItemWithKeyAndState(List<object> items, string processInstanceKey, string state) =>
-        items.Any(i => i is JsonElement je
-            && je.TryGetProperty("processInstanceKey", out var pk)
-            && pk.ToString() == processInstanceKey
-            && je.TryGetProperty("state", out var s)
-            && s.GetString() == state);
+    private static bool HasItemWithKeyAndState(List<ProcessInstanceResult> items, string processInstanceKey, string state) =>
+        items.Any(i => i.ProcessInstanceKey.ToString() == processInstanceKey
+            && i.State.ToString() == state);
 }

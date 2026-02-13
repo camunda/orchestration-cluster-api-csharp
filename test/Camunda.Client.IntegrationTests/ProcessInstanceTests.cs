@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Camunda.Client.Api;
 using FluentAssertions;
 
@@ -76,18 +75,10 @@ public class ProcessInstanceTests(CamundaFixture fixture)
         stillActive.Should().BeFalse("process instance should no longer be ACTIVE after cancel");
     }
 
-    /// <summary>
-    /// Items come back as List&lt;object&gt; — at runtime they are JsonElement.
-    /// </summary>
-    private static bool HasItemWithKey(List<object> items, string processInstanceKey) =>
-        items.Any(i => i is JsonElement je
-            && je.TryGetProperty("processInstanceKey", out var pk)
-            && pk.ToString() == processInstanceKey);
+    private static bool HasItemWithKey(List<ProcessInstanceResult> items, string processInstanceKey) =>
+        items.Any(i => i.ProcessInstanceKey.ToString() == processInstanceKey);
 
-    private static bool HasItemWithKeyAndState(List<object> items, string processInstanceKey, string state) =>
-        items.Any(i => i is JsonElement je
-            && je.TryGetProperty("processInstanceKey", out var pk)
-            && pk.ToString() == processInstanceKey
-            && je.TryGetProperty("state", out var s)
-            && s.GetString() == state);
+    private static bool HasItemWithKeyAndState(List<ProcessInstanceResult> items, string processInstanceKey, string state) =>
+        items.Any(i => i.ProcessInstanceKey.ToString() == processInstanceKey
+            && i.State.ToString() == state);
 }
