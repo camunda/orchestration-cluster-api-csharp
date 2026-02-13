@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Camunda.Orchestration.Sdk.Runtime | Camunda C# SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Camunda.Orchestration.Sdk.Runtime | Camunda C# SDK ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Camunda.Orchestration.Sdk">
+            Camunda.Orchestration.Sdk
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Camunda.Orchestration.Sdk.Runtime">
+
+  <h1 id="Camunda_Orchestration_Sdk_Runtime" data-uid="Camunda.Orchestration.Sdk.Runtime" class="text-break">Namespace Camunda.Orchestration.Sdk.Runtime</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ActivatedJob.html">ActivatedJob</a></dt>
+      <dd><p>An activated job received from the Camunda broker, with typed variable access.
+This is what job handler functions receive.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.AuthConfig.html">AuthConfig</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.BackpressureConfig.html">BackpressureConfig</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.BackpressureState.html">BackpressureState</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.BasicAuthConfig.html">BasicAuthConfig</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.BpmnErrorException.html">BpmnErrorException</a></dt>
+      <dd><p>Throw from a job handler to trigger a BPMN error boundary event on the job's task.
+The error code is matched against error catch events in the process model.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaAuthException.html">CamundaAuthException</a></dt>
+      <dd><p>Authentication-specific exception.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaConfig.html">CamundaConfig</a></dt>
+      <dd><p>Hydrated Camunda configuration. Immutable after construction.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaConfigurationException.html">CamundaConfigurationException</a></dt>
+      <dd><p>Thrown when configuration hydration encounters validation errors.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaKeyJsonConverterFactory.html">CamundaKeyJsonConverterFactory</a></dt>
+      <dd><p>JSON converter factory that handles any <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ICamundaKey.html">ICamundaKey</a> struct.
+Serializes as a plain JSON string; deserializes by calling the static AssumeExists factory.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.html">CamundaKeyValidation</a></dt>
+      <dd><p>Validation helpers for domain key constraints.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaLongKeyJsonConverterFactory.html">CamundaLongKeyJsonConverterFactory</a></dt>
+      <dd><p>JSON converter factory that handles any <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ICamundaLongKey.html">ICamundaLongKey</a> struct.
+Serializes as a JSON number; deserializes by calling the static AssumeExists factory.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaOptions.html">CamundaOptions</a></dt>
+      <dd><p>Options for constructing a <a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.html">CamundaClient</a>.
+Mirrors the JS SDK's CamundaOptions with idiomatic C# conventions.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaSdkException.html">CamundaSdkException</a></dt>
+      <dd><p>SDK error types mirroring the JS SDK's error structure.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CancelSdkException.html">CancelSdkException</a></dt>
+      <dd><p>Thrown when a cancellable operation is cancelled.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConfigErrorDetail.html">ConfigErrorDetail</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.html">ConfigurationHydrator</a></dt>
+      <dd><p>Hydrates a <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaConfig.html">CamundaConfig</a> from environment variables and overrides.
+Mirrors the JS SDK's hydrateConfig function.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions&lt;T&gt;</a></dt>
+      <dd><p>Options for eventual consistency polling behavior.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.EventualConfig.html">EventualConfig</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.EventualConsistencyTimeoutException.html">EventualConsistencyTimeoutException</a></dt>
+      <dd><p>Thrown when an eventually consistent endpoint times out waiting for data.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ExtendedDeploymentResponse.html">ExtendedDeploymentResponse</a></dt>
+      <dd><p>Extended deployment result with typed convenience properties for direct access
+to deployed artifacts by category (processes, decisions, forms, etc.).</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.HttpRetryConfig.html">HttpRetryConfig</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.HttpSdkException.html">HttpSdkException</a></dt>
+      <dd><p>HTTP-specific SDK error with RFC 7807 Problem Details.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobFailureException.html">JobFailureException</a></dt>
+      <dd><p>Throw from a job handler to explicitly fail a job with custom retry settings.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobWorker.html">JobWorker</a></dt>
+      <dd><p>A long-running worker that polls the Camunda broker for jobs of a specific type,
+dispatches them to a handler, and auto-completes or auto-fails based on the outcome.</p>
+<p><b>Concurrency model:</b> jobs are dispatched as concurrent <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>s
+on the .NET thread pool. <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.MaxConcurrentJobs.html#Camunda_Orchestration_Sdk_Runtime_JobWorkerConfig_MaxConcurrentJobs">MaxConcurrentJobs</a> controls how
+many jobs may be in-flight simultaneously. For async handlers (the typical case), the
+thread pool thread is released during <code>await</code> points, so many jobs can be handled
+by a small number of OS threads. For CPU-bound handlers, set <code>MaxConcurrentJobs</code>
+to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.environment.processorcount">ProcessorCount</a> to match available cores.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.html">JobWorkerConfig</a></dt>
+      <dd><p>Configuration for a <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobWorker.html">JobWorker</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.OAuthConfig.html">OAuthConfig</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.OAuthRetryConfig.html">OAuthRetryConfig</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.TypedVariables.html">TypedVariables</a></dt>
+      <dd><p>Extension methods for deserializing Camunda variable and custom header payloads
+from untyped <code>object</code> properties into strongly-typed DTOs.</p>
+<p>
+Camunda API responses return <code>variables</code> and <code>customHeaders</code> as
+<code>object</code> properties which, at runtime, are <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a> values.
+These extensions let you opt in to typed deserialization:
+</p>
+<example>
+<pre><code class="lang-csharp">// Define your domain DTO
+public record OrderVars(string OrderId, decimal Amount);
+
+// Deserialize variables from a process instance result
+var result = await client.CreateProcessInstanceAsync(
+    new ProcessInstanceCreationInstructionById
+    {
+        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
+        Variables = new OrderVars("ord-123", 99.99m),  // input: just assign your DTO
+    });
+
+var vars = result.Variables.DeserializeAs&lt;OrderVars&gt;();  // output: typed extraction</code></pre>
+</example>
+<p>
+For <b>input</b> (sending variables), simply assign your DTO to the <code>Variables</code>
+property — <code>System.Text.Json</code> serializes the runtime type automatically.
+</p>
+<p>
+For <b>output</b> (receiving variables), call <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.TypedVariables.DeserializeAs.html#Camunda_Orchestration_Sdk_Runtime_TypedVariables_DeserializeAs__1_System_Object_System_Text_Json_JsonSerializerOptions_">DeserializeAs&lt;T&gt;(object?, JsonSerializerOptions?)</a> on the
+<code>Variables</code> or <code>CustomHeaders</code> property to deserialize the underlying
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a> into your DTO type.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ValidationConfig.html">ValidationConfig</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.RetryDecision.html">RetryDecision</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.StopResult.html">StopResult</a></dt>
+      <dd><p>Result of a <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobWorker.StopAsync.html#Camunda_Orchestration_Sdk_Runtime_JobWorker_StopAsync_System_Nullable_System_TimeSpan__">StopAsync(TimeSpan?)</a> call.</p>
+</dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ICamundaKey.html">ICamundaKey</a></dt>
+      <dd><p>Marker interface for all Camunda domain key types.
+Enables generic constraints and JSON converter discovery.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ICamundaLongKey.html">ICamundaLongKey</a></dt>
+      <dd><p>Marker interface for Camunda domain types backed by a long (int64) value.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable.html">ITenantIdSettable</a></dt>
+      <dd><p>Implemented by request body types that have an optional tenantId property.
+The SDK uses this to inject the configured default tenant ID when the caller
+does not supply one explicitly.</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.AuthStrategy.html">AuthStrategy</a></dt>
+      <dd><p>Supported authentication strategies.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaAuthErrorCode.html">CamundaAuthErrorCode</a></dt>
+      <dd><p>Auth error codes matching the JS SDK.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConfigErrorCode.html">ConfigErrorCode</a></dt>
+      <dd><p>Configuration hydration errors.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ValidationMode.html">ValidationMode</a></dt>
+      <dd><p>Validation modes for request/response validation.</p>
+</dd>
+    </dl>
+    <h3 id="delegates">
+Delegates
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobHandler.html">JobHandler</a></dt>
+      <dd><p>Delegate for job handler functions. Return the output variables to complete the
+job with, or <code>null</code> to complete with no output variables.</p>
+<p>To signal a BPMN error, throw <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.BpmnErrorException.html">BpmnErrorException</a>.</p>
+<p>To explicitly fail a job with custom retries, throw <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobFailureException.html">JobFailureException</a>.</p>
+<p>Any other unhandled exception auto-fails the job with <code>retries - 1</code>.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Camunda 8 Orchestration Cluster API — C# SDK
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

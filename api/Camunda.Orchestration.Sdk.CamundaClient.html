@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class CamundaClient | Camunda C# SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class CamundaClient | Camunda C# SDK ">
+      
+      <meta name="description" content="Primary Camunda client. Provides typed methods for all Camunda 8 REST API operations. Auto-generated operation methods are added in the Generated/ partial class files. This class provides the infrastructure: configuration, auth, retry, backpressure.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_CamundaClient.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.CamundaClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Camunda.Orchestration.Sdk">
+            Camunda.Orchestration.Sdk
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Camunda.Orchestration.Sdk.CamundaClient">
+
+
+
+  <h1 id="Camunda_Orchestration_Sdk_CamundaClient" data-uid="Camunda.Orchestration.Sdk.CamundaClient" class="text-break">
+Class CamundaClient  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Camunda.html">Camunda</a>.<a class="xref" href="Camunda.Orchestration.html">Orchestration</a>.<a class="xref" href="Camunda.Orchestration.Sdk.html">Sdk</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Camunda.Orchestration.Sdk.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Primary Camunda client. Provides typed methods for all Camunda 8 REST API operations.</p>
+<p>Auto-generated operation methods are added in the Generated/ partial class files.
+This class provides the infrastructure: configuration, auth, retry, backpressure.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class CamundaClient : IDisposable, IAsyncDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">CamundaClient</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.TypedVariables.DeserializeAs.html#Camunda_Orchestration_Sdk_Runtime_TypedVariables_DeserializeAs__1_System_Object_System_Text_Json_JsonSerializerOptions_">TypedVariables.DeserializeAs&lt;T&gt;(object?, JsonSerializerOptions?)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.-ctor.html#Camunda_Orchestration_Sdk_CamundaClient__ctor_Camunda_Orchestration_Sdk_Runtime_CamundaOptions_">CamundaClient(CamundaOptions?)</a></dt>
+    <dd><p>Create a new CamundaClient with the given options.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.Config.html#Camunda_Orchestration_Sdk_CamundaClient_Config">Config</a></dt>
+    <dd><p>The current hydrated configuration (read-only).</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ActivateAdHocSubProcessActivitiesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ActivateAdHocSubProcessActivitiesAsync_Camunda_Orchestration_Sdk_Api_ElementInstanceKey_Camunda_Orchestration_Sdk_Api_AdHocSubProcessActivateActivitiesInstruction_System_Threading_CancellationToken_">ActivateAdHocSubProcessActivitiesAsync(ElementInstanceKey, AdHocSubProcessActivateActivitiesInstruction, CancellationToken)</a></dt>
+    <dd><p>Activate activities within an ad-hoc sub-process
+Activates selected activities within an ad-hoc sub-process identified by element ID.
+The provided element IDs must exist within the ad-hoc sub-process instance identified by the
+provided adHocSubProcessInstanceKey.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ActivateJobsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_Api_JobActivationRequest_System_Threading_CancellationToken_">ActivateJobsAsync(JobActivationRequest, CancellationToken)</a></dt>
+    <dd><p>Activate jobs
+Iterate through all known partitions and activate jobs up to the requested maximum.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignClientToGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignClientToGroupAsync_System_String_System_String_System_Threading_CancellationToken_">AssignClientToGroupAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Assign a client to a group
+Assigns a client to a group, making it a member of the group.
+Members of the group inherit the group authorizations, roles, and tenant assignments.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignClientToTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignClientToTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_System_Threading_CancellationToken_">AssignClientToTenantAsync(TenantId, string, CancellationToken)</a></dt>
+    <dd><p>Assign a client to a tenant
+Assign the client to the specified tenant.
+The client can then access tenant data and perform authorized actions.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignGroupToTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignGroupToTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_System_Threading_CancellationToken_">AssignGroupToTenantAsync(TenantId, string, CancellationToken)</a></dt>
+    <dd><p>Assign a group to a tenant
+Assigns a group to a specified tenant.
+Group members (users, clients) can then access tenant data and perform authorized actions.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignMappingRuleToGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToGroupAsync_System_String_System_String_System_Threading_CancellationToken_">AssignMappingRuleToGroupAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Assign a mapping rule to a group
+Assigns a mapping rule to a group.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignMappingRuleToTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_System_Threading_CancellationToken_">AssignMappingRuleToTenantAsync(TenantId, string, CancellationToken)</a></dt>
+    <dd><p>Assign a mapping rule to a tenant
+Assign a single mapping rule to a specified tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToClientAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToClientAsync_System_String_System_String_System_Threading_CancellationToken_">AssignRoleToClientAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Assign a role to a client
+Assigns the specified role to the client. The client will inherit the authorizations associated with this role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToGroupAsync_System_String_System_String_System_Threading_CancellationToken_">AssignRoleToGroupAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Assign a role to a group
+Assigns the specified role to the group. Every member of the group (user or client) will inherit the authorizations associated with this role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToMappingRuleAsync_System_String_System_String_System_Threading_CancellationToken_">AssignRoleToMappingRuleAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Assign a role to a mapping rule
+Assigns a role to a mapping rule.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_System_Threading_CancellationToken_">AssignRoleToTenantAsync(TenantId, string, CancellationToken)</a></dt>
+    <dd><p>Assign a role to a tenant
+Assigns a role to a specified tenant.
+Users, Clients or Groups, that have the role assigned, will get access to the tenant's data and can perform actions according to their authorizations.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToUserAsync_System_String_Camunda_Orchestration_Sdk_Api_Username_System_Threading_CancellationToken_">AssignRoleToUserAsync(string, Username, CancellationToken)</a></dt>
+    <dd><p>Assign a role to a user
+Assigns the specified role to the user. The user will inherit the authorizations associated with this role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskAssignmentRequest_System_Threading_CancellationToken_">AssignUserTaskAsync(UserTaskKey, UserTaskAssignmentRequest, CancellationToken)</a></dt>
+    <dd><p>Assign user task
+Assigns a user task with the given key to the given assignee.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignUserToGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignUserToGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_Username_System_Threading_CancellationToken_">AssignUserToGroupAsync(string, Username, CancellationToken)</a></dt>
+    <dd><p>Assign a user to a group
+Assigns a user to a group, making the user a member of the group.
+Group members inherit the group authorizations, roles, and tenant assignments.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignUserToTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignUserToTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_Username_System_Threading_CancellationToken_">AssignUserToTenantAsync(TenantId, Username, CancellationToken)</a></dt>
+    <dd><p>Assign a user to a tenant
+Assign a single user to a specified tenant. The user can then access tenant data and perform authorized actions.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.BroadcastSignalAsync.html#Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_Camunda_Orchestration_Sdk_Api_SignalBroadcastRequest_System_Threading_CancellationToken_">BroadcastSignalAsync(SignalBroadcastRequest, CancellationToken)</a></dt>
+    <dd><p>Broadcast signal
+Broadcasts a signal.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">CancelBatchOperationAsync(BatchOperationKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Cancel Batch operation
+Cancels a running batch operation.
+This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_CancelProcessInstanceRequest_System_Threading_CancellationToken_">CancelProcessInstanceAsync(ProcessInstanceKey, CancelProcessInstanceRequest, CancellationToken)</a></dt>
+    <dd><p>Cancel process instance
+Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_CancelProcessInstancesBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">CancelProcessInstancesBatchOperationAsync(CancelProcessInstancesBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Cancel process instances (batch)
+Cancels multiple running process instances.
+Since only ACTIVE root instances can be cancelled, any given filters for state and
+parentProcessInstanceKey are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CompleteJobAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CompleteJobAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobCompletionRequest_System_Threading_CancellationToken_">CompleteJobAsync(JobKey, JobCompletionRequest, CancellationToken)</a></dt>
+    <dd><p>Complete job
+Complete a job with the given payload, which allows completing the associated service task.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CompleteUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskCompletionRequest_System_Threading_CancellationToken_">CompleteUserTaskAsync(UserTaskKey, UserTaskCompletionRequest, CancellationToken)</a></dt>
+    <dd><p>Complete user task
+Completes a user task with the given key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CorrelateMessageAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CorrelateMessageAsync_Camunda_Orchestration_Sdk_Api_MessageCorrelationRequest_System_Threading_CancellationToken_">CorrelateMessageAsync(MessageCorrelationRequest, CancellationToken)</a></dt>
+    <dd><p>Correlate message
+Publishes a message and correlates it to a subscription.
+If correlation is successful it will return the first process instance key the message correlated with.
+The message is not buffered.
+Use the publish message endpoint to send messages that can be buffered.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAdminUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">CreateAdminUserAsync(UserRequest, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Create admin user
+Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateAuthorizationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAuthorizationAsync_Camunda_Orchestration_Sdk_Api_AuthorizationRequest_System_Threading_CancellationToken_">CreateAuthorizationAsync(AuthorizationRequest, CancellationToken)</a></dt>
+    <dd><p>Create authorization
+Create the authorization.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDeploymentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDeploymentAsync_System_Net_Http_MultipartFormDataContent_System_Threading_CancellationToken_">CreateDeploymentAsync(MultipartFormDataContent, CancellationToken)</a></dt>
+    <dd><p>Deploy resources
+Deploys one or more resources (e.g. processes, decision models, or forms).
+This is an atomic call, i.e. either all resources are deployed or none of them are.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Nullable_Camunda_Orchestration_Sdk_Api_DocumentId__System_Threading_CancellationToken_">CreateDocumentAsync(MultipartFormDataContent, string?, DocumentId?, CancellationToken)</a></dt>
+    <dd><p>Upload document
+Upload a document to the Camunda 8 cluster.</p>
+<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentLinkAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentLinkAsync_Camunda_Orchestration_Sdk_Api_DocumentId_Camunda_Orchestration_Sdk_Api_DocumentLinkRequest_System_String_System_String_System_Threading_CancellationToken_">CreateDocumentLinkAsync(DocumentId, DocumentLinkRequest, string?, string?, CancellationToken)</a></dt>
+    <dd><p>Create document link
+Create a link to a document in the Camunda 8 cluster.</p>
+<p>Note that this is currently supported for document stores of type: AWS, GCP</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentsAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Threading_CancellationToken_">CreateDocumentsAsync(MultipartFormDataContent, string?, CancellationToken)</a></dt>
+    <dd><p>Upload multiple documents
+Upload multiple documents to the Camunda 8 cluster.</p>
+<p>The caller must provide a file name for each document, which will be used in case of a multi-status response
+to identify which documents failed to upload. The file name can be provided in the <code>Content-Disposition</code> header
+of the file part or in the <code>fileName</code> field of the metadata. You can add a parallel array of metadata objects. These
+are matched with the files based on index, and must have the same length as the files array.
+To pass homogenous metadata for all files, spread the metadata over the metadata array.
+A filename value provided explicitly via the metadata array in the request overrides the <code>Content-Disposition</code> header
+of the file part.</p>
+<p>In case of a multi-status response, the response body will contain a list of <code>DocumentBatchProblemDetail</code> objects,
+each of which contains the file name of the document that failed to upload and the reason for the failure.
+The client can choose to retry the whole batch or individual documents based on the response.</p>
+<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateElementInstanceVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateElementInstanceVariablesAsync_Camunda_Orchestration_Sdk_Api_ElementInstanceKey_Camunda_Orchestration_Sdk_Api_SetVariableRequest_System_Threading_CancellationToken_">CreateElementInstanceVariablesAsync(ElementInstanceKey, SetVariableRequest, CancellationToken)</a></dt>
+    <dd><p>Update element instance variables
+Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.
+Specify the element instance in the <code>elementInstanceKey</code> parameter.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalClusterVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateGlobalClusterVariableAsync_Camunda_Orchestration_Sdk_Api_CreateClusterVariableRequest_System_Threading_CancellationToken_">CreateGlobalClusterVariableAsync(CreateClusterVariableRequest, CancellationToken)</a></dt>
+    <dd><p>Create a global-scoped cluster variable</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateGroupAsync_Camunda_Orchestration_Sdk_Api_GroupCreateRequest_System_Threading_CancellationToken_">CreateGroupAsync(GroupCreateRequest, CancellationToken)</a></dt>
+    <dd><p>Create group
+Create a new group.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateJobWorker.html#Camunda_Orchestration_Sdk_CamundaClient_CreateJobWorker_Camunda_Orchestration_Sdk_Runtime_JobWorkerConfig_Camunda_Orchestration_Sdk_Runtime_JobHandler_">CreateJobWorker(JobWorkerConfig, JobHandler)</a></dt>
+    <dd><p>Create a job worker that polls for and processes jobs of the specified type.</p>
+<p>The handler receives an <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ActivatedJob.html">ActivatedJob</a> and returns variables to
+auto-complete. Throw <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.BpmnErrorException.html">BpmnErrorException</a> for BPMN errors,
+<a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobFailureException.html">JobFailureException</a> for explicit failures, or any other exception
+to auto-fail with <code>retries - 1</code>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateJobWorker.html#Camunda_Orchestration_Sdk_CamundaClient_CreateJobWorker_Camunda_Orchestration_Sdk_Runtime_JobWorkerConfig_System_Func_Camunda_Orchestration_Sdk_Runtime_ActivatedJob_System_Threading_CancellationToken_System_Threading_Tasks_Task__">CreateJobWorker(JobWorkerConfig, Func&lt;ActivatedJob, CancellationToken, Task&gt;)</a></dt>
+    <dd><p>Create a job worker with a handler that doesn't return output variables.
+The job is auto-completed with no variables on success.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateMappingRuleAsync_Camunda_Orchestration_Sdk_Api_MappingRuleCreateRequest_System_Threading_CancellationToken_">CreateMappingRuleAsync(MappingRuleCreateRequest, CancellationToken)</a></dt>
+    <dd><p>Create mapping rule
+Create a new mapping rule</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstruction_System_Threading_CancellationToken_">CreateProcessInstanceAsync(ProcessInstanceCreationInstruction, CancellationToken)</a></dt>
+    <dd><p>Create process instance
+Creates and starts an instance of the specified process.
+The process definition to use to create the instance can be specified either using its unique key
+(as returned by Deploy resources), or using the BPMN process id and a version.</p>
+<p>Waits for the completion of the process instance before returning a result
+when awaitCompletion is enabled.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateRoleAsync_Camunda_Orchestration_Sdk_Api_RoleCreateRequest_System_Threading_CancellationToken_">CreateRoleAsync(RoleCreateRequest, CancellationToken)</a></dt>
+    <dd><p>Create role
+Create a new role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateTenantAsync_Camunda_Orchestration_Sdk_Api_TenantCreateRequest_System_Threading_CancellationToken_">CreateTenantAsync(TenantCreateRequest, CancellationToken)</a></dt>
+    <dd><p>Create tenant
+Creates a new tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateTenantClusterVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_CreateClusterVariableRequest_System_Threading_CancellationToken_">CreateTenantClusterVariableAsync(TenantId, CreateClusterVariableRequest, CancellationToken)</a></dt>
+    <dd><p>Create a tenant-scoped cluster variable</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserCreateResult__System_Threading_CancellationToken_">CreateUserAsync(UserRequest, ConsistencyOptions&lt;UserCreateResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Create user
+Create a new user.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteAuthorizationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteAuthorizationAsync_Camunda_Orchestration_Sdk_Api_AuthorizationKey_System_Threading_CancellationToken_">DeleteAuthorizationAsync(AuthorizationKey, CancellationToken)</a></dt>
+    <dd><p>Delete authorization
+Deletes the authorization with the given key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteProcessInstanceRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteProcessInstanceRequest, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Delete decision instance
+Delete all associated decision evaluations based on provided key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_DeleteDecisionInstancesBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">DeleteDecisionInstancesBatchOperationAsync(DeleteDecisionInstancesBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Delete decision instances (batch)
+Delete multiple decision instances. This will delete the historic data from secondary storage.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteDocumentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDocumentAsync_Camunda_Orchestration_Sdk_Api_DocumentId_System_String_System_Threading_CancellationToken_">DeleteDocumentAsync(DocumentId, string?, CancellationToken)</a></dt>
+    <dd><p>Delete document
+Delete a document from the Camunda 8 cluster.</p>
+<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalClusterVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteGlobalClusterVariableAsync_System_String_System_Threading_CancellationToken_">DeleteGlobalClusterVariableAsync(string, CancellationToken)</a></dt>
+    <dd><p>Delete a global-scoped cluster variable</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteGroupAsync_System_String_System_Threading_CancellationToken_">DeleteGroupAsync(string, CancellationToken)</a></dt>
+    <dd><p>Delete group
+Deletes the group with the given ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_System_String_System_Threading_CancellationToken_">DeleteMappingRuleAsync(string, CancellationToken)</a></dt>
+    <dd><p>Delete a mapping rule
+Deletes the mapping rule with the given ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteProcessInstanceRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Delete process instance
+Deletes a process instance. Only instances that are completed or terminated can be deleted.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_DeleteProcessInstancesBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">DeleteProcessInstancesBatchOperationAsync(DeleteProcessInstancesBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Delete process instances (batch)
+Delete multiple process instances. This will delete the historic data from secondary storage.
+Only process instances in a final state (COMPLETED or TERMINATED) can be deleted.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteResourceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteResourceAsync_Camunda_Orchestration_Sdk_Api_ResourceKey_Camunda_Orchestration_Sdk_Api_DeleteResourceRequest_System_Threading_CancellationToken_">DeleteResourceAsync(ResourceKey, DeleteResourceRequest, CancellationToken)</a></dt>
+    <dd><p>Delete resource
+Deletes a deployed resource. This can be a process definition, decision requirements
+definition, or form definition deployed using the deploy resources endpoint. Specify the
+resource you want to delete in the <code>resourceKey</code> parameter.</p>
+<p>Once a resource has been deleted it cannot be recovered. If the resource needs to be
+available again, a new deployment of the resource is required.</p>
+<p>By default, only the resource itself is deleted from the runtime state. To also delete the
+historic data associated with a resource, set the <code>deleteHistory</code> flag in the request body
+to <code>true</code>. The historic data is deleted asynchronously via a batch operation. The details of
+the created batch operation are included in the response. Note that history deletion is only
+supported for process resources; for other resource types this flag is ignored and no history
+will be deleted.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRoleAsync_System_String_System_Threading_CancellationToken_">DeleteRoleAsync(string, CancellationToken)</a></dt>
+    <dd><p>Delete role
+Deletes the role with the given ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_Threading_CancellationToken_">DeleteTenantAsync(TenantId, CancellationToken)</a></dt>
+    <dd><p>Delete tenant
+Deletes an existing tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteTenantClusterVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteTenantClusterVariableAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_System_Threading_CancellationToken_">DeleteTenantClusterVariableAsync(TenantId, string, CancellationToken)</a></dt>
+    <dd><p>Delete a tenant-scoped cluster variable</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteUserAsync_Camunda_Orchestration_Sdk_Api_Username_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">DeleteUserAsync(Username, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Delete user
+Deletes a user.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeployResourcesFromFilesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeployResourcesFromFilesAsync_System_String___System_String_System_Threading_CancellationToken_">DeployResourcesFromFilesAsync(string[], string?, CancellationToken)</a></dt>
+    <dd><p>Deploy resources from local filesystem paths.
+Reads the specified files, infers MIME types from their extensions,
+and calls <a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDeploymentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDeploymentAsync_System_Net_Http_MultipartFormDataContent_System_Threading_CancellationToken_">CreateDeploymentAsync(MultipartFormDataContent, CancellationToken)</a> with the loaded content.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.Dispose.html#Camunda_Orchestration_Sdk_CamundaClient_Dispose">Dispose()</a></dt>
+    <dd><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DisposeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DisposeAsync">DisposeAsync()</a></dt>
+    <dd><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources asynchronously.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.EvaluateConditionalsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_EvaluateConditionalsAsync_Camunda_Orchestration_Sdk_Api_ConditionalEvaluationInstruction_System_Threading_CancellationToken_">EvaluateConditionalsAsync(ConditionalEvaluationInstruction, CancellationToken)</a></dt>
+    <dd><p>Evaluate root level conditional start events
+Evaluates root-level conditional start events for process definitions.
+If the evaluation is successful, it will return the keys of all created process instances, along with their associated process definition key.
+Multiple root-level conditional start events of the same process definition can trigger if their conditions evaluate to true.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.EvaluateDecisionAsync.html#Camunda_Orchestration_Sdk_CamundaClient_EvaluateDecisionAsync_Camunda_Orchestration_Sdk_Api_DecisionEvaluationInstruction_System_Threading_CancellationToken_">EvaluateDecisionAsync(DecisionEvaluationInstruction, CancellationToken)</a></dt>
+    <dd><p>Evaluate decision
+Evaluates a decision.
+You specify the decision to evaluate either by using its unique key (as returned by
+DeployResource), or using the decision ID. When using the decision ID, the latest deployed
+version of the decision is used.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.EvaluateExpressionAsync.html#Camunda_Orchestration_Sdk_CamundaClient_EvaluateExpressionAsync_Camunda_Orchestration_Sdk_Api_ExpressionEvaluationRequest_System_Threading_CancellationToken_">EvaluateExpressionAsync(ExpressionEvaluationRequest, CancellationToken)</a></dt>
+    <dd><p>Evaluate an expression
+Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.FailJobAsync.html#Camunda_Orchestration_Sdk_CamundaClient_FailJobAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobFailRequest_System_Threading_CancellationToken_">FailJobAsync(JobKey, JobFailRequest, CancellationToken)</a></dt>
+    <dd><p>Fail job
+Mark the job as failed.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetAuditLogAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetAuditLogAsync_Camunda_Orchestration_Sdk_Api_AuditLogKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GetAuditLogResponse__System_Threading_CancellationToken_">GetAuditLogAsync(AuditLogKey, ConsistencyOptions&lt;GetAuditLogResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get audit log
+Get an audit log entry by auditLogKey.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetAuthenticationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetAuthenticationAsync_System_Threading_CancellationToken_">GetAuthenticationAsync(CancellationToken)</a></dt>
+    <dd><p>Get current user
+Retrieves the current authenticated user.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetAuthorizationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetAuthorizationAsync_Camunda_Orchestration_Sdk_Api_AuthorizationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_AuthorizationResult__System_Threading_CancellationToken_">GetAuthorizationAsync(AuthorizationKey, ConsistencyOptions&lt;AuthorizationResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get authorization
+Get authorization by the given key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetBackpressureState.html#Camunda_Orchestration_Sdk_CamundaClient_GetBackpressureState">GetBackpressureState()</a></dt>
+    <dd><p>Current backpressure state snapshot.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationResponse__System_Threading_CancellationToken_">GetBatchOperationAsync(BatchOperationKey, ConsistencyOptions&lt;BatchOperationResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get batch operation
+Get batch operation by key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDecisionDefinitionAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionDefinitionAsync_Camunda_Orchestration_Sdk_Api_DecisionDefinitionKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_DecisionDefinitionResult__System_Threading_CancellationToken_">GetDecisionDefinitionAsync(DecisionDefinitionKey, ConsistencyOptions&lt;DecisionDefinitionResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get decision definition
+Returns a decision definition by key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDecisionDefinitionXmlAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionDefinitionXmlAsync_Camunda_Orchestration_Sdk_Api_DecisionDefinitionKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">GetDecisionDefinitionXmlAsync(DecisionDefinitionKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get decision definition XML
+Returns decision definition as XML.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">GetDecisionInstanceAsync(DecisionInstanceKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get decision instance
+Returns a decision instance.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDecisionRequirementsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionRequirementsAsync_Camunda_Orchestration_Sdk_Api_DecisionRequirementsKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_DecisionRequirementsResult__System_Threading_CancellationToken_">GetDecisionRequirementsAsync(DecisionRequirementsKey, ConsistencyOptions&lt;DecisionRequirementsResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get decision requirements
+Returns Decision Requirements as JSON.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDecisionRequirementsXmlAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionRequirementsXmlAsync_Camunda_Orchestration_Sdk_Api_DecisionRequirementsKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">GetDecisionRequirementsXmlAsync(DecisionRequirementsKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get decision requirements XML
+Returns decision requirements as XML.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDocumentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDocumentAsync_Camunda_Orchestration_Sdk_Api_DocumentId_System_String_System_String_System_Threading_CancellationToken_">GetDocumentAsync(DocumentId, string?, string?, CancellationToken)</a></dt>
+    <dd><p>Download document
+Download a document from the Camunda 8 cluster.</p>
+<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetElementInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetElementInstanceAsync_Camunda_Orchestration_Sdk_Api_ElementInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GetElementInstanceResponse__System_Threading_CancellationToken_">GetElementInstanceAsync(ElementInstanceKey, ConsistencyOptions&lt;GetElementInstanceResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get element instance
+Returns element instance as JSON.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetGlobalClusterVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGlobalClusterVariableAsync_System_String_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_ClusterVariableResult__System_Threading_CancellationToken_">GetGlobalClusterVariableAsync(string, ConsistencyOptions&lt;ClusterVariableResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get a global-scoped cluster variable</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetGlobalJobStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGlobalJobStatisticsAsync_System_DateTimeOffset_System_DateTimeOffset_System_String_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GlobalJobStatisticsQueryResult__System_Threading_CancellationToken_">GetGlobalJobStatisticsAsync(DateTimeOffset, DateTimeOffset, string?, ConsistencyOptions&lt;GlobalJobStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Global job statistics
+Returns global aggregated counts for jobs. Optionally filter by the creation time window and/or jobType.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGroupAsync_System_String_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GroupResult__System_Threading_CancellationToken_">GetGroupAsync(string, ConsistencyOptions&lt;GroupResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get group
+Get a group by its ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetIncidentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetIncidentAsync_Camunda_Orchestration_Sdk_Api_IncidentKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GetIncidentResponse__System_Threading_CancellationToken_">GetIncidentAsync(IncidentKey, ConsistencyOptions&lt;GetIncidentResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get incident
+Returns incident as JSON.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetLicenseAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetLicenseAsync_System_Threading_CancellationToken_">GetLicenseAsync(CancellationToken)</a></dt>
+    <dd><p>Get license status
+Obtains the status of the current Camunda license.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetMappingRuleAsync_System_String_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_MappingRuleResult__System_Threading_CancellationToken_">GetMappingRuleAsync(string, ConsistencyOptions&lt;MappingRuleResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get a mapping rule
+Gets the mapping rule with the given ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessDefinitionAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessDefinitionAsync_Camunda_Orchestration_Sdk_Api_ProcessDefinitionKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_ProcessDefinitionResult__System_Threading_CancellationToken_">GetProcessDefinitionAsync(ProcessDefinitionKey, ConsistencyOptions&lt;ProcessDefinitionResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get process definition
+Returns process definition as JSON.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessDefinitionInstanceStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessDefinitionInstanceStatisticsAsync_Camunda_Orchestration_Sdk_Api_GetProcessDefinitionInstanceStatisticsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_ProcessDefinitionInstanceStatisticsQueryResult__System_Threading_CancellationToken_">GetProcessDefinitionInstanceStatisticsAsync(GetProcessDefinitionInstanceStatisticsRequest, ConsistencyOptions&lt;ProcessDefinitionInstanceStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get process instance statistics
+Get statistics about process instances, grouped by process definition and tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessDefinitionInstanceVersionStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessDefinitionInstanceVersionStatisticsAsync_Camunda_Orchestration_Sdk_Api_GetProcessDefinitionInstanceVersionStatisticsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_ProcessDefinitionInstanceVersionStatisticsQueryResult__System_Threading_CancellationToken_">GetProcessDefinitionInstanceVersionStatisticsAsync(GetProcessDefinitionInstanceVersionStatisticsRequest, ConsistencyOptions&lt;ProcessDefinitionInstanceVersionStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get process instance statistics by version
+Get statistics about process instances, grouped by version for a given process definition.
+The process definition ID must be provided as a required field in the request body filter.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessDefinitionMessageSubscriptionStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessDefinitionMessageSubscriptionStatisticsAsync_Camunda_Orchestration_Sdk_Api_GetProcessDefinitionMessageSubscriptionStatisticsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_ProcessDefinitionMessageSubscriptionStatisticsQueryResult__System_Threading_CancellationToken_">GetProcessDefinitionMessageSubscriptionStatisticsAsync(GetProcessDefinitionMessageSubscriptionStatisticsRequest, ConsistencyOptions&lt;ProcessDefinitionMessageSubscriptionStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get message subscription statistics
+Get message subscription statistics, grouped by process definition.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessDefinitionStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessDefinitionStatisticsAsync_Camunda_Orchestration_Sdk_Api_ProcessDefinitionKey_Camunda_Orchestration_Sdk_Api_GetProcessDefinitionStatisticsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_ProcessDefinitionElementStatisticsQueryResult__System_Threading_CancellationToken_">GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey, GetProcessDefinitionStatisticsRequest, ConsistencyOptions&lt;ProcessDefinitionElementStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get process definition statistics
+Get statistics about elements in currently running process instances by process definition key and search filter.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessDefinitionXmlAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessDefinitionXmlAsync_Camunda_Orchestration_Sdk_Api_ProcessDefinitionKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">GetProcessDefinitionXmlAsync(ProcessDefinitionKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get process definition XML
+Returns process definition as XML.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GetProcessInstanceResponse__System_Threading_CancellationToken_">GetProcessInstanceAsync(ProcessInstanceKey, ConsistencyOptions&lt;GetProcessInstanceResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get process instance
+Get the process instance by the process instance key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceCallHierarchyAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessInstanceCallHierarchyAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">GetProcessInstanceCallHierarchyAsync(ProcessInstanceKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get call hierarchy
+Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceSequenceFlowsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessInstanceSequenceFlowsAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GetProcessInstanceSequenceFlowsResponse__System_Threading_CancellationToken_">GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey, ConsistencyOptions&lt;GetProcessInstanceSequenceFlowsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get sequence flows
+Get sequence flows taken by the process instance.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessInstanceStatisticsAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_ProcessInstanceElementStatisticsQueryResult__System_Threading_CancellationToken_">GetProcessInstanceStatisticsAsync(ProcessInstanceKey, ConsistencyOptions&lt;ProcessInstanceElementStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get element instance statistics
+Get statistics about elements by the process instance key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceStatisticsByDefinitionAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessInstanceStatisticsByDefinitionAsync_Camunda_Orchestration_Sdk_Api_IncidentProcessInstanceStatisticsByDefinitionQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_IncidentProcessInstanceStatisticsByDefinitionQueryResult__System_Threading_CancellationToken_">GetProcessInstanceStatisticsByDefinitionAsync(IncidentProcessInstanceStatisticsByDefinitionQuery, ConsistencyOptions&lt;IncidentProcessInstanceStatisticsByDefinitionQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get process instance statistics by definition
+Returns statistics for active process instances with incidents, grouped by process
+definition. The result set is scoped to a specific incident error hash code, which must be
+provided as a filter in the request body.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceStatisticsByErrorAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessInstanceStatisticsByErrorAsync_Camunda_Orchestration_Sdk_Api_IncidentProcessInstanceStatisticsByErrorQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_IncidentProcessInstanceStatisticsByErrorQueryResult__System_Threading_CancellationToken_">GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery, ConsistencyOptions&lt;IncidentProcessInstanceStatisticsByErrorQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get process instance statistics by error
+Returns statistics for active process instances that currently have active incidents,
+grouped by incident error hash code.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_Api_ResourceKey_System_Threading_CancellationToken_">GetResourceAsync(ResourceKey, CancellationToken)</a></dt>
+    <dd><p>Get resource
+Returns a deployed resource.
+:::info
+Currently, this endpoint only supports RPA resources.
+:::</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceContentAsync_Camunda_Orchestration_Sdk_Api_ResourceKey_System_Threading_CancellationToken_">GetResourceContentAsync(ResourceKey, CancellationToken)</a></dt>
+    <dd><p>Get resource content
+Returns the content of a deployed resource.
+:::info
+Currently, this endpoint only supports RPA resources.
+:::</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_System_String_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_RoleResult__System_Threading_CancellationToken_">GetRoleAsync(string, ConsistencyOptions&lt;RoleResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get role
+Get a role by its ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetStartProcessFormAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetStartProcessFormAsync_Camunda_Orchestration_Sdk_Api_ProcessDefinitionKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GetStartProcessFormResponse__System_Threading_CancellationToken_">GetStartProcessFormAsync(ProcessDefinitionKey, ConsistencyOptions&lt;GetStartProcessFormResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get process start form
+Get the start form of a process.
+Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetStatusAsync_System_Threading_CancellationToken_">GetStatusAsync(CancellationToken)</a></dt>
+    <dd><p>Get cluster status
+Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantResult__System_Threading_CancellationToken_">GetTenantAsync(TenantId, ConsistencyOptions&lt;TenantResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get tenant
+Retrieves a single tenant by tenant ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetTenantClusterVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_ClusterVariableResult__System_Threading_CancellationToken_">GetTenantClusterVariableAsync(TenantId, string, ConsistencyOptions&lt;ClusterVariableResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get a tenant-scoped cluster variable</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetTopologyAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetTopologyAsync_System_Threading_CancellationToken_">GetTopologyAsync(CancellationToken)</a></dt>
+    <dd><p>Get cluster topology
+Obtains the current topology of the cluster the gateway is part of.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetUsageMetricsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetUsageMetricsAsync_System_DateTimeOffset_System_DateTimeOffset_System_Nullable_Camunda_Orchestration_Sdk_Api_TenantId__System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UsageMetricsResponse__System_Threading_CancellationToken_">GetUsageMetricsAsync(DateTimeOffset, DateTimeOffset, TenantId?, bool?, ConsistencyOptions&lt;UsageMetricsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get usage metrics
+Retrieve the usage metrics based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetUserAsync_Camunda_Orchestration_Sdk_Api_Username_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserResult__System_Threading_CancellationToken_">GetUserAsync(Username, ConsistencyOptions&lt;UserResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get user
+Get a user by its username.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GetUserTaskResponse__System_Threading_CancellationToken_">GetUserTaskAsync(UserTaskKey, ConsistencyOptions&lt;GetUserTaskResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get user task
+Get the user task by the user task key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetUserTaskFormAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetUserTaskFormAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GetUserTaskFormResponse__System_Threading_CancellationToken_">GetUserTaskFormAsync(UserTaskKey, ConsistencyOptions&lt;GetUserTaskFormResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get user task form
+Get the form of a user task.
+Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetVariableAsync_Camunda_Orchestration_Sdk_Api_VariableKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GetVariableResponse__System_Threading_CancellationToken_">GetVariableAsync(VariableKey, ConsistencyOptions&lt;GetVariableResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get variable
+Get the variable by the variable key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetWorkers.html#Camunda_Orchestration_Sdk_CamundaClient_GetWorkers">GetWorkers()</a></dt>
+    <dd><p>Returns a snapshot of all registered workers.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_MigrateProcessInstanceRequest_System_Threading_CancellationToken_">MigrateProcessInstanceAsync(ProcessInstanceKey, MigrateProcessInstanceRequest, CancellationToken)</a></dt>
+    <dd><p>Migrate process instance
+Migrates a process instance to a new process definition.
+This request can contain multiple mapping instructions to define mapping between the active
+process instance's elements and target process definition elements.</p>
+<p>Use this to upgrade a process instance to a new version of a process or to
+a different process definition, e.g. to keep your running instances up-to-date with the
+latest process improvements.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_MigrateProcessInstancesBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">MigrateProcessInstancesBatchOperationAsync(MigrateProcessInstancesBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Migrate process instances (batch)
+Migrate multiple process instances.
+Since only process instances with ACTIVE state can be migrated, any given
+filters for state are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_ModifyProcessInstanceRequest_System_Threading_CancellationToken_">ModifyProcessInstanceAsync(ProcessInstanceKey, ModifyProcessInstanceRequest, CancellationToken)</a></dt>
+    <dd><p>Modify process instance
+Modifies a running process instance.
+This request can contain multiple instructions to activate an element of the process or
+to terminate an active instance of an element.</p>
+<p>Use this to repair a process instance that is stuck on an element or took an unintended path.
+For example, because an external system is not available or doesn't respond as expected.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ModifyProcessInstancesBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">ModifyProcessInstancesBatchOperationAsync(ModifyProcessInstancesBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Modify process instances (batch)
+Modify multiple process instances.
+Since only process instances with ACTIVE state can be modified, any given
+filters for state are ignored and overridden during this batch operation.
+In contrast to single modification operation, it is not possible to add variable instructions or modify by element key.
+It is only possible to use the element id of the source and target.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.PinClockAsync.html#Camunda_Orchestration_Sdk_CamundaClient_PinClockAsync_Camunda_Orchestration_Sdk_Api_ClockPinRequest_System_Threading_CancellationToken_">PinClockAsync(ClockPinRequest, CancellationToken)</a></dt>
+    <dd><p>Pin internal clock (alpha)
+Set a precise, static time for the Zeebe engine's internal clock.
+When the clock is pinned, it remains at the specified time and does not advance.
+To change the time, the clock must be pinned again with a new timestamp.</p>
+<p>This endpoint is an alpha feature and may be subject to change
+in future releases.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.PublishMessageAsync.html#Camunda_Orchestration_Sdk_CamundaClient_PublishMessageAsync_Camunda_Orchestration_Sdk_Api_MessagePublicationRequest_System_Threading_CancellationToken_">PublishMessageAsync(MessagePublicationRequest, CancellationToken)</a></dt>
+    <dd><p>Publish message
+Publishes a single message.
+Messages are published to specific partitions computed from their correlation keys.
+Messages can be buffered.
+The endpoint does not wait for a correlation result.
+Use the message correlation endpoint for such use cases.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResetClockAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResetClockAsync_System_Threading_CancellationToken_">ResetClockAsync(CancellationToken)</a></dt>
+    <dd><p>Reset internal clock (alpha)
+Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.
+This operation is useful for returning the clock to
+normal behavior after it has been pinned to a specific time.</p>
+<p>This endpoint is an alpha feature and may be subject to change
+in future releases.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentAsync_Camunda_Orchestration_Sdk_Api_IncidentKey_Camunda_Orchestration_Sdk_Api_IncidentResolutionRequest_System_Threading_CancellationToken_">ResolveIncidentAsync(IncidentKey, IncidentResolutionRequest, CancellationToken)</a></dt>
+    <dd><p>Resolve incident
+Marks the incident as resolved; most likely a call to Update job will be necessary
+to reset the job's retries, followed by this call.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentsBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ResolveIncidentsBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">ResolveIncidentsBatchOperationAsync(ResolveIncidentsBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Resolve related incidents (batch)
+Resolves multiple instances of process instances.
+Since only process instances with ACTIVE state can have unresolved incidents, any given
+filters for state are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveProcessInstanceIncidentsAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Resolve related incidents
+Creates a batch operation to resolve multiple incidents of a process instance.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">ResumeBatchOperationAsync(BatchOperationKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Resume Batch operation
+Resumes a suspended batch operation.
+This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.RunWorkersAsync.html#Camunda_Orchestration_Sdk_CamundaClient_RunWorkersAsync_System_Nullable_System_TimeSpan__System_Threading_CancellationToken_">RunWorkersAsync(TimeSpan?, CancellationToken)</a></dt>
+    <dd><p>Block until cancellation is requested, keeping all registered workers alive.
+This is the typical entry point for worker-only applications.</p>
+<p>When the token is cancelled, all workers are stopped gracefully.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchAuditLogsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchAuditLogsAsync_Camunda_Orchestration_Sdk_Api_AuditLogSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchAuditLogsResponse__System_Threading_CancellationToken_">SearchAuditLogsAsync(AuditLogSearchQueryRequest, ConsistencyOptions&lt;SearchAuditLogsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search audit logs
+Search for audit logs based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchAuthorizationsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchAuthorizationsAsync_Camunda_Orchestration_Sdk_Api_AuthorizationSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_AuthorizationSearchResult__System_Threading_CancellationToken_">SearchAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions&lt;AuthorizationSearchResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search authorizations
+Search for authorizations based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchBatchOperationItemsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchBatchOperationItemsAsync_Camunda_Orchestration_Sdk_Api_SearchBatchOperationItemsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchBatchOperationItemsResponse__System_Threading_CancellationToken_">SearchBatchOperationItemsAsync(SearchBatchOperationItemsRequest, ConsistencyOptions&lt;SearchBatchOperationItemsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search batch operation items
+Search for batch operation items based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchBatchOperationsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchBatchOperationsAsync_Camunda_Orchestration_Sdk_Api_SearchBatchOperationsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationSearchQueryResult__System_Threading_CancellationToken_">SearchBatchOperationsAsync(SearchBatchOperationsRequest, ConsistencyOptions&lt;BatchOperationSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search batch operations
+Search for batch operations based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchClientsForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchClientsForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_SearchClientsForGroupRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchClientsForGroupResponse__System_Threading_CancellationToken_">SearchClientsForGroupAsync(string, SearchClientsForGroupRequest, ConsistencyOptions&lt;SearchClientsForGroupResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search group clients
+Search clients assigned to a group.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchClientsForRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchClientsForRoleAsync_System_String_Camunda_Orchestration_Sdk_Api_SearchClientsForRoleRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantClientSearchResult__System_Threading_CancellationToken_">SearchClientsForRoleAsync(string, SearchClientsForRoleRequest, ConsistencyOptions&lt;TenantClientSearchResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search role clients
+Search clients with assigned role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchClientsForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchClientsForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_SearchClientsForTenantRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantClientSearchResult__System_Threading_CancellationToken_">SearchClientsForTenantAsync(TenantId, SearchClientsForTenantRequest, ConsistencyOptions&lt;TenantClientSearchResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search clients for tenant
+Retrieves a filtered and sorted list of clients for a specified tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchClusterVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchClusterVariablesAsync_Camunda_Orchestration_Sdk_Api_SearchClusterVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchClusterVariablesResponse__System_Threading_CancellationToken_">SearchClusterVariablesAsync(SearchClusterVariablesRequest, bool?, ConsistencyOptions&lt;SearchClusterVariablesResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchCorrelatedMessageSubscriptionsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchCorrelatedMessageSubscriptionsAsync_Camunda_Orchestration_Sdk_Api_CorrelatedMessageSubscriptionSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchCorrelatedMessageSubscriptionsResponse__System_Threading_CancellationToken_">SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery, ConsistencyOptions&lt;SearchCorrelatedMessageSubscriptionsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search correlated message subscriptions
+Search correlated message subscriptions based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchDecisionDefinitionsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchDecisionDefinitionsAsync_Camunda_Orchestration_Sdk_Api_DecisionDefinitionSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_DecisionDefinitionSearchQueryResult__System_Threading_CancellationToken_">SearchDecisionDefinitionsAsync(DecisionDefinitionSearchQuery, ConsistencyOptions&lt;DecisionDefinitionSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search decision definitions
+Search for decision definitions based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchDecisionInstancesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchDecisionInstancesAsync_Camunda_Orchestration_Sdk_Api_SearchDecisionInstancesRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchDecisionInstancesResponse__System_Threading_CancellationToken_">SearchDecisionInstancesAsync(SearchDecisionInstancesRequest, ConsistencyOptions&lt;SearchDecisionInstancesResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search decision instances
+Search for decision instances based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchDecisionRequirementsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchDecisionRequirementsAsync_Camunda_Orchestration_Sdk_Api_DecisionRequirementsSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_DecisionRequirementsSearchQueryResult__System_Threading_CancellationToken_">SearchDecisionRequirementsAsync(DecisionRequirementsSearchQuery, ConsistencyOptions&lt;DecisionRequirementsSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search decision requirements
+Search for decision requirements based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceIncidentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchElementInstanceIncidentsAsync_Camunda_Orchestration_Sdk_Api_ElementInstanceKey_Camunda_Orchestration_Sdk_Api_IncidentSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchElementInstanceIncidentsResponse__System_Threading_CancellationToken_">SearchElementInstanceIncidentsAsync(ElementInstanceKey, IncidentSearchQuery, ConsistencyOptions&lt;SearchElementInstanceIncidentsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search for incidents of a specific element instance
+Search for incidents caused by the specified element instance, including incidents of any child instances created from this element instance.</p>
+<p>Although the <code>elementInstanceKey</code> is provided as a path parameter to indicate the root element instance,
+you may also include an <code>elementInstanceKey</code> within the filter object to narrow results to specific
+child element instances. This is useful, for example, if you want to isolate incidents associated with
+nested or subordinate elements within the given element instance while excluding incidents directly tied
+to the root element itself.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstancesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchElementInstancesAsync_Camunda_Orchestration_Sdk_Api_ElementInstanceSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchElementInstancesResponse__System_Threading_CancellationToken_">SearchElementInstancesAsync(ElementInstanceSearchQuery, ConsistencyOptions&lt;SearchElementInstancesResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search element instances
+Search for element instances based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupIdsForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_SearchGroupIdsForTenantRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantGroupSearchResult__System_Threading_CancellationToken_">SearchGroupIdsForTenantAsync(TenantId, SearchGroupIdsForTenantRequest, ConsistencyOptions&lt;TenantGroupSearchResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search groups for tenant
+Retrieves a filtered and sorted list of groups for a specified tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchGroupsAsync_Camunda_Orchestration_Sdk_Api_GroupSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GroupSearchQueryResult__System_Threading_CancellationToken_">SearchGroupsAsync(GroupSearchQueryRequest, ConsistencyOptions&lt;GroupSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search groups
+Search for groups based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupsForRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchGroupsForRoleAsync_System_String_Camunda_Orchestration_Sdk_Api_SearchGroupsForRoleRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_RoleGroupSearchResult__System_Threading_CancellationToken_">SearchGroupsForRoleAsync(string, SearchGroupsForRoleRequest, ConsistencyOptions&lt;RoleGroupSearchResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search role groups
+Search groups with assigned role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchIncidentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchIncidentsAsync_Camunda_Orchestration_Sdk_Api_IncidentSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchIncidentsResponse__System_Threading_CancellationToken_">SearchIncidentsAsync(IncidentSearchQuery, ConsistencyOptions&lt;SearchIncidentsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search incidents
+Search for incidents based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchJobsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchJobsAsync_Camunda_Orchestration_Sdk_Api_JobSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchJobsResponse__System_Threading_CancellationToken_">SearchJobsAsync(JobSearchQuery, ConsistencyOptions&lt;SearchJobsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search jobs
+Search for jobs based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRuleAsync_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryResult__System_Threading_CancellationToken_">SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions&lt;MappingRuleSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search mapping rules
+Search for mapping rules based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchMappingRulesForGroupAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search group mapping rules
+Search mapping rules assigned to a group.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search role mapping rules
+Search mapping rules with assigned role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search mapping rules for tenant
+Retrieves a filtered and sorted list of MappingRules for a specified tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_Camunda_Orchestration_Sdk_Api_SearchMessageSubscriptionsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMessageSubscriptionsResponse__System_Threading_CancellationToken_">SearchMessageSubscriptionsAsync(SearchMessageSubscriptionsRequest, ConsistencyOptions&lt;SearchMessageSubscriptionsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search message subscriptions
+Search for message subscriptions based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchProcessDefinitionsAsync_Camunda_Orchestration_Sdk_Api_SearchProcessDefinitionsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_ProcessDefinitionSearchQueryResult__System_Threading_CancellationToken_">SearchProcessDefinitionsAsync(SearchProcessDefinitionsRequest, ConsistencyOptions&lt;ProcessDefinitionSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search process definitions
+Search for process definitions based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchProcessInstanceIncidentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchProcessInstanceIncidentsAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_IncidentSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchProcessInstanceIncidentsResponse__System_Threading_CancellationToken_">SearchProcessInstanceIncidentsAsync(ProcessInstanceKey, IncidentSearchQuery, ConsistencyOptions&lt;SearchProcessInstanceIncidentsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search related incidents
+Search for incidents caused by the process instance or any of its called process or decision instances.</p>
+<p>Although the <code>processInstanceKey</code> is provided as a path parameter to indicate the root process instance,
+you may also include a <code>processInstanceKey</code> within the filter object to narrow results to specific
+child process instances. This is useful, for example, if you want to isolate incidents associated with
+subprocesses or called processes under the root instance while excluding incidents directly tied to the root.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchProcessInstancesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchProcessInstancesAsync_Camunda_Orchestration_Sdk_Api_SearchProcessInstancesRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchProcessInstancesResponse__System_Threading_CancellationToken_">SearchProcessInstancesAsync(SearchProcessInstancesRequest, ConsistencyOptions&lt;SearchProcessInstancesResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search process instances
+Search for process instances based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesAsync_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_RoleSearchQueryResult__System_Threading_CancellationToken_">SearchRolesAsync(RoleSearchQueryRequest, ConsistencyOptions&lt;RoleSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search roles
+Search for roles based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchRolesForGroupAsync(string, RoleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search group roles
+Search roles assigned to a group.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search roles for tenant
+Retrieves a filtered and sorted list of roles for a specified tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchTenantsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchTenantsAsync_Camunda_Orchestration_Sdk_Api_SearchTenantsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantSearchQueryResult__System_Threading_CancellationToken_">SearchTenantsAsync(SearchTenantsRequest, ConsistencyOptions&lt;TenantSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search tenants
+Retrieves a filtered and sorted list of tenants.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskAuditLogsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskAuditLogsAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_SearchUserTaskAuditLogsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTaskAuditLogsResponse__System_Threading_CancellationToken_">SearchUserTaskAuditLogsAsync(UserTaskKey, SearchUserTaskAuditLogsRequest, ConsistencyOptions&lt;SearchUserTaskAuditLogsResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search user task audit logs
+Search for user task audit logs based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskVariablesAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_SearchUserTaskVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTaskVariablesResponse__System_Threading_CancellationToken_">SearchUserTaskVariablesAsync(UserTaskKey, SearchUserTaskVariablesRequest, bool?, ConsistencyOptions&lt;SearchUserTaskVariablesResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search user task variables
+Search for user task variables based on given criteria. By default, long variable values in the response are truncated.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTasksAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUserTasksAsync_Camunda_Orchestration_Sdk_Api_SearchUserTasksRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTasksResponse__System_Threading_CancellationToken_">SearchUserTasksAsync(SearchUserTasksRequest, ConsistencyOptions&lt;SearchUserTasksResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search user tasks
+Search for user tasks based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchUsersAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUsersAsync_Camunda_Orchestration_Sdk_Api_SearchUsersRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserSearchResult__System_Threading_CancellationToken_">SearchUsersAsync(SearchUsersRequest, ConsistencyOptions&lt;UserSearchResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search users
+Search for users based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchUsersForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUsersForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_SearchUsersForGroupRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUsersForGroupResponse__System_Threading_CancellationToken_">SearchUsersForGroupAsync(string, SearchUsersForGroupRequest, ConsistencyOptions&lt;SearchUsersForGroupResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search group users
+Search users assigned to a group.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchUsersForRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUsersForRoleAsync_System_String_Camunda_Orchestration_Sdk_Api_SearchUsersForRoleRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantUserSearchResult__System_Threading_CancellationToken_">SearchUsersForRoleAsync(string, SearchUsersForRoleRequest, ConsistencyOptions&lt;TenantUserSearchResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search role users
+Search users with assigned role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchUsersForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUsersForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_SearchUsersForTenantRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantUserSearchResult__System_Threading_CancellationToken_">SearchUsersForTenantAsync(TenantId, SearchUsersForTenantRequest, ConsistencyOptions&lt;TenantUserSearchResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search users for tenant
+Retrieves a filtered and sorted list of users for a specified tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchVariablesAsync_Camunda_Orchestration_Sdk_Api_SearchVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchVariablesResponse__System_Threading_CancellationToken_">SearchVariablesAsync(SearchVariablesRequest, bool?, ConsistencyOptions&lt;SearchVariablesResponse&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search variables
+Search for process and local variables based on given criteria. By default, long variable values in the response are truncated.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync.html#Camunda_Orchestration_Sdk_CamundaClient_StopAllWorkersAsync_System_Nullable_System_TimeSpan__">StopAllWorkersAsync(TimeSpan?)</a></dt>
+    <dd><p>Stop all registered workers and wait for in-flight jobs to drain.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">SuspendBatchOperationAsync(BatchOperationKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dd><p>Suspend Batch operation
+Suspends a running batch operation.
+This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ThrowJobErrorAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ThrowJobErrorAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobErrorRequest_System_Threading_CancellationToken_">ThrowJobErrorAsync(JobKey, JobErrorRequest, CancellationToken)</a></dt>
+    <dd><p>Throw error for job
+Reports a business error (i.e. non-technical) that occurs while processing a job.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignClientFromGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_System_String_System_String_System_Threading_CancellationToken_">UnassignClientFromGroupAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Unassign a client from a group
+Unassigns a client from a group.
+The client is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignClientFromTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_System_Threading_CancellationToken_">UnassignClientFromTenantAsync(TenantId, string, CancellationToken)</a></dt>
+    <dd><p>Unassign a client from a tenant
+Unassigns the client from the specified tenant.
+The client can no longer access tenant data.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignGroupFromTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignGroupFromTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_System_Threading_CancellationToken_">UnassignGroupFromTenantAsync(TenantId, string, CancellationToken)</a></dt>
+    <dd><p>Unassign a group from a tenant
+Unassigns a group from a specified tenant.
+Members of the group (users, clients) will no longer have access to the tenant's data - except they are assigned directly to the tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignMappingRuleFromGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignMappingRuleFromGroupAsync_System_String_System_String_System_Threading_CancellationToken_">UnassignMappingRuleFromGroupAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Unassign a mapping rule from a group
+Unassigns a mapping rule from a group.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignMappingRuleFromTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignMappingRuleFromTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_System_Threading_CancellationToken_">UnassignMappingRuleFromTenantAsync(TenantId, string, CancellationToken)</a></dt>
+    <dd><p>Unassign a mapping rule from a tenant
+Unassigns a single mapping rule from a specified tenant without deleting the rule.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignRoleFromClientAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromClientAsync_System_String_System_String_System_Threading_CancellationToken_">UnassignRoleFromClientAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Unassign a role from a client
+Unassigns the specified role from the client. The client will no longer inherit the authorizations associated with this role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignRoleFromGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromGroupAsync_System_String_System_String_System_Threading_CancellationToken_">UnassignRoleFromGroupAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Unassign a role from a group
+Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignRoleFromMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromMappingRuleAsync_System_String_System_String_System_Threading_CancellationToken_">UnassignRoleFromMappingRuleAsync(string, string, CancellationToken)</a></dt>
+    <dd><p>Unassign a role from a mapping rule
+Unassigns a role from a mapping rule.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignRoleFromTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_System_Threading_CancellationToken_">UnassignRoleFromTenantAsync(TenantId, string, CancellationToken)</a></dt>
+    <dd><p>Unassign a role from a tenant
+Unassigns a role from a specified tenant.
+Users, Clients or Groups, that have the role assigned, will no longer have access to the
+tenant's data - unless they are assigned directly to the tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignRoleFromUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromUserAsync_System_String_Camunda_Orchestration_Sdk_Api_Username_System_Threading_CancellationToken_">UnassignRoleFromUserAsync(string, Username, CancellationToken)</a></dt>
+    <dd><p>Unassign a role from a user
+Unassigns a role from a user. The user will no longer inherit the authorizations associated with this role.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignUserFromGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_Username_System_Threading_CancellationToken_">UnassignUserFromGroupAsync(string, Username, CancellationToken)</a></dt>
+    <dd><p>Unassign a user from a group
+Unassigns a user from a group.
+The user is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignUserFromTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_Username_System_Threading_CancellationToken_">UnassignUserFromTenantAsync(TenantId, Username, CancellationToken)</a></dt>
+    <dd><p>Unassign a user from a tenant
+Unassigns the user from the specified tenant.
+The user can no longer access tenant data.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_System_Threading_CancellationToken_">UnassignUserTaskAsync(UserTaskKey, CancellationToken)</a></dt>
+    <dd><p>Unassign user task
+Removes the assignee of a task with the given key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateAuthorizationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateAuthorizationAsync_Camunda_Orchestration_Sdk_Api_AuthorizationKey_Camunda_Orchestration_Sdk_Api_AuthorizationRequest_System_Threading_CancellationToken_">UpdateAuthorizationAsync(AuthorizationKey, AuthorizationRequest, CancellationToken)</a></dt>
+    <dd><p>Update authorization
+Update the authorization with the given key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalClusterVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateGlobalClusterVariableAsync_System_String_Camunda_Orchestration_Sdk_Api_UpdateClusterVariableRequest_System_Threading_CancellationToken_">UpdateGlobalClusterVariableAsync(string, UpdateClusterVariableRequest, CancellationToken)</a></dt>
+    <dd><p>Update a global-scoped cluster variable
+Updates the value of an existing global cluster variable.
+The variable must exist, otherwise a 404 error is returned.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_GroupUpdateRequest_System_Threading_CancellationToken_">UpdateGroupAsync(string, GroupUpdateRequest, CancellationToken)</a></dt>
+    <dd><p>Update group
+Update a group with the given ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateJobAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateJobAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobUpdateRequest_System_Threading_CancellationToken_">UpdateJobAsync(JobKey, JobUpdateRequest, CancellationToken)</a></dt>
+    <dd><p>Update job
+Update a job with the given key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateMappingRuleAsync_System_String_Camunda_Orchestration_Sdk_Api_UpdateMappingRuleRequest_System_Threading_CancellationToken_">UpdateMappingRuleAsync(string, UpdateMappingRuleRequest, CancellationToken)</a></dt>
+    <dd><p>Update mapping rule
+Update a mapping rule.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_System_String_Camunda_Orchestration_Sdk_Api_RoleUpdateRequest_System_Threading_CancellationToken_">UpdateRoleAsync(string, RoleUpdateRequest, CancellationToken)</a></dt>
+    <dd><p>Update role
+Update a role with the given ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_TenantUpdateRequest_System_Threading_CancellationToken_">UpdateTenantAsync(TenantId, TenantUpdateRequest, CancellationToken)</a></dt>
+    <dd><p>Update tenant
+Updates an existing tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateTenantClusterVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_Api_TenantId_System_String_Camunda_Orchestration_Sdk_Api_UpdateClusterVariableRequest_System_Threading_CancellationToken_">UpdateTenantClusterVariableAsync(TenantId, string, UpdateClusterVariableRequest, CancellationToken)</a></dt>
+    <dd><p>Update a tenant-scoped cluster variable
+Updates the value of an existing tenant-scoped cluster variable.
+The variable must exist, otherwise a 404 error is returned.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateUserAsync_Camunda_Orchestration_Sdk_Api_Username_Camunda_Orchestration_Sdk_Api_UserUpdateRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserResult__System_Threading_CancellationToken_">UpdateUserAsync(Username, UserUpdateRequest, ConsistencyOptions&lt;UserResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Update user
+Updates a user.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskUpdateRequest_System_Threading_CancellationToken_">UpdateUserTaskAsync(UserTaskKey, UserTaskUpdateRequest, CancellationToken)</a></dt>
+    <dd><p>Update user task
+Update a user task with the given key.</p>
+</dd>
+  </dl>
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L11" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Camunda 8 Orchestration Cluster API — C# SDK
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
