@@ -128,7 +128,7 @@ jobs:
           path: _gen-drift.patch
 
       - name: Unit Tests
-        run: dotnet test --configuration Release --no-build --verbosity normal
+        run: dotnet test test/Camunda.Client.Tests --configuration Release --no-build --verbosity normal
 
       - name: Start Integration Stack
         working-directory: docker
@@ -153,7 +153,7 @@ jobs:
           [ $attempts -ge $max_attempts ] && echo "Broker not healthy" && exit 1 || true
 
       - name: Integration Tests
-        run: dotnet test --configuration Release --no-build --filter "Category=Integration" --verbosity normal || true
+        run: dotnet test test/Camunda.Client.IntegrationTests --configuration Release --no-build --verbosity normal
 
       - name: Capture Docker Logs (always)
         if: always()

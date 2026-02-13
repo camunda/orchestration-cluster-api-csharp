@@ -8,6 +8,7 @@ namespace Camunda.Client.IntegrationTests;
 /// Tests for deploying BPMN resources and verifying the deployment response.
 /// </summary>
 [Collection("Camunda")]
+[Trait("Category", "Integration")]
 public class DeploymentTests(CamundaFixture fixture)
 {
     [Fact]

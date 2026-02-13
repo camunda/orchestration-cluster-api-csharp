@@ -9,6 +9,7 @@ namespace Camunda.Client.IntegrationTests;
 /// verifies that keys round-trip through API calls correctly.
 /// </summary>
 [Collection("Camunda")]
+[Trait("Category", "Integration")]
 public class DomainKeyTests(CamundaFixture fixture)
 {
     [Fact]

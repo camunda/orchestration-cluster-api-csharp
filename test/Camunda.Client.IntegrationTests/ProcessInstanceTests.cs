@@ -8,6 +8,7 @@ namespace Camunda.Client.IntegrationTests;
 /// deploy → create instance → search → cancel.
 /// </summary>
 [Collection("Camunda")]
+[Trait("Category", "Integration")]
 public class ProcessInstanceTests(CamundaFixture fixture)
 {
     [Fact]

@@ -7,6 +7,7 @@ namespace Camunda.Client.IntegrationTests;
 /// Smoke test: verify connection to the Camunda engine.
 /// </summary>
 [Collection("Camunda")]
+[Trait("Category", "Integration")]
 public class TopologyTests(CamundaFixture fixture)
 {
     [Fact]
