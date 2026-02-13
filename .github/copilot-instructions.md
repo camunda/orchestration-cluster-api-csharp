@@ -50,10 +50,13 @@ Runtime components:
 
 ## Versioning
 
-Uses MinVer for automatic versioning from git tags:
-- Tags: `v<major>.<minor>.<patch>` (e.g. `v8.8.0`)
-- Prereleases: automatic `alpha.N` suffix on main
-- Same branching model as the JS SDK: `main` = alpha, `stable/*` = releases
+Uses [semantic-release](https://github.com/semantic-release/semantic-release) for automated versioning and publishing (same config as JS SDK):
+- Commit-driven: only `fix:`, `feat:`, `perf:`, `revert:` commits trigger a release (as patch)
+- `server:` → minor bump, `server-major:` → major bump
+- `chore:`, `docs:`, `ci:` commits produce no release
+- Branch model: `main` = alpha prereleases, `stable/*` = stable releases
+- Config: `release.config.cjs`, `commitlint.config.cjs`
+- Commit messages linted via commitlint in CI (Conventional Commits required)
 
 ## Code Style & Linting
 

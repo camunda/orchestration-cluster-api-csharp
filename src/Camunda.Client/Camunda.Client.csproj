@@ -33,9 +33,8 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-    <!-- MinVer: version from git tags (v<major>.<minor>.<patch> format) -->
-    <MinVerTagPrefix>v</MinVerTagPrefix>
-    <MinVerDefaultPreReleaseIdentifiers>alpha.0</MinVerDefaultPreReleaseIdentifiers>
+    <!-- Version: set by semantic-release during publish; 0.0.0-dev for local builds -->
+    <Version>0.0.0-dev</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,7 +46,6 @@
     <PackageReference Include="Polly" Version="8.5.2" />
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="MinVer" Version="5.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

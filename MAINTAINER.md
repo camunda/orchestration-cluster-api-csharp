@@ -193,10 +193,63 @@ Both `ci.yml` and `release.yml` support `workflow_dispatch` with a `spec_ref` in
 
 ## Release Strategy
 
-- **`main`** branch → alpha prereleases (NuGet prerelease)
-- **`stable/<major>.<minor>`** branches → stable releases (NuGet)
-- Versioning via [MinVer](https://github.com/adamralph/minver) from git tags (`v<major>.<minor>.<patch>`)
-- Same branching model as the [JS SDK](https://github.com/camunda/orchestration-cluster-api-js)
+Releases are fully automated via [semantic-release](https://github.com/semantic-release/semantic-release), matching the JS SDK's configuration.
+
+### Branch model
+
+- **`main`** → alpha prereleases (`8.9.0-alpha.1`, `8.9.0-alpha.2`, ...)
+- **`stable/<major>.<minor>`** (current) → stable releases (`8.8.0`, `8.8.1`, ...)
+- **`stable/<major>.<minor>`** (older) → maintenance releases
+
+The currently promoted stable minor is configured via the `CAMUNDA_SDK_CURRENT_STABLE_MINOR` repo variable (e.g. `8.8`).
+
+### Version bumping (mutated semver)
+
+This repo uses a "mutated semver" policy — same as the JS SDK:
+
+| Commit type | Release bump | Use case |
+|---|---|---|
+| `fix:`, `feat:`, `perf:`, `revert:` | **patch** | Normal changes |
+| `server:` | **minor** | Camunda server minor line bump (8.8 → 8.9) |
+| `server-major:` | **major** | Camunda server major line bump (8.x → 9.x) |
+| `chore:`, `docs:`, `ci:`, `style:` | no release | No NuGet publish |
+| `BREAKING CHANGE` | **patch** | Breaking changes are patch (use `server:` / `server-major:` for line bumps) |
+
+### Commit message format
+
+Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/). Enforced by commitlint in CI on pull requests.
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Examples:
+```
+fix: handle null response in process instance search
+feat: add signal broadcast support
+server: upgrade to Camunda 8.9 spec
+```
+
+### How it works
+
+1. `@semantic-release/commit-analyzer` inspects commits since the last tag
+2. If release-worthy commits exist → determines version bump
+3. `@semantic-release/exec` runs `scripts/prepare-release.sh` (updates .csproj version, builds, tests, packs)
+4. `@semantic-release/exec` runs `scripts/publish-nuget.sh` (pushes to NuGet)
+5. `@semantic-release/git` commits the version bump to the .csproj
+6. `@semantic-release/github` creates a GitHub Release with `.nupkg` assets
+
+### Configuration files
+
+- `release.config.cjs` — semantic-release config (branches, plugins, release rules)
+- `commitlint.config.cjs` — commit message linting rules
+- `scripts/next-version.mjs` — dry-run script to preview next version
+- `scripts/prepare-release.sh` — builds and packs the NuGet package
+- `scripts/publish-nuget.sh` — pushes to nuget.org
 
 ## Generator Architecture
 

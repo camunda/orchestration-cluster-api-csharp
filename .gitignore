@@ -3,6 +3,9 @@ bin/
 obj/
 nupkgs/
 
+## Node.js (semantic-release, commitlint)
+node_modules/
+
 ## IDE
 .vs/
 .vscode/

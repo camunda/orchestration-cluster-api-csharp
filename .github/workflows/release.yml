@@ -178,6 +178,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Fetch remote refs for semantic-release
+        run: |
+          set -euo pipefail
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
+          git fetch origin '+refs/notes/*:refs/notes/*' || true
+
       - name: Export stable line config
         run: |
           echo "CAMUNDA_SDK_CURRENT_STABLE_MINOR=${{ vars['CAMUNDA_SDK_CURRENT_STABLE_MINOR'] }}" >> $GITHUB_ENV
@@ -187,68 +193,48 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Determine version from MinVer
-        id: version
-        run: |
-          set -euo pipefail
-          dotnet restore
-          # MinVer computes version from git tags and branch
-          VER=$(dotnet msbuild src/Camunda.Client/Camunda.Client.csproj -getProperty:Version -t:MinVerVersion 2>/dev/null || dotnet msbuild src/Camunda.Client/Camunda.Client.csproj -getProperty:Version)
-          echo "version=$VER" >> $GITHUB_OUTPUT
-          echo "Computed version: $VER"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
 
-          # Check if this version already has a tag
-          if git tag -l "v$VER" | grep -q "v$VER"; then
-            echo "publish_needed=false" >> $GITHUB_OUTPUT
-            echo "Tag v$VER already exists; no publish needed"
-          else
-            echo "publish_needed=true" >> $GITHUB_OUTPUT
-          fi
+      - name: Install Node dependencies
+        run: npm ci
 
-      - name: Build Release
-        if: steps.version.outputs.publish_needed == 'true'
-        run: dotnet build --configuration Release
+      - name: Restore .NET dependencies
+        run: dotnet restore
 
-      - name: Smoke tests (post-build)
-        if: steps.version.outputs.publish_needed == 'true'
-        run: dotnet test --configuration Release --no-build --verbosity normal
-
-      - name: Pack NuGet
-        if: steps.version.outputs.publish_needed == 'true'
-        run: |
-          dotnet pack src/Camunda.Client/Camunda.Client.csproj \
-            --configuration Release \
-            --no-build \
-            --output nupkgs \
-            /p:PackageVersion=${{ steps.version.outputs.version }}
-
-      - name: Publish to NuGet
-        if: steps.version.outputs.publish_needed == 'true'
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: |
-          dotnet nuget push nupkgs/*.nupkg \
-            --api-key "$NUGET_API_KEY" \
-            --source https://api.nuget.org/v3/index.json \
-            --skip-duplicate
-
-      - name: Tag release
-        if: steps.version.outputs.publish_needed == 'true'
-        run: |
-          git config user.name 'github-actions'
-          git config user.email 'actions@github.com'
-          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
-          git push origin "v${{ steps.version.outputs.version }}"
-
-      - name: Create GitHub Release
-        if: steps.version.outputs.publish_needed == 'true'
+      - name: Determine next version (dry-run)
+        id: next_version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "v${{ steps.version.outputs.version }}" \
-            --title "v${{ steps.version.outputs.version }}" \
-            --generate-notes \
-            nupkgs/*.nupkg nupkgs/*.snupkg || true
+          set -e
+          node scripts/next-version.mjs > next-version.out 2>&1 || {
+            echo 'Semantic-release dry-run failed:'
+            cat next-version.out
+            exit 1
+          }
+          echo "semantic-release summary:"
+          grep -E '^(release_branch|release_channel|next_version)=' next-version.out || true
+          VER=$(grep -E '^next_version=' next-version.out | tail -n 1 | cut -d '=' -f2)
+          if [ -z "$VER" ]; then
+            echo "No release required"
+            echo "publish_needed=false" >> $GITHUB_OUTPUT
+            echo "version=" >> $GITHUB_OUTPUT
+          else
+            echo "Next version: $VER"
+            echo "publish_needed=true" >> $GITHUB_OUTPUT
+            echo "version=$VER" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish (semantic-release)
+        if: steps.next_version.outputs.publish_needed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        # See release.config.cjs. This is configured to do a push to Nuget.
+        run: npx semantic-release
 
       - name: Build Docs
         if: github.ref_name == 'main'
@@ -267,4 +253,5 @@ jobs:
         with:
           name: release-analysis
           path: |
-            nupkgs/
+            next-version.out
+            release-assets/
