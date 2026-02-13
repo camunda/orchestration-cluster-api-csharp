@@ -3,13 +3,13 @@
 ## Installation
 
 ```bash
-dotnet add package Camunda.Client
+dotnet add package Camunda.Orchestration.Sdk
 ```
 
 ## Basic Usage
 
 ```csharp
-using Camunda.Client;
+using Camunda.Orchestration.Sdk;
 
 // Reads CAMUNDA_* environment variables automatically
 using var client = Camunda.CreateClient();

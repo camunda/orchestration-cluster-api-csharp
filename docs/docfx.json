@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "files": ["src/Camunda.Client/Camunda.Client.csproj"],
+          "files": ["src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj"],
           "src": ".."
         }
       ],
@@ -40,7 +40,7 @@
     "template": ["default", "modern"],
     "globalMetadata": {
       "_appTitle": "Camunda C# SDK",
-      "_appName": "Camunda.Client",
+      "_appName": "Camunda.Orchestration.Sdk",
       "_appFooter": "Camunda 8 Orchestration Cluster API — C# SDK",
       "_enableSearch": true,
       "_disableContribution": false,

@@ -107,7 +107,7 @@ module.exports = {
     [
       '@semantic-release/git',
       {
-        assets: ['src/Camunda.Client/Camunda.Client.csproj'],
+        assets: ['src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj'],
         message:
           'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
@@ -117,7 +117,7 @@ module.exports = {
       {
         assets: ['release-assets/*.nupkg', 'release-assets/*.snupkg'],
         successComment:
-          'Released in `${nextRelease.gitTag}` (NuGet: `Camunda.Client@${nextRelease.version}`).',
+          'Released in `${nextRelease.gitTag}` (NuGet: `Camunda.Orchestration.Sdk@${nextRelease.version}`).',
       },
     ],
   ],

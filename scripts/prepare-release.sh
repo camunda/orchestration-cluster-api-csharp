@@ -4,7 +4,7 @@
 set -euo pipefail
 
 VERSION="$1"
-CSPROJ="src/Camunda.Client/Camunda.Client.csproj"
+CSPROJ="src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj"
 
 echo "Preparing release v${VERSION}"
 
@@ -16,7 +16,7 @@ echo "Updated ${CSPROJ} to version ${VERSION}"
 dotnet build --configuration Release
 
 # Smoke tests (unit only – integration tests already passed in the generate job)
-dotnet test test/Camunda.Client.Tests --configuration Release --no-build --verbosity normal
+dotnet test test/Camunda.Orchestration.Sdk.Tests --configuration Release --no-build --verbosity normal
 
 # Pack
 mkdir -p release-assets

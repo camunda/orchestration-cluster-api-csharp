@@ -17,12 +17,12 @@ bash scripts/bundle-spec.sh
 # Step 2: Generate C# client
 echo ""
 echo "--- Step 2: Generate SDK ---"
-dotnet run --project src/Camunda.Client.Generator
+dotnet run --project src/Camunda.Orchestration.Sdk.Generator
 
 # Step 3: Format generated code
 echo ""
 echo "--- Step 3: Format generated code ---"
-dotnet format src/Camunda.Client/Camunda.Client.csproj --no-restore
+dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore
 
 # Step 4: Build
 echo ""
@@ -37,7 +37,7 @@ dotnet format --verify-no-changes
 # Step 6: Unit tests (acceptance gate — integration tests are separate)
 echo ""
 echo "--- Step 6: Unit tests ---"
-dotnet test test/Camunda.Client.Tests --configuration Release --no-build
+dotnet test test/Camunda.Orchestration.Sdk.Tests --configuration Release --no-build
 
 echo ""
 echo "=== Build complete ==="

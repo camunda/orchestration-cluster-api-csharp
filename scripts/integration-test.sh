@@ -58,7 +58,7 @@ dotnet build --configuration Release
 
 echo ""
 echo "--- Running integration tests ---"
-dotnet test test/Camunda.Client.IntegrationTests \
+dotnet test test/Camunda.Orchestration.Sdk.IntegrationTests \
   --configuration Release \
   --no-build \
   --logger "console;verbosity=normal"

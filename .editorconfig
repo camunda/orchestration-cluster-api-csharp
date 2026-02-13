@@ -176,7 +176,7 @@ dotnet_diagnostic.CA1707.severity = none
 ###############################################################################
 # Generated code — relaxed rules (formatters fix what they can, rest is OK)
 ###############################################################################
-[src/Camunda.Client/Generated/**.cs]
+[src/Camunda.Orchestration.Sdk/Generated/**.cs]
 
 # Disable naming & style diagnostics for generated files
 dotnet_naming_rule.interface_should_be_begins_with_i.severity = none

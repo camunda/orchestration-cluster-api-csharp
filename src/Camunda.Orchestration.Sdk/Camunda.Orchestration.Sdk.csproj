@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Camunda.Orchestration.Sdk</RootNamespace>
+    <AssemblyName>Camunda.Orchestration.Sdk</AssemblyName>
+    <LangVersion>12</LangVersion>
+
+    <!-- XML documentation for DocFX API docs -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+
+    <!-- NuGet Package Metadata -->
+    <PackageId>Camunda.Orchestration.Sdk</PackageId>
+    <Authors>Camunda</Authors>
+    <Description>C# client SDK for the Camunda 8 Orchestration Cluster REST API. Generated from the upstream OpenAPI spec with ergonomic wrappers, unified configuration, OAuth/Basic auth, retry, backpressure management, and eventual consistency support.</Description>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/camunda/orchestration-cluster-api-csharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/camunda/orchestration-cluster-api-csharp.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>camunda;zeebe;orchestration;bpmn;workflow;sdk;openapi</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- Deterministic builds -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+
+    <!-- Source Link -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- Version: set by semantic-release during publish; 0.0.0-dev for local builds -->
+    <Version>8.9.0-alpha.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Camunda.Orchestration.Sdk.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Polly" Version="8.5.2" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+</Project>

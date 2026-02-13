@@ -7,7 +7,7 @@ Welcome to the API reference for the **Camunda 8 Orchestration Cluster API** C# 
 - [API Reference](api/index.md)
 - [Getting Started](articles/getting-started.md)
 - [GitHub Repository](https://github.com/camunda/orchestration-cluster-api-csharp)
-- [NuGet Package](https://www.nuget.org/packages/Camunda.Client)
+- [NuGet Package](https://www.nuget.org/packages/Camunda.Orchestration.Sdk)
 
 ## Overview
 

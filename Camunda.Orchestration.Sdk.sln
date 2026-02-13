@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2EAEEF45-A409-41C9-B41F-4BD401213602}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda.Orchestration.Sdk", "src\Camunda.Orchestration.Sdk\Camunda.Orchestration.Sdk.csproj", "{D9BB6E1A-DBC3-41B6-A7FF-F82CFFF719D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda.Orchestration.Sdk.Generator", "src\Camunda.Orchestration.Sdk.Generator\Camunda.Orchestration.Sdk.Generator.csproj", "{6D536E6E-1709-444A-AA55-FB8752CDEC20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2E975797-3977-444E-9D63-43F992F1CA66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda.Orchestration.Sdk.Tests", "test\Camunda.Orchestration.Sdk.Tests\Camunda.Orchestration.Sdk.Tests.csproj", "{49121031-7032-4C11-9ECB-1AE8EC374F20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda.Orchestration.Sdk.IntegrationTests", "test\Camunda.Orchestration.Sdk.IntegrationTests\Camunda.Orchestration.Sdk.IntegrationTests.csproj", "{FE87B5D4-E0F6-4BD0-9CEE-64E0D0390448}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9BB6E1A-DBC3-41B6-A7FF-F82CFFF719D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9BB6E1A-DBC3-41B6-A7FF-F82CFFF719D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9BB6E1A-DBC3-41B6-A7FF-F82CFFF719D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9BB6E1A-DBC3-41B6-A7FF-F82CFFF719D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D536E6E-1709-444A-AA55-FB8752CDEC20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D536E6E-1709-444A-AA55-FB8752CDEC20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D536E6E-1709-444A-AA55-FB8752CDEC20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D536E6E-1709-444A-AA55-FB8752CDEC20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49121031-7032-4C11-9ECB-1AE8EC374F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49121031-7032-4C11-9ECB-1AE8EC374F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49121031-7032-4C11-9ECB-1AE8EC374F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49121031-7032-4C11-9ECB-1AE8EC374F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE87B5D4-E0F6-4BD0-9CEE-64E0D0390448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE87B5D4-E0F6-4BD0-9CEE-64E0D0390448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE87B5D4-E0F6-4BD0-9CEE-64E0D0390448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE87B5D4-E0F6-4BD0-9CEE-64E0D0390448}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D9BB6E1A-DBC3-41B6-A7FF-F82CFFF719D8} = {2EAEEF45-A409-41C9-B41F-4BD401213602}
+		{6D536E6E-1709-444A-AA55-FB8752CDEC20} = {2EAEEF45-A409-41C9-B41F-4BD401213602}
+		{49121031-7032-4C11-9ECB-1AE8EC374F20} = {2E975797-3977-444E-9D63-43F992F1CA66}
+		{FE87B5D4-E0F6-4BD0-9CEE-64E0D0390448} = {2E975797-3977-444E-9D63-43F992F1CA66}
+	EndGlobalSection
+EndGlobal

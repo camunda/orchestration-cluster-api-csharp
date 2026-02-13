@@ -10,14 +10,14 @@ This repo generates a C# SDK from a multi-file OpenAPI spec sourced from the Cam
 - Only fetch spec: `bash scripts/fetch-spec.sh`
 - Only fetch spec at a pinned ref: `SPEC_REF=my-sha bash scripts/fetch-spec.sh`
 - Only bundle spec: `bash scripts/bundle-spec.sh`
-- Only regenerate SDK sources: `dotnet run --project src/Camunda.Client.Generator`
+- Only regenerate SDK sources: `dotnet run --project src/Camunda.Orchestration.Sdk.Generator`
 
 Generation pipeline (high level):
 
 1. `scripts/fetch-spec.sh` → sparse clone upstream spec YAML under `external-spec/upstream/...`
 2. `scripts/bundle-spec.sh` → produce `external-spec/bundled/rest-api.bundle.json` (via swagger-cli)
-3. `dotnet run --project src/Camunda.Client.Generator` → generate `src/Camunda.Client/Generated/*`
-4. `dotnet format src/Camunda.Client/Camunda.Client.csproj --no-restore` → auto-fix generated code style
+3. `dotnet run --project src/Camunda.Orchestration.Sdk.Generator` → generate `src/Camunda.Orchestration.Sdk/Generated/*`
+4. `dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore` → auto-fix generated code style
 5. `dotnet build` → compile library + tests
 6. `dotnet format --verify-no-changes` → lint gate (fails if any violations remain)
 7. `dotnet test` → run unit tests
@@ -25,11 +25,11 @@ Generation pipeline (high level):
 ## Where things live
 
 - Bundled spec input to the generator: `external-spec/bundled/rest-api.bundle.json`
-- Generator output (checked/used by build): `src/Camunda.Client/Generated/`
-- Generator logic: `src/Camunda.Client.Generator/CSharpClientGenerator.cs`
-- Runtime infrastructure: `src/Camunda.Client/Runtime/`
-- Main client class: `src/Camunda.Client/CamundaClient.cs`
-- Unit tests: `test/Camunda.Client.Tests/`
+- Generator output (checked/used by build): `src/Camunda.Orchestration.Sdk/Generated/`
+- Generator logic: `src/Camunda.Orchestration.Sdk.Generator/CSharpClientGenerator.cs`
+- Runtime infrastructure: `src/Camunda.Orchestration.Sdk/Runtime/`
+- Main client class: `src/Camunda.Orchestration.Sdk/CamundaClient.cs`
+- Unit tests: `test/Camunda.Orchestration.Sdk.Tests/`
 - Build scripts: `scripts/`
 - CI/CD: `.github/workflows/ci.yml` and `.github/workflows/release.yml`
 
@@ -62,14 +62,14 @@ Uses [semantic-release](https://github.com/semantic-release/semantic-release) fo
 
 - Style rules: `.editorconfig` (Allman braces, namespace-scoped usings, PascalCase types, _camelCase private fields)
 - Enforcement: `Directory.Build.props` sets `EnforceCodeStyleInBuild=true` and `AnalysisLevel=latest-recommended`
-- Auto-fix generated code: `dotnet format src/Camunda.Client/Camunda.Client.csproj --no-restore`
+- Auto-fix generated code: `dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore`
 - Lint check (CI gate): `dotnet format --verify-no-changes`
-- Generated code (`src/Camunda.Client/Generated/`) has relaxed style rules (severity `none`)
+- Generated code (`src/Camunda.Orchestration.Sdk/Generated/`) has relaxed style rules (severity `none`)
 
 ## Quick debug checklist
 
 1. Confirm the build works: `dotnet build`
 2. Run tests: `dotnet test`
 3. Lint check: `dotnet format --verify-no-changes`
-4. Check generated output: `ls src/Camunda.Client/Generated/`
+4. Check generated output: `ls src/Camunda.Orchestration.Sdk/Generated/`
 5. Inspect spec: `cat external-spec/bundled/rest-api.bundle.json | head -100`

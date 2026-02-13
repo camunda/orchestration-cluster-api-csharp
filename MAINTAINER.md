@@ -42,13 +42,13 @@ SPEC_REF=my-branch bash scripts/fetch-spec.sh
 bash scripts/bundle-spec.sh
 
 # Generate C# SDK from bundled spec
-dotnet run --project src/Camunda.Client.Generator
+dotnet run --project src/Camunda.Orchestration.Sdk.Generator
 
 # Build
 dotnet build
 
 # Unit tests (acceptance gate)
-dotnet test test/Camunda.Client.Tests
+dotnet test test/Camunda.Orchestration.Sdk.Tests
 
 # Integration tests (requires Docker)
 bash scripts/integration-test.sh
@@ -58,8 +58,8 @@ bash scripts/integration-test.sh
 
 1. `scripts/fetch-spec.sh` → sparse clone upstream spec YAML under `external-spec/upstream/`
 2. `scripts/bundle-spec.sh` → produce `external-spec/bundled/rest-api.bundle.json` (via swagger-cli)
-3. `dotnet run --project src/Camunda.Client.Generator` → generate `src/Camunda.Client/Generated/*`
-4. `dotnet format src/Camunda.Client/Camunda.Client.csproj --no-restore` → auto-fix generated code style
+3. `dotnet run --project src/Camunda.Orchestration.Sdk.Generator` → generate `src/Camunda.Orchestration.Sdk/Generated/*`
+4. `dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore` → auto-fix generated code style
 5. `dotnet build` → compile library + tests
 6. `dotnet format --verify-no-changes` → lint gate (ensures all code is compliant)
 7. `dotnet test` → run unit tests
@@ -73,13 +73,13 @@ bash scripts/integration-test.sh
 │   └── bundled/              # Bundled single JSON
 ├── scripts/                  # Build pipeline scripts
 ├── src/
-│   ├── Camunda.Client/       # Main SDK library
+│   ├── Camunda.Orchestration.Sdk/       # Main SDK library
 │   │   ├── Runtime/          # Auth, retry, backpressure, config
 │   │   └── Generated/        # Auto-generated models & client methods
-│   └── Camunda.Client.Generator/  # Code generator (reads OpenAPI, emits C#)
+│   └── Camunda.Orchestration.Sdk.Generator/  # Code generator (reads OpenAPI, emits C#)
 └── test/
-    ├── Camunda.Client.Tests/             # Unit tests (build gate)
-    └── Camunda.Client.IntegrationTests/  # Integration tests (live engine)
+    ├── Camunda.Orchestration.Sdk.Tests/             # Unit tests (build gate)
+    └── Camunda.Orchestration.Sdk.IntegrationTests/  # Integration tests (live engine)
 ```
 
 ## Testing
@@ -89,7 +89,7 @@ bash scripts/integration-test.sh
 Unit tests run as part of the build pipeline and serve as acceptance criteria during code generation. They verify serialization, configuration, domain key constraints, and generated model correctness.
 
 ```bash
-dotnet test test/Camunda.Client.Tests
+dotnet test test/Camunda.Orchestration.Sdk.Tests
 ```
 
 ### Integration Tests
@@ -128,7 +128,7 @@ Code style is enforced via `.editorconfig` rules and Roslyn analyzers.
 
 ### Configuration files
 
-- **`.editorconfig`** — C# formatting, naming conventions, code style preferences, and analyzer severity overrides. Generated code under `src/Camunda.Client/Generated/` has relaxed rules (severity `none`) since it is auto-generated.
+- **`.editorconfig`** — C# formatting, naming conventions, code style preferences, and analyzer severity overrides. Generated code under `src/Camunda.Orchestration.Sdk/Generated/` has relaxed rules (severity `none`) since it is auto-generated.
 - **`Directory.Build.props`** — Solution-wide MSBuild properties: `EnforceCodeStyleInBuild=true` activates Roslyn style analysis during `dotnet build`, and `AnalysisLevel=latest-recommended` uses the latest recommended analyzer rule set.
 
 ### Key style rules
@@ -149,7 +149,7 @@ dotnet format
 dotnet format --verify-no-changes
 
 # Auto-fix only the generated project
-dotnet format src/Camunda.Client/Camunda.Client.csproj --no-restore
+dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore
 ```
 
 The build scripts (`build.sh`, `build-local.sh`) automatically run `dotnet format` on generated code and verify the full solution with `--verify-no-changes`. The CI workflow includes matching steps.
@@ -253,7 +253,7 @@ server: upgrade to Camunda 8.9 spec
 
 ## Generator Architecture
 
-The generator (`src/Camunda.Client.Generator/CSharpClientGenerator.cs`) reads the bundled OpenAPI spec and emits two files:
+The generator (`src/Camunda.Orchestration.Sdk.Generator/CSharpClientGenerator.cs`) reads the bundled OpenAPI spec and emits two files:
 
 - `Models.Generated.cs` — model classes, enums, domain key types
 - `CamundaClient.Generated.cs` — async API methods (one per OpenAPI operation)

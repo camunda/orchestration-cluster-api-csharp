@@ -8,7 +8,7 @@ DOCS_DIR="$REPO_ROOT/docs"
 
 # Ensure the library builds with XML doc comments
 echo "[docs] Building library with XML documentation..."
-dotnet build "$REPO_ROOT/src/Camunda.Client/Camunda.Client.csproj" --configuration Release
+dotnet build "$REPO_ROOT/src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj" --configuration Release
 
 # Install docfx as a local tool if not already installed
 if ! dotnet tool list --local 2>/dev/null | grep -q docfx; then
@@ -31,9 +31,9 @@ Browse the auto-generated API documentation for the Camunda C# SDK.
 
 ## Namespaces
 
-- **Camunda.Client** — Main SDK namespace containing `CamundaClient` and the `Camunda` factory
-- **Camunda.Client.Runtime** — Configuration, authentication, retry, backpressure, and error types
-- **Camunda.Client.Api** — Auto-generated model classes and enums from the OpenAPI spec
+- **Camunda.Orchestration.Sdk** — Main SDK namespace containing `CamundaClient` and the `Camunda` factory
+- **Camunda.Orchestration.Sdk.Runtime** — Configuration, authentication, retry, backpressure, and error types
+- **Camunda.Orchestration.Sdk.Api** — Auto-generated model classes and enums from the OpenAPI spec
 EOF
 
 echo "[docs] Building documentation site..."

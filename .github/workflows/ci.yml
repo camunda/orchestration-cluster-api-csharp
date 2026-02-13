@@ -97,10 +97,10 @@ jobs:
           bash scripts/bundle-spec.sh
 
       - name: Generate SDK
-        run: dotnet run --project src/Camunda.Client.Generator
+        run: dotnet run --project src/Camunda.Orchestration.Sdk.Generator
 
       - name: Format Generated Code
-        run: dotnet format src/Camunda.Client/Camunda.Client.csproj --no-restore
+        run: dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
@@ -128,7 +128,7 @@ jobs:
           path: _gen-drift.patch
 
       - name: Unit Tests
-        run: dotnet test test/Camunda.Client.Tests --configuration Release --no-build --verbosity normal
+        run: dotnet test test/Camunda.Orchestration.Sdk.Tests --configuration Release --no-build --verbosity normal
 
       - name: Start Integration Stack
         working-directory: docker
@@ -153,7 +153,7 @@ jobs:
           [ $attempts -ge $max_attempts ] && echo "Broker not healthy" && exit 1 || true
 
       - name: Integration Tests
-        run: dotnet test test/Camunda.Client.IntegrationTests --configuration Release --no-build --verbosity normal
+        run: dotnet test test/Camunda.Orchestration.Sdk.IntegrationTests --configuration Release --no-build --verbosity normal
 
       - name: Capture Docker Logs (always)
         if: always()

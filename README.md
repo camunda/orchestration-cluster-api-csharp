@@ -1,6 +1,6 @@
 # Camunda 8 Orchestration Cluster API — C# SDK
 
-[![NuGet](https://img.shields.io/nuget/v/Camunda.Client)](https://www.nuget.org/packages/Camunda.Client)
+[![NuGet](https://img.shields.io/nuget/v/Camunda.Orchestration.Sdk)](https://www.nuget.org/packages/Camunda.Orchestration.Sdk)
 [![License](https://img.shields.io/github/license/camunda/orchestration-cluster-api-csharp)](LICENSE)
 
 C# client SDK for the [Camunda 8 Orchestration Cluster REST API](https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/).
@@ -10,14 +10,14 @@ Unified configuration, OAuth/Basic auth, automatic retry, backpressure managemen
 ## Installation
 
 ```bash
-dotnet add package Camunda.Client
+dotnet add package Camunda.Orchestration.Sdk
 ```
 
 ## Quick Start
 
 ```csharp
-using Camunda.Client;
-using Camunda.Client.Api;
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Api;
 
 // Reads CAMUNDA_* environment variables automatically
 using var client = Camunda.CreateClient();
@@ -159,7 +159,7 @@ builder.Services.AddSingleton(sp =>
 });
 ```
 
-All SDK log entries appear alongside your application logs with proper category names (`Camunda.Client.CamundaClient`, `Camunda.Client.JobWorker.*`, etc.).
+All SDK log entries appear alongside your application logs with proper category names (`Camunda.Orchestration.Sdk.CamundaClient`, `Camunda.Orchestration.Sdk.JobWorker.*`, etc.).
 
 ### Serilog Integration
 
@@ -200,7 +200,7 @@ using var client = Camunda.CreateClient(new CamundaOptions
 All domain identifiers (process definition keys, job keys, user task keys, etc.) are `readonly record struct` types rather than plain strings. This prevents accidentally mixing different key types at compile time — the same pattern as the JS SDK's branded types.
 
 ```csharp
-using Camunda.Client.Api;
+using Camunda.Orchestration.Sdk.Api;
 
 // Lift a raw value into the correct nominal type
 var defKey = ProcessDefinitionKey.AssumeExists("2251799813686749");
@@ -230,7 +230,7 @@ Camunda API operations use dynamic `variables` and `customHeaders` payloads. By 
 Assign any DTO or dictionary to the `Variables` property — `System.Text.Json` serializes the runtime type automatically:
 
 ```csharp
-using Camunda.Client.Api;
+using Camunda.Orchestration.Sdk.Api;
 
 // Define your application domain models
 public record OrderInput(string OrderId, decimal Amount);
@@ -254,7 +254,7 @@ await client.CompleteJobAsync(jobKey, new CompleteJobRequest
 Use `DeserializeAs<T>()` to extract typed DTOs from API responses:
 
 ```csharp
-using Camunda.Client.Runtime;  // for DeserializeAs<T>()
+using Camunda.Orchestration.Sdk.Runtime;  // for DeserializeAs<T>()
 
 public record OrderResult(bool Processed, string InvoiceNumber);
 public record JobHeaders(string Region, int Priority);
@@ -283,9 +283,9 @@ Job workers subscribe to a specific job type and process jobs as they become ava
 ### Basic Worker
 
 ```csharp
-using Camunda.Client;
-using Camunda.Client.Runtime;
-using Camunda.Client.Api;
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Runtime;
+using Camunda.Orchestration.Sdk.Api;
 
 using var client = Camunda.CreateClient();
 
