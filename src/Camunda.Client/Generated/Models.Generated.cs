@@ -115,7 +115,7 @@ public sealed class ActivatedJobResult
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
 }
 
@@ -2829,7 +2829,7 @@ public sealed class BaseProcessInstanceFilterFields
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
 }
 
@@ -4132,7 +4132,7 @@ public sealed class CreateProcessInstanceResult
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
 }
 
@@ -10101,7 +10101,7 @@ public sealed class ProcessDefinitionStatisticsFilter
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
     /// <summary>
     /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
@@ -10332,7 +10332,7 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
@@ -10431,7 +10431,7 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Client.Api.TenantId.AssumeExists(tenantId); }
@@ -10732,7 +10732,7 @@ public sealed class ProcessInstanceFilterFields
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
 }
 
@@ -11169,7 +11169,7 @@ public sealed class ProcessInstanceResult
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
 }
 
@@ -12276,13 +12276,6 @@ public readonly record struct Tag : global::Camunda.Client.Runtime.ICamundaKey
 }
 
 /// <summary>
-/// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
-/// </summary>
-public sealed class TagSet
-{
-}
-
-/// <summary>
 /// TenantClientResult
 /// </summary>
 public sealed class TenantClientResult
@@ -13269,7 +13262,7 @@ public sealed class UserTaskFilter
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
 }
 
@@ -13518,7 +13511,7 @@ public sealed class UserTaskResult
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public TagSet? Tags { get; set; }
+    public List<Tag>? Tags { get; set; }
 
 }
 

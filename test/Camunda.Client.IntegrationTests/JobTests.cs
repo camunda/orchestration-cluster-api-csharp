@@ -21,31 +21,38 @@ public class JobTests(CamundaFixture fixture)
         try
         {
             // Activate job (with retry — may take a moment for the job to appear)
+            // Filter to only activate jobs belonging to THIS process instance to
+            // avoid picking up leftover jobs from previous test runs.
             ActivateJobsResponse? activation = null;
+            ActivatedJobResult? targetJob = null;
             var deadline = DateTimeOffset.UtcNow.AddSeconds(30);
             while (DateTimeOffset.UtcNow < deadline)
             {
                 activation = await fixture.Client.ActivateJobsAsync(new JobActivationRequest
                 {
                     Type = "integration-test-job",
-                    MaxJobsToActivate = 1,
+                    MaxJobsToActivate = 10,
                     Timeout = 60_000,
                     Worker = "integration-test-worker",
                 });
 
-                if (activation?.Jobs?.Count > 0 == true)
+                if (activation?.Jobs != null)
+                {
+                    targetJob = activation.Jobs.FirstOrDefault(
+                        j => j.ProcessInstanceKey.ToString() == processInstanceKey.ToString());
+                }
+
+                if (targetJob != null)
                     break;
 
                 await Task.Delay(500);
             }
 
-            activation.Should().NotBeNull();
-            activation!.Jobs.Should().NotBeNullOrEmpty("a job should be available for activation");
+            targetJob.Should().NotBeNull("a job for the created process instance should be available");
 
-            var job = activation.Jobs[0];
-            job.Type.Should().Be("integration-test-job");
+            targetJob!.Type.Should().Be("integration-test-job");
 
-            var jobKey = job.JobKey;
+            var jobKey = targetJob.JobKey;
 
             // Complete the job
             await fixture.Client.CompleteJobAsync(jobKey, new JobCompletionRequest

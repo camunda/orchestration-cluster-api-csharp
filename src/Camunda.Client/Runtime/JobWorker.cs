@@ -142,7 +142,7 @@ public sealed class ActivatedJob
     public UserTaskProperties? UserTask => _raw.UserTask;
 
     /// <summary>Tags associated with this job.</summary>
-    public TagSet? Tags => _raw.Tags;
+    public List<Tag>? Tags => _raw.Tags;
 
     /// <summary>
     /// Deserialize the job's <c>variables</c> payload into a strongly-typed DTO.

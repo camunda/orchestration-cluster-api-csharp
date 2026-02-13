@@ -398,6 +398,10 @@ internal static class CSharpClientGenerator
         {
             var typeName = SanitizeTypeName(name);
 
+            // Skip array-type component schemas — they are resolved inline in MapType
+            if (schema.Type == "array")
+                continue;
+
             // Skip schemas that are just primitive scalars (e.g. *Key types that are just strings)
             if (IsPrimitiveSchemaResolved(schema, doc))
             {
@@ -940,9 +944,19 @@ internal static class CSharpClientGenerator
     {
         if (schema == null)
             return "object";
-        // $ref to a named schema — always use the type name (including primitive wrappers)
+        // $ref to a named schema — resolve array-type schemas inline as List<ItemType>
         if (schema.Reference != null)
+        {
+            if (doc != null
+                && doc.Components?.Schemas != null
+                && doc.Components.Schemas.TryGetValue(schema.Reference.Id, out var resolved)
+                && resolved.Type == "array")
+            {
+                return $"List<{MapType(resolved.Items, doc)}>";
+            }
+
             return SanitizeTypeName(schema.Reference.Id);
+        }
 
         // allOf with a single $ref (common pattern: allOf: [{$ref: "..."}] + description overlay)
         if (schema.AllOf is { Count: > 0 } && schema.Type == null)

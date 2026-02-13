@@ -1,6 +1,6 @@
 services:
   camunda:
-    image: camunda/camunda:${CAMUNDA_VERSION}
+    image: camunda/camunda:${CAMUNDA_VERSION:-8.9.0-alpha4}
     container_name: camunda-engine
     environment:
       SPRING_PROFILES_ACTIVE: 'broker,consolidated-auth'

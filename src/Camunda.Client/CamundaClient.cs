@@ -141,7 +141,11 @@ public partial class CamundaClient : IDisposable
     {
         _logger.LogDebug("HTTP {Method} {Path}", method, path);
 
-        using var request = new HttpRequestMessage(method, path);
+        // Strip leading '/' so the path resolves relative to BaseAddress.
+        // Without this, "/topology" would be absolute from the host root,
+        // overriding the "/v2" segment of the base address.
+        var relativePath = path.TrimStart('/');
+        using var request = new HttpRequestMessage(method, relativePath);
 
         if (body != null)
         {
@@ -186,7 +190,8 @@ public partial class CamundaClient : IDisposable
     {
         _logger.LogDebug("HTTP {Method} {Path}", method, path);
 
-        using var request = new HttpRequestMessage(method, path);
+        var relativePath = path.TrimStart('/');
+        using var request = new HttpRequestMessage(method, relativePath);
 
         if (body != null)
         {
@@ -216,7 +221,8 @@ public partial class CamundaClient : IDisposable
     {
         _logger.LogDebug("HTTP POST {Path} (multipart)", path);
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, path) { Content = content };
+        var relativePath = path.TrimStart('/');
+        using var request = new HttpRequestMessage(HttpMethod.Post, relativePath) { Content = content };
         var response = await _httpClient.SendAsync(request, ct);
 
         if (!response.IsSuccessStatusCode)

@@ -357,7 +357,7 @@ public class JobWorkerTests
         {
             Config = new Dictionary<string, string>
             {
-                ["CAMUNDA_REST_ADDRESS"] = "http://localhost:26500/v2",
+                ["CAMUNDA_REST_ADDRESS"] = "http://localhost:8080/v2",
                 ["CAMUNDA_AUTH_STRATEGY"] = "NONE",
             },
         });
