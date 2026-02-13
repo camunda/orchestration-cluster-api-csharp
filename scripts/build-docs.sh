@@ -6,6 +6,9 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DOCS_DIR="$REPO_ROOT/docs"
 
+# Restore local .NET tools (docfx)
+dotnet tool restore
+
 # Ensure the library builds with XML doc comments
 echo "[docs] Building library with XML documentation..."
 dotnet build "$REPO_ROOT/src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj" --configuration Release
