@@ -154,6 +154,28 @@ Reports a business error (i.e. non-technical) that occurs while processing a job
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ThrowJobErrorAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobErrorRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">static async Task ThrowJobErrorExample()
+{
+    using var client = Camunda.CreateClient();
+
+    // Activate a job and get its JobKey from the response
+    var activated = await client.ActivateJobsAsync(new JobActivationRequest
+    {
+        Type = &quot;send-email&quot;,
+        MaxJobsToActivate = 1,
+        Timeout = 300_000,
+        Worker = &quot;email-worker-1&quot;
+    });
+    var jobKey = activated.Jobs[0].JobKey;
+
+    await client.ThrowJobErrorAsync(jobKey, new JobErrorRequest
+    {
+        ErrorCode = &quot;INVALID_ADDRESS&quot;,
+        ErrorMessage = &quot;Recipient email address is invalid&quot;
+    });
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ThrowJobErrorAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobErrorRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: throwJobError</p>

@@ -14695,6 +14695,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.JobActivationRequest.RequestTimeout
   fullName: Camunda.Orchestration.Sdk.Api.JobActivationRequest.RequestTimeout
   nameWithType: JobActivationRequest.RequestTimeout
+- uid: Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantFilter
+  name: TenantFilter
+  href: api/Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantFilter.html#Camunda_Orchestration_Sdk_Api_JobActivationRequest_TenantFilter
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantFilter
+  fullName: Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantFilter
+  nameWithType: JobActivationRequest.TenantFilter
+- uid: Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantFilter*
+  name: TenantFilter
+  href: api/Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantFilter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantFilter
+  fullName: Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantFilter
+  nameWithType: JobActivationRequest.TenantFilter
 - uid: Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantIds
   name: TenantIds
   href: api/Camunda.Orchestration.Sdk.Api.JobActivationRequest.TenantIds.html#Camunda_Orchestration_Sdk_Api_JobActivationRequest_TenantIds
@@ -24529,6 +24541,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.TenantFilter.TenantId
   fullName: Camunda.Orchestration.Sdk.Api.TenantFilter.TenantId
   nameWithType: TenantFilter.TenantId
+- uid: Camunda.Orchestration.Sdk.Api.TenantFilterEnum
+  name: TenantFilterEnum
+  href: api/Camunda.Orchestration.Sdk.Api.TenantFilterEnum.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.TenantFilterEnum
+  fullName: Camunda.Orchestration.Sdk.Api.TenantFilterEnum
+  nameWithType: TenantFilterEnum
+- uid: Camunda.Orchestration.Sdk.Api.TenantFilterEnum.ASSIGNED
+  name: ASSIGNED
+  href: api/Camunda.Orchestration.Sdk.Api.TenantFilterEnum.html#Camunda_Orchestration_Sdk_Api_TenantFilterEnum_ASSIGNED
+  commentId: F:Camunda.Orchestration.Sdk.Api.TenantFilterEnum.ASSIGNED
+  fullName: Camunda.Orchestration.Sdk.Api.TenantFilterEnum.ASSIGNED
+  nameWithType: TenantFilterEnum.ASSIGNED
+- uid: Camunda.Orchestration.Sdk.Api.TenantFilterEnum.PROVIDED
+  name: PROVIDED
+  href: api/Camunda.Orchestration.Sdk.Api.TenantFilterEnum.html#Camunda_Orchestration_Sdk_Api_TenantFilterEnum_PROVIDED
+  commentId: F:Camunda.Orchestration.Sdk.Api.TenantFilterEnum.PROVIDED
+  fullName: Camunda.Orchestration.Sdk.Api.TenantFilterEnum.PROVIDED
+  nameWithType: TenantFilterEnum.PROVIDED
 - uid: Camunda.Orchestration.Sdk.Api.TenantGroupResult
   name: TenantGroupResult
   href: api/Camunda.Orchestration.Sdk.Api.TenantGroupResult.html

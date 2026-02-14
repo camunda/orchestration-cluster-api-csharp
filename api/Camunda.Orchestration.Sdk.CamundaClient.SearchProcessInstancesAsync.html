@@ -154,6 +154,19 @@ Search for process instances based on given criteria.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchProcessInstancesAsync_Camunda_Orchestration_Sdk_Api_SearchProcessInstancesRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchProcessInstancesResponse__System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">static async Task SearchProcessInstancesExample()
+{
+    using var client = Camunda.CreateClient();
+
+    var result = await client.SearchProcessInstancesAsync(new SearchProcessInstancesRequest());
+
+    foreach (var instance in result.Items)
+    {
+        Console.WriteLine($&quot;{instance.ProcessInstanceKey} — {instance.State}&quot;);
+    }
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchProcessInstancesAsync_Camunda_Orchestration_Sdk_Api_SearchProcessInstancesRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchProcessInstancesResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchProcessInstances</p>

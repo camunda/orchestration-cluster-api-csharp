@@ -159,6 +159,22 @@ and calls <a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDe
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeployResourcesFromFilesAsync_System_String___System_String_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">static async Task DeployResourcesFromFilesExample()
+{
+    using var client = Camunda.CreateClient();
+
+    var result = await client.DeployResourcesFromFilesAsync(
+        new[] { &quot;order-process.bpmn&quot;, &quot;email-connector.bpmn&quot; }
+    );
+
+    Console.WriteLine($&quot;Deployment key: {result.DeploymentKey}&quot;);
+    foreach (var process in result.Processes)
+    {
+        Console.WriteLine($&quot;  Process: {process.ProcessDefinitionId} v{process.ProcessDefinitionVersion}&quot;);
+    }
+}
+</code></pre>
 
 
 <h4 class="section">Exceptions</h4>

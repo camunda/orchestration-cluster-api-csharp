@@ -154,6 +154,30 @@ Complete a job with the given payload, which allows completing the associated se
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CompleteJobAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobCompletionRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">static async Task CompleteJobExample()
+{
+    using var client = Camunda.CreateClient();
+
+    // Activate jobs and get a JobKey from the response
+    var activated = await client.ActivateJobsAsync(new JobActivationRequest
+    {
+        Type = &quot;send-email&quot;,
+        MaxJobsToActivate = 1,
+        Timeout = 300_000,
+        Worker = &quot;email-worker-1&quot;
+    });
+    var jobKey = activated.Jobs[0].JobKey;
+
+    await client.CompleteJobAsync(jobKey, new JobCompletionRequest
+    {
+        Variables = new Dictionary&lt;string, object&gt;
+        {
+            [&quot;emailSent&quot;] = true
+        }
+    });
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CompleteJobAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobCompletionRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: completeJob</p>

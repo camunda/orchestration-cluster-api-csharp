@@ -154,6 +154,21 @@ Cancels a running process instance. As a cancellation includes more than just th
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_CancelProcessInstanceRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">static async Task CancelProcessInstanceExample()
+{
+    using var client = Camunda.CreateClient();
+
+    // Create a process instance and get its key from the response
+    var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
+    {
+        ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&quot;order-process&quot;),
+    });
+
+    // Cancel the process instance using the key from the creation response
+    await client.CancelProcessInstanceAsync(created.ProcessInstanceKey, new CancelProcessInstanceRequest());
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_CancelProcessInstanceRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: cancelProcessInstance</p>

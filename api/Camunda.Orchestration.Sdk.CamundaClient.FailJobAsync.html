@@ -154,6 +154,29 @@ Mark the job as failed.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_FailJobAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobFailRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">static async Task FailJobExample()
+{
+    using var client = Camunda.CreateClient();
+
+    // Activate a job and get its JobKey from the response
+    var activated = await client.ActivateJobsAsync(new JobActivationRequest
+    {
+        Type = &quot;send-email&quot;,
+        MaxJobsToActivate = 1,
+        Timeout = 300_000,
+        Worker = &quot;email-worker-1&quot;
+    });
+    var jobKey = activated.Jobs[0].JobKey;
+
+    await client.FailJobAsync(jobKey, new JobFailRequest
+    {
+        Retries = 2,
+        ErrorMessage = &quot;SMTP server unreachable&quot;,
+        RetryBackOff = 30_000 // 30 seconds
+    });
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_FailJobAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobFailRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: failJob</p>

@@ -152,6 +152,25 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_Api_JobActivationRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">static async Task ActivateJobsExample()
+{
+    using var client = Camunda.CreateClient();
+
+    var response = await client.ActivateJobsAsync(new JobActivationRequest
+    {
+        Type = &quot;send-email&quot;,
+        MaxJobsToActivate = 10,
+        Timeout = 300_000, // 5 minutes
+        Worker = &quot;email-worker-1&quot;
+    });
+
+    foreach (var job in response.Jobs)
+    {
+        Console.WriteLine($&quot;Job {job.JobKey}: {job.Type}&quot;);
+    }
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_Api_JobActivationRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: activateJobs</p>
