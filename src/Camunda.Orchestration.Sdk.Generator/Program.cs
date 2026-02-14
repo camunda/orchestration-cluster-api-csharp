@@ -16,6 +16,7 @@ internal static class Program
         }
 
         var specPath = Path.Combine(repoRoot, "external-spec", "bundled", "rest-api.bundle.json");
+        var metadataPath = Path.Combine(repoRoot, "external-spec", "bundled", "spec-metadata.json");
         var outputDir = Path.Combine(repoRoot, "src", "Camunda.Orchestration.Sdk", "Generated");
 
         // Allow overriding spec path via CLI args or env
@@ -27,13 +28,20 @@ internal static class Program
         if (!File.Exists(specPath))
         {
             Console.Error.WriteLine($"[generator] Bundled spec not found at {specPath}");
-            Console.Error.WriteLine("[generator] Run the spec fetch/bundle step first (see scripts/fetch-and-bundle-spec.sh)");
+            Console.Error.WriteLine("[generator] Run the spec fetch/bundle step first (see scripts/bundle-spec.sh)");
+            return 1;
+        }
+
+        if (!File.Exists(metadataPath))
+        {
+            Console.Error.WriteLine($"[generator] Spec metadata not found at {metadataPath}");
+            Console.Error.WriteLine("[generator] Run the spec bundle step first (see scripts/bundle-spec.sh)");
             return 1;
         }
 
         try
         {
-            CSharpClientGenerator.Generate(specPath, outputDir);
+            CSharpClientGenerator.Generate(specPath, metadataPath, outputDir);
             Console.WriteLine("[generator] Generation completed successfully");
             return 0;
         }
