@@ -86,9 +86,7 @@ jobs:
         run: npm ci
 
       - name: Fetch & Bundle spec
-        run: |
-          bash scripts/fetch-spec.sh
-          bash scripts/bundle-spec.sh
+        run: bash scripts/bundle-spec.sh
 
       - name: Generate SDK
         run: dotnet run --project src/Camunda.Orchestration.Sdk.Generator

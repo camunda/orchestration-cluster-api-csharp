@@ -7,20 +7,26 @@ This repo generates a C# SDK from a multi-file OpenAPI spec sourced from the Cam
 - Build (fetches upstream spec): `bash scripts/build.sh`
 - Build pinned to a specific spec ref: `SPEC_REF=my-branch bash scripts/build.sh`
 - Build using already-fetched spec (fast local iteration): `bash scripts/build-local.sh`
-- Only fetch spec: `bash scripts/fetch-spec.sh`
-- Only fetch spec at a pinned ref: `SPEC_REF=my-sha bash scripts/fetch-spec.sh`
-- Only bundle spec: `bash scripts/bundle-spec.sh`
+- Only fetch & bundle spec: `bash scripts/bundle-spec.sh`
+- Only bundle (skip fetch, use local spec): `CAMUNDA_SDK_SKIP_FETCH_SPEC=1 bash scripts/bundle-spec.sh`
 - Only regenerate SDK sources: `dotnet run --project src/Camunda.Orchestration.Sdk.Generator`
 
 Generation pipeline (high level):
 
-1. `scripts/fetch-spec.sh` → sparse clone upstream spec YAML under `external-spec/upstream/...`
-2. `scripts/bundle-spec.sh` → produce `external-spec/bundled/rest-api.bundle.json` (via swagger-cli)
-3. `dotnet run --project src/Camunda.Orchestration.Sdk.Generator` → generate `src/Camunda.Orchestration.Sdk/Generated/*`
-4. `dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore` → auto-fix generated code style
-5. `dotnet build` → compile library + tests
-6. `dotnet format --verify-no-changes` → lint gate (fails if any violations remain)
-7. `dotnet test` → run unit tests
+1. `scripts/bundle-spec.sh` → uses `camunda-schema-bundler` to fetch & bundle upstream spec → `external-spec/bundled/rest-api.bundle.json`
+2. `dotnet run --project src/Camunda.Orchestration.Sdk.Generator` → generate `src/Camunda.Orchestration.Sdk/Generated/*`
+3. `dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore` → auto-fix generated code style
+4. `dotnet build` → compile library + tests
+5. `dotnet format --verify-no-changes` → lint gate (fails if any violations remain)
+6. `dotnet test` → run unit tests
+
+Spec bundling uses the shared `camunda-schema-bundler` npm package which handles:
+- Sparse clone of upstream `camunda/camunda` repo
+- `SwaggerParser.bundle()` to merge multi-file YAML
+- Schema augmentation from all upstream YAML files
+- Path-local `$ref` normalization via signature matching
+- Path-local `$ref` dereferencing (--deref-path-local, required for Microsoft.OpenApi)
+- `SPEC_REF` env var pass-through for CI overrides
 
 ## Where things live
 

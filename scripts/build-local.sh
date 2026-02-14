@@ -8,11 +8,10 @@ cd "$REPO_ROOT"
 
 echo "=== Camunda C# SDK Build (local) ==="
 
-# Step 1: Bundle spec (skip fetch)
+# Step 1: Bundle spec (skip fetch, use existing local spec)
 echo ""
 echo "--- Step 1: Bundle spec ---"
-CAMUNDA_SDK_SKIP_FETCH_SPEC=1 bash scripts/fetch-spec.sh
-bash scripts/bundle-spec.sh
+CAMUNDA_SDK_SKIP_FETCH_SPEC=1 bash scripts/bundle-spec.sh
 
 # Step 2: Generate C# client
 echo ""

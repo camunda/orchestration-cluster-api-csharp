@@ -7,7 +7,7 @@ This document covers building, testing, and releasing the C# SDK. For end-user d
 ### Prerequisites
 
 - .NET 8.0 SDK
-- Node.js (for spec bundling via swagger-cli)
+- Node.js (for spec bundling via `camunda-schema-bundler`)
 - Docker (for integration tests)
 - Git
 
@@ -35,11 +35,12 @@ bash scripts/build-local.sh
 ### Individual steps
 
 ```bash
-# Fetch upstream OpenAPI spec (optionally pinned)
-SPEC_REF=my-branch bash scripts/fetch-spec.sh
-
-# Bundle multi-file spec to single JSON
+# Fetch & bundle upstream OpenAPI spec (optionally pinned)
 bash scripts/bundle-spec.sh
+SPEC_REF=my-branch bash scripts/bundle-spec.sh
+
+# Bundle only (skip fetch, use already-fetched local spec)
+CAMUNDA_SDK_SKIP_FETCH_SPEC=1 bash scripts/bundle-spec.sh
 
 # Generate C# SDK from bundled spec
 dotnet run --project src/Camunda.Orchestration.Sdk.Generator
@@ -56,13 +57,20 @@ bash scripts/integration-test.sh
 
 ## Generation Pipeline
 
-1. `scripts/fetch-spec.sh` → sparse clone upstream spec YAML under `external-spec/upstream/`
-2. `scripts/bundle-spec.sh` → produce `external-spec/bundled/rest-api.bundle.json` (via swagger-cli)
-3. `dotnet run --project src/Camunda.Orchestration.Sdk.Generator` → generate `src/Camunda.Orchestration.Sdk/Generated/*`
-4. `dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore` → auto-fix generated code style
-5. `dotnet build` → compile library + tests
-6. `dotnet format --verify-no-changes` → lint gate (ensures all code is compliant)
-7. `dotnet test` → run unit tests
+1. `scripts/bundle-spec.sh` → uses `camunda-schema-bundler` to fetch upstream spec & produce `external-spec/bundled/rest-api.bundle.json`
+2. `dotnet run --project src/Camunda.Orchestration.Sdk.Generator` → generate `src/Camunda.Orchestration.Sdk/Generated/*`
+3. `dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore` → auto-fix generated code style
+4. `dotnet build` → compile library + tests
+5. `dotnet format --verify-no-changes` → lint gate (ensures all code is compliant)
+6. `dotnet test` → run unit tests
+
+Spec bundling uses the shared `camunda-schema-bundler` npm package which handles:
+- Sparse clone of upstream `camunda/camunda` repo
+- `SwaggerParser.bundle()` to merge multi-file YAML
+- Schema augmentation from all upstream YAML files
+- Path-local `$ref` normalization via signature matching
+- Path-local `$ref` dereferencing (`--deref-path-local`, required for Microsoft.OpenApi)
+- `SPEC_REF` env var pass-through for CI overrides
 
 ## Project Structure
 
