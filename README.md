@@ -7,6 +7,8 @@ C# client SDK for the [Camunda 8 Orchestration Cluster REST API](https://docs.ca
 
 Unified configuration, OAuth/Basic auth, automatic retry, backpressure management, strongly-typed domain keys, and opt-in typed variables.
 
+Full API Documentation available [here](https://camunda.github.io/orchestration-cluster-api-csharp).
+
 ## Installation
 
 ```bash

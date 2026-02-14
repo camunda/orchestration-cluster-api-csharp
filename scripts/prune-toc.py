@@ -10,7 +10,7 @@ while keeping model classes, config classes, etc. flat (no property clutter).
 import json
 import sys
 
-KEEP_MEMBERS_FOR = {"Camunda.Client.CamundaClient"}
+KEEP_MEMBERS_FOR = {"Camunda.Orchestration.Sdk.CamundaClient"}
 
 
 def prune(items):
