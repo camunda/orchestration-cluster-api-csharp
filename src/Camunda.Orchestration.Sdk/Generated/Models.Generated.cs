@@ -1821,6 +1821,34 @@ public enum AuditLogActorTypeEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AuditLogActorTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AuditLogActorTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AuditLogActorTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AuditLogActorTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogActorTypeExactMatch");
+        return new AuditLogActorTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// AuditLogActorTypeEnum property with full advanced search capabilities.
 /// </summary>
 public sealed class AuditLogActorTypeFilterProperty
@@ -1859,6 +1887,34 @@ public readonly record struct AuditLogEntityKey : global::Camunda.Orchestration.
     {
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogEntityKey");
         return new AuditLogEntityKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AuditLogEntityKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AuditLogEntityKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AuditLogEntityKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AuditLogEntityKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogEntityKeyExactMatch");
+        return new AuditLogEntityKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
@@ -2110,6 +2166,34 @@ public readonly record struct AuditLogKey : global::Camunda.Orchestration.Sdk.Ru
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AuditLogKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AuditLogKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AuditLogKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AuditLogKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogKeyExactMatch");
+        return new AuditLogKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -2370,6 +2454,34 @@ public enum AuditLogResultEnum
     FAIL,
     [JsonPropertyName("SUCCESS")]
     SUCCESS,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AuditLogResultExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AuditLogResultExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AuditLogResultExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AuditLogResultExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogResultExactMatch");
+        return new AuditLogResultExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -3133,6 +3245,34 @@ public enum BatchOperationItemStateEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct BatchOperationItemStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private BatchOperationItemStateExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="BatchOperationItemStateExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static BatchOperationItemStateExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "BatchOperationItemStateExactMatch");
+        return new BatchOperationItemStateExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// BatchOperationItemStateEnum property with full advanced search capabilities.
 /// </summary>
 public sealed class BatchOperationItemStateFilterProperty
@@ -3326,6 +3466,34 @@ public enum BatchOperationStateEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct BatchOperationStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private BatchOperationStateExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="BatchOperationStateExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static BatchOperationStateExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "BatchOperationStateExactMatch");
+        return new BatchOperationStateExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// BatchOperationStateEnum property with full advanced search capabilities.
 /// </summary>
 public sealed class BatchOperationStateFilterProperty
@@ -3358,6 +3526,34 @@ public enum BatchOperationTypeEnum
     RESOLVEINCIDENT,
     [JsonPropertyName("UPDATE_VARIABLE")]
     UPDATEVARIABLE,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct BatchOperationTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private BatchOperationTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="BatchOperationTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static BatchOperationTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "BatchOperationTypeExactMatch");
+        return new BatchOperationTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -3484,6 +3680,34 @@ public sealed class CancelProcessInstanceRequest
     [JsonPropertyName("operationReference")]
     public OperationReference? OperationReference { get; set; }
 
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct CategoryExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private CategoryExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="CategoryExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static CategoryExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "CategoryExactMatch");
+        return new CategoryExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -3625,6 +3849,34 @@ public enum ClusterVariableScopeEnum
     GLOBAL,
     [JsonPropertyName("TENANT")]
     TENANT,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ClusterVariableScopeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ClusterVariableScopeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ClusterVariableScopeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ClusterVariableScopeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ClusterVariableScopeExactMatch");
+        return new ClusterVariableScopeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -4308,6 +4560,34 @@ public readonly record struct DecisionDefinitionKey : global::Camunda.Orchestrat
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct DecisionDefinitionKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private DecisionDefinitionKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="DecisionDefinitionKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static DecisionDefinitionKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionKeyExactMatch");
+        return new DecisionDefinitionKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// DecisionDefinitionKey property with full advanced search capabilities.
 /// </summary>
 public sealed class DecisionDefinitionKeyFilterProperty
@@ -4540,6 +4820,34 @@ public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Or
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct DecisionEvaluationInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private DecisionEvaluationInstanceKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="DecisionEvaluationInstanceKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static DecisionEvaluationInstanceKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKeyExactMatch");
+        return new DecisionEvaluationInstanceKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// DecisionEvaluationInstanceKey property with full advanced search capabilities.
 /// </summary>
 public sealed class DecisionEvaluationInstanceKeyFilterProperty
@@ -4585,6 +4893,34 @@ public readonly record struct DecisionEvaluationKey : global::Camunda.Orchestrat
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct DecisionEvaluationKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private DecisionEvaluationKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="DecisionEvaluationKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static DecisionEvaluationKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationKeyExactMatch");
+        return new DecisionEvaluationKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5066,6 +5402,34 @@ public enum DecisionInstanceStateEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct DecisionInstanceStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private DecisionInstanceStateExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="DecisionInstanceStateExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static DecisionInstanceStateExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionInstanceStateExactMatch");
+        return new DecisionInstanceStateExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// DecisionInstanceStateEnum property with full advanced search capabilities.
 /// </summary>
 public sealed class DecisionInstanceStateFilterProperty
@@ -5138,6 +5502,34 @@ public readonly record struct DecisionRequirementsKey : global::Camunda.Orchestr
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct DecisionRequirementsKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private DecisionRequirementsKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="DecisionRequirementsKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static DecisionRequirementsKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionRequirementsKeyExactMatch");
+        return new DecisionRequirementsKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5480,6 +5872,34 @@ public readonly record struct DeploymentKey : global::Camunda.Orchestration.Sdk.
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct DeploymentKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private DeploymentKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="DeploymentKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static DeploymentKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DeploymentKeyExactMatch");
+        return new DeploymentKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5990,6 +6410,34 @@ public readonly record struct ElementInstanceKey : global::Camunda.Orchestration
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ElementInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ElementInstanceKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ElementInstanceKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ElementInstanceKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceKeyExactMatch");
+        return new ElementInstanceKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// ElementInstanceKey property with full advanced search capabilities.
 /// </summary>
 public sealed class ElementInstanceKeyFilterProperty
@@ -6168,6 +6616,34 @@ public enum ElementInstanceStateEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ElementInstanceStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ElementInstanceStateExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ElementInstanceStateExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ElementInstanceStateExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceStateExactMatch");
+        return new ElementInstanceStateExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// ElementInstanceStateEnum property with full advanced search capabilities.
 /// </summary>
 public sealed class ElementInstanceStateFilterProperty
@@ -6197,6 +6673,34 @@ public readonly record struct EndCursor : global::Camunda.Orchestration.Sdk.Runt
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$", minLength: 2, maxLength: 300);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct EntityTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private EntityTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="EntityTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static EntityTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "EntityTypeExactMatch");
+        return new EntityTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6524,6 +7028,34 @@ public readonly record struct FormKey : global::Camunda.Orchestration.Sdk.Runtim
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct FormKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private FormKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="FormKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static FormKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "FormKeyExactMatch");
+        return new FormKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6950,6 +7482,34 @@ public sealed class GroupUserSearchResult
 /// </summary>
 public sealed class IncidentErrorTypeEnum
 {
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct IncidentErrorTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private IncidentErrorTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="IncidentErrorTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static IncidentErrorTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "IncidentErrorTypeExactMatch");
+        return new IncidentErrorTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -7440,6 +8000,34 @@ public sealed class IncidentStateEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct IncidentStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private IncidentStateExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="IncidentStateExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static IncidentStateExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "IncidentStateExactMatch");
+        return new IncidentStateExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// IncidentStateEnum with full advanced search capabilities.
 /// </summary>
 public sealed class IncidentStateFilterProperty
@@ -7805,6 +8393,34 @@ public readonly record struct JobKey : global::Camunda.Orchestration.Sdk.Runtime
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct JobKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private JobKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="JobKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static JobKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "JobKeyExactMatch");
+        return new JobKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// JobKey property with full advanced search capabilities.
 /// </summary>
 public sealed class JobKeyFilterProperty
@@ -7825,6 +8441,34 @@ public enum JobKindEnum
     TASKLISTENER,
     [JsonPropertyName("AD_HOC_SUB_PROCESS")]
     ADHOCSUBPROCESS,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct JobKindExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private JobKindExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="JobKindExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static JobKindExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "JobKindExactMatch");
+        return new JobKindExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -7856,6 +8500,34 @@ public enum JobListenerEventTypeEnum
     UNSPECIFIED,
     [JsonPropertyName("UPDATING")]
     UPDATING,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct JobListenerEventTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private JobListenerEventTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="JobListenerEventTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static JobListenerEventTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "JobListenerEventTypeExactMatch");
+        return new JobListenerEventTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -8274,6 +8946,34 @@ public enum JobStateEnum
     RETRIESUPDATED,
     [JsonPropertyName("TIMED_OUT")]
     TIMEDOUT,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct JobStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private JobStateExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="JobStateExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static JobStateExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "JobStateExactMatch");
+        return new JobStateExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -8995,6 +9695,34 @@ public readonly record struct MessageSubscriptionKey : global::Camunda.Orchestra
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct MessageSubscriptionKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private MessageSubscriptionKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="MessageSubscriptionKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static MessageSubscriptionKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionKeyExactMatch");
+        return new MessageSubscriptionKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// MessageSubscriptionKey property with full advanced search capabilities.
 /// </summary>
 public sealed class MessageSubscriptionKeyFilterProperty
@@ -9163,6 +9891,34 @@ public enum MessageSubscriptionStateEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct MessageSubscriptionStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private MessageSubscriptionStateExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="MessageSubscriptionStateExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static MessageSubscriptionStateExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionStateExactMatch");
+        return new MessageSubscriptionStateExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// MessageSubscriptionStateEnum with full advanced search capabilities.
 /// </summary>
 public sealed class MessageSubscriptionStateFilterProperty
@@ -9251,6 +10007,34 @@ public readonly record struct OperationReference : global::Camunda.Orchestration
     {
         return new OperationReference(value);
     }
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct OperationTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private OperationTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="OperationTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static OperationTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "OperationTypeExactMatch");
+        return new OperationTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9801,6 +10585,34 @@ public readonly record struct ProcessDefinitionKey : global::Camunda.Orchestrati
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ProcessDefinitionKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ProcessDefinitionKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ProcessDefinitionKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ProcessDefinitionKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionKeyExactMatch");
+        return new ProcessDefinitionKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -10793,6 +11605,34 @@ public readonly record struct ProcessInstanceKey : global::Camunda.Orchestration
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ProcessInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ProcessInstanceKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ProcessInstanceKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ProcessInstanceKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceKeyExactMatch");
+        return new ProcessInstanceKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// ProcessInstanceKey property with full advanced search capabilities.
 /// </summary>
 public sealed class ProcessInstanceKeyFilterProperty
@@ -11323,6 +12163,34 @@ public enum ProcessInstanceStateEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ProcessInstanceStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ProcessInstanceStateExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ProcessInstanceStateExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ProcessInstanceStateExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceStateExactMatch");
+        return new ProcessInstanceStateExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// ProcessInstanceStateEnum property with full advanced search capabilities.
 /// </summary>
 public sealed class ProcessInstanceStateFilterProperty
@@ -11347,6 +12215,34 @@ public readonly record struct ResourceKey : global::Camunda.Orchestration.Sdk.Ru
     {
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ResourceKey");
         return new ResourceKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ResourceKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ResourceKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ResourceKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ResourceKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ResourceKeyExactMatch");
+        return new ResourceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
@@ -11920,6 +12816,34 @@ public readonly record struct ScopeKey : global::Camunda.Orchestration.Sdk.Runti
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ScopeKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ScopeKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ScopeKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ScopeKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ScopeKeyExactMatch");
+        return new ScopeKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -13625,6 +14549,34 @@ public enum UserTaskStateEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct UserTaskStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private UserTaskStateExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="UserTaskStateExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static UserTaskStateExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "UserTaskStateExactMatch");
+        return new UserTaskStateExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// UserTaskStateEnum property with full advanced search capabilities.
 /// </summary>
 public sealed class UserTaskStateFilterProperty
@@ -13860,6 +14812,34 @@ public readonly record struct VariableKey : global::Camunda.Orchestration.Sdk.Ru
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct VariableKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private VariableKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="VariableKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static VariableKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "VariableKeyExactMatch");
+        return new VariableKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -14166,27 +15146,6 @@ public sealed class CreateDeploymentResponse
     /// </summary>
     [JsonPropertyName("deployments")]
     public List<DeploymentMetadataResult> Deployments { get; set; } = null!;
-
-}
-
-/// <summary>
-/// The decision instance filter that defines which decision instances should be deleted.
-/// </summary>
-public sealed class DeleteDecisionInstancesBatchOperationRequest
-{
-    /// <summary>
-    /// The decision instance filter.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public object Filter { get; set; } = null!;
-
-    /// <summary>
-    /// A reference key chosen by the user that will be part of all records resulting from this operation.
-    /// Must be &gt; 0 if provided.
-    /// 
-    /// </summary>
-    [JsonPropertyName("operationReference")]
-    public OperationReference? OperationReference { get; set; }
 
 }
 
@@ -14578,63 +15537,6 @@ public sealed class GetIncidentResponse
 }
 
 /// <summary>
-/// GetProcessDefinitionInstanceStatisticsRequest
-/// </summary>
-public sealed class GetProcessDefinitionInstanceStatisticsRequest
-{
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-}
-
-/// <summary>
-/// GetProcessDefinitionInstanceVersionStatisticsRequest
-/// </summary>
-public sealed class GetProcessDefinitionInstanceVersionStatisticsRequest
-{
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The process definition instance version statistics search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public ProcessDefinitionInstanceVersionStatisticsFilter Filter { get; set; } = null!;
-
-}
-
-/// <summary>
-/// GetProcessDefinitionMessageSubscriptionStatisticsRequest
-/// </summary>
-public sealed class GetProcessDefinitionMessageSubscriptionStatisticsRequest
-{
-    [JsonPropertyName("page")]
-    public CursorForwardPagination? Page { get; set; }
-
-    /// <summary>
-    /// The message subscription filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
-
-}
-
-/// <summary>
 /// Process definition element statistics request.
 /// </summary>
 public sealed class GetProcessDefinitionStatisticsRequest
@@ -14757,13 +15659,13 @@ public sealed class GetStartProcessFormResponse
     /// The tenant ID of the form.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public object? TenantId { get; set; }
+    public TenantId? TenantId { get; set; }
 
     /// <summary>
     /// The user-provided identifier of the form.
     /// </summary>
     [JsonPropertyName("formId")]
-    public object? FormId { get; set; }
+    public FormId? FormId { get; set; }
 
     /// <summary>
     /// The form content.
@@ -15287,25 +16189,6 @@ public sealed class SearchClientsForGroupRequest
 }
 
 /// <summary>
-/// SearchClientsForGroupResponse
-/// </summary>
-public sealed class SearchClientsForGroupResponse
-{
-    /// <summary>
-    /// The matching client IDs.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<TenantClientResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
 /// SearchClientsForRoleRequest
 /// </summary>
 public sealed class SearchClientsForRoleRequest
@@ -15314,7 +16197,7 @@ public sealed class SearchClientsForRoleRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<TenantClientSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
@@ -15333,57 +16216,13 @@ public sealed class SearchClientsForTenantRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<TenantClientSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
     /// </summary>
     [JsonPropertyName("page")]
     public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// Cluster variable search query request.
-/// </summary>
-public sealed class SearchClusterVariablesRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<ClusterVariableSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The cluster variable search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// Cluster variable search query response.
-/// </summary>
-public sealed class SearchClusterVariablesResponse
-{
-    /// <summary>
-    /// The matching cluster variables.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<object>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15403,31 +16242,6 @@ public sealed class SearchCorrelatedMessageSubscriptionsResponse
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchDecisionInstancesRequest
-/// </summary>
-public sealed class SearchDecisionInstancesRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<DecisionInstanceSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The decision instance search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
 
 }
 
@@ -15497,7 +16311,7 @@ public sealed class SearchGroupIdsForTenantRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<TenantGroupSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
@@ -15516,7 +16330,7 @@ public sealed class SearchGroupsForRoleRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<RoleGroupSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
@@ -15573,13 +16387,13 @@ public sealed class SearchMessageSubscriptionsRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<MessageSubscriptionSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The incident search filters.
     /// </summary>
     [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
+    public MessageSubscriptionFilter? Filter { get; set; }
 
     /// <summary>
     /// Pagination criteria.
@@ -15617,7 +16431,7 @@ public sealed class SearchProcessDefinitionsRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<ProcessDefinitionSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The process definition search filters.
@@ -15661,13 +16475,13 @@ public sealed class SearchProcessInstancesRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<ProcessInstanceSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The process instance search filters.
     /// </summary>
     [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
+    public ProcessInstanceFilter? Filter { get; set; }
 
     /// <summary>
     /// Pagination criteria.
@@ -15705,7 +16519,7 @@ public sealed class SearchTenantsRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<TenantSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The tenant search filters.
@@ -15741,25 +16555,6 @@ public sealed class SearchUsersForGroupRequest
 }
 
 /// <summary>
-/// SearchUsersForGroupResponse
-/// </summary>
-public sealed class SearchUsersForGroupResponse
-{
-    /// <summary>
-    /// The matching members.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<TenantUserResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
 /// SearchUsersForRoleRequest
 /// </summary>
 public sealed class SearchUsersForRoleRequest
@@ -15768,7 +16563,7 @@ public sealed class SearchUsersForRoleRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<TenantUserSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
@@ -15787,7 +16582,7 @@ public sealed class SearchUsersForTenantRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<TenantUserSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
@@ -15806,7 +16601,7 @@ public sealed class SearchUsersRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<UserSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The user search filters.
@@ -15875,7 +16670,7 @@ public sealed class SearchUserTasksRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<UserTaskSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The user task search filters.
@@ -15919,7 +16714,7 @@ public sealed class SearchUserTaskVariablesRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<VariableSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The user task variable search filters.
@@ -15963,7 +16758,7 @@ public sealed class SearchVariablesRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+    public List<VariableSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The variable search filters.
@@ -15995,62 +16790,6 @@ public sealed class SearchVariablesResponse
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// UpdateMappingRuleRequest
-/// </summary>
-public sealed class UpdateMappingRuleRequest
-{
-    /// <summary>
-    /// The name of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimName")]
-    public string ClaimName { get; set; } = null!;
-
-    /// <summary>
-    /// The value of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimValue")]
-    public string ClaimValue { get; set; } = null!;
-
-    /// <summary>
-    /// The name of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
-
-}
-
-/// <summary>
-/// UpdateMappingRuleResponse
-/// </summary>
-public sealed class UpdateMappingRuleResponse
-{
-    /// <summary>
-    /// The name of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimName")]
-    public string? ClaimName { get; set; }
-
-    /// <summary>
-    /// The value of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimValue")]
-    public string? ClaimValue { get; set; }
-
-    /// <summary>
-    /// The name of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string? Name { get; set; }
-
-    /// <summary>
-    /// The unique ID of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("mappingRuleId")]
-    public string? MappingRuleId { get; set; }
 
 }
 

@@ -549,7 +549,7 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: deleteDecisionInstancesBatchOperation</remarks>
-    public async Task<BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(DeleteDecisionInstancesBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-instances/deletion";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -1101,7 +1101,7 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionInstanceStatistics</remarks>
-    public async Task<ProcessDefinitionInstanceStatisticsQueryResult> GetProcessDefinitionInstanceStatisticsAsync(GetProcessDefinitionInstanceStatisticsRequest body, ConsistencyOptions<ProcessDefinitionInstanceStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionInstanceStatisticsQueryResult> GetProcessDefinitionInstanceStatisticsAsync(ProcessDefinitionInstanceStatisticsQuery body, ConsistencyOptions<ProcessDefinitionInstanceStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/statistics/process-instances";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -1121,7 +1121,7 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionInstanceVersionStatistics</remarks>
-    public async Task<ProcessDefinitionInstanceVersionStatisticsQueryResult> GetProcessDefinitionInstanceVersionStatisticsAsync(GetProcessDefinitionInstanceVersionStatisticsRequest body, ConsistencyOptions<ProcessDefinitionInstanceVersionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionInstanceVersionStatisticsQueryResult> GetProcessDefinitionInstanceVersionStatisticsAsync(ProcessDefinitionInstanceVersionStatisticsQuery body, ConsistencyOptions<ProcessDefinitionInstanceVersionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/statistics/process-instances-by-version";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -1140,7 +1140,7 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionMessageSubscriptionStatistics</remarks>
-    public async Task<ProcessDefinitionMessageSubscriptionStatisticsQueryResult> GetProcessDefinitionMessageSubscriptionStatisticsAsync(GetProcessDefinitionMessageSubscriptionStatisticsRequest body, ConsistencyOptions<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionMessageSubscriptionStatisticsQueryResult> GetProcessDefinitionMessageSubscriptionStatisticsAsync(ProcessDefinitionMessageSubscriptionStatisticsQuery body, ConsistencyOptions<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/statistics/message-subscriptions";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -1807,17 +1807,17 @@ public partial class CamundaClient
     /// Search clients assigned to a group.
     /// </summary>
     /// <remarks>Operation: searchClientsForGroup</remarks>
-    public async Task<SearchClientsForGroupResponse> SearchClientsForGroupAsync(string groupId, SearchClientsForGroupRequest body, ConsistencyOptions<SearchClientsForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantClientSearchResult> SearchClientsForGroupAsync(string groupId, SearchClientsForGroupRequest body, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchClientsForGroupResponse>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchClientsForGroupResponse>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct);
     }
 
     /// <summary>
@@ -1860,7 +1860,7 @@ public partial class CamundaClient
     /// Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.
     /// </summary>
     /// <remarks>Operation: searchClusterVariables</remarks>
-    public async Task<SearchClusterVariablesResponse> SearchClusterVariablesAsync(SearchClusterVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<SearchClusterVariablesResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<ClusterVariableSearchQueryResult> SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<ClusterVariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
@@ -1868,11 +1868,11 @@ public partial class CamundaClient
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClusterVariables", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchClusterVariablesResponse>(HttpMethod.Post, path, body, ct), "searchClusterVariables", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<ClusterVariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchClusterVariables", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchClusterVariablesResponse>(HttpMethod.Post, path, body, ct), "searchClusterVariables", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchClusterVariables", false, ct);
     }
 
     /// <summary>
@@ -1916,7 +1916,7 @@ public partial class CamundaClient
     /// Search for decision instances based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchDecisionInstances</remarks>
-    public async Task<SearchDecisionInstancesResponse> SearchDecisionInstancesAsync(SearchDecisionInstancesRequest body, ConsistencyOptions<SearchDecisionInstancesResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchDecisionInstancesResponse> SearchDecisionInstancesAsync(DecisionInstanceSearchQuery body, ConsistencyOptions<SearchDecisionInstancesResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-instances/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -2383,17 +2383,17 @@ public partial class CamundaClient
     /// Search users assigned to a group.
     /// </summary>
     /// <remarks>Operation: searchUsersForGroup</remarks>
-    public async Task<SearchUsersForGroupResponse> SearchUsersForGroupAsync(string groupId, SearchUsersForGroupRequest body, ConsistencyOptions<SearchUsersForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantUserSearchResult> SearchUsersForGroupAsync(string groupId, SearchUsersForGroupRequest body, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchUsersForGroupResponse>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchUsersForGroupResponse>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct);
     }
 
     /// <summary>
@@ -2693,10 +2693,10 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: updateMappingRule</remarks>
-    public async Task<UpdateMappingRuleResponse> UpdateMappingRuleAsync(string mappingRuleId, UpdateMappingRuleRequest body, CancellationToken ct = default)
+    public async Task<MappingRuleUpdateResult> UpdateMappingRuleAsync(string mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
-        return await InvokeWithRetryAsync(() => SendAsync<UpdateMappingRuleResponse>(HttpMethod.Put, path, body, ct), "updateMappingRule", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<MappingRuleUpdateResult>(HttpMethod.Put, path, body, ct), "updateMappingRule", false, ct);
     }
 
     /// <summary>
