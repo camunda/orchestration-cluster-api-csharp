@@ -7516,6 +7516,13 @@ public sealed class JobActivationRequest
     [JsonPropertyName("tenantIds")]
     public List<TenantId>? TenantIds { get; set; }
 
+    /// <summary>
+    /// The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tenantFilter")]
+    public TenantFilterEnum? TenantFilter { get; set; }
+
 }
 
 /// <summary>
@@ -12412,6 +12419,19 @@ public sealed class TenantFilter
     [JsonPropertyName("name")]
     public string? Name { get; set; }
 
+}
+
+/// <summary>
+/// The tenant filtering strategy for job activation. Determines whether to use tenant IDs provided in the request or tenant IDs assigned to the authenticated principal.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum TenantFilterEnum
+{
+    [JsonPropertyName("PROVIDED")]
+    PROVIDED,
+    [JsonPropertyName("ASSIGNED")]
+    ASSIGNED,
 }
 
 /// <summary>
