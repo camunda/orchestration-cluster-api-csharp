@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Camunda.Orchestration.Sdk.Runtime;
@@ -12,6 +13,19 @@ public sealed class CamundaOptions
     /// Strongly typed env-style overrides (CAMUNDA_* keys).
     /// </summary>
     public Dictionary<string, string>? Config { get; set; }
+
+    /// <summary>
+    /// An <see cref="IConfiguration"/> section (typically <c>configuration.GetSection("Camunda")</c>)
+    /// to bind settings from <c>appsettings.json</c> or any other configuration provider.
+    /// <para>
+    /// Keys use PascalCase property names (e.g. <c>RestAddress</c>, <c>Auth:Strategy</c>)
+    /// and are mapped to the canonical <c>CAMUNDA_*</c> env-var names internally.
+    /// </para>
+    /// <para>
+    /// Precedence (highest wins): <see cref="Config"/> &gt; <see cref="Configuration"/> &gt; environment variables &gt; defaults.
+    /// </para>
+    /// </summary>
+    public IConfiguration? Configuration { get; set; }
 
     /// <summary>
     /// Custom HttpClient factory. If not provided, a default HttpClient is created.

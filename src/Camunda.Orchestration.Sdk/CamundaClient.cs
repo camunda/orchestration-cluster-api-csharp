@@ -34,7 +34,8 @@ public partial class CamundaClient : IDisposable
 
         _config = ConfigurationHydrator.Hydrate(
             env: options.Env,
-            overrides: options.Config);
+            overrides: options.Config,
+            configuration: options.Configuration);
 
         var loggerFactory = options.LoggerFactory ?? CreateDefaultLoggerFactory(_config.LogLevel);
         _loggerFactory = loggerFactory;

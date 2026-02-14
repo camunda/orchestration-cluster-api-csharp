@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Configuration;
+
 namespace Camunda.Orchestration.Sdk.Runtime;
 
 /// <summary>
@@ -71,7 +73,8 @@ public static class ConfigurationHydrator
     /// </summary>
     public static CamundaConfig Hydrate(
         Dictionary<string, string?>? env = null,
-        Dictionary<string, string>? overrides = null)
+        Dictionary<string, string>? overrides = null,
+        IConfiguration? configuration = null)
     {
         var errors = new List<ConfigErrorDetail>();
         var rawMap = new Dictionary<string, string>();
@@ -114,6 +117,18 @@ public static class ConfigurationHydrator
         {
             foreach (var (k, v) in overrides)
                 input[k] = v;
+        }
+
+        // IConfiguration section (appsettings.json etc.) — between env and overrides in precedence
+        if (configuration != null)
+        {
+            var configValues = ExtractFromConfiguration(configuration);
+            foreach (var (k, v) in configValues)
+            {
+                // Configuration wins over env vars but loses to explicit overrides
+                if (overrides == null || !overrides.ContainsKey(k))
+                    input[k] = v;
+            }
         }
 
         // Alias: ZEEBE_REST_ADDRESS → CAMUNDA_REST_ADDRESS
@@ -365,6 +380,74 @@ public static class ConfigurationHydrator
             Response = res,
             Raw = $"req:{req.ToString().ToLowerInvariant()},res:{res.ToString().ToLowerInvariant()}",
         };
+    }
+
+    /// <summary>
+    /// Maps PascalCase <c>IConfiguration</c> keys (from <c>appsettings.json</c>) to canonical <c>CAMUNDA_*</c> env-var names.
+    /// Supports both flat keys (<c>"RestAddress"</c>) and nested sections (<c>"Auth:Strategy"</c>, <c>"Backpressure:Profile"</c>).
+    /// </summary>
+    private static readonly Dictionary<string, string> ConfigKeyMap = new(StringComparer.OrdinalIgnoreCase)
+    {
+        // Top-level
+        ["RestAddress"] = "CAMUNDA_REST_ADDRESS",
+        ["TokenAudience"] = "CAMUNDA_TOKEN_AUDIENCE",
+        ["DefaultTenantId"] = "CAMUNDA_DEFAULT_TENANT_ID",
+        ["LogLevel"] = "CAMUNDA_SDK_LOG_LEVEL",
+        ["Validation"] = "CAMUNDA_SDK_VALIDATION",
+
+        // Auth section
+        ["Auth:Strategy"] = "CAMUNDA_AUTH_STRATEGY",
+        ["Auth:ClientId"] = "CAMUNDA_CLIENT_ID",
+        ["Auth:ClientSecret"] = "CAMUNDA_CLIENT_SECRET",
+        ["Auth:BasicUsername"] = "CAMUNDA_BASIC_AUTH_USERNAME",
+        ["Auth:BasicPassword"] = "CAMUNDA_BASIC_AUTH_PASSWORD",
+
+        // OAuth section
+        ["OAuth:Url"] = "CAMUNDA_OAUTH_URL",
+        ["OAuth:ClientId"] = "CAMUNDA_CLIENT_ID",
+        ["OAuth:ClientSecret"] = "CAMUNDA_CLIENT_SECRET",
+        ["OAuth:GrantType"] = "CAMUNDA_OAUTH_GRANT_TYPE",
+        ["OAuth:Scope"] = "CAMUNDA_OAUTH_SCOPE",
+        ["OAuth:TimeoutMs"] = "CAMUNDA_OAUTH_TIMEOUT_MS",
+        ["OAuth:RetryMax"] = "CAMUNDA_OAUTH_RETRY_MAX",
+        ["OAuth:RetryBaseDelayMs"] = "CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS",
+
+        // HTTP Retry section
+        ["HttpRetry:MaxAttempts"] = "CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS",
+        ["HttpRetry:BaseDelayMs"] = "CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS",
+        ["HttpRetry:MaxDelayMs"] = "CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS",
+
+        // Backpressure section
+        ["Backpressure:Profile"] = "CAMUNDA_SDK_BACKPRESSURE_PROFILE",
+        ["Backpressure:InitialMax"] = "CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX",
+        ["Backpressure:SoftFactor"] = "CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR",
+        ["Backpressure:SevereFactor"] = "CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR",
+        ["Backpressure:RecoveryIntervalMs"] = "CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS",
+        ["Backpressure:RecoveryStep"] = "CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP",
+        ["Backpressure:DecayQuietMs"] = "CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS",
+        ["Backpressure:Floor"] = "CAMUNDA_SDK_BACKPRESSURE_FLOOR",
+        ["Backpressure:SevereThreshold"] = "CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD",
+
+        // Eventual consistency
+        ["Eventual:PollDefaultMs"] = "CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS",
+    };
+
+    /// <summary>
+    /// Extract configuration values from an <see cref="IConfiguration"/> section,
+    /// mapping PascalCase keys to canonical <c>CAMUNDA_*</c> env-var names.
+    /// </summary>
+    internal static Dictionary<string, string> ExtractFromConfiguration(IConfiguration configuration)
+    {
+        var result = new Dictionary<string, string>();
+
+        foreach (var (configKey, envKey) in ConfigKeyMap)
+        {
+            var value = configuration[configKey];
+            if (!string.IsNullOrEmpty(value))
+                result[envKey] = value;
+        }
+
+        return result;
     }
 
     /// <summary>

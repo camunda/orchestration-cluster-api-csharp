@@ -22,38 +22,47 @@ Prior to Camunda 8.10.0, this client will undergo changes as we stabilise the co
 dotnet add package Camunda.Orchestration.Sdk
 ```
 
-## Quick Start
+## Quick Start (Zero-Config — Recommended)
+
+Keep configuration out of application code. Let the factory read `CAMUNDA_*` variables from the environment (12-factor style). This makes rotation, secret management, and environment promotion safer and simpler.
 
 ```csharp
 using Camunda.Orchestration.Sdk;
 using Camunda.Orchestration.Sdk.Api;
 
-// Reads CAMUNDA_* environment variables automatically
+// Zero-config construction: reads CAMUNDA_* from environment variables.
+// If no configuration is present, defaults to Camunda 8 Run on localhost.
 using var client = Camunda.CreateClient();
 
 var topology = await client.GetTopologyAsync();
+Console.WriteLine($"Brokers: {topology.Brokers?.Count ?? 0}");
 ```
 
-## Configuration
+Typical environment (example):
 
-The SDK uses environment variables for configuration, matching the [JS SDK](https://github.com/camunda/orchestration-cluster-api-js) conventions:
+```bash
+CAMUNDA_REST_ADDRESS=https://cluster.example   # SDK appends /v2 automatically
+CAMUNDA_AUTH_STRATEGY=OAUTH
+CAMUNDA_CLIENT_ID=***
+CAMUNDA_CLIENT_SECRET=***
+CAMUNDA_OAUTH_URL=https://login.cloud.camunda.io/oauth/token
+CAMUNDA_DEFAULT_TENANT_ID=<default>            # optional: override default tenant
+```
 
-| Variable | Description | Default |
-|---|---|---|
-| `CAMUNDA_REST_ADDRESS` | Cluster REST API address | — |
-| `CAMUNDA_AUTH_STRATEGY` | `NONE`, `OAUTH`, or `BASIC` | Auto-detected |
-| `CAMUNDA_CLIENT_ID` | OAuth client ID | — |
-| `CAMUNDA_CLIENT_SECRET` | OAuth client secret | — |
-| `CAMUNDA_OAUTH_URL` | OAuth token endpoint | — |
-| `CAMUNDA_TOKEN_AUDIENCE` | OAuth audience | — |
-| `CAMUNDA_BASIC_AUTH_USERNAME` | Basic auth username | — |
-| `CAMUNDA_BASIC_AUTH_PASSWORD` | Basic auth password | — |
-| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID | `<default>` |
-| `CAMUNDA_SDK_LOG_LEVEL` | Log level | `error` |
-| `CAMUNDA_SDK_VALIDATION` | Validation mode (`req:none,res:none`) | — |
-| `ZEEBE_REST_ADDRESS` | Alias for `CAMUNDA_REST_ADDRESS` | — |
+> **Why zero-config?**
+>
+> - **Separation of concerns**: business code depends on an interface, not on secrets/constants wiring.
+> - **12-Factor alignment**: config lives in the environment → simpler promotion (dev → staging → prod).
+> - **Secret rotation**: rotate credentials without a code change or redeploy.
+> - **Immutable start**: single hydration pass prevents drift / mid-request mutations.
+> - **Test ergonomics**: swap env vars per test without touching source; create multiple clients for multi-tenant tests.
+> - **Security review**: fewer code paths handling secrets; scanners & vault tooling work at the boundary.
+> - **Deploy portability**: same artifact runs everywhere; only the environment differs.
+> - **Cross-SDK consistency**: identical variable names across JavaScript, C#, and Python SDKs.
 
-### Programmatic Configuration
+### Programmatic Overrides (Advanced)
+
+Use only when you must supply or mutate configuration dynamically (e.g. multi-tenant routing, tests, ephemeral preview environments). Keys mirror their `CAMUNDA_*` env names:
 
 ```csharp
 using var client = Camunda.CreateClient(new CamundaOptions
@@ -61,12 +70,153 @@ using var client = Camunda.CreateClient(new CamundaOptions
     Config = new Dictionary<string, string>
     {
         ["CAMUNDA_REST_ADDRESS"] = "https://my-cluster.camunda.io",
+        ["CAMUNDA_AUTH_STRATEGY"] = "OAUTH",
         ["CAMUNDA_CLIENT_ID"] = "my-client-id",
         ["CAMUNDA_CLIENT_SECRET"] = "my-secret",
         ["CAMUNDA_OAUTH_URL"] = "https://login.cloud.camunda.io/oauth/token",
         ["CAMUNDA_TOKEN_AUDIENCE"] = "zeebe.camunda.io",
     },
 });
+```
+
+### Configuration via `appsettings.json`
+
+The SDK can read configuration from any `IConfiguration` source (appsettings.json, user secrets, Azure Key Vault, etc.) using idiomatic .NET PascalCase section keys:
+
+```json
+{
+  "Camunda": {
+    "RestAddress": "https://cluster.example.com",
+    "Auth": {
+      "Strategy": "OAUTH",
+      "ClientId": "my-client-id",
+      "ClientSecret": "my-secret"
+    },
+    "OAuth": {
+      "Url": "https://login.cloud.camunda.io/oauth/token"
+    },
+    "Backpressure": {
+      "Profile": "CONSERVATIVE"
+    }
+  }
+}
+```
+
+Pass the section to the client:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+using var client = Camunda.CreateClient(new CamundaOptions
+{
+    Configuration = builder.Configuration.GetSection("Camunda"),
+});
+```
+
+Precedence (highest wins): `Config` dictionary > `IConfiguration` section > environment variables > defaults.
+
+This means you can set secrets via environment variables (or a vault) and non-sensitive settings via `appsettings.json` — they layer naturally:
+
+```json
+// appsettings.json — non-sensitive, checked into source control
+{
+  "Camunda": {
+    "RestAddress": "https://cluster.example.com",
+    "Backpressure": { "Profile": "CONSERVATIVE" }
+  }
+}
+```
+
+```bash
+# Secrets injected via environment (vault, CI, container orchestrator)
+CAMUNDA_CLIENT_ID=***
+CAMUNDA_CLIENT_SECRET=***
+CAMUNDA_OAUTH_URL=https://login.cloud.camunda.io/oauth/token
+```
+
+<details>
+<summary>appsettings.json key reference</summary>
+
+| appsettings.json key | Maps to env var |
+|---|---|
+| `RestAddress` | `CAMUNDA_REST_ADDRESS` |
+| `TokenAudience` | `CAMUNDA_TOKEN_AUDIENCE` |
+| `DefaultTenantId` | `CAMUNDA_DEFAULT_TENANT_ID` |
+| `LogLevel` | `CAMUNDA_SDK_LOG_LEVEL` |
+| `Validation` | `CAMUNDA_SDK_VALIDATION` |
+| `Auth:Strategy` | `CAMUNDA_AUTH_STRATEGY` |
+| `Auth:ClientId` | `CAMUNDA_CLIENT_ID` |
+| `Auth:ClientSecret` | `CAMUNDA_CLIENT_SECRET` |
+| `Auth:BasicUsername` | `CAMUNDA_BASIC_AUTH_USERNAME` |
+| `Auth:BasicPassword` | `CAMUNDA_BASIC_AUTH_PASSWORD` |
+| `OAuth:Url` | `CAMUNDA_OAUTH_URL` |
+| `OAuth:ClientId` | `CAMUNDA_CLIENT_ID` |
+| `OAuth:ClientSecret` | `CAMUNDA_CLIENT_SECRET` |
+| `OAuth:GrantType` | `CAMUNDA_OAUTH_GRANT_TYPE` |
+| `OAuth:Scope` | `CAMUNDA_OAUTH_SCOPE` |
+| `OAuth:TimeoutMs` | `CAMUNDA_OAUTH_TIMEOUT_MS` |
+| `OAuth:RetryMax` | `CAMUNDA_OAUTH_RETRY_MAX` |
+| `OAuth:RetryBaseDelayMs` | `CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS` |
+| `HttpRetry:MaxAttempts` | `CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS` |
+| `HttpRetry:BaseDelayMs` | `CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS` |
+| `HttpRetry:MaxDelayMs` | `CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS` |
+| `Backpressure:Profile` | `CAMUNDA_SDK_BACKPRESSURE_PROFILE` |
+| `Backpressure:InitialMax` | `CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX` |
+| `Backpressure:SoftFactor` | `CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR` |
+| `Backpressure:SevereFactor` | `CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR` |
+| `Backpressure:RecoveryIntervalMs` | `CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS` |
+| `Backpressure:RecoveryStep` | `CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP` |
+| `Backpressure:DecayQuietMs` | `CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS` |
+| `Backpressure:Floor` | `CAMUNDA_SDK_BACKPRESSURE_FLOOR` |
+| `Backpressure:SevereThreshold` | `CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD` |
+| `Eventual:PollDefaultMs` | `CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS` |
+
+</details>
+
+### Dependency Injection (`AddCamundaClient`)
+
+For ASP.NET Core and other DI-based applications, use the `AddCamundaClient()` extension method on `IServiceCollection`. The client is registered as a singleton and automatically picks up `ILoggerFactory` from the container.
+
+**Zero-config** (environment variables only):
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCamundaClient();
+```
+
+**With `appsettings.json`**:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCamundaClient(builder.Configuration.GetSection("Camunda"));
+```
+
+**With options callback** (full control):
+
+```csharp
+builder.Services.AddCamundaClient(options =>
+{
+    options.Configuration = builder.Configuration.GetSection("Camunda");
+    // or: options.Config = new Dictionary<string, string> { ... };
+});
+```
+
+Inject the client anywhere via constructor injection:
+
+```csharp
+public class OrderController(CamundaClient camunda) : ControllerBase
+{
+    [HttpPost]
+    public async Task<IActionResult> StartProcess()
+    {
+        var result = await camunda.CreateProcessInstanceAsync(
+            new ProcessInstanceCreationInstructionById
+            {
+                ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
+            });
+        return Ok(result);
+    }
+}
 ```
 
 ### Custom HttpClient
@@ -78,6 +228,36 @@ using var client = Camunda.CreateClient(new CamundaOptions
     HttpClient = httpClient,
 });
 ```
+
+## Configuration Reference
+
+The SDK uses environment variables for configuration, matching the [JS SDK](https://github.com/camunda/orchestration-cluster-api-js) conventions:
+
+| Variable | Description | Default |
+|---|---|---|
+| `CAMUNDA_REST_ADDRESS` | Cluster REST API address | — |
+| `CAMUNDA_AUTH_STRATEGY` | `NONE`, `OAUTH`, or `BASIC` | Auto-detected |
+| `CAMUNDA_CLIENT_ID` | OAuth client ID | — |
+| `CAMUNDA_CLIENT_SECRET` | OAuth client secret | — |
+| `CAMUNDA_OAUTH_URL` | OAuth token endpoint | — |
+| `CAMUNDA_TOKEN_AUDIENCE` | OAuth audience | — |
+| `CAMUNDA_OAUTH_GRANT_TYPE` | OAuth grant type | `client_credentials` |
+| `CAMUNDA_OAUTH_SCOPE` | OAuth scope | — |
+| `CAMUNDA_OAUTH_TIMEOUT_MS` | OAuth token request timeout (ms) | `5000` |
+| `CAMUNDA_OAUTH_RETRY_MAX` | Max OAuth token fetch retries | `5` |
+| `CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS` | OAuth retry base delay (ms) | `1000` |
+| `CAMUNDA_BASIC_AUTH_USERNAME` | Basic auth username | — |
+| `CAMUNDA_BASIC_AUTH_PASSWORD` | Basic auth password | — |
+| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID | `<default>` |
+| `CAMUNDA_SDK_LOG_LEVEL` | Log level (`error`, `warn`, `info`, `debug`, `trace`, `silent`) | `error` |
+| `CAMUNDA_SDK_VALIDATION` | Validation mode (see below) | `req:none,res:none` |
+| `CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS` | Total HTTP retry attempts (initial + retries) | `3` |
+| `CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS` | HTTP retry base backoff (ms) | `100` |
+| `CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS` | HTTP retry max backoff cap (ms) | `2000` |
+| `CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS` | Default eventual consistency poll interval (ms) | `500` |
+| `ZEEBE_REST_ADDRESS` | Alias for `CAMUNDA_REST_ADDRESS` | — |
+
+For backpressure configuration variables, see [Global Backpressure](#global-backpressure-adaptive-concurrency).
 
 ## Authentication
 
@@ -93,12 +273,84 @@ Auth strategy is auto-detected from environment variables when not explicitly se
 
 Automatic retry with exponential backoff and jitter for transient failures (429, 503, 500, timeouts).
 
-### Backpressure Management
+| Variable | Default | Description |
+|---|---|---|
+| `CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS` | `3` | Total attempts (initial + retries) |
+| `CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS` | `100` | Base backoff delay (ms) |
+| `CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS` | `2000` | Maximum backoff cap (ms) |
 
-Adaptive concurrency management that responds to 429/503 signals:
-- Reduces concurrent request permits on backpressure
-- Recovers permits after quiet periods
-- Configurable profiles: `BALANCED` (default), `LEGACY` (observe-only)
+### Global Backpressure (Adaptive Concurrency)
+
+The client includes an adaptive backpressure manager that throttles the number of in-flight operations when the cluster signals resource exhaustion. It complements (not replaces) per-request HTTP retry.
+
+#### Signals Considered
+
+An HTTP response is treated as a backpressure signal when it matches one of:
+
+- `429` (Too Many Requests) — always
+- `503` with `title === "RESOURCE_EXHAUSTED"`
+- `500` whose RFC 9457 / 7807 `detail` text contains `RESOURCE_EXHAUSTED`
+
+All other 5xx variants are treated as non-retryable (fail fast) and do **not** influence the adaptive gate.
+
+#### How It Works
+
+1. Normal state starts with the concurrency cap from `CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX` (default 16).
+2. On backpressure signals the manager reduces available permits using the soft factor (70% by default).
+3. Repeated consecutive signals escalate severity to `severe`, applying a stronger reduction factor (50%).
+4. Successful (non-backpressure) completions trigger passive recovery checks that gradually restore permits over time if the system stays quiet.
+5. Quiet periods (no signals for a configurable decay interval) downgrade severity and reset the consecutive counter.
+
+The policy is intentionally conservative: it only engages after genuine pressure signals and recovers gradually to avoid oscillation.
+
+#### Configuration
+
+| Variable | Default | Description |
+|---|---|---|
+| `CAMUNDA_SDK_BACKPRESSURE_PROFILE` | `BALANCED` | Preset profile (see below) |
+| `CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX` | `16` | Bootstrap concurrency cap |
+| `CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR` | `70` | Percentage multiplier on soft backpressure (70 → 0.70×) |
+| `CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR` | `50` | Percentage multiplier on severe backpressure |
+| `CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS` | `1000` | Interval between passive recovery checks (ms) |
+| `CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP` | `1` | Permits regained per recovery interval |
+| `CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS` | `2000` | Quiet period to downgrade severity (ms) |
+| `CAMUNDA_SDK_BACKPRESSURE_FLOOR` | `1` | Minimum concurrency floor while degraded |
+| `CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD` | `3` | Consecutive signals required to enter severe state |
+
+#### Profiles
+
+Profiles supply coordinated defaults. Any explicitly set env var overrides the profile value.
+
+| Profile | initialMax | softFactor% | severeFactor% | recoveryMs | recoveryStep | quietDecayMs | floor | severeThreshold | Use case |
+|---|---|---|---|---|---|---|---|---|---|
+| `BALANCED` | 16 | 70 | 50 | 1000 | 1 | 2000 | 1 | 3 | General workloads |
+| `CONSERVATIVE` | 12 | 60 | 40 | 1200 | 1 | 2500 | 1 | 2 | Tighter capacity constraints |
+| `AGGRESSIVE` | 24 | 80 | 60 | 800 | 2 | 1500 | 2 | 4 | High throughput scenarios |
+| `LEGACY` | — | — | — | — | — | — | — | — | Observe-only (no gating) |
+
+Select via environment:
+
+```bash
+CAMUNDA_SDK_BACKPRESSURE_PROFILE=AGGRESSIVE
+```
+
+Override individual knobs on top of a profile:
+
+```bash
+CAMUNDA_SDK_BACKPRESSURE_PROFILE=AGGRESSIVE
+CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX=32
+```
+
+The `LEGACY` profile disables adaptive gating entirely — signals are still tracked for observability but no concurrency limits are applied. Use this to opt out of backpressure management while retaining per-request retry.
+
+#### Inspecting State Programmatically
+
+```csharp
+var state = client.GetBackpressureState();
+// state.Severity: "healthy", "soft", or "severe"
+// state.Consecutive: consecutive backpressure signals observed
+// state.PermitsMax: current concurrency cap (null when LEGACY / not engaged)
+```
 
 ### Eventual Consistency
 
@@ -154,18 +406,16 @@ When an `ILoggerFactory` is provided, `CAMUNDA_SDK_LOG_LEVEL` is ignored — fil
 
 ### ASP.NET Core / Dependency Injection
 
-In ASP.NET Core, pass the framework's logger factory:
+When using `AddCamundaClient()`, the SDK automatically resolves `ILoggerFactory` from the DI container — no manual wiring needed:
 
 ```csharp
-// In Program.cs or Startup
-builder.Services.AddSingleton(sp =>
-{
-    var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
-    return Camunda.CreateClient(new CamundaOptions
-    {
-        LoggerFactory = loggerFactory,
-    });
-});
+var builder = WebApplication.CreateBuilder(args);
+
+// Logging configuration
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
+// SDK automatically uses the host's ILoggerFactory
+builder.Services.AddCamundaClient(builder.Configuration.GetSection("Camunda"));
 ```
 
 All SDK log entries appear alongside your application logs with proper category names (`Camunda.Orchestration.Sdk.CamundaClient`, `Camunda.Orchestration.Sdk.JobWorker.*`, etc.).
