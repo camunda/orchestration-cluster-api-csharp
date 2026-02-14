@@ -95,6 +95,7 @@ module.exports = {
       },
     ],
     '@semantic-release/release-notes-generator',
+    '@semantic-release/changelog',
     [
       '@semantic-release/exec',
       {
@@ -107,7 +108,7 @@ module.exports = {
     [
       '@semantic-release/git',
       {
-        assets: ['src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj'],
+        assets: ['CHANGELOG.md', 'src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj'],
         message:
           'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
