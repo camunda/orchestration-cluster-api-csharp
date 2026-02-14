@@ -13,6 +13,10 @@ dotnet tool restore
 echo "[docs] Building library with XML documentation..."
 dotnet build "$REPO_ROOT/src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj" --configuration Release
 
+# Compile examples (regression guard — fails if API contracts break)
+echo "[docs] Compiling API examples..."
+dotnet build "$REPO_ROOT/docs/examples/Examples.csproj" --configuration Release
+
 # Install docfx as a local tool if not already installed
 if ! dotnet tool list --local 2>/dev/null | grep -q docfx; then
     echo "[docs] Installing DocFX as a local .NET tool..."

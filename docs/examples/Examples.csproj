@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+    <!-- This project only needs to compile, never run -->
+    <OutputType>Library</OutputType>
+    <RootNamespace>Camunda.Orchestration.Sdk.Examples</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj" />
+  </ItemGroup>
+
+</Project>
