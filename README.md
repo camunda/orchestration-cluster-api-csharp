@@ -1,6 +1,7 @@
 # Camunda 8 Orchestration Cluster API — C# SDK
 
 [![NuGet](https://img.shields.io/nuget/v/Camunda.Orchestration.Sdk)](https://www.nuget.org/packages/Camunda.Orchestration.Sdk)
+[![Documentation](https://img.shields.io/badge/docs-API%20Reference-blue)](https://camunda.github.io/orchestration-cluster-api-csharp)
 [![License](https://img.shields.io/github/license/camunda/orchestration-cluster-api-csharp)](LICENSE)
 
 C# client SDK for the [Camunda 8 Orchestration Cluster REST API](https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/).
