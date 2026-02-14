@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Property Message | Camunda C# SDK </title>
+      <title>Property Configuration | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Property Message | Camunda C# SDK ">
+      <meta name="title" content="Property Configuration | Camunda C# SDK ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_Runtime_ConfigErrorDetail_Message_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.Runtime.ConfigErrorDetail.Message*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_Runtime_CamundaOptions_Configuration_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,14 +84,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.Runtime.ConfigErrorDetail.Message*">
+        <article data-uid="Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration*">
 
 
 
 
 
-<h1 id="Camunda_Orchestration_Sdk_Runtime_ConfigErrorDetail_Message_" data-uid="Camunda.Orchestration.Sdk.Runtime.ConfigErrorDetail.Message*" class="text-break">
-Property Message  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/ConfigurationHydrator.cs/#L21"><i class="bi bi-code-slash"></i></a>
+<h1 id="Camunda_Orchestration_Sdk_Runtime_CamundaOptions_Configuration_" data-uid="Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration*" class="text-break">
+Property Configuration  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaOptions.cs/#L28"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -117,18 +117,27 @@ Property Message  <a class="header-action link-secondary" title="View source" hr
 
 
 
-<a id="Camunda_Orchestration_Sdk_Runtime_ConfigErrorDetail_Message_" data-uid="Camunda.Orchestration.Sdk.Runtime.ConfigErrorDetail.Message*"></a>
+<a id="Camunda_Orchestration_Sdk_Runtime_CamundaOptions_Configuration_" data-uid="Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_Runtime_ConfigErrorDetail_Message" data-uid="Camunda.Orchestration.Sdk.Runtime.ConfigErrorDetail.Message">
-  Message
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/ConfigurationHydrator.cs/#L21"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_Runtime_CamundaOptions_Configuration" data-uid="Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration">
+  Configuration
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaOptions.cs/#L28"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"></div>
+<div class="markdown level1 summary"><p>An <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration">IConfiguration</a> section (typically <code>configuration.GetSection(&quot;Camunda&quot;)</code>)
+to bind settings from <code>appsettings.json</code> or any other configuration provider.</p>
+<p>
+Keys use PascalCase property names (e.g. <code>RestAddress</code>, <code>Auth:Strategy</code>)
+and are mapped to the canonical <code>CAMUNDA_*</code> env-var names internally.
+</p>
+<p>
+Precedence (highest wins): <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Config.html#Camunda_Orchestration_Sdk_Runtime_CamundaOptions_Config">Config</a> &gt; <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration.html#Camunda_Orchestration_Sdk_Runtime_CamundaOptions_Configuration">Configuration</a> &gt; environment variables &gt; defaults.
+</p>
+</div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public required string Message { get; init; }</code></pre>
+  <pre><code class="lang-csharp hljs">public IConfiguration? Configuration { get; set; }</code></pre>
 </div>
 
 
@@ -137,7 +146,7 @@ Property Message  <a class="header-action link-secondary" title="View source" hr
 
 <h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration">IConfiguration</a></dt>
   <dd></dd>
 </dl>
 
@@ -151,7 +160,7 @@ Property Message  <a class="header-action link-secondary" title="View source" hr
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/ConfigurationHydrator.cs/#L21" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaOptions.cs/#L28" class="edit-link">Edit this page</a>
         </div>
 
 

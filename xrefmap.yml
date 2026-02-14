@@ -30169,6 +30169,39 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.UpdateUserTaskAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateUserTaskAsync
   nameWithType: CamundaClient.UpdateUserTaskAsync
+- uid: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions
+  name: CamundaServiceCollectionExtensions
+  href: api/Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.html
+  commentId: T:Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions
+  fullName: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions
+  nameWithType: CamundaServiceCollectionExtensions
+- uid: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name: AddCamundaClient(IServiceCollection)
+  href: api/Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient.html#Camunda_Orchestration_Sdk_CamundaServiceCollectionExtensions_AddCamundaClient_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  fullName: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  nameWithType: CamundaServiceCollectionExtensions.AddCamundaClient(IServiceCollection)
+- uid: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)
+  name: AddCamundaClient(IServiceCollection, IConfiguration)
+  href: api/Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient.html#Camunda_Orchestration_Sdk_CamundaServiceCollectionExtensions_AddCamundaClient_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)
+  fullName: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration)
+  nameWithType: CamundaServiceCollectionExtensions.AddCamundaClient(IServiceCollection, IConfiguration)
+- uid: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Camunda.Orchestration.Sdk.Runtime.CamundaOptions})
+  name: AddCamundaClient(IServiceCollection, Action<CamundaOptions>)
+  href: api/Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient.html#Camunda_Orchestration_Sdk_CamundaServiceCollectionExtensions_AddCamundaClient_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Camunda_Orchestration_Sdk_Runtime_CamundaOptions__
+  commentId: M:Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Camunda.Orchestration.Sdk.Runtime.CamundaOptions})
+  name.vb: AddCamundaClient(IServiceCollection, Action(Of CamundaOptions))
+  fullName: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Camunda.Orchestration.Sdk.Runtime.CamundaOptions>)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Camunda.Orchestration.Sdk.Runtime.CamundaOptions))
+  nameWithType: CamundaServiceCollectionExtensions.AddCamundaClient(IServiceCollection, Action<CamundaOptions>)
+  nameWithType.vb: CamundaServiceCollectionExtensions.AddCamundaClient(IServiceCollection, Action(Of CamundaOptions))
+- uid: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient*
+  name: AddCamundaClient
+  href: api/Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient
+  fullName: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient
+  nameWithType: CamundaServiceCollectionExtensions.AddCamundaClient
 - uid: Camunda.Orchestration.Sdk.Runtime
   name: Camunda.Orchestration.Sdk.Runtime
   href: api/Camunda.Orchestration.Sdk.Runtime.html
@@ -31099,6 +31132,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Config
   fullName: Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Config
   nameWithType: CamundaOptions.Config
+- uid: Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration
+  name: Configuration
+  href: api/Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration.html#Camunda_Orchestration_Sdk_Runtime_CamundaOptions_Configuration
+  commentId: P:Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration
+  fullName: Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration
+  nameWithType: CamundaOptions.Configuration
+- uid: Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration*
+  name: Configuration
+  href: api/Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration
+  fullName: Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Configuration
+  nameWithType: CamundaOptions.Configuration
 - uid: Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Env
   name: Env
   href: api/Camunda.Orchestration.Sdk.Runtime.CamundaOptions.Env.html#Camunda_Orchestration_Sdk_Runtime_CamundaOptions_Env
@@ -31315,15 +31360,15 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator
   fullName: Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator
   nameWithType: ConfigurationHydrator
-- uid: Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String})
-  name: Hydrate(Dictionary<string, string?>?, Dictionary<string, string>?)
-  href: api/Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate.html#Camunda_Orchestration_Sdk_Runtime_ConfigurationHydrator_Hydrate_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__
-  commentId: M:Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String})
-  name.vb: Hydrate(Dictionary(Of String, String), Dictionary(Of String, String))
-  fullName: Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary<string, string?>?, System.Collections.Generic.Dictionary<string, string>?)
-  fullName.vb: Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary(Of String, String), System.Collections.Generic.Dictionary(Of String, String))
-  nameWithType: ConfigurationHydrator.Hydrate(Dictionary<string, string?>?, Dictionary<string, string>?)
-  nameWithType.vb: ConfigurationHydrator.Hydrate(Dictionary(Of String, String), Dictionary(Of String, String))
+- uid: Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},Microsoft.Extensions.Configuration.IConfiguration)
+  name: Hydrate(Dictionary<string, string?>?, Dictionary<string, string>?, IConfiguration?)
+  href: api/Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate.html#Camunda_Orchestration_Sdk_Runtime_ConfigurationHydrator_Hydrate_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__Microsoft_Extensions_Configuration_IConfiguration_
+  commentId: M:Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},Microsoft.Extensions.Configuration.IConfiguration)
+  name.vb: Hydrate(Dictionary(Of String, String), Dictionary(Of String, String), IConfiguration)
+  fullName: Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary<string, string?>?, System.Collections.Generic.Dictionary<string, string>?, Microsoft.Extensions.Configuration.IConfiguration?)
+  fullName.vb: Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary(Of String, String), System.Collections.Generic.Dictionary(Of String, String), Microsoft.Extensions.Configuration.IConfiguration)
+  nameWithType: ConfigurationHydrator.Hydrate(Dictionary<string, string?>?, Dictionary<string, string>?, IConfiguration?)
+  nameWithType.vb: ConfigurationHydrator.Hydrate(Dictionary(Of String, String), Dictionary(Of String, String), IConfiguration)
 - uid: Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate*
   name: Hydrate
   href: api/Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate.html

@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_Runtime_ConfigurationHydrator_Hydrate_" data-uid="Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate*" class="text-break">
-Method Hydrate  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/ConfigurationHydrator.cs/#L72"><i class="bi bi-code-slash"></i></a>
+Method Hydrate  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/ConfigurationHydrator.cs/#L74"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method Hydrate  <a class="header-action link-secondary" title="View source" href
 
 <a id="Camunda_Orchestration_Sdk_Runtime_ConfigurationHydrator_Hydrate_" data-uid="Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_Runtime_ConfigurationHydrator_Hydrate_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String})">
-  Hydrate(Dictionary&lt;string, string?&gt;?, Dictionary&lt;string, string&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/ConfigurationHydrator.cs/#L72"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_Runtime_ConfigurationHydrator_Hydrate_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__Microsoft_Extensions_Configuration_IConfiguration_" data-uid="Camunda.Orchestration.Sdk.Runtime.ConfigurationHydrator.Hydrate(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},Microsoft.Extensions.Configuration.IConfiguration)">
+  Hydrate(Dictionary&lt;string, string?&gt;?, Dictionary&lt;string, string&gt;?, IConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/ConfigurationHydrator.cs/#L74"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Hydrate configuration from environment and optional overrides.</p>
@@ -129,7 +129,7 @@ Method Hydrate  <a class="header-action link-secondary" title="View source" href
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public static CamundaConfig Hydrate(Dictionary&lt;string, string?&gt;? env = null, Dictionary&lt;string, string&gt;? overrides = null)</code></pre>
+  <pre><code class="lang-csharp hljs">public static CamundaConfig Hydrate(Dictionary&lt;string, string?&gt;? env = null, Dictionary&lt;string, string&gt;? overrides = null, IConfiguration? configuration = null)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
@@ -137,6 +137,8 @@ Method Hydrate  <a class="header-action link-secondary" title="View source" href
   <dt><code>env</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
   <dd></dd>
   <dt><code>overrides</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+  <dd></dd>
+  <dt><code>configuration</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration">IConfiguration</a></dt>
   <dd></dd>
 </dl>
 
@@ -159,7 +161,7 @@ Method Hydrate  <a class="header-action link-secondary" title="View source" href
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/ConfigurationHydrator.cs/#L72" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/ConfigurationHydrator.cs/#L74" class="edit-link">Edit this page</a>
         </div>
 
 
