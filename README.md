@@ -1,14 +1,20 @@
-# Camunda 8 Orchestration Cluster API — C# SDK
+# Camunda 8 Orchestration Cluster API — C# SDK (Technical Preview)
 
 [![NuGet](https://img.shields.io/nuget/v/Camunda.Orchestration.Sdk)](https://www.nuget.org/packages/Camunda.Orchestration.Sdk)
 [![Documentation](https://img.shields.io/badge/docs-API%20Reference-blue)](https://camunda.github.io/orchestration-cluster-api-csharp)
 [![License](https://img.shields.io/github/license/camunda/orchestration-cluster-api-csharp)](LICENSE)
 
-C# client SDK for the [Camunda 8 Orchestration Cluster REST API](https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/).
+Technical preview of the C# client SDK for the [Camunda 8 Orchestration Cluster REST API](https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/).
 
 Unified configuration, OAuth/Basic auth, automatic retry, backpressure management, strongly-typed domain keys, and opt-in typed variables.
 
 Full API Documentation available [here](https://camunda.github.io/orchestration-cluster-api-csharp).
+
+## Support status
+
+This is a technical preview of the C# client that will become fully supported in Camunda 8.10.0. 
+
+Prior to Camunda 8.10.0, this client will undergo changes as we stabilise the code and incorporate feedback from early adopters. We endeavor to keep disruption to a minimum, but there may be breaking changes.
 
 ## Installation
 
