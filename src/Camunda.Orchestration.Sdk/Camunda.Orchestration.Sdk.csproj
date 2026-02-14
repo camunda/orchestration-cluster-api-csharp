@@ -34,7 +34,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
     <!-- Version: set by semantic-release during publish; 0.0.0-dev for local builds -->
-    <Version>8.9.0-alpha.5</Version>
+    <Version>8.9.0-alpha.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
