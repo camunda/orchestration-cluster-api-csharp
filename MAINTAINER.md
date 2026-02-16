@@ -272,3 +272,48 @@ Key generator behaviors:
 - **Domain keys** — `readonly record struct` types with constraint validation, generated for string/long properties matching OpenAPI `x-]]` patterns
 - **allOf with single $ref** — resolved to the referenced type (common pattern: `allOf: [{$ref: "..."}]` + description overlay)
 - **Inline oneOf request bodies** — matched to component schemas by comparing required field sets
+
+## Docusaurus Integration (camunda-docs)
+
+The SDK's API reference documentation is published on the [Camunda docs site](https://docs.camunda.io) via an inversion-of-control pattern: a GitHub Actions workflow **in the camunda-docs repo** checks out this SDK, generates documentation, and opens a PR to copy the output into the docs site.
+
+### How it works
+
+1. The sync workflow (`sync-csharp-sdk-docs.yaml` in `camunda/camunda-docs`) runs on a weekly schedule (Thursdays at 4 PM UTC) or on manual dispatch.
+2. It checks out this repo (default: `main` branch) and runs:
+   ```bash
+   dotnet build src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj -c Release
+   dotnet docfx metadata docs/docfx.json
+   python3 scripts/generate-docusaurus-md.py
+   ```
+3. The generated Markdown files from `docs-md/api-reference/` are copied into the docs repo at:
+   - **Next version:** `docs/apis-tools/csharp-sdk/api-reference/`
+   - **Released version:** `versioned_docs/version-<X.Y>/apis-tools/csharp-sdk/api-reference/`
+4. A PR is opened automatically via `peter-evans/create-pull-request`.
+
+### Doc generation pipeline
+
+1. `dotnet build` compiles the SDK (Release configuration).
+2. `dotnet docfx metadata` extracts API metadata from the compiled assembly using the DocFX config at `docs/docfx.json`.
+3. `scripts/generate-docusaurus-md.py` converts the DocFX metadata into Docusaurus-compatible Markdown, output in `docs-md/api-reference/`.
+
+### Updating a released version
+
+To backport docs to a released version (e.g. 8.8):
+
+1. Go to the **Actions** tab in `camunda/camunda-docs`.
+2. Select the **Sync C# SDK API Reference** workflow.
+3. Click **Run workflow** and enter `8.8` in the `docs_version` field.
+4. The workflow checks out `stable/8.8` from this repo and copies docs into `versioned_docs/version-8.8/`.
+
+The PR branch is version-scoped (e.g. `update-csharp-sdk-docs/8.8`), so backport and next-version syncs can coexist.
+
+### What lives where
+
+| What | Location |
+| --- | --- |
+| DocFX config | `docs/docfx.json` |
+| Docusaurus MD generator | `scripts/generate-docusaurus-md.py` |
+| Generated Markdown output | `docs-md/api-reference/` |
+| Sync workflow (in camunda-docs) | `.github/workflows/sync-csharp-sdk-docs.yaml` |
+| Docs site target (next) | `docs/apis-tools/csharp-sdk/api-reference/` |
