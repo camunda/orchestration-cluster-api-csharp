@@ -37,3 +37,9 @@ coverage/
 ## DocFX generated output
 docs/_site/
 docs/api/
+
+## Docusaurus markdown output
+docs-md/
+
+## Working plans (local only)
+DOCS_INTEGRATION_PLAN.md
