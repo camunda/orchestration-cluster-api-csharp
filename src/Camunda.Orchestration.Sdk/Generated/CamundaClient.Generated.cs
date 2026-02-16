@@ -299,17 +299,17 @@ public partial class CamundaClient
     /// Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
     /// </summary>
     /// <remarks>Operation: createAdminUser</remarks>
-    public async Task<object> CreateAdminUserAsync(UserRequest body, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task<UserCreateResult> CreateAdminUserAsync(UserRequest body, ConsistencyOptions<UserCreateResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/setup/user";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("createAdminUser", false,
-                () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Post, path, body, ct), "createAdminUser", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<UserCreateResult>(HttpMethod.Post, path, body, ct), "createAdminUser", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Post, path, body, ct), "createAdminUser", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<UserCreateResult>(HttpMethod.Post, path, body, ct), "createAdminUser", false, ct);
     }
 
     /// <summary>
@@ -413,12 +413,31 @@ public partial class CamundaClient
 
     /// <summary>
     /// Create a global-scoped cluster variable
+    /// Create a global-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: createGlobalClusterVariable</remarks>
     public async Task<ClusterVariableResult> CreateGlobalClusterVariableAsync(CreateClusterVariableRequest body, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/global";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Post, path, body, ct), "createGlobalClusterVariable", false, ct);
+    }
+
+    /// <summary>
+    /// Create global user task listener
+    /// Create a new global user task listener.
+    /// </summary>
+    /// <remarks>Operation: createGlobalTaskListener</remarks>
+    public async Task<CreateGlobalTaskListenerResponse> CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest body, ConsistencyOptions<CreateGlobalTaskListenerResponse>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/global-listeners/user-task";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("createGlobalTaskListener", false,
+                () => InvokeWithRetryAsync(() => SendAsync<CreateGlobalTaskListenerResponse>(HttpMethod.Post, path, body, ct), "createGlobalTaskListener", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<CreateGlobalTaskListenerResponse>(HttpMethod.Post, path, body, ct), "createGlobalTaskListener", false, ct);
     }
 
     /// <summary>
@@ -486,6 +505,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Create a tenant-scoped cluster variable
+    /// Create a new cluster variable for the given tenant.
     /// </summary>
     /// <remarks>Operation: createTenantClusterVariable</remarks>
     public async Task<ClusterVariableResult> CreateTenantClusterVariableAsync(TenantId tenantId, CreateClusterVariableRequest body, CancellationToken ct = default)
@@ -580,12 +600,32 @@ public partial class CamundaClient
 
     /// <summary>
     /// Delete a global-scoped cluster variable
+    /// Delete a global-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: deleteGlobalClusterVariable</remarks>
     public async Task DeleteGlobalClusterVariableAsync(string name, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteGlobalClusterVariable", false, ct);
+    }
+
+    /// <summary>
+    /// Delete global user task listener
+    /// Deletes a global user task listener.
+    /// </summary>
+    /// <remarks>Operation: deleteGlobalTaskListener</remarks>
+    public async Task DeleteGlobalTaskListenerAsync(GlobalListenerId id, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/global-listeners/user-task/{Uri.EscapeDataString(id.ToString()!)}";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            await EventualPoller.PollAsync("deleteGlobalTaskListener", false,
+                async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return new object(); },
+                consistency!, _logger, ct);
+            return;
+        }
+
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteGlobalTaskListener", false, ct);
     }
 
     /// <summary>
@@ -698,6 +738,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Delete a tenant-scoped cluster variable
+    /// Delete a tenant-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: deleteTenantClusterVariable</remarks>
     public async Task DeleteTenantClusterVariableAsync(TenantId tenantId, string name, CancellationToken ct = default)
@@ -972,6 +1013,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Get a global-scoped cluster variable
+    /// Get a global-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: getGlobalClusterVariable</remarks>
     public async Task<ClusterVariableResult> GetGlobalClusterVariableAsync(string name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
@@ -1401,6 +1443,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Get a tenant-scoped cluster variable
+    /// Get a tenant-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: getTenantClusterVariable</remarks>
     public async Task<ClusterVariableResult> GetTenantClusterVariableAsync(TenantId tenantId, string name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
@@ -2663,6 +2706,24 @@ public partial class CamundaClient
     {
         var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Put, path, body, ct), "updateGlobalClusterVariable", false, ct);
+    }
+
+    /// <summary>
+    /// Update global user task listener
+    /// Updates a global user task listener.
+    /// </summary>
+    /// <remarks>Operation: updateGlobalTaskListener</remarks>
+    public async Task<UpdateGlobalTaskListenerResponse> UpdateGlobalTaskListenerAsync(GlobalListenerId id, UpdateGlobalTaskListenerRequest body, ConsistencyOptions<UpdateGlobalTaskListenerResponse>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/global-listeners/user-task/{Uri.EscapeDataString(id.ToString()!)}";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("updateGlobalTaskListener", false,
+                () => InvokeWithRetryAsync(() => SendAsync<UpdateGlobalTaskListenerResponse>(HttpMethod.Put, path, body, ct), "updateGlobalTaskListener", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<UpdateGlobalTaskListenerResponse>(HttpMethod.Put, path, body, ct), "updateGlobalTaskListener", false, ct);
     }
 
     /// <summary>

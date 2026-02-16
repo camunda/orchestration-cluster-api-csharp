@@ -83,6 +83,9 @@
       "name": "Expression"
     },
     {
+      "name": "Global listener"
+    },
+    {
       "name": "Group"
     },
     {
@@ -225,6 +228,10 @@
                           },
                           "actorType": {
                             "$ref": "#/components/schemas/AuditLogActorTypeEnum"
+                          },
+                          "agentElementId": {
+                            "type": "string",
+                            "description": "The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID)."
                           },
                           "tenantId": {
                             "allOf": [
@@ -512,6 +519,10 @@
                     },
                     "actorType": {
                       "$ref": "#/components/schemas/AuditLogActorTypeEnum"
+                    },
+                    "agentElementId": {
+                      "type": "string",
+                      "description": "The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID)."
                     },
                     "tenantId": {
                       "allOf": [
@@ -2006,6 +2017,7 @@
           "Cluster Variable"
         ],
         "summary": "Create a global-scoped cluster variable",
+        "description": "Create a global-scoped cluster variable.",
         "requestBody": {
           "required": true,
           "content": {
@@ -2085,6 +2097,7 @@
           "Cluster Variable"
         ],
         "summary": "Get a global-scoped cluster variable",
+        "description": "Get a global-scoped cluster variable.",
         "parameters": [
           {
             "name": "name",
@@ -2272,6 +2285,7 @@
           "Cluster Variable"
         ],
         "summary": "Delete a global-scoped cluster variable",
+        "description": "Delete a global-scoped cluster variable.",
         "parameters": [
           {
             "name": "name",
@@ -2445,6 +2459,7 @@
           "Cluster Variable"
         ],
         "summary": "Create a tenant-scoped cluster variable",
+        "description": "Create a new cluster variable for the given tenant.",
         "parameters": [
           {
             "name": "tenantId",
@@ -2535,6 +2550,7 @@
           "Cluster Variable"
         ],
         "summary": "Get a tenant-scoped cluster variable",
+        "description": "Get a tenant-scoped cluster variable.",
         "parameters": [
           {
             "name": "tenantId",
@@ -2740,6 +2756,7 @@
           "Cluster Variable"
         ],
         "summary": "Delete a tenant-scoped cluster variable",
+        "description": "Delete a tenant-scoped cluster variable.",
         "parameters": [
           {
             "name": "tenantId",
@@ -3182,7 +3199,14 @@
             }
           },
           "404": {
-            "description": "The decision is not found."
+            "description": "The decision is not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
           },
           "500": {
             "description": "An internal error occurred while processing the request.",
@@ -5770,6 +5794,386 @@
           },
           "500": {
             "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/global-listeners/user-task": {
+      "post": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Global listener"
+        ],
+        "operationId": "createGlobalTaskListener",
+        "summary": "Create global user task listener",
+        "description": "Create a new global user task listener.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGlobalTaskListenerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The global user task listener was created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/GlobalListenerBase"
+                        }
+                      ],
+                      "properties": {
+                        "eventTypes": {
+                          "description": "List of user task event types that trigger the listener.",
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/GlobalTaskListenerEventTypeEnum"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "properties": {
+                    "id": {
+                      "$ref": "#/components/schemas/GlobalListenerId"
+                    },
+                    "source": {
+                      "$ref": "#/components/schemas/GlobalListenerSourceEnum"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A global listener with this id already exists.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/global-listeners/user-task/{id}": {
+      "put": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Global listener"
+        ],
+        "operationId": "updateGlobalTaskListener",
+        "summary": "Update global user task listener",
+        "description": "Updates a global user task listener.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the global user task listener to update.",
+            "schema": {
+              "$ref": "#/components/schemas/GlobalListenerId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "eventTypes"
+                ],
+                "allOf": [
+                  {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/GlobalListenerBase"
+                      }
+                    ],
+                    "properties": {
+                      "eventTypes": {
+                        "description": "List of user task event types that trigger the listener.",
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/GlobalTaskListenerEventTypeEnum"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The global listener was updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/GlobalListenerBase"
+                        }
+                      ],
+                      "properties": {
+                        "eventTypes": {
+                          "description": "List of user task event types that trigger the listener.",
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/GlobalTaskListenerEventTypeEnum"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "properties": {
+                    "id": {
+                      "$ref": "#/components/schemas/GlobalListenerId"
+                    },
+                    "source": {
+                      "$ref": "#/components/schemas/GlobalListenerSourceEnum"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The global user task listener was not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Global listener"
+        ],
+        "operationId": "deleteGlobalTaskListener",
+        "summary": "Delete global user task listener",
+        "description": "Deletes a global user task listener.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the global user task listener to delete.",
+            "schema": {
+              "$ref": "#/components/schemas/GlobalListenerId"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The global listener was deleted successfully."
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The global user task listener was not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -13053,7 +13457,6 @@
                   "deleteHistory": {
                     "description": "Indicates if the historic data of a process resource should be deleted via a\nbatch operation asynchronously.\n\nThis flag is only effective for process resources. For other resource types\n(decisions, forms, generic resources), this flag is ignored and no history\nwill be deleted. In those cases, the `batchOperation` field in the response\nwill not be populated.\n",
                     "type": "boolean",
-                    "required": false,
                     "default": false
                   }
                 }
@@ -13272,7 +13675,14 @@
             }
           },
           "500": {
-            "description": "An internal error occurred while processing the request."
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
           }
         }
       }
@@ -14878,7 +15288,14 @@
         },
         "responses": {
           "201": {
-            "description": "The admin user was created successfully."
+            "description": "The admin user was created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCreateResult"
+                }
+              }
+            }
           },
           "400": {
             "description": "The provided data is not valid.",
@@ -15391,7 +15808,14 @@
             }
           },
           "404": {
-            "description": "Not found"
+            "description": "Not found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
           },
           "500": {
             "description": "An internal error occurred while processing the request.",
@@ -18679,6 +19103,10 @@
                           "actorType": {
                             "$ref": "#/components/schemas/AuditLogActorTypeEnum"
                           },
+                          "agentElementId": {
+                            "type": "string",
+                            "description": "The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID)."
+                          },
                           "tenantId": {
                             "allOf": [
                               {
@@ -19923,6 +20351,10 @@
           "actorType": {
             "$ref": "#/components/schemas/AuditLogActorTypeEnum"
           },
+          "agentElementId": {
+            "type": "string",
+            "description": "The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID)."
+          },
           "tenantId": {
             "allOf": [
               {
@@ -20216,6 +20648,14 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/AuditLogActorTypeFilterProperty"
+              }
+            ]
+          },
+          "agentElementId": {
+            "description": "The agent element ID search filter.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
               }
             ]
           },
@@ -23788,7 +24228,6 @@
           "deleteHistory": {
             "description": "Indicates if the historic data of a process resource should be deleted via a\nbatch operation asynchronously.\n\nThis flag is only effective for process resources. For other resource types\n(decisions, forms, generic resources), this flag is ignored and no history\nwill be deleted. In those cases, the `batchOperation` field in the response\nwill not be populated.\n",
             "type": "boolean",
-            "required": false,
             "default": false
           }
         }
@@ -24618,7 +25057,6 @@
           },
           "result": {
             "description": "The result value. Its type can vary.",
-            "type": "object",
             "example": 30
           },
           "warnings": {
@@ -24880,6 +25318,114 @@
               }
             ],
             "description": "The assigned key, which acts as a unique identifier for this form."
+          }
+        }
+      },
+      "GlobalListenerSourceEnum": {
+        "type": "string",
+        "enum": [
+          "CONFIGURATION",
+          "API"
+        ],
+        "description": "How the global listener was defined."
+      },
+      "GlobalTaskListenerEventTypeEnum": {
+        "type": "string",
+        "enum": [
+          "all",
+          "creating",
+          "assigning",
+          "updating",
+          "completing",
+          "canceling"
+        ],
+        "description": "The event type that triggers the user task listener."
+      },
+      "GlobalListenerBase": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "description": "The name of the job type, used as a reference to specify which job workers request the respective listener job.",
+            "type": "string",
+            "example": "order-items"
+          },
+          "retries": {
+            "description": "Number of retries for the listener job.",
+            "type": "integer"
+          },
+          "afterNonGlobal": {
+            "description": "Whether the listener should run after model-level listeners.",
+            "type": "boolean"
+          },
+          "priority": {
+            "description": "The priority of the listener. Higher priority listeners are executed before lower priority ones.",
+            "type": "integer"
+          }
+        }
+      },
+      "GlobalTaskListenerBase": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GlobalListenerBase"
+          }
+        ],
+        "properties": {
+          "eventTypes": {
+            "$ref": "#/components/schemas/GlobalTaskListenerEventTypes"
+          }
+        }
+      },
+      "GlobalTaskListenerEventTypes": {
+        "description": "List of user task event types that trigger the listener.",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/GlobalTaskListenerEventTypeEnum"
+        }
+      },
+      "CreateGlobalTaskListenerRequest": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "eventTypes"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GlobalTaskListenerBase"
+          }
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/GlobalListenerId"
+          }
+        }
+      },
+      "UpdateGlobalTaskListenerRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "eventTypes"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GlobalTaskListenerBase"
+          }
+        ]
+      },
+      "GlobalTaskListenerResult": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GlobalTaskListenerBase"
+          }
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/GlobalListenerId"
+          },
+          "source": {
+            "$ref": "#/components/schemas/GlobalListenerSourceEnum"
           }
         }
       },
@@ -25209,6 +25755,13 @@
         "maxLength": 256,
         "pattern": "^[A-Za-z0-9_@.+-]+$",
         "example": "new-hire-onboarding-workflow"
+      },
+      "GlobalListenerId": {
+        "description": "The user-defined id for the global listener",
+        "type": "string",
+        "format": "GlobalListenerId",
+        "x-semantic-type": "GlobalListenerId",
+        "example": "GlobalListener_1"
       },
       "TenantId": {
         "example": "customer-service",
@@ -28890,7 +29443,7 @@
             "format": "uri",
             "description": "A URI identifying the problem type.",
             "default": "about:blank",
-            "example": "about:blank"
+            "example": "https://docs.camunda.io/api/v2.0/problem-types/bad-request"
           },
           "title": {
             "type": "string",
@@ -28912,7 +29465,7 @@
           },
           "instance": {
             "type": "string",
-            "format": "uri",
+            "format": "uri-reference",
             "description": "A URI path identifying the origin of the problem.",
             "example": "/v2/jobs/activation"
           }

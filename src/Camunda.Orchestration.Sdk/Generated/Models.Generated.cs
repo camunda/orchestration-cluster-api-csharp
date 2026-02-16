@@ -2028,6 +2028,12 @@ public sealed class AuditLogFilter
     public AuditLogActorTypeFilterProperty? ActorType { get; set; }
 
     /// <summary>
+    /// The agent element ID search filter.
+    /// </summary>
+    [JsonPropertyName("agentElementId")]
+    public StringFilterProperty? AgentElementId { get; set; }
+
+    /// <summary>
     /// The entity key search filter.
     /// </summary>
     [JsonPropertyName("entityKey")]
@@ -2300,6 +2306,12 @@ public sealed class AuditLogResult
     /// </summary>
     [JsonPropertyName("actorType")]
     public AuditLogActorTypeEnum? ActorType { get; set; }
+
+    /// <summary>
+    /// The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID).
+    /// </summary>
+    [JsonPropertyName("agentElementId")]
+    public string? AgentElementId { get; set; }
 
     /// <summary>
     /// The tenant ID of the audit log.
@@ -4330,6 +4342,25 @@ public sealed class CreateClusterVariableRequest
     /// </summary>
     [JsonPropertyName("value")]
     public object Value { get; set; } = null!;
+
+}
+
+/// <summary>
+/// CreateGlobalTaskListenerRequest
+/// </summary>
+public sealed class CreateGlobalTaskListenerRequest
+{
+    /// <summary>
+    /// The user-defined id for the global listener
+    /// </summary>
+    [JsonPropertyName("id")]
+    public GlobalListenerId Id { get; set; }
+
+    /// <summary>
+    /// List of user task event types that trigger the listener.
+    /// </summary>
+    [JsonPropertyName("eventTypes")]
+    public List<GlobalTaskListenerEventTypeEnum> EventTypes { get; set; } = null!;
 
 }
 
@@ -7133,6 +7164,183 @@ public sealed class GlobalJobStatisticsQueryResult
     /// </summary>
     [JsonPropertyName("isIncomplete")]
     public bool IsIncomplete { get; set; }
+
+}
+
+/// <summary>
+/// GlobalListenerBase
+/// </summary>
+public sealed class GlobalListenerBase
+{
+    /// <summary>
+    /// The name of the job type, used as a reference to specify which job workers request the respective listener job.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string? Type { get; set; }
+
+    /// <summary>
+    /// Number of retries for the listener job.
+    /// </summary>
+    [JsonPropertyName("retries")]
+    public int? Retries { get; set; }
+
+    /// <summary>
+    /// Whether the listener should run after model-level listeners.
+    /// </summary>
+    [JsonPropertyName("afterNonGlobal")]
+    public bool? AfterNonGlobal { get; set; }
+
+    /// <summary>
+    /// The priority of the listener. Higher priority listeners are executed before lower priority ones.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int? Priority { get; set; }
+
+}
+
+/// <summary>
+/// The user-defined id for the global listener
+/// </summary>
+public readonly record struct GlobalListenerId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private GlobalListenerId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="GlobalListenerId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static GlobalListenerId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerId");
+        return new GlobalListenerId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// How the global listener was defined.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum GlobalListenerSourceEnum
+{
+    [JsonPropertyName("CONFIGURATION")]
+    CONFIGURATION,
+    [JsonPropertyName("API")]
+    API,
+}
+
+/// <summary>
+/// GlobalTaskListenerBase
+/// </summary>
+public sealed class GlobalTaskListenerBase
+{
+    /// <summary>
+    /// List of user task event types that trigger the listener.
+    /// </summary>
+    [JsonPropertyName("eventTypes")]
+    public List<GlobalTaskListenerEventTypeEnum>? EventTypes { get; set; }
+
+    /// <summary>
+    /// The name of the job type, used as a reference to specify which job workers request the respective listener job.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string? Type { get; set; }
+
+    /// <summary>
+    /// Number of retries for the listener job.
+    /// </summary>
+    [JsonPropertyName("retries")]
+    public int? Retries { get; set; }
+
+    /// <summary>
+    /// Whether the listener should run after model-level listeners.
+    /// </summary>
+    [JsonPropertyName("afterNonGlobal")]
+    public bool? AfterNonGlobal { get; set; }
+
+    /// <summary>
+    /// The priority of the listener. Higher priority listeners are executed before lower priority ones.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int? Priority { get; set; }
+
+}
+
+/// <summary>
+/// The event type that triggers the user task listener.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum GlobalTaskListenerEventTypeEnum
+{
+    [JsonPropertyName("all")]
+    All,
+    [JsonPropertyName("creating")]
+    Creating,
+    [JsonPropertyName("assigning")]
+    Assigning,
+    [JsonPropertyName("updating")]
+    Updating,
+    [JsonPropertyName("completing")]
+    Completing,
+    [JsonPropertyName("canceling")]
+    Canceling,
+}
+
+/// <summary>
+/// GlobalTaskListenerResult
+/// </summary>
+public sealed class GlobalTaskListenerResult
+{
+    /// <summary>
+    /// The user-defined id for the global listener
+    /// </summary>
+    [JsonPropertyName("id")]
+    public GlobalListenerId? Id { get; set; }
+
+    /// <summary>
+    /// How the global listener was defined.
+    /// </summary>
+    [JsonPropertyName("source")]
+    public GlobalListenerSourceEnum? Source { get; set; }
+
+    /// <summary>
+    /// List of user task event types that trigger the listener.
+    /// </summary>
+    [JsonPropertyName("eventTypes")]
+    public List<GlobalTaskListenerEventTypeEnum>? EventTypes { get; set; }
+
+    /// <summary>
+    /// The name of the job type, used as a reference to specify which job workers request the respective listener job.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string? Type { get; set; }
+
+    /// <summary>
+    /// Number of retries for the listener job.
+    /// </summary>
+    [JsonPropertyName("retries")]
+    public int? Retries { get; set; }
+
+    /// <summary>
+    /// Whether the listener should run after model-level listeners.
+    /// </summary>
+    [JsonPropertyName("afterNonGlobal")]
+    public bool? AfterNonGlobal { get; set; }
+
+    /// <summary>
+    /// The priority of the listener. Higher priority listeners are executed before lower priority ones.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int? Priority { get; set; }
 
 }
 
@@ -13721,6 +13929,43 @@ public sealed class UpdateClusterVariableRequest
 }
 
 /// <summary>
+/// UpdateGlobalTaskListenerRequest
+/// </summary>
+public sealed class UpdateGlobalTaskListenerRequest
+{
+    /// <summary>
+    /// List of user task event types that trigger the listener.
+    /// </summary>
+    [JsonPropertyName("eventTypes")]
+    public List<GlobalTaskListenerEventTypeEnum> EventTypes { get; set; } = null!;
+
+    /// <summary>
+    /// The name of the job type, used as a reference to specify which job workers request the respective listener job.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string Type { get; set; } = null!;
+
+    /// <summary>
+    /// Number of retries for the listener job.
+    /// </summary>
+    [JsonPropertyName("retries")]
+    public int? Retries { get; set; }
+
+    /// <summary>
+    /// Whether the listener should run after model-level listeners.
+    /// </summary>
+    [JsonPropertyName("afterNonGlobal")]
+    public bool? AfterNonGlobal { get; set; }
+
+    /// <summary>
+    /// The priority of the listener. Higher priority listeners are executed before lower priority ones.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int? Priority { get; set; }
+
+}
+
+/// <summary>
 /// UsageMetricsResponse
 /// </summary>
 public sealed class UsageMetricsResponse
@@ -15150,6 +15395,31 @@ public sealed class CreateDeploymentResponse
 }
 
 /// <summary>
+/// CreateGlobalTaskListenerResponse
+/// </summary>
+public sealed class CreateGlobalTaskListenerResponse
+{
+    /// <summary>
+    /// The user-defined id for the global listener
+    /// </summary>
+    [JsonPropertyName("id")]
+    public GlobalListenerId? Id { get; set; }
+
+    /// <summary>
+    /// How the global listener was defined.
+    /// </summary>
+    [JsonPropertyName("source")]
+    public GlobalListenerSourceEnum? Source { get; set; }
+
+    /// <summary>
+    /// List of user task event types that trigger the listener.
+    /// </summary>
+    [JsonPropertyName("eventTypes")]
+    public List<GlobalTaskListenerEventTypeEnum>? EventTypes { get; set; }
+
+}
+
+/// <summary>
 /// The process instance filter that defines which process instances should be deleted.
 /// </summary>
 public sealed class DeleteProcessInstancesBatchOperationRequest
@@ -15228,6 +15498,12 @@ public sealed class GetAuditLogResponse
     /// </summary>
     [JsonPropertyName("actorType")]
     public AuditLogActorTypeEnum? ActorType { get; set; }
+
+    /// <summary>
+    /// The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID).
+    /// </summary>
+    [JsonPropertyName("agentElementId")]
+    public string? AgentElementId { get; set; }
 
     /// <summary>
     /// The tenant ID of the audit log.
@@ -16790,6 +17066,31 @@ public sealed class SearchVariablesResponse
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// UpdateGlobalTaskListenerResponse
+/// </summary>
+public sealed class UpdateGlobalTaskListenerResponse
+{
+    /// <summary>
+    /// The user-defined id for the global listener
+    /// </summary>
+    [JsonPropertyName("id")]
+    public GlobalListenerId? Id { get; set; }
+
+    /// <summary>
+    /// How the global listener was defined.
+    /// </summary>
+    [JsonPropertyName("source")]
+    public GlobalListenerSourceEnum? Source { get; set; }
+
+    /// <summary>
+    /// List of user task event types that trigger the listener.
+    /// </summary>
+    [JsonPropertyName("eventTypes")]
+    public List<GlobalTaskListenerEventTypeEnum>? EventTypes { get; set; }
 
 }
 
