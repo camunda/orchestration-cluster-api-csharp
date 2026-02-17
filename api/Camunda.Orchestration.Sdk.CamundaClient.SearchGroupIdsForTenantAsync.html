@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupIdsForTenantAsync*" class="text-break">
-Method SearchGroupIdsForTenantAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1998"><i class="bi bi-code-slash"></i></a>
+Method SearchGroupIdsForTenantAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2041"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method SearchGroupIdsForTenantAsync  <a class="header-action link-secondary" tit
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupIdsForTenantAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_SearchGroupIdsForTenantRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantGroupSearchResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupIdsForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.SearchGroupIdsForTenantRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.TenantGroupSearchResult},System.Threading.CancellationToken)">
-  SearchGroupIdsForTenantAsync(TenantId, SearchGroupIdsForTenantRequest, ConsistencyOptions&lt;TenantGroupSearchResult&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1998"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_TenantGroupSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantGroupSearchResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupIdsForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.TenantGroupSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.TenantGroupSearchResult},System.Threading.CancellationToken)">
+  SearchGroupIdsForTenantAsync(TenantId, TenantGroupSearchQueryRequest, ConsistencyOptions&lt;TenantGroupSearchResult&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2041"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search groups for tenant
@@ -130,14 +130,14 @@ Retrieves a filtered and sorted list of groups for a specified tenant.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;TenantGroupSearchResult&gt; SearchGroupIdsForTenantAsync(TenantId tenantId, SearchGroupIdsForTenantRequest body, ConsistencyOptions&lt;TenantGroupSearchResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;TenantGroupSearchResult&gt; SearchGroupIdsForTenantAsync(TenantId tenantId, TenantGroupSearchQueryRequest body, ConsistencyOptions&lt;TenantGroupSearchResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>tenantId</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.TenantId.html">TenantId</a></dt>
   <dd></dd>
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchGroupIdsForTenantRequest.html">SearchGroupIdsForTenantRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.TenantGroupSearchQueryRequest.html">TenantGroupSearchQueryRequest</a></dt>
   <dd></dd>
   <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.TenantGroupSearchResult.html">TenantGroupSearchResult</a>&gt;</dt>
   <dd></dd>
@@ -157,7 +157,7 @@ Retrieves a filtered and sorted list of groups for a specified tenant.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_SearchGroupIdsForTenantRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantGroupSearchResult__System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_TenantGroupSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantGroupSearchResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchGroupIdsForTenant</p>
 </div>
 
@@ -167,7 +167,7 @@ Retrieves a filtered and sorted list of groups for a specified tenant.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1998" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2041" class="edit-link">Edit this page</a>
         </div>
 
 

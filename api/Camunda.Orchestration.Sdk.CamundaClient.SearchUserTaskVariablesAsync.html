@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskVariablesAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskVariablesAsync*" class="text-break">
-Method SearchUserTaskVariablesAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2330"><i class="bi bi-code-slash"></i></a>
+Method SearchUserTaskVariablesAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2373"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method SearchUserTaskVariablesAsync  <a class="header-action link-secondary" tit
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskVariablesAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskVariablesAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskVariablesAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_SearchUserTaskVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTaskVariablesResponse__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskVariablesAsync(Camunda.Orchestration.Sdk.Api.UserTaskKey,Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesRequest,System.Nullable{System.Boolean},Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesResponse},System.Threading.CancellationToken)">
-  SearchUserTaskVariablesAsync(UserTaskKey, SearchUserTaskVariablesRequest, bool?, ConsistencyOptions&lt;SearchUserTaskVariablesResponse&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2330"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskVariablesAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_SearchUserTaskVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_VariableSearchQueryResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskVariablesAsync(Camunda.Orchestration.Sdk.Api.UserTaskKey,Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesRequest,System.Nullable{System.Boolean},Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.VariableSearchQueryResult},System.Threading.CancellationToken)">
+  SearchUserTaskVariablesAsync(UserTaskKey, SearchUserTaskVariablesRequest, bool?, ConsistencyOptions&lt;VariableSearchQueryResult&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2373"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search user task variables
@@ -130,7 +130,7 @@ Search for user task variables based on given criteria. By default, long variabl
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;SearchUserTaskVariablesResponse&gt; SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions&lt;SearchUserTaskVariablesResponse&gt;? consistency = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;VariableSearchQueryResult&gt; SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions&lt;VariableSearchQueryResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
@@ -141,7 +141,7 @@ Search for user task variables based on given criteria. By default, long variabl
   <dd></dd>
   <dt><code>truncateValues</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
   <dd></dd>
-  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesResponse.html">SearchUserTaskVariablesResponse</a>&gt;</dt>
+  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.VariableSearchQueryResult.html">VariableSearchQueryResult</a>&gt;</dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -149,7 +149,7 @@ Search for user task variables based on given criteria. By default, long variabl
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesResponse.html">SearchUserTaskVariablesResponse</a>&gt;</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.VariableSearchQueryResult.html">VariableSearchQueryResult</a>&gt;</dt>
   <dd></dd>
 </dl>
 
@@ -159,7 +159,7 @@ Search for user task variables based on given criteria. By default, long variabl
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskVariablesAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_SearchUserTaskVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTaskVariablesResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskVariablesAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_SearchUserTaskVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_VariableSearchQueryResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchUserTaskVariables</p>
 </div>
 
@@ -169,7 +169,7 @@ Search for user task variables based on given criteria. By default, long variabl
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2330" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2373" class="edit-link">Edit this page</a>
         </div>
 
 

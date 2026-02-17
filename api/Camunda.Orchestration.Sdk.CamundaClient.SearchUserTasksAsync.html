@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTasksAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTasksAsync*" class="text-break">
-Method SearchUserTasksAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2350"><i class="bi bi-code-slash"></i></a>
+Method SearchUserTasksAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2393"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method SearchUserTasksAsync  <a class="header-action link-secondary" title="View
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTasksAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTasksAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTasksAsync_Camunda_Orchestration_Sdk_Api_SearchUserTasksRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTasksResponse__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTasksAsync(Camunda.Orchestration.Sdk.Api.SearchUserTasksRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchUserTasksResponse},System.Threading.CancellationToken)">
-  SearchUserTasksAsync(SearchUserTasksRequest, ConsistencyOptions&lt;SearchUserTasksResponse&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2350"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTasksAsync_Camunda_Orchestration_Sdk_Api_UserTaskSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserTaskSearchQueryResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTasksAsync(Camunda.Orchestration.Sdk.Api.UserTaskSearchQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.UserTaskSearchQueryResult},System.Threading.CancellationToken)">
+  SearchUserTasksAsync(UserTaskSearchQuery, ConsistencyOptions&lt;UserTaskSearchQueryResult&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2393"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search user tasks
@@ -130,14 +130,14 @@ Search for user tasks based on given criteria.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;SearchUserTasksResponse&gt; SearchUserTasksAsync(SearchUserTasksRequest body, ConsistencyOptions&lt;SearchUserTasksResponse&gt;? consistency = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;UserTaskSearchQueryResult&gt; SearchUserTasksAsync(UserTaskSearchQuery body, ConsistencyOptions&lt;UserTaskSearchQueryResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchUserTasksRequest.html">SearchUserTasksRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.UserTaskSearchQuery.html">UserTaskSearchQuery</a></dt>
   <dd></dd>
-  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchUserTasksResponse.html">SearchUserTasksResponse</a>&gt;</dt>
+  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.UserTaskSearchQueryResult.html">UserTaskSearchQueryResult</a>&gt;</dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -145,7 +145,7 @@ Search for user tasks based on given criteria.</p>
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchUserTasksResponse.html">SearchUserTasksResponse</a>&gt;</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.UserTaskSearchQueryResult.html">UserTaskSearchQueryResult</a>&gt;</dt>
   <dd></dd>
 </dl>
 
@@ -154,21 +154,8 @@ Search for user tasks based on given criteria.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTasksAsync_Camunda_Orchestration_Sdk_Api_SearchUserTasksRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTasksResponse__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">static async Task SearchUserTasksExample()
-{
-    using var client = Camunda.CreateClient();
 
-    var result = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
-
-    foreach (var task in result.Items!)
-    {
-        Console.WriteLine($&quot;Task {task.UserTaskKey}: {task.State}, assignee={task.Assignee}&quot;);
-    }
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTasksAsync_Camunda_Orchestration_Sdk_Api_SearchUserTasksRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTasksResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTasksAsync_Camunda_Orchestration_Sdk_Api_UserTaskSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserTaskSearchQueryResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchUserTasks</p>
 </div>
 
@@ -178,7 +165,7 @@ Search for user tasks based on given criteria.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2350" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2393" class="edit-link">Edit this page</a>
         </div>
 
 

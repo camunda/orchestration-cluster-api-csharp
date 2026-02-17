@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync*" class="text-break">
-Method MigrateProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1539"><i class="bi bi-code-slash"></i></a>
+Method MigrateProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1582"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method MigrateProcessInstanceAsync  <a class="header-action link-secondary" titl
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_MigrateProcessInstanceRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Api.MigrateProcessInstanceRequest,System.Threading.CancellationToken)">
-  MigrateProcessInstanceAsync(ProcessInstanceKey, MigrateProcessInstanceRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1539"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_ProcessInstanceMigrationInstruction_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Api.ProcessInstanceMigrationInstruction,System.Threading.CancellationToken)">
+  MigrateProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceMigrationInstruction, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1582"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Migrate process instance
@@ -135,14 +135,14 @@ latest process improvements.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task MigrateProcessInstanceAsync(ProcessInstanceKey processInstanceKey, MigrateProcessInstanceRequest body, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task MigrateProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceMigrationInstruction body, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>processInstanceKey</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.ProcessInstanceKey.html">ProcessInstanceKey</a></dt>
   <dd></dd>
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstanceRequest.html">MigrateProcessInstanceRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.ProcessInstanceMigrationInstruction.html">ProcessInstanceMigrationInstruction</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -159,39 +159,8 @@ latest process improvements.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_MigrateProcessInstanceRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">static async Task MigrateProcessInstanceExample()
-{
-    using var client = Camunda.CreateClient();
 
-    // Create an instance to migrate
-    var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&quot;order-process&quot;),
-    });
-
-    // Deploy the updated process version and get its ProcessDefinitionKey
-    var v2 = await client.DeployResourcesFromFilesAsync(
-        new[] { &quot;order-process-v2.bpmn&quot; }
-    );
-    var targetProcessDefinitionKey = v2.Processes[0].ProcessDefinitionKey;
-
-    await client.MigrateProcessInstanceAsync(created.ProcessInstanceKey, new MigrateProcessInstanceRequest
-    {
-        TargetProcessDefinitionKey = targetProcessDefinitionKey,
-        MappingInstructions = new List&lt;MigrateProcessInstanceMappingInstruction&gt;
-        {
-            new()
-            {
-                SourceElementId = ElementId.AssumeExists(&quot;taskA&quot;),
-                TargetElementId = ElementId.AssumeExists(&quot;taskB&quot;),
-            }
-        }
-    });
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_MigrateProcessInstanceRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_ProcessInstanceMigrationInstruction_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: migrateProcessInstance</p>
 </div>
 
@@ -201,7 +170,7 @@ latest process improvements.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1539" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1582" class="edit-link">Edit this page</a>
         </div>
 
 

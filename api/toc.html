@@ -155,6 +155,9 @@
                                                   <a href="Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalClusterVariableAsync.html" name="" title="CreateGlobalClusterVariableAsync">CreateGlobalClusterVariableAsync</a>
                                               </li>
                                               <li>
+                                                  <a href="Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync.html" name="" title="CreateGlobalTaskListenerAsync">CreateGlobalTaskListenerAsync</a>
+                                              </li>
+                                              <li>
                                                   <a href="Camunda.Orchestration.Sdk.CamundaClient.CreateGroupAsync.html" name="" title="CreateGroupAsync">CreateGroupAsync</a>
                                               </li>
                                               <li>
@@ -192,6 +195,9 @@
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalClusterVariableAsync.html" name="" title="DeleteGlobalClusterVariableAsync">DeleteGlobalClusterVariableAsync</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync.html" name="" title="DeleteGlobalTaskListenerAsync">DeleteGlobalTaskListenerAsync</a>
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.CamundaClient.DeleteGroupAsync.html" name="" title="DeleteGroupAsync">DeleteGroupAsync</a>
@@ -581,6 +587,9 @@
                                                   <a href="Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalClusterVariableAsync.html" name="" title="UpdateGlobalClusterVariableAsync">UpdateGlobalClusterVariableAsync</a>
                                               </li>
                                               <li>
+                                                  <a href="Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync.html" name="" title="UpdateGlobalTaskListenerAsync">UpdateGlobalTaskListenerAsync</a>
+                                              </li>
+                                              <li>
                                                   <a href="Camunda.Orchestration.Sdk.CamundaClient.UpdateGroupAsync.html" name="" title="UpdateGroupAsync">UpdateGroupAsync</a>
                                               </li>
                                               <li>
@@ -632,23 +641,6 @@
                     <a href="Camunda.Orchestration.Sdk.Api.html" name="" title="Camunda.Orchestration.Sdk.Api">Camunda.Orchestration.Sdk.Api</a>
 
                     <ul class="nav level2">
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.ActivateJobsResponse.html" name="" title="ActivateJobsResponse">ActivateJobsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.ActivateJobsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ActivateJobsResponse.Jobs.html" name="" title="Jobs">Jobs</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
                           <li>
                               <span class="expand-stub"></span>
                               <a href="Camunda.Orchestration.Sdk.Api.ActivatedJobResult.html" name="" title="ActivatedJobResult">ActivatedJobResult</a>
@@ -2023,6 +2015,9 @@
                                                   <a href="Camunda.Orchestration.Sdk.Api.AuditLogFilter.ActorType.html" name="" title="ActorType">ActorType</a>
                                               </li>
                                               <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.AuditLogFilter.AgentElementId.html" name="" title="AgentElementId">AgentElementId</a>
+                                              </li>
+                                              <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.AuditLogFilter.AuditLogKey.html" name="" title="AuditLogKey">AuditLogKey</a>
                                               </li>
                                               <li>
@@ -2191,6 +2186,9 @@
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.AuditLogResult.ActorType.html" name="" title="ActorType">ActorType</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.AuditLogResult.AgentElementId.html" name="" title="AgentElementId">AgentElementId</a>
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.AuditLogResult.Annotation.html" name="" title="Annotation">Annotation</a>
@@ -3274,26 +3272,6 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.CancelProcessInstancesBatchOperationRequest.html" name="" title="CancelProcessInstancesBatchOperationRequest">CancelProcessInstancesBatchOperationRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.CancelProcessInstancesBatchOperationRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.CancelProcessInstancesBatchOperationRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.CancelProcessInstancesBatchOperationRequest.OperationReference.html" name="" title="OperationReference">OperationReference</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
                               <a href="Camunda.Orchestration.Sdk.Api.CategoryExactMatch.html" name="" title="CategoryExactMatch">CategoryExactMatch</a>
 
                               <ul class="nav level3">
@@ -3837,22 +3815,45 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.CreateDeploymentResponse.html" name="" title="CreateDeploymentResponse">CreateDeploymentResponse</a>
+                              <a href="Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest.html" name="" title="CreateGlobalTaskListenerRequest">CreateGlobalTaskListenerRequest</a>
 
                               <ul class="nav level3">
                                     <li>
                                         <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.CreateDeploymentResponse.html" name="" title="Properties">Properties</a>
+                                        <a href="Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest.html" name="" title="Properties">Properties</a>
 
                                         <ul class="nav level4">
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.CreateDeploymentResponse.DeploymentKey.html" name="" title="DeploymentKey">DeploymentKey</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest.EventTypes.html" name="" title="EventTypes">EventTypes</a>
                                               </li>
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.CreateDeploymentResponse.Deployments.html" name="" title="Deployments">Deployments</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest.Id.html" name="" title="Id">Id</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.CreateMappingRuleResponse.html" name="" title="CreateMappingRuleResponse">CreateMappingRuleResponse</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.CreateMappingRuleResponse.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.CreateMappingRuleResponse.ClaimName.html" name="" title="ClaimName">ClaimName</a>
                                               </li>
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.CreateDeploymentResponse.TenantId.html" name="" title="TenantId">TenantId</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.CreateMappingRuleResponse.ClaimValue.html" name="" title="ClaimValue">ClaimValue</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.CreateMappingRuleResponse.MappingRuleId.html" name="" title="MappingRuleId">MappingRuleId</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.CreateMappingRuleResponse.Name.html" name="" title="Name">Name</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -4974,26 +4975,6 @@
                                         <ul class="nav level4">
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.DeleteProcessInstanceRequest.OperationReference.html" name="" title="OperationReference">OperationReference</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.DeleteProcessInstancesBatchOperationRequest.html" name="" title="DeleteProcessInstancesBatchOperationRequest">DeleteProcessInstancesBatchOperationRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.DeleteProcessInstancesBatchOperationRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.DeleteProcessInstancesBatchOperationRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.DeleteProcessInstancesBatchOperationRequest.OperationReference.html" name="" title="OperationReference">OperationReference</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -6257,487 +6238,22 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.html" name="" title="GetAuditLogResponse">GetAuditLogResponse</a>
+                              <a href="Camunda.Orchestration.Sdk.Api.GetUserResponse.html" name="" title="GetUserResponse">GetUserResponse</a>
 
                               <ul class="nav level3">
                                     <li>
                                         <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.html" name="" title="Properties">Properties</a>
+                                        <a href="Camunda.Orchestration.Sdk.Api.GetUserResponse.html" name="" title="Properties">Properties</a>
 
                                         <ul class="nav level4">
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.ActorId.html" name="" title="ActorId">ActorId</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserResponse.Email.html" name="" title="Email">Email</a>
                                               </li>
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.ActorType.html" name="" title="ActorType">ActorType</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserResponse.Name.html" name="" title="Name">Name</a>
                                               </li>
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.Annotation.html" name="" title="Annotation">Annotation</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.AuditLogKey.html" name="" title="AuditLogKey">AuditLogKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.BatchOperationKey.html" name="" title="BatchOperationKey">BatchOperationKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.BatchOperationType.html" name="" title="BatchOperationType">BatchOperationType</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.Category.html" name="" title="Category">Category</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.DecisionDefinitionId.html" name="" title="DecisionDefinitionId">DecisionDefinitionId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.DecisionDefinitionKey.html" name="" title="DecisionDefinitionKey">DecisionDefinitionKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.DecisionEvaluationKey.html" name="" title="DecisionEvaluationKey">DecisionEvaluationKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.DecisionRequirementsId.html" name="" title="DecisionRequirementsId">DecisionRequirementsId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.DecisionRequirementsKey.html" name="" title="DecisionRequirementsKey">DecisionRequirementsKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.DeploymentKey.html" name="" title="DeploymentKey">DeploymentKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.ElementInstanceKey.html" name="" title="ElementInstanceKey">ElementInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.EntityDescription.html" name="" title="EntityDescription">EntityDescription</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.EntityKey.html" name="" title="EntityKey">EntityKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.EntityType.html" name="" title="EntityType">EntityType</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.FormKey.html" name="" title="FormKey">FormKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.JobKey.html" name="" title="JobKey">JobKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.OperationType.html" name="" title="OperationType">OperationType</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.ProcessDefinitionId.html" name="" title="ProcessDefinitionId">ProcessDefinitionId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.ProcessDefinitionKey.html" name="" title="ProcessDefinitionKey">ProcessDefinitionKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.ProcessInstanceKey.html" name="" title="ProcessInstanceKey">ProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.RelatedEntityKey.html" name="" title="RelatedEntityKey">RelatedEntityKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.RelatedEntityType.html" name="" title="RelatedEntityType">RelatedEntityType</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.ResourceKey.html" name="" title="ResourceKey">ResourceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.Result.html" name="" title="Result">Result</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.RootProcessInstanceKey.html" name="" title="RootProcessInstanceKey">RootProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.TenantId.html" name="" title="TenantId">TenantId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.Timestamp.html" name="" title="Timestamp">Timestamp</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetAuditLogResponse.UserTaskKey.html" name="" title="UserTaskKey">UserTaskKey</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.html" name="" title="GetElementInstanceResponse">GetElementInstanceResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.ElementId.html" name="" title="ElementId">ElementId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.ElementInstanceKey.html" name="" title="ElementInstanceKey">ElementInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.ElementName.html" name="" title="ElementName">ElementName</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.EndDate.html" name="" title="EndDate">EndDate</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.HasIncident.html" name="" title="HasIncident">HasIncident</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.IncidentKey.html" name="" title="IncidentKey">IncidentKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.ProcessDefinitionId.html" name="" title="ProcessDefinitionId">ProcessDefinitionId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.ProcessDefinitionKey.html" name="" title="ProcessDefinitionKey">ProcessDefinitionKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.ProcessInstanceKey.html" name="" title="ProcessInstanceKey">ProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.RootProcessInstanceKey.html" name="" title="RootProcessInstanceKey">RootProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.StartDate.html" name="" title="StartDate">StartDate</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.State.html" name="" title="State">State</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.TenantId.html" name="" title="TenantId">TenantId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetElementInstanceResponse.Type.html" name="" title="Type">Type</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.html" name="" title="GetIncidentResponse">GetIncidentResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.CreationTime.html" name="" title="CreationTime">CreationTime</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.ElementId.html" name="" title="ElementId">ElementId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.ElementInstanceKey.html" name="" title="ElementInstanceKey">ElementInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.ErrorMessage.html" name="" title="ErrorMessage">ErrorMessage</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.ErrorType.html" name="" title="ErrorType">ErrorType</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.IncidentKey.html" name="" title="IncidentKey">IncidentKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.JobKey.html" name="" title="JobKey">JobKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.ProcessDefinitionId.html" name="" title="ProcessDefinitionId">ProcessDefinitionId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.ProcessDefinitionKey.html" name="" title="ProcessDefinitionKey">ProcessDefinitionKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.ProcessInstanceKey.html" name="" title="ProcessInstanceKey">ProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.RootProcessInstanceKey.html" name="" title="RootProcessInstanceKey">RootProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.State.html" name="" title="State">State</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetIncidentResponse.TenantId.html" name="" title="TenantId">TenantId</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetProcessDefinitionStatisticsRequest.html" name="" title="GetProcessDefinitionStatisticsRequest">GetProcessDefinitionStatisticsRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetProcessDefinitionStatisticsRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessDefinitionStatisticsRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.html" name="" title="GetProcessInstanceResponse">GetProcessInstanceResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.EndDate.html" name="" title="EndDate">EndDate</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.HasIncident.html" name="" title="HasIncident">HasIncident</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.ParentElementInstanceKey.html" name="" title="ParentElementInstanceKey">ParentElementInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.ParentProcessInstanceKey.html" name="" title="ParentProcessInstanceKey">ParentProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.ProcessDefinitionId.html" name="" title="ProcessDefinitionId">ProcessDefinitionId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.ProcessDefinitionKey.html" name="" title="ProcessDefinitionKey">ProcessDefinitionKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.ProcessDefinitionName.html" name="" title="ProcessDefinitionName">ProcessDefinitionName</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.ProcessDefinitionVersion.html" name="" title="ProcessDefinitionVersion">ProcessDefinitionVersion</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.ProcessDefinitionVersionTag.html" name="" title="ProcessDefinitionVersionTag">ProcessDefinitionVersionTag</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.ProcessInstanceKey.html" name="" title="ProcessInstanceKey">ProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.RootProcessInstanceKey.html" name="" title="RootProcessInstanceKey">RootProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.StartDate.html" name="" title="StartDate">StartDate</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.State.html" name="" title="State">State</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.Tags.html" name="" title="Tags">Tags</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceResponse.TenantId.html" name="" title="TenantId">TenantId</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceSequenceFlowsResponse.html" name="" title="GetProcessInstanceSequenceFlowsResponse">GetProcessInstanceSequenceFlowsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceSequenceFlowsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetProcessInstanceSequenceFlowsResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetStartProcessFormResponse.html" name="" title="GetStartProcessFormResponse">GetStartProcessFormResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetStartProcessFormResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetStartProcessFormResponse.FormId.html" name="" title="FormId">FormId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetStartProcessFormResponse.FormKey.html" name="" title="FormKey">FormKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetStartProcessFormResponse.Schema.html" name="" title="Schema">Schema</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetStartProcessFormResponse.TenantId.html" name="" title="TenantId">TenantId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetStartProcessFormResponse.Version.html" name="" title="Version">Version</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskFormResponse.html" name="" title="GetUserTaskFormResponse">GetUserTaskFormResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskFormResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskFormResponse.FormId.html" name="" title="FormId">FormId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskFormResponse.FormKey.html" name="" title="FormKey">FormKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskFormResponse.Schema.html" name="" title="Schema">Schema</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskFormResponse.TenantId.html" name="" title="TenantId">TenantId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskFormResponse.Version.html" name="" title="Version">Version</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.html" name="" title="GetUserTaskResponse">GetUserTaskResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.Assignee.html" name="" title="Assignee">Assignee</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.CandidateGroups.html" name="" title="CandidateGroups">CandidateGroups</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.CandidateUsers.html" name="" title="CandidateUsers">CandidateUsers</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.CompletionDate.html" name="" title="CompletionDate">CompletionDate</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.CreationDate.html" name="" title="CreationDate">CreationDate</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.CustomHeaders.html" name="" title="CustomHeaders">CustomHeaders</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.DueDate.html" name="" title="DueDate">DueDate</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.ElementId.html" name="" title="ElementId">ElementId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.ElementInstanceKey.html" name="" title="ElementInstanceKey">ElementInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.ExternalFormReference.html" name="" title="ExternalFormReference">ExternalFormReference</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.FollowUpDate.html" name="" title="FollowUpDate">FollowUpDate</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.FormKey.html" name="" title="FormKey">FormKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.Name.html" name="" title="Name">Name</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.Priority.html" name="" title="Priority">Priority</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.ProcessDefinitionId.html" name="" title="ProcessDefinitionId">ProcessDefinitionId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.ProcessDefinitionKey.html" name="" title="ProcessDefinitionKey">ProcessDefinitionKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.ProcessDefinitionVersion.html" name="" title="ProcessDefinitionVersion">ProcessDefinitionVersion</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.ProcessInstanceKey.html" name="" title="ProcessInstanceKey">ProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.ProcessName.html" name="" title="ProcessName">ProcessName</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.RootProcessInstanceKey.html" name="" title="RootProcessInstanceKey">RootProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.State.html" name="" title="State">State</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.Tags.html" name="" title="Tags">Tags</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.TenantId.html" name="" title="TenantId">TenantId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserTaskResponse.UserTaskKey.html" name="" title="UserTaskKey">UserTaskKey</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.GetVariableResponse.html" name="" title="GetVariableResponse">GetVariableResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.GetVariableResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetVariableResponse.Name.html" name="" title="Name">Name</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetVariableResponse.ProcessInstanceKey.html" name="" title="ProcessInstanceKey">ProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetVariableResponse.RootProcessInstanceKey.html" name="" title="RootProcessInstanceKey">RootProcessInstanceKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetVariableResponse.ScopeKey.html" name="" title="ScopeKey">ScopeKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetVariableResponse.TenantId.html" name="" title="TenantId">TenantId</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetVariableResponse.Value.html" name="" title="Value">Value</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.GetVariableResponse.VariableKey.html" name="" title="VariableKey">VariableKey</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GetUserResponse.Username.html" name="" title="Username">Username</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -6764,6 +6280,135 @@
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.GlobalJobStatisticsQueryResult.IsIncomplete.html" name="" title="IsIncomplete">IsIncomplete</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerBase.html" name="" title="GlobalListenerBase">GlobalListenerBase</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerBase.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerBase.AfterNonGlobal.html" name="" title="AfterNonGlobal">AfterNonGlobal</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerBase.Priority.html" name="" title="Priority">Priority</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerBase.Retries.html" name="" title="Retries">Retries</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerBase.Type.html" name="" title="Type">Type</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerId.html" name="" title="GlobalListenerId">GlobalListenerId</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerId.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerId.Value.html" name="" title="Value">Value</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerId.html" name="" title="Methods">Methods</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerId.AssumeExists.html" name="" title="AssumeExists">AssumeExists</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerId.IsValid.html" name="" title="IsValid">IsValid</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerId.ToString.html" name="" title="ToString">ToString</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <a href="Camunda.Orchestration.Sdk.Api.GlobalListenerSourceEnum.html" name="" title="GlobalListenerSourceEnum">GlobalListenerSourceEnum</a>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerBase.html" name="" title="GlobalTaskListenerBase">GlobalTaskListenerBase</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerBase.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerBase.AfterNonGlobal.html" name="" title="AfterNonGlobal">AfterNonGlobal</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerBase.EventTypes.html" name="" title="EventTypes">EventTypes</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerBase.Priority.html" name="" title="Priority">Priority</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerBase.Retries.html" name="" title="Retries">Retries</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerBase.Type.html" name="" title="Type">Type</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeEnum.html" name="" title="GlobalTaskListenerEventTypeEnum">GlobalTaskListenerEventTypeEnum</a>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.html" name="" title="GlobalTaskListenerResult">GlobalTaskListenerResult</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.AfterNonGlobal.html" name="" title="AfterNonGlobal">AfterNonGlobal</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.EventTypes.html" name="" title="EventTypes">EventTypes</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.Id.html" name="" title="Id">Id</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.Priority.html" name="" title="Priority">Priority</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.Retries.html" name="" title="Retries">Retries</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.Source.html" name="" title="Source">Source</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.Type.html" name="" title="Type">Type</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -9154,78 +8799,6 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstanceRequest.html" name="" title="MigrateProcessInstanceRequest">MigrateProcessInstanceRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstanceRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstanceRequest.MappingInstructions.html" name="" title="MappingInstructions">MappingInstructions</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstanceRequest.OperationReference.html" name="" title="OperationReference">OperationReference</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstanceRequest.TargetProcessDefinitionKey.html" name="" title="TargetProcessDefinitionKey">TargetProcessDefinitionKey</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstancesBatchOperationRequest.html" name="" title="MigrateProcessInstancesBatchOperationRequest">MigrateProcessInstancesBatchOperationRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstancesBatchOperationRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstancesBatchOperationRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstancesBatchOperationRequest.MigrationPlan.html" name="" title="MigrationPlan">MigrationPlan</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.MigrateProcessInstancesBatchOperationRequest.OperationReference.html" name="" title="OperationReference">OperationReference</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceRequest.html" name="" title="ModifyProcessInstanceRequest">ModifyProcessInstanceRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceRequest.ActivateInstructions.html" name="" title="ActivateInstructions">ActivateInstructions</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceRequest.MoveInstructions.html" name="" title="MoveInstructions">MoveInstructions</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceRequest.OperationReference.html" name="" title="OperationReference">OperationReference</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceRequest.TerminateInstructions.html" name="" title="TerminateInstructions">TerminateInstructions</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
                               <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceVariableInstruction.html" name="" title="ModifyProcessInstanceVariableInstruction">ModifyProcessInstanceVariableInstruction</a>
 
                               <ul class="nav level3">
@@ -9239,29 +8812,6 @@
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceVariableInstruction.Variables.html" name="" title="Variables">Variables</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstancesBatchOperationRequest.html" name="" title="ModifyProcessInstancesBatchOperationRequest">ModifyProcessInstancesBatchOperationRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstancesBatchOperationRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstancesBatchOperationRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstancesBatchOperationRequest.MoveInstructions.html" name="" title="MoveInstructions">MoveInstructions</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstancesBatchOperationRequest.OperationReference.html" name="" title="OperationReference">OperationReference</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -10959,46 +10509,6 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.PublishMessageResponse.html" name="" title="PublishMessageResponse">PublishMessageResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.PublishMessageResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.PublishMessageResponse.MessageKey.html" name="" title="MessageKey">MessageKey</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.PublishMessageResponse.TenantId.html" name="" title="TenantId">TenantId</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.ResolveIncidentsBatchOperationRequest.html" name="" title="ResolveIncidentsBatchOperationRequest">ResolveIncidentsBatchOperationRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.ResolveIncidentsBatchOperationRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ResolveIncidentsBatchOperationRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.ResolveIncidentsBatchOperationRequest.OperationReference.html" name="" title="OperationReference">OperationReference</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
                               <a href="Camunda.Orchestration.Sdk.Api.ResourceKey.html" name="" title="ResourceKey">ResourceKey</a>
 
                               <ul class="nav level3">
@@ -11631,92 +11141,6 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchAuditLogsResponse.html" name="" title="SearchAuditLogsResponse">SearchAuditLogsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchAuditLogsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchAuditLogsResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchAuditLogsResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationItemsRequest.html" name="" title="SearchBatchOperationItemsRequest">SearchBatchOperationItemsRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationItemsRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationItemsRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationItemsRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationItemsRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationItemsResponse.html" name="" title="SearchBatchOperationItemsResponse">SearchBatchOperationItemsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationItemsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationItemsResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationItemsResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationsRequest.html" name="" title="SearchBatchOperationsRequest">SearchBatchOperationsRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationsRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationsRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationsRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchBatchOperationsRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
                               <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForGroupRequest.html" name="" title="SearchClientsForGroupRequest">SearchClientsForGroupRequest</a>
 
                               <ul class="nav level3">
@@ -11730,6 +11154,26 @@
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForGroupRequest.Sort.html" name="" title="Sort">Sort</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForGroupResponse.html" name="" title="SearchClientsForGroupResponse">SearchClientsForGroupResponse</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForGroupResponse.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForGroupResponse.Items.html" name="" title="Items">Items</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForGroupResponse.Page.html" name="" title="Page">Page</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -11757,6 +11201,26 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForRoleResponse.html" name="" title="SearchClientsForRoleResponse">SearchClientsForRoleResponse</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForRoleResponse.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForRoleResponse.Items.html" name="" title="Items">Items</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForRoleResponse.Page.html" name="" title="Page">Page</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
                               <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForTenantRequest.html" name="" title="SearchClientsForTenantRequest">SearchClientsForTenantRequest</a>
 
                               <ul class="nav level3">
@@ -11777,288 +11241,19 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchCorrelatedMessageSubscriptionsResponse.html" name="" title="SearchCorrelatedMessageSubscriptionsResponse">SearchCorrelatedMessageSubscriptionsResponse</a>
+                              <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForTenantResponse.html" name="" title="SearchClientsForTenantResponse">SearchClientsForTenantResponse</a>
 
                               <ul class="nav level3">
                                     <li>
                                         <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchCorrelatedMessageSubscriptionsResponse.html" name="" title="Properties">Properties</a>
+                                        <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForTenantResponse.html" name="" title="Properties">Properties</a>
 
                                         <ul class="nav level4">
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchCorrelatedMessageSubscriptionsResponse.Items.html" name="" title="Items">Items</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForTenantResponse.Items.html" name="" title="Items">Items</a>
                                               </li>
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchCorrelatedMessageSubscriptionsResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchDecisionInstancesResponse.html" name="" title="SearchDecisionInstancesResponse">SearchDecisionInstancesResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchDecisionInstancesResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchDecisionInstancesResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchDecisionInstancesResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchElementInstanceIncidentsResponse.html" name="" title="SearchElementInstanceIncidentsResponse">SearchElementInstanceIncidentsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchElementInstanceIncidentsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchElementInstanceIncidentsResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchElementInstanceIncidentsResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchElementInstancesResponse.html" name="" title="SearchElementInstancesResponse">SearchElementInstancesResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchElementInstancesResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchElementInstancesResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchElementInstancesResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchGroupIdsForTenantRequest.html" name="" title="SearchGroupIdsForTenantRequest">SearchGroupIdsForTenantRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchGroupIdsForTenantRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchGroupIdsForTenantRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchGroupIdsForTenantRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchGroupsForRoleRequest.html" name="" title="SearchGroupsForRoleRequest">SearchGroupsForRoleRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchGroupsForRoleRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchGroupsForRoleRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchGroupsForRoleRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchIncidentsResponse.html" name="" title="SearchIncidentsResponse">SearchIncidentsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchIncidentsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchIncidentsResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchIncidentsResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchJobsResponse.html" name="" title="SearchJobsResponse">SearchJobsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchJobsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchJobsResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchJobsResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsRequest.html" name="" title="SearchMessageSubscriptionsRequest">SearchMessageSubscriptionsRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsResponse.html" name="" title="SearchMessageSubscriptionsResponse">SearchMessageSubscriptionsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchProcessDefinitionsRequest.html" name="" title="SearchProcessDefinitionsRequest">SearchProcessDefinitionsRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchProcessDefinitionsRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessDefinitionsRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessDefinitionsRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessDefinitionsRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstanceIncidentsResponse.html" name="" title="SearchProcessInstanceIncidentsResponse">SearchProcessInstanceIncidentsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstanceIncidentsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstanceIncidentsResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstanceIncidentsResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstancesRequest.html" name="" title="SearchProcessInstancesRequest">SearchProcessInstancesRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstancesRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstancesRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstancesRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstancesRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstancesResponse.html" name="" title="SearchProcessInstancesResponse">SearchProcessInstancesResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstancesResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstancesResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchProcessInstancesResponse.Page.html" name="" title="Page">Page</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchClientsForTenantResponse.Page.html" name="" title="Page">Page</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -12129,72 +11324,6 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchTenantsRequest.html" name="" title="SearchTenantsRequest">SearchTenantsRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchTenantsRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchTenantsRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchTenantsRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchTenantsRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsRequest.html" name="" title="SearchUserTaskAuditLogsRequest">SearchUserTaskAuditLogsRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsResponse.html" name="" title="SearchUserTaskAuditLogsResponse">SearchUserTaskAuditLogsResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
                               <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesRequest.html" name="" title="SearchUserTaskVariablesRequest">SearchUserTaskVariablesRequest</a>
 
                               <ul class="nav level3">
@@ -12211,69 +11340,6 @@
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesResponse.html" name="" title="SearchUserTaskVariablesResponse">SearchUserTaskVariablesResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesResponse.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchUserTasksRequest.html" name="" title="SearchUserTasksRequest">SearchUserTasksRequest</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUserTasksRequest.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTasksRequest.Filter.html" name="" title="Filter">Filter</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTasksRequest.Page.html" name="" title="Page">Page</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTasksRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchUserTasksResponse.html" name="" title="SearchUserTasksResponse">SearchUserTasksResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUserTasksResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTasksResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUserTasksResponse.Page.html" name="" title="Page">Page</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -12301,6 +11367,26 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForGroupResponse.html" name="" title="SearchUsersForGroupResponse">SearchUsersForGroupResponse</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForGroupResponse.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForGroupResponse.Items.html" name="" title="Items">Items</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForGroupResponse.Page.html" name="" title="Page">Page</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
                               <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForRoleRequest.html" name="" title="SearchUsersForRoleRequest">SearchUsersForRoleRequest</a>
 
                               <ul class="nav level3">
@@ -12314,6 +11400,26 @@
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForRoleRequest.Sort.html" name="" title="Sort">Sort</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForRoleResponse.html" name="" title="SearchUsersForRoleResponse">SearchUsersForRoleResponse</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForRoleResponse.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForRoleResponse.Items.html" name="" title="Items">Items</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForRoleResponse.Page.html" name="" title="Page">Page</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -12341,22 +11447,39 @@
                           </li>
                           <li>
                               <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchUsersRequest.html" name="" title="SearchUsersRequest">SearchUsersRequest</a>
+                              <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForTenantResponse.html" name="" title="SearchUsersForTenantResponse">SearchUsersForTenantResponse</a>
 
                               <ul class="nav level3">
                                     <li>
                                         <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUsersRequest.html" name="" title="Properties">Properties</a>
+                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForTenantResponse.html" name="" title="Properties">Properties</a>
 
                                         <ul class="nav level4">
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersRequest.Filter.html" name="" title="Filter">Filter</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForTenantResponse.Items.html" name="" title="Items">Items</a>
                                               </li>
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersRequest.Page.html" name="" title="Page">Page</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersForTenantResponse.Page.html" name="" title="Page">Page</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.SearchUsersResponse.html" name="" title="SearchUsersResponse">SearchUsersResponse</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.SearchUsersResponse.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersResponse.Items.html" name="" title="Items">Items</a>
                                               </li>
                                               <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersRequest.Sort.html" name="" title="Sort">Sort</a>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchUsersResponse.Page.html" name="" title="Page">Page</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -12380,26 +11503,6 @@
                                               </li>
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.SearchVariablesRequest.Sort.html" name="" title="Sort">Sort</a>
-                                              </li>
-                                        </ul>
-                                    </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span class="expand-stub"></span>
-                              <a href="Camunda.Orchestration.Sdk.Api.SearchVariablesResponse.html" name="" title="SearchVariablesResponse">SearchVariablesResponse</a>
-
-                              <ul class="nav level3">
-                                    <li>
-                                        <span class="expand-stub"></span>
-                                        <a href="Camunda.Orchestration.Sdk.Api.SearchVariablesResponse.html" name="" title="Properties">Properties</a>
-
-                                        <ul class="nav level4">
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchVariablesResponse.Items.html" name="" title="Items">Items</a>
-                                              </li>
-                                              <li>
-                                                  <a href="Camunda.Orchestration.Sdk.Api.SearchVariablesResponse.Page.html" name="" title="Page">Page</a>
                                               </li>
                                         </ul>
                                     </li>
@@ -13158,6 +12261,84 @@
                                         <ul class="nav level4">
                                               <li>
                                                   <a href="Camunda.Orchestration.Sdk.Api.UpdateClusterVariableRequest.Value.html" name="" title="Value">Value</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest.html" name="" title="UpdateGlobalTaskListenerRequest">UpdateGlobalTaskListenerRequest</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest.AfterNonGlobal.html" name="" title="AfterNonGlobal">AfterNonGlobal</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest.EventTypes.html" name="" title="EventTypes">EventTypes</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest.Priority.html" name="" title="Priority">Priority</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest.Retries.html" name="" title="Retries">Retries</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest.Type.html" name="" title="Type">Type</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.UpdateMappingRuleResponse.html" name="" title="UpdateMappingRuleResponse">UpdateMappingRuleResponse</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.UpdateMappingRuleResponse.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateMappingRuleResponse.ClaimName.html" name="" title="ClaimName">ClaimName</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateMappingRuleResponse.ClaimValue.html" name="" title="ClaimValue">ClaimValue</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateMappingRuleResponse.MappingRuleId.html" name="" title="MappingRuleId">MappingRuleId</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateMappingRuleResponse.Name.html" name="" title="Name">Name</a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                              </ul>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a href="Camunda.Orchestration.Sdk.Api.UpdateUserResponse.html" name="" title="UpdateUserResponse">UpdateUserResponse</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <span class="expand-stub"></span>
+                                        <a href="Camunda.Orchestration.Sdk.Api.UpdateUserResponse.html" name="" title="Properties">Properties</a>
+
+                                        <ul class="nav level4">
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateUserResponse.Email.html" name="" title="Email">Email</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateUserResponse.Name.html" name="" title="Name">Name</a>
+                                              </li>
+                                              <li>
+                                                  <a href="Camunda.Orchestration.Sdk.Api.UpdateUserResponse.Username.html" name="" title="Username">Username</a>
                                               </li>
                                         </ul>
                                     </li>

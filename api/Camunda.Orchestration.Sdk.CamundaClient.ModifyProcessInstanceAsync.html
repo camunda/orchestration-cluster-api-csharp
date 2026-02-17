@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstanceAsync*" class="text-break">
-Method ModifyProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1578"><i class="bi bi-code-slash"></i></a>
+Method ModifyProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1621"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method ModifyProcessInstanceAsync  <a class="header-action link-secondary" title
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstanceAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_ModifyProcessInstanceRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceRequest,System.Threading.CancellationToken)">
-  ModifyProcessInstanceAsync(ProcessInstanceKey, ModifyProcessInstanceRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1578"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_ProcessInstanceModificationInstruction_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Api.ProcessInstanceModificationInstruction,System.Threading.CancellationToken)">
+  ModifyProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceModificationInstruction, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1621"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Modify process instance
@@ -134,14 +134,14 @@ For example, because an external system is not available or doesn't respond as e
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task ModifyProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ModifyProcessInstanceRequest body, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task ModifyProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceModificationInstruction body, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>processInstanceKey</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.ProcessInstanceKey.html">ProcessInstanceKey</a></dt>
   <dd></dd>
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.ModifyProcessInstanceRequest.html">ModifyProcessInstanceRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.ProcessInstanceModificationInstruction.html">ProcessInstanceModificationInstruction</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -158,28 +158,8 @@ For example, because an external system is not available or doesn't respond as e
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_ModifyProcessInstanceRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">static async Task ModifyProcessInstanceExample()
-{
-    using var client = Camunda.CreateClient();
 
-    // Get a ProcessInstanceKey from the creation response
-    var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&quot;order-process&quot;),
-    });
-
-    await client.ModifyProcessInstanceAsync(created.ProcessInstanceKey, new ModifyProcessInstanceRequest
-    {
-        ActivateInstructions = new List&lt;ProcessInstanceModificationActivateInstruction&gt;
-        {
-            new() { ElementId = ElementId.AssumeExists(&quot;taskB&quot;) }
-        }
-    });
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_ModifyProcessInstanceRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_ProcessInstanceModificationInstruction_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: modifyProcessInstance</p>
 </div>
 
@@ -189,7 +169,7 @@ For example, because an external system is not available or doesn't respond as e
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1578" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1621" class="edit-link">Edit this page</a>
         </div>
 
 

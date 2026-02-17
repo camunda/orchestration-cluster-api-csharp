@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync*" class="text-break">
-Method SearchMessageSubscriptionsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2162"><i class="bi bi-code-slash"></i></a>
+Method SearchMessageSubscriptionsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2205"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method SearchMessageSubscriptionsAsync  <a class="header-action link-secondary" 
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_Camunda_Orchestration_Sdk_Api_SearchMessageSubscriptionsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMessageSubscriptionsResponse__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync(Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsResponse},System.Threading.CancellationToken)">
-  SearchMessageSubscriptionsAsync(SearchMessageSubscriptionsRequest, ConsistencyOptions&lt;SearchMessageSubscriptionsResponse&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2162"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_Camunda_Orchestration_Sdk_Api_MessageSubscriptionSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_MessageSubscriptionSearchQueryResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync(Camunda.Orchestration.Sdk.Api.MessageSubscriptionSearchQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.MessageSubscriptionSearchQueryResult},System.Threading.CancellationToken)">
+  SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery, ConsistencyOptions&lt;MessageSubscriptionSearchQueryResult&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2205"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search message subscriptions
@@ -130,14 +130,14 @@ Search for message subscriptions based on given criteria.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;SearchMessageSubscriptionsResponse&gt; SearchMessageSubscriptionsAsync(SearchMessageSubscriptionsRequest body, ConsistencyOptions&lt;SearchMessageSubscriptionsResponse&gt;? consistency = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;MessageSubscriptionSearchQueryResult&gt; SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery body, ConsistencyOptions&lt;MessageSubscriptionSearchQueryResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsRequest.html">SearchMessageSubscriptionsRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.MessageSubscriptionSearchQuery.html">MessageSubscriptionSearchQuery</a></dt>
   <dd></dd>
-  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsResponse.html">SearchMessageSubscriptionsResponse</a>&gt;</dt>
+  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.MessageSubscriptionSearchQueryResult.html">MessageSubscriptionSearchQueryResult</a>&gt;</dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -145,7 +145,7 @@ Search for message subscriptions based on given criteria.</p>
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchMessageSubscriptionsResponse.html">SearchMessageSubscriptionsResponse</a>&gt;</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.MessageSubscriptionSearchQueryResult.html">MessageSubscriptionSearchQueryResult</a>&gt;</dt>
   <dd></dd>
 </dl>
 
@@ -155,7 +155,7 @@ Search for message subscriptions based on given criteria.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_Camunda_Orchestration_Sdk_Api_SearchMessageSubscriptionsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMessageSubscriptionsResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_Camunda_Orchestration_Sdk_Api_MessageSubscriptionSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_MessageSubscriptionSearchQueryResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchMessageSubscriptions</p>
 </div>
 
@@ -165,7 +165,7 @@ Search for message subscriptions based on given criteria.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2162" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2205" class="edit-link">Edit this page</a>
         </div>
 
 

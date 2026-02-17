@@ -160,7 +160,7 @@ Completes a user task with the given key.</p>
     using var client = Camunda.CreateClient();
 
     // Find a user task via search
-    var tasks = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
+    var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
     var userTaskKey = tasks.Items![0].UserTaskKey.Value;
 
     await client.CompleteUserTaskAsync(userTaskKey, new UserTaskCompletionRequest

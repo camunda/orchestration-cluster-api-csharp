@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchIncidentsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchIncidentsAsync*" class="text-break">
-Method SearchIncidentsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2053"><i class="bi bi-code-slash"></i></a>
+Method SearchIncidentsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2096"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method SearchIncidentsAsync  <a class="header-action link-secondary" title="View
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_SearchIncidentsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchIncidentsAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchIncidentsAsync_Camunda_Orchestration_Sdk_Api_IncidentSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchIncidentsResponse__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchIncidentsAsync(Camunda.Orchestration.Sdk.Api.IncidentSearchQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchIncidentsResponse},System.Threading.CancellationToken)">
-  SearchIncidentsAsync(IncidentSearchQuery, ConsistencyOptions&lt;SearchIncidentsResponse&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2053"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchIncidentsAsync_Camunda_Orchestration_Sdk_Api_IncidentSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_IncidentSearchQueryResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchIncidentsAsync(Camunda.Orchestration.Sdk.Api.IncidentSearchQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.IncidentSearchQueryResult},System.Threading.CancellationToken)">
+  SearchIncidentsAsync(IncidentSearchQuery, ConsistencyOptions&lt;IncidentSearchQueryResult&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2096"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search incidents
@@ -130,14 +130,14 @@ Search for incidents based on given criteria.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;SearchIncidentsResponse&gt; SearchIncidentsAsync(IncidentSearchQuery body, ConsistencyOptions&lt;SearchIncidentsResponse&gt;? consistency = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;IncidentSearchQueryResult&gt; SearchIncidentsAsync(IncidentSearchQuery body, ConsistencyOptions&lt;IncidentSearchQueryResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.IncidentSearchQuery.html">IncidentSearchQuery</a></dt>
   <dd></dd>
-  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchIncidentsResponse.html">SearchIncidentsResponse</a>&gt;</dt>
+  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.IncidentSearchQueryResult.html">IncidentSearchQueryResult</a>&gt;</dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -145,7 +145,7 @@ Search for incidents based on given criteria.</p>
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchIncidentsResponse.html">SearchIncidentsResponse</a>&gt;</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.IncidentSearchQueryResult.html">IncidentSearchQueryResult</a>&gt;</dt>
   <dd></dd>
 </dl>
 
@@ -154,21 +154,8 @@ Search for incidents based on given criteria.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchIncidentsAsync_Camunda_Orchestration_Sdk_Api_IncidentSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchIncidentsResponse__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">static async Task SearchIncidentsExample()
-{
-    using var client = Camunda.CreateClient();
 
-    var result = await client.SearchIncidentsAsync(new IncidentSearchQuery());
-
-    foreach (var incident in result.Items!)
-    {
-        Console.WriteLine($&quot;Incident {incident.IncidentKey}: {incident.ErrorType} — {incident.ErrorMessage}&quot;);
-    }
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchIncidentsAsync_Camunda_Orchestration_Sdk_Api_IncidentSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchIncidentsResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchIncidentsAsync_Camunda_Orchestration_Sdk_Api_IncidentSearchQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_IncidentSearchQueryResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchIncidents</p>
 </div>
 
@@ -178,7 +165,7 @@ Search for incidents based on given criteria.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2053" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2096" class="edit-link">Edit this page</a>
         </div>
 
 

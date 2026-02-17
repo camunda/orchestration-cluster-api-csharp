@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskAuditLogsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskAuditLogsAsync*" class="text-break">
-Method SearchUserTaskAuditLogsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2312"><i class="bi bi-code-slash"></i></a>
+Method SearchUserTaskAuditLogsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2355"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method SearchUserTaskAuditLogsAsync  <a class="header-action link-secondary" tit
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskAuditLogsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskAuditLogsAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskAuditLogsAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_SearchUserTaskAuditLogsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTaskAuditLogsResponse__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskAuditLogsAsync(Camunda.Orchestration.Sdk.Api.UserTaskKey,Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsResponse},System.Threading.CancellationToken)">
-  SearchUserTaskAuditLogsAsync(UserTaskKey, SearchUserTaskAuditLogsRequest, ConsistencyOptions&lt;SearchUserTaskAuditLogsResponse&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2312"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskAuditLogsAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskAuditLogSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_AuditLogSearchQueryResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskAuditLogsAsync(Camunda.Orchestration.Sdk.Api.UserTaskKey,Camunda.Orchestration.Sdk.Api.UserTaskAuditLogSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.AuditLogSearchQueryResult},System.Threading.CancellationToken)">
+  SearchUserTaskAuditLogsAsync(UserTaskKey, UserTaskAuditLogSearchQueryRequest, ConsistencyOptions&lt;AuditLogSearchQueryResult&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2355"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search user task audit logs
@@ -130,16 +130,16 @@ Search for user task audit logs based on given criteria.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;SearchUserTaskAuditLogsResponse&gt; SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, SearchUserTaskAuditLogsRequest body, ConsistencyOptions&lt;SearchUserTaskAuditLogsResponse&gt;? consistency = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;AuditLogSearchQueryResult&gt; SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, UserTaskAuditLogSearchQueryRequest body, ConsistencyOptions&lt;AuditLogSearchQueryResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>userTaskKey</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.UserTaskKey.html">UserTaskKey</a></dt>
   <dd></dd>
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsRequest.html">SearchUserTaskAuditLogsRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.UserTaskAuditLogSearchQueryRequest.html">UserTaskAuditLogSearchQueryRequest</a></dt>
   <dd></dd>
-  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsResponse.html">SearchUserTaskAuditLogsResponse</a>&gt;</dt>
+  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.AuditLogSearchQueryResult.html">AuditLogSearchQueryResult</a>&gt;</dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -147,7 +147,7 @@ Search for user task audit logs based on given criteria.</p>
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchUserTaskAuditLogsResponse.html">SearchUserTaskAuditLogsResponse</a>&gt;</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.AuditLogSearchQueryResult.html">AuditLogSearchQueryResult</a>&gt;</dt>
   <dd></dd>
 </dl>
 
@@ -157,7 +157,7 @@ Search for user task audit logs based on given criteria.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskAuditLogsAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_SearchUserTaskAuditLogsRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchUserTaskAuditLogsResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskAuditLogsAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskAuditLogSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_AuditLogSearchQueryResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchUserTaskAuditLogs</p>
 </div>
 
@@ -167,7 +167,7 @@ Search for user task audit logs based on given criteria.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2312" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2355" class="edit-link">Edit this page</a>
         </div>
 
 
