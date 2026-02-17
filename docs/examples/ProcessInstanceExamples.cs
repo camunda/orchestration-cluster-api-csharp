@@ -95,7 +95,7 @@ internal static class ProcessInstanceExamples
     {
         using var client = Camunda.CreateClient();
 
-        var result = await client.SearchProcessInstancesAsync(new SearchProcessInstancesRequest());
+        var result = await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
 
         foreach (var instance in result.Items)
         {
@@ -121,7 +121,7 @@ internal static class ProcessInstanceExamples
         );
         var targetProcessDefinitionKey = v2.Processes[0].ProcessDefinitionKey;
 
-        await client.MigrateProcessInstanceAsync(created.ProcessInstanceKey, new MigrateProcessInstanceRequest
+        await client.MigrateProcessInstanceAsync(created.ProcessInstanceKey, new ProcessInstanceMigrationInstruction
         {
             TargetProcessDefinitionKey = targetProcessDefinitionKey,
             MappingInstructions = new List<MigrateProcessInstanceMappingInstruction>
@@ -147,7 +147,7 @@ internal static class ProcessInstanceExamples
             ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
         });
 
-        await client.ModifyProcessInstanceAsync(created.ProcessInstanceKey, new ModifyProcessInstanceRequest
+        await client.ModifyProcessInstanceAsync(created.ProcessInstanceKey, new ProcessInstanceModificationInstruction
         {
             ActivateInstructions = new List<ProcessInstanceModificationActivateInstruction>
             {

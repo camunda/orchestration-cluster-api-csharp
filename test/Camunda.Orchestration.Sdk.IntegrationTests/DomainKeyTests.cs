@@ -86,11 +86,11 @@ public class DomainKeyTests(CamundaFixture fixture)
         {
             // Search — the response should contain typed ProcessInstanceKey values
             var deadline = DateTimeOffset.UtcNow.AddSeconds(15);
-            SearchProcessInstancesResponse? searchResult = null;
+            ProcessInstanceSearchQueryResult? searchResult = null;
             while (DateTimeOffset.UtcNow < deadline)
             {
                 searchResult = await fixture.Client.SearchProcessInstancesAsync(
-                    new SearchProcessInstancesRequest());
+                    new ProcessInstanceSearchQuery());
 
                 if (searchResult?.Items?.Count > 0)
                     break;

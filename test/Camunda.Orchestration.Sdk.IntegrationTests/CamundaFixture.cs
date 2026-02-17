@@ -89,7 +89,7 @@ public sealed class CamundaFixture : IAsyncLifetime
     /// <summary>
     /// Deploy a BPMN resource file from the Fixtures directory.
     /// </summary>
-    public async Task<CreateDeploymentResponse> DeployResourceAsync(string fixtureFileName)
+    public async Task<DeploymentResult> DeployResourceAsync(string fixtureFileName)
     {
         var filePath = Path.Combine(AppContext.BaseDirectory, "Fixtures", fixtureFileName);
         if (!File.Exists(filePath))

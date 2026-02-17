@@ -48,7 +48,7 @@ public class DeploymentTests : IDisposable
     [Fact]
     public void ExtendedDeploymentResponse_SortsIntoBuckets()
     {
-        var raw = new CreateDeploymentResponse
+        var raw = new DeploymentResult
         {
             DeploymentKey = DeploymentKey.AssumeExists("123"),
             TenantId = TenantId.AssumeExists("test-tenant"),
@@ -119,7 +119,7 @@ public class DeploymentTests : IDisposable
     [Fact]
     public void ExtendedDeploymentResponse_HandlesEmptyDeployments()
     {
-        var raw = new CreateDeploymentResponse
+        var raw = new DeploymentResult
         {
             DeploymentKey = DeploymentKey.AssumeExists("1"),
             TenantId = TenantId.AssumeExists("t"),
@@ -138,7 +138,7 @@ public class DeploymentTests : IDisposable
     [Fact]
     public void ExtendedDeploymentResponse_HandlesNullDeployments()
     {
-        var raw = new CreateDeploymentResponse
+        var raw = new DeploymentResult
         {
             DeploymentKey = DeploymentKey.AssumeExists("1"),
             TenantId = TenantId.AssumeExists("t"),
@@ -157,7 +157,7 @@ public class DeploymentTests : IDisposable
     [Fact]
     public void ExtendedDeploymentResponse_ExposesRawResponse()
     {
-        var raw = new CreateDeploymentResponse
+        var raw = new DeploymentResult
         {
             DeploymentKey = DeploymentKey.AssumeExists("42"),
             TenantId = TenantId.AssumeExists("t"),
@@ -171,7 +171,7 @@ public class DeploymentTests : IDisposable
     [Fact]
     public void ExtendedDeploymentResponse_MultipleProcesses()
     {
-        var raw = new CreateDeploymentResponse
+        var raw = new DeploymentResult
         {
             DeploymentKey = DeploymentKey.AssumeExists("1"),
             TenantId = TenantId.AssumeExists("t"),

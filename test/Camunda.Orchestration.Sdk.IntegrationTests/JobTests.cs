@@ -24,7 +24,7 @@ public class JobTests(CamundaFixture fixture)
             // Activate job (with retry — may take a moment for the job to appear)
             // Filter to only activate jobs belonging to THIS process instance to
             // avoid picking up leftover jobs from previous test runs.
-            ActivateJobsResponse? activation = null;
+            JobActivationResult? activation = null;
             ActivatedJobResult? targetJob = null;
             var deadline = DateTimeOffset.UtcNow.AddSeconds(30);
             while (DateTimeOffset.UtcNow < deadline)
@@ -67,7 +67,7 @@ public class JobTests(CamundaFixture fixture)
             while (DateTimeOffset.UtcNow < doneDeadline)
             {
                 var search = await fixture.Client.SearchProcessInstancesAsync(
-                    new SearchProcessInstancesRequest());
+                    new ProcessInstanceSearchQuery());
 
                 completed = search?.Items != null &&
                     HasItemWithKeyAndState(search.Items, processInstanceKey.ToString(), "COMPLETED");

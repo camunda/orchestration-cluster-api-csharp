@@ -16,7 +16,7 @@ internal static class UserTaskExamples
         using var client = Camunda.CreateClient();
 
         // Find a user task via search
-        var tasks = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
+        var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
         var userTaskKey = tasks.Items![0].UserTaskKey.Value;
 
         await client.CompleteUserTaskAsync(userTaskKey, new UserTaskCompletionRequest
@@ -36,7 +36,7 @@ internal static class UserTaskExamples
         using var client = Camunda.CreateClient();
 
         // Find a user task via search
-        var tasks = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
+        var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
         var userTaskKey = tasks.Items![0].UserTaskKey.Value;
 
         await client.AssignUserTaskAsync(userTaskKey, new UserTaskAssignmentRequest
@@ -52,7 +52,7 @@ internal static class UserTaskExamples
         using var client = Camunda.CreateClient();
 
         // Find a user task via search
-        var tasks = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
+        var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
         var userTaskKey = tasks.Items![0].UserTaskKey.Value;
 
         await client.UnassignUserTaskAsync(userTaskKey);
@@ -64,7 +64,7 @@ internal static class UserTaskExamples
     {
         using var client = Camunda.CreateClient();
 
-        var result = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
+        var result = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
 
         foreach (var task in result.Items!)
         {
@@ -79,7 +79,7 @@ internal static class UserTaskExamples
         using var client = Camunda.CreateClient();
 
         // Find a user task via search
-        var tasks = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
+        var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
         var userTaskKey = tasks.Items![0].UserTaskKey.Value;
 
         await client.UpdateUserTaskAsync(userTaskKey, new UserTaskUpdateRequest

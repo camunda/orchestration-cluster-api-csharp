@@ -15336,1112 +15336,58 @@ public sealed class VariableValueFilterProperty
 }
 
 /// <summary>
-/// The list of activated jobs
+/// CreateMappingRuleResponse
 /// </summary>
-public sealed class ActivateJobsResponse
+public sealed class CreateMappingRuleResponse
 {
     /// <summary>
-    /// The activated jobs.
+    /// The name of the claim to map.
     /// </summary>
-    [JsonPropertyName("jobs")]
-    public List<ActivatedJobResult> Jobs { get; set; } = null!;
+    [JsonPropertyName("claimName")]
+    public string? ClaimName { get; set; }
 
-}
-
-/// <summary>
-/// The process instance filter that defines which process instances should be canceled.
-/// </summary>
-public sealed class CancelProcessInstancesBatchOperationRequest
-{
-    /// <summary>
-    /// The process instance filter.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; } = null!;
-
-    /// <summary>
-    /// A reference key chosen by the user that will be part of all records resulting from this operation.
-    /// Must be &gt; 0 if provided.
-    /// 
-    /// </summary>
-    [JsonPropertyName("operationReference")]
-    public long? OperationReference { get; set; }
-
-}
-
-/// <summary>
-/// CreateDeploymentResponse
-/// </summary>
-public sealed class CreateDeploymentResponse
-{
-    /// <summary>
-    /// The unique key identifying the deployment.
-    /// </summary>
-    [JsonPropertyName("deploymentKey")]
-    public DeploymentKey DeploymentKey { get; set; }
-
-    /// <summary>
-    /// The tenant ID associated with the deployment.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId TenantId { get; set; }
-
-    /// <summary>
-    /// Items deployed by the request.
-    /// </summary>
-    [JsonPropertyName("deployments")]
-    public List<DeploymentMetadataResult> Deployments { get; set; } = null!;
-
-}
-
-/// <summary>
-/// CreateGlobalTaskListenerResponse
-/// </summary>
-public sealed class CreateGlobalTaskListenerResponse
-{
-    /// <summary>
-    /// The user-defined id for the global listener
-    /// </summary>
-    [JsonPropertyName("id")]
-    public GlobalListenerId? Id { get; set; }
-
-    /// <summary>
-    /// How the global listener was defined.
-    /// </summary>
-    [JsonPropertyName("source")]
-    public GlobalListenerSourceEnum? Source { get; set; }
-
-    /// <summary>
-    /// List of user task event types that trigger the listener.
-    /// </summary>
-    [JsonPropertyName("eventTypes")]
-    public List<GlobalTaskListenerEventTypeEnum>? EventTypes { get; set; }
-
-}
-
-/// <summary>
-/// The process instance filter that defines which process instances should be deleted.
-/// </summary>
-public sealed class DeleteProcessInstancesBatchOperationRequest
-{
-    /// <summary>
-    /// The process instance filter.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; } = null!;
-
-    /// <summary>
-    /// A reference key chosen by the user that will be part of all records resulting from this operation.
-    /// Must be &gt; 0 if provided.
-    /// 
-    /// </summary>
-    [JsonPropertyName("operationReference")]
-    public long? OperationReference { get; set; }
-
-}
-
-/// <summary>
-/// Audit log item.
-/// </summary>
-public sealed class GetAuditLogResponse
-{
-    /// <summary>
-    /// The unique key of the audit log entry.
-    /// </summary>
-    [JsonPropertyName("auditLogKey")]
-    public AuditLogKey? AuditLogKey { get; set; }
-
-    /// <summary>
-    /// System-generated entity key for an audit log entry.
-    /// </summary>
-    [JsonPropertyName("entityKey")]
-    public AuditLogEntityKey? EntityKey { get; set; }
-
-    /// <summary>
-    /// The type of entity affected by the operation.
-    /// </summary>
-    [JsonPropertyName("entityType")]
-    public AuditLogEntityTypeEnum? EntityType { get; set; }
-
-    /// <summary>
-    /// The type of operation performed.
-    /// </summary>
-    [JsonPropertyName("operationType")]
-    public AuditLogOperationTypeEnum? OperationType { get; set; }
-
-    /// <summary>
-    /// Key of the batch operation.
-    /// </summary>
-    [JsonPropertyName("batchOperationKey")]
-    public BatchOperationKey? BatchOperationKey { get; set; }
-
-    /// <summary>
-    /// The type of batch operation performed, if this is part of a batch.
-    /// </summary>
-    [JsonPropertyName("batchOperationType")]
-    public BatchOperationTypeEnum? BatchOperationType { get; set; }
-
-    /// <summary>
-    /// The timestamp when the operation occurred.
-    /// </summary>
-    [JsonPropertyName("timestamp")]
-    public DateTimeOffset? Timestamp { get; set; }
-
-    /// <summary>
-    /// The ID of the actor who performed the operation.
-    /// </summary>
-    [JsonPropertyName("actorId")]
-    public string? ActorId { get; set; }
-
-    /// <summary>
-    /// The type of actor who performed the operation.
-    /// </summary>
-    [JsonPropertyName("actorType")]
-    public AuditLogActorTypeEnum? ActorType { get; set; }
-
-    /// <summary>
-    /// The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID).
-    /// </summary>
-    [JsonPropertyName("agentElementId")]
-    public string? AgentElementId { get; set; }
-
-    /// <summary>
-    /// The tenant ID of the audit log.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
-
-    /// <summary>
-    /// The result status of the operation.
-    /// </summary>
-    [JsonPropertyName("result")]
-    public AuditLogResultEnum? Result { get; set; }
-
-    /// <summary>
-    /// Additional notes about the operation.
-    /// </summary>
-    [JsonPropertyName("annotation")]
-    public string? Annotation { get; set; }
-
-    /// <summary>
-    /// The category of the audit log operation.
-    /// </summary>
-    [JsonPropertyName("category")]
-    public AuditLogCategoryEnum? Category { get; set; }
-
-    /// <summary>
-    /// The process definition ID.
-    /// </summary>
-    [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
-
-    /// <summary>
-    /// The key of the process definition.
-    /// </summary>
-    [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
-
-    /// <summary>
-    /// The key of the process instance.
-    /// </summary>
-    [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// System-generated key for a process instance.
-    /// </summary>
-    [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// The key of the element instance.
-    /// </summary>
-    [JsonPropertyName("elementInstanceKey")]
-    public ElementInstanceKey? ElementInstanceKey { get; set; }
-
-    /// <summary>
-    /// The key of the job.
-    /// </summary>
-    [JsonPropertyName("jobKey")]
-    public JobKey? JobKey { get; set; }
-
-    /// <summary>
-    /// The key of the user task.
-    /// </summary>
-    [JsonPropertyName("userTaskKey")]
-    public UserTaskKey? UserTaskKey { get; set; }
-
-    /// <summary>
-    /// The decision requirements ID.
-    /// </summary>
-    [JsonPropertyName("decisionRequirementsId")]
-    public string? DecisionRequirementsId { get; set; }
-
-    /// <summary>
-    /// The assigned key of the decision requirements.
-    /// </summary>
-    [JsonPropertyName("decisionRequirementsKey")]
-    public DecisionRequirementsKey? DecisionRequirementsKey { get; set; }
-
-    /// <summary>
-    /// The decision definition ID.
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionId")]
-    public DecisionDefinitionId? DecisionDefinitionId { get; set; }
-
-    /// <summary>
-    /// The key of the decision definition.
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionKey")]
-    public DecisionDefinitionKey? DecisionDefinitionKey { get; set; }
-
-    /// <summary>
-    /// The key of the decision evaluation.
-    /// </summary>
-    [JsonPropertyName("decisionEvaluationKey")]
-    public DecisionEvaluationKey? DecisionEvaluationKey { get; set; }
-
-    /// <summary>
-    /// The key of the deployment.
-    /// </summary>
-    [JsonPropertyName("deploymentKey")]
-    public DeploymentKey? DeploymentKey { get; set; }
-
-    /// <summary>
-    /// The key of the form.
-    /// </summary>
-    [JsonPropertyName("formKey")]
-    public object? FormKey { get; set; }
-
-    /// <summary>
-    /// The system-assigned key for this resource.
-    /// </summary>
-    [JsonPropertyName("resourceKey")]
-    public ResourceKey? ResourceKey { get; set; }
-
-    /// <summary>
-    /// The key of the related entity. The content depends on the operation type and entity type.
-    /// For example, for authorization operations, this will contain the ID of the owner (e.g., user or group) the authorization belongs to.
-    /// 
-    /// </summary>
-    [JsonPropertyName("relatedEntityKey")]
-    public AuditLogEntityKey? RelatedEntityKey { get; set; }
-
-    /// <summary>
-    /// The type of the related entity. The content depends on the operation type and entity type.
-    /// For example, for authorization operations, this will contain the type of the owner (e.g., USER or GROUP) the authorization belongs to.
-    /// 
-    /// </summary>
-    [JsonPropertyName("relatedEntityType")]
-    public AuditLogEntityTypeEnum? RelatedEntityType { get; set; }
-
-    /// <summary>
-    /// Additional description of the entity affected by the operation.
-    /// For example, for variable operations, this will contain the variable name.
-    /// 
-    /// </summary>
-    [JsonPropertyName("entityDescription")]
-    public string? EntityDescription { get; set; }
-
-}
-
-/// <summary>
-/// GetElementInstanceResponse
-/// </summary>
-public sealed class GetElementInstanceResponse
-{
-    /// <summary>
-    /// The process definition ID associated to this element instance.
-    /// </summary>
-    [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId ProcessDefinitionId { get; set; }
-
-    /// <summary>
-    /// Date when element instance started.
-    /// </summary>
-    [JsonPropertyName("startDate")]
-    public DateTimeOffset StartDate { get; set; }
-
-    /// <summary>
-    /// Date when element instance finished.
-    /// </summary>
-    [JsonPropertyName("endDate")]
-    public DateTimeOffset? EndDate { get; set; }
-
-    /// <summary>
-    /// The element ID for this element instance.
-    /// </summary>
-    [JsonPropertyName("elementId")]
-    public ElementId ElementId { get; set; }
-
-    /// <summary>
-    /// The element name for this element instance.
-    /// </summary>
-    [JsonPropertyName("elementName")]
-    public string ElementName { get; set; } = null!;
-
-    /// <summary>
-    /// Type of element as defined set of values.
-    /// </summary>
-    [JsonPropertyName("type")]
-    public string Type { get; set; } = null!;
-
-    /// <summary>
-    /// State of element instance as defined set of values.
-    /// </summary>
-    [JsonPropertyName("state")]
-    public ElementInstanceStateEnum State { get; set; }
-
-    /// <summary>
-    /// Shows whether this element instance has an incident. If true also an incidentKey is provided.
-    /// </summary>
-    [JsonPropertyName("hasIncident")]
-    public bool HasIncident { get; set; }
-
-    /// <summary>
-    /// The tenant ID of the incident.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId TenantId { get; set; }
-
-    /// <summary>
-    /// The assigned key, which acts as a unique identifier for this element instance.
-    /// </summary>
-    [JsonPropertyName("elementInstanceKey")]
-    public ElementInstanceKey ElementInstanceKey { get; set; }
-
-    /// <summary>
-    /// The process instance key associated to this element instance.
-    /// </summary>
-    [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey ProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// System-generated key for a process instance.
-    /// </summary>
-    [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// The process definition key associated to this element instance.
-    /// </summary>
-    [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
-
-    /// <summary>
-    /// Incident key associated with this element instance.
-    /// </summary>
-    [JsonPropertyName("incidentKey")]
-    public IncidentKey? IncidentKey { get; set; }
-
-}
-
-/// <summary>
-/// GetIncidentResponse
-/// </summary>
-public sealed class GetIncidentResponse
-{
-    /// <summary>
-    /// The process definition ID associated to this incident.
-    /// </summary>
-    [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
-
-    [JsonPropertyName("errorType")]
-    public IncidentErrorTypeEnum? ErrorType { get; set; }
-
-    /// <summary>
-    /// Error message which describes the error in more detail.
-    /// </summary>
-    [JsonPropertyName("errorMessage")]
-    public string? ErrorMessage { get; set; }
-
-    /// <summary>
-    /// The element ID associated to this incident.
-    /// </summary>
-    [JsonPropertyName("elementId")]
-    public ElementId? ElementId { get; set; }
-
-    [JsonPropertyName("creationTime")]
-    public DateTimeOffset? CreationTime { get; set; }
-
-    [JsonPropertyName("state")]
-    public IncidentStateEnum? State { get; set; }
-
-    /// <summary>
-    /// The tenant ID of the incident.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
-
-    /// <summary>
-    /// The assigned key, which acts as a unique identifier for this incident.
-    /// </summary>
-    [JsonPropertyName("incidentKey")]
-    public IncidentKey? IncidentKey { get; set; }
-
-    /// <summary>
-    /// The process definition key associated to this incident.
-    /// </summary>
-    [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
-
-    /// <summary>
-    /// The process instance key associated to this incident.
-    /// </summary>
-    [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// System-generated key for a process instance.
-    /// </summary>
-    [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// The element instance key associated to this incident.
-    /// </summary>
-    [JsonPropertyName("elementInstanceKey")]
-    public ElementInstanceKey? ElementInstanceKey { get; set; }
-
-    /// <summary>
-    /// The job key, if exists, associated with this incident.
-    /// </summary>
-    [JsonPropertyName("jobKey")]
-    public JobKey? JobKey { get; set; }
-
-}
-
-/// <summary>
-/// Process definition element statistics request.
-/// </summary>
-public sealed class GetProcessDefinitionStatisticsRequest
-{
-    /// <summary>
-    /// The process definition statistics search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
-
-}
-
-/// <summary>
-/// Process instance search response item.
-/// </summary>
-public sealed class GetProcessInstanceResponse
-{
-    /// <summary>
-    /// Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.
-    /// </summary>
-    [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId ProcessDefinitionId { get; set; }
-
-    /// <summary>
-    /// The process definition name.
-    /// </summary>
-    [JsonPropertyName("processDefinitionName")]
-    public string ProcessDefinitionName { get; set; } = null!;
-
-    [JsonPropertyName("processDefinitionVersion")]
-    public int ProcessDefinitionVersion { get; set; }
-
-    /// <summary>
-    /// The process definition version tag.
-    /// </summary>
-    [JsonPropertyName("processDefinitionVersionTag")]
-    public string? ProcessDefinitionVersionTag { get; set; }
-
-    [JsonPropertyName("startDate")]
-    public DateTimeOffset StartDate { get; set; }
-
-    [JsonPropertyName("endDate")]
-    public DateTimeOffset? EndDate { get; set; }
-
-    /// <summary>
-    /// Process instance states
-    /// </summary>
-    [JsonPropertyName("state")]
-    public ProcessInstanceStateEnum State { get; set; }
-
-    /// <summary>
-    /// Whether this process instance has a related incident or not.
-    /// </summary>
-    [JsonPropertyName("hasIncident")]
-    public bool HasIncident { get; set; }
-
-    /// <summary>
-    /// The unique identifier of the tenant.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId TenantId { get; set; }
-
-    /// <summary>
-    /// The key of this process instance.
-    /// </summary>
-    [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey ProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// The process definition key.
-    /// </summary>
-    [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
-
-    /// <summary>
-    /// The parent process instance key.
-    /// </summary>
-    [JsonPropertyName("parentProcessInstanceKey")]
-    public ProcessInstanceKey? ParentProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// The parent element instance key.
-    /// </summary>
-    [JsonPropertyName("parentElementInstanceKey")]
-    public ElementInstanceKey? ParentElementInstanceKey { get; set; }
-
-    /// <summary>
-    /// System-generated key for a process instance.
-    /// </summary>
-    [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
-    /// </summary>
-    [JsonPropertyName("tags")]
-    public List<string>? Tags { get; set; }
-
-}
-
-/// <summary>
-/// Process instance sequence flows query response.
-/// </summary>
-public sealed class GetProcessInstanceSequenceFlowsResponse
-{
-    /// <summary>
-    /// The sequence flows.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<ProcessInstanceSequenceFlowResult>? Items { get; set; }
-
-}
-
-/// <summary>
-/// GetStartProcessFormResponse
-/// </summary>
-public sealed class GetStartProcessFormResponse
-{
-    /// <summary>
-    /// The tenant ID of the form.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
-
-    /// <summary>
-    /// The user-provided identifier of the form.
-    /// </summary>
-    [JsonPropertyName("formId")]
-    public FormId? FormId { get; set; }
-
-    /// <summary>
-    /// The form content.
-    /// </summary>
-    [JsonPropertyName("schema")]
-    public object? Schema { get; set; }
-
-    /// <summary>
-    /// The version of the the deployed form.
-    /// </summary>
-    [JsonPropertyName("version")]
-    public long? Version { get; set; }
-
-    /// <summary>
-    /// The assigned key, which acts as a unique identifier for this form.
-    /// </summary>
-    [JsonPropertyName("formKey")]
-    public object? FormKey { get; set; }
-
-}
-
-/// <summary>
-/// GetUserTaskFormResponse
-/// </summary>
-public sealed class GetUserTaskFormResponse
-{
-    /// <summary>
-    /// The tenant ID of the form.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
-
-    /// <summary>
-    /// The user-provided identifier of the form.
-    /// </summary>
-    [JsonPropertyName("formId")]
-    public FormId? FormId { get; set; }
-
-    /// <summary>
-    /// The form content.
-    /// </summary>
-    [JsonPropertyName("schema")]
-    public object? Schema { get; set; }
-
-    /// <summary>
-    /// The version of the the deployed form.
-    /// </summary>
-    [JsonPropertyName("version")]
-    public long? Version { get; set; }
-
     /// <summary>
-    /// The assigned key, which acts as a unique identifier for this form.
+    /// The value of the claim to map.
     /// </summary>
-    [JsonPropertyName("formKey")]
-    public object? FormKey { get; set; }
-
-}
+    [JsonPropertyName("claimValue")]
+    public string? ClaimValue { get; set; }
 
-/// <summary>
-/// GetUserTaskResponse
-/// </summary>
-public sealed class GetUserTaskResponse
-{
     /// <summary>
-    /// The name for this user task.
+    /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
     public string? Name { get; set; }
 
     /// <summary>
-    /// The state of the user task.
+    /// The unique ID of the mapping rule.
     /// </summary>
-    [JsonPropertyName("state")]
-    public UserTaskStateEnum? State { get; set; }
-
-    /// <summary>
-    /// The assignee of the user task.
-    /// </summary>
-    [JsonPropertyName("assignee")]
-    public string? Assignee { get; set; }
-
-    /// <summary>
-    /// The element ID of the user task.
-    /// </summary>
-    [JsonPropertyName("elementId")]
-    public ElementId? ElementId { get; set; }
-
-    /// <summary>
-    /// The candidate groups for this user task.
-    /// </summary>
-    [JsonPropertyName("candidateGroups")]
-    public List<string>? CandidateGroups { get; set; }
-
-    /// <summary>
-    /// The candidate users for this user task.
-    /// </summary>
-    [JsonPropertyName("candidateUsers")]
-    public List<string>? CandidateUsers { get; set; }
-
-    /// <summary>
-    /// The ID of the process definition.
-    /// </summary>
-    [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
-
-    /// <summary>
-    /// The creation date of a user task.
-    /// </summary>
-    [JsonPropertyName("creationDate")]
-    public DateTimeOffset? CreationDate { get; set; }
-
-    /// <summary>
-    /// The completion date of a user task.
-    /// </summary>
-    [JsonPropertyName("completionDate")]
-    public DateTimeOffset? CompletionDate { get; set; }
-
-    /// <summary>
-    /// The follow date of a user task.
-    /// </summary>
-    [JsonPropertyName("followUpDate")]
-    public DateTimeOffset? FollowUpDate { get; set; }
-
-    /// <summary>
-    /// The due date of a user task.
-    /// </summary>
-    [JsonPropertyName("dueDate")]
-    public DateTimeOffset? DueDate { get; set; }
-
-    /// <summary>
-    /// The unique identifier of the tenant.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
-
-    /// <summary>
-    /// The external form reference.
-    /// </summary>
-    [JsonPropertyName("externalFormReference")]
-    public string? ExternalFormReference { get; set; }
-
-    /// <summary>
-    /// The version of the process definition.
-    /// </summary>
-    [JsonPropertyName("processDefinitionVersion")]
-    public int? ProcessDefinitionVersion { get; set; }
-
-    /// <summary>
-    /// Custom headers for the user task.
-    /// </summary>
-    [JsonPropertyName("customHeaders")]
-    public Dictionary<string, string>? CustomHeaders { get; set; }
-
-    /// <summary>
-    /// The priority of a user task. The higher the value the higher the priority.
-    /// </summary>
-    [JsonPropertyName("priority")]
-    public int? Priority { get; set; }
-
-    /// <summary>
-    /// The key of the user task.
-    /// </summary>
-    [JsonPropertyName("userTaskKey")]
-    public UserTaskKey? UserTaskKey { get; set; }
-
-    /// <summary>
-    /// The key of the element instance.
-    /// </summary>
-    [JsonPropertyName("elementInstanceKey")]
-    public ElementInstanceKey? ElementInstanceKey { get; set; }
-
-    /// <summary>
-    /// The name of the process definition.
-    /// </summary>
-    [JsonPropertyName("processName")]
-    public string? ProcessName { get; set; }
-
-    /// <summary>
-    /// The key of the process definition.
-    /// </summary>
-    [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
-
-    /// <summary>
-    /// The key of the process instance.
-    /// </summary>
-    [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// System-generated key for a process instance.
-    /// </summary>
-    [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// The key of the form.
-    /// </summary>
-    [JsonPropertyName("formKey")]
-    public object? FormKey { get; set; }
-
-    /// <summary>
-    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
-    /// </summary>
-    [JsonPropertyName("tags")]
-    public List<string>? Tags { get; set; }
+    [JsonPropertyName("mappingRuleId")]
+    public string? MappingRuleId { get; set; }
 
 }
 
 /// <summary>
-/// Variable search response item.
+/// GetUserResponse
 /// </summary>
-public sealed class GetVariableResponse
+public sealed class GetUserResponse
 {
     /// <summary>
-    /// Full value of this variable.
+    /// The unique name of a user.
     /// </summary>
-    [JsonPropertyName("value")]
-    public string? Value { get; set; }
+    [JsonPropertyName("username")]
+    public Username? Username { get; set; }
 
     /// <summary>
-    /// Name of this variable.
+    /// The name of the user.
     /// </summary>
     [JsonPropertyName("name")]
     public string? Name { get; set; }
 
     /// <summary>
-    /// Tenant ID of this variable.
+    /// The email of the user.
     /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
-
-    /// <summary>
-    /// The key for this variable.
-    /// </summary>
-    [JsonPropertyName("variableKey")]
-    public VariableKey? VariableKey { get; set; }
-
-    /// <summary>
-    /// The key of the scope of this variable.
-    /// </summary>
-    [JsonPropertyName("scopeKey")]
-    public ScopeKey? ScopeKey { get; set; }
-
-    /// <summary>
-    /// The key of the process instance of this variable.
-    /// </summary>
-    [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// System-generated key for a process instance.
-    /// </summary>
-    [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
-
-}
-
-/// <summary>
-/// The migration instructions describe how to migrate a process instance from one process definition to another.
-/// 
-/// </summary>
-public sealed class MigrateProcessInstanceRequest
-{
-    /// <summary>
-    /// The key of process definition to migrate the process instance to.
-    /// </summary>
-    [JsonPropertyName("targetProcessDefinitionKey")]
-    public ProcessDefinitionKey TargetProcessDefinitionKey { get; set; }
-
-    /// <summary>
-    /// Element mappings from the source process instance to the target process instance.
-    /// </summary>
-    [JsonPropertyName("mappingInstructions")]
-    public List<MigrateProcessInstanceMappingInstruction> MappingInstructions { get; set; } = null!;
-
-    /// <summary>
-    /// A reference key chosen by the user that will be part of all records resulting from this operation.
-    /// Must be &gt; 0 if provided.
-    /// 
-    /// </summary>
-    [JsonPropertyName("operationReference")]
-    public long? OperationReference { get; set; }
-
-}
-
-/// <summary>
-/// MigrateProcessInstancesBatchOperationRequest
-/// </summary>
-public sealed class MigrateProcessInstancesBatchOperationRequest
-{
-    /// <summary>
-    /// The process instance filter.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; } = null!;
-
-    /// <summary>
-    /// The migration plan.
-    /// </summary>
-    [JsonPropertyName("migrationPlan")]
-    public ProcessInstanceMigrationBatchOperationPlan MigrationPlan { get; set; } = null!;
-
-    /// <summary>
-    /// A reference key chosen by the user that will be part of all records resulting from this operation.
-    /// Must be &gt; 0 if provided.
-    /// 
-    /// </summary>
-    [JsonPropertyName("operationReference")]
-    public long? OperationReference { get; set; }
-
-}
-
-/// <summary>
-/// ModifyProcessInstanceRequest
-/// </summary>
-public sealed class ModifyProcessInstanceRequest
-{
-    /// <summary>
-    /// A reference key chosen by the user that will be part of all records resulting from this operation.
-    /// Must be &gt; 0 if provided.
-    /// 
-    /// </summary>
-    [JsonPropertyName("operationReference")]
-    public long? OperationReference { get; set; }
-
-    /// <summary>
-    /// Instructions describing which elements to activate in which scopes and which variables to create or update.
-    /// </summary>
-    [JsonPropertyName("activateInstructions")]
-    public List<ProcessInstanceModificationActivateInstruction>? ActivateInstructions { get; set; }
-
-    /// <summary>
-    /// Instructions describing which elements to move from one scope to another.
-    /// </summary>
-    [JsonPropertyName("moveInstructions")]
-    public List<ProcessInstanceModificationMoveInstruction>? MoveInstructions { get; set; }
-
-    /// <summary>
-    /// Instructions describing which elements to terminate.
-    /// </summary>
-    [JsonPropertyName("terminateInstructions")]
-    public List<ProcessInstanceModificationTerminateInstruction>? TerminateInstructions { get; set; }
-
-}
-
-/// <summary>
-/// The process instance filter to define on which process instances tokens should be moved,
-/// and new element instances should be activated or terminated.
-/// 
-/// </summary>
-public sealed class ModifyProcessInstancesBatchOperationRequest
-{
-    /// <summary>
-    /// The process instance filter.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; } = null!;
-
-    /// <summary>
-    /// Instructions for moving tokens between elements.
-    /// </summary>
-    [JsonPropertyName("moveInstructions")]
-    public List<ProcessInstanceModificationMoveBatchOperationInstruction> MoveInstructions { get; set; } = null!;
-
-    /// <summary>
-    /// A reference key chosen by the user that will be part of all records resulting from this operation.
-    /// Must be &gt; 0 if provided.
-    /// 
-    /// </summary>
-    [JsonPropertyName("operationReference")]
-    public long? OperationReference { get; set; }
-
-}
-
-/// <summary>
-/// The message key of the published message.
-/// </summary>
-public sealed class PublishMessageResponse
-{
-    /// <summary>
-    /// The tenant ID of the message.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
-
-    /// <summary>
-    /// The key of the published message.
-    /// </summary>
-    [JsonPropertyName("messageKey")]
-    public object? MessageKey { get; set; }
-
-}
-
-/// <summary>
-/// The process instance filter that defines which process instances should have their incidents resolved.
-/// </summary>
-public sealed class ResolveIncidentsBatchOperationRequest
-{
-    /// <summary>
-    /// The process instance filter.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public ProcessInstanceFilter Filter { get; set; } = null!;
-
-    /// <summary>
-    /// A reference key chosen by the user that will be part of all records resulting from this operation.
-    /// Must be &gt; 0 if provided.
-    /// 
-    /// </summary>
-    [JsonPropertyName("operationReference")]
-    public long? OperationReference { get; set; }
-
-}
-
-/// <summary>
-/// Audit log search response.
-/// </summary>
-public sealed class SearchAuditLogsResponse
-{
-    /// <summary>
-    /// The matching audit logs.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<AuditLogResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// Batch operation item search request.
-/// </summary>
-public sealed class SearchBatchOperationItemsRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<BatchOperationItemSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The batch operation item search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchBatchOperationItemsResponse
-/// </summary>
-public sealed class SearchBatchOperationItemsResponse
-{
-    /// <summary>
-    /// The matching batch operation items.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<BatchOperationItemResponse>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// Batch operation search request.
-/// </summary>
-public sealed class SearchBatchOperationsRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<BatchOperationSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The batch operation search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
+    [JsonPropertyName("email")]
+    public string? Email { get; set; }
 
 }
 
@@ -16454,13 +15400,32 @@ public sealed class SearchClientsForGroupRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<TenantClientSearchQuerySortRequest>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchClientsForGroupResponse
+/// </summary>
+public sealed class SearchClientsForGroupResponse
+{
+    /// <summary>
+    /// The matching client IDs.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupClientResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -16473,13 +15438,32 @@ public sealed class SearchClientsForRoleRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<TenantClientSearchQuerySortRequest>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
     /// </summary>
     [JsonPropertyName("page")]
-    public object? Page { get; set; }
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchClientsForRoleResponse
+/// </summary>
+public sealed class SearchClientsForRoleResponse
+{
+    /// <summary>
+    /// The matching clients.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupClientResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -16492,322 +15476,32 @@ public sealed class SearchClientsForTenantRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<TenantClientSearchQuerySortRequest>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
     /// </summary>
     [JsonPropertyName("page")]
-    public object? Page { get; set; }
+    public SearchQueryPageRequest? Page { get; set; }
 
 }
 
 /// <summary>
-/// SearchCorrelatedMessageSubscriptionsResponse
+/// SearchClientsForTenantResponse
 /// </summary>
-public sealed class SearchCorrelatedMessageSubscriptionsResponse
+public sealed class SearchClientsForTenantResponse
 {
     /// <summary>
-    /// The matching correlated message subscriptions.
+    /// The matching clients.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<CorrelatedMessageSubscriptionResult>? Items { get; set; }
+    public List<GroupClientResult>? Items { get; set; }
 
     /// <summary>
     /// Pagination information about the search results.
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchDecisionInstancesResponse
-/// </summary>
-public sealed class SearchDecisionInstancesResponse
-{
-    /// <summary>
-    /// The matching decision instances.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<DecisionInstanceResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchElementInstanceIncidentsResponse
-/// </summary>
-public sealed class SearchElementInstanceIncidentsResponse
-{
-    /// <summary>
-    /// The matching incidents.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<IncidentResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchElementInstancesResponse
-/// </summary>
-public sealed class SearchElementInstancesResponse
-{
-    /// <summary>
-    /// The matching element instances.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<ElementInstanceResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchGroupIdsForTenantRequest
-/// </summary>
-public sealed class SearchGroupIdsForTenantRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<TenantGroupSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchGroupsForRoleRequest
-/// </summary>
-public sealed class SearchGroupsForRoleRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<RoleGroupSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchIncidentsResponse
-/// </summary>
-public sealed class SearchIncidentsResponse
-{
-    /// <summary>
-    /// The matching incidents.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<IncidentResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// Job search response.
-/// </summary>
-public sealed class SearchJobsResponse
-{
-    /// <summary>
-    /// The matching jobs.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<JobSearchResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchMessageSubscriptionsRequest
-/// </summary>
-public sealed class SearchMessageSubscriptionsRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<MessageSubscriptionSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The incident search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public MessageSubscriptionFilter? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchMessageSubscriptionsResponse
-/// </summary>
-public sealed class SearchMessageSubscriptionsResponse
-{
-    /// <summary>
-    /// The matching message subscriptions.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<MessageSubscriptionResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchProcessDefinitionsRequest
-/// </summary>
-public sealed class SearchProcessDefinitionsRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<ProcessDefinitionSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The process definition search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public ProcessDefinitionFilter? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchProcessInstanceIncidentsResponse
-/// </summary>
-public sealed class SearchProcessInstanceIncidentsResponse
-{
-    /// <summary>
-    /// The matching incidents.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<IncidentResult>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// Process instance search request.
-/// </summary>
-public sealed class SearchProcessInstancesRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<ProcessInstanceSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The process instance search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public ProcessInstanceFilter? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// Process instance search response.
-/// </summary>
-public sealed class SearchProcessInstancesResponse
-{
-    /// <summary>
-    /// The matching process instances.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<ProcessInstanceResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// Tenant search request
-/// </summary>
-public sealed class SearchTenantsRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<TenantSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The tenant search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public TenantFilter? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
 
 }
 
@@ -16820,13 +15514,32 @@ public sealed class SearchUsersForGroupRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<TenantUserSearchQuerySortRequest>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchUsersForGroupResponse
+/// </summary>
+public sealed class SearchUsersForGroupResponse
+{
+    /// <summary>
+    /// The matching members.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupUserResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -16839,13 +15552,32 @@ public sealed class SearchUsersForRoleRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<TenantUserSearchQuerySortRequest>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// Pagination criteria.
     /// </summary>
     [JsonPropertyName("page")]
-    public object? Page { get; set; }
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchUsersForRoleResponse
+/// </summary>
+public sealed class SearchUsersForRoleResponse
+{
+    /// <summary>
+    /// The matching users.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupUserResult>? Items { get; set; }
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -16858,76 +15590,26 @@ public sealed class SearchUsersForTenantRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<TenantUserSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchUsersRequest
-/// </summary>
-public sealed class SearchUsersRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<UserSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The user search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public UserFilter? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// User task search query request.
-/// </summary>
-public sealed class SearchUserTaskAuditLogsRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
     public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
-    /// The user task audit log search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public UserTaskAuditLogFilter? Filter { get; set; }
-
-    /// <summary>
     /// Pagination criteria.
     /// </summary>
     [JsonPropertyName("page")]
-    public object? Page { get; set; }
+    public SearchQueryPageRequest? Page { get; set; }
 
 }
 
 /// <summary>
-/// Audit log search response.
+/// SearchUsersForTenantResponse
 /// </summary>
-public sealed class SearchUserTaskAuditLogsResponse
+public sealed class SearchUsersForTenantResponse
 {
     /// <summary>
-    /// The matching audit logs.
+    /// The matching users.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<AuditLogResult>? Items { get; set; }
+    public List<GroupUserResult>? Items { get; set; }
 
     /// <summary>
     /// Pagination information about the search results.
@@ -16938,40 +15620,15 @@ public sealed class SearchUserTaskAuditLogsResponse
 }
 
 /// <summary>
-/// User task search query request.
+/// SearchUsersResponse
 /// </summary>
-public sealed class SearchUserTasksRequest
+public sealed class SearchUsersResponse
 {
     /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<UserTaskSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The user task search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// User task search query response.
-/// </summary>
-public sealed class SearchUserTasksResponse
-{
-    /// <summary>
-    /// The matching user tasks.
+    /// The matching users.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<UserTaskResult>? Items { get; set; }
+    public List<UserCreateResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -16990,38 +15647,19 @@ public sealed class SearchUserTaskVariablesRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<VariableSearchQuerySortRequest>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The user task variable search filters.
     /// </summary>
     [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
+    public UserTaskVariableFilter? Filter { get; set; }
 
     /// <summary>
     /// Pagination criteria.
     /// </summary>
     [JsonPropertyName("page")]
-    public object? Page { get; set; }
-
-}
-
-/// <summary>
-/// Variable search query response.
-/// </summary>
-public sealed class SearchUserTaskVariablesResponse
-{
-    /// <summary>
-    /// The matching variables.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<object>? Items { get; set; }
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
+    public SearchQueryPageRequest? Page { get; set; }
 
 }
 
@@ -17034,63 +15672,75 @@ public sealed class SearchVariablesRequest
     /// Sort field criteria.
     /// </summary>
     [JsonPropertyName("sort")]
-    public List<VariableSearchQuerySortRequest>? Sort { get; set; }
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
 
     /// <summary>
     /// The variable search filters.
     /// </summary>
     [JsonPropertyName("filter")]
-    public object? Filter { get; set; }
+    public VariableFilter? Filter { get; set; }
 
     /// <summary>
     /// Pagination criteria.
     /// </summary>
     [JsonPropertyName("page")]
-    public object? Page { get; set; }
+    public SearchQueryPageRequest? Page { get; set; }
 
 }
 
 /// <summary>
-/// Variable search query response.
+/// UpdateMappingRuleResponse
 /// </summary>
-public sealed class SearchVariablesResponse
+public sealed class UpdateMappingRuleResponse
 {
     /// <summary>
-    /// The matching variables.
+    /// The name of the claim to map.
     /// </summary>
-    [JsonPropertyName("items")]
-    public List<object>? Items { get; set; }
+    [JsonPropertyName("claimName")]
+    public string? ClaimName { get; set; }
 
     /// <summary>
-    /// Pagination information about the search results.
+    /// The value of the claim to map.
     /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
+    [JsonPropertyName("claimValue")]
+    public string? ClaimValue { get; set; }
+
+    /// <summary>
+    /// The name of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// The unique ID of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("mappingRuleId")]
+    public string? MappingRuleId { get; set; }
 
 }
 
 /// <summary>
-/// UpdateGlobalTaskListenerResponse
+/// UpdateUserResponse
 /// </summary>
-public sealed class UpdateGlobalTaskListenerResponse
+public sealed class UpdateUserResponse
 {
     /// <summary>
-    /// The user-defined id for the global listener
+    /// The unique name of a user.
     /// </summary>
-    [JsonPropertyName("id")]
-    public GlobalListenerId? Id { get; set; }
+    [JsonPropertyName("username")]
+    public Username? Username { get; set; }
 
     /// <summary>
-    /// How the global listener was defined.
+    /// The name of the user.
     /// </summary>
-    [JsonPropertyName("source")]
-    public GlobalListenerSourceEnum? Source { get; set; }
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
 
     /// <summary>
-    /// List of user task event types that trigger the listener.
+    /// The email of the user.
     /// </summary>
-    [JsonPropertyName("eventTypes")]
-    public List<GlobalTaskListenerEventTypeEnum>? EventTypes { get; set; }
+    [JsonPropertyName("email")]
+    public string? Email { get; set; }
 
 }
 

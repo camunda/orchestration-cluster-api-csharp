@@ -26,12 +26,12 @@ public class ProcessInstanceTests(CamundaFixture fixture)
         processInstanceKey.ToString().Should().NotBeNullOrEmpty();
 
         // Search for the created instance (with retry for eventual consistency)
-        SearchProcessInstancesResponse? searchResult = null;
+        ProcessInstanceSearchQueryResult? searchResult = null;
         var deadline = DateTimeOffset.UtcNow.AddSeconds(15);
         while (DateTimeOffset.UtcNow < deadline)
         {
             searchResult = await fixture.Client.SearchProcessInstancesAsync(
-                new SearchProcessInstancesRequest());
+                new ProcessInstanceSearchQuery());
 
             if (searchResult?.Items != null && HasItemWithKey(searchResult.Items, processInstanceKey.ToString()))
                 break;
@@ -63,7 +63,7 @@ public class ProcessInstanceTests(CamundaFixture fixture)
         while (DateTimeOffset.UtcNow < deadline)
         {
             var search = await fixture.Client.SearchProcessInstancesAsync(
-                new SearchProcessInstancesRequest());
+                new ProcessInstanceSearchQuery());
 
             stillActive = search?.Items != null &&
                 HasItemWithKeyAndState(search.Items, processInstanceKey.ToString(), "ACTIVE");

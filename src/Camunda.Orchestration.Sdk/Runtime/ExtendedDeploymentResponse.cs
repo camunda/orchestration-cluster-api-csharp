@@ -9,7 +9,7 @@ namespace Camunda.Orchestration.Sdk.Runtime;
 public sealed class ExtendedDeploymentResponse
 {
     /// <summary>The underlying raw deployment response.</summary>
-    public CreateDeploymentResponse Raw { get; }
+    public DeploymentResult Raw { get; }
 
     /// <summary>The unique key identifying the deployment.</summary>
     public DeploymentKey DeploymentKey => Raw.DeploymentKey;
@@ -37,9 +37,9 @@ public sealed class ExtendedDeploymentResponse
 
     /// <summary>
     /// Creates an <see cref="ExtendedDeploymentResponse"/> from a raw
-    /// <see cref="CreateDeploymentResponse"/>, sorting deployed items into typed buckets.
+    /// <see cref="DeploymentResult"/>, sorting deployed items into typed buckets.
     /// </summary>
-    public ExtendedDeploymentResponse(CreateDeploymentResponse raw)
+    public ExtendedDeploymentResponse(DeploymentResult raw)
     {
         Raw = raw;
         Processes = [];
