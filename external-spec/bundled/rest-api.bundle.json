@@ -949,7 +949,7 @@
     },
     "/batch-operations/{batchOperationKey}/cancellation": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Batch operation"
         ],
@@ -1023,7 +1023,7 @@
     },
     "/batch-operations/{batchOperationKey}/resumption": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Batch operation"
         ],
@@ -1107,7 +1107,7 @@
     },
     "/batch-operations/{batchOperationKey}/suspension": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Batch operation"
         ],
@@ -2829,7 +2829,7 @@
     },
     "/decision-instances/{decisionInstanceKey}/deletion": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Decision instance"
         ],
@@ -2930,7 +2930,7 @@
     },
     "/decision-instances/deletion": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Decision instance"
         ],
@@ -4263,7 +4263,7 @@
     },
     "/global-listeners/user-task": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Global listener"
         ],
@@ -4363,7 +4363,7 @@
     },
     "/global-listeners/user-task/{id}": {
       "put": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Global listener"
         ],
@@ -4472,7 +4472,7 @@
         }
       },
       "delete": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Global listener"
         ],
@@ -7039,6 +7039,86 @@
         }
       }
     },
+    "/jobs/statistics/by-types": {
+      "post": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Job"
+        ],
+        "operationId": "getJobTypeStatistics",
+        "summary": "Get job statistics by type",
+        "description": "Get statistics about jobs, grouped by job type.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobTypeStatisticsQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The job type statistics result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobTypeStatisticsQueryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/license": {
       "get": {
         "x-eventually-consistent": false,
@@ -8482,7 +8562,7 @@
     },
     "/process-instances/cancellation": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Process instance"
         ],
@@ -8562,7 +8642,7 @@
     },
     "/process-instances/deletion": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Process instance"
         ],
@@ -8642,7 +8722,7 @@
     },
     "/process-instances/incident-resolution": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Process instance"
         ],
@@ -8722,7 +8802,7 @@
     },
     "/process-instances/migration": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Process instance"
         ],
@@ -8802,7 +8882,7 @@
     },
     "/process-instances/modification": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Process instance"
         ],
@@ -9231,7 +9311,7 @@
     },
     "/process-instances/{processInstanceKey}/deletion": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Process instance"
         ],
@@ -9342,7 +9422,7 @@
     },
     "/process-instances/{processInstanceKey}/incident-resolution": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Process instance"
         ],
@@ -11695,7 +11775,7 @@
     },
     "/setup/user": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "Setup"
         ],
@@ -13657,7 +13737,7 @@
     },
     "/users": {
       "post": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "User"
         ],
@@ -13958,7 +14038,7 @@
         }
       },
       "put": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "User"
         ],
@@ -14063,7 +14143,7 @@
         }
       },
       "delete": {
-        "x-eventually-consistent": true,
+        "x-eventually-consistent": false,
         "tags": [
           "User"
         ],
@@ -15153,6 +15233,9 @@
       "AuditLogResult": {
         "description": "Audit log item.",
         "type": "object",
+        "required": [
+          "rootProcessInstanceKey"
+        ],
         "properties": {
           "auditLogKey": {
             "allOf": [
@@ -15246,7 +15329,13 @@
             "description": "The key of the process instance."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "elementInstanceKey": {
             "allOf": [
@@ -16820,6 +16909,9 @@
       },
       "BatchOperationItemResponse": {
         "type": "object",
+        "required": [
+          "rootProcessInstanceKey"
+        ],
         "properties": {
           "operationType": {
             "$ref": "#/components/schemas/BatchOperationTypeEnum"
@@ -16845,7 +16937,13 @@
             "description": "the process instance key of the processed item."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "state": {
             "description": "State of the item.",
@@ -18406,6 +18504,9 @@
       },
       "DecisionInstanceResult": {
         "type": "object",
+        "required": [
+          "rootProcessInstanceKey"
+        ],
         "properties": {
           "decisionEvaluationInstanceKey": {
             "$ref": "#/components/schemas/DecisionEvaluationInstanceKey"
@@ -18479,7 +18580,13 @@
             "description": "The key of the process instance."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "decisionDefinitionKey": {
             "allOf": [
@@ -19699,7 +19806,8 @@
           "tenantId",
           "elementInstanceKey",
           "processInstanceKey",
-          "processDefinitionKey"
+          "processDefinitionKey",
+          "rootProcessInstanceKey"
         ],
         "properties": {
           "processDefinitionId": {
@@ -19802,7 +19910,13 @@
             "description": "The process instance key associated to this element instance."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "processDefinitionKey": {
             "allOf": [
@@ -20973,6 +21087,9 @@
       },
       "IncidentResult": {
         "type": "object",
+        "required": [
+          "rootProcessInstanceKey"
+        ],
         "properties": {
           "processDefinitionId": {
             "allOf": [
@@ -21045,7 +21162,13 @@
             "description": "The process instance key associated to this incident."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "elementInstanceKey": {
             "allOf": [
@@ -21307,6 +21430,107 @@
           }
         }
       },
+      "JobTypeStatisticsQuery": {
+        "description": "Job type statistics query.",
+        "type": "object",
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/JobTypeStatisticsFilter"
+          },
+          "page": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CursorForwardPagination"
+              }
+            ]
+          }
+        }
+      },
+      "JobTypeStatisticsFilter": {
+        "description": "Job type statistics search filter.",
+        "type": "object",
+        "required": [
+          "from",
+          "to"
+        ],
+        "properties": {
+          "from": {
+            "description": "Start of the time window to filter metrics. ISO 8601 date-time format.\n",
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-28T15:51:28.071Z"
+          },
+          "to": {
+            "description": "End of the time window to filter metrics. ISO 8601 date-time format.\n",
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-29T15:51:28.071Z"
+          },
+          "jobType": {
+            "description": "Optional job type filter with advanced search capabilities.\nSupports exact match, pattern matching, and other operators.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          }
+        }
+      },
+      "JobTypeStatisticsQueryResult": {
+        "description": "Job type statistics query result.",
+        "type": "object",
+        "required": [
+          "items",
+          "page"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryResponse"
+          }
+        ],
+        "properties": {
+          "items": {
+            "description": "The list of job type statistics items.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobTypeStatisticsItem"
+            }
+          }
+        }
+      },
+      "JobTypeStatisticsItem": {
+        "description": "Statistics for a single job type.",
+        "type": "object",
+        "required": [
+          "jobType",
+          "created",
+          "completed",
+          "failed",
+          "workers"
+        ],
+        "properties": {
+          "jobType": {
+            "description": "The job type identifier.",
+            "type": "string",
+            "example": "fetch-customer-data"
+          },
+          "created": {
+            "$ref": "#/components/schemas/StatusMetric"
+          },
+          "completed": {
+            "$ref": "#/components/schemas/StatusMetric"
+          },
+          "failed": {
+            "$ref": "#/components/schemas/StatusMetric"
+          },
+          "workers": {
+            "description": "Number of distinct workers observed for this job type.",
+            "type": "integer",
+            "format": "int32",
+            "example": 5
+          }
+        }
+      },
       "JobActivationRequest": {
         "type": "object",
         "additionalProperties": false,
@@ -21413,7 +21637,8 @@
           "processDefinitionKey",
           "elementInstanceKey",
           "kind",
-          "listenerEventType"
+          "listenerEventType",
+          "rootProcessInstanceKey"
         ],
         "properties": {
           "type": {
@@ -21521,6 +21746,15 @@
           },
           "tags": {
             "$ref": "#/components/schemas/TagSet"
+          },
+          "rootProcessInstanceKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           }
         }
       },
@@ -21870,7 +22104,8 @@
           "state",
           "tenantId",
           "type",
-          "worker"
+          "worker",
+          "rootProcessInstanceKey"
         ],
         "properties": {
           "customHeaders": {
@@ -21970,7 +22205,13 @@
             "description": "The process instance key associated with the job."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "retries": {
             "description": "The amount of retries left to this job.",
@@ -22448,18 +22689,6 @@
       },
       "ProcessInstanceKey": {
         "description": "System-generated key for a process instance.",
-        "format": "ProcessInstanceKey",
-        "x-semantic-type": "ProcessInstanceKey",
-        "example": "2251799813690746",
-        "type": "string",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/LongKey"
-          }
-        ]
-      },
-      "RootProcessInstanceKey": {
-        "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
         "format": "ProcessInstanceKey",
         "x-semantic-type": "ProcessInstanceKey",
         "example": "2251799813690746",
@@ -23654,6 +23883,9 @@
       },
       "MessageSubscriptionResult": {
         "type": "object",
+        "required": [
+          "rootProcessInstanceKey"
+        ],
         "properties": {
           "messageSubscriptionKey": {
             "allOf": [
@@ -23688,7 +23920,13 @@
             "description": "The process instance key associated with this message subscription."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "elementId": {
             "allOf": [
@@ -23957,7 +24195,13 @@
             "description": "The process instance key associated with this correlated message subscription."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "subscriptionKey": {
             "allOf": [
@@ -23986,7 +24230,8 @@
           "processDefinitionId",
           "processInstanceKey",
           "subscriptionKey",
-          "tenantId"
+          "tenantId",
+          "rootProcessInstanceKey"
         ]
       },
       "CorrelatedMessageSubscriptionSearchQuery": {
@@ -25459,7 +25704,8 @@
           "hasIncident",
           "tenantId",
           "processInstanceKey",
-          "processDefinitionKey"
+          "processDefinitionKey",
+          "rootProcessInstanceKey"
         ],
         "properties": {
           "processDefinitionId": {
@@ -25528,7 +25774,13 @@
             "description": "The parent element instance key."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "tags": {
             "$ref": "#/components/schemas/TagSet"
@@ -25601,6 +25853,9 @@
       "ProcessInstanceSequenceFlowResult": {
         "description": "Process instance sequence flow result.",
         "type": "object",
+        "required": [
+          "rootProcessInstanceKey"
+        ],
         "properties": {
           "sequenceFlowId": {
             "type": "string",
@@ -25615,7 +25870,13 @@
             "description": "The key of this process instance."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "processDefinitionKey": {
             "allOf": [
@@ -27307,6 +27568,9 @@
       },
       "UserTaskResult": {
         "type": "object",
+        "required": [
+          "rootProcessInstanceKey"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -27432,7 +27696,13 @@
             "description": "The key of the process instance."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           },
           "formKey": {
             "allOf": [
@@ -28093,6 +28363,9 @@
       "VariableResultBase": {
         "description": "Variable response item.",
         "type": "object",
+        "required": [
+          "rootProcessInstanceKey"
+        ],
         "properties": {
           "name": {
             "description": "Name of this variable.",
@@ -28131,7 +28404,13 @@
             "description": "The key of the process instance of this variable."
           },
           "rootProcessInstanceKey": {
-            "$ref": "#/components/schemas/RootProcessInstanceKey"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "nullable": true,
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
           }
         }
       },

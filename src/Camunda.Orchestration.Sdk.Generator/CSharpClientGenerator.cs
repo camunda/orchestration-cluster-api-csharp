@@ -498,8 +498,9 @@ internal static class CSharpClientGenerator
                 var csharpType = MapType(propSchema, doc);
                 var csharpPropName = ToPascalCase(propName);
                 var isRequired = required.Contains(propName);
+                var isNullable = propSchema.Nullable;
 
-                if (!isRequired && !csharpType.EndsWith('?'))
+                if ((!isRequired || isNullable) && !csharpType.EndsWith('?'))
                     csharpType += "?";
 
                 if (!string.IsNullOrEmpty(propSchema.Description))
@@ -568,8 +569,9 @@ internal static class CSharpClientGenerator
             var csharpType = MapType(propSchema, doc);
             var csharpPropName = ToPascalCase(propName);
             var isRequired = required.Contains(propName);
+            var isNullable = propSchema.Nullable;
 
-            if (!isRequired && !csharpType.EndsWith('?'))
+            if ((!isRequired || isNullable) && !csharpType.EndsWith('?'))
                 csharpType += "?";
 
             if (!string.IsNullOrEmpty(propSchema.Description))

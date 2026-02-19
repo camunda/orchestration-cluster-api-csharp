@@ -208,17 +208,9 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: cancelBatchOperation</remarks>
-    public async Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/cancellation";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            await EventualPoller.PollAsync("cancelBatchOperation", false,
-                async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return new object(); },
-                consistency!, _logger, ct);
-            return;
-        }
-
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "cancelBatchOperation", false, ct);
     }
 
@@ -242,16 +234,9 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: cancelProcessInstancesBatchOperation</remarks>
-    public async Task<BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/cancellation";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("cancelProcessInstancesBatchOperation", false,
-                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "cancelProcessInstancesBatchOperation", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "cancelProcessInstancesBatchOperation", false, ct);
     }
 
@@ -299,16 +284,9 @@ public partial class CamundaClient
     /// Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
     /// </summary>
     /// <remarks>Operation: createAdminUser</remarks>
-    public async Task<UserCreateResult> CreateAdminUserAsync(UserRequest body, ConsistencyOptions<UserCreateResult>? consistency = null, CancellationToken ct = default)
+    public async Task<UserCreateResult> CreateAdminUserAsync(UserRequest body, CancellationToken ct = default)
     {
         var path = $"/setup/user";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("createAdminUser", false,
-                () => InvokeWithRetryAsync(() => SendAsync<UserCreateResult>(HttpMethod.Post, path, body, ct), "createAdminUser", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<UserCreateResult>(HttpMethod.Post, path, body, ct), "createAdminUser", false, ct);
     }
 
@@ -427,16 +405,9 @@ public partial class CamundaClient
     /// Create a new global user task listener.
     /// </summary>
     /// <remarks>Operation: createGlobalTaskListener</remarks>
-    public async Task<GlobalTaskListenerResult> CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest body, ConsistencyOptions<GlobalTaskListenerResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GlobalTaskListenerResult> CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest body, CancellationToken ct = default)
     {
         var path = $"/global-listeners/user-task";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("createGlobalTaskListener", false,
-                () => InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Post, path, body, ct), "createGlobalTaskListener", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Post, path, body, ct), "createGlobalTaskListener", false, ct);
     }
 
@@ -519,16 +490,9 @@ public partial class CamundaClient
     /// Create a new user.
     /// </summary>
     /// <remarks>Operation: createUser</remarks>
-    public async Task<UserCreateResult> CreateUserAsync(UserRequest body, ConsistencyOptions<UserCreateResult>? consistency = null, CancellationToken ct = default)
+    public async Task<UserCreateResult> CreateUserAsync(UserRequest body, CancellationToken ct = default)
     {
         var path = $"/users";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("createUser", false,
-                () => InvokeWithRetryAsync(() => SendAsync<UserCreateResult>(HttpMethod.Post, path, body, ct), "createUser", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<UserCreateResult>(HttpMethod.Post, path, body, ct), "createUser", false, ct);
     }
 
@@ -548,17 +512,9 @@ public partial class CamundaClient
     /// Delete all associated decision evaluations based on provided key.
     /// </summary>
     /// <remarks>Operation: deleteDecisionInstance</remarks>
-    public async Task DeleteDecisionInstanceAsync(DecisionInstanceKey decisionInstanceKey, DeleteDecisionInstanceRequest body, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task DeleteDecisionInstanceAsync(DecisionInstanceKey decisionInstanceKey, DeleteDecisionInstanceRequest body, CancellationToken ct = default)
     {
         var path = $"/decision-instances/{Uri.EscapeDataString(decisionInstanceKey.ToString()!)}/deletion";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            await EventualPoller.PollAsync("deleteDecisionInstance", false,
-                async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return new object(); },
-                consistency!, _logger, ct);
-            return;
-        }
-
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "deleteDecisionInstance", false, ct);
     }
 
@@ -569,16 +525,9 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: deleteDecisionInstancesBatchOperation</remarks>
-    public async Task<BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/decision-instances/deletion";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("deleteDecisionInstancesBatchOperation", false,
-                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "deleteDecisionInstancesBatchOperation", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "deleteDecisionInstancesBatchOperation", false, ct);
     }
 
@@ -614,17 +563,9 @@ public partial class CamundaClient
     /// Deletes a global user task listener.
     /// </summary>
     /// <remarks>Operation: deleteGlobalTaskListener</remarks>
-    public async Task DeleteGlobalTaskListenerAsync(GlobalListenerId id, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task DeleteGlobalTaskListenerAsync(GlobalListenerId id, CancellationToken ct = default)
     {
         var path = $"/global-listeners/user-task/{Uri.EscapeDataString(id.ToString()!)}";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            await EventualPoller.PollAsync("deleteGlobalTaskListener", false,
-                async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return new object(); },
-                consistency!, _logger, ct);
-            return;
-        }
-
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteGlobalTaskListener", false, ct);
     }
 
@@ -656,17 +597,9 @@ public partial class CamundaClient
     /// Deletes a process instance. Only instances that are completed or terminated can be deleted.
     /// </summary>
     /// <remarks>Operation: deleteProcessInstance</remarks>
-    public async Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/deletion";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            await EventualPoller.PollAsync("deleteProcessInstance", false,
-                async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return new object(); },
-                consistency!, _logger, ct);
-            return;
-        }
-
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "deleteProcessInstance", false, ct);
     }
 
@@ -678,16 +611,9 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: deleteProcessInstancesBatchOperation</remarks>
-    public async Task<BatchOperationCreatedResult> DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationCreatedResult> DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/deletion";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("deleteProcessInstancesBatchOperation", false,
-                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "deleteProcessInstancesBatchOperation", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "deleteProcessInstancesBatchOperation", false, ct);
     }
 
@@ -752,17 +678,9 @@ public partial class CamundaClient
     /// Deletes a user.
     /// </summary>
     /// <remarks>Operation: deleteUser</remarks>
-    public async Task DeleteUserAsync(Username username, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task DeleteUserAsync(Username username, CancellationToken ct = default)
     {
         var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            await EventualPoller.PollAsync("deleteUser", false,
-                async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return new object(); },
-                consistency!, _logger, ct);
-            return;
-        }
-
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteUser", false, ct);
     }
 
@@ -1087,6 +1005,25 @@ public partial class CamundaClient
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<IncidentResult>(HttpMethod.Get, path, null, ct), "getIncident", false, ct);
+    }
+
+    /// <summary>
+    /// Get job statistics by type
+    /// Get statistics about jobs, grouped by job type.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: getJobTypeStatistics</remarks>
+    public async Task<JobTypeStatisticsQueryResult> GetJobTypeStatisticsAsync(JobTypeStatisticsQuery body, ConsistencyOptions<JobTypeStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/jobs/statistics/by-types";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getJobTypeStatistics", false,
+                () => InvokeWithRetryAsync(() => SendAsync<JobTypeStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobTypeStatistics", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<JobTypeStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobTypeStatistics", false, ct);
     }
 
     /// <summary>
@@ -1594,16 +1531,9 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: migrateProcessInstancesBatchOperation</remarks>
-    public async Task<BatchOperationCreatedResult> MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationCreatedResult> MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/migration";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("migrateProcessInstancesBatchOperation", false,
-                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "migrateProcessInstancesBatchOperation", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "migrateProcessInstancesBatchOperation", false, ct);
     }
 
@@ -1635,16 +1565,9 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: modifyProcessInstancesBatchOperation</remarks>
-    public async Task<BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/modification";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("modifyProcessInstancesBatchOperation", false,
-                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "modifyProcessInstancesBatchOperation", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "modifyProcessInstancesBatchOperation", false, ct);
     }
 
@@ -1721,16 +1644,9 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: resolveIncidentsBatchOperation</remarks>
-    public async Task<BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/incident-resolution";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("resolveIncidentsBatchOperation", false,
-                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "resolveIncidentsBatchOperation", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "resolveIncidentsBatchOperation", false, ct);
     }
 
@@ -1739,16 +1655,9 @@ public partial class CamundaClient
     /// Creates a batch operation to resolve multiple incidents of a process instance.
     /// </summary>
     /// <remarks>Operation: resolveProcessInstanceIncidents</remarks>
-    public async Task<BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/incident-resolution";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("resolveProcessInstanceIncidents", false,
-                () => InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, null, ct), "resolveProcessInstanceIncidents", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, null, ct), "resolveProcessInstanceIncidents", false, ct);
     }
 
@@ -1759,17 +1668,9 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: resumeBatchOperation</remarks>
-    public async Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/resumption";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            await EventualPoller.PollAsync("resumeBatchOperation", false,
-                async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return new object(); },
-                consistency!, _logger, ct);
-            return;
-        }
-
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "resumeBatchOperation", false, ct);
     }
 
@@ -2502,17 +2403,9 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: suspendBatchOperation</remarks>
-    public async Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/suspension";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            await EventualPoller.PollAsync("suspendBatchOperation", false,
-                async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return new object(); },
-                consistency!, _logger, ct);
-            return;
-        }
-
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "suspendBatchOperation", false, ct);
     }
 
@@ -2713,16 +2606,9 @@ public partial class CamundaClient
     /// Updates a global user task listener.
     /// </summary>
     /// <remarks>Operation: updateGlobalTaskListener</remarks>
-    public async Task<GlobalTaskListenerResult> UpdateGlobalTaskListenerAsync(GlobalListenerId id, UpdateGlobalTaskListenerRequest body, ConsistencyOptions<GlobalTaskListenerResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GlobalTaskListenerResult> UpdateGlobalTaskListenerAsync(GlobalListenerId id, UpdateGlobalTaskListenerRequest body, CancellationToken ct = default)
     {
         var path = $"/global-listeners/user-task/{Uri.EscapeDataString(id.ToString()!)}";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("updateGlobalTaskListener", false,
-                () => InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Put, path, body, ct), "updateGlobalTaskListener", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Put, path, body, ct), "updateGlobalTaskListener", false, ct);
     }
 
@@ -2800,16 +2686,9 @@ public partial class CamundaClient
     /// Updates a user.
     /// </summary>
     /// <remarks>Operation: updateUser</remarks>
-    public async Task<UpdateUserResponse> UpdateUserAsync(Username username, UserUpdateRequest body, ConsistencyOptions<UpdateUserResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<UpdateUserResponse> UpdateUserAsync(Username username, UserUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("updateUser", false,
-                () => InvokeWithRetryAsync(() => SendAsync<UpdateUserResponse>(HttpMethod.Put, path, body, ct), "updateUser", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<UpdateUserResponse>(HttpMethod.Put, path, body, ct), "updateUser", false, ct);
     }
 

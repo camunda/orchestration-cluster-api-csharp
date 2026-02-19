@@ -117,6 +117,15 @@ public sealed class ActivatedJobResult
     [JsonPropertyName("tags")]
     public List<Tag>? Tags { get; set; }
 
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
 }
 
 /// <summary>
@@ -2362,7 +2371,7 @@ public sealed class AuditLogResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the element instance.
@@ -3155,7 +3164,7 @@ public sealed class BatchOperationItemResponse
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// State of the item.
@@ -4247,7 +4256,7 @@ public sealed class CorrelatedMessageSubscriptionResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The subscription key that received the message.
@@ -5179,7 +5188,7 @@ public sealed class DecisionInstanceGetQueryResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the decision.
@@ -5333,7 +5342,7 @@ public sealed class DecisionInstanceResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the decision.
@@ -6553,7 +6562,7 @@ public sealed class ElementInstanceResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The process definition key associated to this element instance.
@@ -8121,7 +8130,7 @@ public sealed class IncidentResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The element instance key associated to this incident.
@@ -9086,7 +9095,7 @@ public sealed class JobSearchResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The amount of retries left to this job.
@@ -9189,6 +9198,107 @@ public readonly record struct JobStateExactMatch : global::Camunda.Orchestration
 /// </summary>
 public sealed class JobStateFilterProperty
 {
+}
+
+/// <summary>
+/// Job type statistics search filter.
+/// </summary>
+public sealed class JobTypeStatisticsFilter
+{
+    /// <summary>
+    /// Start of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("from")]
+    public DateTimeOffset From { get; set; }
+
+    /// <summary>
+    /// End of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("to")]
+    public DateTimeOffset To { get; set; }
+
+    /// <summary>
+    /// Optional job type filter with advanced search capabilities.
+    /// Supports exact match, pattern matching, and other operators.
+    /// 
+    /// </summary>
+    [JsonPropertyName("jobType")]
+    public StringFilterProperty? JobType { get; set; }
+
+}
+
+/// <summary>
+/// Statistics for a single job type.
+/// </summary>
+public sealed class JobTypeStatisticsItem
+{
+    /// <summary>
+    /// The job type identifier.
+    /// </summary>
+    [JsonPropertyName("jobType")]
+    public string JobType { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("created")]
+    public StatusMetric Created { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("completed")]
+    public StatusMetric Completed { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("failed")]
+    public StatusMetric Failed { get; set; } = null!;
+
+    /// <summary>
+    /// Number of distinct workers observed for this job type.
+    /// </summary>
+    [JsonPropertyName("workers")]
+    public int Workers { get; set; }
+
+}
+
+/// <summary>
+/// Job type statistics query.
+/// </summary>
+public sealed class JobTypeStatisticsQuery
+{
+    /// <summary>
+    /// Job type statistics search filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public JobTypeStatisticsFilter? Filter { get; set; }
+
+    [JsonPropertyName("page")]
+    public CursorForwardPagination? Page { get; set; }
+
+}
+
+/// <summary>
+/// Job type statistics query result.
+/// </summary>
+public sealed class JobTypeStatisticsQueryResult
+{
+    /// <summary>
+    /// The list of job type statistics items.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<JobTypeStatisticsItem> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
 }
 
 /// <summary>
@@ -9973,7 +10083,7 @@ public sealed class MessageSubscriptionResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The element ID associated with this message subscription.
@@ -12218,7 +12328,7 @@ public sealed class ProcessInstanceResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
@@ -12315,7 +12425,7 @@ public sealed class ProcessInstanceSequenceFlowResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The process definition key.
@@ -12968,37 +13078,6 @@ public sealed class RoleUserSearchResult
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
 
-}
-
-/// <summary>
-/// The key of the root process instance. The root process instance is the top-level
-/// ancestor in the process instance hierarchy. This field is only present for data
-/// belonging to process instance hierarchies created in version 8.9 or later.
-/// 
-/// </summary>
-public readonly record struct RootProcessInstanceKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
-{
-    /// <summary>The underlying string value.</summary>
-    public string Value { get; }
-
-    private RootProcessInstanceKey(string value) => Value = value;
-
-    /// <summary>
-    /// Creates a <see cref="RootProcessInstanceKey"/> from a raw string value.
-    /// Use this when side-loading values not received from an API call.
-    /// </summary>
-    public static RootProcessInstanceKey AssumeExists(string value)
-    {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "RootProcessInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
-        return new RootProcessInstanceKey(value);
-    }
-
-    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
-    public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
-
-    /// <inheritdoc />
-    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -14688,7 +14767,7 @@ public sealed class UserTaskResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the form.
@@ -15145,7 +15224,7 @@ public sealed class VariableResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -15191,7 +15270,7 @@ public sealed class VariableResultBase
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -15312,7 +15391,7 @@ public sealed class VariableSearchResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
