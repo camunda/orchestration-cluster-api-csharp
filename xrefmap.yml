@@ -163,6 +163,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.ActivatedJobResult.Retries
   fullName: Camunda.Orchestration.Sdk.Api.ActivatedJobResult.Retries
   nameWithType: ActivatedJobResult.Retries
+- uid: Camunda.Orchestration.Sdk.Api.ActivatedJobResult.RootProcessInstanceKey
+  name: RootProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.Api.ActivatedJobResult.RootProcessInstanceKey.html#Camunda_Orchestration_Sdk_Api_ActivatedJobResult_RootProcessInstanceKey
+  commentId: P:Camunda.Orchestration.Sdk.Api.ActivatedJobResult.RootProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.Api.ActivatedJobResult.RootProcessInstanceKey
+  nameWithType: ActivatedJobResult.RootProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.Api.ActivatedJobResult.RootProcessInstanceKey*
+  name: RootProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.Api.ActivatedJobResult.RootProcessInstanceKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ActivatedJobResult.RootProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.Api.ActivatedJobResult.RootProcessInstanceKey
+  nameWithType: ActivatedJobResult.RootProcessInstanceKey
 - uid: Camunda.Orchestration.Sdk.Api.ActivatedJobResult.Tags
   name: Tags
   href: api/Camunda.Orchestration.Sdk.Api.ActivatedJobResult.Tags.html#Camunda_Orchestration_Sdk_Api_ActivatedJobResult_Tags
@@ -16315,6 +16327,174 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.JobStateFilterProperty
   fullName: Camunda.Orchestration.Sdk.Api.JobStateFilterProperty
   nameWithType: JobStateFilterProperty
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter
+  name: JobTypeStatisticsFilter
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter
+  nameWithType: JobTypeStatisticsFilter
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.From
+  name: From
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.From.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsFilter_From
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.From
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.From
+  nameWithType: JobTypeStatisticsFilter.From
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.From*
+  name: From
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.From.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.From
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.From
+  nameWithType: JobTypeStatisticsFilter.From
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.JobType
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.JobType.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsFilter_JobType
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.JobType
+  nameWithType: JobTypeStatisticsFilter.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.JobType*
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.JobType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.JobType
+  nameWithType: JobTypeStatisticsFilter.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.To
+  name: To
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.To.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsFilter_To
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.To
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.To
+  nameWithType: JobTypeStatisticsFilter.To
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.To*
+  name: To
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.To.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.To
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.To
+  nameWithType: JobTypeStatisticsFilter.To
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem
+  name: JobTypeStatisticsItem
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem
+  nameWithType: JobTypeStatisticsItem
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Completed
+  name: Completed
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Completed.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsItem_Completed
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Completed
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Completed
+  nameWithType: JobTypeStatisticsItem.Completed
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Completed*
+  name: Completed
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Completed.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Completed
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Completed
+  nameWithType: JobTypeStatisticsItem.Completed
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Created
+  name: Created
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Created.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsItem_Created
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Created
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Created
+  nameWithType: JobTypeStatisticsItem.Created
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Created*
+  name: Created
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Created.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Created
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Created
+  nameWithType: JobTypeStatisticsItem.Created
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Failed
+  name: Failed
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Failed.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsItem_Failed
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Failed
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Failed
+  nameWithType: JobTypeStatisticsItem.Failed
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Failed*
+  name: Failed
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Failed.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Failed
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Failed
+  nameWithType: JobTypeStatisticsItem.Failed
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.JobType
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.JobType.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsItem_JobType
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.JobType
+  nameWithType: JobTypeStatisticsItem.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.JobType*
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.JobType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.JobType
+  nameWithType: JobTypeStatisticsItem.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Workers
+  name: Workers
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Workers.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsItem_Workers
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Workers
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Workers
+  nameWithType: JobTypeStatisticsItem.Workers
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Workers*
+  name: Workers
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Workers.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Workers
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsItem.Workers
+  nameWithType: JobTypeStatisticsItem.Workers
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery
+  name: JobTypeStatisticsQuery
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery
+  nameWithType: JobTypeStatisticsQuery
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Filter.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQuery_Filter
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Filter
+  nameWithType: JobTypeStatisticsQuery.Filter
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Filter
+  nameWithType: JobTypeStatisticsQuery.Filter
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Page.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQuery_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Page
+  nameWithType: JobTypeStatisticsQuery.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery.Page
+  nameWithType: JobTypeStatisticsQuery.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult
+  name: JobTypeStatisticsQueryResult
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult
+  nameWithType: JobTypeStatisticsQueryResult
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Items.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQueryResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Items
+  nameWithType: JobTypeStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Items
+  nameWithType: JobTypeStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Page.html#Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQueryResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Page
+  nameWithType: JobTypeStatisticsQueryResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult.Page
+  nameWithType: JobTypeStatisticsQueryResult.Page
 - uid: Camunda.Orchestration.Sdk.Api.JobUpdateRequest
   name: JobUpdateRequest
   href: api/Camunda.Orchestration.Sdk.Api.JobUpdateRequest.html
@@ -22798,66 +22978,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.RoleUserSearchResult.Page
   fullName: Camunda.Orchestration.Sdk.Api.RoleUserSearchResult.Page
   nameWithType: RoleUserSearchResult.Page
-- uid: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey
-  name: RootProcessInstanceKey
-  href: api/Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.html
-  commentId: T:Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey
-  fullName: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey
-  nameWithType: RootProcessInstanceKey
-- uid: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.AssumeExists(System.String)
-  name: AssumeExists(string)
-  href: api/Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.AssumeExists.html#Camunda_Orchestration_Sdk_Api_RootProcessInstanceKey_AssumeExists_System_String_
-  commentId: M:Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.AssumeExists(System.String)
-  name.vb: AssumeExists(String)
-  fullName: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.AssumeExists(string)
-  fullName.vb: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.AssumeExists(String)
-  nameWithType: RootProcessInstanceKey.AssumeExists(string)
-  nameWithType.vb: RootProcessInstanceKey.AssumeExists(String)
-- uid: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.AssumeExists*
-  name: AssumeExists
-  href: api/Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.AssumeExists.html
-  commentId: Overload:Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.AssumeExists
-  fullName: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.AssumeExists
-  nameWithType: RootProcessInstanceKey.AssumeExists
-- uid: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.IsValid(System.String)
-  name: IsValid(string)
-  href: api/Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.IsValid.html#Camunda_Orchestration_Sdk_Api_RootProcessInstanceKey_IsValid_System_String_
-  commentId: M:Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.IsValid(System.String)
-  name.vb: IsValid(String)
-  fullName: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.IsValid(string)
-  fullName.vb: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.IsValid(String)
-  nameWithType: RootProcessInstanceKey.IsValid(string)
-  nameWithType.vb: RootProcessInstanceKey.IsValid(String)
-- uid: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.IsValid*
-  name: IsValid
-  href: api/Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.IsValid.html
-  commentId: Overload:Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.IsValid
-  fullName: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.IsValid
-  nameWithType: RootProcessInstanceKey.IsValid
-- uid: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.ToString
-  name: ToString()
-  href: api/Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.ToString.html#Camunda_Orchestration_Sdk_Api_RootProcessInstanceKey_ToString
-  commentId: M:Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.ToString
-  fullName: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.ToString()
-  nameWithType: RootProcessInstanceKey.ToString()
-- uid: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.ToString*
-  name: ToString
-  href: api/Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.ToString.html
-  commentId: Overload:Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.ToString
-  fullName: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.ToString
-  nameWithType: RootProcessInstanceKey.ToString
-- uid: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.Value
-  name: Value
-  href: api/Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.Value.html#Camunda_Orchestration_Sdk_Api_RootProcessInstanceKey_Value
-  commentId: P:Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.Value
-  fullName: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.Value
-  nameWithType: RootProcessInstanceKey.Value
-- uid: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.Value*
-  name: Value
-  href: api/Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.Value.html
-  commentId: Overload:Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.Value
-  fullName: Camunda.Orchestration.Sdk.Api.RootProcessInstanceKey.Value
-  nameWithType: RootProcessInstanceKey.Value
 - uid: Camunda.Orchestration.Sdk.Api.ScopeKey
   name: ScopeKey
   href: api/Camunda.Orchestration.Sdk.Api.ScopeKey.html
@@ -27679,15 +27799,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.BroadcastSignalAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.BroadcastSignalAsync
   nameWithType: CamundaClient.BroadcastSignalAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name: CancelBatchOperationAsync(BatchOperationKey, ConsistencyOptions<object>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name.vb: CancelBatchOperationAsync(BatchOperationKey, ConsistencyOptions(Of Object), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<object>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Object), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.CancelBatchOperationAsync(BatchOperationKey, ConsistencyOptions<object>?, CancellationToken)
-  nameWithType.vb: CamundaClient.CancelBatchOperationAsync(BatchOperationKey, ConsistencyOptions(Of Object), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,System.Threading.CancellationToken)
+  name: CancelBatchOperationAsync(BatchOperationKey, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.CancelBatchOperationAsync(BatchOperationKey, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync*
   name: CancelBatchOperationAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync.html
@@ -27706,15 +27823,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstanceAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstanceAsync
   nameWithType: CamundaClient.CancelProcessInstanceAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceCancellationBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name: CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceCancellationBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceCancellationBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name.vb: CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceCancellationBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceCancellationBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceCancellationBatchOperationRequest,System.Threading.CancellationToken)
+  name: CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceCancellationBatchOperationRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceCancellationBatchOperationRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceCancellationBatchOperationRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync*
   name: CancelProcessInstancesBatchOperationAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync.html
@@ -27769,15 +27883,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CorrelateMessageAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.CorrelateMessageAsync
   nameWithType: CamundaClient.CorrelateMessageAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.UserCreateResult},System.Threading.CancellationToken)
-  name: CreateAdminUserAsync(UserRequest, ConsistencyOptions<UserCreateResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAdminUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserCreateResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.UserCreateResult},System.Threading.CancellationToken)
-  name.vb: CreateAdminUserAsync(UserRequest, ConsistencyOptions(Of UserCreateResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.UserCreateResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.UserCreateResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.CreateAdminUserAsync(UserRequest, ConsistencyOptions<UserCreateResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.CreateAdminUserAsync(UserRequest, ConsistencyOptions(Of UserCreateResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest,System.Threading.CancellationToken)
+  name: CreateAdminUserAsync(UserRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAdminUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.CreateAdminUserAsync(UserRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync*
   name: CreateAdminUserAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync.html
@@ -27877,15 +27988,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalClusterVariableAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalClusterVariableAsync
   nameWithType: CamundaClient.CreateGlobalClusterVariableAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult},System.Threading.CancellationToken)
-  name: CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest, ConsistencyOptions<GlobalTaskListenerResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_CreateGlobalTaskListenerRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult},System.Threading.CancellationToken)
-  name.vb: CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest, ConsistencyOptions(Of GlobalTaskListenerResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest, ConsistencyOptions<GlobalTaskListenerResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest, ConsistencyOptions(Of GlobalTaskListenerResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest,System.Threading.CancellationToken)
+  name: CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_CreateGlobalTaskListenerRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.CreateGlobalTaskListenerRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync*
   name: CreateGlobalTaskListenerAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync.html
@@ -27985,15 +28093,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CreateTenantClusterVariableAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateTenantClusterVariableAsync
   nameWithType: CamundaClient.CreateTenantClusterVariableAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.UserCreateResult},System.Threading.CancellationToken)
-  name: CreateUserAsync(UserRequest, ConsistencyOptions<UserCreateResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserCreateResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.UserCreateResult},System.Threading.CancellationToken)
-  name.vb: CreateUserAsync(UserRequest, ConsistencyOptions(Of UserCreateResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.UserCreateResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.UserCreateResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.CreateUserAsync(UserRequest, ConsistencyOptions<UserCreateResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.CreateUserAsync(UserRequest, ConsistencyOptions(Of UserCreateResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest,System.Threading.CancellationToken)
+  name: CreateUserAsync(UserRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.CreateUserAsync(UserRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync*
   name: CreateUserAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync.html
@@ -28012,30 +28117,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteAuthorizationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteAuthorizationAsync
   nameWithType: CamundaClient.DeleteAuthorizationAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey,Camunda.Orchestration.Sdk.Api.DeleteDecisionInstanceRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name: DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteDecisionInstanceRequest, ConsistencyOptions<object>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteDecisionInstanceRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey,Camunda.Orchestration.Sdk.Api.DeleteDecisionInstanceRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name.vb: DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteDecisionInstanceRequest, ConsistencyOptions(Of Object), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey, Camunda.Orchestration.Sdk.Api.DeleteDecisionInstanceRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<object>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey, Camunda.Orchestration.Sdk.Api.DeleteDecisionInstanceRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Object), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteDecisionInstanceRequest, ConsistencyOptions<object>?, CancellationToken)
-  nameWithType.vb: CamundaClient.DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteDecisionInstanceRequest, ConsistencyOptions(Of Object), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey,Camunda.Orchestration.Sdk.Api.DeleteDecisionInstanceRequest,System.Threading.CancellationToken)
+  name: DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteDecisionInstanceRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteDecisionInstanceRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey,Camunda.Orchestration.Sdk.Api.DeleteDecisionInstanceRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey, Camunda.Orchestration.Sdk.Api.DeleteDecisionInstanceRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteDecisionInstanceRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync*
   name: DeleteDecisionInstanceAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync.html
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync
   nameWithType: CamundaClient.DeleteDecisionInstanceAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceDeletionBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name: DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceDeletionBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceDeletionBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name.vb: DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceDeletionBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceDeletionBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceDeletionBatchOperationRequest,System.Threading.CancellationToken)
+  name: DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceDeletionBatchOperationRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceDeletionBatchOperationRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceDeletionBatchOperationRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync*
   name: DeleteDecisionInstancesBatchOperationAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync.html
@@ -28072,15 +28171,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalClusterVariableAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalClusterVariableAsync
   nameWithType: CamundaClient.DeleteGlobalClusterVariableAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name: DeleteGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions<object>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name.vb: DeleteGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions(Of Object), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<object>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Object), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.DeleteGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions<object>?, CancellationToken)
-  nameWithType.vb: CamundaClient.DeleteGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions(Of Object), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,System.Threading.CancellationToken)
+  name: DeleteGlobalTaskListenerAsync(GlobalListenerId, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteGlobalTaskListenerAsync(GlobalListenerId, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync*
   name: DeleteGlobalTaskListenerAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync.html
@@ -28117,30 +28213,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteMappingRuleAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteMappingRuleAsync
   nameWithType: CamundaClient.DeleteMappingRuleAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Api.DeleteProcessInstanceRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name: DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, ConsistencyOptions<object>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteProcessInstanceRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Api.DeleteProcessInstanceRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name.vb: DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, ConsistencyOptions(Of Object), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey, Camunda.Orchestration.Sdk.Api.DeleteProcessInstanceRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<object>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey, Camunda.Orchestration.Sdk.Api.DeleteProcessInstanceRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Object), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, ConsistencyOptions<object>?, CancellationToken)
-  nameWithType.vb: CamundaClient.DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, ConsistencyOptions(Of Object), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Api.DeleteProcessInstanceRequest,System.Threading.CancellationToken)
+  name: DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteProcessInstanceRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Api.DeleteProcessInstanceRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey, Camunda.Orchestration.Sdk.Api.DeleteProcessInstanceRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync*
   name: DeleteProcessInstanceAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync.html
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync
   nameWithType: CamundaClient.DeleteProcessInstanceAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceDeletionBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name: DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceDeletionBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceDeletionBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name.vb: DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceDeletionBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceDeletionBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceDeletionBatchOperationRequest,System.Threading.CancellationToken)
+  name: DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceDeletionBatchOperationRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceDeletionBatchOperationRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceDeletionBatchOperationRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync*
   name: DeleteProcessInstancesBatchOperationAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync.html
@@ -28201,15 +28291,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteTenantClusterVariableAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteTenantClusterVariableAsync
   nameWithType: CamundaClient.DeleteTenantClusterVariableAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync(Camunda.Orchestration.Sdk.Api.Username,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name: DeleteUserAsync(Username, ConsistencyOptions<object>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteUserAsync_Camunda_Orchestration_Sdk_Api_Username_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync(Camunda.Orchestration.Sdk.Api.Username,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name.vb: DeleteUserAsync(Username, ConsistencyOptions(Of Object), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync(Camunda.Orchestration.Sdk.Api.Username, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<object>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync(Camunda.Orchestration.Sdk.Api.Username, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Object), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.DeleteUserAsync(Username, ConsistencyOptions<object>?, CancellationToken)
-  nameWithType.vb: CamundaClient.DeleteUserAsync(Username, ConsistencyOptions(Of Object), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync(Camunda.Orchestration.Sdk.Api.Username,System.Threading.CancellationToken)
+  name: DeleteUserAsync(Username, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteUserAsync_Camunda_Orchestration_Sdk_Api_Username_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync(Camunda.Orchestration.Sdk.Api.Username,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync(Camunda.Orchestration.Sdk.Api.Username, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteUserAsync(Username, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync*
   name: DeleteUserAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync.html
@@ -28537,6 +28624,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetIncidentAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetIncidentAsync
   nameWithType: CamundaClient.GetIncidentAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult},System.Threading.CancellationToken)
+  name: GetJobTypeStatisticsAsync(JobTypeStatisticsQuery, ConsistencyOptions<JobTypeStatisticsQueryResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobTypeStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQueryResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult},System.Threading.CancellationToken)
+  name.vb: GetJobTypeStatisticsAsync(JobTypeStatisticsQuery, ConsistencyOptions(Of JobTypeStatisticsQueryResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetJobTypeStatisticsAsync(JobTypeStatisticsQuery, ConsistencyOptions<JobTypeStatisticsQueryResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetJobTypeStatisticsAsync(JobTypeStatisticsQuery, ConsistencyOptions(Of JobTypeStatisticsQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync*
+  name: GetJobTypeStatisticsAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync
+  nameWithType: CamundaClient.GetJobTypeStatisticsAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetLicenseAsync(System.Threading.CancellationToken)
   name: GetLicenseAsync(CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetLicenseAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetLicenseAsync_System_Threading_CancellationToken_
@@ -28951,15 +29053,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync
   nameWithType: CamundaClient.MigrateProcessInstanceAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceMigrationBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name: MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceMigrationBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceMigrationBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name.vb: MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceMigrationBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceMigrationBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceMigrationBatchOperationRequest,System.Threading.CancellationToken)
+  name: MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceMigrationBatchOperationRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceMigrationBatchOperationRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceMigrationBatchOperationRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync*
   name: MigrateProcessInstancesBatchOperationAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync.html
@@ -28978,15 +29077,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstanceAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstanceAsync
   nameWithType: CamundaClient.ModifyProcessInstanceAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceModificationBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name: ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceModificationBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceModificationBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name.vb: ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceModificationBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceModificationBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceModificationBatchOperationRequest,System.Threading.CancellationToken)
+  name: ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceModificationBatchOperationRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceModificationBatchOperationRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceModificationBatchOperationRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync*
   name: ModifyProcessInstancesBatchOperationAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync.html
@@ -29041,45 +29137,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentAsync
   nameWithType: CamundaClient.ResolveIncidentAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceIncidentResolutionBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name: ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentsBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceIncidentResolutionBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceIncidentResolutionBatchOperationRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name.vb: ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceIncidentResolutionBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceIncidentResolutionBatchOperationRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceIncidentResolutionBatchOperationRequest,System.Threading.CancellationToken)
+  name: ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentsBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceIncidentResolutionBatchOperationRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceIncidentResolutionBatchOperationRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceIncidentResolutionBatchOperationRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync*
   name: ResolveIncidentsBatchOperationAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync.html
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync
   nameWithType: CamundaClient.ResolveIncidentsBatchOperationAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name: ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveProcessInstanceIncidentsAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult},System.Threading.CancellationToken)
-  name.vb: ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.BatchOperationCreatedResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, ConsistencyOptions(Of BatchOperationCreatedResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,System.Threading.CancellationToken)
+  name: ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveProcessInstanceIncidentsAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync*
   name: ResolveProcessInstanceIncidentsAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync.html
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync
   nameWithType: CamundaClient.ResolveProcessInstanceIncidentsAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name: ResumeBatchOperationAsync(BatchOperationKey, ConsistencyOptions<object>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name.vb: ResumeBatchOperationAsync(BatchOperationKey, ConsistencyOptions(Of Object), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<object>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Object), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.ResumeBatchOperationAsync(BatchOperationKey, ConsistencyOptions<object>?, CancellationToken)
-  nameWithType.vb: CamundaClient.ResumeBatchOperationAsync(BatchOperationKey, ConsistencyOptions(Of Object), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,System.Threading.CancellationToken)
+  name: ResumeBatchOperationAsync(BatchOperationKey, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ResumeBatchOperationAsync(BatchOperationKey, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync*
   name: ResumeBatchOperationAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync.html
@@ -29695,15 +29782,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync
   nameWithType: CamundaClient.StopAllWorkersAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name: SuspendBatchOperationAsync(BatchOperationKey, ConsistencyOptions<object>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
-  name.vb: SuspendBatchOperationAsync(BatchOperationKey, ConsistencyOptions(Of Object), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<object>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Object), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.SuspendBatchOperationAsync(BatchOperationKey, ConsistencyOptions<object>?, CancellationToken)
-  nameWithType.vb: CamundaClient.SuspendBatchOperationAsync(BatchOperationKey, ConsistencyOptions(Of Object), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,System.Threading.CancellationToken)
+  name: SuspendBatchOperationAsync(BatchOperationKey, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.Api.BatchOperationKey, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SuspendBatchOperationAsync(BatchOperationKey, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync*
   name: SuspendBatchOperationAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync.html
@@ -29938,15 +30022,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalClusterVariableAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalClusterVariableAsync
   nameWithType: CamundaClient.UpdateGlobalClusterVariableAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult},System.Threading.CancellationToken)
-  name: UpdateGlobalTaskListenerAsync(GlobalListenerId, UpdateGlobalTaskListenerRequest, ConsistencyOptions<GlobalTaskListenerResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_Camunda_Orchestration_Sdk_Api_UpdateGlobalTaskListenerRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult},System.Threading.CancellationToken)
-  name.vb: UpdateGlobalTaskListenerAsync(GlobalListenerId, UpdateGlobalTaskListenerRequest, ConsistencyOptions(Of GlobalTaskListenerResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId, Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId, Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.UpdateGlobalTaskListenerAsync(GlobalListenerId, UpdateGlobalTaskListenerRequest, ConsistencyOptions<GlobalTaskListenerResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.UpdateGlobalTaskListenerAsync(GlobalListenerId, UpdateGlobalTaskListenerRequest, ConsistencyOptions(Of GlobalTaskListenerResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest,System.Threading.CancellationToken)
+  name: UpdateGlobalTaskListenerAsync(GlobalListenerId, UpdateGlobalTaskListenerRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_Camunda_Orchestration_Sdk_Api_UpdateGlobalTaskListenerRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId, Camunda.Orchestration.Sdk.Api.UpdateGlobalTaskListenerRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.UpdateGlobalTaskListenerAsync(GlobalListenerId, UpdateGlobalTaskListenerRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync*
   name: UpdateGlobalTaskListenerAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync.html
@@ -30037,15 +30118,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.UpdateTenantClusterVariableAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateTenantClusterVariableAsync
   nameWithType: CamundaClient.UpdateTenantClusterVariableAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync(Camunda.Orchestration.Sdk.Api.Username,Camunda.Orchestration.Sdk.Api.UserUpdateRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.UpdateUserResponse},System.Threading.CancellationToken)
-  name: UpdateUserAsync(Username, UserUpdateRequest, ConsistencyOptions<UpdateUserResponse>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateUserAsync_Camunda_Orchestration_Sdk_Api_Username_Camunda_Orchestration_Sdk_Api_UserUpdateRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UpdateUserResponse__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync(Camunda.Orchestration.Sdk.Api.Username,Camunda.Orchestration.Sdk.Api.UserUpdateRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.UpdateUserResponse},System.Threading.CancellationToken)
-  name.vb: UpdateUserAsync(Username, UserUpdateRequest, ConsistencyOptions(Of UpdateUserResponse), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync(Camunda.Orchestration.Sdk.Api.Username, Camunda.Orchestration.Sdk.Api.UserUpdateRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.UpdateUserResponse>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync(Camunda.Orchestration.Sdk.Api.Username, Camunda.Orchestration.Sdk.Api.UserUpdateRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.UpdateUserResponse), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.UpdateUserAsync(Username, UserUpdateRequest, ConsistencyOptions<UpdateUserResponse>?, CancellationToken)
-  nameWithType.vb: CamundaClient.UpdateUserAsync(Username, UserUpdateRequest, ConsistencyOptions(Of UpdateUserResponse), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync(Camunda.Orchestration.Sdk.Api.Username,Camunda.Orchestration.Sdk.Api.UserUpdateRequest,System.Threading.CancellationToken)
+  name: UpdateUserAsync(Username, UserUpdateRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateUserAsync_Camunda_Orchestration_Sdk_Api_Username_Camunda_Orchestration_Sdk_Api_UserUpdateRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync(Camunda.Orchestration.Sdk.Api.Username,Camunda.Orchestration.Sdk.Api.UserUpdateRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync(Camunda.Orchestration.Sdk.Api.Username, Camunda.Orchestration.Sdk.Api.UserUpdateRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.UpdateUserAsync(Username, UserUpdateRequest, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync*
   name: UpdateUserAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync.html

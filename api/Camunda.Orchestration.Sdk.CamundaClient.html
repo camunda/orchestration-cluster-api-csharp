@@ -289,7 +289,7 @@ Broadcasts a signal.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">CancelBatchOperationAsync(BatchOperationKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_System_Threading_CancellationToken_">CancelBatchOperationAsync(BatchOperationKey, CancellationToken)</a></dt>
     <dd><p>Cancel Batch operation
 Cancels a running batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
@@ -302,7 +302,7 @@ Cancels a running process instance. As a cancellation includes more than just th
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceCancellationBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceCancellationBatchOperationRequest_System_Threading_CancellationToken_">CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, CancellationToken)</a></dt>
     <dd><p>Cancel process instances (batch)
 Cancels multiple running process instances.
 Since only ACTIVE root instances can be cancelled, any given filters for state and
@@ -332,7 +332,7 @@ Use the publish message endpoint to send messages that can be buffered.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAdminUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserCreateResult__System_Threading_CancellationToken_">CreateAdminUserAsync(UserRequest, ConsistencyOptions&lt;UserCreateResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAdminUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_System_Threading_CancellationToken_">CreateAdminUserAsync(UserRequest, CancellationToken)</a></dt>
     <dd><p>Create admin user
 Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.</p>
 </dd>
@@ -395,7 +395,7 @@ Create a global-scoped cluster variable.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_CreateGlobalTaskListenerRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerResult__System_Threading_CancellationToken_">CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest, ConsistencyOptions&lt;GlobalTaskListenerResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_CreateGlobalTaskListenerRequest_System_Threading_CancellationToken_">CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest, CancellationToken)</a></dt>
     <dd><p>Create global user task listener
 Create a new global user task listener.</p>
 </dd>
@@ -456,7 +456,7 @@ Create a new cluster variable for the given tenant.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UserCreateResult__System_Threading_CancellationToken_">CreateUserAsync(UserRequest, ConsistencyOptions&lt;UserCreateResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_System_Threading_CancellationToken_">CreateUserAsync(UserRequest, CancellationToken)</a></dt>
     <dd><p>Create user
 Create a new user.</p>
 </dd>
@@ -468,13 +468,13 @@ Deletes the authorization with the given key.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteDecisionInstanceRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteDecisionInstanceRequest, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteDecisionInstanceRequest_System_Threading_CancellationToken_">DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteDecisionInstanceRequest, CancellationToken)</a></dt>
     <dd><p>Delete decision instance
 Delete all associated decision evaluations based on provided key.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceDeletionBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteDecisionInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceDeletionBatchOperationRequest_System_Threading_CancellationToken_">DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, CancellationToken)</a></dt>
     <dd><p>Delete decision instances (batch)
 Delete multiple decision instances. This will delete the historic data from secondary storage.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
@@ -494,7 +494,7 @@ Delete a global-scoped cluster variable.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">DeleteGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_System_Threading_CancellationToken_">DeleteGlobalTaskListenerAsync(GlobalListenerId, CancellationToken)</a></dt>
     <dd><p>Delete global user task listener
 Deletes a global user task listener.</p>
 </dd>
@@ -512,13 +512,13 @@ Deletes the mapping rule with the given ID.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteProcessInstanceRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_DeleteProcessInstanceRequest_System_Threading_CancellationToken_">DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, CancellationToken)</a></dt>
     <dd><p>Delete process instance
 Deletes a process instance. Only instances that are completed or terminated can be deleted.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceDeletionBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceDeletionBatchOperationRequest_System_Threading_CancellationToken_">DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, CancellationToken)</a></dt>
     <dd><p>Delete process instances (batch)
 Delete multiple process instances. This will delete the historic data from secondary storage.
 Only process instances in a final state (COMPLETED or TERMINATED) can be deleted.
@@ -560,7 +560,7 @@ Delete a tenant-scoped cluster variable.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteUserAsync_Camunda_Orchestration_Sdk_Api_Username_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">DeleteUserAsync(Username, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteUserAsync_Camunda_Orchestration_Sdk_Api_Username_System_Threading_CancellationToken_">DeleteUserAsync(Username, CancellationToken)</a></dt>
     <dd><p>Delete user
 Deletes a user.</p>
 </dd>
@@ -705,6 +705,12 @@ Get a group by its ID.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetIncidentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetIncidentAsync_Camunda_Orchestration_Sdk_Api_IncidentKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_IncidentResult__System_Threading_CancellationToken_">GetIncidentAsync(IncidentKey, ConsistencyOptions&lt;IncidentResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get incident
 Returns incident as JSON.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobTypeStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQueryResult__System_Threading_CancellationToken_">GetJobTypeStatisticsAsync(JobTypeStatisticsQuery, ConsistencyOptions&lt;JobTypeStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get job statistics by type
+Get statistics about jobs, grouped by job type.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -898,7 +904,7 @@ latest process improvements.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceMigrationBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceMigrationBatchOperationRequest_System_Threading_CancellationToken_">MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, CancellationToken)</a></dt>
     <dd><p>Migrate process instances (batch)
 Migrate multiple process instances.
 Since only process instances with ACTIVE state can be migrated, any given
@@ -917,7 +923,7 @@ For example, because an external system is not available or doesn't respond as e
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceModificationBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceModificationBatchOperationRequest_System_Threading_CancellationToken_">ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, CancellationToken)</a></dt>
     <dd><p>Modify process instances (batch)
 Modify multiple process instances.
 Since only process instances with ACTIVE state can be modified, any given
@@ -965,7 +971,7 @@ to reset the job's retries, followed by this call.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentsBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceIncidentResolutionBatchOperationRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentsBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentsBatchOperationAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceIncidentResolutionBatchOperationRequest_System_Threading_CancellationToken_">ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, CancellationToken)</a></dt>
     <dd><p>Resolve related incidents (batch)
 Resolves multiple instances of process instances.
 Since only process instances with ACTIVE state can have unresolved incidents, any given
@@ -974,13 +980,13 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveProcessInstanceIncidentsAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_BatchOperationCreatedResult__System_Threading_CancellationToken_">ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, ConsistencyOptions&lt;BatchOperationCreatedResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveProcessInstanceIncidentsAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_System_Threading_CancellationToken_">ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, CancellationToken)</a></dt>
     <dd><p>Resolve related incidents
 Creates a batch operation to resolve multiple incidents of a process instance.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">ResumeBatchOperationAsync(BatchOperationKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_System_Threading_CancellationToken_">ResumeBatchOperationAsync(BatchOperationKey, CancellationToken)</a></dt>
     <dd><p>Resume Batch operation
 Resumes a suspended batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
@@ -1241,7 +1247,7 @@ Search for process and local variables based on given criteria. By default, long
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">SuspendBatchOperationAsync(BatchOperationKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_Api_BatchOperationKey_System_Threading_CancellationToken_">SuspendBatchOperationAsync(BatchOperationKey, CancellationToken)</a></dt>
     <dd><p>Suspend Batch operation
 Suspends a running batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
@@ -1352,7 +1358,7 @@ The variable must exist, otherwise a 404 error is returned.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_Camunda_Orchestration_Sdk_Api_UpdateGlobalTaskListenerRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerResult__System_Threading_CancellationToken_">UpdateGlobalTaskListenerAsync(GlobalListenerId, UpdateGlobalTaskListenerRequest, ConsistencyOptions&lt;GlobalTaskListenerResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_Camunda_Orchestration_Sdk_Api_UpdateGlobalTaskListenerRequest_System_Threading_CancellationToken_">UpdateGlobalTaskListenerAsync(GlobalListenerId, UpdateGlobalTaskListenerRequest, CancellationToken)</a></dt>
     <dd><p>Update global user task listener
 Updates a global user task listener.</p>
 </dd>
@@ -1395,7 +1401,7 @@ The variable must exist, otherwise a 404 error is returned.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateUserAsync_Camunda_Orchestration_Sdk_Api_Username_Camunda_Orchestration_Sdk_Api_UserUpdateRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_UpdateUserResponse__System_Threading_CancellationToken_">UpdateUserAsync(Username, UserUpdateRequest, ConsistencyOptions&lt;UpdateUserResponse&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateUserAsync_Camunda_Orchestration_Sdk_Api_Username_Camunda_Orchestration_Sdk_Api_UserUpdateRequest_System_Threading_CancellationToken_">UpdateUserAsync(Username, UserUpdateRequest, CancellationToken)</a></dt>
     <dd><p>Update user
 Updates a user.</p>
 </dd>
