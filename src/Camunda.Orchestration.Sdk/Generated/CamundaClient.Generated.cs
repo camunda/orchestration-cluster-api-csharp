@@ -1488,7 +1488,11 @@ public partial class CamundaClient
 
     /// <summary>
     /// Get variable
-    /// Get the variable by the variable key.
+    /// Get a variable by its key.
+    /// 
+    /// This endpoint returns both process-level and local (element-scoped) variables.
+    /// The variable's scopeKey indicates whether it's a process-level variable or scoped to a
+    /// specific element instance.
     /// </summary>
     /// <remarks>Operation: getVariable</remarks>
     public async Task<VariableResult> GetVariableAsync(VariableKey variableKey, ConsistencyOptions<VariableResult>? consistency = null, CancellationToken ct = default)
@@ -2268,7 +2272,10 @@ public partial class CamundaClient
 
     /// <summary>
     /// Search user task variables
-    /// Search for user task variables based on given criteria. By default, long variable values in the response are truncated.
+    /// Search for user task variables based on given criteria. This endpoint returns all variables
+    /// visible from the user task's scope, including variables from parent scopes in the scope
+    /// hierarchy. By default, long variable values in the response are truncated.
+    /// 
     /// </summary>
     /// <remarks>Operation: searchUserTaskVariables</remarks>
     public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
@@ -2378,7 +2385,15 @@ public partial class CamundaClient
 
     /// <summary>
     /// Search variables
-    /// Search for process and local variables based on given criteria. By default, long variable values in the response are truncated.
+    /// Search for variables based on given criteria.
+    /// 
+    /// This endpoint returns variables that exist directly at the specified scopes - it does not
+    /// include variables from parent scopes that would be visible through the scope hierarchy.
+    /// 
+    /// Variables can be process-level (scoped to the process instance) or local (scoped to specific
+    /// BPMN elements like tasks, subprocesses, etc.).
+    /// 
+    /// By default, long variable values in the response are truncated.
     /// </summary>
     /// <remarks>Operation: searchVariables</remarks>
     public async Task<VariableSearchQueryResult> SearchVariablesAsync(SearchVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)

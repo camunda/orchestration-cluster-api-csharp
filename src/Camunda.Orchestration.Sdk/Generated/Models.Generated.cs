@@ -124,7 +124,7 @@ public sealed class ActivatedJobResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -2371,7 +2371,7 @@ public sealed class AuditLogResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the element instance.
@@ -3164,7 +3164,7 @@ public sealed class BatchOperationItemResponse
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// State of the item.
@@ -4256,7 +4256,7 @@ public sealed class CorrelatedMessageSubscriptionResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The subscription key that received the message.
@@ -5188,7 +5188,7 @@ public sealed class DecisionInstanceGetQueryResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the decision.
@@ -5342,7 +5342,7 @@ public sealed class DecisionInstanceResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the decision.
@@ -6562,7 +6562,7 @@ public sealed class ElementInstanceResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The process definition key associated to this element instance.
@@ -8130,7 +8130,7 @@ public sealed class IncidentResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The element instance key associated to this incident.
@@ -9095,7 +9095,7 @@ public sealed class JobSearchResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The amount of retries left to this job.
@@ -10083,7 +10083,7 @@ public sealed class MessageSubscriptionResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The element ID associated with this message subscription.
@@ -12328,7 +12328,7 @@ public sealed class ProcessInstanceResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
@@ -12425,7 +12425,7 @@ public sealed class ProcessInstanceSequenceFlowResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The process definition key.
@@ -13081,7 +13081,40 @@ public sealed class RoleUserSearchResult
 }
 
 /// <summary>
-/// System-generated key for a scope.
+/// The key of the root process instance. The root process instance is the top-level
+/// ancestor in the process instance hierarchy. This field is only present for data
+/// belonging to process instance hierarchies created in version 8.9 or later.
+/// 
+/// </summary>
+public readonly record struct RootProcessInstanceKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private RootProcessInstanceKey(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="RootProcessInstanceKey"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static RootProcessInstanceKey AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "RootProcessInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new RootProcessInstanceKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// System-generated key for a scope. A scope can hold variables and represents either an
+/// element instance in a BPMN process or the process instance itself.
+/// 
 /// </summary>
 public readonly record struct ScopeKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
 {
@@ -13137,7 +13170,9 @@ public readonly record struct ScopeKeyExactMatch : global::Camunda.Orchestration
 }
 
 /// <summary>
-/// ScopeKey property with full advanced search capabilities.
+/// ScopeKey property with full advanced search capabilities. Filter by the key of the
+/// element instance or process instance that defines the scope of a variable.
+/// 
 /// </summary>
 public sealed class ScopeKeyFilterProperty
 {
@@ -13236,18 +13271,20 @@ public sealed class SetVariableRequest
     public object Variables { get; set; } = null!;
 
     /// <summary>
-    /// If set to true, the variables are merged strictly into the local scope (as specified by the `elementInstanceKey`).
-    /// Otherwise, the variables are propagated to upper scopes and set at the outermost one.
-    /// Let’s consider the following example:
-    /// There are two scopes '1' and '2'.
-    /// Scope '1' is the parent scope of '2'. The effective variables of the scopes are:
+    /// If set to `true`, the variables are merged strictly into the local scope (as specified
+    /// by the `elementInstanceKey`). Otherwise, the variables are propagated to upper scopes
+    /// and set at the outermost one.
+    /// 
+    /// Let's consider the following example:
+    /// There are two scopes '1' and '2'. Scope '1' is the parent scope of '2'. The effective
+    /// variables of the scopes are:
     /// 1 =&gt; { "foo" : 2 }
     /// 2 =&gt; { "bar" : 1 }
-    /// An update request with elementInstanceKey as '2', variables { "foo" : 5 }, and local set
-    /// to true leaves scope '1' unchanged and adjusts scope '2' to { "bar" : 1, "foo" 5 }.
-    /// By default, with local set to false, scope '1' will be { "foo": 5 }
-    /// and scope '2' will be { "bar" : 1 }.
     /// 
+    /// An update request with elementInstanceKey as '2', variables { "foo": 5 }, and local set
+    /// to `true` leaves scope '1' unchanged and adjusts scope '2' to { "bar": 1, "foo": 5 }. By
+    /// default, with local set to `false`, scope '1' will be { "foo": 5 } and scope '2' will be
+    /// { "bar": 1 }.
     /// </summary>
     [JsonPropertyName("local")]
     public bool? Local { get; set; }
@@ -14767,7 +14804,7 @@ public sealed class UserTaskResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the form.
@@ -15100,7 +15137,12 @@ public sealed class VariableFilter
     public VariableKeyFilterProperty? VariableKey { get; set; }
 
     /// <summary>
-    /// The key of the scope of this variable.
+    /// The key of the scope that defines where this variable is directly defined. This can be a
+    /// process instance key (for process-level variables) or an element instance key (for local
+    /// variables scoped to tasks, subprocesses, gateways, events, etc.). Use this filter to
+    /// find variables directly defined in specific scopes. Note that this does not include
+    /// variables from parent scopes that would be visible through the scope hierarchy.
+    /// 
     /// </summary>
     [JsonPropertyName("scopeKey")]
     public ScopeKeyFilterProperty? ScopeKey { get; set; }
@@ -15206,7 +15248,11 @@ public sealed class VariableResult
     public VariableKey? VariableKey { get; set; }
 
     /// <summary>
-    /// The key of the scope of this variable.
+    /// The key of the scope where this variable is directly defined. For process-level
+    /// variables, this is the process instance key. For local variables, this is the key of the
+    /// specific element instance (task, subprocess, gateway, event, etc.) where the variable is
+    /// directly defined.
+    /// 
     /// </summary>
     [JsonPropertyName("scopeKey")]
     public ScopeKey? ScopeKey { get; set; }
@@ -15224,7 +15270,7 @@ public sealed class VariableResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -15252,7 +15298,11 @@ public sealed class VariableResultBase
     public VariableKey? VariableKey { get; set; }
 
     /// <summary>
-    /// The key of the scope of this variable.
+    /// The key of the scope where this variable is directly defined. For process-level
+    /// variables, this is the process instance key. For local variables, this is the key of the
+    /// specific element instance (task, subprocess, gateway, event, etc.) where the variable is
+    /// directly defined.
+    /// 
     /// </summary>
     [JsonPropertyName("scopeKey")]
     public ScopeKey? ScopeKey { get; set; }
@@ -15270,7 +15320,7 @@ public sealed class VariableResultBase
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -15373,7 +15423,11 @@ public sealed class VariableSearchResult
     public VariableKey? VariableKey { get; set; }
 
     /// <summary>
-    /// The key of the scope of this variable.
+    /// The key of the scope where this variable is directly defined. For process-level
+    /// variables, this is the process instance key. For local variables, this is the key of the
+    /// specific element instance (task, subprocess, gateway, event, etc.) where the variable is
+    /// directly defined.
+    /// 
     /// </summary>
     [JsonPropertyName("scopeKey")]
     public ScopeKey? ScopeKey { get; set; }
@@ -15391,7 +15445,7 @@ public sealed class VariableSearchResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 

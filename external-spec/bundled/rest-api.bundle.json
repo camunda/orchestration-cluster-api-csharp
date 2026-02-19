@@ -14881,7 +14881,7 @@
         ],
         "operationId": "searchUserTaskVariables",
         "summary": "Search user task variables",
-        "description": "Search for user task variables based on given criteria. By default, long variable values in the response are truncated.",
+        "description": "Search for user task variables based on given criteria. This endpoint returns all variables\nvisible from the user task's scope, including variables from parent scopes in the scope\nhierarchy. By default, long variable values in the response are truncated.\n",
         "parameters": [
           {
             "name": "userTaskKey",
@@ -14998,7 +14998,7 @@
         ],
         "operationId": "searchVariables",
         "summary": "Search variables",
-        "description": "Search for process and local variables based on given criteria. By default, long variable values in the response are truncated.",
+        "description": "Search for variables based on given criteria.\n\nThis endpoint returns variables that exist directly at the specified scopes - it does not\ninclude variables from parent scopes that would be visible through the scope hierarchy.\n\nVariables can be process-level (scoped to the process instance) or local (scoped to specific\nBPMN elements like tasks, subprocesses, etc.).\n\nBy default, long variable values in the response are truncated.",
         "parameters": [
           {
             "name": "truncateValues",
@@ -15133,7 +15133,7 @@
         ],
         "operationId": "getVariable",
         "summary": "Get variable",
-        "description": "Get the variable by the variable key.",
+        "description": "Get a variable by its key.\n\nThis endpoint returns both process-level and local (element-scoped) variables.\nThe variable's scopeKey indicates whether it's a process-level variable or scoped to a\nspecific element instance.",
         "parameters": [
           {
             "name": "variableKey",
@@ -15233,9 +15233,6 @@
       "AuditLogResult": {
         "description": "Audit log item.",
         "type": "object",
-        "required": [
-          "rootProcessInstanceKey"
-        ],
         "properties": {
           "auditLogKey": {
             "allOf": [
@@ -15329,13 +15326,7 @@
             "description": "The key of the process instance."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "elementInstanceKey": {
             "allOf": [
@@ -16909,9 +16900,6 @@
       },
       "BatchOperationItemResponse": {
         "type": "object",
-        "required": [
-          "rootProcessInstanceKey"
-        ],
         "properties": {
           "operationType": {
             "$ref": "#/components/schemas/BatchOperationTypeEnum"
@@ -16937,13 +16925,7 @@
             "description": "the process instance key of the processed item."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "state": {
             "description": "State of the item.",
@@ -18504,9 +18486,6 @@
       },
       "DecisionInstanceResult": {
         "type": "object",
-        "required": [
-          "rootProcessInstanceKey"
-        ],
         "properties": {
           "decisionEvaluationInstanceKey": {
             "$ref": "#/components/schemas/DecisionEvaluationInstanceKey"
@@ -18580,13 +18559,7 @@
             "description": "The key of the process instance."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "decisionDefinitionKey": {
             "allOf": [
@@ -19806,8 +19779,7 @@
           "tenantId",
           "elementInstanceKey",
           "processInstanceKey",
-          "processDefinitionKey",
-          "rootProcessInstanceKey"
+          "processDefinitionKey"
         ],
         "properties": {
           "processDefinitionId": {
@@ -19910,13 +19882,7 @@
             "description": "The process instance key associated to this element instance."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "processDefinitionKey": {
             "allOf": [
@@ -21087,9 +21053,6 @@
       },
       "IncidentResult": {
         "type": "object",
-        "required": [
-          "rootProcessInstanceKey"
-        ],
         "properties": {
           "processDefinitionId": {
             "allOf": [
@@ -21162,13 +21125,7 @@
             "description": "The process instance key associated to this incident."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "elementInstanceKey": {
             "allOf": [
@@ -21637,8 +21594,7 @@
           "processDefinitionKey",
           "elementInstanceKey",
           "kind",
-          "listenerEventType",
-          "rootProcessInstanceKey"
+          "listenerEventType"
         ],
         "properties": {
           "type": {
@@ -21748,13 +21704,7 @@
             "$ref": "#/components/schemas/TagSet"
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           }
         }
       },
@@ -22104,8 +22054,7 @@
           "state",
           "tenantId",
           "type",
-          "worker",
-          "rootProcessInstanceKey"
+          "worker"
         ],
         "properties": {
           "customHeaders": {
@@ -22205,13 +22154,7 @@
             "description": "The process instance key associated with the job."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "retries": {
             "description": "The amount of retries left to this job.",
@@ -22699,6 +22642,18 @@
           }
         ]
       },
+      "RootProcessInstanceKey": {
+        "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
+        "format": "ProcessInstanceKey",
+        "x-semantic-type": "ProcessInstanceKey",
+        "example": "2251799813690746",
+        "type": "string",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LongKey"
+          }
+        ]
+      },
       "ProcessDefinitionKey": {
         "description": "System-generated key for a deployed process definition.",
         "format": "ProcessDefinitionKey",
@@ -22759,7 +22714,7 @@
         ]
       },
       "ScopeKey": {
-        "description": "System-generated key for a scope.",
+        "description": "System-generated key for a scope. A scope can hold variables and represents either an\nelement instance in a BPMN process or the process instance itself.\n",
         "format": "ScopeKey",
         "x-semantic-type": "ScopeKey",
         "example": "2251799813683890",
@@ -23145,7 +23100,7 @@
         }
       },
       "ScopeKeyFilterProperty": {
-        "description": "ScopeKey property with full advanced search capabilities.",
+        "description": "ScopeKey property with full advanced search capabilities. Filter by the key of the\nelement instance or process instance that defines the scope of a variable.\n",
         "type": "object",
         "oneOf": [
           {
@@ -23883,9 +23838,6 @@
       },
       "MessageSubscriptionResult": {
         "type": "object",
-        "required": [
-          "rootProcessInstanceKey"
-        ],
         "properties": {
           "messageSubscriptionKey": {
             "allOf": [
@@ -23920,13 +23872,7 @@
             "description": "The process instance key associated with this message subscription."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "elementId": {
             "allOf": [
@@ -24195,13 +24141,7 @@
             "description": "The process instance key associated with this correlated message subscription."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "subscriptionKey": {
             "allOf": [
@@ -24230,8 +24170,7 @@
           "processDefinitionId",
           "processInstanceKey",
           "subscriptionKey",
-          "tenantId",
-          "rootProcessInstanceKey"
+          "tenantId"
         ]
       },
       "CorrelatedMessageSubscriptionSearchQuery": {
@@ -25704,8 +25643,7 @@
           "hasIncident",
           "tenantId",
           "processInstanceKey",
-          "processDefinitionKey",
-          "rootProcessInstanceKey"
+          "processDefinitionKey"
         ],
         "properties": {
           "processDefinitionId": {
@@ -25774,13 +25712,7 @@
             "description": "The parent element instance key."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "tags": {
             "$ref": "#/components/schemas/TagSet"
@@ -25853,9 +25785,6 @@
       "ProcessInstanceSequenceFlowResult": {
         "description": "Process instance sequence flow result.",
         "type": "object",
-        "required": [
-          "rootProcessInstanceKey"
-        ],
         "properties": {
           "sequenceFlowId": {
             "type": "string",
@@ -25870,13 +25799,7 @@
             "description": "The key of this process instance."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "processDefinitionKey": {
             "allOf": [
@@ -27568,9 +27491,6 @@
       },
       "UserTaskResult": {
         "type": "object",
-        "required": [
-          "rootProcessInstanceKey"
-        ],
         "properties": {
           "name": {
             "type": "string",
@@ -27696,13 +27616,7 @@
             "description": "The key of the process instance."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           },
           "formKey": {
             "allOf": [
@@ -28291,7 +28205,7 @@
             ]
           },
           "scopeKey": {
-            "description": "The key of the scope of this variable.",
+            "description": "The key of the scope that defines where this variable is directly defined. This can be a\nprocess instance key (for process-level variables) or an element instance key (for local\nvariables scoped to tasks, subprocesses, gateways, events, etc.). Use this filter to\nfind variables directly defined in specific scopes. Note that this does not include\nvariables from parent scopes that would be visible through the scope hierarchy.\n",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ScopeKeyFilterProperty"
@@ -28363,9 +28277,6 @@
       "VariableResultBase": {
         "description": "Variable response item.",
         "type": "object",
-        "required": [
-          "rootProcessInstanceKey"
-        ],
         "properties": {
           "name": {
             "description": "Name of this variable.",
@@ -28393,7 +28304,7 @@
                 "$ref": "#/components/schemas/ScopeKey"
               }
             ],
-            "description": "The key of the scope of this variable."
+            "description": "The key of the scope where this variable is directly defined. For process-level\nvariables, this is the process instance key. For local variables, this is the key of the\nspecific element instance (task, subprocess, gateway, event, etc.) where the variable is\ndirectly defined.\n"
           },
           "processInstanceKey": {
             "allOf": [
@@ -28404,13 +28315,7 @@
             "description": "The key of the process instance of this variable."
           },
           "rootProcessInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
-              }
-            ],
-            "nullable": true,
-            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n"
+            "$ref": "#/components/schemas/RootProcessInstanceKey"
           }
         }
       },
@@ -28445,7 +28350,7 @@
             "type": "object"
           },
           "local": {
-            "description": "If set to true, the variables are merged strictly into the local scope (as specified by the `elementInstanceKey`).\nOtherwise, the variables are propagated to upper scopes and set at the outermost one.\nLet’s consider the following example:\nThere are two scopes '1' and '2'.\nScope '1' is the parent scope of '2'. The effective variables of the scopes are:\n1 => { \"foo\" : 2 }\n2 => { \"bar\" : 1 }\nAn update request with elementInstanceKey as '2', variables { \"foo\" : 5 }, and local set\nto true leaves scope '1' unchanged and adjusts scope '2' to { \"bar\" : 1, \"foo\" 5 }.\nBy default, with local set to false, scope '1' will be { \"foo\": 5 }\nand scope '2' will be { \"bar\" : 1 }.\n",
+            "description": "If set to `true`, the variables are merged strictly into the local scope (as specified\nby the `elementInstanceKey`). Otherwise, the variables are propagated to upper scopes\nand set at the outermost one.\n\nLet's consider the following example:\nThere are two scopes '1' and '2'. Scope '1' is the parent scope of '2'. The effective\nvariables of the scopes are:\n1 => { \"foo\" : 2 }\n2 => { \"bar\" : 1 }\n\nAn update request with elementInstanceKey as '2', variables { \"foo\": 5 }, and local set\nto `true` leaves scope '1' unchanged and adjusts scope '2' to { \"bar\": 1, \"foo\": 5 }. By\ndefault, with local set to `false`, scope '1' will be { \"foo\": 5 } and scope '2' will be\n{ \"bar\": 1 }.",
             "type": "boolean",
             "default": false
           },
