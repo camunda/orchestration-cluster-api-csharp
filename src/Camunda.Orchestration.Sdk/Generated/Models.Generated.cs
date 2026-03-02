@@ -2363,25 +2363,25 @@ public sealed class AuditLogResult
     /// The unique key of the audit log entry.
     /// </summary>
     [JsonPropertyName("auditLogKey")]
-    public AuditLogKey? AuditLogKey { get; set; }
+    public AuditLogKey AuditLogKey { get; set; }
 
     /// <summary>
     /// System-generated entity key for an audit log entry.
     /// </summary>
     [JsonPropertyName("entityKey")]
-    public AuditLogEntityKey? EntityKey { get; set; }
+    public AuditLogEntityKey EntityKey { get; set; }
 
     /// <summary>
     /// The type of entity affected by the operation.
     /// </summary>
     [JsonPropertyName("entityType")]
-    public AuditLogEntityTypeEnum? EntityType { get; set; }
+    public AuditLogEntityTypeEnum EntityType { get; set; }
 
     /// <summary>
     /// The type of operation performed.
     /// </summary>
     [JsonPropertyName("operationType")]
-    public AuditLogOperationTypeEnum? OperationType { get; set; }
+    public AuditLogOperationTypeEnum OperationType { get; set; }
 
     /// <summary>
     /// Key of the batch operation.
@@ -2399,7 +2399,7 @@ public sealed class AuditLogResult
     /// The timestamp when the operation occurred.
     /// </summary>
     [JsonPropertyName("timestamp")]
-    public DateTimeOffset? Timestamp { get; set; }
+    public DateTimeOffset Timestamp { get; set; }
 
     /// <summary>
     /// The ID of the actor who performed the operation.
@@ -2408,7 +2408,7 @@ public sealed class AuditLogResult
     public string? ActorId { get; set; }
 
     /// <summary>
-    /// The type of actor who performed the operation.
+    /// The type of the actor who performed the operation.
     /// </summary>
     [JsonPropertyName("actorType")]
     public AuditLogActorTypeEnum? ActorType { get; set; }
@@ -2429,7 +2429,7 @@ public sealed class AuditLogResult
     /// The result status of the operation.
     /// </summary>
     [JsonPropertyName("result")]
-    public AuditLogResultEnum? Result { get; set; }
+    public AuditLogResultEnum Result { get; set; }
 
     /// <summary>
     /// Additional notes about the operation.
@@ -2441,7 +2441,7 @@ public sealed class AuditLogResult
     /// The category of the audit log operation.
     /// </summary>
     [JsonPropertyName("category")]
-    public AuditLogCategoryEnum? Category { get; set; }
+    public AuditLogCategoryEnum Category { get; set; }
 
     /// <summary>
     /// The process definition ID.
@@ -4908,7 +4908,6 @@ public enum DecisionDefinitionTypeEnum
     DECISIONTABLE,
     [JsonPropertyName("LITERAL_EXPRESSION")]
     LITERALEXPRESSION,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
     [JsonPropertyName("UNKNOWN")]
@@ -5580,10 +5579,8 @@ public enum DecisionInstanceStateEnum
     EVALUATED,
     [JsonPropertyName("FAILED")]
     FAILED,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNKNOWN")]
     UNKNOWN,
 }
@@ -9799,6 +9796,102 @@ public sealed class JobUpdateRequest
     /// </summary>
     [JsonPropertyName("operationReference")]
     public OperationReference? OperationReference { get; set; }
+
+}
+
+/// <summary>
+/// Job worker statistics search filter.
+/// </summary>
+public sealed class JobWorkerStatisticsFilter
+{
+    /// <summary>
+    /// Start of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("from")]
+    public DateTimeOffset From { get; set; }
+
+    /// <summary>
+    /// End of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("to")]
+    public DateTimeOffset To { get; set; }
+
+    /// <summary>
+    /// Job type to return worker metrics for.
+    /// </summary>
+    [JsonPropertyName("jobType")]
+    public string JobType { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Statistics for a single worker within a job type.
+/// </summary>
+public sealed class JobWorkerStatisticsItem
+{
+    /// <summary>
+    /// The worker identifier.
+    /// </summary>
+    [JsonPropertyName("worker")]
+    public string Worker { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("created")]
+    public StatusMetric Created { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("completed")]
+    public StatusMetric Completed { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("failed")]
+    public StatusMetric Failed { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Job worker statistics query.
+/// </summary>
+public sealed class JobWorkerStatisticsQuery
+{
+    /// <summary>
+    /// Job worker statistics search filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public JobWorkerStatisticsFilter Filter { get; set; } = null!;
+
+    /// <summary>
+    /// Search cursor pagination.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public CursorForwardPagination? Page { get; set; }
+
+}
+
+/// <summary>
+/// Job worker statistics query result.
+/// </summary>
+public sealed class JobWorkerStatisticsQueryResult
+{
+    /// <summary>
+    /// The list of per-worker statistics items.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<JobWorkerStatisticsItem> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 

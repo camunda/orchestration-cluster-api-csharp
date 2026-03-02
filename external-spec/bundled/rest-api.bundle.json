@@ -7317,6 +7317,86 @@
         }
       }
     },
+    "/jobs/statistics/by-workers": {
+      "post": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Job"
+        ],
+        "operationId": "getJobWorkerStatistics",
+        "summary": "Get job statistics by worker",
+        "description": "Returns aggregated metrics per worker for the given jobType.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobWorkerStatisticsQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The job worker statistics result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobWorkerStatisticsQueryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/license": {
       "get": {
         "x-eventually-consistent": false,
@@ -15512,7 +15592,38 @@
         "description": "Audit log item.",
         "type": "object",
         "required": [
-          "rootProcessInstanceKey"
+          "auditLogKey",
+          "entityKey",
+          "entityType",
+          "operationType",
+          "batchOperationKey",
+          "batchOperationType",
+          "timestamp",
+          "actorId",
+          "actorType",
+          "agentElementId",
+          "tenantId",
+          "result",
+          "annotation",
+          "category",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processInstanceKey",
+          "rootProcessInstanceKey",
+          "elementInstanceKey",
+          "jobKey",
+          "userTaskKey",
+          "decisionRequirementsId",
+          "decisionRequirementsKey",
+          "decisionDefinitionId",
+          "decisionDefinitionKey",
+          "decisionEvaluationKey",
+          "deploymentKey",
+          "formKey",
+          "resourceKey",
+          "relatedEntityKey",
+          "relatedEntityType",
+          "entityDescription"
         ],
         "properties": {
           "auditLogKey": {
@@ -15538,7 +15649,8 @@
                 "$ref": "#/components/schemas/BatchOperationKey"
               }
             ],
-            "description": "Key of the batch operation."
+            "description": "Key of the batch operation.",
+            "nullable": true
           },
           "batchOperationType": {
             "allOf": [
@@ -15546,7 +15658,8 @@
                 "$ref": "#/components/schemas/BatchOperationTypeEnum"
               }
             ],
-            "description": "The type of batch operation performed, if this is part of a batch."
+            "description": "The type of batch operation performed, if this is part of a batch.",
+            "nullable": true
           },
           "timestamp": {
             "type": "string",
@@ -15555,14 +15668,22 @@
           },
           "actorId": {
             "type": "string",
-            "description": "The ID of the actor who performed the operation."
+            "description": "The ID of the actor who performed the operation.",
+            "nullable": true
           },
           "actorType": {
-            "$ref": "#/components/schemas/AuditLogActorTypeEnum"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AuditLogActorTypeEnum"
+              }
+            ],
+            "description": "The type of the actor who performed the operation.",
+            "nullable": true
           },
           "agentElementId": {
             "type": "string",
-            "description": "The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID)."
+            "description": "The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID).",
+            "nullable": true
           },
           "tenantId": {
             "allOf": [
@@ -15570,14 +15691,16 @@
                 "$ref": "#/components/schemas/TenantId"
               }
             ],
-            "description": "The tenant ID of the audit log."
+            "description": "The tenant ID of the audit log.",
+            "nullable": true
           },
           "result": {
             "$ref": "#/components/schemas/AuditLogResultEnum"
           },
           "annotation": {
             "type": "string",
-            "description": "Additional notes about the operation."
+            "description": "Additional notes about the operation.",
+            "nullable": true
           },
           "category": {
             "$ref": "#/components/schemas/AuditLogCategoryEnum"
@@ -15588,7 +15711,8 @@
                 "$ref": "#/components/schemas/ProcessDefinitionId"
               }
             ],
-            "description": "The process definition ID."
+            "description": "The process definition ID.",
+            "nullable": true
           },
           "processDefinitionKey": {
             "allOf": [
@@ -15596,7 +15720,8 @@
                 "$ref": "#/components/schemas/ProcessDefinitionKey"
               }
             ],
-            "description": "The key of the process definition."
+            "description": "The key of the process definition.",
+            "nullable": true
           },
           "processInstanceKey": {
             "allOf": [
@@ -15604,7 +15729,8 @@
                 "$ref": "#/components/schemas/ProcessInstanceKey"
               }
             ],
-            "description": "The key of the process instance."
+            "description": "The key of the process instance.",
+            "nullable": true
           },
           "rootProcessInstanceKey": {
             "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
@@ -15621,7 +15747,8 @@
                 "$ref": "#/components/schemas/ElementInstanceKey"
               }
             ],
-            "description": "The key of the element instance."
+            "description": "The key of the element instance.",
+            "nullable": true
           },
           "jobKey": {
             "allOf": [
@@ -15629,7 +15756,8 @@
                 "$ref": "#/components/schemas/JobKey"
               }
             ],
-            "description": "The key of the job."
+            "description": "The key of the job.",
+            "nullable": true
           },
           "userTaskKey": {
             "allOf": [
@@ -15637,11 +15765,13 @@
                 "$ref": "#/components/schemas/UserTaskKey"
               }
             ],
-            "description": "The key of the user task."
+            "description": "The key of the user task.",
+            "nullable": true
           },
           "decisionRequirementsId": {
             "type": "string",
-            "description": "The decision requirements ID."
+            "description": "The decision requirements ID.",
+            "nullable": true
           },
           "decisionRequirementsKey": {
             "allOf": [
@@ -15649,7 +15779,8 @@
                 "$ref": "#/components/schemas/DecisionRequirementsKey"
               }
             ],
-            "description": "The assigned key of the decision requirements."
+            "description": "The assigned key of the decision requirements.",
+            "nullable": true
           },
           "decisionDefinitionId": {
             "allOf": [
@@ -15657,7 +15788,8 @@
                 "$ref": "#/components/schemas/DecisionDefinitionId"
               }
             ],
-            "description": "The decision definition ID."
+            "description": "The decision definition ID.",
+            "nullable": true
           },
           "decisionDefinitionKey": {
             "allOf": [
@@ -15665,7 +15797,8 @@
                 "$ref": "#/components/schemas/DecisionDefinitionKey"
               }
             ],
-            "description": "The key of the decision definition."
+            "description": "The key of the decision definition.",
+            "nullable": true
           },
           "decisionEvaluationKey": {
             "allOf": [
@@ -15673,7 +15806,8 @@
                 "$ref": "#/components/schemas/DecisionEvaluationKey"
               }
             ],
-            "description": "The key of the decision evaluation."
+            "description": "The key of the decision evaluation.",
+            "nullable": true
           },
           "deploymentKey": {
             "allOf": [
@@ -15681,7 +15815,8 @@
                 "$ref": "#/components/schemas/DeploymentKey"
               }
             ],
-            "description": "The key of the deployment."
+            "description": "The key of the deployment.",
+            "nullable": true
           },
           "formKey": {
             "allOf": [
@@ -15689,7 +15824,8 @@
                 "$ref": "#/components/schemas/FormKey"
               }
             ],
-            "description": "The key of the form."
+            "description": "The key of the form.",
+            "nullable": true
           },
           "resourceKey": {
             "allOf": [
@@ -15697,7 +15833,8 @@
                 "$ref": "#/components/schemas/ResourceKey"
               }
             ],
-            "description": "The system-assigned key for this resource."
+            "description": "The system-assigned key for this resource.",
+            "nullable": true
           },
           "relatedEntityKey": {
             "allOf": [
@@ -15705,7 +15842,8 @@
                 "$ref": "#/components/schemas/AuditLogEntityKey"
               }
             ],
-            "description": "The key of the related entity. The content depends on the operation type and entity type.\nFor example, for authorization operations, this will contain the ID of the owner (e.g., user or group) the authorization belongs to.\n"
+            "description": "The key of the related entity. The content depends on the operation type and entity type.\nFor example, for authorization operations, this will contain the ID of the owner (e.g., user or group) the authorization belongs to.\n",
+            "nullable": true
           },
           "relatedEntityType": {
             "allOf": [
@@ -15713,11 +15851,13 @@
                 "$ref": "#/components/schemas/AuditLogEntityTypeEnum"
               }
             ],
-            "description": "The type of the related entity. The content depends on the operation type and entity type.\nFor example, for authorization operations, this will contain the type of the owner (e.g., USER or GROUP) the authorization belongs to.\n"
+            "description": "The type of the related entity. The content depends on the operation type and entity type.\nFor example, for authorization operations, this will contain the type of the owner (e.g., USER or GROUP) the authorization belongs to.\n",
+            "nullable": true
           },
           "entityDescription": {
             "type": "string",
-            "description": "Additional description of the entity affected by the operation.\nFor example, for variable operations, this will contain the variable name.\n"
+            "description": "Additional description of the entity affected by the operation.\nFor example, for variable operations, this will contain the variable name.\n",
+            "nullable": true
           }
         }
       },
@@ -22272,6 +22412,102 @@
             "type": "integer",
             "format": "int32",
             "example": 5
+          }
+        }
+      },
+      "JobWorkerStatisticsQuery": {
+        "description": "Job worker statistics query.",
+        "type": "object",
+        "required": [
+          "filter"
+        ],
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/JobWorkerStatisticsFilter"
+          },
+          "page": {
+            "description": "Search cursor pagination.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CursorForwardPagination"
+              }
+            ]
+          }
+        }
+      },
+      "JobWorkerStatisticsFilter": {
+        "description": "Job worker statistics search filter.",
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "jobType"
+        ],
+        "properties": {
+          "from": {
+            "description": "Start of the time window to filter metrics. ISO 8601 date-time format.\n",
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-28T15:51:28.071Z"
+          },
+          "to": {
+            "description": "End of the time window to filter metrics. ISO 8601 date-time format.\n",
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-29T15:51:28.071Z"
+          },
+          "jobType": {
+            "description": "Job type to return worker metrics for.",
+            "type": "string",
+            "example": "fetch-customer-data"
+          }
+        }
+      },
+      "JobWorkerStatisticsQueryResult": {
+        "description": "Job worker statistics query result.",
+        "type": "object",
+        "required": [
+          "items",
+          "page"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryResponse"
+          }
+        ],
+        "properties": {
+          "items": {
+            "description": "The list of per-worker statistics items.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobWorkerStatisticsItem"
+            }
+          }
+        }
+      },
+      "JobWorkerStatisticsItem": {
+        "description": "Statistics for a single worker within a job type.",
+        "type": "object",
+        "required": [
+          "worker",
+          "created",
+          "completed",
+          "failed"
+        ],
+        "properties": {
+          "worker": {
+            "description": "The worker identifier.",
+            "type": "string",
+            "example": "worker-1"
+          },
+          "created": {
+            "$ref": "#/components/schemas/StatusMetric"
+          },
+          "completed": {
+            "$ref": "#/components/schemas/StatusMetric"
+          },
+          "failed": {
+            "$ref": "#/components/schemas/StatusMetric"
           }
         }
       },
