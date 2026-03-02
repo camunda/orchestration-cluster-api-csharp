@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync*" class="text-break">
-Method SearchRolesForTenantAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2220"><i class="bi bi-code-slash"></i></a>
+Method SearchRolesForTenantAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2260"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method SearchRolesForTenantAsync  <a class="header-action link-secondary" title=
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)">
-  SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2220"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchRolesForTenantResponse__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse},System.Threading.CancellationToken)">
+  SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions&lt;SearchRolesForTenantResponse&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2260"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search roles for tenant
@@ -130,7 +130,7 @@ Retrieves a filtered and sorted list of roles for a specified tenant.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;SearchQueryResponse&gt; SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions&lt;SearchQueryResponse&gt;? consistency = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;SearchRolesForTenantResponse&gt; SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions&lt;SearchRolesForTenantResponse&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
@@ -139,7 +139,7 @@ Retrieves a filtered and sorted list of roles for a specified tenant.</p>
   <dd></dd>
   <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest.html">RoleSearchQueryRequest</a></dt>
   <dd></dd>
-  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchQueryResponse.html">SearchQueryResponse</a>&gt;</dt>
+  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.html">SearchRolesForTenantResponse</a>&gt;</dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -147,7 +147,7 @@ Retrieves a filtered and sorted list of roles for a specified tenant.</p>
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchQueryResponse.html">SearchQueryResponse</a>&gt;</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.html">SearchRolesForTenantResponse</a>&gt;</dt>
   <dd></dd>
 </dl>
 
@@ -157,7 +157,7 @@ Retrieves a filtered and sorted list of roles for a specified tenant.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchRolesForTenantResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchRolesForTenant</p>
 </div>
 
@@ -167,7 +167,7 @@ Retrieves a filtered and sorted list of roles for a specified tenant.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2220" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2260" class="edit-link">Edit this page</a>
         </div>
 
 

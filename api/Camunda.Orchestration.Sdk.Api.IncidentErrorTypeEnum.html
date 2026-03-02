@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class IncidentErrorTypeEnum | Camunda C# SDK </title>
+      <title>Enum IncidentErrorTypeEnum | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class IncidentErrorTypeEnum | Camunda C# SDK ">
+      <meta name="title" content="Enum IncidentErrorTypeEnum | Camunda C# SDK ">
       
       <meta name="description" content="Incident error type with a defined set of values.">
       <link rel="icon" href="../favicon.ico">
@@ -88,8 +88,9 @@
 
 
 
+
   <h1 id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum" data-uid="Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum" class="text-break">
-Class IncidentErrorTypeEnum  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L7700"><i class="bi bi-code-slash"></i></a>
+Enum IncidentErrorTypeEnum  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L8124"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,44 +103,16 @@ Class IncidentErrorTypeEnum  <a class="header-action link-secondary" title="View
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class IncidentErrorTypeEnum</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum IncidentErrorTypeEnum</code></pre>
   </div>
 
 
 
 
-  <dl class="typelist inheritance">
-    <dt>Inheritance</dt>
-    <dd>
-      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">IncidentErrorTypeEnum</span></div>
-    </dd>
-  </dl>
 
 
 
-  <dl class="typelist inheritedMembers">
-    <dt>Inherited Members</dt>
-    <dd>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
-    </div>
-  </dd></dl>
 
   <dl class="typelist extensionMethods">
     <dt>Extension Methods</dt>
@@ -149,15 +122,81 @@ Class IncidentErrorTypeEnum  <a class="header-action link-secondary" title="View
   </div>
   </dd></dl>
 
-
-
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_ADHOCSUBPROCESSNORETRIES"><code>[JsonPropertyName(&quot;AD_HOC_SUB_PROCESS_NO_RETRIES&quot;)]
+ADHOCSUBPROCESSNORETRIES = 0</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_CALLEDDECISIONERROR"><code>[JsonPropertyName(&quot;CALLED_DECISION_ERROR&quot;)]
+CALLEDDECISIONERROR = 1</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_CALLEDELEMENTERROR"><code>[JsonPropertyName(&quot;CALLED_ELEMENT_ERROR&quot;)]
+CALLEDELEMENTERROR = 2</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_CONDITIONERROR"><code>[JsonPropertyName(&quot;CONDITION_ERROR&quot;)]
+CONDITIONERROR = 3</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_DECISIONEVALUATIONERROR"><code>[JsonPropertyName(&quot;DECISION_EVALUATION_ERROR&quot;)]
+DECISIONEVALUATIONERROR = 4</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_EXECUTIONLISTENERNORETRIES"><code>[JsonPropertyName(&quot;EXECUTION_LISTENER_NO_RETRIES&quot;)]
+EXECUTIONLISTENERNORETRIES = 5</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_EXTRACTVALUEERROR"><code>[JsonPropertyName(&quot;EXTRACT_VALUE_ERROR&quot;)]
+EXTRACTVALUEERROR = 6</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_FORMNOTFOUND"><code>[JsonPropertyName(&quot;FORM_NOT_FOUND&quot;)]
+FORMNOTFOUND = 7</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_IOMAPPINGERROR"><code>[JsonPropertyName(&quot;IO_MAPPING_ERROR&quot;)]
+IOMAPPINGERROR = 8</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_JOBNORETRIES"><code>[JsonPropertyName(&quot;JOB_NO_RETRIES&quot;)]
+JOBNORETRIES = 9</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_MESSAGESIZEEXCEEDED"><code>[JsonPropertyName(&quot;MESSAGE_SIZE_EXCEEDED&quot;)]
+MESSAGESIZEEXCEEDED = 10</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_RESOURCENOTFOUND"><code>[JsonPropertyName(&quot;RESOURCE_NOT_FOUND&quot;)]
+RESOURCENOTFOUND = 11</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_TASKLISTENERNORETRIES"><code>[JsonPropertyName(&quot;TASK_LISTENER_NO_RETRIES&quot;)]
+TASKLISTENERNORETRIES = 12</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_UNHANDLEDERROREVENT"><code>[JsonPropertyName(&quot;UNHANDLED_ERROR_EVENT&quot;)]
+UNHANDLEDERROREVENT = 13</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_UNKNOWN"><code>[JsonPropertyName(&quot;UNKNOWN&quot;)]
+UNKNOWN = 14</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_UNSPECIFIED"><code>[JsonPropertyName(&quot;UNSPECIFIED&quot;)]
+UNSPECIFIED = 15</code></dt>
+  
+  <dd></dd>
+  </dl>
 
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L7700" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L8124" class="edit-link">Edit this page</a>
         </div>
 
 

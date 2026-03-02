@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstructionByKey" data-uid="Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey" class="text-break">
-Class ProcessInstanceCreationInstructionByKey  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L11482"><i class="bi bi-code-slash"></i></a>
+Class ProcessInstanceCreationInstructionByKey  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L11987"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -164,9 +164,19 @@ Class ProcessInstanceCreationInstructionByKey  <a class="header-action link-seco
 
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.AwaitCompletion.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstructionByKey_AwaitCompletion">AwaitCompletion</a></dt>
-    <dd><p>Wait for the process instance to complete. If the process instance completion does
-not occur within the requestTimeout, the request will be closed. This can lead to a 504
-response status. Disabled by default.</p>
+    <dd><p>Wait for the process instance to complete. If the process instance does not complete
+within the request timeout limit, a 504 response status will be returned. The process
+instance will continue to run in the background regardless of the timeout. Disabled by
+default.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.BusinessId.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstructionByKey_BusinessId">BusinessId</a></dt>
+    <dd><p>An optional, user-defined string identifier that identifies the process instance
+within the scope of a process definition (scoped by tenant). If provided and uniqueness
+enforcement is enabled, the engine will reject creation if another root process instance
+with the same business id is already active for the same process definition.
+Note that any active child process instances with the same business id are not taken into account.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -221,13 +231,15 @@ after it has been created.</p>
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.TenantId.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstructionByKey_TenantId">TenantId</a></dt>
-    <dd><p>The tenant id of the process definition.</p>
+    <dd><p>The tenant id of the process definition.
+If multi-tenancy is enabled, provide the tenant id of the process definition to start a
+process instance of. If multi-tenancy is disabled, don't provide this parameter.</p>
 </dd>
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.Variables.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstructionByKey_Variables">Variables</a></dt>
-    <dd><p>JSON object that will instantiate the variables for the root variable scope
-of the process instance.</p>
+    <dd><p>Set of variables as JSON object to instantiate in the root variable scope of the process
+instance. Can include nested complex objects.</p>
 </dd>
   </dl>
 
@@ -245,7 +257,7 @@ of the process instance.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L11482" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L11987" class="edit-link">Edit this page</a>
         </div>
 
 

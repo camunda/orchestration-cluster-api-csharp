@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_Api_VariableValueFilterProperty" data-uid="Camunda.Orchestration.Sdk.Api.VariableValueFilterProperty" class="text-break">
-Class VariableValueFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15401"><i class="bi bi-code-slash"></i></a>
+Class VariableValueFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L16032"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -162,7 +162,10 @@ Class VariableValueFilterProperty  <a class="header-action link-secondary" title
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.Api.VariableValueFilterProperty.Value.html#Camunda_Orchestration_Sdk_Api_VariableValueFilterProperty_Value">Value</a></dt>
-    <dd><p>The value of the variable.</p>
+    <dd><p>The value of the variable.
+Variable values in filters need to be in serialized JSON format. For example, a variable
+with string value <code>myValue</code> can be found with the filter value <code>&quot;myValue&quot;</code>. Consider
+appropriate escaping for special characters in JSON strings when constructing filter values.</p>
 </dd>
   </dl>
 
@@ -171,7 +174,7 @@ Class VariableValueFilterProperty  <a class="header-action link-secondary" title
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15401" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L16032" class="edit-link">Edit this page</a>
         </div>
 
 

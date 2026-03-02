@@ -696,6 +696,12 @@ Returns global aggregated counts for jobs. Optionally filter by the creation tim
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerResult__System_Threading_CancellationToken_">GetGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions&lt;GlobalTaskListenerResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get global user task listener
+Get a global user task listener by its id.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGroupAsync_System_String_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GroupResult__System_Threading_CancellationToken_">GetGroupAsync(string, ConsistencyOptions&lt;GroupResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get group
 Get a group by its ID.</p>
@@ -884,7 +890,10 @@ Note that this endpoint will only return linked forms. This endpoint does not su
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetVariableAsync_Camunda_Orchestration_Sdk_Api_VariableKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_VariableResult__System_Threading_CancellationToken_">GetVariableAsync(VariableKey, ConsistencyOptions&lt;VariableResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get variable
-Get the variable by the variable key.</p>
+Get a variable by its key.</p>
+<p>This endpoint returns both process-level and local (element-scoped) variables.
+The variable's scopeKey indicates whether it's a process-level variable or scoped to a
+specific element instance.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1088,6 +1097,12 @@ Search for element instances based on given criteria.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchGlobalTaskListenersAsync_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryResult__System_Threading_CancellationToken_">SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest, ConsistencyOptions&lt;GlobalTaskListenerSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search global user task listeners
+Search for global user task listeners based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupIdsForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_TenantGroupSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantGroupSearchResult__System_Threading_CancellationToken_">SearchGroupIdsForTenantAsync(TenantId, TenantGroupSearchQueryRequest, ConsistencyOptions&lt;TenantGroupSearchResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Search groups for tenant
 Retrieves a filtered and sorted list of groups for a specified tenant.</p>
@@ -1118,25 +1133,25 @@ Search for jobs based on given criteria.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRuleAsync_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryResult__System_Threading_CancellationToken_">SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions&lt;MappingRuleSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRuleAsync_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMappingRuleResponse__System_Threading_CancellationToken_">SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchMappingRuleResponse&gt;?, CancellationToken)</a></dt>
     <dd><p>Search mapping rules
 Search for mapping rules based on given criteria.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchMappingRulesForGroupAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMappingRulesForGroupResponse__System_Threading_CancellationToken_">SearchMappingRulesForGroupAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchMappingRulesForGroupResponse&gt;?, CancellationToken)</a></dt>
     <dd><p>Search group mapping rules
 Search mapping rules assigned to a group.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMappingRulesForRoleResponse__System_Threading_CancellationToken_">SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchMappingRulesForRoleResponse&gt;?, CancellationToken)</a></dt>
     <dd><p>Search role mapping rules
 Search mapping rules with assigned role.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMappingRulesForTenantResponse__System_Threading_CancellationToken_">SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchMappingRulesForTenantResponse&gt;?, CancellationToken)</a></dt>
     <dd><p>Search mapping rules for tenant
 Retrieves a filtered and sorted list of MappingRules for a specified tenant.</p>
 </dd>
@@ -1176,13 +1191,13 @@ Search for roles based on given criteria.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchRolesForGroupAsync(string, RoleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchRolesForGroupResponse__System_Threading_CancellationToken_">SearchRolesForGroupAsync(string, RoleSearchQueryRequest, ConsistencyOptions&lt;SearchRolesForGroupResponse&gt;?, CancellationToken)</a></dt>
     <dd><p>Search group roles
 Search roles assigned to a group.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_">SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions&lt;SearchQueryResponse&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchRolesForTenantResponse__System_Threading_CancellationToken_">SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions&lt;SearchRolesForTenantResponse&gt;?, CancellationToken)</a></dt>
     <dd><p>Search roles for tenant
 Retrieves a filtered and sorted list of roles for a specified tenant.</p>
 </dd>
@@ -1202,7 +1217,9 @@ Search for user task audit logs based on given criteria.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskVariablesAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_SearchUserTaskVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_VariableSearchQueryResult__System_Threading_CancellationToken_">SearchUserTaskVariablesAsync(UserTaskKey, SearchUserTaskVariablesRequest, bool?, ConsistencyOptions&lt;VariableSearchQueryResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Search user task variables
-Search for user task variables based on given criteria. By default, long variable values in the response are truncated.</p>
+Search for user task variables based on given criteria. This endpoint returns all variables
+visible from the user task's scope, including variables from parent scopes in the scope
+hierarchy. By default, long variable values in the response are truncated.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1238,7 +1255,12 @@ Retrieves a filtered and sorted list of users for a specified tenant.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchVariablesAsync_Camunda_Orchestration_Sdk_Api_SearchVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_VariableSearchQueryResult__System_Threading_CancellationToken_">SearchVariablesAsync(SearchVariablesRequest, bool?, ConsistencyOptions&lt;VariableSearchQueryResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Search variables
-Search for process and local variables based on given criteria. By default, long variable values in the response are truncated.</p>
+Search for variables based on given criteria.</p>
+<p>This endpoint returns variables that exist directly at the specified scopes - it does not
+include variables from parent scopes that would be visible through the scope hierarchy.</p>
+<p>Variables can be process-level (scoped to the process instance) or local (scoped to specific
+BPMN elements like tasks, subprocesses, etc.).</p>
+<p>By default, long variable values in the response are truncated.</p>
 </dd>
   </dl>
   <dl class="jumplist">

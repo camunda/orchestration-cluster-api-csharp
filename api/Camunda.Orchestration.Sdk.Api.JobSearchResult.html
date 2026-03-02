@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_Api_JobSearchResult" data-uid="Camunda.Orchestration.Sdk.Api.JobSearchResult" class="text-break">
-Class JobSearchResult  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L8993"><i class="bi bi-code-slash"></i></a>
+Class JobSearchResult  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9468"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -177,7 +177,7 @@ Class JobSearchResult  <a class="header-action link-secondary" title="View sourc
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.Api.JobSearchResult.ElementId.html#Camunda_Orchestration_Sdk_Api_JobSearchResult_ElementId">ElementId</a></dt>
-    <dd><p>The element ID associated with the job.</p>
+    <dd><p>The element ID associated with the job. May be missing on job failure.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -187,7 +187,8 @@ Class JobSearchResult  <a class="header-action link-secondary" title="View sourc
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.Api.JobSearchResult.EndTime.html#Camunda_Orchestration_Sdk_Api_JobSearchResult_EndTime">EndTime</a></dt>
-    <dd><p>When the job ended.</p>
+    <dd><p>End date of the job.
+This is <code>null</code> if the job is not in an end state yet.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -283,7 +284,7 @@ belonging to process instance hierarchies created in version 8.9 or later.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L8993" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9468" class="edit-link">Edit this page</a>
         </div>
 
 

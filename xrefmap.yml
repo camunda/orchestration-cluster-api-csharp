@@ -1609,6 +1609,138 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedFormKeyFilter.NotIn
   fullName: Camunda.Orchestration.Sdk.Api.AdvancedFormKeyFilter.NotIn
   nameWithType: AdvancedFormKeyFilter.NotIn
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter
+  name: AdvancedGlobalListenerSourceFilter
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter
+  nameWithType: AdvancedGlobalListenerSourceFilter
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Eq.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalListenerSourceFilter_Eq
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Eq
+  nameWithType: AdvancedGlobalListenerSourceFilter.Eq
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Eq
+  nameWithType: AdvancedGlobalListenerSourceFilter.Eq
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Exists.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalListenerSourceFilter_Exists
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Exists
+  nameWithType: AdvancedGlobalListenerSourceFilter.Exists
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Exists
+  nameWithType: AdvancedGlobalListenerSourceFilter.Exists
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.In
+  name: In
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.In.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalListenerSourceFilter_In
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.In
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.In
+  nameWithType: AdvancedGlobalListenerSourceFilter.In
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.In*
+  name: In
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.In.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.In
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.In
+  nameWithType: AdvancedGlobalListenerSourceFilter.In
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Like
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Like.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalListenerSourceFilter_Like
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Like
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Like
+  nameWithType: AdvancedGlobalListenerSourceFilter.Like
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Like*
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Like.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Like
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Like
+  nameWithType: AdvancedGlobalListenerSourceFilter.Like
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Neq.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalListenerSourceFilter_Neq
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Neq
+  nameWithType: AdvancedGlobalListenerSourceFilter.Neq
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalListenerSourceFilter.Neq
+  nameWithType: AdvancedGlobalListenerSourceFilter.Neq
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter
+  name: AdvancedGlobalTaskListenerEventTypeFilter
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Eq.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalTaskListenerEventTypeFilter_Eq
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Eq
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.Eq
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Eq
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.Eq
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Exists.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalTaskListenerEventTypeFilter_Exists
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Exists
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.Exists
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Exists
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.Exists
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.In
+  name: In
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.In.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalTaskListenerEventTypeFilter_In
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.In
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.In
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.In
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.In*
+  name: In
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.In.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.In
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.In
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.In
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Like
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Like.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalTaskListenerEventTypeFilter_Like
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Like
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Like
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.Like
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Like*
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Like.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Like
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Like
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.Like
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Neq.html#Camunda_Orchestration_Sdk_Api_AdvancedGlobalTaskListenerEventTypeFilter_Neq
+  commentId: P:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Neq
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.Neq
+- uid: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.Api.AdvancedGlobalTaskListenerEventTypeFilter.Neq
+  nameWithType: AdvancedGlobalTaskListenerEventTypeFilter.Neq
 - uid: Camunda.Orchestration.Sdk.Api.AdvancedIncidentErrorTypeFilter
   name: AdvancedIncidentErrorTypeFilter
   href: api/Camunda.Orchestration.Sdk.Api.AdvancedIncidentErrorTypeFilter.html
@@ -3229,6 +3361,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.Api.AuditLogEntityTypeEnum.INCIDENT
   fullName: Camunda.Orchestration.Sdk.Api.AuditLogEntityTypeEnum.INCIDENT
   nameWithType: AuditLogEntityTypeEnum.INCIDENT
+- uid: Camunda.Orchestration.Sdk.Api.AuditLogEntityTypeEnum.JOB
+  name: JOB
+  href: api/Camunda.Orchestration.Sdk.Api.AuditLogEntityTypeEnum.html#Camunda_Orchestration_Sdk_Api_AuditLogEntityTypeEnum_JOB
+  commentId: F:Camunda.Orchestration.Sdk.Api.AuditLogEntityTypeEnum.JOB
+  fullName: Camunda.Orchestration.Sdk.Api.AuditLogEntityTypeEnum.JOB
+  nameWithType: AuditLogEntityTypeEnum.JOB
 - uid: Camunda.Orchestration.Sdk.Api.AuditLogEntityTypeEnum.MAPPINGRULE
   name: MAPPINGRULE
   href: api/Camunda.Orchestration.Sdk.Api.AuditLogEntityTypeEnum.html#Camunda_Orchestration_Sdk_Api_AuditLogEntityTypeEnum_MAPPINGRULE
@@ -6295,6 +6433,66 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.BrokerInfo.Version
   fullName: Camunda.Orchestration.Sdk.Api.BrokerInfo.Version
   nameWithType: BrokerInfo.Version
+- uid: Camunda.Orchestration.Sdk.Api.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.BusinessId.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.BusinessId
+  nameWithType: BusinessId
+- uid: Camunda.Orchestration.Sdk.Api.BusinessId.AssumeExists(System.String)
+  name: AssumeExists(string)
+  href: api/Camunda.Orchestration.Sdk.Api.BusinessId.AssumeExists.html#Camunda_Orchestration_Sdk_Api_BusinessId_AssumeExists_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.Api.BusinessId.AssumeExists(System.String)
+  name.vb: AssumeExists(String)
+  fullName: Camunda.Orchestration.Sdk.Api.BusinessId.AssumeExists(string)
+  fullName.vb: Camunda.Orchestration.Sdk.Api.BusinessId.AssumeExists(String)
+  nameWithType: BusinessId.AssumeExists(string)
+  nameWithType.vb: BusinessId.AssumeExists(String)
+- uid: Camunda.Orchestration.Sdk.Api.BusinessId.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.Api.BusinessId.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.BusinessId.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.Api.BusinessId.AssumeExists
+  nameWithType: BusinessId.AssumeExists
+- uid: Camunda.Orchestration.Sdk.Api.BusinessId.IsValid(System.String)
+  name: IsValid(string)
+  href: api/Camunda.Orchestration.Sdk.Api.BusinessId.IsValid.html#Camunda_Orchestration_Sdk_Api_BusinessId_IsValid_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.Api.BusinessId.IsValid(System.String)
+  name.vb: IsValid(String)
+  fullName: Camunda.Orchestration.Sdk.Api.BusinessId.IsValid(string)
+  fullName.vb: Camunda.Orchestration.Sdk.Api.BusinessId.IsValid(String)
+  nameWithType: BusinessId.IsValid(string)
+  nameWithType.vb: BusinessId.IsValid(String)
+- uid: Camunda.Orchestration.Sdk.Api.BusinessId.IsValid*
+  name: IsValid
+  href: api/Camunda.Orchestration.Sdk.Api.BusinessId.IsValid.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.BusinessId.IsValid
+  fullName: Camunda.Orchestration.Sdk.Api.BusinessId.IsValid
+  nameWithType: BusinessId.IsValid
+- uid: Camunda.Orchestration.Sdk.Api.BusinessId.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.Api.BusinessId.ToString.html#Camunda_Orchestration_Sdk_Api_BusinessId_ToString
+  commentId: M:Camunda.Orchestration.Sdk.Api.BusinessId.ToString
+  fullName: Camunda.Orchestration.Sdk.Api.BusinessId.ToString()
+  nameWithType: BusinessId.ToString()
+- uid: Camunda.Orchestration.Sdk.Api.BusinessId.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.Api.BusinessId.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.BusinessId.ToString
+  fullName: Camunda.Orchestration.Sdk.Api.BusinessId.ToString
+  nameWithType: BusinessId.ToString
+- uid: Camunda.Orchestration.Sdk.Api.BusinessId.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.Api.BusinessId.Value.html#Camunda_Orchestration_Sdk_Api_BusinessId_Value
+  commentId: P:Camunda.Orchestration.Sdk.Api.BusinessId.Value
+  fullName: Camunda.Orchestration.Sdk.Api.BusinessId.Value
+  nameWithType: BusinessId.Value
+- uid: Camunda.Orchestration.Sdk.Api.BusinessId.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.Api.BusinessId.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.BusinessId.Value
+  fullName: Camunda.Orchestration.Sdk.Api.BusinessId.Value
+  nameWithType: BusinessId.Value
 - uid: Camunda.Orchestration.Sdk.Api.CamundaUserResult
   name: CamundaUserResult
   href: api/Camunda.Orchestration.Sdk.Api.CamundaUserResult.html
@@ -7654,6 +7852,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult
   fullName: Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult
   nameWithType: CreateProcessInstanceResult
+- uid: Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.BusinessId.html#Camunda_Orchestration_Sdk_Api_CreateProcessInstanceResult_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.BusinessId
+  nameWithType: CreateProcessInstanceResult.BusinessId
+- uid: Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.BusinessId
+  nameWithType: CreateProcessInstanceResult.BusinessId
 - uid: Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.ProcessDefinitionId
   name: ProcessDefinitionId
   href: api/Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.ProcessDefinitionId.html#Camunda_Orchestration_Sdk_Api_CreateProcessInstanceResult_ProcessDefinitionId
@@ -8356,6 +8566,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.Api.DecisionDefinitionTypeEnum.UNKNOWN
   fullName: Camunda.Orchestration.Sdk.Api.DecisionDefinitionTypeEnum.UNKNOWN
   nameWithType: DecisionDefinitionTypeEnum.UNKNOWN
+- uid: Camunda.Orchestration.Sdk.Api.DecisionDefinitionTypeEnum.UNSPECIFIED
+  name: UNSPECIFIED
+  href: api/Camunda.Orchestration.Sdk.Api.DecisionDefinitionTypeEnum.html#Camunda_Orchestration_Sdk_Api_DecisionDefinitionTypeEnum_UNSPECIFIED
+  commentId: F:Camunda.Orchestration.Sdk.Api.DecisionDefinitionTypeEnum.UNSPECIFIED
+  fullName: Camunda.Orchestration.Sdk.Api.DecisionDefinitionTypeEnum.UNSPECIFIED
+  nameWithType: DecisionDefinitionTypeEnum.UNSPECIFIED
 - uid: Camunda.Orchestration.Sdk.Api.DecisionEvaluationById
   name: DecisionEvaluationById
   href: api/Camunda.Orchestration.Sdk.Api.DecisionEvaluationById.html
@@ -9580,6 +9796,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.Api.DecisionInstanceStateEnum.FAILED
   fullName: Camunda.Orchestration.Sdk.Api.DecisionInstanceStateEnum.FAILED
   nameWithType: DecisionInstanceStateEnum.FAILED
+- uid: Camunda.Orchestration.Sdk.Api.DecisionInstanceStateEnum.UNKNOWN
+  name: UNKNOWN
+  href: api/Camunda.Orchestration.Sdk.Api.DecisionInstanceStateEnum.html#Camunda_Orchestration_Sdk_Api_DecisionInstanceStateEnum_UNKNOWN
+  commentId: F:Camunda.Orchestration.Sdk.Api.DecisionInstanceStateEnum.UNKNOWN
+  fullName: Camunda.Orchestration.Sdk.Api.DecisionInstanceStateEnum.UNKNOWN
+  nameWithType: DecisionInstanceStateEnum.UNKNOWN
 - uid: Camunda.Orchestration.Sdk.Api.DecisionInstanceStateEnum.UNSPECIFIED
   name: UNSPECIFIED
   href: api/Camunda.Orchestration.Sdk.Api.DecisionInstanceStateEnum.html#Camunda_Orchestration_Sdk_Api_DecisionInstanceStateEnum_UNSPECIFIED
@@ -12406,6 +12628,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest
   fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest
   nameWithType: ExpressionEvaluationRequest
+- uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
+  name: Context
+  href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context.html#Camunda_Orchestration_Sdk_Api_ExpressionEvaluationRequest_Context
+  commentId: P:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
+  fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
+  nameWithType: ExpressionEvaluationRequest.Context
+- uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context*
+  name: Context
+  href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
+  fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
+  nameWithType: ExpressionEvaluationRequest.Context
 - uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Expression
   name: Expression
   href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Expression.html#Camunda_Orchestration_Sdk_Api_ExpressionEvaluationRequest_Expression
@@ -12967,6 +13201,72 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceEnum.CONFIGURATION
   fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceEnum.CONFIGURATION
   nameWithType: GlobalListenerSourceEnum.CONFIGURATION
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch
+  name: GlobalListenerSourceExactMatch
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch
+  nameWithType: GlobalListenerSourceExactMatch
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.AssumeExists(System.String)
+  name: AssumeExists(string)
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.AssumeExists.html#Camunda_Orchestration_Sdk_Api_GlobalListenerSourceExactMatch_AssumeExists_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.AssumeExists(System.String)
+  name.vb: AssumeExists(String)
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.AssumeExists(string)
+  fullName.vb: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.AssumeExists(String)
+  nameWithType: GlobalListenerSourceExactMatch.AssumeExists(string)
+  nameWithType.vb: GlobalListenerSourceExactMatch.AssumeExists(String)
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.AssumeExists
+  nameWithType: GlobalListenerSourceExactMatch.AssumeExists
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.IsValid(System.String)
+  name: IsValid(string)
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.IsValid.html#Camunda_Orchestration_Sdk_Api_GlobalListenerSourceExactMatch_IsValid_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.IsValid(System.String)
+  name.vb: IsValid(String)
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.IsValid(string)
+  fullName.vb: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.IsValid(String)
+  nameWithType: GlobalListenerSourceExactMatch.IsValid(string)
+  nameWithType.vb: GlobalListenerSourceExactMatch.IsValid(String)
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.IsValid*
+  name: IsValid
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.IsValid.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.IsValid
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.IsValid
+  nameWithType: GlobalListenerSourceExactMatch.IsValid
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.ToString.html#Camunda_Orchestration_Sdk_Api_GlobalListenerSourceExactMatch_ToString
+  commentId: M:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.ToString()
+  nameWithType: GlobalListenerSourceExactMatch.ToString()
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.ToString
+  nameWithType: GlobalListenerSourceExactMatch.ToString
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.Value.html#Camunda_Orchestration_Sdk_Api_GlobalListenerSourceExactMatch_Value
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.Value
+  nameWithType: GlobalListenerSourceExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceExactMatch.Value
+  nameWithType: GlobalListenerSourceExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceFilterProperty
+  name: GlobalListenerSourceFilterProperty
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalListenerSourceFilterProperty.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GlobalListenerSourceFilterProperty
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalListenerSourceFilterProperty
+  nameWithType: GlobalListenerSourceFilterProperty
 - uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerBase
   name: GlobalTaskListenerBase
   href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerBase.html
@@ -13075,6 +13375,72 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeEnum.Updating
   fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeEnum.Updating
   nameWithType: GlobalTaskListenerEventTypeEnum.Updating
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch
+  name: GlobalTaskListenerEventTypeExactMatch
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch
+  nameWithType: GlobalTaskListenerEventTypeExactMatch
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.AssumeExists(System.String)
+  name: AssumeExists(string)
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.AssumeExists.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerEventTypeExactMatch_AssumeExists_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.AssumeExists(System.String)
+  name.vb: AssumeExists(String)
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.AssumeExists(string)
+  fullName.vb: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.AssumeExists(String)
+  nameWithType: GlobalTaskListenerEventTypeExactMatch.AssumeExists(string)
+  nameWithType.vb: GlobalTaskListenerEventTypeExactMatch.AssumeExists(String)
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.AssumeExists
+  nameWithType: GlobalTaskListenerEventTypeExactMatch.AssumeExists
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.IsValid(System.String)
+  name: IsValid(string)
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.IsValid.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerEventTypeExactMatch_IsValid_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.IsValid(System.String)
+  name.vb: IsValid(String)
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.IsValid(string)
+  fullName.vb: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.IsValid(String)
+  nameWithType: GlobalTaskListenerEventTypeExactMatch.IsValid(string)
+  nameWithType.vb: GlobalTaskListenerEventTypeExactMatch.IsValid(String)
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.IsValid*
+  name: IsValid
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.IsValid.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.IsValid
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.IsValid
+  nameWithType: GlobalTaskListenerEventTypeExactMatch.IsValid
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.ToString.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerEventTypeExactMatch_ToString
+  commentId: M:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.ToString()
+  nameWithType: GlobalTaskListenerEventTypeExactMatch.ToString()
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.ToString
+  nameWithType: GlobalTaskListenerEventTypeExactMatch.ToString
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.Value.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerEventTypeExactMatch_Value
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.Value
+  nameWithType: GlobalTaskListenerEventTypeExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeExactMatch.Value
+  nameWithType: GlobalTaskListenerEventTypeExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeFilterProperty
+  name: GlobalTaskListenerEventTypeFilterProperty
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeFilterProperty.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeFilterProperty
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerEventTypeFilterProperty
+  nameWithType: GlobalTaskListenerEventTypeFilterProperty
 - uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult
   name: GlobalTaskListenerResult
   href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.html
@@ -13165,6 +13531,198 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.Type
   fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult.Type
   nameWithType: GlobalTaskListenerResult.Type
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest
+  name: GlobalTaskListenerSearchQueryFilterRequest
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal
+  name: AfterNonGlobal
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryFilterRequest_AfterNonGlobal
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal*
+  name: AfterNonGlobal
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.AfterNonGlobal
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.EventTypes
+  name: EventTypes
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.EventTypes.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryFilterRequest_EventTypes
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.EventTypes
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.EventTypes
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.EventTypes
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.EventTypes*
+  name: EventTypes
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.EventTypes.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.EventTypes
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.EventTypes
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.EventTypes
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Id
+  name: Id
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Id.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryFilterRequest_Id
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Id
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Id
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Id
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Id*
+  name: Id
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Id.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Id
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Id
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Id
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Priority
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Priority.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryFilterRequest_Priority
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Priority
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Priority
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Priority
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Priority*
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Priority.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Priority
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Priority
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Priority
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Retries
+  name: Retries
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Retries.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryFilterRequest_Retries
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Retries
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Retries
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Retries
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Retries*
+  name: Retries
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Retries.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Retries
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Retries
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Retries
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Source
+  name: Source
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Source.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryFilterRequest_Source
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Source
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Source
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Source
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Source*
+  name: Source
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Source.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Source
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Source
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Source
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Type
+  name: Type
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Type.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryFilterRequest_Type
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Type
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Type
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Type
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Type*
+  name: Type
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Type.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Type
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryFilterRequest.Type
+  nameWithType: GlobalTaskListenerSearchQueryFilterRequest.Type
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest
+  name: GlobalTaskListenerSearchQueryRequest
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest
+  nameWithType: GlobalTaskListenerSearchQueryRequest
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Filter.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryRequest_Filter
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Filter
+  nameWithType: GlobalTaskListenerSearchQueryRequest.Filter
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Filter
+  nameWithType: GlobalTaskListenerSearchQueryRequest.Filter
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Page.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryRequest_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Page
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Page
+  nameWithType: GlobalTaskListenerSearchQueryRequest.Page
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Page
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Page
+  nameWithType: GlobalTaskListenerSearchQueryRequest.Page
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Sort
+  name: Sort
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Sort.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryRequest_Sort
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Sort
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Sort
+  nameWithType: GlobalTaskListenerSearchQueryRequest.Sort
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Sort*
+  name: Sort
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Sort.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Sort
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest.Sort
+  nameWithType: GlobalTaskListenerSearchQueryRequest.Sort
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult
+  name: GlobalTaskListenerSearchQueryResult
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult
+  nameWithType: GlobalTaskListenerSearchQueryResult
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Items.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Items
+  nameWithType: GlobalTaskListenerSearchQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Items
+  nameWithType: GlobalTaskListenerSearchQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Page.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Page
+  nameWithType: GlobalTaskListenerSearchQueryResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult.Page
+  nameWithType: GlobalTaskListenerSearchQueryResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest
+  name: GlobalTaskListenerSearchQuerySortRequest
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest
+  nameWithType: GlobalTaskListenerSearchQuerySortRequest
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Field
+  name: Field
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Field.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQuerySortRequest_Field
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Field
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Field
+  nameWithType: GlobalTaskListenerSearchQuerySortRequest.Field
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Field*
+  name: Field
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Field.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Field
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Field
+  nameWithType: GlobalTaskListenerSearchQuerySortRequest.Field
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Order
+  name: Order
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Order.html#Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQuerySortRequest_Order
+  commentId: P:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Order
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Order
+  nameWithType: GlobalTaskListenerSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Order*
+  name: Order
+  href: api/Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Order.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Order
+  fullName: Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQuerySortRequest.Order
+  nameWithType: GlobalTaskListenerSearchQuerySortRequest.Order
 - uid: Camunda.Orchestration.Sdk.Api.GroupClientResult
   name: GroupClientResult
   href: api/Camunda.Orchestration.Sdk.Api.GroupClientResult.html
@@ -13387,6 +13945,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.GroupFilter.Name
   fullName: Camunda.Orchestration.Sdk.Api.GroupFilter.Name
   nameWithType: GroupFilter.Name
+- uid: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult
+  name: GroupMappingRuleSearchResult
+  href: api/Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult
+  fullName: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult
+  nameWithType: GroupMappingRuleSearchResult
+- uid: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Items.html#Camunda_Orchestration_Sdk_Api_GroupMappingRuleSearchResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Items
+  nameWithType: GroupMappingRuleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Items
+  nameWithType: GroupMappingRuleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Page.html#Camunda_Orchestration_Sdk_Api_GroupMappingRuleSearchResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Page
+  nameWithType: GroupMappingRuleSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.GroupMappingRuleSearchResult.Page
+  nameWithType: GroupMappingRuleSearchResult.Page
 - uid: Camunda.Orchestration.Sdk.Api.GroupResult
   name: GroupResult
   href: api/Camunda.Orchestration.Sdk.Api.GroupResult.html
@@ -13429,6 +14017,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.GroupResult.Name
   fullName: Camunda.Orchestration.Sdk.Api.GroupResult.Name
   nameWithType: GroupResult.Name
+- uid: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult
+  name: GroupRoleSearchResult
+  href: api/Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult
+  fullName: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult
+  nameWithType: GroupRoleSearchResult
+- uid: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Items.html#Camunda_Orchestration_Sdk_Api_GroupRoleSearchResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Items
+  nameWithType: GroupRoleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Items
+  nameWithType: GroupRoleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Page.html#Camunda_Orchestration_Sdk_Api_GroupRoleSearchResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Page
+  nameWithType: GroupRoleSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.GroupRoleSearchResult.Page
+  nameWithType: GroupRoleSearchResult.Page
 - uid: Camunda.Orchestration.Sdk.Api.GroupSearchQueryRequest
   name: GroupSearchQueryRequest
   href: api/Camunda.Orchestration.Sdk.Api.GroupSearchQueryRequest.html
@@ -13717,6 +14335,102 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum
   fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum
   nameWithType: IncidentErrorTypeEnum
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.ADHOCSUBPROCESSNORETRIES
+  name: ADHOCSUBPROCESSNORETRIES
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_ADHOCSUBPROCESSNORETRIES
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.ADHOCSUBPROCESSNORETRIES
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.ADHOCSUBPROCESSNORETRIES
+  nameWithType: IncidentErrorTypeEnum.ADHOCSUBPROCESSNORETRIES
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.CALLEDDECISIONERROR
+  name: CALLEDDECISIONERROR
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_CALLEDDECISIONERROR
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.CALLEDDECISIONERROR
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.CALLEDDECISIONERROR
+  nameWithType: IncidentErrorTypeEnum.CALLEDDECISIONERROR
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.CALLEDELEMENTERROR
+  name: CALLEDELEMENTERROR
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_CALLEDELEMENTERROR
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.CALLEDELEMENTERROR
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.CALLEDELEMENTERROR
+  nameWithType: IncidentErrorTypeEnum.CALLEDELEMENTERROR
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.CONDITIONERROR
+  name: CONDITIONERROR
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_CONDITIONERROR
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.CONDITIONERROR
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.CONDITIONERROR
+  nameWithType: IncidentErrorTypeEnum.CONDITIONERROR
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.DECISIONEVALUATIONERROR
+  name: DECISIONEVALUATIONERROR
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_DECISIONEVALUATIONERROR
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.DECISIONEVALUATIONERROR
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.DECISIONEVALUATIONERROR
+  nameWithType: IncidentErrorTypeEnum.DECISIONEVALUATIONERROR
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.EXECUTIONLISTENERNORETRIES
+  name: EXECUTIONLISTENERNORETRIES
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_EXECUTIONLISTENERNORETRIES
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.EXECUTIONLISTENERNORETRIES
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.EXECUTIONLISTENERNORETRIES
+  nameWithType: IncidentErrorTypeEnum.EXECUTIONLISTENERNORETRIES
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.EXTRACTVALUEERROR
+  name: EXTRACTVALUEERROR
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_EXTRACTVALUEERROR
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.EXTRACTVALUEERROR
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.EXTRACTVALUEERROR
+  nameWithType: IncidentErrorTypeEnum.EXTRACTVALUEERROR
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.FORMNOTFOUND
+  name: FORMNOTFOUND
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_FORMNOTFOUND
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.FORMNOTFOUND
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.FORMNOTFOUND
+  nameWithType: IncidentErrorTypeEnum.FORMNOTFOUND
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.IOMAPPINGERROR
+  name: IOMAPPINGERROR
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_IOMAPPINGERROR
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.IOMAPPINGERROR
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.IOMAPPINGERROR
+  nameWithType: IncidentErrorTypeEnum.IOMAPPINGERROR
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.JOBNORETRIES
+  name: JOBNORETRIES
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_JOBNORETRIES
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.JOBNORETRIES
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.JOBNORETRIES
+  nameWithType: IncidentErrorTypeEnum.JOBNORETRIES
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.MESSAGESIZEEXCEEDED
+  name: MESSAGESIZEEXCEEDED
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_MESSAGESIZEEXCEEDED
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.MESSAGESIZEEXCEEDED
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.MESSAGESIZEEXCEEDED
+  nameWithType: IncidentErrorTypeEnum.MESSAGESIZEEXCEEDED
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.RESOURCENOTFOUND
+  name: RESOURCENOTFOUND
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_RESOURCENOTFOUND
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.RESOURCENOTFOUND
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.RESOURCENOTFOUND
+  nameWithType: IncidentErrorTypeEnum.RESOURCENOTFOUND
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.TASKLISTENERNORETRIES
+  name: TASKLISTENERNORETRIES
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_TASKLISTENERNORETRIES
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.TASKLISTENERNORETRIES
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.TASKLISTENERNORETRIES
+  nameWithType: IncidentErrorTypeEnum.TASKLISTENERNORETRIES
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.UNHANDLEDERROREVENT
+  name: UNHANDLEDERROREVENT
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_UNHANDLEDERROREVENT
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.UNHANDLEDERROREVENT
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.UNHANDLEDERROREVENT
+  nameWithType: IncidentErrorTypeEnum.UNHANDLEDERROREVENT
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.UNKNOWN
+  name: UNKNOWN
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_UNKNOWN
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.UNKNOWN
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.UNKNOWN
+  nameWithType: IncidentErrorTypeEnum.UNKNOWN
+- uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.UNSPECIFIED
+  name: UNSPECIFIED
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_Api_IncidentErrorTypeEnum_UNSPECIFIED
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.UNSPECIFIED
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeEnum.UNSPECIFIED
+  nameWithType: IncidentErrorTypeEnum.UNSPECIFIED
 - uid: Camunda.Orchestration.Sdk.Api.IncidentErrorTypeExactMatch
   name: IncidentErrorTypeExactMatch
   href: api/Camunda.Orchestration.Sdk.Api.IncidentErrorTypeExactMatch.html
@@ -14611,6 +15325,30 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.IncidentStateEnum
   fullName: Camunda.Orchestration.Sdk.Api.IncidentStateEnum
   nameWithType: IncidentStateEnum
+- uid: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.ACTIVE
+  name: ACTIVE
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentStateEnum.html#Camunda_Orchestration_Sdk_Api_IncidentStateEnum_ACTIVE
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentStateEnum.ACTIVE
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.ACTIVE
+  nameWithType: IncidentStateEnum.ACTIVE
+- uid: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.MIGRATED
+  name: MIGRATED
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentStateEnum.html#Camunda_Orchestration_Sdk_Api_IncidentStateEnum_MIGRATED
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentStateEnum.MIGRATED
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.MIGRATED
+  nameWithType: IncidentStateEnum.MIGRATED
+- uid: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.PENDING
+  name: PENDING
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentStateEnum.html#Camunda_Orchestration_Sdk_Api_IncidentStateEnum_PENDING
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentStateEnum.PENDING
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.PENDING
+  nameWithType: IncidentStateEnum.PENDING
+- uid: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.RESOLVED
+  name: RESOLVED
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentStateEnum.html#Camunda_Orchestration_Sdk_Api_IncidentStateEnum_RESOLVED
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentStateEnum.RESOLVED
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.RESOLVED
+  nameWithType: IncidentStateEnum.RESOLVED
 - uid: Camunda.Orchestration.Sdk.Api.IncidentStateExactMatch
   name: IncidentStateExactMatch
   href: api/Camunda.Orchestration.Sdk.Api.IncidentStateExactMatch.html
@@ -18484,12 +19222,24 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.CLAIM
   fullName: Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.CLAIM
   nameWithType: PermissionTypeEnum.CLAIM
+- uid: Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.CLAIMUSERTASK
+  name: CLAIMUSERTASK
+  href: api/Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_Api_PermissionTypeEnum_CLAIMUSERTASK
+  commentId: F:Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.CLAIMUSERTASK
+  fullName: Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.CLAIMUSERTASK
+  nameWithType: PermissionTypeEnum.CLAIMUSERTASK
 - uid: Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.COMPLETE
   name: COMPLETE
   href: api/Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_Api_PermissionTypeEnum_COMPLETE
   commentId: F:Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.COMPLETE
   fullName: Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.COMPLETE
   nameWithType: PermissionTypeEnum.COMPLETE
+- uid: Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.COMPLETEUSERTASK
+  name: COMPLETEUSERTASK
+  href: api/Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_Api_PermissionTypeEnum_COMPLETEUSERTASK
+  commentId: F:Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.COMPLETEUSERTASK
+  fullName: Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.COMPLETEUSERTASK
+  nameWithType: PermissionTypeEnum.COMPLETEUSERTASK
 - uid: Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.CREATE
   name: CREATE
   href: api/Camunda.Orchestration.Sdk.Api.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_Api_PermissionTypeEnum_CREATE
@@ -20206,6 +20956,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.AwaitCompletion
   fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.AwaitCompletion
   nameWithType: ProcessInstanceCreationInstructionById.AwaitCompletion
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.BusinessId.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstructionById_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.BusinessId
+  nameWithType: ProcessInstanceCreationInstructionById.BusinessId
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.BusinessId
+  nameWithType: ProcessInstanceCreationInstructionById.BusinessId
 - uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.FetchVariables
   name: FetchVariables
   href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionById.FetchVariables.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstructionById_FetchVariables
@@ -20359,6 +21121,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.AwaitCompletion
   fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.AwaitCompletion
   nameWithType: ProcessInstanceCreationInstructionByKey.AwaitCompletion
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.BusinessId.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstructionByKey_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.BusinessId
+  nameWithType: ProcessInstanceCreationInstructionByKey.BusinessId
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.BusinessId
+  nameWithType: ProcessInstanceCreationInstructionByKey.BusinessId
 - uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.FetchVariables
   name: FetchVariables
   href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstructionByKey.FetchVariables.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstructionByKey_FetchVariables
@@ -21514,6 +22288,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.ProcessInstanceResult
   fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceResult
   nameWithType: ProcessInstanceResult
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.BusinessId.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceResult_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.BusinessId
+  nameWithType: ProcessInstanceResult.BusinessId
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.BusinessId
+  nameWithType: ProcessInstanceResult.BusinessId
 - uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.EndDate
   name: EndDate
   href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceResult.EndDate.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceResult_EndDate
@@ -22654,6 +23440,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.RoleGroupSearchResult.Page
   fullName: Camunda.Orchestration.Sdk.Api.RoleGroupSearchResult.Page
   nameWithType: RoleGroupSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult
+  name: RoleMappingRuleSearchResult
+  href: api/Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult
+  fullName: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult
+  nameWithType: RoleMappingRuleSearchResult
+- uid: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Items.html#Camunda_Orchestration_Sdk_Api_RoleMappingRuleSearchResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Items
+  nameWithType: RoleMappingRuleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Items
+  nameWithType: RoleMappingRuleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Page.html#Camunda_Orchestration_Sdk_Api_RoleMappingRuleSearchResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Page
+  nameWithType: RoleMappingRuleSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.RoleMappingRuleSearchResult.Page
+  nameWithType: RoleMappingRuleSearchResult.Page
 - uid: Camunda.Orchestration.Sdk.Api.RoleResult
   name: RoleResult
   href: api/Camunda.Orchestration.Sdk.Api.RoleResult.html
@@ -23284,6 +24100,126 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchClientsForTenantResponse.Page
   fullName: Camunda.Orchestration.Sdk.Api.SearchClientsForTenantResponse.Page
   nameWithType: SearchClientsForTenantResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse
+  name: SearchMappingRuleResponse
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse
+  nameWithType: SearchMappingRuleResponse
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Items.html#Camunda_Orchestration_Sdk_Api_SearchMappingRuleResponse_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Items
+  nameWithType: SearchMappingRuleResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Items
+  nameWithType: SearchMappingRuleResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Page.html#Camunda_Orchestration_Sdk_Api_SearchMappingRuleResponse_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Page
+  nameWithType: SearchMappingRuleResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse.Page
+  nameWithType: SearchMappingRuleResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse
+  name: SearchMappingRulesForGroupResponse
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse
+  nameWithType: SearchMappingRulesForGroupResponse
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Items.html#Camunda_Orchestration_Sdk_Api_SearchMappingRulesForGroupResponse_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Items
+  nameWithType: SearchMappingRulesForGroupResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Items
+  nameWithType: SearchMappingRulesForGroupResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Page.html#Camunda_Orchestration_Sdk_Api_SearchMappingRulesForGroupResponse_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Page
+  nameWithType: SearchMappingRulesForGroupResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse.Page
+  nameWithType: SearchMappingRulesForGroupResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse
+  name: SearchMappingRulesForRoleResponse
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse
+  nameWithType: SearchMappingRulesForRoleResponse
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Items.html#Camunda_Orchestration_Sdk_Api_SearchMappingRulesForRoleResponse_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Items
+  nameWithType: SearchMappingRulesForRoleResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Items
+  nameWithType: SearchMappingRulesForRoleResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Page.html#Camunda_Orchestration_Sdk_Api_SearchMappingRulesForRoleResponse_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Page
+  nameWithType: SearchMappingRulesForRoleResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse.Page
+  nameWithType: SearchMappingRulesForRoleResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse
+  name: SearchMappingRulesForTenantResponse
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse
+  nameWithType: SearchMappingRulesForTenantResponse
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Items.html#Camunda_Orchestration_Sdk_Api_SearchMappingRulesForTenantResponse_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Items
+  nameWithType: SearchMappingRulesForTenantResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Items
+  nameWithType: SearchMappingRulesForTenantResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Page.html#Camunda_Orchestration_Sdk_Api_SearchMappingRulesForTenantResponse_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Page
+  nameWithType: SearchMappingRulesForTenantResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse.Page
+  nameWithType: SearchMappingRulesForTenantResponse.Page
 - uid: Camunda.Orchestration.Sdk.Api.SearchQueryPageRequest
   name: SearchQueryPageRequest
   href: api/Camunda.Orchestration.Sdk.Api.SearchQueryPageRequest.html
@@ -23380,6 +24316,66 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchQueryResponse.Page
   fullName: Camunda.Orchestration.Sdk.Api.SearchQueryResponse.Page
   nameWithType: SearchQueryResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse
+  name: SearchRolesForGroupResponse
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse
+  nameWithType: SearchRolesForGroupResponse
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Items.html#Camunda_Orchestration_Sdk_Api_SearchRolesForGroupResponse_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Items
+  nameWithType: SearchRolesForGroupResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Items
+  nameWithType: SearchRolesForGroupResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Page.html#Camunda_Orchestration_Sdk_Api_SearchRolesForGroupResponse_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Page
+  nameWithType: SearchRolesForGroupResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse.Page
+  nameWithType: SearchRolesForGroupResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse
+  name: SearchRolesForTenantResponse
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse
+  nameWithType: SearchRolesForTenantResponse
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Items.html#Camunda_Orchestration_Sdk_Api_SearchRolesForTenantResponse_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Items
+  nameWithType: SearchRolesForTenantResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Items
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Items
+  nameWithType: SearchRolesForTenantResponse.Items
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Page.html#Camunda_Orchestration_Sdk_Api_SearchRolesForTenantResponse_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Page
+  nameWithType: SearchRolesForTenantResponse.Page
+- uid: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Page
+  fullName: Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse.Page
+  nameWithType: SearchRolesForTenantResponse.Page
 - uid: Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesRequest
   name: SearchUserTaskVariablesRequest
   href: api/Camunda.Orchestration.Sdk.Api.SearchUserTaskVariablesRequest.html
@@ -24511,6 +25507,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.TenantId.Value
   fullName: Camunda.Orchestration.Sdk.Api.TenantId.Value
   nameWithType: TenantId.Value
+- uid: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult
+  name: TenantMappingRuleSearchResult
+  href: api/Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult
+  fullName: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult
+  nameWithType: TenantMappingRuleSearchResult
+- uid: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Items.html#Camunda_Orchestration_Sdk_Api_TenantMappingRuleSearchResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Items
+  nameWithType: TenantMappingRuleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Items
+  nameWithType: TenantMappingRuleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Page.html#Camunda_Orchestration_Sdk_Api_TenantMappingRuleSearchResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Page
+  nameWithType: TenantMappingRuleSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.TenantMappingRuleSearchResult.Page
+  nameWithType: TenantMappingRuleSearchResult.Page
 - uid: Camunda.Orchestration.Sdk.Api.TenantResult
   name: TenantResult
   href: api/Camunda.Orchestration.Sdk.Api.TenantResult.html
@@ -24553,6 +25579,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.TenantResult.TenantId
   fullName: Camunda.Orchestration.Sdk.Api.TenantResult.TenantId
   nameWithType: TenantResult.TenantId
+- uid: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult
+  name: TenantRoleSearchResult
+  href: api/Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult
+  fullName: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult
+  nameWithType: TenantRoleSearchResult
+- uid: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Items.html#Camunda_Orchestration_Sdk_Api_TenantRoleSearchResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Items
+  nameWithType: TenantRoleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Items
+  nameWithType: TenantRoleSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Page.html#Camunda_Orchestration_Sdk_Api_TenantRoleSearchResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Page
+  nameWithType: TenantRoleSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.TenantRoleSearchResult.Page
+  nameWithType: TenantRoleSearchResult.Page
 - uid: Camunda.Orchestration.Sdk.Api.TenantSearchQueryRequest
   name: TenantSearchQueryRequest
   href: api/Camunda.Orchestration.Sdk.Api.TenantSearchQueryRequest.html
@@ -28594,6 +29650,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetGlobalJobStatisticsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetGlobalJobStatisticsAsync
   nameWithType: CamundaClient.GetGlobalJobStatisticsAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult},System.Threading.CancellationToken)
+  name: GetGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions<GlobalTaskListenerResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_Api_GlobalListenerId_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult},System.Threading.CancellationToken)
+  name.vb: GetGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions(Of GlobalTaskListenerResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.Api.GlobalListenerId, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.GlobalTaskListenerResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions<GlobalTaskListenerResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions(Of GlobalTaskListenerResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync*
+  name: GetGlobalTaskListenerAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync
+  nameWithType: CamundaClient.GetGlobalTaskListenerAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetGroupAsync(System.String,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.GroupResult},System.Threading.CancellationToken)
   name: GetGroupAsync(string, ConsistencyOptions<GroupResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGroupAsync_System_String_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GroupResult__System_Threading_CancellationToken_
@@ -29395,6 +30466,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstancesAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstancesAsync
   nameWithType: CamundaClient.SearchElementInstancesAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync(Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult},System.Threading.CancellationToken)
+  name: SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchGlobalTaskListenersAsync_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_GlobalTaskListenerSearchQueryResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync(Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult},System.Threading.CancellationToken)
+  name.vb: SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest, ConsistencyOptions(Of GlobalTaskListenerSearchQueryResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync(Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync(Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.GlobalTaskListenerSearchQueryResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest, ConsistencyOptions(Of GlobalTaskListenerSearchQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync*
+  name: SearchGlobalTaskListenersAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync
+  nameWithType: CamundaClient.SearchGlobalTaskListenersAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchGroupIdsForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.TenantGroupSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.TenantGroupSearchResult},System.Threading.CancellationToken)
   name: SearchGroupIdsForTenantAsync(TenantId, TenantGroupSearchQueryRequest, ConsistencyOptions<TenantGroupSearchResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchGroupIdsForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_TenantGroupSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantGroupSearchResult__System_Threading_CancellationToken_
@@ -29470,60 +30556,60 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchJobsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchJobsAsync
   nameWithType: CamundaClient.SearchJobsAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync(Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryResult},System.Threading.CancellationToken)
-  name: SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions<MappingRuleSearchQueryResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRuleAsync_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync(Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryResult},System.Threading.CancellationToken)
-  name.vb: SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions(Of MappingRuleSearchQueryResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync(Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync(Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions<MappingRuleSearchQueryResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions(Of MappingRuleSearchQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync(Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse},System.Threading.CancellationToken)
+  name: SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRuleResponse>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRuleAsync_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMappingRuleResponse__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync(Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse},System.Threading.CancellationToken)
+  name.vb: SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchMappingRuleResponse), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync(Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync(Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchMappingRuleResponse), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRuleResponse>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchMappingRuleResponse), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync*
   name: SearchMappingRuleAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync.html
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRuleAsync
   nameWithType: CamundaClient.SearchMappingRuleAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync(System.String,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name: SearchMappingRulesForGroupAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync(System.String,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name.vb: SearchMappingRulesForGroupAsync(String, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync(string, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchQueryResponse>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync(String, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchQueryResponse), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.SearchMappingRulesForGroupAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  nameWithType.vb: CamundaClient.SearchMappingRulesForGroupAsync(String, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync(System.String,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse},System.Threading.CancellationToken)
+  name: SearchMappingRulesForGroupAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRulesForGroupResponse>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMappingRulesForGroupResponse__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync(System.String,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse},System.Threading.CancellationToken)
+  name.vb: SearchMappingRulesForGroupAsync(String, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchMappingRulesForGroupResponse), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync(string, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync(String, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchMappingRulesForGroupResponse), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchMappingRulesForGroupAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRulesForGroupResponse>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchMappingRulesForGroupAsync(String, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchMappingRulesForGroupResponse), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync*
   name: SearchMappingRulesForGroupAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync.html
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForGroupAsync
   nameWithType: CamundaClient.SearchMappingRulesForGroupAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync(System.String,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name: SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync(System.String,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name.vb: SearchMappingRulesForRoleAsync(String, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync(string, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchQueryResponse>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync(String, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchQueryResponse), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  nameWithType.vb: CamundaClient.SearchMappingRulesForRoleAsync(String, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync(System.String,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse},System.Threading.CancellationToken)
+  name: SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRulesForRoleResponse>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_System_String_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMappingRulesForRoleResponse__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync(System.String,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse},System.Threading.CancellationToken)
+  name.vb: SearchMappingRulesForRoleAsync(String, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchMappingRulesForRoleResponse), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync(string, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync(String, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchMappingRulesForRoleResponse), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRulesForRoleResponse>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchMappingRulesForRoleAsync(String, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchMappingRulesForRoleResponse), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync*
   name: SearchMappingRulesForRoleAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync.html
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync
   nameWithType: CamundaClient.SearchMappingRulesForRoleAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name: SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name.vb: SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchQueryResponse>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchQueryResponse), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  nameWithType.vb: CamundaClient.SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse},System.Threading.CancellationToken)
+  name: SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRulesForTenantResponse>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchMappingRulesForTenantResponse__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse},System.Threading.CancellationToken)
+  name.vb: SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchMappingRulesForTenantResponse), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId, Camunda.Orchestration.Sdk.Api.MappingRuleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchMappingRulesForTenantResponse), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRulesForTenantResponse>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions(Of SearchMappingRulesForTenantResponse), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync*
   name: SearchMappingRulesForTenantAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForTenantAsync.html
@@ -29605,30 +30691,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchRolesAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesAsync
   nameWithType: CamundaClient.SearchRolesAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync(System.String,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name: SearchRolesForGroupAsync(string, RoleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync(System.String,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name.vb: SearchRolesForGroupAsync(String, RoleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync(string, Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchQueryResponse>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync(String, Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchQueryResponse), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.SearchRolesForGroupAsync(string, RoleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  nameWithType.vb: CamundaClient.SearchRolesForGroupAsync(String, RoleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync(System.String,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse},System.Threading.CancellationToken)
+  name: SearchRolesForGroupAsync(string, RoleSearchQueryRequest, ConsistencyOptions<SearchRolesForGroupResponse>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForGroupAsync_System_String_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchRolesForGroupResponse__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync(System.String,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse},System.Threading.CancellationToken)
+  name.vb: SearchRolesForGroupAsync(String, RoleSearchQueryRequest, ConsistencyOptions(Of SearchRolesForGroupResponse), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync(string, Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync(String, Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchRolesForGroupResponse), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchRolesForGroupAsync(string, RoleSearchQueryRequest, ConsistencyOptions<SearchRolesForGroupResponse>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchRolesForGroupAsync(String, RoleSearchQueryRequest, ConsistencyOptions(Of SearchRolesForGroupResponse), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync*
   name: SearchRolesForGroupAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync.html
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForGroupAsync
   nameWithType: CamundaClient.SearchRolesForGroupAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name: SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchQueryResponse__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchQueryResponse},System.Threading.CancellationToken)
-  name.vb: SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId, Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchQueryResponse>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId, Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchQueryResponse), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
-  nameWithType.vb: CamundaClient.SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions(Of SearchQueryResponse), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse},System.Threading.CancellationToken)
+  name: SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions<SearchRolesForTenantResponse>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Api_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_SearchRolesForTenantResponse__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse},System.Threading.CancellationToken)
+  name.vb: SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions(Of SearchRolesForTenantResponse), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId, Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId, Camunda.Orchestration.Sdk.Api.RoleSearchQueryRequest, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.SearchRolesForTenantResponse), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions<SearchRolesForTenantResponse>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions(Of SearchRolesForTenantResponse), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync*
   name: SearchRolesForTenantAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchRolesForTenantAsync.html
