@@ -407,7 +407,7 @@ public partial class CamundaClient
     /// <remarks>Operation: createGlobalTaskListener</remarks>
     public async Task<GlobalTaskListenerResult> CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest body, CancellationToken ct = default)
     {
-        var path = $"/global-listeners/user-task";
+        var path = $"/global-task-listeners";
         return await InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Post, path, body, ct), "createGlobalTaskListener", false, ct);
     }
 
@@ -565,7 +565,7 @@ public partial class CamundaClient
     /// <remarks>Operation: deleteGlobalTaskListener</remarks>
     public async Task DeleteGlobalTaskListenerAsync(GlobalListenerId id, CancellationToken ct = default)
     {
-        var path = $"/global-listeners/user-task/{Uri.EscapeDataString(id.ToString()!)}";
+        var path = $"/global-task-listeners/{Uri.EscapeDataString(id.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteGlobalTaskListener", false, ct);
     }
 
@@ -968,6 +968,24 @@ public partial class CamundaClient
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GlobalJobStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getGlobalJobStatistics", false, ct);
+    }
+
+    /// <summary>
+    /// Get global user task listener
+    /// Get a global user task listener by its id.
+    /// </summary>
+    /// <remarks>Operation: getGlobalTaskListener</remarks>
+    public async Task<GlobalTaskListenerResult> GetGlobalTaskListenerAsync(GlobalListenerId id, ConsistencyOptions<GlobalTaskListenerResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/global-task-listeners/{Uri.EscapeDataString(id.ToString()!)}";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getGlobalTaskListener", true,
+                () => InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Get, path, null, ct), "getGlobalTaskListener", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Get, path, null, ct), "getGlobalTaskListener", false, ct);
     }
 
     /// <summary>
@@ -1939,6 +1957,24 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Search global user task listeners
+    /// Search for global user task listeners based on given criteria.
+    /// </summary>
+    /// <remarks>Operation: searchGlobalTaskListeners</remarks>
+    public async Task<GlobalTaskListenerSearchQueryResult> SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest body, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/global-task-listeners/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchGlobalTaskListeners", false,
+                () => InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchGlobalTaskListeners", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchGlobalTaskListeners", false, ct);
+    }
+
+    /// <summary>
     /// Search groups for tenant
     /// Retrieves a filtered and sorted list of groups for a specified tenant.
     /// </summary>
@@ -2035,17 +2071,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchMappingRule</remarks>
-    public async Task<MappingRuleSearchQueryResult> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<MappingRuleSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchMappingRuleResponse> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRuleResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRule", false,
-                () => InvokeWithRetryAsync(() => SendAsync<MappingRuleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRuleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<MappingRuleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRuleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct);
     }
 
     /// <summary>
@@ -2053,17 +2089,17 @@ public partial class CamundaClient
     /// Search mapping rules assigned to a group.
     /// </summary>
     /// <remarks>Operation: searchMappingRulesForGroup</remarks>
-    public async Task<SearchQueryResponse> SearchMappingRulesForGroupAsync(string groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchMappingRulesForGroupResponse> SearchMappingRulesForGroupAsync(string groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForGroupResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct);
     }
 
     /// <summary>
@@ -2071,17 +2107,17 @@ public partial class CamundaClient
     /// Search mapping rules with assigned role.
     /// </summary>
     /// <remarks>Operation: searchMappingRulesForRole</remarks>
-    public async Task<SearchQueryResponse> SearchMappingRulesForRoleAsync(string roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchMappingRulesForRoleResponse> SearchMappingRulesForRoleAsync(string roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForRoleResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForRole", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForRoleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForRoleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct);
     }
 
     /// <summary>
@@ -2089,17 +2125,17 @@ public partial class CamundaClient
     /// Retrieves a filtered and sorted list of MappingRules for a specified tenant.
     /// </summary>
     /// <remarks>Operation: searchMappingRulesForTenant</remarks>
-    public async Task<SearchQueryResponse> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchMappingRulesForTenantResponse> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForTenantResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct);
     }
 
     /// <summary>
@@ -2203,17 +2239,17 @@ public partial class CamundaClient
     /// Search roles assigned to a group.
     /// </summary>
     /// <remarks>Operation: searchRolesForGroup</remarks>
-    public async Task<SearchQueryResponse> SearchRolesForGroupAsync(string groupId, RoleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchRolesForGroupResponse> SearchRolesForGroupAsync(string groupId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForGroupResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchRolesForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchRolesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchRolesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct);
     }
 
     /// <summary>
@@ -2221,17 +2257,17 @@ public partial class CamundaClient
     /// Retrieves a filtered and sorted list of roles for a specified tenant.
     /// </summary>
     /// <remarks>Operation: searchRolesForTenant</remarks>
-    public async Task<SearchQueryResponse> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<SearchRolesForTenantResponse> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForTenantResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchRolesForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<SearchRolesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchQueryResponse>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<SearchRolesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct);
     }
 
     /// <summary>
@@ -2623,7 +2659,7 @@ public partial class CamundaClient
     /// <remarks>Operation: updateGlobalTaskListener</remarks>
     public async Task<GlobalTaskListenerResult> UpdateGlobalTaskListenerAsync(GlobalListenerId id, UpdateGlobalTaskListenerRequest body, CancellationToken ct = default)
     {
-        var path = $"/global-listeners/user-task/{Uri.EscapeDataString(id.ToString()!)}";
+        var path = $"/global-task-listeners/{Uri.EscapeDataString(id.ToString()!)}";
         return await InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Put, path, body, ct), "updateGlobalTaskListener", false, ct);
     }
 

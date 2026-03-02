@@ -90,6 +90,9 @@ public sealed class ActivatedJobResult
     [JsonPropertyName("processDefinitionKey")]
     public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
 
+    /// <summary>
+    /// The element instance key of the task.
+    /// </summary>
     [JsonPropertyName("elementInstanceKey")]
     public ElementInstanceKey ElementInstanceKey { get; set; }
 
@@ -106,7 +109,9 @@ public sealed class ActivatedJobResult
     public JobListenerEventTypeEnum ListenerEventType { get; set; }
 
     /// <summary>
-    /// Contains properties of a user task.
+    /// User task properties, if the job is a user task.
+    /// This is `null` if the job is not a user task.
+    /// 
     /// </summary>
     [JsonPropertyName("userTask")]
     public UserTaskProperties? UserTask { get; set; }
@@ -115,7 +120,7 @@ public sealed class ActivatedJobResult
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public List<Tag>? Tags { get; set; }
+    public List<Tag> Tags { get; set; } = null!;
 
     /// <summary>
     /// The key of the root process instance. The root process instance is the top-level
@@ -124,7 +129,7 @@ public sealed class ActivatedJobResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -962,6 +967,96 @@ public sealed class AdvancedFormKeyFilter
     /// </summary>
     [JsonPropertyName("$notIn")]
     public List<FormKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// Advanced global listener source filter.
+/// </summary>
+public sealed class AdvancedGlobalListenerSourceFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public GlobalListenerSourceEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public GlobalListenerSourceEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<GlobalListenerSourceEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced global listener event type filter.
+/// </summary>
+public sealed class AdvancedGlobalTaskListenerEventTypeFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public GlobalTaskListenerEventTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public GlobalTaskListenerEventTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<GlobalTaskListenerEventTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
 
 }
 
@@ -1957,6 +2052,8 @@ public enum AuditLogEntityTypeEnum
     GROUP,
     [JsonPropertyName("INCIDENT")]
     INCIDENT,
+    [JsonPropertyName("JOB")]
+    JOB,
     [JsonPropertyName("MAPPING_RULE")]
     MAPPINGRULE,
     [JsonPropertyName("PROCESS_INSTANCE")]
@@ -2371,7 +2468,7 @@ public sealed class AuditLogResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the element instance.
@@ -2546,7 +2643,7 @@ public sealed class AuditLogSearchQueryResult
     /// The matching audit logs.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<AuditLogResult>? Items { get; set; }
+    public List<AuditLogResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -2784,7 +2881,7 @@ public sealed class AuthorizationResult
     /// Specifies the types of the permissions.
     /// </summary>
     [JsonPropertyName("permissionTypes")]
-    public List<PermissionTypeEnum>? PermissionTypes { get; set; }
+    public List<PermissionTypeEnum> PermissionTypes { get; set; } = null!;
 
     /// <summary>
     /// The key of the authorization.
@@ -2847,7 +2944,7 @@ public sealed class AuthorizationSearchResult
     /// The matching authorizations.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<AuthorizationResult>? Items { get; set; }
+    public List<AuthorizationResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -3164,7 +3261,7 @@ public sealed class BatchOperationItemResponse
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// State of the item.
@@ -3220,7 +3317,7 @@ public sealed class BatchOperationItemSearchQueryResult
     /// The matching batch operation items.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<BatchOperationItemResponse>? Items { get; set; }
+    public List<BatchOperationItemResponse> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -3353,12 +3450,16 @@ public sealed class BatchOperationResponse
 
     /// <summary>
     /// The start date of the batch operation.
+    /// This is `null` if the batch operation has not yet started.
+    /// 
     /// </summary>
     [JsonPropertyName("startDate")]
     public DateTimeOffset? StartDate { get; set; }
 
     /// <summary>
     /// The end date of the batch operation.
+    /// This is `null` if the batch operation is still running.
+    /// 
     /// </summary>
     [JsonPropertyName("endDate")]
     public DateTimeOffset? EndDate { get; set; }
@@ -3397,7 +3498,7 @@ public sealed class BatchOperationResponse
     /// The errors that occurred per partition during the batch operation.
     /// </summary>
     [JsonPropertyName("errors")]
-    public List<BatchOperationError>? Errors { get; set; }
+    public List<BatchOperationError> Errors { get; set; } = null!;
 
 }
 
@@ -3435,7 +3536,7 @@ public sealed class BatchOperationSearchQueryResult
     /// The matching batch operations.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<BatchOperationResponse>? Items { get; set; }
+    public List<BatchOperationResponse> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -3622,6 +3723,39 @@ public sealed class BrokerInfo
 }
 
 /// <summary>
+/// An optional, user-defined string identifier that identifies the process instance
+/// within the scope of a process definition (scoped by tenant). If provided and uniqueness
+/// enforcement is enabled, the engine will reject creation if another root process instance
+/// with the same business id is already active for the same process definition.
+/// Note that any active child process instances with the same business id are not taken into account.
+/// 
+/// </summary>
+public readonly record struct BusinessId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private BusinessId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="BusinessId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static BusinessId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "BusinessId", minLength: 1, maxLength: 256);
+        return new BusinessId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// CamundaUserResult
 /// </summary>
 public sealed class CamundaUserResult
@@ -3648,7 +3782,7 @@ public sealed class CamundaUserResult
     /// The web components the user is authorized to use.
     /// </summary>
     [JsonPropertyName("authorizedComponents")]
-    public List<string>? AuthorizedComponents { get; set; }
+    public List<string> AuthorizedComponents { get; set; } = null!;
 
     /// <summary>
     /// The tenants the user is a member of.
@@ -3672,7 +3806,7 @@ public sealed class CamundaUserResult
     /// The plan of the user.
     /// </summary>
     [JsonPropertyName("salesPlanType")]
-    public string SalesPlanType { get; set; } = null!;
+    public string? SalesPlanType { get; set; }
 
     /// <summary>
     /// The links to the components in the C8 stack.
@@ -3813,7 +3947,7 @@ public sealed class ClusterVariableResult
     /// Full value of this cluster variable.
     /// </summary>
     [JsonPropertyName("value")]
-    public string Value { get; set; } = null!;
+    public string? Value { get; set; }
 
     /// <summary>
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
@@ -3828,7 +3962,7 @@ public sealed class ClusterVariableResult
     public ClusterVariableScopeEnum Scope { get; set; }
 
     /// <summary>
-    /// Only provided if the cluster variable scope is TENANT.
+    /// Only provided if the cluster variable scope is TENANT. Null for global scope variables.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
@@ -3853,7 +3987,7 @@ public sealed class ClusterVariableResultBase
     public ClusterVariableScopeEnum Scope { get; set; }
 
     /// <summary>
-    /// Only provided if the cluster variable scope is TENANT.
+    /// Only provided if the cluster variable scope is TENANT. Null for global scope variables.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
@@ -3979,7 +4113,7 @@ public sealed class ClusterVariableSearchQueryResult
     /// The matching cluster variables.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ClusterVariableSearchResult>? Items { get; set; }
+    public List<ClusterVariableSearchResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -4017,7 +4151,7 @@ public sealed class ClusterVariableSearchResult
     /// Value of this cluster variable. Can be truncated.
     /// </summary>
     [JsonPropertyName("value")]
-    public string Value { get; set; } = null!;
+    public string? Value { get; set; }
 
     /// <summary>
     /// Whether the value is truncated or not.
@@ -4038,7 +4172,7 @@ public sealed class ClusterVariableSearchResult
     public ClusterVariableScopeEnum Scope { get; set; }
 
     /// <summary>
-    /// Only provided if the cluster variable scope is TENANT.
+    /// Only provided if the cluster variable scope is TENANT. Null for global scope variables.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
@@ -4256,7 +4390,7 @@ public sealed class CorrelatedMessageSubscriptionResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The subscription key that received the message.
@@ -4306,7 +4440,7 @@ public sealed class CorrelatedMessageSubscriptionSearchQueryResult
     /// The matching correlated message subscriptions.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<CorrelatedMessageSubscriptionResult>? Items { get; set; }
+    public List<CorrelatedMessageSubscriptionResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -4424,7 +4558,13 @@ public sealed class CreateProcessInstanceResult
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public List<Tag>? Tags { get; set; }
+    public List<Tag> Tags { get; set; } = null!;
+
+    /// <summary>
+    /// Business id as provided on creation.
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
 
 }
 
@@ -4729,7 +4869,7 @@ public sealed class DecisionDefinitionSearchQueryResult
     /// The matching decision definitions.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<DecisionDefinitionResult>? Items { get; set; }
+    public List<DecisionDefinitionResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -4759,7 +4899,7 @@ public sealed class DecisionDefinitionSearchQuerySortRequest
 }
 
 /// <summary>
-/// The type of the decision.
+/// The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum DecisionDefinitionTypeEnum
@@ -4768,6 +4908,9 @@ public enum DecisionDefinitionTypeEnum
     DECISIONTABLE,
     [JsonPropertyName("LITERAL_EXPRESSION")]
     LITERALEXPRESSION,
+    [Obsolete("Deprecated since 8.9.0")]
+    [JsonPropertyName("UNSPECIFIED")]
+    UNSPECIFIED,
     [JsonPropertyName("UNKNOWN")]
     UNKNOWN,
 }
@@ -5042,7 +5185,7 @@ public sealed class DecisionInstanceFilter
     public int? DecisionDefinitionVersion { get; set; }
 
     /// <summary>
-    /// The type of the decision.
+    /// The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
     /// </summary>
     [JsonPropertyName("decisionDefinitionType")]
     public DecisionDefinitionTypeEnum? DecisionDefinitionType { get; set; }
@@ -5110,7 +5253,7 @@ public sealed class DecisionInstanceGetQueryResult
     public DecisionEvaluationInstanceKey? DecisionEvaluationInstanceKey { get; set; }
 
     /// <summary>
-    /// The state of the decision instance.
+    /// The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
     /// </summary>
     [JsonPropertyName("state")]
     public DecisionInstanceStateEnum? State { get; set; }
@@ -5146,7 +5289,7 @@ public sealed class DecisionInstanceGetQueryResult
     public int? DecisionDefinitionVersion { get; set; }
 
     /// <summary>
-    /// The type of the decision.
+    /// The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
     /// </summary>
     [JsonPropertyName("decisionDefinitionType")]
     public DecisionDefinitionTypeEnum? DecisionDefinitionType { get; set; }
@@ -5161,7 +5304,7 @@ public sealed class DecisionInstanceGetQueryResult
     /// The tenant ID of the decision instance.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The key of the decision evaluation where this instance was created.
@@ -5188,7 +5331,7 @@ public sealed class DecisionInstanceGetQueryResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the decision.
@@ -5213,14 +5356,14 @@ public sealed class DecisionInstanceGetQueryResult
     /// 
     /// </summary>
     [JsonPropertyName("evaluatedInputs")]
-    public List<EvaluatedDecisionInputItem>? EvaluatedInputs { get; set; }
+    public List<EvaluatedDecisionInputItem> EvaluatedInputs { get; set; } = null!;
 
     /// <summary>
     /// The matched rules of the decision instance.
     /// 
     /// </summary>
     [JsonPropertyName("matchedRules")]
-    public List<MatchedDecisionRuleItem>? MatchedRules { get; set; }
+    public List<MatchedDecisionRuleItem> MatchedRules { get; set; } = null!;
 
 }
 
@@ -5264,7 +5407,7 @@ public sealed class DecisionInstanceResult
     public DecisionEvaluationInstanceKey? DecisionEvaluationInstanceKey { get; set; }
 
     /// <summary>
-    /// The state of the decision instance.
+    /// The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
     /// </summary>
     [JsonPropertyName("state")]
     public DecisionInstanceStateEnum? State { get; set; }
@@ -5300,7 +5443,7 @@ public sealed class DecisionInstanceResult
     public int? DecisionDefinitionVersion { get; set; }
 
     /// <summary>
-    /// The type of the decision.
+    /// The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
     /// </summary>
     [JsonPropertyName("decisionDefinitionType")]
     public DecisionDefinitionTypeEnum? DecisionDefinitionType { get; set; }
@@ -5315,7 +5458,7 @@ public sealed class DecisionInstanceResult
     /// The tenant ID of the decision instance.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The key of the decision evaluation where this instance was created.
@@ -5342,7 +5485,7 @@ public sealed class DecisionInstanceResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the decision.
@@ -5398,7 +5541,7 @@ public sealed class DecisionInstanceSearchQueryResult
     /// The matching decision instances.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<DecisionInstanceResult>? Items { get; set; }
+    public List<DecisionInstanceResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -5428,7 +5571,7 @@ public sealed class DecisionInstanceSearchQuerySortRequest
 }
 
 /// <summary>
-/// The state of the decision instance.
+/// The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum DecisionInstanceStateEnum
@@ -5437,8 +5580,12 @@ public enum DecisionInstanceStateEnum
     EVALUATED,
     [JsonPropertyName("FAILED")]
     FAILED,
+    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
+    [Obsolete("Deprecated since 8.9.0")]
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN,
 }
 
 /// <summary>
@@ -5659,7 +5806,7 @@ public sealed class DecisionRequirementsSearchQueryResult
     /// The matching decision requirements.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<DecisionRequirementsResult>? Items { get; set; }
+    public List<DecisionRequirementsResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -5762,7 +5909,7 @@ public sealed class DeleteResourceResponse
     /// 
     /// This field is only populated when the request `deleteHistory` is set to `true` and the resource
     /// is a process definition. For other resource types (decisions, forms, generic resources),
-    /// this field will not be present in the response.
+    /// this field will be `null`.
     /// 
     /// </summary>
     [JsonPropertyName("batchOperation")]
@@ -5775,15 +5922,27 @@ public sealed class DeleteResourceResponse
 /// </summary>
 public sealed class DeploymentDecisionRequirementsResult
 {
+    /// <summary>
+    /// The id of the deployed decision requirements.
+    /// </summary>
     [JsonPropertyName("decisionRequirementsId")]
     public string? DecisionRequirementsId { get; set; }
 
+    /// <summary>
+    /// The name of the deployed decision requirements.
+    /// </summary>
     [JsonPropertyName("decisionRequirementsName")]
     public string? DecisionRequirementsName { get; set; }
 
+    /// <summary>
+    /// The version of the deployed decision requirements.
+    /// </summary>
     [JsonPropertyName("version")]
     public int? Version { get; set; }
 
+    /// <summary>
+    /// The name of the resource.
+    /// </summary>
     [JsonPropertyName("resourceName")]
     public string? ResourceName { get; set; }
 
@@ -5869,9 +6028,15 @@ public sealed class DeploymentFormResult
     [JsonPropertyName("formId")]
     public FormId? FormId { get; set; }
 
+    /// <summary>
+    /// The version of the deployed form.
+    /// </summary>
     [JsonPropertyName("version")]
     public int? Version { get; set; }
 
+    /// <summary>
+    /// The name of the resource.
+    /// </summary>
     [JsonPropertyName("resourceName")]
     public string? ResourceName { get; set; }
 
@@ -5958,31 +6123,31 @@ public sealed class DeploymentKeyFilterProperty
 public sealed class DeploymentMetadataResult
 {
     /// <summary>
-    /// A deployed process.
+    /// Deployed process.
     /// </summary>
     [JsonPropertyName("processDefinition")]
     public DeploymentProcessResult? ProcessDefinition { get; set; }
 
     /// <summary>
-    /// A deployed decision.
+    /// Deployed decision.
     /// </summary>
     [JsonPropertyName("decisionDefinition")]
     public DeploymentDecisionResult? DecisionDefinition { get; set; }
 
     /// <summary>
-    /// Deployed decision requirements.
+    /// Deployed decision requirement definition.
     /// </summary>
     [JsonPropertyName("decisionRequirements")]
     public DeploymentDecisionRequirementsResult? DecisionRequirements { get; set; }
 
     /// <summary>
-    /// A deployed form.
+    /// Deployed form.
     /// </summary>
     [JsonPropertyName("form")]
     public DeploymentFormResult? Form { get; set; }
 
     /// <summary>
-    /// A deployed Resource.
+    /// Deployed resource.
     /// </summary>
     [JsonPropertyName("resource")]
     public DeploymentResourceResult? Resource { get; set; }
@@ -6033,12 +6198,21 @@ public sealed class DeploymentProcessResult
 /// </summary>
 public sealed class DeploymentResourceResult
 {
+    /// <summary>
+    /// The resource id of the deployed resource.
+    /// </summary>
     [JsonPropertyName("resourceId")]
     public string? ResourceId { get; set; }
 
+    /// <summary>
+    /// The name of the deployed resource.
+    /// </summary>
     [JsonPropertyName("resourceName")]
     public string? ResourceName { get; set; }
 
+    /// <summary>
+    /// The description of the deployed resource.
+    /// </summary>
     [JsonPropertyName("version")]
     public int? Version { get; set; }
 
@@ -6113,13 +6287,13 @@ public sealed class DocumentCreationBatchResponse
     /// Documents that were successfully created.
     /// </summary>
     [JsonPropertyName("failedDocuments")]
-    public List<DocumentCreationFailureDetail>? FailedDocuments { get; set; }
+    public List<DocumentCreationFailureDetail> FailedDocuments { get; set; } = null!;
 
     /// <summary>
     /// Documents that failed creation.
     /// </summary>
     [JsonPropertyName("createdDocuments")]
-    public List<DocumentReference>? CreatedDocuments { get; set; }
+    public List<DocumentReference> CreatedDocuments { get; set; } = null!;
 
 }
 
@@ -6259,7 +6433,7 @@ public sealed class DocumentMetadata
     /// Custom properties of the document.
     /// </summary>
     [JsonPropertyName("customProperties")]
-    public object? CustomProperties { get; set; }
+    public object CustomProperties { get; set; } = null!;
 
 }
 
@@ -6562,7 +6736,7 @@ public sealed class ElementInstanceResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The process definition key associated to this element instance.
@@ -6612,7 +6786,7 @@ public sealed class ElementInstanceSearchQueryResult
     /// The matching element instances.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ElementInstanceResult>? Items { get; set; }
+    public List<ElementInstanceResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -6706,13 +6880,13 @@ public readonly record struct EndCursor : global::Camunda.Orchestration.Sdk.Runt
     /// </summary>
     public static EndCursor AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "EndCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$", minLength: 2, maxLength: 300);
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "EndCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
         return new EndCursor(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$", minLength: 2, maxLength: 300);
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6783,12 +6957,21 @@ public sealed class EvaluateConditionalResult
 /// </summary>
 public sealed class EvaluatedDecisionInputItem
 {
+    /// <summary>
+    /// The identifier of the decision input.
+    /// </summary>
     [JsonPropertyName("inputId")]
     public string? InputId { get; set; }
 
+    /// <summary>
+    /// The name of the decision input.
+    /// </summary>
     [JsonPropertyName("inputName")]
     public string? InputName { get; set; }
 
+    /// <summary>
+    /// The description of the decision input.
+    /// </summary>
     [JsonPropertyName("inputValue")]
     public string? InputValue { get; set; }
 
@@ -6799,18 +6982,33 @@ public sealed class EvaluatedDecisionInputItem
 /// </summary>
 public sealed class EvaluatedDecisionOutputItem
 {
+    /// <summary>
+    /// The ID of the evaluated decison output item.
+    /// </summary>
     [JsonPropertyName("outputId")]
     public string? OutputId { get; set; }
 
+    /// <summary>
+    /// The name of the of the evaluated decison output item.
+    /// </summary>
     [JsonPropertyName("outputName")]
     public string? OutputName { get; set; }
 
+    /// <summary>
+    /// The value of the evaluated decison output item.
+    /// </summary>
     [JsonPropertyName("outputValue")]
     public string? OutputValue { get; set; }
 
+    /// <summary>
+    /// The ID of the matched rule.
+    /// </summary>
     [JsonPropertyName("ruleId")]
     public string? RuleId { get; set; }
 
+    /// <summary>
+    /// The index of the matched rule.
+    /// </summary>
     [JsonPropertyName("ruleIndex")]
     public int? RuleIndex { get; set; }
 
@@ -6843,7 +7041,7 @@ public sealed class EvaluatedDecisionResult
     /// The type of the decision which was evaluated.
     /// </summary>
     [JsonPropertyName("decisionDefinitionType")]
-    public string? DecisionDefinitionType { get; set; }
+    public string DecisionDefinitionType { get; set; } = null!;
 
     /// <summary>
     /// JSON document that will instantiate the result of the decision which was evaluated.
@@ -6862,13 +7060,13 @@ public sealed class EvaluatedDecisionResult
     /// The decision rules that matched within this decision evaluation.
     /// </summary>
     [JsonPropertyName("matchedRules")]
-    public List<MatchedDecisionRuleItem>? MatchedRules { get; set; }
+    public List<MatchedDecisionRuleItem> MatchedRules { get; set; } = null!;
 
     /// <summary>
     /// The decision inputs that were evaluated within this decision evaluation.
     /// </summary>
     [JsonPropertyName("evaluatedInputs")]
-    public List<EvaluatedDecisionInputItem>? EvaluatedInputs { get; set; }
+    public List<EvaluatedDecisionInputItem> EvaluatedInputs { get; set; } = null!;
 
     /// <summary>
     /// The unique key identifying the decision which was evaluate.
@@ -6924,13 +7122,13 @@ public sealed class EvaluateDecisionResult
     /// The ID of the decision which failed during evaluation.
     /// </summary>
     [JsonPropertyName("failedDecisionDefinitionId")]
-    public DecisionDefinitionId FailedDecisionDefinitionId { get; set; }
+    public DecisionDefinitionId? FailedDecisionDefinitionId { get; set; }
 
     /// <summary>
     /// Message describing why the decision which was evaluated failed.
     /// </summary>
     [JsonPropertyName("failureMessage")]
-    public string FailureMessage { get; set; } = null!;
+    public string? FailureMessage { get; set; }
 
     /// <summary>
     /// The tenant ID of the evaluated decision.
@@ -6986,6 +7184,12 @@ public sealed class ExpressionEvaluationRequest : global::Camunda.Orchestration.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
+
+    /// <summary>
+    /// Optional context variables for expression evaluation. These variables are only used for the current evaluation and do not persist beyond it.
+    /// </summary>
+    [JsonPropertyName("context")]
+    public object? Context { get; set; }
 
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= tenantId; }
@@ -7248,6 +7452,41 @@ public enum GlobalListenerSourceEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct GlobalListenerSourceExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private GlobalListenerSourceExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="GlobalListenerSourceExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static GlobalListenerSourceExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerSourceExactMatch");
+        return new GlobalListenerSourceExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Global listener source property with full advanced search capabilities.
+/// </summary>
+public sealed class GlobalListenerSourceFilterProperty
+{
+}
+
+/// <summary>
 /// GlobalTaskListenerBase
 /// </summary>
 public sealed class GlobalTaskListenerBase
@@ -7305,6 +7544,41 @@ public enum GlobalTaskListenerEventTypeEnum
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct GlobalTaskListenerEventTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private GlobalTaskListenerEventTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="GlobalTaskListenerEventTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static GlobalTaskListenerEventTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "GlobalTaskListenerEventTypeExactMatch");
+        return new GlobalTaskListenerEventTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Global listener event type property with full advanced search capabilities.
+/// </summary>
+public sealed class GlobalTaskListenerEventTypeFilterProperty
+{
+}
+
+/// <summary>
 /// GlobalTaskListenerResult
 /// </summary>
 public sealed class GlobalTaskListenerResult
@@ -7325,7 +7599,7 @@ public sealed class GlobalTaskListenerResult
     /// List of user task event types that trigger the listener.
     /// </summary>
     [JsonPropertyName("eventTypes")]
-    public List<GlobalTaskListenerEventTypeEnum>? EventTypes { get; set; }
+    public List<GlobalTaskListenerEventTypeEnum> EventTypes { get; set; } = null!;
 
     /// <summary>
     /// The name of the job type, used as a reference to specify which job workers request the respective listener job.
@@ -7350,6 +7624,118 @@ public sealed class GlobalTaskListenerResult
     /// </summary>
     [JsonPropertyName("priority")]
     public int? Priority { get; set; }
+
+}
+
+/// <summary>
+/// Global listener filter request.
+/// </summary>
+public sealed class GlobalTaskListenerSearchQueryFilterRequest
+{
+    /// <summary>
+    /// Id of the global listener.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public StringFilterProperty? Id { get; set; }
+
+    /// <summary>
+    /// Job type of the global listener.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public StringFilterProperty? Type { get; set; }
+
+    /// <summary>
+    /// Number of retries of the global listener.
+    /// </summary>
+    [JsonPropertyName("retries")]
+    public IntegerFilterProperty? Retries { get; set; }
+
+    /// <summary>
+    /// Event types of the global listener.
+    /// </summary>
+    [JsonPropertyName("eventTypes")]
+    public List<GlobalTaskListenerEventTypeFilterProperty>? EventTypes { get; set; }
+
+    /// <summary>
+    /// Whether the listener runs after model-level listeners.
+    /// </summary>
+    [JsonPropertyName("afterNonGlobal")]
+    public bool? AfterNonGlobal { get; set; }
+
+    /// <summary>
+    /// Priority of the global listener.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public IntegerFilterProperty? Priority { get; set; }
+
+    /// <summary>
+    /// How the global listener was defined.
+    /// </summary>
+    [JsonPropertyName("source")]
+    public GlobalListenerSourceFilterProperty? Source { get; set; }
+
+}
+
+/// <summary>
+/// Global listener search query request.
+/// </summary>
+public sealed class GlobalTaskListenerSearchQueryRequest
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<GlobalTaskListenerSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The global listener search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public GlobalTaskListenerSearchQueryFilterRequest? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// Global listener search query response.
+/// </summary>
+public sealed class GlobalTaskListenerSearchQueryResult
+{
+    /// <summary>
+    /// The matching global listeners.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GlobalTaskListenerResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// GlobalTaskListenerSearchQuerySortRequest
+/// </summary>
+public sealed class GlobalTaskListenerSearchQuerySortRequest
+{
+    /// <summary>
+    /// The field to sort by.
+    /// </summary>
+    [JsonPropertyName("field")]
+    public string Field { get; set; } = null!;
+
+    /// <summary>
+    /// The order in which to sort the related field.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public SortOrderEnum? Order { get; set; }
 
 }
 
@@ -7413,7 +7799,7 @@ public sealed class GroupClientSearchResult
     /// The matching client IDs.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<GroupClientResult>? Items { get; set; }
+    public List<GroupClientResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -7493,6 +7879,25 @@ public sealed class GroupFilter
 }
 
 /// <summary>
+/// GroupMappingRuleSearchResult
+/// </summary>
+public sealed class GroupMappingRuleSearchResult
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
 /// Group search response item.
 /// </summary>
 public sealed class GroupResult
@@ -7514,6 +7919,25 @@ public sealed class GroupResult
     /// </summary>
     [JsonPropertyName("description")]
     public string? Description { get; set; }
+
+}
+
+/// <summary>
+/// GroupRoleSearchResult
+/// </summary>
+public sealed class GroupRoleSearchResult
+{
+    /// <summary>
+    /// The matching roles.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<RoleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -7551,7 +7975,7 @@ public sealed class GroupSearchQueryResult
     /// The matching groups.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<GroupResult>? Items { get; set; }
+    public List<GroupResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -7684,7 +8108,7 @@ public sealed class GroupUserSearchResult
     /// The matching members.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<GroupUserResult>? Items { get; set; }
+    public List<GroupUserResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -7697,8 +8121,41 @@ public sealed class GroupUserSearchResult
 /// <summary>
 /// Incident error type with a defined set of values.
 /// </summary>
-public sealed class IncidentErrorTypeEnum
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum IncidentErrorTypeEnum
 {
+    [JsonPropertyName("AD_HOC_SUB_PROCESS_NO_RETRIES")]
+    ADHOCSUBPROCESSNORETRIES,
+    [JsonPropertyName("CALLED_DECISION_ERROR")]
+    CALLEDDECISIONERROR,
+    [JsonPropertyName("CALLED_ELEMENT_ERROR")]
+    CALLEDELEMENTERROR,
+    [JsonPropertyName("CONDITION_ERROR")]
+    CONDITIONERROR,
+    [JsonPropertyName("DECISION_EVALUATION_ERROR")]
+    DECISIONEVALUATIONERROR,
+    [JsonPropertyName("EXECUTION_LISTENER_NO_RETRIES")]
+    EXECUTIONLISTENERNORETRIES,
+    [JsonPropertyName("EXTRACT_VALUE_ERROR")]
+    EXTRACTVALUEERROR,
+    [JsonPropertyName("FORM_NOT_FOUND")]
+    FORMNOTFOUND,
+    [JsonPropertyName("IO_MAPPING_ERROR")]
+    IOMAPPINGERROR,
+    [JsonPropertyName("JOB_NO_RETRIES")]
+    JOBNORETRIES,
+    [JsonPropertyName("MESSAGE_SIZE_EXCEEDED")]
+    MESSAGESIZEEXCEEDED,
+    [JsonPropertyName("RESOURCE_NOT_FOUND")]
+    RESOURCENOTFOUND,
+    [JsonPropertyName("TASK_LISTENER_NO_RETRIES")]
+    TASKLISTENERNORETRIES,
+    [JsonPropertyName("UNHANDLED_ERROR_EVENT")]
+    UNHANDLEDERROREVENT,
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN,
+    [JsonPropertyName("UNSPECIFIED")]
+    UNSPECIFIED,
 }
 
 /// <summary>
@@ -7893,7 +8350,7 @@ public sealed class IncidentProcessInstanceStatisticsByDefinitionQueryResult
     /// 
     /// </summary>
     [JsonPropertyName("items")]
-    public List<IncidentProcessInstanceStatisticsByDefinitionResult>? Items { get; set; }
+    public List<IncidentProcessInstanceStatisticsByDefinitionResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -7997,7 +8454,7 @@ public sealed class IncidentProcessInstanceStatisticsByErrorQueryResult
     /// 
     /// </summary>
     [JsonPropertyName("items")]
-    public List<IncidentProcessInstanceStatisticsByErrorResult>? Items { get; set; }
+    public List<IncidentProcessInstanceStatisticsByErrorResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -8078,6 +8535,9 @@ public sealed class IncidentResult
     [JsonPropertyName("processDefinitionId")]
     public ProcessDefinitionId? ProcessDefinitionId { get; set; }
 
+    /// <summary>
+    /// The type of the incident error.
+    /// </summary>
     [JsonPropertyName("errorType")]
     public IncidentErrorTypeEnum? ErrorType { get; set; }
 
@@ -8093,9 +8553,15 @@ public sealed class IncidentResult
     [JsonPropertyName("elementId")]
     public ElementId? ElementId { get; set; }
 
+    /// <summary>
+    /// The creation time of the incident.
+    /// </summary>
     [JsonPropertyName("creationTime")]
     public DateTimeOffset? CreationTime { get; set; }
 
+    /// <summary>
+    /// The incident state.
+    /// </summary>
     [JsonPropertyName("state")]
     public IncidentStateEnum? State { get; set; }
 
@@ -8103,7 +8569,7 @@ public sealed class IncidentResult
     /// The tenant ID of the incident.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The assigned key, which acts as a unique identifier for this incident.
@@ -8130,7 +8596,7 @@ public sealed class IncidentResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The element instance key associated to this incident.
@@ -8180,7 +8646,7 @@ public sealed class IncidentSearchQueryResult
     /// The matching incidents.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<IncidentResult>? Items { get; set; }
+    public List<IncidentResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -8212,8 +8678,17 @@ public sealed class IncidentSearchQuerySortRequest
 /// <summary>
 /// Incident states with a defined set of values.
 /// </summary>
-public sealed class IncidentStateEnum
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum IncidentStateEnum
 {
+    [JsonPropertyName("ACTIVE")]
+    ACTIVE,
+    [JsonPropertyName("MIGRATED")]
+    MIGRATED,
+    [JsonPropertyName("PENDING")]
+    PENDING,
+    [JsonPropertyName("RESOLVED")]
+    RESOLVED,
 }
 
 /// <summary>
@@ -8958,7 +9433,7 @@ public sealed class JobSearchQueryResult
     /// The matching jobs.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<JobSearchResult>? Items { get; set; }
+    public List<JobSearchResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -9011,10 +9486,10 @@ public sealed class JobSearchResult
     public string? DeniedReason { get; set; }
 
     /// <summary>
-    /// The element ID associated with the job.
+    /// The element ID associated with the job. May be missing on job failure.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public ElementId ElementId { get; set; }
+    public ElementId? ElementId { get; set; }
 
     /// <summary>
     /// The element instance key associated with the job.
@@ -9023,7 +9498,9 @@ public sealed class JobSearchResult
     public ElementInstanceKey ElementInstanceKey { get; set; }
 
     /// <summary>
-    /// When the job ended.
+    /// End date of the job.
+    /// This is `null` if the job is not in an end state yet.
+    /// 
     /// </summary>
     [JsonPropertyName("endTime")]
     public DateTimeOffset? EndTime { get; set; }
@@ -9095,7 +9572,7 @@ public sealed class JobSearchResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The amount of retries left to this job.
@@ -9277,6 +9754,9 @@ public sealed class JobTypeStatisticsQuery
     [JsonPropertyName("filter")]
     public JobTypeStatisticsFilter? Filter { get; set; }
 
+    /// <summary>
+    /// Search cursor pagination.
+    /// </summary>
     [JsonPropertyName("page")]
     public CursorForwardPagination? Page { get; set; }
 
@@ -9644,7 +10124,7 @@ public sealed class MappingRuleSearchQueryResult
     /// The matching mapping rules.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<MappingRuleResult>? Items { get; set; }
+    public List<MappingRuleResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -9750,7 +10230,7 @@ public sealed class MatchedDecisionRuleItem
     /// The evaluated decision outputs.
     /// </summary>
     [JsonPropertyName("evaluatedOutputs")]
-    public List<EvaluatedDecisionOutputItem>? EvaluatedOutputs { get; set; }
+    public List<EvaluatedDecisionOutputItem> EvaluatedOutputs { get; set; } = null!;
 
 }
 
@@ -10083,7 +10563,7 @@ public sealed class MessageSubscriptionResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The element ID associated with this message subscription.
@@ -10163,7 +10643,7 @@ public sealed class MessageSubscriptionSearchQueryResult
     /// The matching message subscriptions.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<MessageSubscriptionResult>? Items { get; set; }
+    public List<MessageSubscriptionResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -10422,8 +10902,12 @@ public enum PermissionTypeEnum
     CANCELPROCESSINSTANCE,
     [JsonPropertyName("CLAIM")]
     CLAIM,
+    [JsonPropertyName("CLAIM_USER_TASK")]
+    CLAIMUSERTASK,
     [JsonPropertyName("COMPLETE")]
     COMPLETE,
+    [JsonPropertyName("COMPLETE_USER_TASK")]
+    COMPLETEUSERTASK,
     [JsonPropertyName("CREATE")]
     CREATE,
     [JsonPropertyName("CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE")]
@@ -10506,31 +10990,31 @@ public sealed class ProblemDetail
     /// A URI identifying the problem type.
     /// </summary>
     [JsonPropertyName("type")]
-    public string? Type { get; set; }
+    public string Type { get; set; } = null!;
 
     /// <summary>
     /// A summary of the problem type.
     /// </summary>
     [JsonPropertyName("title")]
-    public string? Title { get; set; }
+    public string Title { get; set; } = null!;
 
     /// <summary>
     /// The HTTP status code for this problem.
     /// </summary>
     [JsonPropertyName("status")]
-    public int? Status { get; set; }
+    public int Status { get; set; }
 
     /// <summary>
     /// An explanation of the problem in more detail.
     /// </summary>
     [JsonPropertyName("detail")]
-    public string? Detail { get; set; }
+    public string Detail { get; set; } = null!;
 
     /// <summary>
     /// A URI path identifying the origin of the problem.
     /// </summary>
     [JsonPropertyName("instance")]
-    public string? Instance { get; set; }
+    public string Instance { get; set; } = null!;
 
 }
 
@@ -10556,7 +11040,7 @@ public sealed class ProcessDefinitionElementStatisticsQueryResult
     /// The element statistics.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ProcessElementStatisticsResult>? Items { get; set; }
+    public List<ProcessElementStatisticsResult> Items { get; set; } = null!;
 
 }
 
@@ -10657,6 +11141,9 @@ public readonly record struct ProcessDefinitionId : global::Camunda.Orchestratio
 /// </summary>
 public sealed class ProcessDefinitionInstanceStatisticsQuery
 {
+    /// <summary>
+    /// Search cursor pagination.
+    /// </summary>
     [JsonPropertyName("page")]
     public OffsetPagination? Page { get; set; }
 
@@ -10677,7 +11164,7 @@ public sealed class ProcessDefinitionInstanceStatisticsQueryResult
     /// The process definition instance statistics result.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ProcessDefinitionInstanceStatisticsResult>? Items { get; set; }
+    public List<ProcessDefinitionInstanceStatisticsResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -10802,7 +11289,7 @@ public sealed class ProcessDefinitionInstanceVersionStatisticsQueryResult
     /// The process definition instance version statistics result.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ProcessDefinitionInstanceVersionStatisticsResult>? Items { get; set; }
+    public List<ProcessDefinitionInstanceVersionStatisticsResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -10852,7 +11339,7 @@ public sealed class ProcessDefinitionInstanceVersionStatisticsResult
     /// The name of the process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionName")]
-    public string ProcessDefinitionName { get; set; } = null!;
+    public string? ProcessDefinitionName { get; set; }
 
     /// <summary>
     /// The tenant ID associated with the process definition.
@@ -10948,6 +11435,9 @@ public sealed class ProcessDefinitionKeyFilterProperty
 /// </summary>
 public sealed class ProcessDefinitionMessageSubscriptionStatisticsQuery
 {
+    /// <summary>
+    /// Search cursor pagination.
+    /// </summary>
     [JsonPropertyName("page")]
     public CursorForwardPagination? Page { get; set; }
 
@@ -10968,7 +11458,7 @@ public sealed class ProcessDefinitionMessageSubscriptionStatisticsQueryResult
     /// The matching process definition message subscription statistics.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ProcessDefinitionMessageSubscriptionStatisticsResult>? Items { get; set; }
+    public List<ProcessDefinitionMessageSubscriptionStatisticsResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -11104,7 +11594,7 @@ public sealed class ProcessDefinitionSearchQueryResult
     /// The matching process definitions.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ProcessDefinitionResult>? Items { get; set; }
+    public List<ProcessDefinitionResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -11369,14 +11859,14 @@ public sealed class ProcessInstanceCancellationBatchOperationRequest
 /// <remarks>
 /// Use one of the following concrete types:
 /// <list type="bullet">
-/// <item><description><see cref="ProcessInstanceCreationInstructionById"/></description></item>
 /// <item><description><see cref="ProcessInstanceCreationInstructionByKey"/></description></item>
+/// <item><description><see cref="ProcessInstanceCreationInstructionById"/></description></item>
 /// </list>
 /// </remarks>
-/// <seealso cref="ProcessInstanceCreationInstructionById"/>
 /// <seealso cref="ProcessInstanceCreationInstructionByKey"/>
-[JsonDerivedType(typeof(ProcessInstanceCreationInstructionById))]
+/// <seealso cref="ProcessInstanceCreationInstructionById"/>
 [JsonDerivedType(typeof(ProcessInstanceCreationInstructionByKey))]
+[JsonDerivedType(typeof(ProcessInstanceCreationInstructionById))]
 public abstract class ProcessInstanceCreationInstruction { }
 
 /// <summary>
@@ -11408,6 +11898,9 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
 
     /// <summary>
     /// The tenant id of the process definition.
+    /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
+    /// process instance of. If multi-tenancy is disabled, don't provide this parameter.
+    /// 
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId? TenantId { get; set; }
@@ -11441,9 +11934,10 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
     public List<ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; }
 
     /// <summary>
-    /// Wait for the process instance to complete. If the process instance completion does
-    /// not occur within the requestTimeout, the request will be closed. This can lead to a 504
-    /// response status. Disabled by default.
+    /// Wait for the process instance to complete. If the process instance does not complete
+    /// within the request timeout limit, a 504 response status will be returned. The process
+    /// instance will continue to run in the background regardless of the timeout. Disabled by
+    /// default.
     /// 
     /// </summary>
     [JsonPropertyName("awaitCompletion")]
@@ -11470,6 +11964,17 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
     /// </summary>
     [JsonPropertyName("tags")]
     public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// An optional, user-defined string identifier that identifies the process instance
+    /// within the scope of a process definition (scoped by tenant). If provided and uniqueness
+    /// enforcement is enabled, the engine will reject creation if another root process instance
+    /// with the same business id is already active for the same process definition.
+    /// Note that any active child process instances with the same business id are not taken into account.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
 
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
@@ -11498,8 +12003,8 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public int? ProcessDefinitionVersion { get; set; }
 
     /// <summary>
-    /// JSON object that will instantiate the variables for the root variable scope
-    /// of the process instance.
+    /// Set of variables as JSON object to instantiate in the root variable scope of the process
+    /// instance. Can include nested complex objects.
     /// 
     /// </summary>
     [JsonPropertyName("variables")]
@@ -11527,6 +12032,9 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
 
     /// <summary>
     /// The tenant id of the process definition.
+    /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
+    /// process instance of. If multi-tenancy is disabled, don't provide this parameter.
+    /// 
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId? TenantId { get; set; }
@@ -11540,9 +12048,10 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public OperationReference? OperationReference { get; set; }
 
     /// <summary>
-    /// Wait for the process instance to complete. If the process instance completion does
-    /// not occur within the requestTimeout, the request will be closed. This can lead to a 504
-    /// response status. Disabled by default.
+    /// Wait for the process instance to complete. If the process instance does not complete
+    /// within the request timeout limit, a 504 response status will be returned. The process
+    /// instance will continue to run in the background regardless of the timeout. Disabled by
+    /// default.
     /// 
     /// </summary>
     [JsonPropertyName("awaitCompletion")]
@@ -11569,6 +12078,17 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     /// </summary>
     [JsonPropertyName("tags")]
     public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// An optional, user-defined string identifier that identifies the process instance
+    /// within the scope of a process definition (scoped by tenant). If provided and uniqueness
+    /// enforcement is enabled, the engine will reject creation if another root process instance
+    /// with the same business id is already active for the same process definition.
+    /// Note that any active child process instances with the same business id are not taken into account.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
 
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
@@ -11657,7 +12177,7 @@ public sealed class ProcessInstanceElementStatisticsQueryResult
     /// The element statistics.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ProcessElementStatisticsResult>? Items { get; set; }
+    public List<ProcessElementStatisticsResult> Items { get; set; } = null!;
 
 }
 
@@ -12057,7 +12577,7 @@ public sealed class ProcessInstanceModificationActivateInstruction
     /// 
     /// </summary>
     [JsonPropertyName("ancestorElementInstanceKey")]
-    public object? AncestorElementInstanceKey { get; set; }
+    public ElementInstanceKey? AncestorElementInstanceKey { get; set; }
 
 }
 
@@ -12262,8 +12782,11 @@ public sealed class ProcessInstanceResult
     /// The process definition name.
     /// </summary>
     [JsonPropertyName("processDefinitionName")]
-    public string ProcessDefinitionName { get; set; } = null!;
+    public string? ProcessDefinitionName { get; set; }
 
+    /// <summary>
+    /// The process definition version.
+    /// </summary>
     [JsonPropertyName("processDefinitionVersion")]
     public int ProcessDefinitionVersion { get; set; }
 
@@ -12273,9 +12796,15 @@ public sealed class ProcessInstanceResult
     [JsonPropertyName("processDefinitionVersionTag")]
     public string? ProcessDefinitionVersionTag { get; set; }
 
+    /// <summary>
+    /// The start time of the process instance.
+    /// </summary>
     [JsonPropertyName("startDate")]
     public DateTimeOffset StartDate { get; set; }
 
+    /// <summary>
+    /// The completion or termination time of the process instance.
+    /// </summary>
     [JsonPropertyName("endDate")]
     public DateTimeOffset? EndDate { get; set; }
 
@@ -12328,13 +12857,19 @@ public sealed class ProcessInstanceResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public List<Tag>? Tags { get; set; }
+    public List<Tag> Tags { get; set; } = null!;
+
+    /// <summary>
+    /// The business id associated with this process instance.
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
 
 }
 
@@ -12425,7 +12960,7 @@ public sealed class ProcessInstanceSequenceFlowResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The process definition key.
@@ -12462,7 +12997,7 @@ public sealed class ProcessInstanceSequenceFlowsQueryResult
     /// The sequence flows.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<ProcessInstanceSequenceFlowResult>? Items { get; set; }
+    public List<ProcessInstanceSequenceFlowResult> Items { get; set; } = null!;
 
 }
 
@@ -12729,7 +13264,7 @@ public sealed class RoleClientSearchResult
     /// The matching clients.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<RoleClientResult>? Items { get; set; }
+    public List<RoleClientResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -12868,7 +13403,26 @@ public sealed class RoleGroupSearchResult
     /// The matching groups.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<RoleGroupResult>? Items { get; set; }
+    public List<RoleGroupResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// RoleMappingRuleSearchResult
+/// </summary>
+public sealed class RoleMappingRuleSearchResult
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -12937,7 +13491,7 @@ public sealed class RoleSearchQueryResult
     /// The matching roles.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<RoleResult>? Items { get; set; }
+    public List<RoleResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -13070,7 +13624,7 @@ public sealed class RoleUserSearchResult
     /// The matching users.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<RoleUserResult>? Items { get; set; }
+    public List<RoleUserResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -13078,37 +13632,6 @@ public sealed class RoleUserSearchResult
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
 
-}
-
-/// <summary>
-/// The key of the root process instance. The root process instance is the top-level
-/// ancestor in the process instance hierarchy. This field is only present for data
-/// belonging to process instance hierarchies created in version 8.9 or later.
-/// 
-/// </summary>
-public readonly record struct RootProcessInstanceKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
-{
-    /// <summary>The underlying string value.</summary>
-    public string Value { get; }
-
-    private RootProcessInstanceKey(string value) => Value = value;
-
-    /// <summary>
-    /// Creates a <see cref="RootProcessInstanceKey"/> from a raw string value.
-    /// Use this when side-loading values not received from an API call.
-    /// </summary>
-    public static RootProcessInstanceKey AssumeExists(string value)
-    {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "RootProcessInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
-        return new RootProcessInstanceKey(value);
-    }
-
-    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
-    public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
-
-    /// <inheritdoc />
-    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -13217,7 +13740,7 @@ public sealed class SearchQueryPageResponse
     /// 
     /// </summary>
     [JsonPropertyName("hasMoreTotalItems")]
-    public bool? HasMoreTotalItems { get; set; }
+    public bool HasMoreTotalItems { get; set; }
 
     /// <summary>
     /// The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.
@@ -13464,13 +13987,13 @@ public readonly record struct StartCursor : global::Camunda.Orchestration.Sdk.Ru
     /// </summary>
     public static StartCursor AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "StartCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$", minLength: 2, maxLength: 300);
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "StartCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
         return new StartCursor(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$", minLength: 2, maxLength: 300);
+        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -13491,7 +14014,7 @@ public sealed class StatusMetric
     /// ISO 8601 timestamp of the last update for this status.
     /// </summary>
     [JsonPropertyName("lastUpdatedAt")]
-    public DateTimeOffset LastUpdatedAt { get; set; }
+    public DateTimeOffset? LastUpdatedAt { get; set; }
 
 }
 
@@ -13590,7 +14113,7 @@ public sealed class TenantClientSearchResult
     /// The matching clients.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<TenantClientResult>? Items { get; set; }
+    public List<TenantClientResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -13742,7 +14265,7 @@ public sealed class TenantGroupSearchResult
     /// The matching groups.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<TenantGroupResult>? Items { get; set; }
+    public List<TenantGroupResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -13781,6 +14304,25 @@ public readonly record struct TenantId : global::Camunda.Orchestration.Sdk.Runti
 }
 
 /// <summary>
+/// TenantMappingRuleSearchResult
+/// </summary>
+public sealed class TenantMappingRuleSearchResult
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
 /// Tenant search response item.
 /// </summary>
 public sealed class TenantResult
@@ -13802,6 +14344,25 @@ public sealed class TenantResult
     /// </summary>
     [JsonPropertyName("description")]
     public string? Description { get; set; }
+
+}
+
+/// <summary>
+/// TenantRoleSearchResult
+/// </summary>
+public sealed class TenantRoleSearchResult
+{
+    /// <summary>
+    /// The matching roles.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<RoleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -13839,7 +14400,7 @@ public sealed class TenantSearchQueryResult
     /// The matching tenants.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<TenantResult>? Items { get; set; }
+    public List<TenantResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -13972,7 +14533,7 @@ public sealed class TenantUserSearchResult
     /// The matching users.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<TenantUserResult>? Items { get; set; }
+    public List<TenantUserResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -14096,7 +14657,7 @@ public sealed class UsageMetricsResponse
     /// The usage metrics by tenants. Only available if request `withTenants` query parameter was `true`.
     /// </summary>
     [JsonPropertyName("tenants")]
-    public Dictionary<string, object>? Tenants { get; set; }
+    public Dictionary<string, object> Tenants { get; set; } = null!;
 
     /// <summary>
     /// The amount of created root process instances.
@@ -14533,9 +15094,15 @@ public sealed class UserTaskFilter
     [JsonPropertyName("dueDate")]
     public DateTimeFilterProperty? DueDate { get; set; }
 
+    /// <summary>
+    /// The variables of the process instance.
+    /// </summary>
     [JsonPropertyName("processInstanceVariables")]
     public List<VariableValueFilterProperty>? ProcessInstanceVariables { get; set; }
 
+    /// <summary>
+    /// The local variables of the user task.
+    /// </summary>
     [JsonPropertyName("localVariables")]
     public List<VariableValueFilterProperty>? LocalVariables { get; set; }
 
@@ -14620,19 +15187,19 @@ public sealed class UserTaskProperties
     /// The groups eligible to claim the task.
     /// </summary>
     [JsonPropertyName("candidateGroups")]
-    public List<string>? CandidateGroups { get; set; }
+    public List<string> CandidateGroups { get; set; } = null!;
 
     /// <summary>
     /// The users eligible to claim the task.
     /// </summary>
     [JsonPropertyName("candidateUsers")]
-    public List<string>? CandidateUsers { get; set; }
+    public List<string> CandidateUsers { get; set; } = null!;
 
     /// <summary>
     /// The attributes that were changed in the task.
     /// </summary>
     [JsonPropertyName("changedAttributes")]
-    public List<string>? ChangedAttributes { get; set; }
+    public List<string> ChangedAttributes { get; set; } = null!;
 
     /// <summary>
     /// The due date of the user task in ISO 8601 format.
@@ -14679,6 +15246,8 @@ public sealed class UserTaskResult
 
     /// <summary>
     /// The state of the user task.
+    /// Note: FAILED state is only for legacy job-worker-based tasks.
+    /// 
     /// </summary>
     [JsonPropertyName("state")]
     public UserTaskStateEnum? State { get; set; }
@@ -14699,13 +15268,13 @@ public sealed class UserTaskResult
     /// The candidate groups for this user task.
     /// </summary>
     [JsonPropertyName("candidateGroups")]
-    public List<string>? CandidateGroups { get; set; }
+    public List<string> CandidateGroups { get; set; } = null!;
 
     /// <summary>
     /// The candidate users for this user task.
     /// </summary>
     [JsonPropertyName("candidateUsers")]
-    public List<string>? CandidateUsers { get; set; }
+    public List<string> CandidateUsers { get; set; } = null!;
 
     /// <summary>
     /// The ID of the process definition.
@@ -14759,7 +15328,7 @@ public sealed class UserTaskResult
     /// Custom headers for the user task.
     /// </summary>
     [JsonPropertyName("customHeaders")]
-    public Dictionary<string, string>? CustomHeaders { get; set; }
+    public Dictionary<string, string> CustomHeaders { get; set; } = null!;
 
     /// <summary>
     /// The priority of a user task. The higher the value the higher the priority.
@@ -14781,6 +15350,8 @@ public sealed class UserTaskResult
 
     /// <summary>
     /// The name of the process definition.
+    /// This is `null` if the process has no name defined.
+    /// 
     /// </summary>
     [JsonPropertyName("processName")]
     public string? ProcessName { get; set; }
@@ -14804,7 +15375,7 @@ public sealed class UserTaskResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the form.
@@ -14816,7 +15387,7 @@ public sealed class UserTaskResult
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
     /// </summary>
     [JsonPropertyName("tags")]
-    public List<Tag>? Tags { get; set; }
+    public List<Tag> Tags { get; set; } = null!;
 
 }
 
@@ -14854,7 +15425,7 @@ public sealed class UserTaskSearchQueryResult
     /// The matching user tasks.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<UserTaskResult>? Items { get; set; }
+    public List<UserTaskResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -14885,6 +15456,8 @@ public sealed class UserTaskSearchQuerySortRequest
 
 /// <summary>
 /// The state of the user task.
+/// Note: FAILED state is only for legacy job-worker-based tasks.
+/// 
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum UserTaskStateEnum
@@ -15114,6 +15687,10 @@ public sealed class VariableFilter
 
     /// <summary>
     /// The value of the variable.
+    /// Variable values in filters need to be in serialized JSON format. For example, a variable
+    /// with string value `myValue` can be found with the filter value `"myValue"`. Consider
+    /// appropriate escaping for special characters in JSON strings when constructing filter values.
+    /// 
     /// </summary>
     [JsonPropertyName("value")]
     public StringFilterProperty? Value { get; set; }
@@ -15270,7 +15847,7 @@ public sealed class VariableResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -15320,7 +15897,7 @@ public sealed class VariableResultBase
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -15358,7 +15935,7 @@ public sealed class VariableSearchQueryResult
     /// The matching variables.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<VariableSearchResult>? Items { get; set; }
+    public List<VariableSearchResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -15445,7 +16022,7 @@ public sealed class VariableSearchResult
     /// 
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
-    public RootProcessInstanceKey? RootProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
 }
 
@@ -15462,6 +16039,10 @@ public sealed class VariableValueFilterProperty
 
     /// <summary>
     /// The value of the variable.
+    /// Variable values in filters need to be in serialized JSON format. For example, a variable
+    /// with string value `myValue` can be found with the filter value `"myValue"`. Consider
+    /// appropriate escaping for special characters in JSON strings when constructing filter values.
+    /// 
     /// </summary>
     [JsonPropertyName("value")]
     public StringFilterProperty Value { get; set; } = null!;
@@ -15552,7 +16133,7 @@ public sealed class SearchClientsForGroupResponse
     /// The matching client IDs.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<GroupClientResult>? Items { get; set; }
+    public List<GroupClientResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -15590,7 +16171,7 @@ public sealed class SearchClientsForRoleResponse
     /// The matching clients.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<GroupClientResult>? Items { get; set; }
+    public List<GroupClientResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -15628,7 +16209,121 @@ public sealed class SearchClientsForTenantResponse
     /// The matching clients.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<GroupClientResult>? Items { get; set; }
+    public List<GroupClientResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchMappingRuleResponse
+/// </summary>
+public sealed class SearchMappingRuleResponse
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchMappingRulesForGroupResponse
+/// </summary>
+public sealed class SearchMappingRulesForGroupResponse
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchMappingRulesForRoleResponse
+/// </summary>
+public sealed class SearchMappingRulesForRoleResponse
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchMappingRulesForTenantResponse
+/// </summary>
+public sealed class SearchMappingRulesForTenantResponse
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchRolesForGroupResponse
+/// </summary>
+public sealed class SearchRolesForGroupResponse
+{
+    /// <summary>
+    /// The matching roles.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<RoleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchRolesForTenantResponse
+/// </summary>
+public sealed class SearchRolesForTenantResponse
+{
+    /// <summary>
+    /// The matching roles.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<RoleResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -15666,7 +16361,7 @@ public sealed class SearchUsersForGroupResponse
     /// The matching members.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<GroupUserResult>? Items { get; set; }
+    public List<GroupUserResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -15704,7 +16399,7 @@ public sealed class SearchUsersForRoleResponse
     /// The matching users.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<GroupUserResult>? Items { get; set; }
+    public List<GroupUserResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.
@@ -15742,7 +16437,7 @@ public sealed class SearchUsersForTenantResponse
     /// The matching users.
     /// </summary>
     [JsonPropertyName("items")]
-    public List<GroupUserResult>? Items { get; set; }
+    public List<GroupUserResult> Items { get; set; } = null!;
 
     /// <summary>
     /// Pagination information about the search results.

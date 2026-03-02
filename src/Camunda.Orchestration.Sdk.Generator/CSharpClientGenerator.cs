@@ -426,6 +426,11 @@ internal static class CSharpClientGenerator
                 foreach (var e in schema.Enum.OfType<Microsoft.OpenApi.Any.OpenApiString>())
                 {
                     var enumName = ToPascalCase(e.Value);
+                    var deprecatedVersion = metadata.GetDeprecatedEnumMemberVersion(name, e.Value);
+                    if (deprecatedVersion != null)
+                    {
+                        sb.AppendLine($"    [Obsolete(\"Deprecated since {deprecatedVersion}\")]");
+                    }
                     sb.AppendLine($"    [JsonPropertyName(\"{e.Value}\")]");
                     sb.AppendLine($"    {enumName},");
                 }

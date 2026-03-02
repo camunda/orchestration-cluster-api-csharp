@@ -22,6 +22,9 @@ internal sealed class SpecMetadata
     [JsonPropertyName("operations")]
     public List<OperationMetadataEntry> Operations { get; set; } = [];
 
+    [JsonPropertyName("deprecatedEnumMembers")]
+    public List<DeprecatedEnumSchemaEntry> DeprecatedEnumMembers { get; set; } = [];
+
     [JsonPropertyName("integrity")]
     public IntegrityInfo? Integrity { get; set; }
 
@@ -40,6 +43,34 @@ internal sealed class SpecMetadata
     {
         _semanticKeyNames ??= new HashSet<string>(SemanticKeys.Select(k => k.Name));
         return _semanticKeyNames.Contains(schemaName);
+    }
+
+    private Dictionary<string, Dictionary<string, string>>? _deprecatedEnumLookup;
+
+    /// <summary>
+    /// Returns the deprecatedInVersion string if the given enum member is deprecated, otherwise null.
+    /// </summary>
+    public string? GetDeprecatedEnumMemberVersion(string schemaName, string memberValue)
+    {
+        if (_deprecatedEnumLookup == null)
+        {
+            _deprecatedEnumLookup = new Dictionary<string, Dictionary<string, string>>();
+            foreach (var entry in DeprecatedEnumMembers)
+            {
+                var members = new Dictionary<string, string>();
+                foreach (var m in entry.DeprecatedMembers)
+                {
+                    members[m.Name] = m.DeprecatedInVersion;
+                }
+                _deprecatedEnumLookup[entry.SchemaName] = members;
+            }
+        }
+        if (_deprecatedEnumLookup.TryGetValue(schemaName, out var lookup)
+            && lookup.TryGetValue(memberValue, out var version))
+        {
+            return version;
+        }
+        return null;
     }
 
     public static SpecMetadata Load(string path)
@@ -165,4 +196,25 @@ internal sealed class IntegrityInfo
 
     [JsonPropertyName("totalEventuallyConsistent")]
     public int TotalEventuallyConsistent { get; set; }
+}
+
+internal sealed class DeprecatedEnumSchemaEntry
+{
+    [JsonPropertyName("schemaName")]
+    public string SchemaName { get; set; } = "";
+
+    [JsonPropertyName("enumValues")]
+    public List<string> EnumValues { get; set; } = [];
+
+    [JsonPropertyName("deprecatedMembers")]
+    public List<DeprecatedEnumMemberEntry> DeprecatedMembers { get; set; } = [];
+}
+
+internal sealed class DeprecatedEnumMemberEntry
+{
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = "";
+
+    [JsonPropertyName("deprecatedInVersion")]
+    public string DeprecatedInVersion { get; set; } = "";
 }
