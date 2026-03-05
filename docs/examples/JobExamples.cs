@@ -11,7 +11,7 @@ namespace Camunda.Orchestration.Sdk.Examples;
 internal static class JobExamples
 {
     // <ActivateJobs>
-    static async Task ActivateJobsExample()
+    private static async Task ActivateJobsExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -31,7 +31,7 @@ internal static class JobExamples
     // </ActivateJobs>
 
     // <CompleteJob>
-    static async Task CompleteJobExample()
+    private static async Task CompleteJobExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -56,7 +56,7 @@ internal static class JobExamples
     // </CompleteJob>
 
     // <FailJob>
-    static async Task FailJobExample()
+    private static async Task FailJobExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -80,7 +80,7 @@ internal static class JobExamples
     // </FailJob>
 
     // <ThrowJobError>
-    static async Task ThrowJobErrorExample()
+    private static async Task ThrowJobErrorExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -104,7 +104,7 @@ internal static class JobExamples
 
     // <JobWorker>
     #pragma warning disable CS1998 // Async method lacks await (handler is simple for demo purposes)
-    static async Task JobWorkerExample()
+    private static async Task JobWorkerExample()
     {
         await using var client = Camunda.CreateClient();
 
@@ -130,7 +130,7 @@ internal static class JobExamples
     // </JobWorker>
 
     // <SearchJobs>
-    static async Task SearchJobsExample()
+    private static async Task SearchJobsExample()
     {
         using var client = Camunda.CreateClient();
 

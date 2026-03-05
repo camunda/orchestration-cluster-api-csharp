@@ -10,7 +10,7 @@ namespace Camunda.Orchestration.Sdk.Examples;
 internal static class MessageExamples
 {
     // <CorrelateMessage>
-    static async Task CorrelateMessageExample()
+    private static async Task CorrelateMessageExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -30,7 +30,7 @@ internal static class MessageExamples
     // </CorrelateMessage>
 
     // <PublishMessage>
-    static async Task PublishMessageExample()
+    private static async Task PublishMessageExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -48,7 +48,7 @@ internal static class MessageExamples
     // </PublishMessage>
 
     // <BroadcastSignal>
-    static async Task BroadcastSignalExample()
+    private static async Task BroadcastSignalExample()
     {
         using var client = Camunda.CreateClient();
 

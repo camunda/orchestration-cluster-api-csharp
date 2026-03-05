@@ -11,13 +11,13 @@ namespace Camunda.Orchestration.Sdk.Examples;
 internal static class DecisionExamples
 {
     // <EvaluateDecision>
-    static async Task EvaluateDecisionExample()
+    private static async Task EvaluateDecisionExample()
     {
         using var client = Camunda.CreateClient();
 
         // Find the decision definition via search
         var definitions = await client.SearchDecisionDefinitionsAsync(new DecisionDefinitionSearchQuery());
-        var decisionDefinitionId = definitions.Items![0].DecisionDefinitionId.Value;
+        var decisionDefinitionId = definitions.Items![0].DecisionDefinitionId;
 
         var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
         {
@@ -34,7 +34,7 @@ internal static class DecisionExamples
     // </EvaluateDecision>
 
     // <SearchDecisionDefinitions>
-    static async Task SearchDecisionDefinitionsExample()
+    private static async Task SearchDecisionDefinitionsExample()
     {
         using var client = Camunda.CreateClient();
 

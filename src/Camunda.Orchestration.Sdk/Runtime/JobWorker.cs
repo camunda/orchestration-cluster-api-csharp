@@ -75,6 +75,14 @@ public sealed class JobWorkerConfig
     /// Whether to start polling immediately on creation. Default: <c>true</c>.
     /// </summary>
     public bool AutoStart { get; init; } = true;
+
+    /// <summary>
+    /// Maximum random delay (in seconds) before the worker starts polling.
+    /// When multiple application instances restart simultaneously, this spreads out
+    /// initial activation requests to avoid saturating the server.
+    /// <c>0</c> (the default) means no delay.
+    /// </summary>
+    public double StartupJitterMaxSeconds { get; init; } = 0;
 }
 
 /// <summary>
@@ -281,6 +289,15 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     {
         _logger.LogInformation("JobWorker '{Name}' started for type '{JobType}'",
             _name, _config.JobType);
+
+        if (_config.StartupJitterMaxSeconds > 0)
+        {
+            var jitterMs = (int)(Random.Shared.NextDouble() * _config.StartupJitterMaxSeconds * 1000);
+            _logger.LogInformation(
+                "JobWorker '{Name}' delaying start by {JitterMs}ms (jitter)",
+                _name, jitterMs);
+            await Task.Delay(jitterMs, ct).ConfigureAwait(false);
+        }
 
         try
         {

@@ -1045,25 +1045,6 @@ public partial class CamundaClient
     }
 
     /// <summary>
-    /// Get job statistics by worker
-    /// Returns aggregated metrics per worker for the given jobType.
-    /// 
-    /// </summary>
-    /// <remarks>Operation: getJobWorkerStatistics</remarks>
-    public async Task<JobWorkerStatisticsQueryResult> GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery body, ConsistencyOptions<JobWorkerStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
-    {
-        var path = $"/jobs/statistics/by-workers";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("getJobWorkerStatistics", false,
-                () => InvokeWithRetryAsync(() => SendAsync<JobWorkerStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobWorkerStatistics", false, ct),
-                consistency!, _logger, ct);
-        }
-
-        return await InvokeWithRetryAsync(() => SendAsync<JobWorkerStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobWorkerStatistics", false, ct);
-    }
-
-    /// <summary>
     /// Get license status
     /// Obtains the status of the current Camunda license.
     /// </summary>

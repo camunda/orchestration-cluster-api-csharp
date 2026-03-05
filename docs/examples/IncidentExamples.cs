@@ -11,7 +11,7 @@ namespace Camunda.Orchestration.Sdk.Examples;
 internal static class IncidentExamples
 {
     // <GetIncident>
-    static async Task GetIncidentExample()
+    private static async Task GetIncidentExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -27,7 +27,7 @@ internal static class IncidentExamples
     // </GetIncident>
 
     // <ResolveIncident>
-    static async Task ResolveIncidentExample()
+    private static async Task ResolveIncidentExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -40,7 +40,7 @@ internal static class IncidentExamples
     // </ResolveIncident>
 
     // <SearchIncidents>
-    static async Task SearchIncidentsExample()
+    private static async Task SearchIncidentsExample()
     {
         using var client = Camunda.CreateClient();
 

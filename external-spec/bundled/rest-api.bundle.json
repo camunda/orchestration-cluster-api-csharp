@@ -7317,86 +7317,6 @@
         }
       }
     },
-    "/jobs/statistics/by-workers": {
-      "post": {
-        "x-eventually-consistent": true,
-        "tags": [
-          "Job"
-        ],
-        "operationId": "getJobWorkerStatistics",
-        "summary": "Get job statistics by worker",
-        "description": "Returns aggregated metrics per worker for the given jobType.\n",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/JobWorkerStatisticsQuery"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The job worker statistics result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobWorkerStatisticsQueryResult"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The provided data is not valid.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request lacks valid authentication credentials.",
-            "headers": {
-              "WWW-Authenticate": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The request is not allowed.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An internal error occurred while processing the request.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/license": {
       "get": {
         "x-eventually-consistent": false,
@@ -17018,6 +16938,10 @@
         "type": "string"
       },
       "BatchOperationCreatedResult": {
+        "required": [
+          "batchOperationKey",
+          "batchOperationType"
+        ],
         "description": "The created batch operation.",
         "type": "object",
         "properties": {
@@ -17154,6 +17078,14 @@
       },
       "BatchOperationResponse": {
         "required": [
+          "batchOperationKey",
+          "batchOperationType",
+          "state",
+          "operationsCompletedCount",
+          "operationsFailedCount",
+          "operationsTotalCount",
+          "actorType",
+          "actorId",
           "errors"
         ],
         "type": "object",
@@ -17185,11 +17117,18 @@
             "nullable": true
           },
           "actorType": {
-            "$ref": "#/components/schemas/AuditLogActorTypeEnum"
+            "description": "The type of the actor who performed the operation.\nThis is `null` if the batch operation was created before 8.9,\nor if the actor information is not available.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AuditLogActorTypeEnum"
+              }
+            ]
           },
           "actorId": {
             "type": "string",
-            "description": "The ID of the actor who performed the operation. Available for batch operations created since 8.9."
+            "description": "The ID of the actor who performed the operation. Available for batch operations created since 8.9.",
+            "nullable": true
           },
           "operationsTotalCount": {
             "type": "integer",
@@ -18447,6 +18386,17 @@
       },
       "DecisionDefinitionResult": {
         "type": "object",
+        "required": [
+          "decisionDefinitionId",
+          "decisionDefinitionKey",
+          "decisionRequirementsId",
+          "decisionRequirementsKey",
+          "decisionRequirementsName",
+          "decisionRequirementsVersion",
+          "name",
+          "tenantId",
+          "version"
+        ],
         "properties": {
           "decisionDefinitionId": {
             "allOf": [
@@ -18456,26 +18406,6 @@
             ],
             "description": "The DMN ID of the decision definition."
           },
-          "name": {
-            "type": "string",
-            "description": "The DMN name of the decision definition."
-          },
-          "version": {
-            "type": "integer",
-            "description": "The assigned version of the decision definition."
-          },
-          "decisionRequirementsId": {
-            "type": "string",
-            "description": "the DMN ID of the decision requirements graph that the decision definition is part of."
-          },
-          "tenantId": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TenantId"
-              }
-            ],
-            "description": "The tenant ID of the decision definition."
-          },
           "decisionDefinitionKey": {
             "allOf": [
               {
@@ -18483,6 +18413,10 @@
               }
             ],
             "description": "The assigned key, which acts as a unique identifier for this decision definition."
+          },
+          "decisionRequirementsId": {
+            "description": "the DMN ID of the decision requirements graph that the decision definition is part of.",
+            "type": "string"
           },
           "decisionRequirementsKey": {
             "allOf": [
@@ -18493,12 +18427,28 @@
             "description": "The assigned key of the decision requirements graph that the decision definition is part of."
           },
           "decisionRequirementsName": {
-            "type": "string",
-            "description": "The DMN name of the decision requirements that the decision definition is part of."
+            "description": "The DMN name of the decision requirements that the decision definition is part of.",
+            "type": "string"
           },
           "decisionRequirementsVersion": {
-            "type": "integer",
-            "description": "The assigned version of the decision requirements that the decision definition is part of."
+            "description": "The assigned version of the decision requirements that the decision definition is part of.",
+            "type": "integer"
+          },
+          "name": {
+            "description": "The DMN name of the decision definition.",
+            "type": "string"
+          },
+          "tenantId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ],
+            "description": "The tenant ID of the decision definition."
+          },
+          "version": {
+            "description": "The assigned version of the decision definition.",
+            "type": "integer"
           }
         }
       },
@@ -18578,65 +18528,27 @@
         "type": "object",
         "required": [
           "decisionDefinitionId",
+          "decisionDefinitionKey",
           "decisionDefinitionName",
           "decisionDefinitionVersion",
+          "decisionEvaluationKey",
+          "decisionInstanceKey",
           "decisionRequirementsId",
-          "output",
+          "decisionRequirementsKey",
+          "evaluatedDecisions",
           "failedDecisionDefinitionId",
           "failureMessage",
-          "decisionDefinitionKey",
-          "tenantId",
-          "decisionRequirementsKey",
-          "decisionEvaluationKey",
-          "evaluatedDecisions"
+          "output",
+          "tenantId"
         ],
         "properties": {
           "decisionDefinitionId": {
-            "description": "The ID of the decision which was evaluated.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/DecisionDefinitionId"
               }
-            ]
-          },
-          "decisionDefinitionName": {
-            "description": "The name of the decision which was evaluated.",
-            "type": "string"
-          },
-          "decisionDefinitionVersion": {
-            "description": "The version of the decision which was evaluated.",
-            "type": "integer",
-            "format": "int32"
-          },
-          "decisionRequirementsId": {
-            "description": "The ID of the decision requirements graph that the decision which was evaluated is part of.",
-            "type": "string"
-          },
-          "output": {
-            "description": "JSON document that will instantiate the result of the decision which was evaluated.\n",
-            "type": "string"
-          },
-          "failedDecisionDefinitionId": {
-            "description": "The ID of the decision which failed during evaluation.",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DecisionDefinitionId"
-              }
-            ]
-          },
-          "failureMessage": {
-            "description": "Message describing why the decision which was evaluated failed.",
-            "nullable": true,
-            "type": "string"
-          },
-          "tenantId": {
-            "description": "The tenant ID of the evaluated decision.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TenantId"
-              }
-            ]
+            ],
+            "description": "The ID of the decision which was evaluated."
           },
           "decisionDefinitionKey": {
             "allOf": [
@@ -18646,6 +18558,36 @@
             ],
             "description": "The unique key identifying the decision which was evaluated."
           },
+          "decisionDefinitionName": {
+            "description": "The name of the decision which was evaluated.",
+            "type": "string"
+          },
+          "decisionDefinitionVersion": {
+            "description": "The version of the decision which was evaluated.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "decisionEvaluationKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DecisionEvaluationKey"
+              }
+            ],
+            "description": "The unique key identifying this decision evaluation."
+          },
+          "decisionInstanceKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DecisionInstanceKey"
+              }
+            ],
+            "deprecated": true,
+            "description": "Deprecated, please refer to `decisionEvaluationKey`."
+          },
+          "decisionRequirementsId": {
+            "description": "The ID of the decision requirements graph that the decision which was evaluated is part of.",
+            "type": "string"
+          },
           "decisionRequirementsKey": {
             "allOf": [
               {
@@ -18654,29 +18596,38 @@
             ],
             "description": "The unique key identifying the decision requirements graph that the decision which was evaluated is part of."
           },
-          "decisionInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DecisionInstanceKey"
-              }
-            ],
-            "description": "Deprecated, please refer to `decisionEvaluationKey`.",
-            "deprecated": true
-          },
-          "decisionEvaluationKey": {
-            "description": "The unique key identifying this decision evaluation.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DecisionEvaluationKey"
-              }
-            ]
-          },
           "evaluatedDecisions": {
             "description": "Decisions that were evaluated within the requested decision evaluation.",
-            "type": "array",
             "items": {
               "$ref": "#/components/schemas/EvaluatedDecisionResult"
-            }
+            },
+            "type": "array"
+          },
+          "failedDecisionDefinitionId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DecisionDefinitionId"
+              }
+            ],
+            "description": "The ID of the decision which failed during evaluation.",
+            "nullable": true
+          },
+          "failureMessage": {
+            "description": "Message describing why the decision which was evaluated failed.",
+            "nullable": true,
+            "type": "string"
+          },
+          "output": {
+            "description": "JSON document that will instantiate the result of the decision which was evaluated.\n",
+            "type": "string"
+          },
+          "tenantId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ],
+            "description": "The tenant ID of the evaluated decision."
           }
         }
       },
@@ -19940,6 +19891,13 @@
       },
       "DocumentReference": {
         "type": "object",
+        "required": [
+          "camunda.document.type",
+          "storeId",
+          "documentId",
+          "contentHash",
+          "metadata"
+        ],
         "properties": {
           "camunda.document.type": {
             "type": "string",
@@ -19962,10 +19920,11 @@
           },
           "contentHash": {
             "type": "string",
-            "description": "The hash of the document."
+            "description": "The hash of the document.",
+            "nullable": true
           },
           "metadata": {
-            "$ref": "#/components/schemas/DocumentMetadata"
+            "$ref": "#/components/schemas/DocumentMetadataResponse"
           }
         }
       },
@@ -20019,9 +19978,6 @@
         ]
       },
       "DocumentMetadata": {
-        "required": [
-          "customProperties"
-        ],
         "description": "Information about the document.",
         "type": "object",
         "properties": {
@@ -20066,6 +20022,63 @@
           }
         }
       },
+      "DocumentMetadataResponse": {
+        "description": "Information about the document that is returned in responses.",
+        "type": "object",
+        "required": [
+          "fileName",
+          "expiresAt",
+          "size",
+          "contentType",
+          "customProperties",
+          "processDefinitionId",
+          "processInstanceKey"
+        ],
+        "properties": {
+          "contentType": {
+            "type": "string",
+            "description": "The content type of the document."
+          },
+          "fileName": {
+            "type": "string",
+            "description": "The name of the file."
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the document expires.",
+            "nullable": true
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The size of the document in bytes."
+          },
+          "processDefinitionId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionId"
+              }
+            ],
+            "description": "The ID of the process definition that created the document.",
+            "nullable": true
+          },
+          "processInstanceKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "description": "The key of the process instance that created the document.",
+            "nullable": true
+          },
+          "customProperties": {
+            "type": "object",
+            "description": "Custom properties of the document.",
+            "additionalProperties": true
+          }
+        }
+      },
       "DocumentLinkRequest": {
         "type": "object",
         "properties": {
@@ -20079,6 +20092,10 @@
       },
       "DocumentLink": {
         "type": "object",
+        "required": [
+          "url",
+          "expiresAt"
+        ],
         "properties": {
           "url": {
             "type": "string",
@@ -20567,9 +20584,9 @@
             "description": "Required when the expression references tenant-scoped cluster variables",
             "example": "tenant_123"
           },
-          "context": {
+          "variables": {
             "type": "object",
-            "description": "Optional context variables for expression evaluation. These variables are only used for the current evaluation and do not persist beyond it.",
+            "description": "Optional variables for expression evaluation. These variables are only used for the current evaluation and do not persist beyond it.",
             "example": {
               "x": 10,
               "y": 20
@@ -20953,7 +20970,13 @@
       "GlobalTaskListenerResult": {
         "type": "object",
         "required": [
-          "eventTypes"
+          "id",
+          "type",
+          "retries",
+          "eventTypes",
+          "afterNonGlobal",
+          "priority",
+          "source"
         ],
         "allOf": [
           {
@@ -21903,7 +21926,8 @@
           "ACTIVE",
           "MIGRATED",
           "PENDING",
-          "RESOLVED"
+          "RESOLVED",
+          "UNKNOWN"
         ]
       },
       "IncidentSearchQuerySortRequest": {
@@ -22412,102 +22436,6 @@
             "type": "integer",
             "format": "int32",
             "example": 5
-          }
-        }
-      },
-      "JobWorkerStatisticsQuery": {
-        "description": "Job worker statistics query.",
-        "type": "object",
-        "required": [
-          "filter"
-        ],
-        "properties": {
-          "filter": {
-            "$ref": "#/components/schemas/JobWorkerStatisticsFilter"
-          },
-          "page": {
-            "description": "Search cursor pagination.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CursorForwardPagination"
-              }
-            ]
-          }
-        }
-      },
-      "JobWorkerStatisticsFilter": {
-        "description": "Job worker statistics search filter.",
-        "type": "object",
-        "required": [
-          "from",
-          "to",
-          "jobType"
-        ],
-        "properties": {
-          "from": {
-            "description": "Start of the time window to filter metrics. ISO 8601 date-time format.\n",
-            "type": "string",
-            "format": "date-time",
-            "example": "2024-07-28T15:51:28.071Z"
-          },
-          "to": {
-            "description": "End of the time window to filter metrics. ISO 8601 date-time format.\n",
-            "type": "string",
-            "format": "date-time",
-            "example": "2024-07-29T15:51:28.071Z"
-          },
-          "jobType": {
-            "description": "Job type to return worker metrics for.",
-            "type": "string",
-            "example": "fetch-customer-data"
-          }
-        }
-      },
-      "JobWorkerStatisticsQueryResult": {
-        "description": "Job worker statistics query result.",
-        "type": "object",
-        "required": [
-          "items",
-          "page"
-        ],
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/SearchQueryResponse"
-          }
-        ],
-        "properties": {
-          "items": {
-            "description": "The list of per-worker statistics items.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/JobWorkerStatisticsItem"
-            }
-          }
-        }
-      },
-      "JobWorkerStatisticsItem": {
-        "description": "Statistics for a single worker within a job type.",
-        "type": "object",
-        "required": [
-          "worker",
-          "created",
-          "completed",
-          "failed"
-        ],
-        "properties": {
-          "worker": {
-            "description": "The worker identifier.",
-            "type": "string",
-            "example": "worker-1"
-          },
-          "created": {
-            "$ref": "#/components/schemas/StatusMetric"
-          },
-          "completed": {
-            "$ref": "#/components/schemas/StatusMetric"
-          },
-          "failed": {
-            "$ref": "#/components/schemas/StatusMetric"
           }
         }
       },
@@ -24775,6 +24703,11 @@
       "MessageCorrelationResult": {
         "description": "The message key of the correlated message, as well as the first process instance key it\ncorrelated with.\n",
         "type": "object",
+        "required": [
+          "tenantId",
+          "messageKey",
+          "processInstanceKey"
+        ],
         "properties": {
           "tenantId": {
             "description": "The tenant ID of the correlated message",
@@ -24847,6 +24780,10 @@
       "MessagePublicationResult": {
         "description": "The message key of the published message.",
         "type": "object",
+        "required": [
+          "tenantId",
+          "messageKey"
+        ],
         "properties": {
           "tenantId": {
             "description": "The tenant ID of the message.",

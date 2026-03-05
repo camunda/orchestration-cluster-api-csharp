@@ -11,7 +11,7 @@ namespace Camunda.Orchestration.Sdk.Examples;
 internal static class ClientExamples
 {
     // <CreateClient>
-    static void CreateClientExample()
+    private static void CreateClientExample()
     {
         // Uses environment variables for configuration (ZEEBE_ADDRESS, etc.)
         using var client = Camunda.CreateClient();
@@ -19,7 +19,7 @@ internal static class ClientExamples
     // </CreateClient>
 
     // <CreateClientWithOptions>
-    static void CreateClientWithOptionsExample()
+    private static void CreateClientWithOptionsExample()
     {
         // Override config via environment dictionary
         using var client = Camunda.CreateClient(new CamundaOptions
@@ -36,7 +36,7 @@ internal static class ClientExamples
     // </CreateClientWithOptions>
 
     // <GetTopology>
-    static async Task GetTopologyExample()
+    private static async Task GetTopologyExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -52,7 +52,7 @@ internal static class ClientExamples
     // </GetTopology>
 
     // <GetAuthentication>
-    static async Task GetAuthenticationExample()
+    private static async Task GetAuthenticationExample()
     {
         using var client = Camunda.CreateClient();
 

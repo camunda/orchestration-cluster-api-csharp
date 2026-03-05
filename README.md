@@ -634,6 +634,7 @@ client.CreateJobWorker(config, async (job, ct) =>
 | `FetchVariables` | `null` | Variable names to fetch (null = all) |
 | `WorkerName` | auto | Worker name for logging |
 | `AutoStart` | `true` | Start polling on creation |
+| `StartupJitterMaxSeconds` | `0` | Max random delay (seconds) before first poll. Spreads out activation requests when multiple instances restart simultaneously. `0` = no delay. |
 
 ### Concurrency
 

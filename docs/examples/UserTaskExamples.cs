@@ -11,7 +11,7 @@ namespace Camunda.Orchestration.Sdk.Examples;
 internal static class UserTaskExamples
 {
     // <CompleteUserTask>
-    static async Task CompleteUserTaskExample()
+    private static async Task CompleteUserTaskExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -31,7 +31,7 @@ internal static class UserTaskExamples
     // </CompleteUserTask>
 
     // <AssignUserTask>
-    static async Task AssignUserTaskExample()
+    private static async Task AssignUserTaskExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -47,7 +47,7 @@ internal static class UserTaskExamples
     // </AssignUserTask>
 
     // <UnassignUserTask>
-    static async Task UnassignUserTaskExample()
+    private static async Task UnassignUserTaskExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -60,7 +60,7 @@ internal static class UserTaskExamples
     // </UnassignUserTask>
 
     // <SearchUserTasks>
-    static async Task SearchUserTasksExample()
+    private static async Task SearchUserTasksExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -74,7 +74,7 @@ internal static class UserTaskExamples
     // </SearchUserTasks>
 
     // <UpdateUserTask>
-    static async Task UpdateUserTaskExample()
+    private static async Task UpdateUserTaskExample()
     {
         using var client = Camunda.CreateClient();
 

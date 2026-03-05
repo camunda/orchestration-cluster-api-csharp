@@ -11,7 +11,7 @@ namespace Camunda.Orchestration.Sdk.Examples;
 internal static class DeploymentExamples
 {
     // <DeployResourcesFromFiles>
-    static async Task DeployResourcesFromFilesExample()
+    private static async Task DeployResourcesFromFilesExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -28,7 +28,7 @@ internal static class DeploymentExamples
     // </DeployResourcesFromFiles>
 
     // <DeleteResource>
-    static async Task DeleteResourceExample()
+    private static async Task DeleteResourceExample()
     {
         using var client = Camunda.CreateClient();
 

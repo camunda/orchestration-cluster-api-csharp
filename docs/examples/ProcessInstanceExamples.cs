@@ -11,7 +11,7 @@ namespace Camunda.Orchestration.Sdk.Examples;
 internal static class ProcessInstanceExamples
 {
     // <CreateProcessInstance>
-    static async Task CreateProcessInstanceExample()
+    private static async Task CreateProcessInstanceExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -32,7 +32,7 @@ internal static class ProcessInstanceExamples
     // </CreateProcessInstance>
 
     // <CreateProcessInstanceWithVariables>
-    static async Task CreateProcessInstanceWithVariablesExample()
+    private static async Task CreateProcessInstanceWithVariablesExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -58,7 +58,7 @@ internal static class ProcessInstanceExamples
     // </CreateProcessInstanceWithVariables>
 
     // <CancelProcessInstance>
-    static async Task CancelProcessInstanceExample()
+    private static async Task CancelProcessInstanceExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -74,7 +74,7 @@ internal static class ProcessInstanceExamples
     // </CancelProcessInstance>
 
     // <GetProcessInstance>
-    static async Task GetProcessInstanceExample()
+    private static async Task GetProcessInstanceExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -91,7 +91,7 @@ internal static class ProcessInstanceExamples
     // </GetProcessInstance>
 
     // <SearchProcessInstances>
-    static async Task SearchProcessInstancesExample()
+    private static async Task SearchProcessInstancesExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -105,7 +105,7 @@ internal static class ProcessInstanceExamples
     // </SearchProcessInstances>
 
     // <MigrateProcessInstance>
-    static async Task MigrateProcessInstanceExample()
+    private static async Task MigrateProcessInstanceExample()
     {
         using var client = Camunda.CreateClient();
 
@@ -137,7 +137,7 @@ internal static class ProcessInstanceExamples
     // </MigrateProcessInstance>
 
     // <ModifyProcessInstance>
-    static async Task ModifyProcessInstanceExample()
+    private static async Task ModifyProcessInstanceExample()
     {
         using var client = Camunda.CreateClient();
 
