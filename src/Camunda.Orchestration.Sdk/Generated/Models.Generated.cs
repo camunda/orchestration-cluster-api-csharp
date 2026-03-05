@@ -4911,7 +4911,6 @@ public enum DecisionDefinitionTypeEnum
     DECISIONTABLE,
     [JsonPropertyName("LITERAL_EXPRESSION")]
     LITERALEXPRESSION,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
     [JsonPropertyName("UNKNOWN")]
@@ -5583,10 +5582,8 @@ public enum DecisionInstanceStateEnum
     EVALUATED,
     [JsonPropertyName("FAILED")]
     FAILED,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNKNOWN")]
     UNKNOWN,
 }
@@ -9732,6 +9729,110 @@ public sealed class JobStateFilterProperty
 }
 
 /// <summary>
+/// Job time-series statistics search filter.
+/// </summary>
+public sealed class JobTimeSeriesStatisticsFilter
+{
+    /// <summary>
+    /// Start of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("from")]
+    public DateTimeOffset From { get; set; }
+
+    /// <summary>
+    /// End of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("to")]
+    public DateTimeOffset To { get; set; }
+
+    /// <summary>
+    /// Job type to return time-series metrics for.
+    /// </summary>
+    [JsonPropertyName("jobType")]
+    public string JobType { get; set; } = null!;
+
+    /// <summary>
+    /// Time bucket resolution as an ISO 8601 duration (for example `PT1M` for 1 minute,
+    /// `PT1H` for 1 hour). If omitted, the server chooses a sensible default.
+    /// 
+    /// </summary>
+    [JsonPropertyName("resolution")]
+    public string? Resolution { get; set; }
+
+}
+
+/// <summary>
+/// Aggregated job metrics for a single time bucket.
+/// </summary>
+public sealed class JobTimeSeriesStatisticsItem
+{
+    /// <summary>
+    /// ISO 8601 timestamp representing the start of this time bucket.
+    /// </summary>
+    [JsonPropertyName("time")]
+    public DateTimeOffset Time { get; set; }
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("created")]
+    public StatusMetric Created { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("completed")]
+    public StatusMetric Completed { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("failed")]
+    public StatusMetric Failed { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Job time-series statistics query.
+/// </summary>
+public sealed class JobTimeSeriesStatisticsQuery
+{
+    /// <summary>
+    /// Job time-series statistics search filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public JobTimeSeriesStatisticsFilter Filter { get; set; } = null!;
+
+    /// <summary>
+    /// Search cursor pagination.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public CursorForwardPagination? Page { get; set; }
+
+}
+
+/// <summary>
+/// Job time-series statistics query result.
+/// </summary>
+public sealed class JobTimeSeriesStatisticsQueryResult
+{
+    /// <summary>
+    /// The list of time-bucketed statistics items, ordered ascending by time.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<JobTimeSeriesStatisticsItem> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
 /// Job type statistics search filter.
 /// </summary>
 public sealed class JobTypeStatisticsFilter
@@ -9853,6 +9954,102 @@ public sealed class JobUpdateRequest
     /// </summary>
     [JsonPropertyName("operationReference")]
     public OperationReference? OperationReference { get; set; }
+
+}
+
+/// <summary>
+/// Job worker statistics search filter.
+/// </summary>
+public sealed class JobWorkerStatisticsFilter
+{
+    /// <summary>
+    /// Start of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("from")]
+    public DateTimeOffset From { get; set; }
+
+    /// <summary>
+    /// End of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("to")]
+    public DateTimeOffset To { get; set; }
+
+    /// <summary>
+    /// Job type to return worker metrics for.
+    /// </summary>
+    [JsonPropertyName("jobType")]
+    public string JobType { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Statistics for a single worker within a job type.
+/// </summary>
+public sealed class JobWorkerStatisticsItem
+{
+    /// <summary>
+    /// The worker identifier.
+    /// </summary>
+    [JsonPropertyName("worker")]
+    public string Worker { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("created")]
+    public StatusMetric Created { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("completed")]
+    public StatusMetric Completed { get; set; } = null!;
+
+    /// <summary>
+    /// Metric for a single job status.
+    /// </summary>
+    [JsonPropertyName("failed")]
+    public StatusMetric Failed { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Job worker statistics query.
+/// </summary>
+public sealed class JobWorkerStatisticsQuery
+{
+    /// <summary>
+    /// Job worker statistics search filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public JobWorkerStatisticsFilter Filter { get; set; } = null!;
+
+    /// <summary>
+    /// Search cursor pagination.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public CursorForwardPagination? Page { get; set; }
+
+}
+
+/// <summary>
+/// Job worker statistics query result.
+/// </summary>
+public sealed class JobWorkerStatisticsQueryResult
+{
+    /// <summary>
+    /// The list of per-worker statistics items.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<JobWorkerStatisticsItem> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -15864,19 +16061,19 @@ public sealed class VariableResult
     /// Name of this variable.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// Tenant ID of this variable.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The key for this variable.
     /// </summary>
     [JsonPropertyName("variableKey")]
-    public VariableKey? VariableKey { get; set; }
+    public VariableKey VariableKey { get; set; }
 
     /// <summary>
     /// The key of the scope where this variable is directly defined. For process-level
@@ -15886,13 +16083,13 @@ public sealed class VariableResult
     /// 
     /// </summary>
     [JsonPropertyName("scopeKey")]
-    public ScopeKey? ScopeKey { get; set; }
+    public ScopeKey ScopeKey { get; set; }
 
     /// <summary>
     /// The key of the process instance of this variable.
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the root process instance. The root process instance is the top-level
@@ -15914,19 +16111,19 @@ public sealed class VariableResultBase
     /// Name of this variable.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// Tenant ID of this variable.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The key for this variable.
     /// </summary>
     [JsonPropertyName("variableKey")]
-    public VariableKey? VariableKey { get; set; }
+    public VariableKey VariableKey { get; set; }
 
     /// <summary>
     /// The key of the scope where this variable is directly defined. For process-level
@@ -15936,13 +16133,13 @@ public sealed class VariableResultBase
     /// 
     /// </summary>
     [JsonPropertyName("scopeKey")]
-    public ScopeKey? ScopeKey { get; set; }
+    public ScopeKey ScopeKey { get; set; }
 
     /// <summary>
     /// The key of the process instance of this variable.
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the root process instance. The root process instance is the top-level
@@ -16039,19 +16236,19 @@ public sealed class VariableSearchResult
     /// Name of this variable.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// Tenant ID of this variable.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The key for this variable.
     /// </summary>
     [JsonPropertyName("variableKey")]
-    public VariableKey? VariableKey { get; set; }
+    public VariableKey VariableKey { get; set; }
 
     /// <summary>
     /// The key of the scope where this variable is directly defined. For process-level
@@ -16061,13 +16258,13 @@ public sealed class VariableSearchResult
     /// 
     /// </summary>
     [JsonPropertyName("scopeKey")]
-    public ScopeKey? ScopeKey { get; set; }
+    public ScopeKey ScopeKey { get; set; }
 
     /// <summary>
     /// The key of the process instance of this variable.
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the root process instance. The root process instance is the top-level

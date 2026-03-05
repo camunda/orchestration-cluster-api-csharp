@@ -845,7 +845,7 @@ public partial class CamundaClient
     /// Returns a decision instance.
     /// </summary>
     /// <remarks>Operation: getDecisionInstance</remarks>
-    public async Task<DecisionInstanceGetQueryResult> GetDecisionInstanceAsync(DecisionInstanceKey decisionEvaluationInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<DecisionInstanceGetQueryResult> GetDecisionInstanceAsync(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-instances/{Uri.EscapeDataString(decisionEvaluationInstanceKey.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -1026,6 +1026,27 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get time-series metrics for a job type
+    /// Returns a list of time-bucketed metrics ordered ascending by time.
+    /// The `from` and `to` fields select the time window of interest.
+    /// Each item in the response corresponds to one time bucket of the requested resolution.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: getJobTimeSeriesStatistics</remarks>
+    public async Task<JobTimeSeriesStatisticsQueryResult> GetJobTimeSeriesStatisticsAsync(JobTimeSeriesStatisticsQuery body, ConsistencyOptions<JobTimeSeriesStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/jobs/statistics/time-series";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getJobTimeSeriesStatistics", false,
+                () => InvokeWithRetryAsync(() => SendAsync<JobTimeSeriesStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobTimeSeriesStatistics", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<JobTimeSeriesStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobTimeSeriesStatistics", false, ct);
+    }
+
+    /// <summary>
     /// Get job statistics by type
     /// Get statistics about jobs, grouped by job type.
     /// 
@@ -1042,6 +1063,25 @@ public partial class CamundaClient
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<JobTypeStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobTypeStatistics", false, ct);
+    }
+
+    /// <summary>
+    /// Get job statistics by worker
+    /// Returns aggregated metrics per worker for the given jobType.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: getJobWorkerStatistics</remarks>
+    public async Task<JobWorkerStatisticsQueryResult> GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery body, ConsistencyOptions<JobWorkerStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/jobs/statistics/by-workers";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getJobWorkerStatistics", false,
+                () => InvokeWithRetryAsync(() => SendAsync<JobWorkerStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobWorkerStatistics", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<JobWorkerStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobWorkerStatistics", false, ct);
     }
 
     /// <summary>
