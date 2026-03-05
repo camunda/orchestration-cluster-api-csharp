@@ -206,6 +206,14 @@ request open until jobs are available or this timeout elapses.
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.StartupJitterMaxSeconds.html#Camunda_Orchestration_Sdk_Runtime_JobWorkerConfig_StartupJitterMaxSeconds">StartupJitterMaxSeconds</a></dt>
+    <dd><p>Maximum random delay (in seconds) before the worker starts polling.
+When multiple application instances restart simultaneously, this spreads out
+initial activation requests to avoid saturating the server.
+<code>0</code> (the default) means no delay.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.WorkerName.html#Camunda_Orchestration_Sdk_Runtime_JobWorkerConfig_WorkerName">WorkerName</a></dt>
     <dd><p>Worker name sent to the broker for logging and diagnostics.
 Auto-generated if not set.</p>

@@ -11266,6 +11266,96 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.DocumentMetadata.Size
   fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadata.Size
   nameWithType: DocumentMetadata.Size
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse
+  name: DocumentMetadataResponse
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse
+  nameWithType: DocumentMetadataResponse
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ContentType
+  name: ContentType
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ContentType.html#Camunda_Orchestration_Sdk_Api_DocumentMetadataResponse_ContentType
+  commentId: P:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ContentType
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ContentType
+  nameWithType: DocumentMetadataResponse.ContentType
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ContentType*
+  name: ContentType
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ContentType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ContentType
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ContentType
+  nameWithType: DocumentMetadataResponse.ContentType
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.CustomProperties
+  name: CustomProperties
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.CustomProperties.html#Camunda_Orchestration_Sdk_Api_DocumentMetadataResponse_CustomProperties
+  commentId: P:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.CustomProperties
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.CustomProperties
+  nameWithType: DocumentMetadataResponse.CustomProperties
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.CustomProperties*
+  name: CustomProperties
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.CustomProperties.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.CustomProperties
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.CustomProperties
+  nameWithType: DocumentMetadataResponse.CustomProperties
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ExpiresAt
+  name: ExpiresAt
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ExpiresAt.html#Camunda_Orchestration_Sdk_Api_DocumentMetadataResponse_ExpiresAt
+  commentId: P:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ExpiresAt
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ExpiresAt
+  nameWithType: DocumentMetadataResponse.ExpiresAt
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ExpiresAt*
+  name: ExpiresAt
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ExpiresAt.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ExpiresAt
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ExpiresAt
+  nameWithType: DocumentMetadataResponse.ExpiresAt
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.FileName
+  name: FileName
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.FileName.html#Camunda_Orchestration_Sdk_Api_DocumentMetadataResponse_FileName
+  commentId: P:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.FileName
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.FileName
+  nameWithType: DocumentMetadataResponse.FileName
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.FileName*
+  name: FileName
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.FileName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.FileName
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.FileName
+  nameWithType: DocumentMetadataResponse.FileName
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessDefinitionId.html#Camunda_Orchestration_Sdk_Api_DocumentMetadataResponse_ProcessDefinitionId
+  commentId: P:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessDefinitionId
+  nameWithType: DocumentMetadataResponse.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessDefinitionId*
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessDefinitionId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessDefinitionId
+  nameWithType: DocumentMetadataResponse.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessInstanceKey.html#Camunda_Orchestration_Sdk_Api_DocumentMetadataResponse_ProcessInstanceKey
+  commentId: P:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessInstanceKey
+  nameWithType: DocumentMetadataResponse.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessInstanceKey*
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessInstanceKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.ProcessInstanceKey
+  nameWithType: DocumentMetadataResponse.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.Size
+  name: Size
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.Size.html#Camunda_Orchestration_Sdk_Api_DocumentMetadataResponse_Size
+  commentId: P:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.Size
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.Size
+  nameWithType: DocumentMetadataResponse.Size
+- uid: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.Size*
+  name: Size
+  href: api/Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.Size.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.Size
+  fullName: Camunda.Orchestration.Sdk.Api.DocumentMetadataResponse.Size
+  nameWithType: DocumentMetadataResponse.Size
 - uid: Camunda.Orchestration.Sdk.Api.DocumentReference
   name: DocumentReference
   href: api/Camunda.Orchestration.Sdk.Api.DocumentReference.html
@@ -12628,18 +12718,6 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest
   fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest
   nameWithType: ExpressionEvaluationRequest
-- uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
-  name: Context
-  href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context.html#Camunda_Orchestration_Sdk_Api_ExpressionEvaluationRequest_Context
-  commentId: P:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
-  fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
-  nameWithType: ExpressionEvaluationRequest.Context
-- uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context*
-  name: Context
-  href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context.html
-  commentId: Overload:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
-  fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Context
-  nameWithType: ExpressionEvaluationRequest.Context
 - uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Expression
   name: Expression
   href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Expression.html#Camunda_Orchestration_Sdk_Api_ExpressionEvaluationRequest_Expression
@@ -12679,6 +12757,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.TenantId
   fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.TenantId
   nameWithType: ExpressionEvaluationRequest.TenantId
+- uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Variables
+  name: Variables
+  href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Variables.html#Camunda_Orchestration_Sdk_Api_ExpressionEvaluationRequest_Variables
+  commentId: P:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Variables
+  fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Variables
+  nameWithType: ExpressionEvaluationRequest.Variables
+- uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Variables*
+  name: Variables
+  href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Variables.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Variables
+  fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationRequest.Variables
+  nameWithType: ExpressionEvaluationRequest.Variables
 - uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationResult
   name: ExpressionEvaluationResult
   href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationResult.html
@@ -15349,6 +15439,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.Api.IncidentStateEnum.RESOLVED
   fullName: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.RESOLVED
   nameWithType: IncidentStateEnum.RESOLVED
+- uid: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.UNKNOWN
+  name: UNKNOWN
+  href: api/Camunda.Orchestration.Sdk.Api.IncidentStateEnum.html#Camunda_Orchestration_Sdk_Api_IncidentStateEnum_UNKNOWN
+  commentId: F:Camunda.Orchestration.Sdk.Api.IncidentStateEnum.UNKNOWN
+  fullName: Camunda.Orchestration.Sdk.Api.IncidentStateEnum.UNKNOWN
+  nameWithType: IncidentStateEnum.UNKNOWN
 - uid: Camunda.Orchestration.Sdk.Api.IncidentStateExactMatch
   name: IncidentStateExactMatch
   href: api/Camunda.Orchestration.Sdk.Api.IncidentStateExactMatch.html
@@ -33109,6 +33205,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.PollTimeoutMs
   fullName: Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.PollTimeoutMs
   nameWithType: JobWorkerConfig.PollTimeoutMs
+- uid: Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.StartupJitterMaxSeconds
+  name: StartupJitterMaxSeconds
+  href: api/Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.StartupJitterMaxSeconds.html#Camunda_Orchestration_Sdk_Runtime_JobWorkerConfig_StartupJitterMaxSeconds
+  commentId: P:Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.StartupJitterMaxSeconds
+  fullName: Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.StartupJitterMaxSeconds
+  nameWithType: JobWorkerConfig.StartupJitterMaxSeconds
+- uid: Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.StartupJitterMaxSeconds*
+  name: StartupJitterMaxSeconds
+  href: api/Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.StartupJitterMaxSeconds.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.StartupJitterMaxSeconds
+  fullName: Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.StartupJitterMaxSeconds
+  nameWithType: JobWorkerConfig.StartupJitterMaxSeconds
 - uid: Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.WorkerName
   name: WorkerName
   href: api/Camunda.Orchestration.Sdk.Runtime.JobWorkerConfig.WorkerName.html#Camunda_Orchestration_Sdk_Runtime_JobWorkerConfig_WorkerName

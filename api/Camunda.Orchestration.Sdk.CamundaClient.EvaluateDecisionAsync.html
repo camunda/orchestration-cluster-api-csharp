@@ -156,13 +156,13 @@ version of the decision is used.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_EvaluateDecisionAsync_Camunda_Orchestration_Sdk_Api_DecisionEvaluationInstruction_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">static async Task EvaluateDecisionExample()
+<pre><code class="lang-csharp">private static async Task EvaluateDecisionExample()
 {
     using var client = Camunda.CreateClient();
 
     // Find the decision definition via search
     var definitions = await client.SearchDecisionDefinitionsAsync(new DecisionDefinitionSearchQuery());
-    var decisionDefinitionId = definitions.Items![0].DecisionDefinitionId.Value;
+    var decisionDefinitionId = definitions.Items![0].DecisionDefinitionId;
 
     var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
     {
