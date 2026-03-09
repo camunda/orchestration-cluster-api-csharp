@@ -5053,6 +5053,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationId
   fullName: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationId
   nameWithType: BaseProcessInstanceFilterFields.BatchOperationId
+- uid: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId.html#Camunda_Orchestration_Sdk_Api_BaseProcessInstanceFilterFields_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId
+  nameWithType: BaseProcessInstanceFilterFields.BusinessId
+- uid: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId
+  nameWithType: BaseProcessInstanceFilterFields.BusinessId
 - uid: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.ElementId
   name: ElementId
   href: api/Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.ElementId.html#Camunda_Orchestration_Sdk_Api_BaseProcessInstanceFilterFields_ElementId
@@ -15757,6 +15769,174 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorRequest.Variables
   fullName: Camunda.Orchestration.Sdk.Api.JobErrorRequest.Variables
   nameWithType: JobErrorRequest.Variables
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter
+  name: JobErrorStatisticsFilter
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter
+  nameWithType: JobErrorStatisticsFilter
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorCode
+  name: ErrorCode
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorCode.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsFilter_ErrorCode
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorCode
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorCode
+  nameWithType: JobErrorStatisticsFilter.ErrorCode
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorCode*
+  name: ErrorCode
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorCode.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorCode
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorCode
+  nameWithType: JobErrorStatisticsFilter.ErrorCode
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorMessage
+  name: ErrorMessage
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorMessage.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsFilter_ErrorMessage
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorMessage
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorMessage
+  nameWithType: JobErrorStatisticsFilter.ErrorMessage
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorMessage*
+  name: ErrorMessage
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorMessage.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorMessage
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.ErrorMessage
+  nameWithType: JobErrorStatisticsFilter.ErrorMessage
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.From
+  name: From
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.From.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsFilter_From
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.From
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.From
+  nameWithType: JobErrorStatisticsFilter.From
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.From*
+  name: From
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.From.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.From
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.From
+  nameWithType: JobErrorStatisticsFilter.From
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.JobType
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.JobType.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsFilter_JobType
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.JobType
+  nameWithType: JobErrorStatisticsFilter.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.JobType*
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.JobType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.JobType
+  nameWithType: JobErrorStatisticsFilter.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.To
+  name: To
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.To.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsFilter_To
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.To
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.To
+  nameWithType: JobErrorStatisticsFilter.To
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.To*
+  name: To
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.To.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.To
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsFilter.To
+  nameWithType: JobErrorStatisticsFilter.To
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem
+  name: JobErrorStatisticsItem
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem
+  nameWithType: JobErrorStatisticsItem
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorCode
+  name: ErrorCode
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorCode.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsItem_ErrorCode
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorCode
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorCode
+  nameWithType: JobErrorStatisticsItem.ErrorCode
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorCode*
+  name: ErrorCode
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorCode.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorCode
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorCode
+  nameWithType: JobErrorStatisticsItem.ErrorCode
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorMessage
+  name: ErrorMessage
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorMessage.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsItem_ErrorMessage
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorMessage
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorMessage
+  nameWithType: JobErrorStatisticsItem.ErrorMessage
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorMessage*
+  name: ErrorMessage
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorMessage.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorMessage
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.ErrorMessage
+  nameWithType: JobErrorStatisticsItem.ErrorMessage
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.Workers
+  name: Workers
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.Workers.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsItem_Workers
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.Workers
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.Workers
+  nameWithType: JobErrorStatisticsItem.Workers
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.Workers*
+  name: Workers
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.Workers.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.Workers
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsItem.Workers
+  nameWithType: JobErrorStatisticsItem.Workers
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery
+  name: JobErrorStatisticsQuery
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery
+  nameWithType: JobErrorStatisticsQuery
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Filter.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsQuery_Filter
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Filter
+  nameWithType: JobErrorStatisticsQuery.Filter
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Filter
+  nameWithType: JobErrorStatisticsQuery.Filter
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Page.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsQuery_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Page
+  nameWithType: JobErrorStatisticsQuery.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery.Page
+  nameWithType: JobErrorStatisticsQuery.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult
+  name: JobErrorStatisticsQueryResult
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult
+  nameWithType: JobErrorStatisticsQueryResult
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Items.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsQueryResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Items
+  nameWithType: JobErrorStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Items
+  nameWithType: JobErrorStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Page.html#Camunda_Orchestration_Sdk_Api_JobErrorStatisticsQueryResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Page
+  nameWithType: JobErrorStatisticsQueryResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult.Page
+  nameWithType: JobErrorStatisticsQueryResult.Page
 - uid: Camunda.Orchestration.Sdk.Api.JobFailRequest
   name: JobFailRequest
   href: api/Camunda.Orchestration.Sdk.Api.JobFailRequest.html
@@ -16423,6 +16603,84 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.JobListenerEventTypeFilterProperty
   fullName: Camunda.Orchestration.Sdk.Api.JobListenerEventTypeFilterProperty
   nameWithType: JobListenerEventTypeFilterProperty
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse
+  name: JobMetricsConfigurationResponse
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse
+  nameWithType: JobMetricsConfigurationResponse
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.Enabled
+  name: Enabled
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.Enabled.html#Camunda_Orchestration_Sdk_Api_JobMetricsConfigurationResponse_Enabled
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.Enabled
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.Enabled
+  nameWithType: JobMetricsConfigurationResponse.Enabled
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.Enabled*
+  name: Enabled
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.Enabled.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.Enabled
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.Enabled
+  nameWithType: JobMetricsConfigurationResponse.Enabled
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.ExportInterval
+  name: ExportInterval
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.ExportInterval.html#Camunda_Orchestration_Sdk_Api_JobMetricsConfigurationResponse_ExportInterval
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.ExportInterval
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.ExportInterval
+  nameWithType: JobMetricsConfigurationResponse.ExportInterval
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.ExportInterval*
+  name: ExportInterval
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.ExportInterval.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.ExportInterval
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.ExportInterval
+  nameWithType: JobMetricsConfigurationResponse.ExportInterval
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxJobTypeLength
+  name: MaxJobTypeLength
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxJobTypeLength.html#Camunda_Orchestration_Sdk_Api_JobMetricsConfigurationResponse_MaxJobTypeLength
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxJobTypeLength
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxJobTypeLength
+  nameWithType: JobMetricsConfigurationResponse.MaxJobTypeLength
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxJobTypeLength*
+  name: MaxJobTypeLength
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxJobTypeLength.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxJobTypeLength
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxJobTypeLength
+  nameWithType: JobMetricsConfigurationResponse.MaxJobTypeLength
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxTenantIdLength
+  name: MaxTenantIdLength
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxTenantIdLength.html#Camunda_Orchestration_Sdk_Api_JobMetricsConfigurationResponse_MaxTenantIdLength
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxTenantIdLength
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxTenantIdLength
+  nameWithType: JobMetricsConfigurationResponse.MaxTenantIdLength
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxTenantIdLength*
+  name: MaxTenantIdLength
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxTenantIdLength.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxTenantIdLength
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxTenantIdLength
+  nameWithType: JobMetricsConfigurationResponse.MaxTenantIdLength
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxUniqueKeys
+  name: MaxUniqueKeys
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxUniqueKeys.html#Camunda_Orchestration_Sdk_Api_JobMetricsConfigurationResponse_MaxUniqueKeys
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxUniqueKeys
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxUniqueKeys
+  nameWithType: JobMetricsConfigurationResponse.MaxUniqueKeys
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxUniqueKeys*
+  name: MaxUniqueKeys
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxUniqueKeys.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxUniqueKeys
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxUniqueKeys
+  nameWithType: JobMetricsConfigurationResponse.MaxUniqueKeys
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxWorkerNameLength
+  name: MaxWorkerNameLength
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxWorkerNameLength.html#Camunda_Orchestration_Sdk_Api_JobMetricsConfigurationResponse_MaxWorkerNameLength
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxWorkerNameLength
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxWorkerNameLength
+  nameWithType: JobMetricsConfigurationResponse.MaxWorkerNameLength
+- uid: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxWorkerNameLength*
+  name: MaxWorkerNameLength
+  href: api/Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxWorkerNameLength.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxWorkerNameLength
+  fullName: Camunda.Orchestration.Sdk.Api.JobMetricsConfigurationResponse.MaxWorkerNameLength
+  nameWithType: JobMetricsConfigurationResponse.MaxWorkerNameLength
 - uid: Camunda.Orchestration.Sdk.Api.JobResult
   name: JobResult
   href: api/Camunda.Orchestration.Sdk.Api.JobResult.html
@@ -17161,6 +17419,174 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.JobStateFilterProperty
   fullName: Camunda.Orchestration.Sdk.Api.JobStateFilterProperty
   nameWithType: JobStateFilterProperty
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter
+  name: JobTimeSeriesStatisticsFilter
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter
+  nameWithType: JobTimeSeriesStatisticsFilter
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.From
+  name: From
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.From.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsFilter_From
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.From
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.From
+  nameWithType: JobTimeSeriesStatisticsFilter.From
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.From*
+  name: From
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.From.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.From
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.From
+  nameWithType: JobTimeSeriesStatisticsFilter.From
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.JobType
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.JobType.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsFilter_JobType
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.JobType
+  nameWithType: JobTimeSeriesStatisticsFilter.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.JobType*
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.JobType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.JobType
+  nameWithType: JobTimeSeriesStatisticsFilter.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.Resolution
+  name: Resolution
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.Resolution.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsFilter_Resolution
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.Resolution
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.Resolution
+  nameWithType: JobTimeSeriesStatisticsFilter.Resolution
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.Resolution*
+  name: Resolution
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.Resolution.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.Resolution
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.Resolution
+  nameWithType: JobTimeSeriesStatisticsFilter.Resolution
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.To
+  name: To
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.To.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsFilter_To
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.To
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.To
+  nameWithType: JobTimeSeriesStatisticsFilter.To
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.To*
+  name: To
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.To.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.To
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsFilter.To
+  nameWithType: JobTimeSeriesStatisticsFilter.To
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem
+  name: JobTimeSeriesStatisticsItem
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem
+  nameWithType: JobTimeSeriesStatisticsItem
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Completed
+  name: Completed
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Completed.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsItem_Completed
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Completed
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Completed
+  nameWithType: JobTimeSeriesStatisticsItem.Completed
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Completed*
+  name: Completed
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Completed.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Completed
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Completed
+  nameWithType: JobTimeSeriesStatisticsItem.Completed
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Created
+  name: Created
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Created.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsItem_Created
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Created
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Created
+  nameWithType: JobTimeSeriesStatisticsItem.Created
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Created*
+  name: Created
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Created.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Created
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Created
+  nameWithType: JobTimeSeriesStatisticsItem.Created
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Failed
+  name: Failed
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Failed.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsItem_Failed
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Failed
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Failed
+  nameWithType: JobTimeSeriesStatisticsItem.Failed
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Failed*
+  name: Failed
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Failed.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Failed
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Failed
+  nameWithType: JobTimeSeriesStatisticsItem.Failed
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Time
+  name: Time
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Time.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsItem_Time
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Time
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Time
+  nameWithType: JobTimeSeriesStatisticsItem.Time
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Time*
+  name: Time
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Time.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Time
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsItem.Time
+  nameWithType: JobTimeSeriesStatisticsItem.Time
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery
+  name: JobTimeSeriesStatisticsQuery
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery
+  nameWithType: JobTimeSeriesStatisticsQuery
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Filter.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsQuery_Filter
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Filter
+  nameWithType: JobTimeSeriesStatisticsQuery.Filter
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Filter
+  nameWithType: JobTimeSeriesStatisticsQuery.Filter
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Page.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsQuery_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Page
+  nameWithType: JobTimeSeriesStatisticsQuery.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery.Page
+  nameWithType: JobTimeSeriesStatisticsQuery.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult
+  name: JobTimeSeriesStatisticsQueryResult
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult
+  nameWithType: JobTimeSeriesStatisticsQueryResult
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Items.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsQueryResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Items
+  nameWithType: JobTimeSeriesStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Items
+  nameWithType: JobTimeSeriesStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Page.html#Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsQueryResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Page
+  nameWithType: JobTimeSeriesStatisticsQueryResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult.Page
+  nameWithType: JobTimeSeriesStatisticsQueryResult.Page
 - uid: Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter
   name: JobTypeStatisticsFilter
   href: api/Camunda.Orchestration.Sdk.Api.JobTypeStatisticsFilter.html
@@ -17359,6 +17785,162 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.JobUpdateRequest.OperationReference
   fullName: Camunda.Orchestration.Sdk.Api.JobUpdateRequest.OperationReference
   nameWithType: JobUpdateRequest.OperationReference
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter
+  name: JobWorkerStatisticsFilter
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter
+  nameWithType: JobWorkerStatisticsFilter
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.From
+  name: From
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.From.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsFilter_From
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.From
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.From
+  nameWithType: JobWorkerStatisticsFilter.From
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.From*
+  name: From
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.From.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.From
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.From
+  nameWithType: JobWorkerStatisticsFilter.From
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.JobType
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.JobType.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsFilter_JobType
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.JobType
+  nameWithType: JobWorkerStatisticsFilter.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.JobType*
+  name: JobType
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.JobType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.JobType
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.JobType
+  nameWithType: JobWorkerStatisticsFilter.JobType
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.To
+  name: To
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.To.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsFilter_To
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.To
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.To
+  nameWithType: JobWorkerStatisticsFilter.To
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.To*
+  name: To
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.To.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.To
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsFilter.To
+  nameWithType: JobWorkerStatisticsFilter.To
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem
+  name: JobWorkerStatisticsItem
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem
+  nameWithType: JobWorkerStatisticsItem
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Completed
+  name: Completed
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Completed.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsItem_Completed
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Completed
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Completed
+  nameWithType: JobWorkerStatisticsItem.Completed
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Completed*
+  name: Completed
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Completed.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Completed
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Completed
+  nameWithType: JobWorkerStatisticsItem.Completed
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Created
+  name: Created
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Created.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsItem_Created
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Created
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Created
+  nameWithType: JobWorkerStatisticsItem.Created
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Created*
+  name: Created
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Created.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Created
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Created
+  nameWithType: JobWorkerStatisticsItem.Created
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Failed
+  name: Failed
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Failed.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsItem_Failed
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Failed
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Failed
+  nameWithType: JobWorkerStatisticsItem.Failed
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Failed*
+  name: Failed
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Failed.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Failed
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Failed
+  nameWithType: JobWorkerStatisticsItem.Failed
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Worker
+  name: Worker
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Worker.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsItem_Worker
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Worker
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Worker
+  nameWithType: JobWorkerStatisticsItem.Worker
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Worker*
+  name: Worker
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Worker.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Worker
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsItem.Worker
+  nameWithType: JobWorkerStatisticsItem.Worker
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery
+  name: JobWorkerStatisticsQuery
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery
+  nameWithType: JobWorkerStatisticsQuery
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Filter.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQuery_Filter
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Filter
+  nameWithType: JobWorkerStatisticsQuery.Filter
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Filter
+  nameWithType: JobWorkerStatisticsQuery.Filter
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Page.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQuery_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Page
+  nameWithType: JobWorkerStatisticsQuery.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery.Page
+  nameWithType: JobWorkerStatisticsQuery.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult
+  name: JobWorkerStatisticsQueryResult
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult
+  nameWithType: JobWorkerStatisticsQueryResult
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Items.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQueryResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Items
+  nameWithType: JobWorkerStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Items
+  nameWithType: JobWorkerStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Page.html#Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQueryResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Page
+  nameWithType: JobWorkerStatisticsQueryResult.Page
+- uid: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult.Page
+  nameWithType: JobWorkerStatisticsQueryResult.Page
 - uid: Camunda.Orchestration.Sdk.Api.LicenseResponse
   name: LicenseResponse
   href: api/Camunda.Orchestration.Sdk.Api.LicenseResponse.html
@@ -20686,6 +21268,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationId
   fullName: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationId
   nameWithType: ProcessDefinitionStatisticsFilter.BatchOperationId
+- uid: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId.html#Camunda_Orchestration_Sdk_Api_ProcessDefinitionStatisticsFilter_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId
+  nameWithType: ProcessDefinitionStatisticsFilter.BusinessId
+- uid: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId
+  nameWithType: ProcessDefinitionStatisticsFilter.BusinessId
 - uid: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.ElementId
   name: ElementId
   href: api/Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.ElementId.html#Camunda_Orchestration_Sdk_Api_ProcessDefinitionStatisticsFilter_ElementId
@@ -21562,6 +22156,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationId
   fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationId
   nameWithType: ProcessInstanceFilterFields.BatchOperationId
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceFilterFields_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId
+  nameWithType: ProcessInstanceFilterFields.BusinessId
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId
+  nameWithType: ProcessInstanceFilterFields.BusinessId
 - uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.ElementId
   name: ElementId
   href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.ElementId.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceFilterFields_ElementId
@@ -25135,6 +25741,24 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.Api.StringFilterProperty
   fullName: Camunda.Orchestration.Sdk.Api.StringFilterProperty
   nameWithType: StringFilterProperty
+- uid: Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse
+  name: SystemConfigurationResponse
+  href: api/Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse
+  fullName: Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse
+  nameWithType: SystemConfigurationResponse
+- uid: Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse.JobMetrics
+  name: JobMetrics
+  href: api/Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse.JobMetrics.html#Camunda_Orchestration_Sdk_Api_SystemConfigurationResponse_JobMetrics
+  commentId: P:Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse.JobMetrics
+  fullName: Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse.JobMetrics
+  nameWithType: SystemConfigurationResponse.JobMetrics
+- uid: Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse.JobMetrics*
+  name: JobMetrics
+  href: api/Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse.JobMetrics.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse.JobMetrics
+  fullName: Camunda.Orchestration.Sdk.Api.SystemConfigurationResponse.JobMetrics
+  nameWithType: SystemConfigurationResponse.JobMetrics
 - uid: Camunda.Orchestration.Sdk.Api.Tag
   name: Tag
   href: api/Camunda.Orchestration.Sdk.Api.Tag.html
@@ -29641,15 +30265,15 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetDecisionDefinitionXmlAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionDefinitionXmlAsync
   nameWithType: CamundaClient.GetDecisionDefinitionXmlAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.DecisionInstanceGetQueryResult},System.Threading.CancellationToken)
-  name: GetDecisionInstanceAsync(DecisionInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_DecisionInstanceGetQueryResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.DecisionInstanceGetQueryResult},System.Threading.CancellationToken)
-  name.vb: GetDecisionInstanceAsync(DecisionInstanceKey, ConsistencyOptions(Of DecisionInstanceGetQueryResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.DecisionInstanceGetQueryResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionInstanceKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.DecisionInstanceGetQueryResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.GetDecisionInstanceAsync(DecisionInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.GetDecisionInstanceAsync(DecisionInstanceKey, ConsistencyOptions(Of DecisionInstanceGetQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionEvaluationInstanceKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.DecisionInstanceGetQueryResult},System.Threading.CancellationToken)
+  name: GetDecisionInstanceAsync(DecisionEvaluationInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionEvaluationInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_DecisionInstanceGetQueryResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionEvaluationInstanceKey,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.DecisionInstanceGetQueryResult},System.Threading.CancellationToken)
+  name.vb: GetDecisionInstanceAsync(DecisionEvaluationInstanceKey, ConsistencyOptions(Of DecisionInstanceGetQueryResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionEvaluationInstanceKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.DecisionInstanceGetQueryResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync(Camunda.Orchestration.Sdk.Api.DecisionEvaluationInstanceKey, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.DecisionInstanceGetQueryResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetDecisionInstanceAsync(DecisionEvaluationInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetDecisionInstanceAsync(DecisionEvaluationInstanceKey, ConsistencyOptions(Of DecisionInstanceGetQueryResult), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync*
   name: GetDecisionInstanceAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync.html
@@ -29791,6 +30415,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetIncidentAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetIncidentAsync
   nameWithType: CamundaClient.GetIncidentAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult},System.Threading.CancellationToken)
+  name: GetJobErrorStatisticsAsync(JobErrorStatisticsQuery, ConsistencyOptions<JobErrorStatisticsQueryResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobErrorStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobErrorStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobErrorStatisticsQueryResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult},System.Threading.CancellationToken)
+  name.vb: GetJobErrorStatisticsAsync(JobErrorStatisticsQuery, ConsistencyOptions(Of JobErrorStatisticsQueryResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQuery, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.JobErrorStatisticsQueryResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetJobErrorStatisticsAsync(JobErrorStatisticsQuery, ConsistencyOptions<JobErrorStatisticsQueryResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetJobErrorStatisticsAsync(JobErrorStatisticsQuery, ConsistencyOptions(Of JobErrorStatisticsQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync*
+  name: GetJobErrorStatisticsAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync
+  nameWithType: CamundaClient.GetJobErrorStatisticsAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult},System.Threading.CancellationToken)
+  name: GetJobTimeSeriesStatisticsAsync(JobTimeSeriesStatisticsQuery, ConsistencyOptions<JobTimeSeriesStatisticsQueryResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobTimeSeriesStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsQueryResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult},System.Threading.CancellationToken)
+  name.vb: GetJobTimeSeriesStatisticsAsync(JobTimeSeriesStatisticsQuery, ConsistencyOptions(Of JobTimeSeriesStatisticsQueryResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQuery, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.JobTimeSeriesStatisticsQueryResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetJobTimeSeriesStatisticsAsync(JobTimeSeriesStatisticsQuery, ConsistencyOptions<JobTimeSeriesStatisticsQueryResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetJobTimeSeriesStatisticsAsync(JobTimeSeriesStatisticsQuery, ConsistencyOptions(Of JobTimeSeriesStatisticsQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync*
+  name: GetJobTimeSeriesStatisticsAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync
+  nameWithType: CamundaClient.GetJobTimeSeriesStatisticsAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.JobTypeStatisticsQueryResult},System.Threading.CancellationToken)
   name: GetJobTypeStatisticsAsync(JobTypeStatisticsQuery, ConsistencyOptions<JobTypeStatisticsQueryResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobTypeStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQueryResult__System_Threading_CancellationToken_
@@ -29806,6 +30460,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync
   nameWithType: CamundaClient.GetJobTypeStatisticsAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult},System.Threading.CancellationToken)
+  name: GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery, ConsistencyOptions<JobWorkerStatisticsQueryResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobWorkerStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQueryResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult},System.Threading.CancellationToken)
+  name.vb: GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery, ConsistencyOptions(Of JobWorkerStatisticsQueryResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions<Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync(Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQuery, Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions(Of Camunda.Orchestration.Sdk.Api.JobWorkerStatisticsQueryResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery, ConsistencyOptions<JobWorkerStatisticsQueryResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery, ConsistencyOptions(Of JobWorkerStatisticsQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync*
+  name: GetJobWorkerStatisticsAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync
+  nameWithType: CamundaClient.GetJobWorkerStatisticsAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetLicenseAsync(System.Threading.CancellationToken)
   name: GetLicenseAsync(CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetLicenseAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetLicenseAsync_System_Threading_CancellationToken_
@@ -30079,6 +30748,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetStatusAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetStatusAsync
   nameWithType: CamundaClient.GetStatusAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync(System.Threading.CancellationToken)
+  name: GetSystemConfigurationAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetSystemConfigurationAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetSystemConfigurationAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync*
+  name: GetSystemConfigurationAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync
+  nameWithType: CamundaClient.GetSystemConfigurationAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetTenantAsync(Camunda.Orchestration.Sdk.Api.TenantId,Camunda.Orchestration.Sdk.Runtime.ConsistencyOptions{Camunda.Orchestration.Sdk.Api.TenantResult},System.Threading.CancellationToken)
   name: GetTenantAsync(TenantId, ConsistencyOptions<TenantResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetTenantAsync_Camunda_Orchestration_Sdk_Api_TenantId_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_TenantResult__System_Threading_CancellationToken_

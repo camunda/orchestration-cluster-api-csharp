@@ -653,7 +653,7 @@ Returns decision definition as XML.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_DecisionInstanceGetQueryResult__System_Threading_CancellationToken_">GetDecisionInstanceAsync(DecisionInstanceKey, ConsistencyOptions&lt;DecisionInstanceGetQueryResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDecisionInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionInstanceAsync_Camunda_Orchestration_Sdk_Api_DecisionEvaluationInstanceKey_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_DecisionInstanceGetQueryResult__System_Threading_CancellationToken_">GetDecisionInstanceAsync(DecisionEvaluationInstanceKey, ConsistencyOptions&lt;DecisionInstanceGetQueryResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get decision instance
 Returns a decision instance.</p>
 </dd>
@@ -714,9 +714,29 @@ Returns incident as JSON.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetJobErrorStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobErrorStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobErrorStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobErrorStatisticsQueryResult__System_Threading_CancellationToken_">GetJobErrorStatisticsAsync(JobErrorStatisticsQuery, ConsistencyOptions&lt;JobErrorStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get error metrics for a job type
+Returns aggregated metrics per error for the given jobType.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetJobTimeSeriesStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobTimeSeriesStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobTimeSeriesStatisticsQueryResult__System_Threading_CancellationToken_">GetJobTimeSeriesStatisticsAsync(JobTimeSeriesStatisticsQuery, ConsistencyOptions&lt;JobTimeSeriesStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get time-series metrics for a job type
+Returns a list of time-bucketed metrics ordered ascending by time.
+The <code>from</code> and <code>to</code> fields select the time window of interest.
+Each item in the response corresponds to one time bucket of the requested resolution.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobTypeStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobTypeStatisticsQueryResult__System_Threading_CancellationToken_">GetJobTypeStatisticsAsync(JobTypeStatisticsQuery, ConsistencyOptions&lt;JobTypeStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get job statistics by type
 Get statistics about jobs, grouped by job type.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobWorkerStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQueryResult__System_Threading_CancellationToken_">GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery, ConsistencyOptions&lt;JobWorkerStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get job statistics by worker
+Returns aggregated metrics per worker for the given jobType.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -842,6 +862,15 @@ Note that this endpoint will only return linked forms. This endpoint does not su
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetStatusAsync_System_Threading_CancellationToken_">GetStatusAsync(CancellationToken)</a></dt>
     <dd><p>Get cluster status
 Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetSystemConfigurationAsync_System_Threading_CancellationToken_">GetSystemConfigurationAsync(CancellationToken)</a></dt>
+    <dd><p>System configuration (alpha)
+Returns the current system configuration. The response is an envelope
+that groups settings by feature area.</p>
+<p>This endpoint is an alpha feature and may be subject to change
+in future releases.</p>
 </dd>
   </dl>
   <dl class="jumplist">

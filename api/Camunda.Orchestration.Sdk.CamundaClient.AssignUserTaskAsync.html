@@ -161,7 +161,7 @@ Assigns a user task with the given key to the given assignee.</p>
 
     // Find a user task via search
     var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
-    var userTaskKey = tasks.Items![0].UserTaskKey.Value;
+    var userTaskKey = tasks.Items![0].UserTaskKey;
 
     await client.AssignUserTaskAsync(userTaskKey, new UserTaskAssignmentRequest
     {
