@@ -82,7 +82,7 @@ public sealed class JobWorkerConfig
     /// initial activation requests to avoid saturating the server.
     /// <c>0</c> (the default) means no delay.
     /// </summary>
-    public double StartupJitterMaxSeconds { get; init; } = 0;
+    public double StartupJitterMaxSeconds { get; init; }
 }
 
 /// <summary>
@@ -287,15 +287,17 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
     private async Task PollLoopAsync(CancellationToken ct)
     {
-        _logger.LogInformation("JobWorker '{Name}' started for type '{JobType}'",
-            _name, _config.JobType);
+        if (_logger.IsEnabled(LogLevel.Information))
+            _logger.LogInformation("JobWorker '{Name}' started for type '{JobType}'",
+                _name, _config.JobType);
 
         if (_config.StartupJitterMaxSeconds > 0)
         {
             var jitterMs = (int)(Random.Shared.NextDouble() * _config.StartupJitterMaxSeconds * 1000);
-            _logger.LogInformation(
-                "JobWorker '{Name}' delaying start by {JitterMs}ms (jitter)",
-                _name, jitterMs);
+            if (_logger.IsEnabled(LogLevel.Information))
+                _logger.LogInformation(
+                    "JobWorker '{Name}' delaying start by {JitterMs}ms (jitter)",
+                    _name, jitterMs);
             await Task.Delay(jitterMs, ct).ConfigureAwait(false);
         }
 
@@ -362,7 +364,8 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             // Normal shutdown
         }
 
-        _logger.LogInformation("JobWorker '{Name}' stopped", _name);
+        if (_logger.IsEnabled(LogLevel.Information))
+            _logger.LogInformation("JobWorker '{Name}' stopped", _name);
     }
 
     private async Task ExecuteJobAsync(ActivatedJob job, CancellationToken ct)
@@ -377,7 +380,8 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 Variables = result,
             }, ct: ct).ConfigureAwait(false);
 
-            _logger.LogDebug("JobWorker '{Name}': completed job {JobKey}", _name, job.JobKey);
+            if (_logger.IsEnabled(LogLevel.Debug))
+                _logger.LogDebug("JobWorker '{Name}': completed job {JobKey}", _name, job.JobKey);
         }
         catch (BpmnErrorException ex)
         {
@@ -390,8 +394,9 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
             // Worker is stopping — don't fail the job; it will be re-activated after timeout
-            _logger.LogDebug("JobWorker '{Name}': job {JobKey} cancelled due to worker shutdown",
-                _name, job.JobKey);
+            if (_logger.IsEnabled(LogLevel.Debug))
+                _logger.LogDebug("JobWorker '{Name}': job {JobKey} cancelled due to worker shutdown",
+                    _name, job.JobKey);
         }
         catch (Exception ex)
         {

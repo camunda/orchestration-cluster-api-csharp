@@ -17,7 +17,7 @@ internal static class IncidentExamples
 
         // Find an incident via search
         var incidents = await client.SearchIncidentsAsync(new IncidentSearchQuery());
-        var incidentKey = incidents.Items![0].IncidentKey.Value;
+        var incidentKey = incidents.Items![0].IncidentKey;
 
         var incident = await client.GetIncidentAsync(incidentKey);
 
@@ -33,7 +33,7 @@ internal static class IncidentExamples
 
         // Find an incident via search
         var incidents = await client.SearchIncidentsAsync(new IncidentSearchQuery());
-        var incidentKey = incidents.Items![0].IncidentKey.Value;
+        var incidentKey = incidents.Items![0].IncidentKey;
 
         await client.ResolveIncidentAsync(incidentKey, new IncidentResolutionRequest());
     }

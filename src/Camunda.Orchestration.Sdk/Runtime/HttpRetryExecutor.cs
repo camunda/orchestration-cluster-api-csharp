@@ -30,7 +30,8 @@ internal static class HttpRetryExecutor
 
                 if (!decision.Retryable || attempt + 1 >= config.MaxAttempts)
                 {
-                    logger.LogDebug("Non-retryable or max retries exhausted: {Reason}", decision.Reason);
+                    if (logger.IsEnabled(LogLevel.Debug))
+                        logger.LogDebug("Non-retryable or max retries exhausted: {Reason}", decision.Reason);
                     throw;
                 }
 
@@ -40,8 +41,9 @@ internal static class HttpRetryExecutor
                 var jitter = (int)(delay * 0.2 * (Random.Shared.NextDouble() - 0.5));
                 var sleepMs = delay + jitter;
 
-                logger.LogDebug("Retry attempt {Attempt}/{Max} after {Delay}ms: {Reason}",
-                    attempt + 1, config.MaxAttempts, sleepMs, decision.Reason);
+                if (logger.IsEnabled(LogLevel.Debug))
+                    logger.LogDebug("Retry attempt {Attempt}/{Max} after {Delay}ms: {Reason}",
+                        attempt + 1, config.MaxAttempts, sleepMs, decision.Reason);
 
                 await Task.Delay(sleepMs, ct);
             }

@@ -56,7 +56,8 @@ internal static class EventualPoller
                 {
                     if (options.IsConsistent(result))
                     {
-                        logger.LogDebug("Eventual consistency satisfied for {Op} after {Elapsed}ms", operationId, elapsed);
+                        if (logger.IsEnabled(LogLevel.Debug))
+                            logger.LogDebug("Eventual consistency satisfied for {Op} after {Elapsed}ms", operationId, elapsed);
                         return result;
                     }
                 }
@@ -67,7 +68,8 @@ internal static class EventualPoller
             }
             catch (HttpSdkException ex) when (ex.Status == 404 && isGet)
             {
-                logger.LogDebug("Eventual consistency: 404 for GET {Op}, will retry", operationId);
+                if (logger.IsEnabled(LogLevel.Debug))
+                    logger.LogDebug("Eventual consistency: 404 for GET {Op}, will retry", operationId);
             }
 
             elapsed += interval;

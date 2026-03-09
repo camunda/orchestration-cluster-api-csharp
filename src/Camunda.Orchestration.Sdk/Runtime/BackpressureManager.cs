@@ -55,8 +55,9 @@ internal sealed class BackpressureManager : IDisposable
                 : _config.SoftFactor;
 
             var newMax = Math.Max(_config.Floor, (int)(_permitsMax * factor));
-            _logger.LogDebug("Backpressure: reducing permits {Old} -> {New} (consecutive={Consecutive})",
-                _permitsMax, newMax, _consecutive);
+            if (_logger.IsEnabled(LogLevel.Debug))
+                _logger.LogDebug("Backpressure: reducing permits {Old} -> {New} (consecutive={Consecutive})",
+                    _permitsMax, newMax, _consecutive);
             _permitsMax = newMax;
         }
     }
@@ -70,7 +71,8 @@ internal sealed class BackpressureManager : IDisposable
             if (_config.Enabled && !_config.ObserveOnly)
             {
                 var newMax = _permitsMax + _config.RecoveryStep;
-                _logger.LogDebug("Backpressure: recovering permits {Old} -> {New}", _permitsMax, newMax);
+                if (_logger.IsEnabled(LogLevel.Debug))
+                    _logger.LogDebug("Backpressure: recovering permits {Old} -> {New}", _permitsMax, newMax);
                 _permitsMax = newMax;
             }
         }

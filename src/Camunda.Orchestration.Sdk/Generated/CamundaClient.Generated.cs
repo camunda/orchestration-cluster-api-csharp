@@ -1026,6 +1026,25 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get error metrics for a job type
+    /// Returns aggregated metrics per error for the given jobType.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: getJobErrorStatistics</remarks>
+    public async Task<JobErrorStatisticsQueryResult> GetJobErrorStatisticsAsync(JobErrorStatisticsQuery body, ConsistencyOptions<JobErrorStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/jobs/statistics/errors";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getJobErrorStatistics", false,
+                () => InvokeWithRetryAsync(() => SendAsync<JobErrorStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobErrorStatistics", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<JobErrorStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobErrorStatistics", false, ct);
+    }
+
+    /// <summary>
     /// Get time-series metrics for a job type
     /// Returns a list of time-bucketed metrics ordered ascending by time.
     /// The `from` and `to` fields select the time window of interest.
@@ -1416,6 +1435,22 @@ public partial class CamundaClient
     {
         var path = $"/status";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Get, path, null, ct); return 0; }, "getStatus", false, ct);
+    }
+
+    /// <summary>
+    /// System configuration (alpha)
+    /// Returns the current system configuration. The response is an envelope
+    /// that groups settings by feature area.
+    /// 
+    /// This endpoint is an alpha feature and may be subject to change
+    /// in future releases.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: getSystemConfiguration</remarks>
+    public async Task<SystemConfigurationResponse> GetSystemConfigurationAsync(CancellationToken ct = default)
+    {
+        var path = $"/system/configuration";
+        return await InvokeWithRetryAsync(() => SendAsync<SystemConfigurationResponse>(HttpMethod.Get, path, null, ct), "getSystemConfiguration", false, ct);
     }
 
     /// <summary>

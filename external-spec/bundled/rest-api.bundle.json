@@ -5221,7 +5221,10 @@
                             "description": "The ID of the client.",
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "clientId"
+                        ]
                       }
                     }
                   }
@@ -5969,7 +5972,10 @@
                           "username": {
                             "$ref": "#/components/schemas/Username"
                           }
-                        }
+                        },
+                        "required": [
+                          "username"
+                        ]
                       }
                     }
                   }
@@ -7423,6 +7429,86 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/JobTimeSeriesStatisticsQueryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/statistics/errors": {
+      "post": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Job"
+        ],
+        "operationId": "getJobErrorStatistics",
+        "summary": "Get error metrics for a job type",
+        "description": "Returns aggregated metrics per error for the given jobType.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobErrorStatisticsQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The job error statistics result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobErrorStatisticsQueryResult"
                 }
               }
             }
@@ -11011,7 +11097,10 @@
                             "description": "The ID of the client.",
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "clientId"
+                        ]
                       }
                     }
                   }
@@ -11922,7 +12011,10 @@
                           "username": {
                             "$ref": "#/components/schemas/Username"
                           }
-                        }
+                        },
+                        "required": [
+                          "username"
+                        ]
                       }
                     }
                   }
@@ -12479,6 +12571,70 @@
         }
       }
     },
+    "/system/configuration": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "getSystemConfiguration",
+        "x-eventually-consistent": false,
+        "summary": "System configuration (alpha)",
+        "description": "Returns the current system configuration. The response is an envelope\nthat groups settings by feature area.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+        "responses": {
+          "200": {
+            "description": "Current system configuration grouped by feature area.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemConfigurationResponse"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "jobMetrics": {
+                        "enabled": true,
+                        "exportInterval": "PT5M",
+                        "maxWorkerNameLength": 100,
+                        "maxJobTypeLength": 100,
+                        "maxTenantIdLength": 30,
+                        "maxUniqueKeys": 9500
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/tenants": {
       "post": {
         "x-eventually-consistent": false,
@@ -12999,7 +13155,10 @@
                             "description": "The ID of the client.",
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "clientId"
+                        ]
                       }
                     }
                   }
@@ -13941,7 +14100,10 @@
                           "username": {
                             "$ref": "#/components/schemas/Username"
                           }
-                        }
+                        },
+                        "required": [
+                          "username"
+                        ]
                       }
                     }
                   }
@@ -14317,13 +14479,20 @@
                           },
                           "name": {
                             "description": "The name of the user.",
+                            "nullable": true,
                             "type": "string"
                           },
                           "email": {
                             "description": "The email of the user.",
+                            "nullable": true,
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "username",
+                          "name",
+                          "email"
+                        ]
                       }
                     }
                   }
@@ -14414,13 +14583,20 @@
                     },
                     "name": {
                       "description": "The name of the user.",
+                      "nullable": true,
                       "type": "string"
                     },
                     "email": {
                       "description": "The email of the user.",
+                      "nullable": true,
                       "type": "string"
                     }
-                  }
+                  },
+                  "required": [
+                    "username",
+                    "name",
+                    "email"
+                  ]
                 }
               }
             }
@@ -14516,13 +14692,20 @@
                     },
                     "name": {
                       "description": "The name of the user.",
+                      "nullable": true,
                       "type": "string"
                     },
                     "email": {
                       "description": "The email of the user.",
+                      "nullable": true,
                       "type": "string"
                     }
-                  }
+                  },
+                  "required": [
+                    "username",
+                    "name",
+                    "email"
+                  ]
                 }
               }
             }
@@ -16345,7 +16528,6 @@
       },
       "AuditLogEntityKeyFilterProperty": {
         "description": "EntityKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/AuditLogEntityKeyExactMatch"
@@ -16398,7 +16580,6 @@
       },
       "EntityTypeFilterProperty": {
         "description": "AuditLogEntityTypeEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/EntityTypeExactMatch"
@@ -16447,7 +16628,6 @@
       },
       "OperationTypeFilterProperty": {
         "description": "AuditLogOperationTypeEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/OperationTypeExactMatch"
@@ -16496,7 +16676,6 @@
       },
       "CategoryFilterProperty": {
         "description": "AuditLogCategoryEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/CategoryExactMatch"
@@ -16545,7 +16724,6 @@
       },
       "AuditLogResultFilterProperty": {
         "description": "AuditLogResultEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/AuditLogResultExactMatch"
@@ -16594,7 +16772,6 @@
       },
       "AuditLogActorTypeFilterProperty": {
         "description": "AuditLogActorTypeEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/AuditLogActorTypeExactMatch"
@@ -16918,8 +17095,13 @@
       },
       "AuthorizationResult": {
         "required": [
+          "ownerId",
+          "ownerType",
+          "resourceType",
+          "resourceId",
+          "resourcePropertyName",
           "permissionTypes",
-          "resourcePropertyName"
+          "authorizationKey"
         ],
         "type": "object",
         "properties": {
@@ -16997,7 +17179,10 @@
             ],
             "description": "The key of the created authorization."
           }
-        }
+        },
+        "required": [
+          "authorizationKey"
+        ]
       },
       "PermissionTypeEnum": {
         "description": "Specifies the type of permissions.",
@@ -17746,7 +17931,6 @@
       },
       "BatchOperationTypeFilterProperty": {
         "description": "BatchOperationTypeEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/BatchOperationTypeExactMatch"
@@ -17795,7 +17979,6 @@
       },
       "BatchOperationStateFilterProperty": {
         "description": "BatchOperationStateEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/BatchOperationStateExactMatch"
@@ -17844,7 +18027,6 @@
       },
       "BatchOperationItemStateFilterProperty": {
         "description": "BatchOperationItemStateEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/BatchOperationItemStateExactMatch"
@@ -17944,6 +18126,9 @@
       },
       "ClusterVariableResult": {
         "type": "object",
+        "required": [
+          "value"
+        ],
         "allOf": [
           {
             "$ref": "#/components/schemas/ClusterVariableResultBase"
@@ -17959,6 +18144,10 @@
       "ClusterVariableSearchResult": {
         "description": "Cluster variable search response item.",
         "type": "object",
+        "required": [
+          "value",
+          "isTruncated"
+        ],
         "allOf": [
           {
             "$ref": "#/components/schemas/ClusterVariableResultBase"
@@ -17980,7 +18169,8 @@
         "type": "object",
         "required": [
           "name",
-          "scope"
+          "scope",
+          "tenantId"
         ],
         "properties": {
           "name": {
@@ -18089,7 +18279,6 @@
       },
       "ClusterVariableScopeFilterProperty": {
         "description": "ClusterVariableScopeEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/ClusterVariableScopeExactMatch"
@@ -19076,16 +19265,72 @@
       "DecisionInstanceResult": {
         "type": "object",
         "required": [
-          "rootProcessInstanceKey",
+          "decisionDefinitionId",
+          "decisionDefinitionKey",
+          "decisionDefinitionName",
+          "decisionDefinitionType",
+          "decisionDefinitionVersion",
+          "decisionEvaluationInstanceKey",
+          "decisionEvaluationKey",
+          "elementInstanceKey",
+          "evaluationDate",
           "evaluationFailure",
+          "processDefinitionKey",
+          "processInstanceKey",
+          "result",
+          "rootDecisionDefinitionKey",
+          "rootProcessInstanceKey",
+          "state",
           "tenantId"
         ],
         "properties": {
+          "decisionDefinitionId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DecisionDefinitionId"
+              }
+            ],
+            "description": "The ID of the DMN decision."
+          },
+          "decisionDefinitionKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DecisionDefinitionKey"
+              }
+            ],
+            "description": "The key of the decision."
+          },
+          "decisionDefinitionName": {
+            "type": "string",
+            "description": "The name of the DMN decision."
+          },
+          "decisionDefinitionType": {
+            "$ref": "#/components/schemas/DecisionDefinitionTypeEnum"
+          },
+          "decisionDefinitionVersion": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The version of the decision."
+          },
           "decisionEvaluationInstanceKey": {
             "$ref": "#/components/schemas/DecisionEvaluationInstanceKey"
           },
-          "state": {
-            "$ref": "#/components/schemas/DecisionInstanceStateEnum"
+          "decisionEvaluationKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DecisionEvaluationKey"
+              }
+            ],
+            "description": "The key of the decision evaluation where this instance was created."
+          },
+          "elementInstanceKey": {
+            "description": "The key of the element instance this decision instance is linked to.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementInstanceKey"
+              }
+            ]
           },
           "evaluationDate": {
             "type": "string",
@@ -19097,52 +19342,13 @@
             "nullable": true,
             "description": "The evaluation failure of the decision instance."
           },
-          "decisionDefinitionId": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DecisionDefinitionId"
-              }
-            ],
-            "description": "The ID of the DMN decision."
-          },
-          "decisionDefinitionName": {
-            "type": "string",
-            "description": "The name of the DMN decision."
-          },
-          "decisionDefinitionVersion": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The version of the decision."
-          },
-          "decisionDefinitionType": {
-            "$ref": "#/components/schemas/DecisionDefinitionTypeEnum"
-          },
-          "result": {
-            "type": "string",
-            "description": "The result of the decision instance."
-          },
-          "tenantId": {
-            "description": "The tenant ID of the decision instance.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TenantId"
-              }
-            ]
-          },
-          "decisionEvaluationKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DecisionEvaluationKey"
-              }
-            ],
-            "description": "The key of the decision evaluation where this instance was created."
-          },
           "processDefinitionKey": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/ProcessDefinitionKey"
               }
             ],
+            "nullable": true,
             "description": "The key of the process definition."
           },
           "processInstanceKey": {
@@ -19151,7 +19357,20 @@
                 "$ref": "#/components/schemas/ProcessInstanceKey"
               }
             ],
+            "nullable": true,
             "description": "The key of the process instance."
+          },
+          "result": {
+            "type": "string",
+            "description": "The result of the decision instance."
+          },
+          "rootDecisionDefinitionKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DecisionDefinitionKey"
+              }
+            ],
+            "description": "The key of the root decision definition."
           },
           "rootProcessInstanceKey": {
             "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
@@ -19162,29 +19381,16 @@
               }
             ]
           },
-          "decisionDefinitionKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DecisionDefinitionKey"
-              }
-            ],
-            "description": "The key of the decision."
+          "state": {
+            "$ref": "#/components/schemas/DecisionInstanceStateEnum"
           },
-          "elementInstanceKey": {
-            "description": "The key of the element instance this decision instance is linked to.",
+          "tenantId": {
+            "description": "The tenant ID of the decision instance.",
             "allOf": [
               {
-                "$ref": "#/components/schemas/ElementInstanceKey"
+                "$ref": "#/components/schemas/TenantId"
               }
             ]
-          },
-          "rootDecisionDefinitionKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DecisionDefinitionKey"
-              }
-            ],
-            "description": "The key of the root decision definition."
           }
         }
       },
@@ -19376,7 +19582,6 @@
       },
       "DecisionInstanceStateFilterProperty": {
         "description": "DecisionInstanceStateEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/DecisionInstanceStateExactMatch"
@@ -19489,21 +19694,32 @@
         }
       },
       "DecisionRequirementsResult": {
+        "required": [
+          "decisionRequirementsId",
+          "decisionRequirementsKey",
+          "decisionRequirementsName",
+          "resourceName",
+          "tenantId",
+          "version"
+        ],
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "decisionRequirementsName": {
-            "type": "string",
-            "description": "The DMN name of the decision requirements."
-          },
-          "version": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The assigned version of the decision requirements."
-          },
           "decisionRequirementsId": {
             "type": "string",
             "description": "The DMN ID of the decision requirements."
+          },
+          "decisionRequirementsKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DecisionRequirementsKey"
+              }
+            ],
+            "description": "The assigned key, which acts as a unique identifier for this decision requirements."
+          },
+          "decisionRequirementsName": {
+            "type": "string",
+            "description": "The DMN name of the decision requirements."
           },
           "resourceName": {
             "type": "string",
@@ -19517,13 +19733,10 @@
               }
             ]
           },
-          "decisionRequirementsKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DecisionRequirementsKey"
-              }
-            ],
-            "description": "The assigned key, which acts as a unique identifier for this decision requirements."
+          "version": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The assigned version of the decision requirements."
           }
         }
       },
@@ -19876,6 +20089,14 @@
       },
       "ResourceResult": {
         "type": "object",
+        "required": [
+          "resourceName",
+          "version",
+          "versionTag",
+          "resourceId",
+          "tenantId",
+          "resourceKey"
+        ],
         "properties": {
           "resourceName": {
             "description": "The resource name from which this resource was parsed.",
@@ -19887,6 +20108,7 @@
             "format": "int32"
           },
           "versionTag": {
+            "nullable": true,
             "description": "The version tag of this resource.",
             "type": "string"
           },
@@ -19944,7 +20166,6 @@
       },
       "DeploymentKeyFilterProperty": {
         "description": "DeploymentKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/DeploymentKeyExactMatch"
@@ -19997,7 +20218,6 @@
       },
       "ResourceKeyFilterProperty": {
         "description": "ResourceKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/ResourceKeyExactMatch"
@@ -20465,7 +20685,6 @@
       },
       "ElementInstanceStateFilterProperty": {
         "description": "ElementInstanceStateEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/ElementInstanceStateExactMatch"
@@ -20838,7 +21057,6 @@
       },
       "BasicStringFilterProperty": {
         "description": "String property with basic advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "type": "string",
@@ -20852,7 +21070,6 @@
       },
       "StringFilterProperty": {
         "description": "String property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "type": "string",
@@ -20915,7 +21132,6 @@
       },
       "IntegerFilterProperty": {
         "description": "Integer property with advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "type": "integer",
@@ -20979,7 +21195,6 @@
       },
       "DateTimeFilterProperty": {
         "description": "Date-time property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "type": "string",
@@ -20996,6 +21211,13 @@
         "type": "object",
         "x-semantic-provider": [
           "formId",
+          "formKey"
+        ],
+        "required": [
+          "tenantId",
+          "formId",
+          "schema",
+          "version",
           "formKey"
         ],
         "properties": {
@@ -21016,8 +21238,8 @@
             ]
           },
           "schema": {
-            "description": "The form content.",
-            "type": "object"
+            "description": "The form schema as a JSON document serialized as a string.",
+            "type": "string"
           },
           "version": {
             "description": "The version of the the deployed form.",
@@ -21263,7 +21485,6 @@
       },
       "GlobalListenerSourceFilterProperty": {
         "description": "Global listener source property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/GlobalListenerSourceExactMatch"
@@ -21312,7 +21533,6 @@
       },
       "GlobalTaskListenerEventTypeFilterProperty": {
         "description": "Global listener event type property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/GlobalTaskListenerEventTypeExactMatch"
@@ -21415,9 +21635,15 @@
           },
           "description": {
             "description": "The description of the created group.",
+            "nullable": true,
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "groupId",
+          "name",
+          "description"
+        ]
       },
       "GroupUpdateRequest": {
         "type": "object",
@@ -21448,9 +21674,15 @@
           },
           "description": {
             "type": "string",
+            "nullable": true,
             "description": "The description of the group."
           }
-        }
+        },
+        "required": [
+          "groupId",
+          "name",
+          "description"
+        ]
       },
       "GroupResult": {
         "description": "Group search response item.",
@@ -21466,9 +21698,15 @@
           },
           "description": {
             "type": "string",
+            "nullable": true,
             "description": "The group description."
           }
-        }
+        },
+        "required": [
+          "name",
+          "groupId",
+          "description"
+        ]
       },
       "GroupSearchQuerySortRequest": {
         "type": "object",
@@ -21562,7 +21800,10 @@
           "username": {
             "$ref": "#/components/schemas/Username"
           }
-        }
+        },
+        "required": [
+          "username"
+        ]
       },
       "GroupUserSearchResult": {
         "required": [
@@ -21626,7 +21867,10 @@
             "description": "The ID of the client.",
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "clientId"
+        ]
       },
       "GroupClientSearchResult": {
         "required": [
@@ -21946,7 +22190,6 @@
       },
       "IncidentErrorTypeFilterProperty": {
         "description": "IncidentErrorTypeEnum with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/IncidentErrorTypeExactMatch"
@@ -22024,7 +22267,6 @@
       },
       "IncidentStateFilterProperty": {
         "description": "IncidentStateEnum with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/IncidentStateExactMatch"
@@ -22141,6 +22383,16 @@
       "IncidentResult": {
         "type": "object",
         "required": [
+          "incidentKey",
+          "processDefinitionKey",
+          "processInstanceKey",
+          "elementInstanceKey",
+          "creationTime",
+          "state",
+          "errorType",
+          "errorMessage",
+          "elementId",
+          "processDefinitionId",
           "rootProcessInstanceKey",
           "jobKey",
           "tenantId"
@@ -22793,6 +23045,119 @@
           },
           "failed": {
             "$ref": "#/components/schemas/StatusMetric"
+          }
+        }
+      },
+      "JobErrorStatisticsQuery": {
+        "description": "Job error statistics query.",
+        "type": "object",
+        "required": [
+          "filter"
+        ],
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/JobErrorStatisticsFilter"
+          },
+          "page": {
+            "description": "Search cursor pagination.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CursorForwardPagination"
+              }
+            ]
+          }
+        }
+      },
+      "JobErrorStatisticsFilter": {
+        "description": "Job error statistics search filter.",
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "jobType"
+        ],
+        "properties": {
+          "from": {
+            "description": "Start of the time window to filter metrics. ISO 8601 date-time format.\n",
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-28T15:51:28.071Z"
+          },
+          "to": {
+            "description": "End of the time window to filter metrics. ISO 8601 date-time format.\n",
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-29T15:51:28.071Z"
+          },
+          "jobType": {
+            "description": "Job type to return error metrics for.",
+            "type": "string",
+            "example": "fetch-customer-data"
+          },
+          "errorCode": {
+            "description": "Optional error code filter with advanced search capabilities.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          },
+          "errorMessage": {
+            "description": "Optional error message filter with advanced search capabilities.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          }
+        }
+      },
+      "JobErrorStatisticsQueryResult": {
+        "description": "Job error statistics query result.",
+        "type": "object",
+        "required": [
+          "items",
+          "page"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryResponse"
+          }
+        ],
+        "properties": {
+          "items": {
+            "description": "The list of per-error statistics items.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobErrorStatisticsItem"
+            }
+          }
+        }
+      },
+      "JobErrorStatisticsItem": {
+        "description": "Aggregated error metrics for a single error type and message combination.",
+        "type": "object",
+        "required": [
+          "errorCode",
+          "errorMessage",
+          "workers"
+        ],
+        "properties": {
+          "errorCode": {
+            "description": "The error code identifier.",
+            "type": "string",
+            "example": "UNHANDLED_ERROR_EVENT"
+          },
+          "errorMessage": {
+            "description": "The error message.",
+            "type": "string",
+            "example": "An unexpected error occurred."
+          },
+          "workers": {
+            "description": "Number of distinct workers that encountered this error.",
+            "type": "integer",
+            "format": "int32",
+            "example": 15
           }
         }
       },
@@ -23819,7 +24184,6 @@
       },
       "JobKindFilterProperty": {
         "description": "JobKindEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/JobKindExactMatch"
@@ -23868,7 +24232,6 @@
       },
       "JobListenerEventTypeFilterProperty": {
         "description": "JobListenerEventTypeEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/JobListenerEventTypeExactMatch"
@@ -23917,7 +24280,6 @@
       },
       "JobStateFilterProperty": {
         "description": "JobStateEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/JobStateExactMatch"
@@ -24165,7 +24527,6 @@
       },
       "ProcessDefinitionKeyFilterProperty": {
         "description": "ProcessDefinitionKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/ProcessDefinitionKeyExactMatch"
@@ -24218,7 +24579,6 @@
       },
       "ProcessInstanceKeyFilterProperty": {
         "description": "ProcessInstanceKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/ProcessInstanceKeyExactMatch"
@@ -24271,7 +24631,6 @@
       },
       "ElementInstanceKeyFilterProperty": {
         "description": "ElementInstanceKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/ElementInstanceKeyExactMatch"
@@ -24324,7 +24683,6 @@
       },
       "JobKeyFilterProperty": {
         "description": "JobKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/JobKeyExactMatch"
@@ -24377,7 +24735,6 @@
       },
       "DecisionDefinitionKeyFilterProperty": {
         "description": "DecisionDefinitionKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/DecisionDefinitionKeyExactMatch"
@@ -24430,7 +24787,6 @@
       },
       "ScopeKeyFilterProperty": {
         "description": "ScopeKey property with full advanced search capabilities. Filter by the key of the\nelement instance or process instance that defines the scope of a variable.\n",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/ScopeKeyExactMatch"
@@ -24483,7 +24839,6 @@
       },
       "VariableKeyFilterProperty": {
         "description": "VariableKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/VariableKeyExactMatch"
@@ -24536,7 +24891,6 @@
       },
       "DecisionEvaluationInstanceKeyFilterProperty": {
         "description": "DecisionEvaluationInstanceKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/DecisionEvaluationInstanceKeyExactMatch"
@@ -24589,7 +24943,6 @@
       },
       "AuditLogKeyFilterProperty": {
         "description": "AuditLogKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/AuditLogKeyExactMatch"
@@ -24642,7 +24995,6 @@
       },
       "FormKeyFilterProperty": {
         "description": "FormKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/FormKeyExactMatch"
@@ -24695,7 +25047,6 @@
       },
       "DecisionEvaluationKeyFilterProperty": {
         "description": "DecisionEvaluationKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/DecisionEvaluationKeyExactMatch"
@@ -24748,7 +25099,6 @@
       },
       "DecisionRequirementsKeyFilterProperty": {
         "description": "DecisionRequirementsKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/DecisionRequirementsKeyExactMatch"
@@ -24898,7 +25248,13 @@
             "type": "string",
             "description": "The unique ID of the mapping rule."
           }
-        }
+        },
+        "required": [
+          "claimName",
+          "claimValue",
+          "name",
+          "mappingRuleId"
+        ]
       },
       "MappingRuleCreateResult": {
         "type": "object",
@@ -24955,7 +25311,13 @@
             "type": "string",
             "description": "The ID of the mapping rule."
           }
-        }
+        },
+        "required": [
+          "claimName",
+          "claimValue",
+          "name",
+          "mappingRuleId"
+        ]
       },
       "MappingRuleSearchQuerySortRequest": {
         "type": "object",
@@ -25706,7 +26068,6 @@
       },
       "MessageSubscriptionStateFilterProperty": {
         "description": "MessageSubscriptionStateEnum with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/MessageSubscriptionStateExactMatch"
@@ -25796,7 +26157,6 @@
       },
       "MessageSubscriptionKeyFilterProperty": {
         "description": "MessageSubscriptionKey property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/MessageSubscriptionKeyExactMatch"
@@ -25937,7 +26297,7 @@
             "description": "Name of this process definition."
           },
           "isLatestVersion": {
-            "description": "Whether to only return the latest version of each process definition.\nWhen using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.\nThe response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.\n",
+            "description": "Whether to only return the latest version of each process definition.\nWhen using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.\nThe response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.\nWhen using this filter, sorting is limited to `processDefinitionId` and `tenantId` fields only.\n",
             "type": "boolean"
           },
           "resourceName": {
@@ -26005,6 +26365,16 @@
       },
       "ProcessDefinitionResult": {
         "type": "object",
+        "required": [
+          "processDefinitionKey",
+          "name",
+          "resourceName",
+          "version",
+          "versionTag",
+          "processDefinitionId",
+          "tenantId",
+          "hasStartForm"
+        ],
         "properties": {
           "name": {
             "description": "Name of this process definition.",
@@ -26765,7 +27135,8 @@
               "endDate",
               "state",
               "hasIncident",
-              "tenantId"
+              "tenantId",
+              "businessId"
             ]
           },
           "order": {
@@ -26924,6 +27295,14 @@
           },
           "tags": {
             "$ref": "#/components/schemas/TagSet"
+          },
+          "businessId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "The business id associated with the process instance."
           }
         }
       },
@@ -27696,7 +28075,6 @@
       },
       "ProcessInstanceStateFilterProperty": {
         "description": "ProcessInstanceStateEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/ProcessInstanceStateExactMatch"
@@ -27741,9 +28119,15 @@
           },
           "description": {
             "description": "The description of the created role.",
+            "nullable": true,
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "roleId",
+          "name",
+          "description"
+        ]
       },
       "RoleUpdateRequest": {
         "type": "object",
@@ -27770,13 +28154,19 @@
           },
           "description": {
             "type": "string",
+            "nullable": true,
             "description": "The description of the updated role."
           },
           "roleId": {
             "type": "string",
             "description": "The ID of the updated role."
           }
-        }
+        },
+        "required": [
+          "roleId",
+          "name",
+          "description"
+        ]
       },
       "RoleResult": {
         "description": "Role search response item.",
@@ -27792,9 +28182,15 @@
           },
           "description": {
             "type": "string",
+            "nullable": true,
             "description": "The description of the role."
           }
-        }
+        },
+        "required": [
+          "roleId",
+          "name",
+          "description"
+        ]
       },
       "RoleSearchQuerySortRequest": {
         "type": "object",
@@ -27883,7 +28279,10 @@
           "username": {
             "$ref": "#/components/schemas/Username"
           }
-        }
+        },
+        "required": [
+          "username"
+        ]
       },
       "RoleUserSearchResult": {
         "type": "object",
@@ -27947,7 +28346,10 @@
             "description": "The ID of the client.",
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "clientId"
+        ]
       },
       "RoleClientSearchResult": {
         "type": "object",
@@ -28011,7 +28413,10 @@
             "description": "The id of the group.",
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "groupId"
+        ]
       },
       "RoleGroupSearchResult": {
         "type": "object",
@@ -28333,7 +28738,8 @@
       },
       "UsageMetricsResponse": {
         "required": [
-          "tenants"
+          "tenants",
+          "activeTenants"
         ],
         "type": "object",
         "allOf": [
@@ -28364,6 +28770,11 @@
         }
       },
       "UsageMetricsResponseItem": {
+        "required": [
+          "processInstances",
+          "decisionInstances",
+          "assignees"
+        ],
         "type": "object",
         "properties": {
           "processInstances": {
@@ -28380,6 +28791,66 @@
             "description": "The amount of unique active task users.",
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "SystemConfigurationResponse": {
+        "description": "Envelope for all system configuration sections. Each property\nrepresents a feature area.\n",
+        "type": "object",
+        "required": [
+          "jobMetrics"
+        ],
+        "properties": {
+          "jobMetrics": {
+            "$ref": "#/components/schemas/JobMetricsConfigurationResponse"
+          }
+        }
+      },
+      "JobMetricsConfigurationResponse": {
+        "description": "Configuration for job metrics collection and export.",
+        "type": "object",
+        "required": [
+          "enabled",
+          "exportInterval",
+          "maxWorkerNameLength",
+          "maxJobTypeLength",
+          "maxTenantIdLength",
+          "maxUniqueKeys"
+        ],
+        "properties": {
+          "enabled": {
+            "description": "Whether job metrics export is enabled.",
+            "type": "boolean",
+            "example": true
+          },
+          "exportInterval": {
+            "description": "The interval at which job metrics are exported, as an ISO 8601 duration.",
+            "type": "string",
+            "example": "PT5M"
+          },
+          "maxWorkerNameLength": {
+            "description": "The maximum length of the worker name used in job metrics labels.",
+            "type": "integer",
+            "format": "int32",
+            "example": 100
+          },
+          "maxJobTypeLength": {
+            "description": "The maximum length of the job type used in job metrics labels.",
+            "type": "integer",
+            "format": "int32",
+            "example": 100
+          },
+          "maxTenantIdLength": {
+            "description": "The maximum length of the tenant ID used in job metrics labels.",
+            "type": "integer",
+            "format": "int32",
+            "example": 30
+          },
+          "maxUniqueKeys": {
+            "description": "The maximum number of unique metric keys tracked for job metrics.",
+            "type": "integer",
+            "format": "int32",
+            "example": 9500
           }
         }
       },
@@ -28425,9 +28896,15 @@
           "description": {
             "type": "string",
             "description": "The description of the tenant.",
+            "nullable": true,
             "example": "Customer Service department business processes"
           }
-        }
+        },
+        "required": [
+          "tenantId",
+          "name",
+          "description"
+        ]
       },
       "TenantUpdateRequest": {
         "type": "object",
@@ -28458,9 +28935,15 @@
           },
           "description": {
             "type": "string",
+            "nullable": true,
             "description": "The description of the tenant."
           }
-        }
+        },
+        "required": [
+          "tenantId",
+          "name",
+          "description"
+        ]
       },
       "TenantResult": {
         "description": "Tenant search response item.",
@@ -28477,9 +28960,15 @@
           "description": {
             "type": "string",
             "description": "The tenant description.",
+            "nullable": true,
             "example": "Customer Service department business processes"
           }
-        }
+        },
+        "required": [
+          "tenantId",
+          "name",
+          "description"
+        ]
       },
       "TenantSearchQuerySortRequest": {
         "type": "object",
@@ -28568,7 +29057,10 @@
           "username": {
             "$ref": "#/components/schemas/Username"
           }
-        }
+        },
+        "required": [
+          "username"
+        ]
       },
       "TenantUserSearchResult": {
         "required": [
@@ -28633,7 +29125,10 @@
             "description": "The ID of the client.",
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "clientId"
+        ]
       },
       "TenantClientSearchResult": {
         "required": [
@@ -28698,7 +29193,10 @@
             "description": "The groupId of the group.",
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "groupId"
+        ]
       },
       "TenantGroupSearchResult": {
         "type": "object",
@@ -29030,20 +29528,34 @@
       "UserTaskResult": {
         "type": "object",
         "required": [
+          "tenantId",
+          "userTaskKey",
+          "name",
+          "processInstanceKey",
           "rootProcessInstanceKey",
+          "processDefinitionKey",
+          "elementInstanceKey",
+          "processDefinitionId",
+          "processName",
+          "state",
           "candidateGroups",
           "candidateUsers",
+          "elementId",
+          "creationDate",
           "customHeaders",
+          "priority",
           "tags",
           "assignee",
           "completionDate",
           "dueDate",
           "externalFormReference",
           "followUpDate",
+          "processDefinitionVersion",
           "formKey"
         ],
         "properties": {
           "name": {
+            "nullable": true,
             "type": "string",
             "description": "The name for this user task."
           },
@@ -29395,7 +29907,6 @@
       },
       "UserTaskStateFilterProperty": {
         "description": "UserTaskStateEnum property with full advanced search capabilities.",
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/UserTaskStateExactMatch"
@@ -29525,13 +30036,20 @@
           },
           "name": {
             "description": "The name of the user.",
+            "nullable": true,
             "type": "string"
           },
           "email": {
             "description": "The email of the user.",
+            "nullable": true,
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "username",
+          "name",
+          "email"
+        ]
       },
       "UserUpdateRequest": {
         "type": "object",
@@ -29558,13 +30076,20 @@
           },
           "name": {
             "description": "The name of the user.",
+            "nullable": true,
             "type": "string"
           },
           "email": {
             "description": "The email of the user.",
+            "nullable": true,
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "username",
+          "name",
+          "email"
+        ]
       },
       "UserResult": {
         "type": "object",
@@ -29574,13 +30099,20 @@
           },
           "name": {
             "description": "The name of the user.",
+            "nullable": true,
             "type": "string"
           },
           "email": {
             "description": "The email of the user.",
+            "nullable": true,
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "username",
+          "name",
+          "email"
+        ]
       },
       "UserSearchQuerySortRequest": {
         "type": "object",
@@ -29829,6 +30361,9 @@
       "VariableResult": {
         "description": "Variable search response item.",
         "type": "object",
+        "required": [
+          "value"
+        ],
         "allOf": [
           {
             "$ref": "#/components/schemas/VariableResultBase"

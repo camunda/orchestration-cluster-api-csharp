@@ -75,7 +75,8 @@ public partial class CamundaClient : IDisposable
 
         _bp = new BackpressureManager(_config.Backpressure, _logger);
 
-        _logger.LogDebug("CamundaClient constructed with auth strategy {Strategy}", _config.Auth.Strategy);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("CamundaClient constructed with auth strategy {Strategy}", _config.Auth.Strategy);
     }
 
     /// <summary>
@@ -140,7 +141,8 @@ public partial class CamundaClient : IDisposable
         object? body = null,
         CancellationToken ct = default)
     {
-        _logger.LogDebug("HTTP {Method} {Path}", method, path);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("HTTP {Method} {Path}", method, path);
 
         // Strip leading '/' so the path resolves relative to BaseAddress.
         // Without this, "/topology" would be absolute from the host root,
@@ -160,14 +162,16 @@ public partial class CamundaClient : IDisposable
         {
             var errorBody = await response.Content.ReadAsStringAsync(ct);
             var exception = BuildHttpException(response.StatusCode, errorBody, path);
-            _logger.LogWarning("HTTP {Method} {Path} failed with {Status}", method, path, (int)response.StatusCode);
+            if (_logger.IsEnabled(LogLevel.Warning))
+                _logger.LogWarning("HTTP {Method} {Path} failed with {Status}", method, path, (int)response.StatusCode);
 
             if (_throwOnError)
                 throw exception;
         }
         else
         {
-            _logger.LogDebug("HTTP {Method} {Path} -> {Status}", method, path, (int)response.StatusCode);
+            if (_logger.IsEnabled(LogLevel.Debug))
+                _logger.LogDebug("HTTP {Method} {Path} -> {Status}", method, path, (int)response.StatusCode);
         }
 
         if (response.StatusCode == HttpStatusCode.NoContent || typeof(TResponse) == typeof(VoidResponse))
@@ -189,7 +193,8 @@ public partial class CamundaClient : IDisposable
         object? body = null,
         CancellationToken ct = default)
     {
-        _logger.LogDebug("HTTP {Method} {Path}", method, path);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("HTTP {Method} {Path}", method, path);
 
         var relativePath = path.TrimStart('/');
         using var request = new HttpRequestMessage(method, relativePath);
@@ -205,11 +210,13 @@ public partial class CamundaClient : IDisposable
         if (!response.IsSuccessStatusCode)
         {
             var errorBody = await response.Content.ReadAsStringAsync(ct);
-            _logger.LogWarning("HTTP {Method} {Path} failed with {Status}", method, path, (int)response.StatusCode);
+            if (_logger.IsEnabled(LogLevel.Warning))
+                _logger.LogWarning("HTTP {Method} {Path} failed with {Status}", method, path, (int)response.StatusCode);
             throw BuildHttpException(response.StatusCode, errorBody, path);
         }
 
-        _logger.LogDebug("HTTP {Method} {Path} -> {Status}", method, path, (int)response.StatusCode);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("HTTP {Method} {Path} -> {Status}", method, path, (int)response.StatusCode);
     }
 
     /// <summary>
@@ -220,7 +227,8 @@ public partial class CamundaClient : IDisposable
         MultipartFormDataContent content,
         CancellationToken ct = default)
     {
-        _logger.LogDebug("HTTP POST {Path} (multipart)", path);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("HTTP POST {Path} (multipart)", path);
 
         var relativePath = path.TrimStart('/');
         using var request = new HttpRequestMessage(HttpMethod.Post, relativePath) { Content = content };
@@ -229,11 +237,13 @@ public partial class CamundaClient : IDisposable
         if (!response.IsSuccessStatusCode)
         {
             var errorBody = await response.Content.ReadAsStringAsync(ct);
-            _logger.LogWarning("HTTP POST {Path} (multipart) failed with {Status}", path, (int)response.StatusCode);
+            if (_logger.IsEnabled(LogLevel.Warning))
+                _logger.LogWarning("HTTP POST {Path} (multipart) failed with {Status}", path, (int)response.StatusCode);
             throw BuildHttpException(response.StatusCode, errorBody, path);
         }
 
-        _logger.LogDebug("HTTP POST {Path} (multipart) -> {Status}", path, (int)response.StatusCode);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("HTTP POST {Path} (multipart) -> {Status}", path, (int)response.StatusCode);
 
         var responseContent = await response.Content.ReadAsStringAsync(ct);
         return JsonSerializer.Deserialize<TResponse>(responseContent, _jsonOptions)!;
@@ -281,7 +291,8 @@ public partial class CamundaClient : IDisposable
         if (!bodyDict.TryGetValue("tenantId", out var tenantId) || tenantId != null)
             return;
         bodyDict["tenantId"] = _config.DefaultTenantId;
-        _logger.LogTrace("tenant.default.inject: {Tenant}", _config.DefaultTenantId);
+        if (_logger.IsEnabled(LogLevel.Trace))
+            _logger.LogTrace("tenant.default.inject: {Tenant}", _config.DefaultTenantId);
     }
 
     public void Dispose()

@@ -89,7 +89,8 @@ internal sealed class OAuthManager : IDisposable
         {
             try
             {
-                _logger.LogDebug("OAuth token attempt {Attempt}/{Max}", attempt + 1, max);
+                if (_logger.IsEnabled(LogLevel.Debug))
+                    _logger.LogDebug("OAuth token attempt {Attempt}/{Max}", attempt + 1, max);
 
                 using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
                 cts.CancelAfter(_config.OAuth.TimeoutMs);
@@ -116,8 +117,9 @@ internal sealed class OAuthManager : IDisposable
                     ExpiresAtEpochMs = now + lifetimeMs - skewBuffer,
                 };
 
-                _logger.LogInformation("Token fetched; effective expiry (s)={Expiry}",
-                    Math.Round((_token.ExpiresAtEpochMs - now) / 1000.0));
+                if (_logger.IsEnabled(LogLevel.Information))
+                    _logger.LogInformation("Token fetched; effective expiry (s)={Expiry}",
+                        Math.Round((_token.ExpiresAtEpochMs - now) / 1000.0));
 
                 return _token.AccessToken;
             }

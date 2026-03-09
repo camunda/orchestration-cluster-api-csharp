@@ -2681,7 +2681,7 @@ public sealed class AuthorizationCreateResult
     /// The key of the created authorization.
     /// </summary>
     [JsonPropertyName("authorizationKey")]
-    public AuthorizationKey? AuthorizationKey { get; set; }
+    public AuthorizationKey AuthorizationKey { get; set; }
 
 }
 
@@ -2851,19 +2851,19 @@ public sealed class AuthorizationResult
     /// The ID of the owner of permissions.
     /// </summary>
     [JsonPropertyName("ownerId")]
-    public string? OwnerId { get; set; }
+    public string OwnerId { get; set; } = null!;
 
     /// <summary>
     /// The type of the owner of permissions.
     /// </summary>
     [JsonPropertyName("ownerType")]
-    public OwnerTypeEnum? OwnerType { get; set; }
+    public OwnerTypeEnum OwnerType { get; set; }
 
     /// <summary>
     /// The type of resource that the permissions relate to.
     /// </summary>
     [JsonPropertyName("resourceType")]
-    public string? ResourceType { get; set; }
+    public string ResourceType { get; set; } = null!;
 
     /// <summary>
     /// ID of the resource the permission relates to (mutually exclusive with `resourcePropertyName`).
@@ -2887,7 +2887,7 @@ public sealed class AuthorizationResult
     /// The key of the authorization.
     /// </summary>
     [JsonPropertyName("authorizationKey")]
-    public AuthorizationKey? AuthorizationKey { get; set; }
+    public AuthorizationKey AuthorizationKey { get; set; }
 
 }
 
@@ -3060,6 +3060,12 @@ public sealed class BaseProcessInstanceFilterFields
     /// </summary>
     [JsonPropertyName("tags")]
     public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// The business id associated with the process instance.
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
 
 }
 
@@ -3950,7 +3956,7 @@ public sealed class ClusterVariableResult
     /// Full value of this cluster variable.
     /// </summary>
     [JsonPropertyName("value")]
-    public string? Value { get; set; }
+    public string Value { get; set; } = null!;
 
     /// <summary>
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
@@ -4154,13 +4160,13 @@ public sealed class ClusterVariableSearchResult
     /// Value of this cluster variable. Can be truncated.
     /// </summary>
     [JsonPropertyName("value")]
-    public string? Value { get; set; }
+    public string Value { get; set; } = null!;
 
     /// <summary>
     /// Whether the value is truncated or not.
     /// </summary>
     [JsonPropertyName("isTruncated")]
-    public bool? IsTruncated { get; set; }
+    public bool IsTruncated { get; set; }
 
     /// <summary>
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
@@ -4911,6 +4917,7 @@ public enum DecisionDefinitionTypeEnum
     DECISIONTABLE,
     [JsonPropertyName("LITERAL_EXPRESSION")]
     LITERALEXPRESSION,
+    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
     [JsonPropertyName("UNKNOWN")]
@@ -5249,70 +5256,64 @@ public sealed class DecisionInstanceFilter
 public sealed class DecisionInstanceGetQueryResult
 {
     /// <summary>
+    /// The ID of the DMN decision.
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionId")]
+    public DecisionDefinitionId DecisionDefinitionId { get; set; }
+
+    /// <summary>
+    /// The key of the decision.
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionKey")]
+    public DecisionDefinitionKey DecisionDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The name of the DMN decision.
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionName")]
+    public string DecisionDefinitionName { get; set; } = null!;
+
+    /// <summary>
+    /// The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionType")]
+    public DecisionDefinitionTypeEnum DecisionDefinitionType { get; set; }
+
+    /// <summary>
+    /// The version of the decision.
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionVersion")]
+    public int DecisionDefinitionVersion { get; set; }
+
+    /// <summary>
     /// System-generated key for a decision evaluation instance.
     /// </summary>
     [JsonPropertyName("decisionEvaluationInstanceKey")]
-    public DecisionEvaluationInstanceKey? DecisionEvaluationInstanceKey { get; set; }
+    public DecisionEvaluationInstanceKey DecisionEvaluationInstanceKey { get; set; }
 
     /// <summary>
-    /// The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
+    /// The key of the decision evaluation where this instance was created.
     /// </summary>
-    [JsonPropertyName("state")]
-    public DecisionInstanceStateEnum? State { get; set; }
+    [JsonPropertyName("decisionEvaluationKey")]
+    public DecisionEvaluationKey DecisionEvaluationKey { get; set; }
+
+    /// <summary>
+    /// The key of the element instance this decision instance is linked to.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey? ElementInstanceKey { get; set; }
 
     /// <summary>
     /// The evaluation date of the decision instance.
     /// </summary>
     [JsonPropertyName("evaluationDate")]
-    public DateTimeOffset? EvaluationDate { get; set; }
+    public DateTimeOffset EvaluationDate { get; set; }
 
     /// <summary>
     /// The evaluation failure of the decision instance.
     /// </summary>
     [JsonPropertyName("evaluationFailure")]
     public string? EvaluationFailure { get; set; }
-
-    /// <summary>
-    /// The ID of the DMN decision.
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionId")]
-    public DecisionDefinitionId? DecisionDefinitionId { get; set; }
-
-    /// <summary>
-    /// The name of the DMN decision.
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionName")]
-    public string? DecisionDefinitionName { get; set; }
-
-    /// <summary>
-    /// The version of the decision.
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionVersion")]
-    public int? DecisionDefinitionVersion { get; set; }
-
-    /// <summary>
-    /// The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionType")]
-    public DecisionDefinitionTypeEnum? DecisionDefinitionType { get; set; }
-
-    /// <summary>
-    /// The result of the decision instance.
-    /// </summary>
-    [JsonPropertyName("result")]
-    public string? Result { get; set; }
-
-    /// <summary>
-    /// The tenant ID of the decision instance.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId TenantId { get; set; }
-
-    /// <summary>
-    /// The key of the decision evaluation where this instance was created.
-    /// </summary>
-    [JsonPropertyName("decisionEvaluationKey")]
-    public DecisionEvaluationKey? DecisionEvaluationKey { get; set; }
 
     /// <summary>
     /// The key of the process definition.
@@ -5327,6 +5328,18 @@ public sealed class DecisionInstanceGetQueryResult
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The result of the decision instance.
+    /// </summary>
+    [JsonPropertyName("result")]
+    public string Result { get; set; } = null!;
+
+    /// <summary>
+    /// The key of the root decision definition.
+    /// </summary>
+    [JsonPropertyName("rootDecisionDefinitionKey")]
+    public DecisionDefinitionKey RootDecisionDefinitionKey { get; set; }
+
+    /// <summary>
     /// The key of the root process instance. The root process instance is the top-level
     /// ancestor in the process instance hierarchy. This field is only present for data
     /// belonging to process instance hierarchies created in version 8.9 or later.
@@ -5336,22 +5349,16 @@ public sealed class DecisionInstanceGetQueryResult
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// The key of the decision.
+    /// The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
     /// </summary>
-    [JsonPropertyName("decisionDefinitionKey")]
-    public DecisionDefinitionKey? DecisionDefinitionKey { get; set; }
+    [JsonPropertyName("state")]
+    public DecisionInstanceStateEnum State { get; set; }
 
     /// <summary>
-    /// The key of the element instance this decision instance is linked to.
+    /// The tenant ID of the decision instance.
     /// </summary>
-    [JsonPropertyName("elementInstanceKey")]
-    public ElementInstanceKey? ElementInstanceKey { get; set; }
-
-    /// <summary>
-    /// The key of the root decision definition.
-    /// </summary>
-    [JsonPropertyName("rootDecisionDefinitionKey")]
-    public DecisionDefinitionKey? RootDecisionDefinitionKey { get; set; }
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The evaluated inputs of the decision instance.
@@ -5403,70 +5410,64 @@ public readonly record struct DecisionInstanceKey : global::Camunda.Orchestratio
 public sealed class DecisionInstanceResult
 {
     /// <summary>
+    /// The ID of the DMN decision.
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionId")]
+    public DecisionDefinitionId DecisionDefinitionId { get; set; }
+
+    /// <summary>
+    /// The key of the decision.
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionKey")]
+    public DecisionDefinitionKey DecisionDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The name of the DMN decision.
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionName")]
+    public string DecisionDefinitionName { get; set; } = null!;
+
+    /// <summary>
+    /// The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionType")]
+    public DecisionDefinitionTypeEnum DecisionDefinitionType { get; set; }
+
+    /// <summary>
+    /// The version of the decision.
+    /// </summary>
+    [JsonPropertyName("decisionDefinitionVersion")]
+    public int DecisionDefinitionVersion { get; set; }
+
+    /// <summary>
     /// System-generated key for a decision evaluation instance.
     /// </summary>
     [JsonPropertyName("decisionEvaluationInstanceKey")]
-    public DecisionEvaluationInstanceKey? DecisionEvaluationInstanceKey { get; set; }
+    public DecisionEvaluationInstanceKey DecisionEvaluationInstanceKey { get; set; }
 
     /// <summary>
-    /// The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
+    /// The key of the decision evaluation where this instance was created.
     /// </summary>
-    [JsonPropertyName("state")]
-    public DecisionInstanceStateEnum? State { get; set; }
+    [JsonPropertyName("decisionEvaluationKey")]
+    public DecisionEvaluationKey DecisionEvaluationKey { get; set; }
+
+    /// <summary>
+    /// The key of the element instance this decision instance is linked to.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey? ElementInstanceKey { get; set; }
 
     /// <summary>
     /// The evaluation date of the decision instance.
     /// </summary>
     [JsonPropertyName("evaluationDate")]
-    public DateTimeOffset? EvaluationDate { get; set; }
+    public DateTimeOffset EvaluationDate { get; set; }
 
     /// <summary>
     /// The evaluation failure of the decision instance.
     /// </summary>
     [JsonPropertyName("evaluationFailure")]
     public string? EvaluationFailure { get; set; }
-
-    /// <summary>
-    /// The ID of the DMN decision.
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionId")]
-    public DecisionDefinitionId? DecisionDefinitionId { get; set; }
-
-    /// <summary>
-    /// The name of the DMN decision.
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionName")]
-    public string? DecisionDefinitionName { get; set; }
-
-    /// <summary>
-    /// The version of the decision.
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionVersion")]
-    public int? DecisionDefinitionVersion { get; set; }
-
-    /// <summary>
-    /// The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
-    /// </summary>
-    [JsonPropertyName("decisionDefinitionType")]
-    public DecisionDefinitionTypeEnum? DecisionDefinitionType { get; set; }
-
-    /// <summary>
-    /// The result of the decision instance.
-    /// </summary>
-    [JsonPropertyName("result")]
-    public string? Result { get; set; }
-
-    /// <summary>
-    /// The tenant ID of the decision instance.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId TenantId { get; set; }
-
-    /// <summary>
-    /// The key of the decision evaluation where this instance was created.
-    /// </summary>
-    [JsonPropertyName("decisionEvaluationKey")]
-    public DecisionEvaluationKey? DecisionEvaluationKey { get; set; }
 
     /// <summary>
     /// The key of the process definition.
@@ -5481,6 +5482,18 @@ public sealed class DecisionInstanceResult
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The result of the decision instance.
+    /// </summary>
+    [JsonPropertyName("result")]
+    public string Result { get; set; } = null!;
+
+    /// <summary>
+    /// The key of the root decision definition.
+    /// </summary>
+    [JsonPropertyName("rootDecisionDefinitionKey")]
+    public DecisionDefinitionKey RootDecisionDefinitionKey { get; set; }
+
+    /// <summary>
     /// The key of the root process instance. The root process instance is the top-level
     /// ancestor in the process instance hierarchy. This field is only present for data
     /// belonging to process instance hierarchies created in version 8.9 or later.
@@ -5490,22 +5503,16 @@ public sealed class DecisionInstanceResult
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// The key of the decision.
+    /// The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
     /// </summary>
-    [JsonPropertyName("decisionDefinitionKey")]
-    public DecisionDefinitionKey? DecisionDefinitionKey { get; set; }
+    [JsonPropertyName("state")]
+    public DecisionInstanceStateEnum State { get; set; }
 
     /// <summary>
-    /// The key of the element instance this decision instance is linked to.
+    /// The tenant ID of the decision instance.
     /// </summary>
-    [JsonPropertyName("elementInstanceKey")]
-    public ElementInstanceKey? ElementInstanceKey { get; set; }
-
-    /// <summary>
-    /// The key of the root decision definition.
-    /// </summary>
-    [JsonPropertyName("rootDecisionDefinitionKey")]
-    public DecisionDefinitionKey? RootDecisionDefinitionKey { get; set; }
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
 
 }
 
@@ -5582,8 +5589,10 @@ public enum DecisionInstanceStateEnum
     EVALUATED,
     [JsonPropertyName("FAILED")]
     FAILED,
+    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
+    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNKNOWN")]
     UNKNOWN,
 }
@@ -5735,40 +5744,40 @@ public sealed class DecisionRequirementsKeyFilterProperty
 public sealed class DecisionRequirementsResult
 {
     /// <summary>
-    /// The DMN name of the decision requirements.
-    /// </summary>
-    [JsonPropertyName("decisionRequirementsName")]
-    public string? DecisionRequirementsName { get; set; }
-
-    /// <summary>
-    /// The assigned version of the decision requirements.
-    /// </summary>
-    [JsonPropertyName("version")]
-    public int? Version { get; set; }
-
-    /// <summary>
     /// The DMN ID of the decision requirements.
     /// </summary>
     [JsonPropertyName("decisionRequirementsId")]
-    public string? DecisionRequirementsId { get; set; }
-
-    /// <summary>
-    /// The name of the resource from which this decision requirements was parsed.
-    /// </summary>
-    [JsonPropertyName("resourceName")]
-    public string? ResourceName { get; set; }
-
-    /// <summary>
-    /// The tenant ID of the decision requirements.
-    /// </summary>
-    [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public string DecisionRequirementsId { get; set; } = null!;
 
     /// <summary>
     /// The assigned key, which acts as a unique identifier for this decision requirements.
     /// </summary>
     [JsonPropertyName("decisionRequirementsKey")]
-    public DecisionRequirementsKey? DecisionRequirementsKey { get; set; }
+    public DecisionRequirementsKey DecisionRequirementsKey { get; set; }
+
+    /// <summary>
+    /// The DMN name of the decision requirements.
+    /// </summary>
+    [JsonPropertyName("decisionRequirementsName")]
+    public string DecisionRequirementsName { get; set; } = null!;
+
+    /// <summary>
+    /// The name of the resource from which this decision requirements was parsed.
+    /// </summary>
+    [JsonPropertyName("resourceName")]
+    public string ResourceName { get; set; } = null!;
+
+    /// <summary>
+    /// The tenant ID of the decision requirements.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// The assigned version of the decision requirements.
+    /// </summary>
+    [JsonPropertyName("version")]
+    public int Version { get; set; }
 
 }
 
@@ -7370,31 +7379,31 @@ public sealed class FormResult
     /// The tenant ID of the form.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The user-provided identifier of the form.
     /// </summary>
     [JsonPropertyName("formId")]
-    public FormId? FormId { get; set; }
+    public FormId FormId { get; set; }
 
     /// <summary>
-    /// The form content.
+    /// The form schema as a JSON document serialized as a string.
     /// </summary>
     [JsonPropertyName("schema")]
-    public object? Schema { get; set; }
+    public string Schema { get; set; } = null!;
 
     /// <summary>
     /// The version of the the deployed form.
     /// </summary>
     [JsonPropertyName("version")]
-    public long? Version { get; set; }
+    public long Version { get; set; }
 
     /// <summary>
     /// The assigned key, which acts as a unique identifier for this form.
     /// </summary>
     [JsonPropertyName("formKey")]
-    public FormKey? FormKey { get; set; }
+    public FormKey FormKey { get; set; }
 
 }
 
@@ -7797,7 +7806,7 @@ public sealed class GroupClientResult
     /// The ID of the client.
     /// </summary>
     [JsonPropertyName("clientId")]
-    public string? ClientId { get; set; }
+    public string ClientId { get; set; } = null!;
 
 }
 
@@ -7892,13 +7901,13 @@ public sealed class GroupCreateResult
     /// The ID of the created group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string? GroupId { get; set; }
+    public string GroupId { get; set; } = null!;
 
     /// <summary>
     /// The display name of the created group.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the created group.
@@ -7955,13 +7964,13 @@ public sealed class GroupResult
     /// The group name.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The group ID.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string? GroupId { get; set; }
+    public string GroupId { get; set; } = null!;
 
     /// <summary>
     /// The group description.
@@ -8081,13 +8090,13 @@ public sealed class GroupUpdateResult
     /// The unique external group ID.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string? GroupId { get; set; }
+    public string GroupId { get; set; } = null!;
 
     /// <summary>
     /// The name of the group.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the group.
@@ -8106,7 +8115,7 @@ public sealed class GroupUserResult
     /// The unique name of a user.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username? Username { get; set; }
+    public Username Username { get; set; }
 
 }
 
@@ -8582,37 +8591,37 @@ public sealed class IncidentResult
     /// The process definition ID associated to this incident.
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
 
     /// <summary>
     /// The type of the incident error.
     /// </summary>
     [JsonPropertyName("errorType")]
-    public IncidentErrorTypeEnum? ErrorType { get; set; }
+    public IncidentErrorTypeEnum ErrorType { get; set; }
 
     /// <summary>
     /// Error message which describes the error in more detail.
     /// </summary>
     [JsonPropertyName("errorMessage")]
-    public string? ErrorMessage { get; set; }
+    public string ErrorMessage { get; set; } = null!;
 
     /// <summary>
     /// The element ID associated to this incident.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public ElementId? ElementId { get; set; }
+    public ElementId ElementId { get; set; }
 
     /// <summary>
     /// The creation time of the incident.
     /// </summary>
     [JsonPropertyName("creationTime")]
-    public DateTimeOffset? CreationTime { get; set; }
+    public DateTimeOffset CreationTime { get; set; }
 
     /// <summary>
     /// The incident state.
     /// </summary>
     [JsonPropertyName("state")]
-    public IncidentStateEnum? State { get; set; }
+    public IncidentStateEnum State { get; set; }
 
     /// <summary>
     /// The tenant ID of the incident.
@@ -8624,19 +8633,19 @@ public sealed class IncidentResult
     /// The assigned key, which acts as a unique identifier for this incident.
     /// </summary>
     [JsonPropertyName("incidentKey")]
-    public IncidentKey? IncidentKey { get; set; }
+    public IncidentKey IncidentKey { get; set; }
 
     /// <summary>
     /// The process definition key associated to this incident.
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// The process instance key associated to this incident.
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the root process instance. The root process instance is the top-level
@@ -8651,7 +8660,7 @@ public sealed class IncidentResult
     /// The element instance key associated to this incident.
     /// </summary>
     [JsonPropertyName("elementInstanceKey")]
-    public ElementInstanceKey? ElementInstanceKey { get; set; }
+    public ElementInstanceKey ElementInstanceKey { get; set; }
 
     /// <summary>
     /// The job key, if exists, associated with this incident.
@@ -8933,6 +8942,108 @@ public sealed class JobErrorRequest
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
+
+}
+
+/// <summary>
+/// Job error statistics search filter.
+/// </summary>
+public sealed class JobErrorStatisticsFilter
+{
+    /// <summary>
+    /// Start of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("from")]
+    public DateTimeOffset From { get; set; }
+
+    /// <summary>
+    /// End of the time window to filter metrics. ISO 8601 date-time format.
+    /// 
+    /// </summary>
+    [JsonPropertyName("to")]
+    public DateTimeOffset To { get; set; }
+
+    /// <summary>
+    /// Job type to return error metrics for.
+    /// </summary>
+    [JsonPropertyName("jobType")]
+    public string JobType { get; set; } = null!;
+
+    /// <summary>
+    /// Optional error code filter with advanced search capabilities.
+    /// </summary>
+    [JsonPropertyName("errorCode")]
+    public StringFilterProperty? ErrorCode { get; set; }
+
+    /// <summary>
+    /// Optional error message filter with advanced search capabilities.
+    /// </summary>
+    [JsonPropertyName("errorMessage")]
+    public StringFilterProperty? ErrorMessage { get; set; }
+
+}
+
+/// <summary>
+/// Aggregated error metrics for a single error type and message combination.
+/// </summary>
+public sealed class JobErrorStatisticsItem
+{
+    /// <summary>
+    /// The error code identifier.
+    /// </summary>
+    [JsonPropertyName("errorCode")]
+    public string ErrorCode { get; set; } = null!;
+
+    /// <summary>
+    /// The error message.
+    /// </summary>
+    [JsonPropertyName("errorMessage")]
+    public string ErrorMessage { get; set; } = null!;
+
+    /// <summary>
+    /// Number of distinct workers that encountered this error.
+    /// </summary>
+    [JsonPropertyName("workers")]
+    public int Workers { get; set; }
+
+}
+
+/// <summary>
+/// Job error statistics query.
+/// </summary>
+public sealed class JobErrorStatisticsQuery
+{
+    /// <summary>
+    /// Job error statistics search filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public JobErrorStatisticsFilter Filter { get; set; } = null!;
+
+    /// <summary>
+    /// Search cursor pagination.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public CursorForwardPagination? Page { get; set; }
+
+}
+
+/// <summary>
+/// Job error statistics query result.
+/// </summary>
+public sealed class JobErrorStatisticsQueryResult
+{
+    /// <summary>
+    /// The list of per-error statistics items.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<JobErrorStatisticsItem> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
 
 }
 
@@ -9278,6 +9389,49 @@ public readonly record struct JobListenerEventTypeExactMatch : global::Camunda.O
 /// </summary>
 public sealed class JobListenerEventTypeFilterProperty
 {
+}
+
+/// <summary>
+/// Configuration for job metrics collection and export.
+/// </summary>
+public sealed class JobMetricsConfigurationResponse
+{
+    /// <summary>
+    /// Whether job metrics export is enabled.
+    /// </summary>
+    [JsonPropertyName("enabled")]
+    public bool Enabled { get; set; }
+
+    /// <summary>
+    /// The interval at which job metrics are exported, as an ISO 8601 duration.
+    /// </summary>
+    [JsonPropertyName("exportInterval")]
+    public string ExportInterval { get; set; } = null!;
+
+    /// <summary>
+    /// The maximum length of the worker name used in job metrics labels.
+    /// </summary>
+    [JsonPropertyName("maxWorkerNameLength")]
+    public int MaxWorkerNameLength { get; set; }
+
+    /// <summary>
+    /// The maximum length of the job type used in job metrics labels.
+    /// </summary>
+    [JsonPropertyName("maxJobTypeLength")]
+    public int MaxJobTypeLength { get; set; }
+
+    /// <summary>
+    /// The maximum length of the tenant ID used in job metrics labels.
+    /// </summary>
+    [JsonPropertyName("maxTenantIdLength")]
+    public int MaxTenantIdLength { get; set; }
+
+    /// <summary>
+    /// The maximum number of unique metric keys tracked for job metrics.
+    /// </summary>
+    [JsonPropertyName("maxUniqueKeys")]
+    public int MaxUniqueKeys { get; set; }
+
 }
 
 /// <summary>
@@ -10201,25 +10355,25 @@ public sealed class MappingRuleCreateResult
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string? ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string? ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string? MappingRuleId { get; set; }
+    public string MappingRuleId { get; set; } = null!;
 
 }
 
@@ -10257,25 +10411,25 @@ public sealed class MappingRuleCreateUpdateResult
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string? ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string? ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string? MappingRuleId { get; set; }
+    public string MappingRuleId { get; set; } = null!;
 
 }
 
@@ -10319,25 +10473,25 @@ public sealed class MappingRuleResult
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string? ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string? ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string? MappingRuleId { get; set; }
+    public string MappingRuleId { get; set; } = null!;
 
 }
 
@@ -10438,25 +10592,25 @@ public sealed class MappingRuleUpdateResult
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string? ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string? ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string? MappingRuleId { get; set; }
+    public string MappingRuleId { get; set; } = null!;
 
 }
 
@@ -11310,6 +11464,7 @@ public sealed class ProcessDefinitionFilter
     /// Whether to only return the latest version of each process definition.
     /// When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.
     /// The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.
+    /// When using this filter, sorting is limited to `processDefinitionId` and `tenantId` fields only.
     /// 
     /// </summary>
     [JsonPropertyName("isLatestVersion")]
@@ -11771,13 +11926,13 @@ public sealed class ProcessDefinitionResult
     /// Resource name for this process definition.
     /// </summary>
     [JsonPropertyName("resourceName")]
-    public string? ResourceName { get; set; }
+    public string ResourceName { get; set; } = null!;
 
     /// <summary>
     /// Version of this process definition.
     /// </summary>
     [JsonPropertyName("version")]
-    public int? Version { get; set; }
+    public int Version { get; set; }
 
     /// <summary>
     /// Version tag of this process definition.
@@ -11789,25 +11944,25 @@ public sealed class ProcessDefinitionResult
     /// Process definition ID of this process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
 
     /// <summary>
     /// Tenant ID of this process definition.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The key for this process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// Indicates whether the start event of the process has an associated Form Key.
     /// </summary>
     [JsonPropertyName("hasStartForm")]
-    public bool? HasStartForm { get; set; }
+    public bool HasStartForm { get; set; }
 
 }
 
@@ -11980,6 +12135,12 @@ public sealed class ProcessDefinitionStatisticsFilter
     /// </summary>
     [JsonPropertyName("tags")]
     public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// The business id associated with the process instance.
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
 
     /// <summary>
     /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
@@ -12641,6 +12802,12 @@ public sealed class ProcessInstanceFilterFields
     /// </summary>
     [JsonPropertyName("tags")]
     public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// The business id associated with the process instance.
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
 
 }
 
@@ -13373,13 +13540,13 @@ public sealed class ResourceResult
     /// The resource name from which this resource was parsed.
     /// </summary>
     [JsonPropertyName("resourceName")]
-    public string? ResourceName { get; set; }
+    public string ResourceName { get; set; } = null!;
 
     /// <summary>
     /// The assigned resource version.
     /// </summary>
     [JsonPropertyName("version")]
-    public int? Version { get; set; }
+    public int Version { get; set; }
 
     /// <summary>
     /// The version tag of this resource.
@@ -13391,19 +13558,19 @@ public sealed class ResourceResult
     /// The resource ID of this resource.
     /// </summary>
     [JsonPropertyName("resourceId")]
-    public string? ResourceId { get; set; }
+    public string ResourceId { get; set; } = null!;
 
     /// <summary>
     /// The tenant ID of this resource.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The unique key of this resource.
     /// </summary>
     [JsonPropertyName("resourceKey")]
-    public ResourceKey? ResourceKey { get; set; }
+    public ResourceKey ResourceKey { get; set; }
 
 }
 
@@ -13464,7 +13631,7 @@ public sealed class RoleClientResult
     /// The ID of the client.
     /// </summary>
     [JsonPropertyName("clientId")]
-    public string? ClientId { get; set; }
+    public string ClientId { get; set; } = null!;
 
 }
 
@@ -13559,13 +13726,13 @@ public sealed class RoleCreateResult
     /// The ID of the created role.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string? RoleId { get; set; }
+    public string RoleId { get; set; } = null!;
 
     /// <summary>
     /// The display name of the created role.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the created role.
@@ -13603,7 +13770,7 @@ public sealed class RoleGroupResult
     /// The id of the group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string? GroupId { get; set; }
+    public string GroupId { get; set; } = null!;
 
 }
 
@@ -13692,13 +13859,13 @@ public sealed class RoleResult
     /// The role name.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The role id.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string? RoleId { get; set; }
+    public string RoleId { get; set; } = null!;
 
     /// <summary>
     /// The description of the role.
@@ -13799,7 +13966,7 @@ public sealed class RoleUpdateResult
     /// The display name of the updated role.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the updated role.
@@ -13811,7 +13978,7 @@ public sealed class RoleUpdateResult
     /// The ID of the updated role.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string? RoleId { get; set; }
+    public string RoleId { get; set; } = null!;
 
 }
 
@@ -13824,7 +13991,7 @@ public sealed class RoleUserResult
     /// The unique name of a user.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username? Username { get; set; }
+    public Username Username { get; set; }
 
 }
 
@@ -14277,6 +14444,21 @@ public sealed class StringFilterProperty
 }
 
 /// <summary>
+/// Envelope for all system configuration sections. Each property
+/// represents a feature area.
+/// 
+/// </summary>
+public sealed class SystemConfigurationResponse
+{
+    /// <summary>
+    /// Configuration for job metrics collection and export.
+    /// </summary>
+    [JsonPropertyName("jobMetrics")]
+    public JobMetricsConfigurationResponse JobMetrics { get; set; } = null!;
+
+}
+
+/// <summary>
 /// A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
 /// </summary>
 public readonly record struct Tag : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
@@ -14313,7 +14495,7 @@ public sealed class TenantClientResult
     /// The ID of the client.
     /// </summary>
     [JsonPropertyName("clientId")]
-    public string? ClientId { get; set; }
+    public string ClientId { get; set; } = null!;
 
 }
 
@@ -14408,13 +14590,13 @@ public sealed class TenantCreateResult
     /// The unique identifier of the tenant.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The name of the tenant.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the tenant.
@@ -14465,7 +14647,7 @@ public sealed class TenantGroupResult
     /// The groupId of the group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string? GroupId { get; set; }
+    public string GroupId { get; set; } = null!;
 
 }
 
@@ -14582,13 +14764,13 @@ public sealed class TenantResult
     /// The tenant name.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The unique identifier of the tenant.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The tenant description.
@@ -14708,13 +14890,13 @@ public sealed class TenantUpdateResult
     /// The unique identifier of the tenant.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The name of the tenant.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The description of the tenant.
@@ -14733,7 +14915,7 @@ public sealed class TenantUserResult
     /// The unique name of a user.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username? Username { get; set; }
+    public Username Username { get; set; }
 
 }
 
@@ -14902,7 +15084,7 @@ public sealed class UsageMetricsResponse
     /// The amount of active tenants.
     /// </summary>
     [JsonPropertyName("activeTenants")]
-    public long? ActiveTenants { get; set; }
+    public long ActiveTenants { get; set; }
 
     /// <summary>
     /// The usage metrics by tenants. Only available if request `withTenants` query parameter was `true`.
@@ -14914,19 +15096,19 @@ public sealed class UsageMetricsResponse
     /// The amount of created root process instances.
     /// </summary>
     [JsonPropertyName("processInstances")]
-    public long? ProcessInstances { get; set; }
+    public long ProcessInstances { get; set; }
 
     /// <summary>
     /// The amount of executed decision instances.
     /// </summary>
     [JsonPropertyName("decisionInstances")]
-    public long? DecisionInstances { get; set; }
+    public long DecisionInstances { get; set; }
 
     /// <summary>
     /// The amount of unique active task users.
     /// </summary>
     [JsonPropertyName("assignees")]
-    public long? Assignees { get; set; }
+    public long Assignees { get; set; }
 
 }
 
@@ -14939,19 +15121,19 @@ public sealed class UsageMetricsResponseItem
     /// The amount of created root process instances.
     /// </summary>
     [JsonPropertyName("processInstances")]
-    public long? ProcessInstances { get; set; }
+    public long ProcessInstances { get; set; }
 
     /// <summary>
     /// The amount of executed decision instances.
     /// </summary>
     [JsonPropertyName("decisionInstances")]
-    public long? DecisionInstances { get; set; }
+    public long DecisionInstances { get; set; }
 
     /// <summary>
     /// The amount of unique active task users.
     /// </summary>
     [JsonPropertyName("assignees")]
-    public long? Assignees { get; set; }
+    public long Assignees { get; set; }
 
 }
 
@@ -14964,7 +15146,7 @@ public sealed class UserCreateResult
     /// The unique name of a user.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username? Username { get; set; }
+    public Username Username { get; set; }
 
     /// <summary>
     /// The name of the user.
@@ -15073,7 +15255,7 @@ public sealed class UserResult
     /// The unique name of a user.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username? Username { get; set; }
+    public Username Username { get; set; }
 
     /// <summary>
     /// The name of the user.
@@ -15501,7 +15683,7 @@ public sealed class UserTaskResult
     /// 
     /// </summary>
     [JsonPropertyName("state")]
-    public UserTaskStateEnum? State { get; set; }
+    public UserTaskStateEnum State { get; set; }
 
     /// <summary>
     /// The assignee of the user task.
@@ -15513,7 +15695,7 @@ public sealed class UserTaskResult
     /// The element ID of the user task.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public ElementId? ElementId { get; set; }
+    public ElementId ElementId { get; set; }
 
     /// <summary>
     /// The candidate groups for this user task.
@@ -15531,13 +15713,13 @@ public sealed class UserTaskResult
     /// The ID of the process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
 
     /// <summary>
     /// The creation date of a user task.
     /// </summary>
     [JsonPropertyName("creationDate")]
-    public DateTimeOffset? CreationDate { get; set; }
+    public DateTimeOffset CreationDate { get; set; }
 
     /// <summary>
     /// The completion date of a user task.
@@ -15561,7 +15743,7 @@ public sealed class UserTaskResult
     /// The unique identifier of the tenant.
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public TenantId? TenantId { get; set; }
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The external form reference.
@@ -15573,7 +15755,7 @@ public sealed class UserTaskResult
     /// The version of the process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionVersion")]
-    public int? ProcessDefinitionVersion { get; set; }
+    public int ProcessDefinitionVersion { get; set; }
 
     /// <summary>
     /// Custom headers for the user task.
@@ -15585,19 +15767,19 @@ public sealed class UserTaskResult
     /// The priority of a user task. The higher the value the higher the priority.
     /// </summary>
     [JsonPropertyName("priority")]
-    public int? Priority { get; set; }
+    public int Priority { get; set; }
 
     /// <summary>
     /// The key of the user task.
     /// </summary>
     [JsonPropertyName("userTaskKey")]
-    public UserTaskKey? UserTaskKey { get; set; }
+    public UserTaskKey UserTaskKey { get; set; }
 
     /// <summary>
     /// The key of the element instance.
     /// </summary>
     [JsonPropertyName("elementInstanceKey")]
-    public ElementInstanceKey? ElementInstanceKey { get; set; }
+    public ElementInstanceKey ElementInstanceKey { get; set; }
 
     /// <summary>
     /// The name of the process definition.
@@ -15611,13 +15793,13 @@ public sealed class UserTaskResult
     /// The key of the process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// The key of the process instance.
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the root process instance. The root process instance is the top-level
@@ -15895,7 +16077,7 @@ public sealed class UserUpdateResult
     /// The unique name of a user.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username? Username { get; set; }
+    public Username Username { get; set; }
 
     /// <summary>
     /// The name of the user.
@@ -16055,7 +16237,7 @@ public sealed class VariableResult
     /// Full value of this variable.
     /// </summary>
     [JsonPropertyName("value")]
-    public string? Value { get; set; }
+    public string Value { get; set; } = null!;
 
     /// <summary>
     /// Name of this variable.
@@ -16309,25 +16491,25 @@ public sealed class CreateMappingRuleResponse
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string? ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string? ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string? MappingRuleId { get; set; }
+    public string MappingRuleId { get; set; } = null!;
 
 }
 
@@ -16340,7 +16522,7 @@ public sealed class GetUserResponse
     /// The unique name of a user.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username? Username { get; set; }
+    public Username Username { get; set; }
 
     /// <summary>
     /// The name of the user.
@@ -16776,25 +16958,25 @@ public sealed class UpdateMappingRuleResponse
     /// The name of the claim to map.
     /// </summary>
     [JsonPropertyName("claimName")]
-    public string? ClaimName { get; set; }
+    public string ClaimName { get; set; } = null!;
 
     /// <summary>
     /// The value of the claim to map.
     /// </summary>
     [JsonPropertyName("claimValue")]
-    public string? ClaimValue { get; set; }
+    public string ClaimValue { get; set; } = null!;
 
     /// <summary>
     /// The name of the mapping rule.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string? MappingRuleId { get; set; }
+    public string MappingRuleId { get; set; } = null!;
 
 }
 
@@ -16807,7 +16989,7 @@ public sealed class UpdateUserResponse
     /// The unique name of a user.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username? Username { get; set; }
+    public Username Username { get; set; }
 
     /// <summary>
     /// The name of the user.

@@ -17,7 +17,7 @@ internal static class UserTaskExamples
 
         // Find a user task via search
         var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
-        var userTaskKey = tasks.Items![0].UserTaskKey.Value;
+        var userTaskKey = tasks.Items![0].UserTaskKey;
 
         await client.CompleteUserTaskAsync(userTaskKey, new UserTaskCompletionRequest
         {
@@ -37,7 +37,7 @@ internal static class UserTaskExamples
 
         // Find a user task via search
         var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
-        var userTaskKey = tasks.Items![0].UserTaskKey.Value;
+        var userTaskKey = tasks.Items![0].UserTaskKey;
 
         await client.AssignUserTaskAsync(userTaskKey, new UserTaskAssignmentRequest
         {
@@ -53,7 +53,7 @@ internal static class UserTaskExamples
 
         // Find a user task via search
         var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
-        var userTaskKey = tasks.Items![0].UserTaskKey.Value;
+        var userTaskKey = tasks.Items![0].UserTaskKey;
 
         await client.UnassignUserTaskAsync(userTaskKey);
     }
@@ -80,7 +80,7 @@ internal static class UserTaskExamples
 
         // Find a user task via search
         var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
-        var userTaskKey = tasks.Items![0].UserTaskKey.Value;
+        var userTaskKey = tasks.Items![0].UserTaskKey;
 
         await client.UpdateUserTaskAsync(userTaskKey, new UserTaskUpdateRequest
         {
