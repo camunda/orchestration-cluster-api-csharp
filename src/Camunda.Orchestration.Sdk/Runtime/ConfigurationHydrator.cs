@@ -44,11 +44,11 @@ public static class ConfigurationHydrator
 {
     private static readonly Dictionary<string, string> Defaults = new()
     {
-        ["CAMUNDA_REST_ADDRESS"] = "",
-        ["CAMUNDA_TOKEN_AUDIENCE"] = "",
+        ["CAMUNDA_REST_ADDRESS"] = "http://localhost:8080/v2",
+        ["CAMUNDA_TOKEN_AUDIENCE"] = "zeebe.camunda.io",
         ["CAMUNDA_DEFAULT_TENANT_ID"] = "<default>",
         ["CAMUNDA_AUTH_STRATEGY"] = "NONE",
-        ["CAMUNDA_OAUTH_URL"] = "",
+        ["CAMUNDA_OAUTH_URL"] = "https://login.cloud.camunda.io/oauth/token",
         ["CAMUNDA_OAUTH_GRANT_TYPE"] = "client_credentials",
         ["CAMUNDA_OAUTH_TIMEOUT_MS"] = "5000",
         ["CAMUNDA_OAUTH_RETRY_MAX"] = "5",
