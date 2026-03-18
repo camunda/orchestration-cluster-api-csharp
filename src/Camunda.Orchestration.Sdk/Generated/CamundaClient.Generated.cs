@@ -156,7 +156,8 @@ public partial class CamundaClient
 
     /// <summary>
     /// Assign user task
-    /// Assigns a user task with the given key to the given assignee.
+    /// Assigns a user task with the given key to the given assignee. Assignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
+    /// 
     /// </summary>
     /// <remarks>Operation: assignUserTask</remarks>
     public async Task AssignUserTaskAsync(UserTaskKey userTaskKey, UserTaskAssignmentRequest body, CancellationToken ct = default)
@@ -216,7 +217,8 @@ public partial class CamundaClient
 
     /// <summary>
     /// Cancel process instance
-    /// Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted.
+    /// Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
+    /// 
     /// </summary>
     /// <remarks>Operation: cancelProcessInstance</remarks>
     public async Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, CancelProcessInstanceRequest body, CancellationToken ct = default)
@@ -254,7 +256,8 @@ public partial class CamundaClient
 
     /// <summary>
     /// Complete user task
-    /// Completes a user task with the given key.
+    /// Completes a user task with the given key. Completion waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
+    /// 
     /// </summary>
     /// <remarks>Operation: completeUserTask</remarks>
     public async Task CompleteUserTaskAsync(UserTaskKey userTaskKey, UserTaskCompletionRequest body, CancellationToken ct = default)
@@ -318,7 +321,7 @@ public partial class CamundaClient
     /// Upload document
     /// Upload a document to the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: createDocument</remarks>
@@ -335,7 +338,7 @@ public partial class CamundaClient
     /// Create document link
     /// Create a link to a document in the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP
+    /// Note that this is currently supported for document stores of type: AWS, GCP
     /// 
     /// </summary>
     /// <remarks>Operation: createDocumentLink</remarks>
@@ -364,7 +367,7 @@ public partial class CamundaClient
     /// each of which contains the file name of the document that failed to upload and the reason for the failure.
     /// The client can choose to retry the whole batch or individual documents based on the response.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: createDocuments</remarks>
@@ -380,6 +383,10 @@ public partial class CamundaClient
     /// Update element instance variables
     /// Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.
     /// Specify the element instance in the `elementInstanceKey` parameter.
+    /// Variable updates can be delayed by listener-related processing; if processing exceeds the
+    /// request timeout, this endpoint can return 504. Other gateway timeout causes are also
+    /// possible. Retry with backoff and inspect listener worker availability and logs when this
+    /// repeats.
     /// 
     /// </summary>
     /// <remarks>Operation: createElementInstanceVariables</remarks>
@@ -535,7 +542,7 @@ public partial class CamundaClient
     /// Delete document
     /// Delete a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: deleteDocument</remarks>
@@ -898,7 +905,7 @@ public partial class CamundaClient
     /// Download document
     /// Download a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: getDocument</remarks>
@@ -1086,7 +1093,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Get job statistics by worker
-    /// Returns aggregated metrics per worker for the given jobType.
+    /// Get statistics about jobs, grouped by worker, for a given job type.
     /// 
     /// </summary>
     /// <remarks>Operation: getJobWorkerStatistics</remarks>
@@ -2694,7 +2701,8 @@ public partial class CamundaClient
 
     /// <summary>
     /// Unassign user task
-    /// Removes the assignee of a task with the given key.
+    /// Removes the assignee of a task with the given key. Unassignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
+    /// 
     /// </summary>
     /// <remarks>Operation: unassignUserTask</remarks>
     public async Task UnassignUserTaskAsync(UserTaskKey userTaskKey, CancellationToken ct = default)
@@ -2820,7 +2828,8 @@ public partial class CamundaClient
 
     /// <summary>
     /// Update user task
-    /// Update a user task with the given key.
+    /// Update a user task with the given key. Updates wait for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
+    /// 
     /// </summary>
     /// <remarks>Operation: updateUserTask</remarks>
     public async Task UpdateUserTaskAsync(UserTaskKey userTaskKey, UserTaskUpdateRequest body, CancellationToken ct = default)

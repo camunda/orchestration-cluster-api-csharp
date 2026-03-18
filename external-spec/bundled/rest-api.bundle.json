@@ -3348,7 +3348,7 @@
         ],
         "operationId": "createDocument",
         "summary": "Upload document",
-        "description": "Upload a document to the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Upload a document to the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "storeId",
@@ -3439,7 +3439,7 @@
         ],
         "operationId": "createDocuments",
         "summary": "Upload multiple documents",
-        "description": "Upload multiple documents to the Camunda 8 cluster.\n\nThe caller must provide a file name for each document, which will be used in case of a multi-status response\nto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header\nof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These\nare matched with the files based on index, and must have the same length as the files array.\nTo pass homogenous metadata for all files, spread the metadata over the metadata array.\nA filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header\nof the file part.\n\nIn case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,\neach of which contains the file name of the document that failed to upload and the reason for the failure.\nThe client can choose to retry the whole batch or individual documents based on the response.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Upload multiple documents to the Camunda 8 cluster.\n\nThe caller must provide a file name for each document, which will be used in case of a multi-status response\nto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header\nof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These\nare matched with the files based on index, and must have the same length as the files array.\nTo pass homogenous metadata for all files, spread the metadata over the metadata array.\nA filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header\nof the file part.\n\nIn case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,\neach of which contains the file name of the document that failed to upload and the reason for the failure.\nThe client can choose to retry the whole batch or individual documents based on the response.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "storeId",
@@ -3547,7 +3547,7 @@
         ],
         "operationId": "getDocument",
         "summary": "Download document",
-        "description": "Download a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Download a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "documentId",
@@ -3618,7 +3618,7 @@
         ],
         "operationId": "deleteDocument",
         "summary": "Delete document",
-        "description": "Delete a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Delete a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "documentId",
@@ -3674,7 +3674,7 @@
         ],
         "operationId": "createDocumentLink",
         "summary": "Create document link",
-        "description": "Create a link to a document in the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP\n",
+        "description": "Create a link to a document in the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP\n",
         "parameters": [
           {
             "name": "documentId",
@@ -4122,7 +4122,7 @@
         ],
         "operationId": "createElementInstanceVariables",
         "summary": "Update element instance variables",
-        "description": "Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.\nSpecify the element instance in the `elementInstanceKey` parameter.\n",
+        "description": "Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.\nSpecify the element instance in the `elementInstanceKey` parameter.\nVariable updates can be delayed by listener-related processing; if processing exceeds the\nrequest timeout, this endpoint can return 504. Other gateway timeout causes are also\npossible. Retry with backoff and inspect listener worker availability and logs when this\nrepeats.\n",
         "parameters": [
           {
             "name": "elementInstanceKey",
@@ -4174,6 +4174,27 @@
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The request timed out between the gateway and the broker. For these endpoints, this often happens when user task listeners are configured and the corresponding listener job is not completed within the request timeout. Common causes include no available job workers for the listener type, busy or crashed job workers, or delayed job completion. As with any gateway timeout, general timeout causes (for example transient network issues) can also result in a 504 response.\nTroubleshooting: - verify that job workers for the listener type are running and healthy - check worker logs for crashes, retries, and completion failures - check network connectivity between workers, gateway, and broker - retry with backoff after transient failures - fail without retries if a problem persists\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                },
+                "examples": {
+                  "taskListenerTimeout": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "DEADLINE_EXCEEDED",
+                      "status": 504,
+                      "detail": "Expected to handle request, but request timed out between gateway and broker",
+                      "instance": "/v2/user-tasks/123/completion"
+                    }
+                  }
                 }
               }
             }
@@ -7331,7 +7352,7 @@
         ],
         "operationId": "getJobWorkerStatistics",
         "summary": "Get job statistics by worker",
-        "description": "Returns aggregated metrics per worker for the given jobType.\n",
+        "description": "Get statistics about jobs, grouped by worker, for a given job type.\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -9694,7 +9715,7 @@
         ],
         "operationId": "cancelProcessInstance",
         "summary": "Cancel process instance",
-        "description": "Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted.",
+        "description": "Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.\n",
         "parameters": [
           {
             "name": "processInstanceKey",
@@ -9763,6 +9784,27 @@
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The request timed out between the gateway and the broker. For these endpoints, this often happens when user task listeners are configured and the corresponding listener job is not completed within the request timeout. Common causes include no available job workers for the listener type, busy or crashed job workers, or delayed job completion. As with any gateway timeout, general timeout causes (for example transient network issues) can also result in a 504 response.\nTroubleshooting: - verify that job workers for the listener type are running and healthy - check worker logs for crashes, retries, and completion failures - check network connectivity between workers, gateway, and broker - retry with backoff after transient failures - fail without retries if a problem persists\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                },
+                "examples": {
+                  "taskListenerTimeout": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "DEADLINE_EXCEEDED",
+                      "status": 504,
+                      "detail": "Expected to handle request, but request timed out between gateway and broker",
+                      "instance": "/v2/user-tasks/123/completion"
+                    }
+                  }
                 }
               }
             }
@@ -15005,7 +15047,7 @@
         ],
         "operationId": "updateUserTask",
         "summary": "Update user task",
-        "description": "Update a user task with the given key.",
+        "description": "Update a user task with the given key. Updates wait for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.\n",
         "parameters": [
           {
             "name": "userTaskKey",
@@ -15080,6 +15122,27 @@
                 }
               }
             }
+          },
+          "504": {
+            "description": "The request timed out between the gateway and the broker. For these endpoints, this often happens when user task listeners are configured and the corresponding listener job is not completed within the request timeout. Common causes include no available job workers for the listener type, busy or crashed job workers, or delayed job completion. As with any gateway timeout, general timeout causes (for example transient network issues) can also result in a 504 response.\nTroubleshooting: - verify that job workers for the listener type are running and healthy - check worker logs for crashes, retries, and completion failures - check network connectivity between workers, gateway, and broker - retry with backoff after transient failures - fail without retries if a problem persists\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                },
+                "examples": {
+                  "taskListenerTimeout": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "DEADLINE_EXCEEDED",
+                      "status": 504,
+                      "detail": "Expected to handle request, but request timed out between gateway and broker",
+                      "instance": "/v2/user-tasks/123/completion"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -15092,7 +15155,7 @@
         ],
         "operationId": "unassignUserTask",
         "summary": "Unassign user task",
-        "description": "Removes the assignee of a task with the given key.",
+        "description": "Removes the assignee of a task with the given key. Unassignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.\n",
         "parameters": [
           {
             "name": "userTaskKey",
@@ -15157,6 +15220,27 @@
                 }
               }
             }
+          },
+          "504": {
+            "description": "The request timed out between the gateway and the broker. For these endpoints, this often happens when user task listeners are configured and the corresponding listener job is not completed within the request timeout. Common causes include no available job workers for the listener type, busy or crashed job workers, or delayed job completion. As with any gateway timeout, general timeout causes (for example transient network issues) can also result in a 504 response.\nTroubleshooting: - verify that job workers for the listener type are running and healthy - check worker logs for crashes, retries, and completion failures - check network connectivity between workers, gateway, and broker - retry with backoff after transient failures - fail without retries if a problem persists\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                },
+                "examples": {
+                  "taskListenerTimeout": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "DEADLINE_EXCEEDED",
+                      "status": 504,
+                      "detail": "Expected to handle request, but request timed out between gateway and broker",
+                      "instance": "/v2/user-tasks/123/completion"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -15169,7 +15253,7 @@
         ],
         "operationId": "assignUserTask",
         "summary": "Assign user task",
-        "description": "Assigns a user task with the given key to the given assignee.",
+        "description": "Assigns a user task with the given key to the given assignee. Assignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.\n",
         "parameters": [
           {
             "name": "userTaskKey",
@@ -15241,6 +15325,27 @@
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The request timed out between the gateway and the broker. For these endpoints, this often happens when user task listeners are configured and the corresponding listener job is not completed within the request timeout. Common causes include no available job workers for the listener type, busy or crashed job workers, or delayed job completion. As with any gateway timeout, general timeout causes (for example transient network issues) can also result in a 504 response.\nTroubleshooting: - verify that job workers for the listener type are running and healthy - check worker logs for crashes, retries, and completion failures - check network connectivity between workers, gateway, and broker - retry with backoff after transient failures - fail without retries if a problem persists\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                },
+                "examples": {
+                  "taskListenerTimeout": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "DEADLINE_EXCEEDED",
+                      "status": 504,
+                      "detail": "Expected to handle request, but request timed out between gateway and broker",
+                      "instance": "/v2/user-tasks/123/completion"
+                    }
+                  }
                 }
               }
             }
@@ -15320,7 +15425,7 @@
         ],
         "operationId": "completeUserTask",
         "summary": "Complete user task",
-        "description": "Completes a user task with the given key.",
+        "description": "Completes a user task with the given key. Completion waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.\n",
         "parameters": [
           {
             "name": "userTaskKey",
@@ -15392,6 +15497,27 @@
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The request timed out between the gateway and the broker. For these endpoints, this often happens when user task listeners are configured and the corresponding listener job is not completed within the request timeout. Common causes include no available job workers for the listener type, busy or crashed job workers, or delayed job completion. As with any gateway timeout, general timeout causes (for example transient network issues) can also result in a 504 response.\nTroubleshooting: - verify that job workers for the listener type are running and healthy - check worker logs for crashes, retries, and completion failures - check network connectivity between workers, gateway, and broker - retry with backoff after transient failures - fail without retries if a problem persists\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                },
+                "examples": {
+                  "taskListenerTimeout": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "DEADLINE_EXCEEDED",
+                      "status": 504,
+                      "detail": "Expected to handle request, but request timed out between gateway and broker",
+                      "instance": "/v2/user-tasks/123/completion"
+                    }
+                  }
                 }
               }
             }
@@ -15866,7 +15992,6 @@
           "agentElementId",
           "tenantId",
           "result",
-          "annotation",
           "category",
           "processDefinitionId",
           "processDefinitionKey",
@@ -15958,11 +16083,6 @@
           },
           "result": {
             "$ref": "#/components/schemas/AuditLogResultEnum"
-          },
-          "annotation": {
-            "type": "string",
-            "description": "Additional notes about the operation.",
-            "nullable": true
           },
           "category": {
             "$ref": "#/components/schemas/AuditLogCategoryEnum"
@@ -16133,7 +16253,6 @@
             "enum": [
               "actorId",
               "actorType",
-              "annotation",
               "auditLogKey",
               "batchOperationKey",
               "batchOperationType",
@@ -16827,7 +16946,10 @@
           "roles",
           "salesPlanType",
           "c8Links",
-          "canLogout"
+          "canLogout",
+          "displayName",
+          "email",
+          "username"
         ],
         "properties": {
           "username": {
@@ -16925,7 +17047,6 @@
           },
           "resourceType": {
             "description": "The type of resource to add permissions to.",
-            "type": "string",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ResourceTypeEnum"
@@ -16969,7 +17090,6 @@
           },
           "resourceType": {
             "description": "The type of resource to add permissions to.",
-            "type": "string",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ResourceTypeEnum"
@@ -17084,7 +17204,6 @@
           },
           "resourceType": {
             "description": "The type of resource to search permissions for.",
-            "type": "string",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ResourceTypeEnum"
@@ -17114,7 +17233,6 @@
           },
           "resourceType": {
             "description": "The type of resource that the permissions relate to.",
-            "type": "string",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ResourceTypeEnum"
@@ -17430,7 +17548,9 @@
           "operationsTotalCount",
           "actorType",
           "actorId",
-          "errors"
+          "errors",
+          "endDate",
+          "startDate"
         ],
         "type": "object",
         "properties": {
@@ -17499,6 +17619,11 @@
         }
       },
       "BatchOperationError": {
+        "required": [
+          "message",
+          "partitionId",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "partitionId": {
@@ -17639,7 +17764,14 @@
       "BatchOperationItemResponse": {
         "type": "object",
         "required": [
-          "rootProcessInstanceKey"
+          "rootProcessInstanceKey",
+          "batchOperationKey",
+          "errorMessage",
+          "itemKey",
+          "operationType",
+          "processedDate",
+          "processInstanceKey",
+          "state"
         ],
         "properties": {
           "operationType": {
@@ -17686,12 +17818,13 @@
             ]
           },
           "processedDate": {
-            "description": "the date this item was processed.",
+            "description": "The date this item was processed.\nThis is `null` if the item has not yet been processed.\n",
+            "nullable": true,
             "type": "string",
             "format": "date-time"
           },
           "errorMessage": {
-            "description": "the error message from the engine in case of a failed operation.",
+            "description": "The error message from the engine in case of a failed operation.",
             "nullable": true,
             "type": "string"
           }
@@ -18356,7 +18489,8 @@
           "partitionsCount",
           "replicationFactor",
           "gatewayVersion",
-          "lastCompletedChangeId"
+          "lastCompletedChangeId",
+          "clusterId"
         ],
         "properties": {
           "brokers": {
@@ -18561,6 +18695,10 @@
         "type": "string"
       },
       "ProcessInstanceReference": {
+        "required": [
+          "processDefinitionKey",
+          "processInstanceKey"
+        ],
         "type": "object",
         "properties": {
           "processDefinitionKey": {
@@ -18983,7 +19121,14 @@
         "required": [
           "decisionDefinitionType",
           "evaluatedInputs",
-          "matchedRules"
+          "matchedRules",
+          "decisionDefinitionId",
+          "decisionDefinitionKey",
+          "decisionDefinitionName",
+          "decisionDefinitionVersion",
+          "decisionEvaluationInstanceKey",
+          "output",
+          "tenantId"
         ],
         "x-semantic-provider": [
           "decisionEvaluationInstanceKey"
@@ -19425,6 +19570,11 @@
         ]
       },
       "EvaluatedDecisionInputItem": {
+        "required": [
+          "inputId",
+          "inputName",
+          "inputValue"
+        ],
         "type": "object",
         "description": "A decision input that was evaluated within this decision evaluation.",
         "properties": {
@@ -19437,7 +19587,7 @@
             "description": "The name of the decision input."
           },
           "inputValue": {
-            "description": "The description of the decision input.",
+            "description": "The value of the decision input.",
             "type": "string"
           }
         }
@@ -19445,7 +19595,10 @@
       "EvaluatedDecisionOutputItem": {
         "required": [
           "ruleId",
-          "ruleIndex"
+          "ruleIndex",
+          "outputId",
+          "outputName",
+          "outputValue"
         ],
         "type": "object",
         "description": "The evaluated decision outputs.",
@@ -19477,7 +19630,9 @@
       },
       "MatchedDecisionRuleItem": {
         "required": [
-          "evaluatedOutputs"
+          "evaluatedOutputs",
+          "ruleId",
+          "ruleIndex"
         ],
         "type": "object",
         "description": "A decision rule that matched within this decision evaluation.",
@@ -19887,6 +20042,15 @@
           "decisionDefinitionKey",
           "decisionRequirementsKey"
         ],
+        "required": [
+          "decisionDefinitionId",
+          "decisionDefinitionKey",
+          "decisionRequirementsId",
+          "decisionRequirementsKey",
+          "name",
+          "tenantId",
+          "version"
+        ],
         "properties": {
           "decisionDefinitionId": {
             "allOf": [
@@ -19941,6 +20105,14 @@
         "x-semantic-provider": [
           "decisionRequirementsKey"
         ],
+        "required": [
+          "decisionRequirementsId",
+          "decisionRequirementsKey",
+          "decisionRequirementsName",
+          "resourceName",
+          "tenantId",
+          "version"
+        ],
         "properties": {
           "decisionRequirementsId": {
             "description": "The id of the deployed decision requirements.",
@@ -19983,6 +20155,13 @@
         "x-semantic-provider": [
           "formKey"
         ],
+        "required": [
+          "formId",
+          "formKey",
+          "resourceName",
+          "tenantId",
+          "version"
+        ],
         "properties": {
           "formId": {
             "allOf": [
@@ -20020,6 +20199,13 @@
           "resourceKey"
         ],
         "type": "object",
+        "required": [
+          "resourceId",
+          "resourceKey",
+          "resourceName",
+          "tenantId",
+          "version"
+        ],
         "properties": {
           "resourceId": {
             "description": "The resource id of the deployed resource.",
@@ -20065,7 +20251,8 @@
       "DeleteResourceResponse": {
         "type": "object",
         "required": [
-          "resourceKey"
+          "resourceKey",
+          "batchOperation"
         ],
         "properties": {
           "resourceKey": {
@@ -20309,6 +20496,12 @@
       },
       "DocumentCreationFailureDetail": {
         "type": "object",
+        "required": [
+          "detail",
+          "fileName",
+          "status",
+          "title"
+        ],
         "properties": {
           "fileName": {
             "type": "string",
@@ -20765,7 +20958,9 @@
           "elementInstanceKey",
           "processInstanceKey",
           "processDefinitionKey",
-          "rootProcessInstanceKey"
+          "rootProcessInstanceKey",
+          "endDate",
+          "incidentKey"
         ],
         "properties": {
           "processDefinitionId": {
@@ -20995,9 +21190,22 @@
             "type": "array",
             "description": "List of warnings generated during expression evaluation",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/ExpressionEvaluationWarningItem"
             },
             "example": []
+          }
+        }
+      },
+      "ExpressionEvaluationWarningItem": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "The warning message",
+            "example": "No function found with name 'random' and 1 parameters"
           }
         }
       },
@@ -21973,7 +22181,7 @@
         "type": "string",
         "x-semantic-type": "ProcessDefinitionId",
         "minLength": 1,
-        "pattern": "^[a-zA-Z_][a-zA-Z0-9_\\-\\.]*$",
+        "pattern": "^[\\p{L}_][\\p{L}\\p{N}_\\-\\.]*$",
         "example": "new-account-onboarding-workflow"
       },
       "ElementId": {
@@ -21996,8 +22204,7 @@
         "x-semantic-type": "DecisionDefinitionId",
         "type": "string",
         "minLength": 1,
-        "maxLength": 256,
-        "pattern": "^[A-Za-z0-9_@.+-]+$",
+        "pattern": "^[\\p{L}_][\\p{L}\\p{N}_\\-\\.]*$",
         "example": "new-hire-onboarding-workflow"
       },
       "GlobalListenerId": {
@@ -22343,7 +22550,6 @@
               "processDefinitionId",
               "processInstanceKey",
               "errorType",
-              "errorMessage",
               "elementId",
               "elementInstanceKey",
               "creationTime",
@@ -22551,6 +22757,11 @@
       },
       "IncidentProcessInstanceStatisticsByErrorResult": {
         "type": "object",
+        "required": [
+          "activeInstancesWithErrorCount",
+          "errorHashCode",
+          "errorMessage"
+        ],
         "properties": {
           "errorHashCode": {
             "type": "integer",
@@ -22640,6 +22851,14 @@
       },
       "IncidentProcessInstanceStatisticsByDefinitionResult": {
         "type": "object",
+        "required": [
+          "activeInstancesWithErrorCount",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processDefinitionName",
+          "processDefinitionVersion",
+          "tenantId"
+        ],
         "properties": {
           "processDefinitionId": {
             "$ref": "#/components/schemas/ProcessDefinitionId"
@@ -22931,7 +23150,7 @@
         ],
         "properties": {
           "worker": {
-            "description": "The worker identifier.",
+            "description": "The name of the worker activating the jobs, mostly used for logging purposes.",
             "type": "string",
             "example": "worker-1"
           },
@@ -23269,7 +23488,8 @@
           "kind",
           "listenerEventType",
           "rootProcessInstanceKey",
-          "tags"
+          "tags",
+          "userTask"
         ],
         "properties": {
           "type": {
@@ -23400,7 +23620,14 @@
         "required": [
           "candidateGroups",
           "candidateUsers",
-          "changedAttributes"
+          "changedAttributes",
+          "action",
+          "assignee",
+          "dueDate",
+          "followUpDate",
+          "formKey",
+          "priority",
+          "userTaskKey"
         ],
         "type": "object",
         "description": "Contains properties of a user task.",
@@ -23451,6 +23678,7 @@
                 "$ref": "#/components/schemas/FormKey"
               }
             ],
+            "nullable": true,
             "description": "The key of the form associated with the user task."
           },
           "priority": {
@@ -23751,7 +23979,15 @@
           "tenantId",
           "type",
           "worker",
-          "rootProcessInstanceKey"
+          "rootProcessInstanceKey",
+          "creationTime",
+          "deadline",
+          "deniedReason",
+          "endTime",
+          "errorCode",
+          "errorMessage",
+          "isDenied",
+          "lastUpdateTime"
         ],
         "properties": {
           "customHeaders": {
@@ -23882,11 +24118,13 @@
           },
           "creationTime": {
             "description": "When the job was created. Field is present for jobs created after 8.9.",
+            "nullable": true,
             "type": "string",
             "format": "date-time"
           },
           "lastUpdateTime": {
             "description": "When the job was last updated. Field is present for jobs created after 8.9.",
+            "nullable": true,
             "type": "string",
             "format": "date-time"
           }
@@ -25546,7 +25784,18 @@
       "MessageSubscriptionResult": {
         "type": "object",
         "required": [
-          "rootProcessInstanceKey"
+          "rootProcessInstanceKey",
+          "correlationKey",
+          "elementId",
+          "elementInstanceKey",
+          "lastUpdatedDate",
+          "messageName",
+          "messageSubscriptionKey",
+          "messageSubscriptionState",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processInstanceKey",
+          "tenantId"
         ],
         "properties": {
           "messageSubscriptionKey": {
@@ -25571,6 +25820,7 @@
                 "$ref": "#/components/schemas/ProcessDefinitionKey"
               }
             ],
+            "nullable": true,
             "description": "The process definition key associated with this message subscription."
           },
           "processInstanceKey": {
@@ -25579,6 +25829,7 @@
                 "$ref": "#/components/schemas/ProcessInstanceKey"
               }
             ],
+            "nullable": true,
             "description": "The process instance key associated with this message subscription."
           },
           "rootProcessInstanceKey": {
@@ -25604,6 +25855,7 @@
                 "$ref": "#/components/schemas/ElementInstanceKey"
               }
             ],
+            "nullable": true,
             "description": "The element instance key associated with this message subscription."
           },
           "messageSubscriptionState": {
@@ -25620,6 +25872,7 @@
           },
           "correlationKey": {
             "type": "string",
+            "nullable": true,
             "description": "The correlation key of the message subscription."
           },
           "tenantId": {
@@ -25796,9 +26049,25 @@
       },
       "CorrelatedMessageSubscriptionResult": {
         "type": "object",
+        "required": [
+          "correlationKey",
+          "correlationTime",
+          "elementId",
+          "messageKey",
+          "messageName",
+          "partitionId",
+          "processDefinitionId",
+          "processInstanceKey",
+          "subscriptionKey",
+          "tenantId",
+          "rootProcessInstanceKey",
+          "elementInstanceKey",
+          "processDefinitionKey"
+        ],
         "properties": {
           "correlationKey": {
             "description": "The correlation key of the message.",
+            "nullable": true,
             "type": "string"
           },
           "correlationTime": {
@@ -25816,7 +26085,8 @@
                 "$ref": "#/components/schemas/ElementInstanceKey"
               }
             ],
-            "description": "The element instance key that received the message."
+            "nullable": true,
+            "description": "The element instance key that received the message.\nIt is `null` for start event subscriptions.\n"
           },
           "messageKey": {
             "allOf": [
@@ -25884,20 +26154,7 @@
             ],
             "description": "The tenant ID associated with this correlated message subscription."
           }
-        },
-        "required": [
-          "correlationKey",
-          "correlationTime",
-          "elementId",
-          "messageKey",
-          "messageName",
-          "partitionId",
-          "processDefinitionId",
-          "processInstanceKey",
-          "subscriptionKey",
-          "tenantId",
-          "rootProcessInstanceKey"
-        ]
+        }
       },
       "CorrelatedMessageSubscriptionSearchQuery": {
         "type": "object",
@@ -26459,6 +26716,13 @@
       "ProcessElementStatisticsResult": {
         "description": "Process element statistics response.",
         "type": "object",
+        "required": [
+          "active",
+          "canceled",
+          "completed",
+          "elementId",
+          "incidents"
+        ],
         "properties": {
           "elementId": {
             "allOf": [
@@ -26533,6 +26797,13 @@
       },
       "ProcessDefinitionMessageSubscriptionStatisticsResult": {
         "type": "object",
+        "required": [
+          "activeSubscriptions",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processInstancesWithActiveSubscriptions",
+          "tenantId"
+        ],
         "properties": {
           "processDefinitionId": {
             "description": "The process definition ID associated with this message subscription.",
@@ -26613,6 +26884,14 @@
       "ProcessDefinitionInstanceStatisticsResult": {
         "description": "Process definition instance statistics response.",
         "type": "object",
+        "required": [
+          "activeInstancesWithIncidentCount",
+          "activeInstancesWithoutIncidentCount",
+          "hasMultipleVersions",
+          "latestProcessDefinitionName",
+          "processDefinitionId",
+          "tenantId"
+        ],
         "properties": {
           "processDefinitionId": {
             "$ref": "#/components/schemas/ProcessDefinitionId"
@@ -27053,7 +27332,8 @@
           "tenantId",
           "variables",
           "processInstanceKey",
-          "tags"
+          "tags",
+          "businessId"
         ],
         "type": "object",
         "properties": {
@@ -27251,7 +27531,16 @@
                 "$ref": "#/components/schemas/StringFilterProperty"
               }
             ],
-            "description": "The batch operation id."
+            "description": "The batch operation id.\n**Deprecated**: Use `batchOperationKey` instead. This field will be removed in a future release. If both `batchOperationId` and `batchOperationKey` are provided, the request will be rejected with a 400 error.\n",
+            "deprecated": true
+          },
+          "batchOperationKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "The batch operation key."
           },
           "errorMessage": {
             "allOf": [
@@ -27606,7 +27895,13 @@
         "description": "Process instance sequence flow result.",
         "type": "object",
         "required": [
-          "rootProcessInstanceKey"
+          "rootProcessInstanceKey",
+          "elementId",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processInstanceKey",
+          "sequenceFlowId",
+          "tenantId"
         ],
         "properties": {
           "sequenceFlowId": {
@@ -30340,6 +30635,10 @@
         }
       },
       "VariableSearchResult": {
+        "required": [
+          "isTruncated",
+          "value"
+        ],
         "description": "Variable search response item.",
         "type": "object",
         "allOf": [
