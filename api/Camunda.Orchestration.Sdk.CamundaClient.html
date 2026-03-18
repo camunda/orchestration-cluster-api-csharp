@@ -266,7 +266,7 @@ Assigns the specified role to the user. The user will inherit the authorizations
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskAssignmentRequest_System_Threading_CancellationToken_">AssignUserTaskAsync(UserTaskKey, UserTaskAssignmentRequest, CancellationToken)</a></dt>
     <dd><p>Assign user task
-Assigns a user task with the given key to the given assignee.</p>
+Assigns a user task with the given key to the given assignee. Assignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -298,7 +298,7 @@ This is done asynchronously, the progress can be tracked using the batch operati
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_CancelProcessInstanceRequest_System_Threading_CancellationToken_">CancelProcessInstanceAsync(ProcessInstanceKey, CancelProcessInstanceRequest, CancellationToken)</a></dt>
     <dd><p>Cancel process instance
-Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted.</p>
+Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -319,7 +319,7 @@ Complete a job with the given payload, which allows completing the associated se
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CompleteUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskCompletionRequest_System_Threading_CancellationToken_">CompleteUserTaskAsync(UserTaskKey, UserTaskCompletionRequest, CancellationToken)</a></dt>
     <dd><p>Complete user task
-Completes a user task with the given key.</p>
+Completes a user task with the given key. Completion waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -385,7 +385,11 @@ The client can choose to retry the whole batch or individual documents based on 
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateElementInstanceVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateElementInstanceVariablesAsync_Camunda_Orchestration_Sdk_Api_ElementInstanceKey_Camunda_Orchestration_Sdk_Api_SetVariableRequest_System_Threading_CancellationToken_">CreateElementInstanceVariablesAsync(ElementInstanceKey, SetVariableRequest, CancellationToken)</a></dt>
     <dd><p>Update element instance variables
 Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.
-Specify the element instance in the <code>elementInstanceKey</code> parameter.</p>
+Specify the element instance in the <code>elementInstanceKey</code> parameter.
+Variable updates can be delayed by listener-related processing; if processing exceeds the
+request timeout, this endpoint can return 504. Other gateway timeout causes are also
+possible. Retry with backoff and inspect listener worker availability and logs when this
+repeats.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -736,7 +740,7 @@ Get statistics about jobs, grouped by job type.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetJobWorkerStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetJobWorkerStatisticsAsync_Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQuery_Camunda_Orchestration_Sdk_Runtime_ConsistencyOptions_Camunda_Orchestration_Sdk_Api_JobWorkerStatisticsQueryResult__System_Threading_CancellationToken_">GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery, ConsistencyOptions&lt;JobWorkerStatisticsQueryResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get job statistics by worker
-Returns aggregated metrics per worker for the given jobType.</p>
+Get statistics about jobs, grouped by worker, for a given job type.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1392,7 +1396,7 @@ The user can no longer access tenant data.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_System_Threading_CancellationToken_">UnassignUserTaskAsync(UserTaskKey, CancellationToken)</a></dt>
     <dd><p>Unassign user task
-Removes the assignee of a task with the given key.</p>
+Removes the assignee of a task with the given key. Unassignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1460,7 +1464,7 @@ Updates a user.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskUpdateRequest_System_Threading_CancellationToken_">UpdateUserTaskAsync(UserTaskKey, UserTaskUpdateRequest, CancellationToken)</a></dt>
     <dd><p>Update user task
-Update a user task with the given key.</p>
+Update a user task with the given key. Updates wait for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
 </dd>
   </dl>
 

@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_AssignUserTaskAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignUserTaskAsync*" class="text-break">
-Method AssignUserTaskAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L162"><i class="bi bi-code-slash"></i></a>
+Method AssignUserTaskAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L163"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,11 +121,11 @@ Method AssignUserTaskAsync  <a class="header-action link-secondary" title="View 
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_AssignUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskAssignmentRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignUserTaskAsync(Camunda.Orchestration.Sdk.Api.UserTaskKey,Camunda.Orchestration.Sdk.Api.UserTaskAssignmentRequest,System.Threading.CancellationToken)">
   AssignUserTaskAsync(UserTaskKey, UserTaskAssignmentRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L163"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Assign user task
-Assigns a user task with the given key to the given assignee.</p>
+Assigns a user task with the given key to the given assignee. Assignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -180,7 +180,7 @@ Assigns a user task with the given key to the given assignee.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L162" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L163" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CompleteUserTaskAsync*" class="text-break">
-Method CompleteUserTaskAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L260"><i class="bi bi-code-slash"></i></a>
+Method CompleteUserTaskAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L263"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,11 +121,11 @@ Method CompleteUserTaskAsync  <a class="header-action link-secondary" title="Vie
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskCompletionRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CompleteUserTaskAsync(Camunda.Orchestration.Sdk.Api.UserTaskKey,Camunda.Orchestration.Sdk.Api.UserTaskCompletionRequest,System.Threading.CancellationToken)">
   CompleteUserTaskAsync(UserTaskKey, UserTaskCompletionRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L260"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L263"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Complete user task
-Completes a user task with the given key.</p>
+Completes a user task with the given key. Completion waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -184,7 +184,7 @@ Completes a user task with the given key.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L260" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L263" class="edit-link">Edit this page</a>
         </div>
 
 

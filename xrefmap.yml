@@ -4027,18 +4027,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.AuditLogResult.AgentElementId
   fullName: Camunda.Orchestration.Sdk.Api.AuditLogResult.AgentElementId
   nameWithType: AuditLogResult.AgentElementId
-- uid: Camunda.Orchestration.Sdk.Api.AuditLogResult.Annotation
-  name: Annotation
-  href: api/Camunda.Orchestration.Sdk.Api.AuditLogResult.Annotation.html#Camunda_Orchestration_Sdk_Api_AuditLogResult_Annotation
-  commentId: P:Camunda.Orchestration.Sdk.Api.AuditLogResult.Annotation
-  fullName: Camunda.Orchestration.Sdk.Api.AuditLogResult.Annotation
-  nameWithType: AuditLogResult.Annotation
-- uid: Camunda.Orchestration.Sdk.Api.AuditLogResult.Annotation*
-  name: Annotation
-  href: api/Camunda.Orchestration.Sdk.Api.AuditLogResult.Annotation.html
-  commentId: Overload:Camunda.Orchestration.Sdk.Api.AuditLogResult.Annotation
-  fullName: Camunda.Orchestration.Sdk.Api.AuditLogResult.Annotation
-  nameWithType: AuditLogResult.Annotation
 - uid: Camunda.Orchestration.Sdk.Api.AuditLogResult.AuditLogKey
   name: AuditLogKey
   href: api/Camunda.Orchestration.Sdk.Api.AuditLogResult.AuditLogKey.html#Camunda_Orchestration_Sdk_Api_AuditLogResult_AuditLogKey
@@ -5053,6 +5041,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationId
   fullName: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationId
   nameWithType: BaseProcessInstanceFilterFields.BatchOperationId
+- uid: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationKey
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationKey.html#Camunda_Orchestration_Sdk_Api_BaseProcessInstanceFilterFields_BatchOperationKey
+  commentId: P:Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationKey
+  nameWithType: BaseProcessInstanceFilterFields.BatchOperationKey
+- uid: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationKey*
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BatchOperationKey
+  nameWithType: BaseProcessInstanceFilterFields.BatchOperationKey
 - uid: Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId
   name: BusinessId
   href: api/Camunda.Orchestration.Sdk.Api.BaseProcessInstanceFilterFields.BusinessId.html#Camunda_Orchestration_Sdk_Api_BaseProcessInstanceFilterFields_BusinessId
@@ -12823,6 +12823,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationResult.Warnings
   fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationResult.Warnings
   nameWithType: ExpressionEvaluationResult.Warnings
+- uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem
+  name: ExpressionEvaluationWarningItem
+  href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem.html
+  commentId: T:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem
+  fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem
+  nameWithType: ExpressionEvaluationWarningItem
+- uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem.Message
+  name: Message
+  href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem.Message.html#Camunda_Orchestration_Sdk_Api_ExpressionEvaluationWarningItem_Message
+  commentId: P:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem.Message
+  fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem.Message
+  nameWithType: ExpressionEvaluationWarningItem.Message
+- uid: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem.Message*
+  name: Message
+  href: api/Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem.Message.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem.Message
+  fullName: Camunda.Orchestration.Sdk.Api.ExpressionEvaluationWarningItem.Message
+  nameWithType: ExpressionEvaluationWarningItem.Message
 - uid: Camunda.Orchestration.Sdk.Api.FormId
   name: FormId
   href: api/Camunda.Orchestration.Sdk.Api.FormId.html
@@ -21268,6 +21286,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationId
   fullName: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationId
   nameWithType: ProcessDefinitionStatisticsFilter.BatchOperationId
+- uid: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationKey
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationKey.html#Camunda_Orchestration_Sdk_Api_ProcessDefinitionStatisticsFilter_BatchOperationKey
+  commentId: P:Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationKey
+  nameWithType: ProcessDefinitionStatisticsFilter.BatchOperationKey
+- uid: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationKey*
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BatchOperationKey
+  nameWithType: ProcessDefinitionStatisticsFilter.BatchOperationKey
 - uid: Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId
   name: BusinessId
   href: api/Camunda.Orchestration.Sdk.Api.ProcessDefinitionStatisticsFilter.BusinessId.html#Camunda_Orchestration_Sdk_Api_ProcessDefinitionStatisticsFilter_BusinessId
@@ -22156,6 +22186,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationId
   fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationId
   nameWithType: ProcessInstanceFilterFields.BatchOperationId
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationKey
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationKey.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceFilterFields_BatchOperationKey
+  commentId: P:Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationKey
+  nameWithType: ProcessInstanceFilterFields.BatchOperationKey
+- uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationKey*
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BatchOperationKey
+  nameWithType: ProcessInstanceFilterFields.BatchOperationKey
 - uid: Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId
   name: BusinessId
   href: api/Camunda.Orchestration.Sdk.Api.ProcessInstanceFilterFields.BusinessId.html#Camunda_Orchestration_Sdk_Api_ProcessInstanceFilterFields_BusinessId

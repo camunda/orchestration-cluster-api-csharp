@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstanceAsync*" class="text-break">
-Method CancelProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L222"><i class="bi bi-code-slash"></i></a>
+Method CancelProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L224"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,11 +121,11 @@ Method CancelProcessInstanceAsync  <a class="header-action link-secondary" title
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceKey_Camunda_Orchestration_Sdk_Api_CancelProcessInstanceRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceKey,Camunda.Orchestration.Sdk.Api.CancelProcessInstanceRequest,System.Threading.CancellationToken)">
   CancelProcessInstanceAsync(ProcessInstanceKey, CancelProcessInstanceRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L222"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L224"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Cancel process instance
-Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted.</p>
+Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -180,7 +180,7 @@ Cancels a running process instance. As a cancellation includes more than just th
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L222" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L224" class="edit-link">Edit this page</a>
         </div>
 
 
