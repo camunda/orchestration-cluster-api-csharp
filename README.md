@@ -442,6 +442,7 @@ All SDK log entries appear alongside your application logs with proper category 
 ### Serilog Integration
 
 ```csharp
+using Camunda.Orchestration.Sdk.Runtime;
 using Serilog;
 using Serilog.Extensions.Logging;
 
