@@ -240,7 +240,7 @@ public class OrderController(CamundaClient camunda) : ControllerBase
 
 ```csharp
 var httpClient = new HttpClient { BaseAddress = new Uri("https://my-cluster/v2/") };
-using var client = CamundaClient.Create(new CamundaOptions
+using var client = CamundaClient.Create(new Camunda.Orchestration.Sdk.Runtime.CamundaOptions
 {
     HttpClient = httpClient,
 });
