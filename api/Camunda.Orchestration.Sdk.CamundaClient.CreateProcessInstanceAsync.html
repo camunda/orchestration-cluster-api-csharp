@@ -159,7 +159,7 @@ when awaitCompletion is enabled.</p>
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstruction_System_Threading_CancellationToken__examples">Examples</h4>
 <pre><code class="lang-csharp">private static async Task CreateProcessInstanceExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     // Deploy a process and retrieve its ProcessDefinitionId
     var deployment = await client.DeployResourcesFromFilesAsync(

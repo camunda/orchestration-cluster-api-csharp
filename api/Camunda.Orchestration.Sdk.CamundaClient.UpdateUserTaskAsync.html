@@ -157,7 +157,7 @@ Update a user task with the given key. Updates wait for blocking task listeners 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskUpdateRequest_System_Threading_CancellationToken__examples">Examples</h4>
 <pre><code class="lang-csharp">private static async Task UpdateUserTaskExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     // Find a user task via search
     var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());

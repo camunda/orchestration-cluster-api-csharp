@@ -157,7 +157,7 @@ Assigns a user task with the given key to the given assignee. Assignment waits f
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskAssignmentRequest_System_Threading_CancellationToken__examples">Examples</h4>
 <pre><code class="lang-csharp">private static async Task AssignUserTaskExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     // Find a user task via search
     var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());

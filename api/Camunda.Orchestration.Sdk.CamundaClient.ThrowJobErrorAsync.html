@@ -157,7 +157,7 @@ Reports a business error (i.e. non-technical) that occurs while processing a job
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ThrowJobErrorAsync_Camunda_Orchestration_Sdk_Api_JobKey_Camunda_Orchestration_Sdk_Api_JobErrorRequest_System_Threading_CancellationToken__examples">Examples</h4>
 <pre><code class="lang-csharp">private static async Task ThrowJobErrorExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     // Activate a job and get its JobKey from the response
     var activated = await client.ActivateJobsAsync(new JobActivationRequest

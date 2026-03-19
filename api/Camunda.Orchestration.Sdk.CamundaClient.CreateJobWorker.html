@@ -202,7 +202,7 @@ The job is auto-completed with no variables on success.</p>
 <pre><code class="lang-csharp">#pragma warning disable CS1998 // Async method lacks await (handler is simple for demo purposes)
 private static async Task JobWorkerExample()
 {
-    await using var client = Camunda.CreateClient();
+    await using var client = CamundaClient.Create();
 
     client.CreateJobWorker(
         new JobWorkerConfig

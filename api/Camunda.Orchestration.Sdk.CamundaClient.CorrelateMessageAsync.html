@@ -158,7 +158,7 @@ Use the publish message endpoint to send messages that can be buffered.</p>
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CorrelateMessageAsync_Camunda_Orchestration_Sdk_Api_MessageCorrelationRequest_System_Threading_CancellationToken__examples">Examples</h4>
 <pre><code class="lang-csharp">private static async Task CorrelateMessageExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     var result = await client.CorrelateMessageAsync(new MessageCorrelationRequest
     {

@@ -159,7 +159,7 @@ Use the message correlation endpoint for such use cases.</p>
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_PublishMessageAsync_Camunda_Orchestration_Sdk_Api_MessagePublicationRequest_System_Threading_CancellationToken__examples">Examples</h4>
 <pre><code class="lang-csharp">private static async Task PublishMessageExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     await client.PublishMessageAsync(new MessagePublicationRequest
     {

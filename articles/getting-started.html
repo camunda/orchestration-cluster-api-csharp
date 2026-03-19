@@ -94,7 +94,7 @@
 <pre><code class="lang-csharp">using Camunda.Orchestration.Sdk;
 
 // Reads CAMUNDA_* environment variables automatically
-using var client = Camunda.CreateClient();
+using var client = CamundaClient.Create();
 </code></pre>
 <h2 id="configuration">Configuration</h2>
 <p>Set environment variables to configure the client:</p>
@@ -105,7 +105,9 @@ export CAMUNDA_OAUTH_URL=https://login.cloud.camunda.io/oauth/token
 export CAMUNDA_TOKEN_AUDIENCE=zeebe.camunda.io
 </code></pre>
 <p>Or configure programmatically:</p>
-<pre><code class="lang-csharp">using var client = Camunda.CreateClient(new CamundaOptions
+<pre><code class="lang-csharp">using Camunda.Orchestration.Sdk.Runtime;
+
+using var client = CamundaClient.Create(new CamundaOptions
 {
     Config = new Dictionary&lt;string, string&gt;
     {

@@ -29701,6 +29701,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CorrelateMessageAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.CorrelateMessageAsync
   nameWithType: CamundaClient.CorrelateMessageAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.Create(Camunda.Orchestration.Sdk.Runtime.CamundaOptions)
+  name: Create(CamundaOptions?)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.Create.html#Camunda_Orchestration_Sdk_CamundaClient_Create_Camunda_Orchestration_Sdk_Runtime_CamundaOptions_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.Create(Camunda.Orchestration.Sdk.Runtime.CamundaOptions)
+  name.vb: Create(CamundaOptions)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.Create(Camunda.Orchestration.Sdk.Runtime.CamundaOptions?)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.Create(Camunda.Orchestration.Sdk.Runtime.CamundaOptions)
+  nameWithType: CamundaClient.Create(CamundaOptions?)
+  nameWithType.vb: CamundaClient.Create(CamundaOptions)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.Create*
+  name: Create
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.Create.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.Create
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.Create
+  nameWithType: CamundaClient.Create
 - uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync(Camunda.Orchestration.Sdk.Api.UserRequest,System.Threading.CancellationToken)
   name: CreateAdminUserAsync(UserRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateAdminUserAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAdminUserAsync_Camunda_Orchestration_Sdk_Api_UserRequest_System_Threading_CancellationToken_

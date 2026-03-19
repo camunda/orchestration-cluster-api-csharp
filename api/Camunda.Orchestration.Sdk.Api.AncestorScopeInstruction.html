@@ -103,9 +103,10 @@ a &quot;direct&quot; scope instruction with an <code>ancestorElementInstanceKey<
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonDerivedType(typeof(DirectAncestorKeyInstruction))]
-[JsonDerivedType(typeof(InferredAncestorKeyInstruction))]
-[JsonDerivedType(typeof(UseSourceParentKeyInstruction))]
+    <pre><code class="lang-csharp hljs">[JsonPolymorphic(TypeDiscriminatorPropertyName = &quot;ancestorScopeType&quot;)]
+[JsonDerivedType(typeof(DirectAncestorKeyInstruction), &quot;direct&quot;)]
+[JsonDerivedType(typeof(InferredAncestorKeyInstruction), &quot;inferred&quot;)]
+[JsonDerivedType(typeof(UseSourceParentKeyInstruction), &quot;sourceParent&quot;)]
 public abstract class AncestorScopeInstruction</code></pre>
   </div>
 

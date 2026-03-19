@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_Api_SourceElementInstruction" data-uid="Camunda.Orchestration.Sdk.Api.SourceElementInstruction" class="text-break">
-Class SourceElementInstruction  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L14423"><i class="bi bi-code-slash"></i></a>
+Class SourceElementInstruction  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L14426"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,8 +102,9 @@ Class SourceElementInstruction  <a class="header-action link-secondary" title="V
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonDerivedType(typeof(SourceElementIdInstruction))]
-[JsonDerivedType(typeof(SourceElementInstanceKeyInstruction))]
+    <pre><code class="lang-csharp hljs">[JsonPolymorphic(TypeDiscriminatorPropertyName = &quot;sourceType&quot;)]
+[JsonDerivedType(typeof(SourceElementIdInstruction), &quot;byId&quot;)]
+[JsonDerivedType(typeof(SourceElementInstanceKeyInstruction), &quot;byKey&quot;)]
 public abstract class SourceElementInstruction</code></pre>
   </div>
 
@@ -178,7 +179,7 @@ public abstract class SourceElementInstruction</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L14423" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L14426" class="edit-link">Edit this page</a>
         </div>
 
 
