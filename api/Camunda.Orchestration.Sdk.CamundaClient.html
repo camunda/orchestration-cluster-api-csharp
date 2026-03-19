@@ -354,14 +354,14 @@ This is an atomic call, i.e. either all resources are deployed or none of them a
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Nullable_Camunda_Orchestration_Sdk_Api_DocumentId__System_Threading_CancellationToken_">CreateDocumentAsync(MultipartFormDataContent, string?, DocumentId?, CancellationToken)</a></dt>
     <dd><p>Upload document
 Upload a document to the Camunda 8 cluster.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)</p>
 </dd>
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentLinkAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentLinkAsync_Camunda_Orchestration_Sdk_Api_DocumentId_Camunda_Orchestration_Sdk_Api_DocumentLinkRequest_System_String_System_String_System_Threading_CancellationToken_">CreateDocumentLinkAsync(DocumentId, DocumentLinkRequest, string?, string?, CancellationToken)</a></dt>
     <dd><p>Create document link
 Create a link to a document in the Camunda 8 cluster.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -378,7 +378,7 @@ of the file part.</p>
 <p>In case of a multi-status response, the response body will contain a list of <code>DocumentBatchProblemDetail</code> objects,
 each of which contains the file name of the document that failed to upload and the reason for the failure.
 The client can choose to retry the whole batch or individual documents based on the response.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -488,7 +488,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteDocumentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDocumentAsync_Camunda_Orchestration_Sdk_Api_DocumentId_System_String_System_Threading_CancellationToken_">DeleteDocumentAsync(DocumentId, string?, CancellationToken)</a></dt>
     <dd><p>Delete document
 Delete a document from the Camunda 8 cluster.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -678,7 +678,7 @@ Returns decision requirements as XML.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDocumentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDocumentAsync_Camunda_Orchestration_Sdk_Api_DocumentId_System_String_System_String_System_Threading_CancellationToken_">GetDocumentAsync(DocumentId, string?, string?, CancellationToken)</a></dt>
     <dd><p>Download document
 Download a document from the Camunda 8 cluster.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)</p>
 </dd>
   </dl>
   <dl class="jumplist">
