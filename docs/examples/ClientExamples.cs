@@ -14,7 +14,7 @@ internal static class ClientExamples
     private static void CreateClientExample()
     {
         // Uses environment variables for configuration (ZEEBE_ADDRESS, etc.)
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
     }
     // </CreateClient>
 
@@ -22,7 +22,7 @@ internal static class ClientExamples
     private static void CreateClientWithOptionsExample()
     {
         // Override config via environment dictionary
-        using var client = Camunda.CreateClient(new CamundaOptions
+        using var client = CamundaClient.Create(new CamundaOptions
         {
             Env = new Dictionary<string, string?>
             {
@@ -38,7 +38,7 @@ internal static class ClientExamples
     // <GetTopology>
     private static async Task GetTopologyExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var topology = await client.GetTopologyAsync();
 
@@ -54,7 +54,7 @@ internal static class ClientExamples
     // <GetAuthentication>
     private static async Task GetAuthenticationExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var user = await client.GetAuthenticationAsync();
         Console.WriteLine($"Authenticated as: {user.Username}");

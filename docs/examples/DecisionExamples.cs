@@ -13,7 +13,7 @@ internal static class DecisionExamples
     // <EvaluateDecision>
     private static async Task EvaluateDecisionExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Find the decision definition via search
         var definitions = await client.SearchDecisionDefinitionsAsync(new DecisionDefinitionSearchQuery());
@@ -36,7 +36,7 @@ internal static class DecisionExamples
     // <SearchDecisionDefinitions>
     private static async Task SearchDecisionDefinitionsExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var result = await client.SearchDecisionDefinitionsAsync(new DecisionDefinitionSearchQuery());
 

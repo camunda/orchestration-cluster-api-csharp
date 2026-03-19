@@ -49,7 +49,7 @@ using Camunda.Orchestration.Sdk.Api;
 
 // Zero-config construction: reads CAMUNDA_* from environment variables.
 // If no configuration is present, defaults to Camunda 8 Run on localhost.
-using var client = Camunda.CreateClient();
+using var client = CamundaClient.Create();
 
 var topology = await client.GetTopologyAsync();
 Console.WriteLine($"Brokers: {topology.Brokers?.Count ?? 0}");
@@ -82,7 +82,10 @@ CAMUNDA_DEFAULT_TENANT_ID=<default>            # optional: override default tena
 Use only when you must supply or mutate configuration dynamically (e.g. multi-tenant routing, tests, ephemeral preview environments). Keys mirror their `CAMUNDA_*` env names:
 
 ```csharp
-using var client = Camunda.CreateClient(new CamundaOptions
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Runtime;
+
+using var client = CamundaClient.Create(new CamundaOptions
 {
     Config = new Dictionary<string, string>
     {
@@ -124,7 +127,7 @@ Pass the section to the client:
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
-using var client = Camunda.CreateClient(new CamundaOptions
+using var client = CamundaClient.Create(new Camunda.Orchestration.Sdk.Runtime.CamundaOptions
 {
     Configuration = builder.Configuration.GetSection("Camunda"),
 });
@@ -240,7 +243,7 @@ public class OrderController(CamundaClient camunda) : ControllerBase
 
 ```csharp
 var httpClient = new HttpClient { BaseAddress = new Uri("https://my-cluster/v2/") };
-using var client = Camunda.CreateClient(new CamundaOptions
+using var client = CamundaClient.Create(new Camunda.Orchestration.Sdk.Runtime.CamundaOptions
 {
     HttpClient = httpClient,
 });
@@ -403,6 +406,8 @@ Output uses a tagged format matching the JS SDK:
 Pass an `ILoggerFactory` via `CamundaOptions` to integrate with your application's logging:
 
 ```csharp
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Runtime;
 using Microsoft.Extensions.Logging;
 
 // Example: built-in .NET console logger with custom filtering
@@ -413,7 +418,7 @@ using var loggerFactory = LoggerFactory.Create(builder =>
         .SetMinimumLevel(LogLevel.Debug);
 });
 
-using var client = Camunda.CreateClient(new CamundaOptions
+using var client = CamundaClient.Create(new CamundaOptions
 {
     LoggerFactory = loggerFactory,
 });
@@ -440,6 +445,7 @@ All SDK log entries appear alongside your application logs with proper category 
 ### Serilog Integration
 
 ```csharp
+using Camunda.Orchestration.Sdk.Runtime;
 using Serilog;
 using Serilog.Extensions.Logging;
 
@@ -449,7 +455,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 using var loggerFactory = new SerilogLoggerFactory();
-using var client = Camunda.CreateClient(new CamundaOptions
+using var client = CamundaClient.Create(new CamundaOptions
 {
     LoggerFactory = loggerFactory,
 });
@@ -496,6 +502,77 @@ var result = await client.GetProcessDefinitionAsync(defKey);
 ```
 
 Key types implement `ICamundaKey` (string-backed) or `ICamundaLongKey` (long-backed) and serialize as plain JSON values. Constraint validation (regex pattern, min/max length) is enforced in `AssumeExists()` and queryable via `IsValid()`.
+
+## Deploying Resources
+
+Deploy BPMN, DMN, or Form files from disk:
+
+```csharp
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Api;
+
+using var client = CamundaClient.Create();
+
+var result = await client.DeployResourcesFromFilesAsync(["process.bpmn", "decision.dmn"]);
+
+Console.WriteLine($"Deployment key: {result.DeploymentKey}");
+foreach (var process in result.Processes)
+{
+    Console.WriteLine($"  Process: {process.ProcessDefinitionId} (key: {process.ProcessDefinitionKey})");
+}
+```
+
+## Creating a Process Instance
+
+The recommended pattern is to obtain keys from a prior API response (e.g. a deployment) and pass them directly — no manual conversion needed:
+
+```csharp
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Api;
+
+using var client = CamundaClient.Create();
+
+// Deploy and capture the typed key
+var deployment = await client.DeployResourcesFromFilesAsync(["process.bpmn"]);
+var processKey = deployment.Processes[0].ProcessDefinitionKey;
+
+// Use it directly — the type flows through without conversion
+var result = await client.CreateProcessInstanceAsync(
+    new ProcessInstanceCreationInstructionByKey
+    {
+        ProcessDefinitionKey = processKey,
+    });
+
+Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+```
+
+If you need to restore a key from external storage (database, message queue, config file), wrap the raw value with the domain key constructor:
+
+```csharp
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Api;
+
+using var client = CamundaClient.Create();
+
+var storedKey = "2251799813685249"; // from a DB row or config
+var result = await client.CreateProcessInstanceAsync(
+    new ProcessInstanceCreationInstructionByKey
+    {
+        ProcessDefinitionKey = ProcessDefinitionKey.AssumeExists(storedKey),
+    });
+
+Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+```
+
+You can also start a process instance by BPMN process ID (which uses the latest deployed version):
+
+```csharp
+var result = await client.CreateProcessInstanceAsync(
+    new ProcessInstanceCreationInstructionById
+    {
+        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
+    });
+```
 
 ## Typed Variables with DTOs
 
@@ -563,7 +640,7 @@ using Camunda.Orchestration.Sdk;
 using Camunda.Orchestration.Sdk.Runtime;
 using Camunda.Orchestration.Sdk.Api;
 
-using var client = Camunda.CreateClient();
+using var client = CamundaClient.Create();
 
 // Define input/output DTOs
 public record OrderInput(string OrderId, decimal Amount);
@@ -659,7 +736,7 @@ var result = await worker.StopAsync(gracePeriod: TimeSpan.FromSeconds(10));
 await client.StopAllWorkersAsync(TimeSpan.FromSeconds(10));
 
 // DisposeAsync stops workers automatically
-await using var disposableClient = Camunda.CreateClient();
+await using var disposableClient = CamundaClient.Create();
 ```
 
 ## Contributing

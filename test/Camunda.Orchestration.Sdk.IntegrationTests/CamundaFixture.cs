@@ -37,7 +37,7 @@ public sealed class CamundaFixture : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        Client = Camunda.CreateClient(new Runtime.CamundaOptions
+        Client = CamundaClient.Create(new Runtime.CamundaOptions
         {
             Config = new Dictionary<string, string>
             {

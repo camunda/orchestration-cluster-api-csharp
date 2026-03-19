@@ -13,7 +13,7 @@ internal static class ProcessInstanceExamples
     // <CreateProcessInstance>
     private static async Task CreateProcessInstanceExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Deploy a process and retrieve its ProcessDefinitionId
         var deployment = await client.DeployResourcesFromFilesAsync(
@@ -34,7 +34,7 @@ internal static class ProcessInstanceExamples
     // <CreateProcessInstanceWithVariables>
     private static async Task CreateProcessInstanceWithVariablesExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Deploy and get the ProcessDefinitionId from the deployment response
         var deployment = await client.DeployResourcesFromFilesAsync(
@@ -60,7 +60,7 @@ internal static class ProcessInstanceExamples
     // <CancelProcessInstance>
     private static async Task CancelProcessInstanceExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Create a process instance and get its key from the response
         var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
@@ -76,7 +76,7 @@ internal static class ProcessInstanceExamples
     // <GetProcessInstance>
     private static async Task GetProcessInstanceExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // The ProcessInstanceKey is returned from CreateProcessInstanceAsync
         var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
@@ -93,7 +93,7 @@ internal static class ProcessInstanceExamples
     // <SearchProcessInstances>
     private static async Task SearchProcessInstancesExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var result = await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
 
@@ -107,7 +107,7 @@ internal static class ProcessInstanceExamples
     // <MigrateProcessInstance>
     private static async Task MigrateProcessInstanceExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Create an instance to migrate
         var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
@@ -139,7 +139,7 @@ internal static class ProcessInstanceExamples
     // <ModifyProcessInstance>
     private static async Task ModifyProcessInstanceExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Get a ProcessInstanceKey from the creation response
         var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById

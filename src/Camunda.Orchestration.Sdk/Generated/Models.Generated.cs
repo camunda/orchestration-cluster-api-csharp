@@ -1903,9 +1903,10 @@ public sealed class AdvancedVariableKeyFilter
 /// <seealso cref="DirectAncestorKeyInstruction"/>
 /// <seealso cref="InferredAncestorKeyInstruction"/>
 /// <seealso cref="UseSourceParentKeyInstruction"/>
-[JsonDerivedType(typeof(DirectAncestorKeyInstruction))]
-[JsonDerivedType(typeof(InferredAncestorKeyInstruction))]
-[JsonDerivedType(typeof(UseSourceParentKeyInstruction))]
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "ancestorScopeType")]
+[JsonDerivedType(typeof(DirectAncestorKeyInstruction), "direct")]
+[JsonDerivedType(typeof(InferredAncestorKeyInstruction), "inferred")]
+[JsonDerivedType(typeof(UseSourceParentKeyInstruction), "sourceParent")]
 public abstract class AncestorScopeInstruction { }
 
 /// <summary>
@@ -4923,6 +4924,7 @@ public enum DecisionDefinitionTypeEnum
     DECISIONTABLE,
     [JsonPropertyName("LITERAL_EXPRESSION")]
     LITERALEXPRESSION,
+    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
     [JsonPropertyName("UNKNOWN")]
@@ -5594,8 +5596,10 @@ public enum DecisionInstanceStateEnum
     EVALUATED,
     [JsonPropertyName("FAILED")]
     FAILED,
+    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
+    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNKNOWN")]
     UNKNOWN,
 }
@@ -9463,8 +9467,9 @@ public sealed class JobMetricsConfigurationResponse
 /// </remarks>
 /// <seealso cref="JobResultUserTask"/>
 /// <seealso cref="JobResultAdHocSubProcess"/>
-[JsonDerivedType(typeof(JobResultUserTask))]
-[JsonDerivedType(typeof(JobResultAdHocSubProcess))]
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
+[JsonDerivedType(typeof(JobResultUserTask), "userTask")]
+[JsonDerivedType(typeof(JobResultAdHocSubProcess), "adHocSubProcess")]
 public abstract class JobResult { }
 
 /// <summary>
@@ -12541,7 +12546,8 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
 /// </list>
 /// </remarks>
 /// <seealso cref="ProcessInstanceCreationTerminateInstruction"/>
-[JsonDerivedType(typeof(ProcessInstanceCreationTerminateInstruction))]
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
+[JsonDerivedType(typeof(ProcessInstanceCreationTerminateInstruction), "TERMINATE_PROCESS_INSTANCE")]
 public abstract class ProcessInstanceCreationRuntimeInstruction { }
 
 /// <summary>
@@ -14417,8 +14423,9 @@ public sealed class SourceElementInstanceKeyInstruction : SourceElementInstructi
 /// </remarks>
 /// <seealso cref="SourceElementIdInstruction"/>
 /// <seealso cref="SourceElementInstanceKeyInstruction"/>
-[JsonDerivedType(typeof(SourceElementIdInstruction))]
-[JsonDerivedType(typeof(SourceElementInstanceKeyInstruction))]
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "sourceType")]
+[JsonDerivedType(typeof(SourceElementIdInstruction), "byId")]
+[JsonDerivedType(typeof(SourceElementInstanceKeyInstruction), "byKey")]
 public abstract class SourceElementInstruction { }
 
 /// <summary>

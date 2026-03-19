@@ -16,6 +16,12 @@ namespace Camunda.Orchestration.Sdk;
 /// </summary>
 public partial class CamundaClient : IDisposable
 {
+    /// <summary>
+    /// Create a new CamundaClient.
+    /// </summary>
+    public static CamundaClient Create(CamundaOptions? options = null)
+        => new(options);
+
     private readonly CamundaConfig _config;
     private readonly HttpClient _httpClient;
     private readonly bool _ownsHttpClient;
@@ -320,11 +326,13 @@ internal readonly struct VoidResponse;
 /// <summary>
 /// Factory method for creating CamundaClient instances.
 /// </summary>
+[Obsolete("Use CamundaClient.Create() instead.")]
 public static class Camunda
 {
     /// <summary>
     /// Create a new CamundaClient.
     /// </summary>
+    [Obsolete("Use CamundaClient.Create() instead.")]
     public static CamundaClient CreateClient(CamundaOptions? options = null)
-        => new(options);
+        => CamundaClient.Create(options);
 }

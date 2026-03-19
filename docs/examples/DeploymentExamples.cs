@@ -13,7 +13,7 @@ internal static class DeploymentExamples
     // <DeployResourcesFromFiles>
     private static async Task DeployResourcesFromFilesExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var result = await client.DeployResourcesFromFilesAsync(
             new[] { "order-process.bpmn", "email-connector.bpmn" }
@@ -30,7 +30,7 @@ internal static class DeploymentExamples
     // <DeleteResource>
     private static async Task DeleteResourceExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Deploy a resource and get its key from the deployment response
         var deployment = await client.DeployResourcesFromFilesAsync(

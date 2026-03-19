@@ -12,7 +12,7 @@ internal static class MessageExamples
     // <CorrelateMessage>
     private static async Task CorrelateMessageExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var result = await client.CorrelateMessageAsync(new MessageCorrelationRequest
         {
@@ -32,7 +32,7 @@ internal static class MessageExamples
     // <PublishMessage>
     private static async Task PublishMessageExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         await client.PublishMessageAsync(new MessagePublicationRequest
         {
@@ -50,7 +50,7 @@ internal static class MessageExamples
     // <BroadcastSignal>
     private static async Task BroadcastSignalExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var result = await client.BroadcastSignalAsync(new SignalBroadcastRequest
         {

@@ -12,7 +12,7 @@ dotnet add package Camunda.Orchestration.Sdk
 using Camunda.Orchestration.Sdk;
 
 // Reads CAMUNDA_* environment variables automatically
-using var client = Camunda.CreateClient();
+using var client = CamundaClient.Create();
 ```
 
 ## Configuration
@@ -30,7 +30,9 @@ export CAMUNDA_TOKEN_AUDIENCE=zeebe.camunda.io
 Or configure programmatically:
 
 ```csharp
-using var client = Camunda.CreateClient(new CamundaOptions
+using Camunda.Orchestration.Sdk.Runtime;
+
+using var client = CamundaClient.Create(new CamundaOptions
 {
     Config = new Dictionary<string, string>
     {

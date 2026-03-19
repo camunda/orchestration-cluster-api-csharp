@@ -13,7 +13,7 @@ internal static class UserTaskExamples
     // <CompleteUserTask>
     private static async Task CompleteUserTaskExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Find a user task via search
         var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
@@ -33,7 +33,7 @@ internal static class UserTaskExamples
     // <AssignUserTask>
     private static async Task AssignUserTaskExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Find a user task via search
         var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
@@ -49,7 +49,7 @@ internal static class UserTaskExamples
     // <UnassignUserTask>
     private static async Task UnassignUserTaskExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Find a user task via search
         var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
@@ -62,7 +62,7 @@ internal static class UserTaskExamples
     // <SearchUserTasks>
     private static async Task SearchUserTasksExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var result = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
 
@@ -76,7 +76,7 @@ internal static class UserTaskExamples
     // <UpdateUserTask>
     private static async Task UpdateUserTaskExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Find a user task via search
         var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
