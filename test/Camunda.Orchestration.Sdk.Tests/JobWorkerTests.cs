@@ -353,7 +353,7 @@ public class JobWorkerTests
 
     private static CamundaClient CreateTestClient()
     {
-        return Camunda.CreateClient(new CamundaOptions
+        return CamundaClient.Create(new CamundaOptions
         {
             Config = new Dictionary<string, string>
             {

@@ -13,7 +13,7 @@ internal static class IncidentExamples
     // <GetIncident>
     private static async Task GetIncidentExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Find an incident via search
         var incidents = await client.SearchIncidentsAsync(new IncidentSearchQuery());
@@ -29,7 +29,7 @@ internal static class IncidentExamples
     // <ResolveIncident>
     private static async Task ResolveIncidentExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Find an incident via search
         var incidents = await client.SearchIncidentsAsync(new IncidentSearchQuery());
@@ -42,7 +42,7 @@ internal static class IncidentExamples
     // <SearchIncidents>
     private static async Task SearchIncidentsExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var result = await client.SearchIncidentsAsync(new IncidentSearchQuery());
 

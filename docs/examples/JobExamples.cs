@@ -13,7 +13,7 @@ internal static class JobExamples
     // <ActivateJobs>
     private static async Task ActivateJobsExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var response = await client.ActivateJobsAsync(new JobActivationRequest
         {
@@ -33,7 +33,7 @@ internal static class JobExamples
     // <CompleteJob>
     private static async Task CompleteJobExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Activate jobs and get a JobKey from the response
         var activated = await client.ActivateJobsAsync(new JobActivationRequest
@@ -58,7 +58,7 @@ internal static class JobExamples
     // <FailJob>
     private static async Task FailJobExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Activate a job and get its JobKey from the response
         var activated = await client.ActivateJobsAsync(new JobActivationRequest
@@ -82,7 +82,7 @@ internal static class JobExamples
     // <ThrowJobError>
     private static async Task ThrowJobErrorExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         // Activate a job and get its JobKey from the response
         var activated = await client.ActivateJobsAsync(new JobActivationRequest
@@ -106,7 +106,7 @@ internal static class JobExamples
     #pragma warning disable CS1998 // Async method lacks await (handler is simple for demo purposes)
     private static async Task JobWorkerExample()
     {
-        await using var client = Camunda.CreateClient();
+        await using var client = CamundaClient.Create();
 
         client.CreateJobWorker(
             new JobWorkerConfig
@@ -132,7 +132,7 @@ internal static class JobExamples
     // <SearchJobs>
     private static async Task SearchJobsExample()
     {
-        using var client = Camunda.CreateClient();
+        using var client = CamundaClient.Create();
 
         var result = await client.SearchJobsAsync(new JobSearchQuery());
 

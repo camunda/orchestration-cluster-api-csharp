@@ -49,7 +49,7 @@ using Camunda.Orchestration.Sdk.Api;
 
 // Zero-config construction: reads CAMUNDA_* from environment variables.
 // If no configuration is present, defaults to Camunda 8 Run on localhost.
-using var client = Camunda.CreateClient();
+using var client = CamundaClient.Create();
 
 var topology = await client.GetTopologyAsync();
 Console.WriteLine($"Brokers: {topology.Brokers?.Count ?? 0}");
@@ -82,7 +82,7 @@ CAMUNDA_DEFAULT_TENANT_ID=<default>            # optional: override default tena
 Use only when you must supply or mutate configuration dynamically (e.g. multi-tenant routing, tests, ephemeral preview environments). Keys mirror their `CAMUNDA_*` env names:
 
 ```csharp
-using var client = Camunda.CreateClient(new CamundaOptions
+using var client = CamundaClient.Create(new CamundaOptions
 {
     Config = new Dictionary<string, string>
     {
@@ -124,7 +124,7 @@ Pass the section to the client:
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
-using var client = Camunda.CreateClient(new CamundaOptions
+using var client = CamundaClient.Create(new CamundaOptions
 {
     Configuration = builder.Configuration.GetSection("Camunda"),
 });
@@ -240,7 +240,7 @@ public class OrderController(CamundaClient camunda) : ControllerBase
 
 ```csharp
 var httpClient = new HttpClient { BaseAddress = new Uri("https://my-cluster/v2/") };
-using var client = Camunda.CreateClient(new CamundaOptions
+using var client = CamundaClient.Create(new CamundaOptions
 {
     HttpClient = httpClient,
 });
@@ -413,7 +413,7 @@ using var loggerFactory = LoggerFactory.Create(builder =>
         .SetMinimumLevel(LogLevel.Debug);
 });
 
-using var client = Camunda.CreateClient(new CamundaOptions
+using var client = CamundaClient.Create(new CamundaOptions
 {
     LoggerFactory = loggerFactory,
 });
@@ -449,7 +449,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 using var loggerFactory = new SerilogLoggerFactory();
-using var client = Camunda.CreateClient(new CamundaOptions
+using var client = CamundaClient.Create(new CamundaOptions
 {
     LoggerFactory = loggerFactory,
 });
@@ -563,7 +563,7 @@ using Camunda.Orchestration.Sdk;
 using Camunda.Orchestration.Sdk.Runtime;
 using Camunda.Orchestration.Sdk.Api;
 
-using var client = Camunda.CreateClient();
+using var client = CamundaClient.Create();
 
 // Define input/output DTOs
 public record OrderInput(string OrderId, decimal Amount);
@@ -659,7 +659,7 @@ var result = await worker.StopAsync(gracePeriod: TimeSpan.FromSeconds(10));
 await client.StopAllWorkersAsync(TimeSpan.FromSeconds(10));
 
 // DisposeAsync stops workers automatically
-await using var disposableClient = Camunda.CreateClient();
+await using var disposableClient = CamundaClient.Create();
 ```
 
 ## Contributing
