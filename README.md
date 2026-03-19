@@ -127,7 +127,7 @@ Pass the section to the client:
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
-using var client = CamundaClient.Create(new CamundaOptions
+using var client = CamundaClient.Create(new Camunda.Orchestration.Sdk.Runtime.CamundaOptions
 {
     Configuration = builder.Configuration.GetSection("Camunda"),
 });
