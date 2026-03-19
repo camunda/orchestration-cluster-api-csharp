@@ -82,6 +82,9 @@ CAMUNDA_DEFAULT_TENANT_ID=<default>            # optional: override default tena
 Use only when you must supply or mutate configuration dynamically (e.g. multi-tenant routing, tests, ephemeral preview environments). Keys mirror their `CAMUNDA_*` env names:
 
 ```csharp
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Runtime;
+
 using var client = CamundaClient.Create(new CamundaOptions
 {
     Config = new Dictionary<string, string>
