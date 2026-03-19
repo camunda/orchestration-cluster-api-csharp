@@ -403,6 +403,8 @@ Output uses a tagged format matching the JS SDK:
 Pass an `ILoggerFactory` via `CamundaOptions` to integrate with your application's logging:
 
 ```csharp
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Runtime;
 using Microsoft.Extensions.Logging;
 
 // Example: built-in .NET console logger with custom filtering
