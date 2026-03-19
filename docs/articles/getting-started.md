@@ -30,6 +30,8 @@ export CAMUNDA_TOKEN_AUDIENCE=zeebe.camunda.io
 Or configure programmatically:
 
 ```csharp
+using Camunda.Orchestration.Sdk.Runtime;
+
 using var client = CamundaClient.Create(new CamundaOptions
 {
     Config = new Dictionary<string, string>
