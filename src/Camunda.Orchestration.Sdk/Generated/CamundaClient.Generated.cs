@@ -321,7 +321,7 @@ public partial class CamundaClient
     /// Upload document
     /// Upload a document to the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: createDocument</remarks>
@@ -338,7 +338,7 @@ public partial class CamundaClient
     /// Create document link
     /// Create a link to a document in the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP
     /// 
     /// </summary>
     /// <remarks>Operation: createDocumentLink</remarks>
@@ -367,7 +367,7 @@ public partial class CamundaClient
     /// each of which contains the file name of the document that failed to upload and the reason for the failure.
     /// The client can choose to retry the whole batch or individual documents based on the response.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: createDocuments</remarks>
@@ -542,7 +542,7 @@ public partial class CamundaClient
     /// Delete document
     /// Delete a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: deleteDocument</remarks>
@@ -905,7 +905,7 @@ public partial class CamundaClient
     /// Download document
     /// Download a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: getDocument</remarks>

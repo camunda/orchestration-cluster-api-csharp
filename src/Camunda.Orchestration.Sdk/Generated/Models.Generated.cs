@@ -4924,7 +4924,6 @@ public enum DecisionDefinitionTypeEnum
     DECISIONTABLE,
     [JsonPropertyName("LITERAL_EXPRESSION")]
     LITERALEXPRESSION,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
     [JsonPropertyName("UNKNOWN")]
@@ -5596,10 +5595,8 @@ public enum DecisionInstanceStateEnum
     EVALUATED,
     [JsonPropertyName("FAILED")]
     FAILED,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNKNOWN")]
     UNKNOWN,
 }
@@ -14191,8 +14188,7 @@ public sealed class SearchQueryPageResponse
     public long TotalItems { get; set; }
 
     /// <summary>
-    /// Indicates whether there are more items matching the criteria beyond the returned items.
-    /// This is useful for determining if additional requests are needed to retrieve all results.
+    /// Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.
     /// 
     /// </summary>
     [JsonPropertyName("hasMoreTotalItems")]
