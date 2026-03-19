@@ -497,6 +497,77 @@ var result = await client.GetProcessDefinitionAsync(defKey);
 
 Key types implement `ICamundaKey` (string-backed) or `ICamundaLongKey` (long-backed) and serialize as plain JSON values. Constraint validation (regex pattern, min/max length) is enforced in `AssumeExists()` and queryable via `IsValid()`.
 
+## Deploying Resources
+
+Deploy BPMN, DMN, or Form files from disk:
+
+```csharp
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Api;
+
+using var client = CamundaClient.Create();
+
+var result = await client.DeployResourcesFromFilesAsync(["process.bpmn", "decision.dmn"]);
+
+Console.WriteLine($"Deployment key: {result.DeploymentKey}");
+foreach (var process in result.Processes)
+{
+    Console.WriteLine($"  Process: {process.ProcessDefinitionId} (key: {process.ProcessDefinitionKey})");
+}
+```
+
+## Creating a Process Instance
+
+The recommended pattern is to obtain keys from a prior API response (e.g. a deployment) and pass them directly — no manual conversion needed:
+
+```csharp
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Api;
+
+using var client = CamundaClient.Create();
+
+// Deploy and capture the typed key
+var deployment = await client.DeployResourcesFromFilesAsync(["process.bpmn"]);
+var processKey = deployment.Processes[0].ProcessDefinitionKey;
+
+// Use it directly — the type flows through without conversion
+var result = await client.CreateProcessInstanceAsync(
+    new ProcessInstanceCreationInstructionByKey
+    {
+        ProcessDefinitionKey = processKey,
+    });
+
+Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+```
+
+If you need to restore a key from external storage (database, message queue, config file), wrap the raw value with the domain key constructor:
+
+```csharp
+using Camunda.Orchestration.Sdk;
+using Camunda.Orchestration.Sdk.Api;
+
+using var client = CamundaClient.Create();
+
+var storedKey = "2251799813685249"; // from a DB row or config
+var result = await client.CreateProcessInstanceAsync(
+    new ProcessInstanceCreationInstructionByKey
+    {
+        ProcessDefinitionKey = ProcessDefinitionKey.AssumeExists(storedKey),
+    });
+
+Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+```
+
+You can also start a process instance by BPMN process ID (which uses the latest deployed version):
+
+```csharp
+var result = await client.CreateProcessInstanceAsync(
+    new ProcessInstanceCreationInstructionById
+    {
+        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
+    });
+```
+
 ## Typed Variables with DTOs
 
 Camunda API operations use dynamic `variables` and `customHeaders` payloads. By default these are untyped (`object`), but you can opt in to compile-time type safety using your own DTOs.
