@@ -1,3 +1,11 @@
+# [8.9.0-alpha.10](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.9...v8.9.0-alpha.10) (2026-03-20)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([4e514ca](https://github.com/camunda/orchestration-cluster-api-csharp/commit/4e514ca01b59de86ccf6b8cfa6fd62b1885c5ef1))
+* **gen:** regenerate SDK from stable/8.9 spec with unified namespace ([7ff87b8](https://github.com/camunda/orchestration-cluster-api-csharp/commit/7ff87b8755e42ece111ab38c78eee087c0d330d2))
+
 # [8.9.0-alpha.9](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.8...v8.9.0-alpha.9) (2026-03-20)
 
 
