@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CompleteUserTaskAsync*" class="text-break">
-Method CompleteUserTaskAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L263"><i class="bi bi-code-slash"></i></a>
+Method CompleteUserTaskAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L261"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method CompleteUserTaskAsync  <a class="header-action link-secondary" title="Vie
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CompleteUserTaskAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskCompletionRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CompleteUserTaskAsync(Camunda.Orchestration.Sdk.Api.UserTaskKey,Camunda.Orchestration.Sdk.Api.UserTaskCompletionRequest,System.Threading.CancellationToken)">
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_Camunda_Orchestration_Sdk_UserTaskKey_Camunda_Orchestration_Sdk_UserTaskCompletionRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CompleteUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey,Camunda.Orchestration.Sdk.UserTaskCompletionRequest,System.Threading.CancellationToken)">
   CompleteUserTaskAsync(UserTaskKey, UserTaskCompletionRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L261"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Complete user task
@@ -135,9 +135,9 @@ Completes a user task with the given key. Completion waits for blocking task lis
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>userTaskKey</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.UserTaskKey.html">UserTaskKey</a></dt>
+  <dt><code>userTaskKey</code> <a class="xref" href="Camunda.Orchestration.Sdk.UserTaskKey.html">UserTaskKey</a></dt>
   <dd></dd>
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.UserTaskCompletionRequest.html">UserTaskCompletionRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.UserTaskCompletionRequest.html">UserTaskCompletionRequest</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -154,27 +154,8 @@ Completes a user task with the given key. Completion waits for blocking task lis
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskCompletionRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">private static async Task CompleteUserTaskExample()
-{
-    using var client = CamundaClient.Create();
 
-    // Find a user task via search
-    var tasks = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
-    var userTaskKey = tasks.Items![0].UserTaskKey;
-
-    await client.CompleteUserTaskAsync(userTaskKey, new UserTaskCompletionRequest
-    {
-        Variables = new Dictionary&lt;string, object&gt;
-        {
-            [&quot;approved&quot;] = true,
-            [&quot;comment&quot;] = &quot;Looks good&quot;
-        }
-    });
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_Camunda_Orchestration_Sdk_Api_UserTaskKey_Camunda_Orchestration_Sdk_Api_UserTaskCompletionRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CompleteUserTaskAsync_Camunda_Orchestration_Sdk_UserTaskKey_Camunda_Orchestration_Sdk_UserTaskCompletionRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: completeUserTask</p>
 </div>
 
@@ -184,7 +165,7 @@ Completes a user task with the given key. Completion waits for blocking task lis
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L263" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L261" class="edit-link">Edit this page</a>
         </div>
 
 

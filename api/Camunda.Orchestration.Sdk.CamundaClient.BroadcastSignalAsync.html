@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.BroadcastSignalAsync*" class="text-break">
-Method BroadcastSignalAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L198"><i class="bi bi-code-slash"></i></a>
+Method BroadcastSignalAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L196"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method BroadcastSignalAsync  <a class="header-action link-secondary" title="View
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.BroadcastSignalAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_Camunda_Orchestration_Sdk_Api_SignalBroadcastRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.BroadcastSignalAsync(Camunda.Orchestration.Sdk.Api.SignalBroadcastRequest,System.Threading.CancellationToken)">
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_Camunda_Orchestration_Sdk_SignalBroadcastRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.BroadcastSignalAsync(Camunda.Orchestration.Sdk.SignalBroadcastRequest,System.Threading.CancellationToken)">
   BroadcastSignalAsync(SignalBroadcastRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L196"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Broadcast signal
@@ -135,7 +135,7 @@ Broadcasts a signal.</p>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.SignalBroadcastRequest.html">SignalBroadcastRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.SignalBroadcastRequest.html">SignalBroadcastRequest</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -143,7 +143,7 @@ Broadcasts a signal.</p>
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.SignalBroadcastResult.html">SignalBroadcastResult</a>&gt;</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.SignalBroadcastResult.html">SignalBroadcastResult</a>&gt;</dt>
   <dd></dd>
 </dl>
 
@@ -152,25 +152,8 @@ Broadcasts a signal.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_Camunda_Orchestration_Sdk_Api_SignalBroadcastRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">private static async Task BroadcastSignalExample()
-{
-    using var client = CamundaClient.Create();
 
-    var result = await client.BroadcastSignalAsync(new SignalBroadcastRequest
-    {
-        SignalName = &quot;system-shutdown&quot;,
-        Variables = new Dictionary&lt;string, object&gt;
-        {
-            [&quot;reason&quot;] = &quot;maintenance&quot;
-        }
-    });
-
-    Console.WriteLine($&quot;Signal key: {result.SignalKey}&quot;);
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_Camunda_Orchestration_Sdk_Api_SignalBroadcastRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_Camunda_Orchestration_Sdk_SignalBroadcastRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: broadcastSignal</p>
 </div>
 
@@ -180,7 +163,7 @@ Broadcasts a signal.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L198" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L196" class="edit-link">Edit this page</a>
         </div>
 
 

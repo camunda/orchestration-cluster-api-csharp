@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentAsync*" class="text-break">
-Method ResolveIncidentAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1736"><i class="bi bi-code-slash"></i></a>
+Method ResolveIncidentAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1734"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method ResolveIncidentAsync  <a class="header-action link-secondary" title="View
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentAsync_Camunda_Orchestration_Sdk_Api_IncidentKey_Camunda_Orchestration_Sdk_Api_IncidentResolutionRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentAsync(Camunda.Orchestration.Sdk.Api.IncidentKey,Camunda.Orchestration.Sdk.Api.IncidentResolutionRequest,System.Threading.CancellationToken)">
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentAsync_Camunda_Orchestration_Sdk_IncidentKey_Camunda_Orchestration_Sdk_IncidentResolutionRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ResolveIncidentAsync(Camunda.Orchestration.Sdk.IncidentKey,Camunda.Orchestration.Sdk.IncidentResolutionRequest,System.Threading.CancellationToken)">
   ResolveIncidentAsync(IncidentKey, IncidentResolutionRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1736"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1734"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Resolve incident
@@ -136,9 +136,9 @@ to reset the job's retries, followed by this call.</p>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>incidentKey</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.IncidentKey.html">IncidentKey</a></dt>
+  <dt><code>incidentKey</code> <a class="xref" href="Camunda.Orchestration.Sdk.IncidentKey.html">IncidentKey</a></dt>
   <dd></dd>
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.IncidentResolutionRequest.html">IncidentResolutionRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.IncidentResolutionRequest.html">IncidentResolutionRequest</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -155,20 +155,8 @@ to reset the job's retries, followed by this call.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentAsync_Camunda_Orchestration_Sdk_Api_IncidentKey_Camunda_Orchestration_Sdk_Api_IncidentResolutionRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">private static async Task ResolveIncidentExample()
-{
-    using var client = CamundaClient.Create();
 
-    // Find an incident via search
-    var incidents = await client.SearchIncidentsAsync(new IncidentSearchQuery());
-    var incidentKey = incidents.Items![0].IncidentKey;
-
-    await client.ResolveIncidentAsync(incidentKey, new IncidentResolutionRequest());
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentAsync_Camunda_Orchestration_Sdk_Api_IncidentKey_Camunda_Orchestration_Sdk_Api_IncidentResolutionRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ResolveIncidentAsync_Camunda_Orchestration_Sdk_IncidentKey_Camunda_Orchestration_Sdk_IncidentResolutionRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: resolveIncident</p>
 </div>
 
@@ -178,7 +166,7 @@ to reset the job's retries, followed by this call.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1736" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1734" class="edit-link">Edit this page</a>
         </div>
 
 

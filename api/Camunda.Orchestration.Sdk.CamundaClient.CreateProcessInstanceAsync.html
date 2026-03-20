@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateProcessInstanceAsync*" class="text-break">
-Method CreateProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L455"><i class="bi bi-code-slash"></i></a>
+Method CreateProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L453"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method CreateProcessInstanceAsync  <a class="header-action link-secondary" title
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateProcessInstanceAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstruction_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateProcessInstanceAsync(Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstruction,System.Threading.CancellationToken)">
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceCreationInstruction_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceCreationInstruction,System.Threading.CancellationToken)">
   CreateProcessInstanceAsync(ProcessInstanceCreationInstruction, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L455"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L453"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Create process instance
@@ -139,7 +139,7 @@ when awaitCompletion is enabled.</p>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.ProcessInstanceCreationInstruction.html">ProcessInstanceCreationInstruction</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceCreationInstruction.html">ProcessInstanceCreationInstruction</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -147,7 +147,7 @@ when awaitCompletion is enabled.</p>
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.CreateProcessInstanceResult.html">CreateProcessInstanceResult</a>&gt;</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.CreateProcessInstanceResult.html">CreateProcessInstanceResult</a>&gt;</dt>
   <dd></dd>
 </dl>
 
@@ -156,28 +156,8 @@ when awaitCompletion is enabled.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstruction_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">private static async Task CreateProcessInstanceExample()
-{
-    using var client = CamundaClient.Create();
 
-    // Deploy a process and retrieve its ProcessDefinitionId
-    var deployment = await client.DeployResourcesFromFilesAsync(
-        new[] { &quot;order-process.bpmn&quot; }
-    );
-    var processDefinitionId = deployment.Processes[0].ProcessDefinitionId;
-
-    // Start a new instance using the deployed process definition
-    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = processDefinitionId,
-    });
-
-    Console.WriteLine($&quot;Started process instance: {result.ProcessInstanceKey}&quot;);
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_Api_ProcessInstanceCreationInstruction_System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceCreationInstruction_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: createProcessInstance</p>
 </div>
 
@@ -187,7 +167,7 @@ when awaitCompletion is enabled.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L455" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L453" class="edit-link">Edit this page</a>
         </div>
 
 

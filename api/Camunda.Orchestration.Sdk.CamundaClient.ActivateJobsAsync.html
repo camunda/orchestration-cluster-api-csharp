@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateJobsAsync*" class="text-break">
-Method ActivateJobsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L33"><i class="bi bi-code-slash"></i></a>
+Method ActivateJobsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L31"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method ActivateJobsAsync  <a class="header-action link-secondary" title="View so
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateJobsAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_Api_JobActivationRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateJobsAsync(Camunda.Orchestration.Sdk.Api.JobActivationRequest,System.Threading.CancellationToken)">
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_JobActivationRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateJobsAsync(Camunda.Orchestration.Sdk.JobActivationRequest,System.Threading.CancellationToken)">
   ActivateJobsAsync(JobActivationRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L31"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Activate jobs
@@ -135,7 +135,7 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.Api.JobActivationRequest.html">JobActivationRequest</a></dt>
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.JobActivationRequest.html">JobActivationRequest</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -143,7 +143,7 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.Api.JobActivationResult.html">JobActivationResult</a>&gt;</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.JobActivationResult.html">JobActivationResult</a>&gt;</dt>
   <dd></dd>
 </dl>
 
@@ -152,27 +152,8 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_Api_JobActivationRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">private static async Task ActivateJobsExample()
-{
-    using var client = CamundaClient.Create();
 
-    var response = await client.ActivateJobsAsync(new JobActivationRequest
-    {
-        Type = &quot;send-email&quot;,
-        MaxJobsToActivate = 10,
-        Timeout = 300_000, // 5 minutes
-        Worker = &quot;email-worker-1&quot;
-    });
-
-    foreach (var job in response.Jobs)
-    {
-        Console.WriteLine($&quot;Job {job.JobKey}: {job.Type}&quot;);
-    }
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_Api_JobActivationRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_JobActivationRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: activateJobs</p>
 </div>
 
@@ -182,7 +163,7 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L33" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L31" class="edit-link">Edit this page</a>
         </div>
 
 
