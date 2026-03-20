@@ -10,7 +10,7 @@ on:
       spec_ref:
         description: 'Git ref (branch/tag/SHA) in camunda/camunda to fetch spec from'
         required: false
-        default: 'main'
+        default: 'stable/8.9'
 
 env:
   SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
@@ -184,6 +184,10 @@ jobs:
           set -euo pipefail
           git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
           git fetch origin '+refs/notes/*:refs/notes/*' || true
+          # The generate job may have pushed a commit (fix(gen): regenerate artifacts),
+          # advancing origin/main past our checkout. Reset to match so semantic-release
+          # doesn't refuse with "local branch is behind the remote one".
+          git reset --hard origin/${{ github.ref_name }}
 
       - name: Export stable line config
         run: |
