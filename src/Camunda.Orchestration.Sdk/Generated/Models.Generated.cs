@@ -4924,7 +4924,6 @@ public enum DecisionDefinitionTypeEnum
     DECISIONTABLE,
     [JsonPropertyName("LITERAL_EXPRESSION")]
     LITERALEXPRESSION,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
     [JsonPropertyName("UNKNOWN")]
@@ -5596,10 +5595,8 @@ public enum DecisionInstanceStateEnum
     EVALUATED,
     [JsonPropertyName("FAILED")]
     FAILED,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
     UNSPECIFIED,
-    [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNKNOWN")]
     UNKNOWN,
 }
