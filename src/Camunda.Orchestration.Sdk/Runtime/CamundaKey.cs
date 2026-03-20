@@ -2,7 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Marker interface for all Camunda domain key types.

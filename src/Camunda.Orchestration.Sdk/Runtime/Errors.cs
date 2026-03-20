@@ -1,4 +1,4 @@
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// SDK error types mirroring the JS SDK's error structure.

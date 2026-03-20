@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Options for constructing a <see cref="CamundaClient"/>.

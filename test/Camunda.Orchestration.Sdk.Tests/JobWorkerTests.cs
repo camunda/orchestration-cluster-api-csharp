@@ -1,6 +1,4 @@
 using System.Text.Json;
-using Camunda.Orchestration.Sdk.Api;
-using Camunda.Orchestration.Sdk.Runtime;
 using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
@@ -315,9 +313,9 @@ public class JobWorkerTests
         PropertyNameCaseInsensitive = true,
         Converters =
         {
-            new Runtime.TolerantEnumConverterFactory(),
-            new Runtime.CamundaKeyJsonConverterFactory(),
-            new Runtime.CamundaLongKeyJsonConverterFactory(),
+            new TolerantEnumConverterFactory(),
+            new CamundaKeyJsonConverterFactory(),
+            new CamundaLongKeyJsonConverterFactory(),
         },
     };
 

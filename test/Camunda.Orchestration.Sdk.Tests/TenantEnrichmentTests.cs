@@ -1,6 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using Camunda.Orchestration.Sdk.Api;
 using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
@@ -19,7 +18,7 @@ public class TenantEnrichmentTests : IDisposable
     public TenantEnrichmentTests()
     {
         _handler = new MockHttpMessageHandler();
-        _client = new CamundaClient(new Runtime.CamundaOptions
+        _client = new CamundaClient(new CamundaOptions
         {
             Config = new Dictionary<string, string>
             {
@@ -29,7 +28,7 @@ public class TenantEnrichmentTests : IDisposable
         });
 
         _handlerCustom = new MockHttpMessageHandler();
-        _clientCustomTenant = new CamundaClient(new Runtime.CamundaOptions
+        _clientCustomTenant = new CamundaClient(new CamundaOptions
         {
             Config = new Dictionary<string, string>
             {

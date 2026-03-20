@@ -3,7 +3,6 @@
 #pragma warning disable CS8321 // Local function is declared but never used
 
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Api;
 
 namespace Camunda.Orchestration.Sdk.Examples;
 

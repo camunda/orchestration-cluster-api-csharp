@@ -391,7 +391,7 @@ internal static class CSharpClientGenerator
         sb.AppendLine();
         sb.AppendLine("using System.Text.Json.Serialization;");
         sb.AppendLine();
-        sb.AppendLine("namespace Camunda.Orchestration.Sdk.Api;");
+        sb.AppendLine("namespace Camunda.Orchestration.Sdk;");
         sb.AppendLine();
 
         if (doc.Components?.Schemas == null)
@@ -467,7 +467,7 @@ internal static class CSharpClientGenerator
             // Check if this class has an optional tenantId property AND is used as a request body
             var tenantIdInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdInfo(schema) : null;
             var interfaces = tenantIdInfo != null
-                ? (baseClass != "" ? ", global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable" : " : global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable")
+                ? (baseClass != "" ? ", global::Camunda.Orchestration.Sdk.ITenantIdSettable" : " : global::Camunda.Orchestration.Sdk.ITenantIdSettable")
                 : "";
 
             // Generate class
@@ -540,7 +540,7 @@ internal static class CSharpClientGenerator
     private static void GenerateClass(StringBuilder sb, string typeName, OpenApiSchema schema, OpenApiDocument? doc = null, bool isRequestSchema = false)
     {
         var tenantIdInfo = isRequestSchema ? GetOptionalTenantIdInfo(schema) : null;
-        var interfaces = tenantIdInfo != null ? " : global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable" : "";
+        var interfaces = tenantIdInfo != null ? " : global::Camunda.Orchestration.Sdk.ITenantIdSettable" : "";
 
         sb.AppendLine($"/// <summary>");
         AppendXmlDocLines(sb, schema.Description ?? typeName, "");
@@ -607,7 +607,7 @@ internal static class CSharpClientGenerator
     {
         var underlyingType = GetUnderlyingPrimitiveType(schema, doc);
         var isString = underlyingType == "string";
-        var interfaceName = isString ? "global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey" : "global::Camunda.Orchestration.Sdk.Runtime.ICamundaLongKey";
+        var interfaceName = isString ? "global::Camunda.Orchestration.Sdk.ICamundaKey" : "global::Camunda.Orchestration.Sdk.ICamundaLongKey";
         var (pattern, minLength, maxLength) = isString ? GetConstraints(schema, doc) : (null, null, null);
 
         sb.AppendLine($"/// <summary>");
@@ -644,7 +644,7 @@ internal static class CSharpClientGenerator
             if (maxLength != null)
                 constraintArgs.Add($"maxLength: {maxLength}");
 
-            sb.AppendLine($"        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints({string.Join(", ", constraintArgs)});");
+            sb.AppendLine($"        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints({string.Join(", ", constraintArgs)});");
         }
 
         sb.AppendLine($"        return new {typeName}(value);");
@@ -664,7 +664,7 @@ internal static class CSharpClientGenerator
 
             sb.AppendLine($"    /// <summary>Returns true if the value satisfies this type's constraints.</summary>");
             sb.AppendLine($"    public static bool IsValid(string value) =>");
-            sb.AppendLine($"        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints({string.Join(", ", checkArgs)});");
+            sb.AppendLine($"        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints({string.Join(", ", checkArgs)});");
             sb.AppendLine();
         }
 
@@ -704,8 +704,6 @@ internal static class CSharpClientGenerator
         sb.AppendLine();
         sb.AppendLine("#nullable enable");
         sb.AppendLine();
-        sb.AppendLine("using Camunda.Orchestration.Sdk.Api;");
-        sb.AppendLine("using Camunda.Orchestration.Sdk.Runtime;");
         sb.AppendLine();
         sb.AppendLine("namespace Camunda.Orchestration.Sdk;");
         sb.AppendLine();
@@ -784,7 +782,7 @@ internal static class CSharpClientGenerator
         // Inject default tenant ID enrichment for operations with optional tenantId in body
         if (op.HasOptionalTenantIdInBody && op.HasBody && !op.IsMultipart)
         {
-            sb.AppendLine($"        if (body is Runtime.ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);");
+            sb.AppendLine($"        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);");
         }
 
         var httpMethod = op.Verb switch
@@ -1081,7 +1079,7 @@ internal static class CSharpClientGenerator
         sb.AppendLine("    /// <inheritdoc />");
         if (info.IsBrandedKey)
         {
-            sb.AppendLine("    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }");
+            sb.AppendLine("    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }");
         }
         else
         {

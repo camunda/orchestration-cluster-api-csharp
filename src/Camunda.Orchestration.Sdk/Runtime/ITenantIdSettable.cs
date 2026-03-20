@@ -1,4 +1,4 @@
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Implemented by request body types that have an optional tenantId property.

@@ -5,7 +5,7 @@ using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Auth handler that injects authentication headers into HTTP requests.

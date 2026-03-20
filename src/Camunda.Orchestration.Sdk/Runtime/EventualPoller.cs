@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Options for eventual consistency polling behavior.

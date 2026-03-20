@@ -1,5 +1,4 @@
 using System.Net;
-using Camunda.Orchestration.Sdk.Runtime;
 using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;

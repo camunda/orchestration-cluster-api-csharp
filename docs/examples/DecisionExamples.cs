@@ -4,7 +4,6 @@
 #pragma warning disable CS8629 // Nullable value type may be null
 
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Api;
 
 namespace Camunda.Orchestration.Sdk.Examples;
 

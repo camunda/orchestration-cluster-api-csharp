@@ -5,7 +5,7 @@
 
 using System.Text.Json.Serialization;
 
-namespace Camunda.Orchestration.Sdk.Api;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// ActivatedJobResult
@@ -1927,7 +1927,7 @@ public enum AuditLogActorTypeEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct AuditLogActorTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct AuditLogActorTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -1940,13 +1940,13 @@ public readonly record struct AuditLogActorTypeExactMatch : global::Camunda.Orch
     /// </summary>
     public static AuditLogActorTypeExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogActorTypeExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogActorTypeExactMatch");
         return new AuditLogActorTypeExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -1976,7 +1976,7 @@ public enum AuditLogCategoryEnum
 /// <summary>
 /// System-generated entity key for an audit log entry.
 /// </summary>
-public readonly record struct AuditLogEntityKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct AuditLogEntityKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -1989,13 +1989,13 @@ public readonly record struct AuditLogEntityKey : global::Camunda.Orchestration.
     /// </summary>
     public static AuditLogEntityKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogEntityKey");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogEntityKey");
         return new AuditLogEntityKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -2004,7 +2004,7 @@ public readonly record struct AuditLogEntityKey : global::Camunda.Orchestration.
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct AuditLogEntityKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct AuditLogEntityKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -2017,13 +2017,13 @@ public readonly record struct AuditLogEntityKeyExactMatch : global::Camunda.Orch
     /// </summary>
     public static AuditLogEntityKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogEntityKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogEntityKeyExactMatch");
         return new AuditLogEntityKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -2258,7 +2258,7 @@ public sealed class AuditLogFilter
 /// <summary>
 /// System-generated key for an audit log entry.
 /// </summary>
-public readonly record struct AuditLogKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct AuditLogKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -2271,13 +2271,13 @@ public readonly record struct AuditLogKey : global::Camunda.Orchestration.Sdk.Ru
     /// </summary>
     public static AuditLogKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new AuditLogKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -2286,7 +2286,7 @@ public readonly record struct AuditLogKey : global::Camunda.Orchestration.Sdk.Ru
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct AuditLogKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct AuditLogKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -2299,13 +2299,13 @@ public readonly record struct AuditLogKeyExactMatch : global::Camunda.Orchestrat
     /// </summary>
     public static AuditLogKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogKeyExactMatch");
         return new AuditLogKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -2571,7 +2571,7 @@ public enum AuditLogResultEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct AuditLogResultExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct AuditLogResultExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -2584,13 +2584,13 @@ public readonly record struct AuditLogResultExactMatch : global::Camunda.Orchest
     /// </summary>
     public static AuditLogResultExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuditLogResultExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogResultExactMatch");
         return new AuditLogResultExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -2756,7 +2756,7 @@ public sealed class AuthorizationIdBasedRequest : AuthorizationRequest
 /// <summary>
 /// System-generated key for an authorization.
 /// </summary>
-public readonly record struct AuthorizationKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct AuthorizationKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -2769,13 +2769,13 @@ public readonly record struct AuthorizationKey : global::Camunda.Orchestration.S
     /// </summary>
     public static AuthorizationKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "AuthorizationKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuthorizationKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new AuthorizationKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -3375,7 +3375,7 @@ public enum BatchOperationItemStateEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct BatchOperationItemStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct BatchOperationItemStateExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -3388,13 +3388,13 @@ public readonly record struct BatchOperationItemStateExactMatch : global::Camund
     /// </summary>
     public static BatchOperationItemStateExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "BatchOperationItemStateExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "BatchOperationItemStateExactMatch");
         return new BatchOperationItemStateExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -3410,7 +3410,7 @@ public sealed class BatchOperationItemStateFilterProperty
 /// <summary>
 /// System-generated key for an batch operation.
 /// </summary>
-public readonly record struct BatchOperationKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct BatchOperationKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -3423,13 +3423,13 @@ public readonly record struct BatchOperationKey : global::Camunda.Orchestration.
     /// </summary>
     public static BatchOperationKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "BatchOperationKey");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "BatchOperationKey");
         return new BatchOperationKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -3603,7 +3603,7 @@ public enum BatchOperationStateEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct BatchOperationStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct BatchOperationStateExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -3616,13 +3616,13 @@ public readonly record struct BatchOperationStateExactMatch : global::Camunda.Or
     /// </summary>
     public static BatchOperationStateExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "BatchOperationStateExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "BatchOperationStateExactMatch");
         return new BatchOperationStateExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -3666,7 +3666,7 @@ public enum BatchOperationTypeEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct BatchOperationTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct BatchOperationTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -3679,13 +3679,13 @@ public readonly record struct BatchOperationTypeExactMatch : global::Camunda.Orc
     /// </summary>
     public static BatchOperationTypeExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "BatchOperationTypeExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "BatchOperationTypeExactMatch");
         return new BatchOperationTypeExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -3743,7 +3743,7 @@ public sealed class BrokerInfo
 /// Note that any active child process instances with the same business id are not taken into account.
 /// 
 /// </summary>
-public readonly record struct BusinessId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct BusinessId : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -3756,13 +3756,13 @@ public readonly record struct BusinessId : global::Camunda.Orchestration.Sdk.Run
     /// </summary>
     public static BusinessId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "BusinessId", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "BusinessId", minLength: 1, maxLength: 256);
         return new BusinessId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -3853,7 +3853,7 @@ public sealed class CancelProcessInstanceRequest
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct CategoryExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct CategoryExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -3866,13 +3866,13 @@ public readonly record struct CategoryExactMatch : global::Camunda.Orchestration
     /// </summary>
     public static CategoryExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "CategoryExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "CategoryExactMatch");
         return new CategoryExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -4022,7 +4022,7 @@ public enum ClusterVariableScopeEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct ClusterVariableScopeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ClusterVariableScopeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -4035,13 +4035,13 @@ public readonly record struct ClusterVariableScopeExactMatch : global::Camunda.O
     /// </summary>
     public static ClusterVariableScopeExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ClusterVariableScopeExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClusterVariableScopeExactMatch");
         return new ClusterVariableScopeExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -4195,7 +4195,7 @@ public sealed class ClusterVariableSearchResult
 /// <summary>
 /// ConditionalEvaluationInstruction
 /// </summary>
-public sealed class ConditionalEvaluationInstruction : global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable
+public sealed class ConditionalEvaluationInstruction : global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
     /// Used to evaluate root-level conditional start events for a tenant with the given ID.
@@ -4220,14 +4220,14 @@ public sealed class ConditionalEvaluationInstruction : global::Camunda.Orchestra
     public object Variables { get; set; } = null!;
 
     /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
 }
 
 /// <summary>
 /// System-generated key for a conditional evaluation.
 /// </summary>
-public readonly record struct ConditionalEvaluationKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ConditionalEvaluationKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -4240,13 +4240,13 @@ public readonly record struct ConditionalEvaluationKey : global::Camunda.Orchest
     /// </summary>
     public static ConditionalEvaluationKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ConditionalEvaluationKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ConditionalEvaluationKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ConditionalEvaluationKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -4701,7 +4701,7 @@ public sealed class DecisionDefinitionFilter
 /// <summary>
 /// Id of a decision definition, from the model. Only ids of decision definitions that are deployed are useful.
 /// </summary>
-public readonly record struct DecisionDefinitionId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionDefinitionId : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -4714,13 +4714,13 @@ public readonly record struct DecisionDefinitionId : global::Camunda.Orchestrati
     /// </summary>
     public static DecisionDefinitionId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionId", pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionId", pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
         return new DecisionDefinitionId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -4729,7 +4729,7 @@ public readonly record struct DecisionDefinitionId : global::Camunda.Orchestrati
 /// <summary>
 /// System-generated key for a decision definition.
 /// </summary>
-public readonly record struct DecisionDefinitionKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionDefinitionKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -4742,13 +4742,13 @@ public readonly record struct DecisionDefinitionKey : global::Camunda.Orchestrat
     /// </summary>
     public static DecisionDefinitionKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionDefinitionKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -4757,7 +4757,7 @@ public readonly record struct DecisionDefinitionKey : global::Camunda.Orchestrat
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct DecisionDefinitionKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionDefinitionKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -4770,13 +4770,13 @@ public readonly record struct DecisionDefinitionKeyExactMatch : global::Camunda.
     /// </summary>
     public static DecisionDefinitionKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionKeyExactMatch");
         return new DecisionDefinitionKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -4932,7 +4932,7 @@ public enum DecisionDefinitionTypeEnum
 /// <summary>
 /// DecisionEvaluationById
 /// </summary>
-public sealed class DecisionEvaluationById : DecisionEvaluationInstruction, global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable
+public sealed class DecisionEvaluationById : DecisionEvaluationInstruction, global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
     /// The ID of the decision to be evaluated.
@@ -4956,14 +4956,14 @@ public sealed class DecisionEvaluationById : DecisionEvaluationInstruction, glob
     public TenantId? TenantId { get; set; }
 
     /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
 }
 
 /// <summary>
 /// DecisionEvaluationByKey
 /// </summary>
-public sealed class DecisionEvaluationByKey : DecisionEvaluationInstruction, global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable
+public sealed class DecisionEvaluationByKey : DecisionEvaluationInstruction, global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
     /// System-generated key for a decision definition.
@@ -4984,14 +4984,14 @@ public sealed class DecisionEvaluationByKey : DecisionEvaluationInstruction, glo
     public TenantId? TenantId { get; set; }
 
     /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
 }
 
 /// <summary>
 /// System-generated key for a decision evaluation instance.
 /// </summary>
-public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -5004,13 +5004,13 @@ public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Or
     /// </summary>
     public static DecisionEvaluationInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionEvaluationInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5019,7 +5019,7 @@ public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Or
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct DecisionEvaluationInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionEvaluationInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -5032,13 +5032,13 @@ public readonly record struct DecisionEvaluationInstanceKeyExactMatch : global::
     /// </summary>
     public static DecisionEvaluationInstanceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKeyExactMatch");
         return new DecisionEvaluationInstanceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5070,7 +5070,7 @@ public abstract class DecisionEvaluationInstruction { }
 /// <summary>
 /// System-generated key for a decision evaluation.
 /// </summary>
-public readonly record struct DecisionEvaluationKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionEvaluationKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -5083,13 +5083,13 @@ public readonly record struct DecisionEvaluationKey : global::Camunda.Orchestrat
     /// </summary>
     public static DecisionEvaluationKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionEvaluationKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5098,7 +5098,7 @@ public readonly record struct DecisionEvaluationKey : global::Camunda.Orchestrat
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct DecisionEvaluationKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionEvaluationKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -5111,13 +5111,13 @@ public readonly record struct DecisionEvaluationKeyExactMatch : global::Camunda.
     /// </summary>
     public static DecisionEvaluationKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationKeyExactMatch");
         return new DecisionEvaluationKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5384,7 +5384,7 @@ public sealed class DecisionInstanceGetQueryResult
 /// <summary>
 /// System-generated key for a deployed decision instance.
 /// </summary>
-public readonly record struct DecisionInstanceKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionInstanceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -5397,13 +5397,13 @@ public readonly record struct DecisionInstanceKey : global::Camunda.Orchestratio
     /// </summary>
     public static DecisionInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5603,7 +5603,7 @@ public enum DecisionInstanceStateEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct DecisionInstanceStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionInstanceStateExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -5616,13 +5616,13 @@ public readonly record struct DecisionInstanceStateExactMatch : global::Camunda.
     /// </summary>
     public static DecisionInstanceStateExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionInstanceStateExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionInstanceStateExactMatch");
         return new DecisionInstanceStateExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5681,7 +5681,7 @@ public sealed class DecisionRequirementsFilter
 /// <summary>
 /// System-generated key for a deployed decision requirements definition.
 /// </summary>
-public readonly record struct DecisionRequirementsKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionRequirementsKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -5694,13 +5694,13 @@ public readonly record struct DecisionRequirementsKey : global::Camunda.Orchestr
     /// </summary>
     public static DecisionRequirementsKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionRequirementsKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionRequirementsKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionRequirementsKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5709,7 +5709,7 @@ public readonly record struct DecisionRequirementsKey : global::Camunda.Orchestr
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct DecisionRequirementsKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DecisionRequirementsKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -5722,13 +5722,13 @@ public readonly record struct DecisionRequirementsKeyExactMatch : global::Camund
     /// </summary>
     public static DecisionRequirementsKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DecisionRequirementsKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionRequirementsKeyExactMatch");
         return new DecisionRequirementsKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6069,7 +6069,7 @@ public sealed class DeploymentFormResult
 /// <summary>
 /// Key for a deployment.
 /// </summary>
-public readonly record struct DeploymentKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DeploymentKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -6082,13 +6082,13 @@ public readonly record struct DeploymentKey : global::Camunda.Orchestration.Sdk.
     /// </summary>
     public static DeploymentKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DeploymentKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DeploymentKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DeploymentKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6097,7 +6097,7 @@ public readonly record struct DeploymentKey : global::Camunda.Orchestration.Sdk.
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct DeploymentKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DeploymentKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -6110,13 +6110,13 @@ public readonly record struct DeploymentKeyExactMatch : global::Camunda.Orchestr
     /// </summary>
     public static DeploymentKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DeploymentKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DeploymentKeyExactMatch");
         return new DeploymentKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6343,7 +6343,7 @@ public sealed class DocumentCreationFailureDetail
 /// <summary>
 /// Document Id that uniquely identifies a document.
 /// </summary>
-public readonly record struct DocumentId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct DocumentId : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -6356,13 +6356,13 @@ public readonly record struct DocumentId : global::Camunda.Orchestration.Sdk.Run
     /// </summary>
     public static DocumentId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "DocumentId");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DocumentId");
         return new DocumentId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6538,7 +6538,7 @@ public sealed class DocumentReference
 /// <summary>
 /// The model-defined id of an element.
 /// </summary>
-public readonly record struct ElementId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ElementId : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -6551,13 +6551,13 @@ public readonly record struct ElementId : global::Camunda.Orchestration.Sdk.Runt
     /// </summary>
     public static ElementId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ElementId");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementId");
         return new ElementId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6659,7 +6659,7 @@ public sealed class ElementInstanceFilter
 /// <summary>
 /// System-generated key for a element instance.
 /// </summary>
-public readonly record struct ElementInstanceKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ElementInstanceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -6672,13 +6672,13 @@ public readonly record struct ElementInstanceKey : global::Camunda.Orchestration
     /// </summary>
     public static ElementInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ElementInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6687,7 +6687,7 @@ public readonly record struct ElementInstanceKey : global::Camunda.Orchestration
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct ElementInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ElementInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -6700,13 +6700,13 @@ public readonly record struct ElementInstanceKeyExactMatch : global::Camunda.Orc
     /// </summary>
     public static ElementInstanceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceKeyExactMatch");
         return new ElementInstanceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6893,7 +6893,7 @@ public enum ElementInstanceStateEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct ElementInstanceStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ElementInstanceStateExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -6906,13 +6906,13 @@ public readonly record struct ElementInstanceStateExactMatch : global::Camunda.O
     /// </summary>
     public static ElementInstanceStateExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceStateExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceStateExactMatch");
         return new ElementInstanceStateExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6928,7 +6928,7 @@ public sealed class ElementInstanceStateFilterProperty
 /// <summary>
 /// The end cursor in a search query result set.
 /// </summary>
-public readonly record struct EndCursor : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct EndCursor : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -6941,13 +6941,13 @@ public readonly record struct EndCursor : global::Camunda.Orchestration.Sdk.Runt
     /// </summary>
     public static EndCursor AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "EndCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "EndCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
         return new EndCursor(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6956,7 +6956,7 @@ public readonly record struct EndCursor : global::Camunda.Orchestration.Sdk.Runt
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct EntityTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct EntityTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -6969,13 +6969,13 @@ public readonly record struct EntityTypeExactMatch : global::Camunda.Orchestrati
     /// </summary>
     public static EntityTypeExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "EntityTypeExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "EntityTypeExactMatch");
         return new EntityTypeExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7232,7 +7232,7 @@ public sealed class EvaluateDecisionResult
 /// <summary>
 /// ExpressionEvaluationRequest
 /// </summary>
-public sealed class ExpressionEvaluationRequest : global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable
+public sealed class ExpressionEvaluationRequest : global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
     /// The expression to evaluate (e.g., "=x + y")
@@ -7298,7 +7298,7 @@ public sealed class ExpressionEvaluationWarningItem
 /// <summary>
 /// The user-defined id for the form
 /// </summary>
-public readonly record struct FormId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct FormId : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -7311,13 +7311,13 @@ public readonly record struct FormId : global::Camunda.Orchestration.Sdk.Runtime
     /// </summary>
     public static FormId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "FormId");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "FormId");
         return new FormId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7326,7 +7326,7 @@ public readonly record struct FormId : global::Camunda.Orchestration.Sdk.Runtime
 /// <summary>
 /// System-generated key for a deployed form.
 /// </summary>
-public readonly record struct FormKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct FormKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -7339,13 +7339,13 @@ public readonly record struct FormKey : global::Camunda.Orchestration.Sdk.Runtim
     /// </summary>
     public static FormKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "FormKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "FormKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new FormKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7354,7 +7354,7 @@ public readonly record struct FormKey : global::Camunda.Orchestration.Sdk.Runtim
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct FormKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct FormKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -7367,13 +7367,13 @@ public readonly record struct FormKeyExactMatch : global::Camunda.Orchestration.
     /// </summary>
     public static FormKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "FormKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "FormKeyExactMatch");
         return new FormKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7488,7 +7488,7 @@ public sealed class GlobalListenerBase
 /// <summary>
 /// The user-defined id for the global listener
 /// </summary>
-public readonly record struct GlobalListenerId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct GlobalListenerId : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -7501,13 +7501,13 @@ public readonly record struct GlobalListenerId : global::Camunda.Orchestration.S
     /// </summary>
     public static GlobalListenerId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerId");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerId");
         return new GlobalListenerId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7528,7 +7528,7 @@ public enum GlobalListenerSourceEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct GlobalListenerSourceExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct GlobalListenerSourceExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -7541,13 +7541,13 @@ public readonly record struct GlobalListenerSourceExactMatch : global::Camunda.O
     /// </summary>
     public static GlobalListenerSourceExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerSourceExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerSourceExactMatch");
         return new GlobalListenerSourceExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7620,7 +7620,7 @@ public enum GlobalTaskListenerEventTypeEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct GlobalTaskListenerEventTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct GlobalTaskListenerEventTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -7633,13 +7633,13 @@ public readonly record struct GlobalTaskListenerEventTypeExactMatch : global::Ca
     /// </summary>
     public static GlobalTaskListenerEventTypeExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "GlobalTaskListenerEventTypeExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GlobalTaskListenerEventTypeExactMatch");
         return new GlobalTaskListenerEventTypeExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -8235,7 +8235,7 @@ public enum IncidentErrorTypeEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct IncidentErrorTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct IncidentErrorTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -8248,13 +8248,13 @@ public readonly record struct IncidentErrorTypeExactMatch : global::Camunda.Orch
     /// </summary>
     public static IncidentErrorTypeExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "IncidentErrorTypeExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "IncidentErrorTypeExactMatch");
         return new IncidentErrorTypeExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -8349,7 +8349,7 @@ public sealed class IncidentFilter
 /// <summary>
 /// System-generated key for a incident.
 /// </summary>
-public readonly record struct IncidentKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct IncidentKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -8362,13 +8362,13 @@ public readonly record struct IncidentKey : global::Camunda.Orchestration.Sdk.Ru
     /// </summary>
     public static IncidentKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "IncidentKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "IncidentKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new IncidentKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -8770,7 +8770,7 @@ public enum IncidentStateEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct IncidentStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct IncidentStateExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -8783,13 +8783,13 @@ public readonly record struct IncidentStateExactMatch : global::Camunda.Orchestr
     /// </summary>
     public static IncidentStateExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "IncidentStateExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "IncidentStateExactMatch");
         return new IncidentStateExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9237,7 +9237,7 @@ public sealed class JobFilter
 /// <summary>
 /// System-generated key for a job.
 /// </summary>
-public readonly record struct JobKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct JobKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -9250,13 +9250,13 @@ public readonly record struct JobKey : global::Camunda.Orchestration.Sdk.Runtime
     /// </summary>
     public static JobKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "JobKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new JobKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9265,7 +9265,7 @@ public readonly record struct JobKey : global::Camunda.Orchestration.Sdk.Runtime
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct JobKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct JobKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -9278,13 +9278,13 @@ public readonly record struct JobKeyExactMatch : global::Camunda.Orchestration.S
     /// </summary>
     public static JobKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "JobKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobKeyExactMatch");
         return new JobKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9316,7 +9316,7 @@ public enum JobKindEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct JobKindExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct JobKindExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -9329,13 +9329,13 @@ public readonly record struct JobKindExactMatch : global::Camunda.Orchestration.
     /// </summary>
     public static JobKindExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "JobKindExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobKindExactMatch");
         return new JobKindExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9375,7 +9375,7 @@ public enum JobListenerEventTypeEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct JobListenerEventTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct JobListenerEventTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -9388,13 +9388,13 @@ public readonly record struct JobListenerEventTypeExactMatch : global::Camunda.O
     /// </summary>
     public static JobListenerEventTypeExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "JobListenerEventTypeExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobListenerEventTypeExactMatch");
         return new JobListenerEventTypeExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9866,7 +9866,7 @@ public enum JobStateEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct JobStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct JobStateExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -9879,13 +9879,13 @@ public readonly record struct JobStateExactMatch : global::Camunda.Orchestration
     /// </summary>
     public static JobStateExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "JobStateExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobStateExactMatch");
         return new JobStateExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -10265,7 +10265,7 @@ public sealed class LicenseResponse
 /// Wildcard characters can be escaped with backslash, for instance: `\*`.
 /// 
 /// </summary>
-public readonly record struct LikeFilter : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct LikeFilter : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -10278,13 +10278,13 @@ public readonly record struct LikeFilter : global::Camunda.Orchestration.Sdk.Run
     /// </summary>
     public static LikeFilter AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "LikeFilter");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "LikeFilter");
         return new LikeFilter(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -10306,7 +10306,7 @@ public sealed class LimitPagination : SearchQueryPageRequest
 /// <summary>
 /// Zeebe Engine resource key (Java long serialized as string)
 /// </summary>
-public readonly record struct LongKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct LongKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -10319,13 +10319,13 @@ public readonly record struct LongKey : global::Camunda.Orchestration.Sdk.Runtim
     /// </summary>
     public static LongKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "LongKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "LongKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new LongKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -10658,7 +10658,7 @@ public sealed class MatchedDecisionRuleItem
 /// <summary>
 /// MessageCorrelationRequest
 /// </summary>
-public sealed class MessageCorrelationRequest : global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable
+public sealed class MessageCorrelationRequest : global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
     /// The message name as defined in the BPMN process
@@ -10686,7 +10686,7 @@ public sealed class MessageCorrelationRequest : global::Camunda.Orchestration.Sd
     public TenantId? TenantId { get; set; }
 
     /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -10720,7 +10720,7 @@ public sealed class MessageCorrelationResult
 /// <summary>
 /// System-generated key for an message.
 /// </summary>
-public readonly record struct MessageKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct MessageKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -10733,13 +10733,13 @@ public readonly record struct MessageKey : global::Camunda.Orchestration.Sdk.Run
     /// </summary>
     public static MessageKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "MessageKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new MessageKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -10748,7 +10748,7 @@ public readonly record struct MessageKey : global::Camunda.Orchestration.Sdk.Run
 /// <summary>
 /// MessagePublicationRequest
 /// </summary>
-public sealed class MessagePublicationRequest : global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable
+public sealed class MessagePublicationRequest : global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
     /// The name of the message.
@@ -10789,7 +10789,7 @@ public sealed class MessagePublicationRequest : global::Camunda.Orchestration.Sd
     public TenantId? TenantId { get; set; }
 
     /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -10888,7 +10888,7 @@ public sealed class MessageSubscriptionFilter
 /// <summary>
 /// System-generated key for a message subscription.
 /// </summary>
-public readonly record struct MessageSubscriptionKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct MessageSubscriptionKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -10901,13 +10901,13 @@ public readonly record struct MessageSubscriptionKey : global::Camunda.Orchestra
     /// </summary>
     public static MessageSubscriptionKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new MessageSubscriptionKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -10916,7 +10916,7 @@ public readonly record struct MessageSubscriptionKey : global::Camunda.Orchestra
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct MessageSubscriptionKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct MessageSubscriptionKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -10929,13 +10929,13 @@ public readonly record struct MessageSubscriptionKeyExactMatch : global::Camunda
     /// </summary>
     public static MessageSubscriptionKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionKeyExactMatch");
         return new MessageSubscriptionKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -11112,7 +11112,7 @@ public enum MessageSubscriptionStateEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct MessageSubscriptionStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct MessageSubscriptionStateExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -11125,13 +11125,13 @@ public readonly record struct MessageSubscriptionStateExactMatch : global::Camun
     /// </summary>
     public static MessageSubscriptionStateExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionStateExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionStateExactMatch");
         return new MessageSubscriptionStateExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -11211,7 +11211,7 @@ public sealed class OffsetPagination : SearchQueryPageRequest
 /// Must be &gt; 0 if provided.
 /// 
 /// </summary>
-public readonly record struct OperationReference : global::Camunda.Orchestration.Sdk.Runtime.ICamundaLongKey
+public readonly record struct OperationReference : global::Camunda.Orchestration.Sdk.ICamundaLongKey
 {
     /// <summary>The underlying long value.</summary>
     public long Value { get; }
@@ -11234,7 +11234,7 @@ public readonly record struct OperationReference : global::Camunda.Orchestration
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct OperationTypeExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct OperationTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -11247,13 +11247,13 @@ public readonly record struct OperationTypeExactMatch : global::Camunda.Orchestr
     /// </summary>
     public static OperationTypeExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "OperationTypeExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "OperationTypeExactMatch");
         return new OperationTypeExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -11533,7 +11533,7 @@ public sealed class ProcessDefinitionFilter
 /// <summary>
 /// Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.
 /// </summary>
-public readonly record struct ProcessDefinitionId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ProcessDefinitionId : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -11546,13 +11546,13 @@ public readonly record struct ProcessDefinitionId : global::Camunda.Orchestratio
     /// </summary>
     public static ProcessDefinitionId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionId", pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionId", pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
         return new ProcessDefinitionId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -11792,7 +11792,7 @@ public sealed class ProcessDefinitionInstanceVersionStatisticsResult
 /// <summary>
 /// System-generated key for a deployed process definition.
 /// </summary>
-public readonly record struct ProcessDefinitionKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ProcessDefinitionKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -11805,13 +11805,13 @@ public readonly record struct ProcessDefinitionKey : global::Camunda.Orchestrati
     /// </summary>
     public static ProcessDefinitionKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ProcessDefinitionKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -11820,7 +11820,7 @@ public readonly record struct ProcessDefinitionKey : global::Camunda.Orchestrati
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct ProcessDefinitionKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ProcessDefinitionKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -11833,13 +11833,13 @@ public readonly record struct ProcessDefinitionKeyExactMatch : global::Camunda.O
     /// </summary>
     public static ProcessDefinitionKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionKeyExactMatch");
         return new ProcessDefinitionKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -12308,7 +12308,7 @@ public abstract class ProcessInstanceCreationInstruction { }
 /// <summary>
 /// ProcessInstanceCreationInstructionById
 /// </summary>
-public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCreationInstruction, global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable
+public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCreationInstruction, global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
     /// The BPMN process id of the process definition to start an instance of.
@@ -12413,14 +12413,14 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
     public BusinessId? BusinessId { get; set; }
 
     /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
 }
 
 /// <summary>
 /// ProcessInstanceCreationInstructionByKey
 /// </summary>
-public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCreationInstruction, global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable
+public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCreationInstruction, global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
     /// The unique key identifying the process definition, for example, returned for a process in the
@@ -12527,7 +12527,7 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public BusinessId? BusinessId { get; set; }
 
     /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -12867,7 +12867,7 @@ public sealed class ProcessInstanceIncidentResolutionBatchOperationRequest
 /// <summary>
 /// System-generated key for a process instance.
 /// </summary>
-public readonly record struct ProcessInstanceKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ProcessInstanceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -12880,13 +12880,13 @@ public readonly record struct ProcessInstanceKey : global::Camunda.Orchestration
     /// </summary>
     public static ProcessInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ProcessInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -12895,7 +12895,7 @@ public readonly record struct ProcessInstanceKey : global::Camunda.Orchestration
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct ProcessInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ProcessInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -12908,13 +12908,13 @@ public readonly record struct ProcessInstanceKeyExactMatch : global::Camunda.Orc
     /// </summary>
     public static ProcessInstanceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceKeyExactMatch");
         return new ProcessInstanceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -13468,7 +13468,7 @@ public enum ProcessInstanceStateEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct ProcessInstanceStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ProcessInstanceStateExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -13481,13 +13481,13 @@ public readonly record struct ProcessInstanceStateExactMatch : global::Camunda.O
     /// </summary>
     public static ProcessInstanceStateExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceStateExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceStateExactMatch");
         return new ProcessInstanceStateExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -13503,7 +13503,7 @@ public sealed class ProcessInstanceStateFilterProperty
 /// <summary>
 /// The system-assigned key for this resource.
 /// </summary>
-public readonly record struct ResourceKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ResourceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -13516,13 +13516,13 @@ public readonly record struct ResourceKey : global::Camunda.Orchestration.Sdk.Ru
     /// </summary>
     public static ResourceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ResourceKey");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ResourceKey");
         return new ResourceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -13531,7 +13531,7 @@ public readonly record struct ResourceKey : global::Camunda.Orchestration.Sdk.Ru
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct ResourceKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ResourceKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -13544,13 +13544,13 @@ public readonly record struct ResourceKeyExactMatch : global::Camunda.Orchestrat
     /// </summary>
     public static ResourceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ResourceKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ResourceKeyExactMatch");
         return new ResourceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -14089,7 +14089,7 @@ public sealed class RoleUserSearchResult
 /// element instance in a BPMN process or the process instance itself.
 /// 
 /// </summary>
-public readonly record struct ScopeKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ScopeKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -14102,13 +14102,13 @@ public readonly record struct ScopeKey : global::Camunda.Orchestration.Sdk.Runti
     /// </summary>
     public static ScopeKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ScopeKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ScopeKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ScopeKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -14117,7 +14117,7 @@ public readonly record struct ScopeKey : global::Camunda.Orchestration.Sdk.Runti
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct ScopeKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct ScopeKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -14130,13 +14130,13 @@ public readonly record struct ScopeKeyExactMatch : global::Camunda.Orchestration
     /// </summary>
     public static ScopeKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "ScopeKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ScopeKeyExactMatch");
         return new ScopeKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -14275,7 +14275,7 @@ public sealed class SetVariableRequest
 /// <summary>
 /// SignalBroadcastRequest
 /// </summary>
-public sealed class SignalBroadcastRequest : global::Camunda.Orchestration.Sdk.Runtime.ITenantIdSettable
+public sealed class SignalBroadcastRequest : global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
     /// The name of the signal to broadcast.
@@ -14296,7 +14296,7 @@ public sealed class SignalBroadcastRequest : global::Camunda.Orchestration.Sdk.R
     public TenantId? TenantId { get; set; }
 
     /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.Api.TenantId.AssumeExists(tenantId); }
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -14322,7 +14322,7 @@ public sealed class SignalBroadcastResult
 /// <summary>
 /// System-generated key for an signal.
 /// </summary>
-public readonly record struct SignalKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct SignalKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -14335,13 +14335,13 @@ public readonly record struct SignalKey : global::Camunda.Orchestration.Sdk.Runt
     /// </summary>
     public static SignalKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "SignalKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "SignalKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new SignalKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -14424,7 +14424,7 @@ public abstract class SourceElementInstruction { }
 /// <summary>
 /// The start cursor in a search query result set.
 /// </summary>
-public readonly record struct StartCursor : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct StartCursor : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -14437,13 +14437,13 @@ public readonly record struct StartCursor : global::Camunda.Orchestration.Sdk.Ru
     /// </summary>
     public static StartCursor AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "StartCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "StartCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
         return new StartCursor(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -14493,7 +14493,7 @@ public sealed class SystemConfigurationResponse
 /// <summary>
 /// A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
 /// </summary>
-public readonly record struct Tag : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct Tag : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -14506,13 +14506,13 @@ public readonly record struct Tag : global::Camunda.Orchestration.Sdk.Runtime.IC
     /// </summary>
     public static Tag AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "Tag", pattern: @"^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$", minLength: 1, maxLength: 100);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Tag", pattern: @"^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$", minLength: 1, maxLength: 100);
         return new Tag(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$", minLength: 1, maxLength: 100);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$", minLength: 1, maxLength: 100);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -14743,7 +14743,7 @@ public sealed class TenantGroupSearchResult
 /// <summary>
 /// The unique identifier of the tenant.
 /// </summary>
-public readonly record struct TenantId : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct TenantId : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -14756,13 +14756,13 @@ public readonly record struct TenantId : global::Camunda.Orchestration.Sdk.Runti
     /// </summary>
     public static TenantId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "TenantId", pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "TenantId", pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
         return new TenantId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -15222,7 +15222,7 @@ public sealed class UserFilter
 /// <summary>
 /// The unique name of a user.
 /// </summary>
-public readonly record struct Username : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct Username : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -15235,13 +15235,13 @@ public readonly record struct Username : global::Camunda.Orchestration.Sdk.Runti
     /// </summary>
     public static Username AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "Username", pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Username", pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
         return new Username(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -15606,7 +15606,7 @@ public sealed class UserTaskFilter
 /// <summary>
 /// System-generated key for a user task.
 /// </summary>
-public readonly record struct UserTaskKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct UserTaskKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -15619,13 +15619,13 @@ public readonly record struct UserTaskKey : global::Camunda.Orchestration.Sdk.Ru
     /// </summary>
     public static UserTaskKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "UserTaskKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "UserTaskKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new UserTaskKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -15950,7 +15950,7 @@ public enum UserTaskStateEnum
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct UserTaskStateExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct UserTaskStateExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -15963,13 +15963,13 @@ public readonly record struct UserTaskStateExactMatch : global::Camunda.Orchestr
     /// </summary>
     public static UserTaskStateExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "UserTaskStateExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "UserTaskStateExactMatch");
         return new UserTaskStateExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -16200,7 +16200,7 @@ public sealed class VariableFilter
 /// <summary>
 /// System-generated key for a variable.
 /// </summary>
-public readonly record struct VariableKey : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct VariableKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -16213,13 +16213,13 @@ public readonly record struct VariableKey : global::Camunda.Orchestration.Sdk.Ru
     /// </summary>
     public static VariableKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "VariableKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new VariableKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -16228,7 +16228,7 @@ public readonly record struct VariableKey : global::Camunda.Orchestration.Sdk.Ru
 /// <summary>
 /// Matches the value exactly.
 /// </summary>
-public readonly record struct VariableKeyExactMatch : global::Camunda.Orchestration.Sdk.Runtime.ICamundaKey
+public readonly record struct VariableKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
     /// <summary>The underlying string value.</summary>
     public string Value { get; }
@@ -16241,13 +16241,13 @@ public readonly record struct VariableKeyExactMatch : global::Camunda.Orchestrat
     /// </summary>
     public static VariableKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.AssertConstraints(value, "VariableKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableKeyExactMatch");
         return new VariableKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.Runtime.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;

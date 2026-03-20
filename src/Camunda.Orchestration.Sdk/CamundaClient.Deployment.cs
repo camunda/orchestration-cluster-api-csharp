@@ -1,6 +1,4 @@
 using System.Net.Http.Headers;
-using Camunda.Orchestration.Sdk.Api;
-using Camunda.Orchestration.Sdk.Runtime;
 
 namespace Camunda.Orchestration.Sdk;
 

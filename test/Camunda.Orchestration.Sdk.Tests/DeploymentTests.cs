@@ -1,7 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using Camunda.Orchestration.Sdk.Api;
-using Camunda.Orchestration.Sdk.Runtime;
 using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
