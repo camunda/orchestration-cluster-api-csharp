@@ -400,7 +400,14 @@ Output uses a tagged format matching the JS SDK:
 
 ### Injecting Your Own Logger
 
-Pass an `ILoggerFactory` via `CamundaOptions` to integrate with your application's logging:
+Pass an `ILoggerFactory` via `CamundaOptions` to integrate with your application's logging.
+
+> **Note:** The example below uses `AddConsole()`, which requires the
+> [`Microsoft.Extensions.Logging.Console`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) NuGet package:
+>
+> ```bash
+> dotnet add package Microsoft.Extensions.Logging.Console
+> ```
 
 ```csharp
 using Microsoft.Extensions.Logging;
