@@ -13,7 +13,7 @@ on:
       spec_ref:
         description: 'Git ref (branch/tag/SHA) in camunda/camunda to fetch spec from'
         required: false
-        default: 'main'
+        default: 'stable/8.9'
 
 env:
   SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}

@@ -56,7 +56,7 @@ internal static class CSharpClientGenerator
     private static List<OperationMeta> CollectOperations(OpenApiDocument doc, SpecMetadata metadata, Dictionary<string, OpenApiSchema> inlineSchemas)
     {
         var ops = new List<OperationMeta>();
-        var (oneOfParents, _) = BuildOneOfMaps(doc);
+        var (oneOfParents, _, _) = BuildOneOfMaps(doc);
 
         foreach (var (path, pathItem) in doc.Paths)
         {
@@ -248,14 +248,16 @@ internal static class CSharpClientGenerator
     /// <summary>
     /// Build maps of oneOf parent→variant relationships for component schemas.
     /// Only includes schemas where ALL oneOf entries are $refs to non-primitive types.
+    /// Also collects discriminator info (property name + value mapping) for schemas that declare one.
     /// </summary>
-    private static (Dictionary<string, List<string>> oneOfParents, Dictionary<string, string> variantToParent) BuildOneOfMaps(OpenApiDocument doc)
+    private static (Dictionary<string, List<string>> oneOfParents, Dictionary<string, string> variantToParent, Dictionary<string, (string PropertyName, Dictionary<string, string> ValueToVariant)> discriminators) BuildOneOfMaps(OpenApiDocument doc)
     {
         var oneOfParents = new Dictionary<string, List<string>>();
         var variantToParent = new Dictionary<string, string>();
+        var discriminators = new Dictionary<string, (string PropertyName, Dictionary<string, string> ValueToVariant)>();
 
         if (doc.Components?.Schemas == null)
-            return (oneOfParents, variantToParent);
+            return (oneOfParents, variantToParent, discriminators);
 
         foreach (var (name, schema) in doc.Components.Schemas)
         {
@@ -280,9 +282,22 @@ internal static class CSharpClientGenerator
             oneOfParents[parentName] = variants;
             foreach (var v in variants)
                 variantToParent.TryAdd(v, parentName);
+
+            // Collect discriminator mapping if present
+            if (schema.Discriminator is { PropertyName: { Length: > 0 } } disc && disc.Mapping?.Count > 0)
+            {
+                var valueToVariant = new Dictionary<string, string>();
+                foreach (var (discValue, refPath) in disc.Mapping)
+                {
+                    // Mapping values are "#/components/schemas/TypeName" — extract the type name
+                    var schemaName = refPath.Contains('/') ? refPath.Substring(refPath.LastIndexOf('/') + 1) : refPath;
+                    valueToVariant[discValue] = SanitizeTypeName(schemaName);
+                }
+                discriminators[parentName] = (disc.PropertyName, valueToVariant);
+            }
         }
 
-        return (oneOfParents, variantToParent);
+        return (oneOfParents, variantToParent, discriminators);
     }
 
     /// <summary>
@@ -361,7 +376,7 @@ internal static class CSharpClientGenerator
     private static HashSet<string> BuildRequestSchemaNames(
         OpenApiDocument doc, List<OperationMeta> operations)
     {
-        var (oneOfParents, _) = BuildOneOfMaps(doc);
+        var (oneOfParents, _, _) = BuildOneOfMaps(doc);
         var names = new HashSet<string>();
 
         foreach (var op in operations)
@@ -397,7 +412,7 @@ internal static class CSharpClientGenerator
         if (doc.Components?.Schemas == null)
             return sb.ToString();
 
-        var (oneOfParents, variantToParent) = BuildOneOfMaps(doc);
+        var (oneOfParents, variantToParent, discriminators) = BuildOneOfMaps(doc);
 
         foreach (var (name, schema) in doc.Components.Schemas.OrderBy(kv => kv.Key))
         {
@@ -454,8 +469,21 @@ internal static class CSharpClientGenerator
                 sb.AppendLine($"/// </remarks>");
                 foreach (var variant in variants)
                     sb.AppendLine($"/// <seealso cref=\"{variant}\"/>");
+                if (discriminators.TryGetValue(typeName, out var disc))
+                    sb.AppendLine($"[JsonPolymorphic(TypeDiscriminatorPropertyName = \"{disc.PropertyName}\")]");
                 foreach (var variant in variants)
+                {
+                    if (disc.ValueToVariant != null)
+                    {
+                        var matchingEntry = disc.ValueToVariant.FirstOrDefault(kv => kv.Value == variant);
+                        if (matchingEntry.Key != null)
+                        {
+                            sb.AppendLine($"[JsonDerivedType(typeof({variant}), \"{matchingEntry.Key}\")]");
+                            continue;
+                        }
+                    }
                     sb.AppendLine($"[JsonDerivedType(typeof({variant}))]");
+                }
                 sb.AppendLine($"public abstract class {typeName} {{ }}");
                 sb.AppendLine();
                 continue;

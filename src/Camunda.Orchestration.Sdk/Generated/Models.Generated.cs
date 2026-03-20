@@ -1903,9 +1903,10 @@ public sealed class AdvancedVariableKeyFilter
 /// <seealso cref="DirectAncestorKeyInstruction"/>
 /// <seealso cref="InferredAncestorKeyInstruction"/>
 /// <seealso cref="UseSourceParentKeyInstruction"/>
-[JsonDerivedType(typeof(DirectAncestorKeyInstruction))]
-[JsonDerivedType(typeof(InferredAncestorKeyInstruction))]
-[JsonDerivedType(typeof(UseSourceParentKeyInstruction))]
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "ancestorScopeType")]
+[JsonDerivedType(typeof(DirectAncestorKeyInstruction), "direct")]
+[JsonDerivedType(typeof(InferredAncestorKeyInstruction), "inferred")]
+[JsonDerivedType(typeof(UseSourceParentKeyInstruction), "sourceParent")]
 public abstract class AncestorScopeInstruction { }
 
 /// <summary>
@@ -9463,8 +9464,9 @@ public sealed class JobMetricsConfigurationResponse
 /// </remarks>
 /// <seealso cref="JobResultUserTask"/>
 /// <seealso cref="JobResultAdHocSubProcess"/>
-[JsonDerivedType(typeof(JobResultUserTask))]
-[JsonDerivedType(typeof(JobResultAdHocSubProcess))]
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
+[JsonDerivedType(typeof(JobResultUserTask), "userTask")]
+[JsonDerivedType(typeof(JobResultAdHocSubProcess), "adHocSubProcess")]
 public abstract class JobResult { }
 
 /// <summary>
@@ -12541,7 +12543,8 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
 /// </list>
 /// </remarks>
 /// <seealso cref="ProcessInstanceCreationTerminateInstruction"/>
-[JsonDerivedType(typeof(ProcessInstanceCreationTerminateInstruction))]
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
+[JsonDerivedType(typeof(ProcessInstanceCreationTerminateInstruction), "TERMINATE_PROCESS_INSTANCE")]
 public abstract class ProcessInstanceCreationRuntimeInstruction { }
 
 /// <summary>
@@ -14185,8 +14188,7 @@ public sealed class SearchQueryPageResponse
     public long TotalItems { get; set; }
 
     /// <summary>
-    /// Indicates whether there are more items matching the criteria beyond the returned items.
-    /// This is useful for determining if additional requests are needed to retrieve all results.
+    /// Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.
     /// 
     /// </summary>
     [JsonPropertyName("hasMoreTotalItems")]
@@ -14417,8 +14419,9 @@ public sealed class SourceElementInstanceKeyInstruction : SourceElementInstructi
 /// </remarks>
 /// <seealso cref="SourceElementIdInstruction"/>
 /// <seealso cref="SourceElementInstanceKeyInstruction"/>
-[JsonDerivedType(typeof(SourceElementIdInstruction))]
-[JsonDerivedType(typeof(SourceElementInstanceKeyInstruction))]
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "sourceType")]
+[JsonDerivedType(typeof(SourceElementIdInstruction), "byId")]
+[JsonDerivedType(typeof(SourceElementInstanceKeyInstruction), "byKey")]
 public abstract class SourceElementInstruction { }
 
 /// <summary>
