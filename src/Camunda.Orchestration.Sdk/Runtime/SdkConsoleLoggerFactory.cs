@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Minimal console logger used as the default when no <see cref="ILoggerFactory"/> is injected.

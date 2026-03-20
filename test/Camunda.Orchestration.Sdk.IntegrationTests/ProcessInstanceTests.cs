@@ -1,4 +1,3 @@
-using Camunda.Orchestration.Sdk.Api;
 using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.IntegrationTests;

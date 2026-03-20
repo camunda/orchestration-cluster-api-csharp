@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Camunda.Orchestration.Sdk.Runtime;
 using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
@@ -129,9 +128,9 @@ public class TypedVariableTests
     {
         // Verify that assigning a DTO to an object? property
         // produces correct JSON when serialized
-        var request = new Api.ProcessInstanceCreationInstructionById
+        var request = new ProcessInstanceCreationInstructionById
         {
-            ProcessDefinitionId = Api.ProcessDefinitionId.AssumeExists("test-process"),
+            ProcessDefinitionId = ProcessDefinitionId.AssumeExists("test-process"),
             Variables = new OrderInput("ord-100", 50.0m),
         };
 
@@ -145,9 +144,9 @@ public class TypedVariableTests
     [Fact]
     public void InputVariables_DictionaryAlsoWorks()
     {
-        var request = new Api.ProcessInstanceCreationInstructionById
+        var request = new ProcessInstanceCreationInstructionById
         {
-            ProcessDefinitionId = Api.ProcessDefinitionId.AssumeExists("test-process"),
+            ProcessDefinitionId = ProcessDefinitionId.AssumeExists("test-process"),
             Variables = new Dictionary<string, object> { ["myVar"] = "hello" },
         };
 

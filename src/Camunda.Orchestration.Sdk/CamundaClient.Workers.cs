@@ -1,4 +1,3 @@
-using Camunda.Orchestration.Sdk.Runtime;
 using Microsoft.Extensions.Logging;
 
 namespace Camunda.Orchestration.Sdk;

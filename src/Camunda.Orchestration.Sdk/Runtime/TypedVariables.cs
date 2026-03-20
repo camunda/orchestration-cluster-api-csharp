@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Extension methods for deserializing Camunda variable and custom header payloads

@@ -15,7 +15,7 @@ public class CamundaClientTests : IDisposable
     public CamundaClientTests()
     {
         _handler = new MockHttpMessageHandler();
-        _client = new CamundaClient(new Runtime.CamundaOptions
+        _client = new CamundaClient(new CamundaOptions
         {
             Config = new Dictionary<string, string>
             {
@@ -45,7 +45,7 @@ public class CamundaClientTests : IDisposable
     public void DisposesOwnedHttpClient()
     {
         var handler = new MockHttpMessageHandler();
-        var client = new CamundaClient(new Runtime.CamundaOptions
+        var client = new CamundaClient(new CamundaOptions
         {
             Config = new Dictionary<string, string>
             {
@@ -61,12 +61,12 @@ public class CamundaClientTests : IDisposable
     [Fact]
     public void CanBeCreatedWithMinimalConfig()
     {
-        using var client = new CamundaClient(new Runtime.CamundaOptions
+        using var client = new CamundaClient(new CamundaOptions
         {
             Config = new Dictionary<string, string>(),
         });
 
-        client.Config.Auth.Strategy.Should().Be(Runtime.AuthStrategy.None);
+        client.Config.Auth.Strategy.Should().Be(AuthStrategy.None);
     }
 
     public void Dispose()

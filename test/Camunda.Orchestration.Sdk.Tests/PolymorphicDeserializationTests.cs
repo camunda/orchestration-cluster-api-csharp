@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Camunda.Orchestration.Sdk.Api;
 using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
@@ -22,9 +21,9 @@ public class PolymorphicDeserializationTests
         PropertyNameCaseInsensitive = true,
         Converters =
         {
-            new Runtime.TolerantEnumConverterFactory(),
-            new Runtime.CamundaKeyJsonConverterFactory(),
-            new Runtime.CamundaLongKeyJsonConverterFactory(),
+            new TolerantEnumConverterFactory(),
+            new CamundaKeyJsonConverterFactory(),
+            new CamundaLongKeyJsonConverterFactory(),
         },
     };
 

@@ -3,7 +3,6 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Camunda.Orchestration.Sdk.Runtime;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -56,9 +55,9 @@ public partial class CamundaClient : IDisposable
             PropertyNameCaseInsensitive = true,
             Converters =
             {
-                new Runtime.TolerantEnumConverterFactory(),
-                new Runtime.CamundaKeyJsonConverterFactory(),
-                new Runtime.CamundaLongKeyJsonConverterFactory(),
+                new TolerantEnumConverterFactory(),
+                new CamundaKeyJsonConverterFactory(),
+                new CamundaLongKeyJsonConverterFactory(),
             },
         };
 

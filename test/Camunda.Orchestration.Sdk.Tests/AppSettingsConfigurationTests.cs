@@ -1,4 +1,3 @@
-using Camunda.Orchestration.Sdk.Runtime;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 

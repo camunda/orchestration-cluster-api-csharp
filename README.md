@@ -45,7 +45,6 @@ Keep configuration out of application code. Let the factory read `CAMUNDA_*` var
 
 ```csharp
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Api;
 
 // Zero-config construction: reads CAMUNDA_* from environment variables.
 // If no configuration is present, defaults to Camunda 8 Run on localhost.
@@ -482,7 +481,7 @@ using var client = CamundaClient.Create(new CamundaOptions
 All domain identifiers (process definition keys, job keys, user task keys, etc.) are `readonly record struct` types rather than plain strings. This prevents accidentally mixing different key types at compile time — the same pattern as the JS SDK's branded types.
 
 ```csharp
-using Camunda.Orchestration.Sdk.Api;
+using Camunda.Orchestration.Sdk;
 
 // Lift a raw value into the correct nominal type
 var defKey = ProcessDefinitionKey.AssumeExists("2251799813686749");
@@ -583,7 +582,7 @@ Camunda API operations use dynamic `variables` and `customHeaders` payloads. By 
 Assign any DTO or dictionary to the `Variables` property — `System.Text.Json` serializes the runtime type automatically:
 
 ```csharp
-using Camunda.Orchestration.Sdk.Api;
+using Camunda.Orchestration.Sdk;
 
 // Define your application domain models
 public record OrderInput(string OrderId, decimal Amount);
@@ -607,7 +606,7 @@ await client.CompleteJobAsync(jobKey, new CompleteJobRequest
 Use `DeserializeAs<T>()` to extract typed DTOs from API responses:
 
 ```csharp
-using Camunda.Orchestration.Sdk.Runtime;  // for DeserializeAs<T>()
+using Camunda.Orchestration.Sdk;
 
 public record OrderResult(bool Processed, string InvoiceNumber);
 public record JobHeaders(string Region, int Priority);
@@ -637,8 +636,6 @@ Job workers subscribe to a specific job type and process jobs as they become ava
 
 ```csharp
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Runtime;
-using Camunda.Orchestration.Sdk.Api;
 
 using var client = CamundaClient.Create();
 

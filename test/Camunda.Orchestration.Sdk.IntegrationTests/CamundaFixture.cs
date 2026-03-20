@@ -1,6 +1,5 @@
 using System.Text;
 using System.Text.Json;
-using Camunda.Orchestration.Sdk.Api;
 
 namespace Camunda.Orchestration.Sdk.IntegrationTests;
 
@@ -30,14 +29,14 @@ public sealed class CamundaFixture : IAsyncLifetime
         PropertyNameCaseInsensitive = true,
         Converters =
         {
-            new Runtime.CamundaKeyJsonConverterFactory(),
-            new Runtime.CamundaLongKeyJsonConverterFactory(),
+            new CamundaKeyJsonConverterFactory(),
+            new CamundaLongKeyJsonConverterFactory(),
         },
     };
 
     public async Task InitializeAsync()
     {
-        Client = CamundaClient.Create(new Runtime.CamundaOptions
+        Client = CamundaClient.Create(new CamundaOptions
         {
             Config = new Dictionary<string, string>
             {
@@ -128,7 +127,7 @@ public sealed class CamundaFixture : IAsyncLifetime
         {
             await Client.CancelProcessInstanceAsync(processInstanceKey, new CancelProcessInstanceRequest());
         }
-        catch (Runtime.HttpSdkException ex) when (ex.Status == 404)
+        catch (HttpSdkException ex) when (ex.Status == 404)
         {
             // Already completed or cancelled
         }

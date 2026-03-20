@@ -3,8 +3,6 @@
 
 #nullable enable
 
-using Camunda.Orchestration.Sdk.Api;
-using Camunda.Orchestration.Sdk.Runtime;
 
 namespace Camunda.Orchestration.Sdk;
 
@@ -198,7 +196,7 @@ public partial class CamundaClient
     public async Task<SignalBroadcastResult> BroadcastSignalAsync(SignalBroadcastRequest body, CancellationToken ct = default)
     {
         var path = $"/signals/broadcast";
-        if (body is Runtime.ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<SignalBroadcastResult>(HttpMethod.Post, path, body, ct), "broadcastSignal", false, ct);
     }
 
@@ -278,7 +276,7 @@ public partial class CamundaClient
     public async Task<MessageCorrelationResult> CorrelateMessageAsync(MessageCorrelationRequest body, CancellationToken ct = default)
     {
         var path = $"/messages/correlation";
-        if (body is Runtime.ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<MessageCorrelationResult>(HttpMethod.Post, path, body, ct), "correlateMessage", false, ct);
     }
 
@@ -321,7 +319,7 @@ public partial class CamundaClient
     /// Upload document
     /// Upload a document to the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: createDocument</remarks>
@@ -338,7 +336,7 @@ public partial class CamundaClient
     /// Create document link
     /// Create a link to a document in the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP
+    /// Note that this is currently supported for document stores of type: AWS, GCP
     /// 
     /// </summary>
     /// <remarks>Operation: createDocumentLink</remarks>
@@ -367,7 +365,7 @@ public partial class CamundaClient
     /// each of which contains the file name of the document that failed to upload and the reason for the failure.
     /// The client can choose to retry the whole batch or individual documents based on the response.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: createDocuments</remarks>
@@ -455,7 +453,7 @@ public partial class CamundaClient
     public async Task<CreateProcessInstanceResult> CreateProcessInstanceAsync(ProcessInstanceCreationInstruction body, CancellationToken ct = default)
     {
         var path = $"/process-instances";
-        if (body is Runtime.ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<CreateProcessInstanceResult>(HttpMethod.Post, path, body, ct), "createProcessInstance", false, ct);
     }
 
@@ -542,7 +540,7 @@ public partial class CamundaClient
     /// Delete document
     /// Delete a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: deleteDocument</remarks>
@@ -702,7 +700,7 @@ public partial class CamundaClient
     public async Task<EvaluateConditionalResult> EvaluateConditionalsAsync(ConditionalEvaluationInstruction body, CancellationToken ct = default)
     {
         var path = $"/conditionals/evaluation";
-        if (body is Runtime.ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<EvaluateConditionalResult>(HttpMethod.Post, path, body, ct), "evaluateConditionals", false, ct);
     }
 
@@ -718,7 +716,7 @@ public partial class CamundaClient
     public async Task<EvaluateDecisionResult> EvaluateDecisionAsync(DecisionEvaluationInstruction body, CancellationToken ct = default)
     {
         var path = $"/decision-definitions/evaluation";
-        if (body is Runtime.ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<EvaluateDecisionResult>(HttpMethod.Post, path, body, ct), "evaluateDecision", false, ct);
     }
 
@@ -730,7 +728,7 @@ public partial class CamundaClient
     public async Task<ExpressionEvaluationResult> EvaluateExpressionAsync(ExpressionEvaluationRequest body, CancellationToken ct = default)
     {
         var path = $"/expression/evaluation";
-        if (body is Runtime.ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<ExpressionEvaluationResult>(HttpMethod.Post, path, body, ct), "evaluateExpression", false, ct);
     }
 
@@ -905,7 +903,7 @@ public partial class CamundaClient
     /// Download document
     /// Download a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: getDocument</remarks>
@@ -1705,7 +1703,7 @@ public partial class CamundaClient
     public async Task<MessagePublicationResult> PublishMessageAsync(MessagePublicationRequest body, CancellationToken ct = default)
     {
         var path = $"/messages/publication";
-        if (body is Runtime.ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<MessagePublicationResult>(HttpMethod.Post, path, body, ct), "publishMessage", false, ct);
     }
 

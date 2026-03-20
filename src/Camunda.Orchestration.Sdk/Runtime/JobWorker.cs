@@ -1,8 +1,7 @@
 using System.Text.Json;
-using Camunda.Orchestration.Sdk.Api;
 using Microsoft.Extensions.Logging;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Delegate for job handler functions. Return the output variables to complete the

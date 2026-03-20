@@ -4,7 +4,6 @@
 #pragma warning disable CA1861 // Constant array arguments
 
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Api;
 
 namespace Camunda.Orchestration.Sdk.Examples;
 

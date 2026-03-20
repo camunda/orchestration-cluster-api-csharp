@@ -1,7 +1,7 @@
 using System.Net;
 using Microsoft.Extensions.Logging;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// HTTP retry with exponential backoff and jitter. Mirrors the JS SDK's executeWithHttpRetry.

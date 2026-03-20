@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Adaptive backpressure management. Mirrors the JS SDK's BackpressureManager.

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Configuration hydration errors.

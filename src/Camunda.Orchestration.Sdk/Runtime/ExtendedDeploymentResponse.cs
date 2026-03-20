@@ -1,6 +1,4 @@
-using Camunda.Orchestration.Sdk.Api;
-
-namespace Camunda.Orchestration.Sdk.Runtime;
+namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
 /// Extended deployment result with typed convenience properties for direct access

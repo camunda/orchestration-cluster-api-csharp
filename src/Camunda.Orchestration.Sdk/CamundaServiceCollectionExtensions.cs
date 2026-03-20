@@ -1,4 +1,3 @@
-using Camunda.Orchestration.Sdk.Runtime;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
