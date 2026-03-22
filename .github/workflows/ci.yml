@@ -103,6 +103,12 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
+      - name: Build Examples
+        run: dotnet build docs/examples/Examples.csproj --configuration Release
+
+      - name: Check README Snippets
+        run: python3 scripts/sync-readme-snippets.py --check
+
       - name: Lint Check
         run: dotnet format --verify-no-changes
 

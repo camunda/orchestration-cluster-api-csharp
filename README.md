@@ -43,6 +43,7 @@ When this happens, we signal it in the [CHANGELOG](https://github.com/camunda/or
 
 Keep configuration out of application code. Let the factory read `CAMUNDA_*` variables from the environment (12-factor style). This makes rotation, secret management, and environment promotion safer and simpler.
 
+<!-- snippet:UsingDirective+QuickStart -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -80,6 +81,7 @@ CAMUNDA_DEFAULT_TENANT_ID=<default>            # optional: override default tena
 
 Use only when you must supply or mutate configuration dynamically (e.g. multi-tenant routing, tests, ephemeral preview environments). Keys mirror their `CAMUNDA_*` env names:
 
+<!-- snippet:UsingDirective+ProgrammaticOverrides -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -122,6 +124,7 @@ The SDK can read configuration from any `IConfiguration` source (appsettings.jso
 
 Pass the section to the client:
 
+<!-- snippet:AppSettingsConfig -->
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
@@ -197,6 +200,7 @@ For ASP.NET Core and other DI-based applications, use the `AddCamundaClient()` e
 
 **Zero-config** (environment variables only):
 
+<!-- snippet:DIZeroConfig -->
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCamundaClient();
@@ -204,6 +208,7 @@ builder.Services.AddCamundaClient();
 
 **With `appsettings.json`**:
 
+<!-- snippet:DIAppSettings -->
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCamundaClient(builder.Configuration.GetSection("Camunda"));
@@ -211,6 +216,7 @@ builder.Services.AddCamundaClient(builder.Configuration.GetSection("Camunda"));
 
 **With options callback** (full control):
 
+<!-- snippet:DIOptionsCallback -->
 ```csharp
 builder.Services.AddCamundaClient(options =>
 {
@@ -221,6 +227,7 @@ builder.Services.AddCamundaClient(options =>
 
 Inject the client anywhere via constructor injection:
 
+<!-- snippet:DIControllerInjection -->
 ```csharp
 public class OrderController(CamundaClient camunda) : ControllerBase
 {
@@ -239,6 +246,7 @@ public class OrderController(CamundaClient camunda) : ControllerBase
 
 ### Custom HttpClient
 
+<!-- snippet:CustomHttpClient -->
 ```csharp
 var httpClient = new HttpClient { BaseAddress = new Uri("https://my-cluster/v2/") };
 using var client = CamundaClient.Create(new CamundaOptions
@@ -363,6 +371,7 @@ The `LEGACY` profile disables adaptive gating entirely — signals are still tra
 
 #### Inspecting State Programmatically
 
+<!-- snippet:BackpressureState -->
 ```csharp
 var state = client.GetBackpressureState();
 // state.Severity: "healthy", "soft", or "severe"
@@ -403,6 +412,7 @@ Output uses a tagged format matching the JS SDK:
 
 Pass an `ILoggerFactory` via `CamundaOptions` to integrate with your application's logging:
 
+<!-- snippet:UsingDirective+InjectLogger -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -425,6 +435,7 @@ When an `ILoggerFactory` is provided, `CAMUNDA_SDK_LOG_LEVEL` is ignored — fil
 
 When using `AddCamundaClient()`, the SDK automatically resolves `ILoggerFactory` from the DI container — no manual wiring needed:
 
+<!-- snippet:DILogging -->
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
@@ -476,6 +487,7 @@ using var client = CamundaClient.Create(new CamundaOptions
 
 All domain identifiers (process definition keys, job keys, user task keys, etc.) are `readonly record struct` types rather than plain strings. This prevents accidentally mixing different key types at compile time — the same pattern as the JS SDK's branded types.
 
+<!-- snippet:UsingDirective+DomainKeys -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -502,6 +514,7 @@ Key types implement `ICamundaKey` (string-backed) or `ICamundaLongKey` (long-bac
 
 Deploy BPMN, DMN, or Form files from disk:
 
+<!-- snippet:UsingDirective+DeployResources -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -520,16 +533,15 @@ foreach (var process in result.Processes)
 
 The recommended pattern is to obtain keys from a prior API response (e.g. a deployment) and pass them directly — no manual conversion needed:
 
+<!-- snippet:UsingDirective+CreateProcessInstance -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
 using var client = CamundaClient.Create();
 
-// Deploy and capture the typed key
 var deployment = await client.DeployResourcesFromFilesAsync(["process.bpmn"]);
 var processKey = deployment.Processes[0].ProcessDefinitionKey;
 
-// Use it directly — the type flows through without conversion
 var result = await client.CreateProcessInstanceAsync(
     new ProcessInstanceCreationInstructionByKey
     {
@@ -541,6 +553,7 @@ Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
 
 If you need to restore a key from external storage (database, message queue, config file), wrap the raw value with the domain key constructor:
 
+<!-- snippet:UsingDirective+CreateProcessFromStorage -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -558,6 +571,7 @@ Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
 
 You can also start a process instance by BPMN process ID (which uses the latest deployed version):
 
+<!-- snippet:CreateProcessById -->
 ```csharp
 var result = await client.CreateProcessInstanceAsync(
     new ProcessInstanceCreationInstructionById
@@ -574,6 +588,7 @@ Camunda API operations use dynamic `variables` and `customHeaders` payloads. By 
 
 Assign any DTO or dictionary to the `Variables` property — `System.Text.Json` serializes the runtime type automatically:
 
+<!-- snippet:UsingDirective+SendingVariables+SendingVariablesBody -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -598,20 +613,20 @@ await client.CompleteJobAsync(jobKey, new JobCompletionRequest
 
 Use `DeserializeAs<T>()` to extract typed DTOs from API responses:
 
+<!-- snippet:UsingDirective+ReceivingVariables+ReceivingVariablesBody -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
 public record OrderResult(bool Processed, string InvoiceNumber);
-public record JobHeaders(string Region, int Priority);
 
 // Deserialize variables from any API response
-var result = await client.CreateProcessInstanceAsync(/* ... */);
+var result = await client.CreateProcessInstanceAsync(
+    new ProcessInstanceCreationInstructionById
+    {
+        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("test"),
+    });
 var output = result.Variables.DeserializeAs<OrderResult>();
 // output.Processed, output.InvoiceNumber — fully typed
-
-// Works for custom headers too
-var headers = job.CustomHeaders.DeserializeAs<JobHeaders>();
-// headers.Region, headers.Priority — fully typed
 ```
 
 `DeserializeAs<T>()` handles the common runtime shapes:
@@ -627,14 +642,14 @@ Job workers subscribe to a specific job type and process jobs as they become ava
 
 ### Basic Worker
 
+<!-- snippet:UsingDirective+BasicWorker+BasicWorkerBody -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
-using var client = CamundaClient.Create();
-
 // Define input/output DTOs
-public record OrderInput(string OrderId, decimal Amount);
 public record OrderOutput(bool Processed, string InvoiceNumber);
+
+using var client = CamundaClient.Create();
 
 client.CreateJobWorker(
     new JobWorkerConfig
@@ -669,6 +684,7 @@ The handler return value determines the job outcome:
 | Throw `JobFailureException` | Fail with custom retries / back-off |
 | Throw any other exception | Auto-fail with `retries - 1` |
 
+<!-- snippet:ErrorHandling+ErrorHandlingFailure -->
 ```csharp
 // BPMN error — caught by error boundary events in the process model
 throw new BpmnErrorException("INVALID_ORDER", "Order not found");
@@ -681,7 +697,10 @@ throw new JobFailureException("Service unavailable", retries: 2, retryBackOffMs:
 
 For handlers that don't return output variables, use the void overload:
 
+<!-- snippet:VoidHandler+VoidHandlerBody -->
 ```csharp
+public record NotificationInput(string Message);
+
 client.CreateJobWorker(config, async (job, ct) =>
 {
     await SendNotification(job.GetVariables<NotificationInput>()!, ct);
