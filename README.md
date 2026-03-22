@@ -82,7 +82,6 @@ Use only when you must supply or mutate configuration dynamically (e.g. multi-te
 
 ```csharp
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Runtime;
 
 using var client = CamundaClient.Create(new CamundaOptions
 {
@@ -126,7 +125,7 @@ Pass the section to the client:
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
-using var client = CamundaClient.Create(new Camunda.Orchestration.Sdk.Runtime.CamundaOptions
+using var client = CamundaClient.Create(new CamundaOptions
 {
     Configuration = builder.Configuration.GetSection("Camunda"),
 });
@@ -242,7 +241,7 @@ public class OrderController(CamundaClient camunda) : ControllerBase
 
 ```csharp
 var httpClient = new HttpClient { BaseAddress = new Uri("https://my-cluster/v2/") };
-using var client = CamundaClient.Create(new Camunda.Orchestration.Sdk.Runtime.CamundaOptions
+using var client = CamundaClient.Create(new CamundaOptions
 {
     HttpClient = httpClient,
 });
@@ -406,10 +405,7 @@ Pass an `ILoggerFactory` via `CamundaOptions` to integrate with your application
 
 ```csharp
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Runtime;
-using Microsoft.Extensions.Logging;
 
-// Example: built-in .NET console logger with custom filtering
 using var loggerFactory = LoggerFactory.Create(builder =>
 {
     builder
@@ -444,7 +440,7 @@ All SDK log entries appear alongside your application logs with proper category 
 ### Serilog Integration
 
 ```csharp
-using Camunda.Orchestration.Sdk.Runtime;
+using Camunda.Orchestration.Sdk;
 using Serilog;
 using Serilog.Extensions.Logging;
 
@@ -508,7 +504,6 @@ Deploy BPMN, DMN, or Form files from disk:
 
 ```csharp
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Api;
 
 using var client = CamundaClient.Create();
 
@@ -527,7 +522,6 @@ The recommended pattern is to obtain keys from a prior API response (e.g. a depl
 
 ```csharp
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Api;
 
 using var client = CamundaClient.Create();
 
@@ -549,7 +543,6 @@ If you need to restore a key from external storage (database, message queue, con
 
 ```csharp
 using Camunda.Orchestration.Sdk;
-using Camunda.Orchestration.Sdk.Api;
 
 using var client = CamundaClient.Create();
 
@@ -595,7 +588,7 @@ await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionBy
 });
 
 // Dictionaries also work — no DTO required
-await client.CompleteJobAsync(jobKey, new CompleteJobRequest
+await client.CompleteJobAsync(jobKey, new JobCompletionRequest
 {
     Variables = new Dictionary<string, object> { ["processed"] = true },
 });
@@ -661,7 +654,7 @@ client.CreateJobWorker(
 // Block until Ctrl+C
 using var cts = new CancellationTokenSource();
 Console.CancelKeyPress += (_, e) => { e.Cancel = true; cts.Cancel(); };
-await client.RunWorkersAsync(cts.Token);
+await client.RunWorkersAsync(ct: cts.Token);
 ```
 
 ### Handler Contract
