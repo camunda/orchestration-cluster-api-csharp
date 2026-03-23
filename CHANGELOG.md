@@ -1,3 +1,10 @@
+# [8.9.0-alpha.11](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.10...v8.9.0-alpha.11) (2026-03-23)
+
+
+### Bug Fixes
+
+* address PR review comments ([4c0f313](https://github.com/camunda/orchestration-cluster-api-csharp/commit/4c0f3138a2ae83d9a6b228144903d2c449c714ad))
+
 # [8.9.0-alpha.10](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.9...v8.9.0-alpha.10) (2026-03-20)
 
 
