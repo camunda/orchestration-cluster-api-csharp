@@ -38,14 +38,19 @@ echo ""
 echo "--- Step 5: Lint check ---"
 dotnet format --verify-no-changes
 
-# Step 6: Unit tests (acceptance gate — integration tests are separate)
+# Step 6: Sync README snippets
 echo ""
-echo "--- Step 6: Unit tests ---"
+echo "--- Step 6: Sync README snippets ---"
+python3 scripts/sync-readme-snippets.py
+
+# Step 7: Unit tests (acceptance gate — integration tests are separate)
+echo ""
+echo "--- Step 7: Unit tests ---"
 dotnet test test/Camunda.Orchestration.Sdk.Tests --configuration Release --no-build
 
- # Step 7: Build documentation
+ # Step 8: Build documentation
 echo ""
-echo "--- Step 7: Build documentation ---"
+echo "--- Step 8: Build documentation ---"
 bash scripts/build-docs.sh
 
 echo ""
