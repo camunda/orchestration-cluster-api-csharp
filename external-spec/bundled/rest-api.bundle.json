@@ -3348,7 +3348,7 @@
         ],
         "operationId": "createDocument",
         "summary": "Upload document",
-        "description": "Upload a document to the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Upload a document to the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "storeId",
@@ -3439,7 +3439,7 @@
         ],
         "operationId": "createDocuments",
         "summary": "Upload multiple documents",
-        "description": "Upload multiple documents to the Camunda 8 cluster.\n\nThe caller must provide a file name for each document, which will be used in case of a multi-status response\nto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header\nof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These\nare matched with the files based on index, and must have the same length as the files array.\nTo pass homogenous metadata for all files, spread the metadata over the metadata array.\nA filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header\nof the file part.\n\nIn case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,\neach of which contains the file name of the document that failed to upload and the reason for the failure.\nThe client can choose to retry the whole batch or individual documents based on the response.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Upload multiple documents to the Camunda 8 cluster.\n\nThe caller must provide a file name for each document, which will be used in case of a multi-status response\nto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header\nof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These\nare matched with the files based on index, and must have the same length as the files array.\nTo pass homogenous metadata for all files, spread the metadata over the metadata array.\nA filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header\nof the file part.\n\nIn case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,\neach of which contains the file name of the document that failed to upload and the reason for the failure.\nThe client can choose to retry the whole batch or individual documents based on the response.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "storeId",
@@ -3547,7 +3547,7 @@
         ],
         "operationId": "getDocument",
         "summary": "Download document",
-        "description": "Download a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Download a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "documentId",
@@ -3618,7 +3618,7 @@
         ],
         "operationId": "deleteDocument",
         "summary": "Delete document",
-        "description": "Delete a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Delete a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "documentId",
@@ -3674,7 +3674,7 @@
         ],
         "operationId": "createDocumentLink",
         "summary": "Create document link",
-        "description": "Create a link to a document in the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP\n",
+        "description": "Create a link to a document in the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP\n",
         "parameters": [
           {
             "name": "documentId",
