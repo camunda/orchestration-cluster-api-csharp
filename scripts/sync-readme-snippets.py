@@ -97,6 +97,7 @@ def sync_readme(regions: dict[str, str], *, check: bool = False) -> bool:
     i = 0
     changed = False
     missing: list[str] = []
+    errors: list[str] = []
 
     while i < len(lines):
         line = lines[i].rstrip("\n")
@@ -127,7 +128,7 @@ def sync_readme(regions: dict[str, str], *, check: bool = False) -> bool:
 
         # Expect opening fence
         if i >= len(lines) or not lines[i].strip().startswith("```"):
-            print(f"WARNING: snippet:{region_name} — expected ``` after marker, skipping")
+            errors.append(f"snippet:{region_name} — expected ``` after marker")
             continue
 
         fence_lang = lines[i].strip()  # e.g. ```csharp
@@ -138,7 +139,7 @@ def sync_readme(regions: dict[str, str], *, check: bool = False) -> bool:
             close_idx += 1
 
         if close_idx >= len(lines):
-            print(f"WARNING: snippet:{region_name} — no closing ``` found, skipping")
+            errors.append(f"snippet:{region_name} — no closing ``` found")
             out.append(lines[i])
             i += 1
             continue
@@ -153,9 +154,15 @@ def sync_readme(regions: dict[str, str], *, check: bool = False) -> bool:
         out.append(new_block)
         i = close_idx + 1
 
+    if errors:
+        for err in errors:
+            print(f"ERROR: {err}", file=sys.stderr)
+
     if missing:
         print(f"ERROR: missing regions: {', '.join(missing)}", file=sys.stderr)
-        return True  # treat as failure
+
+    if errors or missing:
+        sys.exit(1)
 
     new_text = "".join(out)
 

@@ -124,8 +124,10 @@ The SDK can read configuration from any `IConfiguration` source (appsettings.jso
 
 Pass the section to the client:
 
-<!-- snippet:AppSettingsConfig -->
+<!-- snippet:UsingDirective+AppSettingsConfig -->
 ```csharp
+using Camunda.Orchestration.Sdk;
+
 var builder = WebApplication.CreateBuilder(args);
 
 using var client = CamundaClient.Create(new CamundaOptions
@@ -200,24 +202,30 @@ For ASP.NET Core and other DI-based applications, use the `AddCamundaClient()` e
 
 **Zero-config** (environment variables only):
 
-<!-- snippet:DIZeroConfig -->
+<!-- snippet:UsingDirective+DIZeroConfig -->
 ```csharp
+using Camunda.Orchestration.Sdk;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCamundaClient();
 ```
 
 **With `appsettings.json`**:
 
-<!-- snippet:DIAppSettings -->
+<!-- snippet:UsingDirective+DIAppSettings -->
 ```csharp
+using Camunda.Orchestration.Sdk;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCamundaClient(builder.Configuration.GetSection("Camunda"));
 ```
 
 **With options callback** (full control):
 
-<!-- snippet:DIOptionsCallback -->
+<!-- snippet:UsingDirective+DIOptionsCallback -->
 ```csharp
+using Camunda.Orchestration.Sdk;
+
 builder.Services.AddCamundaClient(options =>
 {
     options.Configuration = builder.Configuration.GetSection("Camunda");
@@ -246,8 +254,10 @@ public class OrderController(CamundaClient camunda) : ControllerBase
 
 ### Custom HttpClient
 
-<!-- snippet:CustomHttpClient -->
+<!-- snippet:UsingDirective+CustomHttpClient -->
 ```csharp
+using Camunda.Orchestration.Sdk;
+
 var httpClient = new HttpClient { BaseAddress = new Uri("https://my-cluster/v2/") };
 using var client = CamundaClient.Create(new CamundaOptions
 {
@@ -435,8 +445,10 @@ When an `ILoggerFactory` is provided, `CAMUNDA_SDK_LOG_LEVEL` is ignored — fil
 
 When using `AddCamundaClient()`, the SDK automatically resolves `ILoggerFactory` from the DI container — no manual wiring needed:
 
-<!-- snippet:DILogging -->
+<!-- snippet:UsingDirective+DILogging -->
 ```csharp
+using Camunda.Orchestration.Sdk;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Logging configuration
@@ -533,7 +545,7 @@ foreach (var process in result.Processes)
 
 The recommended pattern is to obtain keys from a prior API response (e.g. a deployment) and pass them directly — no manual conversion needed:
 
-<!-- snippet:UsingDirective+CreateProcessInstance -->
+<!-- snippet:UsingDirective+ReadmeCreateProcessInstance -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
