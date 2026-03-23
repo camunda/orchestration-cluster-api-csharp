@@ -199,7 +199,7 @@ internal static class ReadmeExamples
 
     private static async Task CreateProcessInstanceExample()
     {
-        // <CreateProcessInstance>
+        // <ReadmeCreateProcessInstance>
         using var client = CamundaClient.Create();
 
         var deployment = await client.DeployResourcesFromFilesAsync(["process.bpmn"]);
@@ -212,7 +212,7 @@ internal static class ReadmeExamples
             });
 
         Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
-        // </CreateProcessInstance>
+        // </ReadmeCreateProcessInstance>
     }
 
     private static async Task CreateProcessFromStorageExample()
