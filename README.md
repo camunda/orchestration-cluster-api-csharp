@@ -1,5 +1,6 @@
 # Camunda 8 Orchestration Cluster API — C# SDK (Technical Preview)
 
+<!-- WARNING: The content and specific structure of this file drives Docusaurus generation in camunda-docs. Also, code examples are injected during build. Please refer to MAINTAINER.md before editing. -->
 [![NuGet](https://img.shields.io/nuget/v/Camunda.Orchestration.Sdk)](https://www.nuget.org/packages/Camunda.Orchestration.Sdk)
 [![Documentation](https://img.shields.io/badge/docs-API%20Reference-blue)](https://camunda.github.io/orchestration-cluster-api-csharp)
 [![License](https://img.shields.io/github/license/camunda/orchestration-cluster-api-csharp)](LICENSE)

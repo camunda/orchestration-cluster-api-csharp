@@ -61,8 +61,10 @@ bash scripts/integration-test.sh
 2. `dotnet run --project src/Camunda.Orchestration.Sdk.Generator` → generate `src/Camunda.Orchestration.Sdk/Generated/*`
 3. `dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore` → auto-fix generated code style
 4. `dotnet build` → compile library + tests
-5. `dotnet format --verify-no-changes` → lint gate (ensures all code is compliant)
-6. `dotnet test` → run unit tests
+5. `dotnet build docs/examples/Examples.csproj` → type-check compilable code examples
+6. `dotnet format --verify-no-changes` → lint gate (ensures all code is compliant)
+7. `python3 scripts/sync-readme-snippets.py` → sync code examples into README.md
+8. `dotnet test` → run unit tests
 
 Spec bundling uses the shared `camunda-schema-bundler` npm package which handles:
 - Sparse clone of upstream `camunda/camunda` repo
@@ -80,6 +82,8 @@ Spec bundling uses the shared `camunda-schema-bundler` npm package which handles
 │   ├── upstream/             # Raw multi-file YAML
 │   └── bundled/              # Bundled single JSON
 ├── scripts/                  # Build pipeline scripts
+├── docs/
+│   └── examples/             # Compilable code examples (type-checked, synced to README)
 ├── src/
 │   ├── Camunda.Orchestration.Sdk/       # Main SDK library
 │   │   ├── Runtime/          # Auth, retry, backpressure, config
@@ -166,6 +170,58 @@ The build scripts (`build.sh`, `build-local.sh`) automatically run `dotnet forma
 
 - **CA1848** (Use LoggerMessage delegates) — globally suppressed; the SDK does minimal logging and the refactoring burden is not justified.
 - **CA1707** (Identifiers should not contain underscores) — suppressed for test projects; `Should_Do_Something_When_Condition` is standard xUnit naming convention.
+
+## Compilable Examples & README Integration
+
+### Examples Directory
+
+`docs/examples/` contains compilable C# examples organized by API domain:
+
+| File | Domains |
+| --- | --- |
+| `ReadmeExamples.cs` | All README-synced examples (client construction, config, DI, job workers, error handling) |
+| `ClientExamples.cs` | Client construction, configuration |
+| `DecisionExamples.cs` | Decision evaluation, search |
+| `DeploymentExamples.cs` | Deploy resources |
+| `IncidentExamples.cs` | Incident resolution, search |
+| `JobExamples.cs` | Job activation, completion, failure, workers |
+| `MessageExamples.cs` | Message correlation |
+| `ProcessInstanceExamples.cs` | Process start, cancel, search |
+| `UserTaskExamples.cs` | User task assignment, completion, search |
+
+Examples use `// <RegionName>` / `// </RegionName>` markers to define named regions that can be referenced individually.
+
+`Examples.csproj` is a standalone project (not part of the solution) that references the SDK. It is compiled during the build to type-check all examples against the generated API surface.
+
+### Type-Checking
+
+Examples are type-checked at build time via `dotnet build docs/examples/Examples.csproj`. Since `Examples.csproj` references the SDK project, any type-contract regression caused by an upstream spec change will fail the build.
+
+### README Snippet Sync
+
+`scripts/sync-readme-snippets.py` extracts region-tagged code from example files and injects it into `README.md`. It runs as part of both `build.sh` and `build-local.sh`.
+
+**How it works:**
+
+- Scans all `docs/examples/*.cs` files for `// <Name>` ... `// </Name>` region blocks
+- Finds matching `<!-- snippet:Name -->` markers in `README.md`
+- Replaces the fenced code block following each marker with the extracted code
+
+**Composite regions:** Use `+` to concatenate multiple regions:
+
+```markdown
+<!-- snippet:UsingDirective+QuickStart -->
+```
+
+This inserts `UsingDirective` followed by `QuickStart` into a single code block.
+
+**CI enforcement:** CI runs `python3 scripts/sync-readme-snippets.py --check` which fails if the README is out of sync. The build scripts run the update form automatically.
+
+### Adding a New README Example
+
+1. Add a `// <MyExample>` ... `// </MyExample>` block to the appropriate example file in `docs/examples/`.
+2. Add a `<!-- snippet:MyExample -->` marker in `README.md` followed by an empty fenced code block.
+3. Run `bash scripts/build-local.sh` — the build compiles the example and syncs it into the README.
 
 ## Pinning the Upstream Spec (SPEC_REF)
 

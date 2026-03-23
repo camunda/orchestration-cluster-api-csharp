@@ -33,19 +33,24 @@ echo ""
 echo "--- Step 4: Build ---"
 dotnet build --configuration Release
 
-# Step 5: Lint check (verify formatting matches .editorconfig)
+# Step 5: Build examples (type-check compilable code samples)
 echo ""
-echo "--- Step 5: Lint check ---"
+echo "--- Step 5: Build examples ---"
+dotnet build docs/examples/Examples.csproj --configuration Release
+
+# Step 6: Lint check (verify formatting matches .editorconfig)
+echo ""
+echo "--- Step 6: Lint check ---"
 dotnet format --verify-no-changes
 
-# Step 6: Sync README snippets
+# Step 7: Sync README snippets
 echo ""
-echo "--- Step 6: Sync README snippets ---"
+echo "--- Step 7: Sync README snippets ---"
 python3 scripts/sync-readme-snippets.py
 
-# Step 7: Unit tests (acceptance gate — integration tests are separate)
+# Step 8: Unit tests (acceptance gate — integration tests are separate)
 echo ""
-echo "--- Step 7: Unit tests ---"
+echo "--- Step 8: Unit tests ---"
 dotnet test test/Camunda.Orchestration.Sdk.Tests --configuration Release --no-build
 
  # Step 8: Build documentation
