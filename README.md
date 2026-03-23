@@ -1,15 +1,19 @@
 # Camunda 8 Orchestration Cluster API — C# SDK (Technical Preview)
 
 <!-- WARNING: The content and specific structure of this file drives Docusaurus generation in camunda-docs. Also, code examples are injected during build. Please refer to MAINTAINER.md before editing. -->
+<!-- docs:cut:start -->
 [![NuGet](https://img.shields.io/nuget/v/Camunda.Orchestration.Sdk)](https://www.nuget.org/packages/Camunda.Orchestration.Sdk)
 [![Documentation](https://img.shields.io/badge/docs-API%20Reference-blue)](https://camunda.github.io/orchestration-cluster-api-csharp)
 [![License](https://img.shields.io/github/license/camunda/orchestration-cluster-api-csharp)](LICENSE)
+<!-- docs:cut:end -->
 
 Technical preview of the C# client SDK for the [Camunda 8 Orchestration Cluster REST API](https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/).
 
 Unified configuration, OAuth/Basic auth, automatic retry, backpressure management, strongly-typed domain keys, and opt-in typed variables.
 
+<!-- docs:cut:start -->
 Full API Documentation available [here](https://camunda.github.io/orchestration-cluster-api-csharp).
+<!-- docs:cut:end -->
 
 ## Support status
 
@@ -23,7 +27,7 @@ Prior to Camunda 8.10.0, this client will undergo changes as we stabilise the co
 dotnet add package Camunda.Orchestration.Sdk
 ```
 
-## Versioning
+### Versioning
 
 This SDK does **not** follow traditional semver. The **major.minor** version tracks the Camunda server version, so you can easily match the SDK to your deployment target (e.g. SDK `8.9.x` targets Camunda `8.9`).
 
