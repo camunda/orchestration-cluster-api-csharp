@@ -1,3 +1,11 @@
+# [8.9.0-alpha.14](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.13...v8.9.0-alpha.14) (2026-03-24)
+
+
+### Bug Fixes
+
+* build for latest stable/8.9 ([be406c4](https://github.com/camunda/orchestration-cluster-api-csharp/commit/be406c4d04be21e61747e8c1c2b403b10c91b1ce))
+* **gen:** regenerate artifacts ([05eebb6](https://github.com/camunda/orchestration-cluster-api-csharp/commit/05eebb6cdc66cb10ca5fce5321fb7bee71ba82a7))
+
 # [8.9.0-alpha.13](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.12...v8.9.0-alpha.13) (2026-03-24)
 
 
