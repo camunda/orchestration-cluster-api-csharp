@@ -28327,6 +28327,141 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ResourceKey.Value
   fullName: Camunda.Orchestration.Sdk.ResourceKey.Value
   nameWithType: ResourceKey.Value
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Equality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  name: operator ==(ResourceKey, DecisionDefinitionKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Equality.html#Camunda_Orchestration_Sdk_ResourceKey_op_Equality_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_DecisionDefinitionKey_
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Equality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  name.vb: =(ResourceKey, DecisionDefinitionKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator ==(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.=(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  nameWithType: ResourceKey.operator ==(ResourceKey, DecisionDefinitionKey)
+  nameWithType.vb: ResourceKey.=(ResourceKey, DecisionDefinitionKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Equality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  name: operator ==(ResourceKey, DecisionRequirementsKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Equality.html#Camunda_Orchestration_Sdk_ResourceKey_op_Equality_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_DecisionRequirementsKey_
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Equality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  name.vb: =(ResourceKey, DecisionRequirementsKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator ==(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.=(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  nameWithType: ResourceKey.operator ==(ResourceKey, DecisionRequirementsKey)
+  nameWithType.vb: ResourceKey.=(ResourceKey, DecisionRequirementsKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Equality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.FormKey)
+  name: operator ==(ResourceKey, FormKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Equality.html#Camunda_Orchestration_Sdk_ResourceKey_op_Equality_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_FormKey_
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Equality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.FormKey)
+  name.vb: =(ResourceKey, FormKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator ==(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.FormKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.=(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.FormKey)
+  nameWithType: ResourceKey.operator ==(ResourceKey, FormKey)
+  nameWithType.vb: ResourceKey.=(ResourceKey, FormKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Equality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  name: operator ==(ResourceKey, ProcessDefinitionKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Equality.html#Camunda_Orchestration_Sdk_ResourceKey_op_Equality_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ProcessDefinitionKey_
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Equality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  name.vb: =(ResourceKey, ProcessDefinitionKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator ==(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.=(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  nameWithType: ResourceKey.operator ==(ResourceKey, ProcessDefinitionKey)
+  nameWithType.vb: ResourceKey.=(ResourceKey, ProcessDefinitionKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Equality*
+  name: operator ==
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Equality.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ResourceKey.op_Equality
+  name.vb: =
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator ==
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.=
+  nameWithType: ResourceKey.operator ==
+  nameWithType.vb: ResourceKey.=
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Implicit(Camunda.Orchestration.Sdk.DecisionDefinitionKey)~Camunda.Orchestration.Sdk.ResourceKey
+  name: implicit operator ResourceKey(DecisionDefinitionKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Implicit.html#Camunda_Orchestration_Sdk_ResourceKey_op_Implicit_Camunda_Orchestration_Sdk_DecisionDefinitionKey__Camunda_Orchestration_Sdk_ResourceKey
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Implicit(Camunda.Orchestration.Sdk.DecisionDefinitionKey)~Camunda.Orchestration.Sdk.ResourceKey
+  name.vb: CType(DecisionDefinitionKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.implicit operator Camunda.Orchestration.Sdk.ResourceKey(Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.CType(Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  nameWithType: ResourceKey.implicit operator ResourceKey(DecisionDefinitionKey)
+  nameWithType.vb: ResourceKey.CType(DecisionDefinitionKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Implicit(Camunda.Orchestration.Sdk.DecisionRequirementsKey)~Camunda.Orchestration.Sdk.ResourceKey
+  name: implicit operator ResourceKey(DecisionRequirementsKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Implicit.html#Camunda_Orchestration_Sdk_ResourceKey_op_Implicit_Camunda_Orchestration_Sdk_DecisionRequirementsKey__Camunda_Orchestration_Sdk_ResourceKey
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Implicit(Camunda.Orchestration.Sdk.DecisionRequirementsKey)~Camunda.Orchestration.Sdk.ResourceKey
+  name.vb: CType(DecisionRequirementsKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.implicit operator Camunda.Orchestration.Sdk.ResourceKey(Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.CType(Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  nameWithType: ResourceKey.implicit operator ResourceKey(DecisionRequirementsKey)
+  nameWithType.vb: ResourceKey.CType(DecisionRequirementsKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Implicit(Camunda.Orchestration.Sdk.FormKey)~Camunda.Orchestration.Sdk.ResourceKey
+  name: implicit operator ResourceKey(FormKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Implicit.html#Camunda_Orchestration_Sdk_ResourceKey_op_Implicit_Camunda_Orchestration_Sdk_FormKey__Camunda_Orchestration_Sdk_ResourceKey
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Implicit(Camunda.Orchestration.Sdk.FormKey)~Camunda.Orchestration.Sdk.ResourceKey
+  name.vb: CType(FormKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.implicit operator Camunda.Orchestration.Sdk.ResourceKey(Camunda.Orchestration.Sdk.FormKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.CType(Camunda.Orchestration.Sdk.FormKey)
+  nameWithType: ResourceKey.implicit operator ResourceKey(FormKey)
+  nameWithType.vb: ResourceKey.CType(FormKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Implicit(Camunda.Orchestration.Sdk.ProcessDefinitionKey)~Camunda.Orchestration.Sdk.ResourceKey
+  name: implicit operator ResourceKey(ProcessDefinitionKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Implicit.html#Camunda_Orchestration_Sdk_ResourceKey_op_Implicit_Camunda_Orchestration_Sdk_ProcessDefinitionKey__Camunda_Orchestration_Sdk_ResourceKey
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Implicit(Camunda.Orchestration.Sdk.ProcessDefinitionKey)~Camunda.Orchestration.Sdk.ResourceKey
+  name.vb: CType(ProcessDefinitionKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.implicit operator Camunda.Orchestration.Sdk.ResourceKey(Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.CType(Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  nameWithType: ResourceKey.implicit operator ResourceKey(ProcessDefinitionKey)
+  nameWithType.vb: ResourceKey.CType(ProcessDefinitionKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ResourceKey.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.CType
+  nameWithType: ResourceKey.implicit operator
+  nameWithType.vb: ResourceKey.CType
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Inequality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  name: operator !=(ResourceKey, DecisionDefinitionKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Inequality.html#Camunda_Orchestration_Sdk_ResourceKey_op_Inequality_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_DecisionDefinitionKey_
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Inequality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  name.vb: <>(ResourceKey, DecisionDefinitionKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator !=(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.<>(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  nameWithType: ResourceKey.operator !=(ResourceKey, DecisionDefinitionKey)
+  nameWithType.vb: ResourceKey.<>(ResourceKey, DecisionDefinitionKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Inequality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  name: operator !=(ResourceKey, DecisionRequirementsKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Inequality.html#Camunda_Orchestration_Sdk_ResourceKey_op_Inequality_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_DecisionRequirementsKey_
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Inequality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  name.vb: <>(ResourceKey, DecisionRequirementsKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator !=(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.<>(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  nameWithType: ResourceKey.operator !=(ResourceKey, DecisionRequirementsKey)
+  nameWithType.vb: ResourceKey.<>(ResourceKey, DecisionRequirementsKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Inequality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.FormKey)
+  name: operator !=(ResourceKey, FormKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Inequality.html#Camunda_Orchestration_Sdk_ResourceKey_op_Inequality_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_FormKey_
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Inequality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.FormKey)
+  name.vb: <>(ResourceKey, FormKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator !=(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.FormKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.<>(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.FormKey)
+  nameWithType: ResourceKey.operator !=(ResourceKey, FormKey)
+  nameWithType.vb: ResourceKey.<>(ResourceKey, FormKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Inequality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  name: operator !=(ResourceKey, ProcessDefinitionKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Inequality.html#Camunda_Orchestration_Sdk_ResourceKey_op_Inequality_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ProcessDefinitionKey_
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKey.op_Inequality(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  name.vb: <>(ResourceKey, ProcessDefinitionKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator !=(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.<>(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  nameWithType: ResourceKey.operator !=(ResourceKey, ProcessDefinitionKey)
+  nameWithType.vb: ResourceKey.<>(ResourceKey, ProcessDefinitionKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKey.op_Inequality*
+  name: operator !=
+  href: api/Camunda.Orchestration.Sdk.ResourceKey.op_Inequality.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ResourceKey.op_Inequality
+  name.vb: <>
+  fullName: Camunda.Orchestration.Sdk.ResourceKey.operator !=
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKey.<>
+  nameWithType: ResourceKey.operator !=
+  nameWithType.vb: ResourceKey.<>
 - uid: Camunda.Orchestration.Sdk.ResourceKeyExactMatch
   name: ResourceKeyExactMatch
   href: api/Camunda.Orchestration.Sdk.ResourceKeyExactMatch.html
@@ -29389,6 +29524,87 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ScopeKey.Value
   fullName: Camunda.Orchestration.Sdk.ScopeKey.Value
   nameWithType: ScopeKey.Value
+- uid: Camunda.Orchestration.Sdk.ScopeKey.op_Equality(Camunda.Orchestration.Sdk.ScopeKey,Camunda.Orchestration.Sdk.ElementInstanceKey)
+  name: operator ==(ScopeKey, ElementInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.ScopeKey.op_Equality.html#Camunda_Orchestration_Sdk_ScopeKey_op_Equality_Camunda_Orchestration_Sdk_ScopeKey_Camunda_Orchestration_Sdk_ElementInstanceKey_
+  commentId: M:Camunda.Orchestration.Sdk.ScopeKey.op_Equality(Camunda.Orchestration.Sdk.ScopeKey,Camunda.Orchestration.Sdk.ElementInstanceKey)
+  name.vb: =(ScopeKey, ElementInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.ScopeKey.operator ==(Camunda.Orchestration.Sdk.ScopeKey, Camunda.Orchestration.Sdk.ElementInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKey.=(Camunda.Orchestration.Sdk.ScopeKey, Camunda.Orchestration.Sdk.ElementInstanceKey)
+  nameWithType: ScopeKey.operator ==(ScopeKey, ElementInstanceKey)
+  nameWithType.vb: ScopeKey.=(ScopeKey, ElementInstanceKey)
+- uid: Camunda.Orchestration.Sdk.ScopeKey.op_Equality(Camunda.Orchestration.Sdk.ScopeKey,Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  name: operator ==(ScopeKey, ProcessInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.ScopeKey.op_Equality.html#Camunda_Orchestration_Sdk_ScopeKey_op_Equality_Camunda_Orchestration_Sdk_ScopeKey_Camunda_Orchestration_Sdk_ProcessInstanceKey_
+  commentId: M:Camunda.Orchestration.Sdk.ScopeKey.op_Equality(Camunda.Orchestration.Sdk.ScopeKey,Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  name.vb: =(ScopeKey, ProcessInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.ScopeKey.operator ==(Camunda.Orchestration.Sdk.ScopeKey, Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKey.=(Camunda.Orchestration.Sdk.ScopeKey, Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  nameWithType: ScopeKey.operator ==(ScopeKey, ProcessInstanceKey)
+  nameWithType.vb: ScopeKey.=(ScopeKey, ProcessInstanceKey)
+- uid: Camunda.Orchestration.Sdk.ScopeKey.op_Equality*
+  name: operator ==
+  href: api/Camunda.Orchestration.Sdk.ScopeKey.op_Equality.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ScopeKey.op_Equality
+  name.vb: =
+  fullName: Camunda.Orchestration.Sdk.ScopeKey.operator ==
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKey.=
+  nameWithType: ScopeKey.operator ==
+  nameWithType.vb: ScopeKey.=
+- uid: Camunda.Orchestration.Sdk.ScopeKey.op_Implicit(Camunda.Orchestration.Sdk.ElementInstanceKey)~Camunda.Orchestration.Sdk.ScopeKey
+  name: implicit operator ScopeKey(ElementInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.ScopeKey.op_Implicit.html#Camunda_Orchestration_Sdk_ScopeKey_op_Implicit_Camunda_Orchestration_Sdk_ElementInstanceKey__Camunda_Orchestration_Sdk_ScopeKey
+  commentId: M:Camunda.Orchestration.Sdk.ScopeKey.op_Implicit(Camunda.Orchestration.Sdk.ElementInstanceKey)~Camunda.Orchestration.Sdk.ScopeKey
+  name.vb: CType(ElementInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.ScopeKey.implicit operator Camunda.Orchestration.Sdk.ScopeKey(Camunda.Orchestration.Sdk.ElementInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKey.CType(Camunda.Orchestration.Sdk.ElementInstanceKey)
+  nameWithType: ScopeKey.implicit operator ScopeKey(ElementInstanceKey)
+  nameWithType.vb: ScopeKey.CType(ElementInstanceKey)
+- uid: Camunda.Orchestration.Sdk.ScopeKey.op_Implicit(Camunda.Orchestration.Sdk.ProcessInstanceKey)~Camunda.Orchestration.Sdk.ScopeKey
+  name: implicit operator ScopeKey(ProcessInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.ScopeKey.op_Implicit.html#Camunda_Orchestration_Sdk_ScopeKey_op_Implicit_Camunda_Orchestration_Sdk_ProcessInstanceKey__Camunda_Orchestration_Sdk_ScopeKey
+  commentId: M:Camunda.Orchestration.Sdk.ScopeKey.op_Implicit(Camunda.Orchestration.Sdk.ProcessInstanceKey)~Camunda.Orchestration.Sdk.ScopeKey
+  name.vb: CType(ProcessInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.ScopeKey.implicit operator Camunda.Orchestration.Sdk.ScopeKey(Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKey.CType(Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  nameWithType: ScopeKey.implicit operator ScopeKey(ProcessInstanceKey)
+  nameWithType.vb: ScopeKey.CType(ProcessInstanceKey)
+- uid: Camunda.Orchestration.Sdk.ScopeKey.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ScopeKey.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ScopeKey.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ScopeKey.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKey.CType
+  nameWithType: ScopeKey.implicit operator
+  nameWithType.vb: ScopeKey.CType
+- uid: Camunda.Orchestration.Sdk.ScopeKey.op_Inequality(Camunda.Orchestration.Sdk.ScopeKey,Camunda.Orchestration.Sdk.ElementInstanceKey)
+  name: operator !=(ScopeKey, ElementInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.ScopeKey.op_Inequality.html#Camunda_Orchestration_Sdk_ScopeKey_op_Inequality_Camunda_Orchestration_Sdk_ScopeKey_Camunda_Orchestration_Sdk_ElementInstanceKey_
+  commentId: M:Camunda.Orchestration.Sdk.ScopeKey.op_Inequality(Camunda.Orchestration.Sdk.ScopeKey,Camunda.Orchestration.Sdk.ElementInstanceKey)
+  name.vb: <>(ScopeKey, ElementInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.ScopeKey.operator !=(Camunda.Orchestration.Sdk.ScopeKey, Camunda.Orchestration.Sdk.ElementInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKey.<>(Camunda.Orchestration.Sdk.ScopeKey, Camunda.Orchestration.Sdk.ElementInstanceKey)
+  nameWithType: ScopeKey.operator !=(ScopeKey, ElementInstanceKey)
+  nameWithType.vb: ScopeKey.<>(ScopeKey, ElementInstanceKey)
+- uid: Camunda.Orchestration.Sdk.ScopeKey.op_Inequality(Camunda.Orchestration.Sdk.ScopeKey,Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  name: operator !=(ScopeKey, ProcessInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.ScopeKey.op_Inequality.html#Camunda_Orchestration_Sdk_ScopeKey_op_Inequality_Camunda_Orchestration_Sdk_ScopeKey_Camunda_Orchestration_Sdk_ProcessInstanceKey_
+  commentId: M:Camunda.Orchestration.Sdk.ScopeKey.op_Inequality(Camunda.Orchestration.Sdk.ScopeKey,Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  name.vb: <>(ScopeKey, ProcessInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.ScopeKey.operator !=(Camunda.Orchestration.Sdk.ScopeKey, Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKey.<>(Camunda.Orchestration.Sdk.ScopeKey, Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  nameWithType: ScopeKey.operator !=(ScopeKey, ProcessInstanceKey)
+  nameWithType.vb: ScopeKey.<>(ScopeKey, ProcessInstanceKey)
+- uid: Camunda.Orchestration.Sdk.ScopeKey.op_Inequality*
+  name: operator !=
+  href: api/Camunda.Orchestration.Sdk.ScopeKey.op_Inequality.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ScopeKey.op_Inequality
+  name.vb: <>
+  fullName: Camunda.Orchestration.Sdk.ScopeKey.operator !=
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKey.<>
+  nameWithType: ScopeKey.operator !=
+  nameWithType.vb: ScopeKey.<>
 - uid: Camunda.Orchestration.Sdk.ScopeKeyExactMatch
   name: ScopeKeyExactMatch
   href: api/Camunda.Orchestration.Sdk.ScopeKeyExactMatch.html
