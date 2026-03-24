@@ -2387,10 +2387,40 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Search user task effective variables
+    /// Search for the effective variables of a user task. This endpoint returns deduplicated
+    /// variables where each variable name appears at most once. When the same variable name exists
+    /// at multiple scope levels in the scope hierarchy, the value from the innermost scope (closest
+    /// to the user task) takes precedence. This is useful for retrieving the actual runtime state
+    /// of variables as seen by the user task. By default, long variable values in the response are
+    /// truncated.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: searchUserTaskEffectiveVariables</remarks>
+    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
+        var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchUserTaskEffectiveVariables", false,
+                () => InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct);
+    }
+
+    /// <summary>
     /// Search user task variables
-    /// Search for user task variables based on given criteria. This endpoint returns all variables
-    /// visible from the user task's scope, including variables from parent scopes in the scope
-    /// hierarchy. By default, long variable values in the response are truncated.
+    /// Search for user task variables based on given criteria. This endpoint returns all variable
+    /// documents visible from the user task's scope, including variables from parent scopes in the
+    /// scope hierarchy. If the same variable name exists at multiple scope levels, each scope's
+    /// variable is returned as a separate result. Use the
+    /// `/user-tasks/{userTaskKey}/effective-variables/search` endpoint to get deduplicated variables
+    /// where the innermost scope takes precedence. By default, long variable values in the response
+    /// are truncated.
     /// 
     /// </summary>
     /// <remarks>Operation: searchUserTaskVariables</remarks>

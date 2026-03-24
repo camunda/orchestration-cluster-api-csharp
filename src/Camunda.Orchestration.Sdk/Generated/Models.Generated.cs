@@ -4945,7 +4945,7 @@ public sealed class DecisionEvaluationById : DecisionEvaluationInstruction, glob
     public DecisionDefinitionId DecisionDefinitionId { get; set; }
 
     /// <summary>
-    /// The message variables as JSON document.
+    /// The decision evaluation variables as JSON document.
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
@@ -4973,7 +4973,7 @@ public sealed class DecisionEvaluationByKey : DecisionEvaluationInstruction, glo
     public DecisionDefinitionKey DecisionDefinitionKey { get; set; }
 
     /// <summary>
-    /// The message variables as JSON document.
+    /// The decision evaluation variables as JSON document.
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
@@ -14105,13 +14105,13 @@ public readonly record struct ScopeKey : global::Camunda.Orchestration.Sdk.ICamu
     /// </summary>
     public static ScopeKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ScopeKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ScopeKey");
         return new ScopeKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -15475,6 +15475,32 @@ public sealed class UserTaskCompletionRequest
     /// </summary>
     [JsonPropertyName("action")]
     public string? Action { get; set; }
+
+}
+
+/// <summary>
+/// User task effective variable search query request. Uses offset-based pagination only.
+/// 
+/// </summary>
+public sealed class UserTaskEffectiveVariableSearchQueryRequest
+{
+    /// <summary>
+    /// Pagination parameters.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public OffsetPagination? Page { get; set; }
+
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<UserTaskVariableSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The user task variable search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public UserTaskVariableFilter? Filter { get; set; }
 
 }
 
@@ -16931,6 +16957,32 @@ public sealed class SearchUsersResponse
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// User task effective variable search query request. Uses offset-based pagination only.
+/// 
+/// </summary>
+public sealed class SearchUserTaskEffectiveVariablesRequest
+{
+    /// <summary>
+    /// Pagination parameters.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public OffsetPagination? Page { get; set; }
+
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The user task variable search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public UserTaskVariableFilter? Filter { get; set; }
 
 }
 
