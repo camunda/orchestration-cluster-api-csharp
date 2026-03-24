@@ -1,3 +1,15 @@
+# [8.9.0-alpha.13](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.12...v8.9.0-alpha.13) (2026-03-24)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([e5444ee](https://github.com/camunda/orchestration-cluster-api-csharp/commit/e5444eebe2695f4750d7f8d24a72ec82fabf2285))
+
+
+### Features
+
+* segment README into per-section Docusaurus pages ([8155e96](https://github.com/camunda/orchestration-cluster-api-csharp/commit/8155e966b97243b144c7d70e9f7ccf9d0fab2cc0)), closes [#9](https://github.com/camunda/orchestration-cluster-api-csharp/issues/9)
+
 # [8.9.0-alpha.12](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.11...v8.9.0-alpha.12) (2026-03-23)
 
 
