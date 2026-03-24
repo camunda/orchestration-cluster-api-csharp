@@ -9385,6 +9385,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskAuditLogsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskAuditLogsAsync
   nameWithType: CamundaClient.SearchUserTaskAuditLogsAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey,Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest,System.Nullable{System.Boolean},Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.VariableSearchQueryResult},System.Threading.CancellationToken)
+  name: SearchUserTaskEffectiveVariablesAsync(UserTaskKey, SearchUserTaskEffectiveVariablesRequest, bool?, ConsistencyOptions<VariableSearchQueryResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskEffectiveVariablesAsync_Camunda_Orchestration_Sdk_UserTaskKey_Camunda_Orchestration_Sdk_SearchUserTaskEffectiveVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_VariableSearchQueryResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey,Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest,System.Nullable{System.Boolean},Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.VariableSearchQueryResult},System.Threading.CancellationToken)
+  name.vb: SearchUserTaskEffectiveVariablesAsync(UserTaskKey, SearchUserTaskEffectiveVariablesRequest, Boolean?, ConsistencyOptions(Of VariableSearchQueryResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey, Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest, bool?, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey, Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest, Boolean?, Camunda.Orchestration.Sdk.ConsistencyOptions(Of Camunda.Orchestration.Sdk.VariableSearchQueryResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchUserTaskEffectiveVariablesAsync(UserTaskKey, SearchUserTaskEffectiveVariablesRequest, bool?, ConsistencyOptions<VariableSearchQueryResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchUserTaskEffectiveVariablesAsync(UserTaskKey, SearchUserTaskEffectiveVariablesRequest, Boolean?, ConsistencyOptions(Of VariableSearchQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync*
+  name: SearchUserTaskEffectiveVariablesAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync
+  nameWithType: CamundaClient.SearchUserTaskEffectiveVariablesAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey,Camunda.Orchestration.Sdk.SearchUserTaskVariablesRequest,System.Nullable{System.Boolean},Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.VariableSearchQueryResult},System.Threading.CancellationToken)
   name: SearchUserTaskVariablesAsync(UserTaskKey, SearchUserTaskVariablesRequest, bool?, ConsistencyOptions<VariableSearchQueryResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchUserTaskVariablesAsync_Camunda_Orchestration_Sdk_UserTaskKey_Camunda_Orchestration_Sdk_SearchUserTaskVariablesRequest_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_VariableSearchQueryResult__System_Threading_CancellationToken_
@@ -29896,6 +29911,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.SearchRolesForTenantResponse.Page
   fullName: Camunda.Orchestration.Sdk.SearchRolesForTenantResponse.Page
   nameWithType: SearchRolesForTenantResponse.Page
+- uid: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest
+  name: SearchUserTaskEffectiveVariablesRequest
+  href: api/Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest
+  fullName: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest
+  nameWithType: SearchUserTaskEffectiveVariablesRequest
+- uid: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Filter.html#Camunda_Orchestration_Sdk_SearchUserTaskEffectiveVariablesRequest_Filter
+  commentId: P:Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Filter
+  nameWithType: SearchUserTaskEffectiveVariablesRequest.Filter
+- uid: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Filter
+  nameWithType: SearchUserTaskEffectiveVariablesRequest.Filter
+- uid: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Page.html#Camunda_Orchestration_Sdk_SearchUserTaskEffectiveVariablesRequest_Page
+  commentId: P:Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Page
+  fullName: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Page
+  nameWithType: SearchUserTaskEffectiveVariablesRequest.Page
+- uid: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Page
+  fullName: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Page
+  nameWithType: SearchUserTaskEffectiveVariablesRequest.Page
+- uid: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Sort
+  name: Sort
+  href: api/Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Sort.html#Camunda_Orchestration_Sdk_SearchUserTaskEffectiveVariablesRequest_Sort
+  commentId: P:Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Sort
+  fullName: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Sort
+  nameWithType: SearchUserTaskEffectiveVariablesRequest.Sort
+- uid: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Sort*
+  name: Sort
+  href: api/Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Sort.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Sort
+  fullName: Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest.Sort
+  nameWithType: SearchUserTaskEffectiveVariablesRequest.Sort
 - uid: Camunda.Orchestration.Sdk.SearchUserTaskVariablesRequest
   name: SearchUserTaskVariablesRequest
   href: api/Camunda.Orchestration.Sdk.SearchUserTaskVariablesRequest.html
@@ -32356,6 +32413,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskCompletionRequest.Variables
   fullName: Camunda.Orchestration.Sdk.UserTaskCompletionRequest.Variables
   nameWithType: UserTaskCompletionRequest.Variables
+- uid: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest
+  name: UserTaskEffectiveVariableSearchQueryRequest
+  href: api/Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest
+  fullName: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest
+  nameWithType: UserTaskEffectiveVariableSearchQueryRequest
+- uid: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Filter.html#Camunda_Orchestration_Sdk_UserTaskEffectiveVariableSearchQueryRequest_Filter
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Filter
+  nameWithType: UserTaskEffectiveVariableSearchQueryRequest.Filter
+- uid: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Filter
+  nameWithType: UserTaskEffectiveVariableSearchQueryRequest.Filter
+- uid: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Page.html#Camunda_Orchestration_Sdk_UserTaskEffectiveVariableSearchQueryRequest_Page
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Page
+  fullName: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Page
+  nameWithType: UserTaskEffectiveVariableSearchQueryRequest.Page
+- uid: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Page
+  fullName: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Page
+  nameWithType: UserTaskEffectiveVariableSearchQueryRequest.Page
+- uid: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Sort
+  name: Sort
+  href: api/Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Sort.html#Camunda_Orchestration_Sdk_UserTaskEffectiveVariableSearchQueryRequest_Sort
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Sort
+  fullName: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Sort
+  nameWithType: UserTaskEffectiveVariableSearchQueryRequest.Sort
+- uid: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Sort*
+  name: Sort
+  href: api/Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Sort.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Sort
+  fullName: Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest.Sort
+  nameWithType: UserTaskEffectiveVariableSearchQueryRequest.Sort
 - uid: Camunda.Orchestration.Sdk.UserTaskFilter
   name: UserTaskFilter
   href: api/Camunda.Orchestration.Sdk.UserTaskFilter.html
