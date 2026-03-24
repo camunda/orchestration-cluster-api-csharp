@@ -1,3 +1,15 @@
+# [8.9.0-alpha.15](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.14...v8.9.0-alpha.15) (2026-03-24)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([341f8e2](https://github.com/camunda/orchestration-cluster-api-csharp/commit/341f8e2e2251ee6efc2a158237023e6848b1c95a))
+
+
+### Features
+
+* generate implicit conversions and equality for union semantic key types ([fd0f0c8](https://github.com/camunda/orchestration-cluster-api-csharp/commit/fd0f0c85ff57a9d68eefd86136a39b161f1c3973))
+
 # [8.9.0-alpha.14](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.13...v8.9.0-alpha.14) (2026-03-24)
 
 
