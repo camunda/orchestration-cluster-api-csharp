@@ -19,6 +19,9 @@ internal sealed class SpecMetadata
     [JsonPropertyName("semanticKeys")]
     public List<SemanticKeyMeta> SemanticKeys { get; set; } = [];
 
+    [JsonPropertyName("unions")]
+    public List<SemanticKeyUnionMeta> Unions { get; set; } = [];
+
     [JsonPropertyName("operations")]
     public List<OperationMetadataEntry> Operations { get; set; } = [];
 
@@ -32,6 +35,7 @@ internal sealed class SpecMetadata
 
     private Dictionary<string, OperationMetadataEntry>? _opLookup;
     private HashSet<string>? _semanticKeyNames;
+    private HashSet<string>? _semanticKeyUnionNames;
 
     public OperationMetadataEntry? GetOperation(string operationId)
     {
@@ -44,6 +48,28 @@ internal sealed class SpecMetadata
         _semanticKeyNames ??= new HashSet<string>(SemanticKeys.Select(k => k.Name));
         return _semanticKeyNames.Contains(schemaName);
     }
+
+    /// <summary>
+    /// Returns true if the schema is a union whose every branch is a semantic key ref.
+    /// </summary>
+    public bool IsSemanticKeyUnion(string schemaName)
+    {
+        _semanticKeyUnionNames ??= new HashSet<string>(
+            Unions
+                .Where(u => u.Branches.Count > 0 && u.Branches.All(b => b.BranchType == "ref" && IsSemanticKey(b.Ref)))
+                .Select(u => u.Name));
+        return _semanticKeyUnionNames.Contains(schemaName);
+    }
+
+    /// <summary>
+    /// Returns the branch type names for a semantic key union, or null if not found.
+    /// </summary>
+    public List<string>? GetSemanticKeyUnionBranches(string schemaName) =>
+        Unions.FirstOrDefault(u => u.Name == schemaName)
+              ?.Branches
+              .Where(b => b.BranchType == "ref")
+              .Select(b => b.Ref)
+              .ToList();
 
     private Dictionary<string, Dictionary<string, string>>? _deprecatedEnumLookup;
 
@@ -217,4 +243,28 @@ internal sealed class DeprecatedEnumMemberEntry
 
     [JsonPropertyName("deprecatedInVersion")]
     public string DeprecatedInVersion { get; set; } = "";
+}
+
+internal sealed class SemanticKeyUnionMeta
+{
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = "";
+
+    [JsonPropertyName("kind")]
+    public string Kind { get; set; } = "";
+
+    [JsonPropertyName("description")]
+    public string? Description { get; set; }
+
+    [JsonPropertyName("branches")]
+    public List<UnionBranchMeta> Branches { get; set; } = [];
+}
+
+internal sealed class UnionBranchMeta
+{
+    [JsonPropertyName("branchType")]
+    public string BranchType { get; set; } = "";
+
+    [JsonPropertyName("ref")]
+    public string Ref { get; set; } = "";
 }

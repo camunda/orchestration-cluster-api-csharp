@@ -13527,6 +13527,38 @@ public readonly record struct ResourceKey : global::Camunda.Orchestration.Sdk.IC
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
 
+    /// <summary>Implicitly converts a <see cref="ProcessDefinitionKey"/> to <see cref="ResourceKey"/>.</summary>
+    public static implicit operator ResourceKey(ProcessDefinitionKey key) => new ResourceKey(key.Value);
+
+    /// <summary>Implicitly converts a <see cref="DecisionRequirementsKey"/> to <see cref="ResourceKey"/>.</summary>
+    public static implicit operator ResourceKey(DecisionRequirementsKey key) => new ResourceKey(key.Value);
+
+    /// <summary>Implicitly converts a <see cref="FormKey"/> to <see cref="ResourceKey"/>.</summary>
+    public static implicit operator ResourceKey(FormKey key) => new ResourceKey(key.Value);
+
+    /// <summary>Implicitly converts a <see cref="DecisionDefinitionKey"/> to <see cref="ResourceKey"/>.</summary>
+    public static implicit operator ResourceKey(DecisionDefinitionKey key) => new ResourceKey(key.Value);
+
+    /// <summary>Compares a <see cref="ResourceKey"/> and a <see cref="ProcessDefinitionKey"/> by value.</summary>
+    public static bool operator ==(ResourceKey left, ProcessDefinitionKey right) => left.Value == right.Value;
+    /// <summary>Compares a <see cref="ResourceKey"/> and a <see cref="ProcessDefinitionKey"/> by value.</summary>
+    public static bool operator !=(ResourceKey left, ProcessDefinitionKey right) => left.Value != right.Value;
+
+    /// <summary>Compares a <see cref="ResourceKey"/> and a <see cref="DecisionRequirementsKey"/> by value.</summary>
+    public static bool operator ==(ResourceKey left, DecisionRequirementsKey right) => left.Value == right.Value;
+    /// <summary>Compares a <see cref="ResourceKey"/> and a <see cref="DecisionRequirementsKey"/> by value.</summary>
+    public static bool operator !=(ResourceKey left, DecisionRequirementsKey right) => left.Value != right.Value;
+
+    /// <summary>Compares a <see cref="ResourceKey"/> and a <see cref="FormKey"/> by value.</summary>
+    public static bool operator ==(ResourceKey left, FormKey right) => left.Value == right.Value;
+    /// <summary>Compares a <see cref="ResourceKey"/> and a <see cref="FormKey"/> by value.</summary>
+    public static bool operator !=(ResourceKey left, FormKey right) => left.Value != right.Value;
+
+    /// <summary>Compares a <see cref="ResourceKey"/> and a <see cref="DecisionDefinitionKey"/> by value.</summary>
+    public static bool operator ==(ResourceKey left, DecisionDefinitionKey right) => left.Value == right.Value;
+    /// <summary>Compares a <see cref="ResourceKey"/> and a <see cref="DecisionDefinitionKey"/> by value.</summary>
+    public static bool operator !=(ResourceKey left, DecisionDefinitionKey right) => left.Value != right.Value;
+
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
 }
@@ -14112,6 +14144,22 @@ public readonly record struct ScopeKey : global::Camunda.Orchestration.Sdk.ICamu
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <summary>Implicitly converts a <see cref="ProcessInstanceKey"/> to <see cref="ScopeKey"/>.</summary>
+    public static implicit operator ScopeKey(ProcessInstanceKey key) => new ScopeKey(key.Value);
+
+    /// <summary>Implicitly converts a <see cref="ElementInstanceKey"/> to <see cref="ScopeKey"/>.</summary>
+    public static implicit operator ScopeKey(ElementInstanceKey key) => new ScopeKey(key.Value);
+
+    /// <summary>Compares a <see cref="ScopeKey"/> and a <see cref="ProcessInstanceKey"/> by value.</summary>
+    public static bool operator ==(ScopeKey left, ProcessInstanceKey right) => left.Value == right.Value;
+    /// <summary>Compares a <see cref="ScopeKey"/> and a <see cref="ProcessInstanceKey"/> by value.</summary>
+    public static bool operator !=(ScopeKey left, ProcessInstanceKey right) => left.Value != right.Value;
+
+    /// <summary>Compares a <see cref="ScopeKey"/> and a <see cref="ElementInstanceKey"/> by value.</summary>
+    public static bool operator ==(ScopeKey left, ElementInstanceKey right) => left.Value == right.Value;
+    /// <summary>Compares a <see cref="ScopeKey"/> and a <see cref="ElementInstanceKey"/> by value.</summary>
+    public static bool operator !=(ScopeKey left, ElementInstanceKey right) => left.Value != right.Value;
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;

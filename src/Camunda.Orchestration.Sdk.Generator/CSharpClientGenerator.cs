@@ -422,6 +422,14 @@ internal static class CSharpClientGenerator
             if (schema.Type == "array")
                 continue;
 
+            // Union of semantic keys — generate with implicit conversion operators and cross-type equality
+            if (metadata.IsSemanticKeyUnion(name))
+            {
+                var branches = metadata.GetSemanticKeyUnionBranches(name)!;
+                GenerateSemanticKeyUnionStruct(sb, typeName, schema, doc, branches);
+                continue;
+            }
+
             // Skip schemas that are semantic keys or primitive scalars — generate as domain structs
             if (metadata.IsSemanticKey(name) || IsPrimitiveSchemaResolved(schema, doc))
             {
@@ -693,6 +701,88 @@ internal static class CSharpClientGenerator
             sb.AppendLine($"    /// <summary>Returns true if the value satisfies this type's constraints.</summary>");
             sb.AppendLine($"    public static bool IsValid(string value) =>");
             sb.AppendLine($"        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints({string.Join(", ", checkArgs)});");
+            sb.AppendLine();
+        }
+
+        // ToString override
+        sb.AppendLine($"    /// <inheritdoc />");
+        sb.AppendLine($"    public override string ToString() => Value.ToString()!;");
+
+        sb.AppendLine("}");
+        sb.AppendLine();
+    }
+
+    /// <summary>
+    /// Generates a strongly-typed readonly record struct for a schema that is a union of
+    /// semantic key types (e.g. ScopeKey = ProcessInstanceKey | ElementInstanceKey).
+    /// Emits implicit conversion operators from each branch type and cross-type == / != overloads
+    /// so that branch values are directly assignable and comparable without casting.
+    /// </summary>
+    private static void GenerateSemanticKeyUnionStruct(StringBuilder sb, string typeName,
+        OpenApiSchema schema, OpenApiDocument doc, List<string> branchTypeNames)
+    {
+        var (pattern, minLength, maxLength) = GetConstraints(schema, doc);
+
+        sb.AppendLine($"/// <summary>");
+        AppendXmlDocLines(sb, schema.Description ?? $"Strongly-typed union wrapper for {typeName}.", "");
+        sb.AppendLine($"/// </summary>");
+        sb.AppendLine($"public readonly record struct {typeName} : global::Camunda.Orchestration.Sdk.ICamundaKey");
+        sb.AppendLine("{");
+
+        sb.AppendLine($"    /// <summary>The underlying string value.</summary>");
+        sb.AppendLine($"    public string Value {{ get; }}");
+        sb.AppendLine();
+
+        sb.AppendLine($"    private {typeName}(string value) => Value = value;");
+        sb.AppendLine();
+
+        // AssumeExists factory
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// Creates a <see cref=\"{typeName}\"/> from a raw string value.");
+        sb.AppendLine($"    /// Use this when side-loading values not received from an API call.");
+        sb.AppendLine($"    /// </summary>");
+        sb.AppendLine($"    public static {typeName} AssumeExists(string value)");
+        sb.AppendLine("    {");
+        var constraintArgs = new List<string> { "value", $"\"{typeName}\"" };
+        if (pattern != null)
+            constraintArgs.Add($"pattern: @\"{pattern.Replace("\"", "\"\"")}\"");
+        if (minLength != null)
+            constraintArgs.Add($"minLength: {minLength}");
+        if (maxLength != null)
+            constraintArgs.Add($"maxLength: {maxLength}");
+        sb.AppendLine($"        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints({string.Join(", ", constraintArgs)});");
+        sb.AppendLine($"        return new {typeName}(value);");
+        sb.AppendLine("    }");
+        sb.AppendLine();
+
+        // IsValid
+        var checkArgs = new List<string> { "value" };
+        if (pattern != null)
+            checkArgs.Add($"pattern: @\"{pattern.Replace("\"", "\"\"")}\"");
+        if (minLength != null)
+            checkArgs.Add($"minLength: {minLength}");
+        if (maxLength != null)
+            checkArgs.Add($"maxLength: {maxLength}");
+        sb.AppendLine($"    /// <summary>Returns true if the value satisfies this type's constraints.</summary>");
+        sb.AppendLine($"    public static bool IsValid(string value) =>");
+        sb.AppendLine($"        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints({string.Join(", ", checkArgs)});");
+        sb.AppendLine();
+
+        // Implicit conversion operators from each branch type
+        foreach (var branch in branchTypeNames)
+        {
+            sb.AppendLine($"    /// <summary>Implicitly converts a <see cref=\"{branch}\"/> to <see cref=\"{typeName}\"/>.</summary>");
+            sb.AppendLine($"    public static implicit operator {typeName}({branch} key) => new {typeName}(key.Value);");
+            sb.AppendLine();
+        }
+
+        // Cross-type == / != overloads for each branch type
+        foreach (var branch in branchTypeNames)
+        {
+            sb.AppendLine($"    /// <summary>Compares a <see cref=\"{typeName}\"/> and a <see cref=\"{branch}\"/> by value.</summary>");
+            sb.AppendLine($"    public static bool operator ==({typeName} left, {branch} right) => left.Value == right.Value;");
+            sb.AppendLine($"    /// <summary>Compares a <see cref=\"{typeName}\"/> and a <see cref=\"{branch}\"/> by value.</summary>");
+            sb.AppendLine($"    public static bool operator !=({typeName} left, {branch} right) => left.Value != right.Value;");
             sb.AppendLine();
         }
 
