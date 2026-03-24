@@ -12,7 +12,9 @@ Input:
     docs/examples/*.cs      – Compilable C# example files with region tags
 
 Output:
-    docs-md/api-reference/  – Markdown pages + sidebar.js
+    docs-md/csharp-sdk.md           – Landing page (sibling of section directory)
+    docs-md/csharp-sdk/*.md         – Per-section guide pages (from README H2s)
+    docs-md/csharp-sdk/api-reference/  – API reference pages + _category_.json
 """
 
 from __future__ import annotations
@@ -21,6 +23,7 @@ import glob
 import json
 import os
 import re
+import subprocess
 import sys
 import textwrap
 from dataclasses import dataclass, field
@@ -38,8 +41,8 @@ README_PATH = REPO_ROOT / "README.md"
 API_DIR = REPO_ROOT / "docs" / "api"
 OVERWRITE_DIR = REPO_ROOT / "docs" / "overwrite"
 EXAMPLES_DIR = REPO_ROOT / "docs" / "examples"
-OUTPUT_DIR = REPO_ROOT / "docs-md" / "api-reference"
-LANDING_DIR = REPO_ROOT / "docs-md"
+OUTPUT_DIR = REPO_ROOT / "docs-md" / "csharp-sdk" / "api-reference"
+DOCS_MD_DIR = REPO_ROOT / "docs-md"
 
 # ---------------------------------------------------------------------------
 # Frontmatter helper
@@ -767,22 +770,15 @@ def generate_keys(types: list[TypeItem]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Landing page generator (from README.md)
+# Landing page + section page generator (from README.md)
 # ---------------------------------------------------------------------------
 
-LANDING_FRONTMATTER = textwrap.dedent("""\
-    ---
-    id: csharp-sdk
-    title: "C# SDK (Technical Preview)"
-    sidebar_label: "C# SDK (Technical Preview)"
-    mdx:
-      format: md
-    ---
-
-""")
-
-# Depth for landing page: apis-tools/csharp-sdk/ = 2
-_LANDING_PAGE_DEPTH = 2
+# Depth for landing page: apis-tools/csharp-sdk.md = 1 (sibling of dir)
+_LANDING_PAGE_DEPTH = 1
+# Depth for section pages: apis-tools/csharp-sdk/<slug>.md = 2
+_SECTION_PAGE_DEPTH = 2
+# sidebar_position for the API Reference category (always last)
+_API_REFERENCE_POSITION = 100
 
 
 def _strip_cut_sections(content: str) -> str:
@@ -794,33 +790,23 @@ def _strip_cut_sections(content: str) -> str:
     )
 
 
-def _strip_badges(content: str) -> str:
-    """Remove markdown badge/shield image lines."""
-    return re.sub(r"^\[!\[.*?\]\(.*?\)\]\(.*?\)\s*$", "", content, flags=re.MULTILINE)
-
-
 def _strip_contributing(content: str) -> str:
     """Remove Contributing and License sections (end of README)."""
     return re.sub(r"\n## Contributing\b.*", "", content, flags=re.DOTALL)
-
-
-def _strip_external_doc_link(content: str) -> str:
-    """Remove the 'Full API Documentation available here' line."""
-    return re.sub(r"^Full API Documentation available \[.*?\]\(.*?\)\.?\s*$", "", content, flags=re.MULTILINE)
 
 
 def _clean_empty_lines(content: str) -> str:
     return re.sub(r"\n{4,}", "\n\n\n", content)
 
 
-def _rewrite_landing_links(content: str) -> str:
-    """Rewrite docs.camunda.io links at landing page depth."""
+def _rewrite_docs_links(content: str, depth: int) -> str:
+    """Rewrite docs.camunda.io links at the given depth."""
     base_url_re = re.compile(
         r"\[([^\]]*)\]\(https?://docs\.camunda\.io/docs/(?:next/)?(.*?)\)"
     )
-    prefix = "../" * _LANDING_PAGE_DEPTH
+    prefix = "../" * depth
 
-    def _replace(m: re.Match) -> str:
+    def _replace(m: re.Match) -> str:  # type: ignore[type-arg]
         text = m.group(1)
         url_path = m.group(2).rstrip("/")
         for old, new in _URL_PATH_OVERRIDES.items():
@@ -830,11 +816,110 @@ def _rewrite_landing_links(content: str) -> str:
     return base_url_re.sub(_replace, content)
 
 
-def generate_landing_page(readme_path: Path) -> str:
+def _slugify(title: str) -> str:
+    """Convert a heading title to a URL-friendly slug."""
+    slug = title.lower()
+    slug = re.sub(r"[^a-z0-9\s-]", "", slug)
+    slug = re.sub(r"\s+", "-", slug.strip())
+    slug = re.sub(r"-+", "-", slug)
+    return slug
+
+
+def _build_anchor_map(
+    sections: list[tuple[str, str]],
+) -> dict[str, str]:
+    """Build a map from heading anchors to the section page slug they live in.
+
+    Scans all headings (##, ###, etc.) inside each section and maps their
+    Docusaurus-style anchor (slugified) to the section's page slug.
+    """
+    anchor_to_page: dict[str, str] = {}
+    for title, body in sections:
+        page_slug = _slugify(title)
+        for m in re.finditer(r"^#{2,6}\s+(.+)$", body, re.MULTILINE):
+            heading_text = m.group(1).strip()
+            anchor = _slugify(heading_text)
+            anchor_to_page[anchor] = page_slug
+    return anchor_to_page
+
+
+def _rewrite_internal_anchors(
+    content: str, current_slug: str, anchor_map: dict[str, str]
+) -> str:
+    """Rewrite ](#anchor) links that point to headings in other sections."""
+
+    def _replace(m: re.Match) -> str:  # type: ignore[type-arg]
+        text = m.group(1)
+        anchor = m.group(2)
+        target_page = anchor_map.get(anchor)
+        if target_page and target_page != current_slug:
+            return f"[{text}]({target_page}.md#{anchor})"
+        return m.group(0)
+
+    return re.sub(r"\[([^\]]+)\]\(#([^)]+)\)", _replace, content)
+
+
+def _promote_headings(content: str) -> str:
+    """Promote all headings by one level (## → #, ### → ##, etc.)."""
+
+    def _promote(m: re.Match) -> str:  # type: ignore[type-arg]
+        hashes = m.group(1)
+        rest = m.group(2)
+        if len(hashes) > 1:
+            return f"{'#' * (len(hashes) - 1)} {rest}"
+        return m.group(0)
+
+    return re.sub(r"^(#{1,6}) (.+)$", _promote, content, flags=re.MULTILINE)
+
+
+def _split_by_h2(content: str) -> tuple[str, list[tuple[str, str]]]:
+    """Split content into preamble (before first H2) and H2 sections.
+
+    Returns (preamble, [(title, body), ...]).
+    """
+    parts = re.split(r"(?=^## )", content, flags=re.MULTILINE)
+    preamble = parts[0]
+    sections: list[tuple[str, str]] = []
+    for part in parts[1:]:
+        h2_match = re.match(r"^## (.+)\n", part)
+        if h2_match:
+            sections.append((h2_match.group(1).strip(), part))
+    return preamble, sections
+
+
+def _make_section_frontmatter(
+    doc_id: str, title: str, sidebar_position: int
+) -> str:
+    """Generate Docusaurus frontmatter for a section page."""
+    return (
+        f"---\n"
+        f"id: {doc_id}\n"
+        f'title: "{_escape_yaml(title)}"\n'
+        f'sidebar_label: "{_escape_yaml(title)}"\n'
+        f"sidebar_position: {sidebar_position}\n"
+        f"mdx:\n"
+        f"  format: md\n"
+        f"---\n\n"
+    )
+
+
+LANDING_FRONTMATTER = textwrap.dedent("""\
+    ---
+    id: csharp-sdk
+    title: "C# SDK (Technical Preview)"
+    sidebar_label: "C# SDK (Technical Preview)"
+    sidebar_position: 1
+    mdx:
+      format: md
+    ---
+
+""")
+
+
+def generate_readme_pages(readme_path: Path, output_dir: Path) -> None:
+    """Generate landing page + per-section pages from the README."""
     content = readme_path.read_text(encoding="utf-8")
-    content = _strip_badges(content)
     content = _strip_cut_sections(content)
-    content = _strip_external_doc_link(content)
     content = _strip_contributing(content)
     content = _clean_empty_lines(content)
 
@@ -847,66 +932,50 @@ def generate_landing_page(readme_path: Path) -> str:
         flags=re.MULTILINE,
     )
 
-    content = _rewrite_landing_links(content)
-    content = inject_tech_preview_banner(content)
     content = content.strip() + "\n"
 
-    # Append API Reference link
-    content += (
-        "\n## API Reference\n\n"
-        "See the [API Reference](api-reference/index.md) for full class "
-        "and method documentation.\n"
+    preamble, sections = _split_by_h2(content)
+
+    # Build a map of all heading anchors → section page slug
+    anchor_map = _build_anchor_map(sections)
+
+    # --- Landing page: sibling of the section directory ---
+    landing_preamble = _rewrite_docs_links(preamble, depth=_LANDING_PAGE_DEPTH)
+    landing_preamble = inject_tech_preview_banner(landing_preamble)
+    landing_path = output_dir / "csharp-sdk.md"
+    landing_path.write_text(
+        LANDING_FRONTMATTER + landing_preamble.strip() + "\n", encoding="utf-8"
     )
+    print(f"  Wrote landing page {landing_path}")
 
-    return LANDING_FRONTMATTER + content
+    # --- Section pages: one per H2, inside csharp-sdk/ ---
+    section_dir = output_dir / "csharp-sdk"
+    section_dir.mkdir(parents=True, exist_ok=True)
 
+    for i, (title, body) in enumerate(sections):
+        slug = _slugify(title)
+        position = i + 2  # landing page is 1, sections start at 2
+        section_content = _rewrite_docs_links(body, depth=_SECTION_PAGE_DEPTH)
+        section_content = _rewrite_internal_anchors(section_content, slug, anchor_map)
+        page_content = _promote_headings(section_content)
+        page_content = inject_tech_preview_banner(page_content)
+        fm = _make_section_frontmatter(slug, title, position)
+        page_path = section_dir / f"{slug}.md"
+        page_path.write_text(fm + page_content.strip() + "\n", encoding="utf-8")
+        print(f"  Wrote section {page_path}")
 
-# ---------------------------------------------------------------------------
-# Sidebar generator
-# ---------------------------------------------------------------------------
-
-
-def generate_sidebar() -> str:
-    return textwrap.dedent("""\
-        // Auto-generated sidebar for C# SDK API Reference
-        module.exports = [
-          {
-            type: "doc",
-            id: "apis-tools/csharp-sdk/api-reference/index",
-            label: "Overview",
-          },
-          {
-            type: "doc",
-            id: "apis-tools/csharp-sdk/api-reference/camunda-client",
-            label: "CamundaClient",
-          },
-          {
-            type: "doc",
-            id: "apis-tools/csharp-sdk/api-reference/configuration",
-            label: "Configuration",
-          },
-          {
-            type: "doc",
-            id: "apis-tools/csharp-sdk/api-reference/runtime",
-            label: "Runtime",
-          },
-          {
-            type: "doc",
-            id: "apis-tools/csharp-sdk/api-reference/models",
-            label: "Models",
-          },
-          {
-            type: "doc",
-            id: "apis-tools/csharp-sdk/api-reference/enums",
-            label: "Enums",
-          },
-          {
-            type: "doc",
-            id: "apis-tools/csharp-sdk/api-reference/keys",
-            label: "Keys",
-          },
-        ];
-    """)
+    # --- API Reference category metadata ---
+    api_ref_dir = section_dir / "api-reference"
+    if api_ref_dir.is_dir():
+        category = {
+            "label": "API Reference",
+            "position": _API_REFERENCE_POSITION,
+        }
+        category_path = api_ref_dir / "_category_.json"
+        category_path.write_text(
+            json.dumps(category, indent=2) + "\n", encoding="utf-8"
+        )
+        print(f"  Wrote {category_path}")
 
 
 # ---------------------------------------------------------------------------
@@ -915,6 +984,32 @@ def generate_sidebar() -> str:
 
 
 def main() -> None:
+    # Compile examples — fail fast if code samples are broken
+    examples_csproj = REPO_ROOT / "docs" / "examples" / "Examples.csproj"
+    if examples_csproj.exists():
+        print("Compiling API examples...")
+        result = subprocess.run(
+            ["dotnet", "build", str(examples_csproj), "--configuration", "Release"],
+            cwd=str(REPO_ROOT),
+        )
+        if result.returncode != 0:
+            print("ERROR: Examples failed to compile.", file=sys.stderr)
+            sys.exit(1)
+    else:
+        print(f"WARNING: {examples_csproj} not found, skipping example compilation")
+
+    # Sync README snippets from compiled example files
+    sync_script = REPO_ROOT / "scripts" / "sync-readme-snippets.py"
+    if sync_script.exists() and README_PATH.exists():
+        print("Syncing README snippets...")
+        result = subprocess.run(
+            [sys.executable, str(sync_script)],
+            cwd=str(REPO_ROOT),
+        )
+        if result.returncode != 0:
+            print("ERROR: README snippet sync failed.", file=sys.stderr)
+            sys.exit(1)
+
     if not API_DIR.exists():
         print(f"ERROR: {API_DIR} not found. Run `docfx metadata` first.", file=sys.stderr)
         sys.exit(1)
@@ -931,7 +1026,7 @@ def main() -> None:
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Generate pages
+    # Generate API reference pages
     generators = {
         "index.md": lambda: generate_index(pages),
         "camunda-client.md": lambda: generate_camunda_client(pages["camunda-client"]),
@@ -950,20 +1045,12 @@ def main() -> None:
         out_path.write_text(content, encoding="utf-8")
         print(f"  Wrote {out_path} ({len(content)} bytes)")
 
-    # Generate sidebar
-    sidebar_path = OUTPUT_DIR / "sidebar.js"
-    sidebar_path.write_text(generate_sidebar(), encoding="utf-8")
-    print(f"  Wrote {sidebar_path}")
-
-    # Generate landing page from README
+    # Generate landing page + section pages from README
     if README_PATH.exists():
-        LANDING_DIR.mkdir(parents=True, exist_ok=True)
-        landing = generate_landing_page(README_PATH)
-        landing_path = LANDING_DIR / "csharp-sdk.md"
-        landing_path.write_text(landing, encoding="utf-8")
-        print(f"  Wrote {landing_path} ({len(landing)} bytes)")
+        DOCS_MD_DIR.mkdir(parents=True, exist_ok=True)
+        generate_readme_pages(README_PATH, DOCS_MD_DIR)
     else:
-        print(f"  WARNING: {README_PATH} not found, skipping landing page")
+        print(f"  WARNING: {README_PATH} not found, skipping section pages")
 
     print("\nDone!")
 
