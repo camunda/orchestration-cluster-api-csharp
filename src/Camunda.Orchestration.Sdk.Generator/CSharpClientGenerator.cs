@@ -370,6 +370,34 @@ internal static class CSharpClientGenerator
     }
 
     /// <summary>
+    /// For a oneOf schema with mixed primitive/class variants (FilterProperty pattern),
+    /// finds and returns the resolved schema of the non-primitive variant.
+    /// Returns null if the pattern doesn't match (e.g. all variants are primitive).
+    /// </summary>
+    private static OpenApiSchema? FindNonPrimitiveOneOfVariant(OpenApiSchema schema, OpenApiDocument doc)
+    {
+        if (schema.OneOf is not { Count: 2 })
+            return null;
+
+        foreach (var variant in schema.OneOf)
+        {
+            // Resolve $ref if present
+            var resolved = variant.Reference != null && doc.Components?.Schemas != null
+                && doc.Components.Schemas.TryGetValue(variant.Reference.Id, out var refSchema)
+                ? refSchema : variant;
+
+            // Skip primitive variants (inline primitives or allOf-wrapped primitives/enums)
+            if (IsPrimitiveSchemaResolved(resolved, doc))
+                continue;
+
+            // This is the non-primitive (class) variant
+            return resolved;
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// Build a set of schema type names that are used as request bodies.
     /// Includes oneOf variant names when a parent is used as a body type.
     /// </summary>
@@ -495,6 +523,74 @@ internal static class CSharpClientGenerator
                 sb.AppendLine($"public abstract class {typeName} {{ }}");
                 sb.AppendLine();
                 continue;
+            }
+
+            // oneOf with mixed primitive/class variants (FilterProperty pattern)
+            // → generate class using properties from the non-primitive (advanced filter) variant
+            if (schema.OneOf is { Count: > 0 } && !oneOfParents.ContainsKey(typeName))
+            {
+                var classVariantSchema = FindNonPrimitiveOneOfVariant(schema, doc);
+                if (classVariantSchema != null)
+                {
+                    sb.AppendLine($"/// <summary>");
+                    AppendXmlDocLines(sb, schema.Description ?? name, "");
+                    sb.AppendLine($"/// </summary>");
+                    sb.AppendLine($"public sealed class {typeName}");
+                    sb.AppendLine("{");
+
+                    var filterRequired = classVariantSchema.Required ?? new HashSet<string>();
+                    var filterProperties = new Dictionary<string, OpenApiSchema>();
+
+                    // Collect properties from the variant, including allOf composition
+                    if (classVariantSchema.Properties != null)
+                    {
+                        foreach (var (propName, propSchema) in classVariantSchema.Properties)
+                            filterProperties.TryAdd(propName, propSchema);
+                    }
+                    foreach (var allOf in classVariantSchema.AllOf ?? [])
+                    {
+                        var resolved = allOf.Reference != null && doc.Components?.Schemas != null
+                            && doc.Components.Schemas.TryGetValue(allOf.Reference.Id, out var refSchema)
+                            ? refSchema : allOf;
+                        if (resolved.Properties != null)
+                        {
+                            foreach (var (propName, propSchema) in resolved.Properties)
+                                filterProperties.TryAdd(propName, propSchema);
+                        }
+                        if (resolved.Required != null)
+                        {
+                            foreach (var r in resolved.Required)
+                                filterRequired.Add(r);
+                        }
+                    }
+
+                    foreach (var (propName, propSchema) in filterProperties)
+                    {
+                        var csharpType = MapType(propSchema, doc);
+                        var csharpPropName = ToPascalCase(propName);
+                        var isRequired = filterRequired.Contains(propName);
+                        var isNullable = propSchema.Nullable;
+
+                        if ((!isRequired || isNullable) && !csharpType.EndsWith('?'))
+                            csharpType += "?";
+
+                        if (!string.IsNullOrEmpty(propSchema.Description))
+                        {
+                            sb.AppendLine($"    /// <summary>");
+                            AppendXmlDocLines(sb, propSchema.Description);
+                            sb.AppendLine($"    /// </summary>");
+                        }
+
+                        sb.AppendLine($"    [JsonPropertyName(\"{propName}\")]");
+                        var initializer = IsReferenceType(csharpType, doc) ? " = null!;" : "";
+                        sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
+                        sb.AppendLine();
+                    }
+
+                    sb.AppendLine("}");
+                    sb.AppendLine();
+                    continue;
+                }
             }
 
             // Determine if this class is a variant of a oneOf parent
