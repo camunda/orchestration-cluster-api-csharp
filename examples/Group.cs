@@ -12,7 +12,8 @@ public static class GroupExamples
 
         var result = await client.CreateGroupAsync(new GroupCreateRequest
         {
-            Name = "engineering",
+            GroupId = "engineering",
+            Name = "Engineering",
         });
 
         Console.WriteLine($"Group key: {result.GroupId}");
