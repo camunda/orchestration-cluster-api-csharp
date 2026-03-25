@@ -267,6 +267,10 @@ Releases are fully automated via [semantic-release](https://github.com/semantic-
 
 The currently promoted stable minor is configured via the `CAMUNDA_SDK_CURRENT_STABLE_MINOR` repo variable (e.g. `8.8`).
 
+### Dependabot
+
+Dependabot is configured in [.github/dependabot.yml](.github/dependabot.yml) for NuGet, npm, and GitHub Actions updates. When creating a new `stable/*` branch, add a Dependabot entry for it — Dependabot does not support wildcard branch patterns, so each stable branch must be listed explicitly.
+
 ### Version bumping (mutated semver)
 
 This repo uses a "mutated semver" policy — same as the JS SDK:
