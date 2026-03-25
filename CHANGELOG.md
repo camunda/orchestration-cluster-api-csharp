@@ -1,3 +1,17 @@
+# [8.9.0-alpha.17](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.16...v8.9.0-alpha.17) (2026-03-25)
+
+
+### Bug Fixes
+
+* add IAsyncDisposable, diagnostic logging, and 30 new tests ([0b1a497](https://github.com/camunda/orchestration-cluster-api-csharp/commit/0b1a497a99b4ea9b28cff909ffe655980df926a2))
+* always throw on non-2xx HTTP responses ([36b0135](https://github.com/camunda/orchestration-cluster-api-csharp/commit/36b0135980d0088f1e995c0ac72f3c7810112631))
+* remove unused Polly dependency ([b60ad0f](https://github.com/camunda/orchestration-cluster-api-csharp/commit/b60ad0f116a46253fcf6904ce1d59dd5891cd2ee))
+
+
+### Features
+
+* generate FilterProperty classes with advanced filter properties ([009b6df](https://github.com/camunda/orchestration-cluster-api-csharp/commit/009b6dffb6dcf61ba1adc14d09a98767be12680f))
+
 # [8.9.0-alpha.16](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.15...v8.9.0-alpha.16) (2026-03-25)
 
 
