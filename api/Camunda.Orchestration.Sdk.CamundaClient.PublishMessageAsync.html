@@ -156,6 +156,21 @@ Use the message correlation endpoint for such use cases.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_PublishMessageAsync_Camunda_Orchestration_Sdk_MessagePublicationRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task PublishMessageExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.PublishMessageAsync(new MessagePublicationRequest
+    {
+        Name = &quot;paymentReceived&quot;,
+        CorrelationKey = &quot;order-123&quot;,
+        TimeToLive = 60000,
+    });
+
+    Console.WriteLine($&quot;Message key: {result.MessageKey}&quot;);
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_PublishMessageAsync_Camunda_Orchestration_Sdk_MessagePublicationRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: publishMessage</p>

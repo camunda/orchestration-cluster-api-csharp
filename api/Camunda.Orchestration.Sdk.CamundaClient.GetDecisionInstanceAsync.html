@@ -154,6 +154,17 @@ Returns a decision instance.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetDecisionInstanceAsync_Camunda_Orchestration_Sdk_DecisionEvaluationInstanceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_DecisionInstanceGetQueryResult__System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task GetDecisionInstanceExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetDecisionInstanceAsync(
+        DecisionEvaluationInstanceKey.AssumeExists(&quot;123456&quot;));
+
+    Console.WriteLine($&quot;Decision instance: {result.DecisionDefinitionId}&quot;);
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetDecisionInstanceAsync_Camunda_Orchestration_Sdk_DecisionEvaluationInstanceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_DecisionInstanceGetQueryResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: getDecisionInstance</p>

@@ -156,6 +156,21 @@ Search mapping rules with assigned role.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_System_String_Camunda_Orchestration_Sdk_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchMappingRulesForRoleResponse__System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task SearchMappingRulesForRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchMappingRulesForRoleAsync(
+        &quot;developer&quot;,
+        new MappingRuleSearchQueryRequest());
+
+    foreach (var rule in result.Items)
+    {
+        Console.WriteLine($&quot;Mapping rule: {rule.MappingRuleId}&quot;);
+    }
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_System_String_Camunda_Orchestration_Sdk_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchMappingRulesForRoleResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchMappingRulesForRole</p>

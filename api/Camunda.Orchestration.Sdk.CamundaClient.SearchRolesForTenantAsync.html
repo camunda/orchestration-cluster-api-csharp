@@ -156,6 +156,21 @@ Retrieves a filtered and sorted list of roles for a specified tenant.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchRolesForTenantResponse__System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task SearchRolesForTenantExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchRolesForTenantAsync(
+        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        new RoleSearchQueryRequest());
+
+    foreach (var role in result.Items)
+    {
+        Console.WriteLine($&quot;Role: {role.Name}&quot;);
+    }
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchRolesForTenantResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchRolesForTenant</p>

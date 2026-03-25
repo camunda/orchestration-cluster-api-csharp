@@ -159,6 +159,18 @@ Create a link to a document in the Camunda 8 cluster.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentLinkAsync_Camunda_Orchestration_Sdk_DocumentId_Camunda_Orchestration_Sdk_DocumentLinkRequest_System_String_System_String_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task CreateDocumentLinkExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateDocumentLinkAsync(
+        DocumentId.AssumeExists(&quot;doc-123&quot;),
+        new DocumentLinkRequest());
+
+    Console.WriteLine($&quot;Document link: {result.Url}&quot;);
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentLinkAsync_Camunda_Orchestration_Sdk_DocumentId_Camunda_Orchestration_Sdk_DocumentLinkRequest_System_String_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: createDocumentLink</p>

@@ -154,6 +154,20 @@ Search for authorizations based on given criteria.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchAuthorizationsAsync_Camunda_Orchestration_Sdk_AuthorizationSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_AuthorizationSearchResult__System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task SearchAuthorizationsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchAuthorizationsAsync(
+        new AuthorizationSearchQuery());
+
+    foreach (var auth in result.Items)
+    {
+        Console.WriteLine($&quot;Authorization: {auth.AuthorizationKey}&quot;);
+    }
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchAuthorizationsAsync_Camunda_Orchestration_Sdk_AuthorizationSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_AuthorizationSearchResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchAuthorizations</p>

@@ -151,18 +151,12 @@ Obtains the current topology of the cluster the gateway is part of.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetTopologyAsync_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">private static async Task GetTopologyExample()
+<pre><code class="lang-csharp">public static async Task GetTopologyExample()
 {
     using var client = CamundaClient.Create();
 
     var topology = await client.GetTopologyAsync();
-
     Console.WriteLine($&quot;Cluster size: {topology.ClusterSize}&quot;);
-    Console.WriteLine($&quot;Partitions: {topology.PartitionsCount}&quot;);
-    foreach (var broker in topology.Brokers)
-    {
-        Console.WriteLine($&quot;  Broker {broker.NodeId}: {broker.Host}:{broker.Port}&quot;);
-    }
 }
 </code></pre>
 

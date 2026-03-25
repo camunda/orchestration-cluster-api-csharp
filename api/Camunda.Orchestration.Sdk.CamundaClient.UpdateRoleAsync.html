@@ -154,6 +154,17 @@ Update a role with the given ID.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_System_String_Camunda_Orchestration_Sdk_RoleUpdateRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task UpdateRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UpdateRoleAsync(&quot;developer&quot;, new RoleUpdateRequest
+    {
+        Name = &quot;senior-developer&quot;,
+    });
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_System_String_Camunda_Orchestration_Sdk_RoleUpdateRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: updateRole</p>

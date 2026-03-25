@@ -150,6 +150,15 @@ Checks the health status of the cluster by verifying if there's at least one par
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetStatusAsync_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task GetStatusExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.GetStatusAsync();
+    Console.WriteLine(&quot;Cluster is healthy&quot;);
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetStatusAsync_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: getStatus</p>

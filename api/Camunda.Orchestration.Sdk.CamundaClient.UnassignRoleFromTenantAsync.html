@@ -156,6 +156,16 @@ tenant's data - unless they are assigned directly to the tenant.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task UnassignRoleFromTenantExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignRoleFromTenantAsync(
+        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        &quot;developer&quot;);
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: unassignRoleFromTenant</p>

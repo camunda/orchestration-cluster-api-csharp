@@ -152,6 +152,23 @@ Create the authorization.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task CreateAuthorizationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateAuthorizationAsync(new AuthorizationPropertyBasedRequest
+    {
+        ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+        PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE },
+        ResourcePropertyName = &quot;my-process&quot;,
+        OwnerType = OwnerTypeEnum.USER,
+        OwnerId = &quot;user@example.com&quot;,
+    });
+
+    Console.WriteLine($&quot;Authorization key: {result.AuthorizationKey}&quot;);
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: createAuthorization</p>

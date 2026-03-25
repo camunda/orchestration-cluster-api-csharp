@@ -154,6 +154,23 @@ Update the authorization with the given key.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationKey_Camunda_Orchestration_Sdk_AuthorizationRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task UpdateAuthorizationExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UpdateAuthorizationAsync(
+        AuthorizationKey.AssumeExists(&quot;123456&quot;),
+        new AuthorizationPropertyBasedRequest
+        {
+            ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+            PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE, PermissionTypeEnum.DELETE },
+            ResourcePropertyName = &quot;my-process&quot;,
+            OwnerType = OwnerTypeEnum.USER,
+            OwnerId = &quot;user@example.com&quot;,
+        });
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationKey_Camunda_Orchestration_Sdk_AuthorizationRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: updateAuthorization</p>

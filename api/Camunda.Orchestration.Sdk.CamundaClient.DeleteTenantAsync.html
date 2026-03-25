@@ -152,6 +152,14 @@ Deletes an existing tenant.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task DeleteTenantExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteTenantAsync(TenantId.AssumeExists(&quot;acme-corp&quot;));
+}
+</code></pre>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: deleteTenant</p>
