@@ -5,27 +5,34 @@ using Camunda.Orchestration.Sdk;
 public static class IncidentExamples
 {
     #region GetIncident
+    // <GetIncident>
     public static async Task GetIncidentExample()
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetIncidentAsync(new IncidentKey("123456"));
+        var result = await client.GetIncidentAsync(IncidentKey.AssumeExists("123456"));
         Console.WriteLine($"Incident: {result.IncidentKey}");
     }
+    // </GetIncident>
     #endregion GetIncident
 
     #region ResolveIncident
+
+    // <ResolveIncident>
     public static async Task ResolveIncidentExample()
     {
         using var client = CamundaClient.Create();
 
         await client.ResolveIncidentAsync(
-            new IncidentKey("123456"),
+            IncidentKey.AssumeExists("123456"),
             new IncidentResolutionRequest());
     }
+    // </ResolveIncident>
     #endregion ResolveIncident
 
     #region SearchIncidents
+
+    // <SearchIncidents>
     public static async Task SearchIncidentsExample()
     {
         using var client = CamundaClient.Create();
@@ -37,5 +44,6 @@ public static class IncidentExamples
             Console.WriteLine($"Incident: {incident.IncidentKey}");
         }
     }
+    // </SearchIncidents>
     #endregion SearchIncidents
 }

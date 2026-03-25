@@ -5,6 +5,7 @@ using Camunda.Orchestration.Sdk;
 public static class MessageSignalExamples
 {
     #region CorrelateMessage
+    // <CorrelateMessage>
     public static async Task CorrelateMessageExample()
     {
         using var client = CamundaClient.Create();
@@ -17,9 +18,12 @@ public static class MessageSignalExamples
 
         Console.WriteLine($"Message key: {result.MessageKey}");
     }
+    // </CorrelateMessage>
     #endregion CorrelateMessage
 
     #region PublishMessage
+
+    // <PublishMessage>
     public static async Task PublishMessageExample()
     {
         using var client = CamundaClient.Create();
@@ -33,9 +37,12 @@ public static class MessageSignalExamples
 
         Console.WriteLine($"Message key: {result.MessageKey}");
     }
+    // </PublishMessage>
     #endregion PublishMessage
 
     #region BroadcastSignal
+
+    // <BroadcastSignal>
     public static async Task BroadcastSignalExample()
     {
         using var client = CamundaClient.Create();
@@ -47,9 +54,12 @@ public static class MessageSignalExamples
 
         Console.WriteLine($"Signal key: {result.SignalKey}");
     }
+    // </BroadcastSignal>
     #endregion BroadcastSignal
 
     #region SearchMessageSubscriptions
+
+    // <SearchMessageSubscriptions>
     public static async Task SearchMessageSubscriptionsExample()
     {
         using var client = CamundaClient.Create();
@@ -62,9 +72,12 @@ public static class MessageSignalExamples
             Console.WriteLine($"Subscription: {sub.MessageName}");
         }
     }
+    // </SearchMessageSubscriptions>
     #endregion SearchMessageSubscriptions
 
     #region SearchCorrelatedMessageSubscriptions
+
+    // <SearchCorrelatedMessageSubscriptions>
     public static async Task SearchCorrelatedMessageSubscriptionsExample()
     {
         using var client = CamundaClient.Create();
@@ -77,5 +90,6 @@ public static class MessageSignalExamples
             Console.WriteLine($"Correlated subscription: {sub.MessageName}");
         }
     }
+    // </SearchCorrelatedMessageSubscriptions>
     #endregion SearchCorrelatedMessageSubscriptions
 }

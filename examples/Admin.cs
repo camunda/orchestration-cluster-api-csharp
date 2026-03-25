@@ -5,6 +5,7 @@ using Camunda.Orchestration.Sdk;
 public static class AdminExamples
 {
     #region GetGlobalClusterVariable
+    // <GetGlobalClusterVariable>
     public static async Task GetGlobalClusterVariableExample()
     {
         using var client = CamundaClient.Create();
@@ -12,9 +13,12 @@ public static class AdminExamples
         var result = await client.GetGlobalClusterVariableAsync("my-variable");
         Console.WriteLine($"Variable: {result.Name} = {result.Value}");
     }
+    // </GetGlobalClusterVariable>
     #endregion GetGlobalClusterVariable
 
     #region CreateGlobalClusterVariable
+
+    // <CreateGlobalClusterVariable>
     public static async Task CreateGlobalClusterVariableExample()
     {
         using var client = CamundaClient.Create();
@@ -28,9 +32,12 @@ public static class AdminExamples
 
         Console.WriteLine($"Created variable: {result.Name}");
     }
+    // </CreateGlobalClusterVariable>
     #endregion CreateGlobalClusterVariable
 
     #region UpdateGlobalClusterVariable
+
+    // <UpdateGlobalClusterVariable>
     public static async Task UpdateGlobalClusterVariableExample()
     {
         using var client = CamundaClient.Create();
@@ -44,37 +51,46 @@ public static class AdminExamples
 
         Console.WriteLine($"Updated variable: {result.Name}");
     }
+    // </UpdateGlobalClusterVariable>
     #endregion UpdateGlobalClusterVariable
 
     #region DeleteGlobalClusterVariable
+
+    // <DeleteGlobalClusterVariable>
     public static async Task DeleteGlobalClusterVariableExample()
     {
         using var client = CamundaClient.Create();
 
         await client.DeleteGlobalClusterVariableAsync("my-variable");
     }
+    // </DeleteGlobalClusterVariable>
     #endregion DeleteGlobalClusterVariable
 
     #region GetTenantClusterVariable
+
+    // <GetTenantClusterVariable>
     public static async Task GetTenantClusterVariableExample()
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetTenantClusterVariableAsync(
-            new TenantId("acme-corp"),
+            TenantId.AssumeExists("acme-corp"),
             "my-variable");
 
         Console.WriteLine($"Variable: {result.Name} = {result.Value}");
     }
+    // </GetTenantClusterVariable>
     #endregion GetTenantClusterVariable
 
     #region CreateTenantClusterVariable
+
+    // <CreateTenantClusterVariable>
     public static async Task CreateTenantClusterVariableExample()
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateTenantClusterVariableAsync(
-            new TenantId("acme-corp"),
+            TenantId.AssumeExists("acme-corp"),
             new CreateClusterVariableRequest
             {
                 Name = "my-variable",
@@ -83,15 +99,18 @@ public static class AdminExamples
 
         Console.WriteLine($"Created variable: {result.Name}");
     }
+    // </CreateTenantClusterVariable>
     #endregion CreateTenantClusterVariable
 
     #region UpdateTenantClusterVariable
+
+    // <UpdateTenantClusterVariable>
     public static async Task UpdateTenantClusterVariableExample()
     {
         using var client = CamundaClient.Create();
 
         var result = await client.UpdateTenantClusterVariableAsync(
-            new TenantId("acme-corp"),
+            TenantId.AssumeExists("acme-corp"),
             "my-variable",
             new UpdateClusterVariableRequest
             {
@@ -100,20 +119,26 @@ public static class AdminExamples
 
         Console.WriteLine($"Updated variable: {result.Name}");
     }
+    // </UpdateTenantClusterVariable>
     #endregion UpdateTenantClusterVariable
 
     #region DeleteTenantClusterVariable
+
+    // <DeleteTenantClusterVariable>
     public static async Task DeleteTenantClusterVariableExample()
     {
         using var client = CamundaClient.Create();
 
         await client.DeleteTenantClusterVariableAsync(
-            new TenantId("acme-corp"),
+            TenantId.AssumeExists("acme-corp"),
             "my-variable");
     }
+    // </DeleteTenantClusterVariable>
     #endregion DeleteTenantClusterVariable
 
     #region SearchClusterVariables
+
+    // <SearchClusterVariables>
     public static async Task SearchClusterVariablesExample()
     {
         using var client = CamundaClient.Create();
@@ -126,9 +151,12 @@ public static class AdminExamples
             Console.WriteLine($"Variable: {variable.Name}");
         }
     }
+    // </SearchClusterVariables>
     #endregion SearchClusterVariables
 
     #region CreateGlobalTaskListener
+
+    // <CreateGlobalTaskListener>
     public static async Task CreateGlobalTaskListenerExample()
     {
         using var client = CamundaClient.Create();
@@ -136,54 +164,66 @@ public static class AdminExamples
         var result = await client.CreateGlobalTaskListenerAsync(
             new CreateGlobalTaskListenerRequest
             {
-                EventType = "complete",
-                JobType = "my-task-listener",
+                EventTypes = new List<GlobalTaskListenerEventTypeEnum> { GlobalTaskListenerEventTypeEnum.Completing },
+                Id = GlobalListenerId.AssumeExists("my-task-listener"),
             });
 
         Console.WriteLine($"Task listener: {result.Id}");
     }
+    // </CreateGlobalTaskListener>
     #endregion CreateGlobalTaskListener
 
     #region GetGlobalTaskListener
+
+    // <GetGlobalTaskListener>
     public static async Task GetGlobalTaskListenerExample()
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetGlobalTaskListenerAsync(
-            new GlobalListenerId("listener-123"));
+            GlobalListenerId.AssumeExists("listener-123"));
 
-        Console.WriteLine($"Task listener: {result.EventType}");
+        Console.WriteLine($"Task listener: {result.EventTypes}");
     }
+    // </GetGlobalTaskListener>
     #endregion GetGlobalTaskListener
 
     #region UpdateGlobalTaskListener
+
+    // <UpdateGlobalTaskListener>
     public static async Task UpdateGlobalTaskListenerExample()
     {
         using var client = CamundaClient.Create();
 
         var result = await client.UpdateGlobalTaskListenerAsync(
-            new GlobalListenerId("listener-123"),
+            GlobalListenerId.AssumeExists("listener-123"),
             new UpdateGlobalTaskListenerRequest
             {
-                EventType = "complete",
-                JobType = "updated-task-listener",
+                EventTypes = new List<GlobalTaskListenerEventTypeEnum> { GlobalTaskListenerEventTypeEnum.Completing },
+                Type = "updated-task-listener",
             });
 
         Console.WriteLine($"Updated listener: {result.Id}");
     }
+    // </UpdateGlobalTaskListener>
     #endregion UpdateGlobalTaskListener
 
     #region DeleteGlobalTaskListener
+
+    // <DeleteGlobalTaskListener>
     public static async Task DeleteGlobalTaskListenerExample()
     {
         using var client = CamundaClient.Create();
 
         await client.DeleteGlobalTaskListenerAsync(
-            new GlobalListenerId("listener-123"));
+            GlobalListenerId.AssumeExists("listener-123"));
     }
+    // </DeleteGlobalTaskListener>
     #endregion DeleteGlobalTaskListener
 
     #region SearchGlobalTaskListeners
+
+    // <SearchGlobalTaskListeners>
     public static async Task SearchGlobalTaskListenersExample()
     {
         using var client = CamundaClient.Create();
@@ -196,9 +236,12 @@ public static class AdminExamples
             Console.WriteLine($"Listener: {listener.Id}");
         }
     }
+    // </SearchGlobalTaskListeners>
     #endregion SearchGlobalTaskListeners
 
     #region GetLicense
+
+    // <GetLicense>
     public static async Task GetLicenseExample()
     {
         using var client = CamundaClient.Create();
@@ -206,9 +249,12 @@ public static class AdminExamples
         var result = await client.GetLicenseAsync();
         Console.WriteLine($"License type: {result.LicenseType}");
     }
+    // </GetLicense>
     #endregion GetLicense
 
     #region GetSystemConfiguration
+
+    // <GetSystemConfiguration>
     public static async Task GetSystemConfigurationExample()
     {
         using var client = CamundaClient.Create();
@@ -216,9 +262,12 @@ public static class AdminExamples
         var result = await client.GetSystemConfigurationAsync();
         Console.WriteLine($"System config: {result}");
     }
+    // </GetSystemConfiguration>
     #endregion GetSystemConfiguration
 
     #region GetStatus
+
+    // <GetStatus>
     public static async Task GetStatusExample()
     {
         using var client = CamundaClient.Create();
@@ -226,9 +275,12 @@ public static class AdminExamples
         await client.GetStatusAsync();
         Console.WriteLine("Cluster is healthy");
     }
+    // </GetStatus>
     #endregion GetStatus
 
     #region PinClock
+
+    // <PinClock>
     public static async Task PinClockExample()
     {
         using var client = CamundaClient.Create();
@@ -238,18 +290,24 @@ public static class AdminExamples
             Timestamp = 1700000000000,
         });
     }
+    // </PinClock>
     #endregion PinClock
 
     #region ResetClock
+
+    // <ResetClock>
     public static async Task ResetClockExample()
     {
         using var client = CamundaClient.Create();
 
         await client.ResetClockAsync();
     }
+    // </ResetClock>
     #endregion ResetClock
 
     #region EvaluateConditionals
+
+    // <EvaluateConditionals>
     public static async Task EvaluateConditionalsExample()
     {
         using var client = CamundaClient.Create();
@@ -259,9 +317,12 @@ public static class AdminExamples
 
         Console.WriteLine($"Result: {result}");
     }
+    // </EvaluateConditionals>
     #endregion EvaluateConditionals
 
     #region EvaluateExpression
+
+    // <EvaluateExpression>
     public static async Task EvaluateExpressionExample()
     {
         using var client = CamundaClient.Create();
@@ -274,29 +335,38 @@ public static class AdminExamples
 
         Console.WriteLine($"Result: {result.Result}");
     }
+    // </EvaluateExpression>
     #endregion EvaluateExpression
 
     #region GetResource
+
+    // <GetResource>
     public static async Task GetResourceExample()
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetResourceAsync(new ResourceKey("123456"));
+        var result = await client.GetResourceAsync(ResourceKey.AssumeExists("123456"));
         Console.WriteLine($"Resource: {result.ResourceName}");
     }
+    // </GetResource>
     #endregion GetResource
 
     #region GetResourceContent
+
+    // <GetResourceContent>
     public static async Task GetResourceContentExample()
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetResourceContentAsync(new ResourceKey("123456"));
+        var result = await client.GetResourceContentAsync(ResourceKey.AssumeExists("123456"));
         Console.WriteLine($"Content: {result}");
     }
+    // </GetResourceContent>
     #endregion GetResourceContent
 
     #region GetUsageMetrics
+
+    // <GetUsageMetrics>
     public static async Task GetUsageMetricsExample()
     {
         using var client = CamundaClient.Create();
@@ -307,19 +377,25 @@ public static class AdminExamples
 
         Console.WriteLine($"Metrics: {result}");
     }
+    // </GetUsageMetrics>
     #endregion GetUsageMetrics
 
     #region GetAuditLog
+
+    // <GetAuditLog>
     public static async Task GetAuditLogExample()
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetAuditLogAsync(new AuditLogKey("123456"));
+        var result = await client.GetAuditLogAsync(AuditLogKey.AssumeExists("123456"));
         Console.WriteLine($"Audit log: {result.AuditLogKey}");
     }
+    // </GetAuditLog>
     #endregion GetAuditLog
 
     #region SearchAuditLogs
+
+    // <SearchAuditLogs>
     public static async Task SearchAuditLogsExample()
     {
         using var client = CamundaClient.Create();
@@ -332,9 +408,12 @@ public static class AdminExamples
             Console.WriteLine($"Audit log: {log.AuditLogKey}");
         }
     }
+    // </SearchAuditLogs>
     #endregion SearchAuditLogs
 
     #region GetProcessInstanceStatisticsByError
+
+    // <GetProcessInstanceStatisticsByError>
     public static async Task GetProcessInstanceStatisticsByErrorExample()
     {
         using var client = CamundaClient.Create();
@@ -344,12 +423,15 @@ public static class AdminExamples
 
         foreach (var stat in result.Items)
         {
-            Console.WriteLine($"Error type: {stat.ErrorType}");
+            Console.WriteLine($"Error: {stat.ErrorMessage}");
         }
     }
+    // </GetProcessInstanceStatisticsByError>
     #endregion GetProcessInstanceStatisticsByError
 
     #region GetProcessInstanceStatisticsByDefinition
+
+    // <GetProcessInstanceStatisticsByDefinition>
     public static async Task GetProcessInstanceStatisticsByDefinitionExample()
     {
         using var client = CamundaClient.Create();
@@ -362,9 +444,12 @@ public static class AdminExamples
             Console.WriteLine($"Definition: {stat.ProcessDefinitionKey}");
         }
     }
+    // </GetProcessInstanceStatisticsByDefinition>
     #endregion GetProcessInstanceStatisticsByDefinition
 
     #region GetJobErrorStatistics
+
+    // <GetJobErrorStatistics>
     public static async Task GetJobErrorStatisticsExample()
     {
         using var client = CamundaClient.Create();
@@ -377,9 +462,12 @@ public static class AdminExamples
             Console.WriteLine($"Error: {stat.ErrorCode}");
         }
     }
+    // </GetJobErrorStatistics>
     #endregion GetJobErrorStatistics
 
     #region GetJobTimeSeriesStatistics
+
+    // <GetJobTimeSeriesStatistics>
     public static async Task GetJobTimeSeriesStatisticsExample()
     {
         using var client = CamundaClient.Create();
@@ -392,9 +480,12 @@ public static class AdminExamples
             Console.WriteLine($"Time series: {stat}");
         }
     }
+    // </GetJobTimeSeriesStatistics>
     #endregion GetJobTimeSeriesStatistics
 
     #region GetJobTypeStatistics
+
+    // <GetJobTypeStatistics>
     public static async Task GetJobTypeStatisticsExample()
     {
         using var client = CamundaClient.Create();
@@ -407,9 +498,12 @@ public static class AdminExamples
             Console.WriteLine($"Job type: {stat.JobType}");
         }
     }
+    // </GetJobTypeStatistics>
     #endregion GetJobTypeStatistics
 
     #region GetJobWorkerStatistics
+
+    // <GetJobWorkerStatistics>
     public static async Task GetJobWorkerStatisticsExample()
     {
         using var client = CamundaClient.Create();
@@ -422,9 +516,12 @@ public static class AdminExamples
             Console.WriteLine($"Worker: {stat.Worker}");
         }
     }
+    // </GetJobWorkerStatistics>
     #endregion GetJobWorkerStatistics
 
     #region GetGlobalJobStatistics
+
+    // <GetGlobalJobStatistics>
     public static async Task GetGlobalJobStatisticsExample()
     {
         using var client = CamundaClient.Create();
@@ -435,5 +532,6 @@ public static class AdminExamples
 
         Console.WriteLine($"Global job stats: {result}");
     }
+    // </GetGlobalJobStatistics>
     #endregion GetGlobalJobStatistics
 }

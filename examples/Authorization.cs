@@ -5,36 +5,43 @@ using Camunda.Orchestration.Sdk;
 public static class AuthorizationExamples
 {
     #region CreateAuthorization
+    // <CreateAuthorization>
     public static async Task CreateAuthorizationExample()
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.CreateAuthorizationAsync(new AuthorizationRequest
+        var result = await client.CreateAuthorizationAsync(new AuthorizationPropertyBasedRequest
         {
-            ResourceType = "process-definition",
-            Permissions = new[] { "READ", "UPDATE" },
-            ResourceId = "my-process",
-            OwnerType = "USER",
-            OwnerKey = "user@example.com",
+            ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+            PermissionTypes = new List<PermissionTypeEnum> { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE },
+            ResourcePropertyName = "my-process",
+            OwnerType = OwnerTypeEnum.USER,
+            OwnerId = "user@example.com",
         });
 
         Console.WriteLine($"Authorization key: {result.AuthorizationKey}");
     }
+    // </CreateAuthorization>
     #endregion CreateAuthorization
 
     #region GetAuthorization
+
+    // <GetAuthorization>
     public static async Task GetAuthorizationExample()
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetAuthorizationAsync(
-            new AuthorizationKey("123456"));
+            AuthorizationKey.AssumeExists("123456"));
 
         Console.WriteLine($"Resource type: {result.ResourceType}");
     }
+    // </GetAuthorization>
     #endregion GetAuthorization
 
     #region SearchAuthorizations
+
+    // <SearchAuthorizations>
     public static async Task SearchAuthorizationsExample()
     {
         using var client = CamundaClient.Create();
@@ -47,36 +54,45 @@ public static class AuthorizationExamples
             Console.WriteLine($"Authorization: {auth.AuthorizationKey}");
         }
     }
+    // </SearchAuthorizations>
     #endregion SearchAuthorizations
 
     #region UpdateAuthorization
+
+    // <UpdateAuthorization>
     public static async Task UpdateAuthorizationExample()
     {
         using var client = CamundaClient.Create();
 
         await client.UpdateAuthorizationAsync(
-            new AuthorizationKey("123456"),
-            new AuthorizationRequest
+            AuthorizationKey.AssumeExists("123456"),
+            new AuthorizationPropertyBasedRequest
             {
-                ResourceType = "process-definition",
-                Permissions = new[] { "READ", "UPDATE", "DELETE" },
-                ResourceId = "my-process",
-                OwnerType = "USER",
-                OwnerKey = "user@example.com",
+                ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+                PermissionTypes = new List<PermissionTypeEnum> { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE, PermissionTypeEnum.DELETE },
+                ResourcePropertyName = "my-process",
+                OwnerType = OwnerTypeEnum.USER,
+                OwnerId = "user@example.com",
             });
     }
+    // </UpdateAuthorization>
     #endregion UpdateAuthorization
 
     #region DeleteAuthorization
+
+    // <DeleteAuthorization>
     public static async Task DeleteAuthorizationExample()
     {
         using var client = CamundaClient.Create();
 
-        await client.DeleteAuthorizationAsync(new AuthorizationKey("123456"));
+        await client.DeleteAuthorizationAsync(AuthorizationKey.AssumeExists("123456"));
     }
+    // </DeleteAuthorization>
     #endregion DeleteAuthorization
 
     #region GetAuthentication
+
+    // <GetAuthentication>
     public static async Task GetAuthenticationExample()
     {
         using var client = CamundaClient.Create();
@@ -84,5 +100,6 @@ public static class AuthorizationExamples
         var result = await client.GetAuthenticationAsync();
         Console.WriteLine($"Authenticated user: {result.Username}");
     }
+    // </GetAuthentication>
     #endregion GetAuthentication
 }

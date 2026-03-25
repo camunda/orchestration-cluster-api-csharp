@@ -5,71 +5,90 @@ using Camunda.Orchestration.Sdk;
 public static class UserTaskExamples
 {
     #region AssignUserTask
+    // <AssignUserTask>
     public static async Task AssignUserTaskExample()
     {
         using var client = CamundaClient.Create();
 
         await client.AssignUserTaskAsync(
-            new UserTaskKey("123456"),
+            UserTaskKey.AssumeExists("123456"),
             new UserTaskAssignmentRequest
             {
                 Assignee = "user@example.com",
             });
     }
+    // </AssignUserTask>
     #endregion AssignUserTask
 
     #region CompleteUserTask
+
+    // <CompleteUserTask>
     public static async Task CompleteUserTaskExample()
     {
         using var client = CamundaClient.Create();
 
         await client.CompleteUserTaskAsync(
-            new UserTaskKey("123456"),
+            UserTaskKey.AssumeExists("123456"),
             new UserTaskCompletionRequest());
     }
+    // </CompleteUserTask>
     #endregion CompleteUserTask
 
     #region UnassignUserTask
+
+    // <UnassignUserTask>
     public static async Task UnassignUserTaskExample()
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignUserTaskAsync(new UserTaskKey("123456"));
+        await client.UnassignUserTaskAsync(UserTaskKey.AssumeExists("123456"));
     }
+    // </UnassignUserTask>
     #endregion UnassignUserTask
 
     #region GetUserTask
+
+    // <GetUserTask>
     public static async Task GetUserTaskExample()
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetUserTaskAsync(new UserTaskKey("123456"));
+        var result = await client.GetUserTaskAsync(UserTaskKey.AssumeExists("123456"));
         Console.WriteLine($"User task: {result.UserTaskKey}");
     }
+    // </GetUserTask>
     #endregion GetUserTask
 
     #region UpdateUserTask
+
+    // <UpdateUserTask>
     public static async Task UpdateUserTaskExample()
     {
         using var client = CamundaClient.Create();
 
         await client.UpdateUserTaskAsync(
-            new UserTaskKey("123456"),
+            UserTaskKey.AssumeExists("123456"),
             new UserTaskUpdateRequest());
     }
+    // </UpdateUserTask>
     #endregion UpdateUserTask
 
     #region GetUserTaskForm
+
+    // <GetUserTaskForm>
     public static async Task GetUserTaskFormExample()
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetUserTaskFormAsync(new UserTaskKey("123456"));
+        var result = await client.GetUserTaskFormAsync(UserTaskKey.AssumeExists("123456"));
         Console.WriteLine($"Form: {result.FormKey}");
     }
+    // </GetUserTaskForm>
     #endregion GetUserTaskForm
 
     #region SearchUserTasks
+
+    // <SearchUserTasks>
     public static async Task SearchUserTasksExample()
     {
         using var client = CamundaClient.Create();
@@ -81,15 +100,18 @@ public static class UserTaskExamples
             Console.WriteLine($"User task: {task.UserTaskKey}");
         }
     }
+    // </SearchUserTasks>
     #endregion SearchUserTasks
 
     #region SearchUserTaskVariables
+
+    // <SearchUserTaskVariables>
     public static async Task SearchUserTaskVariablesExample()
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchUserTaskVariablesAsync(
-            new UserTaskKey("123456"),
+            UserTaskKey.AssumeExists("123456"),
             new SearchUserTaskVariablesRequest());
 
         foreach (var variable in result.Items)
@@ -97,15 +119,18 @@ public static class UserTaskExamples
             Console.WriteLine($"Variable: {variable.Name}");
         }
     }
+    // </SearchUserTaskVariables>
     #endregion SearchUserTaskVariables
 
     #region SearchUserTaskAuditLogs
+
+    // <SearchUserTaskAuditLogs>
     public static async Task SearchUserTaskAuditLogsExample()
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchUserTaskAuditLogsAsync(
-            new UserTaskKey("123456"),
+            UserTaskKey.AssumeExists("123456"),
             new UserTaskAuditLogSearchQueryRequest());
 
         foreach (var log in result.Items)
@@ -113,5 +138,6 @@ public static class UserTaskExamples
             Console.WriteLine($"Audit log: {log.AuditLogKey}");
         }
     }
+    // </SearchUserTaskAuditLogs>
     #endregion SearchUserTaskAuditLogs
 }

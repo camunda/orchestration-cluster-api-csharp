@@ -15,4 +15,8 @@
     <ProjectReference Include="../../src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="../../examples/*.cs" Link="ApiExamples/%(Filename)%(Extension)" />
+  </ItemGroup>
+
 </Project>

@@ -5,6 +5,7 @@ using Camunda.Orchestration.Sdk;
 public static class JobExamples
 {
     #region ActivateJobs
+    // <ActivateJobs>
     public static async Task ActivateJobsExample()
     {
         using var client = CamundaClient.Create();
@@ -22,26 +23,32 @@ public static class JobExamples
             Console.WriteLine($"Job: {job.JobKey}");
         }
     }
+    // </ActivateJobs>
     #endregion ActivateJobs
 
     #region CompleteJob
+
+    // <CompleteJob>
     public static async Task CompleteJobExample()
     {
         using var client = CamundaClient.Create();
 
         await client.CompleteJobAsync(
-            new JobKey("123456"),
+            JobKey.AssumeExists("123456"),
             new JobCompletionRequest());
     }
+    // </CompleteJob>
     #endregion CompleteJob
 
     #region FailJob
+
+    // <FailJob>
     public static async Task FailJobExample()
     {
         using var client = CamundaClient.Create();
 
         await client.FailJobAsync(
-            new JobKey("123456"),
+            JobKey.AssumeExists("123456"),
             new JobFailRequest
             {
                 Retries = 3,
@@ -49,38 +56,47 @@ public static class JobExamples
                 ErrorMessage = "Something went wrong",
             });
     }
+    // </FailJob>
     #endregion FailJob
 
     #region ThrowJobError
+
+    // <ThrowJobError>
     public static async Task ThrowJobErrorExample()
     {
         using var client = CamundaClient.Create();
 
         await client.ThrowJobErrorAsync(
-            new JobKey("123456"),
+            JobKey.AssumeExists("123456"),
             new JobErrorRequest
             {
                 ErrorCode = "VALIDATION_ERROR",
                 ErrorMessage = "Input validation failed",
             });
     }
+    // </ThrowJobError>
     #endregion ThrowJobError
 
     #region UpdateJob
+
+    // <UpdateJob>
     public static async Task UpdateJobExample()
     {
         using var client = CamundaClient.Create();
 
         await client.UpdateJobAsync(
-            new JobKey("123456"),
+            JobKey.AssumeExists("123456"),
             new JobUpdateRequest
             {
-                Retries = 3,
+                Changeset = new JobChangeset { Retries = 3 },
             });
     }
+    // </UpdateJob>
     #endregion UpdateJob
 
     #region SearchJobs
+
+    // <SearchJobs>
     public static async Task SearchJobsExample()
     {
         using var client = CamundaClient.Create();
@@ -92,5 +108,6 @@ public static class JobExamples
             Console.WriteLine($"Job: {job.JobKey}");
         }
     }
+    // </SearchJobs>
     #endregion SearchJobs
 }
