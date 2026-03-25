@@ -6,7 +6,7 @@ namespace Camunda.Orchestration.Sdk;
 /// Adaptive backpressure management. Mirrors the JS SDK's BackpressureManager.
 /// Tracks HTTP 429/503 signals and limits concurrent requests.
 /// </summary>
-internal sealed class BackpressureManager : IDisposable
+internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
 {
     private readonly ILogger _logger;
     private readonly BackpressureConfig _config;
@@ -39,7 +39,14 @@ internal sealed class BackpressureManager : IDisposable
         {
             try
             { _semaphore.Release(); }
-            catch (SemaphoreFullException) { /* ignore */ }
+            catch (SemaphoreFullException)
+            {
+                if (_logger.IsEnabled(LogLevel.Warning))
+                    _logger.LogWarning(
+                        "Backpressure: semaphore release overflow — a permit was released without a matching acquire. " +
+                        "This is usually harmless (e.g. a request was exempt from backpressure but still released). " +
+                        "If this appears frequently, check that backpressure-exempt operations are not inadvertently releasing permits.");
+            }
         }
     }
 
@@ -81,6 +88,12 @@ internal sealed class BackpressureManager : IDisposable
     public void Dispose()
     {
         _semaphore?.Dispose();
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        _semaphore?.Dispose();
+        return ValueTask.CompletedTask;
     }
 
     public BackpressureState GetState() => new()

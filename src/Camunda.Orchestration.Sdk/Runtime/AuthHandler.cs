@@ -57,6 +57,13 @@ internal sealed class AuthHandler : DelegatingHandler
         return await base.SendAsync(request, ct);
     }
 
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+            _oauth?.Dispose();
+        base.Dispose(disposing);
+    }
+
     // Expose for tests
     internal OAuthManager? OAuthManagerInternal => _oauth;
 }

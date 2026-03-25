@@ -93,7 +93,7 @@ public partial class CamundaClient : IAsyncDisposable
 
         if (_ownsHttpClient)
             _httpClient.Dispose();
-        _bp.Dispose();
+        await _bp.DisposeAsync().ConfigureAwait(false);
         GC.SuppressFinalize(this);
     }
 }

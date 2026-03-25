@@ -6,7 +6,7 @@ namespace Camunda.Orchestration.Sdk;
 /// OAuth token management with singleflight refresh, caching, and retry.
 /// Mirrors the JS SDK's OAuthManager.
 /// </summary>
-internal sealed class OAuthManager : IDisposable
+internal sealed class OAuthManager : IDisposable, IAsyncDisposable
 {
     private readonly CamundaConfig _config;
     private readonly ILogger _logger;
@@ -67,6 +67,12 @@ internal sealed class OAuthManager : IDisposable
     public void Dispose()
     {
         _refreshLock.Dispose();
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        _refreshLock.Dispose();
+        return ValueTask.CompletedTask;
     }
 
     private static bool ShouldRefresh(OAuthToken token)
