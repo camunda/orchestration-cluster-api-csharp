@@ -47,9 +47,4 @@ public sealed class CamundaOptions
     /// Logger factory for SDK logging.
     /// </summary>
     public ILoggerFactory? LoggerFactory { get; set; }
-
-    /// <summary>
-    /// If true (default), non-2xx HTTP responses throw instead of returning an error object.
-    /// </summary>
-    public bool ThrowOnError { get; set; } = true;
 }

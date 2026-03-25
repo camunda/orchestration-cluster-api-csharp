@@ -27,7 +27,6 @@ public partial class CamundaClient : IDisposable
     private readonly ILogger _logger;
     private readonly ILoggerFactory _loggerFactory;
     private readonly BackpressureManager _bp;
-    private readonly bool _throwOnError;
     internal readonly JsonSerializerOptions _jsonOptions;
 
     /// <summary>
@@ -45,8 +44,6 @@ public partial class CamundaClient : IDisposable
         var loggerFactory = options.LoggerFactory ?? CreateDefaultLoggerFactory(_config.LogLevel);
         _loggerFactory = loggerFactory;
         _logger = loggerFactory.CreateLogger<CamundaClient>();
-
-        _throwOnError = options.ThrowOnError;
 
         _jsonOptions = new JsonSerializerOptions
         {
@@ -170,8 +167,7 @@ public partial class CamundaClient : IDisposable
             if (_logger.IsEnabled(LogLevel.Warning))
                 _logger.LogWarning("HTTP {Method} {Path} failed with {Status}", method, path, (int)response.StatusCode);
 
-            if (_throwOnError)
-                throw exception;
+            throw exception;
         }
         else
         {
