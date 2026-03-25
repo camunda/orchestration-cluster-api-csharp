@@ -1,3 +1,11 @@
+# [8.9.0-alpha.16](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.15...v8.9.0-alpha.16) (2026-03-25)
+
+
+### Bug Fixes
+
+* add GroupId to CreateGroupRequest example ([8e6b004](https://github.com/camunda/orchestration-cluster-api-csharp/commit/8e6b004826cf0999b148db286d4fed81690f38de))
+* resolve PR review comments - add XML region tags, compile examples, fix types ([4e3136c](https://github.com/camunda/orchestration-cluster-api-csharp/commit/4e3136c364b3a9d38585a00c435091f079e909e1)), closes [#region](https://github.com/camunda/orchestration-cluster-api-csharp/issues/region)
+
 # [8.9.0-alpha.15](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.14...v8.9.0-alpha.15) (2026-03-24)
 
 
