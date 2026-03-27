@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Delegate JobHandler | Camunda C# SDK ">
       
-      <meta name="description" content="Delegate for job handler functions. Return the output variables to complete the job with, or null to complete with no output variables. To signal a BPMN error, throw . To explicitly fail a job with custom retries, throw . Any other unhandled exception auto-fails the job with retries - 1.">
+      <meta name="description" content="Delegate for job handler functions. Return the output variables to complete the job with, or null to complete with no output variables. Return a  to send a structured completion (e.g. with job corrections or a task denial). To signal a BPMN error, throw . To explicitly fail a job with custom retries, throw . Any other unhandled exception auto-fails the job with retries - 1.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_JobHandler" data-uid="Camunda.Orchestration.Sdk.JobHandler" class="text-break">
-Delegate JobHandler  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L14"><i class="bi bi-code-slash"></i></a>
+Delegate JobHandler  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -98,7 +98,9 @@ Delegate JobHandler  <a class="header-action link-secondary" title="View source"
   </div>
 
   <div class="markdown summary"><p>Delegate for job handler functions. Return the output variables to complete the
-job with, or <code>null</code> to complete with no output variables.</p>
+job with, or <code>null</code> to complete with no output variables.
+Return a <a class="xref" href="Camunda.Orchestration.Sdk.JobCompletionRequest.html">JobCompletionRequest</a> to send a structured completion
+(e.g. with job corrections or a task denial).</p>
 <p>To signal a BPMN error, throw <a class="xref" href="Camunda.Orchestration.Sdk.BpmnErrorException.html">BpmnErrorException</a>.</p>
 <p>To explicitly fail a job with custom retries, throw <a class="xref" href="Camunda.Orchestration.Sdk.JobFailureException.html">JobFailureException</a>.</p>
 <p>Any other unhandled exception auto-fails the job with <code>retries - 1</code>.</p>
@@ -112,15 +114,15 @@ job with, or <code>null</code> to complete with no output variables.</p>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>job</code> <a class="xref" href="Camunda.Orchestration.Sdk.ActivatedJob.html">ActivatedJob</a></dt>
-    <dd>Delegate for job handler functions. Return the output variables to complete the job with, or null to complete with no output variables. To signal a BPMN error, throw . To explicitly fail a job with custom retries, throw . Any other unhandled exception auto-fails the job with retries - 1.</dd>
+    <dd>Delegate for job handler functions. Return the output variables to complete the job with, or null to complete with no output variables. Return a  to send a structured completion (e.g. with job corrections or a task denial). To signal a BPMN error, throw . To explicitly fail a job with custom retries, throw . Any other unhandled exception auto-fails the job with retries - 1.</dd>
     <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
-    <dd>Delegate for job handler functions. Return the output variables to complete the job with, or null to complete with no output variables. To signal a BPMN error, throw . To explicitly fail a job with custom retries, throw . Any other unhandled exception auto-fails the job with retries - 1.</dd>
+    <dd>Delegate for job handler functions. Return the output variables to complete the job with, or null to complete with no output variables. Return a  to send a structured completion (e.g. with job corrections or a task denial). To signal a BPMN error, throw . To explicitly fail a job with custom retries, throw . Any other unhandled exception auto-fails the job with retries - 1.</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
-    <dd>Delegate for job handler functions. Return the output variables to complete the job with, or null to complete with no output variables. To signal a BPMN error, throw . To explicitly fail a job with custom retries, throw . Any other unhandled exception auto-fails the job with retries - 1.</dd>
+    <dd>Delegate for job handler functions. Return the output variables to complete the job with, or null to complete with no output variables. Return a  to send a structured completion (e.g. with job corrections or a task denial). To signal a BPMN error, throw . To explicitly fail a job with custom retries, throw . Any other unhandled exception auto-fails the job with retries - 1.</dd>
   </dl>
 
 
@@ -144,7 +146,7 @@ job with, or <code>null</code> to complete with no output variables.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L14" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L16" class="edit-link">Edit this page</a>
         </div>
 
 

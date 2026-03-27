@@ -2675,6 +2675,10 @@ For <b>output</b> (receiving variables), call <a class="xref" href="Camunda.Orch
       <dd><p>VariableValueFilterProperty</p>
 </dd>
     </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.WorkerDefaultsConfig.html">WorkerDefaultsConfig</a></dt>
+      <dd></dd>
+    </dl>
     <h3 id="structs">
 Structs
 </h3>
@@ -3265,7 +3269,9 @@ Delegates
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobHandler.html">JobHandler</a></dt>
       <dd><p>Delegate for job handler functions. Return the output variables to complete the
-job with, or <code>null</code> to complete with no output variables.</p>
+job with, or <code>null</code> to complete with no output variables.
+Return a <a class="xref" href="Camunda.Orchestration.Sdk.JobCompletionRequest.html">JobCompletionRequest</a> to send a structured completion
+(e.g. with job corrections or a task denial).</p>
 <p>To signal a BPMN error, throw <a class="xref" href="Camunda.Orchestration.Sdk.BpmnErrorException.html">BpmnErrorException</a>.</p>
 <p>To explicitly fail a job with custom retries, throw <a class="xref" href="Camunda.Orchestration.Sdk.JobFailureException.html">JobFailureException</a>.</p>
 <p>Any other unhandled exception auto-fails the job with <code>retries - 1</code>.</p>

@@ -10483,6 +10483,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaConfig.Validation
   fullName: Camunda.Orchestration.Sdk.CamundaConfig.Validation
   nameWithType: CamundaConfig.Validation
+- uid: Camunda.Orchestration.Sdk.CamundaConfig.WorkerDefaults
+  name: WorkerDefaults
+  href: api/Camunda.Orchestration.Sdk.CamundaConfig.WorkerDefaults.html#Camunda_Orchestration_Sdk_CamundaConfig_WorkerDefaults
+  commentId: P:Camunda.Orchestration.Sdk.CamundaConfig.WorkerDefaults
+  fullName: Camunda.Orchestration.Sdk.CamundaConfig.WorkerDefaults
+  nameWithType: CamundaConfig.WorkerDefaults
+- uid: Camunda.Orchestration.Sdk.CamundaConfig.WorkerDefaults*
+  name: WorkerDefaults
+  href: api/Camunda.Orchestration.Sdk.CamundaConfig.WorkerDefaults.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaConfig.WorkerDefaults
+  fullName: Camunda.Orchestration.Sdk.CamundaConfig.WorkerDefaults
+  nameWithType: CamundaConfig.WorkerDefaults
 - uid: Camunda.Orchestration.Sdk.CamundaConfigurationException
   name: CamundaConfigurationException
   href: api/Camunda.Orchestration.Sdk.CamundaConfigurationException.html
@@ -37147,3 +37159,69 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.VariableValueFilterProperty.Value
   fullName: Camunda.Orchestration.Sdk.VariableValueFilterProperty.Value
   nameWithType: VariableValueFilterProperty.Value
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig
+  name: WorkerDefaultsConfig
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.html
+  commentId: T:Camunda.Orchestration.Sdk.WorkerDefaultsConfig
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig
+  nameWithType: WorkerDefaultsConfig
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.JobTimeoutMs
+  name: JobTimeoutMs
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.JobTimeoutMs.html#Camunda_Orchestration_Sdk_WorkerDefaultsConfig_JobTimeoutMs
+  commentId: P:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.JobTimeoutMs
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.JobTimeoutMs
+  nameWithType: WorkerDefaultsConfig.JobTimeoutMs
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.JobTimeoutMs*
+  name: JobTimeoutMs
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.JobTimeoutMs.html
+  commentId: Overload:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.JobTimeoutMs
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.JobTimeoutMs
+  nameWithType: WorkerDefaultsConfig.JobTimeoutMs
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.MaxConcurrentJobs
+  name: MaxConcurrentJobs
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.MaxConcurrentJobs.html#Camunda_Orchestration_Sdk_WorkerDefaultsConfig_MaxConcurrentJobs
+  commentId: P:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.MaxConcurrentJobs
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.MaxConcurrentJobs
+  nameWithType: WorkerDefaultsConfig.MaxConcurrentJobs
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.MaxConcurrentJobs*
+  name: MaxConcurrentJobs
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.MaxConcurrentJobs.html
+  commentId: Overload:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.MaxConcurrentJobs
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.MaxConcurrentJobs
+  nameWithType: WorkerDefaultsConfig.MaxConcurrentJobs
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.PollTimeoutMs
+  name: PollTimeoutMs
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.PollTimeoutMs.html#Camunda_Orchestration_Sdk_WorkerDefaultsConfig_PollTimeoutMs
+  commentId: P:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.PollTimeoutMs
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.PollTimeoutMs
+  nameWithType: WorkerDefaultsConfig.PollTimeoutMs
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.PollTimeoutMs*
+  name: PollTimeoutMs
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.PollTimeoutMs.html
+  commentId: Overload:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.PollTimeoutMs
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.PollTimeoutMs
+  nameWithType: WorkerDefaultsConfig.PollTimeoutMs
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.StartupJitterMaxSeconds
+  name: StartupJitterMaxSeconds
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.StartupJitterMaxSeconds.html#Camunda_Orchestration_Sdk_WorkerDefaultsConfig_StartupJitterMaxSeconds
+  commentId: P:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.StartupJitterMaxSeconds
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.StartupJitterMaxSeconds
+  nameWithType: WorkerDefaultsConfig.StartupJitterMaxSeconds
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.StartupJitterMaxSeconds*
+  name: StartupJitterMaxSeconds
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.StartupJitterMaxSeconds.html
+  commentId: Overload:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.StartupJitterMaxSeconds
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.StartupJitterMaxSeconds
+  nameWithType: WorkerDefaultsConfig.StartupJitterMaxSeconds
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.WorkerName
+  name: WorkerName
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.WorkerName.html#Camunda_Orchestration_Sdk_WorkerDefaultsConfig_WorkerName
+  commentId: P:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.WorkerName
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.WorkerName
+  nameWithType: WorkerDefaultsConfig.WorkerName
+- uid: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.WorkerName*
+  name: WorkerName
+  href: api/Camunda.Orchestration.Sdk.WorkerDefaultsConfig.WorkerName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.WorkerDefaultsConfig.WorkerName
+  fullName: Camunda.Orchestration.Sdk.WorkerDefaultsConfig.WorkerName
+  nameWithType: WorkerDefaultsConfig.WorkerName

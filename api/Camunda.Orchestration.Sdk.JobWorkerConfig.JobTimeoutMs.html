@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_JobWorkerConfig_JobTimeoutMs_" data-uid="Camunda.Orchestration.Sdk.JobWorkerConfig.JobTimeoutMs*" class="text-break">
-Property JobTimeoutMs  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L30"><i class="bi bi-code-slash"></i></a>
+Property JobTimeoutMs  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L33"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,16 +121,17 @@ Property JobTimeoutMs  <a class="header-action link-secondary" title="View sourc
 
 <h3 id="Camunda_Orchestration_Sdk_JobWorkerConfig_JobTimeoutMs" data-uid="Camunda.Orchestration.Sdk.JobWorkerConfig.JobTimeoutMs">
   JobTimeoutMs
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L33"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>How long (in ms) the job is reserved for this worker before the broker
-makes it available to other workers.</p>
+makes it available to other workers.
+Falls back to <code>CAMUNDA_WORKER_TIMEOUT</code> environment variable.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public required long JobTimeoutMs { get; init; }</code></pre>
+  <pre><code class="lang-csharp hljs">public long? JobTimeoutMs { get; init; }</code></pre>
 </div>
 
 
@@ -139,7 +140,7 @@ makes it available to other workers.</p>
 
 <h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
   <dd></dd>
 </dl>
 
@@ -153,7 +154,7 @@ makes it available to other workers.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L30" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L33" class="edit-link">Edit this page</a>
         </div>
 
 
