@@ -37,6 +37,7 @@ public sealed class CamundaConfig
     public ValidationConfig Validation { get; init; } = new();
     public string LogLevel { get; init; } = "error";
     public EventualConfig? Eventual { get; init; }
+    public WorkerDefaultsConfig? WorkerDefaults { get; init; }
 }
 
 public sealed class HttpRetryConfig
@@ -100,4 +101,13 @@ public sealed class ValidationConfig
 public sealed class EventualConfig
 {
     public int PollDefaultMs { get; init; } = 500;
+}
+
+public sealed class WorkerDefaultsConfig
+{
+    public long? JobTimeoutMs { get; init; }
+    public int? MaxConcurrentJobs { get; init; }
+    public long? PollTimeoutMs { get; init; }
+    public string? WorkerName { get; init; }
+    public double? StartupJitterMaxSeconds { get; init; }
 }

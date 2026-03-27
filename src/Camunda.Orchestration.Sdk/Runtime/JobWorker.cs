@@ -6,6 +6,8 @@ namespace Camunda.Orchestration.Sdk;
 /// <summary>
 /// Delegate for job handler functions. Return the output variables to complete the
 /// job with, or <c>null</c> to complete with no output variables.
+/// Return a <see cref="JobCompletionRequest"/> to send a structured completion
+/// (e.g. with job corrections or a task denial).
 ///
 /// <para>To signal a BPMN error, throw <see cref="BpmnErrorException"/>.</para>
 /// <para>To explicitly fail a job with custom retries, throw <see cref="JobFailureException"/>.</para>
@@ -26,8 +28,9 @@ public sealed class JobWorkerConfig
     /// <summary>
     /// How long (in ms) the job is reserved for this worker before the broker
     /// makes it available to other workers.
+    /// Falls back to <c>CAMUNDA_WORKER_TIMEOUT</c> environment variable.
     /// </summary>
-    public required long JobTimeoutMs { get; init; }
+    public long? JobTimeoutMs { get; init; }
 
     /// <summary>
     /// Maximum number of jobs that may be in-flight (activated and being handled)
@@ -43,8 +46,9 @@ public sealed class JobWorkerConfig
     /// to avoid over-subscribing the thread pool.
     /// </para>
     /// <para>Set to <c>1</c> for sequential (single-job-at-a-time) processing.</para>
+    /// <para>Falls back to <c>CAMUNDA_WORKER_MAX_CONCURRENT_JOBS</c> environment variable, then <c>10</c>.</para>
     /// </summary>
-    public int MaxConcurrentJobs { get; init; } = 10;
+    public int? MaxConcurrentJobs { get; init; }
 
     /// <summary>
     /// Delay (in ms) between poll cycles when no jobs are available or when at capacity.
@@ -189,6 +193,8 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     private readonly string _name;
     private readonly ILogger _logger;
     private readonly JsonSerializerOptions _jsonOptions;
+    private readonly long _jobTimeoutMs;
+    private readonly int _maxConcurrentJobs;
 
     private CancellationTokenSource? _cts;
     private Task? _pollTask;
@@ -205,6 +211,18 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         _config = config;
         _handler = handler;
         _jsonOptions = jsonOptions;
+
+        if (config.JobTimeoutMs is null)
+            throw new ArgumentException(
+                "JobTimeoutMs is required: set it on JobWorkerConfig or via CAMUNDA_WORKER_TIMEOUT environment variable.",
+                nameof(config));
+        if (config.MaxConcurrentJobs is null)
+            throw new ArgumentException(
+                "MaxConcurrentJobs is required: set it on JobWorkerConfig, via CAMUNDA_WORKER_MAX_CONCURRENT_JOBS environment variable, or accept the default (10).",
+                nameof(config));
+
+        _jobTimeoutMs = config.JobTimeoutMs.Value;
+        _maxConcurrentJobs = config.MaxConcurrentJobs.Value;
         _name = config.WorkerName ?? $"worker-{config.JobType}-{Interlocked.Increment(ref _counter)}";
         _logger = loggerFactory.CreateLogger($"Camunda.Orchestration.Sdk.JobWorker.{_name}");
 
@@ -304,7 +322,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         {
             while (!ct.IsCancellationRequested)
             {
-                var capacity = _config.MaxConcurrentJobs - ActiveJobs;
+                var capacity = _maxConcurrentJobs - ActiveJobs;
                 if (capacity <= 0)
                 {
                     await Task.Delay(_config.PollIntervalMs, ct).ConfigureAwait(false);
@@ -317,7 +335,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                     {
                         Type = _config.JobType,
                         Worker = _name,
-                        Timeout = _config.JobTimeoutMs,
+                        Timeout = _jobTimeoutMs,
                         MaxJobsToActivate = capacity,
                         FetchVariable = _config.FetchVariables,
                         RequestTimeout = _config.PollTimeoutMs ?? 0,
@@ -373,11 +391,14 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         {
             var result = await _handler(job, ct).ConfigureAwait(false);
 
-            // Auto-complete with the returned variables
-            await _client.CompleteJobAsync(job.JobKey, new JobCompletionRequest
-            {
-                Variables = result,
-            }, ct: ct).ConfigureAwait(false);
+            // If the handler returned a full JobCompletionRequest (e.g. with
+            // corrections or a denial), forward it as-is. Otherwise treat the
+            // return value as output variables.
+            var completionRequest = result is JobCompletionRequest req
+                ? req
+                : new JobCompletionRequest { Variables = result };
+
+            await _client.CompleteJobAsync(job.JobKey, completionRequest, ct: ct).ConfigureAwait(false);
 
             if (_logger.IsEnabled(LogLevel.Debug))
                 _logger.LogDebug("JobWorker '{Name}': completed job {JobKey}", _name, job.JobKey);

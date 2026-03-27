@@ -699,6 +699,7 @@ The handler return value determines the job outcome:
 |---|---|
 | Return `object` | Auto-complete with those variables |
 | Return `null` | Auto-complete with no variables |
+| Return `JobCompletionRequest` | Complete with structured result (corrections, denial) |
 | Throw `BpmnErrorException` | Trigger a BPMN error boundary event |
 | Throw `JobFailureException` | Fail with custom retries / back-off |
 | Throw any other exception | Auto-fail with `retries - 1` |
@@ -710,6 +711,46 @@ throw new BpmnErrorException("INVALID_ORDER", "Order not found");
 
 // Explicit failure with retry control
 throw new JobFailureException("Service unavailable", retries: 2, retryBackOffMs: 5000);
+```
+
+### Job Corrections (User Task Listeners)
+
+When handling jobs from [user task listeners](https://docs.camunda.io/docs/components/concepts/user-task-listeners/), you can return a `JobCompletionRequest` to apply corrections to the task or deny the action. Return a `JobCompletionRequest` from the handler instead of a plain variables object:
+
+```csharp
+client.CreateJobWorker(config, async (job, ct) =>
+{
+    // Apply corrections to the user task
+    return new JobCompletionRequest
+    {
+        Variables = new { reviewed = true },
+        Result = new JobResultUserTask
+        {
+            Corrections = new JobResultCorrections
+            {
+                Assignee = "new-assignee",
+                Priority = 75,
+                CandidateGroups = new List<string> { "managers" },
+            },
+        },
+    };
+});
+```
+
+To deny the user task action (e.g. reject a completion):
+
+```csharp
+client.CreateJobWorker(config, async (job, ct) =>
+{
+    return new JobCompletionRequest
+    {
+        Result = new JobResultUserTask
+        {
+            Denied = true,
+            DeniedReason = "Missing required fields",
+        },
+    };
+});
 ```
 
 ### Void Handler (No Output Variables)
@@ -732,14 +773,63 @@ client.CreateJobWorker(config, async (job, ct) =>
 | Property | Default | Description |
 |---|---|---|
 | `JobType` | *(required)* | BPMN task type to subscribe to |
-| `JobTimeoutMs` | *(required)* | Job lock duration (ms) |
-| `MaxConcurrentJobs` | `10` | Max in-flight jobs per worker |
+| `JobTimeoutMs` | *(env / required)* | Job lock duration (ms). Falls back to `CAMUNDA_WORKER_TIMEOUT` env var. |
+| `MaxConcurrentJobs` | `10` | Max in-flight jobs per worker. Falls back to `CAMUNDA_WORKER_MAX_CONCURRENT_JOBS` env var, then `10`. |
 | `PollIntervalMs` | `500` | Delay between polls when idle |
-| `PollTimeoutMs` | `null` | Long-poll timeout (null = broker default) |
+| `PollTimeoutMs` | `null` | Long-poll timeout (null = broker default). Falls back to `CAMUNDA_WORKER_REQUEST_TIMEOUT` env var. |
 | `FetchVariables` | `null` | Variable names to fetch (null = all) |
-| `WorkerName` | auto | Worker name for logging |
+| `WorkerName` | auto | Worker name for logging. Falls back to `CAMUNDA_WORKER_NAME` env var. |
 | `AutoStart` | `true` | Start polling on creation |
-| `StartupJitterMaxSeconds` | `0` | Max random delay (seconds) before first poll. Spreads out activation requests when multiple instances restart simultaneously. `0` = no delay. |
+| `StartupJitterMaxSeconds` | `0` | Max random delay (seconds) before first poll. Falls back to `CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS` env var. |
+
+### Heritable Worker Defaults
+
+When running many workers with the same base configuration, you can set global defaults via environment variables. These apply to every worker created by the client unless the individual `JobWorkerConfig` explicitly overrides them.
+
+| Environment Variable | Config Property | Type |
+|---|---|---|
+| `CAMUNDA_WORKER_TIMEOUT` | `JobTimeoutMs` | long |
+| `CAMUNDA_WORKER_MAX_CONCURRENT_JOBS` | `MaxConcurrentJobs` | int |
+| `CAMUNDA_WORKER_REQUEST_TIMEOUT` | `PollTimeoutMs` | long |
+| `CAMUNDA_WORKER_NAME` | `WorkerName` | string |
+| `CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS` | `StartupJitterMaxSeconds` | int |
+
+**Precedence:** explicit `JobWorkerConfig` value > environment variable > hardcoded default.
+
+```bash
+export CAMUNDA_WORKER_TIMEOUT=30000
+export CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=8
+export CAMUNDA_WORKER_NAME=order-service
+```
+
+```csharp
+// Workers inherit timeout, concurrency, and name from environment
+client.CreateJobWorker(
+    new JobWorkerConfig { JobType = "validate-order" },
+    async (job, ct) => null);
+
+client.CreateJobWorker(
+    new JobWorkerConfig { JobType = "ship-order" },
+    async (job, ct) => null);
+
+// Per-worker override: this worker uses 32 concurrent jobs instead of the global 8
+client.CreateJobWorker(
+    new JobWorkerConfig { JobType = "bulk-import", MaxConcurrentJobs = 32 },
+    async (job, ct) => null);
+```
+
+You can also pass defaults programmatically via the client constructor:
+
+```csharp
+var client = CamundaClient.Create(new CamundaOptions
+{
+    Config = new Dictionary<string, string>
+    {
+        ["CAMUNDA_WORKER_TIMEOUT"] = "30000",
+        ["CAMUNDA_WORKER_MAX_CONCURRENT_JOBS"] = "8",
+    },
+});
+```
 
 ### Concurrency
 
