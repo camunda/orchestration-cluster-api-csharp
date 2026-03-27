@@ -24524,8 +24524,7 @@
         "enum": [
           "PROVIDED",
           "ASSIGNED"
-        ],
-        "default": "PROVIDED"
+        ]
       },
       "JobStateEnum": {
         "description": "The state of the job.",
