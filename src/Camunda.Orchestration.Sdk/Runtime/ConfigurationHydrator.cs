@@ -104,7 +104,10 @@ public static class ConfigurationHydrator
                          "CAMUNDA_CLIENT_ID", "CAMUNDA_CLIENT_SECRET",
                          "CAMUNDA_BASIC_AUTH_USERNAME", "CAMUNDA_BASIC_AUTH_PASSWORD",
                          "CAMUNDA_OAUTH_SCOPE", "CAMUNDA_OAUTH_CACHE_DIR",
-                         "ZEEBE_REST_ADDRESS"
+                         "ZEEBE_REST_ADDRESS",
+                         "CAMUNDA_WORKER_TIMEOUT", "CAMUNDA_WORKER_MAX_CONCURRENT_JOBS",
+                         "CAMUNDA_WORKER_REQUEST_TIMEOUT", "CAMUNDA_WORKER_NAME",
+                         "CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS"
                      })
             {
                 var v = Environment.GetEnvironmentVariable(extra);
@@ -246,6 +249,23 @@ public static class ConfigurationHydrator
         var oauthRetryBaseDelayMs = ParseInt("CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS", 1000);
         var eventualPollDefaultMs = ParseInt("CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS", 500);
 
+        // Parse optional worker defaults
+        int? workerTimeout = rawMap.ContainsKey("CAMUNDA_WORKER_TIMEOUT")
+            ? ParseInt("CAMUNDA_WORKER_TIMEOUT", 0)
+            : null;
+        int? workerMaxConcurrent = rawMap.ContainsKey("CAMUNDA_WORKER_MAX_CONCURRENT_JOBS")
+            ? ParseInt("CAMUNDA_WORKER_MAX_CONCURRENT_JOBS", 0)
+            : null;
+        int? workerRequestTimeout = rawMap.ContainsKey("CAMUNDA_WORKER_REQUEST_TIMEOUT")
+            ? ParseInt("CAMUNDA_WORKER_REQUEST_TIMEOUT", 0)
+            : null;
+        var workerName = rawMap.GetValueOrDefault("CAMUNDA_WORKER_NAME");
+        int? workerJitter = rawMap.ContainsKey("CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS")
+            ? ParseInt("CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS", 0)
+            : null;
+        var hasWorkerDefaults = workerTimeout != null || workerMaxConcurrent != null
+            || workerRequestTimeout != null || workerName != null || workerJitter != null;
+
         if (errors.Count > 0)
             throw new CamundaConfigurationException(errors);
 
@@ -313,6 +333,16 @@ public static class ConfigurationHydrator
             {
                 PollDefaultMs = eventualPollDefaultMs,
             },
+            WorkerDefaults = hasWorkerDefaults
+                ? new WorkerDefaultsConfig
+                {
+                    JobTimeoutMs = workerTimeout,
+                    MaxConcurrentJobs = workerMaxConcurrent,
+                    PollTimeoutMs = workerRequestTimeout,
+                    WorkerName = workerName,
+                    StartupJitterMaxSeconds = workerJitter,
+                }
+                : null,
         };
     }
 
@@ -430,6 +460,13 @@ public static class ConfigurationHydrator
 
         // Eventual consistency
         ["Eventual:PollDefaultMs"] = "CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS",
+
+        // Worker defaults
+        ["Worker:Timeout"] = "CAMUNDA_WORKER_TIMEOUT",
+        ["Worker:MaxConcurrentJobs"] = "CAMUNDA_WORKER_MAX_CONCURRENT_JOBS",
+        ["Worker:RequestTimeout"] = "CAMUNDA_WORKER_REQUEST_TIMEOUT",
+        ["Worker:Name"] = "CAMUNDA_WORKER_NAME",
+        ["Worker:StartupJitterMaxSeconds"] = "CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS",
     };
 
     /// <summary>

@@ -77,10 +77,10 @@ public class JobWorkerTests
         var config = new JobWorkerConfig
         {
             JobType = "my-type",
-            JobTimeoutMs = 30000,
         };
 
-        config.MaxConcurrentJobs.Should().Be(10);
+        config.MaxConcurrentJobs.Should().BeNull();
+        config.JobTimeoutMs.Should().BeNull();
         config.PollIntervalMs.Should().Be(500);
         config.PollTimeoutMs.Should().BeNull();
         config.FetchVariables.Should().BeNull();

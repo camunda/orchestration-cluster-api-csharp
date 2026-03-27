@@ -23,7 +23,22 @@ public partial class CamundaClient : IAsyncDisposable
     /// <returns>The running <see cref="JobWorker"/> instance.</returns>
     public JobWorker CreateJobWorker(JobWorkerConfig config, JobHandler handler)
     {
-        var worker = new JobWorker(this, config, handler, _loggerFactory, _jsonOptions);
+        var defaults = _config.WorkerDefaults;
+        var merged = new JobWorkerConfig
+        {
+            JobType = config.JobType,
+            JobTimeoutMs = config.JobTimeoutMs ?? defaults?.JobTimeoutMs,
+            MaxConcurrentJobs = config.MaxConcurrentJobs ?? defaults?.MaxConcurrentJobs ?? 10,
+            PollIntervalMs = config.PollIntervalMs,
+            PollTimeoutMs = config.PollTimeoutMs ?? defaults?.PollTimeoutMs,
+            FetchVariables = config.FetchVariables,
+            WorkerName = config.WorkerName ?? defaults?.WorkerName,
+            AutoStart = config.AutoStart,
+            StartupJitterMaxSeconds = config.StartupJitterMaxSeconds > 0
+                ? config.StartupJitterMaxSeconds
+                : defaults?.StartupJitterMaxSeconds ?? 0,
+        };
+        var worker = new JobWorker(this, merged, handler, _loggerFactory, _jsonOptions);
         _workers.Add(worker);
         return worker;
     }
