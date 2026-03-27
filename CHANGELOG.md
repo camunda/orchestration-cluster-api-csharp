@@ -1,3 +1,16 @@
+# [8.9.0-alpha.18](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.17...v8.9.0-alpha.18) (2026-03-27)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([6a4276e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6a4276e0fcd2293604939517c9c507d297738a7f))
+
+
+### Features
+
+* heritable worker defaults via CAMUNDA_WORKER_* env vars ([3233cd7](https://github.com/camunda/orchestration-cluster-api-csharp/commit/3233cd704a1cb7be2f7c38be7a7f4d6f509b73f2))
+* support job corrections and denial in worker handlers ([f19a8bf](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f19a8bf41fd1ea83e0600820ad768975c103ef0e))
+
 # [8.9.0-alpha.17](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.16...v8.9.0-alpha.17) (2026-03-25)
 
 
