@@ -361,4 +361,85 @@ internal static class ReadmeExamples
 
     private static Task SendNotification(NotificationInput input, CancellationToken ct) =>
         Task.CompletedTask;
+
+    private static void JobCorrectionsExample()
+    {
+        using var client = CamundaClient.Create();
+        var config = new JobWorkerConfig { JobType = "validate-task", JobTimeoutMs = 30_000 };
+
+        // <JobCorrections>
+        client.CreateJobWorker(config, async (job, ct) =>
+        {
+            // Apply corrections to the user task
+            return new JobCompletionRequest
+            {
+                Variables = new { reviewed = true },
+                Result = new JobResultUserTask
+                {
+                    Corrections = new JobResultCorrections
+                    {
+                        Assignee = "new-assignee",
+                        Priority = 75,
+                        CandidateGroups = new List<string> { "managers" },
+                    },
+                },
+            };
+        });
+        // </JobCorrections>
+    }
+
+    private static void JobCorrectionsDeniedExample()
+    {
+        using var client = CamundaClient.Create();
+        var config = new JobWorkerConfig { JobType = "review-task", JobTimeoutMs = 30_000 };
+
+        // <JobCorrectionsDenied>
+        client.CreateJobWorker(config, async (job, ct) =>
+        {
+            return new JobCompletionRequest
+            {
+                Result = new JobResultUserTask
+                {
+                    Denied = true,
+                    DeniedReason = "Missing required fields",
+                },
+            };
+        });
+        // </JobCorrectionsDenied>
+    }
+
+    private static void WorkerDefaultsEnvExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // <WorkerDefaultsEnv>
+        // Workers inherit timeout, concurrency, and name from environment
+        client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "validate-order" },
+            async (job, ct) => null);
+
+        client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "ship-order" },
+            async (job, ct) => null);
+
+        // Per-worker override: this worker uses 32 concurrent jobs instead of the global 8
+        client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "bulk-import", MaxConcurrentJobs = 32 },
+            async (job, ct) => null);
+        // </WorkerDefaultsEnv>
+    }
+
+    private static void WorkerDefaultsClientExample()
+    {
+        // <WorkerDefaultsClient>
+        var client = CamundaClient.Create(new CamundaOptions
+        {
+            Config = new Dictionary<string, string>
+            {
+                ["CAMUNDA_WORKER_TIMEOUT"] = "30000",
+                ["CAMUNDA_WORKER_MAX_CONCURRENT_JOBS"] = "8",
+            },
+        });
+        // </WorkerDefaultsClient>
+    }
 }

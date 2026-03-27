@@ -717,6 +717,7 @@ throw new JobFailureException("Service unavailable", retries: 2, retryBackOffMs:
 
 When handling jobs from [user task listeners](https://docs.camunda.io/docs/components/concepts/user-task-listeners/), you can return a `JobCompletionRequest` to apply corrections to the task or deny the action. Return a `JobCompletionRequest` from the handler instead of a plain variables object:
 
+<!-- snippet:JobCorrections -->
 ```csharp
 client.CreateJobWorker(config, async (job, ct) =>
 {
@@ -739,6 +740,7 @@ client.CreateJobWorker(config, async (job, ct) =>
 
 To deny the user task action (e.g. reject a completion):
 
+<!-- snippet:JobCorrectionsDenied -->
 ```csharp
 client.CreateJobWorker(config, async (job, ct) =>
 {
@@ -802,6 +804,7 @@ export CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=8
 export CAMUNDA_WORKER_NAME=order-service
 ```
 
+<!-- snippet:WorkerDefaultsEnv -->
 ```csharp
 // Workers inherit timeout, concurrency, and name from environment
 client.CreateJobWorker(
@@ -820,6 +823,7 @@ client.CreateJobWorker(
 
 You can also pass defaults programmatically via the client constructor:
 
+<!-- snippet:WorkerDefaultsClient -->
 ```csharp
 var client = CamundaClient.Create(new CamundaOptions
 {
