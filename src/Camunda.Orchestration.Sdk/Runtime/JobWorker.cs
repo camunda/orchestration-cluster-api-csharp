@@ -6,6 +6,8 @@ namespace Camunda.Orchestration.Sdk;
 /// <summary>
 /// Delegate for job handler functions. Return the output variables to complete the
 /// job with, or <c>null</c> to complete with no output variables.
+/// Return a <see cref="JobCompletionRequest"/> to send a structured completion
+/// (e.g. with job corrections or a task denial).
 ///
 /// <para>To signal a BPMN error, throw <see cref="BpmnErrorException"/>.</para>
 /// <para>To explicitly fail a job with custom retries, throw <see cref="JobFailureException"/>.</para>
@@ -373,11 +375,14 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         {
             var result = await _handler(job, ct).ConfigureAwait(false);
 
-            // Auto-complete with the returned variables
-            await _client.CompleteJobAsync(job.JobKey, new JobCompletionRequest
-            {
-                Variables = result,
-            }, ct: ct).ConfigureAwait(false);
+            // If the handler returned a full JobCompletionRequest (e.g. with
+            // corrections or a denial), forward it as-is. Otherwise treat the
+            // return value as output variables.
+            var completionRequest = result is JobCompletionRequest req
+                ? req
+                : new JobCompletionRequest { Variables = result };
+
+            await _client.CompleteJobAsync(job.JobKey, completionRequest, ct: ct).ConfigureAwait(false);
 
             if (_logger.IsEnabled(LogLevel.Debug))
                 _logger.LogDebug("JobWorker '{Name}': completed job {JobKey}", _name, job.JobKey);

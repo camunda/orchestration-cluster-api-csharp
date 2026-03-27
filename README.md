@@ -699,6 +699,7 @@ The handler return value determines the job outcome:
 |---|---|
 | Return `object` | Auto-complete with those variables |
 | Return `null` | Auto-complete with no variables |
+| Return `JobCompletionRequest` | Complete with structured result (corrections, denial) |
 | Throw `BpmnErrorException` | Trigger a BPMN error boundary event |
 | Throw `JobFailureException` | Fail with custom retries / back-off |
 | Throw any other exception | Auto-fail with `retries - 1` |
@@ -710,6 +711,46 @@ throw new BpmnErrorException("INVALID_ORDER", "Order not found");
 
 // Explicit failure with retry control
 throw new JobFailureException("Service unavailable", retries: 2, retryBackOffMs: 5000);
+```
+
+### Job Corrections (User Task Listeners)
+
+When handling jobs from [user task listeners](https://docs.camunda.io/docs/components/concepts/user-task-listeners/), you can return a `JobCompletionRequest` to apply corrections to the task or deny the action. Return a `JobCompletionRequest` from the handler instead of a plain variables object:
+
+```csharp
+client.CreateJobWorker(config, async (job, ct) =>
+{
+    // Apply corrections to the user task
+    return new JobCompletionRequest
+    {
+        Variables = new { reviewed = true },
+        Result = new JobResultUserTask
+        {
+            Corrections = new JobResultCorrections
+            {
+                Assignee = "new-assignee",
+                Priority = 75,
+                CandidateGroups = new List<string> { "managers" },
+            },
+        },
+    };
+});
+```
+
+To deny the user task action (e.g. reject a completion):
+
+```csharp
+client.CreateJobWorker(config, async (job, ct) =>
+{
+    return new JobCompletionRequest
+    {
+        Result = new JobResultUserTask
+        {
+            Denied = true,
+            DeniedReason = "Missing required fields",
+        },
+    };
+});
 ```
 
 ### Void Handler (No Output Variables)

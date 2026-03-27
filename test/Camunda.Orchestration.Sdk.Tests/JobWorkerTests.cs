@@ -305,6 +305,94 @@ public class JobWorkerTests
         worker.IsRunning.Should().BeFalse();
     }
 
+    // ---- JobCompletionRequest detection ----
+
+    [Fact]
+    public void Handler_Returning_JobCompletionRequest_Is_Forwarded_AsIs()
+    {
+        // Mirrors the pattern in ExecuteJobAsync: when the handler returns a
+        // JobCompletionRequest, it should be forwarded directly (not wrapped).
+        var corrections = new JobResultCorrections
+        {
+            Assignee = "new-assignee",
+            Priority = 75,
+            CandidateGroups = new List<string> { "managers" },
+        };
+        var completionRequest = new JobCompletionRequest
+        {
+            Variables = new { approved = true },
+            Result = new JobResultUserTask
+            {
+                Corrections = corrections,
+            },
+        };
+        object? result = completionRequest;
+
+        var actual = result is JobCompletionRequest req
+            ? req
+            : new JobCompletionRequest { Variables = result };
+
+        actual.Should().BeSameAs(completionRequest);
+        actual.Result.Should().BeOfType<JobResultUserTask>();
+
+        var userTask = (JobResultUserTask)actual.Result!;
+        userTask.Corrections!.Assignee.Should().Be("new-assignee");
+        userTask.Corrections.Priority.Should().Be(75);
+        userTask.Corrections.CandidateGroups.Should().ContainSingle().Which.Should().Be("managers");
+    }
+
+    [Fact]
+    public void Handler_Returning_PlainObject_Is_Wrapped_As_Variables()
+    {
+        // When the handler returns a plain object (not JobCompletionRequest),
+        // it should be wrapped in a new JobCompletionRequest as Variables.
+        var output = new OrderOutput(true, "INV-001");
+        object? result = output;
+
+        var actual = result is JobCompletionRequest req
+            ? req
+            : new JobCompletionRequest { Variables = result };
+
+        actual.Variables.Should().BeSameAs(output);
+        actual.Result.Should().BeNull();
+    }
+
+    [Fact]
+    public void Handler_Returning_Null_Is_Wrapped_As_Empty_Variables()
+    {
+        object? result = null;
+
+        var actual = result is JobCompletionRequest req
+            ? req
+            : new JobCompletionRequest { Variables = result };
+
+        actual.Variables.Should().BeNull();
+        actual.Result.Should().BeNull();
+    }
+
+    [Fact]
+    public void Handler_Returning_Denial_Is_Forwarded()
+    {
+        var completionRequest = new JobCompletionRequest
+        {
+            Result = new JobResultUserTask
+            {
+                Denied = true,
+                DeniedReason = "Missing required fields",
+            },
+        };
+        object? result = completionRequest;
+
+        var actual = result is JobCompletionRequest req
+            ? req
+            : new JobCompletionRequest { Variables = result };
+
+        actual.Should().BeSameAs(completionRequest);
+        var userTask = (JobResultUserTask)actual.Result!;
+        userTask.Denied.Should().BeTrue();
+        userTask.DeniedReason.Should().Be("Missing required fields");
+    }
+
     // ---- Helpers ----
 
     private static readonly JsonSerializerOptions s_testJsonOptions = new()
