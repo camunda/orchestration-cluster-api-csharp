@@ -140,4 +140,23 @@ public static class UserTaskExamples
     }
     // </SearchUserTaskAuditLogs>
     #endregion SearchUserTaskAuditLogs
+
+    #region SearchUserTaskEffectiveVariables
+
+    // <SearchUserTaskEffectiveVariables>
+    public static async Task SearchUserTaskEffectiveVariablesExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchUserTaskEffectiveVariablesAsync(
+            UserTaskKey.AssumeExists("123456"),
+            new SearchUserTaskEffectiveVariablesRequest());
+
+        foreach (var variable in result.Items)
+        {
+            Console.WriteLine($"Variable: {variable.Name}");
+        }
+    }
+    // </SearchUserTaskEffectiveVariables>
+    #endregion SearchUserTaskEffectiveVariables
 }

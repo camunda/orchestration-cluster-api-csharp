@@ -30,4 +30,56 @@ public static class DocumentExamples
     }
     // </DeleteDocument>
     #endregion DeleteDocument
+
+    #region CreateDocument
+
+    // <CreateDocument>
+    public static async Task CreateDocumentExample()
+    {
+        using var client = CamundaClient.Create();
+
+        using var content = new MultipartFormDataContent();
+        content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes("Hello, world!")), "file", "hello.txt");
+
+        var result = await client.CreateDocumentAsync(content);
+
+        Console.WriteLine($"Document ID: {result.DocumentId}");
+    }
+    // </CreateDocument>
+    #endregion CreateDocument
+
+    #region CreateDocuments
+
+    // <CreateDocuments>
+    public static async Task CreateDocumentsExample()
+    {
+        using var client = CamundaClient.Create();
+
+        using var content = new MultipartFormDataContent();
+        content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes("File one")), "files", "one.txt");
+        content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes("File two")), "files", "two.txt");
+
+        var result = await client.CreateDocumentsAsync(content);
+
+        foreach (var doc in result.CreatedDocuments)
+        {
+            Console.WriteLine($"Created: {doc.DocumentId}");
+        }
+    }
+    // </CreateDocuments>
+    #endregion CreateDocuments
+
+    #region GetDocument
+
+    // <GetDocument>
+    public static async Task GetDocumentExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var content = await client.GetDocumentAsync(DocumentId.AssumeExists("doc-123"));
+
+        Console.WriteLine($"Downloaded document: doc-123");
+    }
+    // </GetDocument>
+    #endregion GetDocument
 }
