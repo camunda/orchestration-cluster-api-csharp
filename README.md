@@ -50,7 +50,7 @@ In the vast majority of use-cases, this will not be an issue; but you should be 
 
 Keep configuration out of application code. Let the factory read `CAMUNDA_*` variables from the environment (12-factor style). This makes rotation, secret management, and environment promotion safer and simpler.
 
-<!-- snippet:UsingDirective+QuickStart -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+QuickStart -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -88,7 +88,7 @@ CAMUNDA_DEFAULT_TENANT_ID=<default>            # optional: override default tena
 
 Use only when you must supply or mutate configuration dynamically (e.g. multi-tenant routing, tests, ephemeral preview environments). Keys mirror their `CAMUNDA_*` env names:
 
-<!-- snippet:UsingDirective+ProgrammaticOverrides -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+ProgrammaticOverrides -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -131,7 +131,7 @@ The SDK can read configuration from any `IConfiguration` source (appsettings.jso
 
 Pass the section to the client:
 
-<!-- snippet:UsingDirective+AppSettingsConfig -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+AppSettingsConfig -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -209,7 +209,7 @@ For ASP.NET Core and other DI-based applications, use the `AddCamundaClient()` e
 
 **Zero-config** (environment variables only):
 
-<!-- snippet:UsingDirective+DIZeroConfig -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DIZeroConfig -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -219,7 +219,7 @@ builder.Services.AddCamundaClient();
 
 **With `appsettings.json`**:
 
-<!-- snippet:UsingDirective+DIAppSettings -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DIAppSettings -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -229,7 +229,7 @@ builder.Services.AddCamundaClient(builder.Configuration.GetSection("Camunda"));
 
 **With options callback** (full control):
 
-<!-- snippet:UsingDirective+DIOptionsCallback -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DIOptionsCallback -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -242,7 +242,7 @@ builder.Services.AddCamundaClient(options =>
 
 Inject the client anywhere via constructor injection:
 
-<!-- snippet:DIControllerInjection -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: DIControllerInjection -->
 ```csharp
 public class OrderController(CamundaClient camunda) : ControllerBase
 {
@@ -261,7 +261,7 @@ public class OrderController(CamundaClient camunda) : ControllerBase
 
 ### Custom HttpClient
 
-<!-- snippet:UsingDirective+CustomHttpClient -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+CustomHttpClient -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -388,7 +388,7 @@ The `LEGACY` profile disables adaptive gating entirely — signals are still tra
 
 #### Inspecting State Programmatically
 
-<!-- snippet:BackpressureState -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: BackpressureState -->
 ```csharp
 var state = client.GetBackpressureState();
 // state.Severity: "healthy", "soft", or "severe"
@@ -429,7 +429,7 @@ Output uses a tagged format matching the JS SDK:
 
 Pass an `ILoggerFactory` via `CamundaOptions` to integrate with your application's logging:
 
-<!-- snippet:UsingDirective+InjectLogger -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+InjectLogger -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -452,7 +452,7 @@ When an `ILoggerFactory` is provided, `CAMUNDA_SDK_LOG_LEVEL` is ignored — fil
 
 When using `AddCamundaClient()`, the SDK automatically resolves `ILoggerFactory` from the DI container — no manual wiring needed:
 
-<!-- snippet:UsingDirective+DILogging -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DILogging -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -469,11 +469,8 @@ All SDK log entries appear alongside your application logs with proper category 
 
 ### Serilog Integration
 
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: SerilogIntegration -->
 ```csharp
-using Camunda.Orchestration.Sdk;
-using Serilog;
-using Serilog.Extensions.Logging;
-
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()
@@ -506,7 +503,7 @@ using var client = CamundaClient.Create(new CamundaOptions
 
 All domain identifiers (process definition keys, job keys, user task keys, etc.) are `readonly record struct` types rather than plain strings. This prevents accidentally mixing different key types at compile time — the same pattern as the JS SDK's branded types.
 
-<!-- snippet:UsingDirective+DomainKeys -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DomainKeys -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -533,7 +530,7 @@ Key types implement `ICamundaKey` (string-backed) or `ICamundaLongKey` (long-bac
 
 Deploy BPMN, DMN, or Form files from disk:
 
-<!-- snippet:UsingDirective+DeployResources -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DeployResources -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -552,7 +549,7 @@ foreach (var process in result.Processes)
 
 The recommended pattern is to obtain keys from a prior API response (e.g. a deployment) and pass them directly — no manual conversion needed:
 
-<!-- snippet:UsingDirective+ReadmeCreateProcessInstance -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+ReadmeCreateProcessInstance -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -572,7 +569,7 @@ Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
 
 If you need to restore a key from external storage (database, message queue, config file), wrap the raw value with the domain key constructor:
 
-<!-- snippet:UsingDirective+CreateProcessFromStorage -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+CreateProcessFromStorage -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -590,7 +587,7 @@ Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
 
 You can also start a process instance by BPMN process ID (which uses the latest deployed version):
 
-<!-- snippet:CreateProcessById -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: CreateProcessById -->
 ```csharp
 var result = await client.CreateProcessInstanceAsync(
     new ProcessInstanceCreationInstructionById
@@ -607,7 +604,7 @@ Camunda API operations use dynamic `variables` and `customHeaders` payloads. By 
 
 Assign any DTO or dictionary to the `Variables` property — `System.Text.Json` serializes the runtime type automatically:
 
-<!-- snippet:UsingDirective+SendingVariables+SendingVariablesBody -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+SendingVariables+SendingVariablesBody -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -632,7 +629,7 @@ await client.CompleteJobAsync(jobKey, new JobCompletionRequest
 
 Use `DeserializeAs<T>()` to extract typed DTOs from API responses:
 
-<!-- snippet:UsingDirective+ReceivingVariables+ReceivingVariablesBody -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+ReceivingVariables+ReceivingVariablesBody -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -661,7 +658,7 @@ Job workers subscribe to a specific job type and process jobs as they become ava
 
 ### Basic Worker
 
-<!-- snippet:UsingDirective+BasicWorker+BasicWorkerBody -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+BasicWorker+BasicWorkerBody -->
 ```csharp
 using Camunda.Orchestration.Sdk;
 
@@ -704,7 +701,7 @@ The handler return value determines the job outcome:
 | Throw `JobFailureException` | Fail with custom retries / back-off |
 | Throw any other exception | Auto-fail with `retries - 1` |
 
-<!-- snippet:ErrorHandling+ErrorHandlingFailure -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: ErrorHandling+ErrorHandlingFailure -->
 ```csharp
 // BPMN error — caught by error boundary events in the process model
 throw new BpmnErrorException("INVALID_ORDER", "Order not found");
@@ -717,7 +714,7 @@ throw new JobFailureException("Service unavailable", retries: 2, retryBackOffMs:
 
 When handling jobs from [user task listeners](https://docs.camunda.io/docs/components/concepts/user-task-listeners/), you can return a `JobCompletionRequest` to apply corrections to the task or deny the action. Return a `JobCompletionRequest` from the handler instead of a plain variables object:
 
-<!-- snippet:JobCorrections -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: JobCorrections -->
 ```csharp
 client.CreateJobWorker(config, async (job, ct) =>
 {
@@ -740,7 +737,7 @@ client.CreateJobWorker(config, async (job, ct) =>
 
 To deny the user task action (e.g. reject a completion):
 
-<!-- snippet:JobCorrectionsDenied -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: JobCorrectionsDenied -->
 ```csharp
 client.CreateJobWorker(config, async (job, ct) =>
 {
@@ -759,7 +756,7 @@ client.CreateJobWorker(config, async (job, ct) =>
 
 For handlers that don't return output variables, use the void overload:
 
-<!-- snippet:VoidHandler+VoidHandlerBody -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: VoidHandler+VoidHandlerBody -->
 ```csharp
 public record NotificationInput(string Message);
 
@@ -804,7 +801,7 @@ export CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=8
 export CAMUNDA_WORKER_NAME=order-service
 ```
 
-<!-- snippet:WorkerDefaultsEnv -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: WorkerDefaultsEnv -->
 ```csharp
 // Workers inherit timeout, concurrency, and name from environment
 client.CreateJobWorker(
@@ -823,7 +820,7 @@ client.CreateJobWorker(
 
 You can also pass defaults programmatically via the client constructor:
 
-<!-- snippet:WorkerDefaultsClient -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: WorkerDefaultsClient -->
 ```csharp
 var client = CamundaClient.Create(new CamundaOptions
 {
@@ -845,9 +842,10 @@ Jobs are dispatched as concurrent `Task`s on the .NET thread pool. `MaxConcurren
 
 ### Lifecycle
 
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: WorkerLifecycle -->
 ```csharp
 // Manual start/stop
-var worker = client.CreateJobWorker(config with { AutoStart = false }, handler);
+var worker = client.CreateJobWorker(new JobWorkerConfig { JobType = "example", JobTimeoutMs = 30_000, AutoStart = false }, handler);
 worker.Start();
 
 // Graceful stop — waits up to 10s for in-flight jobs to finish

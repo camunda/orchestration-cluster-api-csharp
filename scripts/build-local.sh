@@ -33,10 +33,10 @@ echo ""
 echo "--- Step 5: Build examples ---"
 dotnet build docs/examples/Examples.csproj --configuration Release
 
-# Step 6: Sync README snippets
+# Step 6: Check README snippet sync (does not modify README)
 echo ""
-echo "--- Step 6: Sync README snippets ---"
-python3 scripts/sync-readme-snippets.py
+echo "--- Step 6: Check README snippet sync ---"
+python3 scripts/sync-readme-snippets.py --check
 
 # Step 7: Lint check (verify formatting matches .editorconfig)
 echo ""

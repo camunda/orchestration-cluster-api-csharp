@@ -2,20 +2,23 @@
 """
 Synchronize code snippets in README.md from compilable example files.
 
-Replaces code blocks between ``<!-- snippet:RegionName -->`` markers in
-README.md with the corresponding region-tagged code from docs/examples/*.cs.
+Replaces code blocks between snippet markers in README.md with the
+corresponding region-tagged code from docs/examples/*.cs.
 
 Usage:
     python3 scripts/sync-readme-snippets.py          # update README.md in-place
     python3 scripts/sync-readme-snippets.py --check   # CI mode: exit 1 if out of sync
 
 Region tags in .cs files use ``// <RegionName>`` ... ``// </RegionName>``.
-Markers in README.md use ``<!-- snippet:RegionName -->`` before a fenced
-code block, which ends at the next ````` `` ``` ``````.  The script replaces
-everything between the marker and the closing fence (inclusive of both
-fences) with freshly extracted content.
+Markers in README.md use the descriptive format::
 
-Composite regions: ``<!-- snippet:A+B+C -->`` concatenates multiple regions
+    <!-- snippet-source: docs/examples/File.cs | regions: RegionName -->
+
+before a fenced code block.  The script replaces everything between the
+marker and the closing fence (inclusive of both fences) with freshly
+extracted content.
+
+Composite regions: ``regions: A+B+C`` concatenates multiple regions
 separated by blank lines.
 """
 
@@ -58,20 +61,52 @@ def parse_region_tags(cs_path: Path) -> dict[str, str]:
     return regions
 
 
-def load_all_regions() -> dict[str, str]:
-    """Load regions from all .cs files under docs/examples/."""
+def load_all_regions() -> tuple[dict[str, str], dict[str, str]]:
+    """Load regions from all .cs files under docs/examples/.
+
+    Returns (region_content, region_source) where region_source maps
+    region name → relative source file path.
+    """
     all_regions: dict[str, str] = {}
+    region_source: dict[str, str] = {}
     for cs_file in sorted(EXAMPLES_DIR.glob("*.cs")):
-        all_regions.update(parse_region_tags(cs_file))
-    return all_regions
+        rel = cs_file.relative_to(REPO_ROOT).as_posix()
+        for name, content in parse_region_tags(cs_file).items():
+            all_regions[name] = content
+            region_source[name] = rel
+    return all_regions, region_source
 
 
 # ---------------------------------------------------------------------------
 # README rewriting
 # ---------------------------------------------------------------------------
 
-# Matches: <!-- snippet:RegionName --> or <!-- snippet:Region1+Region2 -->
-SNIPPET_MARKER = re.compile(r"^<!--\s*snippet:([\w+]+)\s*-->$")
+# New descriptive format:
+#   <!-- snippet-source: docs/examples/File.cs | regions: RegionName -->
+_NEW_MARKER = re.compile(
+    r"^<!--\s*snippet-source:\s*\S+\s*\|\s*regions:\s*([\w+]+)\s*-->$"
+)
+# Legacy format (for migration):
+#   <!-- snippet:RegionName -->
+_OLD_MARKER = re.compile(r"^<!--\s*snippet:([\w+]+)\s*-->$")
+
+
+def _match_marker(line: str) -> re.Match[str] | None:
+    """Match either new or legacy snippet marker."""
+    return _NEW_MARKER.match(line) or _OLD_MARKER.match(line)
+
+
+def _build_marker(region_name: str, region_source: dict[str, str]) -> str:
+    """Build a descriptive snippet marker line for *region_name*."""
+    parts = region_name.split("+") if "+" in region_name else [region_name]
+    sources = {region_source.get(p) for p in parts if region_source.get(p) is not None}
+    if not sources:
+        source_file = "docs/examples/?.cs"
+    elif len(sources) == 1:
+        source_file = next(iter(sources))
+    else:
+        source_file = ",".join(sorted(sources))
+    return f"<!-- snippet-source: {source_file} | regions: {region_name} -->"
 
 
 def resolve_region(name: str, regions: dict[str, str]) -> str | None:
@@ -85,8 +120,16 @@ def resolve_region(name: str, regions: dict[str, str]) -> str | None:
     return "\n\n".join(r for r in resolved if r)
 
 
-def sync_readme(regions: dict[str, str], *, check: bool = False) -> bool:
+def sync_readme(
+    regions: dict[str, str],
+    region_source: dict[str, str],
+    *,
+    check: bool = False,
+) -> bool:
     """Replace snippet-marked code blocks in README.md.
+
+    Also upgrades legacy ``<!-- snippet:X -->`` markers to the new
+    ``<!-- snippet-source: file | regions: X -->`` format.
 
     Returns True if the file was (or would be) changed.
     """
@@ -98,10 +141,11 @@ def sync_readme(regions: dict[str, str], *, check: bool = False) -> bool:
     changed = False
     missing: list[str] = []
     errors: list[str] = []
+    snippet_count = 0
 
     while i < len(lines):
         line = lines[i].rstrip("\n")
-        m = SNIPPET_MARKER.match(line.strip())
+        m = _match_marker(line.strip())
 
         if not m:
             out.append(lines[i])
@@ -117,8 +161,13 @@ def sync_readme(regions: dict[str, str], *, check: bool = False) -> bool:
             i += 1
             continue
 
-        # Keep the marker line
-        out.append(lines[i])
+        snippet_count += 1
+
+        # Upgrade legacy marker to the new descriptive format
+        new_marker = _build_marker(region_name, region_source) + "\n"
+        if lines[i] != new_marker:
+            changed = True
+        out.append(new_marker)
         i += 1
 
         # Skip whitespace between marker and opening fence
@@ -174,19 +223,79 @@ def sync_readme(regions: dict[str, str], *, check: bool = False) -> bool:
 
     if changed:
         README_PATH.write_text(new_text, encoding="utf-8", newline="")
-        print(f"README.md updated ({sum(1 for l in out if SNIPPET_MARKER.match(l.strip()))} snippets synced)")
+        print(f"README.md updated ({snippet_count} snippets synced)")
     else:
         print("README.md is already up to date")
 
     return changed
 
 
+# ---------------------------------------------------------------------------
+# Un-injected code block detection
+# ---------------------------------------------------------------------------
+
+# Languages that should always be snippet-injected (functional code samples)
+_CHECKED_LANGUAGES = {"csharp", "c#", "cs"}
+
+
+def detect_uninjected_code_blocks(readme_path: Path) -> list[tuple[int, str]]:
+    """Find fenced code blocks in *readme_path* that use a checked language
+    but are NOT preceded by a snippet marker.
+
+    Returns a list of ``(line_number, fence_line)`` tuples (1-based).
+    """
+    text = readme_path.read_text(encoding="utf-8")
+    lines = text.splitlines()
+    uninjected: list[tuple[int, str]] = []
+
+    for idx, line in enumerate(lines):
+        stripped = line.strip()
+        if not stripped.startswith("```"):
+            continue
+        # Extract language from opening fence (e.g. ```csharp)
+        lang = stripped.removeprefix("```").strip().lower()
+        if lang not in _CHECKED_LANGUAGES:
+            continue
+        # Look backward for a snippet marker or exempt marker (skip blank lines)
+        prev = idx - 1
+        while prev >= 0 and lines[prev].strip() == "":
+            prev -= 1
+        if prev >= 0:
+            prev_stripped = lines[prev].strip()
+            if _match_marker(prev_stripped):
+                continue
+            if re.match(r"^<!--\s*snippet-exempt:.*-->$", prev_stripped):
+                continue
+        uninjected.append((idx + 1, stripped))
+
+    return uninjected
+
+
 def main() -> None:
     check = "--check" in sys.argv
-    regions = load_all_regions()
+    regions, region_source = load_all_regions()
     print(f"Loaded {len(regions)} regions from docs/examples/*.cs")
 
-    changed = sync_readme(regions, check=check)
+    changed = sync_readme(regions, region_source, check=check)
+
+    # Detect un-injected C# code blocks
+    uninjected = detect_uninjected_code_blocks(README_PATH)
+    if uninjected:
+        print(
+            f"\nWARNING: {len(uninjected)} C# code block(s) in README.md are NOT "
+            "snippet-injected (not type-checked):",
+            file=sys.stderr,
+        )
+        for lineno, fence in uninjected:
+            print(f"  line {lineno}: {fence}", file=sys.stderr)
+        if check:
+            print(
+                "\nAll C# code blocks must be injected from compilable examples in "
+                "docs/examples/. Add a snippet marker above each block, or move the "
+                "code to docs/examples/ with region tags.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
 
     if check and changed:
         sys.exit(1)
