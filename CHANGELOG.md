@@ -1,3 +1,10 @@
+# [8.9.0-alpha.19](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.18...v8.9.0-alpha.19) (2026-03-31)
+
+
+### Bug Fixes
+
+* harden README code injection ([6965ad6](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6965ad653a9dbc725506a22afc0e6c1716965bec)), closes [#36](https://github.com/camunda/orchestration-cluster-api-csharp/issues/36)
+
 # [8.9.0-alpha.18](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.17...v8.9.0-alpha.18) (2026-03-27)
 
 
