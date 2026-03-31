@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class TypedVariables | Camunda C# SDK ">
       
-      <meta name="description" content="Extension methods for deserializing Camunda variable and custom header payloads from untyped object properties into strongly-typed DTOs.  Camunda API responses return variables and customHeaders as object properties which, at runtime, are  values. These extensions let you opt in to typed deserialization:   // Define your domain DTO public record OrderVars(string OrderId, decimal Amount);  // Deserialize variables from a process instance result var result = await client.CreateProcessInstanceAsync(     new ProcessInstanceCreationInstructionById     {         ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&quot;order-process&quot;),         Variables = new OrderVars(&quot;ord-123&quot;, 99.99m),  // input: just assign your DTO     });  var vars = result.Variables.DeserializeAs&amp;lt;OrderVars&amp;gt;();  // output: typed extraction   For input (sending variables), simply assign your DTO to the Variables property — System.Text.Json serializes the runtime type automatically.   For output (receiving variables), call  on the Variables or CustomHeaders property to deserialize the underlying  into your DTO type.">
+      <meta name="description" content="Extension methods for deserializing Camunda variable and custom header payloads from untyped object properties into strongly-typed DTOs.  Camunda API responses return variables and customHeaders as object properties which, at runtime, are  values. These extensions let you opt in to typed deserialization:   // Define your domain DTO public record OrderVars(string OrderId, decimal Amount); // Deserialize variables from a process instance result var result = await client.CreateProcessInstanceAsync( new ProcessInstanceCreationInstructionById { ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&amp;quot;order-process&amp;quot;), Variables = new OrderVars(&amp;quot;ord-123&amp;quot;, 99.99m),  // input: just assign your DTO }); var vars = result.Variables.DeserializeAs&amp;lt;OrderVars&amp;gt;();  // output: typed extraction   For input (sending variables), simply assign your DTO to the Variables property — System.Text.Json serializes the runtime type automatically.   For output (receiving variables), call  on the Variables or CustomHeaders property to deserialize the underlying  into your DTO type.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -107,16 +107,14 @@ These extensions let you opt in to typed deserialization:
 <example>
 <pre><code class="lang-csharp">// Define your domain DTO
 public record OrderVars(string OrderId, decimal Amount);
-
-// Deserialize variables from a process instance result
+<p>// Deserialize variables from a process instance result
 var result = await client.CreateProcessInstanceAsync(
-    new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
-        Variables = new OrderVars("ord-123", 99.99m),  // input: just assign your DTO
-    });
-
-var vars = result.Variables.DeserializeAs&lt;OrderVars&gt;();  // output: typed extraction</code></pre>
+new ProcessInstanceCreationInstructionById
+{
+ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&quot;order-process&quot;),
+Variables = new OrderVars(&quot;ord-123&quot;, 99.99m),  // input: just assign your DTO
+});</p>
+<p>var vars = result.Variables.DeserializeAs&lt;OrderVars&gt;();  // output: typed extraction</p></code></pre>
 </example>
 <p>
 For <b>input</b> (sending variables), simply assign your DTO to the <code>Variables</code>

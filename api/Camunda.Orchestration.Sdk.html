@@ -2444,16 +2444,14 @@ These extensions let you opt in to typed deserialization:
 <example>
 <pre><code class="lang-csharp">// Define your domain DTO
 public record OrderVars(string OrderId, decimal Amount);
-
-// Deserialize variables from a process instance result
+<p>// Deserialize variables from a process instance result
 var result = await client.CreateProcessInstanceAsync(
-    new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
-        Variables = new OrderVars("ord-123", 99.99m),  // input: just assign your DTO
-    });
-
-var vars = result.Variables.DeserializeAs&lt;OrderVars&gt;();  // output: typed extraction</code></pre>
+new ProcessInstanceCreationInstructionById
+{
+ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&quot;order-process&quot;),
+Variables = new OrderVars(&quot;ord-123&quot;, 99.99m),  // input: just assign your DTO
+});</p>
+<p>var vars = result.Variables.DeserializeAs&lt;OrderVars&gt;();  // output: typed extraction</p></code></pre>
 </example>
 <p>
 For <b>input</b> (sending variables), simply assign your DTO to the <code>Variables</code>
