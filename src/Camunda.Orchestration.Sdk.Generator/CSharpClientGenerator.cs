@@ -999,6 +999,17 @@ internal static class CSharpClientGenerator
             sb.AppendLine($"        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);");
         }
 
+        // Inject default tenant ID into multipart content when applicable
+        if (op.HasOptionalTenantIdInBody && op.IsMultipart)
+        {
+            sb.AppendLine($"        if (_config.DefaultTenantId != null)");
+            sb.AppendLine($"        {{");
+            sb.AppendLine($"            var hasTenant = content.Any(p => p.Headers.ContentDisposition?.Name?.Trim('\"') == \"tenantId\");");
+            sb.AppendLine($"            if (!hasTenant)");
+            sb.AppendLine($"                content.Add(new StringContent(_config.DefaultTenantId), \"tenantId\");");
+            sb.AppendLine($"        }}");
+        }
+
         var httpMethod = op.Verb switch
         {
             OperationType.Get => "HttpMethod.Get",
