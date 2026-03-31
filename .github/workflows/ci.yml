@@ -16,7 +16,7 @@ on:
         default: 'stable/8.9'
 
 env:
-  SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
+  SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'stable/8.9' }}
 
 jobs:
   commitlint:
@@ -55,9 +55,9 @@ jobs:
           fetch-depth: 0
 
       - name: Validate SPEC_REF override
-        if: env.SPEC_REF != 'main'
+        if: env.SPEC_REF != 'stable/8.9'
         run: |
-          echo "SPEC_REF is pinned to '${SPEC_REF}' (not main)"
+          echo "SPEC_REF is pinned to '${SPEC_REF}' (not stable/8.9)"
           ACK="${{ vars.SPEC_REF_OVERRIDE_ACK }}"
           EXPIRES="${{ vars.SPEC_REF_OVERRIDE_EXPIRES }}"
           if [ "$ACK" != "true" ]; then
