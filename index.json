@@ -5532,7 +5532,7 @@
   "api/Camunda.Orchestration.Sdk.DecisionDefinitionTypeEnum.html": {
     "href": "api/Camunda.Orchestration.Sdk.DecisionDefinitionTypeEnum.html",
     "title": "Enum DecisionDefinitionTypeEnum | Camunda C# SDK",
-    "summary": "Enum DecisionDefinitionTypeEnum Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10 [JsonConverter(typeof(JsonStringEnumConverter))] public enum DecisionDefinitionTypeEnum Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Fields [JsonPropertyName(\"DECISION_TABLE\")] DECISIONTABLE = 0 [JsonPropertyName(\"LITERAL_EXPRESSION\")] LITERALEXPRESSION = 1 [JsonPropertyName(\"UNKNOWN\")] UNKNOWN = 3 [JsonPropertyName(\"UNSPECIFIED\")] UNSPECIFIED = 2"
+    "summary": "Enum DecisionDefinitionTypeEnum Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10 [JsonConverter(typeof(JsonStringEnumConverter))] public enum DecisionDefinitionTypeEnum Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Fields [JsonPropertyName(\"DECISION_TABLE\")] DECISIONTABLE = 0 [JsonPropertyName(\"LITERAL_EXPRESSION\")] LITERALEXPRESSION = 1 [JsonPropertyName(\"UNKNOWN\")] UNKNOWN = 3 [Obsolete(\"Deprecated since 8.9.0\")] [JsonPropertyName(\"UNSPECIFIED\")] UNSPECIFIED = 2"
   },
   "api/Camunda.Orchestration.Sdk.DecisionEvaluationById.DecisionDefinitionId.html": {
     "href": "api/Camunda.Orchestration.Sdk.DecisionEvaluationById.DecisionDefinitionId.html",
@@ -6117,7 +6117,7 @@
   "api/Camunda.Orchestration.Sdk.DecisionInstanceStateEnum.html": {
     "href": "api/Camunda.Orchestration.Sdk.DecisionInstanceStateEnum.html",
     "title": "Enum DecisionInstanceStateEnum | Camunda C# SDK",
-    "summary": "Enum DecisionInstanceStateEnum Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10 [JsonConverter(typeof(JsonStringEnumConverter))] public enum DecisionInstanceStateEnum Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Fields [JsonPropertyName(\"EVALUATED\")] EVALUATED = 0 [JsonPropertyName(\"FAILED\")] FAILED = 1 [JsonPropertyName(\"UNKNOWN\")] UNKNOWN = 3 [JsonPropertyName(\"UNSPECIFIED\")] UNSPECIFIED = 2"
+    "summary": "Enum DecisionInstanceStateEnum Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10 [JsonConverter(typeof(JsonStringEnumConverter))] public enum DecisionInstanceStateEnum Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Fields [JsonPropertyName(\"EVALUATED\")] EVALUATED = 0 [JsonPropertyName(\"FAILED\")] FAILED = 1 [Obsolete(\"Deprecated since 8.9.0\")] [JsonPropertyName(\"UNKNOWN\")] UNKNOWN = 3 [Obsolete(\"Deprecated since 8.9.0\")] [JsonPropertyName(\"UNSPECIFIED\")] UNSPECIFIED = 2"
   },
   "api/Camunda.Orchestration.Sdk.DecisionInstanceStateExactMatch.AssumeExists.html": {
     "href": "api/Camunda.Orchestration.Sdk.DecisionInstanceStateExactMatch.AssumeExists.html",
