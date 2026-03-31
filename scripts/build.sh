@@ -43,10 +43,10 @@ echo ""
 echo "--- Step 6: Lint check ---"
 dotnet format --verify-no-changes
 
-# Step 7: Sync README snippets
+# Step 7: Check README snippets are in sync (no auto-sync)
 echo ""
-echo "--- Step 7: Sync README snippets ---"
-python3 scripts/sync-readme-snippets.py
+echo "--- Step 7: Check README snippets are in sync ---"
+python3 scripts/sync-readme-snippets.py --check
 
 # Step 8: Unit tests (acceptance gate — integration tests are separate)
 echo ""

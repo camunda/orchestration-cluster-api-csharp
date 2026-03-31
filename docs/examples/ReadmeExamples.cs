@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Extensions.Logging;
 
 namespace Camunda.Orchestration.Sdk.Examples;
 
@@ -441,5 +443,43 @@ internal static class ReadmeExamples
             },
         });
         // </WorkerDefaultsClient>
+    }
+
+    private static void SerilogIntegrationExample()
+    {
+        // <SerilogIntegration>
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.Console()
+            .CreateLogger();
+
+        using var loggerFactory = new SerilogLoggerFactory();
+        using var client = CamundaClient.Create(new CamundaOptions
+        {
+            LoggerFactory = loggerFactory,
+        });
+        // </SerilogIntegration>
+    }
+
+    private static async Task WorkerLifecycleExample()
+    {
+        using var client = CamundaClient.Create();
+        Func<ActivatedJob, CancellationToken, Task<object?>> handler = (_, _) => Task.FromResult<object?>(null);
+
+        // <WorkerLifecycle>
+        // Manual start/stop
+        var worker = client.CreateJobWorker(new JobWorkerConfig { JobType = "example", JobTimeoutMs = 30_000, AutoStart = false }, handler);
+        worker.Start();
+
+        // Graceful stop — waits up to 10s for in-flight jobs to finish
+        var result = await worker.StopAsync(gracePeriod: TimeSpan.FromSeconds(10));
+        // result.RemainingJobs, result.TimedOut
+
+        // Or stop all workers at once
+        await client.StopAllWorkersAsync(TimeSpan.FromSeconds(10));
+
+        // DisposeAsync stops workers automatically
+        await using var disposableClient = CamundaClient.Create();
+        // </WorkerLifecycle>
     }
 }
