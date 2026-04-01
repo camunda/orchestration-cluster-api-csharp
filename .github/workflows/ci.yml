@@ -44,11 +44,7 @@ jobs:
     timeout-minutes: 45
     strategy:
       matrix:
-        dotnet: ['8.0.x']
-        stack: [simple]
-        include:
-          - dotnet: '8.0.x'
-            stack: full
+        stack: [simple, full]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -75,10 +71,12 @@ jobs:
           fi
           echo "Override valid (expires $EXPIRES)"
 
-      - name: Setup .NET ${{ matrix.dotnet }}
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet }}
+          dotnet-version: |
+            8.0.x
+            10.0.x
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -183,7 +181,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: integration-docker-logs-${{ matrix.dotnet }}-${{ matrix.stack }}
+          name: integration-docker-logs-${{ matrix.stack }}
           path: _logs/compose.log
 
       - name: Append Job Summary
@@ -192,7 +190,7 @@ jobs:
           status="${{ job.status }}"
           driftFlag="${{ steps.drift.outputs.drift }}"
           {
-            echo "### .NET ${{ matrix.dotnet }} (${{ matrix.stack }}) Summary";
+            echo "### .NET 8+10 (${{ matrix.stack }}) Summary";
             echo "- Status: ${status}";
             echo "- Spec ref: ${SPEC_REF}";
             if [ "${driftFlag}" = "true" ]; then

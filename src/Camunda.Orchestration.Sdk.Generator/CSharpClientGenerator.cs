@@ -630,8 +630,18 @@ internal static class CSharpClientGenerator
                 }
             }
 
+            // If this type is a variant of a polymorphic parent, skip the discriminator
+            // property — it is managed by [JsonPolymorphic] on the base class and
+            // re-declaring it on the derived type causes a conflict on .NET 10+.
+            string? discriminatorPropToSkip = null;
+            if (parent != null && discriminators.TryGetValue(parent, out var parentDisc))
+                discriminatorPropToSkip = parentDisc.PropertyName;
+
             foreach (var (propName, propSchema) in properties)
             {
+                if (propName == discriminatorPropToSkip)
+                    continue;
+
                 var csharpType = MapType(propSchema, doc);
                 var csharpPropName = ToPascalCase(propName);
                 var isRequired = required.Contains(propName);
