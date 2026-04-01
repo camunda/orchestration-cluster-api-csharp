@@ -9,6 +9,8 @@
     <OutputType>Library</OutputType>
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
     <RootNamespace>Camunda.Orchestration.Sdk.Examples</RootNamespace>
+    <!-- Suppress analyser rules that aren't meaningful for compile-only example code -->
+    <NoWarn>CA1050;CA1305</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
