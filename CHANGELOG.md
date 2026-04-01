@@ -1,3 +1,15 @@
+# [8.9.0-alpha.22](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.21...v8.9.0-alpha.22) (2026-04-01)
+
+
+### Bug Fixes
+
+* inject default tenant ID for multipart createDeployment ([f24e052](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f24e052680dfa46569180809e375f1fc6d072b21)), closes [#40](https://github.com/camunda/orchestration-cluster-api-csharp/issues/40)
+
+
+### Features
+
+* embed specHash from spec-metadata.json in published package ([0db4ba5](https://github.com/camunda/orchestration-cluster-api-csharp/commit/0db4ba58386c4bcf161e792e8dc1461cf5e8a807)), closes [#39](https://github.com/camunda/orchestration-cluster-api-csharp/issues/39)
+
 # [8.9.0-alpha.21](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.20...v8.9.0-alpha.21) (2026-03-31)
 
 
