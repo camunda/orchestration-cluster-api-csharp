@@ -78,7 +78,7 @@ public static class DocumentExamples
 
         var content = await client.GetDocumentAsync(documentId);
 
-        Console.WriteLine($"Downloaded document: doc-123");
+        Console.WriteLine($"Downloaded document: {documentId}");
     }
     // </GetDocument>
     #endregion GetDocument

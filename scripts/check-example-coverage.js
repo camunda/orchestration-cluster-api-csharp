@@ -29,6 +29,15 @@ if (!fs.existsSync(specPath)) {
 }
 
 const spec = JSON.parse(fs.readFileSync(specPath, "utf8"));
+
+if (!fs.existsSync(mapPath)) {
+  console.error(`Operation map not found at ${mapPath}`);
+  console.error(
+    "Ensure examples/operation-map.json exists and is committed."
+  );
+  process.exit(2);
+}
+
 const operationMap = JSON.parse(fs.readFileSync(mapPath, "utf8"));
 
 const HTTP_METHODS = new Set([
@@ -75,8 +84,8 @@ if (missing.length > 0) {
   }
 
   console.log(`\nTo fix this:`);
-  console.log(`  1. Add an example for each missing operation in docs/examples/`);
-  console.log(`     Wrap code in // <OperationId> ... // </OperationId> tags`);
+  console.log(`  1. Add an example for each missing operation in examples/`);
+  console.log(`     Wrap code in // <RegionName> ... // </RegionName> tags`);
   console.log(`  2. Add an entry to examples/operation-map.json for each operation`);
   console.log(`  3. Or use the Copilot prompt: .github/prompts/add-missing-examples.prompt.md`);
 
@@ -87,4 +96,8 @@ if (missing.length > 0) {
   process.exit(1);
 } else {
   console.log("\nFull coverage!");
+  const missingPath = path.join(rootDir, "missing-examples.json");
+  if (fs.existsSync(missingPath)) {
+    fs.unlinkSync(missingPath);
+  }
 }

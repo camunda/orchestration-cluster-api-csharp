@@ -595,7 +595,7 @@ You can also start a process instance by BPMN process ID (which uses the latest 
 var result = await client.CreateProcessInstanceAsync(
     new ProcessInstanceCreationInstructionById
     {
-        ProcessDefinitionId = processDefinitionId,
+        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("my-process-id"),
     });
 ```
 

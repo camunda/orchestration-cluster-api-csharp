@@ -231,7 +231,7 @@ internal static class ReadmeExamples
         // </CreateProcessFromStorage>
     }
 
-    private static async Task CreateProcessByIdExample(ProcessDefinitionId processDefinitionId)
+    private static async Task CreateProcessByIdExample()
     {
         using var client = CamundaClient.Create();
 
@@ -239,7 +239,7 @@ internal static class ReadmeExamples
         var result = await client.CreateProcessInstanceAsync(
             new ProcessInstanceCreationInstructionById
             {
-                ProcessDefinitionId = processDefinitionId,
+                ProcessDefinitionId = ProcessDefinitionId.AssumeExists("my-process-id"),
             });
         // </CreateProcessById>
     }
