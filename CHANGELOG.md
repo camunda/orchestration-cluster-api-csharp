@@ -1,3 +1,12 @@
+# [8.9.0-alpha.23](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.22...v8.9.0-alpha.23) (2026-04-01)
+
+
+### Bug Fixes
+
+* address PR review comments ([fc2b910](https://github.com/camunda/orchestration-cluster-api-csharp/commit/fc2b9103821b616f496a7c1dccca4e20784ddb28))
+* **gen:** regenerate artifacts ([75e13b1](https://github.com/camunda/orchestration-cluster-api-csharp/commit/75e13b1719d249a2bfc2d1eb0b7dc3e03266edcc))
+* group document operations together in operation-map ([874a5c6](https://github.com/camunda/orchestration-cluster-api-csharp/commit/874a5c6ec4bae62891abf2f2f648d4f20b5e8a42))
+
 # [8.9.0-alpha.22](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.21...v8.9.0-alpha.22) (2026-04-01)
 
 
