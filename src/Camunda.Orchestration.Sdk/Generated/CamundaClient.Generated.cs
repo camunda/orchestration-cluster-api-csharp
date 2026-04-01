@@ -312,6 +312,12 @@ public partial class CamundaClient
     public async Task<DeploymentResult> CreateDeploymentAsync(MultipartFormDataContent content, CancellationToken ct = default)
     {
         var path = $"/deployments";
+        if (_config.DefaultTenantId != null)
+        {
+            var hasTenant = content.Any(p => p.Headers.ContentDisposition?.Name?.Trim('"') == "tenantId");
+            if (!hasTenant)
+                content.Add(new StringContent(_config.DefaultTenantId), "tenantId");
+        }
         return await InvokeWithRetryAsync(() => SendMultipartAsync<DeploymentResult>(path, content, ct), "createDeployment", false, ct);
     }
 
