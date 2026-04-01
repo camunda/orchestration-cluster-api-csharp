@@ -6,11 +6,11 @@ public static class VariableElementExamples
 {
     #region GetVariable
     // <GetVariable>
-    public static async Task GetVariableExample()
+    public static async Task GetVariableExample(VariableKey variableKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetVariableAsync(VariableKey.AssumeExists("123456"));
+        var result = await client.GetVariableAsync(variableKey);
         Console.WriteLine($"Variable: {result.Name} = {result.Value}");
     }
     // </GetVariable>
@@ -36,12 +36,12 @@ public static class VariableElementExamples
     #region GetElementInstance
 
     // <GetElementInstance>
-    public static async Task GetElementInstanceExample()
+    public static async Task GetElementInstanceExample(ElementInstanceKey elementInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetElementInstanceAsync(
-            ElementInstanceKey.AssumeExists("123456"));
+            elementInstanceKey);
 
         Console.WriteLine($"Element: {result.ElementId}");
     }
@@ -69,12 +69,12 @@ public static class VariableElementExamples
     #region SearchElementInstanceIncidents
 
     // <SearchElementInstanceIncidents>
-    public static async Task SearchElementInstanceIncidentsExample()
+    public static async Task SearchElementInstanceIncidentsExample(ElementInstanceKey elementInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchElementInstanceIncidentsAsync(
-            ElementInstanceKey.AssumeExists("123456"),
+            elementInstanceKey,
             new IncidentSearchQuery());
 
         foreach (var incident in result.Items)
@@ -88,12 +88,12 @@ public static class VariableElementExamples
     #region CreateElementInstanceVariables
 
     // <CreateElementInstanceVariables>
-    public static async Task CreateElementInstanceVariablesExample()
+    public static async Task CreateElementInstanceVariablesExample(ElementInstanceKey elementInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         await client.CreateElementInstanceVariablesAsync(
-            ElementInstanceKey.AssumeExists("123456"),
+            elementInstanceKey,
             new SetVariableRequest());
     }
     // </CreateElementInstanceVariables>
@@ -102,12 +102,12 @@ public static class VariableElementExamples
     #region ActivateAdHocSubProcessActivities
 
     // <ActivateAdHocSubProcessActivities>
-    public static async Task ActivateAdHocSubProcessActivitiesExample()
+    public static async Task ActivateAdHocSubProcessActivitiesExample(ElementInstanceKey elementInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         await client.ActivateAdHocSubProcessActivitiesAsync(
-            ElementInstanceKey.AssumeExists("123456"),
+            elementInstanceKey,
             new AdHocSubProcessActivateActivitiesInstruction());
     }
     // </ActivateAdHocSubProcessActivities>

@@ -1,0 +1,20 @@
+[
+  {
+    "operationId": "getDecisionDefinitionXML",
+    "method": "GET",
+    "path": "/decision-definitions/{decisionDefinitionKey}/xml",
+    "summary": "Get decision definition XML"
+  },
+  {
+    "operationId": "getDecisionRequirementsXML",
+    "method": "GET",
+    "path": "/decision-requirements/{decisionRequirementsKey}/xml",
+    "summary": "Get decision requirements XML"
+  },
+  {
+    "operationId": "getProcessDefinitionXML",
+    "method": "GET",
+    "path": "/process-definitions/{processDefinitionKey}/xml",
+    "summary": "Get process definition XML"
+  }
+]

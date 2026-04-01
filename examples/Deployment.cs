@@ -23,12 +23,12 @@ public static class DeploymentExamples
     #region DeleteResource
 
     // <DeleteResource>
-    public static async Task DeleteResourceExample()
+    public static async Task DeleteResourceExample(ResourceKey resourceKey)
     {
         using var client = CamundaClient.Create();
 
         await client.DeleteResourceAsync(
-            ResourceKey.AssumeExists("123456"),
+            resourceKey,
             new DeleteResourceRequest());
     }
     // </DeleteResource>
@@ -37,11 +37,11 @@ public static class DeploymentExamples
     #region GetResource
 
     // <GetResource>
-    public static async Task GetResourceExample()
+    public static async Task GetResourceExample(ResourceKey resourceKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetResourceAsync(ResourceKey.AssumeExists("123456"));
+        var result = await client.GetResourceAsync(resourceKey);
         Console.WriteLine($"Resource: {result.ResourceName}");
     }
     // </GetResource>
@@ -50,11 +50,11 @@ public static class DeploymentExamples
     #region GetResourceContent
 
     // <GetResourceContent>
-    public static async Task GetResourceContentExample()
+    public static async Task GetResourceContentExample(ResourceKey resourceKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetResourceContentAsync(ResourceKey.AssumeExists("123456"));
+        var result = await client.GetResourceContentAsync(resourceKey);
         Console.WriteLine($"Content: {result}");
     }
     // </GetResourceContent>

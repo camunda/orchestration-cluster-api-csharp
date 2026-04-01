@@ -6,12 +6,12 @@ public static class BatchOperationExamples
 {
     #region GetBatchOperation
     // <GetBatchOperation>
-    public static async Task GetBatchOperationExample()
+    public static async Task GetBatchOperationExample(BatchOperationKey batchOperationKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetBatchOperationAsync(
-            BatchOperationKey.AssumeExists("123456"));
+            batchOperationKey);
 
         Console.WriteLine($"Batch operation: {result.BatchOperationKey}");
     }
@@ -57,11 +57,11 @@ public static class BatchOperationExamples
     #region CancelBatchOperation
 
     // <CancelBatchOperation>
-    public static async Task CancelBatchOperationExample()
+    public static async Task CancelBatchOperationExample(BatchOperationKey batchOperationKey)
     {
         using var client = CamundaClient.Create();
 
-        await client.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123456"));
+        await client.CancelBatchOperationAsync(batchOperationKey);
     }
     // </CancelBatchOperation>
     #endregion CancelBatchOperation
@@ -69,11 +69,11 @@ public static class BatchOperationExamples
     #region SuspendBatchOperation
 
     // <SuspendBatchOperation>
-    public static async Task SuspendBatchOperationExample()
+    public static async Task SuspendBatchOperationExample(BatchOperationKey batchOperationKey)
     {
         using var client = CamundaClient.Create();
 
-        await client.SuspendBatchOperationAsync(BatchOperationKey.AssumeExists("123456"));
+        await client.SuspendBatchOperationAsync(batchOperationKey);
     }
     // </SuspendBatchOperation>
     #endregion SuspendBatchOperation
@@ -81,11 +81,11 @@ public static class BatchOperationExamples
     #region ResumeBatchOperation
 
     // <ResumeBatchOperation>
-    public static async Task ResumeBatchOperationExample()
+    public static async Task ResumeBatchOperationExample(BatchOperationKey batchOperationKey)
     {
         using var client = CamundaClient.Create();
 
-        await client.ResumeBatchOperationAsync(BatchOperationKey.AssumeExists("123456"));
+        await client.ResumeBatchOperationAsync(batchOperationKey);
     }
     // </ResumeBatchOperation>
     #endregion ResumeBatchOperation
@@ -123,7 +123,7 @@ public static class BatchOperationExamples
     #region MigrateProcessInstancesBatchOperation
 
     // <MigrateProcessInstancesBatchOperation>
-    public static async Task MigrateProcessInstancesBatchOperationExample()
+    public static async Task MigrateProcessInstancesBatchOperationExample(ProcessDefinitionKey targetProcessDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
@@ -133,7 +133,7 @@ public static class BatchOperationExamples
                 Filter = new ProcessInstanceFilter(),
                 MigrationPlan = new ProcessInstanceMigrationBatchOperationPlan
                 {
-                    TargetProcessDefinitionKey = ProcessDefinitionKey.AssumeExists("456789"),
+                    TargetProcessDefinitionKey = targetProcessDefinitionKey,
                 },
             });
 

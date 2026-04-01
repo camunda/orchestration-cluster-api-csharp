@@ -241,7 +241,7 @@ internal static class ReadmeExamples
         var result = await client.CreateProcessInstanceAsync(
             new ProcessInstanceCreationInstructionById
             {
-                ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
+                ProcessDefinitionId = ProcessDefinitionId.AssumeExists("my-process-id"),
             });
         // </CreateProcessById>
     }
@@ -251,16 +251,15 @@ internal static class ReadmeExamples
     public record OrderInput(string OrderId, decimal Amount);
     // </SendingVariables>
 
-    private static async Task SendingVariablesExample()
+    private static async Task SendingVariablesExample(ProcessDefinitionId processDefinitionId, JobKey jobKey)
     {
         using var client = CamundaClient.Create();
-        var jobKey = JobKey.AssumeExists("1");
 
         // <SendingVariablesBody>
         // Assign the DTO directly
         await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
         {
-            ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
+            ProcessDefinitionId = processDefinitionId,
             Variables = new OrderInput("ord-123", 99.99m),
         });
 
@@ -276,7 +275,7 @@ internal static class ReadmeExamples
     public record OrderResult(bool Processed, string InvoiceNumber);
     // </ReceivingVariables>
 
-    private static async Task ReceivingVariablesExample()
+    private static async Task ReceivingVariablesExample(ProcessDefinitionId processDefinitionId)
     {
         using var client = CamundaClient.Create();
 
@@ -285,7 +284,7 @@ internal static class ReadmeExamples
         var result = await client.CreateProcessInstanceAsync(
             new ProcessInstanceCreationInstructionById
             {
-                ProcessDefinitionId = ProcessDefinitionId.AssumeExists("test"),
+                ProcessDefinitionId = processDefinitionId,
             });
         var output = result.Variables.DeserializeAs<OrderResult>();
         // output.Processed, output.InvoiceNumber — fully typed

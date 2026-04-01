@@ -6,13 +6,13 @@ public static class ProcessInstanceExamples
 {
     #region CreateProcessInstanceById
     // <CreateProcessInstanceById>
-    public static async Task CreateProcessInstanceByIdExample()
+    public static async Task CreateProcessInstanceByIdExample(ProcessDefinitionId processDefinitionId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
         {
-            ProcessDefinitionId = ProcessDefinitionId.AssumeExists("my-process"),
+            ProcessDefinitionId = processDefinitionId,
         });
 
         Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
@@ -23,13 +23,13 @@ public static class ProcessInstanceExamples
     #region CreateProcessInstanceByKey
 
     // <CreateProcessInstanceByKey>
-    public static async Task CreateProcessInstanceByKeyExample()
+    public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey processDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
         {
-            ProcessDefinitionKey = ProcessDefinitionKey.AssumeExists("123456"),
+            ProcessDefinitionKey = processDefinitionKey,
         });
 
         Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
@@ -40,11 +40,11 @@ public static class ProcessInstanceExamples
     #region GetProcessInstance
 
     // <GetProcessInstance>
-    public static async Task GetProcessInstanceExample()
+    public static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetProcessInstanceAsync(ProcessInstanceKey.AssumeExists("123456"));
+        var result = await client.GetProcessInstanceAsync(processInstanceKey);
         Console.WriteLine($"Process instance: {result.ProcessDefinitionId}");
     }
     // </GetProcessInstance>
@@ -70,12 +70,12 @@ public static class ProcessInstanceExamples
     #region CancelProcessInstance
 
     // <CancelProcessInstance>
-    public static async Task CancelProcessInstanceExample()
+    public static async Task CancelProcessInstanceExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         await client.CancelProcessInstanceAsync(
-            ProcessInstanceKey.AssumeExists("123456"),
+            processInstanceKey,
             new CancelProcessInstanceRequest());
     }
     // </CancelProcessInstance>
@@ -84,12 +84,12 @@ public static class ProcessInstanceExamples
     #region DeleteProcessInstance
 
     // <DeleteProcessInstance>
-    public static async Task DeleteProcessInstanceExample()
+    public static async Task DeleteProcessInstanceExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         await client.DeleteProcessInstanceAsync(
-            ProcessInstanceKey.AssumeExists("123456"),
+            processInstanceKey,
             new DeleteProcessInstanceRequest());
     }
     // </DeleteProcessInstance>
@@ -98,15 +98,15 @@ public static class ProcessInstanceExamples
     #region MigrateProcessInstance
 
     // <MigrateProcessInstance>
-    public static async Task MigrateProcessInstanceExample()
+    public static async Task MigrateProcessInstanceExample(ProcessInstanceKey processInstanceKey, ProcessDefinitionKey targetProcessDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
         await client.MigrateProcessInstanceAsync(
-            ProcessInstanceKey.AssumeExists("123456"),
+            processInstanceKey,
             new ProcessInstanceMigrationInstruction
             {
-                TargetProcessDefinitionKey = ProcessDefinitionKey.AssumeExists("789012"),
+                TargetProcessDefinitionKey = targetProcessDefinitionKey,
             });
     }
     // </MigrateProcessInstance>
@@ -115,12 +115,12 @@ public static class ProcessInstanceExamples
     #region ModifyProcessInstance
 
     // <ModifyProcessInstance>
-    public static async Task ModifyProcessInstanceExample()
+    public static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         await client.ModifyProcessInstanceAsync(
-            ProcessInstanceKey.AssumeExists("123456"),
+            processInstanceKey,
             new ProcessInstanceModificationInstruction());
     }
     // </ModifyProcessInstance>
@@ -129,12 +129,12 @@ public static class ProcessInstanceExamples
     #region GetProcessInstanceStatistics
 
     // <GetProcessInstanceStatistics>
-    public static async Task GetProcessInstanceStatisticsExample()
+    public static async Task GetProcessInstanceStatisticsExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetProcessInstanceStatisticsAsync(
-            ProcessInstanceKey.AssumeExists("123456"));
+            processInstanceKey);
 
         foreach (var stat in result.Items)
         {
@@ -147,12 +147,12 @@ public static class ProcessInstanceExamples
     #region GetProcessInstanceSequenceFlows
 
     // <GetProcessInstanceSequenceFlows>
-    public static async Task GetProcessInstanceSequenceFlowsExample()
+    public static async Task GetProcessInstanceSequenceFlowsExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetProcessInstanceSequenceFlowsAsync(
-            ProcessInstanceKey.AssumeExists("123456"));
+            processInstanceKey);
 
         foreach (var flow in result.Items)
         {
@@ -165,12 +165,12 @@ public static class ProcessInstanceExamples
     #region GetProcessInstanceCallHierarchy
 
     // <GetProcessInstanceCallHierarchy>
-    public static async Task GetProcessInstanceCallHierarchyExample()
+    public static async Task GetProcessInstanceCallHierarchyExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetProcessInstanceCallHierarchyAsync(
-            ProcessInstanceKey.AssumeExists("123456"));
+            processInstanceKey);
 
         Console.WriteLine($"Call hierarchy: {result}");
     }
@@ -180,12 +180,12 @@ public static class ProcessInstanceExamples
     #region SearchProcessInstanceIncidents
 
     // <SearchProcessInstanceIncidents>
-    public static async Task SearchProcessInstanceIncidentsExample()
+    public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchProcessInstanceIncidentsAsync(
-            ProcessInstanceKey.AssumeExists("123456"),
+            processInstanceKey,
             new IncidentSearchQuery());
 
         foreach (var incident in result.Items)
@@ -199,12 +199,12 @@ public static class ProcessInstanceExamples
     #region ResolveProcessInstanceIncidents
 
     // <ResolveProcessInstanceIncidents>
-    public static async Task ResolveProcessInstanceIncidentsExample()
+    public static async Task ResolveProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.ResolveProcessInstanceIncidentsAsync(
-            ProcessInstanceKey.AssumeExists("123456"));
+            processInstanceKey);
 
         Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
     }

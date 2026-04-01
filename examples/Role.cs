@@ -80,11 +80,11 @@ public static class RoleExamples
     #region AssignRoleToUser
 
     // <AssignRoleToUser>
-    public static async Task AssignRoleToUserExample()
+    public static async Task AssignRoleToUserExample(Username username)
     {
         using var client = CamundaClient.Create();
 
-        await client.AssignRoleToUserAsync("developer", Username.AssumeExists("jdoe"));
+        await client.AssignRoleToUserAsync("developer", username);
     }
     // </AssignRoleToUser>
     #endregion AssignRoleToUser
@@ -92,11 +92,11 @@ public static class RoleExamples
     #region UnassignRoleFromUser
 
     // <UnassignRoleFromUser>
-    public static async Task UnassignRoleFromUserExample()
+    public static async Task UnassignRoleFromUserExample(Username username)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignRoleFromUserAsync("developer", Username.AssumeExists("jdoe"));
+        await client.UnassignRoleFromUserAsync("developer", username);
     }
     // </UnassignRoleFromUser>
     #endregion UnassignRoleFromUser

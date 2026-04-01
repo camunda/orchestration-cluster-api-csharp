@@ -6,12 +6,12 @@ public static class ProcessDefinitionExamples
 {
     #region GetProcessDefinition
     // <GetProcessDefinition>
-    public static async Task GetProcessDefinitionExample()
+    public static async Task GetProcessDefinitionExample(ProcessDefinitionKey processDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetProcessDefinitionAsync(
-            ProcessDefinitionKey.AssumeExists("123456"));
+            processDefinitionKey);
 
         Console.WriteLine($"Process definition: {result.Name}");
     }
@@ -21,12 +21,12 @@ public static class ProcessDefinitionExamples
     #region GetProcessDefinitionXml
 
     // <GetProcessDefinitionXml>
-    public static async Task GetProcessDefinitionXmlExample()
+    public static async Task GetProcessDefinitionXmlExample(ProcessDefinitionKey processDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetProcessDefinitionXmlAsync(
-            ProcessDefinitionKey.AssumeExists("123456"));
+            processDefinitionKey);
 
         Console.WriteLine($"XML: {result}");
     }
@@ -54,12 +54,12 @@ public static class ProcessDefinitionExamples
     #region GetProcessDefinitionStatistics
 
     // <GetProcessDefinitionStatistics>
-    public static async Task GetProcessDefinitionStatisticsExample()
+    public static async Task GetProcessDefinitionStatisticsExample(ProcessDefinitionKey processDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetProcessDefinitionStatisticsAsync(
-            ProcessDefinitionKey.AssumeExists("123456"),
+            processDefinitionKey,
             new ProcessDefinitionElementStatisticsQuery());
 
         foreach (var stat in result.Items)
@@ -91,7 +91,7 @@ public static class ProcessDefinitionExamples
     #region GetProcessDefinitionInstanceVersionStatistics
 
     // <GetProcessDefinitionInstanceVersionStatistics>
-    public static async Task GetProcessDefinitionInstanceVersionStatisticsExample()
+    public static async Task GetProcessDefinitionInstanceVersionStatisticsExample(ProcessDefinitionId processDefinitionId)
     {
         using var client = CamundaClient.Create();
 
@@ -100,7 +100,7 @@ public static class ProcessDefinitionExamples
             {
                 Filter = new ProcessDefinitionInstanceVersionStatisticsFilter
                 {
-                    ProcessDefinitionId = ProcessDefinitionId.AssumeExists("my-process"),
+                    ProcessDefinitionId = processDefinitionId,
                 },
             });
 
@@ -133,12 +133,12 @@ public static class ProcessDefinitionExamples
     #region GetStartProcessForm
 
     // <GetStartProcessForm>
-    public static async Task GetStartProcessFormExample()
+    public static async Task GetStartProcessFormExample(ProcessDefinitionKey processDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetStartProcessFormAsync(
-            ProcessDefinitionKey.AssumeExists("123456"));
+            processDefinitionKey);
 
         Console.WriteLine($"Form: {result.FormKey}");
     }

@@ -69,12 +69,12 @@ public static class AdminExamples
     #region GetTenantClusterVariable
 
     // <GetTenantClusterVariable>
-    public static async Task GetTenantClusterVariableExample()
+    public static async Task GetTenantClusterVariableExample(TenantId tenantId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetTenantClusterVariableAsync(
-            TenantId.AssumeExists("acme-corp"),
+            tenantId,
             "my-variable");
 
         Console.WriteLine($"Variable: {result.Name} = {result.Value}");
@@ -85,12 +85,12 @@ public static class AdminExamples
     #region CreateTenantClusterVariable
 
     // <CreateTenantClusterVariable>
-    public static async Task CreateTenantClusterVariableExample()
+    public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateTenantClusterVariableAsync(
-            TenantId.AssumeExists("acme-corp"),
+            tenantId,
             new CreateClusterVariableRequest
             {
                 Name = "my-variable",
@@ -105,12 +105,12 @@ public static class AdminExamples
     #region UpdateTenantClusterVariable
 
     // <UpdateTenantClusterVariable>
-    public static async Task UpdateTenantClusterVariableExample()
+    public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.UpdateTenantClusterVariableAsync(
-            TenantId.AssumeExists("acme-corp"),
+            tenantId,
             "my-variable",
             new UpdateClusterVariableRequest
             {
@@ -125,12 +125,12 @@ public static class AdminExamples
     #region DeleteTenantClusterVariable
 
     // <DeleteTenantClusterVariable>
-    public static async Task DeleteTenantClusterVariableExample()
+    public static async Task DeleteTenantClusterVariableExample(TenantId tenantId)
     {
         using var client = CamundaClient.Create();
 
         await client.DeleteTenantClusterVariableAsync(
-            TenantId.AssumeExists("acme-corp"),
+            tenantId,
             "my-variable");
     }
     // </DeleteTenantClusterVariable>
@@ -157,7 +157,7 @@ public static class AdminExamples
     #region CreateGlobalTaskListener
 
     // <CreateGlobalTaskListener>
-    public static async Task CreateGlobalTaskListenerExample()
+    public static async Task CreateGlobalTaskListenerExample(GlobalListenerId id)
     {
         using var client = CamundaClient.Create();
 
@@ -165,7 +165,7 @@ public static class AdminExamples
             new CreateGlobalTaskListenerRequest
             {
                 EventTypes = new List<GlobalTaskListenerEventTypeEnum> { GlobalTaskListenerEventTypeEnum.Completing },
-                Id = GlobalListenerId.AssumeExists("my-task-listener"),
+                Id = id,
             });
 
         Console.WriteLine($"Task listener: {result.Id}");
@@ -176,12 +176,12 @@ public static class AdminExamples
     #region GetGlobalTaskListener
 
     // <GetGlobalTaskListener>
-    public static async Task GetGlobalTaskListenerExample()
+    public static async Task GetGlobalTaskListenerExample(GlobalListenerId globalListenerId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetGlobalTaskListenerAsync(
-            GlobalListenerId.AssumeExists("listener-123"));
+            globalListenerId);
 
         Console.WriteLine($"Task listener: {result.EventTypes}");
     }
@@ -191,12 +191,12 @@ public static class AdminExamples
     #region UpdateGlobalTaskListener
 
     // <UpdateGlobalTaskListener>
-    public static async Task UpdateGlobalTaskListenerExample()
+    public static async Task UpdateGlobalTaskListenerExample(GlobalListenerId globalListenerId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.UpdateGlobalTaskListenerAsync(
-            GlobalListenerId.AssumeExists("listener-123"),
+            globalListenerId,
             new UpdateGlobalTaskListenerRequest
             {
                 EventTypes = new List<GlobalTaskListenerEventTypeEnum> { GlobalTaskListenerEventTypeEnum.Completing },
@@ -211,12 +211,12 @@ public static class AdminExamples
     #region DeleteGlobalTaskListener
 
     // <DeleteGlobalTaskListener>
-    public static async Task DeleteGlobalTaskListenerExample()
+    public static async Task DeleteGlobalTaskListenerExample(GlobalListenerId globalListenerId)
     {
         using var client = CamundaClient.Create();
 
         await client.DeleteGlobalTaskListenerAsync(
-            GlobalListenerId.AssumeExists("listener-123"));
+            globalListenerId);
     }
     // </DeleteGlobalTaskListener>
     #endregion DeleteGlobalTaskListener
@@ -341,11 +341,11 @@ public static class AdminExamples
     #region GetResource
 
     // <GetResource>
-    public static async Task GetResourceExample()
+    public static async Task GetResourceExample(ResourceKey resourceKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetResourceAsync(ResourceKey.AssumeExists("123456"));
+        var result = await client.GetResourceAsync(resourceKey);
         Console.WriteLine($"Resource: {result.ResourceName}");
     }
     // </GetResource>
@@ -354,11 +354,11 @@ public static class AdminExamples
     #region GetResourceContent
 
     // <GetResourceContent>
-    public static async Task GetResourceContentExample()
+    public static async Task GetResourceContentExample(ResourceKey resourceKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetResourceContentAsync(ResourceKey.AssumeExists("123456"));
+        var result = await client.GetResourceContentAsync(resourceKey);
         Console.WriteLine($"Content: {result}");
     }
     // </GetResourceContent>
@@ -383,11 +383,11 @@ public static class AdminExamples
     #region GetAuditLog
 
     // <GetAuditLog>
-    public static async Task GetAuditLogExample()
+    public static async Task GetAuditLogExample(AuditLogKey auditLogKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetAuditLogAsync(AuditLogKey.AssumeExists("123456"));
+        var result = await client.GetAuditLogAsync(auditLogKey);
         Console.WriteLine($"Audit log: {result.AuditLogKey}");
     }
     // </GetAuditLog>

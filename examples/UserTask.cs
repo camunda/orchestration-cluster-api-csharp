@@ -6,12 +6,12 @@ public static class UserTaskExamples
 {
     #region AssignUserTask
     // <AssignUserTask>
-    public static async Task AssignUserTaskExample()
+    public static async Task AssignUserTaskExample(UserTaskKey userTaskKey)
     {
         using var client = CamundaClient.Create();
 
         await client.AssignUserTaskAsync(
-            UserTaskKey.AssumeExists("123456"),
+            userTaskKey,
             new UserTaskAssignmentRequest
             {
                 Assignee = "user@example.com",
@@ -23,12 +23,12 @@ public static class UserTaskExamples
     #region CompleteUserTask
 
     // <CompleteUserTask>
-    public static async Task CompleteUserTaskExample()
+    public static async Task CompleteUserTaskExample(UserTaskKey userTaskKey)
     {
         using var client = CamundaClient.Create();
 
         await client.CompleteUserTaskAsync(
-            UserTaskKey.AssumeExists("123456"),
+            userTaskKey,
             new UserTaskCompletionRequest());
     }
     // </CompleteUserTask>
@@ -37,11 +37,11 @@ public static class UserTaskExamples
     #region UnassignUserTask
 
     // <UnassignUserTask>
-    public static async Task UnassignUserTaskExample()
+    public static async Task UnassignUserTaskExample(UserTaskKey userTaskKey)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignUserTaskAsync(UserTaskKey.AssumeExists("123456"));
+        await client.UnassignUserTaskAsync(userTaskKey);
     }
     // </UnassignUserTask>
     #endregion UnassignUserTask
@@ -49,11 +49,11 @@ public static class UserTaskExamples
     #region GetUserTask
 
     // <GetUserTask>
-    public static async Task GetUserTaskExample()
+    public static async Task GetUserTaskExample(UserTaskKey userTaskKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetUserTaskAsync(UserTaskKey.AssumeExists("123456"));
+        var result = await client.GetUserTaskAsync(userTaskKey);
         Console.WriteLine($"User task: {result.UserTaskKey}");
     }
     // </GetUserTask>
@@ -62,12 +62,12 @@ public static class UserTaskExamples
     #region UpdateUserTask
 
     // <UpdateUserTask>
-    public static async Task UpdateUserTaskExample()
+    public static async Task UpdateUserTaskExample(UserTaskKey userTaskKey)
     {
         using var client = CamundaClient.Create();
 
         await client.UpdateUserTaskAsync(
-            UserTaskKey.AssumeExists("123456"),
+            userTaskKey,
             new UserTaskUpdateRequest());
     }
     // </UpdateUserTask>
@@ -76,11 +76,11 @@ public static class UserTaskExamples
     #region GetUserTaskForm
 
     // <GetUserTaskForm>
-    public static async Task GetUserTaskFormExample()
+    public static async Task GetUserTaskFormExample(UserTaskKey userTaskKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetUserTaskFormAsync(UserTaskKey.AssumeExists("123456"));
+        var result = await client.GetUserTaskFormAsync(userTaskKey);
         Console.WriteLine($"Form: {result.FormKey}");
     }
     // </GetUserTaskForm>
@@ -106,12 +106,12 @@ public static class UserTaskExamples
     #region SearchUserTaskVariables
 
     // <SearchUserTaskVariables>
-    public static async Task SearchUserTaskVariablesExample()
+    public static async Task SearchUserTaskVariablesExample(UserTaskKey userTaskKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchUserTaskVariablesAsync(
-            UserTaskKey.AssumeExists("123456"),
+            userTaskKey,
             new SearchUserTaskVariablesRequest());
 
         foreach (var variable in result.Items)
@@ -125,12 +125,12 @@ public static class UserTaskExamples
     #region SearchUserTaskAuditLogs
 
     // <SearchUserTaskAuditLogs>
-    public static async Task SearchUserTaskAuditLogsExample()
+    public static async Task SearchUserTaskAuditLogsExample(UserTaskKey userTaskKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchUserTaskAuditLogsAsync(
-            UserTaskKey.AssumeExists("123456"),
+            userTaskKey,
             new UserTaskAuditLogSearchQueryRequest());
 
         foreach (var log in result.Items)
@@ -140,4 +140,23 @@ public static class UserTaskExamples
     }
     // </SearchUserTaskAuditLogs>
     #endregion SearchUserTaskAuditLogs
+
+    #region SearchUserTaskEffectiveVariables
+
+    // <SearchUserTaskEffectiveVariables>
+    public static async Task SearchUserTaskEffectiveVariablesExample(UserTaskKey userTaskKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchUserTaskEffectiveVariablesAsync(
+            userTaskKey,
+            new SearchUserTaskEffectiveVariablesRequest());
+
+        foreach (var variable in result.Items)
+        {
+            Console.WriteLine($"Variable: {variable.Name}");
+        }
+    }
+    // </SearchUserTaskEffectiveVariables>
+    #endregion SearchUserTaskEffectiveVariables
 }

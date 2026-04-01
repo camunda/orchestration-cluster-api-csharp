@@ -6,13 +6,13 @@ public static class DecisionExamples
 {
     #region EvaluateDecisionById
     // <EvaluateDecisionById>
-    public static async Task EvaluateDecisionByIdExample()
+    public static async Task EvaluateDecisionByIdExample(DecisionDefinitionId decisionDefinitionId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
         {
-            DecisionDefinitionId = DecisionDefinitionId.AssumeExists("my-decision"),
+            DecisionDefinitionId = decisionDefinitionId,
         });
 
         Console.WriteLine($"Decision output: {result.Output}");
@@ -23,13 +23,13 @@ public static class DecisionExamples
     #region EvaluateDecisionByKey
 
     // <EvaluateDecisionByKey>
-    public static async Task EvaluateDecisionByKeyExample()
+    public static async Task EvaluateDecisionByKeyExample(DecisionDefinitionKey decisionDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.EvaluateDecisionAsync(new DecisionEvaluationByKey
         {
-            DecisionDefinitionKey = DecisionDefinitionKey.AssumeExists("123456"),
+            DecisionDefinitionKey = decisionDefinitionKey,
         });
 
         Console.WriteLine($"Decision output: {result.Output}");
@@ -40,12 +40,12 @@ public static class DecisionExamples
     #region GetDecisionDefinition
 
     // <GetDecisionDefinition>
-    public static async Task GetDecisionDefinitionExample()
+    public static async Task GetDecisionDefinitionExample(DecisionDefinitionKey decisionDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetDecisionDefinitionAsync(
-            DecisionDefinitionKey.AssumeExists("123456"));
+            decisionDefinitionKey);
 
         Console.WriteLine($"Decision definition: {result.Name}");
     }
@@ -55,12 +55,12 @@ public static class DecisionExamples
     #region GetDecisionDefinitionXml
 
     // <GetDecisionDefinitionXml>
-    public static async Task GetDecisionDefinitionXmlExample()
+    public static async Task GetDecisionDefinitionXmlExample(DecisionDefinitionKey decisionDefinitionKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetDecisionDefinitionXmlAsync(
-            DecisionDefinitionKey.AssumeExists("123456"));
+            decisionDefinitionKey);
 
         Console.WriteLine($"XML: {result}");
     }
@@ -88,12 +88,12 @@ public static class DecisionExamples
     #region GetDecisionInstance
 
     // <GetDecisionInstance>
-    public static async Task GetDecisionInstanceExample()
+    public static async Task GetDecisionInstanceExample(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetDecisionInstanceAsync(
-            DecisionEvaluationInstanceKey.AssumeExists("123456"));
+            decisionEvaluationInstanceKey);
 
         Console.WriteLine($"Decision instance: {result.DecisionDefinitionId}");
     }
@@ -121,12 +121,12 @@ public static class DecisionExamples
     #region DeleteDecisionInstance
 
     // <DeleteDecisionInstance>
-    public static async Task DeleteDecisionInstanceExample()
+    public static async Task DeleteDecisionInstanceExample(DecisionEvaluationKey decisionEvaluationKey)
     {
         using var client = CamundaClient.Create();
 
         await client.DeleteDecisionInstanceAsync(
-            DecisionEvaluationKey.AssumeExists("123456"),
+            decisionEvaluationKey,
             new DeleteDecisionInstanceRequest());
     }
     // </DeleteDecisionInstance>
@@ -135,12 +135,12 @@ public static class DecisionExamples
     #region GetDecisionRequirements
 
     // <GetDecisionRequirements>
-    public static async Task GetDecisionRequirementsExample()
+    public static async Task GetDecisionRequirementsExample(DecisionRequirementsKey decisionRequirementsKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetDecisionRequirementsAsync(
-            DecisionRequirementsKey.AssumeExists("123456"));
+            decisionRequirementsKey);
 
         Console.WriteLine($"DRD: {result.DecisionRequirementsName}");
     }
@@ -150,12 +150,12 @@ public static class DecisionExamples
     #region GetDecisionRequirementsXml
 
     // <GetDecisionRequirementsXml>
-    public static async Task GetDecisionRequirementsXmlExample()
+    public static async Task GetDecisionRequirementsXmlExample(DecisionRequirementsKey decisionRequirementsKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetDecisionRequirementsXmlAsync(
-            DecisionRequirementsKey.AssumeExists("123456"));
+            decisionRequirementsKey);
 
         Console.WriteLine($"XML: {result}");
     }
