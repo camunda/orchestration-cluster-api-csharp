@@ -165,12 +165,12 @@ will be deleted.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_DeleteResourceRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task DeleteResourceExample()
+<pre><code class="lang-csharp">public static async Task DeleteResourceExample(ResourceKey resourceKey)
 {
     using var client = CamundaClient.Create();
 
     await client.DeleteResourceAsync(
-        ResourceKey.AssumeExists(&quot;123456&quot;),
+        resourceKey,
         new DeleteResourceRequest());
 }
 </code></pre>

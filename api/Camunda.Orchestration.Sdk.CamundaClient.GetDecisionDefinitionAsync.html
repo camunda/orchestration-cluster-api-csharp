@@ -155,12 +155,12 @@ Returns a decision definition by key.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetDecisionDefinitionAsync_Camunda_Orchestration_Sdk_DecisionDefinitionKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_DecisionDefinitionResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetDecisionDefinitionExample()
+<pre><code class="lang-csharp">public static async Task GetDecisionDefinitionExample(DecisionDefinitionKey decisionDefinitionKey)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.GetDecisionDefinitionAsync(
-        DecisionDefinitionKey.AssumeExists(&quot;123456&quot;));
+        decisionDefinitionKey);
 
     Console.WriteLine($&quot;Decision definition: {result.Name}&quot;);
 }

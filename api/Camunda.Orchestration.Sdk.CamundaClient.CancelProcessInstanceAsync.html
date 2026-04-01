@@ -155,12 +155,12 @@ Cancels a running process instance. As a cancellation includes more than just th
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_CancelProcessInstanceRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task CancelProcessInstanceExample()
+<pre><code class="lang-csharp">public static async Task CancelProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
 
     await client.CancelProcessInstanceAsync(
-        ProcessInstanceKey.AssumeExists(&quot;123456&quot;),
+        processInstanceKey,
         new CancelProcessInstanceRequest());
 }
 </code></pre>

@@ -160,12 +160,12 @@ repeats.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateElementInstanceVariablesAsync_Camunda_Orchestration_Sdk_ElementInstanceKey_Camunda_Orchestration_Sdk_SetVariableRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task CreateElementInstanceVariablesExample()
+<pre><code class="lang-csharp">public static async Task CreateElementInstanceVariablesExample(ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
 
     await client.CreateElementInstanceVariablesAsync(
-        ElementInstanceKey.AssumeExists(&quot;123456&quot;),
+        elementInstanceKey,
         new SetVariableRequest());
 }
 </code></pre>

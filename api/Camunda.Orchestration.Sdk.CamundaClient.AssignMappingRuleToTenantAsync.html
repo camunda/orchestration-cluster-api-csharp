@@ -155,12 +155,12 @@ Assign a single mapping rule to a specified tenant.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task AssignMappingRuleToTenantExample()
+<pre><code class="lang-csharp">public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     await client.AssignMappingRuleToTenantAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         &quot;rule-123&quot;);
 }
 </code></pre>

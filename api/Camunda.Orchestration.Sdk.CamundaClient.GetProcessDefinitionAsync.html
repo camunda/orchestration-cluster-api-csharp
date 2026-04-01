@@ -155,12 +155,12 @@ Returns process definition as JSON.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetProcessDefinitionAsync_Camunda_Orchestration_Sdk_ProcessDefinitionKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ProcessDefinitionResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetProcessDefinitionExample()
+<pre><code class="lang-csharp">public static async Task GetProcessDefinitionExample(ProcessDefinitionKey processDefinitionKey)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.GetProcessDefinitionAsync(
-        ProcessDefinitionKey.AssumeExists(&quot;123456&quot;));
+        processDefinitionKey);
 
     Console.WriteLine($&quot;Process definition: {result.Name}&quot;);
 }

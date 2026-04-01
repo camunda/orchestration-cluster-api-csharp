@@ -157,12 +157,12 @@ Get statistics about elements in currently running process instances by process 
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetProcessDefinitionStatisticsAsync_Camunda_Orchestration_Sdk_ProcessDefinitionKey_Camunda_Orchestration_Sdk_ProcessDefinitionElementStatisticsQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ProcessDefinitionElementStatisticsQueryResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetProcessDefinitionStatisticsExample()
+<pre><code class="lang-csharp">public static async Task GetProcessDefinitionStatisticsExample(ProcessDefinitionKey processDefinitionKey)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.GetProcessDefinitionStatisticsAsync(
-        ProcessDefinitionKey.AssumeExists(&quot;123456&quot;),
+        processDefinitionKey,
         new ProcessDefinitionElementStatisticsQuery());
 
     foreach (var stat in result.Items)

@@ -155,12 +155,12 @@ Assigns a user task with the given key to the given assignee. Assignment waits f
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignUserTaskAsync_Camunda_Orchestration_Sdk_UserTaskKey_Camunda_Orchestration_Sdk_UserTaskAssignmentRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task AssignUserTaskExample()
+<pre><code class="lang-csharp">public static async Task AssignUserTaskExample(UserTaskKey userTaskKey)
 {
     using var client = CamundaClient.Create();
 
     await client.AssignUserTaskAsync(
-        UserTaskKey.AssumeExists(&quot;123456&quot;),
+        userTaskKey,
         new UserTaskAssignmentRequest
         {
             Assignee = &quot;user@example.com&quot;,

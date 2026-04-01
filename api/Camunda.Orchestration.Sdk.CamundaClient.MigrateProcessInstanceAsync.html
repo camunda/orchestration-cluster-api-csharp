@@ -160,15 +160,15 @@ latest process improvements.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ProcessInstanceMigrationInstruction_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task MigrateProcessInstanceExample()
+<pre><code class="lang-csharp">public static async Task MigrateProcessInstanceExample(ProcessInstanceKey processInstanceKey, ProcessDefinitionKey targetProcessDefinitionKey)
 {
     using var client = CamundaClient.Create();
 
     await client.MigrateProcessInstanceAsync(
-        ProcessInstanceKey.AssumeExists(&quot;123456&quot;),
+        processInstanceKey,
         new ProcessInstanceMigrationInstruction
         {
-            TargetProcessDefinitionKey = ProcessDefinitionKey.AssumeExists(&quot;789012&quot;),
+            TargetProcessDefinitionKey = targetProcessDefinitionKey,
         });
 }
 </code></pre>

@@ -155,12 +155,12 @@ Unassigns a single mapping rule from a specified tenant without deleting the rul
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignMappingRuleFromTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UnassignMappingRuleFromTenantExample()
+<pre><code class="lang-csharp">public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     await client.UnassignMappingRuleFromTenantAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         &quot;rule-123&quot;);
 }
 </code></pre>

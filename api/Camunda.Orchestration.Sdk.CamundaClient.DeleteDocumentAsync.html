@@ -156,11 +156,11 @@ Delete a document from the Camunda 8 cluster.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteDocumentAsync_Camunda_Orchestration_Sdk_DocumentId_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task DeleteDocumentExample()
+<pre><code class="lang-csharp">public static async Task DeleteDocumentExample(DocumentId documentId)
 {
     using var client = CamundaClient.Create();
 
-    await client.DeleteDocumentAsync(DocumentId.AssumeExists(&quot;doc-123&quot;));
+    await client.DeleteDocumentAsync(documentId);
 }
 </code></pre>
 

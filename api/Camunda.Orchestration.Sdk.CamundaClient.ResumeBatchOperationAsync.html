@@ -154,11 +154,11 @@ This is done asynchronously, the progress can be tracked using the batch operati
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ResumeBatchOperationAsync_Camunda_Orchestration_Sdk_BatchOperationKey_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task ResumeBatchOperationExample()
+<pre><code class="lang-csharp">public static async Task ResumeBatchOperationExample(BatchOperationKey batchOperationKey)
 {
     using var client = CamundaClient.Create();
 
-    await client.ResumeBatchOperationAsync(BatchOperationKey.AssumeExists(&quot;123456&quot;));
+    await client.ResumeBatchOperationAsync(batchOperationKey);
 }
 </code></pre>
 

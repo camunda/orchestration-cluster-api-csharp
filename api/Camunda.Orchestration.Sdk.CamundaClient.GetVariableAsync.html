@@ -158,11 +158,11 @@ specific element instance.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetVariableAsync_Camunda_Orchestration_Sdk_VariableKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_VariableResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetVariableExample()
+<pre><code class="lang-csharp">public static async Task GetVariableExample(VariableKey variableKey)
 {
     using var client = CamundaClient.Create();
 
-    var result = await client.GetVariableAsync(VariableKey.AssumeExists(&quot;123456&quot;));
+    var result = await client.GetVariableAsync(variableKey);
     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
 }
 </code></pre>

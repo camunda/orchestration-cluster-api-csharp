@@ -153,12 +153,12 @@ Deletes a global user task listener.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_GlobalListenerId_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task DeleteGlobalTaskListenerExample()
+<pre><code class="lang-csharp">public static async Task DeleteGlobalTaskListenerExample(GlobalListenerId globalListenerId)
 {
     using var client = CamundaClient.Create();
 
     await client.DeleteGlobalTaskListenerAsync(
-        GlobalListenerId.AssumeExists(&quot;listener-123&quot;));
+        globalListenerId);
 }
 </code></pre>
 

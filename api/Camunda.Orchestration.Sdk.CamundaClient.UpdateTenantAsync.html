@@ -155,12 +155,12 @@ Updates an existing tenant.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_TenantUpdateRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UpdateTenantExample()
+<pre><code class="lang-csharp">public static async Task UpdateTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     await client.UpdateTenantAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         new TenantUpdateRequest
         {
             Name = &quot;Acme Corp International&quot;,

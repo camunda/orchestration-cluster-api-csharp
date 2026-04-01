@@ -155,12 +155,12 @@ Get statistics about elements by the process instance key.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetProcessInstanceStatisticsAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ProcessInstanceElementStatisticsQueryResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetProcessInstanceStatisticsExample()
+<pre><code class="lang-csharp">public static async Task GetProcessInstanceStatisticsExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.GetProcessInstanceStatisticsAsync(
-        ProcessInstanceKey.AssumeExists(&quot;123456&quot;));
+        processInstanceKey);
 
     foreach (var stat in result.Items)
     {

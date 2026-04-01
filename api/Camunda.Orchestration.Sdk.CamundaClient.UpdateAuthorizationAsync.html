@@ -155,12 +155,12 @@ Update the authorization with the given key.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationKey_Camunda_Orchestration_Sdk_AuthorizationRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UpdateAuthorizationExample()
+<pre><code class="lang-csharp">public static async Task UpdateAuthorizationExample(AuthorizationKey authorizationKey)
 {
     using var client = CamundaClient.Create();
 
     await client.UpdateAuthorizationAsync(
-        AuthorizationKey.AssumeExists(&quot;123456&quot;),
+        authorizationKey,
         new AuthorizationPropertyBasedRequest
         {
             ResourceType = ResourceTypeEnum.PROCESSDEFINITION,

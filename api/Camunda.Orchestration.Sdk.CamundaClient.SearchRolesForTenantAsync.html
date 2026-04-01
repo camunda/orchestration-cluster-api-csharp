@@ -157,12 +157,12 @@ Retrieves a filtered and sorted list of roles for a specified tenant.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchRolesForTenantResponse__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task SearchRolesForTenantExample()
+<pre><code class="lang-csharp">public static async Task SearchRolesForTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.SearchRolesForTenantAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         new RoleSearchQueryRequest());
 
     foreach (var role in result.Items)

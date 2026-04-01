@@ -155,12 +155,12 @@ Get authorization by the given key.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_AuthorizationResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetAuthorizationExample()
+<pre><code class="lang-csharp">public static async Task GetAuthorizationExample(AuthorizationKey authorizationKey)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.GetAuthorizationAsync(
-        AuthorizationKey.AssumeExists(&quot;123456&quot;));
+        authorizationKey);
 
     Console.WriteLine($&quot;Resource type: {result.ResourceType}&quot;);
 }

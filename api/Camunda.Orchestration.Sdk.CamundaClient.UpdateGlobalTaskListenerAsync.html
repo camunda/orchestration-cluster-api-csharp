@@ -155,12 +155,12 @@ Updates a global user task listener.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_GlobalListenerId_Camunda_Orchestration_Sdk_UpdateGlobalTaskListenerRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UpdateGlobalTaskListenerExample()
+<pre><code class="lang-csharp">public static async Task UpdateGlobalTaskListenerExample(GlobalListenerId globalListenerId)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.UpdateGlobalTaskListenerAsync(
-        GlobalListenerId.AssumeExists(&quot;listener-123&quot;),
+        globalListenerId,
         new UpdateGlobalTaskListenerRequest
         {
             EventTypes = new List&lt;GlobalTaskListenerEventTypeEnum&gt; { GlobalTaskListenerEventTypeEnum.Completing },

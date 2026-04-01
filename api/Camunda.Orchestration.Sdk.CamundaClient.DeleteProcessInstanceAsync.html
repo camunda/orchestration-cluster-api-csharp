@@ -155,12 +155,12 @@ Deletes a process instance. Only instances that are completed or terminated can 
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_DeleteProcessInstanceRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task DeleteProcessInstanceExample()
+<pre><code class="lang-csharp">public static async Task DeleteProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
 
     await client.DeleteProcessInstanceAsync(
-        ProcessInstanceKey.AssumeExists(&quot;123456&quot;),
+        processInstanceKey,
         new DeleteProcessInstanceRequest());
 }
 </code></pre>

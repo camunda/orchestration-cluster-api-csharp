@@ -155,11 +155,11 @@ Retrieves a single tenant by tenant ID.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_TenantResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetTenantExample()
+<pre><code class="lang-csharp">public static async Task GetTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
-    var result = await client.GetTenantAsync(TenantId.AssumeExists(&quot;acme-corp&quot;));
+    var result = await client.GetTenantAsync(tenantId);
     Console.WriteLine($&quot;Tenant: {result.Name}&quot;);
 }
 </code></pre>

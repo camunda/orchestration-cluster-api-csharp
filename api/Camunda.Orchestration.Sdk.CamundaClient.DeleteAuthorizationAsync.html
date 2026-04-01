@@ -153,11 +153,11 @@ Deletes the authorization with the given key.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationKey_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task DeleteAuthorizationExample()
+<pre><code class="lang-csharp">public static async Task DeleteAuthorizationExample(AuthorizationKey authorizationKey)
 {
     using var client = CamundaClient.Create();
 
-    await client.DeleteAuthorizationAsync(AuthorizationKey.AssumeExists(&quot;123456&quot;));
+    await client.DeleteAuthorizationAsync(authorizationKey);
 }
 </code></pre>
 

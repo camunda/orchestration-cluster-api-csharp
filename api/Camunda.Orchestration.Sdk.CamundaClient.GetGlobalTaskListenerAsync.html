@@ -155,12 +155,12 @@ Get a global user task listener by its id.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_GlobalListenerId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_GlobalTaskListenerResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetGlobalTaskListenerExample()
+<pre><code class="lang-csharp">public static async Task GetGlobalTaskListenerExample(GlobalListenerId globalListenerId)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.GetGlobalTaskListenerAsync(
-        GlobalListenerId.AssumeExists(&quot;listener-123&quot;));
+        globalListenerId);
 
     Console.WriteLine($&quot;Task listener: {result.EventTypes}&quot;);
 }

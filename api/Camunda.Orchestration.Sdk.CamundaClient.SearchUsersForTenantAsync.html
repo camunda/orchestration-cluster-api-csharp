@@ -157,12 +157,12 @@ Retrieves a filtered and sorted list of users for a specified tenant.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUsersForTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_SearchUsersForTenantRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchUsersForTenantResponse__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task SearchUsersForTenantExample()
+<pre><code class="lang-csharp">public static async Task SearchUsersForTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.SearchUsersForTenantAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         new SearchUsersForTenantRequest());
 
     foreach (var user in result.Items)

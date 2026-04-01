@@ -162,12 +162,12 @@ to the root element itself.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchElementInstanceIncidentsAsync_Camunda_Orchestration_Sdk_ElementInstanceKey_Camunda_Orchestration_Sdk_IncidentSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_IncidentSearchQueryResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task SearchElementInstanceIncidentsExample()
+<pre><code class="lang-csharp">public static async Task SearchElementInstanceIncidentsExample(ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.SearchElementInstanceIncidentsAsync(
-        ElementInstanceKey.AssumeExists(&quot;123456&quot;),
+        elementInstanceKey,
         new IncidentSearchQuery());
 
     foreach (var incident in result.Items)

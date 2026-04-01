@@ -155,11 +155,11 @@ Unassigns a role from a user. The user will no longer inherit the authorizations
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromUserAsync_System_String_Camunda_Orchestration_Sdk_Username_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UnassignRoleFromUserExample()
+<pre><code class="lang-csharp">public static async Task UnassignRoleFromUserExample(Username username)
 {
     using var client = CamundaClient.Create();
 
-    await client.UnassignRoleFromUserAsync(&quot;developer&quot;, Username.AssumeExists(&quot;jdoe&quot;));
+    await client.UnassignRoleFromUserAsync(&quot;developer&quot;, username);
 }
 </code></pre>
 

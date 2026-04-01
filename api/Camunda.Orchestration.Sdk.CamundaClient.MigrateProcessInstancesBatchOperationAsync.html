@@ -156,7 +156,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_ProcessInstanceMigrationBatchOperationRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task MigrateProcessInstancesBatchOperationExample()
+<pre><code class="lang-csharp">public static async Task MigrateProcessInstancesBatchOperationExample(ProcessDefinitionKey targetProcessDefinitionKey)
 {
     using var client = CamundaClient.Create();
 
@@ -166,7 +166,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
             Filter = new ProcessInstanceFilter(),
             MigrationPlan = new ProcessInstanceMigrationBatchOperationPlan
             {
-                TargetProcessDefinitionKey = ProcessDefinitionKey.AssumeExists(&quot;456789&quot;),
+                TargetProcessDefinitionKey = targetProcessDefinitionKey,
             },
         });
 

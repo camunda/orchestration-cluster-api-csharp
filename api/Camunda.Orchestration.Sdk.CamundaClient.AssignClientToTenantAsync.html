@@ -156,12 +156,12 @@ The client can then access tenant data and perform authorized actions.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignClientToTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task AssignClientToTenantExample()
+<pre><code class="lang-csharp">public static async Task AssignClientToTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     await client.AssignClientToTenantAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         &quot;my-service-account&quot;);
 }
 </code></pre>

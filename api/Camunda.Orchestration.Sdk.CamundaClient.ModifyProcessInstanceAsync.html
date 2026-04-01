@@ -159,12 +159,12 @@ For example, because an external system is not available or doesn't respond as e
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ModifyProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ProcessInstanceModificationInstruction_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task ModifyProcessInstanceExample()
+<pre><code class="lang-csharp">public static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
 
     await client.ModifyProcessInstanceAsync(
-        ProcessInstanceKey.AssumeExists(&quot;123456&quot;),
+        processInstanceKey,
         new ProcessInstanceModificationInstruction());
 }
 </code></pre>

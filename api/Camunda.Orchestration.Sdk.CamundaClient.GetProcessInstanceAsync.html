@@ -155,11 +155,11 @@ Get the process instance by the process instance key.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ProcessInstanceResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetProcessInstanceExample()
+<pre><code class="lang-csharp">public static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
 
-    var result = await client.GetProcessInstanceAsync(ProcessInstanceKey.AssumeExists(&quot;123456&quot;));
+    var result = await client.GetProcessInstanceAsync(processInstanceKey);
     Console.WriteLine($&quot;Process instance: {result.ProcessDefinitionId}&quot;);
 }
 </code></pre>

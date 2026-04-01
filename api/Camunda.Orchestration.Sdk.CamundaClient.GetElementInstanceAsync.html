@@ -155,12 +155,12 @@ Returns element instance as JSON.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetElementInstanceAsync_Camunda_Orchestration_Sdk_ElementInstanceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ElementInstanceResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetElementInstanceExample()
+<pre><code class="lang-csharp">public static async Task GetElementInstanceExample(ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.GetElementInstanceAsync(
-        ElementInstanceKey.AssumeExists(&quot;123456&quot;));
+        elementInstanceKey);
 
     Console.WriteLine($&quot;Element: {result.ElementId}&quot;);
 }

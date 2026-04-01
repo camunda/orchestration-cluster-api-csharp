@@ -155,12 +155,12 @@ Delete a tenant-scoped cluster variable.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task DeleteTenantClusterVariableExample()
+<pre><code class="lang-csharp">public static async Task DeleteTenantClusterVariableExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     await client.DeleteTenantClusterVariableAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         &quot;my-variable&quot;);
 }
 </code></pre>

@@ -155,12 +155,12 @@ Complete a job with the given payload, which allows completing the associated se
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CompleteJobAsync_Camunda_Orchestration_Sdk_JobKey_Camunda_Orchestration_Sdk_JobCompletionRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task CompleteJobExample()
+<pre><code class="lang-csharp">public static async Task CompleteJobExample(JobKey jobKey)
 {
     using var client = CamundaClient.Create();
 
     await client.CompleteJobAsync(
-        JobKey.AssumeExists(&quot;123456&quot;),
+        jobKey,
         new JobCompletionRequest());
 }
 </code></pre>

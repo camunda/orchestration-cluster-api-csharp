@@ -157,12 +157,12 @@ Retrieves a filtered and sorted list of groups for a specified tenant.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupIdsForTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_TenantGroupSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_TenantGroupSearchResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task SearchGroupIdsForTenantExample()
+<pre><code class="lang-csharp">public static async Task SearchGroupIdsForTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.SearchGroupIdsForTenantAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         new TenantGroupSearchQueryRequest());
 
     foreach (var group in result.Items)

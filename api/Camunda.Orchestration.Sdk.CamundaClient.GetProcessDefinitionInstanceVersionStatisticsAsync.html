@@ -156,7 +156,7 @@ The process definition ID must be provided as a required field in the request bo
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetProcessDefinitionInstanceVersionStatisticsAsync_Camunda_Orchestration_Sdk_ProcessDefinitionInstanceVersionStatisticsQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ProcessDefinitionInstanceVersionStatisticsQueryResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetProcessDefinitionInstanceVersionStatisticsExample()
+<pre><code class="lang-csharp">public static async Task GetProcessDefinitionInstanceVersionStatisticsExample(ProcessDefinitionId processDefinitionId)
 {
     using var client = CamundaClient.Create();
 
@@ -165,7 +165,7 @@ The process definition ID must be provided as a required field in the request bo
         {
             Filter = new ProcessDefinitionInstanceVersionStatisticsFilter
             {
-                ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&quot;my-process&quot;),
+                ProcessDefinitionId = processDefinitionId,
             },
         });
 

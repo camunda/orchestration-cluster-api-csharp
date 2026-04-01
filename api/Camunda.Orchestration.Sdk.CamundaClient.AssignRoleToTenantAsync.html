@@ -156,12 +156,12 @@ Users, Clients or Groups, that have the role assigned, will get access to the te
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task AssignRoleToTenantExample()
+<pre><code class="lang-csharp">public static async Task AssignRoleToTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     await client.AssignRoleToTenantAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         &quot;developer&quot;);
 }
 </code></pre>

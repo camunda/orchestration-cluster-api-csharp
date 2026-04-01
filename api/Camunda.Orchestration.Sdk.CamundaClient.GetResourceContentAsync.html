@@ -156,11 +156,11 @@ Currently, this endpoint only supports RPA resources.
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceContentAsync_Camunda_Orchestration_Sdk_ResourceKey_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetResourceContentExample()
+<pre><code class="lang-csharp">public static async Task GetResourceContentExample(ResourceKey resourceKey)
 {
     using var client = CamundaClient.Create();
 
-    var result = await client.GetResourceContentAsync(ResourceKey.AssumeExists(&quot;123456&quot;));
+    var result = await client.GetResourceContentAsync(resourceKey);
     Console.WriteLine($&quot;Content: {result}&quot;);
 }
 </code></pre>

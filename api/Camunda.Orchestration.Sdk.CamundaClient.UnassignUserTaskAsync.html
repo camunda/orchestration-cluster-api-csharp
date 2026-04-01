@@ -153,11 +153,11 @@ Removes the assignee of a task with the given key. Unassignment waits for blocki
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignUserTaskAsync_Camunda_Orchestration_Sdk_UserTaskKey_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UnassignUserTaskExample()
+<pre><code class="lang-csharp">public static async Task UnassignUserTaskExample(UserTaskKey userTaskKey)
 {
     using var client = CamundaClient.Create();
 
-    await client.UnassignUserTaskAsync(UserTaskKey.AssumeExists(&quot;123456&quot;));
+    await client.UnassignUserTaskAsync(userTaskKey);
 }
 </code></pre>
 

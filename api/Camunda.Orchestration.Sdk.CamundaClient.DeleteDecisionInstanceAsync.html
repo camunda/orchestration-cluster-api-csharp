@@ -155,12 +155,12 @@ Delete all associated decision evaluations based on provided key.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteDecisionInstanceAsync_Camunda_Orchestration_Sdk_DecisionEvaluationKey_Camunda_Orchestration_Sdk_DeleteDecisionInstanceRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task DeleteDecisionInstanceExample()
+<pre><code class="lang-csharp">public static async Task DeleteDecisionInstanceExample(DecisionEvaluationKey decisionEvaluationKey)
 {
     using var client = CamundaClient.Create();
 
     await client.DeleteDecisionInstanceAsync(
-        DecisionEvaluationKey.AssumeExists(&quot;123456&quot;),
+        decisionEvaluationKey,
         new DeleteDecisionInstanceRequest());
 }
 </code></pre>

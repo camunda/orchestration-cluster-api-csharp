@@ -161,12 +161,12 @@ subprocesses or called processes under the root instance while excluding inciden
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchProcessInstanceIncidentsAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_IncidentSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_IncidentSearchQueryResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task SearchProcessInstanceIncidentsExample()
+<pre><code class="lang-csharp">public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.SearchProcessInstanceIncidentsAsync(
-        ProcessInstanceKey.AssumeExists(&quot;123456&quot;),
+        processInstanceKey,
         new IncidentSearchQuery());
 
     foreach (var incident in result.Items)

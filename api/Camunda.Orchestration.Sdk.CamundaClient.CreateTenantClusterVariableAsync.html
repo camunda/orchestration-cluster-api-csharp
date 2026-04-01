@@ -155,12 +155,12 @@ Create a new cluster variable for the given tenant.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_CreateClusterVariableRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task CreateTenantClusterVariableExample()
+<pre><code class="lang-csharp">public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.CreateTenantClusterVariableAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         new CreateClusterVariableRequest
         {
             Name = &quot;my-variable&quot;,

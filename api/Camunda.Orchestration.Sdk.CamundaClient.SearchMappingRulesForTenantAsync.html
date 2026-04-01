@@ -157,12 +157,12 @@ Retrieves a filtered and sorted list of MappingRules for a specified tenant.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchMappingRulesForTenantResponse__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task SearchMappingRulesForTenantExample()
+<pre><code class="lang-csharp">public static async Task SearchMappingRulesForTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
 
     var result = await client.SearchMappingRulesForTenantAsync(
-        TenantId.AssumeExists(&quot;acme-corp&quot;),
+        tenantId,
         new MappingRuleSearchQueryRequest());
 
     foreach (var rule in result.Items)
