@@ -9,7 +9,7 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
 
 echo "=== Camunda C# SDK Build ==="
-if [ "${SPEC_REF:-main}" != "main" ]; then
+if [ "${SPEC_REF:-stable/8.9}" != "stable/8.9" ]; then
     echo "    SPEC_REF=${SPEC_REF}"
 fi
 
@@ -43,10 +43,10 @@ echo ""
 echo "--- Step 6: Lint check ---"
 dotnet format --verify-no-changes
 
-# Step 7: Sync README snippets
+# Step 7: Check README snippets are in sync (no auto-sync)
 echo ""
-echo "--- Step 7: Sync README snippets ---"
-python3 scripts/sync-readme-snippets.py
+echo "--- Step 7: Check README snippets are in sync ---"
+python3 scripts/sync-readme-snippets.py --check
 
 # Step 8: Unit tests (acceptance gate — integration tests are separate)
 echo ""

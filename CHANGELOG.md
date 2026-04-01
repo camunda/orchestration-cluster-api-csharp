@@ -1,3 +1,36 @@
+# [8.9.0-alpha.22](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.21...v8.9.0-alpha.22) (2026-04-01)
+
+
+### Bug Fixes
+
+* inject default tenant ID for multipart createDeployment ([f24e052](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f24e052680dfa46569180809e375f1fc6d072b21)), closes [#40](https://github.com/camunda/orchestration-cluster-api-csharp/issues/40)
+
+
+### Features
+
+* embed specHash from spec-metadata.json in published package ([0db4ba5](https://github.com/camunda/orchestration-cluster-api-csharp/commit/0db4ba58386c4bcf161e792e8dc1461cf5e8a807)), closes [#39](https://github.com/camunda/orchestration-cluster-api-csharp/issues/39)
+
+# [8.9.0-alpha.21](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.20...v8.9.0-alpha.21) (2026-03-31)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([a0ea912](https://github.com/camunda/orchestration-cluster-api-csharp/commit/a0ea9127431fc4def5511e404a084f33b4920c48))
+
+# [8.9.0-alpha.20](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.19...v8.9.0-alpha.20) (2026-03-31)
+
+
+### Bug Fixes
+
+* build from stable/8.9 ([bc5b929](https://github.com/camunda/orchestration-cluster-api-csharp/commit/bc5b9298057ea1a568d9858fa6ea347d4a55f958))
+
+# [8.9.0-alpha.19](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.18...v8.9.0-alpha.19) (2026-03-31)
+
+
+### Bug Fixes
+
+* harden README code injection ([6965ad6](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6965ad653a9dbc725506a22afc0e6c1716965bec)), closes [#36](https://github.com/camunda/orchestration-cluster-api-csharp/issues/36)
+
 # [8.9.0-alpha.18](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.17...v8.9.0-alpha.18) (2026-03-27)
 
 

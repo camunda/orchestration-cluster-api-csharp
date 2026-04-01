@@ -312,6 +312,12 @@ public partial class CamundaClient
     public async Task<DeploymentResult> CreateDeploymentAsync(MultipartFormDataContent content, CancellationToken ct = default)
     {
         var path = $"/deployments";
+        if (_config.DefaultTenantId != null)
+        {
+            var hasTenant = content.Any(p => p.Headers.ContentDisposition?.Name?.Trim('"') == "tenantId");
+            if (!hasTenant)
+                content.Add(new StringContent(_config.DefaultTenantId), "tenantId");
+        }
         return await InvokeWithRetryAsync(() => SendMultipartAsync<DeploymentResult>(path, content, ct), "createDeployment", false, ct);
     }
 
@@ -319,7 +325,7 @@ public partial class CamundaClient
     /// Upload document
     /// Upload a document to the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: createDocument</remarks>
@@ -336,7 +342,7 @@ public partial class CamundaClient
     /// Create document link
     /// Create a link to a document in the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP
+    /// Note that this is currently supported for document stores of type: AWS, GCP
     /// 
     /// </summary>
     /// <remarks>Operation: createDocumentLink</remarks>
@@ -365,7 +371,7 @@ public partial class CamundaClient
     /// each of which contains the file name of the document that failed to upload and the reason for the failure.
     /// The client can choose to retry the whole batch or individual documents based on the response.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: createDocuments</remarks>
@@ -540,7 +546,7 @@ public partial class CamundaClient
     /// Delete document
     /// Delete a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: deleteDocument</remarks>
@@ -903,7 +909,7 @@ public partial class CamundaClient
     /// Download document
     /// Download a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>Operation: getDocument</remarks>

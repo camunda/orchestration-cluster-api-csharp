@@ -13,7 +13,7 @@ on:
         default: 'stable/8.9'
 
 env:
-  SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
+  SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'stable/8.9' }}
 
 concurrency:
   group: orchestration-cluster-api-csharp-release-${{ github.ref_name }}
@@ -40,14 +40,14 @@ jobs:
           - dotnet: '8.0.x'
             stack: full
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Validate SPEC_REF override
-        if: env.SPEC_REF != 'main'
+        if: env.SPEC_REF != 'stable/8.9'
         run: |
-          echo "SPEC_REF is pinned to '${SPEC_REF}' (not main)"
+          echo "SPEC_REF is pinned to '${SPEC_REF}' (not stable/8.9)"
           ACK="${{ vars.SPEC_REF_OVERRIDE_ACK }}"
           EXPIRES="${{ vars.SPEC_REF_OVERRIDE_EXPIRES }}"
           if [ "$ACK" != "true" ]; then
@@ -70,12 +70,12 @@ jobs:
           echo "CAMUNDA_SDK_CURRENT_STABLE_MINOR=${{ vars['CAMUNDA_SDK_CURRENT_STABLE_MINOR'] }}" >> $GITHUB_ENV
 
       - name: Setup .NET ${{ matrix.dotnet }}
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '22.x'
 
@@ -175,7 +175,7 @@ jobs:
     needs: generate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -194,12 +194,12 @@ jobs:
           echo "CAMUNDA_SDK_CURRENT_STABLE_MINOR=${{ vars['CAMUNDA_SDK_CURRENT_STABLE_MINOR'] }}" >> $GITHUB_ENV
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x'
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '22.x'
 
@@ -259,7 +259,7 @@ jobs:
 
       - name: Upload release analysis logs (always)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-analysis
           path: |
