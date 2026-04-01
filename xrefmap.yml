@@ -9985,6 +9985,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchVariablesAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchVariablesAsync
   nameWithType: CamundaClient.SearchVariablesAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SpecHash
+  name: SpecHash
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SpecHash.html
+  commentId: F:Camunda.Orchestration.Sdk.CamundaClient.SpecHash
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SpecHash
+  nameWithType: CamundaClient.SpecHash
 - uid: Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync(System.Nullable{System.TimeSpan})
   name: StopAllWorkersAsync(TimeSpan?)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync.html#Camunda_Orchestration_Sdk_CamundaClient_StopAllWorkersAsync_System_Nullable_System_TimeSpan__
