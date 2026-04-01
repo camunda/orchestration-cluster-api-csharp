@@ -11,15 +11,9 @@ public class SpecHashTests
     }
 
     [Fact]
-    public void SpecHash_StartsWithSha256Prefix()
+    public void SpecHash_HasValidSha256Format()
     {
-        CamundaClient.SpecHash.Should().StartWith("sha256:");
-    }
-
-    [Fact]
-    public void SpecHash_HasCorrectLength()
-    {
-        // sha256: prefix (7 chars) + 64 hex chars = 71
-        CamundaClient.SpecHash.Should().HaveLength(71);
+        // sha256: prefix followed by 64 hex chars
+        CamundaClient.SpecHash.Should().MatchRegex(@"^sha256:[0-9a-fA-F]{64}$");
     }
 }
