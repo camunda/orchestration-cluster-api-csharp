@@ -81,11 +81,11 @@ public static class GroupExamples
     #region AssignUserToGroup
 
     // <AssignUserToGroup>
-    public static async Task AssignUserToGroupExample()
+    public static async Task AssignUserToGroupExample(Username username)
     {
         using var client = CamundaClient.Create();
 
-        await client.AssignUserToGroupAsync("engineering", Username.AssumeExists("jdoe"));
+        await client.AssignUserToGroupAsync("engineering", username);
     }
     // </AssignUserToGroup>
     #endregion AssignUserToGroup
@@ -93,11 +93,11 @@ public static class GroupExamples
     #region UnassignUserFromGroup
 
     // <UnassignUserFromGroup>
-    public static async Task UnassignUserFromGroupExample()
+    public static async Task UnassignUserFromGroupExample(Username username)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignUserFromGroupAsync("engineering", Username.AssumeExists("jdoe"));
+        await client.UnassignUserFromGroupAsync("engineering", username);
     }
     // </UnassignUserFromGroup>
     #endregion UnassignUserFromGroup

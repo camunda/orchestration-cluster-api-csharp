@@ -6,11 +6,11 @@ public static class IncidentExamples
 {
     #region GetIncident
     // <GetIncident>
-    public static async Task GetIncidentExample()
+    public static async Task GetIncidentExample(IncidentKey incidentKey)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetIncidentAsync(IncidentKey.AssumeExists("123456"));
+        var result = await client.GetIncidentAsync(incidentKey);
         Console.WriteLine($"Incident: {result.IncidentKey}");
     }
     // </GetIncident>
@@ -19,12 +19,12 @@ public static class IncidentExamples
     #region ResolveIncident
 
     // <ResolveIncident>
-    public static async Task ResolveIncidentExample()
+    public static async Task ResolveIncidentExample(IncidentKey incidentKey)
     {
         using var client = CamundaClient.Create();
 
         await client.ResolveIncidentAsync(
-            IncidentKey.AssumeExists("123456"),
+            incidentKey,
             new IncidentResolutionRequest());
     }
     // </ResolveIncident>

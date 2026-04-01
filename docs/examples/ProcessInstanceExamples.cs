@@ -57,33 +57,20 @@ internal static class ProcessInstanceExamples
     // </CreateProcessInstanceWithVariables>
 
     // <CancelProcessInstance>
-    private static async Task CancelProcessInstanceExample()
+    private static async Task CancelProcessInstanceExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
-        // Create a process instance and get its key from the response
-        var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-        {
-            ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
-        });
-
-        // Cancel the process instance using the key from the creation response
-        await client.CancelProcessInstanceAsync(created.ProcessInstanceKey, new CancelProcessInstanceRequest());
+        await client.CancelProcessInstanceAsync(processInstanceKey, new CancelProcessInstanceRequest());
     }
     // </CancelProcessInstance>
 
     // <GetProcessInstance>
-    private static async Task GetProcessInstanceExample()
+    private static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
     {
         using var client = CamundaClient.Create();
 
-        // The ProcessInstanceKey is returned from CreateProcessInstanceAsync
-        var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-        {
-            ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
-        });
-
-        var instance = await client.GetProcessInstanceAsync(created.ProcessInstanceKey);
+        var instance = await client.GetProcessInstanceAsync(processInstanceKey);
 
         Console.WriteLine($"State: {instance.State}");
     }
@@ -104,31 +91,23 @@ internal static class ProcessInstanceExamples
     // </SearchProcessInstances>
 
     // <MigrateProcessInstance>
-    private static async Task MigrateProcessInstanceExample()
+    private static async Task MigrateProcessInstanceExample(
+        ProcessInstanceKey processInstanceKey,
+        ProcessDefinitionKey targetProcessDefinitionKey,
+        ElementId sourceElementId,
+        ElementId targetElementId)
     {
         using var client = CamundaClient.Create();
 
-        // Create an instance to migrate
-        var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-        {
-            ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
-        });
-
-        // Deploy the updated process version and get its ProcessDefinitionKey
-        var v2 = await client.DeployResourcesFromFilesAsync(
-            new[] { "order-process-v2.bpmn" }
-        );
-        var targetProcessDefinitionKey = v2.Processes[0].ProcessDefinitionKey;
-
-        await client.MigrateProcessInstanceAsync(created.ProcessInstanceKey, new ProcessInstanceMigrationInstruction
+        await client.MigrateProcessInstanceAsync(processInstanceKey, new ProcessInstanceMigrationInstruction
         {
             TargetProcessDefinitionKey = targetProcessDefinitionKey,
             MappingInstructions = new List<MigrateProcessInstanceMappingInstruction>
             {
                 new()
                 {
-                    SourceElementId = ElementId.AssumeExists("taskA"),
-                    TargetElementId = ElementId.AssumeExists("taskB"),
+                    SourceElementId = sourceElementId,
+                    TargetElementId = targetElementId,
                 }
             }
         });
@@ -136,21 +115,15 @@ internal static class ProcessInstanceExamples
     // </MigrateProcessInstance>
 
     // <ModifyProcessInstance>
-    private static async Task ModifyProcessInstanceExample()
+    private static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey, ElementId elementId)
     {
         using var client = CamundaClient.Create();
 
-        // Get a ProcessInstanceKey from the creation response
-        var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-        {
-            ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
-        });
-
-        await client.ModifyProcessInstanceAsync(created.ProcessInstanceKey, new ProcessInstanceModificationInstruction
+        await client.ModifyProcessInstanceAsync(processInstanceKey, new ProcessInstanceModificationInstruction
         {
             ActivateInstructions = new List<ProcessInstanceModificationActivateInstruction>
             {
-                new() { ElementId = ElementId.AssumeExists("taskB") }
+                new() { ElementId = elementId }
             }
         });
     }

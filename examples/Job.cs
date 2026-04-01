@@ -29,12 +29,12 @@ public static class JobExamples
     #region CompleteJob
 
     // <CompleteJob>
-    public static async Task CompleteJobExample()
+    public static async Task CompleteJobExample(JobKey jobKey)
     {
         using var client = CamundaClient.Create();
 
         await client.CompleteJobAsync(
-            JobKey.AssumeExists("123456"),
+            jobKey,
             new JobCompletionRequest());
     }
     // </CompleteJob>
@@ -43,12 +43,12 @@ public static class JobExamples
     #region FailJob
 
     // <FailJob>
-    public static async Task FailJobExample()
+    public static async Task FailJobExample(JobKey jobKey)
     {
         using var client = CamundaClient.Create();
 
         await client.FailJobAsync(
-            JobKey.AssumeExists("123456"),
+            jobKey,
             new JobFailRequest
             {
                 Retries = 3,
@@ -62,12 +62,12 @@ public static class JobExamples
     #region ThrowJobError
 
     // <ThrowJobError>
-    public static async Task ThrowJobErrorExample()
+    public static async Task ThrowJobErrorExample(JobKey jobKey)
     {
         using var client = CamundaClient.Create();
 
         await client.ThrowJobErrorAsync(
-            JobKey.AssumeExists("123456"),
+            jobKey,
             new JobErrorRequest
             {
                 ErrorCode = "VALIDATION_ERROR",
@@ -80,12 +80,12 @@ public static class JobExamples
     #region UpdateJob
 
     // <UpdateJob>
-    public static async Task UpdateJobExample()
+    public static async Task UpdateJobExample(JobKey jobKey)
     {
         using var client = CamundaClient.Create();
 
         await client.UpdateJobAsync(
-            JobKey.AssumeExists("123456"),
+            jobKey,
             new JobUpdateRequest
             {
                 Changeset = new JobChangeset { Retries = 3 },

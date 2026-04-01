@@ -46,11 +46,11 @@ public static class UserExamples
     #region GetUser
 
     // <GetUser>
-    public static async Task GetUserExample()
+    public static async Task GetUserExample(Username username)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetUserAsync(Username.AssumeExists("jdoe"));
+        var result = await client.GetUserAsync(username);
         Console.WriteLine($"User: {result.Username}");
     }
     // </GetUser>
@@ -76,12 +76,12 @@ public static class UserExamples
     #region UpdateUser
 
     // <UpdateUser>
-    public static async Task UpdateUserExample()
+    public static async Task UpdateUserExample(Username username)
     {
         using var client = CamundaClient.Create();
 
         await client.UpdateUserAsync(
-            Username.AssumeExists("jdoe"),
+            username,
             new UserUpdateRequest
             {
                 Name = "Jane Smith",
@@ -94,11 +94,11 @@ public static class UserExamples
     #region DeleteUser
 
     // <DeleteUser>
-    public static async Task DeleteUserExample()
+    public static async Task DeleteUserExample(Username username)
     {
         using var client = CamundaClient.Create();
 
-        await client.DeleteUserAsync(Username.AssumeExists("jdoe"));
+        await client.DeleteUserAsync(username);
     }
     // </DeleteUser>
     #endregion DeleteUser

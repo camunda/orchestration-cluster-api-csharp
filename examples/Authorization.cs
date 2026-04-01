@@ -27,12 +27,12 @@ public static class AuthorizationExamples
     #region GetAuthorization
 
     // <GetAuthorization>
-    public static async Task GetAuthorizationExample()
+    public static async Task GetAuthorizationExample(AuthorizationKey authorizationKey)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetAuthorizationAsync(
-            AuthorizationKey.AssumeExists("123456"));
+            authorizationKey);
 
         Console.WriteLine($"Resource type: {result.ResourceType}");
     }
@@ -60,12 +60,12 @@ public static class AuthorizationExamples
     #region UpdateAuthorization
 
     // <UpdateAuthorization>
-    public static async Task UpdateAuthorizationExample()
+    public static async Task UpdateAuthorizationExample(AuthorizationKey authorizationKey)
     {
         using var client = CamundaClient.Create();
 
         await client.UpdateAuthorizationAsync(
-            AuthorizationKey.AssumeExists("123456"),
+            authorizationKey,
             new AuthorizationPropertyBasedRequest
             {
                 ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
@@ -81,11 +81,11 @@ public static class AuthorizationExamples
     #region DeleteAuthorization
 
     // <DeleteAuthorization>
-    public static async Task DeleteAuthorizationExample()
+    public static async Task DeleteAuthorizationExample(AuthorizationKey authorizationKey)
     {
         using var client = CamundaClient.Create();
 
-        await client.DeleteAuthorizationAsync(AuthorizationKey.AssumeExists("123456"));
+        await client.DeleteAuthorizationAsync(authorizationKey);
     }
     // </DeleteAuthorization>
     #endregion DeleteAuthorization

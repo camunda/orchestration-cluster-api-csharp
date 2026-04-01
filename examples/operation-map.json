@@ -42,7 +42,7 @@
   "getProcessDefinition": [
     { "file": "ProcessDefinition.cs", "region": "GetProcessDefinition", "label": "Get a process definition" }
   ],
-  "getProcessDefinitionXml": [
+  "getProcessDefinitionXML": [
     { "file": "ProcessDefinition.cs", "region": "GetProcessDefinitionXml", "label": "Get process definition XML" }
   ],
   "searchProcessDefinitions": [
@@ -82,7 +82,7 @@
   "getDecisionDefinition": [
     { "file": "Decision.cs", "region": "GetDecisionDefinition", "label": "Get a decision definition" }
   ],
-  "getDecisionDefinitionXml": [
+  "getDecisionDefinitionXML": [
     { "file": "Decision.cs", "region": "GetDecisionDefinitionXml", "label": "Get decision definition XML" }
   ],
   "searchDecisionDefinitions": [
@@ -100,7 +100,7 @@
   "getDecisionRequirements": [
     { "file": "Decision.cs", "region": "GetDecisionRequirements", "label": "Get decision requirements" }
   ],
-  "getDecisionRequirementsXml": [
+  "getDecisionRequirementsXML": [
     { "file": "Decision.cs", "region": "GetDecisionRequirementsXml", "label": "Get decision requirements XML" }
   ],
   "searchDecisionRequirements": [

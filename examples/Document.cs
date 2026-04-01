@@ -6,12 +6,12 @@ public static class DocumentExamples
 {
     #region CreateDocumentLink
     // <CreateDocumentLink>
-    public static async Task CreateDocumentLinkExample()
+    public static async Task CreateDocumentLinkExample(DocumentId documentId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateDocumentLinkAsync(
-            DocumentId.AssumeExists("doc-123"),
+            documentId,
             new DocumentLinkRequest());
 
         Console.WriteLine($"Document link: {result.Url}");
@@ -22,11 +22,11 @@ public static class DocumentExamples
     #region DeleteDocument
 
     // <DeleteDocument>
-    public static async Task DeleteDocumentExample()
+    public static async Task DeleteDocumentExample(DocumentId documentId)
     {
         using var client = CamundaClient.Create();
 
-        await client.DeleteDocumentAsync(DocumentId.AssumeExists("doc-123"));
+        await client.DeleteDocumentAsync(documentId);
     }
     // </DeleteDocument>
     #endregion DeleteDocument
@@ -72,11 +72,11 @@ public static class DocumentExamples
     #region GetDocument
 
     // <GetDocument>
-    public static async Task GetDocumentExample()
+    public static async Task GetDocumentExample(DocumentId documentId)
     {
         using var client = CamundaClient.Create();
 
-        var content = await client.GetDocumentAsync(DocumentId.AssumeExists("doc-123"));
+        var content = await client.GetDocumentAsync(documentId);
 
         Console.WriteLine($"Downloaded document: doc-123");
     }
