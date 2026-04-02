@@ -6875,12 +6875,6 @@ public sealed class DeploymentResult
 public sealed class DirectAncestorKeyInstruction : AncestorScopeInstruction
 {
     /// <summary>
-    /// The type of ancestor scope instruction.
-    /// </summary>
-    [JsonPropertyName("ancestorScopeType")]
-    public string AncestorScopeType { get; set; } = null!;
-
-    /// <summary>
     /// The key of the ancestor scope the element instance should be created in.
     /// Set to -1 to create the new element instance within an existing element instance of the
     /// flow scope. If multiple instances of the target element's flow scope exist, choose one
@@ -9710,12 +9704,6 @@ public sealed class IncidentStateFilterProperty
 /// </summary>
 public sealed class InferredAncestorKeyInstruction : AncestorScopeInstruction
 {
-    /// <summary>
-    /// The type of ancestor scope instruction.
-    /// </summary>
-    [JsonPropertyName("ancestorScopeType")]
-    public string AncestorScopeType { get; set; } = null!;
-
 }
 
 /// <summary>
@@ -13789,12 +13777,6 @@ public sealed class ProcessInstanceCreationStartInstruction
 public sealed class ProcessInstanceCreationTerminateInstruction : ProcessInstanceCreationRuntimeInstruction
 {
     /// <summary>
-    /// The type of the runtime instruction
-    /// </summary>
-    [JsonPropertyName("type")]
-    public string? Type { get; set; }
-
-    /// <summary>
     /// The id of the element that, once completed or terminated, will cause the process to be terminated.
     /// 
     /// </summary>
@@ -15763,12 +15745,6 @@ public enum SortOrderEnum
 public sealed class SourceElementIdInstruction : SourceElementInstruction
 {
     /// <summary>
-    /// The type of source element instruction.
-    /// </summary>
-    [JsonPropertyName("sourceType")]
-    public string SourceType { get; set; } = null!;
-
-    /// <summary>
     /// The id of the source element for the move instruction.
     /// 
     /// </summary>
@@ -15784,12 +15760,6 @@ public sealed class SourceElementIdInstruction : SourceElementInstruction
 /// </summary>
 public sealed class SourceElementInstanceKeyInstruction : SourceElementInstruction
 {
-    /// <summary>
-    /// The type of source element instruction.
-    /// </summary>
-    [JsonPropertyName("sourceType")]
-    public string SourceType { get; set; } = null!;
-
     /// <summary>
     /// The source element instance key for the move instruction.
     /// 
@@ -17635,12 +17605,6 @@ public sealed class UserUpdateResult
 /// </summary>
 public sealed class UseSourceParentKeyInstruction : AncestorScopeInstruction
 {
-    /// <summary>
-    /// The type of ancestor scope instruction.
-    /// </summary>
-    [JsonPropertyName("ancestorScopeType")]
-    public string AncestorScopeType { get; set; } = null!;
-
 }
 
 /// <summary>
