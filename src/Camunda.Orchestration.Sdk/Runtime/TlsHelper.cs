@@ -31,7 +31,7 @@ internal static class TlsHelper
         if (certPem != null && keyPem != null)
         {
             var clientCert = tls.KeyPassphrase != null
-                ? X509Certificate2.CreateFromPem(certPem, keyPem)
+                ? X509Certificate2.CreateFromEncryptedPem(certPem, keyPem, tls.KeyPassphrase)
                 : X509Certificate2.CreateFromPem(certPem, keyPem);
 
             // On some platforms (Windows), the ephemeral key needs to be exported to a new cert.
@@ -47,21 +47,30 @@ internal static class TlsHelper
         }
 
         // Load custom CA (for trusting self-signed server certs).
+        // Supports PEM bundles containing multiple certificates.
         var caPem = tls.Ca ?? ReadPath(tls.CaPath);
         if (caPem != null)
         {
-            var caCert = new X509Certificate2(System.Text.Encoding.UTF8.GetBytes(caPem));
+            var caCerts = new X509Certificate2Collection();
+            caCerts.ImportFromPem(caPem);
+
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
             {
                 if (errors == System.Net.Security.SslPolicyErrors.None)
                     return true;
 
-                // Build a chain with the custom CA to validate the server cert.
+                // Only override chain trust errors. Hostname mismatch or
+                // cert-not-available must still fail to preserve TLS security.
+                if ((errors & ~System.Net.Security.SslPolicyErrors.RemoteCertificateChainErrors) != 0)
+                    return false;
+
+                // Build a chain with the custom CA(s) to validate the server cert.
                 if (cert == null || chain == null)
                     return false;
 
                 chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
-                chain.ChainPolicy.CustomTrustStore.Add(caCert);
+                chain.ChainPolicy.CustomTrustStore.Clear();
+                chain.ChainPolicy.CustomTrustStore.AddRange(caCerts);
                 chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
                 return chain.Build(new X509Certificate2(cert));
             };
