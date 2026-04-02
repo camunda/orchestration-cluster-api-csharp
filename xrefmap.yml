@@ -10465,6 +10465,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaConfig.RestAddress
   fullName: Camunda.Orchestration.Sdk.CamundaConfig.RestAddress
   nameWithType: CamundaConfig.RestAddress
+- uid: Camunda.Orchestration.Sdk.CamundaConfig.Tls
+  name: Tls
+  href: api/Camunda.Orchestration.Sdk.CamundaConfig.Tls.html#Camunda_Orchestration_Sdk_CamundaConfig_Tls
+  commentId: P:Camunda.Orchestration.Sdk.CamundaConfig.Tls
+  fullName: Camunda.Orchestration.Sdk.CamundaConfig.Tls
+  nameWithType: CamundaConfig.Tls
+- uid: Camunda.Orchestration.Sdk.CamundaConfig.Tls*
+  name: Tls
+  href: api/Camunda.Orchestration.Sdk.CamundaConfig.Tls.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaConfig.Tls
+  fullName: Camunda.Orchestration.Sdk.CamundaConfig.Tls
+  nameWithType: CamundaConfig.Tls
 - uid: Camunda.Orchestration.Sdk.CamundaConfig.TokenAudience
   name: TokenAudience
   href: api/Camunda.Orchestration.Sdk.CamundaConfig.TokenAudience.html#Camunda_Orchestration_Sdk_CamundaConfig_TokenAudience
@@ -34132,6 +34144,96 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.TenantUserSearchResult.Page
   fullName: Camunda.Orchestration.Sdk.TenantUserSearchResult.Page
   nameWithType: TenantUserSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.TlsConfig
+  name: TlsConfig
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.html
+  commentId: T:Camunda.Orchestration.Sdk.TlsConfig
+  fullName: Camunda.Orchestration.Sdk.TlsConfig
+  nameWithType: TlsConfig
+- uid: Camunda.Orchestration.Sdk.TlsConfig.Ca
+  name: Ca
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.Ca.html#Camunda_Orchestration_Sdk_TlsConfig_Ca
+  commentId: P:Camunda.Orchestration.Sdk.TlsConfig.Ca
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.Ca
+  nameWithType: TlsConfig.Ca
+- uid: Camunda.Orchestration.Sdk.TlsConfig.Ca*
+  name: Ca
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.Ca.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TlsConfig.Ca
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.Ca
+  nameWithType: TlsConfig.Ca
+- uid: Camunda.Orchestration.Sdk.TlsConfig.CaPath
+  name: CaPath
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.CaPath.html#Camunda_Orchestration_Sdk_TlsConfig_CaPath
+  commentId: P:Camunda.Orchestration.Sdk.TlsConfig.CaPath
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.CaPath
+  nameWithType: TlsConfig.CaPath
+- uid: Camunda.Orchestration.Sdk.TlsConfig.CaPath*
+  name: CaPath
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.CaPath.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TlsConfig.CaPath
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.CaPath
+  nameWithType: TlsConfig.CaPath
+- uid: Camunda.Orchestration.Sdk.TlsConfig.Cert
+  name: Cert
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.Cert.html#Camunda_Orchestration_Sdk_TlsConfig_Cert
+  commentId: P:Camunda.Orchestration.Sdk.TlsConfig.Cert
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.Cert
+  nameWithType: TlsConfig.Cert
+- uid: Camunda.Orchestration.Sdk.TlsConfig.Cert*
+  name: Cert
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.Cert.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TlsConfig.Cert
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.Cert
+  nameWithType: TlsConfig.Cert
+- uid: Camunda.Orchestration.Sdk.TlsConfig.CertPath
+  name: CertPath
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.CertPath.html#Camunda_Orchestration_Sdk_TlsConfig_CertPath
+  commentId: P:Camunda.Orchestration.Sdk.TlsConfig.CertPath
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.CertPath
+  nameWithType: TlsConfig.CertPath
+- uid: Camunda.Orchestration.Sdk.TlsConfig.CertPath*
+  name: CertPath
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.CertPath.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TlsConfig.CertPath
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.CertPath
+  nameWithType: TlsConfig.CertPath
+- uid: Camunda.Orchestration.Sdk.TlsConfig.Key
+  name: Key
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.Key.html#Camunda_Orchestration_Sdk_TlsConfig_Key
+  commentId: P:Camunda.Orchestration.Sdk.TlsConfig.Key
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.Key
+  nameWithType: TlsConfig.Key
+- uid: Camunda.Orchestration.Sdk.TlsConfig.Key*
+  name: Key
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.Key.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TlsConfig.Key
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.Key
+  nameWithType: TlsConfig.Key
+- uid: Camunda.Orchestration.Sdk.TlsConfig.KeyPassphrase
+  name: KeyPassphrase
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.KeyPassphrase.html#Camunda_Orchestration_Sdk_TlsConfig_KeyPassphrase
+  commentId: P:Camunda.Orchestration.Sdk.TlsConfig.KeyPassphrase
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.KeyPassphrase
+  nameWithType: TlsConfig.KeyPassphrase
+- uid: Camunda.Orchestration.Sdk.TlsConfig.KeyPassphrase*
+  name: KeyPassphrase
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.KeyPassphrase.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TlsConfig.KeyPassphrase
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.KeyPassphrase
+  nameWithType: TlsConfig.KeyPassphrase
+- uid: Camunda.Orchestration.Sdk.TlsConfig.KeyPath
+  name: KeyPath
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.KeyPath.html#Camunda_Orchestration_Sdk_TlsConfig_KeyPath
+  commentId: P:Camunda.Orchestration.Sdk.TlsConfig.KeyPath
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.KeyPath
+  nameWithType: TlsConfig.KeyPath
+- uid: Camunda.Orchestration.Sdk.TlsConfig.KeyPath*
+  name: KeyPath
+  href: api/Camunda.Orchestration.Sdk.TlsConfig.KeyPath.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TlsConfig.KeyPath
+  fullName: Camunda.Orchestration.Sdk.TlsConfig.KeyPath
+  nameWithType: TlsConfig.KeyPath
 - uid: Camunda.Orchestration.Sdk.TopologyResponse
   name: TopologyResponse
   href: api/Camunda.Orchestration.Sdk.TopologyResponse.html

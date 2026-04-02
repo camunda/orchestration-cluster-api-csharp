@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class Camunda | Camunda C# SDK </title>
+      <title>Class TlsConfig | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class Camunda | Camunda C# SDK ">
+      <meta name="title" content="Class TlsConfig | Camunda C# SDK ">
       
-      <meta name="description" content="Factory method for creating CamundaClient instances.">
+      <meta name="description" content="TLS / mTLS configuration for custom certificates.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_Camunda.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.Camunda%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_TlsConfig.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.TlsConfig%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,12 +84,12 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.Camunda">
+        <article data-uid="Camunda.Orchestration.Sdk.TlsConfig">
 
 
 
-  <h1 id="Camunda_Orchestration_Sdk_Camunda" data-uid="Camunda.Orchestration.Sdk.Camunda" class="text-break">
-Class Camunda  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/CamundaClient.cs/#L326"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Camunda_Orchestration_Sdk_TlsConfig" data-uid="Camunda.Orchestration.Sdk.TlsConfig" class="text-break">
+Class TlsConfig  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaConfig.cs/#L119"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,13 +97,12 @@ Class Camunda  <a class="header-action link-secondary" title="View source" href=
   <dl><dt>Assembly</dt><dd>Camunda.Orchestration.Sdk.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Factory method for creating CamundaClient instances.</p>
+  <div class="markdown summary"><p>TLS / mTLS configuration for custom certificates.</p>
 </div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use CamundaClient.Create() instead.&quot;)]
-public static class Camunda</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class TlsConfig</code></pre>
   </div>
 
 
@@ -113,7 +112,7 @@ public static class Camunda</code></pre>
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">Camunda</span></div>
+      <div><span class="xref">TlsConfig</span></div>
     </dd>
   </dl>
 
@@ -135,9 +134,6 @@ public static class Camunda</code></pre>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
-    </div>
-    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
@@ -145,16 +141,53 @@ public static class Camunda</code></pre>
     </div>
   </dd></dl>
 
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Camunda.Orchestration.Sdk.TypedVariables.DeserializeAs.html#Camunda_Orchestration_Sdk_TypedVariables_DeserializeAs__1_System_Object_System_Text_Json_JsonSerializerOptions_">TypedVariables.DeserializeAs&lt;T&gt;(object?, JsonSerializerOptions?)</a>
+  </div>
+  </dd></dl>
 
 
 
 
-  <h2 class="section" id="methods">Methods
+  <h2 class="section" id="properties">Properties
 </h2>
 
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.Camunda.CreateClient.html#Camunda_Orchestration_Sdk_Camunda_CreateClient_Camunda_Orchestration_Sdk_CamundaOptions_">CreateClient(CamundaOptions?)</a></dt>
-    <dd><p>Create a new CamundaClient.</p>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.TlsConfig.Ca.html#Camunda_Orchestration_Sdk_TlsConfig_Ca">Ca</a></dt>
+    <dd><p>Inline PEM CA bundle (overrides CaPath).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.TlsConfig.CaPath.html#Camunda_Orchestration_Sdk_TlsConfig_CaPath">CaPath</a></dt>
+    <dd><p>Path to PEM CA certificate bundle file.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.TlsConfig.Cert.html#Camunda_Orchestration_Sdk_TlsConfig_Cert">Cert</a></dt>
+    <dd><p>Inline PEM client certificate (overrides CertPath).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.TlsConfig.CertPath.html#Camunda_Orchestration_Sdk_TlsConfig_CertPath">CertPath</a></dt>
+    <dd><p>Path to PEM client certificate file.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.TlsConfig.Key.html#Camunda_Orchestration_Sdk_TlsConfig_Key">Key</a></dt>
+    <dd><p>Inline PEM client private key (overrides KeyPath).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.TlsConfig.KeyPassphrase.html#Camunda_Orchestration_Sdk_TlsConfig_KeyPassphrase">KeyPassphrase</a></dt>
+    <dd><p>Passphrase for an encrypted private key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.TlsConfig.KeyPath.html#Camunda_Orchestration_Sdk_TlsConfig_KeyPath">KeyPath</a></dt>
+    <dd><p>Path to PEM client private key file.</p>
 </dd>
   </dl>
 
@@ -163,7 +196,7 @@ public static class Camunda</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/CamundaClient.cs/#L326" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaConfig.cs/#L119" class="edit-link">Edit this page</a>
         </div>
 
 
