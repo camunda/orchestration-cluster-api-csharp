@@ -1,3 +1,12 @@
+# [8.9.0-alpha.24](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.23...v8.9.0-alpha.24) (2026-04-02)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([2b5d47a](https://github.com/camunda/orchestration-cluster-api-csharp/commit/2b5d47ac1e17122a2ee3481bd39ddcae82a21062))
+* make build warnings fatal, suppress known example warnings ([2513561](https://github.com/camunda/orchestration-cluster-api-csharp/commit/251356133267eda05ec2f5aa349bd1787106aac2)), closes [#49](https://github.com/camunda/orchestration-cluster-api-csharp/issues/49)
+* skip discriminator property on derived types for .NET 10 compat ([d8d1495](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d8d14955b4d32d737d186b889e8e6bf36d526d39)), closes [#38](https://github.com/camunda/orchestration-cluster-api-csharp/issues/38)
+
 # [8.9.0-alpha.23](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.22...v8.9.0-alpha.23) (2026-04-01)
 
 
