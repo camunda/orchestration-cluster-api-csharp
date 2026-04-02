@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_EvaluateDecisionAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.EvaluateDecisionAsync*" class="text-break">
-Method EvaluateDecisionAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L722"><i class="bi bi-code-slash"></i></a>
+Method EvaluateDecisionAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1474"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method EvaluateDecisionAsync  <a class="header-action link-secondary" title="Vie
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_EvaluateDecisionAsync_Camunda_Orchestration_Sdk_DecisionEvaluationInstruction_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.EvaluateDecisionAsync(Camunda.Orchestration.Sdk.DecisionEvaluationInstruction,System.Threading.CancellationToken)">
   EvaluateDecisionAsync(DecisionEvaluationInstruction, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L722"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1474"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Evaluate decision
@@ -155,6 +155,31 @@ version of the decision is used.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_EvaluateDecisionAsync_Camunda_Orchestration_Sdk_DecisionEvaluationInstruction_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task EvaluateDecisionByIdExample(DecisionDefinitionId decisionDefinitionId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
+    {
+        DecisionDefinitionId = decisionDefinitionId,
+    });
+
+    Console.WriteLine($"Decision output: {result.Output}");
+}</code></pre>
+
+<pre><code class="lang-csharp">public static async Task EvaluateDecisionByKeyExample(DecisionDefinitionKey decisionDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.EvaluateDecisionAsync(new DecisionEvaluationByKey
+    {
+        DecisionDefinitionKey = decisionDefinitionKey,
+    });
+
+    Console.WriteLine($"Decision output: {result.Output}");
+}</code></pre>
+
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_EvaluateDecisionAsync_Camunda_Orchestration_Sdk_DecisionEvaluationInstruction_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: evaluateDecision</p>
@@ -166,7 +191,7 @@ version of the decision is used.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L722" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1474" class="edit-link">Edit this page</a>
         </div>
 
 
