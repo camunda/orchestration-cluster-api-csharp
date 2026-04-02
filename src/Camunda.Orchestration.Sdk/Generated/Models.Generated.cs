@@ -4058,7 +4058,7 @@ public sealed class CamundaUserResult
     /// The username of the user.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username? Username { get; set; }
+    public Username Username { get; set; }
 
     /// <summary>
     /// The display name of the user.
@@ -7974,7 +7974,7 @@ public sealed class ExpressionEvaluationResult
     /// The result value. Its type can vary.
     /// </summary>
     [JsonPropertyName("result")]
-    public object Result { get; set; } = null!;
+    public object? Result { get; set; }
 
     /// <summary>
     /// List of warnings generated during expression evaluation
