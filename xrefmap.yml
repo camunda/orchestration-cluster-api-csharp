@@ -16054,18 +16054,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorElementInstanceKey
   fullName: Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorElementInstanceKey
   nameWithType: DirectAncestorKeyInstruction.AncestorElementInstanceKey
-- uid: Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorScopeType
-  name: AncestorScopeType
-  href: api/Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorScopeType.html#Camunda_Orchestration_Sdk_DirectAncestorKeyInstruction_AncestorScopeType
-  commentId: P:Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorScopeType
-  fullName: Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorScopeType
-  nameWithType: DirectAncestorKeyInstruction.AncestorScopeType
-- uid: Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorScopeType*
-  name: AncestorScopeType
-  href: api/Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorScopeType.html
-  commentId: Overload:Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorScopeType
-  fullName: Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction.AncestorScopeType
-  nameWithType: DirectAncestorKeyInstruction.AncestorScopeType
 - uid: Camunda.Orchestration.Sdk.DocumentCreationBatchResponse
   name: DocumentCreationBatchResponse
   href: api/Camunda.Orchestration.Sdk.DocumentCreationBatchResponse.html
@@ -21490,18 +21478,6 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction
   fullName: Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction
   nameWithType: InferredAncestorKeyInstruction
-- uid: Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction.AncestorScopeType
-  name: AncestorScopeType
-  href: api/Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction.AncestorScopeType.html#Camunda_Orchestration_Sdk_InferredAncestorKeyInstruction_AncestorScopeType
-  commentId: P:Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction.AncestorScopeType
-  fullName: Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction.AncestorScopeType
-  nameWithType: InferredAncestorKeyInstruction.AncestorScopeType
-- uid: Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction.AncestorScopeType*
-  name: AncestorScopeType
-  href: api/Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction.AncestorScopeType.html
-  commentId: Overload:Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction.AncestorScopeType
-  fullName: Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction.AncestorScopeType
-  nameWithType: InferredAncestorKeyInstruction.AncestorScopeType
 - uid: Camunda.Orchestration.Sdk.IntegerFilterProperty
   name: IntegerFilterProperty
   href: api/Camunda.Orchestration.Sdk.IntegerFilterProperty.html
@@ -23050,18 +23026,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.IsCompletionConditionFulfilled
   fullName: Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.IsCompletionConditionFulfilled
   nameWithType: JobResultAdHocSubProcess.IsCompletionConditionFulfilled
-- uid: Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.Type
-  name: Type
-  href: api/Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.Type.html#Camunda_Orchestration_Sdk_JobResultAdHocSubProcess_Type
-  commentId: P:Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.Type
-  fullName: Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.Type
-  nameWithType: JobResultAdHocSubProcess.Type
-- uid: Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.Type*
-  name: Type
-  href: api/Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.Type.html
-  commentId: Overload:Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.Type
-  fullName: Camunda.Orchestration.Sdk.JobResultAdHocSubProcess.Type
-  nameWithType: JobResultAdHocSubProcess.Type
 - uid: Camunda.Orchestration.Sdk.JobResultCorrections
   name: JobResultCorrections
   href: api/Camunda.Orchestration.Sdk.JobResultCorrections.html
@@ -23182,18 +23146,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobResultUserTask.DeniedReason
   fullName: Camunda.Orchestration.Sdk.JobResultUserTask.DeniedReason
   nameWithType: JobResultUserTask.DeniedReason
-- uid: Camunda.Orchestration.Sdk.JobResultUserTask.Type
-  name: Type
-  href: api/Camunda.Orchestration.Sdk.JobResultUserTask.Type.html#Camunda_Orchestration_Sdk_JobResultUserTask_Type
-  commentId: P:Camunda.Orchestration.Sdk.JobResultUserTask.Type
-  fullName: Camunda.Orchestration.Sdk.JobResultUserTask.Type
-  nameWithType: JobResultUserTask.Type
-- uid: Camunda.Orchestration.Sdk.JobResultUserTask.Type*
-  name: Type
-  href: api/Camunda.Orchestration.Sdk.JobResultUserTask.Type.html
-  commentId: Overload:Camunda.Orchestration.Sdk.JobResultUserTask.Type
-  fullName: Camunda.Orchestration.Sdk.JobResultUserTask.Type
-  nameWithType: JobResultUserTask.Type
 - uid: Camunda.Orchestration.Sdk.JobSearchQuery
   name: JobSearchQuery
   href: api/Camunda.Orchestration.Sdk.JobSearchQuery.html
@@ -28927,18 +28879,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.AfterElementId
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.AfterElementId
   nameWithType: ProcessInstanceCreationTerminateInstruction.AfterElementId
-- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.Type
-  name: Type
-  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.Type.html#Camunda_Orchestration_Sdk_ProcessInstanceCreationTerminateInstruction_Type
-  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.Type
-  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.Type
-  nameWithType: ProcessInstanceCreationTerminateInstruction.Type
-- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.Type*
-  name: Type
-  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.Type.html
-  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.Type
-  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationTerminateInstruction.Type
-  nameWithType: ProcessInstanceCreationTerminateInstruction.Type
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceDeletionBatchOperationRequest
   name: ProcessInstanceDeletionBatchOperationRequest
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceDeletionBatchOperationRequest.html
@@ -33082,18 +33022,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceElementId
   fullName: Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceElementId
   nameWithType: SourceElementIdInstruction.SourceElementId
-- uid: Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceType
-  name: SourceType
-  href: api/Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceType.html#Camunda_Orchestration_Sdk_SourceElementIdInstruction_SourceType
-  commentId: P:Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceType
-  fullName: Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceType
-  nameWithType: SourceElementIdInstruction.SourceType
-- uid: Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceType*
-  name: SourceType
-  href: api/Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceType.html
-  commentId: Overload:Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceType
-  fullName: Camunda.Orchestration.Sdk.SourceElementIdInstruction.SourceType
-  nameWithType: SourceElementIdInstruction.SourceType
 - uid: Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction
   name: SourceElementInstanceKeyInstruction
   href: api/Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.html
@@ -33112,18 +33040,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceElementInstanceKey
   fullName: Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceElementInstanceKey
   nameWithType: SourceElementInstanceKeyInstruction.SourceElementInstanceKey
-- uid: Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceType
-  name: SourceType
-  href: api/Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceType.html#Camunda_Orchestration_Sdk_SourceElementInstanceKeyInstruction_SourceType
-  commentId: P:Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceType
-  fullName: Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceType
-  nameWithType: SourceElementInstanceKeyInstruction.SourceType
-- uid: Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceType*
-  name: SourceType
-  href: api/Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceType.html
-  commentId: Overload:Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceType
-  fullName: Camunda.Orchestration.Sdk.SourceElementInstanceKeyInstruction.SourceType
-  nameWithType: SourceElementInstanceKeyInstruction.SourceType
 - uid: Camunda.Orchestration.Sdk.SourceElementInstruction
   name: SourceElementInstruction
   href: api/Camunda.Orchestration.Sdk.SourceElementInstruction.html
@@ -34621,18 +34537,6 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction
   fullName: Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction
   nameWithType: UseSourceParentKeyInstruction
-- uid: Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction.AncestorScopeType
-  name: AncestorScopeType
-  href: api/Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction.AncestorScopeType.html#Camunda_Orchestration_Sdk_UseSourceParentKeyInstruction_AncestorScopeType
-  commentId: P:Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction.AncestorScopeType
-  fullName: Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction.AncestorScopeType
-  nameWithType: UseSourceParentKeyInstruction.AncestorScopeType
-- uid: Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction.AncestorScopeType*
-  name: AncestorScopeType
-  href: api/Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction.AncestorScopeType.html
-  commentId: Overload:Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction.AncestorScopeType
-  fullName: Camunda.Orchestration.Sdk.UseSourceParentKeyInstruction.AncestorScopeType
-  nameWithType: UseSourceParentKeyInstruction.AncestorScopeType
 - uid: Camunda.Orchestration.Sdk.UserCreateResult
   name: UserCreateResult
   href: api/Camunda.Orchestration.Sdk.UserCreateResult.html
