@@ -1,3 +1,16 @@
+# [8.9.0-alpha.27](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.26...v8.9.0-alpha.27) (2026-04-02)
+
+
+### Bug Fixes
+
+* address review comments on TLS handler ([20d778a](https://github.com/camunda/orchestration-cluster-api-csharp/commit/20d778a0f2b5ef36d330ee59352b15e76c84ebbb))
+* **gen:** regenerate artifacts ([30433b1](https://github.com/camunda/orchestration-cluster-api-csharp/commit/30433b15de707184e28ffe0ef64f46a090b85e52))
+
+
+### Features
+
+* support custom TLS certificates (self-signed CA & mTLS) ([617f856](https://github.com/camunda/orchestration-cluster-api-csharp/commit/617f85686fb6fef986dc727cc9f3b5314c09822c)), closes [#54](https://github.com/camunda/orchestration-cluster-api-csharp/issues/54)
+
 # [8.9.0-alpha.26](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.25...v8.9.0-alpha.26) (2026-04-02)
 
 
