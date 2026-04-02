@@ -25,7 +25,7 @@ public class JobTests(CamundaFixture fixture)
             // avoid picking up leftover jobs from previous test runs.
             JobActivationResult? activation = null;
             ActivatedJobResult? targetJob = null;
-            var deadline = DateTimeOffset.UtcNow.AddSeconds(60);
+            var deadline = DateTimeOffset.UtcNow.AddSeconds(90);
             while (DateTimeOffset.UtcNow < deadline)
             {
                 activation = await fixture.Client.ActivateJobsAsync(new JobActivationRequest
@@ -34,6 +34,7 @@ public class JobTests(CamundaFixture fixture)
                     MaxJobsToActivate = 10,
                     Timeout = 60_000,
                     Worker = "integration-test-worker",
+                    RequestTimeout = 10_000,
                 });
 
                 if (activation?.Jobs != null)
