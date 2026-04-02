@@ -72,6 +72,26 @@ Uses [semantic-release](https://github.com/semantic-release/semantic-release) fo
 - Lint check (CI gate): `dotnet format --verify-no-changes`
 - Generated code (`src/Camunda.Orchestration.Sdk/Generated/`) has relaxed style rules (severity `none`)
 
+## Bug fix process (red/green refactor)
+
+Every bug fix **must** follow the red/green refactor discipline:
+
+1. **Red** — Write a failing test **first**, before changing any production code. The test must fail for the reason you expect (the bug). Commit this separately or demonstrate the failure clearly in the PR.
+2. **Green** — Apply the minimal production fix that makes the test pass.
+3. **Refactor** (optional) — Clean up while keeping all tests green.
+
+### Test scope: target the defect class, not just the instance
+
+The regression test must be broad enough to detect the **class of defect**, not only the specific instance you are fixing. For example, if the bug is "derived type X re-declares the discriminator property", the test should verify that **no** derived type re-declares a discriminator property — not just type X.
+
+A test that only covers the exact instance provides weaker protection: the same category of bug can recur in a different type without being caught.
+
+### Why
+
+- The failing test **proves** the test can detect this category of defect.
+- The green step **proves** the fix resolves it.
+- A class-scoped test acts as a durable regression guard against future reintroduction of the same pattern.
+
 ## Quick debug checklist
 
 1. Confirm the build works: `dotnet build`
