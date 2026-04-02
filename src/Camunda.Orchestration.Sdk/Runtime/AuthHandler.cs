@@ -44,8 +44,10 @@ internal sealed class AuthHandler : DelegatingHandler
     {
         if (_oauth != null)
         {
-            // Use a separate HttpClient for token fetches to avoid recursion
-            using var tokenClient = new HttpClient();
+            // Use a separate HttpClient for token fetches to avoid recursion.
+            // Apply TLS handler so token requests also use custom certificates.
+            var tlsHandler = TlsHelper.BuildHandler(_config.Tls);
+            using var tokenClient = tlsHandler != null ? new HttpClient(tlsHandler) : new HttpClient();
             var token = await _oauth.GetTokenAsync(tokenClient, ct);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }

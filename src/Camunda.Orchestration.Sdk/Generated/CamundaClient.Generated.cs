@@ -4519,11 +4519,18 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
         var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchUserTaskEffectiveVariables", false,
+                () => InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct),
+                consistency!, _logger, ct);
+        }
+
         return await InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct);
     }
 

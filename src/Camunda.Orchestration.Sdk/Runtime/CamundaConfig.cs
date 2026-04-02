@@ -38,6 +38,7 @@ public sealed class CamundaConfig
     public string LogLevel { get; init; } = "error";
     public EventualConfig? Eventual { get; init; }
     public WorkerDefaultsConfig? WorkerDefaults { get; init; }
+    public TlsConfig? Tls { get; init; }
 }
 
 public sealed class HttpRetryConfig
@@ -110,4 +111,31 @@ public sealed class WorkerDefaultsConfig
     public long? PollTimeoutMs { get; init; }
     public string? WorkerName { get; init; }
     public double? StartupJitterMaxSeconds { get; init; }
+}
+
+/// <summary>
+/// TLS / mTLS configuration for custom certificates.
+/// </summary>
+public sealed class TlsConfig
+{
+    /// <summary>Inline PEM client certificate (overrides CertPath).</summary>
+    public string? Cert { get; init; }
+
+    /// <summary>Path to PEM client certificate file.</summary>
+    public string? CertPath { get; init; }
+
+    /// <summary>Inline PEM client private key (overrides KeyPath).</summary>
+    public string? Key { get; init; }
+
+    /// <summary>Path to PEM client private key file.</summary>
+    public string? KeyPath { get; init; }
+
+    /// <summary>Inline PEM CA bundle (overrides CaPath).</summary>
+    public string? Ca { get; init; }
+
+    /// <summary>Path to PEM CA certificate bundle file.</summary>
+    public string? CaPath { get; init; }
+
+    /// <summary>Passphrase for an encrypted private key.</summary>
+    public string? KeyPassphrase { get; init; }
 }
