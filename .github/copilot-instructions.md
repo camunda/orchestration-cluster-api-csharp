@@ -112,14 +112,14 @@ Code blocks in `README.md` are **injected from compilable example files** — do
 ### How it works
 
 1. Wrap code in a `.cs` file under `docs/examples/` with `// <RegionName>` / `// </RegionName>` tags.
-2. In `README.md`, place `<!-- snippet:RegionName -->` immediately before the fenced code block.
+2. In `README.md`, place `<!-- snippet-source: docs/examples/File.cs | regions: RegionName -->` immediately before the fenced code block.
 3. Run `python3 scripts/sync-readme-snippets.py` to update README.
-4. Composite regions: `<!-- snippet:A+B+C -->` concatenates regions separated by blank lines.
+4. Composite regions: `<!-- snippet-source: docs/examples/File.cs | regions: A+B+C -->` concatenates regions separated by blank lines.
 
 ### Adding or updating a README example
 
 1. Add/edit the region-tagged code in a `.cs` file under `docs/examples/`.
-2. Add/verify the `<!-- snippet:RegionName -->` marker in `README.md`.
+2. Add/verify the `<!-- snippet-source: docs/examples/File.cs | regions: RegionName -->` marker in `README.md`.
 3. Run `dotnet build docs/examples/` to confirm it compiles.
 4. Run `python3 scripts/sync-readme-snippets.py` to sync.
 

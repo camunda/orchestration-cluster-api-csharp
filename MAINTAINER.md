@@ -83,7 +83,8 @@ Spec bundling uses the shared `camunda-schema-bundler` npm package which handles
 │   └── bundled/              # Bundled single JSON
 ├── scripts/                  # Build pipeline scripts
 ├── docs/
-│   └── examples/             # Compilable code examples (type-checked, synced to README)
+│   ├── examples/             # Compilable code examples (type-checked, synced to README)
+│   └── overwrite/            # DocFX overwrite files (uid → example mapping for API docs)
 ├── src/
 │   ├── Camunda.Orchestration.Sdk/       # Main SDK library
 │   │   ├── Runtime/          # Auth, retry, backpressure, config
@@ -204,24 +205,43 @@ Examples are type-checked at build time via `dotnet build docs/examples/Examples
 **How it works:**
 
 - Scans all `docs/examples/*.cs` files for `// <Name>` ... `// </Name>` region blocks
-- Finds matching `<!-- snippet:Name -->` markers in `README.md`
+- Finds matching snippet markers in `README.md` (format: `<!-- snippet-source: docs/examples/File.cs | regions: Name -->`)
 - Replaces the fenced code block following each marker with the extracted code
+- Auto-upgrades legacy `<!-- snippet:Name -->` markers to the new descriptive format
 
 **Composite regions:** Use `+` to concatenate multiple regions:
 
 ```markdown
-<!-- snippet:UsingDirective+QuickStart -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+QuickStart -->
 ```
 
 This inserts `UsingDirective` followed by `QuickStart` into a single code block.
 
-**CI enforcement:** CI runs `python3 scripts/sync-readme-snippets.py --check` which fails if the README is out of sync. The build scripts run the update form automatically.
+**Un-injected code block detection:** The script also scans for C# fenced code blocks that are _not_ preceded by a snippet marker. In `--check` mode (CI), any un-injected C# block causes a failure. To exempt a block (e.g. pseudo-code), add `<!-- snippet-exempt: reason -->` above it.
+
+**CI enforcement:** CI runs `python3 scripts/sync-readme-snippets.py --check` which fails if the README is out of sync or contains un-injected C# code blocks. The build scripts run the update form automatically.
 
 ### Adding a New README Example
 
 1. Add a `// <MyExample>` ... `// </MyExample>` block to the appropriate example file in `docs/examples/`.
-2. Add a `<!-- snippet:MyExample -->` marker in `README.md` followed by an empty fenced code block.
+2. Add a `<!-- snippet-source: docs/examples/File.cs | regions: MyExample -->` marker in `README.md` followed by an empty fenced code block.
 3. Run `bash scripts/build-local.sh` — the build compiles the example and syncs it into the README.
+
+### API Reference Example Injection
+
+Separately from README snippets, `docs/overwrite/CamundaClient.md` contains DocFX overwrite sections that map API method UIDs to compilable code examples. Each section uses the format:
+
+```yaml
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SomeMethodAsync(...)
+example:
+- *content
+---
+
+[!code-csharp[](../../examples/File.cs#RegionName)]
+```
+
+The `scripts/generate-docusaurus-md.py` script resolves these `[!code-csharp]` references by loading the corresponding region-tagged code from `docs/examples/*.cs` and injecting it into the generated API reference Markdown. Region names in overwrite files must match region tags in the example `.cs` files (the filename in the link is not used for resolution — only the region name matters).
 
 ## Pinning the Upstream Spec (SPEC_REF)
 
