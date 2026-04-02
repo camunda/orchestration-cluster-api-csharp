@@ -10567,12 +10567,6 @@ public sealed class JobResultAdHocSubProcess : JobResult
     [JsonPropertyName("isCancelRemainingInstances")]
     public bool? IsCancelRemainingInstances { get; set; }
 
-    /// <summary>
-    /// Used to distinguish between different types of job results.
-    /// </summary>
-    [JsonPropertyName("type")]
-    public string? Type { get; set; }
-
 }
 
 /// <summary>
@@ -10668,12 +10662,6 @@ public sealed class JobResultUserTask : JobResult
     /// </summary>
     [JsonPropertyName("corrections")]
     public JobResultCorrections? Corrections { get; set; }
-
-    /// <summary>
-    /// Used to distinguish between different types of job results.
-    /// </summary>
-    [JsonPropertyName("type")]
-    public string? Type { get; set; }
 
 }
 

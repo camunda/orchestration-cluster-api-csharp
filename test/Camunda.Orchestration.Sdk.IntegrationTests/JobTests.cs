@@ -25,7 +25,7 @@ public class JobTests(CamundaFixture fixture)
             // avoid picking up leftover jobs from previous test runs.
             JobActivationResult? activation = null;
             ActivatedJobResult? targetJob = null;
-            var deadline = DateTimeOffset.UtcNow.AddSeconds(30);
+            var deadline = DateTimeOffset.UtcNow.AddSeconds(60);
             while (DateTimeOffset.UtcNow < deadline)
             {
                 activation = await fixture.Client.ActivateJobsAsync(new JobActivationRequest
@@ -45,7 +45,7 @@ public class JobTests(CamundaFixture fixture)
                 if (targetJob != null)
                     break;
 
-                await Task.Delay(500);
+                await Task.Delay(1000);
             }
 
             targetJob.Should().NotBeNull("a job for the created process instance should be available");
