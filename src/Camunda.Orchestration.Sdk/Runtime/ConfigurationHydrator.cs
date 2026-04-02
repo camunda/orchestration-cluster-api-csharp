@@ -66,6 +66,8 @@ public static class ConfigurationHydrator
     [
         "CAMUNDA_CLIENT_SECRET",
         "CAMUNDA_BASIC_AUTH_PASSWORD",
+        "CAMUNDA_MTLS_KEY",
+        "CAMUNDA_MTLS_KEY_PASSPHRASE",
     ];
 
     /// <summary>
@@ -107,7 +109,10 @@ public static class ConfigurationHydrator
                          "ZEEBE_REST_ADDRESS",
                          "CAMUNDA_WORKER_TIMEOUT", "CAMUNDA_WORKER_MAX_CONCURRENT_JOBS",
                          "CAMUNDA_WORKER_REQUEST_TIMEOUT", "CAMUNDA_WORKER_NAME",
-                         "CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS"
+                         "CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS",
+                         "CAMUNDA_MTLS_CERT", "CAMUNDA_MTLS_KEY", "CAMUNDA_MTLS_CA",
+                         "CAMUNDA_MTLS_CERT_PATH", "CAMUNDA_MTLS_KEY_PATH", "CAMUNDA_MTLS_CA_PATH",
+                         "CAMUNDA_MTLS_KEY_PASSPHRASE"
                      })
             {
                 var v = Environment.GetEnvironmentVariable(extra);
@@ -213,6 +218,36 @@ public static class ConfigurationHydrator
                 });
             }
         }
+
+        // TLS / mTLS validation.
+        // CA-only is valid (trust a self-signed server cert without client identity).
+        // Client cert and key must come as a pair.
+        // A passphrase without a client key is invalid.
+        var mtlsCertProvided = !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CERT"))
+                            || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CERT_PATH"));
+        var mtlsKeyProvided = !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY"))
+                           || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY_PATH"));
+        if (mtlsCertProvided != mtlsKeyProvided)
+        {
+            errors.Add(new ConfigErrorDetail
+            {
+                Code = ConfigErrorCode.MissingRequired,
+                Message = "Incomplete mTLS configuration: both certificate "
+                    + "(CAMUNDA_MTLS_CERT or CAMUNDA_MTLS_CERT_PATH) and key "
+                    + "(CAMUNDA_MTLS_KEY or CAMUNDA_MTLS_KEY_PATH) must be provided together."
+            });
+        }
+        if (!string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY_PASSPHRASE")) && !mtlsKeyProvided)
+        {
+            errors.Add(new ConfigErrorDetail
+            {
+                Code = ConfigErrorCode.MissingRequired,
+                Message = "CAMUNDA_MTLS_KEY_PASSPHRASE is set but no client key was provided."
+            });
+        }
+        var hasTls = mtlsCertProvided || mtlsKeyProvided
+            || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA"))
+            || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA_PATH"));
 
         // Validate integers
         int ParseInt(string key, int fallback)
@@ -341,6 +376,18 @@ public static class ConfigurationHydrator
                     PollTimeoutMs = workerRequestTimeout,
                     WorkerName = workerName,
                     StartupJitterMaxSeconds = workerJitter,
+                }
+                : null,
+            Tls = hasTls
+                ? new TlsConfig
+                {
+                    Cert = rawMap.GetValueOrDefault("CAMUNDA_MTLS_CERT"),
+                    CertPath = rawMap.GetValueOrDefault("CAMUNDA_MTLS_CERT_PATH"),
+                    Key = rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY"),
+                    KeyPath = rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY_PATH"),
+                    Ca = rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA"),
+                    CaPath = rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA_PATH"),
+                    KeyPassphrase = rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY_PASSPHRASE"),
                 }
                 : null,
         };

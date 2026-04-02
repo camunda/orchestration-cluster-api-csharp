@@ -65,7 +65,9 @@ public partial class CamundaClient : IDisposable
         }
         else
         {
-            var authHandler = new AuthHandler(_config, options.HttpMessageHandler, _logger);
+            var tlsHandler = TlsHelper.BuildHandler(_config.Tls);
+            var innerHandler = options.HttpMessageHandler ?? tlsHandler;
+            var authHandler = new AuthHandler(_config, innerHandler, _logger);
             _httpClient = new HttpClient(authHandler)
             {
                 BaseAddress = string.IsNullOrEmpty(_config.RestAddress)

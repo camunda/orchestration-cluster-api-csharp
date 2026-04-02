@@ -299,6 +299,13 @@ The SDK uses environment variables for configuration, matching the [JS SDK](http
 | `CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS` | HTTP retry max backoff cap (ms) | `2000` |
 | `CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS` | Default eventual consistency poll interval (ms) | `500` |
 | `ZEEBE_REST_ADDRESS` | Alias for `CAMUNDA_REST_ADDRESS` | — |
+| `CAMUNDA_MTLS_CERT` | Inline PEM client certificate | — |
+| `CAMUNDA_MTLS_KEY` | Inline PEM client private key | — |
+| `CAMUNDA_MTLS_CA` | Inline PEM CA bundle | — |
+| `CAMUNDA_MTLS_CERT_PATH` | Path to client certificate (PEM) | — |
+| `CAMUNDA_MTLS_KEY_PATH` | Path to client private key (PEM) | — |
+| `CAMUNDA_MTLS_CA_PATH` | Path to CA bundle (PEM) | — |
+| `CAMUNDA_MTLS_KEY_PASSPHRASE` | Passphrase for encrypted private key | — |
 
 For backpressure configuration variables, see [Global Backpressure](#global-backpressure-adaptive-concurrency).
 
@@ -309,6 +316,59 @@ For backpressure configuration variables, see [Global Backpressure](#global-back
 - **None** — No authentication (local development)
 
 Auth strategy is auto-detected from environment variables when not explicitly set.
+
+## Self-signed TLS / mTLS
+
+The SDK supports custom TLS certificates via environment variables. This is useful for:
+
+- **Self-signed server certificates** — trust a CA that signed your server's certificate, without presenting a client identity.
+- **Mutual TLS (mTLS)** — present a client certificate and key to prove the client's identity.
+- **Both** — trust a custom CA _and_ present client credentials.
+
+### Trusting a self-signed server certificate
+
+Set only the CA certificate to trust the server's self-signed certificate:
+
+```bash
+# Path to PEM file:
+CAMUNDA_MTLS_CA_PATH=/path/to/ca.pem
+
+# Or inline PEM:
+CAMUNDA_MTLS_CA="-----BEGIN CERTIFICATE-----\n..."
+```
+
+### Mutual TLS (client certificate)
+
+To present a client certificate for mutual TLS, provide both the certificate and private key:
+
+```bash
+CAMUNDA_MTLS_CERT_PATH=/path/to/client.crt
+CAMUNDA_MTLS_KEY_PATH=/path/to/client.key
+
+# Optional — passphrase if the key is encrypted:
+# CAMUNDA_MTLS_KEY_PASSPHRASE=secret
+```
+
+### Full mTLS with custom CA
+
+Combine a custom CA with client credentials:
+
+```bash
+CAMUNDA_MTLS_CA_PATH=/path/to/ca.pem
+CAMUNDA_MTLS_CERT_PATH=/path/to/client.crt
+CAMUNDA_MTLS_KEY_PATH=/path/to/client.key
+```
+
+Inline PEM values (`CAMUNDA_MTLS_CERT`, `CAMUNDA_MTLS_KEY`, `CAMUNDA_MTLS_CA`) take precedence over their `_PATH` counterparts. TLS is applied to all outbound calls, including OAuth token requests.
+
+No code changes are needed — the SDK picks up TLS configuration from environment variables automatically:
+
+<!-- snippet-exempt: trivial env-var usage illustration -->
+```csharp
+using Camunda.Orchestration.Sdk;
+
+var client = CamundaClient.Create(); // TLS configured from env vars
+```
 
 ## Resilience
 

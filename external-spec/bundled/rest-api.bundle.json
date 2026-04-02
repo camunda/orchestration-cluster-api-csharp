@@ -17105,7 +17105,8 @@
               {
                 "$ref": "#/components/schemas/Username"
               }
-            ]
+            ],
+            "nullable": true
           },
           "displayName": {
             "description": "The display name of the user.",
@@ -21330,8 +21331,7 @@
           },
           "result": {
             "description": "The result value. Its type can vary.",
-            "example": 30,
-            "nullable": true
+            "example": 30
           },
           "warnings": {
             "type": "array",
