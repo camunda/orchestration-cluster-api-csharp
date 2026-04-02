@@ -1,3 +1,10 @@
+# [8.9.0-alpha.25](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.24...v8.9.0-alpha.25) (2026-04-02)
+
+
+### Features
+
+* inject code examples into generated SDK method XML docs ([740522b](https://github.com/camunda/orchestration-cluster-api-csharp/commit/740522b6c11f3a2aade13135b768771a7a4e2980)), closes [#53](https://github.com/camunda/orchestration-cluster-api-csharp/issues/53)
+
 # [8.9.0-alpha.24](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.23...v8.9.0-alpha.24) (2026-04-02)
 
 
