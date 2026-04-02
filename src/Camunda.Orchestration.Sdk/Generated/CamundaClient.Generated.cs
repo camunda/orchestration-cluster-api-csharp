@@ -16,6 +16,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: activateAdHocSubProcessActivities</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ActivateAdHocSubProcessActivitiesExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ActivateAdHocSubProcessActivitiesAsync(
+    ///         elementInstanceKey,
+    ///         new AdHocSubProcessActivateActivitiesInstruction());
+    /// }
+    /// </code>
+    /// </example>
     public async Task ActivateAdHocSubProcessActivitiesAsync(ElementInstanceKey adHocSubProcessInstanceKey, AdHocSubProcessActivateActivitiesInstruction body, CancellationToken ct = default)
     {
         var path = $"/element-instances/ad-hoc-activities/{Uri.EscapeDataString(adHocSubProcessInstanceKey.ToString()!)}/activation";
@@ -28,6 +40,27 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: activateJobs</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ActivateJobsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ActivateJobsAsync(new JobActivationRequest
+    ///     {
+    ///         Type = &quot;my-job-type&quot;,
+    ///         MaxJobsToActivate = 10,
+    ///         Timeout = 300000,
+    ///         Worker = &quot;my-worker&quot;,
+    ///     });
+    /// 
+    ///     foreach (var job in result.Jobs)
+    ///     {
+    ///         Console.WriteLine($&quot;Job: {job.JobKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<JobActivationResult> ActivateJobsAsync(JobActivationRequest body, CancellationToken ct = default)
     {
         var path = $"/jobs/activation";
@@ -41,6 +74,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: assignClientToGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignClientToGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignClientToGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignClientToGroupAsync(string groupId, string clientId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
@@ -54,6 +97,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: assignClientToTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignClientToTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignClientToTenantAsync(
+    ///         tenantId,
+    ///         &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignClientToTenantAsync(TenantId tenantId, string clientId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
@@ -67,6 +122,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: assignGroupToTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignGroupToTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignGroupToTenantAsync(
+    ///         tenantId,
+    ///         &quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignGroupToTenantAsync(TenantId tenantId, string groupId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
@@ -78,6 +145,16 @@ public partial class CamundaClient
     /// Assigns a mapping rule to a group.
     /// </summary>
     /// <remarks>Operation: assignMappingRuleToGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignMappingRuleToGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignMappingRuleToGroupAsync(&quot;engineering&quot;, &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignMappingRuleToGroupAsync(string groupId, string mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
@@ -89,6 +166,18 @@ public partial class CamundaClient
     /// Assign a single mapping rule to a specified tenant.
     /// </summary>
     /// <remarks>Operation: assignMappingRuleToTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignMappingRuleToTenantAsync(
+    ///         tenantId,
+    ///         &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignMappingRuleToTenantAsync(TenantId tenantId, string mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
@@ -100,6 +189,16 @@ public partial class CamundaClient
     /// Assigns the specified role to the client. The client will inherit the authorizations associated with this role.
     /// </summary>
     /// <remarks>Operation: assignRoleToClient</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignRoleToClientExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToClientAsync(&quot;developer&quot;, &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignRoleToClientAsync(string roleId, string clientId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
@@ -111,6 +210,16 @@ public partial class CamundaClient
     /// Assigns the specified role to the group. Every member of the group (user or client) will inherit the authorizations associated with this role.
     /// </summary>
     /// <remarks>Operation: assignRoleToGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignRoleToGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToGroupAsync(&quot;developer&quot;, &quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignRoleToGroupAsync(string roleId, string groupId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
@@ -122,6 +231,16 @@ public partial class CamundaClient
     /// Assigns a role to a mapping rule.
     /// </summary>
     /// <remarks>Operation: assignRoleToMappingRule</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignRoleToMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignRoleToMappingRuleAsync(string roleId, string mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
@@ -135,6 +254,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: assignRoleToTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignRoleToTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToTenantAsync(
+    ///         tenantId,
+    ///         &quot;developer&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignRoleToTenantAsync(TenantId tenantId, string roleId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
@@ -146,6 +277,16 @@ public partial class CamundaClient
     /// Assigns the specified role to the user. The user will inherit the authorizations associated with this role.
     /// </summary>
     /// <remarks>Operation: assignRoleToUser</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignRoleToUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToUserAsync(&quot;developer&quot;, username);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignRoleToUserAsync(string roleId, Username username, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
@@ -158,6 +299,21 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: assignUserTask</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignUserTaskAsync(
+    ///         userTaskKey,
+    ///         new UserTaskAssignmentRequest
+    ///         {
+    ///             Assignee = &quot;user@example.com&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignUserTaskAsync(UserTaskKey userTaskKey, UserTaskAssignmentRequest body, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/assignment";
@@ -171,6 +327,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: assignUserToGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignUserToGroupExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignUserToGroupAsync(&quot;engineering&quot;, username);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignUserToGroupAsync(string groupId, Username username, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
@@ -182,6 +348,18 @@ public partial class CamundaClient
     /// Assign a single user to a specified tenant. The user can then access tenant data and perform authorized actions.
     /// </summary>
     /// <remarks>Operation: assignUserToTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task AssignUserToTenantExample(TenantId tenantId, Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignUserToTenantAsync(
+    ///         tenantId,
+    ///         username);
+    /// }
+    /// </code>
+    /// </example>
     public async Task AssignUserToTenantAsync(TenantId tenantId, Username username, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
@@ -193,6 +371,21 @@ public partial class CamundaClient
     /// Broadcasts a signal.
     /// </summary>
     /// <remarks>Operation: broadcastSignal</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task BroadcastSignalExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.BroadcastSignalAsync(new SignalBroadcastRequest
+    ///     {
+    ///         SignalName = &quot;orderCancelled&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Signal key: {result.SignalKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SignalBroadcastResult> BroadcastSignalAsync(SignalBroadcastRequest body, CancellationToken ct = default)
     {
         var path = $"/signals/broadcast";
@@ -207,6 +400,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: cancelBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CancelBatchOperationExample(BatchOperationKey batchOperationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CancelBatchOperationAsync(batchOperationKey);
+    /// }
+    /// </code>
+    /// </example>
     public async Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/cancellation";
@@ -219,6 +422,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: cancelProcessInstance</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CancelProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CancelProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new CancelProcessInstanceRequest());
+    /// }
+    /// </code>
+    /// </example>
     public async Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, CancelProcessInstanceRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/cancellation";
@@ -234,6 +449,19 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: cancelProcessInstancesBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CancelProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CancelProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceCancellationBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/cancellation";
@@ -246,6 +474,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: completeJob</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CompleteJobExample(JobKey jobKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CompleteJobAsync(
+    ///         jobKey,
+    ///         new JobCompletionRequest());
+    /// }
+    /// </code>
+    /// </example>
     public async Task CompleteJobAsync(JobKey jobKey, JobCompletionRequest body, CancellationToken ct = default)
     {
         var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}/completion";
@@ -258,6 +498,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: completeUserTask</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CompleteUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CompleteUserTaskAsync(
+    ///         userTaskKey,
+    ///         new UserTaskCompletionRequest());
+    /// }
+    /// </code>
+    /// </example>
     public async Task CompleteUserTaskAsync(UserTaskKey userTaskKey, UserTaskCompletionRequest body, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/completion";
@@ -273,6 +525,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: correlateMessage</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CorrelateMessageExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CorrelateMessageAsync(new MessageCorrelationRequest
+    ///     {
+    ///         Name = &quot;paymentReceived&quot;,
+    ///         CorrelationKey = &quot;order-123&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Message key: {result.MessageKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<MessageCorrelationResult> CorrelateMessageAsync(MessageCorrelationRequest body, CancellationToken ct = default)
     {
         var path = $"/messages/correlation";
@@ -285,6 +553,24 @@ public partial class CamundaClient
     /// Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
     /// </summary>
     /// <remarks>Operation: createAdminUser</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateAdminUserExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateAdminUserAsync(new UserRequest
+    ///     {
+    ///         Username = &quot;admin&quot;,
+    ///         Name = &quot;Admin User&quot;,
+    ///         Email = &quot;admin@example.com&quot;,
+    ///         Password = &quot;admin-password&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Admin user key: {result.Username}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<UserCreateResult> CreateAdminUserAsync(UserRequest body, CancellationToken ct = default)
     {
         var path = $"/setup/user";
@@ -296,6 +582,25 @@ public partial class CamundaClient
     /// Create the authorization.
     /// </summary>
     /// <remarks>Operation: createAuthorization</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateAuthorizationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateAuthorizationAsync(new AuthorizationPropertyBasedRequest
+    ///     {
+    ///         ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+    ///         PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE },
+    ///         ResourcePropertyName = &quot;my-process&quot;,
+    ///         OwnerType = OwnerTypeEnum.USER,
+    ///         OwnerId = &quot;user@example.com&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Authorization key: {result.AuthorizationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<AuthorizationCreateResult> CreateAuthorizationAsync(AuthorizationRequest body, CancellationToken ct = default)
     {
         var path = $"/authorizations";
@@ -309,6 +614,21 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: createDeployment</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateDeploymentExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var content = new MultipartFormDataContent();
+    ///     var fileContent = new ByteArrayContent(File.ReadAllBytes(&quot;process.bpmn&quot;));
+    ///     content.Add(fileContent, &quot;resources&quot;, &quot;process.bpmn&quot;);
+    /// 
+    ///     var result = await client.CreateDeploymentAsync(content);
+    ///     Console.WriteLine($&quot;Deployment key: {result.DeploymentKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DeploymentResult> CreateDeploymentAsync(MultipartFormDataContent content, CancellationToken ct = default)
     {
         var path = $"/deployments";
@@ -329,6 +649,21 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: createDocument</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateDocumentExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     using var content = new MultipartFormDataContent();
+    ///     content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;Hello, world!&quot;)), &quot;file&quot;, &quot;hello.txt&quot;);
+    /// 
+    ///     var result = await client.CreateDocumentAsync(content);
+    /// 
+    ///     Console.WriteLine($&quot;Document ID: {result.DocumentId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DocumentReference> CreateDocumentAsync(MultipartFormDataContent content, string? storeId = null, DocumentId? documentId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -346,6 +681,20 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: createDocumentLink</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateDocumentLinkExample(DocumentId documentId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateDocumentLinkAsync(
+    ///         documentId,
+    ///         new DocumentLinkRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Document link: {result.Url}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DocumentLink> CreateDocumentLinkAsync(DocumentId documentId, DocumentLinkRequest body, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -375,6 +724,25 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: createDocuments</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateDocumentsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     using var content = new MultipartFormDataContent();
+    ///     content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File one&quot;)), &quot;files&quot;, &quot;one.txt&quot;);
+    ///     content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File two&quot;)), &quot;files&quot;, &quot;two.txt&quot;);
+    /// 
+    ///     var result = await client.CreateDocumentsAsync(content);
+    /// 
+    ///     foreach (var doc in result.CreatedDocuments)
+    ///     {
+    ///         Console.WriteLine($&quot;Created: {doc.DocumentId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DocumentCreationBatchResponse> CreateDocumentsAsync(MultipartFormDataContent content, string? storeId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -394,6 +762,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: createElementInstanceVariables</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateElementInstanceVariablesExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CreateElementInstanceVariablesAsync(
+    ///         elementInstanceKey,
+    ///         new SetVariableRequest());
+    /// }
+    /// </code>
+    /// </example>
     public async Task CreateElementInstanceVariablesAsync(ElementInstanceKey elementInstanceKey, SetVariableRequest body, CancellationToken ct = default)
     {
         var path = $"/element-instances/{Uri.EscapeDataString(elementInstanceKey.ToString()!)}/variables";
@@ -405,6 +785,23 @@ public partial class CamundaClient
     /// Create a global-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: createGlobalClusterVariable</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateGlobalClusterVariableExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateGlobalClusterVariableAsync(
+    ///         new CreateClusterVariableRequest
+    ///         {
+    ///             Name = &quot;my-variable&quot;,
+    ///             Value = &quot;my-value&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Created variable: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterVariableResult> CreateGlobalClusterVariableAsync(CreateClusterVariableRequest body, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/global";
@@ -416,6 +813,23 @@ public partial class CamundaClient
     /// Create a new global user task listener.
     /// </summary>
     /// <remarks>Operation: createGlobalTaskListener</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateGlobalTaskListenerExample(GlobalListenerId id)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateGlobalTaskListenerAsync(
+    ///         new CreateGlobalTaskListenerRequest
+    ///         {
+    ///             EventTypes = new List&lt;GlobalTaskListenerEventTypeEnum&gt; { GlobalTaskListenerEventTypeEnum.Completing },
+    ///             Id = id,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Task listener: {result.Id}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GlobalTaskListenerResult> CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest body, CancellationToken ct = default)
     {
         var path = $"/global-task-listeners";
@@ -427,6 +841,22 @@ public partial class CamundaClient
     /// Create a new group.
     /// </summary>
     /// <remarks>Operation: createGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateGroupAsync(new GroupCreateRequest
+    ///     {
+    ///         GroupId = &quot;engineering&quot;,
+    ///         Name = &quot;Engineering&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Group key: {result.GroupId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GroupCreateResult> CreateGroupAsync(GroupCreateRequest body, CancellationToken ct = default)
     {
         var path = $"/groups";
@@ -439,6 +869,23 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: createMappingRule</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateMappingRuleAsync(new MappingRuleCreateRequest
+    ///     {
+    ///         ClaimName = &quot;groups&quot;,
+    ///         ClaimValue = &quot;engineering&quot;,
+    ///         Name = &quot;Engineering Group Mapping&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Mapping rule: {result.MappingRuleId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<CreateMappingRuleResponse> CreateMappingRuleAsync(MappingRuleCreateRequest body, CancellationToken ct = default)
     {
         var path = $"/mapping-rules";
@@ -456,6 +903,36 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: createProcessInstance</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateProcessInstanceByIdExample(ProcessDefinitionId processDefinitionId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
+    ///     {
+    ///         ProcessDefinitionId = processDefinitionId,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
+    ///     {
+    ///         ProcessDefinitionKey = processDefinitionKey,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<CreateProcessInstanceResult> CreateProcessInstanceAsync(ProcessInstanceCreationInstruction body, CancellationToken ct = default)
     {
         var path = $"/process-instances";
@@ -468,6 +945,21 @@ public partial class CamundaClient
     /// Create a new role.
     /// </summary>
     /// <remarks>Operation: createRole</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateRoleAsync(new RoleCreateRequest
+    ///     {
+    ///         Name = &quot;developer&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Role key: {result.RoleId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<RoleCreateResult> CreateRoleAsync(RoleCreateRequest body, CancellationToken ct = default)
     {
         var path = $"/roles";
@@ -479,6 +971,22 @@ public partial class CamundaClient
     /// Creates a new tenant.
     /// </summary>
     /// <remarks>Operation: createTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateTenantExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateTenantAsync(new TenantCreateRequest
+    ///     {
+    ///         TenantId = &quot;acme-corp&quot;,
+    ///         Name = &quot;Acme Corporation&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Tenant key: {result.TenantId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<TenantCreateResult> CreateTenantAsync(TenantCreateRequest body, CancellationToken ct = default)
     {
         var path = $"/tenants";
@@ -490,6 +998,24 @@ public partial class CamundaClient
     /// Create a new cluster variable for the given tenant.
     /// </summary>
     /// <remarks>Operation: createTenantClusterVariable</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateTenantClusterVariableAsync(
+    ///         tenantId,
+    ///         new CreateClusterVariableRequest
+    ///         {
+    ///             Name = &quot;my-variable&quot;,
+    ///             Value = &quot;tenant-value&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Created variable: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterVariableResult> CreateTenantClusterVariableAsync(TenantId tenantId, CreateClusterVariableRequest body, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}";
@@ -501,6 +1027,24 @@ public partial class CamundaClient
     /// Create a new user.
     /// </summary>
     /// <remarks>Operation: createUser</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task CreateUserExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateUserAsync(new UserRequest
+    ///     {
+    ///         Username = &quot;jdoe&quot;,
+    ///         Name = &quot;Jane Doe&quot;,
+    ///         Email = &quot;jdoe@example.com&quot;,
+    ///         Password = &quot;secure-password&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;User key: {result.Username}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<UserCreateResult> CreateUserAsync(UserRequest body, CancellationToken ct = default)
     {
         var path = $"/users";
@@ -512,6 +1056,16 @@ public partial class CamundaClient
     /// Deletes the authorization with the given key.
     /// </summary>
     /// <remarks>Operation: deleteAuthorization</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteAuthorizationExample(AuthorizationKey authorizationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteAuthorizationAsync(authorizationKey);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteAuthorizationAsync(AuthorizationKey authorizationKey, CancellationToken ct = default)
     {
         var path = $"/authorizations/{Uri.EscapeDataString(authorizationKey.ToString()!)}";
@@ -523,6 +1077,18 @@ public partial class CamundaClient
     /// Delete all associated decision evaluations based on provided key.
     /// </summary>
     /// <remarks>Operation: deleteDecisionInstance</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteDecisionInstanceExample(DecisionEvaluationKey decisionEvaluationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteDecisionInstanceAsync(
+    ///         decisionEvaluationKey,
+    ///         new DeleteDecisionInstanceRequest());
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteDecisionInstanceAsync(DecisionEvaluationKey decisionEvaluationKey, DeleteDecisionInstanceRequest body, CancellationToken ct = default)
     {
         var path = $"/decision-instances/{Uri.EscapeDataString(decisionEvaluationKey.ToString()!)}/deletion";
@@ -536,6 +1102,19 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: deleteDecisionInstancesBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteDecisionInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.DeleteDecisionInstancesBatchOperationAsync(
+    ///         new DecisionInstanceDeletionBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/decision-instances/deletion";
@@ -550,6 +1129,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: deleteDocument</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteDocumentExample(DocumentId documentId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteDocumentAsync(documentId);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteDocumentAsync(DocumentId documentId, string? storeId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -563,6 +1152,16 @@ public partial class CamundaClient
     /// Delete a global-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: deleteGlobalClusterVariable</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteGlobalClusterVariableExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteGlobalClusterVariableAsync(&quot;my-variable&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteGlobalClusterVariableAsync(string name, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
@@ -574,6 +1173,17 @@ public partial class CamundaClient
     /// Deletes a global user task listener.
     /// </summary>
     /// <remarks>Operation: deleteGlobalTaskListener</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteGlobalTaskListenerAsync(
+    ///         globalListenerId);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteGlobalTaskListenerAsync(GlobalListenerId id, CancellationToken ct = default)
     {
         var path = $"/global-task-listeners/{Uri.EscapeDataString(id.ToString()!)}";
@@ -585,6 +1195,16 @@ public partial class CamundaClient
     /// Deletes the group with the given ID.
     /// </summary>
     /// <remarks>Operation: deleteGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteGroupAsync(&quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteGroupAsync(string groupId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
@@ -597,6 +1217,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: deleteMappingRule</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteMappingRuleAsync(&quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteMappingRuleAsync(string mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
@@ -608,6 +1238,18 @@ public partial class CamundaClient
     /// Deletes a process instance. Only instances that are completed or terminated can be deleted.
     /// </summary>
     /// <remarks>Operation: deleteProcessInstance</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new DeleteProcessInstanceRequest());
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/deletion";
@@ -622,6 +1264,19 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: deleteProcessInstancesBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.DeleteProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceDeletionBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationCreatedResult> DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/deletion";
@@ -645,6 +1300,18 @@ public partial class CamundaClient
     /// will be deleted.
     /// </summary>
     /// <remarks>Operation: deleteResource</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteResourceExample(ResourceKey resourceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteResourceAsync(
+    ///         resourceKey,
+    ///         new DeleteResourceRequest());
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DeleteResourceResponse> DeleteResourceAsync(ResourceKey resourceKey, DeleteResourceRequest body, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/deletion";
@@ -656,6 +1323,16 @@ public partial class CamundaClient
     /// Deletes the role with the given ID.
     /// </summary>
     /// <remarks>Operation: deleteRole</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteRoleAsync(&quot;developer&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteRoleAsync(string roleId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
@@ -667,6 +1344,16 @@ public partial class CamundaClient
     /// Deletes an existing tenant.
     /// </summary>
     /// <remarks>Operation: deleteTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteTenantAsync(tenantId);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteTenantAsync(TenantId tenantId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}";
@@ -678,6 +1365,18 @@ public partial class CamundaClient
     /// Delete a tenant-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: deleteTenantClusterVariable</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteTenantClusterVariableExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteTenantClusterVariableAsync(
+    ///         tenantId,
+    ///         &quot;my-variable&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteTenantClusterVariableAsync(TenantId tenantId, string name, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
@@ -689,6 +1388,16 @@ public partial class CamundaClient
     /// Deletes a user.
     /// </summary>
     /// <remarks>Operation: deleteUser</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task DeleteUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteUserAsync(username);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteUserAsync(Username username, CancellationToken ct = default)
     {
         var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
@@ -703,6 +1412,19 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: evaluateConditionals</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task EvaluateConditionalsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.EvaluateConditionalsAsync(
+    ///         new ConditionalEvaluationInstruction());
+    /// 
+    ///     Console.WriteLine($&quot;Result: {result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<EvaluateConditionalResult> EvaluateConditionalsAsync(ConditionalEvaluationInstruction body, CancellationToken ct = default)
     {
         var path = $"/conditionals/evaluation";
@@ -719,6 +1441,36 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: evaluateDecision</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task EvaluateDecisionByIdExample(DecisionDefinitionId decisionDefinitionId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
+    ///     {
+    ///         DecisionDefinitionId = decisionDefinitionId,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Decision output: {result.Output}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    /// <example>
+    /// <code>
+    /// public static async Task EvaluateDecisionByKeyExample(DecisionDefinitionKey decisionDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.EvaluateDecisionAsync(new DecisionEvaluationByKey
+    ///     {
+    ///         DecisionDefinitionKey = decisionDefinitionKey,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Decision output: {result.Output}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<EvaluateDecisionResult> EvaluateDecisionAsync(DecisionEvaluationInstruction body, CancellationToken ct = default)
     {
         var path = $"/decision-definitions/evaluation";
@@ -731,6 +1483,22 @@ public partial class CamundaClient
     /// Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
     /// </summary>
     /// <remarks>Operation: evaluateExpression</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task EvaluateExpressionExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.EvaluateExpressionAsync(
+    ///         new ExpressionEvaluationRequest
+    ///         {
+    ///             Expression = &quot;= 1 + 2&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Result: {result.Result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ExpressionEvaluationResult> EvaluateExpressionAsync(ExpressionEvaluationRequest body, CancellationToken ct = default)
     {
         var path = $"/expression/evaluation";
@@ -744,6 +1512,23 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: failJob</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task FailJobExample(JobKey jobKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.FailJobAsync(
+    ///         jobKey,
+    ///         new JobFailRequest
+    ///         {
+    ///             Retries = 3,
+    ///             RetryBackOff = 5000,
+    ///             ErrorMessage = &quot;Something went wrong&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
     public async Task FailJobAsync(JobKey jobKey, JobFailRequest body, CancellationToken ct = default)
     {
         var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}/failure";
@@ -755,6 +1540,17 @@ public partial class CamundaClient
     /// Get an audit log entry by auditLogKey.
     /// </summary>
     /// <remarks>Operation: getAuditLog</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetAuditLogExample(AuditLogKey auditLogKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAuditLogAsync(auditLogKey);
+    ///     Console.WriteLine($&quot;Audit log: {result.AuditLogKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<AuditLogResult> GetAuditLogAsync(AuditLogKey auditLogKey, ConsistencyOptions<AuditLogResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/audit-logs/{Uri.EscapeDataString(auditLogKey.ToString()!)}";
@@ -773,6 +1569,17 @@ public partial class CamundaClient
     /// Retrieves the current authenticated user.
     /// </summary>
     /// <remarks>Operation: getAuthentication</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetAuthenticationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAuthenticationAsync();
+    ///     Console.WriteLine($&quot;Authenticated user: {result.Username}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<CamundaUserResult> GetAuthenticationAsync(CancellationToken ct = default)
     {
         var path = $"/authentication/me";
@@ -784,6 +1591,19 @@ public partial class CamundaClient
     /// Get authorization by the given key.
     /// </summary>
     /// <remarks>Operation: getAuthorization</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetAuthorizationExample(AuthorizationKey authorizationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAuthorizationAsync(
+    ///         authorizationKey);
+    /// 
+    ///     Console.WriteLine($&quot;Resource type: {result.ResourceType}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<AuthorizationResult> GetAuthorizationAsync(AuthorizationKey authorizationKey, ConsistencyOptions<AuthorizationResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/authorizations/{Uri.EscapeDataString(authorizationKey.ToString()!)}";
@@ -802,6 +1622,19 @@ public partial class CamundaClient
     /// Get batch operation by key.
     /// </summary>
     /// <remarks>Operation: getBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetBatchOperationExample(BatchOperationKey batchOperationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetBatchOperationAsync(
+    ///         batchOperationKey);
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationResponse> GetBatchOperationAsync(BatchOperationKey batchOperationKey, ConsistencyOptions<BatchOperationResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}";
@@ -820,6 +1653,19 @@ public partial class CamundaClient
     /// Returns a decision definition by key.
     /// </summary>
     /// <remarks>Operation: getDecisionDefinition</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetDecisionDefinitionExample(DecisionDefinitionKey decisionDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionDefinitionAsync(
+    ///         decisionDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;Decision definition: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DecisionDefinitionResult> GetDecisionDefinitionAsync(DecisionDefinitionKey decisionDefinitionKey, ConsistencyOptions<DecisionDefinitionResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-definitions/{Uri.EscapeDataString(decisionDefinitionKey.ToString()!)}";
@@ -838,6 +1684,19 @@ public partial class CamundaClient
     /// Returns decision definition as XML.
     /// </summary>
     /// <remarks>Operation: getDecisionDefinitionXML</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetDecisionDefinitionXmlExample(DecisionDefinitionKey decisionDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionDefinitionXmlAsync(
+    ///         decisionDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;XML: {result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<object> GetDecisionDefinitionXmlAsync(DecisionDefinitionKey decisionDefinitionKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-definitions/{Uri.EscapeDataString(decisionDefinitionKey.ToString()!)}/xml";
@@ -856,6 +1715,19 @@ public partial class CamundaClient
     /// Returns a decision instance.
     /// </summary>
     /// <remarks>Operation: getDecisionInstance</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetDecisionInstanceExample(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionInstanceAsync(
+    ///         decisionEvaluationInstanceKey);
+    /// 
+    ///     Console.WriteLine($&quot;Decision instance: {result.DecisionDefinitionId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DecisionInstanceGetQueryResult> GetDecisionInstanceAsync(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-instances/{Uri.EscapeDataString(decisionEvaluationInstanceKey.ToString()!)}";
@@ -874,6 +1746,19 @@ public partial class CamundaClient
     /// Returns Decision Requirements as JSON.
     /// </summary>
     /// <remarks>Operation: getDecisionRequirements</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetDecisionRequirementsExample(DecisionRequirementsKey decisionRequirementsKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionRequirementsAsync(
+    ///         decisionRequirementsKey);
+    /// 
+    ///     Console.WriteLine($&quot;DRD: {result.DecisionRequirementsName}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DecisionRequirementsResult> GetDecisionRequirementsAsync(DecisionRequirementsKey decisionRequirementsKey, ConsistencyOptions<DecisionRequirementsResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-requirements/{Uri.EscapeDataString(decisionRequirementsKey.ToString()!)}";
@@ -892,6 +1777,19 @@ public partial class CamundaClient
     /// Returns decision requirements as XML.
     /// </summary>
     /// <remarks>Operation: getDecisionRequirementsXML</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetDecisionRequirementsXmlExample(DecisionRequirementsKey decisionRequirementsKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionRequirementsXmlAsync(
+    ///         decisionRequirementsKey);
+    /// 
+    ///     Console.WriteLine($&quot;XML: {result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<object> GetDecisionRequirementsXmlAsync(DecisionRequirementsKey decisionRequirementsKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-requirements/{Uri.EscapeDataString(decisionRequirementsKey.ToString()!)}/xml";
@@ -913,6 +1811,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getDocument</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetDocumentExample(DocumentId documentId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var content = await client.GetDocumentAsync(documentId);
+    /// 
+    ///     Console.WriteLine($&quot;Downloaded document: {documentId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<object> GetDocumentAsync(DocumentId documentId, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -927,6 +1837,19 @@ public partial class CamundaClient
     /// Returns element instance as JSON.
     /// </summary>
     /// <remarks>Operation: getElementInstance</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetElementInstanceExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetElementInstanceAsync(
+    ///         elementInstanceKey);
+    /// 
+    ///     Console.WriteLine($&quot;Element: {result.ElementId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ElementInstanceResult> GetElementInstanceAsync(ElementInstanceKey elementInstanceKey, ConsistencyOptions<ElementInstanceResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/{Uri.EscapeDataString(elementInstanceKey.ToString()!)}";
@@ -945,6 +1868,17 @@ public partial class CamundaClient
     /// Get a global-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: getGlobalClusterVariable</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetGlobalClusterVariableExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetGlobalClusterVariableAsync(&quot;my-variable&quot;);
+    ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterVariableResult> GetGlobalClusterVariableAsync(string name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
@@ -964,6 +1898,20 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getGlobalJobStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetGlobalJobStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetGlobalJobStatisticsAsync(
+    ///         from: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+    ///         to: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
+    /// 
+    ///     Console.WriteLine($&quot;Global job stats: {result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(DateTimeOffset from, DateTimeOffset to, string? jobType = null, ConsistencyOptions<GlobalJobStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -986,6 +1934,19 @@ public partial class CamundaClient
     /// Get a global user task listener by its id.
     /// </summary>
     /// <remarks>Operation: getGlobalTaskListener</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetGlobalTaskListenerAsync(
+    ///         globalListenerId);
+    /// 
+    ///     Console.WriteLine($&quot;Task listener: {result.EventTypes}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GlobalTaskListenerResult> GetGlobalTaskListenerAsync(GlobalListenerId id, ConsistencyOptions<GlobalTaskListenerResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/global-task-listeners/{Uri.EscapeDataString(id.ToString()!)}";
@@ -1004,6 +1965,17 @@ public partial class CamundaClient
     /// Get a group by its ID.
     /// </summary>
     /// <remarks>Operation: getGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetGroupAsync(&quot;engineering&quot;);
+    ///     Console.WriteLine($&quot;Group: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GroupResult> GetGroupAsync(string groupId, ConsistencyOptions<GroupResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
@@ -1023,6 +1995,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getIncident</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetIncidentExample(IncidentKey incidentKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetIncidentAsync(incidentKey);
+    ///     Console.WriteLine($&quot;Incident: {result.IncidentKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<IncidentResult> GetIncidentAsync(IncidentKey incidentKey, ConsistencyOptions<IncidentResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/incidents/{Uri.EscapeDataString(incidentKey.ToString()!)}";
@@ -1042,6 +2025,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getJobErrorStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetJobErrorStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetJobErrorStatisticsAsync(
+    ///         new JobErrorStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Error: {stat.ErrorCode}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<JobErrorStatisticsQueryResult> GetJobErrorStatisticsAsync(JobErrorStatisticsQuery body, ConsistencyOptions<JobErrorStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/jobs/statistics/errors";
@@ -1063,6 +2062,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getJobTimeSeriesStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetJobTimeSeriesStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetJobTimeSeriesStatisticsAsync(
+    ///         new JobTimeSeriesStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Time series: {stat}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<JobTimeSeriesStatisticsQueryResult> GetJobTimeSeriesStatisticsAsync(JobTimeSeriesStatisticsQuery body, ConsistencyOptions<JobTimeSeriesStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/jobs/statistics/time-series";
@@ -1082,6 +2097,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getJobTypeStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetJobTypeStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetJobTypeStatisticsAsync(
+    ///         new JobTypeStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Job type: {stat.JobType}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<JobTypeStatisticsQueryResult> GetJobTypeStatisticsAsync(JobTypeStatisticsQuery body, ConsistencyOptions<JobTypeStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/jobs/statistics/by-types";
@@ -1101,6 +2132,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getJobWorkerStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetJobWorkerStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetJobWorkerStatisticsAsync(
+    ///         new JobWorkerStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Worker: {stat.Worker}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<JobWorkerStatisticsQueryResult> GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery body, ConsistencyOptions<JobWorkerStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/jobs/statistics/by-workers";
@@ -1119,6 +2166,17 @@ public partial class CamundaClient
     /// Obtains the status of the current Camunda license.
     /// </summary>
     /// <remarks>Operation: getLicense</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetLicenseExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetLicenseAsync();
+    ///     Console.WriteLine($&quot;License type: {result.LicenseType}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<LicenseResponse> GetLicenseAsync(CancellationToken ct = default)
     {
         var path = $"/license";
@@ -1131,6 +2189,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getMappingRule</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetMappingRuleAsync(&quot;rule-123&quot;);
+    ///     Console.WriteLine($&quot;Mapping rule: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<MappingRuleResult> GetMappingRuleAsync(string mappingRuleId, ConsistencyOptions<MappingRuleResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
@@ -1149,6 +2218,19 @@ public partial class CamundaClient
     /// Returns process definition as JSON.
     /// </summary>
     /// <remarks>Operation: getProcessDefinition</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessDefinitionExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionAsync(
+    ///         processDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;Process definition: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessDefinitionResult> GetProcessDefinitionAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<ProcessDefinitionResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}";
@@ -1168,6 +2250,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionInstanceStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessDefinitionInstanceStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionInstanceStatisticsAsync(
+    ///         new ProcessDefinitionInstanceStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Definition: {stat.ProcessDefinitionId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessDefinitionInstanceStatisticsQueryResult> GetProcessDefinitionInstanceStatisticsAsync(ProcessDefinitionInstanceStatisticsQuery body, ConsistencyOptions<ProcessDefinitionInstanceStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/statistics/process-instances";
@@ -1188,6 +2286,28 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionInstanceVersionStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessDefinitionInstanceVersionStatisticsExample(ProcessDefinitionId processDefinitionId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionInstanceVersionStatisticsAsync(
+    ///         new ProcessDefinitionInstanceVersionStatisticsQuery
+    ///         {
+    ///             Filter = new ProcessDefinitionInstanceVersionStatisticsFilter
+    ///             {
+    ///                 ProcessDefinitionId = processDefinitionId,
+    ///             },
+    ///         });
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Version: {stat.ProcessDefinitionVersion}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessDefinitionInstanceVersionStatisticsQueryResult> GetProcessDefinitionInstanceVersionStatisticsAsync(ProcessDefinitionInstanceVersionStatisticsQuery body, ConsistencyOptions<ProcessDefinitionInstanceVersionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/statistics/process-instances-by-version";
@@ -1207,6 +2327,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionMessageSubscriptionStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessDefinitionMessageSubscriptionStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionMessageSubscriptionStatisticsAsync(
+    ///         new ProcessDefinitionMessageSubscriptionStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Message subscriptions: {stat.ActiveSubscriptions}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessDefinitionMessageSubscriptionStatisticsQueryResult> GetProcessDefinitionMessageSubscriptionStatisticsAsync(ProcessDefinitionMessageSubscriptionStatisticsQuery body, ConsistencyOptions<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/statistics/message-subscriptions";
@@ -1225,6 +2361,23 @@ public partial class CamundaClient
     /// Get statistics about elements in currently running process instances by process definition key and search filter.
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessDefinitionStatisticsExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionStatisticsAsync(
+    ///         processDefinitionKey,
+    ///         new ProcessDefinitionElementStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Element: {stat.ElementId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionElementStatisticsQuery body, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/statistics/element-instances";
@@ -1243,6 +2396,19 @@ public partial class CamundaClient
     /// Returns process definition as XML.
     /// </summary>
     /// <remarks>Operation: getProcessDefinitionXML</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessDefinitionXmlExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionXmlAsync(
+    ///         processDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;XML: {result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<object> GetProcessDefinitionXmlAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/xml";
@@ -1261,6 +2427,17 @@ public partial class CamundaClient
     /// Get the process instance by the process instance key.
     /// </summary>
     /// <remarks>Operation: getProcessInstance</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceAsync(processInstanceKey);
+    ///     Console.WriteLine($&quot;Process instance: {result.ProcessDefinitionId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessInstanceResult> GetProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}";
@@ -1279,6 +2456,19 @@ public partial class CamundaClient
     /// Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
     /// </summary>
     /// <remarks>Operation: getProcessInstanceCallHierarchy</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessInstanceCallHierarchyExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceCallHierarchyAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     Console.WriteLine($&quot;Call hierarchy: {result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<object> GetProcessInstanceCallHierarchyAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/call-hierarchy";
@@ -1297,6 +2487,22 @@ public partial class CamundaClient
     /// Get sequence flows taken by the process instance.
     /// </summary>
     /// <remarks>Operation: getProcessInstanceSequenceFlows</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessInstanceSequenceFlowsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceSequenceFlowsAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     foreach (var flow in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Sequence flow: {flow}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessInstanceSequenceFlowsQueryResult> GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/sequence-flows";
@@ -1315,6 +2521,22 @@ public partial class CamundaClient
     /// Get statistics about elements by the process instance key.
     /// </summary>
     /// <remarks>Operation: getProcessInstanceStatistics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessInstanceStatisticsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceStatisticsAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Element: {stat.ElementId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessInstanceElementStatisticsQueryResult> GetProcessInstanceStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/statistics/element-instances";
@@ -1336,6 +2558,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getProcessInstanceStatisticsByDefinition</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessInstanceStatisticsByDefinitionExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceStatisticsByDefinitionAsync(
+    ///         new IncidentProcessInstanceStatisticsByDefinitionQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Definition: {stat.ProcessDefinitionKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<IncidentProcessInstanceStatisticsByDefinitionQueryResult> GetProcessInstanceStatisticsByDefinitionAsync(IncidentProcessInstanceStatisticsByDefinitionQuery body, ConsistencyOptions<IncidentProcessInstanceStatisticsByDefinitionQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/incidents/statistics/process-instances-by-definition";
@@ -1356,6 +2594,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getProcessInstanceStatisticsByError</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetProcessInstanceStatisticsByErrorExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceStatisticsByErrorAsync(
+    ///         new IncidentProcessInstanceStatisticsByErrorQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Error: {stat.ErrorMessage}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<IncidentProcessInstanceStatisticsByErrorQueryResult> GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery body, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/incidents/statistics/process-instances-by-error";
@@ -1378,6 +2632,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getResource</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetResourceExample(ResourceKey resourceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetResourceAsync(resourceKey);
+    ///     Console.WriteLine($&quot;Resource: {result.ResourceName}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}";
@@ -1393,6 +2658,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getResourceContent</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetResourceContentExample(ResourceKey resourceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetResourceContentAsync(resourceKey);
+    ///     Console.WriteLine($&quot;Content: {result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/content";
@@ -1404,6 +2680,17 @@ public partial class CamundaClient
     /// Get a role by its ID.
     /// </summary>
     /// <remarks>Operation: getRole</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetRoleAsync(&quot;developer&quot;);
+    ///     Console.WriteLine($&quot;Role: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<RoleResult> GetRoleAsync(string roleId, ConsistencyOptions<RoleResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
@@ -1424,6 +2711,19 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getStartProcessForm</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetStartProcessFormExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetStartProcessFormAsync(
+    ///         processDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;Form: {result.FormKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<FormResult> GetStartProcessFormAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<FormResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/form";
@@ -1442,6 +2742,17 @@ public partial class CamundaClient
     /// Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
     /// </summary>
     /// <remarks>Operation: getStatus</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.GetStatusAsync();
+    ///     Console.WriteLine(&quot;Cluster is healthy&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task GetStatusAsync(CancellationToken ct = default)
     {
         var path = $"/status";
@@ -1458,6 +2769,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getSystemConfiguration</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetSystemConfigurationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetSystemConfigurationAsync();
+    ///     Console.WriteLine($&quot;System config: {result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SystemConfigurationResponse> GetSystemConfigurationAsync(CancellationToken ct = default)
     {
         var path = $"/system/configuration";
@@ -1469,6 +2791,17 @@ public partial class CamundaClient
     /// Retrieves a single tenant by tenant ID.
     /// </summary>
     /// <remarks>Operation: getTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetTenantAsync(tenantId);
+    ///     Console.WriteLine($&quot;Tenant: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<TenantResult> GetTenantAsync(TenantId tenantId, ConsistencyOptions<TenantResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}";
@@ -1487,6 +2820,20 @@ public partial class CamundaClient
     /// Get a tenant-scoped cluster variable.
     /// </summary>
     /// <remarks>Operation: getTenantClusterVariable</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetTenantClusterVariableExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetTenantClusterVariableAsync(
+    ///         tenantId,
+    ///         &quot;my-variable&quot;);
+    /// 
+    ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterVariableResult> GetTenantClusterVariableAsync(TenantId tenantId, string name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
@@ -1505,6 +2852,17 @@ public partial class CamundaClient
     /// Obtains the current topology of the cluster the gateway is part of.
     /// </summary>
     /// <remarks>Operation: getTopology</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetTopologyExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var topology = await client.GetTopologyAsync();
+    ///     Console.WriteLine($&quot;Cluster size: {topology.ClusterSize}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<TopologyResponse> GetTopologyAsync(CancellationToken ct = default)
     {
         var path = $"/topology";
@@ -1516,6 +2874,20 @@ public partial class CamundaClient
     /// Retrieve the usage metrics based on given criteria.
     /// </summary>
     /// <remarks>Operation: getUsageMetrics</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetUsageMetricsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetUsageMetricsAsync(
+    ///         startTime: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+    ///         endTime: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
+    /// 
+    ///     Console.WriteLine($&quot;Metrics: {result}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<UsageMetricsResponse> GetUsageMetricsAsync(DateTimeOffset startTime, DateTimeOffset endTime, TenantId? tenantId = null, bool? withTenants = null, ConsistencyOptions<UsageMetricsResponse>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -1539,6 +2911,17 @@ public partial class CamundaClient
     /// Get a user by its username.
     /// </summary>
     /// <remarks>Operation: getUser</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetUserAsync(username);
+    ///     Console.WriteLine($&quot;User: {result.Username}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GetUserResponse> GetUserAsync(Username username, ConsistencyOptions<GetUserResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
@@ -1557,6 +2940,17 @@ public partial class CamundaClient
     /// Get the user task by the user task key.
     /// </summary>
     /// <remarks>Operation: getUserTask</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetUserTaskAsync(userTaskKey);
+    ///     Console.WriteLine($&quot;User task: {result.UserTaskKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<UserTaskResult> GetUserTaskAsync(UserTaskKey userTaskKey, ConsistencyOptions<UserTaskResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}";
@@ -1577,6 +2971,17 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: getUserTaskForm</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetUserTaskFormExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetUserTaskFormAsync(userTaskKey);
+    ///     Console.WriteLine($&quot;Form: {result.FormKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<FormResult> GetUserTaskFormAsync(UserTaskKey userTaskKey, ConsistencyOptions<FormResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/form";
@@ -1599,6 +3004,17 @@ public partial class CamundaClient
     /// specific element instance.
     /// </summary>
     /// <remarks>Operation: getVariable</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task GetVariableExample(VariableKey variableKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetVariableAsync(variableKey);
+    ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<VariableResult> GetVariableAsync(VariableKey variableKey, ConsistencyOptions<VariableResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/variables/{Uri.EscapeDataString(variableKey.ToString()!)}";
@@ -1624,6 +3040,21 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: migrateProcessInstance</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task MigrateProcessInstanceExample(ProcessInstanceKey processInstanceKey, ProcessDefinitionKey targetProcessDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.MigrateProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new ProcessInstanceMigrationInstruction
+    ///         {
+    ///             TargetProcessDefinitionKey = targetProcessDefinitionKey,
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
     public async Task MigrateProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceMigrationInstruction body, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/migration";
@@ -1639,6 +3070,26 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: migrateProcessInstancesBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task MigrateProcessInstancesBatchOperationExample(ProcessDefinitionKey targetProcessDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.MigrateProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceMigrationBatchOperationRequest
+    ///         {
+    ///             Filter = new ProcessInstanceFilter(),
+    ///             MigrationPlan = new ProcessInstanceMigrationBatchOperationPlan
+    ///             {
+    ///                 TargetProcessDefinitionKey = targetProcessDefinitionKey,
+    ///             },
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationCreatedResult> MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/migration";
@@ -1656,6 +3107,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: modifyProcessInstance</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ModifyProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new ProcessInstanceModificationInstruction());
+    /// }
+    /// </code>
+    /// </example>
     public async Task ModifyProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceModificationInstruction body, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/modification";
@@ -1673,6 +3136,19 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: modifyProcessInstancesBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ModifyProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ModifyProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceModificationBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/modification";
@@ -1690,6 +3166,19 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: pinClock</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task PinClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.PinClockAsync(new ClockPinRequest
+    ///     {
+    ///         Timestamp = 1700000000000,
+    ///     });
+    /// }
+    /// </code>
+    /// </example>
     public async Task PinClockAsync(ClockPinRequest body, CancellationToken ct = default)
     {
         var path = $"/clock";
@@ -1706,6 +3195,23 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: publishMessage</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task PublishMessageExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.PublishMessageAsync(new MessagePublicationRequest
+    ///     {
+    ///         Name = &quot;paymentReceived&quot;,
+    ///         CorrelationKey = &quot;order-123&quot;,
+    ///         TimeToLive = 60000,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Message key: {result.MessageKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<MessagePublicationResult> PublishMessageAsync(MessagePublicationRequest body, CancellationToken ct = default)
     {
         var path = $"/messages/publication";
@@ -1724,6 +3230,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: resetClock</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ResetClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResetClockAsync();
+    /// }
+    /// </code>
+    /// </example>
     public async Task ResetClockAsync(CancellationToken ct = default)
     {
         var path = $"/clock/reset";
@@ -1737,6 +3253,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: resolveIncident</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ResolveIncidentExample(IncidentKey incidentKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResolveIncidentAsync(
+    ///         incidentKey,
+    ///         new IncidentResolutionRequest());
+    /// }
+    /// </code>
+    /// </example>
     public async Task ResolveIncidentAsync(IncidentKey incidentKey, IncidentResolutionRequest body, CancellationToken ct = default)
     {
         var path = $"/incidents/{Uri.EscapeDataString(incidentKey.ToString()!)}/resolution";
@@ -1752,6 +3280,19 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: resolveIncidentsBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ResolveIncidentsBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResolveIncidentsBatchOperationAsync(
+    ///         new ProcessInstanceIncidentResolutionBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest body, CancellationToken ct = default)
     {
         var path = $"/process-instances/incident-resolution";
@@ -1763,6 +3304,19 @@ public partial class CamundaClient
     /// Creates a batch operation to resolve multiple incidents of a process instance.
     /// </summary>
     /// <remarks>Operation: resolveProcessInstanceIncidents</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ResolveProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResolveProcessInstanceIncidentsAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/incident-resolution";
@@ -1776,6 +3330,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: resumeBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ResumeBatchOperationExample(BatchOperationKey batchOperationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResumeBatchOperationAsync(batchOperationKey);
+    /// }
+    /// </code>
+    /// </example>
     public async Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/resumption";
@@ -1787,6 +3351,22 @@ public partial class CamundaClient
     /// Search for audit logs based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchAuditLogs</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchAuditLogsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAuditLogsAsync(
+    ///         new AuditLogSearchQueryRequest());
+    /// 
+    ///     foreach (var log in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Audit log: {log.AuditLogKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<AuditLogSearchQueryResult> SearchAuditLogsAsync(AuditLogSearchQueryRequest body, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/audit-logs/search";
@@ -1805,6 +3385,22 @@ public partial class CamundaClient
     /// Search for authorizations based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchAuthorizations</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchAuthorizationsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAuthorizationsAsync(
+    ///         new AuthorizationSearchQuery());
+    /// 
+    ///     foreach (var auth in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Authorization: {auth.AuthorizationKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<AuthorizationSearchResult> SearchAuthorizationsAsync(AuthorizationSearchQuery body, ConsistencyOptions<AuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/authorizations/search";
@@ -1823,6 +3419,22 @@ public partial class CamundaClient
     /// Search for batch operation items based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchBatchOperationItems</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchBatchOperationItemsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchBatchOperationItemsAsync(
+    ///         new BatchOperationItemSearchQuery());
+    /// 
+    ///     foreach (var item in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Item: {item.ItemKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationItemSearchQueryResult> SearchBatchOperationItemsAsync(BatchOperationItemSearchQuery body, ConsistencyOptions<BatchOperationItemSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/batch-operation-items/search";
@@ -1841,6 +3453,22 @@ public partial class CamundaClient
     /// Search for batch operations based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchBatchOperations</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchBatchOperationsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchBatchOperationsAsync(
+    ///         new BatchOperationSearchQuery());
+    /// 
+    ///     foreach (var op in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Batch operation: {op.BatchOperationKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationSearchQueryResult> SearchBatchOperationsAsync(BatchOperationSearchQuery body, ConsistencyOptions<BatchOperationSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/batch-operations/search";
@@ -1859,6 +3487,23 @@ public partial class CamundaClient
     /// Search clients assigned to a group.
     /// </summary>
     /// <remarks>Operation: searchClientsForGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchClientsForGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchClientsForGroupAsync(
+    ///         &quot;engineering&quot;,
+    ///         new SearchClientsForGroupRequest());
+    /// 
+    ///     foreach (var c in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Client: {c.ClientId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchClientsForGroupResponse> SearchClientsForGroupAsync(string groupId, SearchClientsForGroupRequest body, ConsistencyOptions<SearchClientsForGroupResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/search";
@@ -1877,6 +3522,23 @@ public partial class CamundaClient
     /// Search clients with assigned role.
     /// </summary>
     /// <remarks>Operation: searchClientsForRole</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchClientsForRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchClientsForRoleAsync(
+    ///         &quot;developer&quot;,
+    ///         new SearchClientsForRoleRequest());
+    /// 
+    ///     foreach (var c in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Client: {c.ClientId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchClientsForRoleResponse> SearchClientsForRoleAsync(string roleId, SearchClientsForRoleRequest body, ConsistencyOptions<SearchClientsForRoleResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/search";
@@ -1895,6 +3557,23 @@ public partial class CamundaClient
     /// Retrieves a filtered and sorted list of clients for a specified tenant.
     /// </summary>
     /// <remarks>Operation: searchClientsForTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchClientsForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchClientsForTenantAsync(
+    ///         tenantId,
+    ///         new SearchClientsForTenantRequest());
+    /// 
+    ///     foreach (var c in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Client: {c.ClientId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchClientsForTenantResponse> SearchClientsForTenantAsync(TenantId tenantId, SearchClientsForTenantRequest body, ConsistencyOptions<SearchClientsForTenantResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/search";
@@ -1912,6 +3591,22 @@ public partial class CamundaClient
     /// Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.
     /// </summary>
     /// <remarks>Operation: searchClusterVariables</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchClusterVariablesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchClusterVariablesAsync(
+    ///         new ClusterVariableSearchQueryRequest());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterVariableSearchQueryResult> SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<ClusterVariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -1932,6 +3627,22 @@ public partial class CamundaClient
     /// Search correlated message subscriptions based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchCorrelatedMessageSubscriptions</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchCorrelatedMessageSubscriptionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchCorrelatedMessageSubscriptionsAsync(
+    ///         new CorrelatedMessageSubscriptionSearchQuery());
+    /// 
+    ///     foreach (var sub in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Correlated subscription: {sub.MessageName}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<CorrelatedMessageSubscriptionSearchQueryResult> SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery body, ConsistencyOptions<CorrelatedMessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/correlated-message-subscriptions/search";
@@ -1950,6 +3661,22 @@ public partial class CamundaClient
     /// Search for decision definitions based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchDecisionDefinitions</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchDecisionDefinitionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchDecisionDefinitionsAsync(
+    ///         new DecisionDefinitionSearchQuery());
+    /// 
+    ///     foreach (var dd in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Decision definition: {dd.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DecisionDefinitionSearchQueryResult> SearchDecisionDefinitionsAsync(DecisionDefinitionSearchQuery body, ConsistencyOptions<DecisionDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-definitions/search";
@@ -1968,6 +3695,22 @@ public partial class CamundaClient
     /// Search for decision instances based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchDecisionInstances</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchDecisionInstancesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchDecisionInstancesAsync(
+    ///         new DecisionInstanceSearchQuery());
+    /// 
+    ///     foreach (var di in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Decision instance: {di.DecisionDefinitionId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DecisionInstanceSearchQueryResult> SearchDecisionInstancesAsync(DecisionInstanceSearchQuery body, ConsistencyOptions<DecisionInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-instances/search";
@@ -1986,6 +3729,22 @@ public partial class CamundaClient
     /// Search for decision requirements based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchDecisionRequirements</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchDecisionRequirementsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchDecisionRequirementsAsync(
+    ///         new DecisionRequirementsSearchQuery());
+    /// 
+    ///     foreach (var drd in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;DRD: {drd.DecisionRequirementsName}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<DecisionRequirementsSearchQueryResult> SearchDecisionRequirementsAsync(DecisionRequirementsSearchQuery body, ConsistencyOptions<DecisionRequirementsSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-requirements/search";
@@ -2011,6 +3770,23 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchElementInstanceIncidents</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchElementInstanceIncidentsExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchElementInstanceIncidentsAsync(
+    ///         elementInstanceKey,
+    ///         new IncidentSearchQuery());
+    /// 
+    ///     foreach (var incident in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Incident: {incident.IncidentKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<IncidentSearchQueryResult> SearchElementInstanceIncidentsAsync(ElementInstanceKey elementInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/{Uri.EscapeDataString(elementInstanceKey.ToString()!)}/incidents/search";
@@ -2029,6 +3805,22 @@ public partial class CamundaClient
     /// Search for element instances based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchElementInstances</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchElementInstancesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchElementInstancesAsync(
+    ///         new ElementInstanceSearchQuery());
+    /// 
+    ///     foreach (var ei in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Element instance: {ei.ElementInstanceKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ElementInstanceSearchQueryResult> SearchElementInstancesAsync(ElementInstanceSearchQuery body, ConsistencyOptions<ElementInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/search";
@@ -2047,6 +3839,22 @@ public partial class CamundaClient
     /// Search for global user task listeners based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchGlobalTaskListeners</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchGlobalTaskListenersExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchGlobalTaskListenersAsync(
+    ///         new GlobalTaskListenerSearchQueryRequest());
+    /// 
+    ///     foreach (var listener in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Listener: {listener.Id}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GlobalTaskListenerSearchQueryResult> SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest body, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/global-task-listeners/search";
@@ -2065,6 +3873,23 @@ public partial class CamundaClient
     /// Retrieves a filtered and sorted list of groups for a specified tenant.
     /// </summary>
     /// <remarks>Operation: searchGroupIdsForTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchGroupIdsForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchGroupIdsForTenantAsync(
+    ///         tenantId,
+    ///         new TenantGroupSearchQueryRequest());
+    /// 
+    ///     foreach (var group in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Group: {group.GroupId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<TenantGroupSearchResult> SearchGroupIdsForTenantAsync(TenantId tenantId, TenantGroupSearchQueryRequest body, ConsistencyOptions<TenantGroupSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/groups/search";
@@ -2083,6 +3908,21 @@ public partial class CamundaClient
     /// Search for groups based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchGroups</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchGroupsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchGroupsAsync(new GroupSearchQueryRequest());
+    /// 
+    ///     foreach (var group in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Group: {group.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GroupSearchQueryResult> SearchGroupsAsync(GroupSearchQueryRequest body, ConsistencyOptions<GroupSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/search";
@@ -2101,6 +3941,23 @@ public partial class CamundaClient
     /// Search groups with assigned role.
     /// </summary>
     /// <remarks>Operation: searchGroupsForRole</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchGroupsForRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchGroupsForRoleAsync(
+    ///         &quot;developer&quot;,
+    ///         new RoleGroupSearchQueryRequest());
+    /// 
+    ///     foreach (var group in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Group: {group.GroupId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(string roleId, RoleGroupSearchQueryRequest body, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/groups/search";
@@ -2120,6 +3977,21 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchIncidents</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchIncidentsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchIncidentsAsync(new IncidentSearchQuery());
+    /// 
+    ///     foreach (var incident in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Incident: {incident.IncidentKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<IncidentSearchQueryResult> SearchIncidentsAsync(IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/incidents/search";
@@ -2138,6 +4010,21 @@ public partial class CamundaClient
     /// Search for jobs based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchJobs</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchJobsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchJobsAsync(new JobSearchQuery());
+    /// 
+    ///     foreach (var job in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Job: {job.JobKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<JobSearchQueryResult> SearchJobsAsync(JobSearchQuery body, ConsistencyOptions<JobSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/jobs/search";
@@ -2157,6 +4044,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchMappingRule</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMappingRuleAsync(
+    ///         new MappingRuleSearchQueryRequest());
+    /// 
+    ///     foreach (var rule in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Mapping rule: {rule.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchMappingRuleResponse> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRuleResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/search";
@@ -2175,6 +4078,23 @@ public partial class CamundaClient
     /// Search mapping rules assigned to a group.
     /// </summary>
     /// <remarks>Operation: searchMappingRulesForGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchMappingRulesForGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMappingRulesForGroupAsync(
+    ///         &quot;engineering&quot;,
+    ///         new MappingRuleSearchQueryRequest());
+    /// 
+    ///     foreach (var rule in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Mapping rule: {rule.MappingRuleId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchMappingRulesForGroupResponse> SearchMappingRulesForGroupAsync(string groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForGroupResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/search";
@@ -2193,6 +4113,23 @@ public partial class CamundaClient
     /// Search mapping rules with assigned role.
     /// </summary>
     /// <remarks>Operation: searchMappingRulesForRole</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchMappingRulesForRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMappingRulesForRoleAsync(
+    ///         &quot;developer&quot;,
+    ///         new MappingRuleSearchQueryRequest());
+    /// 
+    ///     foreach (var rule in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Mapping rule: {rule.MappingRuleId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchMappingRulesForRoleResponse> SearchMappingRulesForRoleAsync(string roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForRoleResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/search";
@@ -2211,6 +4148,23 @@ public partial class CamundaClient
     /// Retrieves a filtered and sorted list of MappingRules for a specified tenant.
     /// </summary>
     /// <remarks>Operation: searchMappingRulesForTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchMappingRulesForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMappingRulesForTenantAsync(
+    ///         tenantId,
+    ///         new MappingRuleSearchQueryRequest());
+    /// 
+    ///     foreach (var rule in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Mapping rule: {rule.MappingRuleId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchMappingRulesForTenantResponse> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForTenantResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/search";
@@ -2229,6 +4183,22 @@ public partial class CamundaClient
     /// Search for message subscriptions based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchMessageSubscriptions</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchMessageSubscriptionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMessageSubscriptionsAsync(
+    ///         new MessageSubscriptionSearchQuery());
+    /// 
+    ///     foreach (var sub in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Subscription: {sub.MessageName}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<MessageSubscriptionSearchQueryResult> SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery body, ConsistencyOptions<MessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/message-subscriptions/search";
@@ -2247,6 +4217,22 @@ public partial class CamundaClient
     /// Search for process definitions based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchProcessDefinitions</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchProcessDefinitionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchProcessDefinitionsAsync(
+    ///         new ProcessDefinitionSearchQuery());
+    /// 
+    ///     foreach (var pd in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Process definition: {pd.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessDefinitionSearchQueryResult> SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery body, ConsistencyOptions<ProcessDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/search";
@@ -2271,6 +4257,23 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchProcessInstanceIncidents</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchProcessInstanceIncidentsAsync(
+    ///         processInstanceKey,
+    ///         new IncidentSearchQuery());
+    /// 
+    ///     foreach (var incident in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Incident: {incident.IncidentKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/incidents/search";
@@ -2289,6 +4292,21 @@ public partial class CamundaClient
     /// Search for process instances based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchProcessInstances</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchProcessInstancesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
+    /// 
+    ///     foreach (var instance in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Process instance: {instance.ProcessInstanceKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(ProcessInstanceSearchQuery body, ConsistencyOptions<ProcessInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/search";
@@ -2307,6 +4325,21 @@ public partial class CamundaClient
     /// Search for roles based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchRoles</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchRolesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchRolesAsync(new RoleSearchQueryRequest());
+    /// 
+    ///     foreach (var role in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Role: {role.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<RoleSearchQueryResult> SearchRolesAsync(RoleSearchQueryRequest body, ConsistencyOptions<RoleSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/search";
@@ -2325,6 +4358,23 @@ public partial class CamundaClient
     /// Search roles assigned to a group.
     /// </summary>
     /// <remarks>Operation: searchRolesForGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchRolesForGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchRolesForGroupAsync(
+    ///         &quot;engineering&quot;,
+    ///         new RoleSearchQueryRequest());
+    /// 
+    ///     foreach (var role in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Role: {role.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchRolesForGroupResponse> SearchRolesForGroupAsync(string groupId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForGroupResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/roles/search";
@@ -2343,6 +4393,23 @@ public partial class CamundaClient
     /// Retrieves a filtered and sorted list of roles for a specified tenant.
     /// </summary>
     /// <remarks>Operation: searchRolesForTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchRolesForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchRolesForTenantAsync(
+    ///         tenantId,
+    ///         new RoleSearchQueryRequest());
+    /// 
+    ///     foreach (var role in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Role: {role.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchRolesForTenantResponse> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForTenantResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/search";
@@ -2361,6 +4428,21 @@ public partial class CamundaClient
     /// Retrieves a filtered and sorted list of tenants.
     /// </summary>
     /// <remarks>Operation: searchTenants</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchTenantsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchTenantsAsync(new TenantSearchQueryRequest());
+    /// 
+    ///     foreach (var tenant in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Tenant: {tenant.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<TenantSearchQueryResult> SearchTenantsAsync(TenantSearchQueryRequest body, ConsistencyOptions<TenantSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/search";
@@ -2379,6 +4461,23 @@ public partial class CamundaClient
     /// Search for user task audit logs based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchUserTaskAuditLogs</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchUserTaskAuditLogsExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUserTaskAuditLogsAsync(
+    ///         userTaskKey,
+    ///         new UserTaskAuditLogSearchQueryRequest());
+    /// 
+    ///     foreach (var log in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Audit log: {log.AuditLogKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<AuditLogSearchQueryResult> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, UserTaskAuditLogSearchQueryRequest body, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/audit-logs/search";
@@ -2403,18 +4502,28 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchUserTaskEffectiveVariables</remarks>
-    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    /// <example>
+    /// <code>
+    /// public static async Task SearchUserTaskEffectiveVariablesExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUserTaskEffectiveVariablesAsync(
+    ///         userTaskKey,
+    ///         new SearchUserTaskEffectiveVariablesRequest());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
         var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("searchUserTaskEffectiveVariables", false,
-                () => InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct);
     }
 
@@ -2430,6 +4539,23 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: searchUserTaskVariables</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchUserTaskVariablesExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUserTaskVariablesAsync(
+    ///         userTaskKey,
+    ///         new SearchUserTaskVariablesRequest());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -2450,6 +4576,21 @@ public partial class CamundaClient
     /// Search for user tasks based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchUserTasks</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchUserTasksExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
+    /// 
+    ///     foreach (var task in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User task: {task.UserTaskKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<UserTaskSearchQueryResult> SearchUserTasksAsync(UserTaskSearchQuery body, ConsistencyOptions<UserTaskSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/user-tasks/search";
@@ -2468,6 +4609,21 @@ public partial class CamundaClient
     /// Search for users based on given criteria.
     /// </summary>
     /// <remarks>Operation: searchUsers</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchUsersExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUsersAsync(new UserSearchQueryRequest());
+    /// 
+    ///     foreach (var user in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User: {user.Username}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchUsersResponse> SearchUsersAsync(UserSearchQueryRequest body, ConsistencyOptions<SearchUsersResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/users/search";
@@ -2486,6 +4642,23 @@ public partial class CamundaClient
     /// Search users assigned to a group.
     /// </summary>
     /// <remarks>Operation: searchUsersForGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchUsersForGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUsersForGroupAsync(
+    ///         &quot;engineering&quot;,
+    ///         new SearchUsersForGroupRequest());
+    /// 
+    ///     foreach (var user in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User: {user.Username}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchUsersForGroupResponse> SearchUsersForGroupAsync(string groupId, SearchUsersForGroupRequest body, ConsistencyOptions<SearchUsersForGroupResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/search";
@@ -2504,6 +4677,23 @@ public partial class CamundaClient
     /// Search users with assigned role.
     /// </summary>
     /// <remarks>Operation: searchUsersForRole</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchUsersForRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUsersForRoleAsync(
+    ///         &quot;developer&quot;,
+    ///         new SearchUsersForRoleRequest());
+    /// 
+    ///     foreach (var user in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User: {user.Username}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchUsersForRoleResponse> SearchUsersForRoleAsync(string roleId, SearchUsersForRoleRequest body, ConsistencyOptions<SearchUsersForRoleResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/search";
@@ -2522,6 +4712,23 @@ public partial class CamundaClient
     /// Retrieves a filtered and sorted list of users for a specified tenant.
     /// </summary>
     /// <remarks>Operation: searchUsersForTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchUsersForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUsersForTenantAsync(
+    ///         tenantId,
+    ///         new SearchUsersForTenantRequest());
+    /// 
+    ///     foreach (var user in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User: {user.Username}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SearchUsersForTenantResponse> SearchUsersForTenantAsync(TenantId tenantId, SearchUsersForTenantRequest body, ConsistencyOptions<SearchUsersForTenantResponse>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/users/search";
@@ -2548,6 +4755,21 @@ public partial class CamundaClient
     /// By default, long variable values in the response are truncated.
     /// </summary>
     /// <remarks>Operation: searchVariables</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SearchVariablesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchVariablesAsync(new SearchVariablesRequest());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<VariableSearchQueryResult> SearchVariablesAsync(SearchVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -2570,6 +4792,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: suspendBatchOperation</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task SuspendBatchOperationExample(BatchOperationKey batchOperationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.SuspendBatchOperationAsync(batchOperationKey);
+    /// }
+    /// </code>
+    /// </example>
     public async Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/suspension";
@@ -2582,6 +4814,22 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: throwJobError</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task ThrowJobErrorExample(JobKey jobKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ThrowJobErrorAsync(
+    ///         jobKey,
+    ///         new JobErrorRequest
+    ///         {
+    ///             ErrorCode = &quot;VALIDATION_ERROR&quot;,
+    ///             ErrorMessage = &quot;Input validation failed&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
     public async Task ThrowJobErrorAsync(JobKey jobKey, JobErrorRequest body, CancellationToken ct = default)
     {
         var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}/error";
@@ -2595,6 +4843,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: unassignClientFromGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignClientFromGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignClientFromGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignClientFromGroupAsync(string groupId, string clientId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
@@ -2608,6 +4866,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: unassignClientFromTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignClientFromTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignClientFromTenantAsync(
+    ///         tenantId,
+    ///         &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignClientFromTenantAsync(TenantId tenantId, string clientId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
@@ -2621,6 +4891,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: unassignGroupFromTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignGroupFromTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignGroupFromTenantAsync(
+    ///         tenantId,
+    ///         &quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignGroupFromTenantAsync(TenantId tenantId, string groupId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
@@ -2632,6 +4914,16 @@ public partial class CamundaClient
     /// Unassigns a mapping rule from a group.
     /// </summary>
     /// <remarks>Operation: unassignMappingRuleFromGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignMappingRuleFromGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignMappingRuleFromGroupAsync(&quot;engineering&quot;, &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignMappingRuleFromGroupAsync(string groupId, string mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
@@ -2643,6 +4935,18 @@ public partial class CamundaClient
     /// Unassigns a single mapping rule from a specified tenant without deleting the rule.
     /// </summary>
     /// <remarks>Operation: unassignMappingRuleFromTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignMappingRuleFromTenantAsync(
+    ///         tenantId,
+    ///         &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignMappingRuleFromTenantAsync(TenantId tenantId, string mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
@@ -2654,6 +4958,16 @@ public partial class CamundaClient
     /// Unassigns the specified role from the client. The client will no longer inherit the authorizations associated with this role.
     /// </summary>
     /// <remarks>Operation: unassignRoleFromClient</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignRoleFromClientExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromClientAsync(&quot;developer&quot;, &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignRoleFromClientAsync(string roleId, string clientId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
@@ -2665,6 +4979,16 @@ public partial class CamundaClient
     /// Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role.
     /// </summary>
     /// <remarks>Operation: unassignRoleFromGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignRoleFromGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromGroupAsync(&quot;developer&quot;, &quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignRoleFromGroupAsync(string roleId, string groupId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
@@ -2676,6 +5000,16 @@ public partial class CamundaClient
     /// Unassigns a role from a mapping rule.
     /// </summary>
     /// <remarks>Operation: unassignRoleFromMappingRule</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignRoleFromMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignRoleFromMappingRuleAsync(string roleId, string mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
@@ -2690,6 +5024,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: unassignRoleFromTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignRoleFromTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromTenantAsync(
+    ///         tenantId,
+    ///         &quot;developer&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignRoleFromTenantAsync(TenantId tenantId, string roleId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
@@ -2701,6 +5047,16 @@ public partial class CamundaClient
     /// Unassigns a role from a user. The user will no longer inherit the authorizations associated with this role.
     /// </summary>
     /// <remarks>Operation: unassignRoleFromUser</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignRoleFromUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromUserAsync(&quot;developer&quot;, username);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignRoleFromUserAsync(string roleId, Username username, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
@@ -2714,6 +5070,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: unassignUserFromGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignUserFromGroupExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignUserFromGroupAsync(&quot;engineering&quot;, username);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignUserFromGroupAsync(string groupId, Username username, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
@@ -2727,6 +5093,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: unassignUserFromTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignUserFromTenantExample(TenantId tenantId, Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignUserFromTenantAsync(
+    ///         tenantId,
+    ///         username);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignUserFromTenantAsync(TenantId tenantId, Username username, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
@@ -2739,6 +5117,16 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: unassignUserTask</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UnassignUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignUserTaskAsync(userTaskKey);
+    /// }
+    /// </code>
+    /// </example>
     public async Task UnassignUserTaskAsync(UserTaskKey userTaskKey, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/assignee";
@@ -2750,6 +5138,25 @@ public partial class CamundaClient
     /// Update the authorization with the given key.
     /// </summary>
     /// <remarks>Operation: updateAuthorization</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateAuthorizationExample(AuthorizationKey authorizationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateAuthorizationAsync(
+    ///         authorizationKey,
+    ///         new AuthorizationPropertyBasedRequest
+    ///         {
+    ///             ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+    ///             PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE, PermissionTypeEnum.DELETE },
+    ///             ResourcePropertyName = &quot;my-process&quot;,
+    ///             OwnerType = OwnerTypeEnum.USER,
+    ///             OwnerId = &quot;user@example.com&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
     public async Task UpdateAuthorizationAsync(AuthorizationKey authorizationKey, AuthorizationRequest body, CancellationToken ct = default)
     {
         var path = $"/authorizations/{Uri.EscapeDataString(authorizationKey.ToString()!)}";
@@ -2763,6 +5170,23 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: updateGlobalClusterVariable</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateGlobalClusterVariableExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.UpdateGlobalClusterVariableAsync(
+    ///         &quot;my-variable&quot;,
+    ///         new UpdateClusterVariableRequest
+    ///         {
+    ///             Value = &quot;updated-value&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterVariableResult> UpdateGlobalClusterVariableAsync(string name, UpdateClusterVariableRequest body, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
@@ -2774,6 +5198,24 @@ public partial class CamundaClient
     /// Updates a global user task listener.
     /// </summary>
     /// <remarks>Operation: updateGlobalTaskListener</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.UpdateGlobalTaskListenerAsync(
+    ///         globalListenerId,
+    ///         new UpdateGlobalTaskListenerRequest
+    ///         {
+    ///             EventTypes = new List&lt;GlobalTaskListenerEventTypeEnum&gt; { GlobalTaskListenerEventTypeEnum.Completing },
+    ///             Type = &quot;updated-task-listener&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Updated listener: {result.Id}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GlobalTaskListenerResult> UpdateGlobalTaskListenerAsync(GlobalListenerId id, UpdateGlobalTaskListenerRequest body, CancellationToken ct = default)
     {
         var path = $"/global-task-listeners/{Uri.EscapeDataString(id.ToString()!)}";
@@ -2785,6 +5227,19 @@ public partial class CamundaClient
     /// Update a group with the given ID.
     /// </summary>
     /// <remarks>Operation: updateGroup</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateGroupAsync(&quot;engineering&quot;, new GroupUpdateRequest
+    ///     {
+    ///         Name = &quot;engineering-team&quot;,
+    ///     });
+    /// }
+    /// </code>
+    /// </example>
     public async Task<GroupUpdateResult> UpdateGroupAsync(string groupId, GroupUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
@@ -2796,6 +5251,21 @@ public partial class CamundaClient
     /// Update a job with the given key.
     /// </summary>
     /// <remarks>Operation: updateJob</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateJobExample(JobKey jobKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateJobAsync(
+    ///         jobKey,
+    ///         new JobUpdateRequest
+    ///         {
+    ///             Changeset = new JobChangeset { Retries = 3 },
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
     public async Task UpdateJobAsync(JobKey jobKey, JobUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}";
@@ -2808,6 +5278,21 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: updateMappingRule</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateMappingRuleAsync(&quot;rule-123&quot;, new MappingRuleUpdateRequest
+    ///     {
+    ///         ClaimName = &quot;groups&quot;,
+    ///         ClaimValue = &quot;senior-engineering&quot;,
+    ///         Name = &quot;Senior Engineering Mapping&quot;,
+    ///     });
+    /// }
+    /// </code>
+    /// </example>
     public async Task<UpdateMappingRuleResponse> UpdateMappingRuleAsync(string mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
@@ -2819,6 +5304,19 @@ public partial class CamundaClient
     /// Update a role with the given ID.
     /// </summary>
     /// <remarks>Operation: updateRole</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateRoleAsync(&quot;developer&quot;, new RoleUpdateRequest
+    ///     {
+    ///         Name = &quot;senior-developer&quot;,
+    ///     });
+    /// }
+    /// </code>
+    /// </example>
     public async Task<RoleUpdateResult> UpdateRoleAsync(string roleId, RoleUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
@@ -2830,6 +5328,21 @@ public partial class CamundaClient
     /// Updates an existing tenant.
     /// </summary>
     /// <remarks>Operation: updateTenant</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateTenantAsync(
+    ///         tenantId,
+    ///         new TenantUpdateRequest
+    ///         {
+    ///             Name = &quot;Acme Corp International&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
     public async Task<TenantUpdateResult> UpdateTenantAsync(TenantId tenantId, TenantUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}";
@@ -2843,6 +5356,24 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: updateTenantClusterVariable</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.UpdateTenantClusterVariableAsync(
+    ///         tenantId,
+    ///         &quot;my-variable&quot;,
+    ///         new UpdateClusterVariableRequest
+    ///         {
+    ///             Value = &quot;updated-tenant-value&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterVariableResult> UpdateTenantClusterVariableAsync(TenantId tenantId, string name, UpdateClusterVariableRequest body, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
@@ -2854,6 +5385,22 @@ public partial class CamundaClient
     /// Updates a user.
     /// </summary>
     /// <remarks>Operation: updateUser</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateUserAsync(
+    ///         username,
+    ///         new UserUpdateRequest
+    ///         {
+    ///             Name = &quot;Jane Smith&quot;,
+    ///             Email = &quot;jsmith@example.com&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
     public async Task<UpdateUserResponse> UpdateUserAsync(Username username, UserUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
@@ -2866,6 +5413,18 @@ public partial class CamundaClient
     /// 
     /// </summary>
     /// <remarks>Operation: updateUserTask</remarks>
+    /// <example>
+    /// <code>
+    /// public static async Task UpdateUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateUserTaskAsync(
+    ///         userTaskKey,
+    ///         new UserTaskUpdateRequest());
+    /// }
+    /// </code>
+    /// </example>
     public async Task UpdateUserTaskAsync(UserTaskKey userTaskKey, UserTaskUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}";
