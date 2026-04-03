@@ -90,6 +90,7 @@ internal static class CSharpClientGenerator
                     .ToList();
                 var queryParams = op.Parameters
                     .Where(p => p.In == ParameterLocation.Query)
+                    .OrderByDescending(p => p.Required)
                     .Select(p => new ParamMeta(p.Name, MapType(p.Schema), p.Required))
                     .ToList();
 
