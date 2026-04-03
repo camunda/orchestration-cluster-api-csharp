@@ -1,3 +1,10 @@
+# [8.9.0-alpha.28](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.27...v8.9.0-alpha.28) (2026-04-03)
+
+
+### Features
+
+* add Roslyn-based API changelog tool ([d68fb52](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d68fb524844052e8168ba3cbb239e9285b94bb06))
+
 # [8.9.0-alpha.27](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.26...v8.9.0-alpha.27) (2026-04-02)
 
 
