@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
@@ -12,16 +11,14 @@ public class DisposalTests
     public void BackpressureManager_Dispose_DoesNotThrow()
     {
         var bp = new BackpressureManager(new BackpressureConfig(), NullLogger.Instance);
-        var act = () => bp.Dispose();
-        act.Should().NotThrow();
+        bp.Dispose();
     }
 
     [Fact]
     public async Task BackpressureManager_DisposeAsync_DoesNotThrow()
     {
         var bp = new BackpressureManager(new BackpressureConfig(), NullLogger.Instance);
-        var act = async () => await bp.DisposeAsync();
-        await act.Should().NotThrowAsync();
+        await bp.DisposeAsync();
     }
 
     [Fact]
@@ -32,8 +29,7 @@ public class DisposalTests
             OAuth = new OAuthConfig { ClientId = "x", ClientSecret = "x" },
         };
         var oauth = new OAuthManager(config, NullLogger.Instance);
-        var act = () => oauth.Dispose();
-        act.Should().NotThrow();
+        oauth.Dispose();
     }
 
     [Fact]
@@ -44,8 +40,7 @@ public class DisposalTests
             OAuth = new OAuthConfig { ClientId = "x", ClientSecret = "x" },
         };
         var oauth = new OAuthManager(config, NullLogger.Instance);
-        var act = async () => await oauth.DisposeAsync();
-        await act.Should().NotThrowAsync();
+        await oauth.DisposeAsync();
     }
 
     [Fact]
@@ -60,12 +55,11 @@ public class DisposalTests
             HttpMessageHandler = new MockHttpMessageHandler(),
         });
 
-        var act = async () => await client.DisposeAsync();
-        await act.Should().NotThrowAsync();
+        await client.DisposeAsync();
     }
 
     [Fact]
-    public void CamundaClient_Dispose_ThenDisposeAsync_DoesNotThrow()
+    public async Task CamundaClient_Dispose_ThenDisposeAsync_DoesNotThrow()
     {
         var client = new CamundaClient(new CamundaOptions
         {
@@ -78,8 +72,7 @@ public class DisposalTests
 
         // Sync dispose then async dispose should not throw
         client.Dispose();
-        var act = async () => await client.DisposeAsync();
-        act.Should().NotThrowAsync();
+        await client.DisposeAsync();
     }
 
     [Fact]
@@ -89,7 +82,6 @@ public class DisposalTests
         bp.Dispose();
 
         // SemaphoreSlim.WaitAsync throws ObjectDisposedException after disposal
-        var act = async () => await bp.AcquireAsync();
-        await act.Should().ThrowAsync<ObjectDisposedException>();
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await bp.AcquireAsync());
     }
 }

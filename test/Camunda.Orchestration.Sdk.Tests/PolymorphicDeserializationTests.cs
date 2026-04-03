@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -42,10 +41,9 @@ public class PolymorphicDeserializationTests
 
         var result = JsonSerializer.Deserialize<JobResult>(json, s_options);
 
-        result.Should().BeOfType<JobResultUserTask>();
-        var userTask = (JobResultUserTask)result!;
-        userTask.Denied.Should().BeTrue();
-        userTask.DeniedReason.Should().Be("Missing approval");
+        var userTask = Assert.IsType<JobResultUserTask>(result);
+        Assert.True(userTask.Denied);
+        Assert.Equal("Missing approval", userTask.DeniedReason);
         // Note: STJ consumes the discriminator property ("type") as metadata;
         // it is NOT populated on the deserialized object.
     }
@@ -63,10 +61,9 @@ public class PolymorphicDeserializationTests
 
         var result = JsonSerializer.Deserialize<JobResult>(json, s_options);
 
-        result.Should().BeOfType<JobResultAdHocSubProcess>();
-        var adHoc = (JobResultAdHocSubProcess)result!;
-        adHoc.IsCompletionConditionFulfilled.Should().BeTrue();
-        adHoc.IsCancelRemainingInstances.Should().BeFalse();
+        var adHoc = Assert.IsType<JobResultAdHocSubProcess>(result);
+        Assert.True(adHoc.IsCompletionConditionFulfilled);
+        Assert.False(adHoc.IsCancelRemainingInstances);
     }
 
     [Fact]
@@ -84,10 +81,9 @@ public class PolymorphicDeserializationTests
         var json = JsonSerializer.Serialize<JobResult>(original, s_options);
         var deserialized = JsonSerializer.Deserialize<JobResult>(json, s_options);
 
-        deserialized.Should().BeOfType<JobResultUserTask>();
-        var roundTripped = (JobResultUserTask)deserialized!;
-        roundTripped.Denied.Should().BeFalse();
-        roundTripped.DeniedReason.Should().Be("Looks good");
+        var roundTripped = Assert.IsType<JobResultUserTask>(deserialized);
+        Assert.False(roundTripped.Denied);
+        Assert.Equal("Looks good", roundTripped.DeniedReason);
     }
 
     [Fact]
@@ -107,11 +103,10 @@ public class PolymorphicDeserializationTests
 
         var request = JsonSerializer.Deserialize<JobCompletionRequest>(json, s_options);
 
-        request.Should().NotBeNull();
-        request!.Result.Should().BeOfType<JobResultUserTask>();
-        var userTask = (JobResultUserTask)request.Result!;
-        userTask.Denied.Should().BeTrue();
-        userTask.DeniedReason.Should().Be("Rejected by compliance");
+        Assert.NotNull(request);
+        var userTask = Assert.IsType<JobResultUserTask>(request!.Result);
+        Assert.True(userTask.Denied);
+        Assert.Equal("Rejected by compliance", userTask.DeniedReason);
     }
 
     // ── SourceElementInstruction: discriminator property "sourceType" ──
@@ -128,7 +123,7 @@ public class PolymorphicDeserializationTests
 
         var result = JsonSerializer.Deserialize<SourceElementInstruction>(json, s_options);
 
-        result.Should().BeOfType<SourceElementIdInstruction>();
+        Assert.IsType<SourceElementIdInstruction>(result);
     }
 
     [Fact]
@@ -143,7 +138,7 @@ public class PolymorphicDeserializationTests
 
         var result = JsonSerializer.Deserialize<SourceElementInstruction>(json, s_options);
 
-        result.Should().BeOfType<SourceElementInstanceKeyInstruction>();
+        Assert.IsType<SourceElementInstanceKeyInstruction>(result);
     }
 
     // ── AncestorScopeInstruction: discriminator property "ancestorScopeType" ──
@@ -160,7 +155,7 @@ public class PolymorphicDeserializationTests
 
         var result = JsonSerializer.Deserialize<AncestorScopeInstruction>(json, s_options);
 
-        result.Should().BeOfType<DirectAncestorKeyInstruction>();
+        Assert.IsType<DirectAncestorKeyInstruction>(result);
     }
 
     [Fact]
@@ -174,6 +169,6 @@ public class PolymorphicDeserializationTests
 
         var result = JsonSerializer.Deserialize<AncestorScopeInstruction>(json, s_options);
 
-        result.Should().BeOfType<InferredAncestorKeyInstruction>();
+        Assert.IsType<InferredAncestorKeyInstruction>(result);
     }
 }

@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 
 namespace Camunda.Orchestration.Sdk.Tests;
@@ -22,9 +21,9 @@ public class AppSettingsConfigurationTests
             env: new Dictionary<string, string?>(),
             configuration: configSection);
 
-        config.RestAddress.Should().Contain("cluster.example.com");
-        config.DefaultTenantId.Should().Be("my-tenant");
-        config.LogLevel.Should().Be("debug");
+        Assert.Contains("cluster.example.com", config.RestAddress);
+        Assert.Equal("my-tenant", config.DefaultTenantId);
+        Assert.Equal("debug", config.LogLevel);
     }
 
     [Fact]
@@ -44,9 +43,9 @@ public class AppSettingsConfigurationTests
             env: new Dictionary<string, string?>(),
             configuration: configSection);
 
-        config.Auth.Strategy.Should().Be(AuthStrategy.Basic);
-        config.Auth.Basic!.Username.Should().Be("alice");
-        config.Auth.Basic.Password.Should().Be("secret");
+        Assert.Equal(AuthStrategy.Basic, config.Auth.Strategy);
+        Assert.Equal("alice", config.Auth.Basic!.Username);
+        Assert.Equal("secret", config.Auth.Basic.Password);
     }
 
     [Fact]
@@ -67,10 +66,10 @@ public class AppSettingsConfigurationTests
             env: new Dictionary<string, string?>(),
             configuration: configSection);
 
-        config.Auth.Strategy.Should().Be(AuthStrategy.OAuth);
-        config.OAuth.OAuthUrl.Should().Be("https://auth.example.com/token");
-        config.OAuth.ClientId.Should().Be("my-client");
-        config.OAuth.TimeoutMs.Should().Be(8000);
+        Assert.Equal(AuthStrategy.OAuth, config.Auth.Strategy);
+        Assert.Equal("https://auth.example.com/token", config.OAuth.OAuthUrl);
+        Assert.Equal("my-client", config.OAuth.ClientId);
+        Assert.Equal(8000, config.OAuth.TimeoutMs);
     }
 
     [Fact]
@@ -90,9 +89,9 @@ public class AppSettingsConfigurationTests
             env: new Dictionary<string, string?>(),
             configuration: configSection);
 
-        config.Backpressure.Profile.Should().Be("AGGRESSIVE");
-        config.Backpressure.InitialMax.Should().Be(32);
-        config.Backpressure.Floor.Should().Be(2);
+        Assert.Equal("AGGRESSIVE", config.Backpressure.Profile);
+        Assert.Equal(32, config.Backpressure.InitialMax);
+        Assert.Equal(2, config.Backpressure.Floor);
     }
 
     [Fact]
@@ -112,9 +111,9 @@ public class AppSettingsConfigurationTests
             env: new Dictionary<string, string?>(),
             configuration: configSection);
 
-        config.HttpRetry.MaxAttempts.Should().Be(5);
-        config.HttpRetry.BaseDelayMs.Should().Be(200);
-        config.HttpRetry.MaxDelayMs.Should().Be(5000);
+        Assert.Equal(5, config.HttpRetry.MaxAttempts);
+        Assert.Equal(200, config.HttpRetry.BaseDelayMs);
+        Assert.Equal(5000, config.HttpRetry.MaxDelayMs);
     }
 
     [Fact]
@@ -137,9 +136,9 @@ public class AppSettingsConfigurationTests
             },
             configuration: configSection);
 
-        config.RestAddress.Should().Contain("from-override.example.com");
+        Assert.Contains("from-override.example.com", config.RestAddress);
         // LogLevel was not overridden, so IConfiguration value wins
-        config.LogLevel.Should().Be("info");
+        Assert.Equal("info", config.LogLevel);
     }
 
     [Fact]
@@ -160,7 +159,7 @@ public class AppSettingsConfigurationTests
             },
             configuration: configSection);
 
-        config.RestAddress.Should().Contain("from-appsettings.example.com");
+        Assert.Contains("from-appsettings.example.com", config.RestAddress);
     }
 
     [Fact]
@@ -176,8 +175,8 @@ public class AppSettingsConfigurationTests
 
         var extracted = ConfigurationHydrator.ExtractFromConfiguration(configSection);
 
-        extracted.Should().ContainKey("CAMUNDA_REST_ADDRESS");
-        extracted["CAMUNDA_REST_ADDRESS"].Should().Be("https://lowercase.example.com");
+        Assert.True(extracted.ContainsKey("CAMUNDA_REST_ADDRESS"));
+        Assert.Equal("https://lowercase.example.com", extracted["CAMUNDA_REST_ADDRESS"]);
     }
 
     [Fact]
@@ -194,7 +193,7 @@ public class AppSettingsConfigurationTests
 
         var extracted = ConfigurationHydrator.ExtractFromConfiguration(configSection);
 
-        extracted.Should().NotContainKey("CAMUNDA_REST_ADDRESS");
-        extracted.Should().ContainKey("CAMUNDA_SDK_LOG_LEVEL");
+        Assert.False(extracted.ContainsKey("CAMUNDA_REST_ADDRESS"));
+        Assert.True(extracted.ContainsKey("CAMUNDA_SDK_LOG_LEVEL"));
     }
 }

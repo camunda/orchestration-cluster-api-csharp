@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -16,8 +15,8 @@ public class ServiceCollectionExtensionTests
         var provider = services.BuildServiceProvider();
         var client = provider.GetRequiredService<CamundaClient>();
 
-        client.Should().NotBeNull();
-        client.Config.Auth.Strategy.Should().Be(AuthStrategy.None);
+        Assert.NotNull(client);
+        Assert.Equal(AuthStrategy.None, client.Config.Auth.Strategy);
     }
 
     [Fact]
@@ -37,8 +36,8 @@ public class ServiceCollectionExtensionTests
         var provider = services.BuildServiceProvider();
         var client = provider.GetRequiredService<CamundaClient>();
 
-        client.Config.RestAddress.Should().Contain("cluster.example.com");
-        client.Config.Backpressure.Profile.Should().Be("CONSERVATIVE");
+        Assert.Contains("cluster.example.com", client.Config.RestAddress);
+        Assert.Equal("CONSERVATIVE", client.Config.Backpressure.Profile);
     }
 
     [Fact]
@@ -56,7 +55,7 @@ public class ServiceCollectionExtensionTests
         var provider = services.BuildServiceProvider();
         var client = provider.GetRequiredService<CamundaClient>();
 
-        client.Config.RestAddress.Should().Contain("callback.example.com");
+        Assert.Contains("callback.example.com", client.Config.RestAddress);
     }
 
     [Fact]
@@ -69,7 +68,7 @@ public class ServiceCollectionExtensionTests
         var a = provider.GetRequiredService<CamundaClient>();
         var b = provider.GetRequiredService<CamundaClient>();
 
-        a.Should().BeSameAs(b);
+        Assert.Same(a, b);
     }
 
     [Fact]
@@ -83,6 +82,6 @@ public class ServiceCollectionExtensionTests
         var client = provider.GetRequiredService<CamundaClient>();
 
         // If ILoggerFactory was injected, the client should construct without error
-        client.Should().NotBeNull();
+        Assert.NotNull(client);
     }
 }

@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -51,9 +50,9 @@ public class TypedVariableTests
 
         var result = payload.DeserializeAs<OrderInput>();
 
-        result.Should().NotBeNull();
-        result!.OrderId.Should().Be("ord-123");
-        result.Amount.Should().Be(99.99m);
+        Assert.NotNull(result);
+        Assert.Equal("ord-123", result!.OrderId);
+        Assert.Equal(99.99m, result.Amount);
     }
 
     [Fact]
@@ -64,9 +63,9 @@ public class TypedVariableTests
 
         var result = payload.DeserializeAs<MutableDto>();
 
-        result.Should().NotBeNull();
-        result!.Name.Should().Be("widget");
-        result.Count.Should().Be(42);
+        Assert.NotNull(result);
+        Assert.Equal("widget", result!.Name);
+        Assert.Equal(42, result.Count);
     }
 
     [Fact]
@@ -77,8 +76,9 @@ public class TypedVariableTests
 
         var result = payload.DeserializeAs<Dictionary<string, string>>();
 
-        result.Should().NotBeNull();
-        result.Should().ContainKey("key1").WhoseValue.Should().Be("value1");
+        Assert.NotNull(result);
+        Assert.True(result.ContainsKey("key1"));
+        Assert.Equal("value1", result["key1"]);
     }
 
     [Fact]
@@ -88,7 +88,7 @@ public class TypedVariableTests
 
         var result = payload.DeserializeAs<OrderInput>();
 
-        result.Should().BeNull();
+        Assert.Null(result);
     }
 
     [Fact]
@@ -99,7 +99,7 @@ public class TypedVariableTests
 
         var result = payload.DeserializeAs<OrderInput>();
 
-        result.Should().BeSameAs(original);
+        Assert.Same(original, result);
     }
 
     [Fact]
@@ -117,8 +117,8 @@ public class TypedVariableTests
 
         var result = payload.DeserializeAs<OrderInput>(options);
 
-        result.Should().NotBeNull();
-        result!.OrderId.Should().Be("ord-789");
+        Assert.NotNull(result);
+        Assert.Equal("ord-789", result!.OrderId);
     }
 
     // ---- Input: Assigning DTOs to Variables property ----
@@ -137,8 +137,8 @@ public class TypedVariableTests
         var json = JsonSerializer.Serialize(request, s_camelCaseOptions);
 
         // The variables should be serialized as the DTO's properties
-        json.Should().Contain("\"orderId\":\"ord-100\"");
-        json.Should().Contain("\"amount\":50");
+        Assert.Contains("\"orderId\":\"ord-100\"", json);
+        Assert.Contains("\"amount\":50", json);
     }
 
     [Fact]
@@ -152,7 +152,7 @@ public class TypedVariableTests
 
         var json = JsonSerializer.Serialize(request, s_camelCaseOptions);
 
-        json.Should().Contain("\"myVar\":\"hello\"");
+        Assert.Contains("\"myVar\":\"hello\"", json);
     }
 
     // ---- Round-trip: Input DTO → serialize → deserialize → DeserializeAs<T> ----
@@ -173,9 +173,9 @@ public class TypedVariableTests
         // Extract typed variables
         var output = response!.Variables.DeserializeAs<OrderInput>(s_camelCaseOnlyOptions);
 
-        output.Should().NotBeNull();
-        output!.OrderId.Should().Be("ord-rt");
-        output.Amount.Should().Be(77.77m);
+        Assert.NotNull(output);
+        Assert.Equal("ord-rt", output!.OrderId);
+        Assert.Equal(77.77m, output.Amount);
     }
 
     [Fact]
@@ -186,9 +186,9 @@ public class TypedVariableTests
 
         var headers = response!.CustomHeaders.DeserializeAs<JobHeaders>();
 
-        headers.Should().NotBeNull();
-        headers!.Region.Should().Be("eu-west");
-        headers.Priority.Should().Be(5);
+        Assert.NotNull(headers);
+        Assert.Equal("eu-west", headers!.Region);
+        Assert.Equal(5, headers.Priority);
     }
 
     // Helper types to simulate API responses

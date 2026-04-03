@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Camunda.Orchestration.Sdk.Tests;
 
 /// <summary>
@@ -18,10 +16,10 @@ public class ErrorTests
             Instance = "/v2/process-instances/123",
         };
 
-        ex.Status.Should().Be(404);
-        ex.OperationId.Should().Be("getProcessInstance");
-        ex.Title.Should().Be("NOT_FOUND");
-        ex.Detail.Should().Be("Process instance not found");
+        Assert.Equal(404, ex.Status);
+        Assert.Equal("getProcessInstance", ex.OperationId);
+        Assert.Equal("NOT_FOUND", ex.Title);
+        Assert.Equal("Process instance not found", ex.Detail);
     }
 
     [Fact]
@@ -29,8 +27,8 @@ public class ErrorTests
     {
         var ex = new EventualConsistencyTimeoutException("timeout", "searchProcessInstances", 5000);
 
-        ex.WaitedMs.Should().Be(5000);
-        ex.OperationId.Should().Be("searchProcessInstances");
+        Assert.Equal(5000, ex.WaitedMs);
+        Assert.Equal("searchProcessInstances", ex.OperationId);
     }
 
     [Fact]
@@ -38,8 +36,8 @@ public class ErrorTests
     {
         var ex = new CamundaAuthException(CamundaAuthErrorCode.TokenFetchFailed, "Failed");
 
-        ex.Code.Should().Be(CamundaAuthErrorCode.TokenFetchFailed);
-        ex.Message.Should().Contain("TokenFetchFailed");
+        Assert.Equal(CamundaAuthErrorCode.TokenFetchFailed, ex.Code);
+        Assert.Contains("TokenFetchFailed", ex.Message);
     }
 
     [Fact]
@@ -53,8 +51,8 @@ public class ErrorTests
 
         var ex = new CamundaConfigurationException(errors);
 
-        ex.Errors.Should().HaveCount(2);
-        ex.Message.Should().Contain("CAMUNDA_AUTH_STRATEGY");
-        ex.Message.Should().Contain("CAMUNDA_OAUTH_TIMEOUT_MS");
+        Assert.Equal(2, ex.Errors.Count);
+        Assert.Contains("CAMUNDA_AUTH_STRATEGY", ex.Message);
+        Assert.Contains("CAMUNDA_OAUTH_TIMEOUT_MS", ex.Message);
     }
 }

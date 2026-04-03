@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Camunda.Orchestration.Sdk.Tests;
 
 /// <summary>
@@ -16,8 +14,8 @@ public class WorkerDefaultsTests
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_WORKER_TIMEOUT"] = "30000" });
 
-        config.WorkerDefaults.Should().NotBeNull();
-        config.WorkerDefaults!.JobTimeoutMs.Should().Be(30000);
+        Assert.NotNull(config.WorkerDefaults);
+        Assert.Equal(30000, config.WorkerDefaults!.JobTimeoutMs);
     }
 
     [Fact]
@@ -26,8 +24,8 @@ public class WorkerDefaultsTests
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_WORKER_MAX_CONCURRENT_JOBS"] = "8" });
 
-        config.WorkerDefaults.Should().NotBeNull();
-        config.WorkerDefaults!.MaxConcurrentJobs.Should().Be(8);
+        Assert.NotNull(config.WorkerDefaults);
+        Assert.Equal(8, config.WorkerDefaults!.MaxConcurrentJobs);
     }
 
     [Fact]
@@ -36,8 +34,8 @@ public class WorkerDefaultsTests
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_WORKER_REQUEST_TIMEOUT"] = "15000" });
 
-        config.WorkerDefaults.Should().NotBeNull();
-        config.WorkerDefaults!.PollTimeoutMs.Should().Be(15000);
+        Assert.NotNull(config.WorkerDefaults);
+        Assert.Equal(15000, config.WorkerDefaults!.PollTimeoutMs);
     }
 
     [Fact]
@@ -46,8 +44,8 @@ public class WorkerDefaultsTests
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_WORKER_NAME"] = "my-worker" });
 
-        config.WorkerDefaults.Should().NotBeNull();
-        config.WorkerDefaults!.WorkerName.Should().Be("my-worker");
+        Assert.NotNull(config.WorkerDefaults);
+        Assert.Equal("my-worker", config.WorkerDefaults!.WorkerName);
     }
 
     [Fact]
@@ -56,8 +54,8 @@ public class WorkerDefaultsTests
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS"] = "5" });
 
-        config.WorkerDefaults.Should().NotBeNull();
-        config.WorkerDefaults!.StartupJitterMaxSeconds.Should().Be(5);
+        Assert.NotNull(config.WorkerDefaults);
+        Assert.Equal(5, config.WorkerDefaults!.StartupJitterMaxSeconds);
     }
 
     [Fact]
@@ -66,7 +64,7 @@ public class WorkerDefaultsTests
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?>());
 
-        config.WorkerDefaults.Should().BeNull();
+        Assert.Null(config.WorkerDefaults);
     }
 
     [Fact]
@@ -80,12 +78,12 @@ public class WorkerDefaultsTests
                 ["CAMUNDA_WORKER_NAME"] = "batch-worker",
             });
 
-        config.WorkerDefaults.Should().NotBeNull();
-        config.WorkerDefaults!.JobTimeoutMs.Should().Be(60000);
-        config.WorkerDefaults!.MaxConcurrentJobs.Should().Be(16);
-        config.WorkerDefaults!.WorkerName.Should().Be("batch-worker");
-        config.WorkerDefaults!.PollTimeoutMs.Should().BeNull();
-        config.WorkerDefaults!.StartupJitterMaxSeconds.Should().BeNull();
+        Assert.NotNull(config.WorkerDefaults);
+        Assert.Equal(60000, config.WorkerDefaults!.JobTimeoutMs);
+        Assert.Equal(16, config.WorkerDefaults!.MaxConcurrentJobs);
+        Assert.Equal("batch-worker", config.WorkerDefaults!.WorkerName);
+        Assert.Null(config.WorkerDefaults!.PollTimeoutMs);
+        Assert.Null(config.WorkerDefaults!.StartupJitterMaxSeconds);
     }
 
     // ---- Merge: defaults applied when per-worker config omits fields ----
@@ -100,7 +98,7 @@ public class WorkerDefaultsTests
             (job, ct) => Task.FromResult<object?>(null));
 
         // Worker should be created successfully — timeout and concurrency from defaults
-        worker.Should().NotBeNull();
+        Assert.NotNull(worker);
 
     }
 
@@ -121,7 +119,7 @@ public class WorkerDefaultsTests
             },
             (job, ct) => Task.FromResult<object?>(null));
 
-        worker.Name.Should().Be("explicit-name");
+        Assert.Equal("explicit-name", worker.Name);
 
     }
 
@@ -135,7 +133,7 @@ public class WorkerDefaultsTests
             new JobWorkerConfig { JobType = "test", AutoStart = false },
             (job, ct) => Task.FromResult<object?>(null));
 
-        worker.Name.Should().Be("global-worker");
+        Assert.Equal("global-worker", worker.Name);
 
     }
 
@@ -158,8 +156,8 @@ public class WorkerDefaultsTests
             new JobWorkerConfig { JobType = "test", AutoStart = false },
             (job, ct) => Task.FromResult<object?>(null));
 
-        act.Should().Throw<ArgumentException>()
-            .WithMessage("*JobTimeoutMs is required*");
+        var ex = Assert.Throws<ArgumentException>(act);
+        Assert.Contains("JobTimeoutMs is required", ex.Message);
     }
 
     [Fact]
@@ -171,7 +169,7 @@ public class WorkerDefaultsTests
             new JobWorkerConfig { JobType = "test", AutoStart = false },
             (job, ct) => Task.FromResult<object?>(null));
 
-        worker.Should().NotBeNull();
+        Assert.NotNull(worker);
 
     }
 
@@ -197,7 +195,7 @@ public class WorkerDefaultsTests
             },
             (job, ct) => Task.FromResult<object?>(null));
 
-        worker.Should().NotBeNull();
+        Assert.NotNull(worker);
 
     }
 
@@ -223,7 +221,7 @@ public class WorkerDefaultsTests
             },
             (job, ct) => Task.FromResult<object?>(null));
 
-        worker.Should().NotBeNull();
+        Assert.NotNull(worker);
 
     }
 
