@@ -1894,7 +1894,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Global job statistics
-    /// Returns global aggregated counts for jobs. Optionally filter by the creation time window and/or jobType.
+    /// Returns global aggregated counts for jobs. Filter by the creation time window (required) and optionally by jobType.
     /// 
     /// </summary>
     /// <remarks>Operation: getGlobalJobStatistics</remarks>
