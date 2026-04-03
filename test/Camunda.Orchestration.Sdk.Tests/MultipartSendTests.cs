@@ -1,5 +1,4 @@
 using System.Net;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -34,11 +33,11 @@ public class MultipartSendTests : IDisposable
         content.Add(new StringContent("test"), "resources", "test.bpmn");
 
         var act = async () => await _client.SendMultipartAsync<object>("deployments", content);
-        var ex = (await act.Should().ThrowAsync<HttpSdkException>()).Which;
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
 
-        ex.Status.Should().Be(400);
-        ex.Title.Should().Be("INVALID_ARGUMENT");
-        ex.Detail.Should().Be("Missing resource");
+        Assert.Equal(400, ex.Status);
+        Assert.Equal("INVALID_ARGUMENT", ex.Title);
+        Assert.Equal("Missing resource", ex.Detail);
     }
 
     [Fact]
@@ -51,9 +50,9 @@ public class MultipartSendTests : IDisposable
         content.Add(new StringContent("huge payload"), "resources", "big.bpmn");
 
         var act = async () => await _client.SendMultipartAsync<object>("deployments", content);
-        var ex = (await act.Should().ThrowAsync<HttpSdkException>()).Which;
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
 
-        ex.Status.Should().Be(413);
+        Assert.Equal(413, ex.Status);
     }
 
     [Fact]
@@ -65,10 +64,10 @@ public class MultipartSendTests : IDisposable
         content.Add(new StringContent("test"), "resources", "test.bpmn");
 
         var act = async () => await _client.SendMultipartAsync<object>("deployments", content);
-        var ex = (await act.Should().ThrowAsync<HttpSdkException>()).Which;
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
 
-        ex.Status.Should().Be(502);
-        ex.Title.Should().BeNull();
+        Assert.Equal(502, ex.Status);
+        Assert.Null(ex.Title);
     }
 
     [Fact]
@@ -81,10 +80,10 @@ public class MultipartSendTests : IDisposable
         content.Add(new StringContent("test"), "resources", "test.bpmn");
 
         var act = async () => await _client.SendMultipartAsync<object>("deployments", content);
-        var ex = (await act.Should().ThrowAsync<HttpSdkException>()).Which;
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
 
-        ex.Status.Should().Be(429);
-        ex.IsBackpressure.Should().BeTrue();
+        Assert.Equal(429, ex.Status);
+        Assert.True(ex.IsBackpressure);
     }
 
     public void Dispose()

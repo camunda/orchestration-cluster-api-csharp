@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Camunda.Orchestration.Sdk.Tests;
 
 /// <summary>
@@ -16,7 +14,7 @@ public class SemanticKeyUnionTests
     {
         var pik = ProcessInstanceKey.AssumeExists("2251799813683890");
         ScopeKey scope = pik;
-        scope.Value.Should().Be("2251799813683890");
+        Assert.Equal("2251799813683890", scope.Value);
     }
 
     [Fact]
@@ -24,7 +22,7 @@ public class SemanticKeyUnionTests
     {
         var eik = ElementInstanceKey.AssumeExists("2251799813683891");
         ScopeKey scope = eik;
-        scope.Value.Should().Be("2251799813683891");
+        Assert.Equal("2251799813683891", scope.Value);
     }
 
     [Fact]
@@ -32,8 +30,8 @@ public class SemanticKeyUnionTests
     {
         var scope = ScopeKey.AssumeExists("123");
         var pik = ProcessInstanceKey.AssumeExists("123");
-        (scope == pik).Should().BeTrue();
-        (scope != pik).Should().BeFalse();
+        Assert.True(scope == pik);
+        Assert.False(scope != pik);
     }
 
     [Fact]
@@ -41,8 +39,8 @@ public class SemanticKeyUnionTests
     {
         var scope = ScopeKey.AssumeExists("123");
         var pik = ProcessInstanceKey.AssumeExists("456");
-        (scope == pik).Should().BeFalse();
-        (scope != pik).Should().BeTrue();
+        Assert.False(scope == pik);
+        Assert.True(scope != pik);
     }
 
     [Fact]
@@ -50,8 +48,8 @@ public class SemanticKeyUnionTests
     {
         var scope = ScopeKey.AssumeExists("789");
         var eik = ElementInstanceKey.AssumeExists("789");
-        (scope == eik).Should().BeTrue();
-        (scope != eik).Should().BeFalse();
+        Assert.True(scope == eik);
+        Assert.False(scope != eik);
     }
 
     [Fact]
@@ -59,8 +57,8 @@ public class SemanticKeyUnionTests
     {
         var scope = ScopeKey.AssumeExists("789");
         var eik = ElementInstanceKey.AssumeExists("999");
-        (scope == eik).Should().BeFalse();
-        (scope != eik).Should().BeTrue();
+        Assert.False(scope == eik);
+        Assert.True(scope != eik);
     }
 
     // ── ResourceKey (ProcessDefinitionKey | DecisionRequirementsKey | FormKey | DecisionDefinitionKey) ─
@@ -70,7 +68,7 @@ public class SemanticKeyUnionTests
     {
         var pdk = ProcessDefinitionKey.AssumeExists("2251799813683001");
         ResourceKey resource = pdk;
-        resource.Value.Should().Be("2251799813683001");
+        Assert.Equal("2251799813683001", resource.Value);
     }
 
     [Fact]
@@ -78,7 +76,7 @@ public class SemanticKeyUnionTests
     {
         var drk = DecisionRequirementsKey.AssumeExists("2251799813683002");
         ResourceKey resource = drk;
-        resource.Value.Should().Be("2251799813683002");
+        Assert.Equal("2251799813683002", resource.Value);
     }
 
     [Fact]
@@ -86,7 +84,7 @@ public class SemanticKeyUnionTests
     {
         var fk = FormKey.AssumeExists("2251799813683003");
         ResourceKey resource = fk;
-        resource.Value.Should().Be("2251799813683003");
+        Assert.Equal("2251799813683003", resource.Value);
     }
 
     [Fact]
@@ -94,7 +92,7 @@ public class SemanticKeyUnionTests
     {
         var ddk = DecisionDefinitionKey.AssumeExists("2251799813683004");
         ResourceKey resource = ddk;
-        resource.Value.Should().Be("2251799813683004");
+        Assert.Equal("2251799813683004", resource.Value);
     }
 
     [Fact]
@@ -102,8 +100,8 @@ public class SemanticKeyUnionTests
     {
         var resource = ResourceKey.AssumeExists("100");
         var pdk = ProcessDefinitionKey.AssumeExists("100");
-        (resource == pdk).Should().BeTrue();
-        (resource != pdk).Should().BeFalse();
+        Assert.True(resource == pdk);
+        Assert.False(resource != pdk);
     }
 
     [Fact]
@@ -111,6 +109,6 @@ public class SemanticKeyUnionTests
     {
         var resource = ResourceKey.AssumeExists("200");
         var ddk = DecisionDefinitionKey.AssumeExists("200");
-        (resource == ddk).Should().BeTrue();
+        Assert.True(resource == ddk);
     }
 }

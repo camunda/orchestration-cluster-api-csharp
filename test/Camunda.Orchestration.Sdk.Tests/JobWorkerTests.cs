@@ -1,5 +1,4 @@
 using System.Text.Json;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -11,6 +10,8 @@ namespace Camunda.Orchestration.Sdk.Tests;
 public class JobWorkerTests
 {
     // ---- Sample DTOs ----
+
+    private static readonly List<string> _fetchVariables = ["orderId", "amount"];
 
     public record OrderInput(string OrderId, decimal Amount);
     public record OrderOutput(bool Processed, string InvoiceNumber);
@@ -27,9 +28,9 @@ public class JobWorkerTests
 
         var vars = job.GetVariables<OrderInput>();
 
-        vars.Should().NotBeNull();
-        vars!.OrderId.Should().Be("ord-1");
-        vars.Amount.Should().Be(42.5m);
+        Assert.NotNull(vars);
+        Assert.Equal("ord-1", vars!.OrderId);
+        Assert.Equal(42.5m, vars.Amount);
     }
 
     [Fact]
@@ -40,9 +41,9 @@ public class JobWorkerTests
 
         var headers = job.GetCustomHeaders<TaskHeaders>();
 
-        headers.Should().NotBeNull();
-        headers!.Region.Should().Be("us-east");
-        headers.Priority.Should().Be(7);
+        Assert.NotNull(headers);
+        Assert.Equal("us-east", headers!.Region);
+        Assert.Equal(7, headers.Priority);
     }
 
     [Fact]
@@ -52,9 +53,9 @@ public class JobWorkerTests
 
         var dict = job.GetVariables<Dictionary<string, JsonElement>>();
 
-        dict.Should().ContainKey("key1");
-        dict!["key1"].GetString().Should().Be("val1");
-        dict["key2"].GetInt32().Should().Be(42);
+        Assert.True(dict!.ContainsKey("key1"));
+        Assert.Equal("val1", dict["key1"].GetString());
+        Assert.Equal(42, dict["key2"].GetInt32());
     }
 
     [Fact]
@@ -62,11 +63,11 @@ public class JobWorkerTests
     {
         var job = CreateTestJob();
 
-        job.Type.Should().Be("test-type");
-        job.Worker.Should().Be("test-worker");
-        job.Retries.Should().Be(3);
-        job.Deadline.Should().Be(1700000000000);
-        job.Kind.Should().Be(JobKindEnum.BPMNELEMENT);
+        Assert.Equal("test-type", job.Type);
+        Assert.Equal("test-worker", job.Worker);
+        Assert.Equal(3, job.Retries);
+        Assert.Equal(1700000000000, job.Deadline);
+        Assert.Equal(JobKindEnum.BPMNELEMENT, job.Kind);
     }
 
     // ---- JobWorkerConfig ----
@@ -79,13 +80,13 @@ public class JobWorkerTests
             JobType = "my-type",
         };
 
-        config.MaxConcurrentJobs.Should().BeNull();
-        config.JobTimeoutMs.Should().BeNull();
-        config.PollIntervalMs.Should().Be(500);
-        config.PollTimeoutMs.Should().BeNull();
-        config.FetchVariables.Should().BeNull();
-        config.WorkerName.Should().BeNull();
-        config.AutoStart.Should().BeTrue();
+        Assert.Null(config.MaxConcurrentJobs);
+        Assert.Null(config.JobTimeoutMs);
+        Assert.Equal(500, config.PollIntervalMs);
+        Assert.Null(config.PollTimeoutMs);
+        Assert.Null(config.FetchVariables);
+        Assert.Null(config.WorkerName);
+        Assert.True(config.AutoStart);
     }
 
     [Fact]
@@ -98,19 +99,19 @@ public class JobWorkerTests
             MaxConcurrentJobs = 32,
             PollIntervalMs = 1000,
             PollTimeoutMs = 10000,
-            FetchVariables = ["orderId", "amount"],
+            FetchVariables = _fetchVariables,
             WorkerName = "payment-worker-1",
             AutoStart = false,
         };
 
-        config.JobType.Should().Be("payment");
-        config.JobTimeoutMs.Should().Be(60000);
-        config.MaxConcurrentJobs.Should().Be(32);
-        config.PollIntervalMs.Should().Be(1000);
-        config.PollTimeoutMs.Should().Be(10000);
-        config.FetchVariables.Should().BeEquivalentTo(["orderId", "amount"]);
-        config.WorkerName.Should().Be("payment-worker-1");
-        config.AutoStart.Should().BeFalse();
+        Assert.Equal("payment", config.JobType);
+        Assert.Equal(60000, config.JobTimeoutMs);
+        Assert.Equal(32, config.MaxConcurrentJobs);
+        Assert.Equal(1000, config.PollIntervalMs);
+        Assert.Equal(10000, config.PollTimeoutMs);
+        Assert.Equivalent(_fetchVariables, config.FetchVariables);
+        Assert.Equal("payment-worker-1", config.WorkerName);
+        Assert.False(config.AutoStart);
     }
 
     // ---- BpmnErrorException ----
@@ -120,10 +121,10 @@ public class JobWorkerTests
     {
         var ex = new BpmnErrorException("INVALID_ORDER", "Order not found");
 
-        ex.ErrorCode.Should().Be("INVALID_ORDER");
-        ex.ErrorMessage.Should().Be("Order not found");
-        ex.Variables.Should().BeNull();
-        ex.Message.Should().Be("Order not found");
+        Assert.Equal("INVALID_ORDER", ex.ErrorCode);
+        Assert.Equal("Order not found", ex.ErrorMessage);
+        Assert.Null(ex.Variables);
+        Assert.Equal("Order not found", ex.Message);
     }
 
     [Fact]
@@ -132,8 +133,8 @@ public class JobWorkerTests
         var vars = new { reason = "expired" };
         var ex = new BpmnErrorException("EXPIRED", variables: vars);
 
-        ex.ErrorCode.Should().Be("EXPIRED");
-        ex.Variables.Should().Be(vars);
+        Assert.Equal("EXPIRED", ex.ErrorCode);
+        Assert.Equal(vars, ex.Variables);
     }
 
     [Fact]
@@ -141,7 +142,7 @@ public class JobWorkerTests
     {
         var ex = new BpmnErrorException("MY_CODE");
 
-        ex.Message.Should().Be("BPMN error: MY_CODE");
+        Assert.Equal("BPMN error: MY_CODE", ex.Message);
     }
 
     // ---- JobFailureException ----
@@ -151,9 +152,9 @@ public class JobWorkerTests
     {
         var ex = new JobFailureException("Transient error", retries: 2, retryBackOffMs: 5000);
 
-        ex.Message.Should().Be("Transient error");
-        ex.Retries.Should().Be(2);
-        ex.RetryBackOffMs.Should().Be(5000);
+        Assert.Equal("Transient error", ex.Message);
+        Assert.Equal(2, ex.Retries);
+        Assert.Equal(5000, ex.RetryBackOffMs);
     }
 
     [Fact]
@@ -161,8 +162,8 @@ public class JobWorkerTests
     {
         var ex = new JobFailureException("Fatal error", retries: 0);
 
-        ex.Retries.Should().Be(0);
-        ex.RetryBackOffMs.Should().BeNull();
+        Assert.Equal(0, ex.Retries);
+        Assert.Null(ex.RetryBackOffMs);
     }
 
     // ---- Worker lifecycle (without server) ----
@@ -180,8 +181,8 @@ public class JobWorkerTests
 
         var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
 
-        client.GetWorkers().Should().ContainSingle();
-        client.GetWorkers()[0].Should().BeSameAs(worker);
+        Assert.Single(client.GetWorkers());
+        Assert.Same(worker, client.GetWorkers()[0]);
     }
 
     [Fact]
@@ -197,7 +198,7 @@ public class JobWorkerTests
 
         var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
 
-        worker.Name.Should().StartWith("worker-payment-");
+        Assert.StartsWith("worker-payment-", worker.Name);
     }
 
     [Fact]
@@ -214,7 +215,7 @@ public class JobWorkerTests
 
         var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
 
-        worker.Name.Should().Be("my-custom-worker");
+        Assert.Equal("my-custom-worker", worker.Name);
     }
 
     [Fact]
@@ -230,8 +231,8 @@ public class JobWorkerTests
 
         var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
 
-        worker.IsRunning.Should().BeFalse();
-        worker.ActiveJobs.Should().Be(0);
+        Assert.False(worker.IsRunning);
+        Assert.Equal(0, worker.ActiveJobs);
     }
 
     [Fact]
@@ -251,15 +252,15 @@ public class JobWorkerTests
         // Start them
         w1.Start();
         w2.Start();
-        w1.IsRunning.Should().BeTrue();
+        Assert.True(w1.IsRunning);
 
         // Stop all
         await client.StopAllWorkersAsync(TimeSpan.FromSeconds(1));
 
         // Allow poll loop to complete
         await Task.Delay(100);
-        w1.IsRunning.Should().BeFalse();
-        w2.IsRunning.Should().BeFalse();
+        Assert.False(w1.IsRunning);
+        Assert.False(w2.IsRunning);
     }
 
     [Fact]
@@ -280,8 +281,8 @@ public class JobWorkerTests
             await Task.CompletedTask;
         });
 
-        worker.Should().NotBeNull();
-        client.GetWorkers().Should().ContainSingle();
+        Assert.NotNull(worker);
+        Assert.Single(client.GetWorkers());
     }
 
     [Fact]
@@ -297,12 +298,12 @@ public class JobWorkerTests
 
         var worker = client.CreateJobWorker(config, (job, ct) => Task.FromResult<object?>(null));
         worker.Start();
-        worker.IsRunning.Should().BeTrue();
+        Assert.True(worker.IsRunning);
 
         await worker.DisposeAsync();
         await Task.Delay(100);
 
-        worker.IsRunning.Should().BeFalse();
+        Assert.False(worker.IsRunning);
     }
 
     // ---- JobCompletionRequest detection ----
@@ -332,13 +333,13 @@ public class JobWorkerTests
             ? req
             : new JobCompletionRequest { Variables = result };
 
-        actual.Should().BeSameAs(completionRequest);
-        actual.Result.Should().BeOfType<JobResultUserTask>();
+        Assert.Same(completionRequest, actual);
+        Assert.IsType<JobResultUserTask>(actual.Result);
 
         var userTask = (JobResultUserTask)actual.Result!;
-        userTask.Corrections!.Assignee.Should().Be("new-assignee");
-        userTask.Corrections.Priority.Should().Be(75);
-        userTask.Corrections.CandidateGroups.Should().ContainSingle().Which.Should().Be("managers");
+        Assert.Equal("new-assignee", userTask.Corrections!.Assignee);
+        Assert.Equal(75, userTask.Corrections.Priority);
+        Assert.Equal("managers", Assert.Single(userTask.Corrections.CandidateGroups!));
     }
 
     [Fact]
@@ -353,8 +354,8 @@ public class JobWorkerTests
             ? req
             : new JobCompletionRequest { Variables = result };
 
-        actual.Variables.Should().BeSameAs(output);
-        actual.Result.Should().BeNull();
+        Assert.Same(output, actual.Variables);
+        Assert.Null(actual.Result);
     }
 
     [Fact]
@@ -366,8 +367,8 @@ public class JobWorkerTests
             ? req
             : new JobCompletionRequest { Variables = result };
 
-        actual.Variables.Should().BeNull();
-        actual.Result.Should().BeNull();
+        Assert.Null(actual.Variables);
+        Assert.Null(actual.Result);
     }
 
     [Fact]
@@ -387,10 +388,10 @@ public class JobWorkerTests
             ? req
             : new JobCompletionRequest { Variables = result };
 
-        actual.Should().BeSameAs(completionRequest);
+        Assert.Same(completionRequest, actual);
         var userTask = (JobResultUserTask)actual.Result!;
-        userTask.Denied.Should().BeTrue();
-        userTask.DeniedReason.Should().Be("Missing required fields");
+        Assert.True(userTask.Denied);
+        Assert.Equal("Missing required fields", userTask.DeniedReason);
     }
 
     // ---- Helpers ----

@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Camunda.Orchestration.Sdk.Tests;
 
 /// <summary>
@@ -13,8 +11,8 @@ public class ConfigurationTests
         var act = () => ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_AUTH_STRATEGY"] = "invalid" });
 
-        act.Should().Throw<CamundaConfigurationException>()
-            .Which.Errors.Should().Contain(e => e.Code == ConfigErrorCode.InvalidEnum);
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains(ex.Errors, e => e.Code == ConfigErrorCode.InvalidEnum);
     }
 
     [Fact]
@@ -23,8 +21,8 @@ public class ConfigurationTests
         var act = () => ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_OAUTH_TIMEOUT_MS"] = "5.0" });
 
-        act.Should().Throw<CamundaConfigurationException>()
-            .Which.Errors.Should().Contain(e => e.Code == ConfigErrorCode.InvalidInteger);
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains(ex.Errors, e => e.Code == ConfigErrorCode.InvalidInteger);
     }
 
     [Fact]
@@ -33,7 +31,7 @@ public class ConfigurationTests
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_OAUTH_TIMEOUT_MS"] = "6000" });
 
-        config.OAuth.TimeoutMs.Should().Be(6000);
+        Assert.Equal(6000, config.OAuth.TimeoutMs);
     }
 
     [Fact]
@@ -42,7 +40,7 @@ public class ConfigurationTests
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { });
 
-        config.Auth.Strategy.Should().Be(AuthStrategy.None);
+        Assert.Equal(AuthStrategy.None, config.Auth.Strategy);
     }
 
     [Fact]
@@ -56,7 +54,7 @@ public class ConfigurationTests
                 ["CAMUNDA_CLIENT_SECRET"] = "my-secret",
             });
 
-        config.Auth.Strategy.Should().Be(AuthStrategy.OAuth);
+        Assert.Equal(AuthStrategy.OAuth, config.Auth.Strategy);
     }
 
     [Fact]
@@ -68,7 +66,7 @@ public class ConfigurationTests
                 ["CAMUNDA_REST_ADDRESS"] = "https://zeebe.example.com",
             });
 
-        config.RestAddress.Should().EndWith("/v2");
+        Assert.EndsWith("/v2", config.RestAddress);
     }
 
     [Fact]
@@ -80,7 +78,7 @@ public class ConfigurationTests
                 ["CAMUNDA_REST_ADDRESS"] = "https://zeebe.example.com/v2",
             });
 
-        config.RestAddress.Should().Be("https://zeebe.example.com/v2");
+        Assert.Equal("https://zeebe.example.com/v2", config.RestAddress);
     }
 
     [Fact]
@@ -92,8 +90,8 @@ public class ConfigurationTests
                 ["CAMUNDA_SDK_VALIDATION"] = "strict",
             });
 
-        config.Validation.Request.Should().Be(ValidationMode.Strict);
-        config.Validation.Response.Should().Be(ValidationMode.Strict);
+        Assert.Equal(ValidationMode.Strict, config.Validation.Request);
+        Assert.Equal(ValidationMode.Strict, config.Validation.Response);
     }
 
     [Fact]
@@ -105,8 +103,8 @@ public class ConfigurationTests
                 ["CAMUNDA_SDK_VALIDATION"] = "req:warn,res:strict",
             });
 
-        config.Validation.Request.Should().Be(ValidationMode.Warn);
-        config.Validation.Response.Should().Be(ValidationMode.Strict);
+        Assert.Equal(ValidationMode.Warn, config.Validation.Request);
+        Assert.Equal(ValidationMode.Strict, config.Validation.Response);
     }
 
     [Fact]
@@ -116,7 +114,7 @@ public class ConfigurationTests
             env: new Dictionary<string, string?> { ["CAMUNDA_SDK_LOG_LEVEL"] = "error" },
             overrides: new Dictionary<string, string> { ["CAMUNDA_SDK_LOG_LEVEL"] = "debug" });
 
-        config.LogLevel.Should().Be("debug");
+        Assert.Equal("debug", config.LogLevel);
     }
 
     [Fact]
@@ -128,7 +126,7 @@ public class ConfigurationTests
                 ["ZEEBE_REST_ADDRESS"] = "https://zeebe.local",
             });
 
-        config.RestAddress.Should().Contain("zeebe.local");
+        Assert.Contains("zeebe.local", config.RestAddress);
     }
 
     [Fact]
@@ -140,8 +138,8 @@ public class ConfigurationTests
                 ["CAMUNDA_AUTH_STRATEGY"] = "OAUTH",
             });
 
-        act.Should().Throw<CamundaConfigurationException>()
-            .Which.Errors.Should().Contain(e => e.Code == ConfigErrorCode.MissingRequired);
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains(ex.Errors, e => e.Code == ConfigErrorCode.MissingRequired);
     }
 
     [Fact]
@@ -150,9 +148,9 @@ public class ConfigurationTests
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { });
 
-        config.Backpressure.Enabled.Should().BeTrue();
-        config.Backpressure.Profile.Should().Be("BALANCED");
-        config.Backpressure.ObserveOnly.Should().BeFalse();
+        Assert.True(config.Backpressure.Enabled);
+        Assert.Equal("BALANCED", config.Backpressure.Profile);
+        Assert.False(config.Backpressure.ObserveOnly);
     }
 
     [Fact]
@@ -164,13 +162,13 @@ public class ConfigurationTests
                 ["CAMUNDA_SDK_BACKPRESSURE_PROFILE"] = "LEGACY",
             });
 
-        config.Backpressure.ObserveOnly.Should().BeTrue();
+        Assert.True(config.Backpressure.ObserveOnly);
     }
 
     [Fact]
     public void RedactSecretMasksAllButLast4()
     {
-        ConfigurationHydrator.RedactSecret("abcdefgh").Should().Be("****efgh");
-        ConfigurationHydrator.RedactSecret("ab").Should().Be("**");
+        Assert.Equal("****efgh", ConfigurationHydrator.RedactSecret("abcdefgh"));
+        Assert.Equal("**", ConfigurationHydrator.RedactSecret("ab"));
     }
 }

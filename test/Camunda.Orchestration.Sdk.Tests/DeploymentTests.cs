@@ -1,6 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -99,19 +98,19 @@ public class DeploymentTests : IDisposable
 
         var extended = new ExtendedDeploymentResponse(raw);
 
-        extended.DeploymentKey.ToString().Should().Be("123");
-        extended.TenantId.ToString().Should().Be("test-tenant");
-        extended.Deployments.Should().HaveCount(5);
-        extended.Processes.Should().HaveCount(1);
-        extended.Processes[0].ProcessDefinitionId.ToString().Should().Be("proc-1");
-        extended.Decisions.Should().HaveCount(1);
-        extended.Decisions[0].DecisionDefinitionId.ToString().Should().Be("dec-1");
-        extended.DecisionRequirements.Should().HaveCount(1);
-        extended.DecisionRequirements[0].DecisionRequirementsKey.ToString().Should().Be("3");
-        extended.Forms.Should().HaveCount(1);
-        extended.Forms[0].FormId.ToString().Should().Be("form-1");
-        extended.Resources.Should().HaveCount(1);
-        extended.Resources[0].ResourceId.Should().Be("res-1");
+        Assert.Equal("123", extended.DeploymentKey.ToString());
+        Assert.Equal("test-tenant", extended.TenantId.ToString());
+        Assert.Equal(5, extended.Deployments.Count);
+        Assert.Single(extended.Processes);
+        Assert.Equal("proc-1", extended.Processes[0].ProcessDefinitionId.ToString());
+        Assert.Single(extended.Decisions);
+        Assert.Equal("dec-1", extended.Decisions[0].DecisionDefinitionId.ToString());
+        Assert.Single(extended.DecisionRequirements);
+        Assert.Equal("3", extended.DecisionRequirements[0].DecisionRequirementsKey.ToString());
+        Assert.Single(extended.Forms);
+        Assert.Equal("form-1", extended.Forms[0].FormId.ToString());
+        Assert.Single(extended.Resources);
+        Assert.Equal("res-1", extended.Resources[0].ResourceId);
     }
 
     [Fact]
@@ -126,11 +125,11 @@ public class DeploymentTests : IDisposable
 
         var extended = new ExtendedDeploymentResponse(raw);
 
-        extended.Processes.Should().BeEmpty();
-        extended.Decisions.Should().BeEmpty();
-        extended.DecisionRequirements.Should().BeEmpty();
-        extended.Forms.Should().BeEmpty();
-        extended.Resources.Should().BeEmpty();
+        Assert.Empty(extended.Processes);
+        Assert.Empty(extended.Decisions);
+        Assert.Empty(extended.DecisionRequirements);
+        Assert.Empty(extended.Forms);
+        Assert.Empty(extended.Resources);
     }
 
     [Fact]
@@ -145,11 +144,11 @@ public class DeploymentTests : IDisposable
 
         var extended = new ExtendedDeploymentResponse(raw);
 
-        extended.Processes.Should().BeEmpty();
-        extended.Decisions.Should().BeEmpty();
-        extended.DecisionRequirements.Should().BeEmpty();
-        extended.Forms.Should().BeEmpty();
-        extended.Resources.Should().BeEmpty();
+        Assert.Empty(extended.Processes);
+        Assert.Empty(extended.Decisions);
+        Assert.Empty(extended.DecisionRequirements);
+        Assert.Empty(extended.Forms);
+        Assert.Empty(extended.Resources);
     }
 
     [Fact]
@@ -163,7 +162,7 @@ public class DeploymentTests : IDisposable
         };
 
         var extended = new ExtendedDeploymentResponse(raw);
-        extended.Raw.Should().BeSameAs(raw);
+        Assert.Same(raw, extended.Raw);
     }
 
     [Fact]
@@ -202,8 +201,8 @@ public class DeploymentTests : IDisposable
 
         var extended = new ExtendedDeploymentResponse(raw);
 
-        extended.Processes.Should().HaveCount(2);
-        extended.Decisions.Should().BeEmpty();
+        Assert.Equal(2, extended.Processes.Count);
+        Assert.Empty(extended.Decisions);
     }
 
     #endregion
@@ -214,21 +213,21 @@ public class DeploymentTests : IDisposable
     public async Task DeployResourcesFromFilesAsync_ThrowsOnNullPaths()
     {
         var act = () => _client.DeployResourcesFromFilesAsync(null!);
-        await act.Should().ThrowAsync<ArgumentException>();
+        await Assert.ThrowsAsync<ArgumentException>(act);
     }
 
     [Fact]
     public async Task DeployResourcesFromFilesAsync_ThrowsOnEmptyPaths()
     {
         var act = () => _client.DeployResourcesFromFilesAsync([]);
-        await act.Should().ThrowAsync<ArgumentException>();
+        await Assert.ThrowsAsync<ArgumentException>(act);
     }
 
     [Fact]
     public async Task DeployResourcesFromFilesAsync_ThrowsOnMissingFile()
     {
         var act = () => _client.DeployResourcesFromFilesAsync(["/nonexistent/file.bpmn"]);
-        await act.Should().ThrowAsync<FileNotFoundException>();
+        await Assert.ThrowsAsync<FileNotFoundException>(act);
     }
 
     [Fact]
@@ -260,13 +259,13 @@ public class DeploymentTests : IDisposable
 
         var result = await _client.DeployResourcesFromFilesAsync([bpmnPath]);
 
-        result.Should().NotBeNull();
-        result.DeploymentKey.ToString().Should().Be("100");
-        result.Processes.Should().HaveCount(1);
-        result.Processes[0].ProcessDefinitionId.ToString().Should().Be("test-process");
+        Assert.NotNull(result);
+        Assert.Equal("100", result.DeploymentKey.ToString());
+        Assert.Single(result.Processes);
+        Assert.Equal("test-process", result.Processes[0].ProcessDefinitionId.ToString());
 
-        _handler.Requests.Should().HaveCount(1);
-        _handler.Requests[0].RequestUri!.PathAndQuery.Should().Contain("/deployments");
+        Assert.Single(_handler.Requests);
+        Assert.Contains("/deployments", _handler.Requests[0].RequestUri!.PathAndQuery);
     }
 
     [Fact]
@@ -293,9 +292,9 @@ public class DeploymentTests : IDisposable
 
         var result = await _client.DeployResourcesFromFilesAsync([bpmnPath], tenantId: "my-tenant");
 
-        result.Should().NotBeNull();
-        result.TenantId.ToString().Should().Be("my-tenant");
-        capturedContent.Should().Contain("my-tenant");
+        Assert.NotNull(result);
+        Assert.Equal("my-tenant", result.TenantId.ToString());
+        Assert.Contains("my-tenant", capturedContent);
     }
 
     [Fact]
@@ -345,16 +344,16 @@ public class DeploymentTests : IDisposable
 
         var result = await _client.DeployResourcesFromFilesAsync([bpmnPath, dmnPath, formPath]);
 
-        result.Processes.Should().HaveCount(1);
-        result.Decisions.Should().HaveCount(1);
-        result.Forms.Should().HaveCount(1);
+        Assert.Single(result.Processes);
+        Assert.Single(result.Decisions);
+        Assert.Single(result.Forms);
     }
 
     [Fact]
     public async Task DeployResourcesFromFilesAsync_ThrowsOnEmptyFilePath()
     {
         var act = () => _client.DeployResourcesFromFilesAsync(["", "test.bpmn"]);
-        await act.Should().ThrowAsync<ArgumentException>();
+        await Assert.ThrowsAsync<ArgumentException>(act);
     }
 
     #endregion

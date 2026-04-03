@@ -1,5 +1,4 @@
 using System.Net;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -25,8 +24,8 @@ public class HttpRetryTests
             config,
             Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
 
-        result.Should().Be(42);
-        attempt.Should().Be(3);
+        Assert.Equal(42, result);
+        Assert.Equal(3, attempt);
     }
 
     [Fact]
@@ -45,7 +44,7 @@ public class HttpRetryTests
             config,
             Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
 
-        await act.Should().ThrowAsync<HttpRequestException>();
+        await Assert.ThrowsAsync<HttpRequestException>(act);
     }
 
     [Fact]
@@ -66,8 +65,8 @@ public class HttpRetryTests
             config,
             Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
 
-        await act.Should().ThrowAsync<HttpRequestException>();
-        attempt.Should().Be(1); // No retry for 404
+        await Assert.ThrowsAsync<HttpRequestException>(act);
+        Assert.Equal(1, attempt); // No retry for 404
     }
 
     [Fact]
@@ -76,8 +75,8 @@ public class HttpRetryTests
         var ex = new HttpRequestException("rate limited", null, HttpStatusCode.TooManyRequests);
         var decision = HttpRetryExecutor.DefaultClassify(ex);
 
-        decision.Retryable.Should().BeTrue();
-        decision.Reason.Should().Contain("429");
+        Assert.True(decision.Retryable);
+        Assert.Contains("429", decision.Reason);
     }
 
     [Fact]
@@ -86,6 +85,6 @@ public class HttpRetryTests
         var ex = new HttpRequestException("not found", null, HttpStatusCode.NotFound);
         var decision = HttpRetryExecutor.DefaultClassify(ex);
 
-        decision.Retryable.Should().BeFalse();
+        Assert.False(decision.Retryable);
     }
 }

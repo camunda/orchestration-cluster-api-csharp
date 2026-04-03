@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
@@ -23,8 +22,8 @@ public class EventualPollerTests
             new ConsistencyOptions<string> { WaitUpToMs = 0 },
             NullLogger.Instance);
 
-        result.Should().Be("immediate");
-        callCount.Should().Be(1);
+        Assert.Equal("immediate", result);
+        Assert.Equal(1, callCount);
     }
 
     [Fact]
@@ -47,8 +46,8 @@ public class EventualPollerTests
             },
             NullLogger.Instance);
 
-        result.Should().Be(42);
-        callCount.Should().Be(1);
+        Assert.Equal(42, result);
+        Assert.Equal(1, callCount);
     }
 
     [Fact]
@@ -71,8 +70,8 @@ public class EventualPollerTests
             },
             NullLogger.Instance);
 
-        result.Should().Be(3);
-        callCount.Should().Be(3);
+        Assert.Equal(3, result);
+        Assert.Equal(3, callCount);
     }
 
     [Fact]
@@ -90,9 +89,9 @@ public class EventualPollerTests
             },
             NullLogger.Instance);
 
-        var ex = (await act.Should().ThrowAsync<EventualConsistencyTimeoutException>()).Which;
-        ex.OperationId.Should().Be("slowOp");
-        ex.WaitedMs.Should().BeGreaterThanOrEqualTo(50);
+        var ex = await Assert.ThrowsAsync<EventualConsistencyTimeoutException>(act);
+        Assert.Equal("slowOp", ex.OperationId);
+        Assert.True(ex.WaitedMs >= 50);
     }
 
     [Fact]
@@ -116,8 +115,8 @@ public class EventualPollerTests
             },
             NullLogger.Instance);
 
-        result.Should().Be("found");
-        callCount.Should().Be(3);
+        Assert.Equal("found", result);
+        Assert.Equal(3, callCount);
     }
 
     [Fact]
@@ -140,8 +139,9 @@ public class EventualPollerTests
             },
             NullLogger.Instance);
 
-        await act.Should().ThrowAsync<HttpSdkException>()
-            .Where(e => e.Status == 404);
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
+
+        Assert.Equal(404, ex.Status);
     }
 
     [Fact]
@@ -163,8 +163,8 @@ public class EventualPollerTests
             },
             NullLogger.Instance);
 
-        result.Should().Be("data");
-        callCount.Should().Be(2);
+        Assert.Equal("data", result);
+        Assert.Equal(2, callCount);
     }
 
     [Fact]
@@ -185,7 +185,7 @@ public class EventualPollerTests
             NullLogger.Instance,
             cts.Token);
 
-        await act.Should().ThrowAsync<OperationCanceledException>();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(act);
     }
 
     [Fact]
@@ -208,7 +208,8 @@ public class EventualPollerTests
             },
             NullLogger.Instance);
 
-        await act.Should().ThrowAsync<HttpSdkException>()
-            .Where(e => e.Status == 500);
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
+
+        Assert.Equal(500, ex.Status);
     }
 }

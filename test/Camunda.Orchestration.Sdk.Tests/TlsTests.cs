@@ -1,6 +1,5 @@
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -64,8 +63,8 @@ public class TlsTests : IDisposable
     {
         var act = () => ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_MTLS_CERT"] = _clientCertPem });
-        act.Should().Throw<CamundaConfigurationException>()
-            .WithMessage("*Incomplete mTLS*");
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains("Incomplete mTLS", ex.Message);
     }
 
     [Fact]
@@ -73,8 +72,8 @@ public class TlsTests : IDisposable
     {
         var act = () => ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_MTLS_KEY"] = _clientKeyPem });
-        act.Should().Throw<CamundaConfigurationException>()
-            .WithMessage("*Incomplete mTLS*");
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains("Incomplete mTLS", ex.Message);
     }
 
     [Fact]
@@ -82,8 +81,8 @@ public class TlsTests : IDisposable
     {
         var act = () => ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_MTLS_CERT_PATH"] = _clientCertPath });
-        act.Should().Throw<CamundaConfigurationException>()
-            .WithMessage("*Incomplete mTLS*");
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains("Incomplete mTLS", ex.Message);
     }
 
     [Fact]
@@ -91,8 +90,8 @@ public class TlsTests : IDisposable
     {
         var act = () => ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_MTLS_KEY_PATH"] = _clientKeyPath });
-        act.Should().Throw<CamundaConfigurationException>()
-            .WithMessage("*Incomplete mTLS*");
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains("Incomplete mTLS", ex.Message);
     }
 
     [Fact]
@@ -100,8 +99,8 @@ public class TlsTests : IDisposable
     {
         var act = () => ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_MTLS_KEY_PASSPHRASE"] = "secret" });
-        act.Should().Throw<CamundaConfigurationException>()
-            .WithMessage("*no client key*");
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains("no client key", ex.Message);
     }
 
     [Fact]
@@ -109,8 +108,8 @@ public class TlsTests : IDisposable
     {
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_MTLS_CA"] = _caCertPem });
-        config.Tls.Should().NotBeNull();
-        config.Tls!.Ca.Should().Be(_caCertPem);
+        Assert.NotNull(config.Tls);
+        Assert.Equal(_caCertPem, config.Tls!.Ca);
     }
 
     [Fact]
@@ -118,8 +117,8 @@ public class TlsTests : IDisposable
     {
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?> { ["CAMUNDA_MTLS_CA_PATH"] = _caCertPath });
-        config.Tls.Should().NotBeNull();
-        config.Tls!.CaPath.Should().Be(_caCertPath);
+        Assert.NotNull(config.Tls);
+        Assert.Equal(_caCertPath, config.Tls!.CaPath);
     }
 
     [Fact]
@@ -131,9 +130,9 @@ public class TlsTests : IDisposable
                 ["CAMUNDA_MTLS_CERT"] = _clientCertPem,
                 ["CAMUNDA_MTLS_KEY"] = _clientKeyPem,
             });
-        config.Tls.Should().NotBeNull();
-        config.Tls!.Cert.Should().Be(_clientCertPem);
-        config.Tls!.Key.Should().Be(_clientKeyPem);
+        Assert.NotNull(config.Tls);
+        Assert.Equal(_clientCertPem, config.Tls!.Cert);
+        Assert.Equal(_clientKeyPem, config.Tls!.Key);
     }
 
     [Fact]
@@ -145,9 +144,9 @@ public class TlsTests : IDisposable
                 ["CAMUNDA_MTLS_CERT_PATH"] = _clientCertPath,
                 ["CAMUNDA_MTLS_KEY_PATH"] = _clientKeyPath,
             });
-        config.Tls.Should().NotBeNull();
-        config.Tls!.CertPath.Should().Be(_clientCertPath);
-        config.Tls!.KeyPath.Should().Be(_clientKeyPath);
+        Assert.NotNull(config.Tls);
+        Assert.Equal(_clientCertPath, config.Tls!.CertPath);
+        Assert.Equal(_clientKeyPath, config.Tls!.KeyPath);
     }
 
     [Fact]
@@ -155,7 +154,7 @@ public class TlsTests : IDisposable
     {
         var config = ConfigurationHydrator.Hydrate(
             env: new Dictionary<string, string?>());
-        config.Tls.Should().BeNull();
+        Assert.Null(config.Tls);
     }
 
     // -----------------------------------------------------------------------
@@ -165,7 +164,7 @@ public class TlsTests : IDisposable
     [Fact]
     public void BuildHandler_ReturnsNull_WhenNoTls()
     {
-        TlsHelper.BuildHandler(null).Should().BeNull();
+        Assert.Null(TlsHelper.BuildHandler(null));
     }
 
     [Fact]
@@ -173,8 +172,8 @@ public class TlsTests : IDisposable
     {
         var tls = new TlsConfig { Ca = _caCertPem };
         var handler = TlsHelper.BuildHandler(tls);
-        handler.Should().NotBeNull();
-        handler!.ServerCertificateCustomValidationCallback.Should().NotBeNull();
+        Assert.NotNull(handler);
+        Assert.NotNull(handler!.ServerCertificateCustomValidationCallback);
     }
 
     [Fact]
@@ -182,8 +181,8 @@ public class TlsTests : IDisposable
     {
         var tls = new TlsConfig { CaPath = _caCertPath };
         var handler = TlsHelper.BuildHandler(tls);
-        handler.Should().NotBeNull();
-        handler!.ServerCertificateCustomValidationCallback.Should().NotBeNull();
+        Assert.NotNull(handler);
+        Assert.NotNull(handler!.ServerCertificateCustomValidationCallback);
     }
 
     [Fact]
@@ -191,8 +190,8 @@ public class TlsTests : IDisposable
     {
         var tls = new TlsConfig { Cert = _clientCertPem, Key = _clientKeyPem };
         var handler = TlsHelper.BuildHandler(tls);
-        handler.Should().NotBeNull();
-        handler!.ClientCertificates.Count.Should().Be(1);
+        Assert.NotNull(handler);
+        Assert.Single(handler!.ClientCertificates);
     }
 
     [Fact]
@@ -200,8 +199,8 @@ public class TlsTests : IDisposable
     {
         var tls = new TlsConfig { CertPath = _clientCertPath, KeyPath = _clientKeyPath };
         var handler = TlsHelper.BuildHandler(tls);
-        handler.Should().NotBeNull();
-        handler!.ClientCertificates.Count.Should().Be(1);
+        Assert.NotNull(handler);
+        Assert.Single(handler!.ClientCertificates);
     }
 
     [Fact]
@@ -214,9 +213,9 @@ public class TlsTests : IDisposable
             Ca = _caCertPem,
         };
         var handler = TlsHelper.BuildHandler(tls);
-        handler.Should().NotBeNull();
-        handler!.ClientCertificates.Count.Should().Be(1);
-        handler.ServerCertificateCustomValidationCallback.Should().NotBeNull();
+        Assert.NotNull(handler);
+        Assert.Single(handler!.ClientCertificates);
+        Assert.NotNull(handler.ServerCertificateCustomValidationCallback);
     }
 
     [Fact]
@@ -224,7 +223,8 @@ public class TlsTests : IDisposable
     {
         var tls = new TlsConfig { CertPath = "/nonexistent/cert.pem", KeyPath = "/nonexistent/key.pem" };
         var act = () => TlsHelper.BuildHandler(tls);
-        act.Should().Throw<FileNotFoundException>().WithMessage("*cert.pem*");
+        var ex = Assert.Throws<FileNotFoundException>(act);
+        Assert.Contains("cert.pem", ex.Message);
     }
 
     [Fact]
@@ -239,7 +239,7 @@ public class TlsTests : IDisposable
         };
         // Should not throw because inline overrides the invalid paths
         var handler = TlsHelper.BuildHandler(tls);
-        handler.Should().NotBeNull();
-        handler!.ClientCertificates.Count.Should().Be(1);
+        Assert.NotNull(handler);
+        Assert.Single(handler!.ClientCertificates);
     }
 }

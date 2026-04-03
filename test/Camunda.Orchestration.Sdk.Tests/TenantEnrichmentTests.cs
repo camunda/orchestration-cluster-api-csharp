@@ -1,6 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -57,9 +56,9 @@ public class TenantEnrichmentTests : IDisposable
             SignalName = "test-signal",
         });
 
-        capturedBody.Should().NotBeNull();
+        Assert.NotNull(capturedBody);
         var doc = JsonDocument.Parse(capturedBody!);
-        doc.RootElement.GetProperty("tenantId").GetString().Should().Be("<default>");
+        Assert.Equal("<default>", doc.RootElement.GetProperty("tenantId").GetString());
     }
 
     [Fact]
@@ -81,9 +80,9 @@ public class TenantEnrichmentTests : IDisposable
             TenantId = TenantId.AssumeExists("my-tenant"),
         });
 
-        capturedBody.Should().NotBeNull();
+        Assert.NotNull(capturedBody);
         var doc = JsonDocument.Parse(capturedBody!);
-        doc.RootElement.GetProperty("tenantId").GetString().Should().Be("my-tenant");
+        Assert.Equal("my-tenant", doc.RootElement.GetProperty("tenantId").GetString());
     }
 
     [Fact]
@@ -104,9 +103,9 @@ public class TenantEnrichmentTests : IDisposable
             SignalName = "test-signal",
         });
 
-        capturedBody.Should().NotBeNull();
+        Assert.NotNull(capturedBody);
         var doc = JsonDocument.Parse(capturedBody!);
-        doc.RootElement.GetProperty("tenantId").GetString().Should().Be("custom-tenant");
+        Assert.Equal("custom-tenant", doc.RootElement.GetProperty("tenantId").GetString());
     }
 
     [Fact]
@@ -127,9 +126,9 @@ public class TenantEnrichmentTests : IDisposable
             Name = "test-msg",
         });
 
-        capturedBody.Should().NotBeNull();
+        Assert.NotNull(capturedBody);
         var doc = JsonDocument.Parse(capturedBody!);
-        doc.RootElement.GetProperty("tenantId").GetString().Should().Be("<default>");
+        Assert.Equal("<default>", doc.RootElement.GetProperty("tenantId").GetString());
     }
 
     [Fact]
@@ -150,9 +149,9 @@ public class TenantEnrichmentTests : IDisposable
             Name = "test-msg",
         });
 
-        capturedBody.Should().NotBeNull();
+        Assert.NotNull(capturedBody);
         var doc = JsonDocument.Parse(capturedBody!);
-        doc.RootElement.GetProperty("tenantId").GetString().Should().Be("<default>");
+        Assert.Equal("<default>", doc.RootElement.GetProperty("tenantId").GetString());
     }
 
     [Fact]
@@ -173,9 +172,9 @@ public class TenantEnrichmentTests : IDisposable
             Expression = "=1+1",
         });
 
-        capturedBody.Should().NotBeNull();
+        Assert.NotNull(capturedBody);
         var doc = JsonDocument.Parse(capturedBody!);
-        doc.RootElement.GetProperty("tenantId").GetString().Should().Be("<default>");
+        Assert.Equal("<default>", doc.RootElement.GetProperty("tenantId").GetString());
     }
 
     [Fact]
@@ -196,9 +195,9 @@ public class TenantEnrichmentTests : IDisposable
             ProcessDefinitionKey = ProcessDefinitionKey.AssumeExists("1"),
         });
 
-        capturedBody.Should().NotBeNull();
+        Assert.NotNull(capturedBody);
         var doc = JsonDocument.Parse(capturedBody!);
-        doc.RootElement.GetProperty("tenantId").GetString().Should().Be("<default>");
+        Assert.Equal("<default>", doc.RootElement.GetProperty("tenantId").GetString());
     }
 
     [Fact]
@@ -220,9 +219,9 @@ public class TenantEnrichmentTests : IDisposable
             TenantId = TenantId.AssumeExists("explicit-tenant"),
         });
 
-        capturedBody.Should().NotBeNull();
+        Assert.NotNull(capturedBody);
         var doc = JsonDocument.Parse(capturedBody!);
-        doc.RootElement.GetProperty("tenantId").GetString().Should().Be("explicit-tenant");
+        Assert.Equal("explicit-tenant", doc.RootElement.GetProperty("tenantId").GetString());
     }
 
     [Fact]
@@ -243,9 +242,9 @@ public class TenantEnrichmentTests : IDisposable
             DecisionDefinitionKey = DecisionDefinitionKey.AssumeExists("1"),
         });
 
-        capturedBody.Should().NotBeNull();
+        Assert.NotNull(capturedBody);
         var doc = JsonDocument.Parse(capturedBody!);
-        doc.RootElement.GetProperty("tenantId").GetString().Should().Be("<default>");
+        Assert.Equal("<default>", doc.RootElement.GetProperty("tenantId").GetString());
     }
 
     [Fact]
@@ -272,8 +271,8 @@ public class TenantEnrichmentTests : IDisposable
 
             await _client.DeployResourcesFromFilesAsync(new[] { tmpFile });
 
-            capturedContent.Should().NotBeNull();
-            capturedContent.Should().Contain("<default>");
+            Assert.NotNull(capturedContent);
+            Assert.Contains("<default>", capturedContent);
         }
         finally
         {
@@ -305,9 +304,9 @@ public class TenantEnrichmentTests : IDisposable
 
             await _client.DeployResourcesFromFilesAsync(new[] { tmpFile }, tenantId: "my-tenant");
 
-            capturedContent.Should().NotBeNull();
-            capturedContent.Should().Contain("my-tenant");
-            capturedContent.Should().NotContain("<default>");
+            Assert.NotNull(capturedContent);
+            Assert.Contains("my-tenant", capturedContent);
+            Assert.DoesNotContain("<default>", capturedContent);
         }
         finally
         {

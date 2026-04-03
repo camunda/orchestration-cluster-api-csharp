@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Camunda.Orchestration.Sdk.Tests;
 
 /// <summary>
@@ -13,9 +11,9 @@ public class BackpressureTests
         var bp = new BackpressureManager(new BackpressureConfig(), Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
         var state = bp.GetState();
 
-        state.Severity.Should().Be("healthy");
-        state.Consecutive.Should().Be(0);
-        state.PermitsMax.Should().Be(16); // BALANCED default
+        Assert.Equal("healthy", state.Severity);
+        Assert.Equal(0, state.Consecutive);
+        Assert.Equal(16, state.PermitsMax); // BALANCED default
     }
 
     [Fact]
@@ -24,11 +22,11 @@ public class BackpressureTests
         var bp = new BackpressureManager(new BackpressureConfig(), Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
 
         bp.RecordBackpressure();
-        bp.GetState().Consecutive.Should().Be(1);
-        bp.GetState().Severity.Should().Be("soft");
+        Assert.Equal(1, bp.GetState().Consecutive);
+        Assert.Equal("soft", bp.GetState().Severity);
 
         bp.RecordBackpressure();
-        bp.GetState().Consecutive.Should().Be(2);
+        Assert.Equal(2, bp.GetState().Consecutive);
     }
 
     [Fact]
@@ -40,7 +38,7 @@ public class BackpressureTests
 
         bp.RecordBackpressure();
         bp.RecordBackpressure();
-        bp.GetState().Severity.Should().Be("severe");
+        Assert.Equal("severe", bp.GetState().Severity);
     }
 
     [Fact]
@@ -51,7 +49,7 @@ public class BackpressureTests
             Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
 
         bp.RecordBackpressure();
-        bp.GetState().PermitsMax.Should().BeNull();
+        Assert.Null(bp.GetState().PermitsMax);
     }
 
     [Fact]

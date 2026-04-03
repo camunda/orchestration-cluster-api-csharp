@@ -1,6 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using FluentAssertions;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
@@ -53,12 +52,12 @@ public class OAuthManagerTests : IDisposable
         _tokenHandler.Enqueue(HttpStatusCode.OK, TokenJson("first-token"));
 
         var token1 = await _oauth.GetTokenAsync(_tokenClient);
-        token1.Should().Be("first-token");
+        Assert.Equal("first-token", token1);
 
         // Second call should return cached token without another HTTP call
         var token2 = await _oauth.GetTokenAsync(_tokenClient);
-        token2.Should().Be("first-token");
-        _tokenHandler.Requests.Should().HaveCount(1, "token should be cached");
+        Assert.Equal("first-token", token2);
+        Assert.Single(_tokenHandler.Requests);
     }
 
     [Fact]
@@ -68,14 +67,14 @@ public class OAuthManagerTests : IDisposable
         _tokenHandler.Enqueue(HttpStatusCode.OK, TokenJson("refreshed-token"));
 
         var token1 = await _oauth.GetTokenAsync(_tokenClient);
-        token1.Should().Be("initial-token");
+        Assert.Equal("initial-token", token1);
 
         // Force expiry
         _oauth.Debug_SetTokenExpiry(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - 10000);
 
         var token2 = await _oauth.GetTokenAsync(_tokenClient);
-        token2.Should().Be("refreshed-token");
-        _tokenHandler.Requests.Should().HaveCount(2);
+        Assert.Equal("refreshed-token", token2);
+        Assert.Equal(2, _tokenHandler.Requests.Count);
     }
 
     [Fact]
@@ -85,11 +84,11 @@ public class OAuthManagerTests : IDisposable
         _tokenHandler.Enqueue(HttpStatusCode.OK, TokenJson("token-2"));
 
         var token1 = await _oauth.GetTokenAsync(_tokenClient);
-        token1.Should().Be("token-1");
+        Assert.Equal("token-1", token1);
 
         var token2 = await _oauth.ForceRefreshAsync(_tokenClient);
-        token2.Should().Be("token-2");
-        _tokenHandler.Requests.Should().HaveCount(2);
+        Assert.Equal("token-2", token2);
+        Assert.Equal(2, _tokenHandler.Requests.Count);
     }
 
     [Fact]
@@ -113,8 +112,8 @@ public class OAuthManagerTests : IDisposable
 
         var results = await Task.WhenAll(tasks);
 
-        results.Should().AllBe("shared-token");
-        _tokenHandler.Requests.Should().HaveCount(1, "singleflight should coalesce concurrent fetches");
+        Assert.All(results, item => Assert.Equal("shared-token", item));
+        Assert.Single(_tokenHandler.Requests);
     }
 
     [Fact]
@@ -134,8 +133,8 @@ public class OAuthManagerTests : IDisposable
         using var oauth = new OAuthManager(config, NullLogger.Instance);
 
         var act = async () => await oauth.GetTokenAsync(_tokenClient);
-        var ex = (await act.Should().ThrowAsync<CamundaAuthException>()).Which;
-        ex.Code.Should().Be(CamundaAuthErrorCode.OAuthConfigMissing);
+        var ex = await Assert.ThrowsAsync<CamundaAuthException>(act);
+        Assert.Equal(CamundaAuthErrorCode.OAuthConfigMissing, ex.Code);
     }
 
     [Fact]
@@ -148,8 +147,8 @@ public class OAuthManagerTests : IDisposable
         using var oauth = new OAuthManager(CreateConfig(), NullLogger.Instance);
 
         var act = async () => await oauth.GetTokenAsync(client);
-        var ex = (await act.Should().ThrowAsync<CamundaAuthException>()).Which;
-        ex.Code.Should().Be(CamundaAuthErrorCode.TokenParseFailed);
+        var ex = await Assert.ThrowsAsync<CamundaAuthException>(act);
+        Assert.Equal(CamundaAuthErrorCode.TokenParseFailed, ex.Code);
     }
 
     [Fact]
@@ -163,8 +162,8 @@ public class OAuthManagerTests : IDisposable
         using var oauth = new OAuthManager(CreateConfig(), NullLogger.Instance);
 
         var act = async () => await oauth.GetTokenAsync(client);
-        var ex = (await act.Should().ThrowAsync<CamundaAuthException>()).Which;
-        ex.Code.Should().Be(CamundaAuthErrorCode.TokenParseFailed);
+        var ex = await Assert.ThrowsAsync<CamundaAuthException>(act);
+        Assert.Equal(CamundaAuthErrorCode.TokenParseFailed, ex.Code);
     }
 
     [Fact]
@@ -178,8 +177,8 @@ public class OAuthManagerTests : IDisposable
         using var oauth = new OAuthManager(CreateConfig(retryMax: 3), NullLogger.Instance);
 
         var token = await oauth.GetTokenAsync(client);
-        token.Should().Be("recovered-token");
-        handler.Requests.Should().HaveCount(2);
+        Assert.Equal("recovered-token", token);
+        Assert.Equal(2, handler.Requests.Count);
     }
 
     [Fact]
@@ -193,8 +192,8 @@ public class OAuthManagerTests : IDisposable
         using var oauth = new OAuthManager(CreateConfig(retryMax: 2), NullLogger.Instance);
 
         var act = async () => await oauth.GetTokenAsync(client);
-        var ex = (await act.Should().ThrowAsync<CamundaAuthException>()).Which;
-        ex.Code.Should().Be(CamundaAuthErrorCode.TokenFetchFailed);
+        var ex = await Assert.ThrowsAsync<CamundaAuthException>(act);
+        Assert.Equal(CamundaAuthErrorCode.TokenFetchFailed, ex.Code);
     }
 
     [Fact]
@@ -207,7 +206,7 @@ public class OAuthManagerTests : IDisposable
         _oauth.ClearCache();
         var token = await _oauth.GetTokenAsync(_tokenClient);
 
-        token.Should().Be("second");
-        _tokenHandler.Requests.Should().HaveCount(2);
+        Assert.Equal("second", token);
+        Assert.Equal(2, _tokenHandler.Requests.Count);
     }
 }

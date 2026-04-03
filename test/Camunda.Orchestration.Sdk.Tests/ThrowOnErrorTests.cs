@@ -1,5 +1,4 @@
 using System.Net;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -39,8 +38,8 @@ public class ThrowOnErrorTests : IDisposable
         using var client = CreateClient();
 
         var act = async () => await client.GetTopologyAsync();
-        await act.Should().ThrowAsync<HttpSdkException>()
-            .Where(e => e.Status == 400);
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
+        Assert.Equal(400, ex.Status);
     }
 
     [Fact]
@@ -57,8 +56,8 @@ public class ThrowOnErrorTests : IDisposable
             Retries = 0,
             ErrorMessage = "test",
         });
-        await act.Should().ThrowAsync<HttpSdkException>()
-            .Where(e => e.Status == 404);
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
+        Assert.Equal(404, ex.Status);
     }
 
     [Fact]
@@ -70,13 +69,13 @@ public class ThrowOnErrorTests : IDisposable
         using var client = CreateClient();
 
         var act = async () => await client.GetTopologyAsync();
-        var ex = (await act.Should().ThrowAsync<HttpSdkException>()).Which;
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
 
-        ex.Status.Should().Be(400);
-        ex.Title.Should().Be("INVALID_ARGUMENT");
-        ex.Detail.Should().Be("Process definition not found");
-        ex.Type.Should().Be("about:blank");
-        ex.Instance.Should().Be("/v2/process-instances");
+        Assert.Equal(400, ex.Status);
+        Assert.Equal("INVALID_ARGUMENT", ex.Title);
+        Assert.Equal("Process definition not found", ex.Detail);
+        Assert.Equal("about:blank", ex.Type);
+        Assert.Equal("/v2/process-instances", ex.Instance);
     }
 
     [Fact]
@@ -87,11 +86,11 @@ public class ThrowOnErrorTests : IDisposable
         using var client = CreateClient();
 
         var act = async () => await client.GetTopologyAsync();
-        var ex = (await act.Should().ThrowAsync<HttpSdkException>()).Which;
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
 
-        ex.Status.Should().Be(500);
-        ex.Title.Should().BeNull();
-        ex.Detail.Should().BeNull();
+        Assert.Equal(500, ex.Status);
+        Assert.Null(ex.Title);
+        Assert.Null(ex.Detail);
     }
 
     public void Dispose()

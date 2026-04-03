@@ -1,5 +1,4 @@
 using System.Net;
-using FluentAssertions;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -28,17 +27,17 @@ public class CamundaClientTests : IDisposable
     [Fact]
     public void ConfigIsHydrated()
     {
-        _client.Config.Should().NotBeNull();
-        _client.Config.RestAddress.Should().Contain("mock.local");
-        _client.Config.RestAddress.Should().EndWith("/v2");
+        Assert.NotNull(_client.Config);
+        Assert.Contains("mock.local", _client.Config.RestAddress);
+        Assert.EndsWith("/v2", _client.Config.RestAddress);
     }
 
     [Fact]
     public void BackpressureStateIsHealthyInitially()
     {
         var state = _client.GetBackpressureState();
-        state.Severity.Should().Be("healthy");
-        state.Consecutive.Should().Be(0);
+        Assert.Equal("healthy", state.Severity);
+        Assert.Equal(0, state.Consecutive);
     }
 
     [Fact]
@@ -54,8 +53,7 @@ public class CamundaClientTests : IDisposable
             HttpMessageHandler = handler,
         });
 
-        var act = () => client.Dispose();
-        act.Should().NotThrow();
+        client.Dispose();
     }
 
     [Fact]
@@ -66,7 +64,7 @@ public class CamundaClientTests : IDisposable
             Config = new Dictionary<string, string>(),
         });
 
-        client.Config.Auth.Strategy.Should().Be(AuthStrategy.None);
+        Assert.Equal(AuthStrategy.None, client.Config.Auth.Strategy);
     }
 
     public void Dispose()
