@@ -1,3 +1,10 @@
+# [8.9.0-alpha.30](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.29...v8.9.0-alpha.30) (2026-04-03)
+
+
+### Bug Fixes
+
+* sort required query params before optional in generator ([b88b5cf](https://github.com/camunda/orchestration-cluster-api-csharp/commit/b88b5cf506c1244bc0c86eda59d791b61f7fcb65)), closes [#62](https://github.com/camunda/orchestration-cluster-api-csharp/issues/62)
+
 # [8.9.0-alpha.29](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.28...v8.9.0-alpha.29) (2026-04-03)
 
 
