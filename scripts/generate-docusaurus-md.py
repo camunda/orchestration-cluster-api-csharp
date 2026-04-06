@@ -124,12 +124,27 @@ def rewrite_camunda_docs_links(content: str) -> str:
 # ---------------------------------------------------------------------------
 
 
+class _DocfxSafeLoader(yaml.SafeLoader):
+    """SafeLoader that tolerates DocFX YAML quirks.
+
+    DocFX emits ``name.vb: =`` for VB.NET operator overloads. The bare ``=``
+    is the YAML value tag (tag:yaml.org,2002:value) which SafeLoader rejects.
+    We simply treat it as a plain string.
+    """
+
+
+_DocfxSafeLoader.add_constructor(
+    "tag:yaml.org,2002:value",
+    lambda loader, node: loader.construct_scalar(node),
+)
+
+
 def load_docfx_yaml(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
     # Strip the ### YamlMime:ManagedReference line
     if text.startswith("###"):
         text = text[text.index("\n") + 1 :]
-    return yaml.safe_load(text) or {}
+    return yaml.load(text, Loader=_DocfxSafeLoader) or {}
 
 
 # ---------------------------------------------------------------------------
