@@ -124,12 +124,27 @@ def rewrite_camunda_docs_links(content: str) -> str:
 # ---------------------------------------------------------------------------
 
 
+class _DocfxSafeLoader(yaml.SafeLoader):
+    """SafeLoader that tolerates DocFX YAML quirks.
+
+    DocFX emits ``name.vb: =`` for VB.NET operator overloads. The bare ``=``
+    is the YAML value tag (tag:yaml.org,2002:value) which SafeLoader rejects.
+    We simply treat it as a plain string.
+    """
+
+
+_DocfxSafeLoader.add_constructor(
+    "tag:yaml.org,2002:value",
+    lambda loader, node: loader.construct_scalar(node),
+)
+
+
 def load_docfx_yaml(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
     # Strip the ### YamlMime:ManagedReference line
     if text.startswith("###"):
         text = text[text.index("\n") + 1 :]
-    return yaml.safe_load(text) or {}
+    return yaml.load(text, Loader=_DocfxSafeLoader) or {}
 
 
 # ---------------------------------------------------------------------------
@@ -979,71 +994,127 @@ def generate_readme_pages(readme_path: Path, output_dir: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Link validation
+# ---------------------------------------------------------------------------
+
+# Matches markdown links with relative (non-http, non-anchor) targets.
+_RELATIVE_LINK_RE = re.compile(r"\[([^\]]*)\]\((?!https?://|#|mailto:)([^)]+)\)")
+
+
+def validate_generated_links(output_dir: Path) -> list[str]:
+    """Scan generated markdown for relative links that won't resolve in camunda-docs.
+
+    Valid relative links are either:
+    - ``../`` prefixed (pointing up into the camunda-docs tree)
+    - Simple filenames without directory separators (sibling links within the
+      same generated directory, e.g. ``models.md`` from ``index.md``)
+
+    Repo-relative links containing ``/`` (e.g. ``docs/backpressure.md``) will
+    break when the pages are copied into the camunda-docs site.
+
+    Returns a list of human-readable error strings (empty = all good).
+    """
+    errors: list[str] = []
+    for md_file in sorted(output_dir.rglob("*.md")):
+        content = md_file.read_text(encoding="utf-8")
+        for line_no, line in enumerate(content.splitlines(), start=1):
+            for m in _RELATIVE_LINK_RE.finditer(line):
+                target = m.group(2).split("#")[0]  # strip fragment
+                if not target:
+                    continue  # pure anchor
+                if target.startswith("../"):
+                    continue  # valid cross-directory link
+                if "/" not in target:
+                    continue  # valid sibling link (same directory)
+                rel = md_file.relative_to(output_dir)
+                errors.append(
+                    f"  {rel}:{line_no}: repo-relative link [{m.group(1)}]({m.group(2)})"
+                )
+    return errors
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 
 def main() -> None:
-    # Compile examples — fail fast if code samples are broken
-    examples_csproj = REPO_ROOT / "docs" / "examples" / "Examples.csproj"
-    if examples_csproj.exists():
-        print("Compiling API examples...")
-        result = subprocess.run(
-            ["dotnet", "build", str(examples_csproj), "--configuration", "Release"],
-            cwd=str(REPO_ROOT),
-        )
-        if result.returncode != 0:
-            print("ERROR: Examples failed to compile.", file=sys.stderr)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Generate Docusaurus markdown from DocFX YAML + README")
+    parser.add_argument(
+        "--validate-links",
+        action="store_true",
+        help="After generation, validate that no repo-relative links survive.",
+    )
+    parser.add_argument(
+        "--readme-only",
+        action="store_true",
+        help="Only generate README section pages (skip DocFX API reference).",
+    )
+    args = parser.parse_args()
+
+    if not args.readme_only:
+        # Compile examples — fail fast if code samples are broken
+        examples_csproj = REPO_ROOT / "docs" / "examples" / "Examples.csproj"
+        if examples_csproj.exists():
+            print("Compiling API examples...")
+            result = subprocess.run(
+                ["dotnet", "build", str(examples_csproj), "--configuration", "Release"],
+                cwd=str(REPO_ROOT),
+            )
+            if result.returncode != 0:
+                print("ERROR: Examples failed to compile.", file=sys.stderr)
+                sys.exit(1)
+        else:
+            print(f"WARNING: {examples_csproj} not found, skipping example compilation")
+
+        # Sync README snippets from compiled example files
+        sync_script = REPO_ROOT / "scripts" / "sync-readme-snippets.py"
+        if sync_script.exists() and README_PATH.exists():
+            print("Syncing README snippets...")
+            result = subprocess.run(
+                [sys.executable, str(sync_script)],
+                cwd=str(REPO_ROOT),
+            )
+            if result.returncode != 0:
+                print("ERROR: README snippet sync failed.", file=sys.stderr)
+                sys.exit(1)
+
+        if not API_DIR.exists():
+            print(f"ERROR: {API_DIR} not found. Run `docfx metadata` first.", file=sys.stderr)
             sys.exit(1)
-    else:
-        print(f"WARNING: {examples_csproj} not found, skipping example compilation")
 
-    # Sync README snippets from compiled example files
-    sync_script = REPO_ROOT / "scripts" / "sync-readme-snippets.py"
-    if sync_script.exists() and README_PATH.exists():
-        print("Syncing README snippets...")
-        result = subprocess.run(
-            [sys.executable, str(sync_script)],
-            cwd=str(REPO_ROOT),
-        )
-        if result.returncode != 0:
-            print("ERROR: README snippet sync failed.", file=sys.stderr)
-            sys.exit(1)
+        print(f"Loading DocFX YAML from {API_DIR} ...")
+        examples = load_overwrite_examples(OVERWRITE_DIR, EXAMPLES_DIR)
+        print(f"  Loaded {len(examples)} code examples")
+        types = load_all_types(API_DIR, examples)
+        print(f"  Loaded {len(types)} types")
 
-    if not API_DIR.exists():
-        print(f"ERROR: {API_DIR} not found. Run `docfx metadata` first.", file=sys.stderr)
-        sys.exit(1)
+        pages = classify_types(types)
+        for page, page_types in pages.items():
+            print(f"  {page}: {len(page_types)} types")
 
-    print(f"Loading DocFX YAML from {API_DIR} ...")
-    examples = load_overwrite_examples(OVERWRITE_DIR, EXAMPLES_DIR)
-    print(f"  Loaded {len(examples)} code examples")
-    types = load_all_types(API_DIR, examples)
-    print(f"  Loaded {len(types)} types")
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    pages = classify_types(types)
-    for page, page_types in pages.items():
-        print(f"  {page}: {len(page_types)} types")
+        # Generate API reference pages
+        generators = {
+            "index.md": lambda: generate_index(pages),
+            "camunda-client.md": lambda: generate_camunda_client(pages["camunda-client"]),
+            "configuration.md": lambda: generate_configuration(pages["configuration"]),
+            "runtime.md": lambda: generate_runtime(pages["runtime"]),
+            "models.md": lambda: generate_models(pages["models"]),
+            "enums.md": lambda: generate_enums(pages["enums"]),
+            "keys.md": lambda: generate_keys(pages["keys"]),
+        }
 
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-    # Generate API reference pages
-    generators = {
-        "index.md": lambda: generate_index(pages),
-        "camunda-client.md": lambda: generate_camunda_client(pages["camunda-client"]),
-        "configuration.md": lambda: generate_configuration(pages["configuration"]),
-        "runtime.md": lambda: generate_runtime(pages["runtime"]),
-        "models.md": lambda: generate_models(pages["models"]),
-        "enums.md": lambda: generate_enums(pages["enums"]),
-        "keys.md": lambda: generate_keys(pages["keys"]),
-    }
-
-    for filename, gen_fn in generators.items():
-        content = gen_fn()
-        content = rewrite_camunda_docs_links(content)
-        content = inject_tech_preview_banner(content)
-        out_path = OUTPUT_DIR / filename
-        out_path.write_text(content, encoding="utf-8")
-        print(f"  Wrote {out_path} ({len(content)} bytes)")
+        for filename, gen_fn in generators.items():
+            content = gen_fn()
+            content = rewrite_camunda_docs_links(content)
+            content = inject_tech_preview_banner(content)
+            out_path = OUTPUT_DIR / filename
+            out_path.write_text(content, encoding="utf-8")
+            print(f"  Wrote {out_path} ({len(content)} bytes)")
 
     # Generate landing page + section pages from README
     if README_PATH.exists():
@@ -1051,6 +1122,31 @@ def main() -> None:
         generate_readme_pages(README_PATH, DOCS_MD_DIR)
     else:
         print(f"  WARNING: {README_PATH} not found, skipping section pages")
+
+    # Validate links if requested
+    if args.validate_links:
+        errors = validate_generated_links(DOCS_MD_DIR)
+        if errors:
+            print(
+                f"\n{len(errors)} broken link(s) found in generated docs:",
+                file=sys.stderr,
+            )
+            for err in errors:
+                print(err, file=sys.stderr)
+            print(
+                "\nRelative links must start with '../' to resolve in camunda-docs.",
+                file=sys.stderr,
+            )
+            print(
+                "Wrap repo-only links in <!-- docs:cut:start/end --> markers,",
+                file=sys.stderr,
+            )
+            print(
+                "or add an entry to _URL_PATH_OVERRIDES if the target path changed.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        print("Link validation passed — no repo-relative links found.")
 
     print("\nDone!")
 
