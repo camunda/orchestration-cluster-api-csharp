@@ -1,3 +1,10 @@
+# [8.9.0-alpha.31](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.30...v8.9.0-alpha.31) (2026-04-06)
+
+
+### Bug Fixes
+
+* handle YAML value tag in DocFX output ([9aecbad](https://github.com/camunda/orchestration-cluster-api-csharp/commit/9aecbad77326e6f7a390712e05bd3d98cfa4cce2))
+
 # [8.9.0-alpha.30](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.29...v8.9.0-alpha.30) (2026-04-03)
 
 
