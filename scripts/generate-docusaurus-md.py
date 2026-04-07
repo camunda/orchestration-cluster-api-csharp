@@ -40,7 +40,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 README_PATH = REPO_ROOT / "README.md"
 API_DIR = REPO_ROOT / "docs" / "api"
 OVERWRITE_DIR = REPO_ROOT / "docs" / "overwrite"
-EXAMPLES_DIR = REPO_ROOT / "docs" / "examples"
+EXAMPLES_DIR = REPO_ROOT / "examples"
 OUTPUT_DIR = REPO_ROOT / "docs-md" / "csharp-sdk" / "api-reference"
 DOCS_MD_DIR = REPO_ROOT / "docs-md"
 
@@ -208,7 +208,7 @@ def load_overwrite_examples(
                 continue
             # Check for code reference
             code_ref = re.search(
-                r"\[!code-csharp\[\]\(\.\.\/examples\/(\S+)#(\w+)\)\]", section
+                r"\[!code-csharp\[\]\((?:\.\./)*examples/(\S+)#(\w+)\)\]", section
             )
             if code_ref and current_uid:
                 region = code_ref.group(2)
