@@ -1,3 +1,11 @@
+# [8.9.0-alpha.32](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.31...v8.9.0-alpha.32) (2026-04-07)
+
+
+### Bug Fixes
+
+* add validation gate for overwrite example resolution ([09cb254](https://github.com/camunda/orchestration-cluster-api-csharp/commit/09cb254bc741b3a9e4c9b1f32a030224e0a4cf5e))
+* point docs-md generator at correct examples directory ([bb3c9de](https://github.com/camunda/orchestration-cluster-api-csharp/commit/bb3c9de4352b296f9e494d77af35efcfc98a5903))
+
 # [8.9.0-alpha.31](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.30...v8.9.0-alpha.31) (2026-04-06)
 
 
