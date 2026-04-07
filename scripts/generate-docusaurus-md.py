@@ -40,7 +40,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 README_PATH = REPO_ROOT / "README.md"
 API_DIR = REPO_ROOT / "docs" / "api"
 OVERWRITE_DIR = REPO_ROOT / "docs" / "overwrite"
-EXAMPLES_DIR = REPO_ROOT / "docs" / "examples"
+EXAMPLES_DIR = REPO_ROOT / "examples"
 OUTPUT_DIR = REPO_ROOT / "docs-md" / "csharp-sdk" / "api-reference"
 DOCS_MD_DIR = REPO_ROOT / "docs-md"
 
@@ -192,6 +192,8 @@ def load_overwrite_examples(
 
     # Parse overwrite files: each section starts with --- uid: ...\nexample:\n- *content\n---
     uid_to_example: dict[str, str] = {}
+    total_refs = 0
+    unresolved: list[str] = []
     for md_file in overwrite_dir.glob("*.md"):
         text = md_file.read_text(encoding="utf-8")
         # Split on --- blocks
@@ -208,13 +210,34 @@ def load_overwrite_examples(
                 continue
             # Check for code reference
             code_ref = re.search(
-                r"\[!code-csharp\[\]\(\.\.\/examples\/(\S+)#(\w+)\)\]", section
+                r"\[!code-csharp\[\]\((?:\.\./)*examples/(\S+)#(\w+)\)\]", section
             )
             if code_ref and current_uid:
+                total_refs += 1
                 region = code_ref.group(2)
                 if region in all_regions:
                     uid_to_example[current_uid] = all_regions[region]
+                else:
+                    unresolved.append(f"{current_uid} -> {region}")
                 current_uid = None
+
+    # Validate: every overwrite reference must resolve to an example
+    if unresolved:
+        print(
+            f"ERROR: {len(unresolved)} overwrite example(s) could not be resolved:",
+            file=sys.stderr,
+        )
+        for u in unresolved:
+            print(f"  {u}", file=sys.stderr)
+        sys.exit(1)
+    if total_refs > 0 and len(uid_to_example) == 0:
+        print(
+            "ERROR: Found overwrite references but resolved 0 examples. "
+            "Check EXAMPLES_DIR and code-ref regex.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
     return uid_to_example
 
 
