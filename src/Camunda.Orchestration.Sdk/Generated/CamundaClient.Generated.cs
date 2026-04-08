@@ -15,7 +15,20 @@ public partial class CamundaClient
     /// provided adHocSubProcessInstanceKey.
     /// 
     /// </summary>
-    /// <remarks>Operation: activateAdHocSubProcessActivities</remarks>
+    /// <remarks>
+    /// Operation: activateAdHocSubProcessActivities
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ActivateAdHocSubProcessActivitiesExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ActivateAdHocSubProcessActivitiesAsync(
+    ///         elementInstanceKey,
+    ///         new AdHocSubProcessActivateActivitiesInstruction());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ActivateAdHocSubProcessActivitiesExample(ElementInstanceKey elementInstanceKey)
@@ -39,7 +52,29 @@ public partial class CamundaClient
     /// Iterate through all known partitions and activate jobs up to the requested maximum.
     /// 
     /// </summary>
-    /// <remarks>Operation: activateJobs</remarks>
+    /// <remarks>
+    /// Operation: activateJobs
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ActivateJobsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ActivateJobsAsync(new JobActivationRequest
+    ///     {
+    ///         Type = &quot;my-job-type&quot;,
+    ///         MaxJobsToActivate = 10,
+    ///         Timeout = 300000,
+    ///         Worker = &quot;my-worker&quot;,
+    ///     });
+    /// 
+    ///     foreach (var job in result.Jobs)
+    ///     {
+    ///         Console.WriteLine($&quot;Job: {job.JobKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ActivateJobsExample()
@@ -73,7 +108,18 @@ public partial class CamundaClient
     /// Members of the group inherit the group authorizations, roles, and tenant assignments.
     /// 
     /// </summary>
-    /// <remarks>Operation: assignClientToGroup</remarks>
+    /// <remarks>
+    /// Operation: assignClientToGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignClientToGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignClientToGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignClientToGroupExample()
@@ -96,7 +142,20 @@ public partial class CamundaClient
     /// The client can then access tenant data and perform authorized actions.
     /// 
     /// </summary>
-    /// <remarks>Operation: assignClientToTenant</remarks>
+    /// <remarks>
+    /// Operation: assignClientToTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignClientToTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignClientToTenantAsync(
+    ///         tenantId,
+    ///         &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignClientToTenantExample(TenantId tenantId)
@@ -121,7 +180,20 @@ public partial class CamundaClient
     /// Group members (users, clients) can then access tenant data and perform authorized actions.
     /// 
     /// </summary>
-    /// <remarks>Operation: assignGroupToTenant</remarks>
+    /// <remarks>
+    /// Operation: assignGroupToTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignGroupToTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignGroupToTenantAsync(
+    ///         tenantId,
+    ///         &quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignGroupToTenantExample(TenantId tenantId)
@@ -144,7 +216,18 @@ public partial class CamundaClient
     /// Assign a mapping rule to a group
     /// Assigns a mapping rule to a group.
     /// </summary>
-    /// <remarks>Operation: assignMappingRuleToGroup</remarks>
+    /// <remarks>
+    /// Operation: assignMappingRuleToGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignMappingRuleToGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignMappingRuleToGroupAsync(&quot;engineering&quot;, &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignMappingRuleToGroupExample()
@@ -165,7 +248,20 @@ public partial class CamundaClient
     /// Assign a mapping rule to a tenant
     /// Assign a single mapping rule to a specified tenant.
     /// </summary>
-    /// <remarks>Operation: assignMappingRuleToTenant</remarks>
+    /// <remarks>
+    /// Operation: assignMappingRuleToTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignMappingRuleToTenantAsync(
+    ///         tenantId,
+    ///         &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
@@ -188,7 +284,18 @@ public partial class CamundaClient
     /// Assign a role to a client
     /// Assigns the specified role to the client. The client will inherit the authorizations associated with this role.
     /// </summary>
-    /// <remarks>Operation: assignRoleToClient</remarks>
+    /// <remarks>
+    /// Operation: assignRoleToClient
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignRoleToClientExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToClientAsync(&quot;developer&quot;, &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignRoleToClientExample()
@@ -209,7 +316,18 @@ public partial class CamundaClient
     /// Assign a role to a group
     /// Assigns the specified role to the group. Every member of the group (user or client) will inherit the authorizations associated with this role.
     /// </summary>
-    /// <remarks>Operation: assignRoleToGroup</remarks>
+    /// <remarks>
+    /// Operation: assignRoleToGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignRoleToGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToGroupAsync(&quot;developer&quot;, &quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignRoleToGroupExample()
@@ -230,7 +348,18 @@ public partial class CamundaClient
     /// Assign a role to a mapping rule
     /// Assigns a role to a mapping rule.
     /// </summary>
-    /// <remarks>Operation: assignRoleToMappingRule</remarks>
+    /// <remarks>
+    /// Operation: assignRoleToMappingRule
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignRoleToMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignRoleToMappingRuleExample()
@@ -253,7 +382,20 @@ public partial class CamundaClient
     /// Users, Clients or Groups, that have the role assigned, will get access to the tenant's data and can perform actions according to their authorizations.
     /// 
     /// </summary>
-    /// <remarks>Operation: assignRoleToTenant</remarks>
+    /// <remarks>
+    /// Operation: assignRoleToTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignRoleToTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToTenantAsync(
+    ///         tenantId,
+    ///         &quot;developer&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignRoleToTenantExample(TenantId tenantId)
@@ -276,7 +418,18 @@ public partial class CamundaClient
     /// Assign a role to a user
     /// Assigns the specified role to the user. The user will inherit the authorizations associated with this role.
     /// </summary>
-    /// <remarks>Operation: assignRoleToUser</remarks>
+    /// <remarks>
+    /// Operation: assignRoleToUser
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignRoleToUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignRoleToUserAsync(&quot;developer&quot;, username);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignRoleToUserExample(Username username)
@@ -298,7 +451,23 @@ public partial class CamundaClient
     /// Assigns a user task with the given key to the given assignee. Assignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
     /// 
     /// </summary>
-    /// <remarks>Operation: assignUserTask</remarks>
+    /// <remarks>
+    /// Operation: assignUserTask
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignUserTaskAsync(
+    ///         userTaskKey,
+    ///         new UserTaskAssignmentRequest
+    ///         {
+    ///             Assignee = &quot;user@example.com&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignUserTaskExample(UserTaskKey userTaskKey)
@@ -326,7 +495,18 @@ public partial class CamundaClient
     /// Group members inherit the group authorizations, roles, and tenant assignments.
     /// 
     /// </summary>
-    /// <remarks>Operation: assignUserToGroup</remarks>
+    /// <remarks>
+    /// Operation: assignUserToGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignUserToGroupExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignUserToGroupAsync(&quot;engineering&quot;, username);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignUserToGroupExample(Username username)
@@ -347,7 +527,20 @@ public partial class CamundaClient
     /// Assign a user to a tenant
     /// Assign a single user to a specified tenant. The user can then access tenant data and perform authorized actions.
     /// </summary>
-    /// <remarks>Operation: assignUserToTenant</remarks>
+    /// <remarks>
+    /// Operation: assignUserToTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignUserToTenantExample(TenantId tenantId, Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignUserToTenantAsync(
+    ///         tenantId,
+    ///         username);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task AssignUserToTenantExample(TenantId tenantId, Username username)
@@ -370,7 +563,23 @@ public partial class CamundaClient
     /// Broadcast signal
     /// Broadcasts a signal.
     /// </summary>
-    /// <remarks>Operation: broadcastSignal</remarks>
+    /// <remarks>
+    /// Operation: broadcastSignal
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task BroadcastSignalExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.BroadcastSignalAsync(new SignalBroadcastRequest
+    ///     {
+    ///         SignalName = &quot;orderCancelled&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Signal key: {result.SignalKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task BroadcastSignalExample()
@@ -399,7 +608,18 @@ public partial class CamundaClient
     /// This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: cancelBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: cancelBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CancelBatchOperationExample(BatchOperationKey batchOperationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CancelBatchOperationAsync(batchOperationKey);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CancelBatchOperationExample(BatchOperationKey batchOperationKey)
@@ -421,7 +641,20 @@ public partial class CamundaClient
     /// Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
     /// 
     /// </summary>
-    /// <remarks>Operation: cancelProcessInstance</remarks>
+    /// <remarks>
+    /// Operation: cancelProcessInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CancelProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CancelProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new CancelProcessInstanceRequest());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CancelProcessInstanceExample(ProcessInstanceKey processInstanceKey)
@@ -448,7 +681,21 @@ public partial class CamundaClient
     /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: cancelProcessInstancesBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: cancelProcessInstancesBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CancelProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CancelProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceCancellationBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CancelProcessInstancesBatchOperationExample()
@@ -473,7 +720,20 @@ public partial class CamundaClient
     /// Complete a job with the given payload, which allows completing the associated service task.
     /// 
     /// </summary>
-    /// <remarks>Operation: completeJob</remarks>
+    /// <remarks>
+    /// Operation: completeJob
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CompleteJobExample(JobKey jobKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CompleteJobAsync(
+    ///         jobKey,
+    ///         new JobCompletionRequest());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CompleteJobExample(JobKey jobKey)
@@ -497,7 +757,20 @@ public partial class CamundaClient
     /// Completes a user task with the given key. Completion waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
     /// 
     /// </summary>
-    /// <remarks>Operation: completeUserTask</remarks>
+    /// <remarks>
+    /// Operation: completeUserTask
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CompleteUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CompleteUserTaskAsync(
+    ///         userTaskKey,
+    ///         new UserTaskCompletionRequest());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CompleteUserTaskExample(UserTaskKey userTaskKey)
@@ -524,7 +797,24 @@ public partial class CamundaClient
     /// Use the publish message endpoint to send messages that can be buffered.
     /// 
     /// </summary>
-    /// <remarks>Operation: correlateMessage</remarks>
+    /// <remarks>
+    /// Operation: correlateMessage
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CorrelateMessageExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CorrelateMessageAsync(new MessageCorrelationRequest
+    ///     {
+    ///         Name = &quot;paymentReceived&quot;,
+    ///         CorrelationKey = &quot;order-123&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Message key: {result.MessageKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CorrelateMessageExample()
@@ -552,7 +842,26 @@ public partial class CamundaClient
     /// Create admin user
     /// Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
     /// </summary>
-    /// <remarks>Operation: createAdminUser</remarks>
+    /// <remarks>
+    /// Operation: createAdminUser
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateAdminUserExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateAdminUserAsync(new UserRequest
+    ///     {
+    ///         Username = &quot;admin&quot;,
+    ///         Name = &quot;Admin User&quot;,
+    ///         Email = &quot;admin@example.com&quot;,
+    ///         Password = &quot;admin-password&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Admin user key: {result.Username}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateAdminUserExample()
@@ -581,7 +890,27 @@ public partial class CamundaClient
     /// Create authorization
     /// Create the authorization.
     /// </summary>
-    /// <remarks>Operation: createAuthorization</remarks>
+    /// <remarks>
+    /// Operation: createAuthorization
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateAuthorizationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateAuthorizationAsync(new AuthorizationPropertyBasedRequest
+    ///     {
+    ///         ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+    ///         PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE },
+    ///         ResourcePropertyName = &quot;my-process&quot;,
+    ///         OwnerType = OwnerTypeEnum.USER,
+    ///         OwnerId = &quot;user@example.com&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Authorization key: {result.AuthorizationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateAuthorizationExample()
@@ -613,7 +942,23 @@ public partial class CamundaClient
     /// This is an atomic call, i.e. either all resources are deployed or none of them are.
     /// 
     /// </summary>
-    /// <remarks>Operation: createDeployment</remarks>
+    /// <remarks>
+    /// Operation: createDeployment
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateDeploymentExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var content = new MultipartFormDataContent();
+    ///     var fileContent = new ByteArrayContent(File.ReadAllBytes(&quot;process.bpmn&quot;));
+    ///     content.Add(fileContent, &quot;resources&quot;, &quot;process.bpmn&quot;);
+    /// 
+    ///     var result = await client.CreateDeploymentAsync(content);
+    ///     Console.WriteLine($&quot;Deployment key: {result.DeploymentKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateDeploymentExample()
@@ -648,7 +993,23 @@ public partial class CamundaClient
     /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
-    /// <remarks>Operation: createDocument</remarks>
+    /// <remarks>
+    /// Operation: createDocument
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateDocumentExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     using var content = new MultipartFormDataContent();
+    ///     content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;Hello, world!&quot;)), &quot;file&quot;, &quot;hello.txt&quot;);
+    /// 
+    ///     var result = await client.CreateDocumentAsync(content);
+    /// 
+    ///     Console.WriteLine($&quot;Document ID: {result.DocumentId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateDocumentExample()
@@ -680,7 +1041,22 @@ public partial class CamundaClient
     /// Note that this is currently supported for document stores of type: AWS, GCP
     /// 
     /// </summary>
-    /// <remarks>Operation: createDocumentLink</remarks>
+    /// <remarks>
+    /// Operation: createDocumentLink
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateDocumentLinkExample(DocumentId documentId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateDocumentLinkAsync(
+    ///         documentId,
+    ///         new DocumentLinkRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Document link: {result.Url}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateDocumentLinkExample(DocumentId documentId)
@@ -723,7 +1099,27 @@ public partial class CamundaClient
     /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
-    /// <remarks>Operation: createDocuments</remarks>
+    /// <remarks>
+    /// Operation: createDocuments
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateDocumentsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     using var content = new MultipartFormDataContent();
+    ///     content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File one&quot;)), &quot;files&quot;, &quot;one.txt&quot;);
+    ///     content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File two&quot;)), &quot;files&quot;, &quot;two.txt&quot;);
+    /// 
+    ///     var result = await client.CreateDocumentsAsync(content);
+    /// 
+    ///     foreach (var doc in result.CreatedDocuments)
+    ///     {
+    ///         Console.WriteLine($&quot;Created: {doc.DocumentId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateDocumentsExample()
@@ -761,7 +1157,20 @@ public partial class CamundaClient
     /// repeats.
     /// 
     /// </summary>
-    /// <remarks>Operation: createElementInstanceVariables</remarks>
+    /// <remarks>
+    /// Operation: createElementInstanceVariables
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateElementInstanceVariablesExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.CreateElementInstanceVariablesAsync(
+    ///         elementInstanceKey,
+    ///         new SetVariableRequest());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateElementInstanceVariablesExample(ElementInstanceKey elementInstanceKey)
@@ -784,7 +1193,25 @@ public partial class CamundaClient
     /// Create a global-scoped cluster variable
     /// Create a global-scoped cluster variable.
     /// </summary>
-    /// <remarks>Operation: createGlobalClusterVariable</remarks>
+    /// <remarks>
+    /// Operation: createGlobalClusterVariable
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateGlobalClusterVariableExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateGlobalClusterVariableAsync(
+    ///         new CreateClusterVariableRequest
+    ///         {
+    ///             Name = &quot;my-variable&quot;,
+    ///             Value = &quot;my-value&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Created variable: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateGlobalClusterVariableExample()
@@ -812,7 +1239,25 @@ public partial class CamundaClient
     /// Create global user task listener
     /// Create a new global user task listener.
     /// </summary>
-    /// <remarks>Operation: createGlobalTaskListener</remarks>
+    /// <remarks>
+    /// Operation: createGlobalTaskListener
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateGlobalTaskListenerExample(GlobalListenerId id)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateGlobalTaskListenerAsync(
+    ///         new CreateGlobalTaskListenerRequest
+    ///         {
+    ///             EventTypes = new List&lt;GlobalTaskListenerEventTypeEnum&gt; { GlobalTaskListenerEventTypeEnum.Completing },
+    ///             Id = id,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Task listener: {result.Id}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateGlobalTaskListenerExample(GlobalListenerId id)
@@ -840,7 +1285,24 @@ public partial class CamundaClient
     /// Create group
     /// Create a new group.
     /// </summary>
-    /// <remarks>Operation: createGroup</remarks>
+    /// <remarks>
+    /// Operation: createGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateGroupAsync(new GroupCreateRequest
+    ///     {
+    ///         GroupId = &quot;engineering&quot;,
+    ///         Name = &quot;Engineering&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Group key: {result.GroupId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateGroupExample()
@@ -868,7 +1330,25 @@ public partial class CamundaClient
     /// Create a new mapping rule
     /// 
     /// </summary>
-    /// <remarks>Operation: createMappingRule</remarks>
+    /// <remarks>
+    /// Operation: createMappingRule
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateMappingRuleAsync(new MappingRuleCreateRequest
+    ///     {
+    ///         ClaimName = &quot;groups&quot;,
+    ///         ClaimValue = &quot;engineering&quot;,
+    ///         Name = &quot;Engineering Group Mapping&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Mapping rule: {result.MappingRuleId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateMappingRuleExample()
@@ -902,7 +1382,34 @@ public partial class CamundaClient
     /// when awaitCompletion is enabled.
     /// 
     /// </summary>
-    /// <remarks>Operation: createProcessInstance</remarks>
+    /// <remarks>
+    /// Operation: createProcessInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateProcessInstanceByIdExample(ProcessDefinitionId processDefinitionId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
+    ///     {
+    ///         ProcessDefinitionId = processDefinitionId,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
+    /// }
+    /// public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
+    ///     {
+    ///         ProcessDefinitionKey = processDefinitionKey,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateProcessInstanceByIdExample(ProcessDefinitionId processDefinitionId)
@@ -944,7 +1451,23 @@ public partial class CamundaClient
     /// Create role
     /// Create a new role.
     /// </summary>
-    /// <remarks>Operation: createRole</remarks>
+    /// <remarks>
+    /// Operation: createRole
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateRoleAsync(new RoleCreateRequest
+    ///     {
+    ///         Name = &quot;developer&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Role key: {result.RoleId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateRoleExample()
@@ -970,7 +1493,24 @@ public partial class CamundaClient
     /// Create tenant
     /// Creates a new tenant.
     /// </summary>
-    /// <remarks>Operation: createTenant</remarks>
+    /// <remarks>
+    /// Operation: createTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateTenantExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateTenantAsync(new TenantCreateRequest
+    ///     {
+    ///         TenantId = &quot;acme-corp&quot;,
+    ///         Name = &quot;Acme Corporation&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Tenant key: {result.TenantId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateTenantExample()
@@ -997,7 +1537,26 @@ public partial class CamundaClient
     /// Create a tenant-scoped cluster variable
     /// Create a new cluster variable for the given tenant.
     /// </summary>
-    /// <remarks>Operation: createTenantClusterVariable</remarks>
+    /// <remarks>
+    /// Operation: createTenantClusterVariable
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateTenantClusterVariableAsync(
+    ///         tenantId,
+    ///         new CreateClusterVariableRequest
+    ///         {
+    ///             Name = &quot;my-variable&quot;,
+    ///             Value = &quot;tenant-value&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Created variable: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
@@ -1026,7 +1585,26 @@ public partial class CamundaClient
     /// Create user
     /// Create a new user.
     /// </summary>
-    /// <remarks>Operation: createUser</remarks>
+    /// <remarks>
+    /// Operation: createUser
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateUserExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateUserAsync(new UserRequest
+    ///     {
+    ///         Username = &quot;jdoe&quot;,
+    ///         Name = &quot;Jane Doe&quot;,
+    ///         Email = &quot;jdoe@example.com&quot;,
+    ///         Password = &quot;secure-password&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;User key: {result.Username}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task CreateUserExample()
@@ -1055,7 +1633,18 @@ public partial class CamundaClient
     /// Delete authorization
     /// Deletes the authorization with the given key.
     /// </summary>
-    /// <remarks>Operation: deleteAuthorization</remarks>
+    /// <remarks>
+    /// Operation: deleteAuthorization
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteAuthorizationExample(AuthorizationKey authorizationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteAuthorizationAsync(authorizationKey);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteAuthorizationExample(AuthorizationKey authorizationKey)
@@ -1076,7 +1665,20 @@ public partial class CamundaClient
     /// Delete decision instance
     /// Delete all associated decision evaluations based on provided key.
     /// </summary>
-    /// <remarks>Operation: deleteDecisionInstance</remarks>
+    /// <remarks>
+    /// Operation: deleteDecisionInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteDecisionInstanceExample(DecisionEvaluationKey decisionEvaluationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteDecisionInstanceAsync(
+    ///         decisionEvaluationKey,
+    ///         new DeleteDecisionInstanceRequest());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteDecisionInstanceExample(DecisionEvaluationKey decisionEvaluationKey)
@@ -1101,7 +1703,21 @@ public partial class CamundaClient
     /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: deleteDecisionInstancesBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: deleteDecisionInstancesBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteDecisionInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.DeleteDecisionInstancesBatchOperationAsync(
+    ///         new DecisionInstanceDeletionBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteDecisionInstancesBatchOperationExample()
@@ -1128,7 +1744,18 @@ public partial class CamundaClient
     /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
-    /// <remarks>Operation: deleteDocument</remarks>
+    /// <remarks>
+    /// Operation: deleteDocument
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteDocumentExample(DocumentId documentId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteDocumentAsync(documentId);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteDocumentExample(DocumentId documentId)
@@ -1151,7 +1778,18 @@ public partial class CamundaClient
     /// Delete a global-scoped cluster variable
     /// Delete a global-scoped cluster variable.
     /// </summary>
-    /// <remarks>Operation: deleteGlobalClusterVariable</remarks>
+    /// <remarks>
+    /// Operation: deleteGlobalClusterVariable
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteGlobalClusterVariableExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteGlobalClusterVariableAsync(&quot;my-variable&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteGlobalClusterVariableExample()
@@ -1172,7 +1810,19 @@ public partial class CamundaClient
     /// Delete global user task listener
     /// Deletes a global user task listener.
     /// </summary>
-    /// <remarks>Operation: deleteGlobalTaskListener</remarks>
+    /// <remarks>
+    /// Operation: deleteGlobalTaskListener
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteGlobalTaskListenerAsync(
+    ///         globalListenerId);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteGlobalTaskListenerExample(GlobalListenerId globalListenerId)
@@ -1194,7 +1844,18 @@ public partial class CamundaClient
     /// Delete group
     /// Deletes the group with the given ID.
     /// </summary>
-    /// <remarks>Operation: deleteGroup</remarks>
+    /// <remarks>
+    /// Operation: deleteGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteGroupAsync(&quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteGroupExample()
@@ -1216,7 +1877,18 @@ public partial class CamundaClient
     /// Deletes the mapping rule with the given ID.
     /// 
     /// </summary>
-    /// <remarks>Operation: deleteMappingRule</remarks>
+    /// <remarks>
+    /// Operation: deleteMappingRule
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteMappingRuleAsync(&quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteMappingRuleExample()
@@ -1237,7 +1909,20 @@ public partial class CamundaClient
     /// Delete process instance
     /// Deletes a process instance. Only instances that are completed or terminated can be deleted.
     /// </summary>
-    /// <remarks>Operation: deleteProcessInstance</remarks>
+    /// <remarks>
+    /// Operation: deleteProcessInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new DeleteProcessInstanceRequest());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteProcessInstanceExample(ProcessInstanceKey processInstanceKey)
@@ -1263,7 +1948,21 @@ public partial class CamundaClient
     /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: deleteProcessInstancesBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: deleteProcessInstancesBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.DeleteProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceDeletionBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteProcessInstancesBatchOperationExample()
@@ -1299,7 +1998,20 @@ public partial class CamundaClient
     /// supported for process resources; for other resource types this flag is ignored and no history
     /// will be deleted.
     /// </summary>
-    /// <remarks>Operation: deleteResource</remarks>
+    /// <remarks>
+    /// Operation: deleteResource
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteResourceExample(ResourceKey resourceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteResourceAsync(
+    ///         resourceKey,
+    ///         new DeleteResourceRequest());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteResourceExample(ResourceKey resourceKey)
@@ -1322,7 +2034,18 @@ public partial class CamundaClient
     /// Delete role
     /// Deletes the role with the given ID.
     /// </summary>
-    /// <remarks>Operation: deleteRole</remarks>
+    /// <remarks>
+    /// Operation: deleteRole
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteRoleAsync(&quot;developer&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteRoleExample()
@@ -1343,7 +2066,18 @@ public partial class CamundaClient
     /// Delete tenant
     /// Deletes an existing tenant.
     /// </summary>
-    /// <remarks>Operation: deleteTenant</remarks>
+    /// <remarks>
+    /// Operation: deleteTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteTenantAsync(tenantId);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteTenantExample(TenantId tenantId)
@@ -1364,7 +2098,20 @@ public partial class CamundaClient
     /// Delete a tenant-scoped cluster variable
     /// Delete a tenant-scoped cluster variable.
     /// </summary>
-    /// <remarks>Operation: deleteTenantClusterVariable</remarks>
+    /// <remarks>
+    /// Operation: deleteTenantClusterVariable
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteTenantClusterVariableExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteTenantClusterVariableAsync(
+    ///         tenantId,
+    ///         &quot;my-variable&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteTenantClusterVariableExample(TenantId tenantId)
@@ -1387,7 +2134,18 @@ public partial class CamundaClient
     /// Delete user
     /// Deletes a user.
     /// </summary>
-    /// <remarks>Operation: deleteUser</remarks>
+    /// <remarks>
+    /// Operation: deleteUser
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteUserAsync(username);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task DeleteUserExample(Username username)
@@ -1411,7 +2169,21 @@ public partial class CamundaClient
     /// Multiple root-level conditional start events of the same process definition can trigger if their conditions evaluate to true.
     /// 
     /// </summary>
-    /// <remarks>Operation: evaluateConditionals</remarks>
+    /// <remarks>
+    /// Operation: evaluateConditionals
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task EvaluateConditionalsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.EvaluateConditionalsAsync(
+    ///         new ConditionalEvaluationInstruction());
+    /// 
+    ///     Console.WriteLine($&quot;Result: {result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task EvaluateConditionalsExample()
@@ -1440,7 +2212,34 @@ public partial class CamundaClient
     /// version of the decision is used.
     /// 
     /// </summary>
-    /// <remarks>Operation: evaluateDecision</remarks>
+    /// <remarks>
+    /// Operation: evaluateDecision
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task EvaluateDecisionByIdExample(DecisionDefinitionId decisionDefinitionId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
+    ///     {
+    ///         DecisionDefinitionId = decisionDefinitionId,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Decision output: {result.Output}&quot;);
+    /// }
+    /// public static async Task EvaluateDecisionByKeyExample(DecisionDefinitionKey decisionDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.EvaluateDecisionAsync(new DecisionEvaluationByKey
+    ///     {
+    ///         DecisionDefinitionKey = decisionDefinitionKey,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Decision output: {result.Output}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task EvaluateDecisionByIdExample(DecisionDefinitionId decisionDefinitionId)
@@ -1482,7 +2281,24 @@ public partial class CamundaClient
     /// Evaluate an expression
     /// Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
     /// </summary>
-    /// <remarks>Operation: evaluateExpression</remarks>
+    /// <remarks>
+    /// Operation: evaluateExpression
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task EvaluateExpressionExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.EvaluateExpressionAsync(
+    ///         new ExpressionEvaluationRequest
+    ///         {
+    ///             Expression = &quot;= 1 + 2&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Result: {result.Result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task EvaluateExpressionExample()
@@ -1511,7 +2327,25 @@ public partial class CamundaClient
     /// Mark the job as failed.
     /// 
     /// </summary>
-    /// <remarks>Operation: failJob</remarks>
+    /// <remarks>
+    /// Operation: failJob
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task FailJobExample(JobKey jobKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.FailJobAsync(
+    ///         jobKey,
+    ///         new JobFailRequest
+    ///         {
+    ///             Retries = 3,
+    ///             RetryBackOff = 5000,
+    ///             ErrorMessage = &quot;Something went wrong&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task FailJobExample(JobKey jobKey)
@@ -1539,7 +2373,19 @@ public partial class CamundaClient
     /// Get audit log
     /// Get an audit log entry by auditLogKey.
     /// </summary>
-    /// <remarks>Operation: getAuditLog</remarks>
+    /// <remarks>
+    /// Operation: getAuditLog
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetAuditLogExample(AuditLogKey auditLogKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAuditLogAsync(auditLogKey);
+    ///     Console.WriteLine($&quot;Audit log: {result.AuditLogKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetAuditLogExample(AuditLogKey auditLogKey)
@@ -1568,7 +2414,19 @@ public partial class CamundaClient
     /// Get current user
     /// Retrieves the current authenticated user.
     /// </summary>
-    /// <remarks>Operation: getAuthentication</remarks>
+    /// <remarks>
+    /// Operation: getAuthentication
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetAuthenticationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAuthenticationAsync();
+    ///     Console.WriteLine($&quot;Authenticated user: {result.Username}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetAuthenticationExample()
@@ -1590,7 +2448,21 @@ public partial class CamundaClient
     /// Get authorization
     /// Get authorization by the given key.
     /// </summary>
-    /// <remarks>Operation: getAuthorization</remarks>
+    /// <remarks>
+    /// Operation: getAuthorization
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetAuthorizationExample(AuthorizationKey authorizationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAuthorizationAsync(
+    ///         authorizationKey);
+    /// 
+    ///     Console.WriteLine($&quot;Resource type: {result.ResourceType}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetAuthorizationExample(AuthorizationKey authorizationKey)
@@ -1621,7 +2493,21 @@ public partial class CamundaClient
     /// Get batch operation
     /// Get batch operation by key.
     /// </summary>
-    /// <remarks>Operation: getBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: getBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetBatchOperationExample(BatchOperationKey batchOperationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetBatchOperationAsync(
+    ///         batchOperationKey);
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetBatchOperationExample(BatchOperationKey batchOperationKey)
@@ -1652,7 +2538,21 @@ public partial class CamundaClient
     /// Get decision definition
     /// Returns a decision definition by key.
     /// </summary>
-    /// <remarks>Operation: getDecisionDefinition</remarks>
+    /// <remarks>
+    /// Operation: getDecisionDefinition
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetDecisionDefinitionExample(DecisionDefinitionKey decisionDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionDefinitionAsync(
+    ///         decisionDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;Decision definition: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetDecisionDefinitionExample(DecisionDefinitionKey decisionDefinitionKey)
@@ -1683,7 +2583,21 @@ public partial class CamundaClient
     /// Get decision definition XML
     /// Returns decision definition as XML.
     /// </summary>
-    /// <remarks>Operation: getDecisionDefinitionXML</remarks>
+    /// <remarks>
+    /// Operation: getDecisionDefinitionXML
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetDecisionDefinitionXmlExample(DecisionDefinitionKey decisionDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionDefinitionXmlAsync(
+    ///         decisionDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;XML: {result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetDecisionDefinitionXmlExample(DecisionDefinitionKey decisionDefinitionKey)
@@ -1714,7 +2628,21 @@ public partial class CamundaClient
     /// Get decision instance
     /// Returns a decision instance.
     /// </summary>
-    /// <remarks>Operation: getDecisionInstance</remarks>
+    /// <remarks>
+    /// Operation: getDecisionInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetDecisionInstanceExample(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionInstanceAsync(
+    ///         decisionEvaluationInstanceKey);
+    /// 
+    ///     Console.WriteLine($&quot;Decision instance: {result.DecisionDefinitionId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetDecisionInstanceExample(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey)
@@ -1745,7 +2673,21 @@ public partial class CamundaClient
     /// Get decision requirements
     /// Returns Decision Requirements as JSON.
     /// </summary>
-    /// <remarks>Operation: getDecisionRequirements</remarks>
+    /// <remarks>
+    /// Operation: getDecisionRequirements
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetDecisionRequirementsExample(DecisionRequirementsKey decisionRequirementsKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionRequirementsAsync(
+    ///         decisionRequirementsKey);
+    /// 
+    ///     Console.WriteLine($&quot;DRD: {result.DecisionRequirementsName}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetDecisionRequirementsExample(DecisionRequirementsKey decisionRequirementsKey)
@@ -1776,7 +2718,21 @@ public partial class CamundaClient
     /// Get decision requirements XML
     /// Returns decision requirements as XML.
     /// </summary>
-    /// <remarks>Operation: getDecisionRequirementsXML</remarks>
+    /// <remarks>
+    /// Operation: getDecisionRequirementsXML
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetDecisionRequirementsXmlExample(DecisionRequirementsKey decisionRequirementsKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetDecisionRequirementsXmlAsync(
+    ///         decisionRequirementsKey);
+    /// 
+    ///     Console.WriteLine($&quot;XML: {result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetDecisionRequirementsXmlExample(DecisionRequirementsKey decisionRequirementsKey)
@@ -1810,7 +2766,20 @@ public partial class CamundaClient
     /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
-    /// <remarks>Operation: getDocument</remarks>
+    /// <remarks>
+    /// Operation: getDocument
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetDocumentExample(DocumentId documentId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var content = await client.GetDocumentAsync(documentId);
+    /// 
+    ///     Console.WriteLine($&quot;Downloaded document: {documentId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetDocumentExample(DocumentId documentId)
@@ -1836,7 +2805,21 @@ public partial class CamundaClient
     /// Get element instance
     /// Returns element instance as JSON.
     /// </summary>
-    /// <remarks>Operation: getElementInstance</remarks>
+    /// <remarks>
+    /// Operation: getElementInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetElementInstanceExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetElementInstanceAsync(
+    ///         elementInstanceKey);
+    /// 
+    ///     Console.WriteLine($&quot;Element: {result.ElementId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetElementInstanceExample(ElementInstanceKey elementInstanceKey)
@@ -1867,7 +2850,19 @@ public partial class CamundaClient
     /// Get a global-scoped cluster variable
     /// Get a global-scoped cluster variable.
     /// </summary>
-    /// <remarks>Operation: getGlobalClusterVariable</remarks>
+    /// <remarks>
+    /// Operation: getGlobalClusterVariable
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetGlobalClusterVariableExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetGlobalClusterVariableAsync(&quot;my-variable&quot;);
+    ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetGlobalClusterVariableExample()
@@ -1897,7 +2892,22 @@ public partial class CamundaClient
     /// Returns global aggregated counts for jobs. Filter by the creation time window (required) and optionally by jobType.
     /// 
     /// </summary>
-    /// <remarks>Operation: getGlobalJobStatistics</remarks>
+    /// <remarks>
+    /// Operation: getGlobalJobStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetGlobalJobStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetGlobalJobStatisticsAsync(
+    ///         from: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+    ///         to: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
+    /// 
+    ///     Console.WriteLine($&quot;Global job stats: {result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetGlobalJobStatisticsExample()
@@ -1933,7 +2943,21 @@ public partial class CamundaClient
     /// Get global user task listener
     /// Get a global user task listener by its id.
     /// </summary>
-    /// <remarks>Operation: getGlobalTaskListener</remarks>
+    /// <remarks>
+    /// Operation: getGlobalTaskListener
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetGlobalTaskListenerAsync(
+    ///         globalListenerId);
+    /// 
+    ///     Console.WriteLine($&quot;Task listener: {result.EventTypes}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetGlobalTaskListenerExample(GlobalListenerId globalListenerId)
@@ -1964,7 +2988,19 @@ public partial class CamundaClient
     /// Get group
     /// Get a group by its ID.
     /// </summary>
-    /// <remarks>Operation: getGroup</remarks>
+    /// <remarks>
+    /// Operation: getGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetGroupAsync(&quot;engineering&quot;);
+    ///     Console.WriteLine($&quot;Group: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetGroupExample()
@@ -1994,7 +3030,19 @@ public partial class CamundaClient
     /// Returns incident as JSON.
     /// 
     /// </summary>
-    /// <remarks>Operation: getIncident</remarks>
+    /// <remarks>
+    /// Operation: getIncident
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetIncidentExample(IncidentKey incidentKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetIncidentAsync(incidentKey);
+    ///     Console.WriteLine($&quot;Incident: {result.IncidentKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetIncidentExample(IncidentKey incidentKey)
@@ -2024,7 +3072,24 @@ public partial class CamundaClient
     /// Returns aggregated metrics per error for the given jobType.
     /// 
     /// </summary>
-    /// <remarks>Operation: getJobErrorStatistics</remarks>
+    /// <remarks>
+    /// Operation: getJobErrorStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetJobErrorStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetJobErrorStatisticsAsync(
+    ///         new JobErrorStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Error: {stat.ErrorCode}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetJobErrorStatisticsExample()
@@ -2061,7 +3126,24 @@ public partial class CamundaClient
     /// Each item in the response corresponds to one time bucket of the requested resolution.
     /// 
     /// </summary>
-    /// <remarks>Operation: getJobTimeSeriesStatistics</remarks>
+    /// <remarks>
+    /// Operation: getJobTimeSeriesStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetJobTimeSeriesStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetJobTimeSeriesStatisticsAsync(
+    ///         new JobTimeSeriesStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Time series: {stat}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetJobTimeSeriesStatisticsExample()
@@ -2096,7 +3178,24 @@ public partial class CamundaClient
     /// Get statistics about jobs, grouped by job type.
     /// 
     /// </summary>
-    /// <remarks>Operation: getJobTypeStatistics</remarks>
+    /// <remarks>
+    /// Operation: getJobTypeStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetJobTypeStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetJobTypeStatisticsAsync(
+    ///         new JobTypeStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Job type: {stat.JobType}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetJobTypeStatisticsExample()
@@ -2131,7 +3230,24 @@ public partial class CamundaClient
     /// Get statistics about jobs, grouped by worker, for a given job type.
     /// 
     /// </summary>
-    /// <remarks>Operation: getJobWorkerStatistics</remarks>
+    /// <remarks>
+    /// Operation: getJobWorkerStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetJobWorkerStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetJobWorkerStatisticsAsync(
+    ///         new JobWorkerStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Worker: {stat.Worker}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetJobWorkerStatisticsExample()
@@ -2165,7 +3281,19 @@ public partial class CamundaClient
     /// Get license status
     /// Obtains the status of the current Camunda license.
     /// </summary>
-    /// <remarks>Operation: getLicense</remarks>
+    /// <remarks>
+    /// Operation: getLicense
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetLicenseExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetLicenseAsync();
+    ///     Console.WriteLine($&quot;License type: {result.LicenseType}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetLicenseExample()
@@ -2188,7 +3316,19 @@ public partial class CamundaClient
     /// Gets the mapping rule with the given ID.
     /// 
     /// </summary>
-    /// <remarks>Operation: getMappingRule</remarks>
+    /// <remarks>
+    /// Operation: getMappingRule
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetMappingRuleAsync(&quot;rule-123&quot;);
+    ///     Console.WriteLine($&quot;Mapping rule: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetMappingRuleExample()
@@ -2217,7 +3357,21 @@ public partial class CamundaClient
     /// Get process definition
     /// Returns process definition as JSON.
     /// </summary>
-    /// <remarks>Operation: getProcessDefinition</remarks>
+    /// <remarks>
+    /// Operation: getProcessDefinition
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessDefinitionExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionAsync(
+    ///         processDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;Process definition: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessDefinitionExample(ProcessDefinitionKey processDefinitionKey)
@@ -2249,7 +3403,24 @@ public partial class CamundaClient
     /// Get statistics about process instances, grouped by process definition and tenant.
     /// 
     /// </summary>
-    /// <remarks>Operation: getProcessDefinitionInstanceStatistics</remarks>
+    /// <remarks>
+    /// Operation: getProcessDefinitionInstanceStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessDefinitionInstanceStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionInstanceStatisticsAsync(
+    ///         new ProcessDefinitionInstanceStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Definition: {stat.ProcessDefinitionId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessDefinitionInstanceStatisticsExample()
@@ -2285,7 +3456,30 @@ public partial class CamundaClient
     /// The process definition ID must be provided as a required field in the request body filter.
     /// 
     /// </summary>
-    /// <remarks>Operation: getProcessDefinitionInstanceVersionStatistics</remarks>
+    /// <remarks>
+    /// Operation: getProcessDefinitionInstanceVersionStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessDefinitionInstanceVersionStatisticsExample(ProcessDefinitionId processDefinitionId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionInstanceVersionStatisticsAsync(
+    ///         new ProcessDefinitionInstanceVersionStatisticsQuery
+    ///         {
+    ///             Filter = new ProcessDefinitionInstanceVersionStatisticsFilter
+    ///             {
+    ///                 ProcessDefinitionId = processDefinitionId,
+    ///             },
+    ///         });
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Version: {stat.ProcessDefinitionVersion}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessDefinitionInstanceVersionStatisticsExample(ProcessDefinitionId processDefinitionId)
@@ -2326,7 +3520,24 @@ public partial class CamundaClient
     /// Get message subscription statistics, grouped by process definition.
     /// 
     /// </summary>
-    /// <remarks>Operation: getProcessDefinitionMessageSubscriptionStatistics</remarks>
+    /// <remarks>
+    /// Operation: getProcessDefinitionMessageSubscriptionStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessDefinitionMessageSubscriptionStatisticsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionMessageSubscriptionStatisticsAsync(
+    ///         new ProcessDefinitionMessageSubscriptionStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Message subscriptions: {stat.ActiveSubscriptions}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessDefinitionMessageSubscriptionStatisticsExample()
@@ -2360,7 +3571,25 @@ public partial class CamundaClient
     /// Get process definition statistics
     /// Get statistics about elements in currently running process instances by process definition key and search filter.
     /// </summary>
-    /// <remarks>Operation: getProcessDefinitionStatistics</remarks>
+    /// <remarks>
+    /// Operation: getProcessDefinitionStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessDefinitionStatisticsExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionStatisticsAsync(
+    ///         processDefinitionKey,
+    ///         new ProcessDefinitionElementStatisticsQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Element: {stat.ElementId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessDefinitionStatisticsExample(ProcessDefinitionKey processDefinitionKey)
@@ -2395,7 +3624,21 @@ public partial class CamundaClient
     /// Get process definition XML
     /// Returns process definition as XML.
     /// </summary>
-    /// <remarks>Operation: getProcessDefinitionXML</remarks>
+    /// <remarks>
+    /// Operation: getProcessDefinitionXML
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessDefinitionXmlExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessDefinitionXmlAsync(
+    ///         processDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;XML: {result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessDefinitionXmlExample(ProcessDefinitionKey processDefinitionKey)
@@ -2426,7 +3669,19 @@ public partial class CamundaClient
     /// Get process instance
     /// Get the process instance by the process instance key.
     /// </summary>
-    /// <remarks>Operation: getProcessInstance</remarks>
+    /// <remarks>
+    /// Operation: getProcessInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceAsync(processInstanceKey);
+    ///     Console.WriteLine($&quot;Process instance: {result.ProcessDefinitionId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
@@ -2455,7 +3710,21 @@ public partial class CamundaClient
     /// Get call hierarchy
     /// Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
     /// </summary>
-    /// <remarks>Operation: getProcessInstanceCallHierarchy</remarks>
+    /// <remarks>
+    /// Operation: getProcessInstanceCallHierarchy
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessInstanceCallHierarchyExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceCallHierarchyAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     Console.WriteLine($&quot;Call hierarchy: {result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessInstanceCallHierarchyExample(ProcessInstanceKey processInstanceKey)
@@ -2486,7 +3755,24 @@ public partial class CamundaClient
     /// Get sequence flows
     /// Get sequence flows taken by the process instance.
     /// </summary>
-    /// <remarks>Operation: getProcessInstanceSequenceFlows</remarks>
+    /// <remarks>
+    /// Operation: getProcessInstanceSequenceFlows
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessInstanceSequenceFlowsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceSequenceFlowsAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     foreach (var flow in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Sequence flow: {flow}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessInstanceSequenceFlowsExample(ProcessInstanceKey processInstanceKey)
@@ -2520,7 +3806,24 @@ public partial class CamundaClient
     /// Get element instance statistics
     /// Get statistics about elements by the process instance key.
     /// </summary>
-    /// <remarks>Operation: getProcessInstanceStatistics</remarks>
+    /// <remarks>
+    /// Operation: getProcessInstanceStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessInstanceStatisticsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceStatisticsAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Element: {stat.ElementId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessInstanceStatisticsExample(ProcessInstanceKey processInstanceKey)
@@ -2557,7 +3860,24 @@ public partial class CamundaClient
     /// provided as a filter in the request body.
     /// 
     /// </summary>
-    /// <remarks>Operation: getProcessInstanceStatisticsByDefinition</remarks>
+    /// <remarks>
+    /// Operation: getProcessInstanceStatisticsByDefinition
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessInstanceStatisticsByDefinitionExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceStatisticsByDefinitionAsync(
+    ///         new IncidentProcessInstanceStatisticsByDefinitionQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Definition: {stat.ProcessDefinitionKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessInstanceStatisticsByDefinitionExample()
@@ -2593,7 +3913,24 @@ public partial class CamundaClient
     /// grouped by incident error hash code.
     /// 
     /// </summary>
-    /// <remarks>Operation: getProcessInstanceStatisticsByError</remarks>
+    /// <remarks>
+    /// Operation: getProcessInstanceStatisticsByError
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessInstanceStatisticsByErrorExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceStatisticsByErrorAsync(
+    ///         new IncidentProcessInstanceStatisticsByErrorQuery());
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Error: {stat.ErrorMessage}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetProcessInstanceStatisticsByErrorExample()
@@ -2631,7 +3968,19 @@ public partial class CamundaClient
     /// :::
     /// 
     /// </summary>
-    /// <remarks>Operation: getResource</remarks>
+    /// <remarks>
+    /// Operation: getResource
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetResourceExample(ResourceKey resourceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetResourceAsync(resourceKey);
+    ///     Console.WriteLine($&quot;Resource: {result.ResourceName}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetResourceExample(ResourceKey resourceKey)
@@ -2657,7 +4006,19 @@ public partial class CamundaClient
     /// :::
     /// 
     /// </summary>
-    /// <remarks>Operation: getResourceContent</remarks>
+    /// <remarks>
+    /// Operation: getResourceContent
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetResourceContentExample(ResourceKey resourceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetResourceContentAsync(resourceKey);
+    ///     Console.WriteLine($&quot;Content: {result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetResourceContentExample(ResourceKey resourceKey)
@@ -2679,7 +4040,19 @@ public partial class CamundaClient
     /// Get role
     /// Get a role by its ID.
     /// </summary>
-    /// <remarks>Operation: getRole</remarks>
+    /// <remarks>
+    /// Operation: getRole
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetRoleAsync(&quot;developer&quot;);
+    ///     Console.WriteLine($&quot;Role: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetRoleExample()
@@ -2710,7 +4083,21 @@ public partial class CamundaClient
     /// Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
     /// 
     /// </summary>
-    /// <remarks>Operation: getStartProcessForm</remarks>
+    /// <remarks>
+    /// Operation: getStartProcessForm
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetStartProcessFormExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetStartProcessFormAsync(
+    ///         processDefinitionKey);
+    /// 
+    ///     Console.WriteLine($&quot;Form: {result.FormKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetStartProcessFormExample(ProcessDefinitionKey processDefinitionKey)
@@ -2741,7 +4128,19 @@ public partial class CamundaClient
     /// Get cluster status
     /// Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
     /// </summary>
-    /// <remarks>Operation: getStatus</remarks>
+    /// <remarks>
+    /// Operation: getStatus
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.GetStatusAsync();
+    ///     Console.WriteLine(&quot;Cluster is healthy&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetStatusExample()
@@ -2768,7 +4167,19 @@ public partial class CamundaClient
     /// in future releases.
     /// 
     /// </summary>
-    /// <remarks>Operation: getSystemConfiguration</remarks>
+    /// <remarks>
+    /// Operation: getSystemConfiguration
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetSystemConfigurationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetSystemConfigurationAsync();
+    ///     Console.WriteLine($&quot;System config: {result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetSystemConfigurationExample()
@@ -2790,7 +4201,19 @@ public partial class CamundaClient
     /// Get tenant
     /// Retrieves a single tenant by tenant ID.
     /// </summary>
-    /// <remarks>Operation: getTenant</remarks>
+    /// <remarks>
+    /// Operation: getTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetTenantAsync(tenantId);
+    ///     Console.WriteLine($&quot;Tenant: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetTenantExample(TenantId tenantId)
@@ -2819,7 +4242,22 @@ public partial class CamundaClient
     /// Get a tenant-scoped cluster variable
     /// Get a tenant-scoped cluster variable.
     /// </summary>
-    /// <remarks>Operation: getTenantClusterVariable</remarks>
+    /// <remarks>
+    /// Operation: getTenantClusterVariable
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetTenantClusterVariableExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetTenantClusterVariableAsync(
+    ///         tenantId,
+    ///         &quot;my-variable&quot;);
+    /// 
+    ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetTenantClusterVariableExample(TenantId tenantId)
@@ -2851,7 +4289,19 @@ public partial class CamundaClient
     /// Get cluster topology
     /// Obtains the current topology of the cluster the gateway is part of.
     /// </summary>
-    /// <remarks>Operation: getTopology</remarks>
+    /// <remarks>
+    /// Operation: getTopology
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetTopologyExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var topology = await client.GetTopologyAsync();
+    ///     Console.WriteLine($&quot;Cluster size: {topology.ClusterSize}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetTopologyExample()
@@ -2873,7 +4323,22 @@ public partial class CamundaClient
     /// Get usage metrics
     /// Retrieve the usage metrics based on given criteria.
     /// </summary>
-    /// <remarks>Operation: getUsageMetrics</remarks>
+    /// <remarks>
+    /// Operation: getUsageMetrics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetUsageMetricsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetUsageMetricsAsync(
+    ///         startTime: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+    ///         endTime: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
+    /// 
+    ///     Console.WriteLine($&quot;Metrics: {result}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetUsageMetricsExample()
@@ -2910,7 +4375,19 @@ public partial class CamundaClient
     /// Get user
     /// Get a user by its username.
     /// </summary>
-    /// <remarks>Operation: getUser</remarks>
+    /// <remarks>
+    /// Operation: getUser
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetUserAsync(username);
+    ///     Console.WriteLine($&quot;User: {result.Username}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetUserExample(Username username)
@@ -2939,7 +4416,19 @@ public partial class CamundaClient
     /// Get user task
     /// Get the user task by the user task key.
     /// </summary>
-    /// <remarks>Operation: getUserTask</remarks>
+    /// <remarks>
+    /// Operation: getUserTask
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetUserTaskAsync(userTaskKey);
+    ///     Console.WriteLine($&quot;User task: {result.UserTaskKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetUserTaskExample(UserTaskKey userTaskKey)
@@ -2970,7 +4459,19 @@ public partial class CamundaClient
     /// Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
     /// 
     /// </summary>
-    /// <remarks>Operation: getUserTaskForm</remarks>
+    /// <remarks>
+    /// Operation: getUserTaskForm
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetUserTaskFormExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetUserTaskFormAsync(userTaskKey);
+    ///     Console.WriteLine($&quot;Form: {result.FormKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetUserTaskFormExample(UserTaskKey userTaskKey)
@@ -3003,7 +4504,19 @@ public partial class CamundaClient
     /// The variable's scopeKey indicates whether it's a process-level variable or scoped to a
     /// specific element instance.
     /// </summary>
-    /// <remarks>Operation: getVariable</remarks>
+    /// <remarks>
+    /// Operation: getVariable
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetVariableExample(VariableKey variableKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetVariableAsync(variableKey);
+    ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task GetVariableExample(VariableKey variableKey)
@@ -3039,7 +4552,23 @@ public partial class CamundaClient
     /// latest process improvements.
     /// 
     /// </summary>
-    /// <remarks>Operation: migrateProcessInstance</remarks>
+    /// <remarks>
+    /// Operation: migrateProcessInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task MigrateProcessInstanceExample(ProcessInstanceKey processInstanceKey, ProcessDefinitionKey targetProcessDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.MigrateProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new ProcessInstanceMigrationInstruction
+    ///         {
+    ///             TargetProcessDefinitionKey = targetProcessDefinitionKey,
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task MigrateProcessInstanceExample(ProcessInstanceKey processInstanceKey, ProcessDefinitionKey targetProcessDefinitionKey)
@@ -3069,7 +4598,28 @@ public partial class CamundaClient
     /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: migrateProcessInstancesBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: migrateProcessInstancesBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task MigrateProcessInstancesBatchOperationExample(ProcessDefinitionKey targetProcessDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.MigrateProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceMigrationBatchOperationRequest
+    ///         {
+    ///             Filter = new ProcessInstanceFilter(),
+    ///             MigrationPlan = new ProcessInstanceMigrationBatchOperationPlan
+    ///             {
+    ///                 TargetProcessDefinitionKey = targetProcessDefinitionKey,
+    ///             },
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task MigrateProcessInstancesBatchOperationExample(ProcessDefinitionKey targetProcessDefinitionKey)
@@ -3106,7 +4656,20 @@ public partial class CamundaClient
     /// For example, because an external system is not available or doesn't respond as expected.
     /// 
     /// </summary>
-    /// <remarks>Operation: modifyProcessInstance</remarks>
+    /// <remarks>
+    /// Operation: modifyProcessInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ModifyProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new ProcessInstanceModificationInstruction());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey)
@@ -3135,7 +4698,21 @@ public partial class CamundaClient
     /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: modifyProcessInstancesBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: modifyProcessInstancesBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ModifyProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ModifyProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceModificationBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ModifyProcessInstancesBatchOperationExample()
@@ -3165,7 +4742,21 @@ public partial class CamundaClient
     /// in future releases.
     /// 
     /// </summary>
-    /// <remarks>Operation: pinClock</remarks>
+    /// <remarks>
+    /// Operation: pinClock
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task PinClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.PinClockAsync(new ClockPinRequest
+    ///     {
+    ///         Timestamp = 1700000000000,
+    ///     });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task PinClockExample()
@@ -3194,7 +4785,25 @@ public partial class CamundaClient
     /// Use the message correlation endpoint for such use cases.
     /// 
     /// </summary>
-    /// <remarks>Operation: publishMessage</remarks>
+    /// <remarks>
+    /// Operation: publishMessage
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task PublishMessageExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.PublishMessageAsync(new MessagePublicationRequest
+    ///     {
+    ///         Name = &quot;paymentReceived&quot;,
+    ///         CorrelationKey = &quot;order-123&quot;,
+    ///         TimeToLive = 60000,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Message key: {result.MessageKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task PublishMessageExample()
@@ -3229,7 +4838,18 @@ public partial class CamundaClient
     /// in future releases.
     /// 
     /// </summary>
-    /// <remarks>Operation: resetClock</remarks>
+    /// <remarks>
+    /// Operation: resetClock
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResetClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResetClockAsync();
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ResetClockExample()
@@ -3252,7 +4872,20 @@ public partial class CamundaClient
     /// to reset the job's retries, followed by this call.
     /// 
     /// </summary>
-    /// <remarks>Operation: resolveIncident</remarks>
+    /// <remarks>
+    /// Operation: resolveIncident
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResolveIncidentExample(IncidentKey incidentKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResolveIncidentAsync(
+    ///         incidentKey,
+    ///         new IncidentResolutionRequest());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ResolveIncidentExample(IncidentKey incidentKey)
@@ -3279,7 +4912,21 @@ public partial class CamundaClient
     /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: resolveIncidentsBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: resolveIncidentsBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResolveIncidentsBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResolveIncidentsBatchOperationAsync(
+    ///         new ProcessInstanceIncidentResolutionBatchOperationRequest());
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ResolveIncidentsBatchOperationExample()
@@ -3303,7 +4950,21 @@ public partial class CamundaClient
     /// Resolve related incidents
     /// Creates a batch operation to resolve multiple incidents of a process instance.
     /// </summary>
-    /// <remarks>Operation: resolveProcessInstanceIncidents</remarks>
+    /// <remarks>
+    /// Operation: resolveProcessInstanceIncidents
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResolveProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResolveProcessInstanceIncidentsAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ResolveProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
@@ -3329,7 +4990,18 @@ public partial class CamundaClient
     /// This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: resumeBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: resumeBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResumeBatchOperationExample(BatchOperationKey batchOperationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResumeBatchOperationAsync(batchOperationKey);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ResumeBatchOperationExample(BatchOperationKey batchOperationKey)
@@ -3350,7 +5022,24 @@ public partial class CamundaClient
     /// Search audit logs
     /// Search for audit logs based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchAuditLogs</remarks>
+    /// <remarks>
+    /// Operation: searchAuditLogs
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchAuditLogsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAuditLogsAsync(
+    ///         new AuditLogSearchQueryRequest());
+    /// 
+    ///     foreach (var log in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Audit log: {log.AuditLogKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchAuditLogsExample()
@@ -3384,7 +5073,24 @@ public partial class CamundaClient
     /// Search authorizations
     /// Search for authorizations based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchAuthorizations</remarks>
+    /// <remarks>
+    /// Operation: searchAuthorizations
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchAuthorizationsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAuthorizationsAsync(
+    ///         new AuthorizationSearchQuery());
+    /// 
+    ///     foreach (var auth in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Authorization: {auth.AuthorizationKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchAuthorizationsExample()
@@ -3418,7 +5124,24 @@ public partial class CamundaClient
     /// Search batch operation items
     /// Search for batch operation items based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchBatchOperationItems</remarks>
+    /// <remarks>
+    /// Operation: searchBatchOperationItems
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchBatchOperationItemsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchBatchOperationItemsAsync(
+    ///         new BatchOperationItemSearchQuery());
+    /// 
+    ///     foreach (var item in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Item: {item.ItemKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchBatchOperationItemsExample()
@@ -3452,7 +5175,24 @@ public partial class CamundaClient
     /// Search batch operations
     /// Search for batch operations based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchBatchOperations</remarks>
+    /// <remarks>
+    /// Operation: searchBatchOperations
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchBatchOperationsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchBatchOperationsAsync(
+    ///         new BatchOperationSearchQuery());
+    /// 
+    ///     foreach (var op in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Batch operation: {op.BatchOperationKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchBatchOperationsExample()
@@ -3486,7 +5226,25 @@ public partial class CamundaClient
     /// Search group clients
     /// Search clients assigned to a group.
     /// </summary>
-    /// <remarks>Operation: searchClientsForGroup</remarks>
+    /// <remarks>
+    /// Operation: searchClientsForGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchClientsForGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchClientsForGroupAsync(
+    ///         &quot;engineering&quot;,
+    ///         new SearchClientsForGroupRequest());
+    /// 
+    ///     foreach (var c in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Client: {c.ClientId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchClientsForGroupExample()
@@ -3521,7 +5279,25 @@ public partial class CamundaClient
     /// Search role clients
     /// Search clients with assigned role.
     /// </summary>
-    /// <remarks>Operation: searchClientsForRole</remarks>
+    /// <remarks>
+    /// Operation: searchClientsForRole
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchClientsForRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchClientsForRoleAsync(
+    ///         &quot;developer&quot;,
+    ///         new SearchClientsForRoleRequest());
+    /// 
+    ///     foreach (var c in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Client: {c.ClientId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchClientsForRoleExample()
@@ -3556,7 +5332,25 @@ public partial class CamundaClient
     /// Search clients for tenant
     /// Retrieves a filtered and sorted list of clients for a specified tenant.
     /// </summary>
-    /// <remarks>Operation: searchClientsForTenant</remarks>
+    /// <remarks>
+    /// Operation: searchClientsForTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchClientsForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchClientsForTenantAsync(
+    ///         tenantId,
+    ///         new SearchClientsForTenantRequest());
+    /// 
+    ///     foreach (var c in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Client: {c.ClientId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchClientsForTenantExample(TenantId tenantId)
@@ -3590,7 +5384,24 @@ public partial class CamundaClient
     /// <summary>
     /// Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.
     /// </summary>
-    /// <remarks>Operation: searchClusterVariables</remarks>
+    /// <remarks>
+    /// Operation: searchClusterVariables
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchClusterVariablesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchClusterVariablesAsync(
+    ///         new ClusterVariableSearchQueryRequest());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchClusterVariablesExample()
@@ -3626,7 +5437,24 @@ public partial class CamundaClient
     /// Search correlated message subscriptions
     /// Search correlated message subscriptions based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchCorrelatedMessageSubscriptions</remarks>
+    /// <remarks>
+    /// Operation: searchCorrelatedMessageSubscriptions
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchCorrelatedMessageSubscriptionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchCorrelatedMessageSubscriptionsAsync(
+    ///         new CorrelatedMessageSubscriptionSearchQuery());
+    /// 
+    ///     foreach (var sub in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Correlated subscription: {sub.MessageName}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchCorrelatedMessageSubscriptionsExample()
@@ -3660,7 +5488,24 @@ public partial class CamundaClient
     /// Search decision definitions
     /// Search for decision definitions based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchDecisionDefinitions</remarks>
+    /// <remarks>
+    /// Operation: searchDecisionDefinitions
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchDecisionDefinitionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchDecisionDefinitionsAsync(
+    ///         new DecisionDefinitionSearchQuery());
+    /// 
+    ///     foreach (var dd in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Decision definition: {dd.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchDecisionDefinitionsExample()
@@ -3694,7 +5539,24 @@ public partial class CamundaClient
     /// Search decision instances
     /// Search for decision instances based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchDecisionInstances</remarks>
+    /// <remarks>
+    /// Operation: searchDecisionInstances
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchDecisionInstancesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchDecisionInstancesAsync(
+    ///         new DecisionInstanceSearchQuery());
+    /// 
+    ///     foreach (var di in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Decision instance: {di.DecisionDefinitionId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchDecisionInstancesExample()
@@ -3728,7 +5590,24 @@ public partial class CamundaClient
     /// Search decision requirements
     /// Search for decision requirements based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchDecisionRequirements</remarks>
+    /// <remarks>
+    /// Operation: searchDecisionRequirements
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchDecisionRequirementsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchDecisionRequirementsAsync(
+    ///         new DecisionRequirementsSearchQuery());
+    /// 
+    ///     foreach (var drd in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;DRD: {drd.DecisionRequirementsName}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchDecisionRequirementsExample()
@@ -3769,7 +5648,25 @@ public partial class CamundaClient
     /// to the root element itself.
     /// 
     /// </summary>
-    /// <remarks>Operation: searchElementInstanceIncidents</remarks>
+    /// <remarks>
+    /// Operation: searchElementInstanceIncidents
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchElementInstanceIncidentsExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchElementInstanceIncidentsAsync(
+    ///         elementInstanceKey,
+    ///         new IncidentSearchQuery());
+    /// 
+    ///     foreach (var incident in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Incident: {incident.IncidentKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchElementInstanceIncidentsExample(ElementInstanceKey elementInstanceKey)
@@ -3804,7 +5701,24 @@ public partial class CamundaClient
     /// Search element instances
     /// Search for element instances based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchElementInstances</remarks>
+    /// <remarks>
+    /// Operation: searchElementInstances
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchElementInstancesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchElementInstancesAsync(
+    ///         new ElementInstanceSearchQuery());
+    /// 
+    ///     foreach (var ei in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Element instance: {ei.ElementInstanceKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchElementInstancesExample()
@@ -3838,7 +5752,24 @@ public partial class CamundaClient
     /// Search global user task listeners
     /// Search for global user task listeners based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchGlobalTaskListeners</remarks>
+    /// <remarks>
+    /// Operation: searchGlobalTaskListeners
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchGlobalTaskListenersExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchGlobalTaskListenersAsync(
+    ///         new GlobalTaskListenerSearchQueryRequest());
+    /// 
+    ///     foreach (var listener in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Listener: {listener.Id}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchGlobalTaskListenersExample()
@@ -3872,7 +5803,25 @@ public partial class CamundaClient
     /// Search groups for tenant
     /// Retrieves a filtered and sorted list of groups for a specified tenant.
     /// </summary>
-    /// <remarks>Operation: searchGroupIdsForTenant</remarks>
+    /// <remarks>
+    /// Operation: searchGroupIdsForTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchGroupIdsForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchGroupIdsForTenantAsync(
+    ///         tenantId,
+    ///         new TenantGroupSearchQueryRequest());
+    /// 
+    ///     foreach (var group in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Group: {group.GroupId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchGroupIdsForTenantExample(TenantId tenantId)
@@ -3907,7 +5856,23 @@ public partial class CamundaClient
     /// Search groups
     /// Search for groups based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchGroups</remarks>
+    /// <remarks>
+    /// Operation: searchGroups
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchGroupsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchGroupsAsync(new GroupSearchQueryRequest());
+    /// 
+    ///     foreach (var group in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Group: {group.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchGroupsExample()
@@ -3940,7 +5905,25 @@ public partial class CamundaClient
     /// Search role groups
     /// Search groups with assigned role.
     /// </summary>
-    /// <remarks>Operation: searchGroupsForRole</remarks>
+    /// <remarks>
+    /// Operation: searchGroupsForRole
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchGroupsForRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchGroupsForRoleAsync(
+    ///         &quot;developer&quot;,
+    ///         new RoleGroupSearchQueryRequest());
+    /// 
+    ///     foreach (var group in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Group: {group.GroupId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchGroupsForRoleExample()
@@ -3976,7 +5959,23 @@ public partial class CamundaClient
     /// Search for incidents based on given criteria.
     /// 
     /// </summary>
-    /// <remarks>Operation: searchIncidents</remarks>
+    /// <remarks>
+    /// Operation: searchIncidents
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchIncidentsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchIncidentsAsync(new IncidentSearchQuery());
+    /// 
+    ///     foreach (var incident in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Incident: {incident.IncidentKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchIncidentsExample()
@@ -4009,7 +6008,23 @@ public partial class CamundaClient
     /// Search jobs
     /// Search for jobs based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchJobs</remarks>
+    /// <remarks>
+    /// Operation: searchJobs
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchJobsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchJobsAsync(new JobSearchQuery());
+    /// 
+    ///     foreach (var job in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Job: {job.JobKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchJobsExample()
@@ -4043,7 +6058,24 @@ public partial class CamundaClient
     /// Search for mapping rules based on given criteria.
     /// 
     /// </summary>
-    /// <remarks>Operation: searchMappingRule</remarks>
+    /// <remarks>
+    /// Operation: searchMappingRule
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMappingRuleAsync(
+    ///         new MappingRuleSearchQueryRequest());
+    /// 
+    ///     foreach (var rule in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Mapping rule: {rule.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchMappingRuleExample()
@@ -4077,7 +6109,25 @@ public partial class CamundaClient
     /// Search group mapping rules
     /// Search mapping rules assigned to a group.
     /// </summary>
-    /// <remarks>Operation: searchMappingRulesForGroup</remarks>
+    /// <remarks>
+    /// Operation: searchMappingRulesForGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchMappingRulesForGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMappingRulesForGroupAsync(
+    ///         &quot;engineering&quot;,
+    ///         new MappingRuleSearchQueryRequest());
+    /// 
+    ///     foreach (var rule in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Mapping rule: {rule.MappingRuleId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchMappingRulesForGroupExample()
@@ -4112,7 +6162,25 @@ public partial class CamundaClient
     /// Search role mapping rules
     /// Search mapping rules with assigned role.
     /// </summary>
-    /// <remarks>Operation: searchMappingRulesForRole</remarks>
+    /// <remarks>
+    /// Operation: searchMappingRulesForRole
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchMappingRulesForRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMappingRulesForRoleAsync(
+    ///         &quot;developer&quot;,
+    ///         new MappingRuleSearchQueryRequest());
+    /// 
+    ///     foreach (var rule in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Mapping rule: {rule.MappingRuleId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchMappingRulesForRoleExample()
@@ -4147,7 +6215,25 @@ public partial class CamundaClient
     /// Search mapping rules for tenant
     /// Retrieves a filtered and sorted list of MappingRules for a specified tenant.
     /// </summary>
-    /// <remarks>Operation: searchMappingRulesForTenant</remarks>
+    /// <remarks>
+    /// Operation: searchMappingRulesForTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchMappingRulesForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMappingRulesForTenantAsync(
+    ///         tenantId,
+    ///         new MappingRuleSearchQueryRequest());
+    /// 
+    ///     foreach (var rule in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Mapping rule: {rule.MappingRuleId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchMappingRulesForTenantExample(TenantId tenantId)
@@ -4182,7 +6268,24 @@ public partial class CamundaClient
     /// Search message subscriptions
     /// Search for message subscriptions based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchMessageSubscriptions</remarks>
+    /// <remarks>
+    /// Operation: searchMessageSubscriptions
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchMessageSubscriptionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchMessageSubscriptionsAsync(
+    ///         new MessageSubscriptionSearchQuery());
+    /// 
+    ///     foreach (var sub in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Subscription: {sub.MessageName}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchMessageSubscriptionsExample()
@@ -4216,7 +6319,24 @@ public partial class CamundaClient
     /// Search process definitions
     /// Search for process definitions based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchProcessDefinitions</remarks>
+    /// <remarks>
+    /// Operation: searchProcessDefinitions
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchProcessDefinitionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchProcessDefinitionsAsync(
+    ///         new ProcessDefinitionSearchQuery());
+    /// 
+    ///     foreach (var pd in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Process definition: {pd.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchProcessDefinitionsExample()
@@ -4256,7 +6376,25 @@ public partial class CamundaClient
     /// subprocesses or called processes under the root instance while excluding incidents directly tied to the root.
     /// 
     /// </summary>
-    /// <remarks>Operation: searchProcessInstanceIncidents</remarks>
+    /// <remarks>
+    /// Operation: searchProcessInstanceIncidents
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchProcessInstanceIncidentsAsync(
+    ///         processInstanceKey,
+    ///         new IncidentSearchQuery());
+    /// 
+    ///     foreach (var incident in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Incident: {incident.IncidentKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
@@ -4291,7 +6429,23 @@ public partial class CamundaClient
     /// Search process instances
     /// Search for process instances based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchProcessInstances</remarks>
+    /// <remarks>
+    /// Operation: searchProcessInstances
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchProcessInstancesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
+    /// 
+    ///     foreach (var instance in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Process instance: {instance.ProcessInstanceKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchProcessInstancesExample()
@@ -4324,7 +6478,23 @@ public partial class CamundaClient
     /// Search roles
     /// Search for roles based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchRoles</remarks>
+    /// <remarks>
+    /// Operation: searchRoles
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchRolesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchRolesAsync(new RoleSearchQueryRequest());
+    /// 
+    ///     foreach (var role in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Role: {role.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchRolesExample()
@@ -4357,7 +6527,25 @@ public partial class CamundaClient
     /// Search group roles
     /// Search roles assigned to a group.
     /// </summary>
-    /// <remarks>Operation: searchRolesForGroup</remarks>
+    /// <remarks>
+    /// Operation: searchRolesForGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchRolesForGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchRolesForGroupAsync(
+    ///         &quot;engineering&quot;,
+    ///         new RoleSearchQueryRequest());
+    /// 
+    ///     foreach (var role in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Role: {role.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchRolesForGroupExample()
@@ -4392,7 +6580,25 @@ public partial class CamundaClient
     /// Search roles for tenant
     /// Retrieves a filtered and sorted list of roles for a specified tenant.
     /// </summary>
-    /// <remarks>Operation: searchRolesForTenant</remarks>
+    /// <remarks>
+    /// Operation: searchRolesForTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchRolesForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchRolesForTenantAsync(
+    ///         tenantId,
+    ///         new RoleSearchQueryRequest());
+    /// 
+    ///     foreach (var role in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Role: {role.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchRolesForTenantExample(TenantId tenantId)
@@ -4427,7 +6633,23 @@ public partial class CamundaClient
     /// Search tenants
     /// Retrieves a filtered and sorted list of tenants.
     /// </summary>
-    /// <remarks>Operation: searchTenants</remarks>
+    /// <remarks>
+    /// Operation: searchTenants
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchTenantsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchTenantsAsync(new TenantSearchQueryRequest());
+    /// 
+    ///     foreach (var tenant in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Tenant: {tenant.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchTenantsExample()
@@ -4460,7 +6682,25 @@ public partial class CamundaClient
     /// Search user task audit logs
     /// Search for user task audit logs based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchUserTaskAuditLogs</remarks>
+    /// <remarks>
+    /// Operation: searchUserTaskAuditLogs
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchUserTaskAuditLogsExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUserTaskAuditLogsAsync(
+    ///         userTaskKey,
+    ///         new UserTaskAuditLogSearchQueryRequest());
+    /// 
+    ///     foreach (var log in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Audit log: {log.AuditLogKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchUserTaskAuditLogsExample(UserTaskKey userTaskKey)
@@ -4501,7 +6741,25 @@ public partial class CamundaClient
     /// truncated.
     /// 
     /// </summary>
-    /// <remarks>Operation: searchUserTaskEffectiveVariables</remarks>
+    /// <remarks>
+    /// Operation: searchUserTaskEffectiveVariables
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchUserTaskEffectiveVariablesExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUserTaskEffectiveVariablesAsync(
+    ///         userTaskKey,
+    ///         new SearchUserTaskEffectiveVariablesRequest());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchUserTaskEffectiveVariablesExample(UserTaskKey userTaskKey)
@@ -4519,18 +6777,11 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
         var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("searchUserTaskEffectiveVariables", false,
-                () => InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct);
     }
 
@@ -4545,7 +6796,25 @@ public partial class CamundaClient
     /// are truncated.
     /// 
     /// </summary>
-    /// <remarks>Operation: searchUserTaskVariables</remarks>
+    /// <remarks>
+    /// Operation: searchUserTaskVariables
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchUserTaskVariablesExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUserTaskVariablesAsync(
+    ///         userTaskKey,
+    ///         new SearchUserTaskVariablesRequest());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchUserTaskVariablesExample(UserTaskKey userTaskKey)
@@ -4582,7 +6851,23 @@ public partial class CamundaClient
     /// Search user tasks
     /// Search for user tasks based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchUserTasks</remarks>
+    /// <remarks>
+    /// Operation: searchUserTasks
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchUserTasksExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
+    /// 
+    ///     foreach (var task in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User task: {task.UserTaskKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchUserTasksExample()
@@ -4615,7 +6900,23 @@ public partial class CamundaClient
     /// Search users
     /// Search for users based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchUsers</remarks>
+    /// <remarks>
+    /// Operation: searchUsers
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchUsersExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUsersAsync(new UserSearchQueryRequest());
+    /// 
+    ///     foreach (var user in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User: {user.Username}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchUsersExample()
@@ -4648,7 +6949,25 @@ public partial class CamundaClient
     /// Search group users
     /// Search users assigned to a group.
     /// </summary>
-    /// <remarks>Operation: searchUsersForGroup</remarks>
+    /// <remarks>
+    /// Operation: searchUsersForGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchUsersForGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUsersForGroupAsync(
+    ///         &quot;engineering&quot;,
+    ///         new SearchUsersForGroupRequest());
+    /// 
+    ///     foreach (var user in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User: {user.Username}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchUsersForGroupExample()
@@ -4683,7 +7002,25 @@ public partial class CamundaClient
     /// Search role users
     /// Search users with assigned role.
     /// </summary>
-    /// <remarks>Operation: searchUsersForRole</remarks>
+    /// <remarks>
+    /// Operation: searchUsersForRole
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchUsersForRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUsersForRoleAsync(
+    ///         &quot;developer&quot;,
+    ///         new SearchUsersForRoleRequest());
+    /// 
+    ///     foreach (var user in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User: {user.Username}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchUsersForRoleExample()
@@ -4718,7 +7055,25 @@ public partial class CamundaClient
     /// Search users for tenant
     /// Retrieves a filtered and sorted list of users for a specified tenant.
     /// </summary>
-    /// <remarks>Operation: searchUsersForTenant</remarks>
+    /// <remarks>
+    /// Operation: searchUsersForTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchUsersForTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchUsersForTenantAsync(
+    ///         tenantId,
+    ///         new SearchUsersForTenantRequest());
+    /// 
+    ///     foreach (var user in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;User: {user.Username}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchUsersForTenantExample(TenantId tenantId)
@@ -4761,7 +7116,23 @@ public partial class CamundaClient
     /// 
     /// By default, long variable values in the response are truncated.
     /// </summary>
-    /// <remarks>Operation: searchVariables</remarks>
+    /// <remarks>
+    /// Operation: searchVariables
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchVariablesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchVariablesAsync(new SearchVariablesRequest());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SearchVariablesExample()
@@ -4798,7 +7169,18 @@ public partial class CamundaClient
     /// This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: suspendBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: suspendBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SuspendBatchOperationExample(BatchOperationKey batchOperationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.SuspendBatchOperationAsync(batchOperationKey);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task SuspendBatchOperationExample(BatchOperationKey batchOperationKey)
@@ -4820,7 +7202,24 @@ public partial class CamundaClient
     /// Reports a business error (i.e. non-technical) that occurs while processing a job.
     /// 
     /// </summary>
-    /// <remarks>Operation: throwJobError</remarks>
+    /// <remarks>
+    /// Operation: throwJobError
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ThrowJobErrorExample(JobKey jobKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ThrowJobErrorAsync(
+    ///         jobKey,
+    ///         new JobErrorRequest
+    ///         {
+    ///             ErrorCode = &quot;VALIDATION_ERROR&quot;,
+    ///             ErrorMessage = &quot;Input validation failed&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task ThrowJobErrorExample(JobKey jobKey)
@@ -4849,7 +7248,18 @@ public partial class CamundaClient
     /// The client is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
     /// 
     /// </summary>
-    /// <remarks>Operation: unassignClientFromGroup</remarks>
+    /// <remarks>
+    /// Operation: unassignClientFromGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignClientFromGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignClientFromGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignClientFromGroupExample()
@@ -4872,7 +7282,20 @@ public partial class CamundaClient
     /// The client can no longer access tenant data.
     /// 
     /// </summary>
-    /// <remarks>Operation: unassignClientFromTenant</remarks>
+    /// <remarks>
+    /// Operation: unassignClientFromTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignClientFromTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignClientFromTenantAsync(
+    ///         tenantId,
+    ///         &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignClientFromTenantExample(TenantId tenantId)
@@ -4897,7 +7320,20 @@ public partial class CamundaClient
     /// Members of the group (users, clients) will no longer have access to the tenant's data - except they are assigned directly to the tenant.
     /// 
     /// </summary>
-    /// <remarks>Operation: unassignGroupFromTenant</remarks>
+    /// <remarks>
+    /// Operation: unassignGroupFromTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignGroupFromTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignGroupFromTenantAsync(
+    ///         tenantId,
+    ///         &quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignGroupFromTenantExample(TenantId tenantId)
@@ -4920,7 +7356,18 @@ public partial class CamundaClient
     /// Unassign a mapping rule from a group
     /// Unassigns a mapping rule from a group.
     /// </summary>
-    /// <remarks>Operation: unassignMappingRuleFromGroup</remarks>
+    /// <remarks>
+    /// Operation: unassignMappingRuleFromGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignMappingRuleFromGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignMappingRuleFromGroupAsync(&quot;engineering&quot;, &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignMappingRuleFromGroupExample()
@@ -4941,7 +7388,20 @@ public partial class CamundaClient
     /// Unassign a mapping rule from a tenant
     /// Unassigns a single mapping rule from a specified tenant without deleting the rule.
     /// </summary>
-    /// <remarks>Operation: unassignMappingRuleFromTenant</remarks>
+    /// <remarks>
+    /// Operation: unassignMappingRuleFromTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignMappingRuleFromTenantAsync(
+    ///         tenantId,
+    ///         &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId)
@@ -4964,7 +7424,18 @@ public partial class CamundaClient
     /// Unassign a role from a client
     /// Unassigns the specified role from the client. The client will no longer inherit the authorizations associated with this role.
     /// </summary>
-    /// <remarks>Operation: unassignRoleFromClient</remarks>
+    /// <remarks>
+    /// Operation: unassignRoleFromClient
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignRoleFromClientExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromClientAsync(&quot;developer&quot;, &quot;my-service-account&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignRoleFromClientExample()
@@ -4985,7 +7456,18 @@ public partial class CamundaClient
     /// Unassign a role from a group
     /// Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role.
     /// </summary>
-    /// <remarks>Operation: unassignRoleFromGroup</remarks>
+    /// <remarks>
+    /// Operation: unassignRoleFromGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignRoleFromGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromGroupAsync(&quot;developer&quot;, &quot;engineering&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignRoleFromGroupExample()
@@ -5006,7 +7488,18 @@ public partial class CamundaClient
     /// Unassign a role from a mapping rule
     /// Unassigns a role from a mapping rule.
     /// </summary>
-    /// <remarks>Operation: unassignRoleFromMappingRule</remarks>
+    /// <remarks>
+    /// Operation: unassignRoleFromMappingRule
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignRoleFromMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignRoleFromMappingRuleExample()
@@ -5030,7 +7523,20 @@ public partial class CamundaClient
     /// tenant's data - unless they are assigned directly to the tenant.
     /// 
     /// </summary>
-    /// <remarks>Operation: unassignRoleFromTenant</remarks>
+    /// <remarks>
+    /// Operation: unassignRoleFromTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignRoleFromTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromTenantAsync(
+    ///         tenantId,
+    ///         &quot;developer&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignRoleFromTenantExample(TenantId tenantId)
@@ -5053,7 +7559,18 @@ public partial class CamundaClient
     /// Unassign a role from a user
     /// Unassigns a role from a user. The user will no longer inherit the authorizations associated with this role.
     /// </summary>
-    /// <remarks>Operation: unassignRoleFromUser</remarks>
+    /// <remarks>
+    /// Operation: unassignRoleFromUser
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignRoleFromUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignRoleFromUserAsync(&quot;developer&quot;, username);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignRoleFromUserExample(Username username)
@@ -5076,7 +7593,18 @@ public partial class CamundaClient
     /// The user is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
     /// 
     /// </summary>
-    /// <remarks>Operation: unassignUserFromGroup</remarks>
+    /// <remarks>
+    /// Operation: unassignUserFromGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignUserFromGroupExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignUserFromGroupAsync(&quot;engineering&quot;, username);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignUserFromGroupExample(Username username)
@@ -5099,7 +7627,20 @@ public partial class CamundaClient
     /// The user can no longer access tenant data.
     /// 
     /// </summary>
-    /// <remarks>Operation: unassignUserFromTenant</remarks>
+    /// <remarks>
+    /// Operation: unassignUserFromTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignUserFromTenantExample(TenantId tenantId, Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignUserFromTenantAsync(
+    ///         tenantId,
+    ///         username);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignUserFromTenantExample(TenantId tenantId, Username username)
@@ -5123,7 +7664,18 @@ public partial class CamundaClient
     /// Removes the assignee of a task with the given key. Unassignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
     /// 
     /// </summary>
-    /// <remarks>Operation: unassignUserTask</remarks>
+    /// <remarks>
+    /// Operation: unassignUserTask
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UnassignUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UnassignUserTaskAsync(userTaskKey);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UnassignUserTaskExample(UserTaskKey userTaskKey)
@@ -5144,7 +7696,27 @@ public partial class CamundaClient
     /// Update authorization
     /// Update the authorization with the given key.
     /// </summary>
-    /// <remarks>Operation: updateAuthorization</remarks>
+    /// <remarks>
+    /// Operation: updateAuthorization
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateAuthorizationExample(AuthorizationKey authorizationKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateAuthorizationAsync(
+    ///         authorizationKey,
+    ///         new AuthorizationPropertyBasedRequest
+    ///         {
+    ///             ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+    ///             PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE, PermissionTypeEnum.DELETE },
+    ///             ResourcePropertyName = &quot;my-process&quot;,
+    ///             OwnerType = OwnerTypeEnum.USER,
+    ///             OwnerId = &quot;user@example.com&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateAuthorizationExample(AuthorizationKey authorizationKey)
@@ -5176,7 +7748,25 @@ public partial class CamundaClient
     /// The variable must exist, otherwise a 404 error is returned.
     /// 
     /// </summary>
-    /// <remarks>Operation: updateGlobalClusterVariable</remarks>
+    /// <remarks>
+    /// Operation: updateGlobalClusterVariable
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateGlobalClusterVariableExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.UpdateGlobalClusterVariableAsync(
+    ///         &quot;my-variable&quot;,
+    ///         new UpdateClusterVariableRequest
+    ///         {
+    ///             Value = &quot;updated-value&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateGlobalClusterVariableExample()
@@ -5204,7 +7794,26 @@ public partial class CamundaClient
     /// Update global user task listener
     /// Updates a global user task listener.
     /// </summary>
-    /// <remarks>Operation: updateGlobalTaskListener</remarks>
+    /// <remarks>
+    /// Operation: updateGlobalTaskListener
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.UpdateGlobalTaskListenerAsync(
+    ///         globalListenerId,
+    ///         new UpdateGlobalTaskListenerRequest
+    ///         {
+    ///             EventTypes = new List&lt;GlobalTaskListenerEventTypeEnum&gt; { GlobalTaskListenerEventTypeEnum.Completing },
+    ///             Type = &quot;updated-task-listener&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Updated listener: {result.Id}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateGlobalTaskListenerExample(GlobalListenerId globalListenerId)
@@ -5233,7 +7842,21 @@ public partial class CamundaClient
     /// Update group
     /// Update a group with the given ID.
     /// </summary>
-    /// <remarks>Operation: updateGroup</remarks>
+    /// <remarks>
+    /// Operation: updateGroup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateGroupExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateGroupAsync(&quot;engineering&quot;, new GroupUpdateRequest
+    ///     {
+    ///         Name = &quot;engineering-team&quot;,
+    ///     });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateGroupExample()
@@ -5257,7 +7880,23 @@ public partial class CamundaClient
     /// Update job
     /// Update a job with the given key.
     /// </summary>
-    /// <remarks>Operation: updateJob</remarks>
+    /// <remarks>
+    /// Operation: updateJob
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateJobExample(JobKey jobKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateJobAsync(
+    ///         jobKey,
+    ///         new JobUpdateRequest
+    ///         {
+    ///             Changeset = new JobChangeset { Retries = 3 },
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateJobExample(JobKey jobKey)
@@ -5284,7 +7923,23 @@ public partial class CamundaClient
     /// Update a mapping rule.
     /// 
     /// </summary>
-    /// <remarks>Operation: updateMappingRule</remarks>
+    /// <remarks>
+    /// Operation: updateMappingRule
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateMappingRuleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateMappingRuleAsync(&quot;rule-123&quot;, new MappingRuleUpdateRequest
+    ///     {
+    ///         ClaimName = &quot;groups&quot;,
+    ///         ClaimValue = &quot;senior-engineering&quot;,
+    ///         Name = &quot;Senior Engineering Mapping&quot;,
+    ///     });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateMappingRuleExample()
@@ -5310,7 +7965,21 @@ public partial class CamundaClient
     /// Update role
     /// Update a role with the given ID.
     /// </summary>
-    /// <remarks>Operation: updateRole</remarks>
+    /// <remarks>
+    /// Operation: updateRole
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateRoleExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateRoleAsync(&quot;developer&quot;, new RoleUpdateRequest
+    ///     {
+    ///         Name = &quot;senior-developer&quot;,
+    ///     });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateRoleExample()
@@ -5334,7 +8003,23 @@ public partial class CamundaClient
     /// Update tenant
     /// Updates an existing tenant.
     /// </summary>
-    /// <remarks>Operation: updateTenant</remarks>
+    /// <remarks>
+    /// Operation: updateTenant
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateTenantExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateTenantAsync(
+    ///         tenantId,
+    ///         new TenantUpdateRequest
+    ///         {
+    ///             Name = &quot;Acme Corp International&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateTenantExample(TenantId tenantId)
@@ -5362,7 +8047,26 @@ public partial class CamundaClient
     /// The variable must exist, otherwise a 404 error is returned.
     /// 
     /// </summary>
-    /// <remarks>Operation: updateTenantClusterVariable</remarks>
+    /// <remarks>
+    /// Operation: updateTenantClusterVariable
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.UpdateTenantClusterVariableAsync(
+    ///         tenantId,
+    ///         &quot;my-variable&quot;,
+    ///         new UpdateClusterVariableRequest
+    ///         {
+    ///             Value = &quot;updated-tenant-value&quot;,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
@@ -5391,7 +8095,24 @@ public partial class CamundaClient
     /// Update user
     /// Updates a user.
     /// </summary>
-    /// <remarks>Operation: updateUser</remarks>
+    /// <remarks>
+    /// Operation: updateUser
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateUserExample(Username username)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateUserAsync(
+    ///         username,
+    ///         new UserUpdateRequest
+    ///         {
+    ///             Name = &quot;Jane Smith&quot;,
+    ///             Email = &quot;jsmith@example.com&quot;,
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateUserExample(Username username)
@@ -5419,7 +8140,20 @@ public partial class CamundaClient
     /// Update a user task with the given key. Updates wait for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
     /// 
     /// </summary>
-    /// <remarks>Operation: updateUserTask</remarks>
+    /// <remarks>
+    /// Operation: updateUserTask
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateUserTaskAsync(
+    ///         userTaskKey,
+    ///         new UserTaskUpdateRequest());
+    /// }
+    /// </code>
+    /// </remarks>
     /// <example>
     /// <code>
     /// public static async Task UpdateUserTaskExample(UserTaskKey userTaskKey)
