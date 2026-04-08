@@ -11,13 +11,13 @@
     {
       "file": "ProcessInstance.cs",
       "region": "CreateProcessInstanceById",
-      "label": "Create by process definition ID",
+      "label": "By ID",
       "imports": "using Camunda.Orchestration.Sdk;"
     },
     {
       "file": "ProcessInstance.cs",
       "region": "CreateProcessInstanceByKey",
-      "label": "Create by process definition key",
+      "label": "By key",
       "imports": "using Camunda.Orchestration.Sdk;"
     }
   ],
@@ -209,13 +209,13 @@
     {
       "file": "Decision.cs",
       "region": "EvaluateDecisionById",
-      "label": "Evaluate by decision definition ID",
+      "label": "By ID",
       "imports": "using Camunda.Orchestration.Sdk;"
     },
     {
       "file": "Decision.cs",
       "region": "EvaluateDecisionByKey",
-      "label": "Evaluate by decision definition key",
+      "label": "By key",
       "imports": "using Camunda.Orchestration.Sdk;"
     }
   ],
