@@ -1,3 +1,15 @@
+# [8.9.0-alpha.33](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.32...v8.9.0-alpha.33) (2026-04-08)
+
+
+### Bug Fixes
+
+* shorten discriminant labels for multi-entry operations ([e7b0ec2](https://github.com/camunda/orchestration-cluster-api-csharp/commit/e7b0ec2236822c53f312a6d874adcfd41a703390))
+
+
+### Features
+
+* add imports field to operation-map entries ([afcc895](https://github.com/camunda/orchestration-cluster-api-csharp/commit/afcc89567057cd307c49b610be573a513f72ab8b))
+
 # [8.9.0-alpha.32](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.31...v8.9.0-alpha.32) (2026-04-07)
 
 
