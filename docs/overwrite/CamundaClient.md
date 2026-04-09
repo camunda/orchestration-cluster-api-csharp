@@ -249,6 +249,26 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentAsync(System.Net.Http.MultipartFormDataContent,System.String,System.Nullable{Camunda.Orchestration.Sdk.DocumentId},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Document.cs#CreateDocument)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentsAsync(System.Net.Http.MultipartFormDataContent,System.String,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Document.cs#CreateDocuments)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentLinkAsync(Camunda.Orchestration.Sdk.DocumentId,Camunda.Orchestration.Sdk.DocumentLinkRequest,System.String,System.String,System.Threading.CancellationToken)
 example:
 - *content
@@ -299,6 +319,26 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.CreateJobWorker(Camunda.Orchestration.Sdk.JobWorkerConfig,Camunda.Orchestration.Sdk.JobHandler)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Worker.cs#CreateJobWorker)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.CreateJobWorker(Camunda.Orchestration.Sdk.JobWorkerConfig,System.Func{Camunda.Orchestration.Sdk.ActivatedJob,System.Threading.CancellationToken,System.Threading.Tasks.Task})
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Worker.cs#CreateJobWorker)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.CreateMappingRuleAsync(Camunda.Orchestration.Sdk.MappingRuleCreateRequest,System.Threading.CancellationToken)
 example:
 - *content
@@ -306,6 +346,18 @@ example:
 
 
 [!code-csharp[](../../examples/MappingRule.cs#CreateMappingRule)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.CreateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceCreationInstruction,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/ProcessInstance.cs#CreateProcessInstanceById)]
+
+[!code-csharp[](../../examples/ProcessInstance.cs#CreateProcessInstanceByKey)]
 
 
 ---
@@ -499,6 +551,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.DeployResourcesFromFilesAsync(System.String[],System.String,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Deployment.cs#DeployResourcesFromFiles)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.EvaluateConditionalsAsync(Camunda.Orchestration.Sdk.ConditionalEvaluationInstruction,System.Threading.CancellationToken)
 example:
 - *content
@@ -506,6 +568,18 @@ example:
 
 
 [!code-csharp[](../../examples/Admin.cs#EvaluateConditionals)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.EvaluateDecisionAsync(Camunda.Orchestration.Sdk.DecisionEvaluationInstruction,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Decision.cs#EvaluateDecisionById)]
+
+[!code-csharp[](../../examples/Decision.cs#EvaluateDecisionByKey)]
 
 
 ---
@@ -526,6 +600,16 @@ example:
 
 
 [!code-csharp[](../../examples/Job.cs#FailJob)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetBackpressureState
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Worker.cs#GetBackpressureState)]
 
 
 ---
@@ -616,6 +700,16 @@ example:
 
 
 [!code-csharp[](../../examples/Decision.cs#GetDecisionRequirementsXml)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetDocumentAsync(Camunda.Orchestration.Sdk.DocumentId,System.String,System.String,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Document.cs#GetDocument)]
 
 
 ---
@@ -999,6 +1093,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetWorkers
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Worker.cs#GetWorkers)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ProcessInstanceMigrationInstruction,System.Threading.CancellationToken)
 example:
 - *content
@@ -1096,6 +1200,16 @@ example:
 
 
 [!code-csharp[](../../examples/ProcessInstance.cs#ResolveProcessInstanceIncidents)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.RunWorkersAsync(System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Worker.cs#RunWorkers)]
 
 
 ---
@@ -1449,6 +1563,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey,Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest,System.Nullable{System.Boolean},Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.VariableSearchQueryResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/UserTask.cs#SearchUserTaskEffectiveVariables)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.SearchUserTasksAsync(Camunda.Orchestration.Sdk.UserTaskSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.UserTaskSearchQueryResult},System.Threading.CancellationToken)
 example:
 - *content
@@ -1506,6 +1630,16 @@ example:
 
 
 [!code-csharp[](../../examples/VariableElement.cs#SearchVariables)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync(System.Nullable{System.TimeSpan})
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Worker.cs#StopAllWorkers)]
 
 
 ---
