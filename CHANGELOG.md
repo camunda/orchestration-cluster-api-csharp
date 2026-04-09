@@ -1,3 +1,11 @@
+# [8.9.0-alpha.36](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.35...v8.9.0-alpha.36) (2026-04-09)
+
+
+### Bug Fixes
+
+* add missing overwrite entries and examples (green) ([f498d85](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f498d859b25e914b20482ee2d669b5d90cb473f6)), closes [#78](https://github.com/camunda/orchestration-cluster-api-csharp/issues/78)
+* address PR review comments ([6efa8b4](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6efa8b47886b81a16225ac896d43a78616a49b61))
+
 # [8.9.0-alpha.35](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.34...v8.9.0-alpha.35) (2026-04-09)
 
 
