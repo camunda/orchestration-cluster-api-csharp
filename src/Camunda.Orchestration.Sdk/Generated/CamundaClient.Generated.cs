@@ -970,15 +970,12 @@ public partial class CamundaClient
     /// Operation: createDeployment
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateDeploymentExample()
+    /// public static async Task DeployResourcesFromFilesExample()
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var content = new MultipartFormDataContent();
-    ///     var fileContent = new ByteArrayContent(File.ReadAllBytes(&quot;process.bpmn&quot;));
-    ///     content.Add(fileContent, &quot;resources&quot;, &quot;process.bpmn&quot;);
-    /// 
-    ///     var result = await client.CreateDeploymentAsync(content);
+    ///     var result = await client.DeployResourcesFromFilesAsync(
+    ///         [&quot;process.bpmn&quot;, &quot;decision.dmn&quot;]);
     ///     Console.WriteLine($&quot;Deployment key: {result.DeploymentKey}&quot;);
     /// }
     /// </code>
@@ -986,15 +983,12 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateDeploymentExample()
+    /// public static async Task DeployResourcesFromFilesExample()
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var content = new MultipartFormDataContent();
-    ///     var fileContent = new ByteArrayContent(File.ReadAllBytes(&quot;process.bpmn&quot;));
-    ///     content.Add(fileContent, &quot;resources&quot;, &quot;process.bpmn&quot;);
-    /// 
-    ///     var result = await client.CreateDeploymentAsync(content);
+    ///     var result = await client.DeployResourcesFromFilesAsync(
+    ///         [&quot;process.bpmn&quot;, &quot;decision.dmn&quot;]);
     ///     Console.WriteLine($&quot;Deployment key: {result.DeploymentKey}&quot;);
     /// }
     /// </code>
