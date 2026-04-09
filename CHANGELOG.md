@@ -1,3 +1,11 @@
+# [8.9.0-alpha.37](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.36...v8.9.0-alpha.37) (2026-04-09)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([d3764d0](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d3764d08eee015f7393064597dad14ea3b846828))
+* prefer DeployResourcesFromFiles in API spec examples ([965e492](https://github.com/camunda/orchestration-cluster-api-csharp/commit/965e4929a710eefd0b7249cdf65bd93c2d3cdd5d))
+
 # [8.9.0-alpha.36](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.35...v8.9.0-alpha.36) (2026-04-09)
 
 
