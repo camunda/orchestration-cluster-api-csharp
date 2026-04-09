@@ -3,8 +3,9 @@
 Post-process the DocFX-generated toc.json to keep method sub-items
 only for CamundaClient, removing member sub-items from all other types.
 
-This allows CamundaClient methods to appear in the left-hand sidebar TOC
-while keeping model classes, config classes, etc. flat (no property clutter).
+For CamundaClient, flatten the category groupings (Constructors, Fields,
+Properties, Methods) so that methods appear directly under CamundaClient
+in alphabetical order — matching the JS and Python SDK docs layout.
 """
 
 import json
@@ -24,9 +25,15 @@ def prune(items):
         # Namespace → recurse into child types
         if item.get("type") == "Namespace":
             prune(children)
-        # Types we want expanded → keep their members
+        # Types we want expanded → flatten category groups into a single
+        # alphabetical list of methods (remove Constructors/Fields/Properties/Methods nesting)
         elif uid in KEEP_MEMBERS_FOR:
-            pass
+            flat = []
+            for category in children:
+                for member in category.get("items", []):
+                    flat.append(member)
+            flat.sort(key=lambda m: m.get("name", ""))
+            item["items"] = flat
         # Everything else → strip member sub-items
         else:
             del item["items"]
