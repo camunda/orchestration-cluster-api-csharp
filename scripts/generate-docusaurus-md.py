@@ -208,17 +208,20 @@ def load_overwrite_examples(
             if uid_match:
                 current_uid = uid_match.group(1).strip()
                 continue
-            # Check for code reference
-            code_ref = re.search(
+            # Check for code references (support multiple per uid)
+            code_refs = re.findall(
                 r"\[!code-csharp\[\]\((?:\.\./)*examples/(\S+)#(\w+)\)\]", section
             )
-            if code_ref and current_uid:
-                total_refs += 1
-                region = code_ref.group(2)
-                if region in all_regions:
-                    uid_to_example[current_uid] = all_regions[region]
-                else:
-                    unresolved.append(f"{current_uid} -> {region}")
+            if code_refs and current_uid:
+                total_refs += len(code_refs)
+                resolved_parts = []
+                for _, region in code_refs:
+                    if region in all_regions:
+                        resolved_parts.append(all_regions[region])
+                    else:
+                        unresolved.append(f"{current_uid} -> {region}")
+                if resolved_parts:
+                    uid_to_example[current_uid] = "\n\n".join(resolved_parts)
                 current_uid = None
 
     # Validate: every overwrite reference must resolve to an example
