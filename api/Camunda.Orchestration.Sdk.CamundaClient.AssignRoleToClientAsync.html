@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToClientAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToClientAsync*" class="text-break">
-Method AssignRoleToClientAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L202"><i class="bi bi-code-slash"></i></a>
+Method AssignRoleToClientAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L317"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method AssignRoleToClientAsync  <a class="header-action link-secondary" title="V
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToClientAsync_System_String_System_String_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToClientAsync(System.String,System.String,System.Threading.CancellationToken)">
   AssignRoleToClientAsync(string, string, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L317"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Assign a role to a client
@@ -165,6 +165,13 @@ Assigns the specified role to the client. The client will inherit the authorizat
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToClientAsync_System_String_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: assignRoleToClient</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task AssignRoleToClientExample()
+{
+    using var client = CamundaClient.Create();
+<pre><code>await client.AssignRoleToClientAsync(&quot;developer&quot;, &quot;my-service-account&quot;);
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -173,7 +180,7 @@ Assigns the specified role to the client. The client will inherit the authorizat
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L202" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L317" class="edit-link">Edit this page</a>
         </div>
 
 

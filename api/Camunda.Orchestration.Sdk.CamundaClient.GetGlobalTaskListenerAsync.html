@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_GetGlobalTaskListenerAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync*" class="text-break">
-Method GetGlobalTaskListenerAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1950"><i class="bi bi-code-slash"></i></a>
+Method GetGlobalTaskListenerAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3053"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method GetGlobalTaskListenerAsync  <a class="header-action link-secondary" title
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_GetGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_GlobalListenerId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_GlobalTaskListenerResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.GlobalListenerId,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.GlobalTaskListenerResult},System.Threading.CancellationToken)">
   GetGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions&lt;GlobalTaskListenerResult&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1950"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3053"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Get global user task listener
@@ -168,6 +168,16 @@ Get a global user task listener by its id.</p>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetGlobalTaskListenerAsync_Camunda_Orchestration_Sdk_GlobalListenerId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_GlobalTaskListenerResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: getGlobalTaskListener</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task GetGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.GetGlobalTaskListenerAsync(
+    globalListenerId);
+
+Console.WriteLine($&quot;Task listener: {result.EventTypes}&quot;);
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -176,7 +186,7 @@ Get a global user task listener by its id.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1950" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3053" class="edit-link">Edit this page</a>
         </div>
 
 

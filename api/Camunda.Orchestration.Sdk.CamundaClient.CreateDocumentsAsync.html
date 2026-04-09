@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentsAsync*" class="text-break">
-Method CreateDocumentsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L746"><i class="bi bi-code-slash"></i></a>
+Method CreateDocumentsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1170"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method CreateDocumentsAsync  <a class="header-action link-secondary" title="View
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentsAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentsAsync(System.Net.Http.MultipartFormDataContent,System.String,System.Threading.CancellationToken)">
   CreateDocumentsAsync(MultipartFormDataContent, string?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L746"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1170"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Upload multiple documents
@@ -166,25 +166,42 @@ The client can choose to retry the whole batch or individual documents based on 
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentsAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task CreateDocumentsExample()
 {
     using var client = CamundaClient.Create();
+<pre><code>using var content = new MultipartFormDataContent();
+content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File one&quot;)), &quot;files&quot;, &quot;one.txt&quot;);
+content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File two&quot;)), &quot;files&quot;, &quot;two.txt&quot;);
 
-    using var content = new MultipartFormDataContent();
-    content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes("File one")), "files", "one.txt");
-    content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes("File two")), "files", "two.txt");
+var result = await client.CreateDocumentsAsync(content);
 
-    var result = await client.CreateDocumentsAsync(content);
-
-    foreach (var doc in result.CreatedDocuments)
-    {
-        Console.WriteLine($"Created: {doc.DocumentId}");
-    }
-}</code></pre>
+foreach (var doc in result.CreatedDocuments)
+{
+    Console.WriteLine($&quot;Created: {doc.DocumentId}&quot;);
+}
+</code></pre>
+<p>}</p></code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentsAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: createDocuments</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task CreateDocumentsExample()
+{
+    using var client = CamundaClient.Create();
+<pre><code>using var content = new MultipartFormDataContent();
+content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File one&quot;)), &quot;files&quot;, &quot;one.txt&quot;);
+content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File two&quot;)), &quot;files&quot;, &quot;two.txt&quot;);
+
+var result = await client.CreateDocumentsAsync(content);
+
+foreach (var doc in result.CreatedDocuments)
+{
+    Console.WriteLine($&quot;Created: {doc.DocumentId}&quot;);
+}
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -193,7 +210,7 @@ The client can choose to retry the whole batch or individual documents based on 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L746" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1170" class="edit-link">Edit this page</a>
         </div>
 
 

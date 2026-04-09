@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_ResolveProcessInstanceIncidentsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync*" class="text-break">
-Method ResolveProcessInstanceIncidentsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3320"><i class="bi bi-code-slash"></i></a>
+Method ResolveProcessInstanceIncidentsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L5104"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method ResolveProcessInstanceIncidentsAsync  <a class="header-action link-second
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_ResolveProcessInstanceIncidentsAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,System.Threading.CancellationToken)">
   ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3320"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L5104"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Resolve related incidents
@@ -166,6 +166,16 @@ Creates a batch operation to resolve multiple incidents of a process instance.</
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ResolveProcessInstanceIncidentsAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: resolveProcessInstanceIncidents</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task ResolveProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.ResolveProcessInstanceIncidentsAsync(
+    processInstanceKey);
+
+Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -174,7 +184,7 @@ Creates a batch operation to resolve multiple incidents of a process instance.</
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3320" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L5104" class="edit-link">Edit this page</a>
         </div>
 
 

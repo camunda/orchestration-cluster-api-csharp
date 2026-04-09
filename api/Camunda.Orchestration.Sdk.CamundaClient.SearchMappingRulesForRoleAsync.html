@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync*" class="text-break">
-Method SearchMappingRulesForRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4133"><i class="bi bi-code-slash"></i></a>
+Method SearchMappingRulesForRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6348"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method SearchMappingRulesForRoleAsync  <a class="header-action link-secondary" t
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_System_String_Camunda_Orchestration_Sdk_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchMappingRulesForRoleResponse__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchMappingRulesForRoleAsync(System.String,Camunda.Orchestration.Sdk.MappingRuleSearchQueryRequest,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.SearchMappingRulesForRoleResponse},System.Threading.CancellationToken)">
   SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions&lt;SearchMappingRulesForRoleResponse&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4133"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6348"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search role mapping rules
@@ -174,6 +174,20 @@ Search mapping rules with assigned role.</p>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRulesForRoleAsync_System_String_Camunda_Orchestration_Sdk_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchMappingRulesForRoleResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchMappingRulesForRole</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task SearchMappingRulesForRoleExample()
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.SearchMappingRulesForRoleAsync(
+    &quot;developer&quot;,
+    new MappingRuleSearchQueryRequest());
+
+foreach (var rule in result.Items)
+{
+    Console.WriteLine($&quot;Mapping rule: {rule.MappingRuleId}&quot;);
+}
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -182,7 +196,7 @@ Search mapping rules with assigned role.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4133" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6348" class="edit-link">Edit this page</a>
         </div>
 
 

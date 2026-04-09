@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_GetJobTypeStatisticsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync*" class="text-break">
-Method GetJobTypeStatisticsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2116"><i class="bi bi-code-slash"></i></a>
+Method GetJobTypeStatisticsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3299"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method GetJobTypeStatisticsAsync  <a class="header-action link-secondary" title=
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_GetJobTypeStatisticsAsync_Camunda_Orchestration_Sdk_JobTypeStatisticsQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_JobTypeStatisticsQueryResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetJobTypeStatisticsAsync(Camunda.Orchestration.Sdk.JobTypeStatisticsQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.JobTypeStatisticsQueryResult},System.Threading.CancellationToken)">
   GetJobTypeStatisticsAsync(JobTypeStatisticsQuery, ConsistencyOptions&lt;JobTypeStatisticsQueryResult&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2116"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3299"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Get job statistics by type
@@ -171,6 +171,19 @@ Get statistics about jobs, grouped by job type.</p>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetJobTypeStatisticsAsync_Camunda_Orchestration_Sdk_JobTypeStatisticsQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_JobTypeStatisticsQueryResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: getJobTypeStatistics</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task GetJobTypeStatisticsExample()
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.GetJobTypeStatisticsAsync(
+    new JobTypeStatisticsQuery());
+
+foreach (var stat in result.Items)
+{
+    Console.WriteLine($&quot;Job type: {stat.JobType}&quot;);
+}
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -179,7 +192,7 @@ Get statistics about jobs, grouped by job type.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2116" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3299" class="edit-link">Edit this page</a>
         </div>
 
 

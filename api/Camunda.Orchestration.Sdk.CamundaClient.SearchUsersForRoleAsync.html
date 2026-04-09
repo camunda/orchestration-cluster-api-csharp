@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUsersForRoleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUsersForRoleAsync*" class="text-break">
-Method SearchUsersForRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4704"><i class="bi bi-code-slash"></i></a>
+Method SearchUsersForRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7211"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method SearchUsersForRoleAsync  <a class="header-action link-secondary" title="V
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchUsersForRoleAsync_System_String_Camunda_Orchestration_Sdk_SearchUsersForRoleRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchUsersForRoleResponse__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchUsersForRoleAsync(System.String,Camunda.Orchestration.Sdk.SearchUsersForRoleRequest,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.SearchUsersForRoleResponse},System.Threading.CancellationToken)">
   SearchUsersForRoleAsync(string, SearchUsersForRoleRequest, ConsistencyOptions&lt;SearchUsersForRoleResponse&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4704"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7211"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search role users
@@ -174,6 +174,20 @@ Search users with assigned role.</p>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUsersForRoleAsync_System_String_Camunda_Orchestration_Sdk_SearchUsersForRoleRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_SearchUsersForRoleResponse__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchUsersForRole</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task SearchUsersForRoleExample()
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.SearchUsersForRoleAsync(
+    &quot;developer&quot;,
+    new SearchUsersForRoleRequest());
+
+foreach (var user in result.Items)
+{
+    Console.WriteLine($&quot;User: {user.Username}&quot;);
+}
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -182,7 +196,7 @@ Search users with assigned role.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4704" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7211" class="edit-link">Edit this page</a>
         </div>
 
 

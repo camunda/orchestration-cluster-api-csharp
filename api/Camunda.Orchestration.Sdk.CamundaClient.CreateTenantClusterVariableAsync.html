@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_CreateTenantClusterVariableAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateTenantClusterVariableAsync*" class="text-break">
-Method CreateTenantClusterVariableAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1019"><i class="bi bi-code-slash"></i></a>
+Method CreateTenantClusterVariableAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1619"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method CreateTenantClusterVariableAsync  <a class="header-action link-secondary"
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_CreateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_CreateClusterVariableRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId,Camunda.Orchestration.Sdk.CreateClusterVariableRequest,System.Threading.CancellationToken)">
   CreateTenantClusterVariableAsync(TenantId, CreateClusterVariableRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1019"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1619"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Create a tenant-scoped cluster variable
@@ -173,6 +173,21 @@ Create a new cluster variable for the given tenant.</p>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_CreateClusterVariableRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: createTenantClusterVariable</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.CreateTenantClusterVariableAsync(
+    tenantId,
+    new CreateClusterVariableRequest
+    {
+        Name = &quot;my-variable&quot;,
+        Value = &quot;tenant-value&quot;,
+    });
+
+Console.WriteLine($&quot;Created variable: {result.Name}&quot;);
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -181,7 +196,7 @@ Create a new cluster variable for the given tenant.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1019" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1619" class="edit-link">Edit this page</a>
         </div>
 
 

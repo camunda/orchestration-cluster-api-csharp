@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToGroupAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignMappingRuleToGroupAsync*" class="text-break">
-Method AssignMappingRuleToGroupAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L158"><i class="bi bi-code-slash"></i></a>
+Method AssignMappingRuleToGroupAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L247"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method AssignMappingRuleToGroupAsync  <a class="header-action link-secondary" ti
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToGroupAsync_System_String_System_String_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignMappingRuleToGroupAsync(System.String,System.String,System.Threading.CancellationToken)">
   AssignMappingRuleToGroupAsync(string, string, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L247"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Assign a mapping rule to a group
@@ -165,6 +165,13 @@ Assigns a mapping rule to a group.</p>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToGroupAsync_System_String_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: assignMappingRuleToGroup</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task AssignMappingRuleToGroupExample()
+{
+    using var client = CamundaClient.Create();
+<pre><code>await client.AssignMappingRuleToGroupAsync(&quot;engineering&quot;, &quot;rule-123&quot;);
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -173,7 +180,7 @@ Assigns a mapping rule to a group.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L158" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L247" class="edit-link">Edit this page</a>
         </div>
 
 

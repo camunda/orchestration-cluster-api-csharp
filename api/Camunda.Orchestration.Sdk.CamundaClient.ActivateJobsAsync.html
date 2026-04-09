@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateJobsAsync*" class="text-break">
-Method ActivateJobsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L64"><i class="bi bi-code-slash"></i></a>
+Method ActivateJobsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L101"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method ActivateJobsAsync  <a class="header-action link-secondary" title="View so
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_JobActivationRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateJobsAsync(Camunda.Orchestration.Sdk.JobActivationRequest,System.Threading.CancellationToken)">
   ActivateJobsAsync(JobActivationRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L101"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Activate jobs
@@ -174,6 +174,24 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ActivateJobsAsync_Camunda_Orchestration_Sdk_JobActivationRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: activateJobs</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task ActivateJobsExample()
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.ActivateJobsAsync(new JobActivationRequest
+{
+    Type = &quot;my-job-type&quot;,
+    MaxJobsToActivate = 10,
+    Timeout = 300000,
+    Worker = &quot;my-worker&quot;,
+});
+
+foreach (var job in result.Jobs)
+{
+    Console.WriteLine($&quot;Job: {job.JobKey}&quot;);
+}
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -182,7 +200,7 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L64" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L101" class="edit-link">Edit this page</a>
         </div>
 
 

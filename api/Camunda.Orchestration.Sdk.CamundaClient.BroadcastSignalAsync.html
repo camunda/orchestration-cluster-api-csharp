@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.BroadcastSignalAsync*" class="text-break">
-Method BroadcastSignalAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L389"><i class="bi bi-code-slash"></i></a>
+Method BroadcastSignalAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L614"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method BroadcastSignalAsync  <a class="header-action link-secondary" title="View
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_Camunda_Orchestration_Sdk_SignalBroadcastRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.BroadcastSignalAsync(Camunda.Orchestration.Sdk.SignalBroadcastRequest,System.Threading.CancellationToken)">
   BroadcastSignalAsync(SignalBroadcastRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L389"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L614"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Broadcast signal
@@ -168,6 +168,18 @@ Broadcasts a signal.</p>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_BroadcastSignalAsync_Camunda_Orchestration_Sdk_SignalBroadcastRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: broadcastSignal</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task BroadcastSignalExample()
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.BroadcastSignalAsync(new SignalBroadcastRequest
+{
+    SignalName = &quot;orderCancelled&quot;,
+});
+
+Console.WriteLine($&quot;Signal key: {result.SignalKey}&quot;);
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -176,7 +188,7 @@ Broadcasts a signal.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L389" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L614" class="edit-link">Edit this page</a>
         </div>
 
 

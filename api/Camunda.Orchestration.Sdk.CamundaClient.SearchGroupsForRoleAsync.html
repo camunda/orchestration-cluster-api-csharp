@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupsForRoleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupsForRoleAsync*" class="text-break">
-Method SearchGroupsForRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3961"><i class="bi bi-code-slash"></i></a>
+Method SearchGroupsForRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6086"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method SearchGroupsForRoleAsync  <a class="header-action link-secondary" title="
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupsForRoleAsync_System_String_Camunda_Orchestration_Sdk_RoleGroupSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleGroupSearchResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchGroupsForRoleAsync(System.String,Camunda.Orchestration.Sdk.RoleGroupSearchQueryRequest,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.RoleGroupSearchResult},System.Threading.CancellationToken)">
   SearchGroupsForRoleAsync(string, RoleGroupSearchQueryRequest, ConsistencyOptions&lt;RoleGroupSearchResult&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3961"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6086"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search role groups
@@ -174,6 +174,20 @@ Search groups with assigned role.</p>
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchGroupsForRoleAsync_System_String_Camunda_Orchestration_Sdk_RoleGroupSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleGroupSearchResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: searchGroupsForRole</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task SearchGroupsForRoleExample()
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.SearchGroupsForRoleAsync(
+    &quot;developer&quot;,
+    new RoleGroupSearchQueryRequest());
+
+foreach (var group in result.Items)
+{
+    Console.WriteLine($&quot;Group: {group.GroupId}&quot;);
+}
+</code></pre>
+<p>}</p></code></pre>
 </div>
 
 
@@ -182,7 +196,7 @@ Search groups with assigned role.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L3961" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6086" class="edit-link">Edit this page</a>
         </div>
 
 
