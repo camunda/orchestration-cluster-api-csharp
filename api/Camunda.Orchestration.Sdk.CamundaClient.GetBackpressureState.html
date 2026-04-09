@@ -144,6 +144,15 @@ Method GetBackpressureState  <a class="header-action link-secondary" title="View
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetBackpressureState_examples">Examples</h4>
+<pre><code class="lang-csharp">public static void GetBackpressureStateExample()
+{
+    using var client = CamundaClient.Create();
+
+    var state = client.GetBackpressureState();
+    Console.WriteLine($&quot;Severity: {state.Severity}, Permits: {state.PermitsMax}&quot;);
+}
+</code></pre>
 
 
 

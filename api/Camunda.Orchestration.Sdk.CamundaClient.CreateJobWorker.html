@@ -158,6 +158,20 @@ to auto-fail with <code>retries - 1</code>.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateJobWorker_Camunda_Orchestration_Sdk_JobWorkerConfig_Camunda_Orchestration_Sdk_JobHandler__examples">Examples</h4>
+<pre><code class="lang-csharp">public static void CreateJobWorkerExample()
+{
+    using var client = CamundaClient.Create();
+
+    var worker = client.CreateJobWorker(
+        new JobWorkerConfig { JobType = &quot;payment-service&quot; },
+        async (job, ct) =&gt;
+        {
+            Console.WriteLine($&quot;Processing job {job.JobKey}&quot;);
+            return new { Success = true };
+        });
+}
+</code></pre>
 
 
 
@@ -198,6 +212,20 @@ The job is auto-completed with no variables on success.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateJobWorker_Camunda_Orchestration_Sdk_JobWorkerConfig_System_Func_Camunda_Orchestration_Sdk_ActivatedJob_System_Threading_CancellationToken_System_Threading_Tasks_Task___examples">Examples</h4>
+<pre><code class="lang-csharp">public static void CreateJobWorkerExample()
+{
+    using var client = CamundaClient.Create();
+
+    var worker = client.CreateJobWorker(
+        new JobWorkerConfig { JobType = &quot;payment-service&quot; },
+        async (job, ct) =&gt;
+        {
+            Console.WriteLine($&quot;Processing job {job.JobKey}&quot;);
+            return new { Success = true };
+        });
+}
+</code></pre>
 
 
 

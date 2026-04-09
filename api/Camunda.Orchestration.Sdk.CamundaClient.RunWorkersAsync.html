@@ -155,6 +155,22 @@ This is the typical entry point for worker-only applications.</p>
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_RunWorkersAsync_System_Nullable_System_TimeSpan__System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task RunWorkersExample(CancellationToken ct)
+{
+    using var client = CamundaClient.Create();
+
+    client.CreateJobWorker(
+        new JobWorkerConfig { JobType = &quot;payment-service&quot; },
+        async (job, jobCt) =&gt;
+        {
+            Console.WriteLine($&quot;Processing job {job.JobKey}&quot;);
+            return null;
+        });
+
+    await client.RunWorkersAsync(gracePeriod: TimeSpan.FromSeconds(10), ct);
+}
+</code></pre>
 
 
 

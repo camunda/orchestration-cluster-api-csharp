@@ -166,23 +166,22 @@ The client can choose to retry the whole batch or individual documents based on 
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentsAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task CreateDocumentsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>using var content = new MultipartFormDataContent();
-content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File one&quot;)), &quot;files&quot;, &quot;one.txt&quot;);
-content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File two&quot;)), &quot;files&quot;, &quot;two.txt&quot;);
 
-var result = await client.CreateDocumentsAsync(content);
+    using var content = new MultipartFormDataContent();
+    content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File one&quot;)), &quot;files&quot;, &quot;one.txt&quot;);
+    content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;File two&quot;)), &quot;files&quot;, &quot;two.txt&quot;);
 
-foreach (var doc in result.CreatedDocuments)
-{
-    Console.WriteLine($&quot;Created: {doc.DocumentId}&quot;);
+    var result = await client.CreateDocumentsAsync(content);
+
+    foreach (var doc in result.CreatedDocuments)
+    {
+        Console.WriteLine($&quot;Created: {doc.DocumentId}&quot;);
+    }
 }
 </code></pre>
-<p>}</p></code></pre>
-
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentsAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: createDocuments</p>

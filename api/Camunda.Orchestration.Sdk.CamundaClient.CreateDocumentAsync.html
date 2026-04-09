@@ -158,19 +158,18 @@ Upload a document to the Camunda 8 cluster.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Nullable_Camunda_Orchestration_Sdk_DocumentId__System_Threading_CancellationToken__examples">Examples</h4>
-<p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task CreateDocumentExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>using var content = new MultipartFormDataContent();
-content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;Hello, world!&quot;)), &quot;file&quot;, &quot;hello.txt&quot;);
 
-var result = await client.CreateDocumentAsync(content);
+    using var content = new MultipartFormDataContent();
+    content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;Hello, world!&quot;)), &quot;file&quot;, &quot;hello.txt&quot;);
 
-Console.WriteLine($&quot;Document ID: {result.DocumentId}&quot;);
+    var result = await client.CreateDocumentAsync(content);
+
+    Console.WriteLine($&quot;Document ID: {result.DocumentId}&quot;);
+}
 </code></pre>
-<p>}</p></code></pre>
-
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Nullable_Camunda_Orchestration_Sdk_DocumentId__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: createDocument</p>

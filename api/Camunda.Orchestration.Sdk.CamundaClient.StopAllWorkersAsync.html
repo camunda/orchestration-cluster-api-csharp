@@ -149,6 +149,22 @@ Method StopAllWorkersAsync  <a class="header-action link-secondary" title="View 
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_StopAllWorkersAsync_System_Nullable_System_TimeSpan___examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task StopAllWorkersExample()
+{
+    using var client = CamundaClient.Create();
+
+    client.CreateJobWorker(
+        new JobWorkerConfig { JobType = &quot;payment-service&quot; },
+        async (job, ct) =&gt;
+        {
+            Console.WriteLine($&quot;Processing job {job.JobKey}&quot;);
+            return null;
+        });
+
+    await client.StopAllWorkersAsync(gracePeriod: TimeSpan.FromSeconds(5));
+}
+</code></pre>
 
 
 

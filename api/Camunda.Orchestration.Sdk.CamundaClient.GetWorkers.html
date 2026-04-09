@@ -144,6 +144,26 @@ Method GetWorkers  <a class="header-action link-secondary" title="View source" h
 
 
 
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetWorkers_examples">Examples</h4>
+<pre><code class="lang-csharp">public static void GetWorkersExample()
+{
+    using var client = CamundaClient.Create();
+
+    client.CreateJobWorker(
+        new JobWorkerConfig { JobType = &quot;payment-service&quot; },
+        async (job, ct) =&gt;
+        {
+            Console.WriteLine($&quot;Processing job {job.JobKey}&quot;);
+            return null;
+        });
+
+    var workers = client.GetWorkers();
+    foreach (var worker in workers)
+    {
+        Console.WriteLine($&quot;Worker: {worker.Name}, Active: {worker.ActiveJobs}&quot;);
+    }
+}
+</code></pre>
 
 
 

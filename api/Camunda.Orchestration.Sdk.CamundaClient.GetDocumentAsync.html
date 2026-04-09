@@ -158,16 +158,15 @@ Download a document from the Camunda 8 cluster.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetDocumentAsync_Camunda_Orchestration_Sdk_DocumentId_System_String_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task GetDocumentExample(DocumentId documentId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var content = await client.GetDocumentAsync(documentId);
 
-Console.WriteLine($&quot;Downloaded document: {documentId}&quot;);
+    var content = await client.GetDocumentAsync(documentId);
+
+    Console.WriteLine($&quot;Downloaded document: {documentId}&quot;);
+}
 </code></pre>
-<p>}</p></code></pre>
-
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetDocumentAsync_Camunda_Orchestration_Sdk_DocumentId_System_String_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: getDocument</p>

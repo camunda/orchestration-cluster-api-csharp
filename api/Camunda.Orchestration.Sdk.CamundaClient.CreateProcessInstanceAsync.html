@@ -157,32 +157,29 @@ when awaitCompletion is enabled.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceCreationInstruction_System_Threading_CancellationToken__examples">Examples</h4>
-<p><b>Example 1:</b></p>
 <pre><code class="lang-csharp">public static async Task CreateProcessInstanceByIdExample(ProcessDefinitionId processDefinitionId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-{
-    ProcessDefinitionId = processDefinitionId,
-});
 
-Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
+    {
+        ProcessDefinitionId = processDefinitionId,
+    });
 
-<p><b>Example 2:</b></p>
-<pre><code class="lang-csharp">public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey processDefinitionKey)
+    Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
+}
+</code></pre><pre><code class="lang-csharp">public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey processDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
-{
-    ProcessDefinitionKey = processDefinitionKey,
-});
 
-Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
+    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
+    {
+        ProcessDefinitionKey = processDefinitionKey,
+    });
+
+    Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
+}
 </code></pre>
-<p>}</p></code></pre>
-
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceCreationInstruction_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: createProcessInstance</p>
