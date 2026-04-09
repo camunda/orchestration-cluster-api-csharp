@@ -997,11 +997,25 @@ internal static class CSharpClientGenerator
         if (!string.IsNullOrEmpty(op.Description))
             AppendXmlDocLines(sb, op.Description);
         sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    /// <remarks>Operation: {op.OriginalOperationId}</remarks>");
 
-        // Inject code examples from operation-map.json
+        // Inject code examples into <remarks> (shown in IntelliSense) and <example> (for doc generators)
         if (operationExamples.TryGetValue(op.OriginalOperationId, out var examples))
         {
+            sb.AppendLine($"    /// <remarks>");
+            sb.AppendLine($"    /// Operation: {op.OriginalOperationId}");
+            sb.AppendLine($"    /// <para><b>Example:</b></para>");
+            sb.AppendLine($"    /// <code>");
+            foreach (var exampleCode in examples)
+            {
+                foreach (var line in exampleCode.Split('\n'))
+                {
+                    var trimmed = line.TrimEnd('\r');
+                    sb.AppendLine($"    /// {System.Security.SecurityElement.Escape(trimmed)}");
+                }
+            }
+            sb.AppendLine($"    /// </code>");
+            sb.AppendLine($"    /// </remarks>");
+
             foreach (var exampleCode in examples)
             {
                 sb.AppendLine($"    /// <example>");
@@ -1014,6 +1028,10 @@ internal static class CSharpClientGenerator
                 sb.AppendLine($"    /// </code>");
                 sb.AppendLine($"    /// </example>");
             }
+        }
+        else
+        {
+            sb.AppendLine($"    /// <remarks>Operation: {op.OriginalOperationId}</remarks>");
         }
 
         // Build parameters
