@@ -1,3 +1,10 @@
+# [8.9.0-alpha.35](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.34...v8.9.0-alpha.35) (2026-04-09)
+
+
+### Bug Fixes
+
+* flatten CamundaClient TOC in API docs to alphabetical list ([c086bcd](https://github.com/camunda/orchestration-cluster-api-csharp/commit/c086bcd77688c1bf70ab12d1f9199cd17b4ddc4e))
+
 # [8.9.0-alpha.34](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.33...v8.9.0-alpha.34) (2026-04-09)
 
 
