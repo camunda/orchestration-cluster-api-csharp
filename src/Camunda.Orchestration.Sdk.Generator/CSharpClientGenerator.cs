@@ -997,14 +997,33 @@ internal static class CSharpClientGenerator
         if (!string.IsNullOrEmpty(op.Description))
             AppendXmlDocLines(sb, op.Description);
         sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    /// <remarks>Operation: {op.OriginalOperationId}</remarks>");
 
-        // Inject code examples from operation-map.json
+        // Inject code examples into <remarks> (shown in IntelliSense) and <example> (for doc generators)
         if (operationExamples.TryGetValue(op.OriginalOperationId, out var examples))
         {
-            foreach (var exampleCode in examples)
+            sb.AppendLine($"    /// <remarks>");
+            sb.AppendLine($"    /// Operation: {op.OriginalOperationId}");
+            for (var i = 0; i < examples.Count; i++)
             {
+                var exampleCode = examples[i];
+                var exampleHeading = examples.Count == 1 ? "Example:" : $"Example {i + 1}:";
+                sb.AppendLine($"    /// <para><b>{exampleHeading}</b></para>");
+                sb.AppendLine($"    /// <code>");
+                foreach (var line in exampleCode.Split('\n'))
+                {
+                    var trimmed = line.TrimEnd('\r');
+                    sb.AppendLine($"    /// {System.Security.SecurityElement.Escape(trimmed)}");
+                }
+                sb.AppendLine($"    /// </code>");
+            }
+            sb.AppendLine($"    /// </remarks>");
+
+            for (var i = 0; i < examples.Count; i++)
+            {
+                var exampleCode = examples[i];
+                var exampleHeading = examples.Count == 1 ? "Example:" : $"Example {i + 1}:";
                 sb.AppendLine($"    /// <example>");
+                sb.AppendLine($"    /// <para><b>{exampleHeading}</b></para>");
                 sb.AppendLine($"    /// <code>");
                 foreach (var line in exampleCode.Split('\n'))
                 {
@@ -1014,6 +1033,10 @@ internal static class CSharpClientGenerator
                 sb.AppendLine($"    /// </code>");
                 sb.AppendLine($"    /// </example>");
             }
+        }
+        else
+        {
+            sb.AppendLine($"    /// <remarks>Operation: {op.OriginalOperationId}</remarks>");
         }
 
         // Build parameters
