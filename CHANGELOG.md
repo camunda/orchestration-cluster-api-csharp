@@ -1,3 +1,16 @@
+# [8.9.0-alpha.34](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.33...v8.9.0-alpha.34) (2026-04-09)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([0e01fdd](https://github.com/camunda/orchestration-cluster-api-csharp/commit/0e01fddb10c68aa93c5fc372a96eb6a1ec3c6221))
+* separate code blocks per example in IntelliSense remarks ([397c2b4](https://github.com/camunda/orchestration-cluster-api-csharp/commit/397c2b4dd4d451358004c1d342f7d082bc17e6f8))
+
+
+### Features
+
+* include code examples in remarks for IntelliSense ([0039de7](https://github.com/camunda/orchestration-cluster-api-csharp/commit/0039de735d3730d94fd44c4a8a69491c4da72b92))
+
 # [8.9.0-alpha.33](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.32...v8.9.0-alpha.33) (2026-04-08)
 
 
