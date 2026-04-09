@@ -31,7 +31,7 @@ public static class WorkerExamples
 
         client.CreateJobWorker(
             new JobWorkerConfig { JobType = "payment-service" },
-            async (job, ct) =>
+            async (job, jobCt) =>
             {
                 Console.WriteLine($"Processing job {job.JobKey}");
                 return null;

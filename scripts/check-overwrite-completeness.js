@@ -8,8 +8,9 @@
  * Addresses: https://github.com/camunda/orchestration-cluster-api-csharp/issues/78
  *
  * Exits with code 1 if any public API method is missing an overwrite entry
- * (unless it is in the PENDING list), or if any overwrite entry references
- * a non-existent example file or region.
+ * (except for methods explicitly excluded by this script because they are not
+ * API operations), or if any overwrite entry references a non-existent example
+ * file or region.
  */
 
 const fs = require("fs");
@@ -79,7 +80,14 @@ if (fs.existsSync(generatedFile)) {
   }
 }
 
-// Collect from hand-written partial class files
+// Collect from hand-written partial class files (CamundaClient.cs + CamundaClient.*.cs)
+const mainClientFile = path.join(srcDir, "CamundaClient.cs");
+if (fs.existsSync(mainClientFile)) {
+  for (const name of extractPublicMethods(mainClientFile)) {
+    allPublicMethods.add(name);
+  }
+}
+
 const partialFiles = fs
   .readdirSync(srcDir)
   .filter((f) => f.startsWith("CamundaClient.") && f.endsWith(".cs"));
@@ -104,23 +112,47 @@ if (!fs.existsSync(overwriteFile)) {
 
 const overwriteContent = fs.readFileSync(overwriteFile, "utf8");
 
-// Extract method names from uid lines
+// Parse overwrite file into per-uid blocks: track each uid and its code refs
+// Format: --- / uid: ... / example: / - *content / --- / [!code-csharp[](path#Region)]
+const uidEntries = []; // { uid, methodName, refs: [{ file, region }] }
 const uidMethodNames = new Set();
-const uidRe =
-  /^uid:\s*Camunda\.Orchestration\.Sdk\.CamundaClient\.(\w+)/gm;
-let um;
-while ((um = uidRe.exec(overwriteContent)) !== null) {
-  uidMethodNames.add(um[1]);
+
+const sections = overwriteContent.split(/^---\s*$/m);
+let currentUid = null;
+let currentMethodName = null;
+for (const section of sections) {
+  const trimmed = section.trim();
+  if (!trimmed) continue;
+  const uidMatch = trimmed.match(
+    /^uid:\s*Camunda\.Orchestration\.Sdk\.CamundaClient\.(\w+)/m
+  );
+  if (uidMatch) {
+    currentMethodName = uidMatch[1];
+    currentUid = trimmed.match(/^uid:\s*(.+)$/m)?.[1]?.trim();
+    uidMethodNames.add(currentMethodName);
+    continue;
+  }
+  // This section contains code references for the previous uid
+  if (currentUid) {
+    const refs = [];
+    const refRe =
+      /\[!code-csharp\[\]\((?:\.\.\/)*examples\/([^#)]+)#(\w+)\)\]/g;
+    let rm;
+    while ((rm = refRe.exec(trimmed)) !== null) {
+      refs.push({ file: rm[1], region: rm[2] });
+    }
+    uidEntries.push({
+      uid: currentUid,
+      methodName: currentMethodName,
+      refs,
+    });
+    currentUid = null;
+    currentMethodName = null;
+  }
 }
 
-// Extract example references: [!code-csharp[](../../examples/File.cs#Region)]
-const exampleRefs = [];
-const refRe =
-  /\[!code-csharp\[\]\(\.\.\/\.\.\/examples\/([^#)]+)#(\w+)\)\]/g;
-let rm;
-while ((rm = refRe.exec(overwriteContent)) !== null) {
-  exampleRefs.push({ file: rm[1], region: rm[2] });
-}
+// Flatten all example refs for file/region validation
+const exampleRefs = uidEntries.flatMap((e) => e.refs);
 
 // ── Step 3: Check overwrite completeness ────────────────────────────────────
 
@@ -173,8 +205,13 @@ for (const ref of exampleRefs) {
 
 // ── Report ──────────────────────────────────────────────────────────────────
 
+// Check for uid entries that have no code references
+const uidsWithoutRefs = uidEntries
+  .filter((e) => e.refs.length === 0)
+  .map((e) => e.uid);
+
 console.log(`Public CamundaClient methods: ${allPublicMethods.size}`);
-console.log(`Overwrite uid entries:         ${uidMethodNames.size}`);
+console.log(`Overwrite uid entries:         ${uidEntries.length}`);
 console.log(`Example references:            ${exampleRefs.length}`);
 
 let exitCode = 0;
@@ -192,6 +229,16 @@ if (missing.length > 0) {
   exitCode = 1;
 }
 
+if (uidsWithoutRefs.length > 0) {
+  console.error(
+    `\n✗ ${uidsWithoutRefs.length} overwrite uid(s) have no [!code-csharp] reference:`
+  );
+  for (const uid of uidsWithoutRefs) {
+    console.error(`  - ${uid}`);
+  }
+  exitCode = 1;
+}
+
 if (refErrors.length > 0) {
   console.error(
     `\n✗ ${refErrors.length} broken example reference(s) in overwrite file:`
@@ -202,8 +249,9 @@ if (refErrors.length > 0) {
   exitCode = 1;
 }
 
-if (exitCode === 0 && missing.length === 0 && refErrors.length === 0) {
+if (exitCode === 0) {
   console.log("\n✓ All public methods have overwrite entries.");
+  console.log("✓ All overwrite entries have code references.");
   console.log("✓ All example references resolve.");
 }
 
