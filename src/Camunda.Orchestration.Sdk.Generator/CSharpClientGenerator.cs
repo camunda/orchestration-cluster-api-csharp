@@ -1003,22 +1003,27 @@ internal static class CSharpClientGenerator
         {
             sb.AppendLine($"    /// <remarks>");
             sb.AppendLine($"    /// Operation: {op.OriginalOperationId}");
-            sb.AppendLine($"    /// <para><b>Example:</b></para>");
-            sb.AppendLine($"    /// <code>");
-            foreach (var exampleCode in examples)
+            for (var i = 0; i < examples.Count; i++)
             {
+                var exampleCode = examples[i];
+                var exampleHeading = examples.Count == 1 ? "Example:" : $"Example {i + 1}:";
+                sb.AppendLine($"    /// <para><b>{exampleHeading}</b></para>");
+                sb.AppendLine($"    /// <code>");
                 foreach (var line in exampleCode.Split('\n'))
                 {
                     var trimmed = line.TrimEnd('\r');
                     sb.AppendLine($"    /// {System.Security.SecurityElement.Escape(trimmed)}");
                 }
+                sb.AppendLine($"    /// </code>");
             }
-            sb.AppendLine($"    /// </code>");
             sb.AppendLine($"    /// </remarks>");
 
-            foreach (var exampleCode in examples)
+            for (var i = 0; i < examples.Count; i++)
             {
+                var exampleCode = examples[i];
+                var exampleHeading = examples.Count == 1 ? "Example:" : $"Example {i + 1}:";
                 sb.AppendLine($"    /// <example>");
+                sb.AppendLine($"    /// <para><b>{exampleHeading}</b></para>");
                 sb.AppendLine($"    /// <code>");
                 foreach (var line in exampleCode.Split('\n'))
                 {
