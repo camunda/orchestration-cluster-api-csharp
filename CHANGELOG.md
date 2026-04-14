@@ -1,3 +1,10 @@
+# [8.9.0-alpha.38](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.37...v8.9.0-alpha.38) (2026-04-14)
+
+
+### Bug Fixes
+
+* update release process documentation ([eafeb4d](https://github.com/camunda/orchestration-cluster-api-csharp/commit/eafeb4dce5ca58806014de88f6aa2933bccb8f02))
+
 # [8.9.0-alpha.37](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.36...v8.9.0-alpha.37) (2026-04-09)
 
 
