@@ -293,7 +293,7 @@ SDK major version tracks Camunda server minor (server 8.9 → SDK 9.x, server 8.
 
 Dependabot is configured in [.github/dependabot.yml](.github/dependabot.yml) for NuGet, npm, and GitHub Actions updates. When creating a new `stable/*` branch, add a Dependabot entry for it — Dependabot does not support wildcard branch patterns, so each stable branch must be listed explicitly.
 
-### Version bumping (mutated semver)
+### Version bumping
 
 This repo uses standard semantic versioning:
 
@@ -320,7 +320,14 @@ Examples:
 ```
 fix: handle null response in process instance search
 feat: add signal broadcast support
-server: upgrade to Camunda 8.9 spec
+```
+
+To signal a **breaking change** (major bump), use a `BREAKING CHANGE:` footer in the commit body — not the `!` shorthand (which may not be recognized depending on the parser version):
+
+```
+feat: release SDK 10 for Camunda server 8.10
+
+BREAKING CHANGE: SDK major version bumped from 9 to 10 to track Camunda server 8.10
 ```
 
 ### How it works
@@ -331,6 +338,39 @@ server: upgrade to Camunda 8.9 spec
 4. `@semantic-release/exec` runs `scripts/publish-nuget.sh` (pushes to NuGet)
 5. `@semantic-release/git` commits the version bump to the .csproj
 6. `@semantic-release/github` creates a GitHub Release with `.nupkg` assets
+
+### Releasing a new major version (new stable line)
+
+When a new Camunda server minor ships (e.g. 8.10), the SDK bumps its major (e.g. 9 → 10). Follow these steps **in order**:
+
+1. **Set the repo variable**: GitHub → Settings → Variables → set `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` to the **new** major (e.g. `10`). This must be set before `stable/<major>` CI runs, otherwise the branch is treated as maintenance instead of the current stable line.
+
+2. **Push a breaking-change commit on `main`**:
+   ```bash
+   git checkout main
+   git commit --allow-empty -m "feat: release SDK 10 for Camunda server 8.10
+
+   BREAKING CHANGE: SDK major version bumped from 9 to 10 to track Camunda server 8.10"
+   git push
+   ```
+
+3. **Wait for main CI** to complete and publish the first alpha (e.g. `v10.0.0-alpha.1`).
+
+4. **Create and push the stable branch** from main:
+   ```bash
+   git checkout -b stable/10
+   git push -u origin stable/10
+   ```
+   CI runs automatically on push and publishes the first stable release (e.g. `10.0.0`).
+
+5. **Add Dependabot entries** for the new stable branch in `.github/dependabot.yml` (nuget, npm, github-actions). Dependabot does not support wildcard branch patterns.
+
+6. **Switch back to `main`** for ongoing development:
+   ```bash
+   git checkout main
+   ```
+
+> **Important**: Use a `BREAKING CHANGE:` footer in the commit body — not the `feat!:` shorthand. The `!` convention may not be recognized depending on the `conventional-commits-parser` version bundled with `@semantic-release/commit-analyzer`.
 
 ### Configuration files
 

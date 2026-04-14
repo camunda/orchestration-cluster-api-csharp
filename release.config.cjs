@@ -32,8 +32,6 @@ function envCurrentStableMajor() {
 const branch = currentBranchName();
 const stableMajor = stableMajorFromBranch(branch);
 const currentStableMajor = envCurrentStableMajor();
-const isOnMain = branch === 'main';
-const isOnCurrentStable = Boolean(stableMajor && stableMajor === currentStableMajor);
 
 function maintenanceBranchConfig(branchName, major) {
   return {
@@ -57,7 +55,7 @@ function dedupeBranches(branches) {
 }
 
 module.exports = {
-  // Branch model (mirrors JS SDK):
+  // Branch model:
   // - main: alpha prereleases (NuGet prerelease)
   // - stable/<major> (current): stable releases (NuGet)
   // - stable/<major> (older): maintenance stream
@@ -71,22 +69,21 @@ module.exports = {
   //   `prerelease` → pre-release
   //   neither      → release
   //
-  // The config tailors itself per-branch CI run:
-  //   On main:      main=prerelease(alpha), stable/N=release
-  //   On stable/N:  main=release, stable/N=maintenance(range:N.x)
+  // main is always prerelease(alpha). The current stable line is the release
+  // branch (no range, no prerelease). Older stable lines are maintenance.
+  // This avoids version-range conflicts when main and the current stable
+  // share the same major (e.g. main produces 9.0.0-alpha.N while stable/9
+  // produces 9.0.0 stable).
   branches: dedupeBranches([
-    // main: prerelease when running on main, plain release branch otherwise.
-    isOnMain
-      ? { name: 'main', prerelease: 'alpha', channel: 'alpha' }
-      : { name: 'main' },
+    // main: always prerelease — produces alpha versions on the 'alpha' channel.
+    { name: 'main', prerelease: 'alpha', channel: 'alpha' },
 
-    // Current stable line: constrained with range when running on it,
-    // plain release branch when running from main.
+    // Current stable line: release branch (no range). This is the "release"
+    // branch that semantic-release requires (≥1 branch with no range/prerelease).
     ...(currentStableMajor
       ? [
           {
             name: `stable/${currentStableMajor}`,
-            ...(isOnCurrentStable ? { range: `${currentStableMajor}.x` } : {}),
             channel: 'latest',
           },
         ]
