@@ -1,3 +1,15 @@
+# [9.0.0-alpha.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.38...v9.0.0-alpha.1) (2026-04-14)
+
+
+### Features
+
+* release SDK 9 for Camunda server 8.9 ([2008077](https://github.com/camunda/orchestration-cluster-api-csharp/commit/200807767858f471904ffd681d57c299fa7df281))
+
+
+### BREAKING CHANGES
+
+* SDK major version bumped from 8 to 9 to track Camunda server 8.9
+
 # [8.9.0-alpha.38](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.37...v8.9.0-alpha.38) (2026-04-14)
 
 
