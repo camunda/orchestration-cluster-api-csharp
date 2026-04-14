@@ -57,10 +57,10 @@ Runtime components:
 ## Versioning
 
 Uses [semantic-release](https://github.com/semantic-release/semantic-release) for automated versioning and publishing (same config as JS SDK):
-- Commit-driven: only `fix:`, `feat:`, `perf:`, `revert:` commits trigger a release (as patch)
-- `server:` → minor bump, `server-major:` → major bump
+- Standard semantic versioning: `fix:`/`perf:`/`revert:` → patch, `feat:` → minor, `BREAKING CHANGE` → major
 - `chore:`, `docs:`, `ci:` commits produce no release
-- Branch model: `main` = alpha prereleases, `stable/*` = stable releases
+- Branch model: `main` = alpha prereleases, `stable/<major>` (current) = stable releases, `stable/<major>` (older) = maintenance
+- SDK major tracks Camunda server minor (server 8.9 → SDK 9.x). Current stable major set via `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` repo variable.
 - Config: `release.config.cjs`, `commitlint.config.cjs`
 - Commit messages linted via commitlint in CI (Conventional Commits required)
 
