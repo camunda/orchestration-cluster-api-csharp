@@ -134,8 +134,7 @@ module.exports = {
       '@semantic-release/github',
       {
         assets: ['release-assets/*.nupkg', 'release-assets/*.snupkg'],
-        successComment:
-          'Released in `${nextRelease.gitTag}` (NuGet: `Camunda.Orchestration.Sdk@${nextRelease.version}`).',
+        successComment: false,
       },
     ],
   ],
