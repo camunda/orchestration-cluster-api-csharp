@@ -1,3 +1,20 @@
+# [9.0.0-alpha.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.2...v9.0.0-alpha.3) (2026-04-14)
+
+
+### Bug Fixes
+
+* disable successComment to avoid GraphQL error on non-PR commits ([77de048](https://github.com/camunda/orchestration-cluster-api-csharp/commit/77de048e80fa438fb94afb2744f16ab6d5f6b7dd))
+
+
+### Features
+
+* begin SDK 10 development for Camunda server 8.10 ([5f61d22](https://github.com/camunda/orchestration-cluster-api-csharp/commit/5f61d22eaca7f74e81846bda22a703f35f33ce4f))
+
+
+### BREAKING CHANGES
+
+* SDK major version bumped from 9 to 10
+
 # [9.0.0-alpha.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.1...v9.0.0-alpha.2) (2026-04-14)
 
 
