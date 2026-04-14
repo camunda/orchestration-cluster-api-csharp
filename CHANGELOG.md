@@ -1,3 +1,10 @@
+## [9.0.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0...v9.0.1) (2026-04-14)
+
+
+### Bug Fixes
+
+* disable successComment to avoid GraphQL error on non-PR commits ([d513ae0](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d513ae016f497b7f10f29b48d1e265427428c1e9))
+
 # [9.0.0](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.8.0...v9.0.0) (2026-04-14)
 
 
