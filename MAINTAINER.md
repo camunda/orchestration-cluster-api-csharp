@@ -363,9 +363,19 @@ When a new Camunda server minor ships (e.g. 8.10), the SDK bumps its major (e.g.
    ```
    CI runs automatically on push and publishes the first stable release (e.g. `10.0.0`).
 
-5. **Add Dependabot entries** for the new stable branch in `.github/dependabot.yml` (nuget, npm, github-actions). Dependabot does not support wildcard branch patterns.
+5. **Bump `main` to the next major** so alpha versions don't collide with the stable line:
+   ```bash
+   git checkout main
+   git commit --allow-empty -m "feat: begin SDK 11 development for Camunda server 8.11
 
-6. **Switch back to `main`** for ongoing development:
+   BREAKING CHANGE: SDK major version bumped from 10 to 11"
+   git push
+   ```
+   This ensures main publishes `11.0.0-alpha.x` while `stable/10` publishes `10.0.x`.
+
+6. **Add Dependabot entries** for the new stable branch in `.github/dependabot.yml` (nuget, npm, github-actions). Dependabot does not support wildcard branch patterns.
+
+7. **Switch back to `main`** for ongoing development:
    ```bash
    git checkout main
    ```
