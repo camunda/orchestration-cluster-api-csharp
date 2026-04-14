@@ -293,15 +293,14 @@ Dependabot is configured in [.github/dependabot.yml](.github/dependabot.yml) for
 
 ### Version bumping (mutated semver)
 
-This repo uses a "mutated semver" policy — same as the JS SDK:
+This repo uses standard semantic versioning:
 
 | Commit type | Release bump | Use case |
 |---|---|---|
-| `fix:`, `feat:`, `perf:`, `revert:` | **patch** | Normal changes |
-| `server:` | **minor** | Camunda server minor line bump (8.8 → 8.9) |
-| `server-major:` | **major** | Camunda server major line bump (8.x → 9.x) |
+| `fix:`, `perf:`, `revert:` | **patch** | Bug fixes and performance improvements |
+| `feat:` | **minor** | New features |
+| `BREAKING CHANGE` | **major** | Breaking API changes |
 | `chore:`, `docs:`, `ci:`, `style:` | no release | No NuGet publish |
-| `BREAKING CHANGE` | **patch** | Breaking changes are patch (use `server:` / `server-major:` for line bumps) |
 
 ### Commit message format
 

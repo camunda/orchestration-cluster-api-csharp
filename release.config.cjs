@@ -79,18 +79,16 @@ module.exports = {
     [
       '@semantic-release/commit-analyzer',
       {
-        // Mutated semver policy (same as JS SDK):
-        // - Patch: normal changes (including features)
-        // - Minor: reserved for Camunda server minor line bumps (e.g. 8.8 -> 8.9)
-        // - Major: reserved for Camunda server major line bumps (e.g. 8.x -> 9.x)
+        // Standard semantic versioning:
+        // - Patch: fix, perf, revert
+        // - Minor: feat
+        // - Major: breaking changes
         releaseRules: [
-          { type: 'feat', release: 'patch' },
+          { type: 'feat', release: 'minor' },
           { type: 'fix', release: 'patch' },
           { type: 'perf', release: 'patch' },
           { type: 'revert', release: 'patch' },
-          { breaking: true, release: 'patch' },
-          { type: 'server', release: 'minor' },
-          { type: 'server-major', release: 'major' },
+          { breaking: true, release: 'major' },
         ],
       },
     ],
