@@ -1,3 +1,10 @@
+# [9.0.0-alpha.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.1...v9.0.0-alpha.2) (2026-04-14)
+
+
+### Bug Fixes
+
+* update release process ([d559644](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d559644cf93b53eb0ee2dfef086d7c6fa1ff00fe))
+
 # [9.0.0-alpha.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v8.9.0-alpha.38...v9.0.0-alpha.1) (2026-04-14)
 
 
