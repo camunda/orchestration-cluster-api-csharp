@@ -281,11 +281,13 @@ Releases are fully automated via [semantic-release](https://github.com/semantic-
 
 ### Branch model
 
-- **`main`** → alpha prereleases (`8.9.0-alpha.1`, `8.9.0-alpha.2`, ...)
-- **`stable/<major>.<minor>`** (current) → stable releases (`8.8.0`, `8.8.1`, ...)
-- **`stable/<major>.<minor>`** (older) → maintenance releases
+- **`main`** → alpha prereleases (`10.0.0-alpha.1`, `10.0.0-alpha.2`, ...)
+- **`stable/<major>`** (current) → stable releases (`9.0.0`, `9.0.1`, ...)
+- **`stable/<major>`** (older) → maintenance releases
 
-The currently promoted stable minor is configured via the `CAMUNDA_SDK_CURRENT_STABLE_MINOR` repo variable (e.g. `8.8`).
+The currently promoted stable major is configured via the `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` repo variable (e.g. `9`).
+
+SDK major version tracks Camunda server minor (server 8.9 → SDK 9.x, server 8.10 → SDK 10.x).
 
 ### Dependabot
 

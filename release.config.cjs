@@ -11,27 +11,35 @@ function currentBranchName() {
   }
 }
 
-function stableMinorFromBranch(branch) {
-  // stable/<major>.<minor> (e.g. stable/8.8)
-  const m = /^stable\/(\d+\.\d+)$/.exec(branch);
+function stableMajorFromBranch(branch) {
+  // stable/<major> (e.g. stable/9)
+  const m = /^stable\/(\d+)$/.exec(branch);
   return m ? m[1] : null;
 }
 
-function envCurrentStableMinor() {
-  // Expected format: <major>.<minor> (e.g. 8.8)
-  const v = (process.env.CAMUNDA_SDK_CURRENT_STABLE_MINOR || '').trim();
-  return /^\d+\.\d+$/.test(v) ? v : null;
+function stableDistTagForMajor(major) {
+  // npm dist-tags must NOT be a valid SemVer version or range.
+  // "9" alone is a valid SemVer range, so append "-stable".
+  return `${major}-stable`;
+}
+
+function envCurrentStableMajor() {
+  // Expected format: integer (e.g. 9)
+  const v = (process.env.CAMUNDA_SDK_CURRENT_STABLE_MAJOR || '').trim();
+  return /^\d+$/.test(v) ? v : null;
 }
 
 const branch = currentBranchName();
-const stableMinor = stableMinorFromBranch(branch);
-const currentStableMinor = envCurrentStableMinor();
+const stableMajor = stableMajorFromBranch(branch);
+const currentStableMajor = envCurrentStableMajor();
+const isOnMain = branch === 'main';
+const isOnCurrentStable = Boolean(stableMajor && stableMajor === currentStableMajor);
 
-function maintenanceBranchConfig(branchName, minor) {
+function maintenanceBranchConfig(branchName, major) {
   return {
     name: branchName,
-    range: `${minor}.x`,
-    channel: `${minor}-stable`,
+    range: `${major}.x`,
+    channel: stableDistTagForMajor(major),
   };
 }
 
@@ -51,28 +59,42 @@ function dedupeBranches(branches) {
 module.exports = {
   // Branch model (mirrors JS SDK):
   // - main: alpha prereleases (NuGet prerelease)
-  // - stable/<major>.<minor> (current): stable releases (NuGet)
-  // - stable/<major>.<minor> (other): maintenance stream
+  // - stable/<major> (current): stable releases (NuGet)
+  // - stable/<major> (older): maintenance stream
   //
-  // The currently promoted stable minor is configured via `CAMUNDA_SDK_CURRENT_STABLE_MINOR`.
+  // SDK major version tracks Camunda server minor (server 8.9 → SDK 9.x).
+  // The currently promoted stable major is configured via `CAMUNDA_SDK_CURRENT_STABLE_MAJOR`.
+  //
+  // semantic-release requires ≥1 "release branch" (no `range`, no `prerelease`).
+  // Branch type classification:
+  //   `range`      → maintenance
+  //   `prerelease` → pre-release
+  //   neither      → release
+  //
+  // The config tailors itself per-branch CI run:
+  //   On main:      main=prerelease(alpha), stable/N=release
+  //   On stable/N:  main=release, stable/N=maintenance(range:N.x)
   branches: dedupeBranches([
-    {
-      name: 'main',
-      prerelease: 'alpha',
-      channel: 'alpha',
-    },
+    // main: prerelease when running on main, plain release branch otherwise.
+    isOnMain
+      ? { name: 'main', prerelease: 'alpha', channel: 'alpha' }
+      : { name: 'main' },
 
-    ...(currentStableMinor
+    // Current stable line: constrained with range when running on it,
+    // plain release branch when running from main.
+    ...(currentStableMajor
       ? [
           {
-            name: `stable/${currentStableMinor}`,
+            name: `stable/${currentStableMajor}`,
+            ...(isOnCurrentStable ? { range: `${currentStableMajor}.x` } : {}),
             channel: 'latest',
           },
         ]
       : []),
 
-    ...(stableMinor && stableMinor !== currentStableMinor
-      ? [maintenanceBranchConfig(branch, stableMinor)]
+    // Any other stable/* branch publishes as a maintenance line.
+    ...(stableMajor && stableMajor !== currentStableMajor
+      ? [maintenanceBranchConfig(branch, stableMajor)]
       : []),
   ]),
   plugins: [
