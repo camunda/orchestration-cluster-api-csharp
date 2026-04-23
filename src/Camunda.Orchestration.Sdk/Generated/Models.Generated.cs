@@ -807,6 +807,57 @@ public sealed class AdvancedDeploymentKeyFilter
 }
 
 /// <summary>
+/// Advanced ElementId filter.
+/// </summary>
+public sealed class AdvancedElementIdFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ElementId? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ElementId? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ElementId>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ElementId>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
 /// Advanced ElementInstanceKey filter.
 /// </summary>
 public sealed class AdvancedElementInstanceKeyFilter
@@ -1454,6 +1505,51 @@ public sealed class AdvancedMessageSubscriptionStateFilter
     /// </summary>
     [JsonPropertyName("$in")]
     public List<MessageSubscriptionStateEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced MessageSubscriptionTypeEnum filter
+/// </summary>
+public sealed class AdvancedMessageSubscriptionTypeFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public MessageSubscriptionTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public MessageSubscriptionTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<MessageSubscriptionTypeEnum>? In { get; set; }
 
     /// <summary>
     /// Checks if the property matches the provided like value.
@@ -7160,6 +7256,85 @@ public readonly record struct ElementId : global::Camunda.Orchestration.Sdk.ICam
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ElementIdExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ElementIdExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ElementIdExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ElementIdExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementIdExactMatch");
+        return new ElementIdExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// ElementId property with full advanced search capabilities.
+/// </summary>
+public sealed class ElementIdFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ElementId? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ElementId? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ElementId>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ElementId>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
 /// Element instance filter.
 /// </summary>
 public sealed class ElementInstanceFilter
@@ -7186,14 +7361,14 @@ public sealed class ElementInstanceFilter
     /// The element ID for this element instance.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public ElementId? ElementId { get; set; }
+    public ElementIdFilterProperty? ElementId { get; set; }
 
     /// <summary>
     /// The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
     /// 
     /// </summary>
     [JsonPropertyName("elementName")]
-    public string? ElementName { get; set; }
+    public StringFilterProperty? ElementName { get; set; }
 
     /// <summary>
     /// Shows whether this element instance has an incident related to.
@@ -10362,6 +10537,8 @@ public enum JobListenerEventTypeEnum
 {
     [JsonPropertyName("ASSIGNING")]
     ASSIGNING,
+    [JsonPropertyName("BEFORE_ALL")]
+    BEFOREALL,
     [JsonPropertyName("CANCELING")]
     CANCELING,
     [JsonPropertyName("COMPLETING")]
@@ -11954,6 +12131,27 @@ public sealed class MessageSubscriptionFilter
     [JsonPropertyName("tenantId")]
     public StringFilterProperty? TenantId { get; set; }
 
+    /// <summary>
+    /// The type of message subscription to filter by. When omitted, both
+    /// `START_EVENT` and `PROCESS_EVENT` are returned. Only available for data
+    /// created with Camunda 8.10 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("messageSubscriptionType")]
+    public MessageSubscriptionTypeFilterProperty? MessageSubscriptionType { get; set; }
+
+    /// <summary>
+    /// The name of the process definition associated with this message subscription.
+    /// </summary>
+    [JsonPropertyName("processDefinitionName")]
+    public StringFilterProperty? ProcessDefinitionName { get; set; }
+
+    /// <summary>
+    /// The version of the process definition associated with this message subscription.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public IntegerFilterProperty? ProcessDefinitionVersion { get; set; }
+
 }
 
 /// <summary>
@@ -12074,6 +12272,8 @@ public sealed class MessageSubscriptionResult
 
     /// <summary>
     /// The process instance key associated with this message subscription.
+    /// Only populated for intermediate event entities.
+    /// 
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
@@ -12095,6 +12295,8 @@ public sealed class MessageSubscriptionResult
 
     /// <summary>
     /// The element instance key associated with this message subscription.
+    /// Only populated for intermediate event entities.
+    /// 
     /// </summary>
     [JsonPropertyName("elementInstanceKey")]
     public ElementInstanceKey? ElementInstanceKey { get; set; }
@@ -12122,6 +12324,37 @@ public sealed class MessageSubscriptionResult
     /// </summary>
     [JsonPropertyName("correlationKey")]
     public string? CorrelationKey { get; set; }
+
+    /// <summary>
+    /// The type of message subscription.
+    /// `START_EVENT` is definition-scoped (process start events). Always has a value; only
+    /// captured from Camunda 8.10 onwards.
+    /// `PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have
+    /// no value stored; the API returns `PROCESS_EVENT` as a default for those entries.
+    /// 
+    /// </summary>
+    [JsonPropertyName("messageSubscriptionType")]
+    public MessageSubscriptionTypeEnum MessageSubscriptionType { get; set; }
+
+    /// <summary>
+    /// The `zeebe:properties` extension properties extracted from the BPMN element associated
+    /// with this subscription. Empty object when no properties are defined.
+    /// 
+    /// </summary>
+    [JsonPropertyName("extensionProperties")]
+    public Dictionary<string, string> ExtensionProperties { get; set; } = null!;
+
+    /// <summary>
+    /// The name of the process definition associated with this message subscription.
+    /// </summary>
+    [JsonPropertyName("processDefinitionName")]
+    public string? ProcessDefinitionName { get; set; }
+
+    /// <summary>
+    /// The version of the process definition associated with this message subscription.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int? ProcessDefinitionVersion { get; set; }
 
     /// <summary>
     /// The unique identifier of the tenant.
@@ -12266,6 +12499,96 @@ public sealed class MessageSubscriptionStateFilterProperty
     /// </summary>
     [JsonPropertyName("$in")]
     public List<MessageSubscriptionStateEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// The type of message subscription.
+/// `START_EVENT` is definition-scoped (process start events). Always has a value; only
+/// captured from Camunda 8.10 onwards.
+/// `PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have
+/// no value stored; the API returns `PROCESS_EVENT` as a default for those entries.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum MessageSubscriptionTypeEnum
+{
+    [JsonPropertyName("START_EVENT")]
+    STARTEVENT,
+    [JsonPropertyName("PROCESS_EVENT")]
+    PROCESSEVENT,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct MessageSubscriptionTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private MessageSubscriptionTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="MessageSubscriptionTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static MessageSubscriptionTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionTypeExactMatch");
+        return new MessageSubscriptionTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// MessageSubscriptionTypeEnum with full advanced search capabilities.
+/// </summary>
+public sealed class MessageSubscriptionTypeFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public MessageSubscriptionTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public MessageSubscriptionTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<MessageSubscriptionTypeEnum>? In { get; set; }
 
     /// <summary>
     /// Checks if the property matches the provided like value.

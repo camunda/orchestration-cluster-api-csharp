@@ -1009,7 +1009,7 @@ public partial class CamundaClient
     /// Upload document
     /// Upload a document to the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>
@@ -1058,7 +1058,7 @@ public partial class CamundaClient
     /// Create document link
     /// Create a link to a document in the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP
     /// 
     /// </summary>
     /// <remarks>
@@ -1117,7 +1117,7 @@ public partial class CamundaClient
     /// each of which contains the file name of the document that failed to upload and the reason for the failure.
     /// The client can choose to retry the whole batch or individual documents based on the response.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>
@@ -1780,7 +1780,7 @@ public partial class CamundaClient
     /// Delete document
     /// Delete a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>
@@ -2831,7 +2831,7 @@ public partial class CamundaClient
     /// Download document
     /// Download a document from the Camunda 8 cluster.
     /// 
-    /// Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+    /// Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
     /// 
     /// </summary>
     /// <remarks>
@@ -4086,9 +4086,16 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, CancellationToken ct = default)
+    public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, ConsistencyOptions<ResourceResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getResource", true,
+                () => InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct),
+                consistency!, _logger, ct);
+        }
+
         return await InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct);
     }
 
@@ -4125,9 +4132,16 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, CancellationToken ct = default)
+    public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/content";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getResourceContent", true,
+                () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct),
+                consistency!, _logger, ct);
+        }
+
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct);
     }
 
@@ -6409,6 +6423,19 @@ public partial class CamundaClient
     /// <summary>
     /// Search message subscriptions
     /// Search for message subscriptions based on given criteria.
+    /// 
+    /// By default, both start and intermediate event subscriptions are returned. Use the
+    /// `messageSubscriptionType` filter to restrict results to a single type.
+    /// 
+    /// **Version notes:**
+    /// - Start event subscriptions are only captured for deployments made with 8.10 or later.
+    /// - The `messageSubscriptionType` field is only populated for data created
+    ///   with Camunda 8.10 or later. For pre-8.10 data, intermediate event entries have no
+    ///   `messageSubscriptionType` value stored. For convenience, the API returns `PROCESS_EVENT`
+    ///   as a default for such search results, though.
+    /// - Searching for intermediate event subscriptions **including legacy data** can be achieved
+    ///   by filtering for `messageSubscriptionType` not matching `START_EVENT`.
+    /// 
     /// </summary>
     /// <remarks>
     /// Operation: searchMessageSubscriptions

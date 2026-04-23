@@ -214,7 +214,8 @@
           "500": {
             "description": "An internal error occurred while processing the request."
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/audit-logs/{auditLogKey}": {
@@ -295,7 +296,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/authentication/me": {
@@ -360,7 +362,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/authorizations": {
@@ -460,7 +463,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/authorizations/search": {
@@ -539,7 +543,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/authorizations/{authorizationKey}": {
@@ -623,7 +628,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "get": {
         "x-eventually-consistent": true,
@@ -702,7 +708,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -774,7 +781,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operation-items/search": {
@@ -827,7 +835,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/search": {
@@ -880,7 +889,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/{batchOperationKey}": {
@@ -944,7 +954,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/{batchOperationKey}/cancellation": {
@@ -1018,7 +1029,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/{batchOperationKey}/resumption": {
@@ -1102,7 +1114,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/{batchOperationKey}/suspension": {
@@ -1186,7 +1199,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/clock": {
@@ -1242,7 +1256,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/clock/reset": {
@@ -1278,7 +1293,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/cluster-variables/global": {
@@ -1358,7 +1374,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/cluster-variables/global/{name}": {
@@ -1449,7 +1466,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "put": {
         "operationId": "updateGlobalClusterVariable",
@@ -1548,7 +1566,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "delete": {
         "operationId": "deleteGlobalClusterVariable",
@@ -1630,7 +1649,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/cluster-variables/search": {
@@ -1720,7 +1740,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/cluster-variables/tenants/{tenantId}": {
@@ -1801,6 +1822,16 @@
               }
             }
           },
+          "404": {
+            "description": "The tenant with the given ID was not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
           "500": {
             "description": "An internal error occurred while processing the request.",
             "content": {
@@ -1811,7 +1842,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/cluster-variables/tenants/{tenantId}/{name}": {
@@ -1911,7 +1943,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "put": {
         "operationId": "updateTenantClusterVariable",
@@ -2019,7 +2052,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "delete": {
         "operationId": "deleteTenantClusterVariable",
@@ -2110,7 +2144,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/conditionals/evaluation": {
@@ -2222,7 +2257,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/correlated-message-subscriptions/search": {
@@ -2302,7 +2338,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/decision-definitions/evaluation": {
@@ -2391,7 +2428,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-definitions/search": {
@@ -2471,7 +2509,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-definitions/{decisionDefinitionKey}": {
@@ -2562,7 +2601,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/decision-definitions/{decisionDefinitionKey}/xml": {
@@ -2653,7 +2693,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-instances/search": {
@@ -2733,7 +2774,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-instances/{decisionEvaluationInstanceKey}": {
@@ -2824,7 +2866,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/decision-instances/{decisionEvaluationKey}/deletion": {
@@ -2925,7 +2968,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/decision-instances/deletion": {
@@ -3005,7 +3049,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/decision-requirements/search": {
@@ -3085,7 +3130,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-requirements/{decisionRequirementsKey}": {
@@ -3176,7 +3222,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/decision-requirements/{decisionRequirementsKey}/xml": {
@@ -3267,7 +3314,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/deployments": {
@@ -3337,7 +3385,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/documents": {
@@ -3348,7 +3397,7 @@
         ],
         "operationId": "createDocument",
         "summary": "Upload document",
-        "description": "Upload a document to the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Upload a document to the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "storeId",
@@ -3428,7 +3477,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/documents/batch": {
@@ -3439,7 +3489,7 @@
         ],
         "operationId": "createDocuments",
         "summary": "Upload multiple documents",
-        "description": "Upload multiple documents to the Camunda 8 cluster.\n\nThe caller must provide a file name for each document, which will be used in case of a multi-status response\nto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header\nof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These\nare matched with the files based on index, and must have the same length as the files array.\nTo pass homogenous metadata for all files, spread the metadata over the metadata array.\nA filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header\nof the file part.\n\nIn case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,\neach of which contains the file name of the document that failed to upload and the reason for the failure.\nThe client can choose to retry the whole batch or individual documents based on the response.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Upload multiple documents to the Camunda 8 cluster.\n\nThe caller must provide a file name for each document, which will be used in case of a multi-status response\nto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header\nof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These\nare matched with the files based on index, and must have the same length as the files array.\nTo pass homogenous metadata for all files, spread the metadata over the metadata array.\nA filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header\nof the file part.\n\nIn case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,\neach of which contains the file name of the document that failed to upload and the reason for the failure.\nThe client can choose to retry the whole batch or individual documents based on the response.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "storeId",
@@ -3536,7 +3586,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.7"
       }
     },
     "/documents/{documentId}": {
@@ -3547,7 +3598,7 @@
         ],
         "operationId": "getDocument",
         "summary": "Download document",
-        "description": "Download a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Download a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "documentId",
@@ -3609,7 +3660,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -3618,7 +3670,7 @@
         ],
         "operationId": "deleteDocument",
         "summary": "Delete document",
-        "description": "Delete a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Delete a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "documentId",
@@ -3663,7 +3715,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/documents/{documentId}/links": {
@@ -3674,7 +3727,7 @@
         ],
         "operationId": "createDocumentLink",
         "summary": "Create document link",
-        "description": "Create a link to a document in the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP\n",
+        "description": "Create a link to a document in the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP\n",
         "parameters": [
           {
             "name": "documentId",
@@ -3735,7 +3788,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.7"
       }
     },
     "/element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation": {
@@ -3839,7 +3893,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/element-instances/search": {
@@ -3919,7 +3974,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/element-instances/{elementInstanceKey}": {
@@ -4010,7 +4066,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/element-instances/{elementInstanceKey}/incidents/search": {
@@ -4111,7 +4168,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/element-instances/{elementInstanceKey}/variables": {
@@ -4199,7 +4257,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/expression/evaluation": {
@@ -4279,7 +4338,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/global-task-listeners": {
@@ -4379,7 +4439,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/global-task-listeners/{id}": {
@@ -4460,7 +4521,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -4569,7 +4631,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -4661,7 +4724,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/global-task-listeners/search": {
@@ -4740,7 +4804,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/groups": {
@@ -4829,7 +4894,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/search": {
@@ -4909,7 +4975,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}": {
@@ -4990,7 +5057,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -5089,7 +5157,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -5161,7 +5230,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/clients/search": {
@@ -5317,7 +5387,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/clients/{clientId}": {
@@ -5413,7 +5484,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -5497,7 +5569,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/mapping-rules/search": {
@@ -5615,7 +5688,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/mapping-rules/{mappingRuleId}": {
@@ -5711,7 +5785,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -5795,7 +5870,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/roles/search": {
@@ -5913,7 +5989,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/users/search": {
@@ -6068,7 +6145,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/users/{username}": {
@@ -6164,7 +6242,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -6248,7 +6327,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/incidents/search": {
@@ -6328,7 +6408,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/incidents/{incidentKey}": {
@@ -6419,7 +6500,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/incidents/{incidentKey}/resolution": {
@@ -6506,7 +6588,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/incidents/statistics/process-instances-by-definition": {
@@ -6586,7 +6669,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/incidents/statistics/process-instances-by-error": {
@@ -6666,7 +6750,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/activation": {
@@ -6746,7 +6831,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/search": {
@@ -6826,7 +6912,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/jobs/{jobKey}": {
@@ -6913,7 +7000,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/{jobKey}/completion": {
@@ -7000,7 +7088,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/{jobKey}/error": {
@@ -7087,7 +7176,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/{jobKey}/failure": {
@@ -7174,7 +7264,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/statistics/global": {
@@ -7278,7 +7369,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/statistics/by-types": {
@@ -7358,7 +7450,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/statistics/by-workers": {
@@ -7438,7 +7531,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/statistics/time-series": {
@@ -7518,7 +7612,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/statistics/errors": {
@@ -7598,7 +7693,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/license": {
@@ -7631,7 +7727,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/mapping-rules": {
@@ -7708,7 +7805,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/mapping-rules/search": {
@@ -7804,7 +7902,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/mapping-rules/{mappingRuleId}": {
@@ -7902,7 +8001,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -7974,7 +8074,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "get": {
         "x-eventually-consistent": true,
@@ -8043,7 +8144,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/message-subscriptions/search": {
@@ -8054,7 +8156,7 @@
         ],
         "operationId": "searchMessageSubscriptions",
         "summary": "Search message subscriptions",
-        "description": "Search for message subscriptions based on given criteria.",
+        "description": "Search for message subscriptions based on given criteria.\n\nBy default, both start and intermediate event subscriptions are returned. Use the\n`messageSubscriptionType` filter to restrict results to a single type.\n\n**Version notes:**\n- Start event subscriptions are only captured for deployments made with 8.10 or later.\n- The `messageSubscriptionType` field is only populated for data created\n  with Camunda 8.10 or later. For pre-8.10 data, intermediate event entries have no\n  `messageSubscriptionType` value stored. For convenience, the API returns `PROCESS_EVENT`\n  as a default for such search results, though.\n- Searching for intermediate event subscriptions **including legacy data** can be achieved\n  by filtering for `messageSubscriptionType` not matching `START_EVENT`.\n",
         "requestBody": {
           "required": false,
           "content": {
@@ -8123,7 +8225,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/messages/correlation": {
@@ -8206,7 +8309,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/messages/publication": {
@@ -8269,7 +8373,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-definitions/search": {
@@ -8349,7 +8454,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/statistics/message-subscriptions": {
@@ -8429,7 +8535,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-definitions/statistics/process-instances": {
@@ -8509,7 +8616,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-definitions/{processDefinitionKey}": {
@@ -8600,7 +8708,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/{processDefinitionKey}/form": {
@@ -8694,7 +8803,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/{processDefinitionKey}/statistics/element-instances": {
@@ -8785,7 +8895,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/{processDefinitionKey}/xml": {
@@ -8886,7 +8997,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/statistics/process-instances-by-version": {
@@ -8966,7 +9078,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-instances": {
@@ -9066,7 +9179,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/cancellation": {
@@ -9146,7 +9260,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/deletion": {
@@ -9226,7 +9341,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-instances/incident-resolution": {
@@ -9306,7 +9422,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/migration": {
@@ -9386,7 +9503,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/modification": {
@@ -9466,7 +9584,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/search": {
@@ -9546,7 +9665,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/{processInstanceKey}": {
@@ -9637,7 +9757,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/{processInstanceKey}/call-hierarchy": {
@@ -9731,7 +9852,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/{processInstanceKey}/cancellation": {
@@ -9836,7 +9958,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/{processInstanceKey}/deletion": {
@@ -9947,7 +10070,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-instances/{processInstanceKey}/incident-resolution": {
@@ -10038,7 +10162,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-instances/{processInstanceKey}/incidents/search": {
@@ -10139,7 +10264,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/{processInstanceKey}/migration": {
@@ -10226,7 +10352,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/{processInstanceKey}/modification": {
@@ -10303,7 +10430,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/{processInstanceKey}/sequence-flows": {
@@ -10384,7 +10512,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/{processInstanceKey}/statistics/element-instances": {
@@ -10465,12 +10594,13 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/resources/{resourceKey}": {
       "get": {
-        "x-eventually-consistent": false,
+        "x-eventually-consistent": true,
         "tags": [
           "Resource"
         ],
@@ -10519,12 +10649,13 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.7"
       }
     },
     "/resources/{resourceKey}/content": {
       "get": {
-        "x-eventually-consistent": false,
+        "x-eventually-consistent": true,
         "tags": [
           "Resource"
         ],
@@ -10546,9 +10677,10 @@
           "200": {
             "description": "The resource content is successfully returned.",
             "content": {
-              "application/json": {
+              "application/octet-stream": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -10573,7 +10705,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.7"
       }
     },
     "/resources/{resourceKey}/deletion": {
@@ -10657,7 +10790,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/roles": {
@@ -10746,7 +10880,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/search": {
@@ -10826,7 +10961,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}": {
@@ -10907,7 +11043,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -11006,7 +11143,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -11078,7 +11216,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/clients/search": {
@@ -11234,7 +11373,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/clients/{clientId}": {
@@ -11330,7 +11470,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -11414,7 +11555,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/groups/search": {
@@ -11515,7 +11657,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/groups/{groupId}": {
@@ -11611,7 +11754,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -11695,7 +11839,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/mapping-rules/search": {
@@ -11813,7 +11958,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/mapping-rules/{mappingRuleId}": {
@@ -11909,7 +12055,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -11993,7 +12140,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/users/search": {
@@ -12148,7 +12296,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/users/{username}": {
@@ -12244,7 +12393,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -12328,7 +12478,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/setup/user": {
@@ -12401,7 +12552,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/signals/broadcast": {
@@ -12474,7 +12626,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/status": {
@@ -12493,7 +12646,8 @@
           "503": {
             "description": "The cluster is DOWN and does not have any partition with a healthy leader."
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/system/usage-metrics": {
@@ -12637,7 +12791,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/system/configuration": {
@@ -12701,7 +12856,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/tenants": {
@@ -12787,7 +12943,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/search": {
@@ -12877,7 +13034,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}": {
@@ -12968,7 +13126,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -13060,7 +13219,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -13135,7 +13295,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/clients/search": {
@@ -13235,7 +13396,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/clients/{clientId}": {
@@ -13321,7 +13483,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -13405,7 +13568,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/groups/search": {
@@ -13449,7 +13613,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/groups/{groupId}": {
@@ -13535,7 +13700,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -13619,7 +13785,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/mapping-rules/search": {
@@ -13680,7 +13847,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/mapping-rules/{mappingRuleId}": {
@@ -13766,7 +13934,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -13850,7 +14019,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/roles/search": {
@@ -13911,7 +14081,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/roles/{roleId}": {
@@ -13997,7 +14168,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -14081,7 +14253,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/users/search": {
@@ -14180,7 +14353,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/users/{username}": {
@@ -14266,7 +14440,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -14350,7 +14525,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/topology": {
@@ -14400,7 +14576,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/users": {
@@ -14500,7 +14677,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/users/search": {
@@ -14616,7 +14794,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/users/{username}": {
@@ -14717,7 +14896,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -14829,7 +15009,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -14894,7 +15075,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/user-tasks/search": {
@@ -14974,7 +15156,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/user-tasks/{userTaskKey}": {
@@ -15065,7 +15248,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "patch": {
         "x-eventually-consistent": false,
@@ -15171,7 +15355,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/user-tasks/{userTaskKey}/assignee": {
@@ -15269,7 +15454,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/user-tasks/{userTaskKey}/assignment": {
@@ -15377,7 +15563,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/user-tasks/{userTaskKey}/audit-logs/search": {
@@ -15441,7 +15628,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/user-tasks/{userTaskKey}/completion": {
@@ -15549,7 +15737,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/user-tasks/{userTaskKey}/effective-variables/search": {
@@ -15669,7 +15858,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/user-tasks/{userTaskKey}/form": {
@@ -15763,7 +15953,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/user-tasks/{userTaskKey}/variables/search": {
@@ -15880,7 +16071,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/variables/search": {
@@ -16015,7 +16207,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/variables/{variableKey}": {
@@ -16106,7 +16299,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     }
   },
@@ -20945,13 +21139,17 @@
             "description": "The element ID for this element instance.",
             "allOf": [
               {
-                "$ref": "#/components/schemas/ElementId"
+                "$ref": "#/components/schemas/ElementIdFilterProperty"
               }
             ]
           },
           "elementName": {
-            "type": "string",
-            "description": "The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.\n"
+            "description": "The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
           },
           "hasIncident": {
             "type": "boolean",
@@ -22413,6 +22611,61 @@
         "minLength": 1,
         "maxLength": 256,
         "example": "order-12345"
+      },
+      "ElementIdFilterProperty": {
+        "description": "ElementId property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ElementIdExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedElementIdFilter"
+          }
+        ]
+      },
+      "AdvancedElementIdFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced ElementId filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementId"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementId"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementId"
+            }
+          },
+          "$notIn": {
+            "description": "Checks if the property matches none of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementId"
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
+          }
+        }
       },
       "IncidentSearchQuery": {
         "additionalProperties": false,
@@ -24557,6 +24810,7 @@
         "type": "string",
         "enum": [
           "ASSIGNING",
+          "BEFORE_ALL",
           "CANCELING",
           "COMPLETING",
           "CREATING",
@@ -25937,12 +26191,16 @@
           "correlationKey",
           "elementId",
           "elementInstanceKey",
+          "extensionProperties",
           "lastUpdatedDate",
           "messageName",
           "messageSubscriptionKey",
           "messageSubscriptionState",
+          "messageSubscriptionType",
           "processDefinitionId",
           "processDefinitionKey",
+          "processDefinitionName",
+          "processDefinitionVersion",
           "processInstanceKey",
           "tenantId"
         ],
@@ -25979,7 +26237,7 @@
               }
             ],
             "nullable": true,
-            "description": "The process instance key associated with this message subscription."
+            "description": "The process instance key associated with this message subscription.\nOnly populated for intermediate event entities.\n"
           },
           "rootProcessInstanceKey": {
             "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
@@ -26005,7 +26263,7 @@
               }
             ],
             "nullable": true,
-            "description": "The element instance key associated with this message subscription."
+            "description": "The element instance key associated with this message subscription.\nOnly populated for intermediate event entities.\n"
           },
           "messageSubscriptionState": {
             "$ref": "#/components/schemas/MessageSubscriptionStateEnum"
@@ -26024,6 +26282,27 @@
             "nullable": true,
             "description": "The correlation key of the message subscription."
           },
+          "messageSubscriptionType": {
+            "$ref": "#/components/schemas/MessageSubscriptionTypeEnum"
+          },
+          "extensionProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The `zeebe:properties` extension properties extracted from the BPMN element associated\nwith this subscription. Empty object when no properties are defined.\n"
+          },
+          "processDefinitionName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the process definition associated with this message subscription."
+          },
+          "processDefinitionVersion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "The version of the process definition associated with this message subscription."
+          },
           "tenantId": {
             "$ref": "#/components/schemas/TenantId"
           }
@@ -26038,10 +26317,13 @@
             "enum": [
               "messageSubscriptionKey",
               "processDefinitionId",
+              "processDefinitionName",
+              "processDefinitionVersion",
               "processInstanceKey",
               "elementId",
               "elementInstanceKey",
               "messageSubscriptionState",
+              "messageSubscriptionType",
               "lastUpdatedDate",
               "messageName",
               "correlationKey",
@@ -26173,6 +26455,30 @@
               }
             ],
             "description": "The unique external tenant ID."
+          },
+          "messageSubscriptionType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MessageSubscriptionTypeFilterProperty"
+              }
+            ],
+            "description": "The type of message subscription to filter by. When omitted, both\n`START_EVENT` and `PROCESS_EVENT` are returned. Only available for data\ncreated with Camunda 8.10 or later.\n"
+          },
+          "processDefinitionName": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "The name of the process definition associated with this message subscription."
+          },
+          "processDefinitionVersion": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntegerFilterProperty"
+              }
+            ],
+            "description": "The version of the process definition associated with this message subscription."
           }
         }
       },
@@ -26370,6 +26676,14 @@
           "MIGRATED"
         ]
       },
+      "MessageSubscriptionTypeEnum": {
+        "description": "The type of message subscription.\n`START_EVENT` is definition-scoped (process start events). Always has a value; only\ncaptured from Camunda 8.10 onwards.\n`PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have\nno value stored; the API returns `PROCESS_EVENT` as a default for those entries.\n",
+        "type": "string",
+        "enum": [
+          "START_EVENT",
+          "PROCESS_EVENT"
+        ]
+      },
       "CorrelatedMessageSubscriptionFilter": {
         "description": "Correlated message subscriptions search filter.",
         "type": "object",
@@ -26469,6 +26783,54 @@
               }
             ],
             "description": "The tenant ID associated with this correlated message subscription."
+          }
+        }
+      },
+      "MessageSubscriptionTypeFilterProperty": {
+        "description": "MessageSubscriptionTypeEnum with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MessageSubscriptionTypeExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedMessageSubscriptionTypeFilter"
+          }
+        ]
+      },
+      "AdvancedMessageSubscriptionTypeFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced MessageSubscriptionTypeEnum filter",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MessageSubscriptionTypeEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MessageSubscriptionTypeEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageSubscriptionTypeEnum"
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
           }
         }
       },
@@ -31116,6 +31478,16 @@
           }
         ]
       },
+      "ElementIdExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ElementId"
+          }
+        ]
+      },
       "IncidentErrorTypeExactMatch": {
         "type": "string",
         "title": "Exact match",
@@ -31284,6 +31656,16 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/DecisionRequirementsKey"
+          }
+        ]
+      },
+      "MessageSubscriptionTypeExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MessageSubscriptionTypeEnum"
           }
         ]
       },
