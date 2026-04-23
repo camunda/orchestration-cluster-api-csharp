@@ -20,10 +20,12 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.5" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../../src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj" />
+    <ProjectReference Include="../../src/Camunda.Orchestration.Sdk.Generator/Camunda.Orchestration.Sdk.Generator.csproj" />
   </ItemGroup>
 
   <ItemGroup>

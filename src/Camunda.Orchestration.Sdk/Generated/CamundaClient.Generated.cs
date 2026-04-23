@@ -389,7 +389,7 @@ public partial class CamundaClient
     /// <summary>
     /// Assign a role to a tenant
     /// Assigns a role to a specified tenant.
-    /// Users, Clients or Groups, that have the role assigned, will get access to the tenant's data and can perform actions according to their authorizations.
+    /// Users, Clients or Groups, that have the role assigned, will get access to the tenant&apos;s data and can perform actions according to their authorizations.
     /// 
     /// </summary>
     /// <remarks>
@@ -4223,7 +4223,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Get cluster status
-    /// Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
+    /// Checks the health status of the cluster by verifying if there&apos;s at least one partition with a healthy leader.
     /// </summary>
     /// <remarks>
     /// Operation: getStatus
@@ -4607,7 +4607,7 @@ public partial class CamundaClient
     /// Get a variable by its key.
     /// 
     /// This endpoint returns both process-level and local (element-scoped) variables.
-    /// The variable's scopeKey indicates whether it's a process-level variable or scoped to a
+    /// The variable&apos;s scopeKey indicates whether it&apos;s a process-level variable or scoped to a
     /// specific element instance.
     /// </summary>
     /// <remarks>
@@ -4652,7 +4652,7 @@ public partial class CamundaClient
     /// Migrate process instance
     /// Migrates a process instance to a new process definition.
     /// This request can contain multiple mapping instructions to define mapping between the active
-    /// process instance's elements and target process definition elements.
+    /// process instance&apos;s elements and target process definition elements.
     /// 
     /// Use this to upgrade a process instance to a new version of a process or to
     /// a different process definition, e.g. to keep your running instances up-to-date with the
@@ -4762,7 +4762,7 @@ public partial class CamundaClient
     /// to terminate an active instance of an element.
     /// 
     /// Use this to repair a process instance that is stuck on an element or took an unintended path.
-    /// For example, because an external system is not available or doesn't respond as expected.
+    /// For example, because an external system is not available or doesn&apos;t respond as expected.
     /// 
     /// </summary>
     /// <remarks>
@@ -4845,7 +4845,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Pin internal clock (alpha)
-    /// Set a precise, static time for the Zeebe engine's internal clock.
+    /// Set a precise, static time for the Zeebe engine&apos;s internal clock.
     /// When the clock is pinned, it remains at the specified time and does not advance.
     /// To change the time, the clock must be pinned again with a new timestamp.
     /// 
@@ -4943,7 +4943,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Reset internal clock (alpha)
-    /// Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.
+    /// Resets the Zeebe engine&apos;s internal clock to the current system time, enabling it to tick in real-time.
     /// This operation is useful for returning the clock to
     /// normal behavior after it has been pinned to a specific time.
     /// 
@@ -4983,7 +4983,7 @@ public partial class CamundaClient
     /// <summary>
     /// Resolve incident
     /// Marks the incident as resolved; most likely a call to Update job will be necessary
-    /// to reset the job's retries, followed by this call.
+    /// to reset the job&apos;s retries, followed by this call.
     /// 
     /// </summary>
     /// <remarks>
@@ -6947,8 +6947,8 @@ public partial class CamundaClient
     /// <summary>
     /// Search user task variables
     /// Search for user task variables based on given criteria. This endpoint returns all variable
-    /// documents visible from the user task's scope, including variables from parent scopes in the
-    /// scope hierarchy. If the same variable name exists at multiple scope levels, each scope's
+    /// documents visible from the user task&apos;s scope, including variables from parent scopes in the
+    /// scope hierarchy. If the same variable name exists at multiple scope levels, each scope&apos;s
     /// variable is returned as a separate result. Use the
     /// `/user-tasks/{userTaskKey}/effective-variables/search` endpoint to get deduplicated variables
     /// where the innermost scope takes precedence. By default, long variable values in the response
@@ -7487,7 +7487,7 @@ public partial class CamundaClient
     /// <summary>
     /// Unassign a group from a tenant
     /// Unassigns a group from a specified tenant.
-    /// Members of the group (users, clients) will no longer have access to the tenant's data - except they are assigned directly to the tenant.
+    /// Members of the group (users, clients) will no longer have access to the tenant&apos;s data - except they are assigned directly to the tenant.
     /// 
     /// </summary>
     /// <remarks>
@@ -7696,7 +7696,7 @@ public partial class CamundaClient
     /// Unassign a role from a tenant
     /// Unassigns a role from a specified tenant.
     /// Users, Clients or Groups, that have the role assigned, will no longer have access to the
-    /// tenant's data - unless they are assigned directly to the tenant.
+    /// tenant&apos;s data - unless they are assigned directly to the tenant.
     /// 
     /// </summary>
     /// <remarks>
