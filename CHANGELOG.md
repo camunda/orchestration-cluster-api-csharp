@@ -1,3 +1,11 @@
+## [9.0.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.1...v9.0.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **generator:** sanitize spec-controlled strings against Unicode injection ([#116](https://github.com/camunda/orchestration-cluster-api-csharp/issues/116)) ([5492351](https://github.com/camunda/orchestration-cluster-api-csharp/commit/549235111371cbb635d68dd7b1185aaf1f5ca318)), closes [#117](https://github.com/camunda/orchestration-cluster-api-csharp/issues/117)
+* **gen:** regenerate artifacts ([4f86fbe](https://github.com/camunda/orchestration-cluster-api-csharp/commit/4f86fbeb8444dc4f8e6b1e60a1c574dbe6db1b60))
+
 ## [9.0.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0...v9.0.1) (2026-04-14)
 
 
