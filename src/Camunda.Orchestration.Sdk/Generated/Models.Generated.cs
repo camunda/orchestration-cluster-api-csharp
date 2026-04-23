@@ -19,13 +19,13 @@ public sealed class ActivatedJobResult
     public string Type { get; set; } = null!;
 
     /// <summary>
-    /// The bpmn process ID of the job's process definition.
+    /// The bpmn process ID of the job&apos;s process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
     public ProcessDefinitionId ProcessDefinitionId { get; set; }
 
     /// <summary>
-    /// The version of the job's process definition.
+    /// The version of the job&apos;s process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionVersion")]
     public int ProcessDefinitionVersion { get; set; }
@@ -79,13 +79,13 @@ public sealed class ActivatedJobResult
     public JobKey JobKey { get; set; }
 
     /// <summary>
-    /// The job's process instance key.
+    /// The job&apos;s process instance key.
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// The key of the job's process definition.
+    /// The key of the job&apos;s process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
     public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
@@ -1889,7 +1889,7 @@ public sealed class AdvancedVariableKeyFilter
 
 /// <summary>
 /// Defines the ancestor scope for the created element instances. The default behavior resembles
-/// a "direct" scope instruction with an `ancestorElementInstanceKey` of `"-1"`.
+/// a &quot;direct&quot; scope instruction with an `ancestorElementInstanceKey` of `&quot;-1&quot;`.
 /// 
 /// </summary>
 /// <remarks>
@@ -4217,7 +4217,7 @@ public sealed class CategoryFilterProperty
 /// * `priority` - minimum 0, maximum 100, default 50
 /// 
 /// Providing any of those attributes with a `null` value or omitting it preserves
-/// the persisted attribute's value.
+/// the persisted attribute&apos;s value.
 /// 
 /// The assignee cannot be adjusted with this endpoint, use the Assign task endpoint.
 /// This ensures correct event emission for assignee changes.
@@ -6877,7 +6877,7 @@ public sealed class DirectAncestorKeyInstruction : AncestorScopeInstruction
     /// <summary>
     /// The key of the ancestor scope the element instance should be created in.
     /// Set to -1 to create the new element instance within an existing element instance of the
-    /// flow scope. If multiple instances of the target element's flow scope exist, choose one
+    /// flow scope. If multiple instances of the target element&apos;s flow scope exist, choose one
     /// specifically with this property by providing its key.
     /// 
     /// </summary>
@@ -7100,7 +7100,7 @@ public sealed class DocumentMetadataResponse
 public sealed class DocumentReference
 {
     /// <summary>
-    /// Document discriminator. Always set to "camunda".
+    /// Document discriminator. Always set to &quot;camunda&quot;.
     /// </summary>
     [JsonPropertyName("camunda.document.type")]
     public string CamundaDocumentType { get; set; } = null!;
@@ -7189,7 +7189,7 @@ public sealed class ElementInstanceFilter
     public ElementId? ElementId { get; set; }
 
     /// <summary>
-    /// The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
+    /// The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don&apos;t contain this data and cannot be found.
     /// 
     /// </summary>
     [JsonPropertyName("elementName")]
@@ -7937,7 +7937,7 @@ public sealed class EvaluateDecisionResult
 public sealed class ExpressionEvaluationRequest : global::Camunda.Orchestration.Sdk.ITenantIdSettable
 {
     /// <summary>
-    /// The expression to evaluate (e.g., "=x + y")
+    /// The expression to evaluate (e.g., &quot;=x + y&quot;)
     /// </summary>
     [JsonPropertyName("expression")]
     public string Expression { get; set; } = null!;
@@ -9699,7 +9699,7 @@ public sealed class IncidentStateFilterProperty
 }
 
 /// <summary>
-/// Instructs the engine to derive the ancestor scope key from the source element's hierarchy. The engine traverses the source element's ancestry to find an instance that matches one of the target element's flow scopes, ensuring the target is activated in the correct scope.
+/// Instructs the engine to derive the ancestor scope key from the source element&apos;s hierarchy. The engine traverses the source element&apos;s ancestry to find an instance that matches one of the target element&apos;s flow scopes, ensuring the target is activated in the correct scope.
 /// 
 /// </summary>
 public sealed class InferredAncestorKeyInstruction : AncestorScopeInstruction
@@ -9767,7 +9767,7 @@ public sealed class IntegerFilterProperty
 public sealed class JobActivationRequest
 {
     /// <summary>
-    /// The job type, as defined in the BPMN process (e.g. &lt;zeebe:taskDefinition type="payment-service" /&gt;)
+    /// The job type, as defined in the BPMN process (e.g. &lt;zeebe:taskDefinition type=&quot;payment-service&quot; /&gt;)
     /// </summary>
     [JsonPropertyName("type")]
     public string Type { get; set; } = null!;
@@ -9811,7 +9811,7 @@ public sealed class JobActivationRequest
     public List<TenantId>? TenantIds { get; set; }
 
     /// <summary>
-    /// The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.
+    /// The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal&apos;s authorized tenants.
     /// 
     /// </summary>
     [JsonPropertyName("tenantFilter")]
@@ -10025,7 +10025,7 @@ public sealed class JobFailRequest
     public long? RetryBackOff { get; set; }
 
     /// <summary>
-    /// JSON object that will instantiate the variables at the local scope of the job's associated task.
+    /// JSON object that will instantiate the variables at the local scope of the job&apos;s associated task.
     /// 
     /// </summary>
     [JsonPropertyName("variables")]
@@ -10570,7 +10570,7 @@ public sealed class JobResultAdHocSubProcess : JobResult
 /// * `priority` - minimum 0, maximum 100, default 50
 /// 
 /// Providing any of those attributes with a `null` value or omitting it preserves
-/// the persisted attribute's value.
+/// the persisted attribute&apos;s value.
 /// 
 /// </summary>
 public sealed class JobResultCorrections
@@ -10620,7 +10620,7 @@ public sealed class JobResultCorrections
 public sealed class JobResultUserTask : JobResult
 {
     /// <summary>
-    /// Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.
+    /// Indicates whether the worker denies the work, i.e. explicitly doesn&apos;t approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.
     /// 
     /// </summary>
     [JsonPropertyName("denied")]
@@ -10645,7 +10645,7 @@ public sealed class JobResultUserTask : JobResult
     /// * `priority` - minimum 0, maximum 100, default 50
     /// 
     /// Providing any of those attributes with a `null` value or omitting it preserves
-    /// the persisted attribute's value.
+    /// the persisted attribute&apos;s value.
     /// 
     /// </summary>
     [JsonPropertyName("corrections")]
@@ -13382,23 +13382,23 @@ public sealed class ProcessDefinitionStatisticsFilter
     /// 
     /// ```json
     /// {
-    ///   "state": "ACTIVE",
-    ///   "tenantId": 123,
-    ///   "$or": [
-    ///     { "processDefinitionId": "process_v1" },
-    ///     { "processDefinitionId": "process_v2", "hasIncident": true }
+    ///   &quot;state&quot;: &quot;ACTIVE&quot;,
+    ///   &quot;tenantId&quot;: 123,
+    ///   &quot;$or&quot;: [
+    ///     { &quot;processDefinitionId&quot;: &quot;process_v1&quot; },
+    ///     { &quot;processDefinitionId&quot;: &quot;process_v2&quot;, &quot;hasIncident&quot;: true }
     ///   ]
     /// }
     /// ```
     /// This matches process instances that:
     /// 
-    /// &lt;ul style="padding-left: 20px; margin-left: 20px;"&gt;
-    ///   &lt;li style="list-style-type: disc;"&gt;are in &lt;em&gt;ACTIVE&lt;/em&gt; state&lt;/li&gt;
-    ///   &lt;li style="list-style-type: disc;"&gt;have tenant id equal to &lt;em&gt;123&lt;/em&gt;&lt;/li&gt;
-    ///   &lt;li style="list-style-type: disc;"&gt;and match either:
-    ///     &lt;ul style="padding-left: 20px; margin-left: 20px;"&gt;
-    ///       &lt;li style="list-style-type: circle;"&gt;&lt;code&gt;processDefinitionId&lt;/code&gt; is &lt;em&gt;process_v1&lt;/em&gt;, or&lt;/li&gt;
-    ///       &lt;li style="list-style-type: circle;"&gt;&lt;code&gt;processDefinitionId&lt;/code&gt; is &lt;em&gt;process_v2&lt;/em&gt; and &lt;code&gt;hasIncident&lt;/code&gt; is &lt;em&gt;true&lt;/em&gt;&lt;/li&gt;
+    /// &lt;ul style=&quot;padding-left: 20px; margin-left: 20px;&quot;&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;are in &lt;em&gt;ACTIVE&lt;/em&gt; state&lt;/li&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;have tenant id equal to &lt;em&gt;123&lt;/em&gt;&lt;/li&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;and match either:
+    ///     &lt;ul style=&quot;padding-left: 20px; margin-left: 20px;&quot;&gt;
+    ///       &lt;li style=&quot;list-style-type: circle;&quot;&gt;&lt;code&gt;processDefinitionId&lt;/code&gt; is &lt;em&gt;process_v1&lt;/em&gt;, or&lt;/li&gt;
+    ///       &lt;li style=&quot;list-style-type: circle;&quot;&gt;&lt;code&gt;processDefinitionId&lt;/code&gt; is &lt;em&gt;process_v2&lt;/em&gt; and &lt;code&gt;hasIncident&lt;/code&gt; is &lt;em&gt;true&lt;/em&gt;&lt;/li&gt;
     ///     &lt;/ul&gt;
     ///   &lt;/li&gt;
     /// &lt;/ul&gt;
@@ -13542,7 +13542,7 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
     /// <summary>
     /// The tenant id of the process definition.
     /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
-    /// process instance of. If multi-tenancy is disabled, don't provide this parameter.
+    /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
     /// 
     /// </summary>
     [JsonPropertyName("tenantId")]
@@ -13639,7 +13639,7 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
 
     /// <summary>
     /// As the version is already identified by the `processDefinitionKey`, the value of this field is ignored.
-    /// It's here for backwards-compatibility only as previous releases accepted it in request bodies.
+    /// It&apos;s here for backwards-compatibility only as previous releases accepted it in request bodies.
     /// 
     /// </summary>
     [JsonPropertyName("processDefinitionVersion")]
@@ -13676,7 +13676,7 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     /// <summary>
     /// The tenant id of the process definition.
     /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
-    /// process instance of. If multi-tenancy is disabled, don't provide this parameter.
+    /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
     /// 
     /// </summary>
     [JsonPropertyName("tenantId")]
@@ -13762,7 +13762,7 @@ public sealed class ProcessInstanceCreationStartInstruction
     ///   - different types of start instructions
     ///   - ability to set local variables for different flow scopes
     /// 
-    /// For now, however, the start instruction is implicitly a "startBeforeElement" instruction
+    /// For now, however, the start instruction is implicitly a &quot;startBeforeElement&quot; instruction
     /// 
     /// </summary>
     [JsonPropertyName("elementId")]
@@ -13863,23 +13863,23 @@ public sealed class ProcessInstanceFilter
     /// 
     /// ```json
     /// {
-    ///   "state": "ACTIVE",
-    ///   "tenantId": 123,
-    ///   "$or": [
-    ///     { "processDefinitionId": "process_v1" },
-    ///     { "processDefinitionId": "process_v2", "hasIncident": true }
+    ///   &quot;state&quot;: &quot;ACTIVE&quot;,
+    ///   &quot;tenantId&quot;: 123,
+    ///   &quot;$or&quot;: [
+    ///     { &quot;processDefinitionId&quot;: &quot;process_v1&quot; },
+    ///     { &quot;processDefinitionId&quot;: &quot;process_v2&quot;, &quot;hasIncident&quot;: true }
     ///   ]
     /// }
     /// ```
     /// This matches process instances that:
     /// 
-    /// &lt;ul style="padding-left: 20px; margin-left: 20px;"&gt;
-    ///   &lt;li style="list-style-type: disc;"&gt;are in &lt;em&gt;ACTIVE&lt;/em&gt; state&lt;/li&gt;
-    ///   &lt;li style="list-style-type: disc;"&gt;have tenant id equal to &lt;em&gt;123&lt;/em&gt;&lt;/li&gt;
-    ///   &lt;li style="list-style-type: disc;"&gt;and match either:
-    ///     &lt;ul style="padding-left: 20px; margin-left: 20px;"&gt;
-    ///       &lt;li style="list-style-type: circle;"&gt;&lt;code&gt;processDefinitionId&lt;/code&gt; is &lt;em&gt;process_v1&lt;/em&gt;, or&lt;/li&gt;
-    ///       &lt;li style="list-style-type: circle;"&gt;&lt;code&gt;processDefinitionId&lt;/code&gt; is &lt;em&gt;process_v2&lt;/em&gt; and &lt;code&gt;hasIncident&lt;/code&gt; is &lt;em&gt;true&lt;/em&gt;&lt;/li&gt;
+    /// &lt;ul style=&quot;padding-left: 20px; margin-left: 20px;&quot;&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;are in &lt;em&gt;ACTIVE&lt;/em&gt; state&lt;/li&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;have tenant id equal to &lt;em&gt;123&lt;/em&gt;&lt;/li&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;and match either:
+    ///     &lt;ul style=&quot;padding-left: 20px; margin-left: 20px;&quot;&gt;
+    ///       &lt;li style=&quot;list-style-type: circle;&quot;&gt;&lt;code&gt;processDefinitionId&lt;/code&gt; is &lt;em&gt;process_v1&lt;/em&gt;, or&lt;/li&gt;
+    ///       &lt;li style=&quot;list-style-type: circle;&quot;&gt;&lt;code&gt;processDefinitionId&lt;/code&gt; is &lt;em&gt;process_v2&lt;/em&gt; and &lt;code&gt;hasIncident&lt;/code&gt; is &lt;em&gt;true&lt;/em&gt;&lt;/li&gt;
     ///     &lt;/ul&gt;
     ///   &lt;/li&gt;
     /// &lt;/ul&gt;
@@ -14254,7 +14254,7 @@ public sealed class ProcessInstanceModificationActivateInstruction
     /// <summary>
     /// The key of the ancestor scope the element instance should be created in.
     /// Set to -1 to create the new element instance within an existing element instance of the
-    /// flow scope. If multiple instances of the target element's flow scope exist, choose one
+    /// flow scope. If multiple instances of the target element&apos;s flow scope exist, choose one
     /// specifically with this property by providing its key.
     /// 
     /// </summary>
@@ -14372,7 +14372,7 @@ public sealed class ProcessInstanceModificationMoveInstruction
 
     /// <summary>
     /// Defines the ancestor scope for the created element instances. The default behavior resembles
-    /// a "direct" scope instruction with an `ancestorElementInstanceKey` of `"-1"`.
+    /// a &quot;direct&quot; scope instruction with an `ancestorElementInstanceKey` of `&quot;-1&quot;`.
     /// 
     /// </summary>
     [JsonPropertyName("ancestorScopeInstruction")]
@@ -15625,16 +15625,16 @@ public sealed class SetVariableRequest
     /// by the `elementInstanceKey`). Otherwise, the variables are propagated to upper scopes
     /// and set at the outermost one.
     /// 
-    /// Let's consider the following example:
-    /// There are two scopes '1' and '2'. Scope '1' is the parent scope of '2'. The effective
+    /// Let&apos;s consider the following example:
+    /// There are two scopes &apos;1&apos; and &apos;2&apos;. Scope &apos;1&apos; is the parent scope of &apos;2&apos;. The effective
     /// variables of the scopes are:
-    /// 1 =&gt; { "foo" : 2 }
-    /// 2 =&gt; { "bar" : 1 }
+    /// 1 =&gt; { &quot;foo&quot; : 2 }
+    /// 2 =&gt; { &quot;bar&quot; : 1 }
     /// 
-    /// An update request with elementInstanceKey as '2', variables { "foo": 5 }, and local set
-    /// to `true` leaves scope '1' unchanged and adjusts scope '2' to { "bar": 1, "foo": 5 }. By
-    /// default, with local set to `false`, scope '1' will be { "foo": 5 } and scope '2' will be
-    /// { "bar": 1 }.
+    /// An update request with elementInstanceKey as &apos;2&apos;, variables { &quot;foo&quot;: 5 }, and local set
+    /// to `true` leaves scope &apos;1&apos; unchanged and adjusts scope &apos;2&apos; to { &quot;bar&quot;: 1, &quot;foo&quot;: 5 }. By
+    /// default, with local set to `false`, scope &apos;1&apos; will be { &quot;foo&quot;: 5 } and scope &apos;2&apos; will be
+    /// { &quot;bar&quot;: 1 }.
     /// </summary>
     [JsonPropertyName("local")]
     public bool? Local { get; set; }
@@ -16795,7 +16795,7 @@ public sealed class UserTaskAssignmentRequest
     public bool? AllowOverride { get; set; }
 
     /// <summary>
-    /// A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "assign".
+    /// A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to &quot;assign&quot;.
     /// 
     /// </summary>
     [JsonPropertyName("action")]
@@ -16877,7 +16877,7 @@ public sealed class UserTaskCompletionRequest
     public object? Variables { get; set; }
 
     /// <summary>
-    /// A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "complete".
+    /// A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to &quot;complete&quot;.
     /// 
     /// </summary>
     [JsonPropertyName("action")]
@@ -16941,7 +16941,7 @@ public sealed class UserTaskFilter
     public ElementId? ElementId { get; set; }
 
     /// <summary>
-    /// The task name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
+    /// The task name. This only works for data created with 8.8 and onwards. Instances from prior versions don&apos;t contain this data and cannot be found.
     /// 
     /// </summary>
     [JsonPropertyName("name")]
@@ -17474,7 +17474,7 @@ public sealed class UserTaskUpdateRequest
     /// * `priority` - minimum 0, maximum 100, default 50
     /// 
     /// Providing any of those attributes with a `null` value or omitting it preserves
-    /// the persisted attribute's value.
+    /// the persisted attribute&apos;s value.
     /// 
     /// The assignee cannot be adjusted with this endpoint, use the Assign task endpoint.
     /// This ensures correct event emission for assignee changes.
@@ -17484,7 +17484,7 @@ public sealed class UserTaskUpdateRequest
     public Changeset? Changeset { get; set; }
 
     /// <summary>
-    /// A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "update".
+    /// A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to &quot;update&quot;.
     /// 
     /// </summary>
     [JsonPropertyName("action")]
@@ -17600,7 +17600,7 @@ public sealed class UserUpdateResult
 }
 
 /// <summary>
-/// Instructs the engine to use the source's direct parent key as the ancestor scope key for the target element. This is a simpler alternative to `inferred` that skips hierarchy traversal and directly uses the source's parent key. This is useful when the source and target elements are siblings within the same flow scope.
+/// Instructs the engine to use the source&apos;s direct parent key as the ancestor scope key for the target element. This is a simpler alternative to `inferred` that skips hierarchy traversal and directly uses the source&apos;s parent key. This is useful when the source and target elements are siblings within the same flow scope.
 /// 
 /// </summary>
 public sealed class UseSourceParentKeyInstruction : AncestorScopeInstruction
@@ -17621,7 +17621,7 @@ public sealed class VariableFilter
     /// <summary>
     /// The value of the variable.
     /// Variable values in filters need to be in serialized JSON format. For example, a variable
-    /// with string value `myValue` can be found with the filter value `"myValue"`. Consider
+    /// with string value `myValue` can be found with the filter value `&quot;myValue&quot;`. Consider
     /// appropriate escaping for special characters in JSON strings when constructing filter values.
     /// 
     /// </summary>
@@ -18003,7 +18003,7 @@ public sealed class VariableValueFilterProperty
     /// <summary>
     /// The value of the variable.
     /// Variable values in filters need to be in serialized JSON format. For example, a variable
-    /// with string value `myValue` can be found with the filter value `"myValue"`. Consider
+    /// with string value `myValue` can be found with the filter value `&quot;myValue&quot;`. Consider
     /// appropriate escaping for special characters in JSON strings when constructing filter values.
     /// 
     /// </summary>

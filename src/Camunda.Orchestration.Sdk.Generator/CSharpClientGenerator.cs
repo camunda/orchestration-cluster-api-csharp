@@ -50,12 +50,16 @@ internal static class CSharpClientGenerator
 
         // Generate models (component schemas + inline schemas)
         var modelsCode = GenerateModels(doc, metadata, inlineSchemas, requestSchemaNames);
-        File.WriteAllText(Path.Combine(outputDir, "Models.Generated.cs"), modelsCode);
+        var modelsPath = Path.Combine(outputDir, "Models.Generated.cs");
+        SafeEmit.ScanGeneratedSource(modelsPath, modelsCode);
+        File.WriteAllText(modelsPath, modelsCode);
         Console.WriteLine($"[generator] Generated Models.Generated.cs ({doc.Components?.Schemas?.Count ?? 0} component schemas, {inlineSchemas.Count} inline schemas)");
 
         // Generate client methods
         var clientCode = GenerateClientMethods(operations, operationExamples);
-        File.WriteAllText(Path.Combine(outputDir, "CamundaClient.Generated.cs"), clientCode);
+        var clientPath = Path.Combine(outputDir, "CamundaClient.Generated.cs");
+        SafeEmit.ScanGeneratedSource(clientPath, clientCode);
+        File.WriteAllText(clientPath, clientCode);
         Console.WriteLine($"[generator] Generated CamundaClient.Generated.cs ({operations.Count} operations)");
 
         // Generate spec hash constant — fail fast if missing or invalid
@@ -67,7 +71,9 @@ internal static class CSharpClientGenerator
         }
 
         var specHashCode = GenerateSpecHash(metadata.SpecHash);
-        File.WriteAllText(Path.Combine(outputDir, "SpecHash.Generated.cs"), specHashCode);
+        var specHashPath = Path.Combine(outputDir, "SpecHash.Generated.cs");
+        SafeEmit.ScanGeneratedSource(specHashPath, specHashCode);
+        File.WriteAllText(specHashPath, specHashCode);
         Console.WriteLine($"[generator] Generated SpecHash.Generated.cs (specHash: {metadata.SpecHash})");
     }
 
@@ -501,7 +507,7 @@ internal static class CSharpClientGenerator
                     {
                         sb.AppendLine($"    [Obsolete(\"Deprecated since {deprecatedVersion}\")]");
                     }
-                    sb.AppendLine($"    [JsonPropertyName(\"{e.Value}\")]");
+                    sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(e.Value)}\")]");
                     sb.AppendLine($"    {enumName},");
                 }
                 sb.AppendLine("}");
@@ -525,7 +531,7 @@ internal static class CSharpClientGenerator
                 foreach (var variant in variants)
                     sb.AppendLine($"/// <seealso cref=\"{variant}\"/>");
                 if (discriminators.TryGetValue(typeName, out var disc))
-                    sb.AppendLine($"[JsonPolymorphic(TypeDiscriminatorPropertyName = \"{disc.PropertyName}\")]");
+                    sb.AppendLine($"[JsonPolymorphic(TypeDiscriminatorPropertyName = \"{SafeEmit.SafeCSharpStringLiteral(disc.PropertyName)}\")]");
                 foreach (var variant in variants)
                 {
                     if (disc.ValueToVariant != null)
@@ -533,7 +539,7 @@ internal static class CSharpClientGenerator
                         var matchingEntry = disc.ValueToVariant.FirstOrDefault(kv => kv.Value == variant);
                         if (matchingEntry.Key != null)
                         {
-                            sb.AppendLine($"[JsonDerivedType(typeof({variant}), \"{matchingEntry.Key}\")]");
+                            sb.AppendLine($"[JsonDerivedType(typeof({variant}), \"{SafeEmit.SafeCSharpStringLiteral(matchingEntry.Key)}\")]");
                             continue;
                         }
                     }
@@ -600,7 +606,7 @@ internal static class CSharpClientGenerator
                             sb.AppendLine($"    /// </summary>");
                         }
 
-                        sb.AppendLine($"    [JsonPropertyName(\"{propName}\")]");
+                        sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(propName)}\")]");
                         var initializer = IsReferenceType(csharpType, doc) ? " = null!;" : "";
                         sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
                         sb.AppendLine();
@@ -676,7 +682,7 @@ internal static class CSharpClientGenerator
                     sb.AppendLine($"    /// </summary>");
                 }
 
-                sb.AppendLine($"    [JsonPropertyName(\"{propName}\")]");
+                sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(propName)}\")]");
                 var initializer = IsReferenceType(csharpType, doc) ? " = null!;" : "";
                 sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
                 sb.AppendLine();
@@ -747,7 +753,7 @@ internal static class CSharpClientGenerator
                 sb.AppendLine($"    /// </summary>");
             }
 
-            sb.AppendLine($"    [JsonPropertyName(\"{propName}\")]");
+            sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(propName)}\")]");
             var initializer = IsReferenceType(csharpType, doc) ? " = null!;" : "";
             sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
             sb.AppendLine();
@@ -1002,7 +1008,7 @@ internal static class CSharpClientGenerator
         if (operationExamples.TryGetValue(op.OriginalOperationId, out var examples))
         {
             sb.AppendLine($"    /// <remarks>");
-            sb.AppendLine($"    /// Operation: {op.OriginalOperationId}");
+            sb.AppendLine($"    /// Operation: {SafeEmit.SafeXmlDocText(op.OriginalOperationId)}");
             for (var i = 0; i < examples.Count; i++)
             {
                 var exampleCode = examples[i];
@@ -1012,7 +1018,7 @@ internal static class CSharpClientGenerator
                 foreach (var line in exampleCode.Split('\n'))
                 {
                     var trimmed = line.TrimEnd('\r');
-                    sb.AppendLine($"    /// {System.Security.SecurityElement.Escape(trimmed)}");
+                    sb.AppendLine($"    /// {SafeEmit.SafeXmlDocText(trimmed)}");
                 }
                 sb.AppendLine($"    /// </code>");
             }
@@ -1028,7 +1034,7 @@ internal static class CSharpClientGenerator
                 foreach (var line in exampleCode.Split('\n'))
                 {
                     var trimmed = line.TrimEnd('\r');
-                    sb.AppendLine($"    /// {System.Security.SecurityElement.Escape(trimmed)}");
+                    sb.AppendLine($"    /// {SafeEmit.SafeXmlDocText(trimmed)}");
                 }
                 sb.AppendLine($"    /// </code>");
                 sb.AppendLine($"    /// </example>");
@@ -1036,7 +1042,7 @@ internal static class CSharpClientGenerator
         }
         else
         {
-            sb.AppendLine($"    /// <remarks>Operation: {op.OriginalOperationId}</remarks>");
+            sb.AppendLine($"    /// <remarks>Operation: {SafeEmit.SafeXmlDocText(op.OriginalOperationId)}</remarks>");
         }
 
         // Build parameters
@@ -1349,12 +1355,15 @@ internal static class CSharpClientGenerator
     {
         // Handle names like "ProcessInstance" → "ProcessInstance"
         // Handle names with special chars
-        return name
+        var stripped = name
             .Replace("XML", "Xml")
             .Replace("-", "")
             .Replace(".", "")
             .Replace("$", "")
             .Replace(" ", "");
+        // Final safety net: even if a future spec name slips a character past
+        // the strip set, SafeCSharpIdentifier guarantees a valid C# identifier.
+        return SafeEmit.SafeCSharpIdentifier(stripped);
     }
 
     /// <summary>
@@ -1411,10 +1420,19 @@ internal static class CSharpClientGenerator
     internal static string SanitizeOperationId(string id)
     {
         var result = ToPascalCase(id.Replace("XML", "Xml"));
-        return result;
+        return SafeEmit.SafeCSharpIdentifier(result);
     }
 
     internal static string ToPascalCase(string s)
+    {
+        var pascal = ToPascalCaseRaw(s);
+        // Final safety net: ensure the result is a valid C# identifier even
+        // if the input contained Unicode characters outside the ECMA-334
+        // identifier classes (homoglyphs, bidi controls, etc.).
+        return SafeEmit.SafeCSharpIdentifier(pascal);
+    }
+
+    private static string ToPascalCaseRaw(string s)
     {
         if (string.IsNullOrEmpty(s))
             return s;
@@ -1444,20 +1462,22 @@ internal static class CSharpClientGenerator
         return char.ToLowerInvariant(pascal[0]) + pascal[1..];
     }
 
-    private static string EscapeXml(string s) =>
-        s.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;");
-
     /// <summary>
     /// Formats a potentially multi-line string as XML doc comment lines,
-    /// each prefixed with the given indent + "/// ".
+    /// each prefixed with the given indent + "/// ". Each line is independently
+    /// run through <see cref="SafeEmit.SafeXmlDocText"/> so the per-line output
+    /// can never contain a Unicode line-terminator that would close the
+    /// surrounding `///` comment.
     /// </summary>
     private static void AppendXmlDocLines(StringBuilder sb, string text, string indent = "    ")
     {
-        var escaped = EscapeXml(text);
-        foreach (var line in escaped.Split('\n'))
+        // Split on physical newlines FIRST so each comment line is preserved.
+        // Per-line escape strips XML metacharacters and Unicode line-terminators
+        // (which would otherwise terminate the `///` comment per ECMA-334).
+        foreach (var line in text.Split('\n'))
         {
             var trimmed = line.TrimEnd('\r');
-            sb.AppendLine($"{indent}/// {trimmed}");
+            sb.AppendLine($"{indent}/// {SafeEmit.SafeXmlDocText(trimmed)}");
         }
     }
 
