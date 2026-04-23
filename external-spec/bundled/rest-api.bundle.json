@@ -214,7 +214,8 @@
           "500": {
             "description": "An internal error occurred while processing the request."
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/audit-logs/{auditLogKey}": {
@@ -295,7 +296,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/authentication/me": {
@@ -360,7 +362,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/authorizations": {
@@ -460,7 +463,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/authorizations/search": {
@@ -539,7 +543,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/authorizations/{authorizationKey}": {
@@ -623,7 +628,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "get": {
         "x-eventually-consistent": true,
@@ -702,7 +708,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -774,7 +781,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operation-items/search": {
@@ -827,7 +835,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/search": {
@@ -880,7 +889,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/{batchOperationKey}": {
@@ -944,7 +954,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/{batchOperationKey}/cancellation": {
@@ -1018,7 +1029,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/{batchOperationKey}/resumption": {
@@ -1102,7 +1114,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/batch-operations/{batchOperationKey}/suspension": {
@@ -1186,7 +1199,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/clock": {
@@ -1242,7 +1256,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/clock/reset": {
@@ -1278,7 +1293,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/cluster-variables/global": {
@@ -1358,7 +1374,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/cluster-variables/global/{name}": {
@@ -1449,7 +1466,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "put": {
         "operationId": "updateGlobalClusterVariable",
@@ -1548,7 +1566,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "delete": {
         "operationId": "deleteGlobalClusterVariable",
@@ -1630,7 +1649,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/cluster-variables/search": {
@@ -1720,7 +1740,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/cluster-variables/tenants/{tenantId}": {
@@ -1801,6 +1822,16 @@
               }
             }
           },
+          "404": {
+            "description": "The tenant with the given ID was not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
           "500": {
             "description": "An internal error occurred while processing the request.",
             "content": {
@@ -1811,7 +1842,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/cluster-variables/tenants/{tenantId}/{name}": {
@@ -1911,7 +1943,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "put": {
         "operationId": "updateTenantClusterVariable",
@@ -2019,7 +2052,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "delete": {
         "operationId": "deleteTenantClusterVariable",
@@ -2110,7 +2144,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/conditionals/evaluation": {
@@ -2222,7 +2257,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/correlated-message-subscriptions/search": {
@@ -2302,7 +2338,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/decision-definitions/evaluation": {
@@ -2391,7 +2428,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-definitions/search": {
@@ -2471,7 +2509,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-definitions/{decisionDefinitionKey}": {
@@ -2562,7 +2601,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/decision-definitions/{decisionDefinitionKey}/xml": {
@@ -2653,7 +2693,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-instances/search": {
@@ -2733,7 +2774,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-instances/{decisionEvaluationInstanceKey}": {
@@ -2824,7 +2866,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/decision-instances/{decisionEvaluationKey}/deletion": {
@@ -2925,7 +2968,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/decision-instances/deletion": {
@@ -3005,7 +3049,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/decision-requirements/search": {
@@ -3085,7 +3130,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/decision-requirements/{decisionRequirementsKey}": {
@@ -3176,7 +3222,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/decision-requirements/{decisionRequirementsKey}/xml": {
@@ -3267,7 +3314,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/deployments": {
@@ -3337,7 +3385,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/documents": {
@@ -3428,7 +3477,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/documents/batch": {
@@ -3536,7 +3586,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.7"
       }
     },
     "/documents/{documentId}": {
@@ -3609,7 +3660,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -3663,7 +3715,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/documents/{documentId}/links": {
@@ -3735,7 +3788,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.7"
       }
     },
     "/element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation": {
@@ -3839,7 +3893,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/element-instances/search": {
@@ -3919,7 +3974,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/element-instances/{elementInstanceKey}": {
@@ -4010,7 +4066,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/element-instances/{elementInstanceKey}/incidents/search": {
@@ -4111,7 +4168,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/element-instances/{elementInstanceKey}/variables": {
@@ -4199,7 +4257,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/expression/evaluation": {
@@ -4279,7 +4338,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/global-task-listeners": {
@@ -4379,7 +4439,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/global-task-listeners/{id}": {
@@ -4460,7 +4521,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -4569,7 +4631,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -4661,7 +4724,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/global-task-listeners/search": {
@@ -4740,7 +4804,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/groups": {
@@ -4829,7 +4894,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/search": {
@@ -4909,7 +4975,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}": {
@@ -4990,7 +5057,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -5089,7 +5157,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -5161,7 +5230,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/clients/search": {
@@ -5317,7 +5387,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/clients/{clientId}": {
@@ -5413,7 +5484,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -5497,7 +5569,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/mapping-rules/search": {
@@ -5615,7 +5688,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/mapping-rules/{mappingRuleId}": {
@@ -5711,7 +5785,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -5795,7 +5870,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/roles/search": {
@@ -5913,7 +5989,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/users/search": {
@@ -6068,7 +6145,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/groups/{groupId}/users/{username}": {
@@ -6164,7 +6242,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -6248,7 +6327,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/incidents/search": {
@@ -6328,7 +6408,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/incidents/{incidentKey}": {
@@ -6419,7 +6500,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/incidents/{incidentKey}/resolution": {
@@ -6506,7 +6588,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/incidents/statistics/process-instances-by-definition": {
@@ -6586,7 +6669,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/incidents/statistics/process-instances-by-error": {
@@ -6666,7 +6750,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/activation": {
@@ -6746,7 +6831,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/search": {
@@ -6826,7 +6912,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/jobs/{jobKey}": {
@@ -6913,7 +7000,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/{jobKey}/completion": {
@@ -7000,7 +7088,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/{jobKey}/error": {
@@ -7087,7 +7176,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/{jobKey}/failure": {
@@ -7174,7 +7264,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/jobs/statistics/global": {
@@ -7278,7 +7369,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/statistics/by-types": {
@@ -7358,7 +7450,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/statistics/by-workers": {
@@ -7438,7 +7531,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/statistics/time-series": {
@@ -7518,7 +7612,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/jobs/statistics/errors": {
@@ -7598,7 +7693,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/license": {
@@ -7631,7 +7727,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/mapping-rules": {
@@ -7708,7 +7805,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/mapping-rules/search": {
@@ -7804,7 +7902,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/mapping-rules/{mappingRuleId}": {
@@ -7902,7 +8001,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -7974,7 +8074,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "get": {
         "x-eventually-consistent": true,
@@ -8043,7 +8144,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/message-subscriptions/search": {
@@ -8123,7 +8225,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/messages/correlation": {
@@ -8206,7 +8309,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/messages/publication": {
@@ -8269,7 +8373,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-definitions/search": {
@@ -8349,7 +8454,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/statistics/message-subscriptions": {
@@ -8429,7 +8535,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-definitions/statistics/process-instances": {
@@ -8509,7 +8616,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-definitions/{processDefinitionKey}": {
@@ -8600,7 +8708,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/{processDefinitionKey}/form": {
@@ -8694,7 +8803,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/{processDefinitionKey}/statistics/element-instances": {
@@ -8785,7 +8895,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/{processDefinitionKey}/xml": {
@@ -8886,7 +8997,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-definitions/statistics/process-instances-by-version": {
@@ -8966,7 +9078,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-instances": {
@@ -9066,7 +9179,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/cancellation": {
@@ -9146,7 +9260,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/deletion": {
@@ -9226,7 +9341,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-instances/incident-resolution": {
@@ -9306,7 +9422,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/migration": {
@@ -9386,7 +9503,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/modification": {
@@ -9466,7 +9584,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/search": {
@@ -9546,7 +9665,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/{processInstanceKey}": {
@@ -9637,7 +9757,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/{processInstanceKey}/call-hierarchy": {
@@ -9731,7 +9852,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/{processInstanceKey}/cancellation": {
@@ -9836,7 +9958,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/{processInstanceKey}/deletion": {
@@ -9947,7 +10070,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-instances/{processInstanceKey}/incident-resolution": {
@@ -10038,7 +10162,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/process-instances/{processInstanceKey}/incidents/search": {
@@ -10139,7 +10264,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/{processInstanceKey}/migration": {
@@ -10226,7 +10352,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/{processInstanceKey}/modification": {
@@ -10303,7 +10430,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/process-instances/{processInstanceKey}/sequence-flows": {
@@ -10384,7 +10512,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/process-instances/{processInstanceKey}/statistics/element-instances": {
@@ -10465,7 +10594,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/resources/{resourceKey}": {
@@ -10519,7 +10649,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.7"
       }
     },
     "/resources/{resourceKey}/content": {
@@ -10573,7 +10704,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.7"
       }
     },
     "/resources/{resourceKey}/deletion": {
@@ -10657,7 +10789,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/roles": {
@@ -10746,7 +10879,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/search": {
@@ -10826,7 +10960,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}": {
@@ -10907,7 +11042,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -11006,7 +11142,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -11078,7 +11215,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/clients/search": {
@@ -11234,7 +11372,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/clients/{clientId}": {
@@ -11330,7 +11469,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -11414,7 +11554,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/groups/search": {
@@ -11515,7 +11656,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/groups/{groupId}": {
@@ -11611,7 +11753,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -11695,7 +11838,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/mapping-rules/search": {
@@ -11813,7 +11957,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/mapping-rules/{mappingRuleId}": {
@@ -11909,7 +12054,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -11993,7 +12139,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/users/search": {
@@ -12148,7 +12295,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/roles/{roleId}/users/{username}": {
@@ -12244,7 +12392,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -12328,7 +12477,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/setup/user": {
@@ -12401,7 +12551,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/signals/broadcast": {
@@ -12474,7 +12625,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/status": {
@@ -12493,7 +12645,8 @@
           "503": {
             "description": "The cluster is DOWN and does not have any partition with a healthy leader."
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/system/usage-metrics": {
@@ -12637,7 +12790,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/system/configuration": {
@@ -12701,7 +12855,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/tenants": {
@@ -12787,7 +12942,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/search": {
@@ -12877,7 +13033,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}": {
@@ -12968,7 +13125,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -13060,7 +13218,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -13135,7 +13294,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/clients/search": {
@@ -13235,7 +13395,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/clients/{clientId}": {
@@ -13321,7 +13482,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -13405,7 +13567,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/groups/search": {
@@ -13449,7 +13612,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/groups/{groupId}": {
@@ -13535,7 +13699,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -13619,7 +13784,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/mapping-rules/search": {
@@ -13680,7 +13846,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/mapping-rules/{mappingRuleId}": {
@@ -13766,7 +13933,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -13850,7 +14018,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/roles/search": {
@@ -13911,7 +14080,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/roles/{roleId}": {
@@ -13997,7 +14167,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -14081,7 +14252,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/users/search": {
@@ -14180,7 +14352,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/tenants/{tenantId}/users/{username}": {
@@ -14266,7 +14439,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -14350,7 +14524,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/topology": {
@@ -14400,7 +14575,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/users": {
@@ -14500,7 +14676,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/users/search": {
@@ -14616,7 +14793,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/users/{username}": {
@@ -14717,7 +14895,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -14829,7 +15008,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -14894,7 +15074,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/user-tasks/search": {
@@ -14974,7 +15155,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.6"
       }
     },
     "/user-tasks/{userTaskKey}": {
@@ -15065,7 +15247,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       },
       "patch": {
         "x-eventually-consistent": false,
@@ -15171,7 +15354,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/user-tasks/{userTaskKey}/assignee": {
@@ -15269,7 +15453,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/user-tasks/{userTaskKey}/assignment": {
@@ -15377,7 +15562,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/user-tasks/{userTaskKey}/audit-logs/search": {
@@ -15441,7 +15627,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.9"
       }
     },
     "/user-tasks/{userTaskKey}/completion": {
@@ -15549,7 +15736,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.5"
       }
     },
     "/user-tasks/{userTaskKey}/effective-variables/search": {
@@ -15669,7 +15857,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/user-tasks/{userTaskKey}/form": {
@@ -15763,7 +15952,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/user-tasks/{userTaskKey}/variables/search": {
@@ -15880,7 +16070,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/variables/search": {
@@ -16015,7 +16206,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     },
     "/variables/{variableKey}": {
@@ -16106,7 +16298,8 @@
               }
             }
           }
-        }
+        },
+        "x-added-in-version": "8.8"
       }
     }
   },
