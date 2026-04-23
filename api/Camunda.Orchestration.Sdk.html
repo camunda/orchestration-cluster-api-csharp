@@ -191,6 +191,11 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedElementIdFilter.html">AdvancedElementIdFilter</a></dt>
+      <dd><p>Advanced ElementId filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedElementInstanceKeyFilter.html">AdvancedElementInstanceKeyFilter</a></dt>
       <dd><p>Advanced ElementInstanceKey filter.</p>
 </dd>
@@ -263,6 +268,11 @@ This is what job handler functions receive.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionStateFilter.html">AdvancedMessageSubscriptionStateFilter</a></dt>
       <dd><p>Advanced MessageSubscriptionStateEnum filter</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.html">AdvancedMessageSubscriptionTypeFilter</a></dt>
+      <dd><p>Advanced MessageSubscriptionTypeEnum filter</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -978,6 +988,11 @@ Mirrors the JS SDK's hydrateConfig function.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementIdFilterProperty.html">ElementIdFilterProperty</a></dt>
+      <dd><p>ElementId property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceFilter.html">ElementInstanceFilter</a></dt>
       <dd><p>Element instance filter.</p>
 </dd>
@@ -1683,6 +1698,11 @@ correlated with.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.html">MessageSubscriptionStateFilterProperty</a></dt>
       <dd><p>MessageSubscriptionStateEnum with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.html">MessageSubscriptionTypeFilterProperty</a></dt>
+      <dd><p>MessageSubscriptionTypeEnum with full advanced search capabilities.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -2840,6 +2860,11 @@ Note that any active child process instances with the same business id are not t
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementIdExactMatch.html">ElementIdExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceKey.html">ElementInstanceKey</a></dt>
       <dd><p>System-generated key for a element instance.</p>
 </dd>
@@ -2967,6 +2992,11 @@ Note that any active child process instances with the same business id are not t
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionStateExactMatch.html">MessageSubscriptionStateExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.html">MessageSubscriptionTypeExactMatch</a></dt>
       <dd><p>Matches the value exactly.</p>
 </dd>
     </dl>
@@ -3223,6 +3253,15 @@ Enums
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionStateEnum.html">MessageSubscriptionStateEnum</a></dt>
       <dd><p>The state of message subscription.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.html">MessageSubscriptionTypeEnum</a></dt>
+      <dd><p>The type of message subscription.
+<code>START_EVENT</code> is definition-scoped (process start events). Always has a value; only
+captured from Camunda 8.10 onwards.
+<code>PROCESS_EVENT</code> is instance-scoped (intermediate catch events). Pre-8.10 entries have
+no value stored; the API returns <code>PROCESS_EVENT</code> as a default for those entries.</p>
 </dd>
     </dl>
     <dl class="jumplist">

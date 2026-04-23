@@ -1591,6 +1591,84 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AdvancedDeploymentKeyFilter.NotIn
   fullName: Camunda.Orchestration.Sdk.AdvancedDeploymentKeyFilter.NotIn
   nameWithType: AdvancedDeploymentKeyFilter.NotIn
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter
+  name: AdvancedElementIdFilter
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.AdvancedElementIdFilter
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter
+  nameWithType: AdvancedElementIdFilter
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Eq.html#Camunda_Orchestration_Sdk_AdvancedElementIdFilter_Eq
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Eq
+  nameWithType: AdvancedElementIdFilter.Eq
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Eq
+  nameWithType: AdvancedElementIdFilter.Eq
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Exists.html#Camunda_Orchestration_Sdk_AdvancedElementIdFilter_Exists
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Exists
+  nameWithType: AdvancedElementIdFilter.Exists
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Exists
+  nameWithType: AdvancedElementIdFilter.Exists
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.In
+  name: In
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.In.html#Camunda_Orchestration_Sdk_AdvancedElementIdFilter_In
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.In
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.In
+  nameWithType: AdvancedElementIdFilter.In
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.In*
+  name: In
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.In.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.In
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.In
+  nameWithType: AdvancedElementIdFilter.In
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Like
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Like.html#Camunda_Orchestration_Sdk_AdvancedElementIdFilter_Like
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Like
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Like
+  nameWithType: AdvancedElementIdFilter.Like
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Like*
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Like.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Like
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Like
+  nameWithType: AdvancedElementIdFilter.Like
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Neq.html#Camunda_Orchestration_Sdk_AdvancedElementIdFilter_Neq
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Neq
+  nameWithType: AdvancedElementIdFilter.Neq
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.Neq
+  nameWithType: AdvancedElementIdFilter.Neq
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.NotIn
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.NotIn.html#Camunda_Orchestration_Sdk_AdvancedElementIdFilter_NotIn
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.NotIn
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.NotIn
+  nameWithType: AdvancedElementIdFilter.NotIn
+- uid: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.NotIn*
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.AdvancedElementIdFilter.NotIn.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedElementIdFilter.NotIn
+  fullName: Camunda.Orchestration.Sdk.AdvancedElementIdFilter.NotIn
+  nameWithType: AdvancedElementIdFilter.NotIn
 - uid: Camunda.Orchestration.Sdk.AdvancedElementInstanceKeyFilter
   name: AdvancedElementInstanceKeyFilter
   href: api/Camunda.Orchestration.Sdk.AdvancedElementInstanceKeyFilter.html
@@ -2641,6 +2719,72 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionStateFilter.Neq
   fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionStateFilter.Neq
   nameWithType: AdvancedMessageSubscriptionStateFilter.Neq
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter
+  name: AdvancedMessageSubscriptionTypeFilter
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter
+  nameWithType: AdvancedMessageSubscriptionTypeFilter
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Eq.html#Camunda_Orchestration_Sdk_AdvancedMessageSubscriptionTypeFilter_Eq
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Eq
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.Eq
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Eq
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.Eq
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Exists.html#Camunda_Orchestration_Sdk_AdvancedMessageSubscriptionTypeFilter_Exists
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Exists
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.Exists
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Exists
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.Exists
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.In
+  name: In
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.In.html#Camunda_Orchestration_Sdk_AdvancedMessageSubscriptionTypeFilter_In
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.In
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.In
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.In
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.In*
+  name: In
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.In.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.In
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.In
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.In
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Like
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Like.html#Camunda_Orchestration_Sdk_AdvancedMessageSubscriptionTypeFilter_Like
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Like
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Like
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.Like
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Like*
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Like.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Like
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Like
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.Like
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Neq.html#Camunda_Orchestration_Sdk_AdvancedMessageSubscriptionTypeFilter_Neq
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Neq
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.Neq
+- uid: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter.Neq
+  nameWithType: AdvancedMessageSubscriptionTypeFilter.Neq
 - uid: Camunda.Orchestration.Sdk.AdvancedOperationTypeFilter
   name: AdvancedOperationTypeFilter
   href: api/Camunda.Orchestration.Sdk.AdvancedOperationTypeFilter.html
@@ -9019,24 +9163,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceStatisticsByErrorAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceStatisticsByErrorAsync
   nameWithType: CamundaClient.GetProcessInstanceStatisticsByErrorAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,System.Threading.CancellationToken)
-  name: GetResourceAsync(ResourceKey, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,System.Threading.CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey, System.Threading.CancellationToken)
-  nameWithType: CamundaClient.GetResourceAsync(ResourceKey, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ResourceResult},System.Threading.CancellationToken)
+  name: GetResourceAsync(ResourceKey, ConsistencyOptions<ResourceResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ResourceResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ResourceResult},System.Threading.CancellationToken)
+  name.vb: GetResourceAsync(ResourceKey, ConsistencyOptions(Of ResourceResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ResourceResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions(Of Camunda.Orchestration.Sdk.ResourceResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetResourceAsync(ResourceKey, ConsistencyOptions<ResourceResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetResourceAsync(ResourceKey, ConsistencyOptions(Of ResourceResult), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync*
   name: GetResourceAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync.html
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync
   nameWithType: CamundaClient.GetResourceAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey,System.Threading.CancellationToken)
-  name: GetResourceContentAsync(ResourceKey, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceContentAsync_Camunda_Orchestration_Sdk_ResourceKey_System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey,System.Threading.CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey, System.Threading.CancellationToken)
-  nameWithType: CamundaClient.GetResourceContentAsync(ResourceKey, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
+  name: GetResourceContentAsync(ResourceKey, ConsistencyOptions<object>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceContentAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_System_Object__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{System.Object},System.Threading.CancellationToken)
+  name.vb: GetResourceContentAsync(ResourceKey, ConsistencyOptions(Of Object), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<object>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions(Of Object), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetResourceContentAsync(ResourceKey, ConsistencyOptions<object>?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetResourceContentAsync(ResourceKey, ConsistencyOptions(Of Object), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync*
   name: GetResourceContentAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync.html
@@ -16564,6 +16714,144 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementId.Value
   fullName: Camunda.Orchestration.Sdk.ElementId.Value
   nameWithType: ElementId.Value
+- uid: Camunda.Orchestration.Sdk.ElementIdExactMatch
+  name: ElementIdExactMatch
+  href: api/Camunda.Orchestration.Sdk.ElementIdExactMatch.html
+  commentId: T:Camunda.Orchestration.Sdk.ElementIdExactMatch
+  fullName: Camunda.Orchestration.Sdk.ElementIdExactMatch
+  nameWithType: ElementIdExactMatch
+- uid: Camunda.Orchestration.Sdk.ElementIdExactMatch.AssumeExists(System.String)
+  name: AssumeExists(string)
+  href: api/Camunda.Orchestration.Sdk.ElementIdExactMatch.AssumeExists.html#Camunda_Orchestration_Sdk_ElementIdExactMatch_AssumeExists_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.ElementIdExactMatch.AssumeExists(System.String)
+  name.vb: AssumeExists(String)
+  fullName: Camunda.Orchestration.Sdk.ElementIdExactMatch.AssumeExists(string)
+  fullName.vb: Camunda.Orchestration.Sdk.ElementIdExactMatch.AssumeExists(String)
+  nameWithType: ElementIdExactMatch.AssumeExists(string)
+  nameWithType.vb: ElementIdExactMatch.AssumeExists(String)
+- uid: Camunda.Orchestration.Sdk.ElementIdExactMatch.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.ElementIdExactMatch.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdExactMatch.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.ElementIdExactMatch.AssumeExists
+  nameWithType: ElementIdExactMatch.AssumeExists
+- uid: Camunda.Orchestration.Sdk.ElementIdExactMatch.IsValid(System.String)
+  name: IsValid(string)
+  href: api/Camunda.Orchestration.Sdk.ElementIdExactMatch.IsValid.html#Camunda_Orchestration_Sdk_ElementIdExactMatch_IsValid_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.ElementIdExactMatch.IsValid(System.String)
+  name.vb: IsValid(String)
+  fullName: Camunda.Orchestration.Sdk.ElementIdExactMatch.IsValid(string)
+  fullName.vb: Camunda.Orchestration.Sdk.ElementIdExactMatch.IsValid(String)
+  nameWithType: ElementIdExactMatch.IsValid(string)
+  nameWithType.vb: ElementIdExactMatch.IsValid(String)
+- uid: Camunda.Orchestration.Sdk.ElementIdExactMatch.IsValid*
+  name: IsValid
+  href: api/Camunda.Orchestration.Sdk.ElementIdExactMatch.IsValid.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdExactMatch.IsValid
+  fullName: Camunda.Orchestration.Sdk.ElementIdExactMatch.IsValid
+  nameWithType: ElementIdExactMatch.IsValid
+- uid: Camunda.Orchestration.Sdk.ElementIdExactMatch.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.ElementIdExactMatch.ToString.html#Camunda_Orchestration_Sdk_ElementIdExactMatch_ToString
+  commentId: M:Camunda.Orchestration.Sdk.ElementIdExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.ElementIdExactMatch.ToString()
+  nameWithType: ElementIdExactMatch.ToString()
+- uid: Camunda.Orchestration.Sdk.ElementIdExactMatch.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.ElementIdExactMatch.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.ElementIdExactMatch.ToString
+  nameWithType: ElementIdExactMatch.ToString
+- uid: Camunda.Orchestration.Sdk.ElementIdExactMatch.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.ElementIdExactMatch.Value.html#Camunda_Orchestration_Sdk_ElementIdExactMatch_Value
+  commentId: P:Camunda.Orchestration.Sdk.ElementIdExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.ElementIdExactMatch.Value
+  nameWithType: ElementIdExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.ElementIdExactMatch.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.ElementIdExactMatch.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.ElementIdExactMatch.Value
+  nameWithType: ElementIdExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty
+  name: ElementIdFilterProperty
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.html
+  commentId: T:Camunda.Orchestration.Sdk.ElementIdFilterProperty
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty
+  nameWithType: ElementIdFilterProperty
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq.html#Camunda_Orchestration_Sdk_ElementIdFilterProperty_Eq
+  commentId: P:Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq
+  nameWithType: ElementIdFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq
+  nameWithType: ElementIdFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ElementIdFilterProperty_Exists
+  commentId: P:Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists
+  nameWithType: ElementIdFilterProperty.Exists
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists
+  nameWithType: ElementIdFilterProperty.Exists
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.In
+  name: In
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.In.html#Camunda_Orchestration_Sdk_ElementIdFilterProperty_In
+  commentId: P:Camunda.Orchestration.Sdk.ElementIdFilterProperty.In
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.In
+  nameWithType: ElementIdFilterProperty.In
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.In*
+  name: In
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.In.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.In
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.In
+  nameWithType: ElementIdFilterProperty.In
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Like
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.Like.html#Camunda_Orchestration_Sdk_ElementIdFilterProperty_Like
+  commentId: P:Camunda.Orchestration.Sdk.ElementIdFilterProperty.Like
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Like
+  nameWithType: ElementIdFilterProperty.Like
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Like*
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.Like.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.Like
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Like
+  nameWithType: ElementIdFilterProperty.Like
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.Neq.html#Camunda_Orchestration_Sdk_ElementIdFilterProperty_Neq
+  commentId: P:Camunda.Orchestration.Sdk.ElementIdFilterProperty.Neq
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Neq
+  nameWithType: ElementIdFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.Neq
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Neq
+  nameWithType: ElementIdFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn.html#Camunda_Orchestration_Sdk_ElementIdFilterProperty_NotIn
+  commentId: P:Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn
+  nameWithType: ElementIdFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn*
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn
+  nameWithType: ElementIdFilterProperty.NotIn
 - uid: Camunda.Orchestration.Sdk.ElementInstanceFilter
   name: ElementInstanceFilter
   href: api/Camunda.Orchestration.Sdk.ElementInstanceFilter.html
@@ -22714,6 +23002,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.ASSIGNING
   fullName: Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.ASSIGNING
   nameWithType: JobListenerEventTypeEnum.ASSIGNING
+- uid: Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.BEFOREALL
+  name: BEFOREALL
+  href: api/Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.html#Camunda_Orchestration_Sdk_JobListenerEventTypeEnum_BEFOREALL
+  commentId: F:Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.BEFOREALL
+  fullName: Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.BEFOREALL
+  nameWithType: JobListenerEventTypeEnum.BEFOREALL
 - uid: Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.CANCELING
   name: CANCELING
   href: api/Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.html#Camunda_Orchestration_Sdk_JobListenerEventTypeEnum_CANCELING
@@ -25588,6 +25882,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionState
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionState
   nameWithType: MessageSubscriptionFilter.MessageSubscriptionState
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionType
+  name: MessageSubscriptionType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionType.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_MessageSubscriptionType
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionType
+  nameWithType: MessageSubscriptionFilter.MessageSubscriptionType
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionType*
+  name: MessageSubscriptionType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.MessageSubscriptionType
+  nameWithType: MessageSubscriptionFilter.MessageSubscriptionType
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionId
   name: ProcessDefinitionId
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionId.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_ProcessDefinitionId
@@ -25612,6 +25918,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionKey
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionKey
   nameWithType: MessageSubscriptionFilter.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionName
+  name: ProcessDefinitionName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionName.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_ProcessDefinitionName
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionName
+  nameWithType: MessageSubscriptionFilter.ProcessDefinitionName
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionName*
+  name: ProcessDefinitionName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionName
+  nameWithType: MessageSubscriptionFilter.ProcessDefinitionName
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionVersion
+  name: ProcessDefinitionVersion
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionVersion.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_ProcessDefinitionVersion
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionVersion
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionVersion
+  nameWithType: MessageSubscriptionFilter.ProcessDefinitionVersion
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionVersion*
+  name: ProcessDefinitionVersion
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionVersion.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionVersion
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessDefinitionVersion
+  nameWithType: MessageSubscriptionFilter.ProcessDefinitionVersion
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessInstanceKey
   name: ProcessInstanceKey
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ProcessInstanceKey.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_ProcessInstanceKey
@@ -25864,6 +26194,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ElementInstanceKey
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ElementInstanceKey
   nameWithType: MessageSubscriptionResult.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
+  name: ExtensionProperties
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ExtensionProperties
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
+  nameWithType: MessageSubscriptionResult.ExtensionProperties
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties*
+  name: ExtensionProperties
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
+  nameWithType: MessageSubscriptionResult.ExtensionProperties
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.LastUpdatedDate
   name: LastUpdatedDate
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.LastUpdatedDate.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_LastUpdatedDate
@@ -25912,6 +26254,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionState
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionState
   nameWithType: MessageSubscriptionResult.MessageSubscriptionState
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionType
+  name: MessageSubscriptionType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionType.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_MessageSubscriptionType
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionType
+  nameWithType: MessageSubscriptionResult.MessageSubscriptionType
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionType*
+  name: MessageSubscriptionType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.MessageSubscriptionType
+  nameWithType: MessageSubscriptionResult.MessageSubscriptionType
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionId
   name: ProcessDefinitionId
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionId.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ProcessDefinitionId
@@ -25936,6 +26290,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionKey
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionKey
   nameWithType: MessageSubscriptionResult.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionName
+  name: ProcessDefinitionName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionName.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ProcessDefinitionName
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionName
+  nameWithType: MessageSubscriptionResult.ProcessDefinitionName
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionName*
+  name: ProcessDefinitionName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionName
+  nameWithType: MessageSubscriptionResult.ProcessDefinitionName
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionVersion
+  name: ProcessDefinitionVersion
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionVersion.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ProcessDefinitionVersion
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionVersion
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionVersion
+  nameWithType: MessageSubscriptionResult.ProcessDefinitionVersion
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionVersion*
+  name: ProcessDefinitionVersion
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionVersion.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionVersion
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessDefinitionVersion
+  nameWithType: MessageSubscriptionResult.ProcessDefinitionVersion
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessInstanceKey
   name: ProcessInstanceKey
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ProcessInstanceKey.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ProcessInstanceKey
@@ -26230,6 +26608,150 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.Neq
   nameWithType: MessageSubscriptionStateFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum
+  name: MessageSubscriptionTypeEnum
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.html
+  commentId: T:Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum
+  nameWithType: MessageSubscriptionTypeEnum
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.PROCESSEVENT
+  name: PROCESSEVENT
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeEnum_PROCESSEVENT
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.PROCESSEVENT
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.PROCESSEVENT
+  nameWithType: MessageSubscriptionTypeEnum.PROCESSEVENT
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.STARTEVENT
+  name: STARTEVENT
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeEnum_STARTEVENT
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.STARTEVENT
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.STARTEVENT
+  nameWithType: MessageSubscriptionTypeEnum.STARTEVENT
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch
+  name: MessageSubscriptionTypeExactMatch
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.html
+  commentId: T:Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch
+  nameWithType: MessageSubscriptionTypeExactMatch
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.AssumeExists(System.String)
+  name: AssumeExists(string)
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.AssumeExists.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeExactMatch_AssumeExists_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.AssumeExists(System.String)
+  name.vb: AssumeExists(String)
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.AssumeExists(string)
+  fullName.vb: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.AssumeExists(String)
+  nameWithType: MessageSubscriptionTypeExactMatch.AssumeExists(string)
+  nameWithType.vb: MessageSubscriptionTypeExactMatch.AssumeExists(String)
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.AssumeExists
+  nameWithType: MessageSubscriptionTypeExactMatch.AssumeExists
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.IsValid(System.String)
+  name: IsValid(string)
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.IsValid.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeExactMatch_IsValid_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.IsValid(System.String)
+  name.vb: IsValid(String)
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.IsValid(string)
+  fullName.vb: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.IsValid(String)
+  nameWithType: MessageSubscriptionTypeExactMatch.IsValid(string)
+  nameWithType.vb: MessageSubscriptionTypeExactMatch.IsValid(String)
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.IsValid*
+  name: IsValid
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.IsValid.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.IsValid
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.IsValid
+  nameWithType: MessageSubscriptionTypeExactMatch.IsValid
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.ToString.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeExactMatch_ToString
+  commentId: M:Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.ToString()
+  nameWithType: MessageSubscriptionTypeExactMatch.ToString()
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.ToString
+  nameWithType: MessageSubscriptionTypeExactMatch.ToString
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.Value.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeExactMatch_Value
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.Value
+  nameWithType: MessageSubscriptionTypeExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeExactMatch.Value
+  nameWithType: MessageSubscriptionTypeExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty
+  name: MessageSubscriptionTypeFilterProperty
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.html
+  commentId: T:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty
+  nameWithType: MessageSubscriptionTypeFilterProperty
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeFilterProperty_Eq
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq
+  nameWithType: MessageSubscriptionTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq
+  nameWithType: MessageSubscriptionTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeFilterProperty_Exists
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists
+  nameWithType: MessageSubscriptionTypeFilterProperty.Exists
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists
+  nameWithType: MessageSubscriptionTypeFilterProperty.Exists
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.In
+  name: In
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.In.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeFilterProperty_In
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.In
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.In
+  nameWithType: MessageSubscriptionTypeFilterProperty.In
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.In*
+  name: In
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.In.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.In
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.In
+  nameWithType: MessageSubscriptionTypeFilterProperty.In
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Like
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Like.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeFilterProperty_Like
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Like
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Like
+  nameWithType: MessageSubscriptionTypeFilterProperty.Like
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Like*
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Like.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Like
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Like
+  nameWithType: MessageSubscriptionTypeFilterProperty.Like
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeFilterProperty_Neq
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq
+  nameWithType: MessageSubscriptionTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq
+  nameWithType: MessageSubscriptionTypeFilterProperty.Neq
 - uid: Camunda.Orchestration.Sdk.MigrateProcessInstanceMappingInstruction
   name: MigrateProcessInstanceMappingInstruction
   href: api/Camunda.Orchestration.Sdk.MigrateProcessInstanceMappingInstruction.html

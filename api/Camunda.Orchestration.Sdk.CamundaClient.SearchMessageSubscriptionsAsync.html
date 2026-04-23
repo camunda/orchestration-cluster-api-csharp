@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync*" class="text-break">
-Method SearchMessageSubscriptionsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6448"><i class="bi bi-code-slash"></i></a>
+Method SearchMessageSubscriptionsAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6475"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,11 +121,23 @@ Method SearchMessageSubscriptionsAsync  <a class="header-action link-secondary" 
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_MessageSubscriptionSearchQueryResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync(Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.MessageSubscriptionSearchQueryResult},System.Threading.CancellationToken)">
   SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery, ConsistencyOptions&lt;MessageSubscriptionSearchQueryResult&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6448"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6475"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search message subscriptions
 Search for message subscriptions based on given criteria.</p>
+<p>By default, both start and intermediate event subscriptions are returned. Use the
+<code>messageSubscriptionType</code> filter to restrict results to a single type.</p>
+<p><strong>Version notes:</strong></p>
+<ul>
+<li>Start event subscriptions are only captured for deployments made with 8.10 or later.</li>
+<li>The <code>messageSubscriptionType</code> field is only populated for data created
+with Camunda 8.10 or later. For pre-8.10 data, intermediate event entries have no
+<code>messageSubscriptionType</code> value stored. For convenience, the API returns <code>PROCESS_EVENT</code>
+as a default for such search results, though.</li>
+<li>Searching for intermediate event subscriptions <strong>including legacy data</strong> can be achieved
+by filtering for <code>messageSubscriptionType</code> not matching <code>START_EVENT</code>.</li>
+</ul>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -192,7 +204,7 @@ foreach (var sub in result.Items)
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6448" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6475" class="edit-link">Edit this page</a>
         </div>
 
 

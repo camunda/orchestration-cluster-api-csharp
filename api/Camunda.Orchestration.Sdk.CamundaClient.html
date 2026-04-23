@@ -368,14 +368,14 @@ This is an atomic call, i.e. either all resources are deployed or none of them a
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentAsync_System_Net_Http_MultipartFormDataContent_System_String_System_Nullable_Camunda_Orchestration_Sdk_DocumentId__System_Threading_CancellationToken_">CreateDocumentAsync(MultipartFormDataContent, string?, DocumentId?, CancellationToken)</a></dt>
     <dd><p>Upload document
 Upload a document to the Camunda 8 cluster.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)</p>
 </dd>
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDocumentLinkAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDocumentLinkAsync_Camunda_Orchestration_Sdk_DocumentId_Camunda_Orchestration_Sdk_DocumentLinkRequest_System_String_System_String_System_Threading_CancellationToken_">CreateDocumentLinkAsync(DocumentId, DocumentLinkRequest, string?, string?, CancellationToken)</a></dt>
     <dd><p>Create document link
 Create a link to a document in the Camunda 8 cluster.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -392,7 +392,7 @@ of the file part.</p>
 <p>In case of a multi-status response, the response body will contain a list of <code>DocumentBatchProblemDetail</code> objects,
 each of which contains the file name of the document that failed to upload and the reason for the failure.
 The client can choose to retry the whole batch or individual documents based on the response.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -502,7 +502,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteDocumentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteDocumentAsync_Camunda_Orchestration_Sdk_DocumentId_System_String_System_Threading_CancellationToken_">DeleteDocumentAsync(DocumentId, string?, CancellationToken)</a></dt>
     <dd><p>Delete document
 Delete a document from the Camunda 8 cluster.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -692,7 +692,7 @@ Returns decision requirements as XML.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDocumentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDocumentAsync_Camunda_Orchestration_Sdk_DocumentId_System_String_System_String_System_Threading_CancellationToken_">GetDocumentAsync(DocumentId, string?, string?, CancellationToken)</a></dt>
     <dd><p>Download document
 Download a document from the Camunda 8 cluster.</p>
-<p>Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)</p>
+<p>Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -846,7 +846,7 @@ grouped by incident error hash code.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_System_Threading_CancellationToken_">GetResourceAsync(ResourceKey, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ResourceResult__System_Threading_CancellationToken_">GetResourceAsync(ResourceKey, ConsistencyOptions&lt;ResourceResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get resource
 Returns a deployed resource.
 :::info
@@ -855,7 +855,7 @@ Currently, this endpoint only supports RPA resources.
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceContentAsync_Camunda_Orchestration_Sdk_ResourceKey_System_Threading_CancellationToken_">GetResourceContentAsync(ResourceKey, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceContentAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">GetResourceContentAsync(ResourceKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
     <dd><p>Get resource content
 Returns the content of a deployed resource.
 :::info
@@ -1207,6 +1207,18 @@ Retrieves a filtered and sorted list of MappingRules for a specified tenant.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchMessageSubscriptionsAsync_Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_MessageSubscriptionSearchQueryResult__System_Threading_CancellationToken_">SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery, ConsistencyOptions&lt;MessageSubscriptionSearchQueryResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Search message subscriptions
 Search for message subscriptions based on given criteria.</p>
+<p>By default, both start and intermediate event subscriptions are returned. Use the
+<code>messageSubscriptionType</code> filter to restrict results to a single type.</p>
+<p><strong>Version notes:</strong></p>
+<ul>
+<li>Start event subscriptions are only captured for deployments made with 8.10 or later.</li>
+<li>The <code>messageSubscriptionType</code> field is only populated for data created
+with Camunda 8.10 or later. For pre-8.10 data, intermediate event entries have no
+<code>messageSubscriptionType</code> value stored. For convenience, the API returns <code>PROCESS_EVENT</code>
+as a default for such search results, though.</li>
+<li>Searching for intermediate event subscriptions <strong>including legacy data</strong> can be achieved
+by filtering for <code>messageSubscriptionType</code> not matching <code>START_EVENT</code>.</li>
+</ul>
 </dd>
   </dl>
   <dl class="jumplist">

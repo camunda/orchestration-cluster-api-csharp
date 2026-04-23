@@ -119,8 +119,8 @@ Method GetResourceAsync  <a class="header-action link-secondary" title="View sou
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,System.Threading.CancellationToken)">
-  GetResourceAsync(ResourceKey, CancellationToken)
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ResourceResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ResourceResult},System.Threading.CancellationToken)">
+  GetResourceAsync(ResourceKey, ConsistencyOptions&lt;ResourceResult&gt;?, CancellationToken)
   <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4089"><i class="bi bi-code-slash"></i></a>
 </h3>
 
@@ -133,12 +133,14 @@ Currently, this endpoint only supports RPA resources.
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;ResourceResult&gt; GetResourceAsync(ResourceKey resourceKey, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;ResourceResult&gt; GetResourceAsync(ResourceKey resourceKey, ConsistencyOptions&lt;ResourceResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>resourceKey</code> <a class="xref" href="Camunda.Orchestration.Sdk.ResourceKey.html">ResourceKey</a></dt>
+  <dd></dd>
+  <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.ResourceResult.html">ResourceResult</a>&gt;</dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -155,17 +157,18 @@ Currently, this endpoint only supports RPA resources.
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_System_Threading_CancellationToken__examples">Examples</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ResourceResult__System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task GetResourceExample(ResourceKey resourceKey)
 {
     using var client = CamundaClient.Create();
-
-    var result = await client.GetResourceAsync(resourceKey);
-    Console.WriteLine($&quot;Resource: {result.ResourceName}&quot;);
-}
+<pre><code>var result = await client.GetResourceAsync(resourceKey);
+Console.WriteLine($&quot;Resource: {result.ResourceName}&quot;);
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ResourceResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: getResource</p>
 <p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task GetResourceExample(ResourceKey resourceKey)
