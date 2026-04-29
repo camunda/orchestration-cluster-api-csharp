@@ -5425,7 +5425,10 @@ public sealed class DecisionEvaluationByKey : DecisionEvaluationInstruction, glo
 }
 
 /// <summary>
-/// System-generated key for a decision evaluation instance.
+/// System-generated identifier for a decision evaluation instance. It is composed of the
+/// parent decision evaluation key and the 1-based index of the evaluated decision within
+/// that evaluation, joined by a hyphen (format: `&lt;decisionEvaluationKey&gt;-&lt;index&gt;`).
+/// 
 /// </summary>
 public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
@@ -5440,13 +5443,13 @@ public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Or
     /// </summary>
     public static DecisionEvaluationInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKey", pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
         return new DecisionEvaluationInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5468,13 +5471,13 @@ public readonly record struct DecisionEvaluationInstanceKeyExactMatch : global::
     /// </summary>
     public static DecisionEvaluationInstanceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKeyExactMatch", pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
         return new DecisionEvaluationInstanceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5787,7 +5790,10 @@ public sealed class DecisionInstanceGetQueryResult
     public int DecisionDefinitionVersion { get; set; }
 
     /// <summary>
-    /// System-generated key for a decision evaluation instance.
+    /// System-generated identifier for a decision evaluation instance. It is composed of the
+    /// parent decision evaluation key and the 1-based index of the evaluated decision within
+    /// that evaluation, joined by a hyphen (format: `&lt;decisionEvaluationKey&gt;-&lt;index&gt;`).
+    /// 
     /// </summary>
     [JsonPropertyName("decisionEvaluationInstanceKey")]
     public DecisionEvaluationInstanceKey DecisionEvaluationInstanceKey { get; set; }
@@ -5941,7 +5947,10 @@ public sealed class DecisionInstanceResult
     public int DecisionDefinitionVersion { get; set; }
 
     /// <summary>
-    /// System-generated key for a decision evaluation instance.
+    /// System-generated identifier for a decision evaluation instance. It is composed of the
+    /// parent decision evaluation key and the 1-based index of the evaluated decision within
+    /// that evaluation, joined by a hyphen (format: `&lt;decisionEvaluationKey&gt;-&lt;index&gt;`).
+    /// 
     /// </summary>
     [JsonPropertyName("decisionEvaluationInstanceKey")]
     public DecisionEvaluationInstanceKey DecisionEvaluationInstanceKey { get; set; }
