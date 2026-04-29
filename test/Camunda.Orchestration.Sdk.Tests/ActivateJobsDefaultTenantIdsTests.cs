@@ -145,12 +145,12 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
     public void EveryRequestSchemaWithOptionalTenantIdsArray_ImplementsITenantIdsSettable()
     {
         // Class-scoped guard: scan the bundled spec for any operation whose
-        // request body schema has an optional `tenantIds: array` property and
-        // assert the corresponding generated class implements ITenantIdsSettable.
-        // Today only JobActivationRequest matches; this guard prevents the same
-        // defect class from recurring in a future sibling schema.
+        // request body schema (whether $ref'd or inline) has an optional
+        // `tenantIds: array` property and assert the corresponding generated
+        // class implements ITenantIdsSettable. Today only JobActivationRequest
+        // matches; this guard prevents the same defect class from recurring in
+        // a future sibling schema.
         var spec = LoadBundledSpec();
-        var schemas = spec["components"]!["schemas"]!.AsObject();
 
         var matches = FindRequestSchemasWithOptionalTenantIdsArray(spec);
 
@@ -204,6 +204,7 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
                 var content = rb?["content"] as JsonObject;
                 if (content == null)
                     continue;
+                var operationId = op["operationId"]?.GetValue<string>();
                 foreach (var (ct, mt) in content)
                 {
                     if (!ct.Contains("json", StringComparison.OrdinalIgnoreCase))
@@ -212,15 +213,30 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
                         continue;
                     var schema = mtObj["schema"];
                     var (resolved, refName) = Resolve(schema, schemas);
-                    if (resolved == null || refName == null)
+                    if (resolved == null)
                         continue;
-                    if (HasOptionalTenantIdsArray(resolved))
+                    if (!HasOptionalTenantIdsArray(resolved))
+                        continue;
+                    // For $ref bodies the SDK type is the referenced schema name.
+                    // For inline bodies the generator names the class
+                    // `{PascalCase(operationId)}Request` (see GetBodySchemaRef
+                    // / `bodySchemaRef ?? opId + "Request"` in the generator).
+                    if (refName != null)
+                    {
                         result.Add(refName);
+                    }
+                    else if (!string.IsNullOrEmpty(operationId))
+                    {
+                        result.Add(PascalCaseFirst(operationId) + "Request");
+                    }
                 }
             }
         }
         return result.ToList();
     }
+
+    private static string PascalCaseFirst(string s) =>
+        string.IsNullOrEmpty(s) ? s : char.ToUpperInvariant(s[0]) + s[1..];
 
     private static (JsonObject? resolved, string? refName) Resolve(JsonNode? schema, JsonObject schemas)
     {
