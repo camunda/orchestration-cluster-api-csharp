@@ -215,7 +215,7 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
                     var (resolved, refName) = Resolve(schema, schemas);
                     if (resolved == null)
                         continue;
-                    if (!HasOptionalTenantIdsArray(resolved))
+                    if (!HasOptionalTenantIdsArrayInAnyVariant(resolved, schemas))
                         continue;
                     // For $ref bodies the SDK type is the referenced schema name.
                     // For inline bodies the generator names the class
@@ -253,18 +253,68 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
         return (obj, null);
     }
 
-    private static bool HasOptionalTenantIdsArray(JsonObject schema)
+    /// <summary>
+    /// True if <paramref name="schema"/> (or every variant in a
+    /// <c>oneOf</c>/<c>anyOf</c>) has an optional <c>tenantIds: array</c>
+    /// property. Mirrors the generator's <c>HasOptionalTenantIdsArrayInAnyVariant</c>
+    /// detection so the structural guard catches the same defect class the
+    /// generator handles.
+    /// </summary>
+    private static bool HasOptionalTenantIdsArrayInAnyVariant(JsonObject schema, JsonObject schemas)
     {
-        if (schema["type"]?.GetValue<string>() != "object")
+        var variants = (schema["oneOf"] as JsonArray) ?? (schema["anyOf"] as JsonArray);
+        if (variants is { Count: > 0 })
+        {
+            foreach (var v in variants)
+            {
+                var (resolved, _) = Resolve(v, schemas);
+                if (resolved == null || !HasOptionalTenantIdsArray(resolved, schemas))
+                    return false;
+            }
+            return true;
+        }
+        return HasOptionalTenantIdsArray(schema, schemas);
+    }
+
+    private static bool HasOptionalTenantIdsArray(JsonObject schema, JsonObject schemas)
+    {
+        // Merge own properties/required with allOf fragments, resolving
+        // `allOf: [{$ref: ...}]` against the schemas map. Mirrors the
+        // generator's HasOptionalTenantIdsArrayDirect.
+        var properties = new Dictionary<string, JsonObject>(StringComparer.Ordinal);
+        var required = new HashSet<string>(StringComparer.Ordinal);
+
+        if (schema["properties"] is JsonObject ownProps)
+            foreach (var (k, v) in ownProps)
+                if (v is JsonObject vObj)
+                    properties.TryAdd(k, vObj);
+        if (schema["required"] is JsonArray ownReq)
+            foreach (var n in ownReq)
+                if (n?.GetValue<string>() is string s)
+                    required.Add(s);
+
+        if (schema["allOf"] is JsonArray allOf)
+        {
+            foreach (var fragment in allOf)
+            {
+                if (fragment is not JsonObject fragObj)
+                    continue;
+                var (resolved, _) = Resolve(fragment, schemas);
+                var target = resolved ?? fragObj;
+                if (target["properties"] is JsonObject tProps)
+                    foreach (var (k, v) in tProps)
+                        if (v is JsonObject vObj)
+                            properties.TryAdd(k, vObj);
+                if (target["required"] is JsonArray tReq)
+                    foreach (var n in tReq)
+                        if (n?.GetValue<string>() is string s)
+                            required.Add(s);
+            }
+        }
+
+        if (!properties.TryGetValue("tenantIds", out var tenantIds))
             return false;
-        var props = schema["properties"] as JsonObject;
-        if (props == null)
-            return false;
-        var tenantIds = props["tenantIds"] as JsonObject;
-        if (tenantIds == null)
-            return false;
-        var required = schema["required"] as JsonArray;
-        if (required != null && required.Any(n => n?.GetValue<string>() == "tenantIds"))
+        if (required.Contains("tenantIds"))
             return false;
         return tenantIds["type"]?.GetValue<string>() == "array";
     }
