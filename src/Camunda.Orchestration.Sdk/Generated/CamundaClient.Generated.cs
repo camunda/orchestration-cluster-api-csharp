@@ -101,6 +101,7 @@ public partial class CamundaClient
     public async Task<JobActivationResult> ActivateJobsAsync(JobActivationRequest body, CancellationToken ct = default)
     {
         var path = $"/jobs/activation";
+        if (body is ITenantIdsSettable __ts) __ts.SetDefaultTenantIds(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<JobActivationResult>(HttpMethod.Post, path, body, ct), "activateJobs", false, ct);
     }
 
@@ -4086,16 +4087,9 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, ConsistencyOptions<ResourceResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("getResource", true,
-                () => InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct);
     }
 
@@ -4132,16 +4126,9 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/content";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("getResourceContent", true,
-                () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct);
     }
 

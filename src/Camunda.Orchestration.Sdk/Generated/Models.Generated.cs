@@ -10002,7 +10002,7 @@ public sealed class IntegerFilterProperty
 /// <summary>
 /// JobActivationRequest
 /// </summary>
-public sealed class JobActivationRequest
+public sealed class JobActivationRequest : global::Camunda.Orchestration.Sdk.ITenantIdsSettable
 {
     /// <summary>
     /// The job type, as defined in the BPMN process (e.g. &lt;zeebe:taskDefinition type=&quot;payment-service&quot; /&gt;)
@@ -10054,6 +10054,13 @@ public sealed class JobActivationRequest
     /// </summary>
     [JsonPropertyName("tenantFilter")]
     public TenantFilterEnum? TenantFilter { get; set; }
+
+    /// <inheritdoc />
+    public void SetDefaultTenantIds(string tenantId)
+    {
+        if (TenantIds == null || TenantIds.Count == 0)
+            TenantIds = new List<TenantId> { global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId) };
+    }
 
 }
 
