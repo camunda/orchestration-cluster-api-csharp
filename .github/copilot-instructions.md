@@ -63,6 +63,7 @@ Uses [semantic-release](https://github.com/semantic-release/semantic-release) fo
 - SDK major tracks Camunda server minor (server 8.9 → SDK 9.x). Current stable major set via `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` repo variable.
 - Config: `release.config.cjs`, `commitlint.config.cjs`
 - Commit messages linted via commitlint in CI (Conventional Commits required)
+- **Subject length limit: 100 characters max** (`subject-max-length` in `commitlint.config.cjs`). CI fails the lint job on longer subjects. Em-dashes count as one character; multi-byte characters count by their character count, not byte count. Keep subjects concise — push detail into the body.
 
 ## Code Style & Linting
 

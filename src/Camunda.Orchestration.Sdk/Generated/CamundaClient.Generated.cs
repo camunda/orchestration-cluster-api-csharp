@@ -101,6 +101,7 @@ public partial class CamundaClient
     public async Task<JobActivationResult> ActivateJobsAsync(JobActivationRequest body, CancellationToken ct = default)
     {
         var path = $"/jobs/activation";
+        if (body is ITenantIdsSettable __ts) __ts.SetDefaultTenantIds(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<JobActivationResult>(HttpMethod.Post, path, body, ct), "activateJobs", false, ct);
     }
 
