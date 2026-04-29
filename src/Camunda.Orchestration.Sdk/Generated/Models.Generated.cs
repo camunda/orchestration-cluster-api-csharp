@@ -1613,6 +1613,57 @@ public sealed class AdvancedOperationTypeFilter
 }
 
 /// <summary>
+/// Advanced ProcessDefinitionId filter.
+/// </summary>
+public sealed class AdvancedProcessDefinitionIdFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ProcessDefinitionId? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ProcessDefinitionId? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ProcessDefinitionId>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ProcessDefinitionId>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
 /// Advanced ProcessDefinitionKey filter.
 /// </summary>
 public sealed class AdvancedProcessDefinitionKeyFilter
@@ -3520,10 +3571,13 @@ public sealed class BatchOperationItemResponse
     public string ItemKey { get; set; } = null!;
 
     /// <summary>
-    /// the process instance key of the processed item.
+    /// The process instance key of the processed item. Null for batch-op types whose targets
+    /// are not process instances (e.g. DELETE_DECISION_INSTANCE, DELETE_DECISION_DEFINITION,
+    /// DELETE_PROCESS_DEFINITION).
+    /// 
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the root process instance. The root process instance is the top-level
@@ -5521,7 +5575,10 @@ public sealed class DecisionEvaluationByKey : DecisionEvaluationInstruction, glo
 }
 
 /// <summary>
-/// System-generated key for a decision evaluation instance.
+/// System-generated identifier for a decision evaluation instance. It is composed of the
+/// parent decision evaluation key and the 1-based index of the evaluated decision within
+/// that evaluation, joined by a hyphen (format: `&lt;decisionEvaluationKey&gt;-&lt;index&gt;`).
+/// 
 /// </summary>
 public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
 {
@@ -5536,13 +5593,13 @@ public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Or
     /// </summary>
     public static DecisionEvaluationInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKey", pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
         return new DecisionEvaluationInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5564,13 +5621,13 @@ public readonly record struct DecisionEvaluationInstanceKeyExactMatch : global::
     /// </summary>
     public static DecisionEvaluationInstanceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKeyExactMatch", pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
         return new DecisionEvaluationInstanceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5883,7 +5940,10 @@ public sealed class DecisionInstanceGetQueryResult
     public int DecisionDefinitionVersion { get; set; }
 
     /// <summary>
-    /// System-generated key for a decision evaluation instance.
+    /// System-generated identifier for a decision evaluation instance. It is composed of the
+    /// parent decision evaluation key and the 1-based index of the evaluated decision within
+    /// that evaluation, joined by a hyphen (format: `&lt;decisionEvaluationKey&gt;-&lt;index&gt;`).
+    /// 
     /// </summary>
     [JsonPropertyName("decisionEvaluationInstanceKey")]
     public DecisionEvaluationInstanceKey DecisionEvaluationInstanceKey { get; set; }
@@ -6037,7 +6097,10 @@ public sealed class DecisionInstanceResult
     public int DecisionDefinitionVersion { get; set; }
 
     /// <summary>
-    /// System-generated key for a decision evaluation instance.
+    /// System-generated identifier for a decision evaluation instance. It is composed of the
+    /// parent decision evaluation key and the 1-based index of the evaluated decision within
+    /// that evaluation, joined by a hyphen (format: `&lt;decisionEvaluationKey&gt;-&lt;index&gt;`).
+    /// 
     /// </summary>
     [JsonPropertyName("decisionEvaluationInstanceKey")]
     public DecisionEvaluationInstanceKey DecisionEvaluationInstanceKey { get; set; }
@@ -12152,6 +12215,18 @@ public sealed class MessageSubscriptionFilter
     [JsonPropertyName("processDefinitionVersion")]
     public IntegerFilterProperty? ProcessDefinitionVersion { get; set; }
 
+    /// <summary>
+    /// Filter by tool name extracted from the `io.camunda.tool:name` zeebe:property.
+    /// </summary>
+    [JsonPropertyName("toolName")]
+    public StringFilterProperty? ToolName { get; set; }
+
+    /// <summary>
+    /// Filter by inbound connector type extracted from the `inbound.type` zeebe:property.
+    /// </summary>
+    [JsonPropertyName("inboundConnectorType")]
+    public StringFilterProperty? InboundConnectorType { get; set; }
+
 }
 
 /// <summary>
@@ -12355,6 +12430,22 @@ public sealed class MessageSubscriptionResult
     /// </summary>
     [JsonPropertyName("processDefinitionVersion")]
     public int? ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// Tool name extracted from the `io.camunda.tool:name` zeebe:property.
+    /// Null when the property is absent.
+    /// 
+    /// </summary>
+    [JsonPropertyName("toolName")]
+    public string? ToolName { get; set; }
+
+    /// <summary>
+    /// Inbound connector type extracted from the `inbound.type` zeebe:property.
+    /// Null when the property is absent.
+    /// 
+    /// </summary>
+    [JsonPropertyName("inboundConnectorType")]
+    public string? InboundConnectorType { get; set; }
 
     /// <summary>
     /// The unique identifier of the tenant.
@@ -13056,6 +13147,85 @@ public readonly record struct ProcessDefinitionId : global::Camunda.Orchestratio
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ProcessDefinitionIdExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ProcessDefinitionIdExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ProcessDefinitionIdExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ProcessDefinitionIdExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionIdExactMatch", pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        return new ProcessDefinitionIdExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// ProcessDefinitionId property with full advanced search capabilities.
+/// </summary>
+public sealed class ProcessDefinitionIdFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ProcessDefinitionId? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ProcessDefinitionId? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ProcessDefinitionId>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ProcessDefinitionId>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
 }
 
 /// <summary>
@@ -17292,7 +17462,7 @@ public sealed class UserTaskFilter
     /// The ID of the process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
+    public ProcessDefinitionIdFilterProperty? ProcessDefinitionId { get; set; }
 
     /// <summary>
     /// The user task creation date.
@@ -17340,13 +17510,13 @@ public sealed class UserTaskFilter
     /// The key of the process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// The key of the process instance.
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+    public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the element instance.

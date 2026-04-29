@@ -18130,12 +18130,13 @@
             "type": "string"
           },
           "processInstanceKey": {
+            "description": "The process instance key of the processed item. Null for batch-op types whose targets\nare not process instances (e.g. DELETE_DECISION_INSTANCE, DELETE_DECISION_DEFINITION,\nDELETE_PROCESS_DEFINITION).\n",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/ProcessInstanceKey"
               }
-            ],
-            "description": "the process instance key of the processed item."
+            ]
           },
           "rootProcessInstanceKey": {
             "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
@@ -22667,6 +22668,61 @@
           }
         }
       },
+      "ProcessDefinitionIdFilterProperty": {
+        "description": "ProcessDefinitionId property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ProcessDefinitionIdExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedProcessDefinitionIdFilter"
+          }
+        ]
+      },
+      "AdvancedProcessDefinitionIdFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced ProcessDefinitionId filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionId"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionId"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessDefinitionId"
+            }
+          },
+          "$notIn": {
+            "description": "Checks if the property matches none of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessDefinitionId"
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
+          }
+        }
+      },
       "IncidentSearchQuery": {
         "additionalProperties": false,
         "type": "object",
@@ -25094,16 +25150,14 @@
         ]
       },
       "DecisionEvaluationInstanceKey": {
-        "description": "System-generated key for a decision evaluation instance.",
+        "description": "System-generated identifier for a decision evaluation instance. It is composed of the\nparent decision evaluation key and the 1-based index of the evaluated decision within\nthat evaluation, joined by a hyphen (format: `<decisionEvaluationKey>-<index>`).\n",
         "format": "DecisionEvaluationInstanceKey",
         "x-semantic-type": "DecisionEvaluationInstanceKey",
-        "example": "2251799813684367",
         "type": "string",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/LongKey"
-          }
-        ]
+        "pattern": "^[0-9]+-[0-9]+$",
+        "minLength": 3,
+        "maxLength": 30,
+        "example": "2251799813684367-1"
       },
       "DecisionEvaluationKey": {
         "allOf": [
@@ -26192,6 +26246,7 @@
           "elementId",
           "elementInstanceKey",
           "extensionProperties",
+          "inboundConnectorType",
           "lastUpdatedDate",
           "messageName",
           "messageSubscriptionKey",
@@ -26202,7 +26257,8 @@
           "processDefinitionName",
           "processDefinitionVersion",
           "processInstanceKey",
-          "tenantId"
+          "tenantId",
+          "toolName"
         ],
         "properties": {
           "messageSubscriptionKey": {
@@ -26303,6 +26359,16 @@
             "nullable": true,
             "description": "The version of the process definition associated with this message subscription."
           },
+          "toolName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Tool name extracted from the `io.camunda.tool:name` zeebe:property.\nNull when the property is absent.\n"
+          },
+          "inboundConnectorType": {
+            "type": "string",
+            "nullable": true,
+            "description": "Inbound connector type extracted from the `inbound.type` zeebe:property.\nNull when the property is absent.\n"
+          },
           "tenantId": {
             "$ref": "#/components/schemas/TenantId"
           }
@@ -26327,7 +26393,9 @@
               "lastUpdatedDate",
               "messageName",
               "correlationKey",
-              "tenantId"
+              "tenantId",
+              "toolName",
+              "inboundConnectorType"
             ]
           },
           "order": {
@@ -26479,6 +26547,22 @@
               }
             ],
             "description": "The version of the process definition associated with this message subscription."
+          },
+          "toolName": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "Filter by tool name extracted from the `io.camunda.tool:name` zeebe:property."
+          },
+          "inboundConnectorType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "Filter by inbound connector type extracted from the `inbound.type` zeebe:property."
           }
         }
       },
@@ -30222,7 +30306,7 @@
           "processDefinitionId": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ProcessDefinitionId"
+                "$ref": "#/components/schemas/ProcessDefinitionIdFilterProperty"
               }
             ],
             "description": "The ID of the process definition."
@@ -30284,7 +30368,7 @@
           "processDefinitionKey": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ProcessDefinitionKey"
+                "$ref": "#/components/schemas/ProcessDefinitionKeyFilterProperty"
               }
             ],
             "description": "The key of the process definition."
@@ -30292,7 +30376,7 @@
           "processInstanceKey": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ProcessInstanceKey"
+                "$ref": "#/components/schemas/ProcessInstanceKeyFilterProperty"
               }
             ],
             "description": "The key of the process instance."
@@ -31485,6 +31569,16 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/ElementId"
+          }
+        ]
+      },
+      "ProcessDefinitionIdExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ProcessDefinitionId"
           }
         ]
       },
