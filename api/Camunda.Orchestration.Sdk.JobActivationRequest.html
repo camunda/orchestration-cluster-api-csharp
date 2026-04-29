@@ -102,7 +102,7 @@ Class JobActivationRequest  <a class="header-action link-secondary" title="View 
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class JobActivationRequest</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class JobActivationRequest : ITenantIdsSettable</code></pre>
   </div>
 
 
@@ -116,6 +116,12 @@ Class JobActivationRequest  <a class="header-action link-secondary" title="View 
     </dd>
   </dl>
 
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Camunda.Orchestration.Sdk.ITenantIdsSettable.html">ITenantIdsSettable</a></div>
+    </dd>
+  </dl>
 
 
   <dl class="typelist inheritedMembers">
@@ -193,6 +199,16 @@ Class JobActivationRequest  <a class="header-action link-secondary" title="View 
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobActivationRequest.Worker.html#Camunda_Orchestration_Sdk_JobActivationRequest_Worker">Worker</a></dt>
     <dd><p>The name of the worker activating the jobs, mostly used for logging purposes.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds.html#Camunda_Orchestration_Sdk_JobActivationRequest_SetDefaultTenantIds_System_String_">SetDefaultTenantIds(string)</a></dt>
+    <dd><p>Sets the tenant ID list to <code>[tenantId]</code> if it has not already
+been set (or is empty) by the caller.</p>
 </dd>
   </dl>
 

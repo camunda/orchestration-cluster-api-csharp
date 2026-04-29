@@ -20614,6 +20614,27 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ITenantIdSettable.SetDefaultTenantId
   fullName: Camunda.Orchestration.Sdk.ITenantIdSettable.SetDefaultTenantId
   nameWithType: ITenantIdSettable.SetDefaultTenantId
+- uid: Camunda.Orchestration.Sdk.ITenantIdsSettable
+  name: ITenantIdsSettable
+  href: api/Camunda.Orchestration.Sdk.ITenantIdsSettable.html
+  commentId: T:Camunda.Orchestration.Sdk.ITenantIdsSettable
+  fullName: Camunda.Orchestration.Sdk.ITenantIdsSettable
+  nameWithType: ITenantIdsSettable
+- uid: Camunda.Orchestration.Sdk.ITenantIdsSettable.SetDefaultTenantIds(System.String)
+  name: SetDefaultTenantIds(string)
+  href: api/Camunda.Orchestration.Sdk.ITenantIdsSettable.SetDefaultTenantIds.html#Camunda_Orchestration_Sdk_ITenantIdsSettable_SetDefaultTenantIds_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.ITenantIdsSettable.SetDefaultTenantIds(System.String)
+  name.vb: SetDefaultTenantIds(String)
+  fullName: Camunda.Orchestration.Sdk.ITenantIdsSettable.SetDefaultTenantIds(string)
+  fullName.vb: Camunda.Orchestration.Sdk.ITenantIdsSettable.SetDefaultTenantIds(String)
+  nameWithType: ITenantIdsSettable.SetDefaultTenantIds(string)
+  nameWithType.vb: ITenantIdsSettable.SetDefaultTenantIds(String)
+- uid: Camunda.Orchestration.Sdk.ITenantIdsSettable.SetDefaultTenantIds*
+  name: SetDefaultTenantIds
+  href: api/Camunda.Orchestration.Sdk.ITenantIdsSettable.SetDefaultTenantIds.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ITenantIdsSettable.SetDefaultTenantIds
+  fullName: Camunda.Orchestration.Sdk.ITenantIdsSettable.SetDefaultTenantIds
+  nameWithType: ITenantIdsSettable.SetDefaultTenantIds
 - uid: Camunda.Orchestration.Sdk.IncidentErrorTypeEnum
   name: IncidentErrorTypeEnum
   href: api/Camunda.Orchestration.Sdk.IncidentErrorTypeEnum.html
@@ -22000,6 +22021,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobActivationRequest.RequestTimeout
   fullName: Camunda.Orchestration.Sdk.JobActivationRequest.RequestTimeout
   nameWithType: JobActivationRequest.RequestTimeout
+- uid: Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds(System.String)
+  name: SetDefaultTenantIds(string)
+  href: api/Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds.html#Camunda_Orchestration_Sdk_JobActivationRequest_SetDefaultTenantIds_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds(System.String)
+  name.vb: SetDefaultTenantIds(String)
+  fullName: Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds(string)
+  fullName.vb: Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds(String)
+  nameWithType: JobActivationRequest.SetDefaultTenantIds(string)
+  nameWithType.vb: JobActivationRequest.SetDefaultTenantIds(String)
+- uid: Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds*
+  name: SetDefaultTenantIds
+  href: api/Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds
+  fullName: Camunda.Orchestration.Sdk.JobActivationRequest.SetDefaultTenantIds
+  nameWithType: JobActivationRequest.SetDefaultTenantIds
 - uid: Camunda.Orchestration.Sdk.JobActivationRequest.TenantFilter
   name: TenantFilter
   href: api/Camunda.Orchestration.Sdk.JobActivationRequest.TenantFilter.html#Camunda_Orchestration_Sdk_JobActivationRequest_TenantFilter

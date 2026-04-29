@@ -3154,6 +3154,15 @@ The SDK uses this to inject the configured default tenant ID when the caller
 does not supply one explicitly.</p>
 </dd>
     </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ITenantIdsSettable.html">ITenantIdsSettable</a></dt>
+      <dd><p>Implemented by request body types that have an optional <code>tenantIds</code>
+array property (e.g. <a class="xref" href="Camunda.Orchestration.Sdk.JobActivationRequest.html">JobActivationRequest</a>). The SDK uses
+this to inject <code>[DefaultTenantId]</code> when the caller does not supply
+a tenant list explicitly. Mirrors <a class="xref" href="Camunda.Orchestration.Sdk.ITenantIdSettable.html">ITenantIdSettable</a> for
+the plural array shape.</p>
+</dd>
+    </dl>
     <h3 id="enums">
 Enums
 </h3>
