@@ -1,3 +1,11 @@
+## [9.0.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.2...v9.0.3) (2026-04-29)
+
+
+### Bug Fixes
+
+* **gen:** apply CAMUNDA_DEFAULT_TENANT_ID to ActivateJobsAsync tenantIds ([#123](https://github.com/camunda/orchestration-cluster-api-csharp/issues/123)) ([05d9d27](https://github.com/camunda/orchestration-cluster-api-csharp/commit/05d9d274ed428b03c2ec35d3210e3c2347c6af17))
+* **gen:** regenerate artifacts ([cc9ba59](https://github.com/camunda/orchestration-cluster-api-csharp/commit/cc9ba59791496ca527a24261556dc1159588d3fa))
+
 ## [9.0.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.1...v9.0.2) (2026-04-23)
 
 
