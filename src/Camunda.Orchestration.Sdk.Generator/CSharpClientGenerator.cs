@@ -151,6 +151,17 @@ internal static class CSharpClientGenerator
                         inlineSchemas.TryAdd(responseSchemaRef, inlineRespSchema);
                 }
 
+                // Detect optional plural `tenantIds` array in the request body.
+                // Self-contained here (rather than via spec-metadata) so this fix
+                // does not require a camunda-schema-bundler release. See issue #123.
+                var hasOptionalTenantIdsInBody = false;
+                if (hasBody && !isMultipart)
+                {
+                    var bodySchema = ResolveRequestBodySchema(doc, op);
+                    if (bodySchema != null)
+                        hasOptionalTenantIdsInBody = HasOptionalTenantIdsArrayInAnyVariant(bodySchema, doc);
+                }
+
                 ops.Add(new OperationMeta
                 {
                     OperationId = opId,
@@ -166,6 +177,7 @@ internal static class CSharpClientGenerator
                     IsVoidResponse = responseSchemaRef == null && GetSuccessStatusCode(op) is 204 or 202,
                     IsEventuallyConsistent = isEventual,
                     HasOptionalTenantIdInBody = metaEntry?.OptionalTenantIdInBody ?? false,
+                    HasOptionalTenantIdsInBody = hasOptionalTenantIdsInBody,
                     Summary = op.Summary,
                     Description = op.Description,
                     Tags = op.Tags?.Select(t => t.Name).ToList() ?? [],
@@ -226,6 +238,79 @@ internal static class CSharpClientGenerator
                 return mediaType.Schema;
         }
         return null;
+    }
+
+    /// <summary>
+    /// Returns the JSON request body schema for an operation, resolving a
+    /// component <c>$ref</c> against the document. Returns the inline schema
+    /// when no <c>$ref</c> is present.
+    /// </summary>
+    private static OpenApiSchema? ResolveRequestBodySchema(OpenApiDocument doc, OpenApiOperation op)
+    {
+        var content = op.RequestBody?.Content;
+        if (content == null)
+            return null;
+        foreach (var (ct, mediaType) in content)
+        {
+            if (!ct.Contains("json", StringComparison.OrdinalIgnoreCase))
+                continue;
+            if (mediaType.Schema == null)
+                continue;
+            if (mediaType.Schema.Reference != null
+                && doc.Components?.Schemas != null
+                && doc.Components.Schemas.TryGetValue(mediaType.Schema.Reference.Id, out var resolved))
+                return resolved;
+            return mediaType.Schema;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// True if the schema (or every variant in a <c>oneOf</c>/<c>anyOf</c>) has
+    /// an optional <c>tenantIds: array</c> property. Mirrors the JS hook
+    /// <c>collectOpsWithOptionalTenantIdsArray</c> introduced in
+    /// orchestration-cluster-api-js#171.
+    /// </summary>
+    private static bool HasOptionalTenantIdsArrayInAnyVariant(OpenApiSchema schema, OpenApiDocument doc)
+    {
+        var variants = schema.OneOf?.Count > 0 ? schema.OneOf : (schema.AnyOf?.Count > 0 ? schema.AnyOf : null);
+        if (variants is { Count: > 0 })
+        {
+            foreach (var v in variants)
+            {
+                var resolved = v.Reference != null
+                    && doc.Components?.Schemas != null
+                    && doc.Components.Schemas.TryGetValue(v.Reference.Id, out var r)
+                    ? r
+                    : v;
+                if (!HasOptionalTenantIdsArrayDirect(resolved))
+                    return false;
+            }
+            return true;
+        }
+        return HasOptionalTenantIdsArrayDirect(schema);
+    }
+
+    private static bool HasOptionalTenantIdsArrayDirect(OpenApiSchema schema)
+    {
+        var properties = new Dictionary<string, OpenApiSchema>(
+            schema.Properties ?? new Dictionary<string, OpenApiSchema>());
+        var required = new HashSet<string>(
+            schema.Required ?? new HashSet<string>());
+        foreach (var allOf in schema.AllOf ?? [])
+        {
+            if (allOf.Properties != null)
+                foreach (var (k, v) in allOf.Properties)
+                    properties.TryAdd(k, v);
+            if (allOf.Required != null)
+                foreach (var r in allOf.Required)
+                    required.Add(r);
+        }
+        if (!properties.TryGetValue("tenantIds", out var tenantIdsProp))
+            return false;
+        if (required.Contains("tenantIds"))
+            return false;
+        return tenantIdsProp.Type == "array";
     }
 
     private static OpenApiSchema? GetInlineResponseSchema(OpenApiOperation op)
@@ -623,9 +708,15 @@ internal static class CSharpClientGenerator
 
             // Check if this class has an optional tenantId property AND is used as a request body
             var tenantIdInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdInfo(schema) : null;
-            var interfaces = tenantIdInfo != null
-                ? (baseClass != "" ? ", global::Camunda.Orchestration.Sdk.ITenantIdSettable" : " : global::Camunda.Orchestration.Sdk.ITenantIdSettable")
-                : "";
+            var tenantIdsInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdsInfo(schema, doc) : null;
+            var ifaceList = new List<string>();
+            if (tenantIdInfo != null)
+                ifaceList.Add("global::Camunda.Orchestration.Sdk.ITenantIdSettable");
+            if (tenantIdsInfo != null)
+                ifaceList.Add("global::Camunda.Orchestration.Sdk.ITenantIdsSettable");
+            var interfaces = ifaceList.Count == 0
+                ? ""
+                : (baseClass != "" ? ", " + string.Join(", ", ifaceList) : " : " + string.Join(", ", ifaceList));
 
             // Generate class
             sb.AppendLine($"/// <summary>");
@@ -690,6 +781,8 @@ internal static class CSharpClientGenerator
 
             if (tenantIdInfo != null)
                 EmitSetDefaultTenantIdMethod(sb, tenantIdInfo.Value);
+            if (tenantIdsInfo != null)
+                EmitSetDefaultTenantIdsMethod(sb, tenantIdsInfo.Value);
 
             sb.AppendLine("}");
             sb.AppendLine();
@@ -707,7 +800,13 @@ internal static class CSharpClientGenerator
     private static void GenerateClass(StringBuilder sb, string typeName, OpenApiSchema schema, OpenApiDocument? doc = null, bool isRequestSchema = false)
     {
         var tenantIdInfo = isRequestSchema ? GetOptionalTenantIdInfo(schema) : null;
-        var interfaces = tenantIdInfo != null ? " : global::Camunda.Orchestration.Sdk.ITenantIdSettable" : "";
+        var tenantIdsInfo = isRequestSchema ? GetOptionalTenantIdsInfo(schema, doc) : null;
+        var ifaceList = new List<string>();
+        if (tenantIdInfo != null)
+            ifaceList.Add("global::Camunda.Orchestration.Sdk.ITenantIdSettable");
+        if (tenantIdsInfo != null)
+            ifaceList.Add("global::Camunda.Orchestration.Sdk.ITenantIdsSettable");
+        var interfaces = ifaceList.Count == 0 ? "" : " : " + string.Join(", ", ifaceList);
 
         sb.AppendLine($"/// <summary>");
         AppendXmlDocLines(sb, schema.Description ?? typeName, "");
@@ -761,6 +860,8 @@ internal static class CSharpClientGenerator
 
         if (tenantIdInfo != null)
             EmitSetDefaultTenantIdMethod(sb, tenantIdInfo.Value);
+        if (tenantIdsInfo != null)
+            EmitSetDefaultTenantIdsMethod(sb, tenantIdsInfo.Value);
 
         sb.AppendLine("}");
         sb.AppendLine();
@@ -1100,6 +1201,15 @@ internal static class CSharpClientGenerator
             sb.AppendLine($"        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);");
         }
 
+        // Inject default tenant ID enrichment for operations with optional plural
+        // `tenantIds` array in body (e.g. activateJobs). The singular DefaultTenantId
+        // is wrapped into a single-element list when the caller omits TenantIds.
+        // See issue #123 / orchestration-cluster-api-js#170.
+        if (op.HasOptionalTenantIdsInBody && op.HasBody && !op.IsMultipart)
+        {
+            sb.AppendLine($"        if (body is ITenantIdsSettable __ts) __ts.SetDefaultTenantIds(_config.DefaultTenantId);");
+        }
+
         // Inject default tenant ID into multipart content when applicable
         if (op.HasOptionalTenantIdInBody && op.IsMultipart)
         {
@@ -1401,6 +1511,65 @@ internal static class CSharpClientGenerator
     }
 
     /// <summary>
+    /// Returns the C# element type of the optional <c>tenantIds</c> array
+    /// property if present (and not in the schema's required set), or null
+    /// otherwise. Used to determine the <see cref="Camunda.Orchestration.Sdk.ITenantIdsSettable"/>
+    /// implementation. See issue camunda/orchestration-cluster-api-csharp#123.
+    /// </summary>
+    private static (string ItemCSharpType, bool IsBrandedKey)? GetOptionalTenantIdsInfo(OpenApiSchema schema, OpenApiDocument? doc = null)
+    {
+        var properties = new Dictionary<string, OpenApiSchema>(
+            schema.Properties ?? new Dictionary<string, OpenApiSchema>());
+        var required = new HashSet<string>(
+            schema.Required ?? new HashSet<string>());
+        foreach (var allOf in schema.AllOf ?? [])
+        {
+            if (allOf.Properties != null)
+                foreach (var (k, v) in allOf.Properties)
+                    properties.TryAdd(k, v);
+            if (allOf.Required != null)
+                foreach (var r in allOf.Required)
+                    required.Add(r);
+        }
+
+        if (!properties.TryGetValue("tenantIds", out var tenantIdsProp))
+            return null;
+        if (required.Contains("tenantIds"))
+            return null;
+        if (tenantIdsProp.Type != "array" || tenantIdsProp.Items == null)
+            return null;
+
+        var itemType = MapType(tenantIdsProp.Items, doc);
+        // Only support a branded TenantId or plain string element type.
+        if (itemType != "string" && itemType != "TenantId")
+            return null;
+        return (itemType, itemType == "TenantId");
+    }
+
+    /// <summary>
+    /// Emits the SetDefaultTenantIds method implementation for ITenantIdsSettable.
+    /// Mirrors <see cref="EmitSetDefaultTenantIdMethod"/> but for the plural
+    /// array shape (e.g. JobActivationRequest.TenantIds).
+    /// </summary>
+    private static void EmitSetDefaultTenantIdsMethod(StringBuilder sb, (string ItemCSharpType, bool IsBrandedKey) info)
+    {
+        sb.AppendLine("    /// <inheritdoc />");
+        sb.AppendLine("    public void SetDefaultTenantIds(string tenantId)");
+        sb.AppendLine("    {");
+        sb.AppendLine("        if (TenantIds == null || TenantIds.Count == 0)");
+        if (info.IsBrandedKey)
+        {
+            sb.AppendLine($"            TenantIds = new List<{info.ItemCSharpType}> {{ global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId) }};");
+        }
+        else
+        {
+            sb.AppendLine($"            TenantIds = new List<{info.ItemCSharpType}> {{ tenantId }};");
+        }
+        sb.AppendLine("    }");
+        sb.AppendLine();
+    }
+
+    /// <summary>
     /// Emits the SetDefaultTenantId method implementation for ITenantIdSettable.
     /// </summary>
     private static void EmitSetDefaultTenantIdMethod(StringBuilder sb, (string CSharpType, bool IsBrandedKey) info)
@@ -1584,6 +1753,7 @@ internal sealed class OperationMeta
     public required List<string> Tags { get; init; }
     public required bool IsExemptFromBackpressure { get; init; }
     public required bool HasOptionalTenantIdInBody { get; init; }
+    public required bool HasOptionalTenantIdsInBody { get; init; }
 }
 
 internal readonly record struct ParamMeta(string Name, string Type, bool Required);
