@@ -283,15 +283,15 @@ internal static class CSharpClientGenerator
                     && doc.Components.Schemas.TryGetValue(v.Reference.Id, out var r)
                     ? r
                     : v;
-                if (!HasOptionalTenantIdsArrayDirect(resolved))
+                if (!HasOptionalTenantIdsArrayDirect(resolved, doc))
                     return false;
             }
             return true;
         }
-        return HasOptionalTenantIdsArrayDirect(schema);
+        return HasOptionalTenantIdsArrayDirect(schema, doc);
     }
 
-    private static bool HasOptionalTenantIdsArrayDirect(OpenApiSchema schema)
+    private static bool HasOptionalTenantIdsArrayDirect(OpenApiSchema schema, OpenApiDocument? doc = null)
     {
         var properties = new Dictionary<string, OpenApiSchema>(
             schema.Properties ?? new Dictionary<string, OpenApiSchema>());
@@ -299,11 +299,20 @@ internal static class CSharpClientGenerator
             schema.Required ?? new HashSet<string>());
         foreach (var allOf in schema.AllOf ?? [])
         {
-            if (allOf.Properties != null)
-                foreach (var (k, v) in allOf.Properties)
+            // Resolve `allOf: [{$ref: ...}]` against the document — Microsoft.OpenApi
+            // does not auto-resolve refs into the AllOf entry. Without this, a schema
+            // that composes `tenantIds` via a referenced component would be missed.
+            // Matches the pattern used elsewhere in this file (e.g. GetConstraints).
+            var resolved = allOf.Reference != null
+                && doc?.Components?.Schemas != null
+                && doc.Components.Schemas.TryGetValue(allOf.Reference.Id, out var refSchema)
+                ? refSchema
+                : allOf;
+            if (resolved.Properties != null)
+                foreach (var (k, v) in resolved.Properties)
                     properties.TryAdd(k, v);
-            if (allOf.Required != null)
-                foreach (var r in allOf.Required)
+            if (resolved.Required != null)
+                foreach (var r in resolved.Required)
                     required.Add(r);
         }
         if (!properties.TryGetValue("tenantIds", out var tenantIdsProp))
@@ -1524,11 +1533,18 @@ internal static class CSharpClientGenerator
             schema.Required ?? new HashSet<string>());
         foreach (var allOf in schema.AllOf ?? [])
         {
-            if (allOf.Properties != null)
-                foreach (var (k, v) in allOf.Properties)
+            // Resolve `allOf: [{$ref: ...}]` against the document — see
+            // HasOptionalTenantIdsArrayDirect for rationale.
+            var resolved = allOf.Reference != null
+                && doc?.Components?.Schemas != null
+                && doc.Components.Schemas.TryGetValue(allOf.Reference.Id, out var refSchema)
+                ? refSchema
+                : allOf;
+            if (resolved.Properties != null)
+                foreach (var (k, v) in resolved.Properties)
                     properties.TryAdd(k, v);
-            if (allOf.Required != null)
-                foreach (var r in allOf.Required)
+            if (resolved.Required != null)
+                foreach (var r in resolved.Required)
                     required.Add(r);
         }
 
