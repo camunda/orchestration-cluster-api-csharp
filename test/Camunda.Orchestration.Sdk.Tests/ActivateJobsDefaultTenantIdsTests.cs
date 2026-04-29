@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using Camunda.Orchestration.Sdk.Generator;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -163,7 +164,7 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
         var missing = new List<string>();
         foreach (var schemaName in matches)
         {
-            var typeName = $"Camunda.Orchestration.Sdk.{SanitizeTypeName(schemaName)}";
+            var typeName = $"Camunda.Orchestration.Sdk.{CSharpClientGenerator.SanitizeTypeName(schemaName)}";
             var t = sdkAssembly.GetType(typeName);
             Assert.NotNull(t);
             if (!iface!.IsAssignableFrom(t))
@@ -318,9 +319,6 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
             return false;
         return tenantIds["type"]?.GetValue<string>() == "array";
     }
-
-    private static string SanitizeTypeName(string name) =>
-        name.Replace("XML", "Xml").Replace("-", "").Replace(".", "").Replace("$", "").Replace(" ", "");
 
     public void Dispose()
     {
