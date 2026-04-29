@@ -181,6 +181,51 @@ If `bash scripts/build.sh` (or `bash scripts/build-local.sh`) modifies `src/Camu
 
 The pre-push checklist below still applies: always run the full build before pushing, and commit any regenerated drift before the push.
 
+## Backporting generator fixes to `stable/*` branches
+
+Generator fixes (changes to `src/Camunda.Orchestration.Sdk.Generator/`, `src/Camunda.Orchestration.Sdk/Runtime/`, the partial `src/Camunda.Orchestration.Sdk/CamundaClient.cs`, `scripts/build*.sh`, `scripts/bundle-spec.sh`, or the `camunda-schema-bundler` integration) are **safe and expected to backport** to `stable/N` branches via cherry-pick.
+
+> **Definition (important):** "Generator code" includes everything that produces `src/Camunda.Orchestration.Sdk/Generated/*` from the bundled spec **plus the hand-written runtime under `src/Camunda.Orchestration.Sdk/Runtime/` and partial-class infrastructure (`CamundaClient.cs`)**. Those files are inputs to the build, on the same footing as the generator project. A type fix in `src/Camunda.Orchestration.Sdk/Runtime/OAuthManager.cs` is a generator-class change for backport purposes.
+
+**What is NOT a generator fix** (do not auto-backport without discussion):
+
+- Changes under `src/Camunda.Orchestration.Sdk/Generated/` directly (regenerated; never hand-edit).
+- Changes that alter the public API surface, runtime behavior of generated clients, or anything that changes the published SDK semantics.
+
+### Why backporting generator fixes is safe
+
+The release workflow (`.github/workflows/release.yml`) regenerates `Generated/` on every run of `stable/*`, auto-commits any drift as `fix(gen): regenerate artifacts`, and then publishes a patch via semantic-release. So a generator-only or untouched-runtime change cherry-picked onto `stable/N`:
+
+1. Doesn't change `src/Camunda.Orchestration.Sdk/Generated/*` under the **currently pinned** generator dependencies (verify locally — see checklist below).
+2. Lets the next Dependabot bump of `Microsoft.OpenApi`, `YamlDotNet`, or other generator dependencies succeed where it would otherwise fail.
+3. Auto-publishes a clean N.x patch with no behavioral change to the SDK.
+
+### Backport workflow
+
+1. Land the fix on `main` first via a normal PR. Get it reviewed and merged.
+2. For each `stable/N` branch that needs the fix:
+   ```bash
+   git fetch origin stable/N
+   git checkout -b backport/stable-N/<short-name> origin/stable/N
+   git cherry-pick <commit-sha-from-main>
+   ```
+3. If the cherry-pick is clean (no conflicts), push and open a PR targeting `stable/N`. If conflicts arise, resolve them — but be conservative; if a conflict suggests the fix doesn't apply cleanly to that branch's generator pipeline, ask before forcing it.
+4. PR title convention: `<original-title> (backport #<main-pr> to stable/N)`.
+5. PR body: link the original PR, summarize the cherry-pick, and explicitly state the verification (see below).
+
+### Verification before opening the backport PR
+
+- Cherry-pick applied cleanly (or document any conflict resolution).
+- The change is generator-class (generator project, runtime, partial-class infrastructure, build scripts) — not generated output and not behavioral.
+- Where feasible, locally run `bash scripts/build-local.sh` under that branch's pinned dependencies and confirm `git diff --stat src/Camunda.Orchestration.Sdk/Generated/` is empty (byte-identical output).
+- `dotnet build`, `dotnet format --verify-no-changes`, and `dotnet test` still pass.
+
+### Anti-patterns
+
+- **Don't** cherry-pick changes that touch `src/Camunda.Orchestration.Sdk/Generated/` directly — those will be overwritten on the next regen.
+- **Don't** cherry-pick generator fixes alongside unrelated runtime/behavioral changes in the same commit. Split them on `main` first so the backport is surgical.
+- **Don't** backport without first landing on `main`, unless the `main` branch itself cannot reproduce the issue (rare; flag explicitly in the PR).
+
 ## Pre-push checklist
 
 Before pushing any commits, **always** run a full build. This:
