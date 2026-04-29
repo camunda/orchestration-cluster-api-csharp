@@ -228,16 +228,13 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
                     }
                     else if (!string.IsNullOrEmpty(operationId))
                     {
-                        result.Add(PascalCaseFirst(operationId) + "Request");
+                        result.Add(CSharpClientGenerator.SanitizeOperationId(operationId) + "Request");
                     }
                 }
             }
         }
         return result.ToList();
     }
-
-    private static string PascalCaseFirst(string s) =>
-        string.IsNullOrEmpty(s) ? s : char.ToUpperInvariant(s[0]) + s[1..];
 
     private static (JsonObject? resolved, string? refName) Resolve(JsonNode? schema, JsonObject schemas)
     {

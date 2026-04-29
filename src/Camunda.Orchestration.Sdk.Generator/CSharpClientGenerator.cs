@@ -1527,6 +1527,35 @@ internal static class CSharpClientGenerator
     /// </summary>
     private static (string ItemCSharpType, bool IsBrandedKey)? GetOptionalTenantIdsInfo(OpenApiSchema schema, OpenApiDocument? doc = null)
     {
+        // Mirror HasOptionalTenantIdsArrayInAnyVariant: when the schema is a
+        // oneOf/anyOf, every variant must agree on the same optional tenantIds
+        // item type. Otherwise the operation-level injection (which IS
+        // variant-aware) would emit a SetDefaultTenantIds call against a
+        // wrapper class whose variants didn't implement ITenantIdsSettable
+        // consistently, making the injection a no-op or inconsistent.
+        var variants = schema.OneOf?.Count > 0 ? schema.OneOf : (schema.AnyOf?.Count > 0 ? schema.AnyOf : null);
+        if (variants is { Count: > 0 })
+        {
+            (string ItemCSharpType, bool IsBrandedKey)? agreed = null;
+            foreach (var v in variants)
+            {
+                var resolvedVariant = v.Reference != null
+                    && doc?.Components?.Schemas != null
+                    && doc.Components.Schemas.TryGetValue(v.Reference.Id, out var r)
+                    ? r
+                    : v;
+                var info = GetOptionalTenantIdsInfo(resolvedVariant, doc);
+                if (info == null)
+                    return null;
+                if (agreed == null)
+                    agreed = info;
+                else if (agreed.Value.ItemCSharpType != info.Value.ItemCSharpType
+                    || agreed.Value.IsBrandedKey != info.Value.IsBrandedKey)
+                    return null;
+            }
+            return agreed;
+        }
+
         var properties = new Dictionary<string, OpenApiSchema>(
             schema.Properties ?? new Dictionary<string, OpenApiSchema>());
         var required = new HashSet<string>(
