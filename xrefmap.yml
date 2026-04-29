@@ -2851,6 +2851,84 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AdvancedOperationTypeFilter.Neq
   fullName: Camunda.Orchestration.Sdk.AdvancedOperationTypeFilter.Neq
   nameWithType: AdvancedOperationTypeFilter.Neq
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter
+  name: AdvancedProcessDefinitionIdFilter
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter
+  nameWithType: AdvancedProcessDefinitionIdFilter
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Eq.html#Camunda_Orchestration_Sdk_AdvancedProcessDefinitionIdFilter_Eq
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Eq
+  nameWithType: AdvancedProcessDefinitionIdFilter.Eq
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Eq
+  nameWithType: AdvancedProcessDefinitionIdFilter.Eq
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Exists.html#Camunda_Orchestration_Sdk_AdvancedProcessDefinitionIdFilter_Exists
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Exists
+  nameWithType: AdvancedProcessDefinitionIdFilter.Exists
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Exists
+  nameWithType: AdvancedProcessDefinitionIdFilter.Exists
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.In
+  name: In
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.In.html#Camunda_Orchestration_Sdk_AdvancedProcessDefinitionIdFilter_In
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.In
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.In
+  nameWithType: AdvancedProcessDefinitionIdFilter.In
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.In*
+  name: In
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.In.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.In
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.In
+  nameWithType: AdvancedProcessDefinitionIdFilter.In
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Like
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Like.html#Camunda_Orchestration_Sdk_AdvancedProcessDefinitionIdFilter_Like
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Like
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Like
+  nameWithType: AdvancedProcessDefinitionIdFilter.Like
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Like*
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Like.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Like
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Like
+  nameWithType: AdvancedProcessDefinitionIdFilter.Like
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Neq.html#Camunda_Orchestration_Sdk_AdvancedProcessDefinitionIdFilter_Neq
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Neq
+  nameWithType: AdvancedProcessDefinitionIdFilter.Neq
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.Neq
+  nameWithType: AdvancedProcessDefinitionIdFilter.Neq
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.NotIn
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.NotIn.html#Camunda_Orchestration_Sdk_AdvancedProcessDefinitionIdFilter_NotIn
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.NotIn
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.NotIn
+  nameWithType: AdvancedProcessDefinitionIdFilter.NotIn
+- uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.NotIn*
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.NotIn.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.NotIn
+  fullName: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.NotIn
+  nameWithType: AdvancedProcessDefinitionIdFilter.NotIn
 - uid: Camunda.Orchestration.Sdk.AdvancedProcessDefinitionKeyFilter
   name: AdvancedProcessDefinitionKeyFilter
   href: api/Camunda.Orchestration.Sdk.AdvancedProcessDefinitionKeyFilter.html
@@ -25834,6 +25912,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ElementInstanceKey
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ElementInstanceKey
   nameWithType: MessageSubscriptionFilter.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.InboundConnectorType
+  name: InboundConnectorType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.InboundConnectorType.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_InboundConnectorType
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.InboundConnectorType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.InboundConnectorType
+  nameWithType: MessageSubscriptionFilter.InboundConnectorType
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.InboundConnectorType*
+  name: InboundConnectorType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.InboundConnectorType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.InboundConnectorType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.InboundConnectorType
+  nameWithType: MessageSubscriptionFilter.InboundConnectorType
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.LastUpdatedDate
   name: LastUpdatedDate
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.LastUpdatedDate.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_LastUpdatedDate
@@ -25966,6 +26056,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.TenantId
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.TenantId
   nameWithType: MessageSubscriptionFilter.TenantId
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ToolName
+  name: ToolName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ToolName.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_ToolName
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ToolName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ToolName
+  nameWithType: MessageSubscriptionFilter.ToolName
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ToolName*
+  name: ToolName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ToolName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ToolName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.ToolName
+  nameWithType: MessageSubscriptionFilter.ToolName
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionKey
   name: MessageSubscriptionKey
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionKey.html
@@ -26206,6 +26308,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
   nameWithType: MessageSubscriptionResult.ExtensionProperties
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType
+  name: InboundConnectorType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_InboundConnectorType
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType
+  nameWithType: MessageSubscriptionResult.InboundConnectorType
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType*
+  name: InboundConnectorType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType
+  nameWithType: MessageSubscriptionResult.InboundConnectorType
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.LastUpdatedDate
   name: LastUpdatedDate
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.LastUpdatedDate.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_LastUpdatedDate
@@ -26350,6 +26464,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.TenantId
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.TenantId
   nameWithType: MessageSubscriptionResult.TenantId
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName
+  name: ToolName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ToolName
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName
+  nameWithType: MessageSubscriptionResult.ToolName
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName*
+  name: ToolName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName
+  nameWithType: MessageSubscriptionResult.ToolName
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuery
   name: MessageSubscriptionSearchQuery
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuery.html
@@ -27745,6 +27871,144 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionId.Value
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionId.Value
   nameWithType: ProcessDefinitionId.Value
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch
+  name: ProcessDefinitionIdExactMatch
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch
+  nameWithType: ProcessDefinitionIdExactMatch
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.AssumeExists(System.String)
+  name: AssumeExists(string)
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.AssumeExists.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdExactMatch_AssumeExists_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.AssumeExists(System.String)
+  name.vb: AssumeExists(String)
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.AssumeExists(string)
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.AssumeExists(String)
+  nameWithType: ProcessDefinitionIdExactMatch.AssumeExists(string)
+  nameWithType.vb: ProcessDefinitionIdExactMatch.AssumeExists(String)
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.AssumeExists
+  nameWithType: ProcessDefinitionIdExactMatch.AssumeExists
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.IsValid(System.String)
+  name: IsValid(string)
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.IsValid.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdExactMatch_IsValid_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.IsValid(System.String)
+  name.vb: IsValid(String)
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.IsValid(string)
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.IsValid(String)
+  nameWithType: ProcessDefinitionIdExactMatch.IsValid(string)
+  nameWithType.vb: ProcessDefinitionIdExactMatch.IsValid(String)
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.IsValid*
+  name: IsValid
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.IsValid.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.IsValid
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.IsValid
+  nameWithType: ProcessDefinitionIdExactMatch.IsValid
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.ToString.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdExactMatch_ToString
+  commentId: M:Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.ToString()
+  nameWithType: ProcessDefinitionIdExactMatch.ToString()
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.ToString
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.ToString
+  nameWithType: ProcessDefinitionIdExactMatch.ToString
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.Value.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdExactMatch_Value
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.Value
+  nameWithType: ProcessDefinitionIdExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.Value
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.Value
+  nameWithType: ProcessDefinitionIdExactMatch.Value
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty
+  name: ProcessDefinitionIdFilterProperty
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty
+  nameWithType: ProcessDefinitionIdFilterProperty
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty_Eq
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq
+  nameWithType: ProcessDefinitionIdFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq
+  nameWithType: ProcessDefinitionIdFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty_Exists
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists
+  nameWithType: ProcessDefinitionIdFilterProperty.Exists
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists
+  nameWithType: ProcessDefinitionIdFilterProperty.Exists
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.In
+  name: In
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.In.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty_In
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.In
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.In
+  nameWithType: ProcessDefinitionIdFilterProperty.In
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.In*
+  name: In
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.In.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.In
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.In
+  nameWithType: ProcessDefinitionIdFilterProperty.In
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Like
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Like.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty_Like
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Like
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Like
+  nameWithType: ProcessDefinitionIdFilterProperty.Like
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Like*
+  name: Like
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Like.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Like
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Like
+  nameWithType: ProcessDefinitionIdFilterProperty.Like
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Neq.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty_Neq
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Neq
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Neq
+  nameWithType: ProcessDefinitionIdFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Neq
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Neq
+  nameWithType: ProcessDefinitionIdFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty_NotIn
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn
+  nameWithType: ProcessDefinitionIdFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn*
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn
+  nameWithType: ProcessDefinitionIdFilterProperty.NotIn
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuery
   name: ProcessDefinitionInstanceStatisticsQuery
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuery.html

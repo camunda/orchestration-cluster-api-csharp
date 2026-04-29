@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_BatchOperationItemResponse_ProcessInstanceKey_" data-uid="Camunda.Orchestration.Sdk.BatchOperationItemResponse.ProcessInstanceKey*" class="text-break">
-Property ProcessInstanceKey  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3525"><i class="bi bi-code-slash"></i></a>
+Property ProcessInstanceKey  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3579"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,16 +121,18 @@ Property ProcessInstanceKey  <a class="header-action link-secondary" title="View
 
 <h3 id="Camunda_Orchestration_Sdk_BatchOperationItemResponse_ProcessInstanceKey" data-uid="Camunda.Orchestration.Sdk.BatchOperationItemResponse.ProcessInstanceKey">
   ProcessInstanceKey
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3525"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3579"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"><p>the process instance key of the processed item.</p>
+<div class="markdown level1 summary"><p>The process instance key of the processed item. Null for batch-op types whose targets
+are not process instances (e.g. DELETE_DECISION_INSTANCE, DELETE_DECISION_DEFINITION,
+DELETE_PROCESS_DEFINITION).</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
   <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;processInstanceKey&quot;)]
-public ProcessInstanceKey ProcessInstanceKey { get; set; }</code></pre>
+public ProcessInstanceKey? ProcessInstanceKey { get; set; }</code></pre>
 </div>
 
 
@@ -139,7 +141,7 @@ public ProcessInstanceKey ProcessInstanceKey { get; set; }</code></pre>
 
 <h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceKey.html">ProcessInstanceKey</a></dt>
+  <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceKey.html">ProcessInstanceKey</a>?</dt>
   <dd></dd>
 </dl>
 
@@ -153,7 +155,7 @@ public ProcessInstanceKey ProcessInstanceKey { get; set; }</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3525" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3579" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -281,6 +281,11 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedProcessDefinitionIdFilter.html">AdvancedProcessDefinitionIdFilter</a></dt>
+      <dd><p>Advanced ProcessDefinitionId filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedProcessDefinitionKeyFilter.html">AdvancedProcessDefinitionKeyFilter</a></dt>
       <dd><p>Advanced ProcessDefinitionKey filter.</p>
 </dd>
@@ -1759,6 +1764,11 @@ correlated with.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.html">ProcessDefinitionIdFilterProperty</a></dt>
+      <dd><p>ProcessDefinitionId property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuery.html">ProcessDefinitionInstanceStatisticsQuery</a></dt>
       <dd><p>ProcessDefinitionInstanceStatisticsQuery</p>
 </dd>
@@ -2801,7 +2811,9 @@ Note that any active child process instances with the same business id are not t
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKey.html">DecisionEvaluationInstanceKey</a></dt>
-      <dd><p>System-generated key for a decision evaluation instance.</p>
+      <dd><p>System-generated identifier for a decision evaluation instance. It is composed of the
+parent decision evaluation key and the 1-based index of the evaluated decision within
+that evaluation, joined by a hyphen (format: <code>&lt;decisionEvaluationKey&gt;-&lt;index&gt;</code>).</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3014,6 +3026,11 @@ Must be &gt; 0 if provided.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionId.html">ProcessDefinitionId</a></dt>
       <dd><p>Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionIdExactMatch.html">ProcessDefinitionIdExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
 </dd>
     </dl>
     <dl class="jumplist">
