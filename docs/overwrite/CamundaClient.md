@@ -973,6 +973,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SearchResourcesAsync(Camunda.Orchestration.Sdk.ResourceSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ResourceSearchQueryResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Admin.cs#SearchResources)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync(System.String,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.RoleResult},System.Threading.CancellationToken)
 example:
 - *content

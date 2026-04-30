@@ -364,6 +364,22 @@ public static class AdminExamples
     // </GetResourceContent>
     #endregion GetResourceContent
 
+    #region SearchResources
+
+    // <SearchResources>
+    public static async Task SearchResourcesExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchResourcesAsync(new ResourceSearchQuery());
+        foreach (var resource in result.Items!)
+        {
+            Console.WriteLine($"Resource: {resource.ResourceName}");
+        }
+    }
+    // </SearchResources>
+    #endregion SearchResources
+
     #region GetUsageMetrics
 
     // <GetUsageMetrics>

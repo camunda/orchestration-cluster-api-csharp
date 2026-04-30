@@ -179,6 +179,13 @@
       "label": "Get resource content"
     }
   ],
+  "searchResources": [
+    {
+      "file": "Admin.cs",
+      "region": "SearchResources",
+      "label": "Search resources"
+    }
+  ],
   "evaluateDecision": [
     {
       "file": "Decision.cs",
