@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync*" class="text-break">
-Method GetResourceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4090"><i class="bi bi-code-slash"></i></a>
+Method GetResourceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4092"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,13 +121,15 @@ Method GetResourceAsync  <a class="header-action link-secondary" title="View sou
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ResourceResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ResourceResult},System.Threading.CancellationToken)">
   GetResourceAsync(ResourceKey, ConsistencyOptions&lt;ResourceResult&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4090"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4092"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Get resource
 Returns a deployed resource.
 :::info
-Currently, this endpoint only supports RPA resources.
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective APIs.
 :::</p>
 </div>
 <div class="markdown level1 conceptual"></div>
@@ -186,7 +188,7 @@ Console.WriteLine($&quot;Resource: {result.ResourceName}&quot;);
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4090" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4092" class="edit-link">Edit this page</a>
         </div>
 
 

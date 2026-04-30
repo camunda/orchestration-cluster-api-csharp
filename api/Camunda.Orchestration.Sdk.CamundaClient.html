@@ -850,7 +850,9 @@ grouped by incident error hash code.</p>
     <dd><p>Get resource
 Returns a deployed resource.
 :::info
-Currently, this endpoint only supports RPA resources.
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective APIs.
 :::</p>
 </dd>
   </dl>
@@ -1241,6 +1243,17 @@ subprocesses or called processes under the root instance while excluding inciden
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchProcessInstancesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchProcessInstancesAsync_Camunda_Orchestration_Sdk_ProcessInstanceSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ProcessInstanceSearchQueryResult__System_Threading_CancellationToken_">SearchProcessInstancesAsync(ProcessInstanceSearchQuery, ConsistencyOptions&lt;ProcessInstanceSearchQueryResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Search process instances
 Search for process instances based on given criteria.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchResourcesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchResourcesAsync_Camunda_Orchestration_Sdk_ResourceSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ResourceSearchQueryResult__System_Threading_CancellationToken_">SearchResourcesAsync(ResourceSearchQuery, ConsistencyOptions&lt;ResourceSearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search resources
+Search for deployed resources based on given criteria.
+:::info
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective search APIs.
+:::</p>
 </dd>
   </dl>
   <dl class="jumplist">
