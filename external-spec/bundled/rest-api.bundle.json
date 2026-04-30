@@ -10598,6 +10598,87 @@
         "x-added-in-version": "8.8"
       }
     },
+    "/resources/search": {
+      "post": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Resource"
+        ],
+        "operationId": "searchResources",
+        "summary": "Search resources",
+        "description": "Search for deployed resources based on given criteria.\n:::info\nThis endpoint does not return BPMN process definitions, DMN decision definitions, or form\nresources. To query BPMN process definitions or DMN decision definitions, use their\nrespective search APIs.\n:::\n",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceSearchQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The resource search result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceSearchQueryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/resources/{resourceKey}": {
       "get": {
         "x-eventually-consistent": true,
@@ -10606,7 +10687,7 @@
         ],
         "operationId": "getResource",
         "summary": "Get resource",
-        "description": "Returns a deployed resource.\n:::info\nCurrently, this endpoint only supports RPA resources.\n:::\n",
+        "description": "Returns a deployed resource.\n:::info\nThis endpoint does not return BPMN process definitions, DMN decision definitions, or form\nresources. To query BPMN process definitions or DMN decision definitions, use their\nrespective APIs.\n:::\n",
         "parameters": [
           {
             "name": "resourceKey",
@@ -20792,6 +20873,138 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ResourceKey"
+            }
+          }
+        }
+      },
+      "ResourceSearchQuerySortRequest": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "description": "The field to sort by.",
+            "type": "string",
+            "enum": [
+              "resourceKey",
+              "resourceName",
+              "resourceId",
+              "version",
+              "versionTag",
+              "deploymentKey",
+              "tenantId"
+            ]
+          },
+          "order": {
+            "$ref": "#/components/schemas/SortOrderEnum"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "ResourceSearchQuery": {
+        "type": "object",
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryRequest"
+          }
+        ],
+        "properties": {
+          "sort": {
+            "description": "Sort field criteria.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceSearchQuerySortRequest"
+            }
+          },
+          "filter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceFilter"
+              }
+            ],
+            "description": "The resource search filters."
+          }
+        }
+      },
+      "ResourceFilter": {
+        "description": "Resource search filter.",
+        "type": "object",
+        "properties": {
+          "resourceKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceKeyFilterProperty"
+              }
+            ],
+            "description": "The key for this resource."
+          },
+          "resourceName": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "Resource name of this resource."
+          },
+          "resourceId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "Resource ID of this resource."
+          },
+          "version": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntegerFilterProperty"
+              }
+            ],
+            "description": "Version of this resource."
+          },
+          "versionTag": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "Version tag of this resource."
+          },
+          "deploymentKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeploymentKeyFilterProperty"
+              }
+            ],
+            "description": "Deployment key of this resource."
+          },
+          "tenantId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ],
+            "description": "Tenant ID of this resource."
+          }
+        }
+      },
+      "ResourceSearchQueryResult": {
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryResponse"
+          }
+        ],
+        "properties": {
+          "items": {
+            "description": "The matching resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceResult"
             }
           }
         }

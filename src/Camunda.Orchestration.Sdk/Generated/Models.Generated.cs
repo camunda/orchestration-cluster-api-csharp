@@ -15271,6 +15271,55 @@ public sealed class ProcessInstanceStateFilterProperty
 }
 
 /// <summary>
+/// Resource search filter.
+/// </summary>
+public sealed class ResourceFilter
+{
+    /// <summary>
+    /// The key for this resource.
+    /// </summary>
+    [JsonPropertyName("resourceKey")]
+    public ResourceKeyFilterProperty? ResourceKey { get; set; }
+
+    /// <summary>
+    /// Resource name of this resource.
+    /// </summary>
+    [JsonPropertyName("resourceName")]
+    public StringFilterProperty? ResourceName { get; set; }
+
+    /// <summary>
+    /// Resource ID of this resource.
+    /// </summary>
+    [JsonPropertyName("resourceId")]
+    public StringFilterProperty? ResourceId { get; set; }
+
+    /// <summary>
+    /// Version of this resource.
+    /// </summary>
+    [JsonPropertyName("version")]
+    public IntegerFilterProperty? Version { get; set; }
+
+    /// <summary>
+    /// Version tag of this resource.
+    /// </summary>
+    [JsonPropertyName("versionTag")]
+    public StringFilterProperty? VersionTag { get; set; }
+
+    /// <summary>
+    /// Deployment key of this resource.
+    /// </summary>
+    [JsonPropertyName("deploymentKey")]
+    public DeploymentKeyFilterProperty? DeploymentKey { get; set; }
+
+    /// <summary>
+    /// Tenant ID of this resource.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+}
+
+/// <summary>
 /// The system-assigned key for this resource.
 /// </summary>
 public readonly record struct ResourceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
@@ -15435,6 +15484,69 @@ public sealed class ResourceResult
     /// </summary>
     [JsonPropertyName("resourceKey")]
     public ResourceKey ResourceKey { get; set; }
+
+}
+
+/// <summary>
+/// ResourceSearchQuery
+/// </summary>
+public sealed class ResourceSearchQuery
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<ResourceSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The resource search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ResourceFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// ResourceSearchQueryResult
+/// </summary>
+public sealed class ResourceSearchQueryResult
+{
+    /// <summary>
+    /// The matching resources.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<ResourceResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// ResourceSearchQuerySortRequest
+/// </summary>
+public sealed class ResourceSearchQuerySortRequest
+{
+    /// <summary>
+    /// The field to sort by.
+    /// </summary>
+    [JsonPropertyName("field")]
+    public string Field { get; set; } = null!;
+
+    /// <summary>
+    /// The order in which to sort the related field.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public SortOrderEnum? Order { get; set; }
 
 }
 

@@ -4058,7 +4058,9 @@ public partial class CamundaClient
     /// Get resource
     /// Returns a deployed resource.
     /// :::info
-    /// Currently, this endpoint only supports RPA resources.
+    /// This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+    /// resources. To query BPMN process definitions or DMN decision definitions, use their
+    /// respective APIs.
     /// :::
     /// 
     /// </summary>
@@ -6646,6 +6648,60 @@ public partial class CamundaClient
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessInstances", false, ct);
+    }
+
+    /// <summary>
+    /// Search resources
+    /// Search for deployed resources based on given criteria.
+    /// :::info
+    /// This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+    /// resources. To query BPMN process definitions or DMN decision definitions, use their
+    /// respective search APIs.
+    /// :::
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: searchResources
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchResourcesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchResourcesAsync(new ResourceSearchQuery());
+    ///     foreach (var resource in result.Items!)
+    ///     {
+    ///         Console.WriteLine($&quot;Resource: {resource.ResourceName}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchResourcesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchResourcesAsync(new ResourceSearchQuery());
+    ///     foreach (var resource in result.Items!)
+    ///     {
+    ///         Console.WriteLine($&quot;Resource: {resource.ResourceName}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ResourceSearchQueryResult> SearchResourcesAsync(ResourceSearchQuery body, ConsistencyOptions<ResourceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/resources/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchResources", false,
+                () => InvokeWithRetryAsync(() => SendAsync<ResourceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchResources", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<ResourceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchResources", false, ct);
     }
 
     /// <summary>
