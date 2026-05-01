@@ -96,12 +96,12 @@ internal static class CSharpClientGenerator
                 var parameters = op.Parameters ?? (IList<IOpenApiParameter>)Array.Empty<IOpenApiParameter>();
                 var pathParams = parameters
                     .Where(p => p.In == ParameterLocation.Path)
-                    .Select(p => new ParamMeta(p.Name ?? string.Empty, MapType(p.Schema), true))
+                    .Select(p => new ParamMeta(RequireParameterName(p, op.OperationId), MapType(p.Schema), true))
                     .ToList();
                 var queryParams = parameters
                     .Where(p => p.In == ParameterLocation.Query)
                     .OrderByDescending(p => p.Required)
-                    .Select(p => new ParamMeta(p.Name ?? string.Empty, MapType(p.Schema), p.Required))
+                    .Select(p => new ParamMeta(RequireParameterName(p, op.OperationId), MapType(p.Schema), p.Required))
                     .ToList();
 
                 var hasBody = op.RequestBody?.Content?.Any(c =>
@@ -1240,15 +1240,22 @@ internal static class CSharpClientGenerator
             sb.AppendLine($"        }}");
         }
 
-        var httpMethod = op.Verb.Method switch
+        // Normalize once: HttpMethod.Method is canonicalized to uppercase for the well-known
+        // verbs by HttpClient, but defensively upper-case here in case the OpenAPI reader
+        // surfaces a lowercase verb (e.g. via a custom HttpMethod ctor). Unknown verbs throw
+        // rather than silently degrading to GET, which would mask spec bugs.
+        var verbUpper = op.Verb.Method.ToUpperInvariant();
+        var httpMethod = verbUpper switch
         {
             "GET" => "HttpMethod.Get",
             "POST" => "HttpMethod.Post",
             "PUT" => "HttpMethod.Put",
             "DELETE" => "HttpMethod.Delete",
             "PATCH" => "HttpMethod.Patch",
-            _ => "HttpMethod.Get",
+            _ => throw new InvalidOperationException(
+                $"Unsupported HTTP verb '{op.Verb.Method}' on operation '{op.OriginalOperationId}'."),
         };
+        var isGetLiteral = verbUpper == "GET" ? "true" : "false";
 
         // Generate the call
         var bodyArg = op.IsMultipart ? "null" : (op.HasBody ? "body" : "null");
@@ -1261,13 +1268,13 @@ internal static class CSharpClientGenerator
             {
                 if (op.IsMultipart)
                 {
-                    sb.AppendLine($"            await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == HttpMethod.Get ? "true" : "false")},");
+                    sb.AppendLine($"            await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {isGetLiteral},");
                     sb.AppendLine($"                async () => {{ await InvokeWithRetryAsync(() => SendMultipartAsync<object>(path, content, ct), \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct); return new object(); }},");
                     sb.AppendLine($"                consistency!, _logger, ct);");
                 }
                 else
                 {
-                    sb.AppendLine($"            await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == HttpMethod.Get ? "true" : "false")},");
+                    sb.AppendLine($"            await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {isGetLiteral},");
                     sb.AppendLine($"                async () => {{ await SendVoidAsync({httpMethod}, path, {bodyArg}, ct); return new object(); }},");
                     sb.AppendLine($"                consistency!, _logger, ct);");
                 }
@@ -1277,13 +1284,13 @@ internal static class CSharpClientGenerator
             {
                 if (op.IsMultipart)
                 {
-                    sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == HttpMethod.Get ? "true" : "false")},");
+                    sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {isGetLiteral},");
                     sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendMultipartAsync<{op.ResponseTypeName}>(path, content, ct), \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
                     sb.AppendLine($"                consistency!, _logger, ct);");
                 }
                 else
                 {
-                    sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == HttpMethod.Get ? "true" : "false")},");
+                    sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {isGetLiteral},");
                     sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendAsync<{op.ResponseTypeName}>({httpMethod}, path, {bodyArg}, ct), \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
                     sb.AppendLine($"                consistency!, _logger, ct);");
                 }
@@ -1799,6 +1806,23 @@ internal static class CSharpClientGenerator
     /// </summary>
     private static string? GetRefId(IOpenApiSchema? schema) =>
         (schema as OpenApiSchemaReference)?.Reference?.Id;
+
+    /// <summary>
+    /// OpenAPI requires every parameter to have a non-empty <c>name</c>. The v3
+    /// model surfaces <see cref="IOpenApiParameter.Name"/> as nullable, so guard
+    /// here rather than substituting <see cref="string.Empty"/> (which would
+    /// silently emit invalid C# identifiers and broken path/query assembly).
+    /// </summary>
+    private static string RequireParameterName(IOpenApiParameter parameter, string? operationId)
+    {
+        if (string.IsNullOrEmpty(parameter.Name))
+        {
+            throw new InvalidOperationException(
+                $"Parameter is missing a name on operation '{operationId ?? "<unknown>"}'. " +
+                "OpenAPI requires every parameter to declare a non-empty 'name' — fix the spec.");
+        }
+        return parameter.Name;
+    }
 
     /// <summary>
     /// Maps the v3 <see cref="JsonSchemaType"/> flag enum back to the legacy
