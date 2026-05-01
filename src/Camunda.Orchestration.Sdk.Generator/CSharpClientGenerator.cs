@@ -1,8 +1,8 @@
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using Microsoft.OpenApi.Models;
-using Microsoft.OpenApi.Readers;
+using Microsoft.OpenApi;
+using Microsoft.OpenApi.Reader;
 
 namespace Camunda.Orchestration.Sdk.Generator;
 
@@ -20,13 +20,14 @@ internal static class CSharpClientGenerator
         Console.WriteLine($"[generator] Reading spec from {specPath}");
         Console.WriteLine($"[generator] Reading metadata from {metadataPath}");
 
-        using var stream = File.OpenRead(specPath);
-        var reader = new OpenApiStreamReader();
-        var doc = reader.Read(stream, out var diagnostic);
+        using var fileStream = File.OpenRead(specPath);
+        var readResult = OpenApiModelFactory.LoadAsync(fileStream, OpenApiConstants.Json, new OpenApiReaderSettings()).GetAwaiter().GetResult();
+        var doc = readResult.Document
+            ?? throw new InvalidOperationException($"[generator] Failed to load OpenAPI document from {specPath}");
 
-        if (diagnostic.Errors.Count > 0)
+        if (readResult.Diagnostic?.Errors is { Count: > 0 } errors)
         {
-            foreach (var error in diagnostic.Errors)
+            foreach (var error in errors)
                 Console.Error.WriteLine($"[generator] OpenAPI error: {error.Message}");
         }
 
@@ -42,7 +43,7 @@ internal static class CSharpClientGenerator
             Console.WriteLine($"[generator] Loaded {operationExamples.Count} operation examples");
 
         // Collect operations first — this also discovers inline schemas
-        var inlineSchemas = new Dictionary<string, OpenApiSchema>();
+        var inlineSchemas = new Dictionary<string, IOpenApiSchema>();
         var operations = CollectOperations(doc, metadata, inlineSchemas);
 
         // Build set of schema names used as request bodies (ITenantIdSettable only applies to these)
@@ -77,27 +78,30 @@ internal static class CSharpClientGenerator
         Console.WriteLine($"[generator] Generated SpecHash.Generated.cs (specHash: {metadata.SpecHash})");
     }
 
-    private static List<OperationMeta> CollectOperations(OpenApiDocument doc, SpecMetadata metadata, Dictionary<string, OpenApiSchema> inlineSchemas)
+    private static List<OperationMeta> CollectOperations(OpenApiDocument doc, SpecMetadata metadata, Dictionary<string, IOpenApiSchema> inlineSchemas)
     {
         var ops = new List<OperationMeta>();
         var (oneOfParents, _, _) = BuildOneOfMaps(doc);
 
         foreach (var (path, pathItem) in doc.Paths)
         {
-            foreach (var (verb, op) in pathItem.Operations)
+            if (pathItem.Operations is not { } pathOps)
+                continue;
+            foreach (var (verb, op) in pathOps)
             {
                 if (string.IsNullOrEmpty(op.OperationId))
                     continue;
 
                 var opId = SanitizeOperationId(op.OperationId);
-                var pathParams = op.Parameters
+                var parameters = op.Parameters ?? (IList<IOpenApiParameter>)Array.Empty<IOpenApiParameter>();
+                var pathParams = parameters
                     .Where(p => p.In == ParameterLocation.Path)
-                    .Select(p => new ParamMeta(p.Name, MapType(p.Schema), true))
+                    .Select(p => new ParamMeta(p.Name ?? string.Empty, MapType(p.Schema), true))
                     .ToList();
-                var queryParams = op.Parameters
+                var queryParams = parameters
                     .Where(p => p.In == ParameterLocation.Query)
                     .OrderByDescending(p => p.Required)
-                    .Select(p => new ParamMeta(p.Name, MapType(p.Schema), p.Required))
+                    .Select(p => new ParamMeta(p.Name ?? string.Empty, MapType(p.Schema), p.Required))
                     .ToList();
 
                 var hasBody = op.RequestBody?.Content?.Any(c =>
@@ -180,7 +184,7 @@ internal static class CSharpClientGenerator
                     HasOptionalTenantIdsInBody = hasOptionalTenantIdsInBody,
                     Summary = op.Summary,
                     Description = op.Description,
-                    Tags = op.Tags?.Select(t => t.Name).ToList() ?? [],
+                    Tags = op.Tags?.Select(t => t.Name ?? string.Empty).ToList() ?? [],
                     IsExemptFromBackpressure = IsExempt(opId),
                 });
             }
@@ -198,8 +202,8 @@ internal static class CSharpClientGenerator
 
         foreach (var (_, mediaType) in content)
         {
-            if (mediaType.Schema?.Reference != null)
-                return SanitizeTypeName(mediaType.Schema.Reference.Id);
+            if (GetRefId(mediaType.Schema) != null)
+                return SanitizeTypeName(GetRefId(mediaType.Schema)!);
             // For multipart, we generate a special type
         }
         return null;
@@ -207,6 +211,8 @@ internal static class CSharpClientGenerator
 
     private static string? GetResponseSchemaRef(OpenApiOperation op)
     {
+        if (op.Responses == null)
+            return null;
         foreach (var (code, response) in op.Responses)
         {
             if (!code.StartsWith('2'))
@@ -216,16 +222,16 @@ internal static class CSharpClientGenerator
 
             foreach (var (_, mediaType) in response.Content)
             {
-                if (mediaType.Schema?.Reference != null)
-                    return SanitizeTypeName(mediaType.Schema.Reference.Id);
-                if (mediaType.Schema?.Type == "object" || mediaType.Schema?.Properties?.Count > 0)
-                    return SanitizeOperationId(op.OperationId) + "Response";
+                if (GetRefId(mediaType.Schema) != null)
+                    return SanitizeTypeName(GetRefId(mediaType.Schema)!);
+                if (SchemaTypeName(mediaType.Schema) == "object" || mediaType.Schema?.Properties?.Count > 0)
+                    return SanitizeOperationId(op.OperationId!) + "Response";
             }
         }
         return null;
     }
 
-    private static OpenApiSchema? GetInlineBodySchema(OpenApiOperation op)
+    private static IOpenApiSchema? GetInlineBodySchema(OpenApiOperation op)
     {
         var content = op.RequestBody?.Content;
         if (content == null)
@@ -234,7 +240,7 @@ internal static class CSharpClientGenerator
         {
             if (!ct.Contains("json", StringComparison.OrdinalIgnoreCase))
                 continue;
-            if (mediaType.Schema?.Reference == null)
+            if (GetRefId(mediaType.Schema) == null)
                 return mediaType.Schema;
         }
         return null;
@@ -245,7 +251,7 @@ internal static class CSharpClientGenerator
     /// component <c>$ref</c> against the document. Returns the inline schema
     /// when no <c>$ref</c> is present.
     /// </summary>
-    private static OpenApiSchema? ResolveRequestBodySchema(OpenApiDocument doc, OpenApiOperation op)
+    private static IOpenApiSchema? ResolveRequestBodySchema(OpenApiDocument doc, OpenApiOperation op)
     {
         var content = op.RequestBody?.Content;
         if (content == null)
@@ -256,9 +262,9 @@ internal static class CSharpClientGenerator
                 continue;
             if (mediaType.Schema == null)
                 continue;
-            if (mediaType.Schema.Reference != null
+            if (GetRefId(mediaType.Schema) != null
                 && doc.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(mediaType.Schema.Reference.Id, out var resolved))
+                && doc.Components.Schemas.TryGetValue(GetRefId(mediaType.Schema)!, out var resolved))
                 return resolved;
             return mediaType.Schema;
         }
@@ -271,16 +277,16 @@ internal static class CSharpClientGenerator
     /// <c>collectOpsWithOptionalTenantIdsArray</c> introduced in
     /// orchestration-cluster-api-js#171.
     /// </summary>
-    private static bool HasOptionalTenantIdsArrayInAnyVariant(OpenApiSchema schema, OpenApiDocument doc)
+    private static bool HasOptionalTenantIdsArrayInAnyVariant(IOpenApiSchema schema, OpenApiDocument doc)
     {
         var variants = schema.OneOf?.Count > 0 ? schema.OneOf : (schema.AnyOf?.Count > 0 ? schema.AnyOf : null);
         if (variants is { Count: > 0 })
         {
             foreach (var v in variants)
             {
-                var resolved = v.Reference != null
+                var resolved = GetRefId(v) != null
                     && doc.Components?.Schemas != null
-                    && doc.Components.Schemas.TryGetValue(v.Reference.Id, out var r)
+                    && doc.Components.Schemas.TryGetValue(GetRefId(v)!, out var r)
                     ? r
                     : v;
                 if (!HasOptionalTenantIdsArrayDirect(resolved, doc))
@@ -291,10 +297,10 @@ internal static class CSharpClientGenerator
         return HasOptionalTenantIdsArrayDirect(schema, doc);
     }
 
-    private static bool HasOptionalTenantIdsArrayDirect(OpenApiSchema schema, OpenApiDocument? doc = null)
+    private static bool HasOptionalTenantIdsArrayDirect(IOpenApiSchema schema, OpenApiDocument? doc = null)
     {
-        var properties = new Dictionary<string, OpenApiSchema>(
-            schema.Properties ?? new Dictionary<string, OpenApiSchema>());
+        var properties = new Dictionary<string, IOpenApiSchema>(
+            schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
         var required = new HashSet<string>(
             schema.Required ?? new HashSet<string>());
         foreach (var allOf in schema.AllOf ?? [])
@@ -303,9 +309,9 @@ internal static class CSharpClientGenerator
             // does not auto-resolve refs into the AllOf entry. Without this, a schema
             // that composes `tenantIds` via a referenced component would be missed.
             // Matches the pattern used elsewhere in this file (e.g. GetConstraints).
-            var resolved = allOf.Reference != null
+            var resolved = GetRefId(allOf) != null
                 && doc?.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(allOf.Reference.Id, out var refSchema)
+                && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
                 ? refSchema
                 : allOf;
             if (resolved.Properties != null)
@@ -319,11 +325,13 @@ internal static class CSharpClientGenerator
             return false;
         if (required.Contains("tenantIds"))
             return false;
-        return tenantIdsProp.Type == "array";
+        return SchemaTypeName(tenantIdsProp) == "array";
     }
 
-    private static OpenApiSchema? GetInlineResponseSchema(OpenApiOperation op)
+    private static IOpenApiSchema? GetInlineResponseSchema(OpenApiOperation op)
     {
+        if (op.Responses == null)
+            return null;
         foreach (var (code, response) in op.Responses)
         {
             if (!code.StartsWith('2'))
@@ -332,8 +340,8 @@ internal static class CSharpClientGenerator
                 continue;
             foreach (var (_, mediaType) in response.Content)
             {
-                if (mediaType.Schema?.Reference == null &&
-                    (mediaType.Schema?.Type == "object" || mediaType.Schema?.Properties?.Count > 0))
+                if (GetRefId(mediaType.Schema) == null &&
+                    (SchemaTypeName(mediaType.Schema) == "object" || mediaType.Schema?.Properties?.Count > 0))
                     return mediaType.Schema;
             }
         }
@@ -342,6 +350,8 @@ internal static class CSharpClientGenerator
 
     private static int? GetSuccessStatusCode(OpenApiOperation op)
     {
+        if (op.Responses == null)
+            return null;
         foreach (var (code, _) in op.Responses)
         {
             if (int.TryParse(code, out var val) && val is >= 200 and < 300)
@@ -385,8 +395,8 @@ internal static class CSharpClientGenerator
 
             // Check: all variants must be $refs to schemas that generate as classes (not primitives)
             var allRefsToClasses = schema.OneOf.All(v =>
-                v.Reference != null &&
-                doc.Components.Schemas.TryGetValue(v.Reference.Id, out var refSchema) &&
+                GetRefId(v) != null &&
+                doc.Components.Schemas.TryGetValue(GetRefId(v)!, out var refSchema) &&
                 !IsPrimitiveSchemaResolved(refSchema, doc));
 
             if (!allRefsToClasses)
@@ -394,8 +404,8 @@ internal static class CSharpClientGenerator
 
             var parentName = SanitizeTypeName(name);
             var variants = schema.OneOf
-                .Where(v => v.Reference != null)
-                .Select(v => SanitizeTypeName(v.Reference.Id))
+                .Where(v => GetRefId(v) != null)
+                .Select(v => SanitizeTypeName(GetRefId(v)!))
                 .ToList();
 
             oneOfParents[parentName] = variants;
@@ -406,11 +416,11 @@ internal static class CSharpClientGenerator
             if (schema.Discriminator is { PropertyName: { Length: > 0 } } disc && disc.Mapping?.Count > 0)
             {
                 var valueToVariant = new Dictionary<string, string>();
-                foreach (var (discValue, refPath) in disc.Mapping)
+                foreach (var (discValue, mappingRef) in disc.Mapping)
                 {
-                    // Mapping values are "#/components/schemas/TypeName" — extract the type name
-                    var schemaName = refPath.Contains('/') ? refPath.Substring(refPath.LastIndexOf('/') + 1) : refPath;
-                    valueToVariant[discValue] = SanitizeTypeName(schemaName);
+                    var schemaName = mappingRef?.Reference?.Id;
+                    if (schemaName != null)
+                        valueToVariant[discValue] = SanitizeTypeName(schemaName);
                 }
                 discriminators[parentName] = (disc.PropertyName, valueToVariant);
             }
@@ -425,7 +435,7 @@ internal static class CSharpClientGenerator
     /// </summary>
     private static string? FindMatchingOneOfComponent(
         OpenApiDocument doc,
-        OpenApiSchema inlineSchema,
+        IOpenApiSchema inlineSchema,
         Dictionary<string, List<string>> oneOfParents)
     {
         if (inlineSchema.OneOf is not { Count: > 0 })
@@ -493,7 +503,7 @@ internal static class CSharpClientGenerator
     /// finds and returns the resolved schema of the non-primitive variant.
     /// Returns null if the pattern doesn't match (e.g. all variants are primitive).
     /// </summary>
-    private static OpenApiSchema? FindNonPrimitiveOneOfVariant(OpenApiSchema schema, OpenApiDocument doc)
+    private static IOpenApiSchema? FindNonPrimitiveOneOfVariant(IOpenApiSchema schema, OpenApiDocument doc)
     {
         if (schema.OneOf is not { Count: 2 })
             return null;
@@ -501,8 +511,8 @@ internal static class CSharpClientGenerator
         foreach (var variant in schema.OneOf)
         {
             // Resolve $ref if present
-            var resolved = variant.Reference != null && doc.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(variant.Reference.Id, out var refSchema)
+            var resolved = GetRefId(variant) != null && doc.Components?.Schemas != null
+                && doc.Components.Schemas.TryGetValue(GetRefId(variant)!, out var refSchema)
                 ? refSchema : variant;
 
             // Skip primitive variants (inline primitives or allOf-wrapped primitives/enums)
@@ -543,7 +553,7 @@ internal static class CSharpClientGenerator
         return names;
     }
 
-    private static string GenerateModels(OpenApiDocument doc, SpecMetadata metadata, Dictionary<string, OpenApiSchema> inlineSchemas, HashSet<string> requestSchemaNames)
+    private static string GenerateModels(OpenApiDocument doc, SpecMetadata metadata, Dictionary<string, IOpenApiSchema> inlineSchemas, HashSet<string> requestSchemaNames)
     {
         var sb = new StringBuilder();
         sb.AppendLine("// <auto-generated />");
@@ -566,7 +576,7 @@ internal static class CSharpClientGenerator
             var typeName = SanitizeTypeName(name);
 
             // Skip array-type component schemas — they are resolved inline in MapType
-            if (schema.Type == "array")
+            if (SchemaTypeName(schema) == "array")
                 continue;
 
             // Union of semantic keys — generate with implicit conversion operators and cross-type equality
@@ -584,7 +594,7 @@ internal static class CSharpClientGenerator
                 continue;
             }
 
-            if (schema.Enum?.Count > 0 && schema.Type == "string")
+            if (schema.Enum?.Count > 0 && SchemaTypeName(schema) == "string")
             {
                 // Generate enum
                 sb.AppendLine($"/// <summary>");
@@ -593,15 +603,15 @@ internal static class CSharpClientGenerator
                 sb.AppendLine($"[JsonConverter(typeof(JsonStringEnumConverter))]");
                 sb.AppendLine($"public enum {typeName}");
                 sb.AppendLine("{");
-                foreach (var e in schema.Enum.OfType<Microsoft.OpenApi.Any.OpenApiString>())
+                foreach (var e in EnumStringValues(schema))
                 {
-                    var enumName = ToPascalCase(e.Value);
-                    var deprecatedVersion = metadata.GetDeprecatedEnumMemberVersion(name, e.Value);
+                    var enumName = ToPascalCase(e);
+                    var deprecatedVersion = metadata.GetDeprecatedEnumMemberVersion(name, e);
                     if (deprecatedVersion != null)
                     {
                         sb.AppendLine($"    [Obsolete(\"Deprecated since {deprecatedVersion}\")]");
                     }
-                    sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(e.Value)}\")]");
+                    sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(e)}\")]");
                     sb.AppendLine($"    {enumName},");
                 }
                 sb.AppendLine("}");
@@ -658,7 +668,7 @@ internal static class CSharpClientGenerator
                     sb.AppendLine("{");
 
                     var filterRequired = classVariantSchema.Required ?? new HashSet<string>();
-                    var filterProperties = new Dictionary<string, OpenApiSchema>();
+                    var filterProperties = new Dictionary<string, IOpenApiSchema>();
 
                     // Collect properties from the variant, including allOf composition
                     if (classVariantSchema.Properties != null)
@@ -668,8 +678,8 @@ internal static class CSharpClientGenerator
                     }
                     foreach (var allOf in classVariantSchema.AllOf ?? [])
                     {
-                        var resolved = allOf.Reference != null && doc.Components?.Schemas != null
-                            && doc.Components.Schemas.TryGetValue(allOf.Reference.Id, out var refSchema)
+                        var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
+                            && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
                             ? refSchema : allOf;
                         if (resolved.Properties != null)
                         {
@@ -688,7 +698,7 @@ internal static class CSharpClientGenerator
                         var csharpType = MapType(propSchema, doc);
                         var csharpPropName = ToPascalCase(propName);
                         var isRequired = filterRequired.Contains(propName);
-                        var isNullable = propSchema.Nullable;
+                        var isNullable = IsNullable(propSchema);
 
                         if ((!isRequired || isNullable) && !csharpType.EndsWith('?'))
                             csharpType += "?";
@@ -735,7 +745,7 @@ internal static class CSharpClientGenerator
             sb.AppendLine("{");
 
             var required = schema.Required ?? new HashSet<string>();
-            var properties = schema.Properties ?? new Dictionary<string, OpenApiSchema>();
+            var properties = schema.Properties ?? new Dictionary<string, IOpenApiSchema>();
 
             // Handle allOf composition
             foreach (var allOf in schema.AllOf ?? [])
@@ -770,7 +780,7 @@ internal static class CSharpClientGenerator
                 var csharpType = MapType(propSchema, doc);
                 var csharpPropName = ToPascalCase(propName);
                 var isRequired = required.Contains(propName);
-                var isNullable = propSchema.Nullable;
+                var isNullable = IsNullable(propSchema);
 
                 if ((!isRequired || isNullable) && !csharpType.EndsWith('?'))
                     csharpType += "?";
@@ -806,7 +816,7 @@ internal static class CSharpClientGenerator
         return sb.ToString();
     }
 
-    private static void GenerateClass(StringBuilder sb, string typeName, OpenApiSchema schema, OpenApiDocument? doc = null, bool isRequestSchema = false)
+    private static void GenerateClass(StringBuilder sb, string typeName, IOpenApiSchema schema, OpenApiDocument? doc = null, bool isRequestSchema = false)
     {
         var tenantIdInfo = isRequestSchema ? GetOptionalTenantIdInfo(schema) : null;
         var tenantIdsInfo = isRequestSchema ? GetOptionalTenantIdsInfo(schema, doc) : null;
@@ -824,7 +834,7 @@ internal static class CSharpClientGenerator
         sb.AppendLine("{");
 
         var required = schema.Required ?? new HashSet<string>();
-        var properties = schema.Properties ?? new Dictionary<string, OpenApiSchema>();
+        var properties = schema.Properties ?? new Dictionary<string, IOpenApiSchema>();
 
         // Handle allOf composition
         foreach (var allOf in schema.AllOf ?? [])
@@ -849,7 +859,7 @@ internal static class CSharpClientGenerator
             var csharpType = MapType(propSchema, doc);
             var csharpPropName = ToPascalCase(propName);
             var isRequired = required.Contains(propName);
-            var isNullable = propSchema.Nullable;
+            var isNullable = IsNullable(propSchema);
 
             if ((!isRequired || isNullable) && !csharpType.EndsWith('?'))
                 csharpType += "?";
@@ -880,7 +890,7 @@ internal static class CSharpClientGenerator
     /// Generates a strongly-typed readonly record struct for a primitive schema
     /// (nominal/branded type pattern — C# equivalent of TypeScript's branded types).
     /// </summary>
-    private static void GenerateDomainStruct(StringBuilder sb, string typeName, OpenApiSchema schema, OpenApiDocument doc)
+    private static void GenerateDomainStruct(StringBuilder sb, string typeName, IOpenApiSchema schema, OpenApiDocument doc)
     {
         var underlyingType = GetUnderlyingPrimitiveType(schema, doc);
         var isString = underlyingType == "string";
@@ -960,7 +970,7 @@ internal static class CSharpClientGenerator
     /// so that branch values are directly assignable and comparable without casting.
     /// </summary>
     private static void GenerateSemanticKeyUnionStruct(StringBuilder sb, string typeName,
-        OpenApiSchema schema, OpenApiDocument doc, List<string> branchTypeNames)
+       IOpenApiSchema schema, OpenApiDocument doc, List<string> branchTypeNames)
     {
         var (pattern, minLength, maxLength) = GetConstraints(schema, doc);
 
@@ -1038,17 +1048,17 @@ internal static class CSharpClientGenerator
     /// <summary>
     /// Resolves the underlying primitive C# type for a schema, traversing allOf composition.
     /// </summary>
-    private static string GetUnderlyingPrimitiveType(OpenApiSchema schema, OpenApiDocument doc)
+    private static string GetUnderlyingPrimitiveType(IOpenApiSchema schema, OpenApiDocument doc)
     {
-        if (schema.Type != null)
+        if (SchemaTypeName(schema) != null)
             return MapPrimitiveType(schema);
 
         foreach (var allOf in schema.AllOf ?? [])
         {
-            var resolved = allOf.Reference != null && doc.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(allOf.Reference.Id, out var refSchema)
+            var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
+                && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
                 ? refSchema : allOf;
-            if (resolved.Type != null)
+            if (SchemaTypeName(resolved) != null)
                 return MapPrimitiveType(resolved);
         }
 
@@ -1230,13 +1240,13 @@ internal static class CSharpClientGenerator
             sb.AppendLine($"        }}");
         }
 
-        var httpMethod = op.Verb switch
+        var httpMethod = op.Verb.Method switch
         {
-            OperationType.Get => "HttpMethod.Get",
-            OperationType.Post => "HttpMethod.Post",
-            OperationType.Put => "HttpMethod.Put",
-            OperationType.Delete => "HttpMethod.Delete",
-            OperationType.Patch => "HttpMethod.Patch",
+            "GET" => "HttpMethod.Get",
+            "POST" => "HttpMethod.Post",
+            "PUT" => "HttpMethod.Put",
+            "DELETE" => "HttpMethod.Delete",
+            "PATCH" => "HttpMethod.Patch",
             _ => "HttpMethod.Get",
         };
 
@@ -1251,13 +1261,13 @@ internal static class CSharpClientGenerator
             {
                 if (op.IsMultipart)
                 {
-                    sb.AppendLine($"            await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == OperationType.Get ? "true" : "false")},");
+                    sb.AppendLine($"            await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == HttpMethod.Get ? "true" : "false")},");
                     sb.AppendLine($"                async () => {{ await InvokeWithRetryAsync(() => SendMultipartAsync<object>(path, content, ct), \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct); return new object(); }},");
                     sb.AppendLine($"                consistency!, _logger, ct);");
                 }
                 else
                 {
-                    sb.AppendLine($"            await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == OperationType.Get ? "true" : "false")},");
+                    sb.AppendLine($"            await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == HttpMethod.Get ? "true" : "false")},");
                     sb.AppendLine($"                async () => {{ await SendVoidAsync({httpMethod}, path, {bodyArg}, ct); return new object(); }},");
                     sb.AppendLine($"                consistency!, _logger, ct);");
                 }
@@ -1267,13 +1277,13 @@ internal static class CSharpClientGenerator
             {
                 if (op.IsMultipart)
                 {
-                    sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == OperationType.Get ? "true" : "false")},");
+                    sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == HttpMethod.Get ? "true" : "false")},");
                     sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendMultipartAsync<{op.ResponseTypeName}>(path, content, ct), \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
                     sb.AppendLine($"                consistency!, _logger, ct);");
                 }
                 else
                 {
-                    sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == OperationType.Get ? "true" : "false")},");
+                    sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {(op.Verb == HttpMethod.Get ? "true" : "false")},");
                     sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendAsync<{op.ResponseTypeName}>({httpMethod}, path, {bodyArg}, ct), \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
                     sb.AppendLine($"                consistency!, _logger, ct);");
                 }
@@ -1326,7 +1336,7 @@ internal static class CSharpClientGenerator
                 if (SanitizeTypeName(name) != csharpType)
                     continue;
                 // Enums are value types
-                if (schema.Enum?.Count > 0 && schema.Type == "string")
+                if (schema.Enum?.Count > 0 && SchemaTypeName(schema) == "string")
                     return false;
                 // Domain key structs (primitive wrappers) are value types
                 if (IsPrimitiveSchemaResolved(schema, doc))
@@ -1343,8 +1353,8 @@ internal static class CSharpClientGenerator
     /// Returns true if the schema is a primitive scalar (string, integer, number, boolean)
     /// with no object properties — i.e. it should map to a strongly-typed wrapper, not a class.
     /// </summary>
-    private static bool IsPrimitiveSchema(OpenApiSchema schema) =>
-        schema.Type is "string" or "integer" or "number" or "boolean"
+    private static bool IsPrimitiveSchema(IOpenApiSchema schema) =>
+        SchemaTypeName(schema) is "string" or "integer" or "number" or "boolean"
         && (schema.Properties == null || schema.Properties.Count == 0)
         && (schema.Enum == null || schema.Enum.Count == 0);
 
@@ -1352,7 +1362,7 @@ internal static class CSharpClientGenerator
     /// Returns true if the schema (or its allOf base) is a primitive scalar,
     /// resolving through allOf composition (e.g. AuditLogKey → allOf[LongKey] → string).
     /// </summary>
-    private static bool IsPrimitiveSchemaResolved(OpenApiSchema schema, OpenApiDocument doc)
+    private static bool IsPrimitiveSchemaResolved(IOpenApiSchema schema, OpenApiDocument doc)
     {
         if (IsPrimitiveSchema(schema))
             return true;
@@ -1361,8 +1371,8 @@ internal static class CSharpClientGenerator
         {
             foreach (var fragment in schema.AllOf)
             {
-                var resolved = fragment.Reference != null && doc.Components?.Schemas != null
-                    && doc.Components.Schemas.TryGetValue(fragment.Reference.Id, out var refSchema)
+                var resolved = GetRefId(fragment) != null && doc.Components?.Schemas != null
+                    && doc.Components.Schemas.TryGetValue(GetRefId(fragment)!, out var refSchema)
                     ? refSchema : fragment;
                 if (!IsPrimitiveSchema(resolved))
                     return false;
@@ -1376,7 +1386,7 @@ internal static class CSharpClientGenerator
     /// Extracts constraints (pattern, minLength, maxLength) from a schema,
     /// resolving through allOf composition.
     /// </summary>
-    private static (string? pattern, int? minLength, int? maxLength) GetConstraints(OpenApiSchema schema, OpenApiDocument doc)
+    private static (string? pattern, int? minLength, int? maxLength) GetConstraints(IOpenApiSchema schema, OpenApiDocument doc)
     {
         string? pattern = schema.Pattern;
         int? minLength = schema.MinLength > 0 ? schema.MinLength : null;
@@ -1384,8 +1394,8 @@ internal static class CSharpClientGenerator
 
         foreach (var allOf in schema.AllOf ?? [])
         {
-            var resolved = allOf.Reference != null && doc.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(allOf.Reference.Id, out var refSchema)
+            var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
+                && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
                 ? refSchema : allOf;
             pattern ??= resolved.Pattern;
             minLength ??= resolved.MinLength > 0 ? resolved.MinLength : null;
@@ -1395,38 +1405,38 @@ internal static class CSharpClientGenerator
     }
 
     // Type mapping
-    internal static string MapType(OpenApiSchema? schema, OpenApiDocument? doc = null)
+    internal static string MapType(IOpenApiSchema? schema, OpenApiDocument? doc = null)
     {
         if (schema == null)
             return "object";
         // $ref to a named schema — resolve array-type schemas inline as List<ItemType>
-        if (schema.Reference != null)
+        if (GetRefId(schema) != null)
         {
             if (doc != null
                 && doc.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(schema.Reference.Id, out var resolved)
-                && resolved.Type == "array")
+                && doc.Components.Schemas.TryGetValue(GetRefId(schema)!, out var resolved)
+                && SchemaTypeName(resolved) == "array")
             {
                 return $"List<{MapType(resolved.Items, doc)}>";
             }
 
-            return SanitizeTypeName(schema.Reference.Id);
+            return SanitizeTypeName(GetRefId(schema)!);
         }
 
         // allOf with a single $ref (common pattern: allOf: [{$ref: "..."}] + description overlay)
-        if (schema.AllOf is { Count: > 0 } && schema.Type == null)
+        if (schema.AllOf is { Count: > 0 } && SchemaTypeName(schema) == null)
         {
-            var refFragment = schema.AllOf.FirstOrDefault(a => a.Reference != null);
+            var refFragment = schema.AllOf.FirstOrDefault(a => GetRefId(a) != null);
             if (refFragment != null)
-                return SanitizeTypeName(refFragment.Reference.Id);
+                return SanitizeTypeName(GetRefId(refFragment)!);
         }
 
         return MapPrimitiveType(schema, doc);
     }
 
-    private static string MapPrimitiveType(OpenApiSchema schema, OpenApiDocument? doc = null)
+    private static string MapPrimitiveType(IOpenApiSchema schema, OpenApiDocument? doc = null)
     {
-        return schema.Type switch
+        return SchemaTypeName(schema) switch
         {
             "string" when schema.Format == "date-time" => "DateTimeOffset",
             "string" when schema.Format == "date" => "DateOnly",
@@ -1451,7 +1461,7 @@ internal static class CSharpClientGenerator
     /// with the same set of property names. This handles cases where the spec uses
     /// inline definitions instead of $ref for schemas that match existing components.
     /// </summary>
-    private static string? FindMatchingComponentSchema(OpenApiDocument doc, OpenApiSchema inlineSchema)
+    private static string? FindMatchingComponentSchema(OpenApiDocument doc, IOpenApiSchema inlineSchema)
     {
         var inlineProps = inlineSchema.Properties?.Keys.ToHashSet();
         if (inlineProps == null || inlineProps.Count == 0)
@@ -1489,11 +1499,11 @@ internal static class CSharpClientGenerator
     /// Returns the C# type of the optional tenantId property if present, or null if not.
     /// Used to determine the SetDefaultTenantId implementation.
     /// </summary>
-    private static (string CSharpType, bool IsBrandedKey)? GetOptionalTenantIdInfo(OpenApiSchema schema)
+    private static (string CSharpType, bool IsBrandedKey)? GetOptionalTenantIdInfo(IOpenApiSchema schema)
     {
         // Collect all properties including allOf composition
-        var properties = new Dictionary<string, OpenApiSchema>(
-            schema.Properties ?? new Dictionary<string, OpenApiSchema>());
+        var properties = new Dictionary<string, IOpenApiSchema>(
+            schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
         var required = new HashSet<string>(
             schema.Required ?? new HashSet<string>());
         foreach (var allOf in schema.AllOf ?? [])
@@ -1525,7 +1535,7 @@ internal static class CSharpClientGenerator
     /// otherwise. Used to determine the <see cref="Camunda.Orchestration.Sdk.ITenantIdsSettable"/>
     /// implementation. See issue camunda/orchestration-cluster-api-csharp#123.
     /// </summary>
-    private static (string ItemCSharpType, bool IsBrandedKey)? GetOptionalTenantIdsInfo(OpenApiSchema schema, OpenApiDocument? doc = null)
+    private static (string ItemCSharpType, bool IsBrandedKey)? GetOptionalTenantIdsInfo(IOpenApiSchema schema, OpenApiDocument? doc = null)
     {
         // Mirror HasOptionalTenantIdsArrayInAnyVariant: when the schema is a
         // oneOf/anyOf, every variant must agree on the same optional tenantIds
@@ -1539,9 +1549,9 @@ internal static class CSharpClientGenerator
             (string ItemCSharpType, bool IsBrandedKey)? agreed = null;
             foreach (var v in variants)
             {
-                var resolvedVariant = v.Reference != null
+                var resolvedVariant = GetRefId(v) != null
                     && doc?.Components?.Schemas != null
-                    && doc.Components.Schemas.TryGetValue(v.Reference.Id, out var r)
+                    && doc.Components.Schemas.TryGetValue(GetRefId(v)!, out var r)
                     ? r
                     : v;
                 var info = GetOptionalTenantIdsInfo(resolvedVariant, doc);
@@ -1556,17 +1566,17 @@ internal static class CSharpClientGenerator
             return agreed;
         }
 
-        var properties = new Dictionary<string, OpenApiSchema>(
-            schema.Properties ?? new Dictionary<string, OpenApiSchema>());
+        var properties = new Dictionary<string, IOpenApiSchema>(
+            schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
         var required = new HashSet<string>(
             schema.Required ?? new HashSet<string>());
         foreach (var allOf in schema.AllOf ?? [])
         {
             // Resolve `allOf: [{$ref: ...}]` against the document — see
             // HasOptionalTenantIdsArrayDirect for rationale.
-            var resolved = allOf.Reference != null
+            var resolved = GetRefId(allOf) != null
                 && doc?.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(allOf.Reference.Id, out var refSchema)
+                && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
                 ? refSchema
                 : allOf;
             if (resolved.Properties != null)
@@ -1581,7 +1591,7 @@ internal static class CSharpClientGenerator
             return null;
         if (required.Contains("tenantIds"))
             return null;
-        if (tenantIdsProp.Type != "array" || tenantIdsProp.Items == null)
+        if (SchemaTypeName(tenantIdsProp) != "array" || tenantIdsProp.Items == null)
             return null;
 
         var itemType = MapType(tenantIdsProp.Items, doc);
@@ -1777,13 +1787,83 @@ internal static class CSharpClientGenerator
 
         return string.Join("\n", captured);
     }
+
+    // ───────────────────────────────────────────────────────────────────────────
+    // Microsoft.OpenApi 3.x interop helpers
+    // ───────────────────────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Returns the referenced component schema name if <paramref name="schema"/>
+    /// is a <c>$ref</c> (an <see cref="OpenApiSchemaReference"/>), or null when
+    /// the schema is inline.
+    /// </summary>
+    private static string? GetRefId(IOpenApiSchema? schema) =>
+        (schema as OpenApiSchemaReference)?.Reference?.Id;
+
+    /// <summary>
+    /// Maps the v3 <see cref="JsonSchemaType"/> flag enum back to the legacy
+    /// OpenAPI 3.0 string ("string", "integer", "number", "boolean", "array",
+    /// "object"). The <c>"null"</c> bit (added by the v3 reader to model
+    /// OpenAPI 3.0's <c>nullable: true</c>) is masked out so existing
+    /// type-string comparisons remain stable. Returns null when the schema
+    /// declares no type.
+    /// </summary>
+    private static string? SchemaTypeName(IOpenApiSchema? schema)
+    {
+        if (schema?.Type is not { } t)
+            return null;
+        var nonNull = t & ~JsonSchemaType.Null;
+        if (nonNull == 0)
+            return null;
+        if (nonNull.HasFlag(JsonSchemaType.Object))
+            return "object";
+        if (nonNull.HasFlag(JsonSchemaType.Array))
+            return "array";
+        if (nonNull.HasFlag(JsonSchemaType.String))
+            return "string";
+        if (nonNull.HasFlag(JsonSchemaType.Integer))
+            return "integer";
+        if (nonNull.HasFlag(JsonSchemaType.Number))
+            return "number";
+        if (nonNull.HasFlag(JsonSchemaType.Boolean))
+            return "boolean";
+        return null;
+    }
+
+    /// <summary>
+    /// True when the schema is nullable. v1's <c>OpenApiSchema.Nullable</c>
+    /// (OpenAPI 3.0 <c>nullable: true</c>) is normalised by the v3 reader into
+    /// the <see cref="JsonSchemaType.Null"/> bit on <see cref="IOpenApiSchema.Type"/>.
+    /// </summary>
+    private static bool IsNullable(IOpenApiSchema? schema) =>
+        schema?.Type?.HasFlag(JsonSchemaType.Null) == true;
+
+    /// <summary>
+    /// Enumerates string enum values declared on a schema. v1 surfaced these as
+    /// <c>OpenApiString</c>; v3 stores them as <see cref="System.Text.Json.Nodes.JsonNode"/>.
+    /// Non-string members are skipped — the generator only emits string enums.
+    /// </summary>
+    private static IEnumerable<string> EnumStringValues(IOpenApiSchema schema)
+    {
+        if (schema.Enum == null)
+            yield break;
+        foreach (var node in schema.Enum)
+        {
+            if (node is System.Text.Json.Nodes.JsonValue jv
+                && jv.GetValueKind() == System.Text.Json.JsonValueKind.String
+                && jv.TryGetValue<string>(out var s))
+            {
+                yield return s;
+            }
+        }
+    }
 }
 
 internal sealed class OperationMeta
 {
     public required string OperationId { get; init; }
     public required string OriginalOperationId { get; init; }
-    public required OperationType Verb { get; init; }
+    public required HttpMethod Verb { get; init; }
     public required string Path { get; init; }
     public required List<ParamMeta> PathParams { get; init; }
     public required List<ParamMeta> QueryParams { get; init; }
