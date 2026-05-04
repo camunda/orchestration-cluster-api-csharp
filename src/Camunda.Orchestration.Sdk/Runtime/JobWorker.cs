@@ -89,15 +89,14 @@ public sealed class JobWorkerConfig
 
     /// <summary>
     /// Restrict job activation to the given tenant IDs (multi-tenant setups).
-    /// Takes precedence over <see cref="TenantId"/>.
+    /// Cannot be combined with <see cref="TenantId"/> — setting both is
+    /// rejected with <see cref="ArgumentException"/>. Passing an empty list
+    /// is also rejected; leave <c>null</c> to fall back to the default.
     ///
     /// <para>If neither <see cref="TenantIds"/> nor <see cref="TenantId"/> is set,
     /// the activation request falls back to <c>[CamundaConfig.DefaultTenantId]</c>
     /// (which itself defaults to <c>"&lt;default&gt;"</c> and can be overridden
     /// via the <c>CAMUNDA_DEFAULT_TENANT_ID</c> environment variable).</para>
-    ///
-    /// <para>Setting both <see cref="TenantIds"/> and <see cref="TenantId"/> on
-    /// the same config is rejected with <see cref="ArgumentException"/>.</para>
     /// </summary>
     public IReadOnlyList<string>? TenantIds { get; init; }
 
@@ -246,6 +245,11 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         if (config.TenantIds is not null && !string.IsNullOrEmpty(config.TenantId))
             throw new ArgumentException(
                 "JobWorkerConfig.TenantIds and JobWorkerConfig.TenantId are mutually exclusive — set one, not both.",
+                nameof(config));
+
+        if (config.TenantIds is { Count: 0 })
+            throw new ArgumentException(
+                "JobWorkerConfig.TenantIds must not be empty — omit it (null) to use the default tenant, or provide at least one tenant ID.",
                 nameof(config));
 
         _resolvedTenantIds = ResolveTenantIds(config);
@@ -497,7 +501,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
     private static List<TenantId>? ResolveTenantIds(JobWorkerConfig config)
     {
-        if (config.TenantIds is { Count: > 0 } list)
+        if (config.TenantIds is { } list)
         {
             var resolved = new List<TenantId>(list.Count);
             foreach (var id in list)

@@ -156,4 +156,29 @@ public class JobWorkerTenantTests
             () => client.CreateJobWorker(config, (_, _) => Task.FromResult<object?>(null)));
         Assert.Contains("mutually exclusive", ex.Message, StringComparison.OrdinalIgnoreCase);
     }
+
+    [Fact]
+    public void CreateJobWorker_RejectsEmpty_TenantIds()
+    {
+        using var client = new CamundaClient(new CamundaOptions
+        {
+            Config = new Dictionary<string, string>
+            {
+                ["CAMUNDA_REST_ADDRESS"] = "https://mock.local",
+            },
+            HttpMessageHandler = new MockHttpMessageHandler(),
+        });
+
+        var config = new JobWorkerConfig
+        {
+            JobType = "empty-tenants",
+            JobTimeoutMs = 30_000,
+            AutoStart = false,
+            TenantIds = Array.Empty<string>(),
+        };
+
+        var ex = Assert.Throws<ArgumentException>(
+            () => client.CreateJobWorker(config, (_, _) => Task.FromResult<object?>(null)));
+        Assert.Contains("must not be empty", ex.Message, StringComparison.OrdinalIgnoreCase);
+    }
 }
