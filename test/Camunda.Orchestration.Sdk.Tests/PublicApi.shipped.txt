@@ -3074,6 +3074,7 @@ TYPE Camunda.Orchestration.Sdk.JobWorker : sealed class interfaces=[System.IAsyn
 TYPE Camunda.Orchestration.Sdk.JobWorkerConfig : sealed class
   CTOR ()
   PROP System.Boolean AutoStart { get; init; }
+  PROP System.Collections.Generic.IReadOnlyList<System.String>? TenantIds { get; init; }
   PROP System.Collections.Generic.List<System.String>? FetchVariables { get; init; }
   PROP System.Double StartupJitterMaxSeconds { get; init; }
   PROP System.Int32 PollIntervalMs { get; init; }
@@ -3081,6 +3082,7 @@ TYPE Camunda.Orchestration.Sdk.JobWorkerConfig : sealed class
   PROP System.Int64? JobTimeoutMs { get; init; }
   PROP System.Int64? PollTimeoutMs { get; init; }
   PROP System.String JobType { get; init; }
+  PROP System.String? TenantId { get; init; }
   PROP System.String? WorkerName { get; init; }
 
 TYPE Camunda.Orchestration.Sdk.JobWorkerStatisticsFilter : sealed class
