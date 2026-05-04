@@ -24,6 +24,7 @@ public class JobWorkerTenantTests
     private static readonly string[] BetaGamma = new[] { "beta", "gamma" };
     private static readonly string[] Explicit12 = new[] { "explicit-1", "explicit-2" };
     private static readonly string[] BetaOnly = new[] { "beta" };
+    private static readonly string[] FuncTenantOnly = new[] { "func-tenant" };
 
     private static async Task<List<string>> RunOnePollAndCaptureTenantIdsAsync(
         Dictionary<string, string> config,
@@ -158,28 +159,14 @@ public class JobWorkerTenantTests
     }
 
     [Fact]
-    public void CreateJobWorker_RejectsEmpty_TenantIds()
+    public async Task PollLoop_EmptyTenantIds_FallsBackToDefault()
     {
-        using var client = new CamundaClient(new CamundaOptions
+        var tenantIds = await RunOnePollAndCaptureTenantIdsAsync(new Dictionary<string, string>
         {
-            Config = new Dictionary<string, string>
-            {
-                ["CAMUNDA_REST_ADDRESS"] = "https://mock.local",
-            },
-            HttpMessageHandler = new MockHttpMessageHandler(),
-        });
+            ["CAMUNDA_REST_ADDRESS"] = "https://mock.local",
+        }, tenantIds: Array.Empty<string>());
 
-        var config = new JobWorkerConfig
-        {
-            JobType = "empty-tenants",
-            JobTimeoutMs = 30_000,
-            AutoStart = false,
-            TenantIds = Array.Empty<string>(),
-        };
-
-        var ex = Assert.Throws<ArgumentException>(
-            () => client.CreateJobWorker(config, (_, _) => Task.FromResult<object?>(null)));
-        Assert.Contains("must not be empty", ex.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal(DefaultSentinel, tenantIds);
     }
 
     [Theory]
@@ -234,5 +221,58 @@ public class JobWorkerTenantTests
 
         Assert.ThrowsAny<ArgumentException>(
             () => client.CreateJobWorker(config, (_, _) => Task.FromResult<object?>(null)));
+    }
+
+    /// <summary>
+    /// The <c>Func&lt;ActivatedJob, CancellationToken, Task&gt;</c> overload delegates
+    /// to the primary overload — verify tenant resolution works end-to-end through it.
+    /// </summary>
+    [Fact]
+    public async Task FuncOverload_UsesSingularTenantId()
+    {
+        var handler = new MockHttpMessageHandler();
+        var firstRequestBody = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        handler.Enqueue(async req =>
+        {
+            var body = await req.Content!.ReadAsStringAsync();
+            firstRequestBody.TrySetResult(body);
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"jobs\":[]}", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+        for (var i = 0; i < 8; i++)
+            handler.Enqueue(HttpStatusCode.OK, "{\"jobs\":[]}");
+
+        using var client = new CamundaClient(new CamundaOptions
+        {
+            Config = new Dictionary<string, string>
+            {
+                ["CAMUNDA_REST_ADDRESS"] = "https://mock.local",
+            },
+            HttpMessageHandler = handler,
+        });
+
+        var workerConfig = new JobWorkerConfig
+        {
+            JobType = "func-overload-test",
+            JobTimeoutMs = 30_000,
+            MaxConcurrentJobs = 1,
+            AutoStart = false,
+            TenantId = "func-tenant",
+        };
+
+        // Use the Func<ActivatedJob, CancellationToken, Task> overload
+        var worker = client.CreateJobWorker(workerConfig, (_, _) => Task.CompletedTask);
+        worker.Start();
+
+        var capturedJson = await firstRequestBody.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        await worker.StopAsync(TimeSpan.FromSeconds(1));
+
+        using var doc = JsonDocument.Parse(capturedJson);
+        Assert.True(doc.RootElement.TryGetProperty("tenantIds", out var arr));
+        var tenantIds = arr.EnumerateArray().Select(e => e.GetString() ?? "").ToList();
+        Assert.Equal(FuncTenantOnly, tenantIds);
     }
 }

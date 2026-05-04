@@ -90,13 +90,13 @@ public sealed class JobWorkerConfig
     /// <summary>
     /// Restrict job activation to the given tenant IDs (multi-tenant setups).
     /// Cannot be combined with <see cref="TenantId"/> — setting both is
-    /// rejected with <see cref="ArgumentException"/>. Passing an empty list
-    /// is also rejected; leave <c>null</c> to fall back to the default.
+    /// rejected with <see cref="ArgumentException"/>.
     ///
-    /// <para>If neither <see cref="TenantIds"/> nor <see cref="TenantId"/> is set,
-    /// the activation request falls back to <c>[CamundaConfig.DefaultTenantId]</c>
-    /// (which itself defaults to <c>"&lt;default&gt;"</c> and can be overridden
-    /// via the <c>CAMUNDA_DEFAULT_TENANT_ID</c> environment variable).</para>
+    /// <para>If neither <see cref="TenantIds"/> nor <see cref="TenantId"/> is set
+    /// (or <see cref="TenantIds"/> is empty), the activation request falls back
+    /// to <c>[CamundaConfig.DefaultTenantId]</c> (which itself defaults to
+    /// <c>"&lt;default&gt;"</c> and can be overridden via the
+    /// <c>CAMUNDA_DEFAULT_TENANT_ID</c> environment variable).</para>
     /// </summary>
     public IReadOnlyList<string>? TenantIds { get; init; }
 
@@ -245,11 +245,6 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         if (config.TenantIds is not null && !string.IsNullOrEmpty(config.TenantId))
             throw new ArgumentException(
                 "JobWorkerConfig.TenantIds and JobWorkerConfig.TenantId are mutually exclusive — set one, not both.",
-                nameof(config));
-
-        if (config.TenantIds is { Count: 0 })
-            throw new ArgumentException(
-                "JobWorkerConfig.TenantIds must not be empty — omit it (null) to use the default tenant, or provide at least one tenant ID.",
                 nameof(config));
 
         if (config.TenantId is not null && string.IsNullOrWhiteSpace(config.TenantId))
@@ -506,7 +501,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
     private static List<TenantId>? ResolveTenantIds(JobWorkerConfig config)
     {
-        if (config.TenantIds is { } list)
+        if (config.TenantIds is { Count: > 0 } list)
         {
             var resolved = new List<TenantId>(list.Count);
             foreach (var id in list)
