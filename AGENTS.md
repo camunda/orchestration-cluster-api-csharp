@@ -140,7 +140,7 @@ perf
 
 Rules:
 
-- **Subject length: 5–100 characters.** Enforced by `subject-max-length` in `commitlint.config.cjs`; CI fails the lint job on longer subjects. Em-dashes (`—`) and other multi-byte characters count by character count, not byte count. Keep subjects concise — push detail into the body.
+- **Subject length: 5–100 characters.** Enforced by the shared `@camunda8/sdk-infra` commitlint base config (imported by the local `commitlint.config.cjs`); CI fails the lint job on longer subjects. Em-dashes (`—`) and other multi-byte characters count by character count, not byte count. Keep subjects concise — push detail into the body.
 - Use imperative mood ("add support", not "added support").
 - Lowercase subject (except proper nouns). No PascalCase subjects.
 - Keep subject concise; body can include details, rationale, links.
