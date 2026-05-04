@@ -1,4 +1,4 @@
-const base = require('@camunda/sdk-infra/configs/release.config.base.cjs');
+const base = require('@camunda8/sdk-infra/configs/release.config.base.cjs');
 
 module.exports = {
   ...base,

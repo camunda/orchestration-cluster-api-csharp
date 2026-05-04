@@ -82,9 +82,6 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Allow git deps over HTTPS
-        run: git config --global url."https://github.com/".insteadOf "ssh://git@github.com/"
-
       - name: Install Node dependencies
         run: npm ci
 
@@ -205,9 +202,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '22.x'
-
-      - name: Allow git deps over HTTPS
-        run: git config --global url."https://github.com/".insteadOf "ssh://git@github.com/"
 
       - name: Install Node dependencies
         run: npm ci

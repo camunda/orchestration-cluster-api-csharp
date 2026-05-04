@@ -1,4 +1,4 @@
-const base = require('@camunda/sdk-infra/configs/commitlint.config.base.cjs');
+const base = require('@camunda8/sdk-infra/configs/commitlint.config.base.cjs');
 module.exports = {
   ...base,
   rules: {

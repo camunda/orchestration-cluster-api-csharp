@@ -4,7 +4,7 @@
     "release": "semantic-release"
   },
   "devDependencies": {
-    "@camunda/sdk-infra": "github:camunda/sdk-infra",
+    "@camunda8/sdk-infra": "^0.0.1",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "@semantic-release/changelog": "^6.0.3",
