@@ -86,6 +86,27 @@ public sealed class JobWorkerConfig
     /// <c>0</c> (the default) means no delay.
     /// </summary>
     public double StartupJitterMaxSeconds { get; init; }
+
+    /// <summary>
+    /// Restrict job activation to the given tenant IDs (multi-tenant setups).
+    /// Takes precedence over <see cref="TenantId"/>.
+    ///
+    /// <para>If neither <see cref="TenantIds"/> nor <see cref="TenantId"/> is set,
+    /// the activation request falls back to <c>[CamundaConfig.DefaultTenantId]</c>
+    /// (which itself defaults to <c>"&lt;default&gt;"</c> and can be overridden
+    /// via the <c>CAMUNDA_DEFAULT_TENANT_ID</c> environment variable).</para>
+    ///
+    /// <para>Setting both <see cref="TenantIds"/> and <see cref="TenantId"/> on
+    /// the same config is rejected with <see cref="ArgumentException"/>.</para>
+    /// </summary>
+    public IReadOnlyList<string>? TenantIds { get; init; }
+
+    /// <summary>
+    /// Convenience for the common single-tenant case. Equivalent to setting
+    /// <see cref="TenantIds"/> to <c>[TenantId]</c>. Cannot be combined with
+    /// <see cref="TenantIds"/>.
+    /// </summary>
+    public string? TenantId { get; init; }
 }
 
 /// <summary>
@@ -195,6 +216,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     private readonly JsonSerializerOptions _jsonOptions;
     private readonly long _jobTimeoutMs;
     private readonly int _maxConcurrentJobs;
+    private readonly List<TenantId>? _resolvedTenantIds;
 
     private CancellationTokenSource? _cts;
     private Task? _pollTask;
@@ -220,6 +242,13 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             throw new ArgumentException(
                 "MaxConcurrentJobs is required: set it on JobWorkerConfig, via CAMUNDA_WORKER_MAX_CONCURRENT_JOBS environment variable, or accept the default (10).",
                 nameof(config));
+
+        if (config.TenantIds is { Count: > 0 } && !string.IsNullOrEmpty(config.TenantId))
+            throw new ArgumentException(
+                "JobWorkerConfig.TenantIds and JobWorkerConfig.TenantId are mutually exclusive — set one, not both.",
+                nameof(config));
+
+        _resolvedTenantIds = ResolveTenantIds(config);
 
         _jobTimeoutMs = config.JobTimeoutMs.Value;
         _maxConcurrentJobs = config.MaxConcurrentJobs.Value;
@@ -339,6 +368,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                         MaxJobsToActivate = capacity,
                         FetchVariable = _config.FetchVariables,
                         RequestTimeout = _config.PollTimeoutMs ?? 0,
+                        TenantIds = _resolvedTenantIds,
                     }, ct: ct).ConfigureAwait(false);
 
                     if (response?.Jobs == null || response.Jobs.Count == 0)
@@ -463,6 +493,24 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             _logger.LogError(ex, "JobWorker '{Name}': failed to throw BPMN error for {JobKey}",
                 _name, job.JobKey);
         }
+    }
+
+    private static List<TenantId>? ResolveTenantIds(JobWorkerConfig config)
+    {
+        if (config.TenantIds is { Count: > 0 } list)
+        {
+            var resolved = new List<TenantId>(list.Count);
+            foreach (var id in list)
+                resolved.Add(global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(id));
+            return resolved;
+        }
+
+        if (!string.IsNullOrEmpty(config.TenantId))
+            return new List<TenantId> { global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(config.TenantId) };
+
+        // Leave null so the generated ActivateJobsAsync injects [DefaultTenantId]
+        // via ITenantIdsSettable.SetDefaultTenantIds.
+        return null;
     }
 
     private ActivatedJobResult? DeserializeJob(object rawJob)
