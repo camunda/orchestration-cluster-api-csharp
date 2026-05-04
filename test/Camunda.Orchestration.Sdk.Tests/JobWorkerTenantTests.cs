@@ -208,4 +208,31 @@ public class JobWorkerTenantTests
             () => client.CreateJobWorker(config, (_, _) => Task.FromResult<object?>(null)));
         Assert.Contains("must not be empty or whitespace", ex.Message, StringComparison.OrdinalIgnoreCase);
     }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("  ")]
+    [InlineData("bad tenant!")]
+    public void CreateJobWorker_RejectsMalformedEntries_InTenantIds(string badEntry)
+    {
+        using var client = new CamundaClient(new CamundaOptions
+        {
+            Config = new Dictionary<string, string>
+            {
+                ["CAMUNDA_REST_ADDRESS"] = "https://mock.local",
+            },
+            HttpMessageHandler = new MockHttpMessageHandler(),
+        });
+
+        var config = new JobWorkerConfig
+        {
+            JobType = "malformed-tenants",
+            JobTimeoutMs = 30_000,
+            AutoStart = false,
+            TenantIds = new[] { "valid-tenant", badEntry },
+        };
+
+        Assert.ThrowsAny<ArgumentException>(
+            () => client.CreateJobWorker(config, (_, _) => Task.FromResult<object?>(null)));
+    }
 }
