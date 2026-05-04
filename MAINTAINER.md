@@ -355,7 +355,7 @@ BREAKING CHANGE: SDK major version bumped from 9 to 10 to track Camunda server 8
 
 When a new Camunda server minor ships (e.g. 8.10), the SDK bumps its major (e.g. 9 → 10). Follow these steps **in order**:
 
-1. **Set the repo variable**: GitHub → Settings → Variables → set `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` to the **new** major (e.g. `10`). This must be set before `stable/<major>` CI runs, otherwise the branch is treated as maintenance instead of the current stable line.
+1. **Set the repo variable**: GitHub → Settings → Variables → set `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` to the **new** major (e.g. `10`). This must be set before the next `main` CI run, so that `main`'s branch array includes `stable/10` as the release branch. Without it, `main` won't know about the stable line and semantic-release can't reconcile version history across branches.
 
 2. **Push a breaking-change commit on `main`**:
    ```bash
