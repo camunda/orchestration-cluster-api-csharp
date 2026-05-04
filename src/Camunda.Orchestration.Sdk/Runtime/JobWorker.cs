@@ -243,7 +243,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 "MaxConcurrentJobs is required: set it on JobWorkerConfig, via CAMUNDA_WORKER_MAX_CONCURRENT_JOBS environment variable, or accept the default (10).",
                 nameof(config));
 
-        if (config.TenantIds is { Count: > 0 } && !string.IsNullOrEmpty(config.TenantId))
+        if (config.TenantIds is not null && !string.IsNullOrEmpty(config.TenantId))
             throw new ArgumentException(
                 "JobWorkerConfig.TenantIds and JobWorkerConfig.TenantId are mutually exclusive — set one, not both.",
                 nameof(config));
