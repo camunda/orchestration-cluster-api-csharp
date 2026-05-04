@@ -181,4 +181,31 @@ public class JobWorkerTenantTests
             () => client.CreateJobWorker(config, (_, _) => Task.FromResult<object?>(null)));
         Assert.Contains("must not be empty", ex.Message, StringComparison.OrdinalIgnoreCase);
     }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("  ")]
+    public void CreateJobWorker_RejectsEmptyOrWhitespace_TenantId(string badTenantId)
+    {
+        using var client = new CamundaClient(new CamundaOptions
+        {
+            Config = new Dictionary<string, string>
+            {
+                ["CAMUNDA_REST_ADDRESS"] = "https://mock.local",
+            },
+            HttpMessageHandler = new MockHttpMessageHandler(),
+        });
+
+        var config = new JobWorkerConfig
+        {
+            JobType = "empty-tenant",
+            JobTimeoutMs = 30_000,
+            AutoStart = false,
+            TenantId = badTenantId,
+        };
+
+        var ex = Assert.Throws<ArgumentException>(
+            () => client.CreateJobWorker(config, (_, _) => Task.FromResult<object?>(null)));
+        Assert.Contains("must not be empty or whitespace", ex.Message, StringComparison.OrdinalIgnoreCase);
+    }
 }

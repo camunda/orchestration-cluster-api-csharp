@@ -252,6 +252,11 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 "JobWorkerConfig.TenantIds must not be empty — omit it (null) to use the default tenant, or provide at least one tenant ID.",
                 nameof(config));
 
+        if (config.TenantId is not null && string.IsNullOrWhiteSpace(config.TenantId))
+            throw new ArgumentException(
+                "JobWorkerConfig.TenantId must not be empty or whitespace — omit it (null) to use the default tenant.",
+                nameof(config));
+
         _resolvedTenantIds = ResolveTenantIds(config);
 
         _jobTimeoutMs = config.JobTimeoutMs.Value;
@@ -509,7 +514,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             return resolved;
         }
 
-        if (!string.IsNullOrEmpty(config.TenantId))
+        if (config.TenantId is not null)
             return new List<TenantId> { global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(config.TenantId) };
 
         // Leave null so the generated ActivateJobsAsync injects [DefaultTenantId]
