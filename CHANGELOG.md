@@ -1,3 +1,16 @@
+# [9.0.0-alpha.10](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.9...v9.0.0-alpha.10) (2026-05-05)
+
+
+### Bug Fixes
+
+* Potential fix for pull request finding ([b3f6353](https://github.com/camunda/orchestration-cluster-api-csharp/commit/b3f6353a3bd047418d852b0cd16d08587f519043))
+
+
+### Features
+
+* **worker:** support TenantIds and TenantId on JobWorkerConfig ([f34852b](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f34852bd80a735ee7985d115caeff4891e0ed39d))
+* **worker:** support TenantIds and TenantId on JobWorkerConfig ([bf24581](https://github.com/camunda/orchestration-cluster-api-csharp/commit/bf245814877b5bf893ce18cb6817dab0496b34ae)), closes [#120](https://github.com/camunda/orchestration-cluster-api-csharp/issues/120)
+
 # [9.0.0-alpha.9](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.8...v9.0.0-alpha.9) (2026-05-04)
 
 
