@@ -24715,6 +24715,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobWorkerConfig.StartupJitterMaxSeconds
   fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.StartupJitterMaxSeconds
   nameWithType: JobWorkerConfig.StartupJitterMaxSeconds
+- uid: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantId
+  commentId: P:Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId
+  fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId
+  nameWithType: JobWorkerConfig.TenantId
+- uid: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId*
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId
+  fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId
+  nameWithType: JobWorkerConfig.TenantId
+- uid: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds
+  name: TenantIds
+  href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds
+  commentId: P:Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds
+  fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds
+  nameWithType: JobWorkerConfig.TenantIds
+- uid: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds*
+  name: TenantIds
+  href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds
+  fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds
+  nameWithType: JobWorkerConfig.TenantIds
 - uid: Camunda.Orchestration.Sdk.JobWorkerConfig.WorkerName
   name: WorkerName
   href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.WorkerName.html#Camunda_Orchestration_Sdk_JobWorkerConfig_WorkerName

@@ -216,6 +216,25 @@ initial activation requests to avoid saturating the server.
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantId">TenantId</a></dt>
+    <dd><p>Convenience for the common single-tenant case. Equivalent to setting
+<a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds">TenantIds</a> to <code>[TenantId]</code>. Cannot be combined with
+<a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds">TenantIds</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds">TenantIds</a></dt>
+    <dd><p>Restrict job activation to the given tenant IDs (multi-tenant setups).
+Cannot be combined with <a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantId">TenantId</a> — setting both is
+rejected with <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a>.</p>
+<p>If neither <a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds">TenantIds</a> nor <a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantId">TenantId</a> is set
+(or <a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds">TenantIds</a> is empty), the activation request falls back
+to <code>[CamundaConfig.DefaultTenantId]</code> (which itself defaults to
+<code>"&lt;default&gt;"</code> and can be overridden via the
+<code>CAMUNDA_DEFAULT_TENANT_ID</code> environment variable).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.WorkerName.html#Camunda_Orchestration_Sdk_JobWorkerConfig_WorkerName">WorkerName</a></dt>
     <dd><p>Worker name sent to the broker for logging and diagnostics.
 Auto-generated if not set.</p>

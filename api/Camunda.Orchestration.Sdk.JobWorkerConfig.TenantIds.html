@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Method StopAllWorkersAsync | Camunda C# SDK </title>
+      <title>Property TenantIds | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Method StopAllWorkersAsync | Camunda C# SDK ">
+      <meta name="title" content="Property TenantIds | Camunda C# SDK ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_CamundaClient_StopAllWorkersAsync_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,14 +84,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync*">
+        <article data-uid="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds*">
 
 
 
 
 
-<h1 id="Camunda_Orchestration_Sdk_CamundaClient_StopAllWorkersAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync*" class="text-break">
-Method StopAllWorkersAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/CamundaClient.Workers.cs/#L90"><i class="bi bi-code-slash"></i></a>
+<h1 id="Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds_" data-uid="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds*" class="text-break">
+Property TenantIds  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L101"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -117,54 +117,40 @@ Method StopAllWorkersAsync  <a class="header-action link-secondary" title="View 
 
 
 
-<a id="Camunda_Orchestration_Sdk_CamundaClient_StopAllWorkersAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync*"></a>
+<a id="Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds_" data-uid="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_StopAllWorkersAsync_System_Nullable_System_TimeSpan__" data-uid="Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync(System.Nullable{System.TimeSpan})">
-  StopAllWorkersAsync(TimeSpan?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/CamundaClient.Workers.cs/#L90"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds" data-uid="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds">
+  TenantIds
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L101"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"><p>Stop all registered workers and wait for in-flight jobs to drain.</p>
+<div class="markdown level1 summary"><p>Restrict job activation to the given tenant IDs (multi-tenant setups).
+Cannot be combined with <a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantId">TenantId</a> — setting both is
+rejected with <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a>.</p>
+<p>If neither <a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds">TenantIds</a> nor <a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantId">TenantId</a> is set
+(or <a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantIds">TenantIds</a> is empty), the activation request falls back
+to <code>[CamundaConfig.DefaultTenantId]</code> (which itself defaults to
+<code>"&lt;default&gt;"</code> and can be overridden via the
+<code>CAMUNDA_DEFAULT_TENANT_ID</code> environment variable).</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task StopAllWorkersAsync(TimeSpan? gracePeriod = null)</code></pre>
+  <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt;? TenantIds { get; init; }</code></pre>
 </div>
 
-<h4 class="section">Parameters</h4>
+
+
+
+
+<h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><code>gracePeriod</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a>?</dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
   <dd></dd>
 </dl>
 
-<h4 class="section">Returns</h4>
-<dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
-  <dd></dd>
-</dl>
 
 
-
-
-
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_StopAllWorkersAsync_System_Nullable_System_TimeSpan___examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task StopAllWorkersExample()
-{
-    using var client = CamundaClient.Create();
-
-    client.CreateJobWorker(
-        new JobWorkerConfig { JobType = &quot;payment-service&quot; },
-        async (job, ct) =&gt;
-        {
-            Console.WriteLine($&quot;Processing job {job.JobKey}&quot;);
-            return null;
-        });
-
-    await client.StopAllWorkersAsync(gracePeriod: TimeSpan.FromSeconds(5));
-}
-</code></pre>
 
 
 
@@ -173,7 +159,7 @@ Method StopAllWorkersAsync  <a class="header-action link-secondary" title="View 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/CamundaClient.Workers.cs/#L90" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L101" class="edit-link">Edit this page</a>
         </div>
 
 
