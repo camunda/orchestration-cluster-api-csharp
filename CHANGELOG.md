@@ -1,3 +1,11 @@
+# [9.1.0](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.3...v9.1.0) (2026-05-05)
+
+
+### Features
+
+* **worker:** backport TenantIds/TenantId on JobWorkerConfig to stable/9 ([1a4fc0c](https://github.com/camunda/orchestration-cluster-api-csharp/commit/1a4fc0c84a53de3f58e1e899269ea4e77ea4e350))
+* **worker:** support TenantIds and TenantId on JobWorkerConfig ([7e4080d](https://github.com/camunda/orchestration-cluster-api-csharp/commit/7e4080d4c833c65f5c59020b0d0fe0642e984355))
+
 ## [9.0.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.2...v9.0.3) (2026-04-29)
 
 
