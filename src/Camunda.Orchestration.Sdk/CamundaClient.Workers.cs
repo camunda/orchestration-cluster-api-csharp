@@ -37,6 +37,8 @@ public partial class CamundaClient : IAsyncDisposable
             StartupJitterMaxSeconds = config.StartupJitterMaxSeconds > 0
                 ? config.StartupJitterMaxSeconds
                 : defaults?.StartupJitterMaxSeconds ?? 0,
+            TenantIds = config.TenantIds,
+            TenantId = config.TenantId,
         };
         var worker = new JobWorker(this, merged, handler, _loggerFactory, _jsonOptions);
         _workers.Add(worker);
