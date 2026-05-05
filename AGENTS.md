@@ -96,8 +96,9 @@ Uses [semantic-release](https://github.com/semantic-release/semantic-release) fo
 - Standard semantic versioning: `fix:`/`perf:`/`revert:` → patch, `feat:` → minor, `BREAKING CHANGE` → major
 - `chore:`, `docs:`, `ci:` commits produce no release
 - Branch model: `main` = alpha prereleases, `stable/<major>` (current) = stable releases, `stable/<major>` (older) = maintenance
+- Branch-role-swapping: the release config is evaluated per-branch. On `main`, `main` is prerelease(alpha) and `stable/N` is the release branch. On `stable/N`, the roles swap — `stable/N` gets `range: N.x` (maintenance) and `main` becomes a plain release branch to satisfy semantic-release's ≥1 release branch requirement. Published versions are identical in both models.
 - SDK major tracks Camunda server minor (server 8.9 → SDK 9.x). Current stable major set via `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` repo variable.
-- Config: `release.config.cjs`, `commitlint.config.cjs`
+- Config: `release.config.cjs` imports shared base from `@camunda8/sdk-infra`, `commitlint.config.cjs` likewise
 - Commit messages linted via commitlint in CI (Conventional Commits required)
 
 ## Code Style & Linting
@@ -139,7 +140,7 @@ perf
 
 Rules:
 
-- **Subject length: 5–100 characters.** Enforced by `subject-max-length` in `commitlint.config.cjs`; CI fails the lint job on longer subjects. Em-dashes (`—`) and other multi-byte characters count by character count, not byte count. Keep subjects concise — push detail into the body.
+- **Subject length: 5–100 characters.** Enforced by the shared `@camunda8/sdk-infra` commitlint base config (imported by the local `commitlint.config.cjs`); CI fails the lint job on longer subjects. Em-dashes (`—`) and other multi-byte characters count by character count, not byte count. Keep subjects concise — push detail into the body.
 - Use imperative mood ("add support", not "added support").
 - Lowercase subject (except proper nouns). No PascalCase subjects.
 - Keep subject concise; body can include details, rationale, links.

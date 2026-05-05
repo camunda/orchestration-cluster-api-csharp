@@ -17708,6 +17708,9 @@
         }
       },
       "AuthorizationCreateResult": {
+        "x-semantic-provider": [
+          "authorizationKey"
+        ],
         "type": "object",
         "properties": {
           "authorizationKey": {
@@ -17826,6 +17829,9 @@
           "batchOperationType"
         ],
         "description": "The created batch operation.",
+        "x-semantic-provider": [
+          "batchOperationKey"
+        ],
         "type": "object",
         "properties": {
           "batchOperationKey": {
@@ -20462,7 +20468,11 @@
         "type": "object",
         "x-semantic-provider": [
           "decisionDefinitionKey",
-          "decisionRequirementsKey"
+          "decisionRequirementsKey",
+          "decisionDefinitionId",
+          "decisionRequirementsId",
+          "name",
+          "version"
         ],
         "required": [
           "decisionDefinitionId",
@@ -21010,6 +21020,9 @@
         }
       },
       "DocumentReference": {
+        "x-semantic-provider": [
+          "documentId"
+        ],
         "type": "object",
         "required": [
           "camunda.document.type",
@@ -26330,6 +26343,9 @@
       },
       "MessageCorrelationResult": {
         "description": "The message key of the correlated message, as well as the first process instance key it\ncorrelated with.\n",
+        "x-semantic-provider": [
+          "messageKey"
+        ],
         "type": "object",
         "required": [
           "tenantId",
@@ -26407,6 +26423,9 @@
       },
       "MessagePublicationResult": {
         "description": "The message key of the published message.",
+        "x-semantic-provider": [
+          "messageKey"
+        ],
         "type": "object",
         "required": [
           "tenantId",

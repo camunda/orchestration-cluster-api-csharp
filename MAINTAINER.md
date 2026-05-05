@@ -289,6 +289,18 @@ The currently promoted stable major is configured via the `CAMUNDA_SDK_CURRENT_S
 
 SDK major version tracks Camunda server minor (server 8.9 → SDK 9.x, server 8.10 → SDK 10.x).
 
+#### Branch-role-swapping
+
+The release config (`release.config.cjs`) uses a dynamic branch model from the shared `@camunda8/sdk-infra` base config. The branch array is computed based on which branch CI is running on:
+
+| CI runs on | `main` role | `stable/N` role |
+|---|---|---|
+| `main` | prerelease (alpha) | release (latest) |
+| `stable/N` (current) | plain release branch | maintenance (range: N.x) |
+| `stable/N` (older) | plain release branch | maintenance (range: N.x) |
+
+This avoids version conflicts when semantic-release reconciles version history across branches. The published versions (alpha on main, stable on stable/N) are identical to a static model.
+
 ### Dependabot
 
 Dependabot is configured in [.github/dependabot.yml](.github/dependabot.yml) for NuGet, npm, and GitHub Actions updates. When creating a new `stable/*` branch, add a Dependabot entry for it — Dependabot does not support wildcard branch patterns, so each stable branch must be listed explicitly.
@@ -343,7 +355,7 @@ BREAKING CHANGE: SDK major version bumped from 9 to 10 to track Camunda server 8
 
 When a new Camunda server minor ships (e.g. 8.10), the SDK bumps its major (e.g. 9 → 10). Follow these steps **in order**:
 
-1. **Set the repo variable**: GitHub → Settings → Variables → set `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` to the **new** major (e.g. `10`). This must be set before `stable/<major>` CI runs, otherwise the branch is treated as maintenance instead of the current stable line.
+1. **Set the repo variable**: GitHub → Settings → Variables → set `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` to the **new** major (e.g. `10`). This must be set before the next `main` CI run, so that `main`'s branch array includes `stable/10` as the release branch. Without it, `main` won't know about the stable line and semantic-release can't reconcile version history across branches.
 
 2. **Push a breaking-change commit on `main`**:
    ```bash
@@ -384,8 +396,8 @@ When a new Camunda server minor ships (e.g. 8.10), the SDK bumps its major (e.g.
 
 ### Configuration files
 
-- `release.config.cjs` — semantic-release config (branches, plugins, release rules)
-- `commitlint.config.cjs` — commit message linting rules
+- `release.config.cjs` — semantic-release config (imports shared base from `@camunda8/sdk-infra`, appends C#-specific plugins)
+- `commitlint.config.cjs` — commit message linting rules (imports shared base from `@camunda8/sdk-infra`)
 - `scripts/next-version.mjs` — dry-run script to preview next version
 - `scripts/prepare-release.sh` — builds and packs the NuGet package
 - `scripts/publish-nuget.sh` — pushes to nuget.org
