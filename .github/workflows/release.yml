@@ -235,3 +235,13 @@ jobs:
           path: |
             next-version.out
             release-assets/
+
+  notify-release-failure:
+    needs: [publish]
+    if: failure()
+    uses: camunda/sdk-infra/.github/workflows/sdk-slack-notify.yml@v1
+    with:
+      repo-name: orchestration-cluster-api-csharp
+      workflow-name: Release
+    secrets:
+      slack-webhook-url: ${{ secrets.SLACK_SDK_ALERTS }}
