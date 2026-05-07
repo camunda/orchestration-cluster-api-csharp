@@ -182,7 +182,7 @@ public static class RoleExamples
 
         var result = await client.SearchUsersForRoleAsync(
             roleId,
-            new SearchUsersForRoleRequest());
+            new RoleUserSearchQueryRequest());
 
         foreach (var user in result.Items)
         {
@@ -220,7 +220,7 @@ public static class RoleExamples
 
         var result = await client.SearchClientsForRoleAsync(
             roleId,
-            new SearchClientsForRoleRequest());
+            new RoleClientSearchQueryRequest());
 
         foreach (var c in result.Items)
         {

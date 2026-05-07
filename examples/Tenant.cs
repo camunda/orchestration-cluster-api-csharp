@@ -229,7 +229,7 @@ public static class TenantExamples
 
         var result = await client.SearchUsersForTenantAsync(
             tenantId,
-            new SearchUsersForTenantRequest());
+            new TenantUserSearchQueryRequest());
 
         foreach (var user in result.Items)
         {
@@ -248,7 +248,7 @@ public static class TenantExamples
 
         var result = await client.SearchClientsForTenantAsync(
             tenantId,
-            new SearchClientsForTenantRequest());
+            new TenantClientSearchQueryRequest());
 
         foreach (var c in result.Items)
         {

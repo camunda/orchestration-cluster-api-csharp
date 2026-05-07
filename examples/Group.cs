@@ -159,7 +159,7 @@ public static class GroupExamples
 
         var result = await client.SearchUsersForGroupAsync(
             groupId,
-            new SearchUsersForGroupRequest());
+            new GroupUserSearchQueryRequest());
 
         foreach (var user in result.Items)
         {
@@ -178,7 +178,7 @@ public static class GroupExamples
 
         var result = await client.SearchClientsForGroupAsync(
             groupId,
-            new SearchClientsForGroupRequest());
+            new GroupClientSearchQueryRequest());
 
         foreach (var c in result.Items)
         {
