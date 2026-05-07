@@ -217,6 +217,88 @@ public sealed class AdvancedActorTypeFilter
 }
 
 /// <summary>
+/// Advanced AgentInstanceKey filter.
+/// </summary>
+public sealed class AdvancedAgentInstanceKeyFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentInstanceKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// Advanced AgentInstanceStatusEnum filter.
+/// </summary>
+public sealed class AdvancedAgentInstanceStatusFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceStatusEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceStatusEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceStatusEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
 /// Advanced entityKey filter.
 /// </summary>
 public sealed class AdvancedAuditLogEntityKeyFilter
@@ -803,6 +885,57 @@ public sealed class AdvancedDeploymentKeyFilter
     /// </summary>
     [JsonPropertyName("$notIn")]
     public List<DeploymentKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// Advanced ElementId filter.
+/// </summary>
+public sealed class AdvancedElementIdFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ElementId? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ElementId? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ElementId>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ElementId>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
 
 }
 
@@ -1472,6 +1605,51 @@ public sealed class AdvancedMessageSubscriptionStateFilter
 }
 
 /// <summary>
+/// Advanced MessageSubscriptionTypeEnum filter
+/// </summary>
+public sealed class AdvancedMessageSubscriptionTypeFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public MessageSubscriptionTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public MessageSubscriptionTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<MessageSubscriptionTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
 /// Advanced AuditLogOperationTypeEnum filter.
 /// </summary>
 public sealed class AdvancedOperationTypeFilter
@@ -1499,6 +1677,57 @@ public sealed class AdvancedOperationTypeFilter
     /// </summary>
     [JsonPropertyName("$in")]
     public List<AuditLogOperationTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced ProcessDefinitionId filter.
+/// </summary>
+public sealed class AdvancedProcessDefinitionIdFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ProcessDefinitionId? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ProcessDefinitionId? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ProcessDefinitionId>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ProcessDefinitionId>? NotIn { get; set; }
 
     /// <summary>
     /// Checks if the property matches the provided like value.
@@ -1884,6 +2113,476 @@ public sealed class AdvancedVariableKeyFilter
     /// </summary>
     [JsonPropertyName("$notIn")]
     public List<VariableKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// The static definition of an agent instance, set once at creation.
+/// </summary>
+public sealed class AgentInstanceDefinition
+{
+    /// <summary>
+    /// The LLM model identifier (for example, gpt-4o).
+    /// </summary>
+    [JsonPropertyName("model")]
+    public string Model { get; set; } = null!;
+
+    /// <summary>
+    /// The LLM provider (for example, openai or anthropic).
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string Provider { get; set; } = null!;
+
+    /// <summary>
+    /// The system prompt configured for this agent instance.
+    /// </summary>
+    [JsonPropertyName("systemPrompt")]
+    public string SystemPrompt { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Agent instance search filter.
+/// </summary>
+public sealed class AgentInstanceFilter
+{
+    /// <summary>
+    /// The unique key of the agent instance.
+    /// </summary>
+    [JsonPropertyName("agentInstanceKey")]
+    public AgentInstanceKeyFilterProperty? AgentInstanceKey { get; set; }
+
+    /// <summary>
+    /// The current status of the agent instance.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public AgentInstanceStatusFilterProperty? Status { get; set; }
+
+    /// <summary>
+    /// The BPMN element ID of the agent task.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementIdFilterProperty? ElementId { get; set; }
+
+    /// <summary>
+    /// The key of the process instance that owns this agent instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The tenant ID of the agent instance.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public StringFilterProperty? TenantId { get; set; }
+
+    /// <summary>
+    /// The creation date of the agent instance.
+    /// </summary>
+    [JsonPropertyName("creationDate")]
+    public DateTimeFilterProperty? CreationDate { get; set; }
+
+    /// <summary>
+    /// The date the agent instance was last updated.
+    /// </summary>
+    [JsonPropertyName("lastUpdatedDate")]
+    public DateTimeFilterProperty? LastUpdatedDate { get; set; }
+
+    /// <summary>
+    /// The completion date of the agent instance.
+    /// </summary>
+    [JsonPropertyName("completionDate")]
+    public DateTimeFilterProperty? CompletionDate { get; set; }
+
+}
+
+/// <summary>
+/// System-generated key for an agent instance.
+/// </summary>
+public readonly record struct AgentInstanceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentInstanceKey(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentInstanceKey"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentInstanceKey AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new AgentInstanceKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AgentInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentInstanceKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentInstanceKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentInstanceKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceKeyExactMatch");
+        return new AgentInstanceKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// AgentInstanceKey property with full advanced search capabilities.
+/// </summary>
+public sealed class AgentInstanceKeyFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentInstanceKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// The configured limits for an agent instance, set once at creation.
+/// </summary>
+public sealed class AgentInstanceLimits
+{
+    /// <summary>
+    /// Maximum LLM calls allowed. -1 if no limit is configured.
+    /// </summary>
+    [JsonPropertyName("maxModelCalls")]
+    public long MaxModelCalls { get; set; }
+
+    /// <summary>
+    /// Maximum tool calls allowed. -1 if no limit is configured.
+    /// </summary>
+    [JsonPropertyName("maxToolCalls")]
+    public long MaxToolCalls { get; set; }
+
+    /// <summary>
+    /// Maximum total tokens allowed. -1 if no limit is configured.
+    /// </summary>
+    [JsonPropertyName("maxTokens")]
+    public long MaxTokens { get; set; }
+
+}
+
+/// <summary>
+/// Aggregated metrics for an agent instance across all model calls.
+/// </summary>
+public sealed class AgentInstanceMetrics
+{
+    /// <summary>
+    /// Total input tokens consumed across all model calls.
+    /// </summary>
+    [JsonPropertyName("inputTokens")]
+    public long InputTokens { get; set; }
+
+    /// <summary>
+    /// Total output tokens produced across all model calls.
+    /// </summary>
+    [JsonPropertyName("outputTokens")]
+    public long OutputTokens { get; set; }
+
+    /// <summary>
+    /// Total number of LLM calls made.
+    /// </summary>
+    [JsonPropertyName("modelCalls")]
+    public long ModelCalls { get; set; }
+
+    /// <summary>
+    /// Total number of tool calls made.
+    /// </summary>
+    [JsonPropertyName("toolCalls")]
+    public long ToolCalls { get; set; }
+
+}
+
+/// <summary>
+/// AgentInstanceResult
+/// </summary>
+public sealed class AgentInstanceResult
+{
+    /// <summary>
+    /// The unique key for this agent instance.
+    /// </summary>
+    [JsonPropertyName("agentInstanceKey")]
+    public AgentInstanceKey AgentInstanceKey { get; set; }
+
+    /// <summary>
+    /// The current status of an agent instance.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public AgentInstanceStatusEnum Status { get; set; }
+
+    /// <summary>
+    /// The static definition of the agent, including model, provider, and system prompt.
+    /// </summary>
+    [JsonPropertyName("definition")]
+    public AgentInstanceDefinition Definition { get; set; } = null!;
+
+    /// <summary>
+    /// Aggregated metrics across all iterations of this agent instance.
+    /// </summary>
+    [JsonPropertyName("metrics")]
+    public AgentInstanceMetrics Metrics { get; set; } = null!;
+
+    /// <summary>
+    /// The configured limits for this agent instance, set once at creation.
+    /// </summary>
+    [JsonPropertyName("limits")]
+    public AgentInstanceLimits Limits { get; set; } = null!;
+
+    /// <summary>
+    /// The BPMN element ID of the ad-hoc sub-process or AI agent task that owns this agent instance.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId ElementId { get; set; }
+
+    /// <summary>
+    /// The key of the process instance that owns this agent instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The tenant ID of this agent instance.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// The date when this agent instance was created.
+    /// </summary>
+    [JsonPropertyName("creationDate")]
+    public DateTimeOffset CreationDate { get; set; }
+
+    /// <summary>
+    /// The date when this agent instance was last updated.
+    /// </summary>
+    [JsonPropertyName("lastUpdatedDate")]
+    public DateTimeOffset LastUpdatedDate { get; set; }
+
+    /// <summary>
+    /// The date when this agent instance completed. Null while the agent is still running.
+    /// </summary>
+    [JsonPropertyName("completionDate")]
+    public DateTimeOffset? CompletionDate { get; set; }
+
+}
+
+/// <summary>
+/// Agent instance search request.
+/// </summary>
+public sealed class AgentInstanceSearchQuery
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AgentInstanceSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The agent instance search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public AgentInstanceFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// Agent instance search response.
+/// </summary>
+public sealed class AgentInstanceSearchQueryResult
+{
+    /// <summary>
+    /// The matching agent instances.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<AgentInstanceResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// AgentInstanceSearchQuerySortRequest
+/// </summary>
+public sealed class AgentInstanceSearchQuerySortRequest
+{
+    /// <summary>
+    /// The field to sort by.
+    /// </summary>
+    [JsonPropertyName("field")]
+    public string Field { get; set; } = null!;
+
+    /// <summary>
+    /// The order in which to sort the related field.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public SortOrderEnum? Order { get; set; }
+
+}
+
+/// <summary>
+/// The current status of an agent instance.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentInstanceStatusEnum
+{
+    [JsonPropertyName("COMPLETED")]
+    COMPLETED,
+    [JsonPropertyName("IDLE")]
+    IDLE,
+    [JsonPropertyName("INITIALIZING")]
+    INITIALIZING,
+    [JsonPropertyName("THINKING")]
+    THINKING,
+    [JsonPropertyName("TOOL_CALLING")]
+    TOOLCALLING,
+    [JsonPropertyName("TOOL_DISCOVERY")]
+    TOOLDISCOVERY,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AgentInstanceStatusExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentInstanceStatusExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentInstanceStatusExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentInstanceStatusExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceStatusExactMatch");
+        return new AgentInstanceStatusExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// AgentInstanceStatusEnum property with full advanced search capabilities.
+/// </summary>
+public sealed class AgentInstanceStatusFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceStatusEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceStatusEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceStatusEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
 
 }
 
@@ -3424,10 +4123,13 @@ public sealed class BatchOperationItemResponse
     public string ItemKey { get; set; } = null!;
 
     /// <summary>
-    /// the process instance key of the processed item.
+    /// The process instance key of the processed item. Null for batch-op types whose targets
+    /// are not process instances (e.g. DELETE_DECISION_INSTANCE, DELETE_DECISION_DEFINITION,
+    /// DELETE_PROCESS_DEFINITION).
+    /// 
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the root process instance. The root process instance is the top-level
@@ -4258,6 +4960,39 @@ public sealed class Changeset
 }
 
 /// <summary>
+/// The unique identifier of an OAuth client.
+/// Minted outside the Camunda REST API: in SaaS by Console, in Self-Managed
+/// with OIDC by the external identity provider (e.g. EntraID, Keycloak,
+/// Okta). In Self-Managed with Basic authentication, machine-to-machine
+/// applications are modelled as users instead — see the user identifier.
+/// 
+/// </summary>
+public readonly record struct ClientId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ClientId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ClientId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ClientId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClientId", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        return new ClientId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// ClockPinRequest
 /// </summary>
 public sealed class ClockPinRequest
@@ -4268,6 +5003,34 @@ public sealed class ClockPinRequest
     [JsonPropertyName("timestamp")]
     public long Timestamp { get; set; }
 
+}
+
+/// <summary>
+/// The name of a cluster variable. Unique within its scope (global or tenant-specific).
+/// </summary>
+public readonly record struct ClusterVariableName : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ClusterVariableName(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ClusterVariableName"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ClusterVariableName AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClusterVariableName", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        return new ClusterVariableName(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -4285,7 +5048,7 @@ public sealed class ClusterVariableResult
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
+    public ClusterVariableName Name { get; set; }
 
     /// <summary>
     /// The scope of a cluster variable.
@@ -4310,7 +5073,7 @@ public sealed class ClusterVariableResultBase
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
+    public ClusterVariableName Name { get; set; }
 
     /// <summary>
     /// The scope of a cluster variable.
@@ -4533,7 +5296,7 @@ public sealed class ClusterVariableSearchResult
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
+    public ClusterVariableName Name { get; set; }
 
     /// <summary>
     /// The scope of a cluster variable.
@@ -4850,7 +5613,7 @@ public sealed class CreateClusterVariableRequest
     /// The name of the cluster variable. Must be unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
+    public ClusterVariableName Name { get; set; }
 
     /// <summary>
     /// The value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
@@ -7169,6 +7932,85 @@ public readonly record struct ElementId : global::Camunda.Orchestration.Sdk.ICam
 }
 
 /// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ElementIdExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ElementIdExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ElementIdExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ElementIdExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementIdExactMatch");
+        return new ElementIdExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// ElementId property with full advanced search capabilities.
+/// </summary>
+public sealed class ElementIdFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ElementId? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ElementId? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ElementId>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ElementId>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
 /// Element instance filter.
 /// </summary>
 public sealed class ElementInstanceFilter
@@ -7195,14 +8037,14 @@ public sealed class ElementInstanceFilter
     /// The element ID for this element instance.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public ElementId? ElementId { get; set; }
+    public ElementIdFilterProperty? ElementId { get; set; }
 
     /// <summary>
     /// The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don&apos;t contain this data and cannot be found.
     /// 
     /// </summary>
     [JsonPropertyName("elementName")]
-    public string? ElementName { get; set; }
+    public StringFilterProperty? ElementName { get; set; }
 
     /// <summary>
     /// Shows whether this element instance has an incident related to.
@@ -8242,13 +9084,13 @@ public readonly record struct GlobalListenerId : global::Camunda.Orchestration.S
     /// </summary>
     public static GlobalListenerId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerId");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerId", pattern: @"^[a-zA-Z0-9_~@.+\-]+$", minLength: 1, maxLength: 256);
         return new GlobalListenerId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+\-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -8639,7 +9481,7 @@ public sealed class GroupClientResult
     /// The ID of the client.
     /// </summary>
     [JsonPropertyName("clientId")]
-    public string ClientId { get; set; } = null!;
+    public ClientId ClientId { get; set; }
 
 }
 
@@ -8709,7 +9551,7 @@ public sealed class GroupCreateRequest
     /// The ID of the new group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
     /// <summary>
     /// The display name of the new group.
@@ -8734,7 +9576,7 @@ public sealed class GroupCreateResult
     /// The ID of the created group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
     /// <summary>
     /// The display name of the created group.
@@ -8767,6 +9609,34 @@ public sealed class GroupFilter
     [JsonPropertyName("name")]
     public string? Name { get; set; }
 
+}
+
+/// <summary>
+/// The unique identifier of a group.
+/// </summary>
+public readonly record struct GroupId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private GroupId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="GroupId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static GroupId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GroupId", minLength: 1, maxLength: 256);
+        return new GroupId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -8803,7 +9673,7 @@ public sealed class GroupResult
     /// The group ID.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
     /// <summary>
     /// The group description.
@@ -8920,10 +9790,10 @@ public sealed class GroupUpdateRequest
 public sealed class GroupUpdateResult
 {
     /// <summary>
-    /// The unique external group ID.
+    /// The unique group ID.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
     /// <summary>
     /// The name of the group.
@@ -10378,6 +11248,8 @@ public enum JobListenerEventTypeEnum
 {
     [JsonPropertyName("ASSIGNING")]
     ASSIGNING,
+    [JsonPropertyName("BEFORE_ALL")]
+    BEFOREALL,
     [JsonPropertyName("CANCELING")]
     CANCELING,
     [JsonPropertyName("COMPLETING")]
@@ -11427,7 +12299,7 @@ public sealed class MappingRuleCreateRequest
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
     /// <summary>
     /// The name of the claim to map.
@@ -11476,7 +12348,7 @@ public sealed class MappingRuleCreateResult
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
 }
 
@@ -11532,7 +12404,7 @@ public sealed class MappingRuleCreateUpdateResult
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
 }
 
@@ -11563,8 +12435,36 @@ public sealed class MappingRuleFilter
     /// The ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string? MappingRuleId { get; set; }
+    public MappingRuleId? MappingRuleId { get; set; }
 
+}
+
+/// <summary>
+/// The unique identifier of a mapping rule.
+/// </summary>
+public readonly record struct MappingRuleId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private MappingRuleId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="MappingRuleId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static MappingRuleId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MappingRuleId", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        return new MappingRuleId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -11594,7 +12494,7 @@ public sealed class MappingRuleResult
     /// The ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
 }
 
@@ -11713,7 +12613,7 @@ public sealed class MappingRuleUpdateResult
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
 }
 
@@ -11970,6 +12870,39 @@ public sealed class MessageSubscriptionFilter
     [JsonPropertyName("tenantId")]
     public StringFilterProperty? TenantId { get; set; }
 
+    /// <summary>
+    /// The type of message subscription to filter by. When omitted, both
+    /// `START_EVENT` and `PROCESS_EVENT` are returned. Only available for data
+    /// created with Camunda 8.10 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("messageSubscriptionType")]
+    public MessageSubscriptionTypeFilterProperty? MessageSubscriptionType { get; set; }
+
+    /// <summary>
+    /// The name of the process definition associated with this message subscription.
+    /// </summary>
+    [JsonPropertyName("processDefinitionName")]
+    public StringFilterProperty? ProcessDefinitionName { get; set; }
+
+    /// <summary>
+    /// The version of the process definition associated with this message subscription.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public IntegerFilterProperty? ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// Filter by tool name extracted from the `io.camunda.tool:name` zeebe:property.
+    /// </summary>
+    [JsonPropertyName("toolName")]
+    public StringFilterProperty? ToolName { get; set; }
+
+    /// <summary>
+    /// Filter by inbound connector type extracted from the `inbound.type` zeebe:property.
+    /// </summary>
+    [JsonPropertyName("inboundConnectorType")]
+    public StringFilterProperty? InboundConnectorType { get; set; }
+
 }
 
 /// <summary>
@@ -12090,6 +13023,8 @@ public sealed class MessageSubscriptionResult
 
     /// <summary>
     /// The process instance key associated with this message subscription.
+    /// Only populated for intermediate event entities.
+    /// 
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
@@ -12111,6 +13046,8 @@ public sealed class MessageSubscriptionResult
 
     /// <summary>
     /// The element instance key associated with this message subscription.
+    /// Only populated for intermediate event entities.
+    /// 
     /// </summary>
     [JsonPropertyName("elementInstanceKey")]
     public ElementInstanceKey? ElementInstanceKey { get; set; }
@@ -12138,6 +13075,53 @@ public sealed class MessageSubscriptionResult
     /// </summary>
     [JsonPropertyName("correlationKey")]
     public string? CorrelationKey { get; set; }
+
+    /// <summary>
+    /// The type of message subscription.
+    /// `START_EVENT` is definition-scoped (process start events). Always has a value; only
+    /// captured from Camunda 8.10 onwards.
+    /// `PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have
+    /// no value stored; the API returns `PROCESS_EVENT` as a default for those entries.
+    /// 
+    /// </summary>
+    [JsonPropertyName("messageSubscriptionType")]
+    public MessageSubscriptionTypeEnum MessageSubscriptionType { get; set; }
+
+    /// <summary>
+    /// The `zeebe:properties` extension properties extracted from the BPMN element associated
+    /// with this subscription. Empty object when no properties are defined.
+    /// 
+    /// </summary>
+    [JsonPropertyName("extensionProperties")]
+    public Dictionary<string, string> ExtensionProperties { get; set; } = null!;
+
+    /// <summary>
+    /// The name of the process definition associated with this message subscription.
+    /// </summary>
+    [JsonPropertyName("processDefinitionName")]
+    public string? ProcessDefinitionName { get; set; }
+
+    /// <summary>
+    /// The version of the process definition associated with this message subscription.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int? ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// Tool name extracted from the `io.camunda.tool:name` zeebe:property.
+    /// Null when the property is absent.
+    /// 
+    /// </summary>
+    [JsonPropertyName("toolName")]
+    public string? ToolName { get; set; }
+
+    /// <summary>
+    /// Inbound connector type extracted from the `inbound.type` zeebe:property.
+    /// Null when the property is absent.
+    /// 
+    /// </summary>
+    [JsonPropertyName("inboundConnectorType")]
+    public string? InboundConnectorType { get; set; }
 
     /// <summary>
     /// The unique identifier of the tenant.
@@ -12282,6 +13266,96 @@ public sealed class MessageSubscriptionStateFilterProperty
     /// </summary>
     [JsonPropertyName("$in")]
     public List<MessageSubscriptionStateEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// The type of message subscription.
+/// `START_EVENT` is definition-scoped (process start events). Always has a value; only
+/// captured from Camunda 8.10 onwards.
+/// `PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have
+/// no value stored; the API returns `PROCESS_EVENT` as a default for those entries.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum MessageSubscriptionTypeEnum
+{
+    [JsonPropertyName("START_EVENT")]
+    STARTEVENT,
+    [JsonPropertyName("PROCESS_EVENT")]
+    PROCESSEVENT,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct MessageSubscriptionTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private MessageSubscriptionTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="MessageSubscriptionTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static MessageSubscriptionTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionTypeExactMatch");
+        return new MessageSubscriptionTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// MessageSubscriptionTypeEnum with full advanced search capabilities.
+/// </summary>
+public sealed class MessageSubscriptionTypeFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public MessageSubscriptionTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public MessageSubscriptionTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<MessageSubscriptionTypeEnum>? In { get; set; }
 
     /// <summary>
     /// Checks if the property matches the provided like value.
@@ -12749,6 +13823,85 @@ public readonly record struct ProcessDefinitionId : global::Camunda.Orchestratio
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ProcessDefinitionIdExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ProcessDefinitionIdExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ProcessDefinitionIdExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ProcessDefinitionIdExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionIdExactMatch", pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        return new ProcessDefinitionIdExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// ProcessDefinitionId property with full advanced search capabilities.
+/// </summary>
+public sealed class ProcessDefinitionIdFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ProcessDefinitionId? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ProcessDefinitionId? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ProcessDefinitionId>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ProcessDefinitionId>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
 }
 
 /// <summary>
@@ -14787,6 +15940,55 @@ public sealed class ProcessInstanceStateFilterProperty
 }
 
 /// <summary>
+/// Resource search filter.
+/// </summary>
+public sealed class ResourceFilter
+{
+    /// <summary>
+    /// The key for this resource.
+    /// </summary>
+    [JsonPropertyName("resourceKey")]
+    public ResourceKeyFilterProperty? ResourceKey { get; set; }
+
+    /// <summary>
+    /// Resource name of this resource.
+    /// </summary>
+    [JsonPropertyName("resourceName")]
+    public StringFilterProperty? ResourceName { get; set; }
+
+    /// <summary>
+    /// Resource ID of this resource.
+    /// </summary>
+    [JsonPropertyName("resourceId")]
+    public StringFilterProperty? ResourceId { get; set; }
+
+    /// <summary>
+    /// Version of this resource.
+    /// </summary>
+    [JsonPropertyName("version")]
+    public IntegerFilterProperty? Version { get; set; }
+
+    /// <summary>
+    /// Version tag of this resource.
+    /// </summary>
+    [JsonPropertyName("versionTag")]
+    public StringFilterProperty? VersionTag { get; set; }
+
+    /// <summary>
+    /// Deployment key of this resource.
+    /// </summary>
+    [JsonPropertyName("deploymentKey")]
+    public DeploymentKeyFilterProperty? DeploymentKey { get; set; }
+
+    /// <summary>
+    /// Tenant ID of this resource.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+}
+
+/// <summary>
 /// The system-assigned key for this resource.
 /// </summary>
 public readonly record struct ResourceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
@@ -14955,6 +16157,69 @@ public sealed class ResourceResult
 }
 
 /// <summary>
+/// ResourceSearchQuery
+/// </summary>
+public sealed class ResourceSearchQuery
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<ResourceSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The resource search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ResourceFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// ResourceSearchQueryResult
+/// </summary>
+public sealed class ResourceSearchQueryResult
+{
+    /// <summary>
+    /// The matching resources.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<ResourceResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// ResourceSearchQuerySortRequest
+/// </summary>
+public sealed class ResourceSearchQuerySortRequest
+{
+    /// <summary>
+    /// The field to sort by.
+    /// </summary>
+    [JsonPropertyName("field")]
+    public string Field { get; set; } = null!;
+
+    /// <summary>
+    /// The order in which to sort the related field.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public SortOrderEnum? Order { get; set; }
+
+}
+
+/// <summary>
 /// The type of resource to add/remove permissions to/from.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -15011,7 +16276,7 @@ public sealed class RoleClientResult
     /// The ID of the client.
     /// </summary>
     [JsonPropertyName("clientId")]
-    public string ClientId { get; set; } = null!;
+    public ClientId ClientId { get; set; }
 
 }
 
@@ -15081,7 +16346,7 @@ public sealed class RoleCreateRequest
     /// The ID of the new role.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string RoleId { get; set; } = null!;
+    public RoleId RoleId { get; set; }
 
     /// <summary>
     /// The display name of the new role.
@@ -15106,7 +16371,7 @@ public sealed class RoleCreateResult
     /// The ID of the created role.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string RoleId { get; set; } = null!;
+    public RoleId RoleId { get; set; }
 
     /// <summary>
     /// The display name of the created role.
@@ -15131,7 +16396,7 @@ public sealed class RoleFilter
     /// The role ID search filters.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string? RoleId { get; set; }
+    public RoleId? RoleId { get; set; }
 
     /// <summary>
     /// The role name search filters.
@@ -15150,7 +16415,7 @@ public sealed class RoleGroupResult
     /// The id of the group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
 }
 
@@ -15212,6 +16477,34 @@ public sealed class RoleGroupSearchResult
 }
 
 /// <summary>
+/// The unique identifier of a role.
+/// </summary>
+public readonly record struct RoleId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private RoleId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="RoleId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static RoleId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "RoleId", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        return new RoleId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// RoleMappingRuleSearchResult
 /// </summary>
 public sealed class RoleMappingRuleSearchResult
@@ -15245,7 +16538,7 @@ public sealed class RoleResult
     /// The role id.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string RoleId { get; set; } = null!;
+    public RoleId RoleId { get; set; }
 
     /// <summary>
     /// The description of the role.
@@ -15358,7 +16651,7 @@ public sealed class RoleUpdateResult
     /// The ID of the updated role.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string RoleId { get; set; } = null!;
+    public RoleId RoleId { get; set; }
 
 }
 
@@ -15953,7 +17246,7 @@ public sealed class TenantClientResult
     /// The ID of the client.
     /// </summary>
     [JsonPropertyName("clientId")]
-    public string ClientId { get; set; } = null!;
+    public ClientId ClientId { get; set; }
 
 }
 
@@ -16020,10 +17313,13 @@ public sealed class TenantClientSearchResult
 public sealed class TenantCreateRequest
 {
     /// <summary>
-    /// The unique ID for the tenant. Must be 255 characters or less. Can contain letters, numbers, [`_`, `-`, `+`, `.`, `@`].
+    /// The unique ID for the tenant. Must be 31 characters or less and match
+    /// `^[\w.-]{1,31}$` (word characters, `.`, `-`). The literal
+    /// `&lt;default&gt;` is also accepted as the default-tenant alias.
+    /// 
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public string TenantId { get; set; } = null!;
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The name of the tenant.
@@ -16045,7 +17341,7 @@ public sealed class TenantCreateRequest
 public sealed class TenantCreateResult
 {
     /// <summary>
-    /// The unique identifier of the tenant.
+    /// The unique identifier of the created tenant.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId TenantId { get; set; }
@@ -16102,10 +17398,10 @@ public enum TenantFilterEnum
 public sealed class TenantGroupResult
 {
     /// <summary>
-    /// The groupId of the group.
+    /// The group ID.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
 }
 
@@ -16182,13 +17478,13 @@ public readonly record struct TenantId : global::Camunda.Orchestration.Sdk.ICamu
     /// </summary>
     public static TenantId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "TenantId", pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "TenantId", pattern: @"^(<default>|[\w\.\-]{1,31})$", minLength: 1, maxLength: 31);
         return new TenantId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[\w\.\-]{1,31})$", minLength: 1, maxLength: 31);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -16345,7 +17641,7 @@ public sealed class TenantUpdateRequest
 public sealed class TenantUpdateResult
 {
     /// <summary>
-    /// The unique identifier of the tenant.
+    /// The unique identifier of the updated tenant.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId TenantId { get; set; }
@@ -16601,7 +17897,7 @@ public sealed class UsageMetricsResponseItem
 public sealed class UserCreateResult
 {
     /// <summary>
-    /// The unique name of a user.
+    /// The username of the created user.
     /// </summary>
     [JsonPropertyName("username")]
     public Username Username { get; set; }
@@ -16661,13 +17957,13 @@ public readonly record struct Username : global::Camunda.Orchestration.Sdk.ICamu
     /// </summary>
     public static Username AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Username", pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Username", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
         return new Username(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -16685,10 +17981,10 @@ public sealed class UserRequest
     public string Password { get; set; } = null!;
 
     /// <summary>
-    /// The username of the user.
+    /// The username of the new user.
     /// </summary>
     [JsonPropertyName("username")]
-    public string Username { get; set; } = null!;
+    public Username Username { get; set; }
 
     /// <summary>
     /// The name of the user.
@@ -16710,7 +18006,7 @@ public sealed class UserRequest
 public sealed class UserResult
 {
     /// <summary>
-    /// The unique name of a user.
+    /// The username of the user.
     /// </summary>
     [JsonPropertyName("username")]
     public Username Username { get; set; }
@@ -16985,7 +18281,7 @@ public sealed class UserTaskFilter
     /// The ID of the process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
+    public ProcessDefinitionIdFilterProperty? ProcessDefinitionId { get; set; }
 
     /// <summary>
     /// The user task creation date.
@@ -17033,13 +18329,13 @@ public sealed class UserTaskFilter
     /// The key of the process definition.
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// The key of the process instance.
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
-    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+    public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the element instance.
@@ -17596,7 +18892,7 @@ public sealed class UserUpdateRequest
 public sealed class UserUpdateResult
 {
     /// <summary>
-    /// The unique name of a user.
+    /// The username of the updated user.
     /// </summary>
     [JsonPropertyName("username")]
     public Username Username { get; set; }
@@ -18025,555 +19321,6 @@ public sealed class VariableValueFilterProperty
     /// </summary>
     [JsonPropertyName("value")]
     public StringFilterProperty Value { get; set; } = null!;
-
-}
-
-/// <summary>
-/// CreateMappingRuleResponse
-/// </summary>
-public sealed class CreateMappingRuleResponse
-{
-    /// <summary>
-    /// The name of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimName")]
-    public string ClaimName { get; set; } = null!;
-
-    /// <summary>
-    /// The value of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimValue")]
-    public string ClaimValue { get; set; } = null!;
-
-    /// <summary>
-    /// The name of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
-
-    /// <summary>
-    /// The unique ID of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
-
-}
-
-/// <summary>
-/// GetUserResponse
-/// </summary>
-public sealed class GetUserResponse
-{
-    /// <summary>
-    /// The unique name of a user.
-    /// </summary>
-    [JsonPropertyName("username")]
-    public Username Username { get; set; }
-
-    /// <summary>
-    /// The name of the user.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string? Name { get; set; }
-
-    /// <summary>
-    /// The email of the user.
-    /// </summary>
-    [JsonPropertyName("email")]
-    public string? Email { get; set; }
-
-}
-
-/// <summary>
-/// SearchClientsForGroupRequest
-/// </summary>
-public sealed class SearchClientsForGroupRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchClientsForGroupResponse
-/// </summary>
-public sealed class SearchClientsForGroupResponse
-{
-    /// <summary>
-    /// The matching client IDs.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupClientResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchClientsForRoleRequest
-/// </summary>
-public sealed class SearchClientsForRoleRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchClientsForRoleResponse
-/// </summary>
-public sealed class SearchClientsForRoleResponse
-{
-    /// <summary>
-    /// The matching clients.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupClientResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchClientsForTenantRequest
-/// </summary>
-public sealed class SearchClientsForTenantRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchClientsForTenantResponse
-/// </summary>
-public sealed class SearchClientsForTenantResponse
-{
-    /// <summary>
-    /// The matching clients.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupClientResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchMappingRuleResponse
-/// </summary>
-public sealed class SearchMappingRuleResponse
-{
-    /// <summary>
-    /// The matching mapping rules.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<MappingRuleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchMappingRulesForGroupResponse
-/// </summary>
-public sealed class SearchMappingRulesForGroupResponse
-{
-    /// <summary>
-    /// The matching mapping rules.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<MappingRuleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchMappingRulesForRoleResponse
-/// </summary>
-public sealed class SearchMappingRulesForRoleResponse
-{
-    /// <summary>
-    /// The matching mapping rules.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<MappingRuleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchMappingRulesForTenantResponse
-/// </summary>
-public sealed class SearchMappingRulesForTenantResponse
-{
-    /// <summary>
-    /// The matching mapping rules.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<MappingRuleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchRolesForGroupResponse
-/// </summary>
-public sealed class SearchRolesForGroupResponse
-{
-    /// <summary>
-    /// The matching roles.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<RoleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchRolesForTenantResponse
-/// </summary>
-public sealed class SearchRolesForTenantResponse
-{
-    /// <summary>
-    /// The matching roles.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<RoleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchUsersForGroupRequest
-/// </summary>
-public sealed class SearchUsersForGroupRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchUsersForGroupResponse
-/// </summary>
-public sealed class SearchUsersForGroupResponse
-{
-    /// <summary>
-    /// The matching members.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupUserResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchUsersForRoleRequest
-/// </summary>
-public sealed class SearchUsersForRoleRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchUsersForRoleResponse
-/// </summary>
-public sealed class SearchUsersForRoleResponse
-{
-    /// <summary>
-    /// The matching users.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupUserResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchUsersForTenantRequest
-/// </summary>
-public sealed class SearchUsersForTenantRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchUsersForTenantResponse
-/// </summary>
-public sealed class SearchUsersForTenantResponse
-{
-    /// <summary>
-    /// The matching users.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupUserResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchUsersResponse
-/// </summary>
-public sealed class SearchUsersResponse
-{
-    /// <summary>
-    /// The matching users.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<UserCreateResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// User task effective variable search query request. Uses offset-based pagination only.
-/// 
-/// </summary>
-public sealed class SearchUserTaskEffectiveVariablesRequest
-{
-    /// <summary>
-    /// Pagination parameters.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public OffsetPagination? Page { get; set; }
-
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The user task variable search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public UserTaskVariableFilter? Filter { get; set; }
-
-}
-
-/// <summary>
-/// User task search query request.
-/// </summary>
-public sealed class SearchUserTaskVariablesRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The user task variable search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public UserTaskVariableFilter? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// Variable search query request.
-/// </summary>
-public sealed class SearchVariablesRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The variable search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public VariableFilter? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// UpdateMappingRuleResponse
-/// </summary>
-public sealed class UpdateMappingRuleResponse
-{
-    /// <summary>
-    /// The name of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimName")]
-    public string ClaimName { get; set; } = null!;
-
-    /// <summary>
-    /// The value of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimValue")]
-    public string ClaimValue { get; set; } = null!;
-
-    /// <summary>
-    /// The name of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
-
-    /// <summary>
-    /// The unique ID of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
-
-}
-
-/// <summary>
-/// UpdateUserResponse
-/// </summary>
-public sealed class UpdateUserResponse
-{
-    /// <summary>
-    /// The unique name of a user.
-    /// </summary>
-    [JsonPropertyName("username")]
-    public Username Username { get; set; }
-
-    /// <summary>
-    /// The name of the user.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string? Name { get; set; }
-
-    /// <summary>
-    /// The email of the user.
-    /// </summary>
-    [JsonPropertyName("email")]
-    public string? Email { get; set; }
 
 }
 
