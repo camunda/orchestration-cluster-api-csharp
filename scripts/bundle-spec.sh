@@ -26,7 +26,7 @@ if [ "${CAMUNDA_SDK_SKIP_FETCH_SPEC:-0}" = "1" ]; then
         --output-spec "$BUNDLED_SPEC" \
         --output-metadata "$METADATA"
 else
-    REF="${SPEC_REF:-stable/8.9}"
+    REF="${SPEC_REF:-main}"
     echo "[bundle-spec] Fetching (ref: $REF) and bundling spec"
     npx camunda-schema-bundler \
         --ref "$REF" \

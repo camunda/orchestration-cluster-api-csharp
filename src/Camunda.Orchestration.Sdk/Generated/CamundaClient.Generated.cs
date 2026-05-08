@@ -115,26 +115,26 @@ public partial class CamundaClient
     /// Operation: assignClientToGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignClientToGroupExample()
+    /// public static async Task AssignClientToGroupExample(GroupId groupId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignClientToGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+    ///     await client.AssignClientToGroupAsync(groupId, clientId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignClientToGroupExample()
+    /// public static async Task AssignClientToGroupExample(GroupId groupId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignClientToGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+    ///     await client.AssignClientToGroupAsync(groupId, clientId);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignClientToGroupAsync(string groupId, string clientId, CancellationToken ct = default)
+    public async Task AssignClientToGroupAsync(GroupId groupId, ClientId clientId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignClientToGroup", false, ct);
@@ -150,30 +150,30 @@ public partial class CamundaClient
     /// Operation: assignClientToTenant
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignClientToTenantExample(TenantId tenantId)
+    /// public static async Task AssignClientToTenantExample(TenantId tenantId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.AssignClientToTenantAsync(
     ///         tenantId,
-    ///         &quot;my-service-account&quot;);
+    ///         clientId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignClientToTenantExample(TenantId tenantId)
+    /// public static async Task AssignClientToTenantExample(TenantId tenantId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.AssignClientToTenantAsync(
     ///         tenantId,
-    ///         &quot;my-service-account&quot;);
+    ///         clientId);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignClientToTenantAsync(TenantId tenantId, string clientId, CancellationToken ct = default)
+    public async Task AssignClientToTenantAsync(TenantId tenantId, ClientId clientId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignClientToTenant", false, ct);
@@ -189,30 +189,30 @@ public partial class CamundaClient
     /// Operation: assignGroupToTenant
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignGroupToTenantExample(TenantId tenantId)
+    /// public static async Task AssignGroupToTenantExample(TenantId tenantId, GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.AssignGroupToTenantAsync(
     ///         tenantId,
-    ///         &quot;engineering&quot;);
+    ///         groupId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignGroupToTenantExample(TenantId tenantId)
+    /// public static async Task AssignGroupToTenantExample(TenantId tenantId, GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.AssignGroupToTenantAsync(
     ///         tenantId,
-    ///         &quot;engineering&quot;);
+    ///         groupId);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignGroupToTenantAsync(TenantId tenantId, string groupId, CancellationToken ct = default)
+    public async Task AssignGroupToTenantAsync(TenantId tenantId, GroupId groupId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignGroupToTenant", false, ct);
@@ -226,26 +226,26 @@ public partial class CamundaClient
     /// Operation: assignMappingRuleToGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignMappingRuleToGroupExample()
+    /// public static async Task AssignMappingRuleToGroupExample(GroupId groupId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignMappingRuleToGroupAsync(&quot;engineering&quot;, &quot;rule-123&quot;);
+    ///     await client.AssignMappingRuleToGroupAsync(groupId, mappingRuleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignMappingRuleToGroupExample()
+    /// public static async Task AssignMappingRuleToGroupExample(GroupId groupId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignMappingRuleToGroupAsync(&quot;engineering&quot;, &quot;rule-123&quot;);
+    ///     await client.AssignMappingRuleToGroupAsync(groupId, mappingRuleId);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignMappingRuleToGroupAsync(string groupId, string mappingRuleId, CancellationToken ct = default)
+    public async Task AssignMappingRuleToGroupAsync(GroupId groupId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignMappingRuleToGroup", false, ct);
@@ -259,30 +259,30 @@ public partial class CamundaClient
     /// Operation: assignMappingRuleToTenant
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
+    /// public static async Task AssignMappingRuleToTenantExample(TenantId tenantId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.AssignMappingRuleToTenantAsync(
     ///         tenantId,
-    ///         &quot;rule-123&quot;);
+    ///         mappingRuleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
+    /// public static async Task AssignMappingRuleToTenantExample(TenantId tenantId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.AssignMappingRuleToTenantAsync(
     ///         tenantId,
-    ///         &quot;rule-123&quot;);
+    ///         mappingRuleId);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignMappingRuleToTenantAsync(TenantId tenantId, string mappingRuleId, CancellationToken ct = default)
+    public async Task AssignMappingRuleToTenantAsync(TenantId tenantId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignMappingRuleToTenant", false, ct);
@@ -296,26 +296,26 @@ public partial class CamundaClient
     /// Operation: assignRoleToClient
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToClientExample()
+    /// public static async Task AssignRoleToClientExample(RoleId roleId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignRoleToClientAsync(&quot;developer&quot;, &quot;my-service-account&quot;);
+    ///     await client.AssignRoleToClientAsync(roleId, clientId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToClientExample()
+    /// public static async Task AssignRoleToClientExample(RoleId roleId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignRoleToClientAsync(&quot;developer&quot;, &quot;my-service-account&quot;);
+    ///     await client.AssignRoleToClientAsync(roleId, clientId);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignRoleToClientAsync(string roleId, string clientId, CancellationToken ct = default)
+    public async Task AssignRoleToClientAsync(RoleId roleId, ClientId clientId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToClient", false, ct);
@@ -329,26 +329,26 @@ public partial class CamundaClient
     /// Operation: assignRoleToGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToGroupExample()
+    /// public static async Task AssignRoleToGroupExample(RoleId roleId, GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignRoleToGroupAsync(&quot;developer&quot;, &quot;engineering&quot;);
+    ///     await client.AssignRoleToGroupAsync(roleId, groupId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToGroupExample()
+    /// public static async Task AssignRoleToGroupExample(RoleId roleId, GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignRoleToGroupAsync(&quot;developer&quot;, &quot;engineering&quot;);
+    ///     await client.AssignRoleToGroupAsync(roleId, groupId);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignRoleToGroupAsync(string roleId, string groupId, CancellationToken ct = default)
+    public async Task AssignRoleToGroupAsync(RoleId roleId, GroupId groupId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToGroup", false, ct);
@@ -362,26 +362,26 @@ public partial class CamundaClient
     /// Operation: assignRoleToMappingRule
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToMappingRuleExample()
+    /// public static async Task AssignRoleToMappingRuleExample(RoleId roleId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignRoleToMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
+    ///     await client.AssignRoleToMappingRuleAsync(roleId, mappingRuleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToMappingRuleExample()
+    /// public static async Task AssignRoleToMappingRuleExample(RoleId roleId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignRoleToMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
+    ///     await client.AssignRoleToMappingRuleAsync(roleId, mappingRuleId);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignRoleToMappingRuleAsync(string roleId, string mappingRuleId, CancellationToken ct = default)
+    public async Task AssignRoleToMappingRuleAsync(RoleId roleId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToMappingRule", false, ct);
@@ -397,30 +397,30 @@ public partial class CamundaClient
     /// Operation: assignRoleToTenant
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToTenantExample(TenantId tenantId)
+    /// public static async Task AssignRoleToTenantExample(TenantId tenantId, RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.AssignRoleToTenantAsync(
     ///         tenantId,
-    ///         &quot;developer&quot;);
+    ///         roleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToTenantExample(TenantId tenantId)
+    /// public static async Task AssignRoleToTenantExample(TenantId tenantId, RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.AssignRoleToTenantAsync(
     ///         tenantId,
-    ///         &quot;developer&quot;);
+    ///         roleId);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignRoleToTenantAsync(TenantId tenantId, string roleId, CancellationToken ct = default)
+    public async Task AssignRoleToTenantAsync(TenantId tenantId, RoleId roleId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToTenant", false, ct);
@@ -434,26 +434,26 @@ public partial class CamundaClient
     /// Operation: assignRoleToUser
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToUserExample(Username username)
+    /// public static async Task AssignRoleToUserExample(RoleId roleId, Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignRoleToUserAsync(&quot;developer&quot;, username);
+    ///     await client.AssignRoleToUserAsync(roleId, username);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignRoleToUserExample(Username username)
+    /// public static async Task AssignRoleToUserExample(RoleId roleId, Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignRoleToUserAsync(&quot;developer&quot;, username);
+    ///     await client.AssignRoleToUserAsync(roleId, username);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignRoleToUserAsync(string roleId, Username username, CancellationToken ct = default)
+    public async Task AssignRoleToUserAsync(RoleId roleId, Username username, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToUser", false, ct);
@@ -513,26 +513,26 @@ public partial class CamundaClient
     /// Operation: assignUserToGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignUserToGroupExample(Username username)
+    /// public static async Task AssignUserToGroupExample(GroupId groupId, Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignUserToGroupAsync(&quot;engineering&quot;, username);
+    ///     await client.AssignUserToGroupAsync(groupId, username);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task AssignUserToGroupExample(Username username)
+    /// public static async Task AssignUserToGroupExample(GroupId groupId, Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.AssignUserToGroupAsync(&quot;engineering&quot;, username);
+    ///     await client.AssignUserToGroupAsync(groupId, username);
     /// }
     /// </code>
     /// </example>
-    public async Task AssignUserToGroupAsync(string groupId, Username username, CancellationToken ct = default)
+    public async Task AssignUserToGroupAsync(GroupId groupId, Username username, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignUserToGroup", false, ct);
@@ -869,13 +869,13 @@ public partial class CamundaClient
     /// Operation: createAdminUser
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateAdminUserExample()
+    /// public static async Task CreateAdminUserExample(Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateAdminUserAsync(new UserRequest
     ///     {
-    ///         Username = &quot;admin&quot;,
+    ///         Username = username,
     ///         Name = &quot;Admin User&quot;,
     ///         Email = &quot;admin@example.com&quot;,
     ///         Password = &quot;admin-password&quot;,
@@ -888,13 +888,13 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateAdminUserExample()
+    /// public static async Task CreateAdminUserExample(Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateAdminUserAsync(new UserRequest
     ///     {
-    ///         Username = &quot;admin&quot;,
+    ///         Username = username,
     ///         Name = &quot;Admin User&quot;,
     ///         Email = &quot;admin@example.com&quot;,
     ///         Password = &quot;admin-password&quot;,
@@ -1221,14 +1221,14 @@ public partial class CamundaClient
     /// Operation: createGlobalClusterVariable
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateGlobalClusterVariableExample()
+    /// public static async Task CreateGlobalClusterVariableExample(ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateGlobalClusterVariableAsync(
     ///         new CreateClusterVariableRequest
     ///         {
-    ///             Name = &quot;my-variable&quot;,
+    ///             Name = name,
     ///             Value = &quot;my-value&quot;,
     ///         });
     /// 
@@ -1239,14 +1239,14 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateGlobalClusterVariableExample()
+    /// public static async Task CreateGlobalClusterVariableExample(ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateGlobalClusterVariableAsync(
     ///         new CreateClusterVariableRequest
     ///         {
-    ///             Name = &quot;my-variable&quot;,
+    ///             Name = name,
     ///             Value = &quot;my-value&quot;,
     ///         });
     /// 
@@ -1310,18 +1310,34 @@ public partial class CamundaClient
     /// <summary>
     /// Create group
     /// Create a new group.
+    /// 
+    /// The supplied `groupId` is validated against `^[a-zA-Z0-9_~@.+-]+$`
+    /// (max 256 characters) by `IdentifierValidator.validateId` in the
+    /// runtime. This strict validation applies wherever the Groups API
+    /// is available: in OIDC deployments that set
+    /// `camunda.security.authentication.oidc.groupsClaim` the Groups
+    /// API (including this endpoint) is disabled entirely, so group
+    /// CRUD never sees externally-minted IdP IDs. The BYOG relaxation
+    /// only loosens validation when a group is referenced *as a member*
+    /// of a role or tenant (`assignRoleToGroup`,
+    /// `assignGroupToTenant`); group CRUD itself always uses the strict
+    /// default-id regex. The constraint is not advertised on the
+    /// `GroupId` schema so that the same schema can be reused at
+    /// member-reference sites without falsely rejecting
+    /// externally-minted IdP group IDs there.
+    /// 
     /// </summary>
     /// <remarks>
     /// Operation: createGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateGroupExample()
+    /// public static async Task CreateGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateGroupAsync(new GroupCreateRequest
     ///     {
-    ///         GroupId = &quot;engineering&quot;,
+    ///         GroupId = groupId,
     ///         Name = &quot;Engineering&quot;,
     ///     });
     /// 
@@ -1332,13 +1348,13 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateGroupExample()
+    /// public static async Task CreateGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateGroupAsync(new GroupCreateRequest
     ///     {
-    ///         GroupId = &quot;engineering&quot;,
+    ///         GroupId = groupId,
     ///         Name = &quot;Engineering&quot;,
     ///     });
     /// 
@@ -1394,10 +1410,10 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<CreateMappingRuleResponse> CreateMappingRuleAsync(MappingRuleCreateRequest body, CancellationToken ct = default)
+    public async Task<MappingRuleCreateResult> CreateMappingRuleAsync(MappingRuleCreateRequest body, CancellationToken ct = default)
     {
         var path = $"/mapping-rules";
-        return await InvokeWithRetryAsync(() => SendAsync<CreateMappingRuleResponse>(HttpMethod.Post, path, body, ct), "createMappingRule", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<MappingRuleCreateResult>(HttpMethod.Post, path, body, ct), "createMappingRule", false, ct);
     }
 
     /// <summary>
@@ -1531,13 +1547,13 @@ public partial class CamundaClient
     /// Operation: createTenant
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateTenantExample()
+    /// public static async Task CreateTenantExample(TenantId tenantId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateTenantAsync(new TenantCreateRequest
     ///     {
-    ///         TenantId = &quot;acme-corp&quot;,
+    ///         TenantId = tenantId,
     ///         Name = &quot;Acme Corporation&quot;,
     ///     });
     /// 
@@ -1548,13 +1564,13 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateTenantExample()
+    /// public static async Task CreateTenantExample(TenantId tenantId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateTenantAsync(new TenantCreateRequest
     ///     {
-    ///         TenantId = &quot;acme-corp&quot;,
+    ///         TenantId = tenantId,
     ///         Name = &quot;Acme Corporation&quot;,
     ///     });
     /// 
@@ -1576,7 +1592,7 @@ public partial class CamundaClient
     /// Operation: createTenantClusterVariable
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
+    /// public static async Task CreateTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
@@ -1584,7 +1600,7 @@ public partial class CamundaClient
     ///         tenantId,
     ///         new CreateClusterVariableRequest
     ///         {
-    ///             Name = &quot;my-variable&quot;,
+    ///             Name = name,
     ///             Value = &quot;tenant-value&quot;,
     ///         });
     /// 
@@ -1595,7 +1611,7 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
+    /// public static async Task CreateTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
@@ -1603,7 +1619,7 @@ public partial class CamundaClient
     ///         tenantId,
     ///         new CreateClusterVariableRequest
     ///         {
-    ///             Name = &quot;my-variable&quot;,
+    ///             Name = name,
     ///             Value = &quot;tenant-value&quot;,
     ///         });
     /// 
@@ -1625,13 +1641,13 @@ public partial class CamundaClient
     /// Operation: createUser
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateUserExample()
+    /// public static async Task CreateUserExample(Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateUserAsync(new UserRequest
     ///     {
-    ///         Username = &quot;jdoe&quot;,
+    ///         Username = username,
     ///         Name = &quot;Jane Doe&quot;,
     ///         Email = &quot;jdoe@example.com&quot;,
     ///         Password = &quot;secure-password&quot;,
@@ -1644,13 +1660,13 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateUserExample()
+    /// public static async Task CreateUserExample(Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.CreateUserAsync(new UserRequest
     ///     {
-    ///         Username = &quot;jdoe&quot;,
+    ///         Username = username,
     ///         Name = &quot;Jane Doe&quot;,
     ///         Email = &quot;jdoe@example.com&quot;,
     ///         Password = &quot;secure-password&quot;,
@@ -1823,26 +1839,26 @@ public partial class CamundaClient
     /// Operation: deleteGlobalClusterVariable
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteGlobalClusterVariableExample()
+    /// public static async Task DeleteGlobalClusterVariableExample(ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.DeleteGlobalClusterVariableAsync(&quot;my-variable&quot;);
+    ///     await client.DeleteGlobalClusterVariableAsync(name);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteGlobalClusterVariableExample()
+    /// public static async Task DeleteGlobalClusterVariableExample(ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.DeleteGlobalClusterVariableAsync(&quot;my-variable&quot;);
+    ///     await client.DeleteGlobalClusterVariableAsync(name);
     /// }
     /// </code>
     /// </example>
-    public async Task DeleteGlobalClusterVariableAsync(string name, CancellationToken ct = default)
+    public async Task DeleteGlobalClusterVariableAsync(ClusterVariableName name, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteGlobalClusterVariable", false, ct);
@@ -1891,26 +1907,26 @@ public partial class CamundaClient
     /// Operation: deleteGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteGroupExample()
+    /// public static async Task DeleteGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.DeleteGroupAsync(&quot;engineering&quot;);
+    ///     await client.DeleteGroupAsync(groupId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteGroupExample()
+    /// public static async Task DeleteGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.DeleteGroupAsync(&quot;engineering&quot;);
+    ///     await client.DeleteGroupAsync(groupId);
     /// }
     /// </code>
     /// </example>
-    public async Task DeleteGroupAsync(string groupId, CancellationToken ct = default)
+    public async Task DeleteGroupAsync(GroupId groupId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteGroup", false, ct);
@@ -1925,26 +1941,26 @@ public partial class CamundaClient
     /// Operation: deleteMappingRule
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteMappingRuleExample()
+    /// public static async Task DeleteMappingRuleExample(MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.DeleteMappingRuleAsync(&quot;rule-123&quot;);
+    ///     await client.DeleteMappingRuleAsync(mappingRuleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteMappingRuleExample()
+    /// public static async Task DeleteMappingRuleExample(MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.DeleteMappingRuleAsync(&quot;rule-123&quot;);
+    ///     await client.DeleteMappingRuleAsync(mappingRuleId);
     /// }
     /// </code>
     /// </example>
-    public async Task DeleteMappingRuleAsync(string mappingRuleId, CancellationToken ct = default)
+    public async Task DeleteMappingRuleAsync(MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteMappingRule", false, ct);
@@ -2086,26 +2102,26 @@ public partial class CamundaClient
     /// Operation: deleteRole
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteRoleExample()
+    /// public static async Task DeleteRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.DeleteRoleAsync(&quot;developer&quot;);
+    ///     await client.DeleteRoleAsync(roleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteRoleExample()
+    /// public static async Task DeleteRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.DeleteRoleAsync(&quot;developer&quot;);
+    ///     await client.DeleteRoleAsync(roleId);
     /// }
     /// </code>
     /// </example>
-    public async Task DeleteRoleAsync(string roleId, CancellationToken ct = default)
+    public async Task DeleteRoleAsync(RoleId roleId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteRole", false, ct);
@@ -2152,30 +2168,30 @@ public partial class CamundaClient
     /// Operation: deleteTenantClusterVariable
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteTenantClusterVariableExample(TenantId tenantId)
+    /// public static async Task DeleteTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.DeleteTenantClusterVariableAsync(
     ///         tenantId,
-    ///         &quot;my-variable&quot;);
+    ///         name);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task DeleteTenantClusterVariableExample(TenantId tenantId)
+    /// public static async Task DeleteTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.DeleteTenantClusterVariableAsync(
     ///         tenantId,
-    ///         &quot;my-variable&quot;);
+    ///         name);
     /// }
     /// </code>
     /// </example>
-    public async Task DeleteTenantClusterVariableAsync(TenantId tenantId, string name, CancellationToken ct = default)
+    public async Task DeleteTenantClusterVariableAsync(TenantId tenantId, ClusterVariableName name, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteTenantClusterVariable", false, ct);
@@ -2427,6 +2443,48 @@ public partial class CamundaClient
     {
         var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}/failure";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "failJob", true, ct);
+    }
+
+    /// <summary>
+    /// Get agent instance
+    /// Returns agent instance as JSON.
+    /// </summary>
+    /// <remarks>
+    /// Operation: getAgentInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAgentInstanceAsync(agentInstanceKey);
+    ///     Console.WriteLine($&quot;Agent instance: {result.AgentInstanceKey}, status: {result.Status}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAgentInstanceAsync(agentInstanceKey);
+    ///     Console.WriteLine($&quot;Agent instance: {result.AgentInstanceKey}, status: {result.Status}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<AgentInstanceResult> GetAgentInstanceAsync(AgentInstanceKey agentInstanceKey, ConsistencyOptions<AgentInstanceResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/agent-instances/{Uri.EscapeDataString(agentInstanceKey.ToString()!)}";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getAgentInstance", true,
+                () => InvokeWithRetryAsync(() => SendAsync<AgentInstanceResult>(HttpMethod.Get, path, null, ct), "getAgentInstance", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceResult>(HttpMethod.Get, path, null, ct), "getAgentInstance", false, ct);
     }
 
     /// <summary>
@@ -2925,11 +2983,11 @@ public partial class CamundaClient
     /// Operation: getGlobalClusterVariable
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetGlobalClusterVariableExample()
+    /// public static async Task GetGlobalClusterVariableExample(ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.GetGlobalClusterVariableAsync(&quot;my-variable&quot;);
+    ///     var result = await client.GetGlobalClusterVariableAsync(name);
     ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
     /// }
     /// </code>
@@ -2937,16 +2995,16 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetGlobalClusterVariableExample()
+    /// public static async Task GetGlobalClusterVariableExample(ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.GetGlobalClusterVariableAsync(&quot;my-variable&quot;);
+    ///     var result = await client.GetGlobalClusterVariableAsync(name);
     ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterVariableResult> GetGlobalClusterVariableAsync(string name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ClusterVariableResult> GetGlobalClusterVariableAsync(ClusterVariableName name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -3066,11 +3124,11 @@ public partial class CamundaClient
     /// Operation: getGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetGroupExample()
+    /// public static async Task GetGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.GetGroupAsync(&quot;engineering&quot;);
+    ///     var result = await client.GetGroupAsync(groupId);
     ///     Console.WriteLine($&quot;Group: {result.Name}&quot;);
     /// }
     /// </code>
@@ -3078,16 +3136,16 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetGroupExample()
+    /// public static async Task GetGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.GetGroupAsync(&quot;engineering&quot;);
+    ///     var result = await client.GetGroupAsync(groupId);
     ///     Console.WriteLine($&quot;Group: {result.Name}&quot;);
     /// }
     /// </code>
     /// </example>
-    public async Task<GroupResult> GetGroupAsync(string groupId, ConsistencyOptions<GroupResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupResult> GetGroupAsync(GroupId groupId, ConsistencyOptions<GroupResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -3401,11 +3459,11 @@ public partial class CamundaClient
     /// Operation: getMappingRule
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetMappingRuleExample()
+    /// public static async Task GetMappingRuleExample(MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.GetMappingRuleAsync(&quot;rule-123&quot;);
+    ///     var result = await client.GetMappingRuleAsync(mappingRuleId);
     ///     Console.WriteLine($&quot;Mapping rule: {result.Name}&quot;);
     /// }
     /// </code>
@@ -3413,16 +3471,16 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetMappingRuleExample()
+    /// public static async Task GetMappingRuleExample(MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.GetMappingRuleAsync(&quot;rule-123&quot;);
+    ///     var result = await client.GetMappingRuleAsync(mappingRuleId);
     ///     Console.WriteLine($&quot;Mapping rule: {result.Name}&quot;);
     /// }
     /// </code>
     /// </example>
-    public async Task<MappingRuleResult> GetMappingRuleAsync(string mappingRuleId, ConsistencyOptions<MappingRuleResult>? consistency = null, CancellationToken ct = default)
+    public async Task<MappingRuleResult> GetMappingRuleAsync(MappingRuleId mappingRuleId, ConsistencyOptions<MappingRuleResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -4156,11 +4214,11 @@ public partial class CamundaClient
     /// Operation: getRole
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetRoleExample()
+    /// public static async Task GetRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.GetRoleAsync(&quot;developer&quot;);
+    ///     var result = await client.GetRoleAsync(roleId);
     ///     Console.WriteLine($&quot;Role: {result.Name}&quot;);
     /// }
     /// </code>
@@ -4168,16 +4226,16 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetRoleExample()
+    /// public static async Task GetRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.GetRoleAsync(&quot;developer&quot;);
+    ///     var result = await client.GetRoleAsync(roleId);
     ///     Console.WriteLine($&quot;Role: {result.Name}&quot;);
     /// }
     /// </code>
     /// </example>
-    public async Task<RoleResult> GetRoleAsync(string roleId, ConsistencyOptions<RoleResult>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleResult> GetRoleAsync(RoleId roleId, ConsistencyOptions<RoleResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -4363,13 +4421,13 @@ public partial class CamundaClient
     /// Operation: getTenantClusterVariable
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetTenantClusterVariableExample(TenantId tenantId)
+    /// public static async Task GetTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.GetTenantClusterVariableAsync(
     ///         tenantId,
-    ///         &quot;my-variable&quot;);
+    ///         name);
     /// 
     ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
     /// }
@@ -4378,19 +4436,19 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task GetTenantClusterVariableExample(TenantId tenantId)
+    /// public static async Task GetTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.GetTenantClusterVariableAsync(
     ///         tenantId,
-    ///         &quot;my-variable&quot;);
+    ///         name);
     /// 
     ///     Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterVariableResult> GetTenantClusterVariableAsync(TenantId tenantId, string name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ClusterVariableResult> GetTenantClusterVariableAsync(TenantId tenantId, ClusterVariableName name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -4520,17 +4578,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GetUserResponse> GetUserAsync(Username username, ConsistencyOptions<GetUserResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<UserResult> GetUserAsync(Username username, ConsistencyOptions<UserResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getUser", true,
-                () => InvokeWithRetryAsync(() => SendAsync<GetUserResponse>(HttpMethod.Get, path, null, ct), "getUser", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<UserResult>(HttpMethod.Get, path, null, ct), "getUser", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<GetUserResponse>(HttpMethod.Get, path, null, ct), "getUser", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<UserResult>(HttpMethod.Get, path, null, ct), "getUser", false, ct);
     }
 
     /// <summary>
@@ -5154,6 +5212,56 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Search agent instances
+    /// Search for agent instances based on given criteria.
+    /// </summary>
+    /// <remarks>
+    /// Operation: searchAgentInstances
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchAgentInstancesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAgentInstancesAsync(new AgentInstanceSearchQuery());
+    /// 
+    ///     foreach (var instance in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Agent instance: {instance.AgentInstanceKey}, status: {instance.Status}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchAgentInstancesExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAgentInstancesAsync(new AgentInstanceSearchQuery());
+    /// 
+    ///     foreach (var instance in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Agent instance: {instance.AgentInstanceKey}, status: {instance.Status}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<AgentInstanceSearchQueryResult> SearchAgentInstancesAsync(AgentInstanceSearchQuery body, ConsistencyOptions<AgentInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/agent-instances/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchAgentInstances", false,
+                () => InvokeWithRetryAsync(() => SendAsync<AgentInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentInstances", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentInstances", false, ct);
+    }
+
+    /// <summary>
     /// Search audit logs
     /// Search for audit logs based on given criteria.
     /// </summary>
@@ -5369,13 +5477,13 @@ public partial class CamundaClient
     /// Operation: searchClientsForGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchClientsForGroupExample()
+    /// public static async Task SearchClientsForGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchClientsForGroupAsync(
-    ///         &quot;engineering&quot;,
-    ///         new SearchClientsForGroupRequest());
+    ///         groupId,
+    ///         new GroupClientSearchQueryRequest());
     /// 
     ///     foreach (var c in result.Items)
     ///     {
@@ -5387,13 +5495,13 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchClientsForGroupExample()
+    /// public static async Task SearchClientsForGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchClientsForGroupAsync(
-    ///         &quot;engineering&quot;,
-    ///         new SearchClientsForGroupRequest());
+    ///         groupId,
+    ///         new GroupClientSearchQueryRequest());
     /// 
     ///     foreach (var c in result.Items)
     ///     {
@@ -5402,17 +5510,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchClientsForGroupResponse> SearchClientsForGroupAsync(string groupId, SearchClientsForGroupRequest body, ConsistencyOptions<SearchClientsForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupClientSearchResult> SearchClientsForGroupAsync(GroupId groupId, GroupClientSearchQueryRequest body, ConsistencyOptions<GroupClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchClientsForGroupResponse>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GroupClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchClientsForGroupResponse>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GroupClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct);
     }
 
     /// <summary>
@@ -5423,13 +5531,13 @@ public partial class CamundaClient
     /// Operation: searchClientsForRole
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchClientsForRoleExample()
+    /// public static async Task SearchClientsForRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchClientsForRoleAsync(
-    ///         &quot;developer&quot;,
-    ///         new SearchClientsForRoleRequest());
+    ///         roleId,
+    ///         new RoleClientSearchQueryRequest());
     /// 
     ///     foreach (var c in result.Items)
     ///     {
@@ -5441,13 +5549,13 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchClientsForRoleExample()
+    /// public static async Task SearchClientsForRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchClientsForRoleAsync(
-    ///         &quot;developer&quot;,
-    ///         new SearchClientsForRoleRequest());
+    ///         roleId,
+    ///         new RoleClientSearchQueryRequest());
     /// 
     ///     foreach (var c in result.Items)
     ///     {
@@ -5456,17 +5564,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchClientsForRoleResponse> SearchClientsForRoleAsync(string roleId, SearchClientsForRoleRequest body, ConsistencyOptions<SearchClientsForRoleResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleClientSearchResult> SearchClientsForRoleAsync(RoleId roleId, RoleClientSearchQueryRequest body, ConsistencyOptions<RoleClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForRole", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchClientsForRoleResponse>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<RoleClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchClientsForRoleResponse>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<RoleClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct);
     }
 
     /// <summary>
@@ -5483,7 +5591,7 @@ public partial class CamundaClient
     /// 
     ///     var result = await client.SearchClientsForTenantAsync(
     ///         tenantId,
-    ///         new SearchClientsForTenantRequest());
+    ///         new TenantClientSearchQueryRequest());
     /// 
     ///     foreach (var c in result.Items)
     ///     {
@@ -5501,7 +5609,7 @@ public partial class CamundaClient
     /// 
     ///     var result = await client.SearchClientsForTenantAsync(
     ///         tenantId,
-    ///         new SearchClientsForTenantRequest());
+    ///         new TenantClientSearchQueryRequest());
     /// 
     ///     foreach (var c in result.Items)
     ///     {
@@ -5510,17 +5618,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchClientsForTenantResponse> SearchClientsForTenantAsync(TenantId tenantId, SearchClientsForTenantRequest body, ConsistencyOptions<SearchClientsForTenantResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantClientSearchResult> SearchClientsForTenantAsync(TenantId tenantId, TenantClientSearchQueryRequest body, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchClientsForTenantResponse>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchClientsForTenantResponse>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct);
     }
 
     /// <summary>
@@ -6061,12 +6169,12 @@ public partial class CamundaClient
     /// Operation: searchGroupsForRole
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchGroupsForRoleExample()
+    /// public static async Task SearchGroupsForRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchGroupsForRoleAsync(
-    ///         &quot;developer&quot;,
+    ///         roleId,
     ///         new RoleGroupSearchQueryRequest());
     /// 
     ///     foreach (var group in result.Items)
@@ -6079,12 +6187,12 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchGroupsForRoleExample()
+    /// public static async Task SearchGroupsForRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchGroupsForRoleAsync(
-    ///         &quot;developer&quot;,
+    ///         roleId,
     ///         new RoleGroupSearchQueryRequest());
     /// 
     ///     foreach (var group in result.Items)
@@ -6094,7 +6202,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(string roleId, RoleGroupSearchQueryRequest body, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(RoleId roleId, RoleGroupSearchQueryRequest body, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/groups/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -6248,17 +6356,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchMappingRuleResponse> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRuleResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<MappingRuleSearchQueryResult> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<MappingRuleSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRule", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRuleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<MappingRuleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRuleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<MappingRuleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct);
     }
 
     /// <summary>
@@ -6269,12 +6377,12 @@ public partial class CamundaClient
     /// Operation: searchMappingRulesForGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchMappingRulesForGroupExample()
+    /// public static async Task SearchMappingRulesForGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchMappingRulesForGroupAsync(
-    ///         &quot;engineering&quot;,
+    ///         groupId,
     ///         new MappingRuleSearchQueryRequest());
     /// 
     ///     foreach (var rule in result.Items)
@@ -6287,12 +6395,12 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchMappingRulesForGroupExample()
+    /// public static async Task SearchMappingRulesForGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchMappingRulesForGroupAsync(
-    ///         &quot;engineering&quot;,
+    ///         groupId,
     ///         new MappingRuleSearchQueryRequest());
     /// 
     ///     foreach (var rule in result.Items)
@@ -6302,17 +6410,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchMappingRulesForGroupResponse> SearchMappingRulesForGroupAsync(string groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupMappingRuleSearchResult> SearchMappingRulesForGroupAsync(GroupId groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<GroupMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GroupMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GroupMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct);
     }
 
     /// <summary>
@@ -6323,12 +6431,12 @@ public partial class CamundaClient
     /// Operation: searchMappingRulesForRole
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchMappingRulesForRoleExample()
+    /// public static async Task SearchMappingRulesForRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchMappingRulesForRoleAsync(
-    ///         &quot;developer&quot;,
+    ///         roleId,
     ///         new MappingRuleSearchQueryRequest());
     /// 
     ///     foreach (var rule in result.Items)
@@ -6341,12 +6449,12 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchMappingRulesForRoleExample()
+    /// public static async Task SearchMappingRulesForRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchMappingRulesForRoleAsync(
-    ///         &quot;developer&quot;,
+    ///         roleId,
     ///         new MappingRuleSearchQueryRequest());
     /// 
     ///     foreach (var rule in result.Items)
@@ -6356,17 +6464,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchMappingRulesForRoleResponse> SearchMappingRulesForRoleAsync(string roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForRoleResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleMappingRuleSearchResult> SearchMappingRulesForRoleAsync(RoleId roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<RoleMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForRole", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForRoleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<RoleMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForRoleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<RoleMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct);
     }
 
     /// <summary>
@@ -6410,17 +6518,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchMappingRulesForTenantResponse> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForTenantResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantMappingRuleSearchResult> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<TenantMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct);
     }
 
     /// <summary>
@@ -6762,12 +6870,12 @@ public partial class CamundaClient
     /// Operation: searchRolesForGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchRolesForGroupExample()
+    /// public static async Task SearchRolesForGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchRolesForGroupAsync(
-    ///         &quot;engineering&quot;,
+    ///         groupId,
     ///         new RoleSearchQueryRequest());
     /// 
     ///     foreach (var role in result.Items)
@@ -6780,12 +6888,12 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchRolesForGroupExample()
+    /// public static async Task SearchRolesForGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchRolesForGroupAsync(
-    ///         &quot;engineering&quot;,
+    ///         groupId,
     ///         new RoleSearchQueryRequest());
     /// 
     ///     foreach (var role in result.Items)
@@ -6795,17 +6903,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchRolesForGroupResponse> SearchRolesForGroupAsync(string groupId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupRoleSearchResult> SearchRolesForGroupAsync(GroupId groupId, RoleSearchQueryRequest body, ConsistencyOptions<GroupRoleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchRolesForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchRolesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GroupRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchRolesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GroupRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct);
     }
 
     /// <summary>
@@ -6849,17 +6957,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchRolesForTenantResponse> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForTenantResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantRoleSearchResult> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<TenantRoleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchRolesForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchRolesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchRolesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct);
     }
 
     /// <summary>
@@ -6986,7 +7094,7 @@ public partial class CamundaClient
     /// 
     ///     var result = await client.SearchUserTaskEffectiveVariablesAsync(
     ///         userTaskKey,
-    ///         new SearchUserTaskEffectiveVariablesRequest());
+    ///         new UserTaskEffectiveVariableSearchQueryRequest());
     /// 
     ///     foreach (var variable in result.Items)
     ///     {
@@ -7004,7 +7112,7 @@ public partial class CamundaClient
     /// 
     ///     var result = await client.SearchUserTaskEffectiveVariablesAsync(
     ///         userTaskKey,
-    ///         new SearchUserTaskEffectiveVariablesRequest());
+    ///         new UserTaskEffectiveVariableSearchQueryRequest());
     /// 
     ///     foreach (var variable in result.Items)
     ///     {
@@ -7013,7 +7121,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, UserTaskEffectiveVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
@@ -7049,7 +7157,7 @@ public partial class CamundaClient
     /// 
     ///     var result = await client.SearchUserTaskVariablesAsync(
     ///         userTaskKey,
-    ///         new SearchUserTaskVariablesRequest());
+    ///         new UserTaskVariableSearchQueryRequest());
     /// 
     ///     foreach (var variable in result.Items)
     ///     {
@@ -7067,7 +7175,7 @@ public partial class CamundaClient
     /// 
     ///     var result = await client.SearchUserTaskVariablesAsync(
     ///         userTaskKey,
-    ///         new SearchUserTaskVariablesRequest());
+    ///         new UserTaskVariableSearchQueryRequest());
     /// 
     ///     foreach (var variable in result.Items)
     ///     {
@@ -7076,7 +7184,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, UserTaskVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
@@ -7178,17 +7286,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchUsersResponse> SearchUsersAsync(UserSearchQueryRequest body, ConsistencyOptions<SearchUsersResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<UserSearchResult> SearchUsersAsync(UserSearchQueryRequest body, ConsistencyOptions<UserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsers", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchUsersResponse>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<UserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchUsersResponse>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<UserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct);
     }
 
     /// <summary>
@@ -7199,13 +7307,13 @@ public partial class CamundaClient
     /// Operation: searchUsersForGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchUsersForGroupExample()
+    /// public static async Task SearchUsersForGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchUsersForGroupAsync(
-    ///         &quot;engineering&quot;,
-    ///         new SearchUsersForGroupRequest());
+    ///         groupId,
+    ///         new GroupUserSearchQueryRequest());
     /// 
     ///     foreach (var user in result.Items)
     ///     {
@@ -7217,13 +7325,13 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchUsersForGroupExample()
+    /// public static async Task SearchUsersForGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchUsersForGroupAsync(
-    ///         &quot;engineering&quot;,
-    ///         new SearchUsersForGroupRequest());
+    ///         groupId,
+    ///         new GroupUserSearchQueryRequest());
     /// 
     ///     foreach (var user in result.Items)
     ///     {
@@ -7232,17 +7340,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchUsersForGroupResponse> SearchUsersForGroupAsync(string groupId, SearchUsersForGroupRequest body, ConsistencyOptions<SearchUsersForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupUserSearchResult> SearchUsersForGroupAsync(GroupId groupId, GroupUserSearchQueryRequest body, ConsistencyOptions<GroupUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchUsersForGroupResponse>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GroupUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchUsersForGroupResponse>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GroupUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct);
     }
 
     /// <summary>
@@ -7253,13 +7361,13 @@ public partial class CamundaClient
     /// Operation: searchUsersForRole
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchUsersForRoleExample()
+    /// public static async Task SearchUsersForRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchUsersForRoleAsync(
-    ///         &quot;developer&quot;,
-    ///         new SearchUsersForRoleRequest());
+    ///         roleId,
+    ///         new RoleUserSearchQueryRequest());
     /// 
     ///     foreach (var user in result.Items)
     ///     {
@@ -7271,13 +7379,13 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task SearchUsersForRoleExample()
+    /// public static async Task SearchUsersForRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.SearchUsersForRoleAsync(
-    ///         &quot;developer&quot;,
-    ///         new SearchUsersForRoleRequest());
+    ///         roleId,
+    ///         new RoleUserSearchQueryRequest());
     /// 
     ///     foreach (var user in result.Items)
     ///     {
@@ -7286,17 +7394,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchUsersForRoleResponse> SearchUsersForRoleAsync(string roleId, SearchUsersForRoleRequest body, ConsistencyOptions<SearchUsersForRoleResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleUserSearchResult> SearchUsersForRoleAsync(RoleId roleId, RoleUserSearchQueryRequest body, ConsistencyOptions<RoleUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForRole", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchUsersForRoleResponse>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<RoleUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchUsersForRoleResponse>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<RoleUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct);
     }
 
     /// <summary>
@@ -7313,7 +7421,7 @@ public partial class CamundaClient
     /// 
     ///     var result = await client.SearchUsersForTenantAsync(
     ///         tenantId,
-    ///         new SearchUsersForTenantRequest());
+    ///         new TenantUserSearchQueryRequest());
     /// 
     ///     foreach (var user in result.Items)
     ///     {
@@ -7331,7 +7439,7 @@ public partial class CamundaClient
     /// 
     ///     var result = await client.SearchUsersForTenantAsync(
     ///         tenantId,
-    ///         new SearchUsersForTenantRequest());
+    ///         new TenantUserSearchQueryRequest());
     /// 
     ///     foreach (var user in result.Items)
     ///     {
@@ -7340,17 +7448,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchUsersForTenantResponse> SearchUsersForTenantAsync(TenantId tenantId, SearchUsersForTenantRequest body, ConsistencyOptions<SearchUsersForTenantResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantUserSearchResult> SearchUsersForTenantAsync(TenantId tenantId, TenantUserSearchQueryRequest body, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchUsersForTenantResponse>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchUsersForTenantResponse>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct);
     }
 
     /// <summary>
@@ -7373,7 +7481,7 @@ public partial class CamundaClient
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.SearchVariablesAsync(new SearchVariablesRequest());
+    ///     var result = await client.SearchVariablesAsync(new VariableSearchQuery());
     /// 
     ///     foreach (var variable in result.Items)
     ///     {
@@ -7389,7 +7497,7 @@ public partial class CamundaClient
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     var result = await client.SearchVariablesAsync(new SearchVariablesRequest());
+    ///     var result = await client.SearchVariablesAsync(new VariableSearchQuery());
     /// 
     ///     foreach (var variable in result.Items)
     ///     {
@@ -7398,7 +7506,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchVariablesAsync(SearchVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchVariablesAsync(VariableSearchQuery body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
@@ -7504,26 +7612,26 @@ public partial class CamundaClient
     /// Operation: unassignClientFromGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignClientFromGroupExample()
+    /// public static async Task UnassignClientFromGroupExample(GroupId groupId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignClientFromGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+    ///     await client.UnassignClientFromGroupAsync(groupId, clientId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignClientFromGroupExample()
+    /// public static async Task UnassignClientFromGroupExample(GroupId groupId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignClientFromGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+    ///     await client.UnassignClientFromGroupAsync(groupId, clientId);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignClientFromGroupAsync(string groupId, string clientId, CancellationToken ct = default)
+    public async Task UnassignClientFromGroupAsync(GroupId groupId, ClientId clientId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignClientFromGroup", false, ct);
@@ -7539,30 +7647,30 @@ public partial class CamundaClient
     /// Operation: unassignClientFromTenant
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignClientFromTenantExample(TenantId tenantId)
+    /// public static async Task UnassignClientFromTenantExample(TenantId tenantId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.UnassignClientFromTenantAsync(
     ///         tenantId,
-    ///         &quot;my-service-account&quot;);
+    ///         clientId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignClientFromTenantExample(TenantId tenantId)
+    /// public static async Task UnassignClientFromTenantExample(TenantId tenantId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.UnassignClientFromTenantAsync(
     ///         tenantId,
-    ///         &quot;my-service-account&quot;);
+    ///         clientId);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignClientFromTenantAsync(TenantId tenantId, string clientId, CancellationToken ct = default)
+    public async Task UnassignClientFromTenantAsync(TenantId tenantId, ClientId clientId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignClientFromTenant", false, ct);
@@ -7578,30 +7686,30 @@ public partial class CamundaClient
     /// Operation: unassignGroupFromTenant
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignGroupFromTenantExample(TenantId tenantId)
+    /// public static async Task UnassignGroupFromTenantExample(TenantId tenantId, GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.UnassignGroupFromTenantAsync(
     ///         tenantId,
-    ///         &quot;engineering&quot;);
+    ///         groupId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignGroupFromTenantExample(TenantId tenantId)
+    /// public static async Task UnassignGroupFromTenantExample(TenantId tenantId, GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.UnassignGroupFromTenantAsync(
     ///         tenantId,
-    ///         &quot;engineering&quot;);
+    ///         groupId);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignGroupFromTenantAsync(TenantId tenantId, string groupId, CancellationToken ct = default)
+    public async Task UnassignGroupFromTenantAsync(TenantId tenantId, GroupId groupId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignGroupFromTenant", false, ct);
@@ -7615,26 +7723,26 @@ public partial class CamundaClient
     /// Operation: unassignMappingRuleFromGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignMappingRuleFromGroupExample()
+    /// public static async Task UnassignMappingRuleFromGroupExample(GroupId groupId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignMappingRuleFromGroupAsync(&quot;engineering&quot;, &quot;rule-123&quot;);
+    ///     await client.UnassignMappingRuleFromGroupAsync(groupId, mappingRuleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignMappingRuleFromGroupExample()
+    /// public static async Task UnassignMappingRuleFromGroupExample(GroupId groupId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignMappingRuleFromGroupAsync(&quot;engineering&quot;, &quot;rule-123&quot;);
+    ///     await client.UnassignMappingRuleFromGroupAsync(groupId, mappingRuleId);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignMappingRuleFromGroupAsync(string groupId, string mappingRuleId, CancellationToken ct = default)
+    public async Task UnassignMappingRuleFromGroupAsync(GroupId groupId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignMappingRuleFromGroup", false, ct);
@@ -7648,30 +7756,30 @@ public partial class CamundaClient
     /// Operation: unassignMappingRuleFromTenant
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId)
+    /// public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.UnassignMappingRuleFromTenantAsync(
     ///         tenantId,
-    ///         &quot;rule-123&quot;);
+    ///         mappingRuleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId)
+    /// public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.UnassignMappingRuleFromTenantAsync(
     ///         tenantId,
-    ///         &quot;rule-123&quot;);
+    ///         mappingRuleId);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignMappingRuleFromTenantAsync(TenantId tenantId, string mappingRuleId, CancellationToken ct = default)
+    public async Task UnassignMappingRuleFromTenantAsync(TenantId tenantId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignMappingRuleFromTenant", false, ct);
@@ -7685,26 +7793,26 @@ public partial class CamundaClient
     /// Operation: unassignRoleFromClient
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromClientExample()
+    /// public static async Task UnassignRoleFromClientExample(RoleId roleId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignRoleFromClientAsync(&quot;developer&quot;, &quot;my-service-account&quot;);
+    ///     await client.UnassignRoleFromClientAsync(roleId, clientId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromClientExample()
+    /// public static async Task UnassignRoleFromClientExample(RoleId roleId, ClientId clientId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignRoleFromClientAsync(&quot;developer&quot;, &quot;my-service-account&quot;);
+    ///     await client.UnassignRoleFromClientAsync(roleId, clientId);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignRoleFromClientAsync(string roleId, string clientId, CancellationToken ct = default)
+    public async Task UnassignRoleFromClientAsync(RoleId roleId, ClientId clientId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromClient", false, ct);
@@ -7718,26 +7826,26 @@ public partial class CamundaClient
     /// Operation: unassignRoleFromGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromGroupExample()
+    /// public static async Task UnassignRoleFromGroupExample(RoleId roleId, GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignRoleFromGroupAsync(&quot;developer&quot;, &quot;engineering&quot;);
+    ///     await client.UnassignRoleFromGroupAsync(roleId, groupId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromGroupExample()
+    /// public static async Task UnassignRoleFromGroupExample(RoleId roleId, GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignRoleFromGroupAsync(&quot;developer&quot;, &quot;engineering&quot;);
+    ///     await client.UnassignRoleFromGroupAsync(roleId, groupId);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignRoleFromGroupAsync(string roleId, string groupId, CancellationToken ct = default)
+    public async Task UnassignRoleFromGroupAsync(RoleId roleId, GroupId groupId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromGroup", false, ct);
@@ -7751,26 +7859,26 @@ public partial class CamundaClient
     /// Operation: unassignRoleFromMappingRule
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromMappingRuleExample()
+    /// public static async Task UnassignRoleFromMappingRuleExample(RoleId roleId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignRoleFromMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
+    ///     await client.UnassignRoleFromMappingRuleAsync(roleId, mappingRuleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromMappingRuleExample()
+    /// public static async Task UnassignRoleFromMappingRuleExample(RoleId roleId, MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignRoleFromMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
+    ///     await client.UnassignRoleFromMappingRuleAsync(roleId, mappingRuleId);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignRoleFromMappingRuleAsync(string roleId, string mappingRuleId, CancellationToken ct = default)
+    public async Task UnassignRoleFromMappingRuleAsync(RoleId roleId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromMappingRule", false, ct);
@@ -7787,30 +7895,30 @@ public partial class CamundaClient
     /// Operation: unassignRoleFromTenant
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromTenantExample(TenantId tenantId)
+    /// public static async Task UnassignRoleFromTenantExample(TenantId tenantId, RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.UnassignRoleFromTenantAsync(
     ///         tenantId,
-    ///         &quot;developer&quot;);
+    ///         roleId);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromTenantExample(TenantId tenantId)
+    /// public static async Task UnassignRoleFromTenantExample(TenantId tenantId, RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     await client.UnassignRoleFromTenantAsync(
     ///         tenantId,
-    ///         &quot;developer&quot;);
+    ///         roleId);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignRoleFromTenantAsync(TenantId tenantId, string roleId, CancellationToken ct = default)
+    public async Task UnassignRoleFromTenantAsync(TenantId tenantId, RoleId roleId, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromTenant", false, ct);
@@ -7824,26 +7932,26 @@ public partial class CamundaClient
     /// Operation: unassignRoleFromUser
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromUserExample(Username username)
+    /// public static async Task UnassignRoleFromUserExample(RoleId roleId, Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignRoleFromUserAsync(&quot;developer&quot;, username);
+    ///     await client.UnassignRoleFromUserAsync(roleId, username);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignRoleFromUserExample(Username username)
+    /// public static async Task UnassignRoleFromUserExample(RoleId roleId, Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignRoleFromUserAsync(&quot;developer&quot;, username);
+    ///     await client.UnassignRoleFromUserAsync(roleId, username);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignRoleFromUserAsync(string roleId, Username username, CancellationToken ct = default)
+    public async Task UnassignRoleFromUserAsync(RoleId roleId, Username username, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromUser", false, ct);
@@ -7859,26 +7967,26 @@ public partial class CamundaClient
     /// Operation: unassignUserFromGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignUserFromGroupExample(Username username)
+    /// public static async Task UnassignUserFromGroupExample(GroupId groupId, Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignUserFromGroupAsync(&quot;engineering&quot;, username);
+    ///     await client.UnassignUserFromGroupAsync(groupId, username);
     /// }
     /// </code>
     /// </remarks>
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UnassignUserFromGroupExample(Username username)
+    /// public static async Task UnassignUserFromGroupExample(GroupId groupId, Username username)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UnassignUserFromGroupAsync(&quot;engineering&quot;, username);
+    ///     await client.UnassignUserFromGroupAsync(groupId, username);
     /// }
     /// </code>
     /// </example>
-    public async Task UnassignUserFromGroupAsync(string groupId, Username username, CancellationToken ct = default)
+    public async Task UnassignUserFromGroupAsync(GroupId groupId, Username username, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignUserFromGroup", false, ct);
@@ -8018,12 +8126,12 @@ public partial class CamundaClient
     /// Operation: updateGlobalClusterVariable
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateGlobalClusterVariableExample()
+    /// public static async Task UpdateGlobalClusterVariableExample(ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.UpdateGlobalClusterVariableAsync(
-    ///         &quot;my-variable&quot;,
+    ///         name,
     ///         new UpdateClusterVariableRequest
     ///         {
     ///             Value = &quot;updated-value&quot;,
@@ -8036,12 +8144,12 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateGlobalClusterVariableExample()
+    /// public static async Task UpdateGlobalClusterVariableExample(ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.UpdateGlobalClusterVariableAsync(
-    ///         &quot;my-variable&quot;,
+    ///         name,
     ///         new UpdateClusterVariableRequest
     ///         {
     ///             Value = &quot;updated-value&quot;,
@@ -8051,7 +8159,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterVariableResult> UpdateGlobalClusterVariableAsync(string name, UpdateClusterVariableRequest body, CancellationToken ct = default)
+    public async Task<ClusterVariableResult> UpdateGlobalClusterVariableAsync(ClusterVariableName name, UpdateClusterVariableRequest body, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Put, path, body, ct), "updateGlobalClusterVariable", false, ct);
@@ -8114,11 +8222,11 @@ public partial class CamundaClient
     /// Operation: updateGroup
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateGroupExample()
+    /// public static async Task UpdateGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UpdateGroupAsync(&quot;engineering&quot;, new GroupUpdateRequest
+    ///     await client.UpdateGroupAsync(groupId, new GroupUpdateRequest
     ///     {
     ///         Name = &quot;engineering-team&quot;,
     ///     });
@@ -8128,18 +8236,18 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateGroupExample()
+    /// public static async Task UpdateGroupExample(GroupId groupId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UpdateGroupAsync(&quot;engineering&quot;, new GroupUpdateRequest
+    ///     await client.UpdateGroupAsync(groupId, new GroupUpdateRequest
     ///     {
     ///         Name = &quot;engineering-team&quot;,
     ///     });
     /// }
     /// </code>
     /// </example>
-    public async Task<GroupUpdateResult> UpdateGroupAsync(string groupId, GroupUpdateRequest body, CancellationToken ct = default)
+    public async Task<GroupUpdateResult> UpdateGroupAsync(GroupId groupId, GroupUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
         return await InvokeWithRetryAsync(() => SendAsync<GroupUpdateResult>(HttpMethod.Put, path, body, ct), "updateGroup", false, ct);
@@ -8197,11 +8305,11 @@ public partial class CamundaClient
     /// Operation: updateMappingRule
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateMappingRuleExample()
+    /// public static async Task UpdateMappingRuleExample(MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UpdateMappingRuleAsync(&quot;rule-123&quot;, new MappingRuleUpdateRequest
+    ///     await client.UpdateMappingRuleAsync(mappingRuleId, new MappingRuleUpdateRequest
     ///     {
     ///         ClaimName = &quot;groups&quot;,
     ///         ClaimValue = &quot;senior-engineering&quot;,
@@ -8213,11 +8321,11 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateMappingRuleExample()
+    /// public static async Task UpdateMappingRuleExample(MappingRuleId mappingRuleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UpdateMappingRuleAsync(&quot;rule-123&quot;, new MappingRuleUpdateRequest
+    ///     await client.UpdateMappingRuleAsync(mappingRuleId, new MappingRuleUpdateRequest
     ///     {
     ///         ClaimName = &quot;groups&quot;,
     ///         ClaimValue = &quot;senior-engineering&quot;,
@@ -8226,10 +8334,10 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<UpdateMappingRuleResponse> UpdateMappingRuleAsync(string mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
+    public async Task<MappingRuleUpdateResult> UpdateMappingRuleAsync(MappingRuleId mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
-        return await InvokeWithRetryAsync(() => SendAsync<UpdateMappingRuleResponse>(HttpMethod.Put, path, body, ct), "updateMappingRule", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<MappingRuleUpdateResult>(HttpMethod.Put, path, body, ct), "updateMappingRule", false, ct);
     }
 
     /// <summary>
@@ -8240,11 +8348,11 @@ public partial class CamundaClient
     /// Operation: updateRole
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateRoleExample()
+    /// public static async Task UpdateRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UpdateRoleAsync(&quot;developer&quot;, new RoleUpdateRequest
+    ///     await client.UpdateRoleAsync(roleId, new RoleUpdateRequest
     ///     {
     ///         Name = &quot;senior-developer&quot;,
     ///     });
@@ -8254,18 +8362,18 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateRoleExample()
+    /// public static async Task UpdateRoleExample(RoleId roleId)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
-    ///     await client.UpdateRoleAsync(&quot;developer&quot;, new RoleUpdateRequest
+    ///     await client.UpdateRoleAsync(roleId, new RoleUpdateRequest
     ///     {
     ///         Name = &quot;senior-developer&quot;,
     ///     });
     /// }
     /// </code>
     /// </example>
-    public async Task<RoleUpdateResult> UpdateRoleAsync(string roleId, RoleUpdateRequest body, CancellationToken ct = default)
+    public async Task<RoleUpdateResult> UpdateRoleAsync(RoleId roleId, RoleUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
         return await InvokeWithRetryAsync(() => SendAsync<RoleUpdateResult>(HttpMethod.Put, path, body, ct), "updateRole", false, ct);
@@ -8324,13 +8432,13 @@ public partial class CamundaClient
     /// Operation: updateTenantClusterVariable
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
+    /// public static async Task UpdateTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.UpdateTenantClusterVariableAsync(
     ///         tenantId,
-    ///         &quot;my-variable&quot;,
+    ///         name,
     ///         new UpdateClusterVariableRequest
     ///         {
     ///             Value = &quot;updated-tenant-value&quot;,
@@ -8343,13 +8451,13 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
+    /// public static async Task UpdateTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
     ///     var result = await client.UpdateTenantClusterVariableAsync(
     ///         tenantId,
-    ///         &quot;my-variable&quot;,
+    ///         name,
     ///         new UpdateClusterVariableRequest
     ///         {
     ///             Value = &quot;updated-tenant-value&quot;,
@@ -8359,7 +8467,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterVariableResult> UpdateTenantClusterVariableAsync(TenantId tenantId, string name, UpdateClusterVariableRequest body, CancellationToken ct = default)
+    public async Task<ClusterVariableResult> UpdateTenantClusterVariableAsync(TenantId tenantId, ClusterVariableName name, UpdateClusterVariableRequest body, CancellationToken ct = default)
     {
         var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Put, path, body, ct), "updateTenantClusterVariable", false, ct);
@@ -8404,10 +8512,10 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<UpdateUserResponse> UpdateUserAsync(Username username, UserUpdateRequest body, CancellationToken ct = default)
+    public async Task<UserUpdateResult> UpdateUserAsync(Username username, UserUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
-        return await InvokeWithRetryAsync(() => SendAsync<UpdateUserResponse>(HttpMethod.Put, path, body, ct), "updateUser", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<UserUpdateResult>(HttpMethod.Put, path, body, ct), "updateUser", false, ct);
     }
 
     /// <summary>
