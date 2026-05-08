@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using Camunda.Orchestration.Sdk.Generator;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -16,7 +17,7 @@ public class InlineEnumPropertyTests
     private static readonly Assembly s_sdkAssembly = typeof(CamundaClient).Assembly;
 
     /// <summary>
-    /// Yields (schemaName, propName, enumValues) for every inline string enum
+    /// Yields (schemaName, propName) for every inline string enum
     /// property discovered in the bundled OpenAPI spec.
     /// </summary>
     public static IEnumerable<object[]> InlineStringEnumProperties()
@@ -79,12 +80,12 @@ public class InlineEnumPropertyTests
     public void InlineStringEnum_GeneratesTypedEnumProperty(string schemaName, string propName)
     {
         // Find the C# class for the schema
-        var csharpTypeName = $"Camunda.Orchestration.Sdk.{SanitizeTypeName(schemaName)}";
+        var csharpTypeName = $"Camunda.Orchestration.Sdk.{CSharpClientGenerator.SanitizeTypeName(schemaName)}";
         var type = s_sdkAssembly.GetType(csharpTypeName);
         Assert.True(type != null, $"Expected C# type {csharpTypeName} for schema {schemaName}");
 
         // Find the property on the type
-        var csharpPropName = ToPascalCase(propName);
+        var csharpPropName = CSharpClientGenerator.ToPascalCase(propName);
         var prop = type.GetProperty(csharpPropName, BindingFlags.Public | BindingFlags.Instance);
         Assert.True(prop != null,
             $"{csharpTypeName}.{csharpPropName} not found (JSON property: {propName})");
@@ -112,7 +113,7 @@ public class InlineEnumPropertyTests
     {
         // Every inline enum type should have [JsonConverter(typeof(JsonStringEnumConverter))]
         var inlineEnumTypeNames = InlineStringEnumProperties()
-            .Select(row => $"{SanitizeTypeName((string)row[0])}{ToPascalCase((string)row[1])}")
+            .Select(row => $"{CSharpClientGenerator.SanitizeTypeName((string)row[0])}{CSharpClientGenerator.ToPascalCase((string)row[1])}")
             .Distinct()
             .ToList();
 
@@ -133,7 +134,7 @@ public class InlineEnumPropertyTests
     {
         // Every member of every inline enum must have [JsonPropertyName] for wire format fidelity
         var inlineEnumTypeNames = InlineStringEnumProperties()
-            .Select(row => $"{SanitizeTypeName((string)row[0])}{ToPascalCase((string)row[1])}")
+            .Select(row => $"{CSharpClientGenerator.SanitizeTypeName((string)row[0])}{CSharpClientGenerator.ToPascalCase((string)row[1])}")
             .Distinct()
             .ToList();
 
@@ -141,8 +142,7 @@ public class InlineEnumPropertyTests
         {
             var fullName = $"Camunda.Orchestration.Sdk.{enumName}";
             var type = s_sdkAssembly.GetType(fullName);
-            if (type == null)
-                continue;
+            Assert.True(type != null, $"Expected inline enum type {fullName}");
 
             foreach (var member in Enum.GetNames(type))
             {
@@ -166,41 +166,5 @@ public class InlineEnumPropertyTests
             dir = Path.GetDirectoryName(dir);
         }
         throw new FileNotFoundException("Could not locate external-spec/bundled/rest-api.bundle.json");
-    }
-
-    /// <summary>
-    /// Mirrors the generator's SanitizeTypeName: strips characters invalid in C# identifiers.
-    /// </summary>
-    private static string SanitizeTypeName(string name)
-    {
-        var result = new System.Text.StringBuilder(name.Length);
-        foreach (var c in name)
-        {
-            if (char.IsLetterOrDigit(c) || c == '_')
-                result.Append(c);
-        }
-        return result.ToString();
-    }
-
-    /// <summary>
-    /// Mirrors the generator's ToPascalCase: converts snake_case/camelCase/kebab-case to PascalCase.
-    /// </summary>
-    private static string ToPascalCase(string s)
-    {
-        if (string.IsNullOrEmpty(s))
-            return s;
-        if (s.StartsWith('$'))
-            s = s[1..];
-        if (string.IsNullOrEmpty(s))
-            return s;
-        if (s.Contains('_') || s.Contains('-') || s.Contains('.'))
-        {
-            var parts = s.Split(['_', '-', '.'], StringSplitOptions.RemoveEmptyEntries);
-            return string.Concat(parts.Select(p =>
-                p.Length == 0 ? "" : char.ToUpperInvariant(p[0]) + p[1..]));
-        }
-        if (char.IsLower(s[0]))
-            return char.ToUpperInvariant(s[0]) + s[1..];
-        return s;
     }
 }

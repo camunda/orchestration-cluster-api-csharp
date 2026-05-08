@@ -574,6 +574,8 @@ internal static class CSharpClientGenerator
         // Collect inline string enum properties across all schemas so we can
         // emit them as typed enums and reference them in property declarations.
         var inlineEnums = CollectInlineEnums(doc, inlineSchemas);
+        var inlineEnumTypeNames = new HashSet<string>(
+            inlineEnums.Values.Select(e => e.EnumTypeName), StringComparer.Ordinal);
         foreach (var entry in inlineEnums.Values.OrderBy(e => e.EnumTypeName))
         {
             EmitInlineEnum(sb, entry.EnumTypeName, entry.PropSchema);
@@ -719,7 +721,7 @@ internal static class CSharpClientGenerator
                         }
 
                         sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(propName)}\")]");
-                        var initializer = IsReferenceType(csharpType, doc, inlineEnums) ? " = null!;" : "";
+                        var initializer = IsReferenceType(csharpType, doc, inlineEnumTypeNames) ? " = null!;" : "";
                         sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
                         sb.AppendLine();
                     }
@@ -801,7 +803,7 @@ internal static class CSharpClientGenerator
                 }
 
                 sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(propName)}\")]");
-                var initializer = IsReferenceType(csharpType, doc, inlineEnums) ? " = null!;" : "";
+                var initializer = IsReferenceType(csharpType, doc, inlineEnumTypeNames) ? " = null!;" : "";
                 sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
                 sb.AppendLine();
             }
@@ -818,13 +820,13 @@ internal static class CSharpClientGenerator
         // Generate classes for inline schemas (request/response bodies without $ref)
         foreach (var (typeName, schema) in inlineSchemas.OrderBy(kv => kv.Key))
         {
-            GenerateClass(sb, typeName, schema, doc, inlineEnums, requestSchemaNames.Contains(typeName));
+            GenerateClass(sb, typeName, schema, doc, inlineEnums, inlineEnumTypeNames, requestSchemaNames.Contains(typeName));
         }
 
         return sb.ToString();
     }
 
-    private static void GenerateClass(StringBuilder sb, string typeName, IOpenApiSchema schema, OpenApiDocument? doc = null, Dictionary<string, InlineEnumEntry>? inlineEnums = null, bool isRequestSchema = false)
+    private static void GenerateClass(StringBuilder sb, string typeName, IOpenApiSchema schema, OpenApiDocument? doc = null, Dictionary<string, InlineEnumEntry>? inlineEnums = null, HashSet<string>? inlineEnumTypeNames = null, bool isRequestSchema = false)
     {
         var tenantIdInfo = isRequestSchema ? GetOptionalTenantIdInfo(schema) : null;
         var tenantIdsInfo = isRequestSchema ? GetOptionalTenantIdsInfo(schema, doc) : null;
@@ -880,7 +882,7 @@ internal static class CSharpClientGenerator
             }
 
             sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(propName)}\")]");
-            var initializer = IsReferenceType(csharpType, doc, inlineEnums) ? " = null!;" : "";
+            var initializer = IsReferenceType(csharpType, doc, inlineEnumTypeNames) ? " = null!;" : "";
             sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
             sb.AppendLine();
         }
@@ -1330,7 +1332,7 @@ internal static class CSharpClientGenerator
     /// Returns true if a C# type string represents a reference type that needs a null-forgiving
     /// initializer (= null!;) to avoid CS8618 warnings.
     /// </summary>
-    private static bool IsReferenceType(string csharpType, OpenApiDocument? doc, Dictionary<string, InlineEnumEntry>? inlineEnums = null)
+    private static bool IsReferenceType(string csharpType, OpenApiDocument? doc, HashSet<string>? inlineEnumTypeNames = null)
     {
         if (csharpType.EndsWith('?'))
             return false;
@@ -1343,8 +1345,8 @@ internal static class CSharpClientGenerator
             || csharpType.StartsWith("List<", StringComparison.Ordinal)
             || csharpType.StartsWith("Dictionary<", StringComparison.Ordinal))
             return true;
-        // Inline enums are value types
-        if (inlineEnums != null && inlineEnums.Values.Any(e => e.EnumTypeName == csharpType))
+        // Inline enums are value types (O(1) HashSet lookup)
+        if (inlineEnumTypeNames != null && inlineEnumTypeNames.Contains(csharpType))
             return false;
         // Check if it's an enum or domain struct (value type) in the spec
         if (doc?.Components?.Schemas != null)
@@ -1965,15 +1967,20 @@ internal static class CSharpClientGenerator
                     && GetRefId(propSchema) == null)
                 {
                     var enumTypeName = parentTypeName + ToPascalCase(propName);
-                    if (emittedEnumNames.Add(enumTypeName))
+                    // Disambiguate if another property already claimed this enum name
+                    var candidateName = enumTypeName;
+                    var suffix = 2;
+                    while (!emittedEnumNames.Add(candidateName))
                     {
-                        var key = $"{parentTypeName}.{propName}";
-                        result[key] = new InlineEnumEntry
-                        {
-                            EnumTypeName = enumTypeName,
-                            PropSchema = propSchema,
-                        };
+                        candidateName = $"{enumTypeName}{suffix}";
+                        suffix++;
                     }
+                    var key = $"{parentTypeName}.{propName}";
+                    result[key] = new InlineEnumEntry
+                    {
+                        EnumTypeName = candidateName,
+                        PropSchema = propSchema,
+                    };
                 }
             }
         }
