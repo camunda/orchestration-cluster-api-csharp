@@ -1013,6 +1013,7 @@ The following methods have updated parameter and/or return types to match the ty
 
 The affected properties are mainly sort-request `Field` properties, plus a few `Type`, `State`, `Health`, and `Role` properties:
 
+<!-- snippet-exempt: migration before/after comparison (v9 code won't compile against v10) -->
 ```csharp
 // Before (v9) — bare string, no compile-time checking
 var sort = new UserTaskSearchQuerySortRequest
@@ -1085,6 +1086,7 @@ The naming convention is `{ParentClassName}{PascalCase(PropertyName)}` (e.g., `U
 
 `GetResourceAsync` and `GetResourceContentAsync` now accept an optional `ConsistencyOptions` parameter, matching the pattern used by all other eventually-consistent endpoints. If you pass these methods by reference or use them in delegates, you may need to update the signature:
 
+<!-- snippet-exempt: migration before/after comparison (v9 code won't compile against v10) -->
 ```csharp
 // Before (v9)
 var resource = await client.GetResourceAsync(resourceKey);
@@ -1102,6 +1104,7 @@ var resource = await client.GetResourceAsync(resourceKey,
 
 v10 adds a `SearchResourcesAsync` method with full search, filter, and sort support:
 
+<!-- snippet-exempt: illustrative usage with placeholder filter -->
 ```csharp
 var result = await client.SearchResourcesAsync(new ResourceSearchQuery
 {
