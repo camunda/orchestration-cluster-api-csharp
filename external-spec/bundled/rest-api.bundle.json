@@ -7,7 +7,7 @@
       "name": "Camunda Engineering",
       "url": "https://github.com/camunda/camunda/issues"
     },
-    "description": "API for communicating with a Camunda 8 cluster.",
+    "description": "API for communicating with a Camunda 8 cluster.\n\n## Conventions\n\n### Enum value casing\n\nServer-side, enum-typed request fields accept any casing of a\ndocumented value (for example `ACTIVE`, `active`, and `Active` are\nall accepted on input). Responses always use the canonical casing\nshown in this specification.\n\nThis permissive request behavior is a server-side convenience and\nis **not** part of the OpenAPI enum contract — SDKs generated from\nthis specification by strict generators may reject non-canonical\ncasing on the client side. For portability across SDKs, always\nsend the canonical casing shown in this document.\n",
     "license": {
       "name": "Camunda License Version 1.0",
       "url": "https://github.com/camunda/camunda/blob/main/licenses/CAMUNDA-LICENSE-1.0.txt"
