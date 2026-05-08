@@ -1,3 +1,16 @@
+# [9.0.0-alpha.12](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.11...v9.0.0-alpha.12) (2026-05-08)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([d23f0cf](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d23f0cf1cd375d5feab7d6b9c61de8ba1395028b))
+
+
+### Features
+
+* generate typed enums for inline string enum properties ([6721d7d](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6721d7d31906ad94e9e217200e9f7b569488091a))
+* generate typed enums for inline string enum properties ([69d7086](https://github.com/camunda/orchestration-cluster-api-csharp/commit/69d7086f7a77360dd1535a4216b6752af7da4bc4)), closes [#171](https://github.com/camunda/orchestration-cluster-api-csharp/issues/171)
+
 # [9.0.0-alpha.11](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.10...v9.0.0-alpha.11) (2026-05-08)
 
 
