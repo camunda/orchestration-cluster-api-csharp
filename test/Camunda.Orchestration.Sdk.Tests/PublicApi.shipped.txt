@@ -513,8 +513,16 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER CreationDate = 0 json="creationDate"
+  MEMBER LastUpdatedDate = 1 json="lastUpdatedDate"
+  MEMBER CompletionDate = 2 json="completionDate"
+  MEMBER Status = 3 json="status"
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceStatusEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -772,8 +780,35 @@ TYPE Camunda.Orchestration.Sdk.AuditLogSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ActorId = 0 json="actorId"
+  MEMBER ActorType = 1 json="actorType"
+  MEMBER AuditLogKey = 2 json="auditLogKey"
+  MEMBER BatchOperationKey = 3 json="batchOperationKey"
+  MEMBER BatchOperationType = 4 json="batchOperationType"
+  MEMBER Category = 5 json="category"
+  MEMBER DecisionDefinitionId = 6 json="decisionDefinitionId"
+  MEMBER DecisionDefinitionKey = 7 json="decisionDefinitionKey"
+  MEMBER DecisionEvaluationKey = 8 json="decisionEvaluationKey"
+  MEMBER DecisionRequirementsId = 9 json="decisionRequirementsId"
+  MEMBER DecisionRequirementsKey = 10 json="decisionRequirementsKey"
+  MEMBER ElementInstanceKey = 11 json="elementInstanceKey"
+  MEMBER EntityKey = 12 json="entityKey"
+  MEMBER EntityType = 13 json="entityType"
+  MEMBER JobKey = 14 json="jobKey"
+  MEMBER OperationType = 15 json="operationType"
+  MEMBER ProcessDefinitionId = 16 json="processDefinitionId"
+  MEMBER ProcessDefinitionKey = 17 json="processDefinitionKey"
+  MEMBER ProcessInstanceKey = 18 json="processInstanceKey"
+  MEMBER Result = 19 json="result"
+  MEMBER TenantId = 20 json="tenantId"
+  MEMBER Timestamp = 21 json="timestamp"
+  MEMBER UserTaskKey = 22 json="userTaskKey"
 
 TYPE Camunda.Orchestration.Sdk.AuthConfig : sealed class
   CTOR ()
@@ -845,8 +880,17 @@ TYPE Camunda.Orchestration.Sdk.AuthorizationSearchQuery : sealed class
 
 TYPE Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER OwnerId = 0 json="ownerId"
+  MEMBER OwnerType = 1 json="ownerType"
+  MEMBER ResourceId = 2 json="resourceId"
+  MEMBER ResourcePropertyName = 3 json="resourcePropertyName"
+  MEMBER ResourceType = 4 json="resourceType"
 
 TYPE Camunda.Orchestration.Sdk.AuthorizationSearchResult : sealed class
   CTOR ()
@@ -923,9 +967,15 @@ TYPE Camunda.Orchestration.Sdk.BatchOperationCreatedResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationError : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BatchOperationErrorType Type { get; set; } [JsonPropertyName("type")]
   PROP System.Int32 PartitionId { get; set; } [JsonPropertyName("partitionId")]
   PROP System.String Message { get; set; } [JsonPropertyName("message")]
-  PROP System.String Type { get; set; } [JsonPropertyName("type")]
+
+TYPE Camunda.Orchestration.Sdk.BatchOperationErrorType : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER QUERYFAILED = 0 json="QUERY_FAILED"
+  MEMBER RESULTBUFFERSIZEEXCEEDED = 1 json="RESULT_BUFFER_SIZE_EXCEEDED"
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationFilter : sealed class
   CTOR ()
@@ -945,14 +995,23 @@ TYPE Camunda.Orchestration.Sdk.BatchOperationItemFilter : sealed class
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationItemResponse : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BatchOperationItemResponseState State { get; set; } [JsonPropertyName("state")]
   PROP Camunda.Orchestration.Sdk.BatchOperationKey BatchOperationKey { get; set; } [JsonPropertyName("batchOperationKey")]
   PROP Camunda.Orchestration.Sdk.BatchOperationTypeEnum OperationType { get; set; } [JsonPropertyName("operationType")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
   PROP System.DateTimeOffset? ProcessedDate { get; set; } [JsonPropertyName("processedDate")]
   PROP System.String ItemKey { get; set; } [JsonPropertyName("itemKey")]
-  PROP System.String State { get; set; } [JsonPropertyName("state")]
   PROP System.String? ErrorMessage { get; set; } [JsonPropertyName("errorMessage")]
+
+TYPE Camunda.Orchestration.Sdk.BatchOperationItemResponseState : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ACTIVE = 0 json="ACTIVE"
+  MEMBER COMPLETED = 1 json="COMPLETED"
+  MEMBER SKIPPED = 2 json="SKIPPED"
+  MEMBER CANCELED = 3 json="CANCELED"
+  MEMBER FAILED = 4 json="FAILED"
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationItemSearchQuery : sealed class
   CTOR ()
@@ -967,8 +1026,17 @@ TYPE Camunda.Orchestration.Sdk.BatchOperationItemSearchQueryResult : sealed clas
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER BatchOperationKey = 0 json="batchOperationKey"
+  MEMBER ItemKey = 1 json="itemKey"
+  MEMBER ProcessInstanceKey = 2 json="processInstanceKey"
+  MEMBER ProcessedDate = 3 json="processedDate"
+  MEMBER State = 4 json="state"
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationItemStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -1031,8 +1099,19 @@ TYPE Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER BatchOperationKey = 0 json="batchOperationKey"
+  MEMBER OperationType = 1 json="operationType"
+  MEMBER State = 2 json="state"
+  MEMBER StartDate = 3 json="startDate"
+  MEMBER EndDate = 4 json="endDate"
+  MEMBER ActorType = 5 json="actorType"
+  MEMBER ActorId = 6 json="actorId"
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -1509,8 +1588,16 @@ TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Name = 0 json="name"
+  MEMBER Value = 1 json="value"
+  MEMBER TenantId = 2 json="tenantId"
+  MEMBER Scope = 3 json="scope"
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchResult : sealed class
   CTOR ()
@@ -1604,8 +1691,24 @@ TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQueryResult : 
 
 TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER CorrelationKey = 0 json="correlationKey"
+  MEMBER CorrelationTime = 1 json="correlationTime"
+  MEMBER ElementId = 2 json="elementId"
+  MEMBER ElementInstanceKey = 3 json="elementInstanceKey"
+  MEMBER MessageKey = 4 json="messageKey"
+  MEMBER MessageName = 5 json="messageName"
+  MEMBER PartitionId = 6 json="partitionId"
+  MEMBER ProcessDefinitionId = 7 json="processDefinitionId"
+  MEMBER ProcessDefinitionKey = 8 json="processDefinitionKey"
+  MEMBER ProcessInstanceKey = 9 json="processInstanceKey"
+  MEMBER SubscriptionKey = 10 json="subscriptionKey"
+  MEMBER TenantId = 11 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.CreateClusterVariableRequest : sealed class
   CTOR ()
@@ -1722,8 +1825,21 @@ TYPE Camunda.Orchestration.Sdk.DecisionDefinitionSearchQueryResult : sealed clas
 
 TYPE Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER DecisionDefinitionKey = 0 json="decisionDefinitionKey"
+  MEMBER DecisionDefinitionId = 1 json="decisionDefinitionId"
+  MEMBER Name = 2 json="name"
+  MEMBER Version = 3 json="version"
+  MEMBER DecisionRequirementsId = 4 json="decisionRequirementsId"
+  MEMBER DecisionRequirementsKey = 5 json="decisionRequirementsKey"
+  MEMBER DecisionRequirementsName = 6 json="decisionRequirementsName"
+  MEMBER DecisionRequirementsVersion = 7 json="decisionRequirementsVersion"
+  MEMBER TenantId = 8 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.DecisionDefinitionTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -1891,8 +2007,27 @@ TYPE Camunda.Orchestration.Sdk.DecisionInstanceSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER DecisionDefinitionId = 0 json="decisionDefinitionId"
+  MEMBER DecisionDefinitionKey = 1 json="decisionDefinitionKey"
+  MEMBER DecisionDefinitionName = 2 json="decisionDefinitionName"
+  MEMBER DecisionDefinitionType = 3 json="decisionDefinitionType"
+  MEMBER DecisionDefinitionVersion = 4 json="decisionDefinitionVersion"
+  MEMBER DecisionEvaluationInstanceKey = 5 json="decisionEvaluationInstanceKey"
+  MEMBER DecisionEvaluationKey = 6 json="decisionEvaluationKey"
+  MEMBER ElementInstanceKey = 7 json="elementInstanceKey"
+  MEMBER EvaluationDate = 8 json="evaluationDate"
+  MEMBER EvaluationFailure = 9 json="evaluationFailure"
+  MEMBER ProcessDefinitionKey = 10 json="processDefinitionKey"
+  MEMBER ProcessInstanceKey = 11 json="processInstanceKey"
+  MEMBER RootDecisionDefinitionKey = 12 json="rootDecisionDefinitionKey"
+  MEMBER State = 13 json="state"
+  MEMBER TenantId = 14 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.DecisionInstanceStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -1977,8 +2112,17 @@ TYPE Camunda.Orchestration.Sdk.DecisionRequirementsSearchQueryResult : sealed cl
 
 TYPE Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER DecisionRequirementsKey = 0 json="decisionRequirementsKey"
+  MEMBER DecisionRequirementsName = 1 json="decisionRequirementsName"
+  MEMBER Version = 2 json="version"
+  MEMBER DecisionRequirementsId = 3 json="decisionRequirementsId"
+  MEMBER TenantId = 4 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.DeleteDecisionInstanceRequest : sealed class
   CTOR ()
@@ -2139,9 +2283,14 @@ TYPE Camunda.Orchestration.Sdk.DocumentReference : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.DocumentId DocumentId { get; set; } [JsonPropertyName("documentId")]
   PROP Camunda.Orchestration.Sdk.DocumentMetadataResponse Metadata { get; set; } [JsonPropertyName("metadata")]
-  PROP System.String CamundaDocumentType { get; set; } [JsonPropertyName("camunda.document.type")]
+  PROP Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType CamundaDocumentType { get; set; } [JsonPropertyName("camunda.document.type")]
   PROP System.String StoreId { get; set; } [JsonPropertyName("storeId")]
   PROP System.String? ContentHash { get; set; } [JsonPropertyName("contentHash")]
+
+TYPE Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Camunda = 0 json="camunda"
 
 TYPE Camunda.Orchestration.Sdk.ElementId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ElementId>]
   PROP System.String Value { get; }
@@ -2175,6 +2324,7 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceFilter : sealed class
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? EndDate { get; set; } [JsonPropertyName("endDate")]
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? StartDate { get; set; } [JsonPropertyName("startDate")]
   PROP Camunda.Orchestration.Sdk.ElementIdFilterProperty? ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceFilterType? Type { get; set; } [JsonPropertyName("type")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty? State { get; set; } [JsonPropertyName("state")]
   PROP Camunda.Orchestration.Sdk.IncidentKey? IncidentKey { get; set; } [JsonPropertyName("incidentKey")]
@@ -2185,7 +2335,37 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceFilter : sealed class
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Boolean? HasIncident { get; set; } [JsonPropertyName("hasIncident")]
   PROP System.String? ElementInstanceScopeKey { get; set; } [JsonPropertyName("elementInstanceScopeKey")]
-  PROP System.String? Type { get; set; } [JsonPropertyName("type")]
+
+TYPE Camunda.Orchestration.Sdk.ElementInstanceFilterType : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER UNSPECIFIED = 0 json="UNSPECIFIED"
+  MEMBER PROCESS = 1 json="PROCESS"
+  MEMBER SUBPROCESS = 2 json="SUB_PROCESS"
+  MEMBER EVENTSUBPROCESS = 3 json="EVENT_SUB_PROCESS"
+  MEMBER ADHOCSUBPROCESS = 4 json="AD_HOC_SUB_PROCESS"
+  MEMBER ADHOCSUBPROCESSINNERINSTANCE = 5 json="AD_HOC_SUB_PROCESS_INNER_INSTANCE"
+  MEMBER STARTEVENT = 6 json="START_EVENT"
+  MEMBER INTERMEDIATECATCHEVENT = 7 json="INTERMEDIATE_CATCH_EVENT"
+  MEMBER INTERMEDIATETHROWEVENT = 8 json="INTERMEDIATE_THROW_EVENT"
+  MEMBER BOUNDARYEVENT = 9 json="BOUNDARY_EVENT"
+  MEMBER ENDEVENT = 10 json="END_EVENT"
+  MEMBER SERVICETASK = 11 json="SERVICE_TASK"
+  MEMBER RECEIVETASK = 12 json="RECEIVE_TASK"
+  MEMBER USERTASK = 13 json="USER_TASK"
+  MEMBER MANUALTASK = 14 json="MANUAL_TASK"
+  MEMBER TASK = 15 json="TASK"
+  MEMBER EXCLUSIVEGATEWAY = 16 json="EXCLUSIVE_GATEWAY"
+  MEMBER INCLUSIVEGATEWAY = 17 json="INCLUSIVE_GATEWAY"
+  MEMBER PARALLELGATEWAY = 18 json="PARALLEL_GATEWAY"
+  MEMBER EVENTBASEDGATEWAY = 19 json="EVENT_BASED_GATEWAY"
+  MEMBER SEQUENCEFLOW = 20 json="SEQUENCE_FLOW"
+  MEMBER MULTIINSTANCEBODY = 21 json="MULTI_INSTANCE_BODY"
+  MEMBER CALLACTIVITY = 22 json="CALL_ACTIVITY"
+  MEMBER BUSINESSRULETASK = 23 json="BUSINESS_RULE_TASK"
+  MEMBER SCRIPTTASK = 24 json="SCRIPT_TASK"
+  MEMBER SENDTASK = 25 json="SEND_TASK"
+  MEMBER UNKNOWN = 26 json="UNKNOWN"
 
 TYPE Camunda.Orchestration.Sdk.ElementInstanceKey : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ElementInstanceKey>]
   PROP System.String Value { get; }
@@ -2217,6 +2397,7 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceResultType Type { get; set; } [JsonPropertyName("type")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceStateEnum State { get; set; } [JsonPropertyName("state")]
   PROP Camunda.Orchestration.Sdk.IncidentKey? IncidentKey { get; set; } [JsonPropertyName("incidentKey")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
@@ -2228,7 +2409,37 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceResult : sealed class
   PROP System.DateTimeOffset StartDate { get; set; } [JsonPropertyName("startDate")]
   PROP System.DateTimeOffset? EndDate { get; set; } [JsonPropertyName("endDate")]
   PROP System.String ElementName { get; set; } [JsonPropertyName("elementName")]
-  PROP System.String Type { get; set; } [JsonPropertyName("type")]
+
+TYPE Camunda.Orchestration.Sdk.ElementInstanceResultType : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER UNSPECIFIED = 0 json="UNSPECIFIED"
+  MEMBER PROCESS = 1 json="PROCESS"
+  MEMBER SUBPROCESS = 2 json="SUB_PROCESS"
+  MEMBER EVENTSUBPROCESS = 3 json="EVENT_SUB_PROCESS"
+  MEMBER ADHOCSUBPROCESS = 4 json="AD_HOC_SUB_PROCESS"
+  MEMBER ADHOCSUBPROCESSINNERINSTANCE = 5 json="AD_HOC_SUB_PROCESS_INNER_INSTANCE"
+  MEMBER STARTEVENT = 6 json="START_EVENT"
+  MEMBER INTERMEDIATECATCHEVENT = 7 json="INTERMEDIATE_CATCH_EVENT"
+  MEMBER INTERMEDIATETHROWEVENT = 8 json="INTERMEDIATE_THROW_EVENT"
+  MEMBER BOUNDARYEVENT = 9 json="BOUNDARY_EVENT"
+  MEMBER ENDEVENT = 10 json="END_EVENT"
+  MEMBER SERVICETASK = 11 json="SERVICE_TASK"
+  MEMBER RECEIVETASK = 12 json="RECEIVE_TASK"
+  MEMBER USERTASK = 13 json="USER_TASK"
+  MEMBER MANUALTASK = 14 json="MANUAL_TASK"
+  MEMBER TASK = 15 json="TASK"
+  MEMBER EXCLUSIVEGATEWAY = 16 json="EXCLUSIVE_GATEWAY"
+  MEMBER INCLUSIVEGATEWAY = 17 json="INCLUSIVE_GATEWAY"
+  MEMBER PARALLELGATEWAY = 18 json="PARALLEL_GATEWAY"
+  MEMBER EVENTBASEDGATEWAY = 19 json="EVENT_BASED_GATEWAY"
+  MEMBER SEQUENCEFLOW = 20 json="SEQUENCE_FLOW"
+  MEMBER MULTIINSTANCEBODY = 21 json="MULTI_INSTANCE_BODY"
+  MEMBER CALLACTIVITY = 22 json="CALL_ACTIVITY"
+  MEMBER BUSINESSRULETASK = 23 json="BUSINESS_RULE_TASK"
+  MEMBER SCRIPTTASK = 24 json="SCRIPT_TASK"
+  MEMBER SENDTASK = 25 json="SEND_TASK"
+  MEMBER UNKNOWN = 26 json="UNKNOWN"
 
 TYPE Camunda.Orchestration.Sdk.ElementInstanceSearchQuery : sealed class
   CTOR ()
@@ -2243,8 +2454,24 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ElementInstanceKey = 0 json="elementInstanceKey"
+  MEMBER ProcessInstanceKey = 1 json="processInstanceKey"
+  MEMBER ProcessDefinitionKey = 2 json="processDefinitionKey"
+  MEMBER ProcessDefinitionId = 3 json="processDefinitionId"
+  MEMBER StartDate = 4 json="startDate"
+  MEMBER EndDate = 5 json="endDate"
+  MEMBER ElementId = 6 json="elementId"
+  MEMBER ElementName = 7 json="elementName"
+  MEMBER Type = 8 json="type"
+  MEMBER State = 9 json="state"
+  MEMBER IncidentKey = 10 json="incidentKey"
+  MEMBER TenantId = 11 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.ElementInstanceStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -2539,8 +2766,17 @@ TYPE Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQueryResult : sealed clas
 
 TYPE Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Id = 0 json="id"
+  MEMBER Type = 1 json="type"
+  MEMBER AfterNonGlobal = 2 json="afterNonGlobal"
+  MEMBER Priority = 3 json="priority"
+  MEMBER Source = 4 json="source"
 
 TYPE Camunda.Orchestration.Sdk.GroupClientResult : sealed class
   CTOR ()
@@ -2553,8 +2789,13 @@ TYPE Camunda.Orchestration.Sdk.GroupClientSearchQueryRequest : sealed class
 
 TYPE Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ClientId = 0 json="clientId"
 
 TYPE Camunda.Orchestration.Sdk.GroupClientSearchResult : sealed class
   CTOR ()
@@ -2616,8 +2857,14 @@ TYPE Camunda.Orchestration.Sdk.GroupSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.GroupSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Name = 0 json="name"
+  MEMBER GroupId = 1 json="groupId"
 
 TYPE Camunda.Orchestration.Sdk.GroupUpdateRequest : sealed class
   CTOR ()
@@ -2641,8 +2888,13 @@ TYPE Camunda.Orchestration.Sdk.GroupUserSearchQueryRequest : sealed class
 
 TYPE Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Username = 0 json="username"
 
 TYPE Camunda.Orchestration.Sdk.GroupUserSearchResult : sealed class
   CTOR ()
@@ -2754,8 +3006,15 @@ TYPE Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuer
 
 TYPE Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ActiveInstancesWithErrorCount = 0 json="activeInstancesWithErrorCount"
+  MEMBER ProcessDefinitionKey = 1 json="processDefinitionKey"
+  MEMBER TenantId = 2 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionResult : sealed class
   CTOR ()
@@ -2778,8 +3037,14 @@ TYPE Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQueryResu
 
 TYPE Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ErrorMessage = 0 json="errorMessage"
+  MEMBER ActiveInstancesWithErrorCount = 1 json="activeInstancesWithErrorCount"
 
 TYPE Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorResult : sealed class
   CTOR ()
@@ -2820,8 +3085,23 @@ TYPE Camunda.Orchestration.Sdk.IncidentSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER IncidentKey = 0 json="incidentKey"
+  MEMBER ProcessDefinitionKey = 1 json="processDefinitionKey"
+  MEMBER ProcessDefinitionId = 2 json="processDefinitionId"
+  MEMBER ProcessInstanceKey = 3 json="processInstanceKey"
+  MEMBER ErrorType = 4 json="errorType"
+  MEMBER ElementId = 5 json="elementId"
+  MEMBER ElementInstanceKey = 6 json="elementInstanceKey"
+  MEMBER CreationTime = 7 json="creationTime"
+  MEMBER State = 8 json="state"
+  MEMBER JobKey = 9 json="jobKey"
+  MEMBER TenantId = 10 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.IncidentStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -3097,8 +3377,32 @@ TYPE Camunda.Orchestration.Sdk.JobSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.JobSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Deadline = 0 json="deadline"
+  MEMBER DeniedReason = 1 json="deniedReason"
+  MEMBER ElementId = 2 json="elementId"
+  MEMBER ElementInstanceKey = 3 json="elementInstanceKey"
+  MEMBER EndTime = 4 json="endTime"
+  MEMBER ErrorCode = 5 json="errorCode"
+  MEMBER ErrorMessage = 6 json="errorMessage"
+  MEMBER HasFailedWithRetriesLeft = 7 json="hasFailedWithRetriesLeft"
+  MEMBER IsDenied = 8 json="isDenied"
+  MEMBER JobKey = 9 json="jobKey"
+  MEMBER Kind = 10 json="kind"
+  MEMBER ListenerEventType = 11 json="listenerEventType"
+  MEMBER ProcessDefinitionId = 12 json="processDefinitionId"
+  MEMBER ProcessDefinitionKey = 13 json="processDefinitionKey"
+  MEMBER ProcessInstanceKey = 14 json="processInstanceKey"
+  MEMBER Retries = 15 json="retries"
+  MEMBER State = 16 json="state"
+  MEMBER TenantId = 17 json="tenantId"
+  MEMBER Type = 18 json="type"
+  MEMBER Worker = 19 json="worker"
 
 TYPE Camunda.Orchestration.Sdk.JobSearchResult : sealed class
   CTOR ()
@@ -3347,8 +3651,16 @@ TYPE Camunda.Orchestration.Sdk.MappingRuleSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER MappingRuleId = 0 json="mappingRuleId"
+  MEMBER ClaimName = 1 json="claimName"
+  MEMBER ClaimValue = 2 json="claimValue"
+  MEMBER Name = 3 json="name"
 
 TYPE Camunda.Orchestration.Sdk.MappingRuleUpdateRequest : sealed class
   CTOR ()
@@ -3486,8 +3798,27 @@ TYPE Camunda.Orchestration.Sdk.MessageSubscriptionSearchQueryResult : sealed cla
 
 TYPE Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER MessageSubscriptionKey = 0 json="messageSubscriptionKey"
+  MEMBER ProcessDefinitionId = 1 json="processDefinitionId"
+  MEMBER ProcessDefinitionName = 2 json="processDefinitionName"
+  MEMBER ProcessDefinitionVersion = 3 json="processDefinitionVersion"
+  MEMBER ProcessInstanceKey = 4 json="processInstanceKey"
+  MEMBER ElementId = 5 json="elementId"
+  MEMBER ElementInstanceKey = 6 json="elementInstanceKey"
+  MEMBER MessageSubscriptionState = 7 json="messageSubscriptionState"
+  MEMBER MessageSubscriptionType = 8 json="messageSubscriptionType"
+  MEMBER LastUpdatedDate = 9 json="lastUpdatedDate"
+  MEMBER MessageName = 10 json="messageName"
+  MEMBER CorrelationKey = 11 json="correlationKey"
+  MEMBER TenantId = 12 json="tenantId"
+  MEMBER ToolName = 13 json="toolName"
+  MEMBER InboundConnectorType = 14 json="inboundConnectorType"
 
 TYPE Camunda.Orchestration.Sdk.MessageSubscriptionStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -3604,9 +3935,23 @@ TYPE Camunda.Orchestration.Sdk.OwnerTypeEnum : enum interfaces=[System.IComparab
 
 TYPE Camunda.Orchestration.Sdk.Partition : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.PartitionHealth Health { get; set; } [JsonPropertyName("health")]
+  PROP Camunda.Orchestration.Sdk.PartitionRole Role { get; set; } [JsonPropertyName("role")]
   PROP System.Int32 PartitionId { get; set; } [JsonPropertyName("partitionId")]
-  PROP System.String Health { get; set; } [JsonPropertyName("health")]
-  PROP System.String Role { get; set; } [JsonPropertyName("role")]
+
+TYPE Camunda.Orchestration.Sdk.PartitionHealth : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Healthy = 0 json="healthy"
+  MEMBER Unhealthy = 1 json="unhealthy"
+  MEMBER Dead = 2 json="dead"
+
+TYPE Camunda.Orchestration.Sdk.PartitionRole : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Leader = 0 json="leader"
+  MEMBER Follower = 1 json="follower"
+  MEMBER Inactive = 2 json="inactive"
 
 TYPE Camunda.Orchestration.Sdk.PermissionTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -3720,8 +4065,15 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQueryResult : 
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ProcessDefinitionId = 0 json="processDefinitionId"
+  MEMBER ActiveInstancesWithIncidentCount = 1 json="activeInstancesWithIncidentCount"
+  MEMBER ActiveInstancesWithoutIncidentCount = 2 json="activeInstancesWithoutIncidentCount"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsResult : sealed class
   CTOR ()
@@ -3750,8 +4102,18 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQueryRe
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ProcessDefinitionId = 0 json="processDefinitionId"
+  MEMBER ProcessDefinitionKey = 1 json="processDefinitionKey"
+  MEMBER ProcessDefinitionName = 2 json="processDefinitionName"
+  MEMBER ProcessDefinitionVersion = 3 json="processDefinitionVersion"
+  MEMBER ActiveInstancesWithIncidentCount = 4 json="activeInstancesWithIncidentCount"
+  MEMBER ActiveInstancesWithoutIncidentCount = 5 json="activeInstancesWithoutIncidentCount"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsResult : sealed class
   CTOR ()
@@ -3831,8 +4193,19 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ProcessDefinitionKey = 0 json="processDefinitionKey"
+  MEMBER Name = 1 json="name"
+  MEMBER ResourceName = 2 json="resourceName"
+  MEMBER Version = 3 json="version"
+  MEMBER VersionTag = 4 json="versionTag"
+  MEMBER ProcessDefinitionId = 5 json="processDefinitionId"
+  MEMBER TenantId = 6 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter : sealed class
   CTOR ()
@@ -4097,8 +4470,26 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ProcessInstanceKey = 0 json="processInstanceKey"
+  MEMBER ProcessDefinitionId = 1 json="processDefinitionId"
+  MEMBER ProcessDefinitionName = 2 json="processDefinitionName"
+  MEMBER ProcessDefinitionVersion = 3 json="processDefinitionVersion"
+  MEMBER ProcessDefinitionVersionTag = 4 json="processDefinitionVersionTag"
+  MEMBER ProcessDefinitionKey = 5 json="processDefinitionKey"
+  MEMBER ParentProcessInstanceKey = 6 json="parentProcessInstanceKey"
+  MEMBER ParentElementInstanceKey = 7 json="parentElementInstanceKey"
+  MEMBER StartDate = 8 json="startDate"
+  MEMBER EndDate = 9 json="endDate"
+  MEMBER State = 10 json="state"
+  MEMBER HasIncident = 11 json="hasIncident"
+  MEMBER TenantId = 12 json="tenantId"
+  MEMBER BusinessId = 13 json="businessId"
 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowResult : sealed class
   CTOR ()
@@ -4196,8 +4587,19 @@ TYPE Camunda.Orchestration.Sdk.ResourceSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ResourceKey = 0 json="resourceKey"
+  MEMBER ResourceName = 1 json="resourceName"
+  MEMBER ResourceId = 2 json="resourceId"
+  MEMBER Version = 3 json="version"
+  MEMBER VersionTag = 4 json="versionTag"
+  MEMBER DeploymentKey = 5 json="deploymentKey"
+  MEMBER TenantId = 6 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.ResourceTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -4244,8 +4646,13 @@ TYPE Camunda.Orchestration.Sdk.RoleClientSearchQueryRequest : sealed class
 
 TYPE Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ClientId = 0 json="clientId"
 
 TYPE Camunda.Orchestration.Sdk.RoleClientSearchResult : sealed class
   CTOR ()
@@ -4280,8 +4687,13 @@ TYPE Camunda.Orchestration.Sdk.RoleGroupSearchQueryRequest : sealed class
 
 TYPE Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER GroupId = 0 json="groupId"
 
 TYPE Camunda.Orchestration.Sdk.RoleGroupSearchResult : sealed class
   CTOR ()
@@ -4321,8 +4733,14 @@ TYPE Camunda.Orchestration.Sdk.RoleSearchQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.RoleSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Name = 0 json="name"
+  MEMBER RoleId = 1 json="roleId"
 
 TYPE Camunda.Orchestration.Sdk.RoleUpdateRequest : sealed class
   CTOR ()
@@ -4346,8 +4764,13 @@ TYPE Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest : sealed class
 
 TYPE Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Username = 0 json="username"
 
 TYPE Camunda.Orchestration.Sdk.RoleUserSearchResult : sealed class
   CTOR ()
@@ -4505,7 +4928,12 @@ TYPE Camunda.Orchestration.Sdk.TenantClientSearchQueryRequest : sealed class
 TYPE Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+  PROP Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ClientId = 0 json="clientId"
 
 TYPE Camunda.Orchestration.Sdk.TenantClientSearchResult : sealed class
   CTOR ()
@@ -4547,7 +4975,12 @@ TYPE Camunda.Orchestration.Sdk.TenantGroupSearchQueryRequest : sealed class
 TYPE Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+  PROP Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER GroupId = 0 json="groupId"
 
 TYPE Camunda.Orchestration.Sdk.TenantGroupSearchResult : sealed class
   CTOR ()
@@ -4593,7 +5026,14 @@ TYPE Camunda.Orchestration.Sdk.TenantSearchQueryResult : sealed class
 TYPE Camunda.Orchestration.Sdk.TenantSearchQuerySortRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+  PROP Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Key = 0 json="key"
+  MEMBER Name = 1 json="name"
+  MEMBER TenantId = 2 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.TenantUpdateRequest : sealed class
   CTOR ()
@@ -4618,7 +5058,12 @@ TYPE Camunda.Orchestration.Sdk.TenantUserSearchQueryRequest : sealed class
 TYPE Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+  PROP Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Username = 0 json="username"
 
 TYPE Camunda.Orchestration.Sdk.TenantUserSearchResult : sealed class
   CTOR ()
@@ -4711,7 +5156,14 @@ TYPE Camunda.Orchestration.Sdk.UserSearchQueryRequest : sealed class
 TYPE Camunda.Orchestration.Sdk.UserSearchQuerySortRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+  PROP Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Username = 0 json="username"
+  MEMBER Name = 1 json="name"
+  MEMBER Email = 2 json="email"
 
 TYPE Camunda.Orchestration.Sdk.UserSearchResult : sealed class
   CTOR ()
@@ -4835,7 +5287,17 @@ TYPE Camunda.Orchestration.Sdk.UserTaskSearchQueryResult : sealed class
 TYPE Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+  PROP Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER CreationDate = 0 json="creationDate"
+  MEMBER CompletionDate = 1 json="completionDate"
+  MEMBER FollowUpDate = 2 json="followUpDate"
+  MEMBER DueDate = 3 json="dueDate"
+  MEMBER Priority = 4 json="priority"
+  MEMBER Name = 5 json="name"
 
 TYPE Camunda.Orchestration.Sdk.UserTaskStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -4885,7 +5347,17 @@ TYPE Camunda.Orchestration.Sdk.UserTaskVariableSearchQueryRequest : sealed class
 TYPE Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+  PROP Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Value = 0 json="value"
+  MEMBER Name = 1 json="name"
+  MEMBER TenantId = 2 json="tenantId"
+  MEMBER VariableKey = 3 json="variableKey"
+  MEMBER ScopeKey = 4 json="scopeKey"
+  MEMBER ProcessInstanceKey = 5 json="processInstanceKey"
 
 TYPE Camunda.Orchestration.Sdk.UserUpdateRequest : sealed class
   CTOR ()
@@ -4990,7 +5462,17 @@ TYPE Camunda.Orchestration.Sdk.VariableSearchQueryResult : sealed class
 TYPE Camunda.Orchestration.Sdk.VariableSearchQuerySortRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
-  PROP System.String Field { get; set; } [JsonPropertyName("field")]
+  PROP Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Value = 0 json="value"
+  MEMBER Name = 1 json="name"
+  MEMBER TenantId = 2 json="tenantId"
+  MEMBER VariableKey = 3 json="variableKey"
+  MEMBER ScopeKey = 4 json="scopeKey"
+  MEMBER ProcessInstanceKey = 5 json="processInstanceKey"
 
 TYPE Camunda.Orchestration.Sdk.VariableSearchResult : sealed class
   CTOR ()
