@@ -151,10 +151,6 @@ public class InlineEnumPropertyTests
         // Derive inline enum types from reflection on actual properties.
         var inlineEnumTypes = GetInlineEnumTypesFromReflection();
 
-        // Load spec to verify wire values match
-        var spec = LoadBundledSpec();
-        var schemas = spec["components"]!["schemas"]!.AsObject();
-
         foreach (var enumType in inlineEnumTypes)
         {
             foreach (var member in Enum.GetNames(enumType))
