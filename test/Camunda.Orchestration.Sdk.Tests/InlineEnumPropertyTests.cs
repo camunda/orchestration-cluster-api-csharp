@@ -46,9 +46,28 @@ public class InlineEnumPropertyTests
             {
                 foreach (var allOfItem in allOfArray)
                 {
-                    if (allOfItem is JsonObject allOfObj && allOfObj["properties"] is JsonObject allOfProps)
+                    if (allOfItem is not JsonObject allOfObj)
+                        continue;
+
+                    // Resolve $ref in allOf items
+                    JsonObject? propsSource = null;
+                    if (allOfObj["$ref"]?.GetValue<string>() is string refPath)
                     {
-                        foreach (var (propName, propDef) in allOfProps)
+                        var refName = refPath.Split('/')[^1];
+                        if (schemas[refName] is JsonObject refSchema
+                            && refSchema["properties"] is JsonObject refProps)
+                        {
+                            propsSource = refProps;
+                        }
+                    }
+                    else if (allOfObj["properties"] is JsonObject inlineProps)
+                    {
+                        propsSource = inlineProps;
+                    }
+
+                    if (propsSource != null)
+                    {
+                        foreach (var (propName, propDef) in propsSource)
                         {
                             if (propDef != null)
                                 properties.TryAdd(propName, propDef);
@@ -111,48 +130,164 @@ public class InlineEnumPropertyTests
     [Fact]
     public void AllInlineEnums_HaveJsonStringEnumConverterAttribute()
     {
-        // Every inline enum type should have [JsonConverter(typeof(JsonStringEnumConverter))]
-        var inlineEnumTypeNames = InlineStringEnumProperties()
-            .Select(row => $"{CSharpClientGenerator.SanitizeTypeName((string)row[0])}{CSharpClientGenerator.ToPascalCase((string)row[1])}")
-            .Distinct()
-            .ToList();
+        // Derive inline enum types from reflection on actual properties
+        // rather than re-encoding the naming convention (handles disambiguation).
+        var inlineEnumTypes = GetInlineEnumTypesFromReflection();
 
-        foreach (var enumName in inlineEnumTypeNames)
+        foreach (var enumType in inlineEnumTypes)
         {
-            var fullName = $"Camunda.Orchestration.Sdk.{enumName}";
-            var type = s_sdkAssembly.GetType(fullName);
-            Assert.True(type != null, $"Expected inline enum type {fullName}");
-
-            var attr = type.GetCustomAttribute<JsonConverterAttribute>();
+            var attr = enumType.GetCustomAttribute<JsonConverterAttribute>();
             Assert.True(attr != null,
-                $"{fullName} is missing [JsonConverter(typeof(JsonStringEnumConverter))]");
+                $"{enumType.FullName} is missing [JsonConverter(typeof(JsonStringEnumConverter))]");
+            Assert.True(attr.ConverterType == typeof(JsonStringEnumConverter),
+                $"{enumType.FullName} has [JsonConverter] but converter type is " +
+                $"{attr.ConverterType?.Name}, expected JsonStringEnumConverter");
         }
     }
 
     [Fact]
     public void AllInlineEnumMembers_HaveJsonPropertyNameAttribute()
     {
-        // Every member of every inline enum must have [JsonPropertyName] for wire format fidelity
-        var inlineEnumTypeNames = InlineStringEnumProperties()
-            .Select(row => $"{CSharpClientGenerator.SanitizeTypeName((string)row[0])}{CSharpClientGenerator.ToPascalCase((string)row[1])}")
-            .Distinct()
-            .ToList();
+        // Derive inline enum types from reflection on actual properties.
+        var inlineEnumTypes = GetInlineEnumTypesFromReflection();
 
-        foreach (var enumName in inlineEnumTypeNames)
+        // Load spec to verify wire values match
+        var spec = LoadBundledSpec();
+        var schemas = spec["components"]!["schemas"]!.AsObject();
+
+        foreach (var enumType in inlineEnumTypes)
         {
-            var fullName = $"Camunda.Orchestration.Sdk.{enumName}";
-            var type = s_sdkAssembly.GetType(fullName);
-            Assert.True(type != null, $"Expected inline enum type {fullName}");
-
-            foreach (var member in Enum.GetNames(type))
+            foreach (var member in Enum.GetNames(enumType))
             {
-                var field = type.GetField(member);
-                Assert.True(field != null, $"{fullName}.{member} field not found");
+                var field = enumType.GetField(member);
+                Assert.True(field != null, $"{enumType.FullName}.{member} field not found");
                 var attr = field.GetCustomAttribute<JsonPropertyNameAttribute>();
                 Assert.True(attr != null,
-                    $"{fullName}.{member} is missing [JsonPropertyName] — wire format will not match spec");
+                    $"{enumType.FullName}.{member} is missing [JsonPropertyName] — wire format will not match spec");
             }
         }
+    }
+
+    [Fact]
+    public void AllInlineEnumMembers_MatchSpecWireValues()
+    {
+        // Verify that [JsonPropertyName] values match the spec enum values exactly
+        var spec = LoadBundledSpec();
+        var schemas = spec["components"]!["schemas"]!.AsObject();
+
+        foreach (var row in InlineStringEnumProperties())
+        {
+            var schemaName = (string)row[0];
+            var propName = (string)row[1];
+
+            // Resolve spec enum values
+            var specEnumValues = GetSpecEnumValues(schemas, schemaName, propName);
+            if (specEnumValues == null)
+                continue;
+
+            // Find the reflected enum type via the property
+            var csharpTypeName = $"Camunda.Orchestration.Sdk.{CSharpClientGenerator.SanitizeTypeName(schemaName)}";
+            var type = s_sdkAssembly.GetType(csharpTypeName);
+            if (type == null)
+                continue;
+
+            var csharpPropName = CSharpClientGenerator.ToPascalCase(propName);
+            var prop = type.GetProperty(csharpPropName, BindingFlags.Public | BindingFlags.Instance);
+            if (prop == null)
+                continue;
+
+            var enumType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+            if (!enumType.IsEnum)
+                continue;
+
+            // Collect wire values from [JsonPropertyName] attributes
+            var wireValues = new HashSet<string>();
+            foreach (var member in Enum.GetNames(enumType))
+            {
+                var field = enumType.GetField(member);
+                var attr = field?.GetCustomAttribute<JsonPropertyNameAttribute>();
+                if (attr != null)
+                    wireValues.Add(attr.Name);
+            }
+
+            // Every spec value should have a matching [JsonPropertyName]
+            foreach (var specValue in specEnumValues)
+            {
+                Assert.True(wireValues.Contains(specValue),
+                    $"{enumType.FullName} is missing member with [JsonPropertyName(\"{specValue}\")] " +
+                    $"(schema: {schemaName}, property: {propName})");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Derives inline enum types by reflecting on the properties discovered by the
+    /// Theory data source — avoids re-encoding the generator's naming convention.
+    /// </summary>
+    private static HashSet<Type> GetInlineEnumTypesFromReflection()
+    {
+        var enumTypes = new HashSet<Type>();
+        foreach (var row in InlineStringEnumProperties())
+        {
+            var schemaName = (string)row[0];
+            var propName = (string)row[1];
+
+            var csharpTypeName = $"Camunda.Orchestration.Sdk.{CSharpClientGenerator.SanitizeTypeName(schemaName)}";
+            var type = s_sdkAssembly.GetType(csharpTypeName);
+            if (type == null)
+                continue;
+
+            var csharpPropName = CSharpClientGenerator.ToPascalCase(propName);
+            var prop = type.GetProperty(csharpPropName, BindingFlags.Public | BindingFlags.Instance);
+            if (prop == null)
+                continue;
+
+            var propType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+            if (propType.IsEnum)
+                enumTypes.Add(propType);
+        }
+        Assert.True(enumTypes.Count > 0, "No inline enum types found via reflection");
+        return enumTypes;
+    }
+
+    private static List<string>? GetSpecEnumValues(JsonObject schemas, string schemaName, string propName)
+    {
+        if (schemas[schemaName] is not JsonObject schemaObj)
+            return null;
+
+        // Direct properties
+        if (schemaObj["properties"] is JsonObject props && props[propName] is JsonObject propObj)
+        {
+            if (propObj["enum"] is JsonArray arr)
+                return arr.Select(e => e?.GetValue<string>() ?? "").ToList();
+        }
+
+        // allOf composition
+        if (schemaObj["allOf"] is JsonArray allOf)
+        {
+            foreach (var item in allOf)
+            {
+                if (item is not JsonObject itemObj)
+                    continue;
+
+                JsonObject? source = null;
+                if (itemObj["$ref"]?.GetValue<string>() is string refPath)
+                {
+                    var refName = refPath.Split('/')[^1];
+                    if (schemas[refName] is JsonObject refSchema)
+                        source = refSchema["properties"] as JsonObject;
+                }
+                else
+                {
+                    source = itemObj["properties"] as JsonObject;
+                }
+
+                if (source?[propName] is JsonObject refPropObj && refPropObj["enum"] is JsonArray refArr)
+                    return refArr.Select(e => e?.GetValue<string>() ?? "").ToList();
+            }
+        }
+
+        return null;
     }
 
     private static JsonNode LoadBundledSpec()
