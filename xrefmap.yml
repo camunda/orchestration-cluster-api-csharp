@@ -4357,6 +4357,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequest.Order
   nameWithType: AgentInstanceSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField
+  name: AgentInstanceSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField
+  nameWithType: AgentInstanceSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.CompletionDate
+  name: CompletionDate
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AgentInstanceSearchQuerySortRequestField_CompletionDate
+  commentId: F:Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.CompletionDate
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.CompletionDate
+  nameWithType: AgentInstanceSearchQuerySortRequestField.CompletionDate
+- uid: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.CreationDate
+  name: CreationDate
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AgentInstanceSearchQuerySortRequestField_CreationDate
+  commentId: F:Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.CreationDate
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.CreationDate
+  nameWithType: AgentInstanceSearchQuerySortRequestField.CreationDate
+- uid: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.LastUpdatedDate
+  name: LastUpdatedDate
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AgentInstanceSearchQuerySortRequestField_LastUpdatedDate
+  commentId: F:Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.LastUpdatedDate
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.LastUpdatedDate
+  nameWithType: AgentInstanceSearchQuerySortRequestField.LastUpdatedDate
+- uid: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.Status
+  name: Status
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AgentInstanceSearchQuerySortRequestField_Status
+  commentId: F:Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.Status
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.Status
+  nameWithType: AgentInstanceSearchQuerySortRequestField.Status
 - uid: Camunda.Orchestration.Sdk.AgentInstanceStatusEnum
   name: AgentInstanceStatusEnum
   href: api/Camunda.Orchestration.Sdk.AgentInstanceStatusEnum.html
@@ -6247,6 +6277,150 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest.Order
   nameWithType: AuditLogSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField
+  name: AuditLogSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField
+  nameWithType: AuditLogSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ActorId
+  name: ActorId
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_ActorId
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ActorId
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ActorId
+  nameWithType: AuditLogSearchQuerySortRequestField.ActorId
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ActorType
+  name: ActorType
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_ActorType
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ActorType
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ActorType
+  nameWithType: AuditLogSearchQuerySortRequestField.ActorType
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.AuditLogKey
+  name: AuditLogKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_AuditLogKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.AuditLogKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.AuditLogKey
+  nameWithType: AuditLogSearchQuerySortRequestField.AuditLogKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.BatchOperationKey
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_BatchOperationKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.BatchOperationKey
+  nameWithType: AuditLogSearchQuerySortRequestField.BatchOperationKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.BatchOperationType
+  name: BatchOperationType
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_BatchOperationType
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.BatchOperationType
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.BatchOperationType
+  nameWithType: AuditLogSearchQuerySortRequestField.BatchOperationType
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.Category
+  name: Category
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_Category
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.Category
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.Category
+  nameWithType: AuditLogSearchQuerySortRequestField.Category
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionDefinitionId
+  name: DecisionDefinitionId
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_DecisionDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionDefinitionId
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionDefinitionId
+  nameWithType: AuditLogSearchQuerySortRequestField.DecisionDefinitionId
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionDefinitionKey
+  name: DecisionDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_DecisionDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionDefinitionKey
+  nameWithType: AuditLogSearchQuerySortRequestField.DecisionDefinitionKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionEvaluationKey
+  name: DecisionEvaluationKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_DecisionEvaluationKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionEvaluationKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionEvaluationKey
+  nameWithType: AuditLogSearchQuerySortRequestField.DecisionEvaluationKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionRequirementsId
+  name: DecisionRequirementsId
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_DecisionRequirementsId
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionRequirementsId
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionRequirementsId
+  nameWithType: AuditLogSearchQuerySortRequestField.DecisionRequirementsId
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionRequirementsKey
+  name: DecisionRequirementsKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_DecisionRequirementsKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionRequirementsKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.DecisionRequirementsKey
+  nameWithType: AuditLogSearchQuerySortRequestField.DecisionRequirementsKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ElementInstanceKey
+  name: ElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_ElementInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ElementInstanceKey
+  nameWithType: AuditLogSearchQuerySortRequestField.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.EntityKey
+  name: EntityKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_EntityKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.EntityKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.EntityKey
+  nameWithType: AuditLogSearchQuerySortRequestField.EntityKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.EntityType
+  name: EntityType
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_EntityType
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.EntityType
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.EntityType
+  nameWithType: AuditLogSearchQuerySortRequestField.EntityType
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.JobKey
+  name: JobKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_JobKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.JobKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.JobKey
+  nameWithType: AuditLogSearchQuerySortRequestField.JobKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.OperationType
+  name: OperationType
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_OperationType
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.OperationType
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.OperationType
+  nameWithType: AuditLogSearchQuerySortRequestField.OperationType
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ProcessDefinitionId
+  nameWithType: AuditLogSearchQuerySortRequestField.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: AuditLogSearchQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: AuditLogSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.Result
+  name: Result
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_Result
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.Result
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.Result
+  nameWithType: AuditLogSearchQuerySortRequestField.Result
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.TenantId
+  nameWithType: AuditLogSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.Timestamp
+  name: Timestamp
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_Timestamp
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.Timestamp
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.Timestamp
+  nameWithType: AuditLogSearchQuerySortRequestField.Timestamp
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.UserTaskKey
+  name: UserTaskKey
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_UserTaskKey
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.UserTaskKey
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.UserTaskKey
+  nameWithType: AuditLogSearchQuerySortRequestField.UserTaskKey
 - uid: Camunda.Orchestration.Sdk.AuthConfig
   name: AuthConfig
   href: api/Camunda.Orchestration.Sdk.AuthConfig.html
@@ -6745,6 +6919,42 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequest.Order
   nameWithType: AuthorizationSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField
+  name: AuthorizationSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField
+  nameWithType: AuthorizationSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.OwnerId
+  name: OwnerId
+  href: api/Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuthorizationSearchQuerySortRequestField_OwnerId
+  commentId: F:Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.OwnerId
+  fullName: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.OwnerId
+  nameWithType: AuthorizationSearchQuerySortRequestField.OwnerId
+- uid: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.OwnerType
+  name: OwnerType
+  href: api/Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuthorizationSearchQuerySortRequestField_OwnerType
+  commentId: F:Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.OwnerType
+  fullName: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.OwnerType
+  nameWithType: AuthorizationSearchQuerySortRequestField.OwnerType
+- uid: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.ResourceId
+  name: ResourceId
+  href: api/Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuthorizationSearchQuerySortRequestField_ResourceId
+  commentId: F:Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.ResourceId
+  fullName: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.ResourceId
+  nameWithType: AuthorizationSearchQuerySortRequestField.ResourceId
+- uid: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.ResourcePropertyName
+  name: ResourcePropertyName
+  href: api/Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuthorizationSearchQuerySortRequestField_ResourcePropertyName
+  commentId: F:Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.ResourcePropertyName
+  fullName: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.ResourcePropertyName
+  nameWithType: AuthorizationSearchQuerySortRequestField.ResourcePropertyName
+- uid: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.ResourceType
+  name: ResourceType
+  href: api/Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuthorizationSearchQuerySortRequestField_ResourceType
+  commentId: F:Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.ResourceType
+  fullName: Camunda.Orchestration.Sdk.AuthorizationSearchQuerySortRequestField.ResourceType
+  nameWithType: AuthorizationSearchQuerySortRequestField.ResourceType
 - uid: Camunda.Orchestration.Sdk.AuthorizationSearchResult
   name: AuthorizationSearchResult
   href: api/Camunda.Orchestration.Sdk.AuthorizationSearchResult.html
@@ -7423,6 +7633,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationError.Type
   fullName: Camunda.Orchestration.Sdk.BatchOperationError.Type
   nameWithType: BatchOperationError.Type
+- uid: Camunda.Orchestration.Sdk.BatchOperationErrorType
+  name: BatchOperationErrorType
+  href: api/Camunda.Orchestration.Sdk.BatchOperationErrorType.html
+  commentId: T:Camunda.Orchestration.Sdk.BatchOperationErrorType
+  fullName: Camunda.Orchestration.Sdk.BatchOperationErrorType
+  nameWithType: BatchOperationErrorType
+- uid: Camunda.Orchestration.Sdk.BatchOperationErrorType.QUERYFAILED
+  name: QUERYFAILED
+  href: api/Camunda.Orchestration.Sdk.BatchOperationErrorType.html#Camunda_Orchestration_Sdk_BatchOperationErrorType_QUERYFAILED
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationErrorType.QUERYFAILED
+  fullName: Camunda.Orchestration.Sdk.BatchOperationErrorType.QUERYFAILED
+  nameWithType: BatchOperationErrorType.QUERYFAILED
+- uid: Camunda.Orchestration.Sdk.BatchOperationErrorType.RESULTBUFFERSIZEEXCEEDED
+  name: RESULTBUFFERSIZEEXCEEDED
+  href: api/Camunda.Orchestration.Sdk.BatchOperationErrorType.html#Camunda_Orchestration_Sdk_BatchOperationErrorType_RESULTBUFFERSIZEEXCEEDED
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationErrorType.RESULTBUFFERSIZEEXCEEDED
+  fullName: Camunda.Orchestration.Sdk.BatchOperationErrorType.RESULTBUFFERSIZEEXCEEDED
+  nameWithType: BatchOperationErrorType.RESULTBUFFERSIZEEXCEEDED
 - uid: Camunda.Orchestration.Sdk.BatchOperationFilter
   name: BatchOperationFilter
   href: api/Camunda.Orchestration.Sdk.BatchOperationFilter.html
@@ -7657,6 +7885,42 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationItemResponse.State
   fullName: Camunda.Orchestration.Sdk.BatchOperationItemResponse.State
   nameWithType: BatchOperationItemResponse.State
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemResponseState
+  name: BatchOperationItemResponseState
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemResponseState.html
+  commentId: T:Camunda.Orchestration.Sdk.BatchOperationItemResponseState
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemResponseState
+  nameWithType: BatchOperationItemResponseState
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.ACTIVE
+  name: ACTIVE
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemResponseState.html#Camunda_Orchestration_Sdk_BatchOperationItemResponseState_ACTIVE
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemResponseState.ACTIVE
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.ACTIVE
+  nameWithType: BatchOperationItemResponseState.ACTIVE
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.CANCELED
+  name: CANCELED
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemResponseState.html#Camunda_Orchestration_Sdk_BatchOperationItemResponseState_CANCELED
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemResponseState.CANCELED
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.CANCELED
+  nameWithType: BatchOperationItemResponseState.CANCELED
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.COMPLETED
+  name: COMPLETED
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemResponseState.html#Camunda_Orchestration_Sdk_BatchOperationItemResponseState_COMPLETED
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemResponseState.COMPLETED
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.COMPLETED
+  nameWithType: BatchOperationItemResponseState.COMPLETED
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.FAILED
+  name: FAILED
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemResponseState.html#Camunda_Orchestration_Sdk_BatchOperationItemResponseState_FAILED
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemResponseState.FAILED
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.FAILED
+  nameWithType: BatchOperationItemResponseState.FAILED
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.SKIPPED
+  name: SKIPPED
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemResponseState.html#Camunda_Orchestration_Sdk_BatchOperationItemResponseState_SKIPPED
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemResponseState.SKIPPED
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemResponseState.SKIPPED
+  nameWithType: BatchOperationItemResponseState.SKIPPED
 - uid: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuery
   name: BatchOperationItemSearchQuery
   href: api/Camunda.Orchestration.Sdk.BatchOperationItemSearchQuery.html
@@ -7759,6 +8023,42 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequest.Order
   nameWithType: BatchOperationItemSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField
+  name: BatchOperationItemSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField
+  nameWithType: BatchOperationItemSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.BatchOperationKey
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationItemSearchQuerySortRequestField_BatchOperationKey
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.BatchOperationKey
+  nameWithType: BatchOperationItemSearchQuerySortRequestField.BatchOperationKey
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.ItemKey
+  name: ItemKey
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationItemSearchQuerySortRequestField_ItemKey
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.ItemKey
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.ItemKey
+  nameWithType: BatchOperationItemSearchQuerySortRequestField.ItemKey
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationItemSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: BatchOperationItemSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.ProcessedDate
+  name: ProcessedDate
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationItemSearchQuerySortRequestField_ProcessedDate
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.ProcessedDate
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.ProcessedDate
+  nameWithType: BatchOperationItemSearchQuerySortRequestField.ProcessedDate
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationItemSearchQuerySortRequestField_State
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.State
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemSearchQuerySortRequestField.State
+  nameWithType: BatchOperationItemSearchQuerySortRequestField.State
 - uid: Camunda.Orchestration.Sdk.BatchOperationItemStateEnum
   name: BatchOperationItemStateEnum
   href: api/Camunda.Orchestration.Sdk.BatchOperationItemStateEnum.html
@@ -8215,6 +8515,54 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequest.Order
   nameWithType: BatchOperationSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField
+  name: BatchOperationSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField
+  nameWithType: BatchOperationSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.ActorId
+  name: ActorId
+  href: api/Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationSearchQuerySortRequestField_ActorId
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.ActorId
+  fullName: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.ActorId
+  nameWithType: BatchOperationSearchQuerySortRequestField.ActorId
+- uid: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.ActorType
+  name: ActorType
+  href: api/Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationSearchQuerySortRequestField_ActorType
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.ActorType
+  fullName: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.ActorType
+  nameWithType: BatchOperationSearchQuerySortRequestField.ActorType
+- uid: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.BatchOperationKey
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationSearchQuerySortRequestField_BatchOperationKey
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.BatchOperationKey
+  nameWithType: BatchOperationSearchQuerySortRequestField.BatchOperationKey
+- uid: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.EndDate
+  name: EndDate
+  href: api/Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationSearchQuerySortRequestField_EndDate
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.EndDate
+  fullName: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.EndDate
+  nameWithType: BatchOperationSearchQuerySortRequestField.EndDate
+- uid: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.OperationType
+  name: OperationType
+  href: api/Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationSearchQuerySortRequestField_OperationType
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.OperationType
+  fullName: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.OperationType
+  nameWithType: BatchOperationSearchQuerySortRequestField.OperationType
+- uid: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.StartDate
+  name: StartDate
+  href: api/Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationSearchQuerySortRequestField_StartDate
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.StartDate
+  fullName: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.StartDate
+  nameWithType: BatchOperationSearchQuerySortRequestField.StartDate
+- uid: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_BatchOperationSearchQuerySortRequestField_State
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.State
+  fullName: Camunda.Orchestration.Sdk.BatchOperationSearchQuerySortRequestField.State
+  nameWithType: BatchOperationSearchQuerySortRequestField.State
 - uid: Camunda.Orchestration.Sdk.BatchOperationStateEnum
   name: BatchOperationStateEnum
   href: api/Camunda.Orchestration.Sdk.BatchOperationStateEnum.html
@@ -12877,6 +13225,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequest.Order
   nameWithType: ClusterVariableSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField
+  name: ClusterVariableSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField
+  nameWithType: ClusterVariableSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ClusterVariableSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.Name
+  nameWithType: ClusterVariableSearchQuerySortRequestField.Name
+- uid: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.Scope
+  name: Scope
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ClusterVariableSearchQuerySortRequestField_Scope
+  commentId: F:Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.Scope
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.Scope
+  nameWithType: ClusterVariableSearchQuerySortRequestField.Scope
+- uid: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ClusterVariableSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.TenantId
+  nameWithType: ClusterVariableSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ClusterVariableSearchQuerySortRequestField_Value
+  commentId: F:Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.Value
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField.Value
+  nameWithType: ClusterVariableSearchQuerySortRequestField.Value
 - uid: Camunda.Orchestration.Sdk.ClusterVariableSearchResult
   name: ClusterVariableSearchResult
   href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchResult.html
@@ -13645,6 +14023,84 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequest.Order
   nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField
+  name: CorrelatedMessageSubscriptionSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.CorrelationKey
+  name: CorrelationKey
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_CorrelationKey
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.CorrelationKey
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.CorrelationKey
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.CorrelationKey
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.CorrelationTime
+  name: CorrelationTime
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_CorrelationTime
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.CorrelationTime
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.CorrelationTime
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.CorrelationTime
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ElementId
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_ElementId
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ElementId
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ElementId
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.ElementId
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ElementInstanceKey
+  name: ElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_ElementInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ElementInstanceKey
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.MessageKey
+  name: MessageKey
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_MessageKey
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.MessageKey
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.MessageKey
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.MessageKey
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.MessageName
+  name: MessageName
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_MessageName
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.MessageName
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.MessageName
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.MessageName
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.PartitionId
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_PartitionId
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.PartitionId
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.PartitionId
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.PartitionId
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionId
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.SubscriptionKey
+  name: SubscriptionKey
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_SubscriptionKey
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.SubscriptionKey
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.SubscriptionKey
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.SubscriptionKey
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.TenantId
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.TenantId
 - uid: Camunda.Orchestration.Sdk.CreateClusterVariableRequest
   name: CreateClusterVariableRequest
   href: api/Camunda.Orchestration.Sdk.CreateClusterVariableRequest.html
@@ -14557,6 +15013,66 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequest.Order
   nameWithType: DecisionDefinitionSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField
+  name: DecisionDefinitionSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionDefinitionId
+  name: DecisionDefinitionId
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionDefinitionSearchQuerySortRequestField_DecisionDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionDefinitionId
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionDefinitionId
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField.DecisionDefinitionId
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionDefinitionKey
+  name: DecisionDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionDefinitionSearchQuerySortRequestField_DecisionDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionDefinitionKey
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField.DecisionDefinitionKey
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsId
+  name: DecisionRequirementsId
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionDefinitionSearchQuerySortRequestField_DecisionRequirementsId
+  commentId: F:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsId
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsId
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsId
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsKey
+  name: DecisionRequirementsKey
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionDefinitionSearchQuerySortRequestField_DecisionRequirementsKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsKey
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsKey
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsKey
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsName
+  name: DecisionRequirementsName
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionDefinitionSearchQuerySortRequestField_DecisionRequirementsName
+  commentId: F:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsName
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsName
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsName
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsVersion
+  name: DecisionRequirementsVersion
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionDefinitionSearchQuerySortRequestField_DecisionRequirementsVersion
+  commentId: F:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsVersion
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsVersion
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField.DecisionRequirementsVersion
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionDefinitionSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.Name
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField.Name
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionDefinitionSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.TenantId
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.Version
+  name: Version
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionDefinitionSearchQuerySortRequestField_Version
+  commentId: F:Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.Version
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuerySortRequestField.Version
+  nameWithType: DecisionDefinitionSearchQuerySortRequestField.Version
 - uid: Camunda.Orchestration.Sdk.DecisionDefinitionTypeEnum
   name: DecisionDefinitionTypeEnum
   href: api/Camunda.Orchestration.Sdk.DecisionDefinitionTypeEnum.html
@@ -15913,6 +16429,102 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequest.Order
   nameWithType: DecisionInstanceSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField
+  name: DecisionInstanceSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField
+  nameWithType: DecisionInstanceSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionId
+  name: DecisionDefinitionId
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_DecisionDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionId
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionId
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionId
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionKey
+  name: DecisionDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_DecisionDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionKey
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionKey
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionName
+  name: DecisionDefinitionName
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_DecisionDefinitionName
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionName
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionName
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionName
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionType
+  name: DecisionDefinitionType
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_DecisionDefinitionType
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionType
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionType
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionType
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionVersion
+  name: DecisionDefinitionVersion
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_DecisionDefinitionVersion
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionVersion
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionVersion
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionVersion
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionEvaluationInstanceKey
+  name: DecisionEvaluationInstanceKey
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_DecisionEvaluationInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionEvaluationInstanceKey
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionEvaluationInstanceKey
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.DecisionEvaluationInstanceKey
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionEvaluationKey
+  name: DecisionEvaluationKey
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_DecisionEvaluationKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionEvaluationKey
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionEvaluationKey
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.DecisionEvaluationKey
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.ElementInstanceKey
+  name: ElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_ElementInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.ElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.ElementInstanceKey
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.EvaluationDate
+  name: EvaluationDate
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_EvaluationDate
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.EvaluationDate
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.EvaluationDate
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.EvaluationDate
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.EvaluationFailure
+  name: EvaluationFailure
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_EvaluationFailure
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.EvaluationFailure
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.EvaluationFailure
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.EvaluationFailure
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.RootDecisionDefinitionKey
+  name: RootDecisionDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_RootDecisionDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.RootDecisionDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.RootDecisionDefinitionKey
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.RootDecisionDefinitionKey
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_State
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.State
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.State
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.State
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.TenantId
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.TenantId
 - uid: Camunda.Orchestration.Sdk.DecisionInstanceStateEnum
   name: DecisionInstanceStateEnum
   href: api/Camunda.Orchestration.Sdk.DecisionInstanceStateEnum.html
@@ -16525,6 +17137,42 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequest.Order
   nameWithType: DecisionRequirementsSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField
+  name: DecisionRequirementsSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField
+  nameWithType: DecisionRequirementsSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsId
+  name: DecisionRequirementsId
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionRequirementsSearchQuerySortRequestField_DecisionRequirementsId
+  commentId: F:Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsId
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsId
+  nameWithType: DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsId
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsKey
+  name: DecisionRequirementsKey
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionRequirementsSearchQuerySortRequestField_DecisionRequirementsKey
+  commentId: F:Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsKey
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsKey
+  nameWithType: DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsKey
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsName
+  name: DecisionRequirementsName
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionRequirementsSearchQuerySortRequestField_DecisionRequirementsName
+  commentId: F:Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsName
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsName
+  nameWithType: DecisionRequirementsSearchQuerySortRequestField.DecisionRequirementsName
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionRequirementsSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.TenantId
+  nameWithType: DecisionRequirementsSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.Version
+  name: Version
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionRequirementsSearchQuerySortRequestField_Version
+  commentId: F:Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.Version
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsSearchQuerySortRequestField.Version
+  nameWithType: DecisionRequirementsSearchQuerySortRequestField.Version
 - uid: Camunda.Orchestration.Sdk.DeleteDecisionInstanceRequest
   name: DeleteDecisionInstanceRequest
   href: api/Camunda.Orchestration.Sdk.DeleteDecisionInstanceRequest.html
@@ -17737,6 +18385,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DocumentReference.StoreId
   fullName: Camunda.Orchestration.Sdk.DocumentReference.StoreId
   nameWithType: DocumentReference.StoreId
+- uid: Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType
+  name: DocumentReferenceCamundaDocumentType
+  href: api/Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType.html
+  commentId: T:Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType
+  fullName: Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType
+  nameWithType: DocumentReferenceCamundaDocumentType
+- uid: Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType.Camunda
+  name: Camunda
+  href: api/Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType.html#Camunda_Orchestration_Sdk_DocumentReferenceCamundaDocumentType_Camunda
+  commentId: F:Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType.Camunda
+  fullName: Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType.Camunda
+  nameWithType: DocumentReferenceCamundaDocumentType.Camunda
 - uid: Camunda.Orchestration.Sdk.ElementId
   name: ElementId
   href: api/Camunda.Orchestration.Sdk.ElementId.html
@@ -18109,6 +18769,174 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceFilter.Type
   fullName: Camunda.Orchestration.Sdk.ElementInstanceFilter.Type
   nameWithType: ElementInstanceFilter.Type
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType
+  name: ElementInstanceFilterType
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html
+  commentId: T:Camunda.Orchestration.Sdk.ElementInstanceFilterType
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType
+  nameWithType: ElementInstanceFilterType
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.ADHOCSUBPROCESS
+  name: ADHOCSUBPROCESS
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_ADHOCSUBPROCESS
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.ADHOCSUBPROCESS
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.ADHOCSUBPROCESS
+  nameWithType: ElementInstanceFilterType.ADHOCSUBPROCESS
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.ADHOCSUBPROCESSINNERINSTANCE
+  name: ADHOCSUBPROCESSINNERINSTANCE
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_ADHOCSUBPROCESSINNERINSTANCE
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.ADHOCSUBPROCESSINNERINSTANCE
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.ADHOCSUBPROCESSINNERINSTANCE
+  nameWithType: ElementInstanceFilterType.ADHOCSUBPROCESSINNERINSTANCE
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.BOUNDARYEVENT
+  name: BOUNDARYEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_BOUNDARYEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.BOUNDARYEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.BOUNDARYEVENT
+  nameWithType: ElementInstanceFilterType.BOUNDARYEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.BUSINESSRULETASK
+  name: BUSINESSRULETASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_BUSINESSRULETASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.BUSINESSRULETASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.BUSINESSRULETASK
+  nameWithType: ElementInstanceFilterType.BUSINESSRULETASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.CALLACTIVITY
+  name: CALLACTIVITY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_CALLACTIVITY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.CALLACTIVITY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.CALLACTIVITY
+  nameWithType: ElementInstanceFilterType.CALLACTIVITY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.ENDEVENT
+  name: ENDEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_ENDEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.ENDEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.ENDEVENT
+  nameWithType: ElementInstanceFilterType.ENDEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.EVENTBASEDGATEWAY
+  name: EVENTBASEDGATEWAY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_EVENTBASEDGATEWAY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.EVENTBASEDGATEWAY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.EVENTBASEDGATEWAY
+  nameWithType: ElementInstanceFilterType.EVENTBASEDGATEWAY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.EVENTSUBPROCESS
+  name: EVENTSUBPROCESS
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_EVENTSUBPROCESS
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.EVENTSUBPROCESS
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.EVENTSUBPROCESS
+  nameWithType: ElementInstanceFilterType.EVENTSUBPROCESS
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.EXCLUSIVEGATEWAY
+  name: EXCLUSIVEGATEWAY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_EXCLUSIVEGATEWAY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.EXCLUSIVEGATEWAY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.EXCLUSIVEGATEWAY
+  nameWithType: ElementInstanceFilterType.EXCLUSIVEGATEWAY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.INCLUSIVEGATEWAY
+  name: INCLUSIVEGATEWAY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_INCLUSIVEGATEWAY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.INCLUSIVEGATEWAY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.INCLUSIVEGATEWAY
+  nameWithType: ElementInstanceFilterType.INCLUSIVEGATEWAY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.INTERMEDIATECATCHEVENT
+  name: INTERMEDIATECATCHEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_INTERMEDIATECATCHEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.INTERMEDIATECATCHEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.INTERMEDIATECATCHEVENT
+  nameWithType: ElementInstanceFilterType.INTERMEDIATECATCHEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.INTERMEDIATETHROWEVENT
+  name: INTERMEDIATETHROWEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_INTERMEDIATETHROWEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.INTERMEDIATETHROWEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.INTERMEDIATETHROWEVENT
+  nameWithType: ElementInstanceFilterType.INTERMEDIATETHROWEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.MANUALTASK
+  name: MANUALTASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_MANUALTASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.MANUALTASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.MANUALTASK
+  nameWithType: ElementInstanceFilterType.MANUALTASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.MULTIINSTANCEBODY
+  name: MULTIINSTANCEBODY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_MULTIINSTANCEBODY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.MULTIINSTANCEBODY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.MULTIINSTANCEBODY
+  nameWithType: ElementInstanceFilterType.MULTIINSTANCEBODY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.PARALLELGATEWAY
+  name: PARALLELGATEWAY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_PARALLELGATEWAY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.PARALLELGATEWAY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.PARALLELGATEWAY
+  nameWithType: ElementInstanceFilterType.PARALLELGATEWAY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.PROCESS
+  name: PROCESS
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_PROCESS
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.PROCESS
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.PROCESS
+  nameWithType: ElementInstanceFilterType.PROCESS
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.RECEIVETASK
+  name: RECEIVETASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_RECEIVETASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.RECEIVETASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.RECEIVETASK
+  nameWithType: ElementInstanceFilterType.RECEIVETASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SCRIPTTASK
+  name: SCRIPTTASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_SCRIPTTASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.SCRIPTTASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SCRIPTTASK
+  nameWithType: ElementInstanceFilterType.SCRIPTTASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SENDTASK
+  name: SENDTASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_SENDTASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.SENDTASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SENDTASK
+  nameWithType: ElementInstanceFilterType.SENDTASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SEQUENCEFLOW
+  name: SEQUENCEFLOW
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_SEQUENCEFLOW
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.SEQUENCEFLOW
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SEQUENCEFLOW
+  nameWithType: ElementInstanceFilterType.SEQUENCEFLOW
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SERVICETASK
+  name: SERVICETASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_SERVICETASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.SERVICETASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SERVICETASK
+  nameWithType: ElementInstanceFilterType.SERVICETASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.STARTEVENT
+  name: STARTEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_STARTEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.STARTEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.STARTEVENT
+  nameWithType: ElementInstanceFilterType.STARTEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SUBPROCESS
+  name: SUBPROCESS
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_SUBPROCESS
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.SUBPROCESS
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.SUBPROCESS
+  nameWithType: ElementInstanceFilterType.SUBPROCESS
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.TASK
+  name: TASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_TASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.TASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.TASK
+  nameWithType: ElementInstanceFilterType.TASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.UNKNOWN
+  name: UNKNOWN
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_UNKNOWN
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.UNKNOWN
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.UNKNOWN
+  nameWithType: ElementInstanceFilterType.UNKNOWN
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.UNSPECIFIED
+  name: UNSPECIFIED
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_UNSPECIFIED
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.UNSPECIFIED
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.UNSPECIFIED
+  nameWithType: ElementInstanceFilterType.UNSPECIFIED
+- uid: Camunda.Orchestration.Sdk.ElementInstanceFilterType.USERTASK
+  name: USERTASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceFilterType.html#Camunda_Orchestration_Sdk_ElementInstanceFilterType_USERTASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceFilterType.USERTASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceFilterType.USERTASK
+  nameWithType: ElementInstanceFilterType.USERTASK
 - uid: Camunda.Orchestration.Sdk.ElementInstanceKey
   name: ElementInstanceKey
   href: api/Camunda.Orchestration.Sdk.ElementInstanceKey.html
@@ -18469,6 +19297,174 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceResult.Type
   fullName: Camunda.Orchestration.Sdk.ElementInstanceResult.Type
   nameWithType: ElementInstanceResult.Type
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType
+  name: ElementInstanceResultType
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html
+  commentId: T:Camunda.Orchestration.Sdk.ElementInstanceResultType
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType
+  nameWithType: ElementInstanceResultType
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.ADHOCSUBPROCESS
+  name: ADHOCSUBPROCESS
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_ADHOCSUBPROCESS
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.ADHOCSUBPROCESS
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.ADHOCSUBPROCESS
+  nameWithType: ElementInstanceResultType.ADHOCSUBPROCESS
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.ADHOCSUBPROCESSINNERINSTANCE
+  name: ADHOCSUBPROCESSINNERINSTANCE
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_ADHOCSUBPROCESSINNERINSTANCE
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.ADHOCSUBPROCESSINNERINSTANCE
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.ADHOCSUBPROCESSINNERINSTANCE
+  nameWithType: ElementInstanceResultType.ADHOCSUBPROCESSINNERINSTANCE
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.BOUNDARYEVENT
+  name: BOUNDARYEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_BOUNDARYEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.BOUNDARYEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.BOUNDARYEVENT
+  nameWithType: ElementInstanceResultType.BOUNDARYEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.BUSINESSRULETASK
+  name: BUSINESSRULETASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_BUSINESSRULETASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.BUSINESSRULETASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.BUSINESSRULETASK
+  nameWithType: ElementInstanceResultType.BUSINESSRULETASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.CALLACTIVITY
+  name: CALLACTIVITY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_CALLACTIVITY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.CALLACTIVITY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.CALLACTIVITY
+  nameWithType: ElementInstanceResultType.CALLACTIVITY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.ENDEVENT
+  name: ENDEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_ENDEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.ENDEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.ENDEVENT
+  nameWithType: ElementInstanceResultType.ENDEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.EVENTBASEDGATEWAY
+  name: EVENTBASEDGATEWAY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_EVENTBASEDGATEWAY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.EVENTBASEDGATEWAY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.EVENTBASEDGATEWAY
+  nameWithType: ElementInstanceResultType.EVENTBASEDGATEWAY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.EVENTSUBPROCESS
+  name: EVENTSUBPROCESS
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_EVENTSUBPROCESS
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.EVENTSUBPROCESS
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.EVENTSUBPROCESS
+  nameWithType: ElementInstanceResultType.EVENTSUBPROCESS
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.EXCLUSIVEGATEWAY
+  name: EXCLUSIVEGATEWAY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_EXCLUSIVEGATEWAY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.EXCLUSIVEGATEWAY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.EXCLUSIVEGATEWAY
+  nameWithType: ElementInstanceResultType.EXCLUSIVEGATEWAY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.INCLUSIVEGATEWAY
+  name: INCLUSIVEGATEWAY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_INCLUSIVEGATEWAY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.INCLUSIVEGATEWAY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.INCLUSIVEGATEWAY
+  nameWithType: ElementInstanceResultType.INCLUSIVEGATEWAY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.INTERMEDIATECATCHEVENT
+  name: INTERMEDIATECATCHEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_INTERMEDIATECATCHEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.INTERMEDIATECATCHEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.INTERMEDIATECATCHEVENT
+  nameWithType: ElementInstanceResultType.INTERMEDIATECATCHEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.INTERMEDIATETHROWEVENT
+  name: INTERMEDIATETHROWEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_INTERMEDIATETHROWEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.INTERMEDIATETHROWEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.INTERMEDIATETHROWEVENT
+  nameWithType: ElementInstanceResultType.INTERMEDIATETHROWEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.MANUALTASK
+  name: MANUALTASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_MANUALTASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.MANUALTASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.MANUALTASK
+  nameWithType: ElementInstanceResultType.MANUALTASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.MULTIINSTANCEBODY
+  name: MULTIINSTANCEBODY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_MULTIINSTANCEBODY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.MULTIINSTANCEBODY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.MULTIINSTANCEBODY
+  nameWithType: ElementInstanceResultType.MULTIINSTANCEBODY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.PARALLELGATEWAY
+  name: PARALLELGATEWAY
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_PARALLELGATEWAY
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.PARALLELGATEWAY
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.PARALLELGATEWAY
+  nameWithType: ElementInstanceResultType.PARALLELGATEWAY
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.PROCESS
+  name: PROCESS
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_PROCESS
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.PROCESS
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.PROCESS
+  nameWithType: ElementInstanceResultType.PROCESS
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.RECEIVETASK
+  name: RECEIVETASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_RECEIVETASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.RECEIVETASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.RECEIVETASK
+  nameWithType: ElementInstanceResultType.RECEIVETASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.SCRIPTTASK
+  name: SCRIPTTASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_SCRIPTTASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.SCRIPTTASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.SCRIPTTASK
+  nameWithType: ElementInstanceResultType.SCRIPTTASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.SENDTASK
+  name: SENDTASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_SENDTASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.SENDTASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.SENDTASK
+  nameWithType: ElementInstanceResultType.SENDTASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.SEQUENCEFLOW
+  name: SEQUENCEFLOW
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_SEQUENCEFLOW
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.SEQUENCEFLOW
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.SEQUENCEFLOW
+  nameWithType: ElementInstanceResultType.SEQUENCEFLOW
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.SERVICETASK
+  name: SERVICETASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_SERVICETASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.SERVICETASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.SERVICETASK
+  nameWithType: ElementInstanceResultType.SERVICETASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.STARTEVENT
+  name: STARTEVENT
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_STARTEVENT
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.STARTEVENT
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.STARTEVENT
+  nameWithType: ElementInstanceResultType.STARTEVENT
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.SUBPROCESS
+  name: SUBPROCESS
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_SUBPROCESS
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.SUBPROCESS
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.SUBPROCESS
+  nameWithType: ElementInstanceResultType.SUBPROCESS
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.TASK
+  name: TASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_TASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.TASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.TASK
+  nameWithType: ElementInstanceResultType.TASK
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.UNKNOWN
+  name: UNKNOWN
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_UNKNOWN
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.UNKNOWN
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.UNKNOWN
+  nameWithType: ElementInstanceResultType.UNKNOWN
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.UNSPECIFIED
+  name: UNSPECIFIED
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_UNSPECIFIED
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.UNSPECIFIED
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.UNSPECIFIED
+  nameWithType: ElementInstanceResultType.UNSPECIFIED
+- uid: Camunda.Orchestration.Sdk.ElementInstanceResultType.USERTASK
+  name: USERTASK
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceResultType.html#Camunda_Orchestration_Sdk_ElementInstanceResultType_USERTASK
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceResultType.USERTASK
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceResultType.USERTASK
+  nameWithType: ElementInstanceResultType.USERTASK
 - uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuery
   name: ElementInstanceSearchQuery
   href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuery.html
@@ -18571,6 +19567,84 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequest.Order
   nameWithType: ElementInstanceSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField
+  name: ElementInstanceSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField
+  nameWithType: ElementInstanceSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ElementId
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_ElementId
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ElementId
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ElementId
+  nameWithType: ElementInstanceSearchQuerySortRequestField.ElementId
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ElementInstanceKey
+  name: ElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_ElementInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ElementInstanceKey
+  nameWithType: ElementInstanceSearchQuerySortRequestField.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ElementName
+  name: ElementName
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_ElementName
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ElementName
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ElementName
+  nameWithType: ElementInstanceSearchQuerySortRequestField.ElementName
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.EndDate
+  name: EndDate
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_EndDate
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.EndDate
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.EndDate
+  nameWithType: ElementInstanceSearchQuerySortRequestField.EndDate
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.IncidentKey
+  name: IncidentKey
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_IncidentKey
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.IncidentKey
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.IncidentKey
+  nameWithType: ElementInstanceSearchQuerySortRequestField.IncidentKey
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ProcessDefinitionId
+  nameWithType: ElementInstanceSearchQuerySortRequestField.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: ElementInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: ElementInstanceSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.StartDate
+  name: StartDate
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_StartDate
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.StartDate
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.StartDate
+  nameWithType: ElementInstanceSearchQuerySortRequestField.StartDate
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_State
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.State
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.State
+  nameWithType: ElementInstanceSearchQuerySortRequestField.State
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.TenantId
+  nameWithType: ElementInstanceSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.Type
+  name: Type
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ElementInstanceSearchQuerySortRequestField_Type
+  commentId: F:Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.Type
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceSearchQuerySortRequestField.Type
+  nameWithType: ElementInstanceSearchQuerySortRequestField.Type
 - uid: Camunda.Orchestration.Sdk.ElementInstanceStateEnum
   name: ElementInstanceStateEnum
   href: api/Camunda.Orchestration.Sdk.ElementInstanceStateEnum.html
@@ -20788,6 +21862,42 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequest.Order
   nameWithType: GlobalTaskListenerSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField
+  name: GlobalTaskListenerSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField
+  nameWithType: GlobalTaskListenerSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.AfterNonGlobal
+  name: AfterNonGlobal
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_GlobalTaskListenerSearchQuerySortRequestField_AfterNonGlobal
+  commentId: F:Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.AfterNonGlobal
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.AfterNonGlobal
+  nameWithType: GlobalTaskListenerSearchQuerySortRequestField.AfterNonGlobal
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Id
+  name: Id
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_GlobalTaskListenerSearchQuerySortRequestField_Id
+  commentId: F:Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Id
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Id
+  nameWithType: GlobalTaskListenerSearchQuerySortRequestField.Id
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Priority
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_GlobalTaskListenerSearchQuerySortRequestField_Priority
+  commentId: F:Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Priority
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Priority
+  nameWithType: GlobalTaskListenerSearchQuerySortRequestField.Priority
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Source
+  name: Source
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_GlobalTaskListenerSearchQuerySortRequestField_Source
+  commentId: F:Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Source
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Source
+  nameWithType: GlobalTaskListenerSearchQuerySortRequestField.Source
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Type
+  name: Type
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_GlobalTaskListenerSearchQuerySortRequestField_Type
+  commentId: F:Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Type
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQuerySortRequestField.Type
+  nameWithType: GlobalTaskListenerSearchQuerySortRequestField.Type
 - uid: Camunda.Orchestration.Sdk.GroupClientResult
   name: GroupClientResult
   href: api/Camunda.Orchestration.Sdk.GroupClientResult.html
@@ -20866,6 +21976,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequest.Order
   nameWithType: GroupClientSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField
+  name: GroupClientSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField
+  nameWithType: GroupClientSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField.ClientId
+  name: ClientId
+  href: api/Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_GroupClientSearchQuerySortRequestField_ClientId
+  commentId: F:Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField.ClientId
+  fullName: Camunda.Orchestration.Sdk.GroupClientSearchQuerySortRequestField.ClientId
+  nameWithType: GroupClientSearchQuerySortRequestField.ClientId
 - uid: Camunda.Orchestration.Sdk.GroupClientSearchResult
   name: GroupClientSearchResult
   href: api/Camunda.Orchestration.Sdk.GroupClientSearchResult.html
@@ -21274,6 +22396,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.GroupSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.GroupSearchQuerySortRequest.Order
   nameWithType: GroupSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField
+  name: GroupSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField
+  nameWithType: GroupSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField.GroupId
+  name: GroupId
+  href: api/Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_GroupSearchQuerySortRequestField_GroupId
+  commentId: F:Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField.GroupId
+  fullName: Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField.GroupId
+  nameWithType: GroupSearchQuerySortRequestField.GroupId
+- uid: Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_GroupSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.GroupSearchQuerySortRequestField.Name
+  nameWithType: GroupSearchQuerySortRequestField.Name
 - uid: Camunda.Orchestration.Sdk.GroupUpdateRequest
   name: GroupUpdateRequest
   href: api/Camunda.Orchestration.Sdk.GroupUpdateRequest.html
@@ -21424,6 +22564,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequest.Order
   nameWithType: GroupUserSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField
+  name: GroupUserSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField
+  nameWithType: GroupUserSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField.Username
+  name: Username
+  href: api/Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_GroupUserSearchQuerySortRequestField_Username
+  commentId: F:Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField.Username
+  fullName: Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField.Username
+  nameWithType: GroupUserSearchQuerySortRequestField.Username
 - uid: Camunda.Orchestration.Sdk.GroupUserSearchResult
   name: GroupUserSearchResult
   href: api/Camunda.Orchestration.Sdk.GroupUserSearchResult.html
@@ -22228,6 +23380,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest.Order
   nameWithType: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField
+  name: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField
+  nameWithType: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.ActiveInstancesWithErrorCount
+  name: ActiveInstancesWithErrorCount
+  href: api/Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField_ActiveInstancesWithErrorCount
+  commentId: F:Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.ActiveInstancesWithErrorCount
+  fullName: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.ActiveInstancesWithErrorCount
+  nameWithType: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.ActiveInstancesWithErrorCount
+- uid: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.TenantId
+  nameWithType: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField.TenantId
 - uid: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionResult
   name: IncidentProcessInstanceStatisticsByDefinitionResult
   href: api/Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionResult.html
@@ -22396,6 +23572,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequest.Order
   nameWithType: IncidentProcessInstanceStatisticsByErrorQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField
+  name: IncidentProcessInstanceStatisticsByErrorQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField
+  nameWithType: IncidentProcessInstanceStatisticsByErrorQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.ActiveInstancesWithErrorCount
+  name: ActiveInstancesWithErrorCount
+  href: api/Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentProcessInstanceStatisticsByErrorQuerySortRequestField_ActiveInstancesWithErrorCount
+  commentId: F:Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.ActiveInstancesWithErrorCount
+  fullName: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.ActiveInstancesWithErrorCount
+  nameWithType: IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.ActiveInstancesWithErrorCount
+- uid: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.ErrorMessage
+  name: ErrorMessage
+  href: api/Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentProcessInstanceStatisticsByErrorQuerySortRequestField_ErrorMessage
+  commentId: F:Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.ErrorMessage
+  fullName: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.ErrorMessage
+  nameWithType: IncidentProcessInstanceStatisticsByErrorQuerySortRequestField.ErrorMessage
 - uid: Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorResult
   name: IncidentProcessInstanceStatisticsByErrorResult
   href: api/Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorResult.html
@@ -22720,6 +23914,78 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequest.Order
   nameWithType: IncidentSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField
+  name: IncidentSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField
+  nameWithType: IncidentSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.CreationTime
+  name: CreationTime
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_CreationTime
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.CreationTime
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.CreationTime
+  nameWithType: IncidentSearchQuerySortRequestField.CreationTime
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ElementId
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_ElementId
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ElementId
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ElementId
+  nameWithType: IncidentSearchQuerySortRequestField.ElementId
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ElementInstanceKey
+  name: ElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_ElementInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ElementInstanceKey
+  nameWithType: IncidentSearchQuerySortRequestField.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ErrorType
+  name: ErrorType
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_ErrorType
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ErrorType
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ErrorType
+  nameWithType: IncidentSearchQuerySortRequestField.ErrorType
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.IncidentKey
+  name: IncidentKey
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_IncidentKey
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.IncidentKey
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.IncidentKey
+  nameWithType: IncidentSearchQuerySortRequestField.IncidentKey
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.JobKey
+  name: JobKey
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_JobKey
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.JobKey
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.JobKey
+  nameWithType: IncidentSearchQuerySortRequestField.JobKey
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ProcessDefinitionId
+  nameWithType: IncidentSearchQuerySortRequestField.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: IncidentSearchQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: IncidentSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_State
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.State
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.State
+  nameWithType: IncidentSearchQuerySortRequestField.State
+- uid: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_IncidentSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.IncidentSearchQuerySortRequestField.TenantId
+  nameWithType: IncidentSearchQuerySortRequestField.TenantId
 - uid: Camunda.Orchestration.Sdk.IncidentStateEnum
   name: IncidentStateEnum
   href: api/Camunda.Orchestration.Sdk.IncidentStateEnum.html
@@ -24691,6 +25957,132 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequest.Order
   nameWithType: JobSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField
+  name: JobSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField
+  nameWithType: JobSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Deadline
+  name: Deadline
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_Deadline
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Deadline
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Deadline
+  nameWithType: JobSearchQuerySortRequestField.Deadline
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.DeniedReason
+  name: DeniedReason
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_DeniedReason
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.DeniedReason
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.DeniedReason
+  nameWithType: JobSearchQuerySortRequestField.DeniedReason
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ElementId
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_ElementId
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ElementId
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ElementId
+  nameWithType: JobSearchQuerySortRequestField.ElementId
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ElementInstanceKey
+  name: ElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_ElementInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ElementInstanceKey
+  nameWithType: JobSearchQuerySortRequestField.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.EndTime
+  name: EndTime
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_EndTime
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.EndTime
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.EndTime
+  nameWithType: JobSearchQuerySortRequestField.EndTime
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ErrorCode
+  name: ErrorCode
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_ErrorCode
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ErrorCode
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ErrorCode
+  nameWithType: JobSearchQuerySortRequestField.ErrorCode
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ErrorMessage
+  name: ErrorMessage
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_ErrorMessage
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ErrorMessage
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ErrorMessage
+  nameWithType: JobSearchQuerySortRequestField.ErrorMessage
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.HasFailedWithRetriesLeft
+  name: HasFailedWithRetriesLeft
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_HasFailedWithRetriesLeft
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.HasFailedWithRetriesLeft
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.HasFailedWithRetriesLeft
+  nameWithType: JobSearchQuerySortRequestField.HasFailedWithRetriesLeft
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.IsDenied
+  name: IsDenied
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_IsDenied
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.IsDenied
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.IsDenied
+  nameWithType: JobSearchQuerySortRequestField.IsDenied
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.JobKey
+  name: JobKey
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_JobKey
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.JobKey
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.JobKey
+  nameWithType: JobSearchQuerySortRequestField.JobKey
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Kind
+  name: Kind
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_Kind
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Kind
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Kind
+  nameWithType: JobSearchQuerySortRequestField.Kind
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ListenerEventType
+  name: ListenerEventType
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_ListenerEventType
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ListenerEventType
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ListenerEventType
+  nameWithType: JobSearchQuerySortRequestField.ListenerEventType
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ProcessDefinitionId
+  nameWithType: JobSearchQuerySortRequestField.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: JobSearchQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: JobSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Retries
+  name: Retries
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_Retries
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Retries
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Retries
+  nameWithType: JobSearchQuerySortRequestField.Retries
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_State
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.State
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.State
+  nameWithType: JobSearchQuerySortRequestField.State
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.TenantId
+  nameWithType: JobSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Type
+  name: Type
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_Type
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Type
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Type
+  nameWithType: JobSearchQuerySortRequestField.Type
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Worker
+  name: Worker
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_Worker
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Worker
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Worker
+  nameWithType: JobSearchQuerySortRequestField.Worker
 - uid: Camunda.Orchestration.Sdk.JobSearchResult
   name: JobSearchResult
   href: api/Camunda.Orchestration.Sdk.JobSearchResult.html
@@ -26581,6 +27973,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequest.Order
   nameWithType: MappingRuleSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField
+  name: MappingRuleSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField
+  nameWithType: MappingRuleSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.ClaimName
+  name: ClaimName
+  href: api/Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MappingRuleSearchQuerySortRequestField_ClaimName
+  commentId: F:Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.ClaimName
+  fullName: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.ClaimName
+  nameWithType: MappingRuleSearchQuerySortRequestField.ClaimName
+- uid: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.ClaimValue
+  name: ClaimValue
+  href: api/Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MappingRuleSearchQuerySortRequestField_ClaimValue
+  commentId: F:Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.ClaimValue
+  fullName: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.ClaimValue
+  nameWithType: MappingRuleSearchQuerySortRequestField.ClaimValue
+- uid: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.MappingRuleId
+  name: MappingRuleId
+  href: api/Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MappingRuleSearchQuerySortRequestField_MappingRuleId
+  commentId: F:Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.MappingRuleId
+  fullName: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.MappingRuleId
+  nameWithType: MappingRuleSearchQuerySortRequestField.MappingRuleId
+- uid: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MappingRuleSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.MappingRuleSearchQuerySortRequestField.Name
+  nameWithType: MappingRuleSearchQuerySortRequestField.Name
 - uid: Camunda.Orchestration.Sdk.MappingRuleUpdateRequest
   name: MappingRuleUpdateRequest
   href: api/Camunda.Orchestration.Sdk.MappingRuleUpdateRequest.html
@@ -27721,6 +29143,102 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequest.Order
   nameWithType: MessageSubscriptionSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField
+  name: MessageSubscriptionSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.CorrelationKey
+  name: CorrelationKey
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_CorrelationKey
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.CorrelationKey
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.CorrelationKey
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.CorrelationKey
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ElementId
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_ElementId
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ElementId
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ElementId
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.ElementId
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ElementInstanceKey
+  name: ElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_ElementInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ElementInstanceKey
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.InboundConnectorType
+  name: InboundConnectorType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_InboundConnectorType
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.InboundConnectorType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.InboundConnectorType
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.InboundConnectorType
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.LastUpdatedDate
+  name: LastUpdatedDate
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_LastUpdatedDate
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.LastUpdatedDate
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.LastUpdatedDate
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.LastUpdatedDate
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageName
+  name: MessageName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_MessageName
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageName
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.MessageName
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionKey
+  name: MessageSubscriptionKey
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_MessageSubscriptionKey
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionKey
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionKey
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionKey
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionState
+  name: MessageSubscriptionState
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_MessageSubscriptionState
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionState
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionState
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionState
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionType
+  name: MessageSubscriptionType
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_MessageSubscriptionType
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionType
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.MessageSubscriptionType
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionId
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionName
+  name: ProcessDefinitionName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_ProcessDefinitionName
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionName
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionName
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionVersion
+  name: ProcessDefinitionVersion
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_ProcessDefinitionVersion
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionVersion
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionVersion
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.ProcessDefinitionVersion
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.TenantId
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ToolName
+  name: ToolName
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_ToolName
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ToolName
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.ToolName
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.ToolName
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionStateEnum
   name: MessageSubscriptionStateEnum
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionStateEnum.html
@@ -28486,6 +30004,54 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Partition.Role
   fullName: Camunda.Orchestration.Sdk.Partition.Role
   nameWithType: Partition.Role
+- uid: Camunda.Orchestration.Sdk.PartitionHealth
+  name: PartitionHealth
+  href: api/Camunda.Orchestration.Sdk.PartitionHealth.html
+  commentId: T:Camunda.Orchestration.Sdk.PartitionHealth
+  fullName: Camunda.Orchestration.Sdk.PartitionHealth
+  nameWithType: PartitionHealth
+- uid: Camunda.Orchestration.Sdk.PartitionHealth.Dead
+  name: Dead
+  href: api/Camunda.Orchestration.Sdk.PartitionHealth.html#Camunda_Orchestration_Sdk_PartitionHealth_Dead
+  commentId: F:Camunda.Orchestration.Sdk.PartitionHealth.Dead
+  fullName: Camunda.Orchestration.Sdk.PartitionHealth.Dead
+  nameWithType: PartitionHealth.Dead
+- uid: Camunda.Orchestration.Sdk.PartitionHealth.Healthy
+  name: Healthy
+  href: api/Camunda.Orchestration.Sdk.PartitionHealth.html#Camunda_Orchestration_Sdk_PartitionHealth_Healthy
+  commentId: F:Camunda.Orchestration.Sdk.PartitionHealth.Healthy
+  fullName: Camunda.Orchestration.Sdk.PartitionHealth.Healthy
+  nameWithType: PartitionHealth.Healthy
+- uid: Camunda.Orchestration.Sdk.PartitionHealth.Unhealthy
+  name: Unhealthy
+  href: api/Camunda.Orchestration.Sdk.PartitionHealth.html#Camunda_Orchestration_Sdk_PartitionHealth_Unhealthy
+  commentId: F:Camunda.Orchestration.Sdk.PartitionHealth.Unhealthy
+  fullName: Camunda.Orchestration.Sdk.PartitionHealth.Unhealthy
+  nameWithType: PartitionHealth.Unhealthy
+- uid: Camunda.Orchestration.Sdk.PartitionRole
+  name: PartitionRole
+  href: api/Camunda.Orchestration.Sdk.PartitionRole.html
+  commentId: T:Camunda.Orchestration.Sdk.PartitionRole
+  fullName: Camunda.Orchestration.Sdk.PartitionRole
+  nameWithType: PartitionRole
+- uid: Camunda.Orchestration.Sdk.PartitionRole.Follower
+  name: Follower
+  href: api/Camunda.Orchestration.Sdk.PartitionRole.html#Camunda_Orchestration_Sdk_PartitionRole_Follower
+  commentId: F:Camunda.Orchestration.Sdk.PartitionRole.Follower
+  fullName: Camunda.Orchestration.Sdk.PartitionRole.Follower
+  nameWithType: PartitionRole.Follower
+- uid: Camunda.Orchestration.Sdk.PartitionRole.Inactive
+  name: Inactive
+  href: api/Camunda.Orchestration.Sdk.PartitionRole.html#Camunda_Orchestration_Sdk_PartitionRole_Inactive
+  commentId: F:Camunda.Orchestration.Sdk.PartitionRole.Inactive
+  fullName: Camunda.Orchestration.Sdk.PartitionRole.Inactive
+  nameWithType: PartitionRole.Inactive
+- uid: Camunda.Orchestration.Sdk.PartitionRole.Leader
+  name: Leader
+  href: api/Camunda.Orchestration.Sdk.PartitionRole.html#Camunda_Orchestration_Sdk_PartitionRole_Leader
+  commentId: F:Camunda.Orchestration.Sdk.PartitionRole.Leader
+  fullName: Camunda.Orchestration.Sdk.PartitionRole.Leader
+  nameWithType: PartitionRole.Leader
 - uid: Camunda.Orchestration.Sdk.PermissionTypeEnum
   name: PermissionTypeEnum
   href: api/Camunda.Orchestration.Sdk.PermissionTypeEnum.html
@@ -29242,6 +30808,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequest.Order
   nameWithType: ProcessDefinitionInstanceStatisticsQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField
+  name: ProcessDefinitionInstanceStatisticsQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField
+  nameWithType: ProcessDefinitionInstanceStatisticsQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.ActiveInstancesWithIncidentCount
+  name: ActiveInstancesWithIncidentCount
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionInstanceStatisticsQuerySortRequestField_ActiveInstancesWithIncidentCount
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.ActiveInstancesWithIncidentCount
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.ActiveInstancesWithIncidentCount
+  nameWithType: ProcessDefinitionInstanceStatisticsQuerySortRequestField.ActiveInstancesWithIncidentCount
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.ActiveInstancesWithoutIncidentCount
+  name: ActiveInstancesWithoutIncidentCount
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionInstanceStatisticsQuerySortRequestField_ActiveInstancesWithoutIncidentCount
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.ActiveInstancesWithoutIncidentCount
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.ActiveInstancesWithoutIncidentCount
+  nameWithType: ProcessDefinitionInstanceStatisticsQuerySortRequestField.ActiveInstancesWithoutIncidentCount
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionInstanceStatisticsQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.ProcessDefinitionId
+  nameWithType: ProcessDefinitionInstanceStatisticsQuerySortRequestField.ProcessDefinitionId
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsResult
   name: ProcessDefinitionInstanceStatisticsResult
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsResult.html
@@ -29452,6 +31042,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequest.Order
   nameWithType: ProcessDefinitionInstanceVersionStatisticsQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField
+  name: ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField
+  nameWithType: ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ActiveInstancesWithIncidentCount
+  name: ActiveInstancesWithIncidentCount
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField_ActiveInstancesWithIncidentCount
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ActiveInstancesWithIncidentCount
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ActiveInstancesWithIncidentCount
+  nameWithType: ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ActiveInstancesWithIncidentCount
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ActiveInstancesWithoutIncidentCount
+  name: ActiveInstancesWithoutIncidentCount
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField_ActiveInstancesWithoutIncidentCount
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ActiveInstancesWithoutIncidentCount
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ActiveInstancesWithoutIncidentCount
+  nameWithType: ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ActiveInstancesWithoutIncidentCount
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionId
+  nameWithType: ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionName
+  name: ProcessDefinitionName
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField_ProcessDefinitionName
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionName
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionName
+  nameWithType: ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionName
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionVersion
+  name: ProcessDefinitionVersion
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField_ProcessDefinitionVersion
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionVersion
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionVersion
+  nameWithType: ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.ProcessDefinitionVersion
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsResult
   name: ProcessDefinitionInstanceVersionStatisticsResult
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsResult.html
@@ -30058,6 +31690,54 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequest.Order
   nameWithType: ProcessDefinitionSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField
+  name: ProcessDefinitionSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField
+  nameWithType: ProcessDefinitionSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.Name
+  nameWithType: ProcessDefinitionSearchQuerySortRequestField.Name
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionSearchQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.ProcessDefinitionId
+  nameWithType: ProcessDefinitionSearchQuerySortRequestField.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionSearchQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: ProcessDefinitionSearchQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.ResourceName
+  name: ResourceName
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionSearchQuerySortRequestField_ResourceName
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.ResourceName
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.ResourceName
+  nameWithType: ProcessDefinitionSearchQuerySortRequestField.ResourceName
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.TenantId
+  nameWithType: ProcessDefinitionSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.Version
+  name: Version
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionSearchQuerySortRequestField_Version
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.Version
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.Version
+  nameWithType: ProcessDefinitionSearchQuerySortRequestField.Version
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.VersionTag
+  name: VersionTag
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessDefinitionSearchQuerySortRequestField_VersionTag
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.VersionTag
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.VersionTag
+  nameWithType: ProcessDefinitionSearchQuerySortRequestField.VersionTag
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter
   name: ProcessDefinitionStatisticsFilter
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.html
@@ -32164,6 +33844,96 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequest.Order
   nameWithType: ProcessInstanceSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField
+  name: ProcessInstanceSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField
+  nameWithType: ProcessInstanceSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_BusinessId
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.BusinessId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.BusinessId
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.BusinessId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.EndDate
+  name: EndDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_EndDate
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.EndDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.EndDate
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.EndDate
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.HasIncident
+  name: HasIncident
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_HasIncident
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.HasIncident
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.HasIncident
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.HasIncident
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ParentElementInstanceKey
+  name: ParentElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_ParentElementInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ParentElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ParentElementInstanceKey
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.ParentElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ParentProcessInstanceKey
+  name: ParentProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_ParentProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ParentProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ParentProcessInstanceKey
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.ParentProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_ProcessDefinitionId
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionId
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_ProcessDefinitionKey
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionName
+  name: ProcessDefinitionName
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_ProcessDefinitionName
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionName
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionName
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionName
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionVersion
+  name: ProcessDefinitionVersion
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_ProcessDefinitionVersion
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionVersion
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionVersion
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionVersion
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionVersionTag
+  name: ProcessDefinitionVersionTag
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_ProcessDefinitionVersionTag
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionVersionTag
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionVersionTag
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.ProcessDefinitionVersionTag
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.StartDate
+  name: StartDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_StartDate
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.StartDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.StartDate
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.StartDate
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_State
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.State
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.State
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.State
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.TenantId
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.TenantId
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowResult
   name: ProcessInstanceSequenceFlowResult
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowResult.html
@@ -33013,6 +34783,54 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequest.Order
   nameWithType: ResourceSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField
+  name: ResourceSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField
+  nameWithType: ResourceSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.DeploymentKey
+  name: DeploymentKey
+  href: api/Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ResourceSearchQuerySortRequestField_DeploymentKey
+  commentId: F:Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.DeploymentKey
+  fullName: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.DeploymentKey
+  nameWithType: ResourceSearchQuerySortRequestField.DeploymentKey
+- uid: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.ResourceId
+  name: ResourceId
+  href: api/Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ResourceSearchQuerySortRequestField_ResourceId
+  commentId: F:Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.ResourceId
+  fullName: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.ResourceId
+  nameWithType: ResourceSearchQuerySortRequestField.ResourceId
+- uid: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.ResourceKey
+  name: ResourceKey
+  href: api/Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ResourceSearchQuerySortRequestField_ResourceKey
+  commentId: F:Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.ResourceKey
+  fullName: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.ResourceKey
+  nameWithType: ResourceSearchQuerySortRequestField.ResourceKey
+- uid: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.ResourceName
+  name: ResourceName
+  href: api/Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ResourceSearchQuerySortRequestField_ResourceName
+  commentId: F:Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.ResourceName
+  fullName: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.ResourceName
+  nameWithType: ResourceSearchQuerySortRequestField.ResourceName
+- uid: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ResourceSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.TenantId
+  nameWithType: ResourceSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.Version
+  name: Version
+  href: api/Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ResourceSearchQuerySortRequestField_Version
+  commentId: F:Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.Version
+  fullName: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.Version
+  nameWithType: ResourceSearchQuerySortRequestField.Version
+- uid: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.VersionTag
+  name: VersionTag
+  href: api/Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ResourceSearchQuerySortRequestField_VersionTag
+  commentId: F:Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.VersionTag
+  fullName: Camunda.Orchestration.Sdk.ResourceSearchQuerySortRequestField.VersionTag
+  nameWithType: ResourceSearchQuerySortRequestField.VersionTag
 - uid: Camunda.Orchestration.Sdk.ResourceTypeEnum
   name: ResourceTypeEnum
   href: api/Camunda.Orchestration.Sdk.ResourceTypeEnum.html
@@ -33265,6 +35083,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequest.Order
   nameWithType: RoleClientSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField
+  name: RoleClientSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField
+  nameWithType: RoleClientSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField.ClientId
+  name: ClientId
+  href: api/Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_RoleClientSearchQuerySortRequestField_ClientId
+  commentId: F:Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField.ClientId
+  fullName: Camunda.Orchestration.Sdk.RoleClientSearchQuerySortRequestField.ClientId
+  nameWithType: RoleClientSearchQuerySortRequestField.ClientId
 - uid: Camunda.Orchestration.Sdk.RoleClientSearchResult
   name: RoleClientSearchResult
   href: api/Camunda.Orchestration.Sdk.RoleClientSearchResult.html
@@ -33487,6 +35317,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequest.Order
   nameWithType: RoleGroupSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField
+  name: RoleGroupSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField
+  nameWithType: RoleGroupSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField.GroupId
+  name: GroupId
+  href: api/Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_RoleGroupSearchQuerySortRequestField_GroupId
+  commentId: F:Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField.GroupId
+  fullName: Camunda.Orchestration.Sdk.RoleGroupSearchQuerySortRequestField.GroupId
+  nameWithType: RoleGroupSearchQuerySortRequestField.GroupId
 - uid: Camunda.Orchestration.Sdk.RoleGroupSearchResult
   name: RoleGroupSearchResult
   href: api/Camunda.Orchestration.Sdk.RoleGroupSearchResult.html
@@ -33751,6 +35593,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.RoleSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.RoleSearchQuerySortRequest.Order
   nameWithType: RoleSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField
+  name: RoleSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField
+  nameWithType: RoleSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_RoleSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField.Name
+  nameWithType: RoleSearchQuerySortRequestField.Name
+- uid: Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField.RoleId
+  name: RoleId
+  href: api/Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_RoleSearchQuerySortRequestField_RoleId
+  commentId: F:Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField.RoleId
+  fullName: Camunda.Orchestration.Sdk.RoleSearchQuerySortRequestField.RoleId
+  nameWithType: RoleSearchQuerySortRequestField.RoleId
 - uid: Camunda.Orchestration.Sdk.RoleUpdateRequest
   name: RoleUpdateRequest
   href: api/Camunda.Orchestration.Sdk.RoleUpdateRequest.html
@@ -33901,6 +35761,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequest.Order
   nameWithType: RoleUserSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField
+  name: RoleUserSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField
+  nameWithType: RoleUserSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField.Username
+  name: Username
+  href: api/Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_RoleUserSearchQuerySortRequestField_Username
+  commentId: F:Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField.Username
+  fullName: Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequestField.Username
+  nameWithType: RoleUserSearchQuerySortRequestField.Username
 - uid: Camunda.Orchestration.Sdk.RoleUserSearchResult
   name: RoleUserSearchResult
   href: api/Camunda.Orchestration.Sdk.RoleUserSearchResult.html
@@ -34915,6 +36787,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequest.Order
   nameWithType: TenantClientSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField
+  name: TenantClientSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField
+  nameWithType: TenantClientSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField.ClientId
+  name: ClientId
+  href: api/Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_TenantClientSearchQuerySortRequestField_ClientId
+  commentId: F:Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField.ClientId
+  fullName: Camunda.Orchestration.Sdk.TenantClientSearchQuerySortRequestField.ClientId
+  nameWithType: TenantClientSearchQuerySortRequestField.ClientId
 - uid: Camunda.Orchestration.Sdk.TenantClientSearchResult
   name: TenantClientSearchResult
   href: api/Camunda.Orchestration.Sdk.TenantClientSearchResult.html
@@ -35155,6 +37039,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequest.Order
   nameWithType: TenantGroupSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField
+  name: TenantGroupSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField
+  nameWithType: TenantGroupSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField.GroupId
+  name: GroupId
+  href: api/Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_TenantGroupSearchQuerySortRequestField_GroupId
+  commentId: F:Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField.GroupId
+  fullName: Camunda.Orchestration.Sdk.TenantGroupSearchQuerySortRequestField.GroupId
+  nameWithType: TenantGroupSearchQuerySortRequestField.GroupId
 - uid: Camunda.Orchestration.Sdk.TenantGroupSearchResult
   name: TenantGroupSearchResult
   href: api/Camunda.Orchestration.Sdk.TenantGroupSearchResult.html
@@ -35449,6 +37345,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.TenantSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.TenantSearchQuerySortRequest.Order
   nameWithType: TenantSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField
+  name: TenantSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField
+  nameWithType: TenantSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.Key
+  name: Key
+  href: api/Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_TenantSearchQuerySortRequestField_Key
+  commentId: F:Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.Key
+  fullName: Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.Key
+  nameWithType: TenantSearchQuerySortRequestField.Key
+- uid: Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_TenantSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.Name
+  nameWithType: TenantSearchQuerySortRequestField.Name
+- uid: Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_TenantSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.TenantSearchQuerySortRequestField.TenantId
+  nameWithType: TenantSearchQuerySortRequestField.TenantId
 - uid: Camunda.Orchestration.Sdk.TenantUpdateRequest
   name: TenantUpdateRequest
   href: api/Camunda.Orchestration.Sdk.TenantUpdateRequest.html
@@ -35599,6 +37519,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequest.Order
   nameWithType: TenantUserSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField
+  name: TenantUserSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField
+  nameWithType: TenantUserSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField.Username
+  name: Username
+  href: api/Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_TenantUserSearchQuerySortRequestField_Username
+  commentId: F:Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField.Username
+  fullName: Camunda.Orchestration.Sdk.TenantUserSearchQuerySortRequestField.Username
+  nameWithType: TenantUserSearchQuerySortRequestField.Username
 - uid: Camunda.Orchestration.Sdk.TenantUserSearchResult
   name: TenantUserSearchResult
   href: api/Camunda.Orchestration.Sdk.TenantUserSearchResult.html
@@ -36280,6 +38212,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.UserSearchQuerySortRequest.Order
   nameWithType: UserSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField
+  name: UserSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField
+  nameWithType: UserSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.Email
+  name: Email
+  href: api/Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserSearchQuerySortRequestField_Email
+  commentId: F:Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.Email
+  fullName: Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.Email
+  nameWithType: UserSearchQuerySortRequestField.Email
+- uid: Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.Name
+  nameWithType: UserSearchQuerySortRequestField.Name
+- uid: Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.Username
+  name: Username
+  href: api/Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserSearchQuerySortRequestField_Username
+  commentId: F:Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.Username
+  fullName: Camunda.Orchestration.Sdk.UserSearchQuerySortRequestField.Username
+  nameWithType: UserSearchQuerySortRequestField.Username
 - uid: Camunda.Orchestration.Sdk.UserSearchResult
   name: UserSearchResult
   href: api/Camunda.Orchestration.Sdk.UserSearchResult.html
@@ -37360,6 +39316,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequest.Order
   nameWithType: UserTaskSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField
+  name: UserTaskSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField
+  nameWithType: UserTaskSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.CompletionDate
+  name: CompletionDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskSearchQuerySortRequestField_CompletionDate
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.CompletionDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.CompletionDate
+  nameWithType: UserTaskSearchQuerySortRequestField.CompletionDate
+- uid: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.CreationDate
+  name: CreationDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskSearchQuerySortRequestField_CreationDate
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.CreationDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.CreationDate
+  nameWithType: UserTaskSearchQuerySortRequestField.CreationDate
+- uid: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.DueDate
+  name: DueDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskSearchQuerySortRequestField_DueDate
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.DueDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.DueDate
+  nameWithType: UserTaskSearchQuerySortRequestField.DueDate
+- uid: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.FollowUpDate
+  name: FollowUpDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskSearchQuerySortRequestField_FollowUpDate
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.FollowUpDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.FollowUpDate
+  nameWithType: UserTaskSearchQuerySortRequestField.FollowUpDate
+- uid: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.Name
+  nameWithType: UserTaskSearchQuerySortRequestField.Name
+- uid: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.Priority
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskSearchQuerySortRequestField_Priority
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.Priority
+  fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.Priority
+  nameWithType: UserTaskSearchQuerySortRequestField.Priority
 - uid: Camunda.Orchestration.Sdk.UserTaskStateEnum
   name: UserTaskStateEnum
   href: api/Camunda.Orchestration.Sdk.UserTaskStateEnum.html
@@ -37666,6 +39664,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequest.Order
   nameWithType: UserTaskVariableSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField
+  name: UserTaskVariableSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField
+  nameWithType: UserTaskVariableSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskVariableSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.Name
+  nameWithType: UserTaskVariableSearchQuerySortRequestField.Name
+- uid: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskVariableSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: UserTaskVariableSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.ScopeKey
+  name: ScopeKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskVariableSearchQuerySortRequestField_ScopeKey
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.ScopeKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.ScopeKey
+  nameWithType: UserTaskVariableSearchQuerySortRequestField.ScopeKey
+- uid: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskVariableSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.TenantId
+  nameWithType: UserTaskVariableSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskVariableSearchQuerySortRequestField_Value
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.Value
+  fullName: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.Value
+  nameWithType: UserTaskVariableSearchQuerySortRequestField.Value
+- uid: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.VariableKey
+  name: VariableKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskVariableSearchQuerySortRequestField_VariableKey
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.VariableKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.VariableKey
+  nameWithType: UserTaskVariableSearchQuerySortRequestField.VariableKey
 - uid: Camunda.Orchestration.Sdk.UserUpdateRequest
   name: UserUpdateRequest
   href: api/Camunda.Orchestration.Sdk.UserUpdateRequest.html
@@ -38428,6 +40468,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.VariableSearchQuerySortRequest.Order
   fullName: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequest.Order
   nameWithType: VariableSearchQuerySortRequest.Order
+- uid: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField
+  name: VariableSearchQuerySortRequestField
+  href: api/Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.html
+  commentId: T:Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField
+  fullName: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField
+  nameWithType: VariableSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_VariableSearchQuerySortRequestField_Name
+  commentId: F:Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.Name
+  fullName: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.Name
+  nameWithType: VariableSearchQuerySortRequestField.Name
+- uid: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_VariableSearchQuerySortRequestField_ProcessInstanceKey
+  commentId: F:Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.ProcessInstanceKey
+  nameWithType: VariableSearchQuerySortRequestField.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.ScopeKey
+  name: ScopeKey
+  href: api/Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_VariableSearchQuerySortRequestField_ScopeKey
+  commentId: F:Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.ScopeKey
+  fullName: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.ScopeKey
+  nameWithType: VariableSearchQuerySortRequestField.ScopeKey
+- uid: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_VariableSearchQuerySortRequestField_TenantId
+  commentId: F:Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.TenantId
+  fullName: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.TenantId
+  nameWithType: VariableSearchQuerySortRequestField.TenantId
+- uid: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_VariableSearchQuerySortRequestField_Value
+  commentId: F:Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.Value
+  fullName: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.Value
+  nameWithType: VariableSearchQuerySortRequestField.Value
+- uid: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.VariableKey
+  name: VariableKey
+  href: api/Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_VariableSearchQuerySortRequestField_VariableKey
+  commentId: F:Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.VariableKey
+  fullName: Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.VariableKey
+  nameWithType: VariableSearchQuerySortRequestField.VariableKey
 - uid: Camunda.Orchestration.Sdk.VariableSearchResult
   name: VariableSearchResult
   href: api/Camunda.Orchestration.Sdk.VariableSearchResult.html
