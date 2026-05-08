@@ -108,17 +108,55 @@ var sort = new UserTaskSearchQuerySortRequest
 };
 ```
 
-Other affected properties:
+Complete list of affected properties (45 total):
 
 | Type | Property | Enum |
 |------|----------|------|
+| `AgentInstanceSearchQuerySortRequest` | `Field` | `AgentInstanceSearchQuerySortRequestField` |
+| `AuditLogSearchQuerySortRequest` | `Field` | `AuditLogSearchQuerySortRequestField` |
+| `AuthorizationSearchQuerySortRequest` | `Field` | `AuthorizationSearchQuerySortRequestField` |
 | `BatchOperationError` | `Type` | `BatchOperationErrorType` |
 | `BatchOperationItemResponse` | `State` | `BatchOperationItemResponseState` |
-| `DocumentReference` | `Camunda.document.type` | `DocumentReferenceCamundaDocumentType` |
+| `BatchOperationItemSearchQuerySortRequest` | `Field` | `BatchOperationItemSearchQuerySortRequestField` |
+| `BatchOperationSearchQuerySortRequest` | `Field` | `BatchOperationSearchQuerySortRequestField` |
+| `ClusterVariableSearchQuerySortRequest` | `Field` | `ClusterVariableSearchQuerySortRequestField` |
+| `CorrelatedMessageSubscriptionSearchQuerySortRequest` | `Field` | `CorrelatedMessageSubscriptionSearchQuerySortRequestField` |
+| `DecisionDefinitionSearchQuerySortRequest` | `Field` | `DecisionDefinitionSearchQuerySortRequestField` |
+| `DecisionInstanceSearchQuerySortRequest` | `Field` | `DecisionInstanceSearchQuerySortRequestField` |
+| `DecisionRequirementsSearchQuerySortRequest` | `Field` | `DecisionRequirementsSearchQuerySortRequestField` |
+| `DocumentReference` | `CamundaDocumentType` | `DocumentReferenceCamundaDocumentType` |
 | `ElementInstanceFilter` | `Type` | `ElementInstanceFilterType` |
 | `ElementInstanceResult` | `Type` | `ElementInstanceResultType` |
+| `ElementInstanceSearchQuerySortRequest` | `Field` | `ElementInstanceSearchQuerySortRequestField` |
+| `GlobalTaskListenerSearchQuerySortRequest` | `Field` | `GlobalTaskListenerSearchQuerySortRequestField` |
+| `GroupClientSearchQuerySortRequest` | `Field` | `GroupClientSearchQuerySortRequestField` |
+| `GroupSearchQuerySortRequest` | `Field` | `GroupSearchQuerySortRequestField` |
+| `GroupUserSearchQuerySortRequest` | `Field` | `GroupUserSearchQuerySortRequestField` |
+| `IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest` | `Field` | `IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField` |
+| `IncidentProcessInstanceStatisticsByErrorQuerySortRequest` | `Field` | `IncidentProcessInstanceStatisticsByErrorQuerySortRequestField` |
+| `IncidentSearchQuerySortRequest` | `Field` | `IncidentSearchQuerySortRequestField` |
+| `JobSearchQuerySortRequest` | `Field` | `JobSearchQuerySortRequestField` |
+| `MappingRuleSearchQuerySortRequest` | `Field` | `MappingRuleSearchQuerySortRequestField` |
+| `MessageSubscriptionSearchQuerySortRequest` | `Field` | `MessageSubscriptionSearchQuerySortRequestField` |
 | `Partition` | `Health` | `PartitionHealth` |
 | `Partition` | `Role` | `PartitionRole` |
+| `ProcessDefinitionInstanceStatisticsQuerySortRequest` | `Field` | `ProcessDefinitionInstanceStatisticsQuerySortRequestField` |
+| `ProcessDefinitionInstanceVersionStatisticsQuerySortRequest` | `Field` | `ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField` |
+| `ProcessDefinitionSearchQuerySortRequest` | `Field` | `ProcessDefinitionSearchQuerySortRequestField` |
+| `ProcessInstanceSearchQuerySortRequest` | `Field` | `ProcessInstanceSearchQuerySortRequestField` |
+| `ResourceSearchQuerySortRequest` | `Field` | `ResourceSearchQuerySortRequestField` |
+| `RoleClientSearchQuerySortRequest` | `Field` | `RoleClientSearchQuerySortRequestField` |
+| `RoleGroupSearchQuerySortRequest` | `Field` | `RoleGroupSearchQuerySortRequestField` |
+| `RoleSearchQuerySortRequest` | `Field` | `RoleSearchQuerySortRequestField` |
+| `RoleUserSearchQuerySortRequest` | `Field` | `RoleUserSearchQuerySortRequestField` |
+| `TenantClientSearchQuerySortRequest` | `Field` | `TenantClientSearchQuerySortRequestField` |
+| `TenantGroupSearchQuerySortRequest` | `Field` | `TenantGroupSearchQuerySortRequestField` |
+| `TenantSearchQuerySortRequest` | `Field` | `TenantSearchQuerySortRequestField` |
+| `TenantUserSearchQuerySortRequest` | `Field` | `TenantUserSearchQuerySortRequestField` |
+| `UserSearchQuerySortRequest` | `Field` | `UserSearchQuerySortRequestField` |
+| `UserTaskSearchQuerySortRequest` | `Field` | `UserTaskSearchQuerySortRequestField` |
+| `UserTaskVariableSearchQuerySortRequest` | `Field` | `UserTaskVariableSearchQuerySortRequestField` |
+| `VariableSearchQuerySortRequest` | `Field` | `VariableSearchQuerySortRequestField` |
 
 The naming convention is `{ParentClassName}{PascalCase(PropertyName)}` (e.g., `UserTaskSearchQuerySortRequestField`).
 
