@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantClusterVariableAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateTenantClusterVariableAsync*" class="text-break">
-Method UpdateTenantClusterVariableAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8362"><i class="bi bi-code-slash"></i></a>
+Method UpdateTenantClusterVariableAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8470"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method UpdateTenantClusterVariableAsync  <a class="header-action link-secondary"
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantClusterVariableAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateTenantClusterVariableAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_System_String_Camunda_Orchestration_Sdk_UpdateClusterVariableRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId,System.String,Camunda.Orchestration.Sdk.UpdateClusterVariableRequest,System.Threading.CancellationToken)">
-  UpdateTenantClusterVariableAsync(TenantId, string, UpdateClusterVariableRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8362"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_ClusterVariableName_Camunda_Orchestration_Sdk_UpdateClusterVariableRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId,Camunda.Orchestration.Sdk.ClusterVariableName,Camunda.Orchestration.Sdk.UpdateClusterVariableRequest,System.Threading.CancellationToken)">
+  UpdateTenantClusterVariableAsync(TenantId, ClusterVariableName, UpdateClusterVariableRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8470"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Update a tenant-scoped cluster variable
@@ -131,14 +131,14 @@ The variable must exist, otherwise a 404 error is returned.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;ClusterVariableResult&gt; UpdateTenantClusterVariableAsync(TenantId tenantId, string name, UpdateClusterVariableRequest body, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;ClusterVariableResult&gt; UpdateTenantClusterVariableAsync(TenantId tenantId, ClusterVariableName name, UpdateClusterVariableRequest body, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>tenantId</code> <a class="xref" href="Camunda.Orchestration.Sdk.TenantId.html">TenantId</a></dt>
   <dd></dd>
-  <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>name</code> <a class="xref" href="Camunda.Orchestration.Sdk.ClusterVariableName.html">ClusterVariableName</a></dt>
   <dd></dd>
   <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.html">UpdateClusterVariableRequest</a></dt>
   <dd></dd>
@@ -157,32 +157,33 @@ The variable must exist, otherwise a 404 error is returned.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_System_String_Camunda_Orchestration_Sdk_UpdateClusterVariableRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.UpdateTenantClusterVariableAsync(
-        tenantId,
-        &quot;my-variable&quot;,
-        new UpdateClusterVariableRequest
-        {
-            Value = &quot;updated-tenant-value&quot;,
-        });
-
-    Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_System_String_Camunda_Orchestration_Sdk_UpdateClusterVariableRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
-<div class="markdown level1 remarks"><p>Operation: updateTenantClusterVariable</p>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_ClusterVariableName_Camunda_Orchestration_Sdk_UpdateClusterVariableRequest_System_Threading_CancellationToken__examples">Examples</h4>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
+<pre><code class="lang-csharp">public static async Task UpdateTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
 {
     using var client = CamundaClient.Create();
 <pre><code>var result = await client.UpdateTenantClusterVariableAsync(
     tenantId,
-    &quot;my-variable&quot;,
+    name,
+    new UpdateClusterVariableRequest
+    {
+        Value = &quot;updated-tenant-value&quot;,
+    });
+
+Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
+</code></pre>
+<p>}</p></code></pre>
+
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_ClusterVariableName_Camunda_Orchestration_Sdk_UpdateClusterVariableRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+<div class="markdown level1 remarks"><p>Operation: updateTenantClusterVariable</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task UpdateTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.UpdateTenantClusterVariableAsync(
+    tenantId,
+    name,
     new UpdateClusterVariableRequest
     {
         Value = &quot;updated-tenant-value&quot;,
@@ -199,7 +200,7 @@ Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8362" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8470" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetTenantClusterVariableAsync*" class="text-break">
-Method GetTenantClusterVariableAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4393"><i class="bi bi-code-slash"></i></a>
+Method GetTenantClusterVariableAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4451"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method GetTenantClusterVariableAsync  <a class="header-action link-secondary" ti
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetTenantClusterVariableAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_System_String_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ClusterVariableResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId,System.String,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ClusterVariableResult},System.Threading.CancellationToken)">
-  GetTenantClusterVariableAsync(TenantId, string, ConsistencyOptions&lt;ClusterVariableResult&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4393"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_ClusterVariableName_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ClusterVariableResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId,Camunda.Orchestration.Sdk.ClusterVariableName,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ClusterVariableResult},System.Threading.CancellationToken)">
+  GetTenantClusterVariableAsync(TenantId, ClusterVariableName, ConsistencyOptions&lt;ClusterVariableResult&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4451"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Get a tenant-scoped cluster variable
@@ -130,14 +130,14 @@ Get a tenant-scoped cluster variable.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;ClusterVariableResult&gt; GetTenantClusterVariableAsync(TenantId tenantId, string name, ConsistencyOptions&lt;ClusterVariableResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;ClusterVariableResult&gt; GetTenantClusterVariableAsync(TenantId tenantId, ClusterVariableName name, ConsistencyOptions&lt;ClusterVariableResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>tenantId</code> <a class="xref" href="Camunda.Orchestration.Sdk.TenantId.html">TenantId</a></dt>
   <dd></dd>
-  <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>name</code> <a class="xref" href="Camunda.Orchestration.Sdk.ClusterVariableName.html">ClusterVariableName</a></dt>
   <dd></dd>
   <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.ClusterVariableResult.html">ClusterVariableResult</a>&gt;</dt>
   <dd></dd>
@@ -156,28 +156,29 @@ Get a tenant-scoped cluster variable.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_System_String_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ClusterVariableResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetTenantClusterVariableExample(TenantId tenantId)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.GetTenantClusterVariableAsync(
-        tenantId,
-        &quot;my-variable&quot;);
-
-    Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_System_String_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ClusterVariableResult__System_Threading_CancellationToken__remarks">Remarks</h4>
-<div class="markdown level1 remarks"><p>Operation: getTenantClusterVariable</p>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_ClusterVariableName_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ClusterVariableResult__System_Threading_CancellationToken__examples">Examples</h4>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task GetTenantClusterVariableExample(TenantId tenantId)
+<pre><code class="lang-csharp">public static async Task GetTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
 {
     using var client = CamundaClient.Create();
 <pre><code>var result = await client.GetTenantClusterVariableAsync(
     tenantId,
-    &quot;my-variable&quot;);
+    name);
+
+Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
+</code></pre>
+<p>}</p></code></pre>
+
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_ClusterVariableName_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ClusterVariableResult__System_Threading_CancellationToken__remarks">Remarks</h4>
+<div class="markdown level1 remarks"><p>Operation: getTenantClusterVariable</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task GetTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
+{
+    using var client = CamundaClient.Create();
+<pre><code>var result = await client.GetTenantClusterVariableAsync(
+    tenantId,
+    name);
 
 Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
 </code></pre>
@@ -190,7 +191,7 @@ Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4393" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4451" class="edit-link">Edit this page</a>
         </div>
 
 

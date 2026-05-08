@@ -119,8 +119,8 @@ Method AssignClientToGroupAsync  <a class="header-action link-secondary" title="
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_AssignClientToGroupAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignClientToGroupAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_AssignClientToGroupAsync_System_String_System_String_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignClientToGroupAsync(System.String,System.String,System.Threading.CancellationToken)">
-  AssignClientToGroupAsync(string, string, CancellationToken)
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_AssignClientToGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_ClientId_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignClientToGroupAsync(Camunda.Orchestration.Sdk.GroupId,Camunda.Orchestration.Sdk.ClientId,System.Threading.CancellationToken)">
+  AssignClientToGroupAsync(GroupId, ClientId, CancellationToken)
   <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L137"><i class="bi bi-code-slash"></i></a>
 </h3>
 
@@ -131,14 +131,14 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task AssignClientToGroupAsync(string groupId, string clientId, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task AssignClientToGroupAsync(GroupId groupId, ClientId clientId, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>groupId</code> <a class="xref" href="Camunda.Orchestration.Sdk.GroupId.html">GroupId</a></dt>
   <dd></dd>
-  <dt><code>clientId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>clientId</code> <a class="xref" href="Camunda.Orchestration.Sdk.ClientId.html">ClientId</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -155,22 +155,23 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignClientToGroupAsync_System_String_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task AssignClientToGroupExample()
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignClientToGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_ClientId_System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task AssignClientToGroupExample(GroupId groupId, ClientId clientId)
 {
     using var client = CamundaClient.Create();
-
-    await client.AssignClientToGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
-}
+<pre><code>await client.AssignClientToGroupAsync(groupId, clientId);
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignClientToGroupAsync_System_String_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignClientToGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_ClientId_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: assignClientToGroup</p>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task AssignClientToGroupExample()
+<pre><code class="lang-csharp">public static async Task AssignClientToGroupExample(GroupId groupId, ClientId clientId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.AssignClientToGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+<pre><code>await client.AssignClientToGroupAsync(groupId, clientId);
 </code></pre>
 <p>}</p></code></pre>
 </div>

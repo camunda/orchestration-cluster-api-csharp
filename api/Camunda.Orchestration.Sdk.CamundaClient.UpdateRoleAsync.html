@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateRoleAsync*" class="text-break">
-Method UpdateRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8268"><i class="bi bi-code-slash"></i></a>
+Method UpdateRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8376"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method UpdateRoleAsync  <a class="header-action link-secondary" title="View sour
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateRoleAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_System_String_Camunda_Orchestration_Sdk_RoleUpdateRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateRoleAsync(System.String,Camunda.Orchestration.Sdk.RoleUpdateRequest,System.Threading.CancellationToken)">
-  UpdateRoleAsync(string, RoleUpdateRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8268"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_RoleUpdateRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateRoleAsync(Camunda.Orchestration.Sdk.RoleId,Camunda.Orchestration.Sdk.RoleUpdateRequest,System.Threading.CancellationToken)">
+  UpdateRoleAsync(RoleId, RoleUpdateRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8376"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Update role
@@ -130,12 +130,12 @@ Update a role with the given ID.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;RoleUpdateResult&gt; UpdateRoleAsync(string roleId, RoleUpdateRequest body, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;RoleUpdateResult&gt; UpdateRoleAsync(RoleId roleId, RoleUpdateRequest body, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>roleId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>roleId</code> <a class="xref" href="Camunda.Orchestration.Sdk.RoleId.html">RoleId</a></dt>
   <dd></dd>
   <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.RoleUpdateRequest.html">RoleUpdateRequest</a></dt>
   <dd></dd>
@@ -154,25 +154,26 @@ Update a role with the given ID.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_System_String_Camunda_Orchestration_Sdk_RoleUpdateRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UpdateRoleExample()
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_RoleUpdateRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task UpdateRoleExample(RoleId roleId)
 {
     using var client = CamundaClient.Create();
-
-    await client.UpdateRoleAsync(&quot;developer&quot;, new RoleUpdateRequest
-    {
-        Name = &quot;senior-developer&quot;,
-    });
-}
+<pre><code>await client.UpdateRoleAsync(roleId, new RoleUpdateRequest
+{
+    Name = &quot;senior-developer&quot;,
+});
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_System_String_Camunda_Orchestration_Sdk_RoleUpdateRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateRoleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_RoleUpdateRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: updateRole</p>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task UpdateRoleExample()
+<pre><code class="lang-csharp">public static async Task UpdateRoleExample(RoleId roleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UpdateRoleAsync(&quot;developer&quot;, new RoleUpdateRequest
+<pre><code>await client.UpdateRoleAsync(roleId, new RoleUpdateRequest
 {
     Name = &quot;senior-developer&quot;,
 });
@@ -186,7 +187,7 @@ Update a role with the given ID.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8268" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8376" class="edit-link">Edit this page</a>
         </div>
 
 

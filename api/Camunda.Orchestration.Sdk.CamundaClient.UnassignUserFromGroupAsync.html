@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromGroupAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignUserFromGroupAsync*" class="text-break">
-Method UnassignUserFromGroupAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7881"><i class="bi bi-code-slash"></i></a>
+Method UnassignUserFromGroupAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7989"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method UnassignUserFromGroupAsync  <a class="header-action link-secondary" title
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromGroupAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignUserFromGroupAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromGroupAsync_System_String_Camunda_Orchestration_Sdk_Username_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignUserFromGroupAsync(System.String,Camunda.Orchestration.Sdk.Username,System.Threading.CancellationToken)">
-  UnassignUserFromGroupAsync(string, Username, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7881"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_Username_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignUserFromGroupAsync(Camunda.Orchestration.Sdk.GroupId,Camunda.Orchestration.Sdk.Username,System.Threading.CancellationToken)">
+  UnassignUserFromGroupAsync(GroupId, Username, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7989"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Unassign a user from a group
@@ -131,12 +131,12 @@ The user is removed as a group member, with associated authorizations, roles, an
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task UnassignUserFromGroupAsync(string groupId, Username username, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task UnassignUserFromGroupAsync(GroupId groupId, Username username, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>groupId</code> <a class="xref" href="Camunda.Orchestration.Sdk.GroupId.html">GroupId</a></dt>
   <dd></dd>
   <dt><code>username</code> <a class="xref" href="Camunda.Orchestration.Sdk.Username.html">Username</a></dt>
   <dd></dd>
@@ -155,22 +155,23 @@ The user is removed as a group member, with associated authorizations, roles, an
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromGroupAsync_System_String_Camunda_Orchestration_Sdk_Username_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UnassignUserFromGroupExample(Username username)
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_Username_System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task UnassignUserFromGroupExample(GroupId groupId, Username username)
 {
     using var client = CamundaClient.Create();
-
-    await client.UnassignUserFromGroupAsync(&quot;engineering&quot;, username);
-}
+<pre><code>await client.UnassignUserFromGroupAsync(groupId, username);
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromGroupAsync_System_String_Camunda_Orchestration_Sdk_Username_System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignUserFromGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_Username_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: unassignUserFromGroup</p>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task UnassignUserFromGroupExample(Username username)
+<pre><code class="lang-csharp">public static async Task UnassignUserFromGroupExample(GroupId groupId, Username username)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UnassignUserFromGroupAsync(&quot;engineering&quot;, username);
+<pre><code>await client.UnassignUserFromGroupAsync(groupId, username);
 </code></pre>
 <p>}</p></code></pre>
 </div>
@@ -181,7 +182,7 @@ The user is removed as a group member, with associated authorizations, roles, an
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7881" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7989" class="edit-link">Edit this page</a>
         </div>
 
 

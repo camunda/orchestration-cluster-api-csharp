@@ -119,8 +119,8 @@ Method AssignMappingRuleToTenantAsync  <a class="header-action link-secondary" t
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToTenantAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignMappingRuleToTenantAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignMappingRuleToTenantAsync(Camunda.Orchestration.Sdk.TenantId,System.String,System.Threading.CancellationToken)">
-  AssignMappingRuleToTenantAsync(TenantId, string, CancellationToken)
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignMappingRuleToTenantAsync(Camunda.Orchestration.Sdk.TenantId,Camunda.Orchestration.Sdk.MappingRuleId,System.Threading.CancellationToken)">
+  AssignMappingRuleToTenantAsync(TenantId, MappingRuleId, CancellationToken)
   <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L285"><i class="bi bi-code-slash"></i></a>
 </h3>
 
@@ -130,14 +130,14 @@ Assign a single mapping rule to a specified tenant.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task AssignMappingRuleToTenantAsync(TenantId tenantId, string mappingRuleId, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task AssignMappingRuleToTenantAsync(TenantId tenantId, MappingRuleId mappingRuleId, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>tenantId</code> <a class="xref" href="Camunda.Orchestration.Sdk.TenantId.html">TenantId</a></dt>
   <dd></dd>
-  <dt><code>mappingRuleId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>mappingRuleId</code> <a class="xref" href="Camunda.Orchestration.Sdk.MappingRuleId.html">MappingRuleId</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -154,26 +154,27 @@ Assign a single mapping rule to a specified tenant.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
-{
-    using var client = CamundaClient.Create();
-
-    await client.AssignMappingRuleToTenantAsync(
-        tenantId,
-        &quot;rule-123&quot;);
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
-<div class="markdown level1 remarks"><p>Operation: assignMappingRuleToTenant</p>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken__examples">Examples</h4>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
+<pre><code class="lang-csharp">public static async Task AssignMappingRuleToTenantExample(TenantId tenantId, MappingRuleId mappingRuleId)
 {
     using var client = CamundaClient.Create();
 <pre><code>await client.AssignMappingRuleToTenantAsync(
     tenantId,
-    &quot;rule-123&quot;);
+    mappingRuleId);
+</code></pre>
+<p>}</p></code></pre>
+
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignMappingRuleToTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken__remarks">Remarks</h4>
+<div class="markdown level1 remarks"><p>Operation: assignMappingRuleToTenant</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task AssignMappingRuleToTenantExample(TenantId tenantId, MappingRuleId mappingRuleId)
+{
+    using var client = CamundaClient.Create();
+<pre><code>await client.AssignMappingRuleToTenantAsync(
+    tenantId,
+    mappingRuleId);
 </code></pre>
 <p>}</p></code></pre>
 </div>

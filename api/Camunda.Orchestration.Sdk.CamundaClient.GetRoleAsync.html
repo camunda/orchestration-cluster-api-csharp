@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync*" class="text-break">
-Method GetRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4180"><i class="bi bi-code-slash"></i></a>
+Method GetRoleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4238"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method GetRoleAsync  <a class="header-action link-secondary" title="View source"
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_System_String_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync(System.String,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.RoleResult},System.Threading.CancellationToken)">
-  GetRoleAsync(string, ConsistencyOptions&lt;RoleResult&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4180"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync(Camunda.Orchestration.Sdk.RoleId,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.RoleResult},System.Threading.CancellationToken)">
+  GetRoleAsync(RoleId, ConsistencyOptions&lt;RoleResult&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4238"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Get role
@@ -130,12 +130,12 @@ Get a role by its ID.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;RoleResult&gt; GetRoleAsync(string roleId, ConsistencyOptions&lt;RoleResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;RoleResult&gt; GetRoleAsync(RoleId roleId, ConsistencyOptions&lt;RoleResult&gt;? consistency = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>roleId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>roleId</code> <a class="xref" href="Camunda.Orchestration.Sdk.RoleId.html">RoleId</a></dt>
   <dd></dd>
   <dt><code>consistency</code> <a class="xref" href="Camunda.Orchestration.Sdk.ConsistencyOptions-1.html">ConsistencyOptions</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.RoleResult.html">RoleResult</a>&gt;</dt>
   <dd></dd>
@@ -154,23 +154,24 @@ Get a role by its ID.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_System_String_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleResult__System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task GetRoleExample()
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleResult__System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task GetRoleExample(RoleId roleId)
 {
     using var client = CamundaClient.Create();
-
-    var result = await client.GetRoleAsync(&quot;developer&quot;);
-    Console.WriteLine($&quot;Role: {result.Name}&quot;);
-}
+<pre><code>var result = await client.GetRoleAsync(roleId);
+Console.WriteLine($&quot;Role: {result.Name}&quot;);
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_System_String_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleResult__System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleResult__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: getRole</p>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task GetRoleExample()
+<pre><code class="lang-csharp">public static async Task GetRoleExample(RoleId roleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetRoleAsync(&quot;developer&quot;);
+<pre><code>var result = await client.GetRoleAsync(roleId);
 Console.WriteLine($&quot;Role: {result.Name}&quot;);
 </code></pre>
 <p>}</p></code></pre>
@@ -182,7 +183,7 @@ Console.WriteLine($&quot;Role: {result.Name}&quot;);
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4180" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L4238" class="edit-link">Edit this page</a>
         </div>
 
 

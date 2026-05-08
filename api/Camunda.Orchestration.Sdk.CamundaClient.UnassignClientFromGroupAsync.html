@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignClientFromGroupAsync*" class="text-break">
-Method UnassignClientFromGroupAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7526"><i class="bi bi-code-slash"></i></a>
+Method UnassignClientFromGroupAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7634"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method UnassignClientFromGroupAsync  <a class="header-action link-secondary" tit
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignClientFromGroupAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_System_String_System_String_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignClientFromGroupAsync(System.String,System.String,System.Threading.CancellationToken)">
-  UnassignClientFromGroupAsync(string, string, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7526"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_ClientId_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignClientFromGroupAsync(Camunda.Orchestration.Sdk.GroupId,Camunda.Orchestration.Sdk.ClientId,System.Threading.CancellationToken)">
+  UnassignClientFromGroupAsync(GroupId, ClientId, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7634"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Unassign a client from a group
@@ -131,14 +131,14 @@ The client is removed as a group member, with associated authorizations, roles, 
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task UnassignClientFromGroupAsync(string groupId, string clientId, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task UnassignClientFromGroupAsync(GroupId groupId, ClientId clientId, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>groupId</code> <a class="xref" href="Camunda.Orchestration.Sdk.GroupId.html">GroupId</a></dt>
   <dd></dd>
-  <dt><code>clientId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>clientId</code> <a class="xref" href="Camunda.Orchestration.Sdk.ClientId.html">ClientId</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -155,22 +155,23 @@ The client is removed as a group member, with associated authorizations, roles, 
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_System_String_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UnassignClientFromGroupExample()
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_ClientId_System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task UnassignClientFromGroupExample(GroupId groupId, ClientId clientId)
 {
     using var client = CamundaClient.Create();
-
-    await client.UnassignClientFromGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
-}
+<pre><code>await client.UnassignClientFromGroupAsync(groupId, clientId);
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_System_String_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_ClientId_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: unassignClientFromGroup</p>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task UnassignClientFromGroupExample()
+<pre><code class="lang-csharp">public static async Task UnassignClientFromGroupExample(GroupId groupId, ClientId clientId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UnassignClientFromGroupAsync(&quot;engineering&quot;, &quot;my-service-account&quot;);
+<pre><code>await client.UnassignClientFromGroupAsync(groupId, clientId);
 </code></pre>
 <p>}</p></code></pre>
 </div>
@@ -181,7 +182,7 @@ The client is removed as a group member, with associated authorizations, roles, 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7526" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7634" class="edit-link">Edit this page</a>
         </div>
 
 

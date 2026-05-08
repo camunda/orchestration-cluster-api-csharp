@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromMappingRuleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignRoleFromMappingRuleAsync*" class="text-break">
-Method UnassignRoleFromMappingRuleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7773"><i class="bi bi-code-slash"></i></a>
+Method UnassignRoleFromMappingRuleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7881"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method UnassignRoleFromMappingRuleAsync  <a class="header-action link-secondary"
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromMappingRuleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignRoleFromMappingRuleAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromMappingRuleAsync_System_String_System_String_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignRoleFromMappingRuleAsync(System.String,System.String,System.Threading.CancellationToken)">
-  UnassignRoleFromMappingRuleAsync(string, string, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7773"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromMappingRuleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UnassignRoleFromMappingRuleAsync(Camunda.Orchestration.Sdk.RoleId,Camunda.Orchestration.Sdk.MappingRuleId,System.Threading.CancellationToken)">
+  UnassignRoleFromMappingRuleAsync(RoleId, MappingRuleId, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7881"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Unassign a role from a mapping rule
@@ -130,14 +130,14 @@ Unassigns a role from a mapping rule.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task UnassignRoleFromMappingRuleAsync(string roleId, string mappingRuleId, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task UnassignRoleFromMappingRuleAsync(RoleId roleId, MappingRuleId mappingRuleId, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>roleId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>roleId</code> <a class="xref" href="Camunda.Orchestration.Sdk.RoleId.html">RoleId</a></dt>
   <dd></dd>
-  <dt><code>mappingRuleId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>mappingRuleId</code> <a class="xref" href="Camunda.Orchestration.Sdk.MappingRuleId.html">MappingRuleId</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -154,22 +154,23 @@ Unassigns a role from a mapping rule.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromMappingRuleAsync_System_String_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UnassignRoleFromMappingRuleExample()
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromMappingRuleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task UnassignRoleFromMappingRuleExample(RoleId roleId, MappingRuleId mappingRuleId)
 {
     using var client = CamundaClient.Create();
-
-    await client.UnassignRoleFromMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
-}
+<pre><code>await client.UnassignRoleFromMappingRuleAsync(roleId, mappingRuleId);
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromMappingRuleAsync_System_String_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UnassignRoleFromMappingRuleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: unassignRoleFromMappingRule</p>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task UnassignRoleFromMappingRuleExample()
+<pre><code class="lang-csharp">public static async Task UnassignRoleFromMappingRuleExample(RoleId roleId, MappingRuleId mappingRuleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UnassignRoleFromMappingRuleAsync(&quot;developer&quot;, &quot;rule-123&quot;);
+<pre><code>await client.UnassignRoleFromMappingRuleAsync(roleId, mappingRuleId);
 </code></pre>
 <p>}</p></code></pre>
 </div>
@@ -180,7 +181,7 @@ Unassigns a role from a mapping rule.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7773" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L7881" class="edit-link">Edit this page</a>
         </div>
 
 

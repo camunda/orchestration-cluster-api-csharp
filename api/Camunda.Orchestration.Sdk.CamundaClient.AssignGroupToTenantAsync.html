@@ -119,8 +119,8 @@ Method AssignGroupToTenantAsync  <a class="header-action link-secondary" title="
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_AssignGroupToTenantAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignGroupToTenantAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_AssignGroupToTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignGroupToTenantAsync(Camunda.Orchestration.Sdk.TenantId,System.String,System.Threading.CancellationToken)">
-  AssignGroupToTenantAsync(TenantId, string, CancellationToken)
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_AssignGroupToTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_GroupId_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AssignGroupToTenantAsync(Camunda.Orchestration.Sdk.TenantId,Camunda.Orchestration.Sdk.GroupId,System.Threading.CancellationToken)">
+  AssignGroupToTenantAsync(TenantId, GroupId, CancellationToken)
   <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L215"><i class="bi bi-code-slash"></i></a>
 </h3>
 
@@ -131,14 +131,14 @@ Group members (users, clients) can then access tenant data and perform authorize
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task AssignGroupToTenantAsync(TenantId tenantId, string groupId, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task AssignGroupToTenantAsync(TenantId tenantId, GroupId groupId, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>tenantId</code> <a class="xref" href="Camunda.Orchestration.Sdk.TenantId.html">TenantId</a></dt>
   <dd></dd>
-  <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>groupId</code> <a class="xref" href="Camunda.Orchestration.Sdk.GroupId.html">GroupId</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -155,26 +155,27 @@ Group members (users, clients) can then access tenant data and perform authorize
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignGroupToTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task AssignGroupToTenantExample(TenantId tenantId)
-{
-    using var client = CamundaClient.Create();
-
-    await client.AssignGroupToTenantAsync(
-        tenantId,
-        &quot;engineering&quot;);
-}
-</code></pre>
-
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignGroupToTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
-<div class="markdown level1 remarks"><p>Operation: assignGroupToTenant</p>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignGroupToTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_GroupId_System_Threading_CancellationToken__examples">Examples</h4>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task AssignGroupToTenantExample(TenantId tenantId)
+<pre><code class="lang-csharp">public static async Task AssignGroupToTenantExample(TenantId tenantId, GroupId groupId)
 {
     using var client = CamundaClient.Create();
 <pre><code>await client.AssignGroupToTenantAsync(
     tenantId,
-    &quot;engineering&quot;);
+    groupId);
+</code></pre>
+<p>}</p></code></pre>
+
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AssignGroupToTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_GroupId_System_Threading_CancellationToken__remarks">Remarks</h4>
+<div class="markdown level1 remarks"><p>Operation: assignGroupToTenant</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task AssignGroupToTenantExample(TenantId tenantId, GroupId groupId)
+{
+    using var client = CamundaClient.Create();
+<pre><code>await client.AssignGroupToTenantAsync(
+    tenantId,
+    groupId);
 </code></pre>
 <p>}</p></code></pre>
 </div>

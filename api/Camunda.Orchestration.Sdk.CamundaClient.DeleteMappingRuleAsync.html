@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.DeleteMappingRuleAsync*" class="text-break">
-Method DeleteMappingRuleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1947"><i class="bi bi-code-slash"></i></a>
+Method DeleteMappingRuleAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1963"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,9 +119,9 @@ Method DeleteMappingRuleAsync  <a class="header-action link-secondary" title="Vi
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.DeleteMappingRuleAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_System_String_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.DeleteMappingRuleAsync(System.String,System.Threading.CancellationToken)">
-  DeleteMappingRuleAsync(string, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1947"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.DeleteMappingRuleAsync(Camunda.Orchestration.Sdk.MappingRuleId,System.Threading.CancellationToken)">
+  DeleteMappingRuleAsync(MappingRuleId, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1963"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Delete a mapping rule
@@ -130,12 +130,12 @@ Deletes the mapping rule with the given ID.</p>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task DeleteMappingRuleAsync(string mappingRuleId, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task DeleteMappingRuleAsync(MappingRuleId mappingRuleId, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>mappingRuleId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>mappingRuleId</code> <a class="xref" href="Camunda.Orchestration.Sdk.MappingRuleId.html">MappingRuleId</a></dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -152,22 +152,23 @@ Deletes the mapping rule with the given ID.</p>
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_System_String_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task DeleteMappingRuleExample()
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task DeleteMappingRuleExample(MappingRuleId mappingRuleId)
 {
     using var client = CamundaClient.Create();
-
-    await client.DeleteMappingRuleAsync(&quot;rule-123&quot;);
-}
+<pre><code>await client.DeleteMappingRuleAsync(mappingRuleId);
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: deleteMappingRule</p>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task DeleteMappingRuleExample()
+<pre><code class="lang-csharp">public static async Task DeleteMappingRuleExample(MappingRuleId mappingRuleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.DeleteMappingRuleAsync(&quot;rule-123&quot;);
+<pre><code>await client.DeleteMappingRuleAsync(mappingRuleId);
 </code></pre>
 <p>}</p></code></pre>
 </div>
@@ -178,7 +179,7 @@ Deletes the mapping rule with the given ID.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1947" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1963" class="edit-link">Edit this page</a>
         </div>
 
 
