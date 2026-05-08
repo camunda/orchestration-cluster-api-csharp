@@ -86,6 +86,42 @@ The following methods have updated parameter and/or return types to match the ty
 | `SearchUsersAsync` | Returns `UserSearchResult` (was `SearchUsersResponse`) |
 | `UpdateUserAsync` | Returns `UserUpdateResult` (was `UpdateUserResponse`) |
 
+### Inline string enums
+
+45 properties that were previously typed as bare `string` are now typed C# enums. This gives compile-time validation, IntelliSense, and parity with the JS and Python SDKs.
+
+The affected properties are mainly sort-request `Field` properties, plus a few `Type`, `State`, `Health`, and `Role` properties:
+
+```csharp
+// Before (v9) — bare string, no compile-time checking
+var sort = new UserTaskSearchQuerySortRequest
+{
+    Field = "completionTime",
+    Order = SortOrderEnum.Asc,
+};
+
+// After (v10) — typed enum with IntelliSense
+var sort = new UserTaskSearchQuerySortRequest
+{
+    Field = UserTaskSearchQuerySortRequestField.CompletionTime,
+    Order = SortOrderEnum.Asc,
+};
+```
+
+Other affected properties:
+
+| Type | Property | Enum |
+|------|----------|------|
+| `BatchOperationError` | `Type` | `BatchOperationErrorType` |
+| `BatchOperationItemResponse` | `State` | `BatchOperationItemResponseState` |
+| `DocumentReference` | `Camunda.document.type` | `DocumentReferenceCamundaDocumentType` |
+| `ElementInstanceFilter` | `Type` | `ElementInstanceFilterType` |
+| `ElementInstanceResult` | `Type` | `ElementInstanceResultType` |
+| `Partition` | `Health` | `PartitionHealth` |
+| `Partition` | `Role` | `PartitionRole` |
+
+The naming convention is `{ParentClassName}{PascalCase(PropertyName)}` (e.g., `UserTaskSearchQuerySortRequestField`).
+
 ### Eventual consistency parameter types
 
 `GetResourceAsync` and `GetResourceContentAsync` now accept an optional `ConsistencyOptions` parameter, matching the pattern used by all other eventually-consistent endpoints. If you pass these methods by reference or use them in delegates, you may need to update the signature:
@@ -111,11 +147,14 @@ v10 adds a `SearchResourcesAsync` method with full search, filter, and sort supp
 var result = await client.SearchResourcesAsync(new ResourceSearchQuery
 {
     Filter = new ResourceFilter { /* ... */ },
-    Sort = [new ResourceSearchQuerySortRequest { Field = "..." }],
+    Sort = [new ResourceSearchQuerySortRequest
+    {
+        Field = ResourceSearchQuerySortRequestField.DeploymentKey,
+    }],
 });
 ```
 
-Supporting types: `ResourceSearchQuery`, `ResourceFilter`, `ResourceSearchQueryResult`, `ResourceSearchQuerySortRequest`.
+Supporting types: `ResourceSearchQuery`, `ResourceFilter`, `ResourceSearchQueryResult`, `ResourceSearchQuerySortRequest`, `ResourceSearchQuerySortRequestField`.
 
 ### New filter properties
 
