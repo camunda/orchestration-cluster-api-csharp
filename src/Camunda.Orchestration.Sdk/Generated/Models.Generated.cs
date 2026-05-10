@@ -8,6 +8,970 @@ using System.Text.Json.Serialization;
 namespace Camunda.Orchestration.Sdk;
 
 /// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentInstanceSearchQuerySortRequestField
+{
+    [JsonPropertyName("creationDate")]
+    CreationDate,
+    [JsonPropertyName("lastUpdatedDate")]
+    LastUpdatedDate,
+    [JsonPropertyName("completionDate")]
+    CompletionDate,
+    [JsonPropertyName("status")]
+    Status,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AuditLogSearchQuerySortRequestField
+{
+    [JsonPropertyName("actorId")]
+    ActorId,
+    [JsonPropertyName("actorType")]
+    ActorType,
+    [JsonPropertyName("auditLogKey")]
+    AuditLogKey,
+    [JsonPropertyName("batchOperationKey")]
+    BatchOperationKey,
+    [JsonPropertyName("batchOperationType")]
+    BatchOperationType,
+    [JsonPropertyName("category")]
+    Category,
+    [JsonPropertyName("decisionDefinitionId")]
+    DecisionDefinitionId,
+    [JsonPropertyName("decisionDefinitionKey")]
+    DecisionDefinitionKey,
+    [JsonPropertyName("decisionEvaluationKey")]
+    DecisionEvaluationKey,
+    [JsonPropertyName("decisionRequirementsId")]
+    DecisionRequirementsId,
+    [JsonPropertyName("decisionRequirementsKey")]
+    DecisionRequirementsKey,
+    [JsonPropertyName("elementInstanceKey")]
+    ElementInstanceKey,
+    [JsonPropertyName("entityKey")]
+    EntityKey,
+    [JsonPropertyName("entityType")]
+    EntityType,
+    [JsonPropertyName("jobKey")]
+    JobKey,
+    [JsonPropertyName("operationType")]
+    OperationType,
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("result")]
+    Result,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+    [JsonPropertyName("timestamp")]
+    Timestamp,
+    [JsonPropertyName("userTaskKey")]
+    UserTaskKey,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AuthorizationSearchQuerySortRequestField
+{
+    [JsonPropertyName("ownerId")]
+    OwnerId,
+    [JsonPropertyName("ownerType")]
+    OwnerType,
+    [JsonPropertyName("resourceId")]
+    ResourceId,
+    [JsonPropertyName("resourcePropertyName")]
+    ResourcePropertyName,
+    [JsonPropertyName("resourceType")]
+    ResourceType,
+}
+
+/// <summary>
+/// The type of the error that occurred during the batch operation.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum BatchOperationErrorType
+{
+    [JsonPropertyName("QUERY_FAILED")]
+    QUERYFAILED,
+    [JsonPropertyName("RESULT_BUFFER_SIZE_EXCEEDED")]
+    RESULTBUFFERSIZEEXCEEDED,
+}
+
+/// <summary>
+/// State of the item.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum BatchOperationItemResponseState
+{
+    [JsonPropertyName("ACTIVE")]
+    ACTIVE,
+    [JsonPropertyName("COMPLETED")]
+    COMPLETED,
+    [JsonPropertyName("SKIPPED")]
+    SKIPPED,
+    [JsonPropertyName("CANCELED")]
+    CANCELED,
+    [JsonPropertyName("FAILED")]
+    FAILED,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum BatchOperationItemSearchQuerySortRequestField
+{
+    [JsonPropertyName("batchOperationKey")]
+    BatchOperationKey,
+    [JsonPropertyName("itemKey")]
+    ItemKey,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("processedDate")]
+    ProcessedDate,
+    [JsonPropertyName("state")]
+    State,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum BatchOperationSearchQuerySortRequestField
+{
+    [JsonPropertyName("batchOperationKey")]
+    BatchOperationKey,
+    [JsonPropertyName("operationType")]
+    OperationType,
+    [JsonPropertyName("state")]
+    State,
+    [JsonPropertyName("startDate")]
+    StartDate,
+    [JsonPropertyName("endDate")]
+    EndDate,
+    [JsonPropertyName("actorType")]
+    ActorType,
+    [JsonPropertyName("actorId")]
+    ActorId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterVariableSearchQuerySortRequestField
+{
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("value")]
+    Value,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+    [JsonPropertyName("scope")]
+    Scope,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum CorrelatedMessageSubscriptionSearchQuerySortRequestField
+{
+    [JsonPropertyName("correlationKey")]
+    CorrelationKey,
+    [JsonPropertyName("correlationTime")]
+    CorrelationTime,
+    [JsonPropertyName("elementId")]
+    ElementId,
+    [JsonPropertyName("elementInstanceKey")]
+    ElementInstanceKey,
+    [JsonPropertyName("messageKey")]
+    MessageKey,
+    [JsonPropertyName("messageName")]
+    MessageName,
+    [JsonPropertyName("partitionId")]
+    PartitionId,
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("subscriptionKey")]
+    SubscriptionKey,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DecisionDefinitionSearchQuerySortRequestField
+{
+    [JsonPropertyName("decisionDefinitionKey")]
+    DecisionDefinitionKey,
+    [JsonPropertyName("decisionDefinitionId")]
+    DecisionDefinitionId,
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("version")]
+    Version,
+    [JsonPropertyName("decisionRequirementsId")]
+    DecisionRequirementsId,
+    [JsonPropertyName("decisionRequirementsKey")]
+    DecisionRequirementsKey,
+    [JsonPropertyName("decisionRequirementsName")]
+    DecisionRequirementsName,
+    [JsonPropertyName("decisionRequirementsVersion")]
+    DecisionRequirementsVersion,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DecisionInstanceSearchQuerySortRequestField
+{
+    [JsonPropertyName("decisionDefinitionId")]
+    DecisionDefinitionId,
+    [JsonPropertyName("decisionDefinitionKey")]
+    DecisionDefinitionKey,
+    [JsonPropertyName("decisionDefinitionName")]
+    DecisionDefinitionName,
+    [JsonPropertyName("decisionDefinitionType")]
+    DecisionDefinitionType,
+    [JsonPropertyName("decisionDefinitionVersion")]
+    DecisionDefinitionVersion,
+    [JsonPropertyName("decisionEvaluationInstanceKey")]
+    DecisionEvaluationInstanceKey,
+    [JsonPropertyName("decisionEvaluationKey")]
+    DecisionEvaluationKey,
+    [JsonPropertyName("elementInstanceKey")]
+    ElementInstanceKey,
+    [JsonPropertyName("evaluationDate")]
+    EvaluationDate,
+    [JsonPropertyName("evaluationFailure")]
+    EvaluationFailure,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("rootDecisionDefinitionKey")]
+    RootDecisionDefinitionKey,
+    [JsonPropertyName("state")]
+    State,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DecisionRequirementsSearchQuerySortRequestField
+{
+    [JsonPropertyName("decisionRequirementsKey")]
+    DecisionRequirementsKey,
+    [JsonPropertyName("decisionRequirementsName")]
+    DecisionRequirementsName,
+    [JsonPropertyName("version")]
+    Version,
+    [JsonPropertyName("decisionRequirementsId")]
+    DecisionRequirementsId,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// Document discriminator. Always set to &quot;camunda&quot;.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DocumentReferenceCamundaDocumentType
+{
+    [JsonPropertyName("camunda")]
+    Camunda,
+}
+
+/// <summary>
+/// Type of element as defined set of values.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ElementInstanceFilterType
+{
+    [JsonPropertyName("UNSPECIFIED")]
+    UNSPECIFIED,
+    [JsonPropertyName("PROCESS")]
+    PROCESS,
+    [JsonPropertyName("SUB_PROCESS")]
+    SUBPROCESS,
+    [JsonPropertyName("EVENT_SUB_PROCESS")]
+    EVENTSUBPROCESS,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS")]
+    ADHOCSUBPROCESS,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS_INNER_INSTANCE")]
+    ADHOCSUBPROCESSINNERINSTANCE,
+    [JsonPropertyName("START_EVENT")]
+    STARTEVENT,
+    [JsonPropertyName("INTERMEDIATE_CATCH_EVENT")]
+    INTERMEDIATECATCHEVENT,
+    [JsonPropertyName("INTERMEDIATE_THROW_EVENT")]
+    INTERMEDIATETHROWEVENT,
+    [JsonPropertyName("BOUNDARY_EVENT")]
+    BOUNDARYEVENT,
+    [JsonPropertyName("END_EVENT")]
+    ENDEVENT,
+    [JsonPropertyName("SERVICE_TASK")]
+    SERVICETASK,
+    [JsonPropertyName("RECEIVE_TASK")]
+    RECEIVETASK,
+    [JsonPropertyName("USER_TASK")]
+    USERTASK,
+    [JsonPropertyName("MANUAL_TASK")]
+    MANUALTASK,
+    [JsonPropertyName("TASK")]
+    TASK,
+    [JsonPropertyName("EXCLUSIVE_GATEWAY")]
+    EXCLUSIVEGATEWAY,
+    [JsonPropertyName("INCLUSIVE_GATEWAY")]
+    INCLUSIVEGATEWAY,
+    [JsonPropertyName("PARALLEL_GATEWAY")]
+    PARALLELGATEWAY,
+    [JsonPropertyName("EVENT_BASED_GATEWAY")]
+    EVENTBASEDGATEWAY,
+    [JsonPropertyName("SEQUENCE_FLOW")]
+    SEQUENCEFLOW,
+    [JsonPropertyName("MULTI_INSTANCE_BODY")]
+    MULTIINSTANCEBODY,
+    [JsonPropertyName("CALL_ACTIVITY")]
+    CALLACTIVITY,
+    [JsonPropertyName("BUSINESS_RULE_TASK")]
+    BUSINESSRULETASK,
+    [JsonPropertyName("SCRIPT_TASK")]
+    SCRIPTTASK,
+    [JsonPropertyName("SEND_TASK")]
+    SENDTASK,
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN,
+}
+
+/// <summary>
+/// Type of element as defined set of values.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ElementInstanceResultType
+{
+    [JsonPropertyName("UNSPECIFIED")]
+    UNSPECIFIED,
+    [JsonPropertyName("PROCESS")]
+    PROCESS,
+    [JsonPropertyName("SUB_PROCESS")]
+    SUBPROCESS,
+    [JsonPropertyName("EVENT_SUB_PROCESS")]
+    EVENTSUBPROCESS,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS")]
+    ADHOCSUBPROCESS,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS_INNER_INSTANCE")]
+    ADHOCSUBPROCESSINNERINSTANCE,
+    [JsonPropertyName("START_EVENT")]
+    STARTEVENT,
+    [JsonPropertyName("INTERMEDIATE_CATCH_EVENT")]
+    INTERMEDIATECATCHEVENT,
+    [JsonPropertyName("INTERMEDIATE_THROW_EVENT")]
+    INTERMEDIATETHROWEVENT,
+    [JsonPropertyName("BOUNDARY_EVENT")]
+    BOUNDARYEVENT,
+    [JsonPropertyName("END_EVENT")]
+    ENDEVENT,
+    [JsonPropertyName("SERVICE_TASK")]
+    SERVICETASK,
+    [JsonPropertyName("RECEIVE_TASK")]
+    RECEIVETASK,
+    [JsonPropertyName("USER_TASK")]
+    USERTASK,
+    [JsonPropertyName("MANUAL_TASK")]
+    MANUALTASK,
+    [JsonPropertyName("TASK")]
+    TASK,
+    [JsonPropertyName("EXCLUSIVE_GATEWAY")]
+    EXCLUSIVEGATEWAY,
+    [JsonPropertyName("INCLUSIVE_GATEWAY")]
+    INCLUSIVEGATEWAY,
+    [JsonPropertyName("PARALLEL_GATEWAY")]
+    PARALLELGATEWAY,
+    [JsonPropertyName("EVENT_BASED_GATEWAY")]
+    EVENTBASEDGATEWAY,
+    [JsonPropertyName("SEQUENCE_FLOW")]
+    SEQUENCEFLOW,
+    [JsonPropertyName("MULTI_INSTANCE_BODY")]
+    MULTIINSTANCEBODY,
+    [JsonPropertyName("CALL_ACTIVITY")]
+    CALLACTIVITY,
+    [JsonPropertyName("BUSINESS_RULE_TASK")]
+    BUSINESSRULETASK,
+    [JsonPropertyName("SCRIPT_TASK")]
+    SCRIPTTASK,
+    [JsonPropertyName("SEND_TASK")]
+    SENDTASK,
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ElementInstanceSearchQuerySortRequestField
+{
+    [JsonPropertyName("elementInstanceKey")]
+    ElementInstanceKey,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("startDate")]
+    StartDate,
+    [JsonPropertyName("endDate")]
+    EndDate,
+    [JsonPropertyName("elementId")]
+    ElementId,
+    [JsonPropertyName("elementName")]
+    ElementName,
+    [JsonPropertyName("type")]
+    Type,
+    [JsonPropertyName("state")]
+    State,
+    [JsonPropertyName("incidentKey")]
+    IncidentKey,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum GlobalTaskListenerSearchQuerySortRequestField
+{
+    [JsonPropertyName("id")]
+    Id,
+    [JsonPropertyName("type")]
+    Type,
+    [JsonPropertyName("afterNonGlobal")]
+    AfterNonGlobal,
+    [JsonPropertyName("priority")]
+    Priority,
+    [JsonPropertyName("source")]
+    Source,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum GroupClientSearchQuerySortRequestField
+{
+    [JsonPropertyName("clientId")]
+    ClientId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum GroupSearchQuerySortRequestField
+{
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("groupId")]
+    GroupId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum GroupUserSearchQuerySortRequestField
+{
+    [JsonPropertyName("username")]
+    Username,
+}
+
+/// <summary>
+/// The aggregated field by which the process instance statistics are sorted.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField
+{
+    [JsonPropertyName("activeInstancesWithErrorCount")]
+    ActiveInstancesWithErrorCount,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort the incident error statistics by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum IncidentProcessInstanceStatisticsByErrorQuerySortRequestField
+{
+    [JsonPropertyName("errorMessage")]
+    ErrorMessage,
+    [JsonPropertyName("activeInstancesWithErrorCount")]
+    ActiveInstancesWithErrorCount,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum IncidentSearchQuerySortRequestField
+{
+    [JsonPropertyName("incidentKey")]
+    IncidentKey,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("errorType")]
+    ErrorType,
+    [JsonPropertyName("elementId")]
+    ElementId,
+    [JsonPropertyName("elementInstanceKey")]
+    ElementInstanceKey,
+    [JsonPropertyName("creationTime")]
+    CreationTime,
+    [JsonPropertyName("state")]
+    State,
+    [JsonPropertyName("jobKey")]
+    JobKey,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum JobSearchQuerySortRequestField
+{
+    [JsonPropertyName("deadline")]
+    Deadline,
+    [JsonPropertyName("deniedReason")]
+    DeniedReason,
+    [JsonPropertyName("elementId")]
+    ElementId,
+    [JsonPropertyName("elementInstanceKey")]
+    ElementInstanceKey,
+    [JsonPropertyName("endTime")]
+    EndTime,
+    [JsonPropertyName("errorCode")]
+    ErrorCode,
+    [JsonPropertyName("errorMessage")]
+    ErrorMessage,
+    [JsonPropertyName("hasFailedWithRetriesLeft")]
+    HasFailedWithRetriesLeft,
+    [JsonPropertyName("isDenied")]
+    IsDenied,
+    [JsonPropertyName("jobKey")]
+    JobKey,
+    [JsonPropertyName("kind")]
+    Kind,
+    [JsonPropertyName("listenerEventType")]
+    ListenerEventType,
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("retries")]
+    Retries,
+    [JsonPropertyName("state")]
+    State,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+    [JsonPropertyName("type")]
+    Type,
+    [JsonPropertyName("worker")]
+    Worker,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum MappingRuleSearchQuerySortRequestField
+{
+    [JsonPropertyName("mappingRuleId")]
+    MappingRuleId,
+    [JsonPropertyName("claimName")]
+    ClaimName,
+    [JsonPropertyName("claimValue")]
+    ClaimValue,
+    [JsonPropertyName("name")]
+    Name,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum MessageSubscriptionSearchQuerySortRequestField
+{
+    [JsonPropertyName("messageSubscriptionKey")]
+    MessageSubscriptionKey,
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("processDefinitionName")]
+    ProcessDefinitionName,
+    [JsonPropertyName("processDefinitionVersion")]
+    ProcessDefinitionVersion,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("elementId")]
+    ElementId,
+    [JsonPropertyName("elementInstanceKey")]
+    ElementInstanceKey,
+    [JsonPropertyName("messageSubscriptionState")]
+    MessageSubscriptionState,
+    [JsonPropertyName("messageSubscriptionType")]
+    MessageSubscriptionType,
+    [JsonPropertyName("lastUpdatedDate")]
+    LastUpdatedDate,
+    [JsonPropertyName("messageName")]
+    MessageName,
+    [JsonPropertyName("correlationKey")]
+    CorrelationKey,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+    [JsonPropertyName("toolName")]
+    ToolName,
+    [JsonPropertyName("inboundConnectorType")]
+    InboundConnectorType,
+}
+
+/// <summary>
+/// Describes the current health of the partition.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum PartitionHealth
+{
+    [JsonPropertyName("healthy")]
+    Healthy,
+    [JsonPropertyName("unhealthy")]
+    Unhealthy,
+    [JsonPropertyName("dead")]
+    Dead,
+}
+
+/// <summary>
+/// Describes the Raft role of the broker for a given partition.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum PartitionRole
+{
+    [JsonPropertyName("leader")]
+    Leader,
+    [JsonPropertyName("follower")]
+    Follower,
+    [JsonPropertyName("inactive")]
+    Inactive,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ProcessDefinitionInstanceStatisticsQuerySortRequestField
+{
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("activeInstancesWithIncidentCount")]
+    ActiveInstancesWithIncidentCount,
+    [JsonPropertyName("activeInstancesWithoutIncidentCount")]
+    ActiveInstancesWithoutIncidentCount,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField
+{
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("processDefinitionName")]
+    ProcessDefinitionName,
+    [JsonPropertyName("processDefinitionVersion")]
+    ProcessDefinitionVersion,
+    [JsonPropertyName("activeInstancesWithIncidentCount")]
+    ActiveInstancesWithIncidentCount,
+    [JsonPropertyName("activeInstancesWithoutIncidentCount")]
+    ActiveInstancesWithoutIncidentCount,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ProcessDefinitionSearchQuerySortRequestField
+{
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("resourceName")]
+    ResourceName,
+    [JsonPropertyName("version")]
+    Version,
+    [JsonPropertyName("versionTag")]
+    VersionTag,
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ProcessInstanceSearchQuerySortRequestField
+{
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("processDefinitionName")]
+    ProcessDefinitionName,
+    [JsonPropertyName("processDefinitionVersion")]
+    ProcessDefinitionVersion,
+    [JsonPropertyName("processDefinitionVersionTag")]
+    ProcessDefinitionVersionTag,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("parentProcessInstanceKey")]
+    ParentProcessInstanceKey,
+    [JsonPropertyName("parentElementInstanceKey")]
+    ParentElementInstanceKey,
+    [JsonPropertyName("startDate")]
+    StartDate,
+    [JsonPropertyName("endDate")]
+    EndDate,
+    [JsonPropertyName("state")]
+    State,
+    [JsonPropertyName("hasIncident")]
+    HasIncident,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+    [JsonPropertyName("businessId")]
+    BusinessId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ResourceSearchQuerySortRequestField
+{
+    [JsonPropertyName("resourceKey")]
+    ResourceKey,
+    [JsonPropertyName("resourceName")]
+    ResourceName,
+    [JsonPropertyName("resourceId")]
+    ResourceId,
+    [JsonPropertyName("version")]
+    Version,
+    [JsonPropertyName("versionTag")]
+    VersionTag,
+    [JsonPropertyName("deploymentKey")]
+    DeploymentKey,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RoleClientSearchQuerySortRequestField
+{
+    [JsonPropertyName("clientId")]
+    ClientId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RoleGroupSearchQuerySortRequestField
+{
+    [JsonPropertyName("groupId")]
+    GroupId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RoleSearchQuerySortRequestField
+{
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("roleId")]
+    RoleId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RoleUserSearchQuerySortRequestField
+{
+    [JsonPropertyName("username")]
+    Username,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum TenantClientSearchQuerySortRequestField
+{
+    [JsonPropertyName("clientId")]
+    ClientId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum TenantGroupSearchQuerySortRequestField
+{
+    [JsonPropertyName("groupId")]
+    GroupId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum TenantSearchQuerySortRequestField
+{
+    [JsonPropertyName("key")]
+    Key,
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum TenantUserSearchQuerySortRequestField
+{
+    [JsonPropertyName("username")]
+    Username,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum UserSearchQuerySortRequestField
+{
+    [JsonPropertyName("username")]
+    Username,
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("email")]
+    Email,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum UserTaskSearchQuerySortRequestField
+{
+    [JsonPropertyName("creationDate")]
+    CreationDate,
+    [JsonPropertyName("completionDate")]
+    CompletionDate,
+    [JsonPropertyName("followUpDate")]
+    FollowUpDate,
+    [JsonPropertyName("dueDate")]
+    DueDate,
+    [JsonPropertyName("priority")]
+    Priority,
+    [JsonPropertyName("name")]
+    Name,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum UserTaskVariableSearchQuerySortRequestField
+{
+    [JsonPropertyName("value")]
+    Value,
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+    [JsonPropertyName("variableKey")]
+    VariableKey,
+    [JsonPropertyName("scopeKey")]
+    ScopeKey,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum VariableSearchQuerySortRequestField
+{
+    [JsonPropertyName("value")]
+    Value,
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+    [JsonPropertyName("variableKey")]
+    VariableKey,
+    [JsonPropertyName("scopeKey")]
+    ScopeKey,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+}
+
+/// <summary>
 /// ActivatedJobResult
 /// </summary>
 public sealed class ActivatedJobResult
@@ -199,6 +1163,88 @@ public sealed class AdvancedActorTypeFilter
     /// </summary>
     [JsonPropertyName("$in")]
     public List<AuditLogActorTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced AgentInstanceKey filter.
+/// </summary>
+public sealed class AdvancedAgentInstanceKeyFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentInstanceKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// Advanced AgentInstanceStatusEnum filter.
+/// </summary>
+public sealed class AdvancedAgentInstanceStatusFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceStatusEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceStatusEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceStatusEnum>? In { get; set; }
 
     /// <summary>
     /// Checks if the property matches the provided like value.
@@ -2035,6 +3081,476 @@ public sealed class AdvancedVariableKeyFilter
 }
 
 /// <summary>
+/// The static definition of an agent instance, set once at creation.
+/// </summary>
+public sealed class AgentInstanceDefinition
+{
+    /// <summary>
+    /// The LLM model identifier (for example, gpt-4o).
+    /// </summary>
+    [JsonPropertyName("model")]
+    public string Model { get; set; } = null!;
+
+    /// <summary>
+    /// The LLM provider (for example, openai or anthropic).
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string Provider { get; set; } = null!;
+
+    /// <summary>
+    /// The system prompt configured for this agent instance.
+    /// </summary>
+    [JsonPropertyName("systemPrompt")]
+    public string SystemPrompt { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Agent instance search filter.
+/// </summary>
+public sealed class AgentInstanceFilter
+{
+    /// <summary>
+    /// The unique key of the agent instance.
+    /// </summary>
+    [JsonPropertyName("agentInstanceKey")]
+    public AgentInstanceKeyFilterProperty? AgentInstanceKey { get; set; }
+
+    /// <summary>
+    /// The current status of the agent instance.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public AgentInstanceStatusFilterProperty? Status { get; set; }
+
+    /// <summary>
+    /// The BPMN element ID of the agent task.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementIdFilterProperty? ElementId { get; set; }
+
+    /// <summary>
+    /// The key of the process instance that owns this agent instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The tenant ID of the agent instance.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public StringFilterProperty? TenantId { get; set; }
+
+    /// <summary>
+    /// The creation date of the agent instance.
+    /// </summary>
+    [JsonPropertyName("creationDate")]
+    public DateTimeFilterProperty? CreationDate { get; set; }
+
+    /// <summary>
+    /// The date the agent instance was last updated.
+    /// </summary>
+    [JsonPropertyName("lastUpdatedDate")]
+    public DateTimeFilterProperty? LastUpdatedDate { get; set; }
+
+    /// <summary>
+    /// The completion date of the agent instance.
+    /// </summary>
+    [JsonPropertyName("completionDate")]
+    public DateTimeFilterProperty? CompletionDate { get; set; }
+
+}
+
+/// <summary>
+/// System-generated key for an agent instance.
+/// </summary>
+public readonly record struct AgentInstanceKey : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentInstanceKey(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentInstanceKey"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentInstanceKey AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new AgentInstanceKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AgentInstanceKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentInstanceKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentInstanceKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentInstanceKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceKeyExactMatch");
+        return new AgentInstanceKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// AgentInstanceKey property with full advanced search capabilities.
+/// </summary>
+public sealed class AgentInstanceKeyFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentInstanceKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// The configured limits for an agent instance, set once at creation.
+/// </summary>
+public sealed class AgentInstanceLimits
+{
+    /// <summary>
+    /// Maximum LLM calls allowed. -1 if no limit is configured.
+    /// </summary>
+    [JsonPropertyName("maxModelCalls")]
+    public long MaxModelCalls { get; set; }
+
+    /// <summary>
+    /// Maximum tool calls allowed. -1 if no limit is configured.
+    /// </summary>
+    [JsonPropertyName("maxToolCalls")]
+    public long MaxToolCalls { get; set; }
+
+    /// <summary>
+    /// Maximum total tokens allowed. -1 if no limit is configured.
+    /// </summary>
+    [JsonPropertyName("maxTokens")]
+    public long MaxTokens { get; set; }
+
+}
+
+/// <summary>
+/// Aggregated metrics for an agent instance across all model calls.
+/// </summary>
+public sealed class AgentInstanceMetrics
+{
+    /// <summary>
+    /// Total input tokens consumed across all model calls.
+    /// </summary>
+    [JsonPropertyName("inputTokens")]
+    public long InputTokens { get; set; }
+
+    /// <summary>
+    /// Total output tokens produced across all model calls.
+    /// </summary>
+    [JsonPropertyName("outputTokens")]
+    public long OutputTokens { get; set; }
+
+    /// <summary>
+    /// Total number of LLM calls made.
+    /// </summary>
+    [JsonPropertyName("modelCalls")]
+    public long ModelCalls { get; set; }
+
+    /// <summary>
+    /// Total number of tool calls made.
+    /// </summary>
+    [JsonPropertyName("toolCalls")]
+    public long ToolCalls { get; set; }
+
+}
+
+/// <summary>
+/// AgentInstanceResult
+/// </summary>
+public sealed class AgentInstanceResult
+{
+    /// <summary>
+    /// The unique key for this agent instance.
+    /// </summary>
+    [JsonPropertyName("agentInstanceKey")]
+    public AgentInstanceKey AgentInstanceKey { get; set; }
+
+    /// <summary>
+    /// The current status of an agent instance.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public AgentInstanceStatusEnum Status { get; set; }
+
+    /// <summary>
+    /// The static definition of the agent, including model, provider, and system prompt.
+    /// </summary>
+    [JsonPropertyName("definition")]
+    public AgentInstanceDefinition Definition { get; set; } = null!;
+
+    /// <summary>
+    /// Aggregated metrics across all iterations of this agent instance.
+    /// </summary>
+    [JsonPropertyName("metrics")]
+    public AgentInstanceMetrics Metrics { get; set; } = null!;
+
+    /// <summary>
+    /// The configured limits for this agent instance, set once at creation.
+    /// </summary>
+    [JsonPropertyName("limits")]
+    public AgentInstanceLimits Limits { get; set; } = null!;
+
+    /// <summary>
+    /// The BPMN element ID of the ad-hoc sub-process or AI agent task that owns this agent instance.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId ElementId { get; set; }
+
+    /// <summary>
+    /// The key of the process instance that owns this agent instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The tenant ID of this agent instance.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// The date when this agent instance was created.
+    /// </summary>
+    [JsonPropertyName("creationDate")]
+    public DateTimeOffset CreationDate { get; set; }
+
+    /// <summary>
+    /// The date when this agent instance was last updated.
+    /// </summary>
+    [JsonPropertyName("lastUpdatedDate")]
+    public DateTimeOffset LastUpdatedDate { get; set; }
+
+    /// <summary>
+    /// The date when this agent instance completed. Null while the agent is still running.
+    /// </summary>
+    [JsonPropertyName("completionDate")]
+    public DateTimeOffset? CompletionDate { get; set; }
+
+}
+
+/// <summary>
+/// Agent instance search request.
+/// </summary>
+public sealed class AgentInstanceSearchQuery
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AgentInstanceSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The agent instance search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public AgentInstanceFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// Agent instance search response.
+/// </summary>
+public sealed class AgentInstanceSearchQueryResult
+{
+    /// <summary>
+    /// The matching agent instances.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<AgentInstanceResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// AgentInstanceSearchQuerySortRequest
+/// </summary>
+public sealed class AgentInstanceSearchQuerySortRequest
+{
+    /// <summary>
+    /// The field to sort by.
+    /// </summary>
+    [JsonPropertyName("field")]
+    public AgentInstanceSearchQuerySortRequestField Field { get; set; }
+
+    /// <summary>
+    /// The order in which to sort the related field.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public SortOrderEnum? Order { get; set; }
+
+}
+
+/// <summary>
+/// The current status of an agent instance.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentInstanceStatusEnum
+{
+    [JsonPropertyName("COMPLETED")]
+    COMPLETED,
+    [JsonPropertyName("IDLE")]
+    IDLE,
+    [JsonPropertyName("INITIALIZING")]
+    INITIALIZING,
+    [JsonPropertyName("THINKING")]
+    THINKING,
+    [JsonPropertyName("TOOL_CALLING")]
+    TOOLCALLING,
+    [JsonPropertyName("TOOL_DISCOVERY")]
+    TOOLDISCOVERY,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AgentInstanceStatusExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentInstanceStatusExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentInstanceStatusExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentInstanceStatusExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceStatusExactMatch");
+        return new AgentInstanceStatusExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// AgentInstanceStatusEnum property with full advanced search capabilities.
+/// </summary>
+public sealed class AgentInstanceStatusFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceStatusEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceStatusEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceStatusEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
 /// Defines the ancestor scope for the created element instances. The default behavior resembles
 /// a &quot;direct&quot; scope instruction with an `ancestorElementInstanceKey` of `&quot;-1&quot;`.
 /// 
@@ -2940,7 +4456,7 @@ public sealed class AuditLogSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public AuditLogSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -3203,7 +4719,7 @@ public sealed class AuthorizationSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public AuthorizationSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -3463,7 +4979,7 @@ public sealed class BatchOperationError
     /// The type of the error that occurred during the batch operation.
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; } = null!;
+    public BatchOperationErrorType Type { get; set; }
 
     /// <summary>
     /// The error message that occurred during the batch operation.
@@ -3592,7 +5108,7 @@ public sealed class BatchOperationItemResponse
     /// State of the item.
     /// </summary>
     [JsonPropertyName("state")]
-    public string State { get; set; } = null!;
+    public BatchOperationItemResponseState State { get; set; }
 
     /// <summary>
     /// The date this item was processed.
@@ -3663,7 +5179,7 @@ public sealed class BatchOperationItemSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public BatchOperationItemSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -3923,7 +5439,7 @@ public sealed class BatchOperationSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public BatchOperationSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -4408,6 +5924,39 @@ public sealed class Changeset
 }
 
 /// <summary>
+/// The unique identifier of an OAuth client.
+/// Minted outside the Camunda REST API: in SaaS by Console, in Self-Managed
+/// with OIDC by the external identity provider (e.g. EntraID, Keycloak,
+/// Okta). In Self-Managed with Basic authentication, machine-to-machine
+/// applications are modelled as users instead — see the user identifier.
+/// 
+/// </summary>
+public readonly record struct ClientId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ClientId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ClientId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ClientId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClientId", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        return new ClientId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// ClockPinRequest
 /// </summary>
 public sealed class ClockPinRequest
@@ -4418,6 +5967,34 @@ public sealed class ClockPinRequest
     [JsonPropertyName("timestamp")]
     public long Timestamp { get; set; }
 
+}
+
+/// <summary>
+/// The name of a cluster variable. Unique within its scope (global or tenant-specific).
+/// </summary>
+public readonly record struct ClusterVariableName : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ClusterVariableName(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ClusterVariableName"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ClusterVariableName AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClusterVariableName", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        return new ClusterVariableName(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -4435,7 +6012,7 @@ public sealed class ClusterVariableResult
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
+    public ClusterVariableName Name { get; set; }
 
     /// <summary>
     /// The scope of a cluster variable.
@@ -4460,7 +6037,7 @@ public sealed class ClusterVariableResultBase
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
+    public ClusterVariableName Name { get; set; }
 
     /// <summary>
     /// The scope of a cluster variable.
@@ -4652,7 +6229,7 @@ public sealed class ClusterVariableSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public ClusterVariableSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -4683,7 +6260,7 @@ public sealed class ClusterVariableSearchResult
     /// The name of the cluster variable. Unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
+    public ClusterVariableName Name { get; set; }
 
     /// <summary>
     /// The scope of a cluster variable.
@@ -4981,7 +6558,7 @@ public sealed class CorrelatedMessageSubscriptionSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public CorrelatedMessageSubscriptionSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -5000,7 +6577,7 @@ public sealed class CreateClusterVariableRequest
     /// The name of the cluster variable. Must be unique within its scope (global or tenant-specific).
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
+    public ClusterVariableName Name { get; set; }
 
     /// <summary>
     /// The value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
@@ -5488,7 +7065,7 @@ public sealed class DecisionDefinitionSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public DecisionDefinitionSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -6229,7 +7806,7 @@ public sealed class DecisionInstanceSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public DecisionInstanceSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -6568,7 +8145,7 @@ public sealed class DecisionRequirementsSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public DecisionRequirementsSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -7262,7 +8839,7 @@ public sealed class DocumentReference
     /// Document discriminator. Always set to &quot;camunda&quot;.
     /// </summary>
     [JsonPropertyName("camunda.document.type")]
-    public string CamundaDocumentType { get; set; } = null!;
+    public DocumentReferenceCamundaDocumentType CamundaDocumentType { get; set; }
 
     /// <summary>
     /// The ID of the document store.
@@ -7418,7 +8995,7 @@ public sealed class ElementInstanceFilter
     /// Type of element as defined set of values.
     /// </summary>
     [JsonPropertyName("type")]
-    public string? Type { get; set; }
+    public ElementInstanceFilterType? Type { get; set; }
 
     /// <summary>
     /// The element ID for this element instance.
@@ -7622,7 +9199,7 @@ public sealed class ElementInstanceResult
     /// Type of element as defined set of values.
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; } = null!;
+    public ElementInstanceResultType Type { get; set; }
 
     /// <summary>
     /// State of element instance as defined set of values.
@@ -7730,7 +9307,7 @@ public sealed class ElementInstanceSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public ElementInstanceSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -8471,13 +10048,13 @@ public readonly record struct GlobalListenerId : global::Camunda.Orchestration.S
     /// </summary>
     public static GlobalListenerId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerId");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerId", pattern: @"^[a-zA-Z0-9_~@.+\-]+$", minLength: 1, maxLength: 256);
         return new GlobalListenerId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+\-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -8849,7 +10426,7 @@ public sealed class GlobalTaskListenerSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public GlobalTaskListenerSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -8868,7 +10445,7 @@ public sealed class GroupClientResult
     /// The ID of the client.
     /// </summary>
     [JsonPropertyName("clientId")]
-    public string ClientId { get; set; } = null!;
+    public ClientId ClientId { get; set; }
 
 }
 
@@ -8900,7 +10477,7 @@ public sealed class GroupClientSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public GroupClientSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -8938,7 +10515,7 @@ public sealed class GroupCreateRequest
     /// The ID of the new group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
     /// <summary>
     /// The display name of the new group.
@@ -8963,7 +10540,7 @@ public sealed class GroupCreateResult
     /// The ID of the created group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
     /// <summary>
     /// The display name of the created group.
@@ -8996,6 +10573,34 @@ public sealed class GroupFilter
     [JsonPropertyName("name")]
     public string? Name { get; set; }
 
+}
+
+/// <summary>
+/// The unique identifier of a group.
+/// </summary>
+public readonly record struct GroupId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private GroupId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="GroupId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static GroupId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GroupId", minLength: 1, maxLength: 256);
+        return new GroupId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -9032,7 +10637,7 @@ public sealed class GroupResult
     /// The group ID.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
     /// <summary>
     /// The group description.
@@ -9114,7 +10719,7 @@ public sealed class GroupSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public GroupSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -9149,10 +10754,10 @@ public sealed class GroupUpdateRequest
 public sealed class GroupUpdateResult
 {
     /// <summary>
-    /// The unique external group ID.
+    /// The unique group ID.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
     /// <summary>
     /// The name of the group.
@@ -9209,7 +10814,7 @@ public sealed class GroupUserSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public GroupUserSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -9533,7 +11138,7 @@ public sealed class IncidentProcessInstanceStatisticsByDefinitionQuerySortReques
     /// The aggregated field by which the process instance statistics are sorted.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -9637,7 +11242,7 @@ public sealed class IncidentProcessInstanceStatisticsByErrorQuerySortRequest
     /// The field to sort the incident error statistics by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public IncidentProcessInstanceStatisticsByErrorQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -9829,7 +11434,7 @@ public sealed class IncidentSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public IncidentSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -10953,7 +12558,7 @@ public sealed class JobSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public JobSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -11658,7 +13263,7 @@ public sealed class MappingRuleCreateRequest
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
     /// <summary>
     /// The name of the claim to map.
@@ -11707,7 +13312,7 @@ public sealed class MappingRuleCreateResult
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
 }
 
@@ -11763,7 +13368,7 @@ public sealed class MappingRuleCreateUpdateResult
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
 }
 
@@ -11794,8 +13399,36 @@ public sealed class MappingRuleFilter
     /// The ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string? MappingRuleId { get; set; }
+    public MappingRuleId? MappingRuleId { get; set; }
 
+}
+
+/// <summary>
+/// The unique identifier of a mapping rule.
+/// </summary>
+public readonly record struct MappingRuleId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private MappingRuleId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="MappingRuleId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static MappingRuleId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MappingRuleId", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        return new MappingRuleId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -11825,7 +13458,7 @@ public sealed class MappingRuleResult
     /// The ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
 }
 
@@ -11882,7 +13515,7 @@ public sealed class MappingRuleSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public MappingRuleSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -11944,7 +13577,7 @@ public sealed class MappingRuleUpdateResult
     /// The unique ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
+    public MappingRuleId MappingRuleId { get; set; }
 
 }
 
@@ -12515,7 +14148,7 @@ public sealed class MessageSubscriptionSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public MessageSubscriptionSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -12899,13 +14532,13 @@ public sealed class Partition
     /// Describes the Raft role of the broker for a given partition.
     /// </summary>
     [JsonPropertyName("role")]
-    public string Role { get; set; } = null!;
+    public PartitionRole Role { get; set; }
 
     /// <summary>
     /// Describes the current health of the partition.
     /// </summary>
     [JsonPropertyName("health")]
-    public string Health { get; set; } = null!;
+    public PartitionHealth Health { get; set; }
 
 }
 
@@ -13282,7 +14915,7 @@ public sealed class ProcessDefinitionInstanceStatisticsQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public ProcessDefinitionInstanceStatisticsQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -13407,7 +15040,7 @@ public sealed class ProcessDefinitionInstanceVersionStatisticsQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -13742,7 +15375,7 @@ public sealed class ProcessDefinitionSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public ProcessDefinitionSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -15108,7 +16741,7 @@ public sealed class ProcessInstanceSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public ProcessInstanceSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -15540,7 +17173,7 @@ public sealed class ResourceSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public ResourceSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -15607,7 +17240,7 @@ public sealed class RoleClientResult
     /// The ID of the client.
     /// </summary>
     [JsonPropertyName("clientId")]
-    public string ClientId { get; set; } = null!;
+    public ClientId ClientId { get; set; }
 
 }
 
@@ -15639,7 +17272,7 @@ public sealed class RoleClientSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public RoleClientSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -15677,7 +17310,7 @@ public sealed class RoleCreateRequest
     /// The ID of the new role.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string RoleId { get; set; } = null!;
+    public RoleId RoleId { get; set; }
 
     /// <summary>
     /// The display name of the new role.
@@ -15702,7 +17335,7 @@ public sealed class RoleCreateResult
     /// The ID of the created role.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string RoleId { get; set; } = null!;
+    public RoleId RoleId { get; set; }
 
     /// <summary>
     /// The display name of the created role.
@@ -15727,7 +17360,7 @@ public sealed class RoleFilter
     /// The role ID search filters.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string? RoleId { get; set; }
+    public RoleId? RoleId { get; set; }
 
     /// <summary>
     /// The role name search filters.
@@ -15746,7 +17379,7 @@ public sealed class RoleGroupResult
     /// The id of the group.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
 }
 
@@ -15778,7 +17411,7 @@ public sealed class RoleGroupSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public RoleGroupSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -15805,6 +17438,34 @@ public sealed class RoleGroupSearchResult
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
 
+}
+
+/// <summary>
+/// The unique identifier of a role.
+/// </summary>
+public readonly record struct RoleId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private RoleId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="RoleId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static RoleId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "RoleId", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        return new RoleId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -15841,7 +17502,7 @@ public sealed class RoleResult
     /// The role id.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string RoleId { get; set; } = null!;
+    public RoleId RoleId { get; set; }
 
     /// <summary>
     /// The description of the role.
@@ -15904,7 +17565,7 @@ public sealed class RoleSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public RoleSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -15954,7 +17615,7 @@ public sealed class RoleUpdateResult
     /// The ID of the updated role.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public string RoleId { get; set; } = null!;
+    public RoleId RoleId { get; set; }
 
 }
 
@@ -15999,7 +17660,7 @@ public sealed class RoleUserSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public RoleUserSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -16549,7 +18210,7 @@ public sealed class TenantClientResult
     /// The ID of the client.
     /// </summary>
     [JsonPropertyName("clientId")]
-    public string ClientId { get; set; } = null!;
+    public ClientId ClientId { get; set; }
 
 }
 
@@ -16581,7 +18242,7 @@ public sealed class TenantClientSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public TenantClientSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -16616,10 +18277,13 @@ public sealed class TenantClientSearchResult
 public sealed class TenantCreateRequest
 {
     /// <summary>
-    /// The unique ID for the tenant. Must be 255 characters or less. Can contain letters, numbers, [`_`, `-`, `+`, `.`, `@`].
+    /// The unique ID for the tenant. Must be 31 characters or less and match
+    /// `^[\w.-]{1,31}$` (word characters, `.`, `-`). The literal
+    /// `&lt;default&gt;` is also accepted as the default-tenant alias.
+    /// 
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public string TenantId { get; set; } = null!;
+    public TenantId TenantId { get; set; }
 
     /// <summary>
     /// The name of the tenant.
@@ -16641,7 +18305,7 @@ public sealed class TenantCreateRequest
 public sealed class TenantCreateResult
 {
     /// <summary>
-    /// The unique identifier of the tenant.
+    /// The unique identifier of the created tenant.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId TenantId { get; set; }
@@ -16698,10 +18362,10 @@ public enum TenantFilterEnum
 public sealed class TenantGroupResult
 {
     /// <summary>
-    /// The groupId of the group.
+    /// The group ID.
     /// </summary>
     [JsonPropertyName("groupId")]
-    public string GroupId { get; set; } = null!;
+    public GroupId GroupId { get; set; }
 
 }
 
@@ -16733,7 +18397,7 @@ public sealed class TenantGroupSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public TenantGroupSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -16778,13 +18442,13 @@ public readonly record struct TenantId : global::Camunda.Orchestration.Sdk.ICamu
     /// </summary>
     public static TenantId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "TenantId", pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "TenantId", pattern: @"^(<default>|[\w\.\-]{1,31})$", minLength: 1, maxLength: 31);
         return new TenantId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[\w\.\-]{1,31})$", minLength: 1, maxLength: 31);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -16906,7 +18570,7 @@ public sealed class TenantSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public TenantSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -16941,7 +18605,7 @@ public sealed class TenantUpdateRequest
 public sealed class TenantUpdateResult
 {
     /// <summary>
-    /// The unique identifier of the tenant.
+    /// The unique identifier of the updated tenant.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId TenantId { get; set; }
@@ -17001,7 +18665,7 @@ public sealed class TenantUserSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public TenantUserSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -17197,7 +18861,7 @@ public sealed class UsageMetricsResponseItem
 public sealed class UserCreateResult
 {
     /// <summary>
-    /// The unique name of a user.
+    /// The username of the created user.
     /// </summary>
     [JsonPropertyName("username")]
     public Username Username { get; set; }
@@ -17257,13 +18921,13 @@ public readonly record struct Username : global::Camunda.Orchestration.Sdk.ICamu
     /// </summary>
     public static Username AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Username", pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Username", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
         return new Username(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[A-Za-z0-9_@.+-]+)$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -17281,10 +18945,10 @@ public sealed class UserRequest
     public string Password { get; set; } = null!;
 
     /// <summary>
-    /// The username of the user.
+    /// The username of the new user.
     /// </summary>
     [JsonPropertyName("username")]
-    public string Username { get; set; } = null!;
+    public Username Username { get; set; }
 
     /// <summary>
     /// The name of the user.
@@ -17306,7 +18970,7 @@ public sealed class UserRequest
 public sealed class UserResult
 {
     /// <summary>
-    /// The unique name of a user.
+    /// The username of the user.
     /// </summary>
     [JsonPropertyName("username")]
     public Username Username { get; set; }
@@ -17359,7 +19023,7 @@ public sealed class UserSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public UserSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -17957,7 +19621,7 @@ public sealed class UserTaskSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public UserTaskSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -18151,7 +19815,7 @@ public sealed class UserTaskVariableSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public UserTaskVariableSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -18192,7 +19856,7 @@ public sealed class UserUpdateRequest
 public sealed class UserUpdateResult
 {
     /// <summary>
-    /// The unique name of a user.
+    /// The username of the updated user.
     /// </summary>
     [JsonPropertyName("username")]
     public Username Username { get; set; }
@@ -18529,7 +20193,7 @@ public sealed class VariableSearchQuerySortRequest
     /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
-    public string Field { get; set; } = null!;
+    public VariableSearchQuerySortRequestField Field { get; set; }
 
     /// <summary>
     /// The order in which to sort the related field.
@@ -18621,555 +20285,6 @@ public sealed class VariableValueFilterProperty
     /// </summary>
     [JsonPropertyName("value")]
     public StringFilterProperty Value { get; set; } = null!;
-
-}
-
-/// <summary>
-/// CreateMappingRuleResponse
-/// </summary>
-public sealed class CreateMappingRuleResponse
-{
-    /// <summary>
-    /// The name of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimName")]
-    public string ClaimName { get; set; } = null!;
-
-    /// <summary>
-    /// The value of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimValue")]
-    public string ClaimValue { get; set; } = null!;
-
-    /// <summary>
-    /// The name of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
-
-    /// <summary>
-    /// The unique ID of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
-
-}
-
-/// <summary>
-/// GetUserResponse
-/// </summary>
-public sealed class GetUserResponse
-{
-    /// <summary>
-    /// The unique name of a user.
-    /// </summary>
-    [JsonPropertyName("username")]
-    public Username Username { get; set; }
-
-    /// <summary>
-    /// The name of the user.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string? Name { get; set; }
-
-    /// <summary>
-    /// The email of the user.
-    /// </summary>
-    [JsonPropertyName("email")]
-    public string? Email { get; set; }
-
-}
-
-/// <summary>
-/// SearchClientsForGroupRequest
-/// </summary>
-public sealed class SearchClientsForGroupRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchClientsForGroupResponse
-/// </summary>
-public sealed class SearchClientsForGroupResponse
-{
-    /// <summary>
-    /// The matching client IDs.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupClientResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchClientsForRoleRequest
-/// </summary>
-public sealed class SearchClientsForRoleRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchClientsForRoleResponse
-/// </summary>
-public sealed class SearchClientsForRoleResponse
-{
-    /// <summary>
-    /// The matching clients.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupClientResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchClientsForTenantRequest
-/// </summary>
-public sealed class SearchClientsForTenantRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchClientsForTenantResponse
-/// </summary>
-public sealed class SearchClientsForTenantResponse
-{
-    /// <summary>
-    /// The matching clients.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupClientResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchMappingRuleResponse
-/// </summary>
-public sealed class SearchMappingRuleResponse
-{
-    /// <summary>
-    /// The matching mapping rules.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<MappingRuleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchMappingRulesForGroupResponse
-/// </summary>
-public sealed class SearchMappingRulesForGroupResponse
-{
-    /// <summary>
-    /// The matching mapping rules.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<MappingRuleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchMappingRulesForRoleResponse
-/// </summary>
-public sealed class SearchMappingRulesForRoleResponse
-{
-    /// <summary>
-    /// The matching mapping rules.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<MappingRuleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchMappingRulesForTenantResponse
-/// </summary>
-public sealed class SearchMappingRulesForTenantResponse
-{
-    /// <summary>
-    /// The matching mapping rules.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<MappingRuleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchRolesForGroupResponse
-/// </summary>
-public sealed class SearchRolesForGroupResponse
-{
-    /// <summary>
-    /// The matching roles.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<RoleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchRolesForTenantResponse
-/// </summary>
-public sealed class SearchRolesForTenantResponse
-{
-    /// <summary>
-    /// The matching roles.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<RoleResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchUsersForGroupRequest
-/// </summary>
-public sealed class SearchUsersForGroupRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchUsersForGroupResponse
-/// </summary>
-public sealed class SearchUsersForGroupResponse
-{
-    /// <summary>
-    /// The matching members.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupUserResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchUsersForRoleRequest
-/// </summary>
-public sealed class SearchUsersForRoleRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchUsersForRoleResponse
-/// </summary>
-public sealed class SearchUsersForRoleResponse
-{
-    /// <summary>
-    /// The matching users.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupUserResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchUsersForTenantRequest
-/// </summary>
-public sealed class SearchUsersForTenantRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// SearchUsersForTenantResponse
-/// </summary>
-public sealed class SearchUsersForTenantResponse
-{
-    /// <summary>
-    /// The matching users.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<GroupUserResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// SearchUsersResponse
-/// </summary>
-public sealed class SearchUsersResponse
-{
-    /// <summary>
-    /// The matching users.
-    /// </summary>
-    [JsonPropertyName("items")]
-    public List<UserCreateResult> Items { get; set; } = null!;
-
-    /// <summary>
-    /// Pagination information about the search results.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageResponse Page { get; set; } = null!;
-
-}
-
-/// <summary>
-/// User task effective variable search query request. Uses offset-based pagination only.
-/// 
-/// </summary>
-public sealed class SearchUserTaskEffectiveVariablesRequest
-{
-    /// <summary>
-    /// Pagination parameters.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public OffsetPagination? Page { get; set; }
-
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The user task variable search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public UserTaskVariableFilter? Filter { get; set; }
-
-}
-
-/// <summary>
-/// User task search query request.
-/// </summary>
-public sealed class SearchUserTaskVariablesRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The user task variable search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public UserTaskVariableFilter? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// Variable search query request.
-/// </summary>
-public sealed class SearchVariablesRequest
-{
-    /// <summary>
-    /// Sort field criteria.
-    /// </summary>
-    [JsonPropertyName("sort")]
-    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
-
-    /// <summary>
-    /// The variable search filters.
-    /// </summary>
-    [JsonPropertyName("filter")]
-    public VariableFilter? Filter { get; set; }
-
-    /// <summary>
-    /// Pagination criteria.
-    /// </summary>
-    [JsonPropertyName("page")]
-    public SearchQueryPageRequest? Page { get; set; }
-
-}
-
-/// <summary>
-/// UpdateMappingRuleResponse
-/// </summary>
-public sealed class UpdateMappingRuleResponse
-{
-    /// <summary>
-    /// The name of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimName")]
-    public string ClaimName { get; set; } = null!;
-
-    /// <summary>
-    /// The value of the claim to map.
-    /// </summary>
-    [JsonPropertyName("claimValue")]
-    public string ClaimValue { get; set; } = null!;
-
-    /// <summary>
-    /// The name of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = null!;
-
-    /// <summary>
-    /// The unique ID of the mapping rule.
-    /// </summary>
-    [JsonPropertyName("mappingRuleId")]
-    public string MappingRuleId { get; set; } = null!;
-
-}
-
-/// <summary>
-/// UpdateUserResponse
-/// </summary>
-public sealed class UpdateUserResponse
-{
-    /// <summary>
-    /// The unique name of a user.
-    /// </summary>
-    [JsonPropertyName("username")]
-    public Username Username { get; set; }
-
-    /// <summary>
-    /// The name of the user.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string? Name { get; set; }
-
-    /// <summary>
-    /// The email of the user.
-    /// </summary>
-    [JsonPropertyName("email")]
-    public string? Email { get; set; }
 
 }
 

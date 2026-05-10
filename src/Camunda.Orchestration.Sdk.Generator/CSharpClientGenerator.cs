@@ -571,6 +571,16 @@ internal static class CSharpClientGenerator
 
         var (oneOfParents, variantToParent, discriminators) = BuildOneOfMaps(doc);
 
+        // Collect inline string enum properties across all schemas so we can
+        // emit them as typed enums and reference them in property declarations.
+        var inlineEnums = CollectInlineEnums(doc, inlineSchemas);
+        var inlineEnumTypeNames = new HashSet<string>(
+            inlineEnums.Values.Select(e => e.EnumTypeName), StringComparer.Ordinal);
+        foreach (var entry in inlineEnums.Values.OrderBy(e => e.EnumTypeName))
+        {
+            EmitInlineEnum(sb, entry.EnumTypeName, entry.PropSchema);
+        }
+
         foreach (var (name, schema) in doc.Components.Schemas.OrderBy(kv => kv.Key))
         {
             var typeName = SanitizeTypeName(name);
@@ -695,7 +705,7 @@ internal static class CSharpClientGenerator
 
                     foreach (var (propName, propSchema) in filterProperties)
                     {
-                        var csharpType = MapType(propSchema, doc);
+                        var csharpType = ResolvePropertyType(propSchema, doc, inlineEnums, typeName, propName);
                         var csharpPropName = ToPascalCase(propName);
                         var isRequired = filterRequired.Contains(propName);
                         var isNullable = IsNullable(propSchema);
@@ -711,7 +721,7 @@ internal static class CSharpClientGenerator
                         }
 
                         sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(propName)}\")]");
-                        var initializer = IsReferenceType(csharpType, doc) ? " = null!;" : "";
+                        var initializer = IsReferenceType(csharpType, doc, inlineEnumTypeNames) ? " = null!;" : "";
                         sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
                         sb.AppendLine();
                     }
@@ -777,7 +787,7 @@ internal static class CSharpClientGenerator
                 if (propName == discriminatorPropToSkip)
                     continue;
 
-                var csharpType = MapType(propSchema, doc);
+                var csharpType = ResolvePropertyType(propSchema, doc, inlineEnums, typeName, propName);
                 var csharpPropName = ToPascalCase(propName);
                 var isRequired = required.Contains(propName);
                 var isNullable = IsNullable(propSchema);
@@ -793,7 +803,7 @@ internal static class CSharpClientGenerator
                 }
 
                 sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(propName)}\")]");
-                var initializer = IsReferenceType(csharpType, doc) ? " = null!;" : "";
+                var initializer = IsReferenceType(csharpType, doc, inlineEnumTypeNames) ? " = null!;" : "";
                 sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
                 sb.AppendLine();
             }
@@ -810,13 +820,13 @@ internal static class CSharpClientGenerator
         // Generate classes for inline schemas (request/response bodies without $ref)
         foreach (var (typeName, schema) in inlineSchemas.OrderBy(kv => kv.Key))
         {
-            GenerateClass(sb, typeName, schema, doc, requestSchemaNames.Contains(typeName));
+            GenerateClass(sb, typeName, schema, doc, inlineEnums, inlineEnumTypeNames, requestSchemaNames.Contains(typeName));
         }
 
         return sb.ToString();
     }
 
-    private static void GenerateClass(StringBuilder sb, string typeName, IOpenApiSchema schema, OpenApiDocument? doc = null, bool isRequestSchema = false)
+    private static void GenerateClass(StringBuilder sb, string typeName, IOpenApiSchema schema, OpenApiDocument? doc = null, Dictionary<string, InlineEnumEntry>? inlineEnums = null, HashSet<string>? inlineEnumTypeNames = null, bool isRequestSchema = false)
     {
         var tenantIdInfo = isRequestSchema ? GetOptionalTenantIdInfo(schema) : null;
         var tenantIdsInfo = isRequestSchema ? GetOptionalTenantIdsInfo(schema, doc) : null;
@@ -856,7 +866,7 @@ internal static class CSharpClientGenerator
 
         foreach (var (propName, propSchema) in properties)
         {
-            var csharpType = MapType(propSchema, doc);
+            var csharpType = ResolvePropertyType(propSchema, doc, inlineEnums, typeName, propName);
             var csharpPropName = ToPascalCase(propName);
             var isRequired = required.Contains(propName);
             var isNullable = IsNullable(propSchema);
@@ -872,7 +882,7 @@ internal static class CSharpClientGenerator
             }
 
             sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(propName)}\")]");
-            var initializer = IsReferenceType(csharpType, doc) ? " = null!;" : "";
+            var initializer = IsReferenceType(csharpType, doc, inlineEnumTypeNames) ? " = null!;" : "";
             sb.AppendLine($"    public {csharpType} {csharpPropName} {{ get; set; }}{initializer}");
             sb.AppendLine();
         }
@@ -1322,7 +1332,7 @@ internal static class CSharpClientGenerator
     /// Returns true if a C# type string represents a reference type that needs a null-forgiving
     /// initializer (= null!;) to avoid CS8618 warnings.
     /// </summary>
-    private static bool IsReferenceType(string csharpType, OpenApiDocument? doc)
+    private static bool IsReferenceType(string csharpType, OpenApiDocument? doc, HashSet<string>? inlineEnumTypeNames = null)
     {
         if (csharpType.EndsWith('?'))
             return false;
@@ -1335,6 +1345,9 @@ internal static class CSharpClientGenerator
             || csharpType.StartsWith("List<", StringComparison.Ordinal)
             || csharpType.StartsWith("Dictionary<", StringComparison.Ordinal))
             return true;
+        // Inline enums are value types (O(1) HashSet lookup)
+        if (inlineEnumTypeNames != null && inlineEnumTypeNames.Contains(csharpType))
+            return false;
         // Check if it's an enum or domain struct (value type) in the spec
         if (doc?.Components?.Schemas != null)
         {
@@ -1880,6 +1893,153 @@ internal static class CSharpClientGenerator
                 yield return s;
             }
         }
+    }
+
+    /// <summary>
+    /// Data for a single inline string enum property discovered during the collection pass.
+    /// </summary>
+    internal sealed class InlineEnumEntry
+    {
+        public required string EnumTypeName { get; init; }
+        public required IOpenApiSchema PropSchema { get; init; }
+    }
+
+    /// <summary>
+    /// Scan all component schemas and inline schemas to find properties that are
+    /// inline string enums (type: string + enum: [...] without a $ref).
+    /// Returns a dictionary keyed by "{ParentTypeName}.{propName}" → InlineEnumEntry.
+    /// </summary>
+    private static Dictionary<string, InlineEnumEntry> CollectInlineEnums(
+        OpenApiDocument doc, Dictionary<string, IOpenApiSchema> inlineSchemas)
+    {
+        var result = new Dictionary<string, InlineEnumEntry>(StringComparer.Ordinal);
+        var emittedEnumNames = new HashSet<string>(StringComparer.Ordinal);
+
+        void ScanProperties(string parentTypeName, IOpenApiSchema schema)
+        {
+            var properties = schema.Properties ?? new Dictionary<string, IOpenApiSchema>();
+
+            // Also gather properties from allOf composition
+            foreach (var allOf in schema.AllOf ?? [])
+            {
+                var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
+                    && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
+                    ? refSchema : allOf;
+                if (resolved.Properties != null)
+                {
+                    foreach (var (propName, propSchema) in resolved.Properties)
+                    {
+                        if (!properties.ContainsKey(propName))
+                            properties = new Dictionary<string, IOpenApiSchema>(properties) { [propName] = propSchema };
+                    }
+                }
+            }
+
+            // Also scan oneOf variants for filter pattern schemas
+            if (schema.OneOf is { Count: > 0 })
+            {
+                foreach (var oneOfVariant in schema.OneOf)
+                {
+                    var variantSchema = GetRefId(oneOfVariant) != null && doc.Components?.Schemas != null
+                        && doc.Components.Schemas.TryGetValue(GetRefId(oneOfVariant)!, out var refSchema)
+                        ? refSchema : oneOfVariant;
+                    foreach (var allOf in variantSchema.AllOf ?? [])
+                    {
+                        var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
+                            && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var innerRef)
+                            ? innerRef : allOf;
+                        if (resolved.Properties != null)
+                        {
+                            foreach (var (propName, propSchema) in resolved.Properties)
+                            {
+                                if (!properties.ContainsKey(propName))
+                                    properties = new Dictionary<string, IOpenApiSchema>(properties) { [propName] = propSchema };
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var (propName, propSchema) in properties)
+            {
+                if (SchemaTypeName(propSchema) == "string"
+                    && propSchema.Enum?.Count > 0
+                    && GetRefId(propSchema) == null)
+                {
+                    var enumTypeName = parentTypeName + ToPascalCase(propName);
+                    // Disambiguate if another property already claimed this enum name
+                    var candidateName = enumTypeName;
+                    var suffix = 2;
+                    while (!emittedEnumNames.Add(candidateName))
+                    {
+                        candidateName = $"{enumTypeName}{suffix}";
+                        suffix++;
+                    }
+                    var key = $"{parentTypeName}.{propName}";
+                    result[key] = new InlineEnumEntry
+                    {
+                        EnumTypeName = candidateName,
+                        PropSchema = propSchema,
+                    };
+                }
+            }
+        }
+
+        if (doc.Components?.Schemas != null)
+        {
+            foreach (var (name, schema) in doc.Components.Schemas)
+            {
+                ScanProperties(SanitizeTypeName(name), schema);
+            }
+        }
+
+        foreach (var (typeName, schema) in inlineSchemas)
+        {
+            ScanProperties(typeName, schema);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Emit a typed enum definition for an inline string enum property.
+    /// Uses the same pattern as component-level enums: [JsonStringEnumConverter]
+    /// attribute and [JsonPropertyName] on each member for wire format fidelity.
+    /// </summary>
+    private static void EmitInlineEnum(StringBuilder sb, string enumTypeName, IOpenApiSchema propSchema)
+    {
+        sb.AppendLine($"/// <summary>");
+        AppendXmlDocLines(sb, propSchema.Description ?? enumTypeName, "");
+        sb.AppendLine($"/// </summary>");
+        sb.AppendLine($"[JsonConverter(typeof(JsonStringEnumConverter))]");
+        sb.AppendLine($"public enum {enumTypeName}");
+        sb.AppendLine("{");
+        foreach (var e in EnumStringValues(propSchema))
+        {
+            var enumName = ToPascalCase(e);
+            sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(e)}\")]");
+            sb.AppendLine($"    {enumName},");
+        }
+        sb.AppendLine("}");
+        sb.AppendLine();
+    }
+
+    /// <summary>
+    /// Resolves the C# type for a property, checking the inline enum dictionary first.
+    /// Falls back to <see cref="MapType"/> for non-enum properties.
+    /// </summary>
+    private static string ResolvePropertyType(
+        IOpenApiSchema propSchema, OpenApiDocument? doc,
+        Dictionary<string, InlineEnumEntry>? inlineEnums,
+        string parentTypeName, string propName)
+    {
+        if (inlineEnums != null)
+        {
+            var key = $"{parentTypeName}.{propName}";
+            if (inlineEnums.TryGetValue(key, out var entry))
+                return entry.EnumTypeName;
+        }
+        return MapType(propSchema, doc);
     }
 }
 
