@@ -14052,12 +14052,13 @@ public sealed class MessageSubscriptionResult
     public MessageSubscriptionTypeEnum MessageSubscriptionType { get; set; }
 
     /// <summary>
-    /// The `zeebe:properties` extension properties extracted from the BPMN element associated
-    /// with this subscription. Empty object when no properties are defined.
+    /// The subset of `zeebe:properties` extension properties whose keys start with the
+    /// `io.camunda.tool:` prefix, extracted from the BPMN element associated with this
+    /// subscription. Empty object when no matching properties are defined.
     /// 
     /// </summary>
-    [JsonPropertyName("extensionProperties")]
-    public Dictionary<string, string> ExtensionProperties { get; set; } = null!;
+    [JsonPropertyName("toolProperties")]
+    public Dictionary<string, string> ToolProperties { get; set; } = null!;
 
     /// <summary>
     /// The name of the process definition associated with this message subscription.
