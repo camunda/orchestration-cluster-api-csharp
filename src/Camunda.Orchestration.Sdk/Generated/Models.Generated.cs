@@ -20289,10 +20289,3 @@ public sealed class VariableValueFilterProperty
 
 }
 
-/// <summary>
-/// GetResourceContentResponse
-/// </summary>
-public sealed class GetResourceContentResponse
-{
-}
-
