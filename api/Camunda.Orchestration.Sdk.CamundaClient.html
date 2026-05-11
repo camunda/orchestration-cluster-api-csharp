@@ -878,10 +878,13 @@ respective APIs.
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceContentAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_System_Object__System_Threading_CancellationToken_">GetResourceContentAsync(ResourceKey, ConsistencyOptions&lt;object&gt;?, CancellationToken)</a></dt>
-    <dd><p>Get resource content
-Returns the content of a deployed resource.
+    <dd><p>Get RPA resource content (deprecated)
+<strong>Deprecated</strong> — use <code>/resources/{resourceKey}/content/binary</code> instead, which supports all
+resource types and returns content as binary (octet-stream).</p>
+<p>Returns the content of a deployed RPA resource as JSON.
 :::info
-Currently, this endpoint only supports RPA resources.
+This endpoint only supports RPA resources. For generic resource content in binary format,
+use the <code>/resources/{resourceKey}/content/binary</code> endpoint.
 :::</p>
 </dd>
   </dl>

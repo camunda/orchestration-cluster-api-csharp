@@ -172,12 +172,6 @@ Only populated for intermediate event entities.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ExtensionProperties">ExtensionProperties</a></dt>
-    <dd><p>The <code>zeebe:properties</code> extension properties extracted from the BPMN element associated
-with this subscription. Empty object when no properties are defined.</p>
-</dd>
-  </dl>
-  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_InboundConnectorType">InboundConnectorType</a></dt>
     <dd><p>Inbound connector type extracted from the <code>inbound.type</code> zeebe:property.
 Null when the property is absent.</p>
@@ -254,6 +248,13 @@ belonging to process instance hierarchies created in version 8.9 or later.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ToolName">ToolName</a></dt>
     <dd><p>Tool name extracted from the <code>io.camunda.tool:name</code> zeebe:property.
 Null when the property is absent.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolProperties.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ToolProperties">ToolProperties</a></dt>
+    <dd><p>The subset of <code>zeebe:properties</code> extension properties whose keys start with the
+<code>io.camunda.tool:</code> prefix, extracted from the BPMN element associated with this
+subscription. Empty object when no matching properties are defined.</p>
 </dd>
   </dl>
 

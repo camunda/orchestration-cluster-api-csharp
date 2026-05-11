@@ -28861,18 +28861,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ElementInstanceKey
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ElementInstanceKey
   nameWithType: MessageSubscriptionResult.ElementInstanceKey
-- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
-  name: ExtensionProperties
-  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ExtensionProperties
-  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
-  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
-  nameWithType: MessageSubscriptionResult.ExtensionProperties
-- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties*
-  name: ExtensionProperties
-  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties.html
-  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
-  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ExtensionProperties
-  nameWithType: MessageSubscriptionResult.ExtensionProperties
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType
   name: InboundConnectorType
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.InboundConnectorType.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_InboundConnectorType
@@ -29041,6 +29029,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolName
   nameWithType: MessageSubscriptionResult.ToolName
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolProperties
+  name: ToolProperties
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolProperties.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_ToolProperties
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolProperties
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolProperties
+  nameWithType: MessageSubscriptionResult.ToolProperties
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolProperties*
+  name: ToolProperties
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolProperties.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolProperties
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.ToolProperties
+  nameWithType: MessageSubscriptionResult.ToolProperties
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuery
   name: MessageSubscriptionSearchQuery
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuery.html
