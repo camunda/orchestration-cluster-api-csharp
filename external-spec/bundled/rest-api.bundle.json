@@ -11055,19 +11055,20 @@
     },
     "/resources/{resourceKey}/content": {
       "get": {
+        "deprecated": true,
         "x-eventually-consistent": true,
         "tags": [
           "Resource"
         ],
         "operationId": "getResourceContent",
-        "summary": "Get resource content",
-        "description": "Returns the content of a deployed resource.\n:::info\nCurrently, this endpoint only supports RPA resources.\n:::\n",
+        "summary": "Get RPA resource content (deprecated)",
+        "description": "**Deprecated** — use `/resources/{resourceKey}/content/binary` instead, which supports all\nresource types and returns content as binary (octet-stream).\n\nReturns the content of a deployed RPA resource as JSON.\n:::info\nThis endpoint only supports RPA resources. For generic resource content in binary format,\nuse the `/resources/{resourceKey}/content/binary` endpoint.\n:::\n",
         "parameters": [
           {
             "name": "resourceKey",
             "in": "path",
             "required": true,
-            "description": "The unique key identifying the resource.",
+            "description": "The unique key identifying the RPA resource.",
             "schema": {
               "$ref": "#/components/schemas/ResourceKey"
             }
@@ -11077,16 +11078,15 @@
           "200": {
             "description": "The resource content is successfully returned.",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "type": "object"
                 }
               }
             }
           },
           "404": {
-            "description": "A resource with the given key was not found.",
+            "description": "An RPA resource with the given key was not found.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -24468,8 +24468,8 @@
         "description": "Job type statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "page",
+          "items"
         ],
         "allOf": [
           {
@@ -24571,8 +24571,8 @@
         "description": "Job worker statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "page",
+          "items"
         ],
         "allOf": [
           {
@@ -24672,8 +24672,8 @@
         "description": "Job time-series statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "page",
+          "items"
         ],
         "allOf": [
           {
@@ -24785,8 +24785,8 @@
         "description": "Job error statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "page",
+          "items"
         ],
         "allOf": [
           {
@@ -24893,8 +24893,8 @@
         },
         "required": [
           "type",
-          "timeout",
-          "maxJobsToActivate"
+          "maxJobsToActivate",
+          "timeout"
         ]
       },
       "JobActivationResult": {
@@ -27325,7 +27325,7 @@
           "correlationKey",
           "elementId",
           "elementInstanceKey",
-          "extensionProperties",
+          "toolProperties",
           "inboundConnectorType",
           "lastUpdatedDate",
           "messageName",
@@ -27421,12 +27421,12 @@
           "messageSubscriptionType": {
             "$ref": "#/components/schemas/MessageSubscriptionTypeEnum"
           },
-          "extensionProperties": {
+          "toolProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
             },
-            "description": "The `zeebe:properties` extension properties extracted from the BPMN element associated\nwith this subscription. Empty object when no properties are defined.\n"
+            "description": "The subset of `zeebe:properties` extension properties whose keys start with the\n`io.camunda.tool:` prefix, extracted from the BPMN element associated with this\nsubscription. Empty object when no matching properties are defined.\n"
           },
           "processDefinitionName": {
             "type": "string",

@@ -4161,10 +4161,14 @@ public partial class CamundaClient
     }
 
     /// <summary>
-    /// Get resource content
-    /// Returns the content of a deployed resource.
+    /// Get RPA resource content (deprecated)
+    /// **Deprecated** — use `/resources/{resourceKey}/content/binary` instead, which supports all
+    /// resource types and returns content as binary (octet-stream).
+    /// 
+    /// Returns the content of a deployed RPA resource as JSON.
     /// :::info
-    /// Currently, this endpoint only supports RPA resources.
+    /// This endpoint only supports RPA resources. For generic resource content in binary format,
+    /// use the `/resources/{resourceKey}/content/binary` endpoint.
     /// :::
     /// 
     /// </summary>

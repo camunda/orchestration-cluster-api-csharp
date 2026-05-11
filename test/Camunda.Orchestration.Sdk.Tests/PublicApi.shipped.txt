@@ -3776,7 +3776,7 @@ TYPE Camunda.Orchestration.Sdk.MessageSubscriptionResult : sealed class
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
-  PROP System.Collections.Generic.Dictionary<System.String,System.String> ExtensionProperties { get; set; } [JsonPropertyName("extensionProperties")]
+  PROP System.Collections.Generic.Dictionary<System.String,System.String> ToolProperties { get; set; } [JsonPropertyName("toolProperties")]
   PROP System.DateTimeOffset LastUpdatedDate { get; set; } [JsonPropertyName("lastUpdatedDate")]
   PROP System.Int32? ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
   PROP System.String MessageName { get; set; } [JsonPropertyName("messageName")]
