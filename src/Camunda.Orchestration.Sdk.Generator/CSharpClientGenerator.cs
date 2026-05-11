@@ -224,7 +224,9 @@ internal static class CSharpClientGenerator
             {
                 if (GetRefId(mediaType.Schema) != null)
                     return SanitizeTypeName(GetRefId(mediaType.Schema)!);
-                if (SchemaTypeName(mediaType.Schema) == "object" || mediaType.Schema?.Properties?.Count > 0)
+                // Only create an inline class when the schema has actual properties.
+                // Bare {type: object} with no properties maps to 'object' via MapPrimitiveType.
+                if (mediaType.Schema?.Properties?.Count > 0)
                     return SanitizeOperationId(op.OperationId!) + "Response";
             }
         }
@@ -340,8 +342,7 @@ internal static class CSharpClientGenerator
                 continue;
             foreach (var (_, mediaType) in response.Content)
             {
-                if (GetRefId(mediaType.Schema) == null &&
-                    (SchemaTypeName(mediaType.Schema) == "object" || mediaType.Schema?.Properties?.Count > 0))
+                if (GetRefId(mediaType.Schema) == null && mediaType.Schema?.Properties?.Count > 0)
                     return mediaType.Schema;
             }
         }
