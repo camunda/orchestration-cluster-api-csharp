@@ -1,3 +1,12 @@
+# [9.0.0-alpha.13](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.12...v9.0.0-alpha.13) (2026-05-11)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([6b06ee4](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6b06ee4cf342b0304c9a7fe93c3a810459142ae3))
+* map bare type:object schemas to object instead of empty class ([9eb35d6](https://github.com/camunda/orchestration-cluster-api-csharp/commit/9eb35d6b18723785673c2d61993ca60339dc871d))
+* map bare type:object schemas to object instead of empty class ([2512e09](https://github.com/camunda/orchestration-cluster-api-csharp/commit/2512e0945479397e40b3fc3cfa5c691fba8b7810))
+
 # [9.0.0-alpha.12](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.11...v9.0.0-alpha.12) (2026-05-08)
 
 
