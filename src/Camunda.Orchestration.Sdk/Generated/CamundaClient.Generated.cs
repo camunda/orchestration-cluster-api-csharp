@@ -4161,14 +4161,10 @@ public partial class CamundaClient
     }
 
     /// <summary>
-    /// Get RPA resource content (deprecated)
-    /// **Deprecated** — use `/resources/{resourceKey}/content/binary` instead, which supports all
-    /// resource types and returns content as binary (octet-stream).
-    /// 
-    /// Returns the content of a deployed RPA resource as JSON.
+    /// Get resource content
+    /// Returns the content of a deployed resource.
     /// :::info
-    /// This endpoint only supports RPA resources. For generic resource content in binary format,
-    /// use the `/resources/{resourceKey}/content/binary` endpoint.
+    /// Currently, this endpoint only supports RPA resources.
     /// :::
     /// 
     /// </summary>
@@ -4197,17 +4193,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GetResourceContentResponse> GetResourceContentAsync(ResourceKey resourceKey, ConsistencyOptions<GetResourceContentResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/content";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getResourceContent", true,
-                () => InvokeWithRetryAsync(() => SendAsync<GetResourceContentResponse>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<GetResourceContentResponse>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct);
     }
 
     /// <summary>

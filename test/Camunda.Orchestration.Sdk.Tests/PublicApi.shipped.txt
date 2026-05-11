@@ -1325,7 +1325,6 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExtendedDeploymentResponse> DeployResourcesFromFilesAsync(System.String[] resourceFilePaths, System.String? tenantId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.FormResult> GetStartProcessFormAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.FormResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.FormResult> GetUserTaskFormAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.FormResult>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GetResourceContentResponse> GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GetResourceContentResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(System.DateTimeOffset from, System.DateTimeOffset to, System.String? jobType = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GlobalJobStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GlobalTaskListenerResult> CreateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GlobalTaskListenerResult> GetGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.GlobalListenerId id, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GlobalTaskListenerResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1408,6 +1407,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<System.Object> GetDocumentAsync(Camunda.Orchestration.Sdk.DocumentId documentId, System.String? storeId = null, System.String? contentHash = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessDefinitionXmlAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessInstanceCallHierarchyAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<System.Object> GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.ValueTask DisposeAsync()
   METHOD System.Void Dispose()
   METHOD static Camunda.Orchestration.Sdk.CamundaClient Create(Camunda.Orchestration.Sdk.CamundaOptions? options = null)
@@ -2652,9 +2652,6 @@ TYPE Camunda.Orchestration.Sdk.FormResult : sealed class
   PROP System.Int64 Version { get; set; } [JsonPropertyName("version")]
   PROP System.String Schema { get; set; } [JsonPropertyName("schema")]
 
-TYPE Camunda.Orchestration.Sdk.GetResourceContentResponse : sealed class
-  CTOR ()
-
 TYPE Camunda.Orchestration.Sdk.GlobalJobStatisticsQueryResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.StatusMetric Completed { get; set; } [JsonPropertyName("completed")]
@@ -3779,7 +3776,7 @@ TYPE Camunda.Orchestration.Sdk.MessageSubscriptionResult : sealed class
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
-  PROP System.Collections.Generic.Dictionary<System.String,System.String> ToolProperties { get; set; } [JsonPropertyName("toolProperties")]
+  PROP System.Collections.Generic.Dictionary<System.String,System.String> ExtensionProperties { get; set; } [JsonPropertyName("extensionProperties")]
   PROP System.DateTimeOffset LastUpdatedDate { get; set; } [JsonPropertyName("lastUpdatedDate")]
   PROP System.Int32? ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
   PROP System.String MessageName { get; set; } [JsonPropertyName("messageName")]
