@@ -338,6 +338,19 @@ public static class AdminExamples
     // </EvaluateExpression>
     #endregion EvaluateExpression
 
+    #region GetFormByKey
+
+    // <GetFormByKey>
+    public static async Task GetFormByKeyExample(FormKey formKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.GetFormByKeyAsync(formKey);
+        Console.WriteLine($"Form: {result.FormId}, version: {result.Version}");
+    }
+    // </GetFormByKey>
+    #endregion GetFormByKey
+
     #region GetResource
 
     // <GetResource>
@@ -363,6 +376,19 @@ public static class AdminExamples
     }
     // </GetResourceContent>
     #endregion GetResourceContent
+
+    #region GetResourceContentBinary
+
+    // <GetResourceContentBinary>
+    public static async Task GetResourceContentBinaryExample(ResourceKey resourceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.GetResourceContentBinaryAsync(resourceKey);
+        Console.WriteLine($"Binary content: {result}");
+    }
+    // </GetResourceContentBinary>
+    #endregion GetResourceContentBinary
 
     #region SearchResources
 
