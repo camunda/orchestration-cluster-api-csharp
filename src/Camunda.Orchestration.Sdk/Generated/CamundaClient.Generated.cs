@@ -2862,13 +2862,13 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<object> GetDocumentAsync(DocumentId documentId, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
+    public async Task<byte[]> GetDocumentAsync(DocumentId documentId, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (storeId != null) queryParts.Add($"storeId={Uri.EscapeDataString(storeId.ToString()!)}");
         if (contentHash != null) queryParts.Add($"contentHash={Uri.EscapeDataString(contentHash.ToString()!)}");
         var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}";
-        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getDocument", false, ct);
+        return await InvokeWithRetryAsync(() => SendBinaryAsync(HttpMethod.Get, path, null, ct), "getDocument", false, ct);
     }
 
     /// <summary>
