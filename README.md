@@ -1006,6 +1006,12 @@ The following methods have updated parameter and/or return types to match the ty
 | `GetUserAsync` | Returns `UserResult` (was `GetUserResponse`) |
 | `SearchUsersAsync` | Returns `UserSearchResult` (was `SearchUsersResponse`) |
 | `UpdateUserAsync` | Returns `UserUpdateResult` (was `UpdateUserResponse`) |
+| `GetDocumentAsync` | Returns `byte[]` (was `object`) |
+| `GetResourceContentBinaryAsync` | Returns `byte[]` (new in v10) |
+
+#### Binary response handling
+
+Operations that return `application/octet-stream` content (such as `GetDocumentAsync`) now correctly return `byte[]` instead of `object`. In v9, these methods attempted to JSON-deserialize the binary response body, which threw `JsonException` for non-JSON content and returned an unusable `JsonElement` for JSON content. No migration action is needed unless your code caught the `JsonException` and worked around it.
 
 #### Inline string enums
 

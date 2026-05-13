@@ -223,6 +223,44 @@ public partial class CamundaClient : IDisposable
     }
 
     /// <summary>
+    /// Execute an HTTP request and return the response body as raw bytes.
+    /// Used for operations that return application/octet-stream (binary content).
+    /// </summary>
+    internal async Task<byte[]> SendBinaryAsync(
+        HttpMethod method,
+        string path,
+        object? body = null,
+        CancellationToken ct = default)
+    {
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("HTTP {Method} {Path} (binary)", method, path);
+
+        var relativePath = path.TrimStart('/');
+        using var request = new HttpRequestMessage(method, relativePath);
+
+        if (body != null)
+        {
+            var json = JsonSerializer.Serialize(body, _jsonOptions);
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+        }
+
+        using var response = await _httpClient.SendAsync(request, ct);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorBody = await response.Content.ReadAsStringAsync(ct);
+            if (_logger.IsEnabled(LogLevel.Warning))
+                _logger.LogWarning("HTTP {Method} {Path} (binary) failed with {Status}", method, path, (int)response.StatusCode);
+            throw BuildHttpException(response.StatusCode, errorBody, path);
+        }
+
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("HTTP {Method} {Path} (binary) -> {Status}", method, path, (int)response.StatusCode);
+
+        return await response.Content.ReadAsByteArrayAsync(ct);
+    }
+
+    /// <summary>
     /// Send a multipart/form-data request (used for deployment).
     /// </summary>
     internal async Task<TResponse> SendMultipartAsync<TResponse>(

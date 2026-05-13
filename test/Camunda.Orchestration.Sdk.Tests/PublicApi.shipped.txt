@@ -428,6 +428,16 @@ TYPE Camunda.Orchestration.Sdk.AdvancedVariableKeyFilter : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableKey>? In { get; set; } [JsonPropertyName("$in")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableKey>? NotIn { get; set; } [JsonPropertyName("$notIn")]
 
+TYPE Camunda.Orchestration.Sdk.AgentInstanceCreationRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.AgentInstanceDefinition Definition { get; set; } [JsonPropertyName("definition")]
+  PROP Camunda.Orchestration.Sdk.AgentInstanceLimits? Limits { get; set; } [JsonPropertyName("limits")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+
+TYPE Camunda.Orchestration.Sdk.AgentInstanceCreationResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.AgentInstanceKey AgentInstanceKey { get; set; } [JsonPropertyName("agentInstanceKey")]
+
 TYPE Camunda.Orchestration.Sdk.AgentInstanceDefinition : sealed class
   CTOR ()
   PROP System.String Model { get; set; } [JsonPropertyName("model")]
@@ -485,6 +495,13 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceMetrics : sealed class
   PROP System.Int64 OutputTokens { get; set; } [JsonPropertyName("outputTokens")]
   PROP System.Int64 ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
 
+TYPE Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta : sealed class
+  CTOR ()
+  PROP System.Int64? InputTokens { get; set; } [JsonPropertyName("inputTokens")]
+  PROP System.Int64? ModelCalls { get; set; } [JsonPropertyName("modelCalls")]
+  PROP System.Int64? OutputTokens { get; set; } [JsonPropertyName("outputTokens")]
+  PROP System.Int64? ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
+
 TYPE Camunda.Orchestration.Sdk.AgentInstanceResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentInstanceDefinition Definition { get; set; } [JsonPropertyName("definition")]
@@ -496,6 +513,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceResult : sealed class
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool> Tools { get; set; } [JsonPropertyName("tools")]
   PROP System.DateTimeOffset CreationDate { get; set; } [JsonPropertyName("creationDate")]
   PROP System.DateTimeOffset LastUpdatedDate { get; set; } [JsonPropertyName("lastUpdatedDate")]
   PROP System.DateTimeOffset? CompletionDate { get; set; } [JsonPropertyName("completionDate")]
@@ -550,6 +568,18 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty : sealed class
   PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceStatusEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta? Metrics { get; set; } [JsonPropertyName("metrics")]
+  PROP Camunda.Orchestration.Sdk.AgentInstanceStatusEnum? Status { get; set; } [JsonPropertyName("status")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool>? Tools { get; set; } [JsonPropertyName("tools")]
+
+TYPE Camunda.Orchestration.Sdk.AgentTool : sealed class
+  CTOR ()
+  PROP System.String Name { get; set; } [JsonPropertyName("name")]
+  PROP System.String? Description { get; set; } [JsonPropertyName("description")]
+  PROP System.String? ElementId { get; set; } [JsonPropertyName("elementId")]
 
 TYPE Camunda.Orchestration.Sdk.AncestorScopeInstruction : abstract class
   ATTR JsonPolymorphic discriminator=ancestorScopeType
@@ -1275,9 +1305,11 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task UnassignUserFromGroupAsync(Camunda.Orchestration.Sdk.GroupId groupId, Camunda.Orchestration.Sdk.Username username, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UnassignUserFromTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.Username username, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UnassignUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task UpdateAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceKey agentInstanceKey, Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UpdateAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationKey authorizationKey, Camunda.Orchestration.Sdk.AuthorizationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UpdateJobAsync(Camunda.Orchestration.Sdk.JobKey jobKey, Camunda.Orchestration.Sdk.JobUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UpdateUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskUpdateRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AgentInstanceCreationResult> CreateAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceCreationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AgentInstanceResult> GetAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceKey agentInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AgentInstanceResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AgentInstanceSearchQueryResult> SearchAgentInstancesAsync(Camunda.Orchestration.Sdk.AgentInstanceSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AgentInstanceSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuditLogResult> GetAuditLogAsync(Camunda.Orchestration.Sdk.AuditLogKey auditLogKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuditLogResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1323,6 +1355,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.EvaluateDecisionResult> EvaluateDecisionAsync(Camunda.Orchestration.Sdk.DecisionEvaluationInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExpressionEvaluationResult> EvaluateExpressionAsync(Camunda.Orchestration.Sdk.ExpressionEvaluationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExtendedDeploymentResponse> DeployResourcesFromFilesAsync(System.String[] resourceFilePaths, System.String? tenantId = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.FormResult> GetFormByKeyAsync(Camunda.Orchestration.Sdk.FormKey formKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.FormResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.FormResult> GetStartProcessFormAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.FormResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.FormResult> GetUserTaskFormAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.FormResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(System.DateTimeOffset from, System.DateTimeOffset to, System.String? jobType = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GlobalJobStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1402,9 +1435,10 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchUserTaskVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskVariableSearchQueryRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchVariablesAsync(Camunda.Orchestration.Sdk.VariableSearchQuery body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<System.Byte[]> GetDocumentAsync(Camunda.Orchestration.Sdk.DocumentId documentId, System.String? storeId = null, System.String? contentHash = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<System.Byte[]> GetResourceContentBinaryAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Byte[]>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetDecisionDefinitionXmlAsync(Camunda.Orchestration.Sdk.DecisionDefinitionKey decisionDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetDecisionRequirementsXmlAsync(Camunda.Orchestration.Sdk.DecisionRequirementsKey decisionRequirementsKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<System.Object> GetDocumentAsync(Camunda.Orchestration.Sdk.DocumentId documentId, System.String? storeId = null, System.String? contentHash = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessDefinitionXmlAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessInstanceCallHierarchyAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -2395,6 +2429,7 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ElementInstanceResult : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.AgentInstanceKey? AgentInstanceKey { get; set; } [JsonPropertyName("agentInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceResultType Type { get; set; } [JsonPropertyName("type")]

@@ -86,6 +86,9 @@
       "name": "Expression"
     },
     {
+      "name": "Form"
+    },
+    {
       "name": "Global listener"
     },
     {
@@ -147,6 +150,107 @@
     }
   ],
   "paths": {
+    "/agent-instances": {
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Agent instance"
+        ],
+        "operationId": "createAgentInstance",
+        "summary": "Create agent instance",
+        "description": "Creates a new agent instance. The returned key identifies the instance and must\nbe used in subsequent update and query calls.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentInstanceCreationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The agent instance was created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstanceCreationResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The elementInstanceKey does not correspond to an active element instance.\nMore details are provided in the response body.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/agent-instances/{agentInstanceKey}": {
       "get": {
         "x-eventually-consistent": true,
@@ -177,6 +281,109 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The agent instance with the given key was not found.\nMore details are provided in the response body.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      },
+      "patch": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Agent instance"
+        ],
+        "operationId": "updateAgentInstance",
+        "summary": "Update agent instance",
+        "description": "Updates the mutable fields of an agent instance: status, metric counters, and\ntools. Metric values are treated as deltas and applied immediately to the\naggregate counters. Tool updates replace the existing tool list. At least one of\nstatus, metrics, or tools must be provided.\n",
+        "parameters": [
+          {
+            "name": "agentInstanceKey",
+            "in": "path",
+            "required": true,
+            "description": "The key of the agent instance to update.",
+            "schema": {
+              "$ref": "#/components/schemas/AgentInstanceKey"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentInstanceUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "The agent instance was updated successfully."
           },
           "400": {
             "description": "The provided data is not valid.",
@@ -4609,6 +4816,98 @@
           }
         },
         "x-added-in-version": "8.9"
+      }
+    },
+    "/forms/{formKey}": {
+      "get": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Form"
+        ],
+        "operationId": "getFormByKey",
+        "summary": "Get form by key",
+        "description": "Get a form by its unique form key.\n",
+        "parameters": [
+          {
+            "name": "formKey",
+            "in": "path",
+            "required": true,
+            "description": "The form key.",
+            "schema": {
+              "$ref": "#/components/schemas/FormKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The form is successfully returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The form with the given key was not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
       }
     },
     "/global-task-listeners": {
@@ -11080,13 +11379,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": true
                 }
               }
             }
           },
           "404": {
-            "description": "An RPA resource with the given key was not found.",
+            "description": "A resource with the given key was not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "The resource exists but is not an RPA resource.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -11107,6 +11417,62 @@
           }
         },
         "x-added-in-version": "8.7"
+      }
+    },
+    "/resources/{resourceKey}/content/binary": {
+      "get": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Resource"
+        ],
+        "operationId": "getResourceContentBinary",
+        "summary": "Get resource content as binary",
+        "description": "Returns the content of a deployed resource in binary format (octet-stream).\n:::info\nThis endpoint does not return BPMN process definitions, DMN decision definitions, or form\nresources. To query BPMN process definitions or DMN decision definitions, use their\nrespective APIs.\n:::\n",
+        "parameters": [
+          {
+            "name": "resourceKey",
+            "in": "path",
+            "required": true,
+            "description": "The unique key identifying the resource.",
+            "schema": {
+              "$ref": "#/components/schemas/ResourceKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource content is successfully returned.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "A resource with the given key was not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.11"
       }
     },
     "/resources/{resourceKey}/deletion": {
@@ -16844,6 +17210,7 @@
           "definition",
           "metrics",
           "limits",
+          "tools",
           "elementId",
           "processInstanceKey",
           "processDefinitionKey",
@@ -16887,6 +17254,13 @@
                 "$ref": "#/components/schemas/AgentInstanceLimits"
               }
             ]
+          },
+          "tools": {
+            "description": "The tools available to the agent.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentTool"
+            }
           },
           "elementId": {
             "description": "The BPMN element ID of the ad-hoc sub-process or AI agent task that owns this agent instance.",
@@ -16961,6 +17335,31 @@
           }
         }
       },
+      "AgentTool": {
+        "description": "A tool available to the agent.",
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "elementId"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The tool name as visible to the LLM."
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "A human-readable description of the tool."
+          },
+          "elementId": {
+            "type": "string",
+            "nullable": true,
+            "description": "The BPMN element ID of the tool element within the ad-hoc sub-process."
+          }
+        }
+      },
       "AgentInstanceMetrics": {
         "description": "Aggregated metrics for an agent instance across all model calls.",
         "type": "object",
@@ -17030,6 +17429,119 @@
           "TOOL_CALLING",
           "TOOL_DISCOVERY"
         ]
+      },
+      "AgentInstanceCreationRequest": {
+        "description": "Request to create a new agent instance.",
+        "type": "object",
+        "required": [
+          "elementInstanceKey",
+          "definition"
+        ],
+        "properties": {
+          "elementInstanceKey": {
+            "description": "The key of the AHSP or AI Agent Task element instance.\nThe engine uses this key to infer processInstanceKey, elementId,\nprocessDefinitionKey, and tenantId.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementInstanceKey"
+              }
+            ]
+          },
+          "definition": {
+            "description": "Static definition set once at creation.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceDefinition"
+              }
+            ]
+          },
+          "limits": {
+            "description": "Limits for the agent execution. When omitted, all limits default to -1\n(no limit).\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceLimits"
+              }
+            ]
+          }
+        }
+      },
+      "AgentInstanceCreationResult": {
+        "description": "Response returned after successfully creating an agent instance.",
+        "type": "object",
+        "x-semantic-provider": [
+          "agentInstanceKey"
+        ],
+        "required": [
+          "agentInstanceKey"
+        ],
+        "properties": {
+          "agentInstanceKey": {
+            "description": "The system-generated key for the created agent instance.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceKey"
+              }
+            ]
+          }
+        }
+      },
+      "AgentInstanceMetricsDelta": {
+        "description": "Metric increments to apply to the agent instance aggregate counters. The engine\naccumulates these deltas into running totals on each UPDATED event. All fields\nare optional; omit a field to leave the corresponding counter unchanged.\n",
+        "type": "object",
+        "properties": {
+          "inputTokens": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "Increment to apply to the total input token counter."
+          },
+          "outputTokens": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "Increment to apply to the total output token counter."
+          },
+          "modelCalls": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "Increment to apply to the total model call counter."
+          },
+          "toolCalls": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "Increment to apply to the total tool call counter."
+          }
+        }
+      },
+      "AgentInstanceUpdateRequest": {
+        "description": "Request to update the mutable state of an agent instance. At least one of\nstatus, metrics, or tools must be provided.\n",
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "The new status of the agent instance.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceStatusEnum"
+              }
+            ]
+          },
+          "metrics": {
+            "description": "Metric increments to apply to the aggregate counters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceMetricsDelta"
+              }
+            ]
+          },
+          "tools": {
+            "description": "The complete list of tools available to the agent, replacing any previously\nstored tools. When provided, the engine replaces the existing tool list with\nthis value.\n",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentTool"
+            }
+          }
+        }
       },
       "AgentInstanceStatusFilterProperty": {
         "description": "AgentInstanceStatusEnum property with full advanced search capabilities.",
@@ -22220,7 +22732,8 @@
           "processDefinitionKey",
           "rootProcessInstanceKey",
           "endDate",
-          "incidentKey"
+          "incidentKey",
+          "agentInstanceKey"
         ],
         "properties": {
           "processDefinitionId": {
@@ -22347,6 +22860,15 @@
               }
             ],
             "description": "Incident key associated with this element instance.",
+            "nullable": true
+          },
+          "agentInstanceKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceKey"
+              }
+            ],
+            "description": "The agent instance key associated with this element instance.",
             "nullable": true
           }
         }

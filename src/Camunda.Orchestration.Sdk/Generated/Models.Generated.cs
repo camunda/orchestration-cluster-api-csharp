@@ -3081,6 +3081,49 @@ public sealed class AdvancedVariableKeyFilter
 }
 
 /// <summary>
+/// Request to create a new agent instance.
+/// </summary>
+public sealed class AgentInstanceCreationRequest
+{
+    /// <summary>
+    /// The key of the AHSP or AI Agent Task element instance.
+    /// The engine uses this key to infer processInstanceKey, elementId,
+    /// processDefinitionKey, and tenantId.
+    /// 
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// Static definition set once at creation.
+    /// </summary>
+    [JsonPropertyName("definition")]
+    public AgentInstanceDefinition Definition { get; set; } = null!;
+
+    /// <summary>
+    /// Limits for the agent execution. When omitted, all limits default to -1
+    /// (no limit).
+    /// 
+    /// </summary>
+    [JsonPropertyName("limits")]
+    public AgentInstanceLimits? Limits { get; set; }
+
+}
+
+/// <summary>
+/// Response returned after successfully creating an agent instance.
+/// </summary>
+public sealed class AgentInstanceCreationResult
+{
+    /// <summary>
+    /// The system-generated key for the created agent instance.
+    /// </summary>
+    [JsonPropertyName("agentInstanceKey")]
+    public AgentInstanceKey AgentInstanceKey { get; set; }
+
+}
+
+/// <summary>
 /// The static definition of an agent instance, set once at creation.
 /// </summary>
 public sealed class AgentInstanceDefinition
@@ -3316,6 +3359,40 @@ public sealed class AgentInstanceMetrics
 }
 
 /// <summary>
+/// Metric increments to apply to the agent instance aggregate counters. The engine
+/// accumulates these deltas into running totals on each UPDATED event. All fields
+/// are optional; omit a field to leave the corresponding counter unchanged.
+/// 
+/// </summary>
+public sealed class AgentInstanceMetricsDelta
+{
+    /// <summary>
+    /// Increment to apply to the total input token counter.
+    /// </summary>
+    [JsonPropertyName("inputTokens")]
+    public long? InputTokens { get; set; }
+
+    /// <summary>
+    /// Increment to apply to the total output token counter.
+    /// </summary>
+    [JsonPropertyName("outputTokens")]
+    public long? OutputTokens { get; set; }
+
+    /// <summary>
+    /// Increment to apply to the total model call counter.
+    /// </summary>
+    [JsonPropertyName("modelCalls")]
+    public long? ModelCalls { get; set; }
+
+    /// <summary>
+    /// Increment to apply to the total tool call counter.
+    /// </summary>
+    [JsonPropertyName("toolCalls")]
+    public long? ToolCalls { get; set; }
+
+}
+
+/// <summary>
 /// AgentInstanceResult
 /// </summary>
 public sealed class AgentInstanceResult
@@ -3349,6 +3426,12 @@ public sealed class AgentInstanceResult
     /// </summary>
     [JsonPropertyName("limits")]
     public AgentInstanceLimits Limits { get; set; } = null!;
+
+    /// <summary>
+    /// The tools available to the agent.
+    /// </summary>
+    [JsonPropertyName("tools")]
+    public List<AgentTool> Tools { get; set; } = null!;
 
     /// <summary>
     /// The BPMN element ID of the ad-hoc sub-process or AI agent task that owns this agent instance.
@@ -3547,6 +3630,61 @@ public sealed class AgentInstanceStatusFilterProperty
     /// </summary>
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Request to update the mutable state of an agent instance. At least one of
+/// status, metrics, or tools must be provided.
+/// 
+/// </summary>
+public sealed class AgentInstanceUpdateRequest
+{
+    /// <summary>
+    /// The new status of the agent instance.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public AgentInstanceStatusEnum? Status { get; set; }
+
+    /// <summary>
+    /// Metric increments to apply to the aggregate counters.
+    /// </summary>
+    [JsonPropertyName("metrics")]
+    public AgentInstanceMetricsDelta? Metrics { get; set; }
+
+    /// <summary>
+    /// The complete list of tools available to the agent, replacing any previously
+    /// stored tools. When provided, the engine replaces the existing tool list with
+    /// this value.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tools")]
+    public List<AgentTool>? Tools { get; set; }
+
+}
+
+/// <summary>
+/// A tool available to the agent.
+/// </summary>
+public sealed class AgentTool
+{
+    /// <summary>
+    /// The tool name as visible to the LLM.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = null!;
+
+    /// <summary>
+    /// A human-readable description of the tool.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// The BPMN element ID of the tool element within the ad-hoc sub-process.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public string? ElementId { get; set; }
 
 }
 
@@ -9251,6 +9389,12 @@ public sealed class ElementInstanceResult
     /// </summary>
     [JsonPropertyName("incidentKey")]
     public IncidentKey? IncidentKey { get; set; }
+
+    /// <summary>
+    /// The agent instance key associated with this element instance.
+    /// </summary>
+    [JsonPropertyName("agentInstanceKey")]
+    public AgentInstanceKey? AgentInstanceKey { get; set; }
 
 }
 
