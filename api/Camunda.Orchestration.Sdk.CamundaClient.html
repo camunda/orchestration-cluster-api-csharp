@@ -352,6 +352,13 @@ Creates a new user and assigns the admin role to it. This endpoint is only usabl
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_System_Threading_CancellationToken_">CreateAgentInstanceAsync(AgentInstanceCreationRequest, CancellationToken)</a></dt>
+    <dd><p>Create agent instance
+Creates a new agent instance. The returned key identifies the instance and must
+be used in subsequent update and query calls.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateAuthorizationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationRequest_System_Threading_CancellationToken_">CreateAuthorizationAsync(AuthorizationRequest, CancellationToken)</a></dt>
     <dd><p>Create authorization
 Create the authorization.</p>
@@ -722,6 +729,12 @@ Returns element instance as JSON.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetFormByKeyAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetFormByKeyAsync_Camunda_Orchestration_Sdk_FormKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_FormResult__System_Threading_CancellationToken_">GetFormByKeyAsync(FormKey, ConsistencyOptions&lt;FormResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get form by key
+Get a form by its unique form key.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetGlobalClusterVariableAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGlobalClusterVariableAsync_Camunda_Orchestration_Sdk_ClusterVariableName_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ClusterVariableResult__System_Threading_CancellationToken_">GetGlobalClusterVariableAsync(ClusterVariableName, ConsistencyOptions&lt;ClusterVariableResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get a global-scoped cluster variable
 Get a global-scoped cluster variable.</p>
@@ -885,6 +898,17 @@ resource types and returns content as binary (octet-stream).</p>
 :::info
 This endpoint only supports RPA resources. For generic resource content in binary format,
 use the <code>/resources/{resourceKey}/content/binary</code> endpoint.
+:::</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentBinaryAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceContentBinaryAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_System_Byte____System_Threading_CancellationToken_">GetResourceContentBinaryAsync(ResourceKey, ConsistencyOptions&lt;byte[]&gt;?, CancellationToken)</a></dt>
+    <dd><p>Get resource content as binary
+Returns the content of a deployed resource in binary format (octet-stream).
+:::info
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective APIs.
 :::</p>
 </dd>
   </dl>
@@ -1480,6 +1504,15 @@ The user can no longer access tenant data.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UnassignUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignUserTaskAsync_Camunda_Orchestration_Sdk_UserTaskKey_System_Threading_CancellationToken_">UnassignUserTaskAsync(UserTaskKey, CancellationToken)</a></dt>
     <dd><p>Unassign user task
 Removes the assignee of a task with the given key. Unassignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateAgentInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_System_Threading_CancellationToken_">UpdateAgentInstanceAsync(AgentInstanceKey, AgentInstanceUpdateRequest, CancellationToken)</a></dt>
+    <dd><p>Update agent instance
+Updates the mutable fields of an agent instance: status, metric counters, and
+tools. Metric values are treated as deltas and applied immediately to the
+aggregate counters. Tool updates replace the existing tool list. At least one of
+status, metrics, or tools must be provided.</p>
 </dd>
   </dl>
   <dl class="jumplist">

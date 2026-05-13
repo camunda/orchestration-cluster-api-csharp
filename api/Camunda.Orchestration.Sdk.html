@@ -341,6 +341,16 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.html">AgentInstanceCreationRequest</a></dt>
+      <dd><p>Request to create a new agent instance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationResult.html">AgentInstanceCreationResult</a></dt>
+      <dd><p>Response returned after successfully creating an agent instance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceDefinition.html">AgentInstanceDefinition</a></dt>
       <dd><p>The static definition of an agent instance, set once at creation.</p>
 </dd>
@@ -366,6 +376,13 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.html">AgentInstanceMetricsDelta</a></dt>
+      <dd><p>Metric increments to apply to the agent instance aggregate counters. The engine
+accumulates these deltas into running totals on each UPDATED event. All fields
+are optional; omit a field to leave the corresponding counter unchanged.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceResult.html">AgentInstanceResult</a></dt>
       <dd><p>AgentInstanceResult</p>
 </dd>
@@ -388,6 +405,17 @@ This is what job handler functions receive.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.html">AgentInstanceStatusFilterProperty</a></dt>
       <dd><p>AgentInstanceStatusEnum property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.html">AgentInstanceUpdateRequest</a></dt>
+      <dd><p>Request to update the mutable state of an agent instance. At least one of
+status, metrics, or tools must be provided.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentTool.html">AgentTool</a></dt>
+      <dd><p>A tool available to the agent.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -444,6 +472,11 @@ a &quot;direct&quot; scope instruction with an <code>ancestorElementInstanceKey<
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AuthConfig.html">AuthConfig</a></dt>
       <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.html">AuthenticationConfigurationResponse</a></dt>
+      <dd><p>Configuration for authentication and session management.</p>
+</dd>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AuthorizationCreateResult.html">AuthorizationCreateResult</a></dt>
@@ -708,6 +741,11 @@ This ensures correct event emission for assignee changes.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.CloudConfigurationResponse.html">CloudConfigurationResponse</a></dt>
+      <dd><p>Configuration for SaaS/cloud-specific settings.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterVariableResult.html">ClusterVariableResult</a></dt>
       <dd><p>ClusterVariableResult</p>
 </dd>
@@ -745,6 +783,11 @@ This ensures correct event emission for assignee changes.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterVariableSearchResult.html">ClusterVariableSearchResult</a></dt>
       <dd><p>Cluster variable search response item.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ComponentsConfigurationResponse.html">ComponentsConfigurationResponse</a></dt>
+      <dd><p>Configuration for active Camunda components in the deployment.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -965,6 +1008,11 @@ Mirrors the JS SDK's hydrateConfig function.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.DeleteResourceResponse.html">DeleteResourceResponse</a></dt>
       <dd><p>DeleteResourceResponse</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.html">DeploymentConfigurationResponse</a></dt>
+      <dd><p>Configuration for deployment characteristics.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3251,6 +3299,11 @@ Enums
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.CloudStage.html">CloudStage</a></dt>
+      <dd><p>The cloud deployment stage.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterVariableScopeEnum.html">ClusterVariableScopeEnum</a></dt>
       <dd><p>The scope of a cluster variable.</p>
 </dd>
@@ -3553,6 +3606,11 @@ Note: FAILED state is only for legacy job-worker-based tasks.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.html">VariableSearchQuerySortRequestField</a></dt>
       <dd><p>The field to sort by.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.WebappComponent.html">WebappComponent</a></dt>
+      <dd><p>A Camunda webapp component name.</p>
 </dd>
     </dl>
     <h3 id="delegates">
