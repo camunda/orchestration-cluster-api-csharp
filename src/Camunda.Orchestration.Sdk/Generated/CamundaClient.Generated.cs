@@ -911,6 +911,63 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Create agent instance
+    /// Creates a new agent instance. The returned key identifies the instance and must
+    /// be used in subsequent update and query calls.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: createAgentInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateAgentInstanceExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
+    ///     {
+    ///         ElementInstanceKey = elementInstanceKey,
+    ///         Definition = new AgentInstanceDefinition
+    ///         {
+    ///             Model = &quot;gpt-4o&quot;,
+    ///             Provider = &quot;openai&quot;,
+    ///             SystemPrompt = &quot;You are a helpful assistant.&quot;,
+    ///         },
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Created agent instance: {result.AgentInstanceKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateAgentInstanceExample(ElementInstanceKey elementInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
+    ///     {
+    ///         ElementInstanceKey = elementInstanceKey,
+    ///         Definition = new AgentInstanceDefinition
+    ///         {
+    ///             Model = &quot;gpt-4o&quot;,
+    ///             Provider = &quot;openai&quot;,
+    ///             SystemPrompt = &quot;You are a helpful assistant.&quot;,
+    ///         },
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Created agent instance: {result.AgentInstanceKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<AgentInstanceCreationResult> CreateAgentInstanceAsync(AgentInstanceCreationRequest body, CancellationToken ct = default)
+    {
+        var path = $"/agent-instances";
+        return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceCreationResult>(HttpMethod.Post, path, body, ct), "createAgentInstance", false, ct);
+    }
+
+    /// <summary>
     /// Create authorization
     /// Create the authorization.
     /// </summary>
@@ -2920,13 +2977,13 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<object> GetDocumentAsync(DocumentId documentId, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
+    public async Task<byte[]> GetDocumentAsync(DocumentId documentId, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (storeId != null) queryParts.Add($"storeId={Uri.EscapeDataString(storeId.ToString()!)}");
         if (contentHash != null) queryParts.Add($"contentHash={Uri.EscapeDataString(contentHash.ToString()!)}");
         var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}";
-        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getDocument", false, ct);
+        return await InvokeWithRetryAsync(() => SendBinaryAsync(HttpMethod.Get, path, null, ct), "getDocument", false, ct);
     }
 
     /// <summary>
@@ -2973,6 +3030,49 @@ public partial class CamundaClient
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ElementInstanceResult>(HttpMethod.Get, path, null, ct), "getElementInstance", false, ct);
+    }
+
+    /// <summary>
+    /// Get form by key
+    /// Get a form by its unique form key.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: getFormByKey
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetFormByKeyExample(FormKey formKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetFormByKeyAsync(formKey);
+    ///     Console.WriteLine($&quot;Form: {result.FormId}, version: {result.Version}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetFormByKeyExample(FormKey formKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetFormByKeyAsync(formKey);
+    ///     Console.WriteLine($&quot;Form: {result.FormId}, version: {result.Version}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<FormResult> GetFormByKeyAsync(FormKey formKey, ConsistencyOptions<FormResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/forms/{Uri.EscapeDataString(formKey.ToString()!)}";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getFormByKey", true,
+                () => InvokeWithRetryAsync(() => SendAsync<FormResult>(HttpMethod.Get, path, null, ct), "getFormByKey", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<FormResult>(HttpMethod.Get, path, null, ct), "getFormByKey", false, ct);
     }
 
     /// <summary>
@@ -4208,6 +4308,54 @@ public partial class CamundaClient
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct);
+    }
+
+    /// <summary>
+    /// Get resource content as binary
+    /// Returns the content of a deployed resource in binary format (octet-stream).
+    /// :::info
+    /// This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+    /// resources. To query BPMN process definitions or DMN decision definitions, use their
+    /// respective APIs.
+    /// :::
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: getResourceContentBinary
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetResourceContentBinaryExample(ResourceKey resourceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     byte[] content = await client.GetResourceContentBinaryAsync(resourceKey);
+    ///     Console.WriteLine($&quot;Binary content length: {content.Length} bytes&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetResourceContentBinaryExample(ResourceKey resourceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     byte[] content = await client.GetResourceContentBinaryAsync(resourceKey);
+    ///     Console.WriteLine($&quot;Binary content length: {content.Length} bytes&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<byte[]> GetResourceContentBinaryAsync(ResourceKey resourceKey, ConsistencyOptions<byte[]>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/content/binary";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getResourceContentBinary", true,
+                () => InvokeWithRetryAsync(() => SendBinaryAsync(HttpMethod.Get, path, null, ct), "getResourceContentBinary", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendBinaryAsync(HttpMethod.Get, path, null, ct), "getResourceContentBinary", false, ct);
     }
 
     /// <summary>
@@ -8067,6 +8215,69 @@ public partial class CamundaClient
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/assignee";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignUserTask", false, ct);
+    }
+
+    /// <summary>
+    /// Update agent instance
+    /// Updates the mutable fields of an agent instance: status, metric counters, and
+    /// tools. Metric values are treated as deltas and applied immediately to the
+    /// aggregate counters. Tool updates replace the existing tool list. At least one of
+    /// status, metrics, or tools must be provided.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: updateAgentInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateAgentInstanceAsync(
+    ///         agentInstanceKey,
+    ///         new AgentInstanceUpdateRequest
+    ///         {
+    ///             Status = AgentInstanceStatusEnum.THINKING,
+    ///             Metrics = new AgentInstanceMetricsDelta
+    ///             {
+    ///                 InputTokens = 150,
+    ///                 OutputTokens = 50,
+    ///                 ModelCalls = 1,
+    ///             },
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Updated agent instance: {agentInstanceKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.UpdateAgentInstanceAsync(
+    ///         agentInstanceKey,
+    ///         new AgentInstanceUpdateRequest
+    ///         {
+    ///             Status = AgentInstanceStatusEnum.THINKING,
+    ///             Metrics = new AgentInstanceMetricsDelta
+    ///             {
+    ///                 InputTokens = 150,
+    ///                 OutputTokens = 50,
+    ///                 ModelCalls = 1,
+    ///             },
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Updated agent instance: {agentInstanceKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task UpdateAgentInstanceAsync(AgentInstanceKey agentInstanceKey, AgentInstanceUpdateRequest body, CancellationToken ct = default)
+    {
+        var path = $"/agent-instances/{Uri.EscapeDataString(agentInstanceKey.ToString()!)}";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Patch, path, body, ct); return 0; }, "updateAgentInstance", false, ct);
     }
 
     /// <summary>
