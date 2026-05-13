@@ -229,6 +229,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceCreationRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/AgentInstance.cs#CreateAgentInstance)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationRequest,System.Threading.CancellationToken)
 example:
 - *content
@@ -733,6 +743,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetFormByKeyAsync(Camunda.Orchestration.Sdk.FormKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.FormResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Admin.cs#GetFormByKey)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetGlobalClusterVariableAsync(System.String,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ClusterVariableResult},System.Threading.CancellationToken)
 example:
 - *content
@@ -980,6 +1000,16 @@ example:
 
 
 [!code-csharp[](../../examples/Deployment.cs#GetResourceContent)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetResourceContentBinaryAsync(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{System.Byte[]},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Admin.cs#GetResourceContentBinary)]
 
 
 ---
@@ -1820,6 +1850,16 @@ example:
 
 
 [!code-csharp[](../../examples/UserTask.cs#UnassignUserTask)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceKey,Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/AgentInstance.cs#UpdateAgentInstance)]
 
 
 ---
