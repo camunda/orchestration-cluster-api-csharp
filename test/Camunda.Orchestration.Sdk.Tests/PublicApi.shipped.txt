@@ -1067,7 +1067,6 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> UpdateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId tenantId, System.String name, Camunda.Orchestration.Sdk.UpdateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableSearchQueryResult> SearchClusterVariablesAsync(Camunda.Orchestration.Sdk.ClusterVariableSearchQueryRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ClusterVariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQueryResult> SearchCorrelatedMessageSubscriptionsAsync(Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CreateMappingRuleResponse> CreateMappingRuleAsync(Camunda.Orchestration.Sdk.MappingRuleCreateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CreateProcessInstanceResult> CreateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceCreationInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.DecisionDefinitionResult> GetDecisionDefinitionAsync(Camunda.Orchestration.Sdk.DecisionDefinitionKey decisionDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.DecisionDefinitionResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.DecisionDefinitionSearchQueryResult> SearchDecisionDefinitionsAsync(Camunda.Orchestration.Sdk.DecisionDefinitionSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.DecisionDefinitionSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1088,16 +1087,19 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExtendedDeploymentResponse> DeployResourcesFromFilesAsync(System.String[] resourceFilePaths, System.String? tenantId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.FormResult> GetStartProcessFormAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.FormResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.FormResult> GetUserTaskFormAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.FormResult>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GetUserResponse> GetUserAsync(Camunda.Orchestration.Sdk.Username username, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GetUserResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(System.DateTimeOffset from, System.DateTimeOffset to, System.String? jobType = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GlobalJobStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GlobalTaskListenerResult> CreateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GlobalTaskListenerResult> GetGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.GlobalListenerId id, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GlobalTaskListenerResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GlobalTaskListenerResult> UpdateGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.GlobalListenerId id, Camunda.Orchestration.Sdk.UpdateGlobalTaskListenerRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQueryResult> SearchGlobalTaskListenersAsync(Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GroupClientSearchResult> SearchClientsForGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.GroupClientSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GroupClientSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GroupCreateResult> CreateGroupAsync(Camunda.Orchestration.Sdk.GroupCreateRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GroupMappingRuleSearchResult> SearchMappingRulesForGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.MappingRuleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GroupMappingRuleSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GroupResult> GetGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GroupResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GroupRoleSearchResult> SearchRolesForGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.RoleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GroupRoleSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GroupSearchQueryResult> SearchGroupsAsync(Camunda.Orchestration.Sdk.GroupSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GroupSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GroupUpdateResult> UpdateGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.GroupUpdateRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.GroupUserSearchResult> SearchUsersForGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.GroupUserSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.GroupUserSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQueryResult> GetProcessInstanceStatisticsByDefinitionAsync(Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByDefinitionQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQueryResult> GetProcessInstanceStatisticsByErrorAsync(Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.IncidentProcessInstanceStatisticsByErrorQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.IncidentResult> GetIncidentAsync(Camunda.Orchestration.Sdk.IncidentKey incidentKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.IncidentResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1111,7 +1113,10 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.JobTypeStatisticsQueryResult> GetJobTypeStatisticsAsync(Camunda.Orchestration.Sdk.JobTypeStatisticsQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.JobTypeStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.JobWorkerStatisticsQueryResult> GetJobWorkerStatisticsAsync(Camunda.Orchestration.Sdk.JobWorkerStatisticsQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.JobWorkerStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.LicenseResponse> GetLicenseAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.MappingRuleCreateResult> CreateMappingRuleAsync(Camunda.Orchestration.Sdk.MappingRuleCreateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.MappingRuleResult> GetMappingRuleAsync(System.String mappingRuleId, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.MappingRuleResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.MappingRuleSearchQueryResult> SearchMappingRuleAsync(Camunda.Orchestration.Sdk.MappingRuleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.MappingRuleSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.MappingRuleUpdateResult> UpdateMappingRuleAsync(System.String mappingRuleId, Camunda.Orchestration.Sdk.MappingRuleUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.MessageCorrelationResult> CorrelateMessageAsync(Camunda.Orchestration.Sdk.MessageCorrelationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.MessagePublicationResult> PublishMessageAsync(Camunda.Orchestration.Sdk.MessagePublicationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.MessageSubscriptionSearchQueryResult> SearchMessageSubscriptionsAsync(Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.MessageSubscriptionSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1125,50 +1130,45 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceResult> GetProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(Camunda.Orchestration.Sdk.ProcessInstanceSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowsQueryResult> GetProcessInstanceSequenceFlowsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ResourceResult> GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ResourceResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ResourceResult> GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleClientSearchResult> SearchClientsForRoleAsync(System.String roleId, Camunda.Orchestration.Sdk.RoleClientSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleClientSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleCreateResult> CreateRoleAsync(Camunda.Orchestration.Sdk.RoleCreateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleGroupSearchResult> SearchGroupsForRoleAsync(System.String roleId, Camunda.Orchestration.Sdk.RoleGroupSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleGroupSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleMappingRuleSearchResult> SearchMappingRulesForRoleAsync(System.String roleId, Camunda.Orchestration.Sdk.MappingRuleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleMappingRuleSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleResult> GetRoleAsync(System.String roleId, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleSearchQueryResult> SearchRolesAsync(Camunda.Orchestration.Sdk.RoleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleUpdateResult> UpdateRoleAsync(System.String roleId, Camunda.Orchestration.Sdk.RoleUpdateRequest body, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchClientsForGroupResponse> SearchClientsForGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.SearchClientsForGroupRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchClientsForGroupResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchClientsForRoleResponse> SearchClientsForRoleAsync(System.String roleId, Camunda.Orchestration.Sdk.SearchClientsForRoleRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchClientsForRoleResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchClientsForTenantResponse> SearchClientsForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.SearchClientsForTenantRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchClientsForTenantResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchMappingRuleResponse> SearchMappingRuleAsync(Camunda.Orchestration.Sdk.MappingRuleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchMappingRuleResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchMappingRulesForGroupResponse> SearchMappingRulesForGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.MappingRuleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchMappingRulesForGroupResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchMappingRulesForRoleResponse> SearchMappingRulesForRoleAsync(System.String roleId, Camunda.Orchestration.Sdk.MappingRuleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchMappingRulesForRoleResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchMappingRulesForTenantResponse> SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.MappingRuleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchMappingRulesForTenantResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchRolesForGroupResponse> SearchRolesForGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.RoleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchRolesForGroupResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchRolesForTenantResponse> SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.RoleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchRolesForTenantResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchUsersForGroupResponse> SearchUsersForGroupAsync(System.String groupId, Camunda.Orchestration.Sdk.SearchUsersForGroupRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchUsersForGroupResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchUsersForRoleResponse> SearchUsersForRoleAsync(System.String roleId, Camunda.Orchestration.Sdk.SearchUsersForRoleRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchUsersForRoleResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchUsersForTenantResponse> SearchUsersForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.SearchUsersForTenantRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchUsersForTenantResponse>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SearchUsersResponse> SearchUsersAsync(Camunda.Orchestration.Sdk.UserSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.SearchUsersResponse>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleUserSearchResult> SearchUsersForRoleAsync(System.String roleId, Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleUserSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SignalBroadcastResult> BroadcastSignalAsync(Camunda.Orchestration.Sdk.SignalBroadcastRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SystemConfigurationResponse> GetSystemConfigurationAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantClientSearchResult> SearchClientsForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.TenantClientSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantClientSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantCreateResult> CreateTenantAsync(Camunda.Orchestration.Sdk.TenantCreateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantGroupSearchResult> SearchGroupIdsForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.TenantGroupSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantGroupSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantMappingRuleSearchResult> SearchMappingRulesForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.MappingRuleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantMappingRuleSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantResult> GetTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantRoleSearchResult> SearchRolesForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.RoleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantRoleSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantSearchQueryResult> SearchTenantsAsync(Camunda.Orchestration.Sdk.TenantSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantUpdateResult> UpdateTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.TenantUpdateRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantUserSearchResult> SearchUsersForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.TenantUserSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantUserSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TopologyResponse> GetTopologyAsync(System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UpdateMappingRuleResponse> UpdateMappingRuleAsync(System.String mappingRuleId, Camunda.Orchestration.Sdk.MappingRuleUpdateRequest body, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UpdateUserResponse> UpdateUserAsync(Camunda.Orchestration.Sdk.Username username, Camunda.Orchestration.Sdk.UserUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UsageMetricsResponse> GetUsageMetricsAsync(System.DateTimeOffset startTime, System.DateTimeOffset endTime, Camunda.Orchestration.Sdk.TenantId? tenantId = null, System.Boolean? withTenants = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UsageMetricsResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserCreateResult> CreateAdminUserAsync(Camunda.Orchestration.Sdk.UserRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserCreateResult> CreateUserAsync(Camunda.Orchestration.Sdk.UserRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserResult> GetUserAsync(Camunda.Orchestration.Sdk.Username username, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserSearchResult> SearchUsersAsync(Camunda.Orchestration.Sdk.UserSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserTaskResult> GetUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserTaskResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserTaskSearchQueryResult> SearchUserTasksAsync(Camunda.Orchestration.Sdk.UserTaskSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserTaskSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserUpdateResult> UpdateUserAsync(Camunda.Orchestration.Sdk.Username username, Camunda.Orchestration.Sdk.UserUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableResult> GetVariableAsync(Camunda.Orchestration.Sdk.VariableKey variableKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableResult>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchUserTaskVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.SearchUserTaskVariablesRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchVariablesAsync(Camunda.Orchestration.Sdk.SearchVariablesRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchUserTaskVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskVariableSearchQueryRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchVariablesAsync(Camunda.Orchestration.Sdk.VariableSearchQuery body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Byte[]> GetDocumentAsync(Camunda.Orchestration.Sdk.DocumentId documentId, System.String? storeId = null, System.String? contentHash = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetDecisionDefinitionXmlAsync(Camunda.Orchestration.Sdk.DecisionDefinitionKey decisionDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetDecisionRequirementsXmlAsync(Camunda.Orchestration.Sdk.DecisionRequirementsKey decisionRequirementsKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessDefinitionXmlAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessInstanceCallHierarchyAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<System.Object> GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<System.Object> GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.ValueTask DisposeAsync()
   METHOD System.Void Dispose()
   METHOD static Camunda.Orchestration.Sdk.CamundaClient Create(Camunda.Orchestration.Sdk.CamundaOptions? options = null)
@@ -1438,13 +1438,6 @@ TYPE Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.GlobalListenerId Id { get; set; } [JsonPropertyName("id")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeEnum> EventTypes { get; set; } [JsonPropertyName("eventTypes")]
-
-TYPE Camunda.Orchestration.Sdk.CreateMappingRuleResponse : sealed class
-  CTOR ()
-  PROP System.String ClaimName { get; set; } [JsonPropertyName("claimName")]
-  PROP System.String ClaimValue { get; set; } [JsonPropertyName("claimValue")]
-  PROP System.String MappingRuleId { get; set; } [JsonPropertyName("mappingRuleId")]
-  PROP System.String Name { get; set; } [JsonPropertyName("name")]
 
 TYPE Camunda.Orchestration.Sdk.CreateProcessInstanceResult : sealed class
   CTOR ()
@@ -2235,12 +2228,6 @@ TYPE Camunda.Orchestration.Sdk.FormResult : sealed class
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Int64 Version { get; set; } [JsonPropertyName("version")]
   PROP System.String Schema { get; set; } [JsonPropertyName("schema")]
-
-TYPE Camunda.Orchestration.Sdk.GetUserResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.Username Username { get; set; } [JsonPropertyName("username")]
-  PROP System.String? Email { get; set; } [JsonPropertyName("email")]
-  PROP System.String? Name { get; set; } [JsonPropertyName("name")]
 
 TYPE Camunda.Orchestration.Sdk.GlobalJobStatisticsQueryResult : sealed class
   CTOR ()
@@ -4091,56 +4078,6 @@ TYPE Camunda.Orchestration.Sdk.ScopeKeyFilterProperty : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ScopeKey>? In { get; set; } [JsonPropertyName("$in")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ScopeKey>? NotIn { get; set; } [JsonPropertyName("$notIn")]
 
-TYPE Camunda.Orchestration.Sdk.SearchClientsForGroupRequest : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
-
-TYPE Camunda.Orchestration.Sdk.SearchClientsForGroupResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.GroupClientResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchClientsForRoleRequest : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
-
-TYPE Camunda.Orchestration.Sdk.SearchClientsForRoleResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.GroupClientResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchClientsForTenantRequest : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
-
-TYPE Camunda.Orchestration.Sdk.SearchClientsForTenantResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.GroupClientResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchMappingRuleResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.MappingRuleResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchMappingRulesForGroupResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.MappingRuleResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchMappingRulesForRoleResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.MappingRuleResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchMappingRulesForTenantResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.MappingRuleResult> Items { get; set; } [JsonPropertyName("items")]
-
 TYPE Camunda.Orchestration.Sdk.SearchQueryPageRequest : abstract class
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.CursorBackwardPagination tag=<none>
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.CursorForwardPagination tag=<none>
@@ -4161,69 +4098,6 @@ TYPE Camunda.Orchestration.Sdk.SearchQueryRequest : sealed class
 TYPE Camunda.Orchestration.Sdk.SearchQueryResponse : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-
-TYPE Camunda.Orchestration.Sdk.SearchRolesForGroupResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.RoleResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchRolesForTenantResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.RoleResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchUserTaskEffectiveVariablesRequest : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.OffsetPagination? Page { get; set; } [JsonPropertyName("page")]
-  PROP Camunda.Orchestration.Sdk.UserTaskVariableFilter? Filter { get; set; } [JsonPropertyName("filter")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
-
-TYPE Camunda.Orchestration.Sdk.SearchUserTaskVariablesRequest : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
-  PROP Camunda.Orchestration.Sdk.UserTaskVariableFilter? Filter { get; set; } [JsonPropertyName("filter")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
-
-TYPE Camunda.Orchestration.Sdk.SearchUsersForGroupRequest : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
-
-TYPE Camunda.Orchestration.Sdk.SearchUsersForGroupResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.GroupUserResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchUsersForRoleRequest : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
-
-TYPE Camunda.Orchestration.Sdk.SearchUsersForRoleResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.GroupUserResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchUsersForTenantRequest : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
-
-TYPE Camunda.Orchestration.Sdk.SearchUsersForTenantResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.GroupUserResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchUsersResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.UserCreateResult> Items { get; set; } [JsonPropertyName("items")]
-
-TYPE Camunda.Orchestration.Sdk.SearchVariablesRequest : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
-  PROP Camunda.Orchestration.Sdk.VariableFilter? Filter { get; set; } [JsonPropertyName("filter")]
-  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
 
 TYPE Camunda.Orchestration.Sdk.SetVariableRequest : sealed class
   CTOR ()
@@ -4483,19 +4357,6 @@ TYPE Camunda.Orchestration.Sdk.UpdateGlobalTaskListenerRequest : sealed class
   PROP System.Int32? Priority { get; set; } [JsonPropertyName("priority")]
   PROP System.Int32? Retries { get; set; } [JsonPropertyName("retries")]
   PROP System.String Type { get; set; } [JsonPropertyName("type")]
-
-TYPE Camunda.Orchestration.Sdk.UpdateMappingRuleResponse : sealed class
-  CTOR ()
-  PROP System.String ClaimName { get; set; } [JsonPropertyName("claimName")]
-  PROP System.String ClaimValue { get; set; } [JsonPropertyName("claimValue")]
-  PROP System.String MappingRuleId { get; set; } [JsonPropertyName("mappingRuleId")]
-  PROP System.String Name { get; set; } [JsonPropertyName("name")]
-
-TYPE Camunda.Orchestration.Sdk.UpdateUserResponse : sealed class
-  CTOR ()
-  PROP Camunda.Orchestration.Sdk.Username Username { get; set; } [JsonPropertyName("username")]
-  PROP System.String? Email { get; set; } [JsonPropertyName("email")]
-  PROP System.String? Name { get; set; } [JsonPropertyName("name")]
 
 TYPE Camunda.Orchestration.Sdk.UsageMetricsResponse : sealed class
   CTOR ()

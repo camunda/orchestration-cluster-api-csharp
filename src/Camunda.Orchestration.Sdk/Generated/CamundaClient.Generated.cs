@@ -1394,10 +1394,10 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<CreateMappingRuleResponse> CreateMappingRuleAsync(MappingRuleCreateRequest body, CancellationToken ct = default)
+    public async Task<MappingRuleCreateResult> CreateMappingRuleAsync(MappingRuleCreateRequest body, CancellationToken ct = default)
     {
         var path = $"/mapping-rules";
-        return await InvokeWithRetryAsync(() => SendAsync<CreateMappingRuleResponse>(HttpMethod.Post, path, body, ct), "createMappingRule", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<MappingRuleCreateResult>(HttpMethod.Post, path, body, ct), "createMappingRule", false, ct);
     }
 
     /// <summary>
@@ -4087,16 +4087,9 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, ConsistencyOptions<ResourceResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("getResource", true,
-                () => InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct);
     }
 
@@ -4133,16 +4126,9 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+    public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/content";
-        if (consistency != null && consistency.WaitUpToMs > 0)
-        {
-            return await EventualPoller.PollAsync("getResourceContent", true,
-                () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct),
-                consistency!, _logger, ct);
-        }
-
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct);
     }
 
@@ -4518,17 +4504,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GetUserResponse> GetUserAsync(Username username, ConsistencyOptions<GetUserResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<UserResult> GetUserAsync(Username username, ConsistencyOptions<UserResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getUser", true,
-                () => InvokeWithRetryAsync(() => SendAsync<GetUserResponse>(HttpMethod.Get, path, null, ct), "getUser", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<UserResult>(HttpMethod.Get, path, null, ct), "getUser", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<GetUserResponse>(HttpMethod.Get, path, null, ct), "getUser", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<UserResult>(HttpMethod.Get, path, null, ct), "getUser", false, ct);
     }
 
     /// <summary>
@@ -5400,17 +5386,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchClientsForGroupResponse> SearchClientsForGroupAsync(string groupId, SearchClientsForGroupRequest body, ConsistencyOptions<SearchClientsForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupClientSearchResult> SearchClientsForGroupAsync(string groupId, GroupClientSearchQueryRequest body, ConsistencyOptions<GroupClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchClientsForGroupResponse>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GroupClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchClientsForGroupResponse>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GroupClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct);
     }
 
     /// <summary>
@@ -5454,17 +5440,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchClientsForRoleResponse> SearchClientsForRoleAsync(string roleId, SearchClientsForRoleRequest body, ConsistencyOptions<SearchClientsForRoleResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleClientSearchResult> SearchClientsForRoleAsync(string roleId, RoleClientSearchQueryRequest body, ConsistencyOptions<RoleClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForRole", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchClientsForRoleResponse>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<RoleClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchClientsForRoleResponse>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<RoleClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct);
     }
 
     /// <summary>
@@ -5508,17 +5494,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchClientsForTenantResponse> SearchClientsForTenantAsync(TenantId tenantId, SearchClientsForTenantRequest body, ConsistencyOptions<SearchClientsForTenantResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantClientSearchResult> SearchClientsForTenantAsync(TenantId tenantId, TenantClientSearchQueryRequest body, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchClientsForTenantResponse>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchClientsForTenantResponse>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct);
     }
 
     /// <summary>
@@ -6246,17 +6232,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchMappingRuleResponse> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRuleResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<MappingRuleSearchQueryResult> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<MappingRuleSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRule", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRuleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<MappingRuleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRuleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<MappingRuleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct);
     }
 
     /// <summary>
@@ -6300,17 +6286,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchMappingRulesForGroupResponse> SearchMappingRulesForGroupAsync(string groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupMappingRuleSearchResult> SearchMappingRulesForGroupAsync(string groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<GroupMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GroupMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GroupMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct);
     }
 
     /// <summary>
@@ -6354,17 +6340,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchMappingRulesForRoleResponse> SearchMappingRulesForRoleAsync(string roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForRoleResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleMappingRuleSearchResult> SearchMappingRulesForRoleAsync(string roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<RoleMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForRole", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForRoleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<RoleMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForRoleResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<RoleMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct);
     }
 
     /// <summary>
@@ -6408,17 +6394,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchMappingRulesForTenantResponse> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForTenantResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantMappingRuleSearchResult> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<TenantMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchMappingRulesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct);
     }
 
     /// <summary>
@@ -6726,17 +6712,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchRolesForGroupResponse> SearchRolesForGroupAsync(string groupId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupRoleSearchResult> SearchRolesForGroupAsync(string groupId, RoleSearchQueryRequest body, ConsistencyOptions<GroupRoleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchRolesForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchRolesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GroupRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchRolesForGroupResponse>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GroupRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct);
     }
 
     /// <summary>
@@ -6780,17 +6766,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchRolesForTenantResponse> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForTenantResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantRoleSearchResult> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<TenantRoleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchRolesForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchRolesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchRolesForTenantResponse>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct);
     }
 
     /// <summary>
@@ -6944,7 +6930,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, UserTaskEffectiveVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
@@ -7007,7 +6993,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, UserTaskVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
@@ -7109,17 +7095,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchUsersResponse> SearchUsersAsync(UserSearchQueryRequest body, ConsistencyOptions<SearchUsersResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<UserSearchResult> SearchUsersAsync(UserSearchQueryRequest body, ConsistencyOptions<UserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsers", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchUsersResponse>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<UserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchUsersResponse>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<UserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct);
     }
 
     /// <summary>
@@ -7163,17 +7149,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchUsersForGroupResponse> SearchUsersForGroupAsync(string groupId, SearchUsersForGroupRequest body, ConsistencyOptions<SearchUsersForGroupResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupUserSearchResult> SearchUsersForGroupAsync(string groupId, GroupUserSearchQueryRequest body, ConsistencyOptions<GroupUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForGroup", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchUsersForGroupResponse>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<GroupUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchUsersForGroupResponse>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<GroupUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct);
     }
 
     /// <summary>
@@ -7217,17 +7203,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchUsersForRoleResponse> SearchUsersForRoleAsync(string roleId, SearchUsersForRoleRequest body, ConsistencyOptions<SearchUsersForRoleResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleUserSearchResult> SearchUsersForRoleAsync(string roleId, RoleUserSearchQueryRequest body, ConsistencyOptions<RoleUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForRole", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchUsersForRoleResponse>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<RoleUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchUsersForRoleResponse>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<RoleUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct);
     }
 
     /// <summary>
@@ -7271,17 +7257,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SearchUsersForTenantResponse> SearchUsersForTenantAsync(TenantId tenantId, SearchUsersForTenantRequest body, ConsistencyOptions<SearchUsersForTenantResponse>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantUserSearchResult> SearchUsersForTenantAsync(TenantId tenantId, TenantUserSearchQueryRequest body, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForTenant", false,
-                () => InvokeWithRetryAsync(() => SendAsync<SearchUsersForTenantResponse>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct),
+                () => InvokeWithRetryAsync(() => SendAsync<TenantUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct),
                 consistency!, _logger, ct);
         }
 
-        return await InvokeWithRetryAsync(() => SendAsync<SearchUsersForTenantResponse>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<TenantUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct);
     }
 
     /// <summary>
@@ -7329,7 +7315,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchVariablesAsync(SearchVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchVariablesAsync(VariableSearchQuery body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
@@ -8157,10 +8143,10 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<UpdateMappingRuleResponse> UpdateMappingRuleAsync(string mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
+    public async Task<MappingRuleUpdateResult> UpdateMappingRuleAsync(string mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
-        return await InvokeWithRetryAsync(() => SendAsync<UpdateMappingRuleResponse>(HttpMethod.Put, path, body, ct), "updateMappingRule", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<MappingRuleUpdateResult>(HttpMethod.Put, path, body, ct), "updateMappingRule", false, ct);
     }
 
     /// <summary>
@@ -8335,10 +8321,10 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<UpdateUserResponse> UpdateUserAsync(Username username, UserUpdateRequest body, CancellationToken ct = default)
+    public async Task<UserUpdateResult> UpdateUserAsync(Username username, UserUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
-        return await InvokeWithRetryAsync(() => SendAsync<UpdateUserResponse>(HttpMethod.Put, path, body, ct), "updateUser", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<UserUpdateResult>(HttpMethod.Put, path, body, ct), "updateUser", false, ct);
     }
 
     /// <summary>
