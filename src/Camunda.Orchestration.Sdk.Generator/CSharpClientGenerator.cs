@@ -186,6 +186,7 @@ internal static class CSharpClientGenerator
                     Description = op.Description,
                     Tags = op.Tags?.Select(t => t.Name ?? string.Empty).ToList() ?? [],
                     IsExemptFromBackpressure = IsExempt(opId),
+                    IsBinaryResponse = responseTypeName == "byte[]",
                 });
             }
         }
@@ -220,8 +221,13 @@ internal static class CSharpClientGenerator
             if (response.Content == null || response.Content.Count == 0)
                 return null;
 
-            foreach (var (_, mediaType) in response.Content)
+            foreach (var (contentType, mediaType) in response.Content)
             {
+                // Binary (octet-stream) responses return byte[]
+                if (contentType.Contains("octet-stream", StringComparison.OrdinalIgnoreCase)
+                    || mediaType.Schema?.Format == "binary")
+                    return "byte[]";
+
                 if (GetRefId(mediaType.Schema) != null)
                     return SanitizeTypeName(GetRefId(mediaType.Schema)!);
                 if (SchemaTypeName(mediaType.Schema) == "object" || mediaType.Schema?.Properties?.Count > 0)
@@ -1288,6 +1294,12 @@ internal static class CSharpClientGenerator
                     sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendMultipartAsync<{op.ResponseTypeName}>(path, content, ct), \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
                     sb.AppendLine($"                consistency!, _logger, ct);");
                 }
+                else if (op.IsBinaryResponse)
+                {
+                    sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {isGetLiteral},");
+                    sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendBinaryAsync({httpMethod}, path, {bodyArg}, ct), \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
+                    sb.AppendLine($"                consistency!, _logger, ct);");
+                }
                 else
                 {
                     sb.AppendLine($"            return await EventualPoller.PollAsync(\"{op.OriginalOperationId}\", {isGetLiteral},");
@@ -1307,6 +1319,10 @@ internal static class CSharpClientGenerator
         else if (op.IsVoidResponse)
         {
             sb.AppendLine($"        await InvokeWithRetryAsync(async () => {{ await SendVoidAsync({httpMethod}, path, {bodyArg}, ct); return 0; }}, \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
+        }
+        else if (op.IsBinaryResponse)
+        {
+            sb.AppendLine($"        return await InvokeWithRetryAsync(() => SendBinaryAsync({httpMethod}, path, {bodyArg}, ct), \"{op.OriginalOperationId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
         }
         else
         {
@@ -1903,6 +1919,7 @@ internal sealed class OperationMeta
     public required bool IsExemptFromBackpressure { get; init; }
     public required bool HasOptionalTenantIdInBody { get; init; }
     public required bool HasOptionalTenantIdsInBody { get; init; }
+    public required bool IsBinaryResponse { get; init; }
 }
 
 internal readonly record struct ParamMeta(string Name, string Type, bool Required);
