@@ -11472,7 +11472,7 @@
             }
           }
         },
-        "x-added-in-version": "8.11"
+        "x-added-in-version": "8.10"
       }
     },
     "/resources/{resourceKey}/deletion": {
@@ -13652,6 +13652,29 @@
                         "maxJobTypeLength": 100,
                         "maxTenantIdLength": 30,
                         "maxUniqueKeys": 9500
+                      },
+                      "components": {
+                        "active": [
+                          "operate",
+                          "tasklist"
+                        ]
+                      },
+                      "deployment": {
+                        "isEnterprise": false,
+                        "isMultiTenancyEnabled": false,
+                        "contextPath": "",
+                        "maxRequestSize": 4194304
+                      },
+                      "authentication": {
+                        "canLogout": true,
+                        "isLoginDelegated": false
+                      },
+                      "cloud": {
+                        "organizationId": null,
+                        "clusterId": null,
+                        "stage": null,
+                        "mixpanelToken": null,
+                        "mixpanelAPIHost": null
                       }
                     }
                   }
@@ -17178,6 +17201,17 @@
                 "$ref": "#/components/schemas/DateTimeFilterProperty"
               }
             ]
+          },
+          "elementInstanceKeys": {
+            "description": "The keys of element instances associated with this agent instance.\nIf multiple keys are provided, the filter matches agent instances associated with all of the provided keys at the same time.",
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ElementInstanceKeyFilterProperty"
+                }
+              ]
+            }
           }
         }
       },
@@ -17217,7 +17251,8 @@
           "tenantId",
           "creationDate",
           "lastUpdatedDate",
-          "completionDate"
+          "completionDate",
+          "elementInstanceKeys"
         ],
         "properties": {
           "agentInstanceKey": {
@@ -17309,6 +17344,17 @@
             "format": "date-time",
             "nullable": true,
             "description": "The date when this agent instance completed. Null while the agent is still running."
+          },
+          "elementInstanceKeys": {
+            "description": "The keys of all element instances associated with this agent instance.",
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ElementInstanceKey"
+                }
+              ]
+            }
           }
         }
       },
@@ -22732,8 +22778,7 @@
           "processDefinitionKey",
           "rootProcessInstanceKey",
           "endDate",
-          "incidentKey",
-          "agentInstanceKey"
+          "incidentKey"
         ],
         "properties": {
           "processDefinitionId": {
@@ -22860,15 +22905,6 @@
               }
             ],
             "description": "Incident key associated with this element instance.",
-            "nullable": true
-          },
-          "agentInstanceKey": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentInstanceKey"
-              }
-            ],
-            "description": "The agent instance key associated with this element instance.",
             "nullable": true
           }
         }
@@ -31318,11 +31354,27 @@
         "description": "Envelope for all system configuration sections. Each property\nrepresents a feature area.\n",
         "type": "object",
         "required": [
-          "jobMetrics"
+          "jobMetrics",
+          "components",
+          "deployment",
+          "authentication",
+          "cloud"
         ],
         "properties": {
           "jobMetrics": {
             "$ref": "#/components/schemas/JobMetricsConfigurationResponse"
+          },
+          "components": {
+            "$ref": "#/components/schemas/ComponentsConfigurationResponse"
+          },
+          "deployment": {
+            "$ref": "#/components/schemas/DeploymentConfigurationResponse"
+          },
+          "authentication": {
+            "$ref": "#/components/schemas/AuthenticationConfigurationResponse"
+          },
+          "cloud": {
+            "$ref": "#/components/schemas/CloudConfigurationResponse"
           }
         }
       },
@@ -31373,6 +31425,144 @@
             "example": 9500
           }
         }
+      },
+      "ComponentsConfigurationResponse": {
+        "description": "Configuration for active Camunda components in the deployment.",
+        "type": "object",
+        "required": [
+          "active"
+        ],
+        "properties": {
+          "active": {
+            "description": "List of webapp components whose UI is enabled in this deployment.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebappComponent"
+            },
+            "example": [
+              "operate",
+              "tasklist"
+            ]
+          }
+        }
+      },
+      "DeploymentConfigurationResponse": {
+        "description": "Configuration for deployment characteristics.",
+        "type": "object",
+        "required": [
+          "isEnterprise",
+          "isMultiTenancyEnabled",
+          "contextPath",
+          "maxRequestSize"
+        ],
+        "properties": {
+          "isEnterprise": {
+            "description": "Whether this is an enterprise deployment.",
+            "type": "boolean",
+            "example": false
+          },
+          "isMultiTenancyEnabled": {
+            "description": "Whether multi-tenancy is enabled.",
+            "type": "boolean",
+            "example": false
+          },
+          "contextPath": {
+            "description": "The servlet context path for the deployment.",
+            "type": "string",
+            "example": ""
+          },
+          "maxRequestSize": {
+            "description": "The maximum HTTP request size in bytes.",
+            "type": "integer",
+            "format": "int64",
+            "example": 4194304
+          }
+        }
+      },
+      "AuthenticationConfigurationResponse": {
+        "description": "Configuration for authentication and session management.",
+        "type": "object",
+        "required": [
+          "canLogout",
+          "isLoginDelegated"
+        ],
+        "properties": {
+          "canLogout": {
+            "description": "Whether users can log out (false for SaaS deployments).",
+            "type": "boolean",
+            "example": true
+          },
+          "isLoginDelegated": {
+            "description": "Whether login is delegated to an external identity provider.",
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "CloudConfigurationResponse": {
+        "description": "Configuration for SaaS/cloud-specific settings.",
+        "type": "object",
+        "required": [
+          "organizationId",
+          "clusterId",
+          "stage",
+          "mixpanelToken",
+          "mixpanelAPIHost"
+        ],
+        "properties": {
+          "organizationId": {
+            "description": "The SaaS organization ID, if applicable.",
+            "type": "string",
+            "nullable": true,
+            "example": "org-123456"
+          },
+          "clusterId": {
+            "description": "The SaaS cluster ID, if applicable.",
+            "type": "string",
+            "nullable": true,
+            "example": "cluster-abc"
+          },
+          "stage": {
+            "description": "The cloud deployment stage.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CloudStage"
+              }
+            ],
+            "example": "prod"
+          },
+          "mixpanelToken": {
+            "description": "The Mixpanel analytics token for the cloud UI.",
+            "type": "string",
+            "nullable": true,
+            "example": "abc123token"
+          },
+          "mixpanelAPIHost": {
+            "description": "The Mixpanel API host URL.",
+            "type": "string",
+            "nullable": true,
+            "example": "https://api.mixpanel.com"
+          }
+        }
+      },
+      "WebappComponent": {
+        "description": "A Camunda webapp component name.",
+        "type": "string",
+        "enum": [
+          "operate",
+          "tasklist",
+          "admin"
+        ]
+      },
+      "CloudStage": {
+        "description": "The cloud deployment stage.",
+        "type": "string",
+        "enum": [
+          "dev",
+          "int",
+          "prod"
+        ]
       },
       "TenantCreateRequest": {
         "type": "object",

@@ -455,6 +455,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceFilter : sealed class
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty>? ElementInstanceKeys { get; set; } [JsonPropertyName("elementInstanceKeys")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceKey : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.AgentInstanceKey>]
   PROP System.String Value { get; }
@@ -514,6 +515,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceResult : sealed class
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool> Tools { get; set; } [JsonPropertyName("tools")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ElementInstanceKey> ElementInstanceKeys { get; set; } [JsonPropertyName("elementInstanceKeys")]
   PROP System.DateTimeOffset CreationDate { get; set; } [JsonPropertyName("creationDate")]
   PROP System.DateTimeOffset LastUpdatedDate { get; set; } [JsonPropertyName("lastUpdatedDate")]
   PROP System.DateTimeOffset? CompletionDate { get; set; } [JsonPropertyName("completionDate")]
@@ -850,6 +852,11 @@ TYPE Camunda.Orchestration.Sdk.AuthStrategy : enum interfaces=[System.IComparabl
   MEMBER None = 0
   MEMBER OAuth = 1
   MEMBER Basic = 2
+
+TYPE Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse : sealed class
+  CTOR ()
+  PROP System.Boolean CanLogout { get; set; } [JsonPropertyName("canLogout")]
+  PROP System.Boolean IsLoginDelegated { get; set; } [JsonPropertyName("isLoginDelegated")]
 
 TYPE Camunda.Orchestration.Sdk.AuthorizationCreateResult : sealed class
   CTOR ()
@@ -1556,6 +1563,21 @@ TYPE Camunda.Orchestration.Sdk.ClockPinRequest : sealed class
   CTOR ()
   PROP System.Int64 Timestamp { get; set; } [JsonPropertyName("timestamp")]
 
+TYPE Camunda.Orchestration.Sdk.CloudConfigurationResponse : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.CloudStage? Stage { get; set; } [JsonPropertyName("stage")]
+  PROP System.String? ClusterId { get; set; } [JsonPropertyName("clusterId")]
+  PROP System.String? MixpanelAPIHost { get; set; } [JsonPropertyName("mixpanelAPIHost")]
+  PROP System.String? MixpanelToken { get; set; } [JsonPropertyName("mixpanelToken")]
+  PROP System.String? OrganizationId { get; set; } [JsonPropertyName("organizationId")]
+
+TYPE Camunda.Orchestration.Sdk.CloudStage : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Dev = 0 json="dev"
+  MEMBER Int = 1 json="int"
+  MEMBER Prod = 2 json="prod"
+
 TYPE Camunda.Orchestration.Sdk.ClusterVariableName : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ClusterVariableName>]
   PROP System.String Value { get; }
   METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.ClusterVariableName other)
@@ -1640,6 +1662,10 @@ TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchResult : sealed class
   PROP System.Boolean IsTruncated { get; set; } [JsonPropertyName("isTruncated")]
   PROP System.String Value { get; set; } [JsonPropertyName("value")]
   PROP System.String? TenantId { get; set; } [JsonPropertyName("tenantId")]
+
+TYPE Camunda.Orchestration.Sdk.ComponentsConfigurationResponse : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.WebappComponent> Active { get; set; } [JsonPropertyName("active")]
 
 TYPE Camunda.Orchestration.Sdk.ConditionalEvaluationInstruction : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
   CTOR ()
@@ -2176,6 +2202,13 @@ TYPE Camunda.Orchestration.Sdk.DeleteResourceResponse : sealed class
   PROP Camunda.Orchestration.Sdk.BatchOperationCreatedResult? BatchOperation { get; set; } [JsonPropertyName("batchOperation")]
   PROP Camunda.Orchestration.Sdk.ResourceKey ResourceKey { get; set; } [JsonPropertyName("resourceKey")]
 
+TYPE Camunda.Orchestration.Sdk.DeploymentConfigurationResponse : sealed class
+  CTOR ()
+  PROP System.Boolean IsEnterprise { get; set; } [JsonPropertyName("isEnterprise")]
+  PROP System.Boolean IsMultiTenancyEnabled { get; set; } [JsonPropertyName("isMultiTenancyEnabled")]
+  PROP System.Int64 MaxRequestSize { get; set; } [JsonPropertyName("maxRequestSize")]
+  PROP System.String ContextPath { get; set; } [JsonPropertyName("contextPath")]
+
 TYPE Camunda.Orchestration.Sdk.DeploymentDecisionRequirementsResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.DecisionRequirementsKey DecisionRequirementsKey { get; set; } [JsonPropertyName("decisionRequirementsKey")]
@@ -2429,7 +2462,6 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ElementInstanceResult : sealed class
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.AgentInstanceKey? AgentInstanceKey { get; set; } [JsonPropertyName("agentInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceResultType Type { get; set; } [JsonPropertyName("type")]
@@ -4940,6 +4972,10 @@ TYPE Camunda.Orchestration.Sdk.StringFilterProperty : sealed class
 
 TYPE Camunda.Orchestration.Sdk.SystemConfigurationResponse : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse Authentication { get; set; } [JsonPropertyName("authentication")]
+  PROP Camunda.Orchestration.Sdk.CloudConfigurationResponse Cloud { get; set; } [JsonPropertyName("cloud")]
+  PROP Camunda.Orchestration.Sdk.ComponentsConfigurationResponse Components { get; set; } [JsonPropertyName("components")]
+  PROP Camunda.Orchestration.Sdk.DeploymentConfigurationResponse Deployment { get; set; } [JsonPropertyName("deployment")]
   PROP Camunda.Orchestration.Sdk.JobMetricsConfigurationResponse JobMetrics { get; set; } [JsonPropertyName("jobMetrics")]
 
 TYPE Camunda.Orchestration.Sdk.Tag : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.Tag>]
@@ -5524,6 +5560,13 @@ TYPE Camunda.Orchestration.Sdk.VariableValueFilterProperty : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.StringFilterProperty Value { get; set; } [JsonPropertyName("value")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
+
+TYPE Camunda.Orchestration.Sdk.WebappComponent : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Operate = 0 json="operate"
+  MEMBER Tasklist = 1 json="tasklist"
+  MEMBER Admin = 2 json="admin"
 
 TYPE Camunda.Orchestration.Sdk.WorkerDefaultsConfig : sealed class
   CTOR ()

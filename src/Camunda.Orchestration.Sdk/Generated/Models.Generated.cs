@@ -3207,6 +3207,13 @@ public sealed class AgentInstanceFilter
     [JsonPropertyName("completionDate")]
     public DateTimeFilterProperty? CompletionDate { get; set; }
 
+    /// <summary>
+    /// The keys of element instances associated with this agent instance.
+    /// If multiple keys are provided, the filter matches agent instances associated with all of the provided keys at the same time.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKeys")]
+    public List<ElementInstanceKeyFilterProperty>? ElementInstanceKeys { get; set; }
+
 }
 
 /// <summary>
@@ -3474,6 +3481,12 @@ public sealed class AgentInstanceResult
     /// </summary>
     [JsonPropertyName("completionDate")]
     public DateTimeOffset? CompletionDate { get; set; }
+
+    /// <summary>
+    /// The keys of all element instances associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKeys")]
+    public List<ElementInstanceKey> ElementInstanceKeys { get; set; } = null!;
 
 }
 
@@ -4601,6 +4614,25 @@ public sealed class AuditLogSearchQuerySortRequest
     /// </summary>
     [JsonPropertyName("order")]
     public SortOrderEnum? Order { get; set; }
+
+}
+
+/// <summary>
+/// Configuration for authentication and session management.
+/// </summary>
+public sealed class AuthenticationConfigurationResponse
+{
+    /// <summary>
+    /// Whether users can log out (false for SaaS deployments).
+    /// </summary>
+    [JsonPropertyName("canLogout")]
+    public bool CanLogout { get; set; }
+
+    /// <summary>
+    /// Whether login is delegated to an external identity provider.
+    /// </summary>
+    [JsonPropertyName("isLoginDelegated")]
+    public bool IsLoginDelegated { get; set; }
 
 }
 
@@ -6108,6 +6140,57 @@ public sealed class ClockPinRequest
 }
 
 /// <summary>
+/// Configuration for SaaS/cloud-specific settings.
+/// </summary>
+public sealed class CloudConfigurationResponse
+{
+    /// <summary>
+    /// The SaaS organization ID, if applicable.
+    /// </summary>
+    [JsonPropertyName("organizationId")]
+    public string? OrganizationId { get; set; }
+
+    /// <summary>
+    /// The SaaS cluster ID, if applicable.
+    /// </summary>
+    [JsonPropertyName("clusterId")]
+    public string? ClusterId { get; set; }
+
+    /// <summary>
+    /// The cloud deployment stage.
+    /// </summary>
+    [JsonPropertyName("stage")]
+    public CloudStage? Stage { get; set; }
+
+    /// <summary>
+    /// The Mixpanel analytics token for the cloud UI.
+    /// </summary>
+    [JsonPropertyName("mixpanelToken")]
+    public string? MixpanelToken { get; set; }
+
+    /// <summary>
+    /// The Mixpanel API host URL.
+    /// </summary>
+    [JsonPropertyName("mixpanelAPIHost")]
+    public string? MixpanelAPIHost { get; set; }
+
+}
+
+/// <summary>
+/// The cloud deployment stage.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum CloudStage
+{
+    [JsonPropertyName("dev")]
+    Dev,
+    [JsonPropertyName("int")]
+    Int,
+    [JsonPropertyName("prod")]
+    Prod,
+}
+
+/// <summary>
 /// The name of a cluster variable. Unique within its scope (global or tenant-specific).
 /// </summary>
 public readonly record struct ClusterVariableName : global::Camunda.Orchestration.Sdk.ICamundaKey
@@ -6411,6 +6494,19 @@ public sealed class ClusterVariableSearchResult
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
+
+}
+
+/// <summary>
+/// Configuration for active Camunda components in the deployment.
+/// </summary>
+public sealed class ComponentsConfigurationResponse
+{
+    /// <summary>
+    /// List of webapp components whose UI is enabled in this deployment.
+    /// </summary>
+    [JsonPropertyName("active")]
+    public List<WebappComponent> Active { get; set; } = null!;
 
 }
 
@@ -8376,6 +8472,37 @@ public sealed class DeleteResourceResponse
 }
 
 /// <summary>
+/// Configuration for deployment characteristics.
+/// </summary>
+public sealed class DeploymentConfigurationResponse
+{
+    /// <summary>
+    /// Whether this is an enterprise deployment.
+    /// </summary>
+    [JsonPropertyName("isEnterprise")]
+    public bool IsEnterprise { get; set; }
+
+    /// <summary>
+    /// Whether multi-tenancy is enabled.
+    /// </summary>
+    [JsonPropertyName("isMultiTenancyEnabled")]
+    public bool IsMultiTenancyEnabled { get; set; }
+
+    /// <summary>
+    /// The servlet context path for the deployment.
+    /// </summary>
+    [JsonPropertyName("contextPath")]
+    public string ContextPath { get; set; } = null!;
+
+    /// <summary>
+    /// The maximum HTTP request size in bytes.
+    /// </summary>
+    [JsonPropertyName("maxRequestSize")]
+    public long MaxRequestSize { get; set; }
+
+}
+
+/// <summary>
 /// Deployed decision requirements.
 /// </summary>
 public sealed class DeploymentDecisionRequirementsResult
@@ -9389,12 +9516,6 @@ public sealed class ElementInstanceResult
     /// </summary>
     [JsonPropertyName("incidentKey")]
     public IncidentKey? IncidentKey { get; set; }
-
-    /// <summary>
-    /// The agent instance key associated with this element instance.
-    /// </summary>
-    [JsonPropertyName("agentInstanceKey")]
-    public AgentInstanceKey? AgentInstanceKey { get; set; }
 
 }
 
@@ -18316,6 +18437,30 @@ public sealed class SystemConfigurationResponse
     [JsonPropertyName("jobMetrics")]
     public JobMetricsConfigurationResponse JobMetrics { get; set; } = null!;
 
+    /// <summary>
+    /// Configuration for active Camunda components in the deployment.
+    /// </summary>
+    [JsonPropertyName("components")]
+    public ComponentsConfigurationResponse Components { get; set; } = null!;
+
+    /// <summary>
+    /// Configuration for deployment characteristics.
+    /// </summary>
+    [JsonPropertyName("deployment")]
+    public DeploymentConfigurationResponse Deployment { get; set; } = null!;
+
+    /// <summary>
+    /// Configuration for authentication and session management.
+    /// </summary>
+    [JsonPropertyName("authentication")]
+    public AuthenticationConfigurationResponse Authentication { get; set; } = null!;
+
+    /// <summary>
+    /// Configuration for SaaS/cloud-specific settings.
+    /// </summary>
+    [JsonPropertyName("cloud")]
+    public CloudConfigurationResponse Cloud { get; set; } = null!;
+
 }
 
 /// <summary>
@@ -20431,5 +20576,19 @@ public sealed class VariableValueFilterProperty
     [JsonPropertyName("value")]
     public StringFilterProperty Value { get; set; } = null!;
 
+}
+
+/// <summary>
+/// A Camunda webapp component name.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum WebappComponent
+{
+    [JsonPropertyName("operate")]
+    Operate,
+    [JsonPropertyName("tasklist")]
+    Tasklist,
+    [JsonPropertyName("admin")]
+    Admin,
 }
 
