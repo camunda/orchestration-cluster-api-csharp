@@ -109,7 +109,7 @@ internal static class CSharpClientGenerator
                     c.Key.Contains("multipart", StringComparison.OrdinalIgnoreCase)) == true;
 
                 var bodySchemaRef = hasBody ? GetBodySchemaRef(op) : null;
-                var responseSchemaRef = GetResponseSchemaRef(op);
+                var responseSchemaRef = GetResponseSchemaRef(doc, op);
 
                 // Use pre-computed metadata for behavioral flags
                 var metaEntry = metadata.GetOperation(op.OperationId);
@@ -210,7 +210,7 @@ internal static class CSharpClientGenerator
         return null;
     }
 
-    private static string? GetResponseSchemaRef(OpenApiOperation op)
+    private static string? GetResponseSchemaRef(OpenApiDocument doc, OpenApiOperation op)
     {
         if (op.Responses == null)
             return null;
@@ -224,15 +224,28 @@ internal static class CSharpClientGenerator
             foreach (var (contentType, mediaType) in response.Content)
             {
                 // Binary (octet-stream) responses return byte[]
-                if (contentType.Contains("octet-stream", StringComparison.OrdinalIgnoreCase)
-                    || mediaType.Schema?.Format == "binary")
+                if (contentType.Contains("octet-stream", StringComparison.OrdinalIgnoreCase))
                     return "byte[]";
 
-                if (GetRefId(mediaType.Schema) != null)
-                    return SanitizeTypeName(GetRefId(mediaType.Schema)!);
+                // Resolve $ref before checking format so that referenced
+                // schemas with format: binary are detected correctly.
+                var schema = mediaType.Schema;
+                var refId = GetRefId(schema);
+                if (refId != null
+                    && doc.Components?.Schemas != null
+                    && doc.Components.Schemas.TryGetValue(refId, out var resolved))
+                {
+                    if (resolved.Format == "binary")
+                        return "byte[]";
+                    return SanitizeTypeName(refId);
+                }
+
+                if (schema?.Format == "binary")
+                    return "byte[]";
+
                 // Only create an inline class when the schema has actual properties.
                 // Bare {type: object} with no properties maps to 'object' via MapPrimitiveType.
-                if (mediaType.Schema?.Properties?.Count > 0)
+                if (schema?.Properties?.Count > 0)
                     return SanitizeOperationId(op.OperationId!) + "Response";
             }
         }
