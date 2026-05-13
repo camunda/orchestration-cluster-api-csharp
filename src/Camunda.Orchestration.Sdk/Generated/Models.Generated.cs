@@ -18028,3 +18028,552 @@ public sealed class VariableValueFilterProperty
 
 }
 
+/// <summary>
+/// CreateMappingRuleResponse
+/// </summary>
+public sealed class CreateMappingRuleResponse
+{
+    /// <summary>
+    /// The name of the claim to map.
+    /// </summary>
+    [JsonPropertyName("claimName")]
+    public string ClaimName { get; set; } = null!;
+
+    /// <summary>
+    /// The value of the claim to map.
+    /// </summary>
+    [JsonPropertyName("claimValue")]
+    public string ClaimValue { get; set; } = null!;
+
+    /// <summary>
+    /// The name of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = null!;
+
+    /// <summary>
+    /// The unique ID of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("mappingRuleId")]
+    public string MappingRuleId { get; set; } = null!;
+
+}
+
+/// <summary>
+/// GetUserResponse
+/// </summary>
+public sealed class GetUserResponse
+{
+    /// <summary>
+    /// The unique name of a user.
+    /// </summary>
+    [JsonPropertyName("username")]
+    public Username Username { get; set; }
+
+    /// <summary>
+    /// The name of the user.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// The email of the user.
+    /// </summary>
+    [JsonPropertyName("email")]
+    public string? Email { get; set; }
+
+}
+
+/// <summary>
+/// SearchClientsForGroupRequest
+/// </summary>
+public sealed class SearchClientsForGroupRequest
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchClientsForGroupResponse
+/// </summary>
+public sealed class SearchClientsForGroupResponse
+{
+    /// <summary>
+    /// The matching client IDs.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupClientResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchClientsForRoleRequest
+/// </summary>
+public sealed class SearchClientsForRoleRequest
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchClientsForRoleResponse
+/// </summary>
+public sealed class SearchClientsForRoleResponse
+{
+    /// <summary>
+    /// The matching clients.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupClientResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchClientsForTenantRequest
+/// </summary>
+public sealed class SearchClientsForTenantRequest
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchClientsForTenantResponse
+/// </summary>
+public sealed class SearchClientsForTenantResponse
+{
+    /// <summary>
+    /// The matching clients.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupClientResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchMappingRuleResponse
+/// </summary>
+public sealed class SearchMappingRuleResponse
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchMappingRulesForGroupResponse
+/// </summary>
+public sealed class SearchMappingRulesForGroupResponse
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchMappingRulesForRoleResponse
+/// </summary>
+public sealed class SearchMappingRulesForRoleResponse
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchMappingRulesForTenantResponse
+/// </summary>
+public sealed class SearchMappingRulesForTenantResponse
+{
+    /// <summary>
+    /// The matching mapping rules.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<MappingRuleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchRolesForGroupResponse
+/// </summary>
+public sealed class SearchRolesForGroupResponse
+{
+    /// <summary>
+    /// The matching roles.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<RoleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchRolesForTenantResponse
+/// </summary>
+public sealed class SearchRolesForTenantResponse
+{
+    /// <summary>
+    /// The matching roles.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<RoleResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchUsersForGroupRequest
+/// </summary>
+public sealed class SearchUsersForGroupRequest
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchUsersForGroupResponse
+/// </summary>
+public sealed class SearchUsersForGroupResponse
+{
+    /// <summary>
+    /// The matching members.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupUserResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchUsersForRoleRequest
+/// </summary>
+public sealed class SearchUsersForRoleRequest
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchUsersForRoleResponse
+/// </summary>
+public sealed class SearchUsersForRoleResponse
+{
+    /// <summary>
+    /// The matching users.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupUserResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchUsersForTenantRequest
+/// </summary>
+public sealed class SearchUsersForTenantRequest
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// SearchUsersForTenantResponse
+/// </summary>
+public sealed class SearchUsersForTenantResponse
+{
+    /// <summary>
+    /// The matching users.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<GroupUserResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SearchUsersResponse
+/// </summary>
+public sealed class SearchUsersResponse
+{
+    /// <summary>
+    /// The matching users.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<UserCreateResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// User task effective variable search query request. Uses offset-based pagination only.
+/// 
+/// </summary>
+public sealed class SearchUserTaskEffectiveVariablesRequest
+{
+    /// <summary>
+    /// Pagination parameters.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public OffsetPagination? Page { get; set; }
+
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The user task variable search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public UserTaskVariableFilter? Filter { get; set; }
+
+}
+
+/// <summary>
+/// User task search query request.
+/// </summary>
+public sealed class SearchUserTaskVariablesRequest
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The user task variable search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public UserTaskVariableFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// Variable search query request.
+/// </summary>
+public sealed class SearchVariablesRequest
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AuditLogSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The variable search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public VariableFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// UpdateMappingRuleResponse
+/// </summary>
+public sealed class UpdateMappingRuleResponse
+{
+    /// <summary>
+    /// The name of the claim to map.
+    /// </summary>
+    [JsonPropertyName("claimName")]
+    public string ClaimName { get; set; } = null!;
+
+    /// <summary>
+    /// The value of the claim to map.
+    /// </summary>
+    [JsonPropertyName("claimValue")]
+    public string ClaimValue { get; set; } = null!;
+
+    /// <summary>
+    /// The name of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = null!;
+
+    /// <summary>
+    /// The unique ID of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("mappingRuleId")]
+    public string MappingRuleId { get; set; } = null!;
+
+}
+
+/// <summary>
+/// UpdateUserResponse
+/// </summary>
+public sealed class UpdateUserResponse
+{
+    /// <summary>
+    /// The unique name of a user.
+    /// </summary>
+    [JsonPropertyName("username")]
+    public Username Username { get; set; }
+
+    /// <summary>
+    /// The name of the user.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// The email of the user.
+    /// </summary>
+    [JsonPropertyName("email")]
+    public string? Email { get; set; }
+
+}
+

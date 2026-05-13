@@ -2895,7 +2895,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DeleteDecisionInstanceRequest"
+                "type": "object",
+                "nullable": true,
+                "additionalProperties": false,
+                "properties": {
+                  "operationReference": {
+                    "$ref": "#/components/schemas/OperationReference"
+                  }
+                }
               }
             }
           }
@@ -5252,7 +5259,36 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GroupClientSearchQueryRequest"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchQueryRequest"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "sort": {
+                    "description": "Sort field criteria.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "The field to sort by.",
+                          "type": "string",
+                          "enum": [
+                            "clientId"
+                          ]
+                        },
+                        "order": {
+                          "$ref": "#/components/schemas/SortOrderEnum"
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
@@ -5263,7 +5299,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GroupClientSearchResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching client IDs.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "description": "The ID of the client.",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "clientId"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -5547,7 +5609,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GroupMappingRuleSearchResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching mapping rules.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MappingRuleResult"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -5831,7 +5910,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GroupRoleSearchResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching roles.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RoleResult"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -5922,7 +6018,36 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GroupUserSearchQueryRequest"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchQueryRequest"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "sort": {
+                    "description": "Sort field criteria.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "The field to sort by.",
+                          "type": "string",
+                          "enum": [
+                            "username"
+                          ]
+                        },
+                        "order": {
+                          "$ref": "#/components/schemas/SortOrderEnum"
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
@@ -5933,7 +6058,32 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GroupUserSearchResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching members.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "username": {
+                            "$ref": "#/components/schemas/Username"
+                          }
+                        },
+                        "required": [
+                          "username"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -7605,7 +7755,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MappingRuleCreateResult"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/MappingRuleCreateUpdateResult"
+                    }
+                  ]
                 }
               }
             }
@@ -7678,7 +7833,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MappingRuleSearchQueryResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching mapping rules.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MappingRuleResult"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -7769,7 +7941,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MappingRuleUpdateResult"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/MappingRuleCreateUpdateResult"
+                    }
+                  ]
                 }
               }
             }
@@ -9704,7 +9881,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CancelProcessInstanceRequest"
+                "type": "object",
+                "nullable": true,
+                "additionalProperties": false,
+                "properties": {
+                  "operationReference": {
+                    "$ref": "#/components/schemas/OperationReference"
+                  }
+                }
               }
             }
           }
@@ -9803,7 +9987,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DeleteProcessInstanceRequest"
+                "type": "object",
+                "nullable": true,
+                "additionalProperties": false,
+                "properties": {
+                  "operationReference": {
+                    "$ref": "#/components/schemas/OperationReference"
+                  }
+                }
               }
             }
           }
@@ -11053,7 +11244,36 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RoleClientSearchQueryRequest"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchQueryRequest"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "sort": {
+                    "description": "Sort field criteria.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "The field to sort by.",
+                          "type": "string",
+                          "enum": [
+                            "clientId"
+                          ]
+                        },
+                        "order": {
+                          "$ref": "#/components/schemas/SortOrderEnum"
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
@@ -11064,7 +11284,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoleClientSearchResult"
+                  "type": "object",
+                  "required": [
+                    "items"
+                  ],
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching clients.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "description": "The ID of the client.",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "clientId"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11632,7 +11878,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoleMappingRuleSearchResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching mapping rules.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MappingRuleResult"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11905,7 +12168,36 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RoleUserSearchQueryRequest"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchQueryRequest"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "sort": {
+                    "description": "Sort field criteria.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "The field to sort by.",
+                          "type": "string",
+                          "enum": [
+                            "username"
+                          ]
+                        },
+                        "order": {
+                          "$ref": "#/components/schemas/SortOrderEnum"
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
@@ -11916,7 +12208,32 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoleUserSearchResult"
+                  "type": "object",
+                  "required": [
+                    "items"
+                  ],
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching users.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "username": {
+                            "$ref": "#/components/schemas/Username"
+                          }
+                        },
+                        "required": [
+                          "username"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -13006,7 +13323,37 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TenantClientSearchQueryRequest"
+                "additionalProperties": false,
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchQueryRequest"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "sort": {
+                    "description": "Sort field criteria.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "The field to sort by.",
+                          "type": "string",
+                          "enum": [
+                            "clientId"
+                          ]
+                        },
+                        "order": {
+                          "$ref": "#/components/schemas/SortOrderEnum"
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
@@ -13017,7 +13364,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenantClientSearchResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching clients.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "description": "The ID of the client.",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "clientId"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -13451,7 +13824,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenantMappingRuleSearchResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching mapping rules.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MappingRuleResult"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -13668,7 +14058,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenantRoleSearchResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching roles.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RoleResult"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -13874,7 +14281,37 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TenantUserSearchQueryRequest"
+                "additionalProperties": false,
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchQueryRequest"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "sort": {
+                    "description": "Sort field criteria.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "The field to sort by.",
+                          "type": "string",
+                          "enum": [
+                            "username"
+                          ]
+                        },
+                        "order": {
+                          "$ref": "#/components/schemas/SortOrderEnum"
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
@@ -13885,7 +14322,32 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenantUserSearchResult"
+                  "required": [
+                    "items"
+                  ],
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching users.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "username": {
+                            "$ref": "#/components/schemas/Username"
+                          }
+                        },
+                        "required": [
+                          "username"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14242,7 +14704,44 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserSearchResult"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SearchQueryResponse"
+                    }
+                  ],
+                  "required": [
+                    "items"
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The matching users.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "username": {
+                            "$ref": "#/components/schemas/Username"
+                          },
+                          "name": {
+                            "description": "The name of the user.",
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "email": {
+                            "description": "The email of the user.",
+                            "nullable": true,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "username",
+                          "name",
+                          "email"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14324,7 +14823,27 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResult"
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "$ref": "#/components/schemas/Username"
+                    },
+                    "name": {
+                      "description": "The name of the user.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "email": {
+                      "description": "The email of the user.",
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "username",
+                    "name",
+                    "email"
+                  ]
                 }
               }
             }
@@ -14414,7 +14933,27 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserUpdateResult"
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "$ref": "#/components/schemas/Username"
+                    },
+                    "name": {
+                      "description": "The name of the user.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "email": {
+                      "description": "The email of the user.",
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "username",
+                    "name",
+                    "email"
+                  ]
                 }
               }
             }
@@ -15235,7 +15774,54 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserTaskEffectiveVariableSearchQueryRequest"
+                "description": "User task effective variable search query request. Uses offset-based pagination only.\n",
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "description": "Pagination parameters.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OffsetPagination"
+                      }
+                    ]
+                  },
+                  "sort": {
+                    "description": "Sort field criteria.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "The field to sort by.",
+                          "type": "string",
+                          "enum": [
+                            "value",
+                            "name",
+                            "tenantId",
+                            "variableKey",
+                            "scopeKey",
+                            "processInstanceKey"
+                          ]
+                        },
+                        "order": {
+                          "$ref": "#/components/schemas/SortOrderEnum"
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ]
+                    }
+                  },
+                  "filter": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/UserTaskVariableFilter"
+                      }
+                    ],
+                    "description": "The user task variable search filters."
+                  }
+                }
               }
             }
           }
@@ -15404,7 +15990,51 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserTaskVariableSearchQueryRequest"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchQueryRequest"
+                  }
+                ],
+                "description": "User task search query request.",
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "sort": {
+                    "description": "Sort field criteria.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "The field to sort by.",
+                          "type": "string",
+                          "enum": [
+                            "value",
+                            "name",
+                            "tenantId",
+                            "variableKey",
+                            "scopeKey",
+                            "processInstanceKey"
+                          ]
+                        },
+                        "order": {
+                          "$ref": "#/components/schemas/SortOrderEnum"
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ]
+                    }
+                  },
+                  "filter": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/UserTaskVariableFilter"
+                      }
+                    ],
+                    "description": "The user task variable search filters."
+                  }
+                }
               }
             }
           }
@@ -15469,7 +16099,51 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/VariableSearchQuery"
+                "description": "Variable search query request.",
+                "additionalProperties": false,
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchQueryRequest"
+                  }
+                ],
+                "properties": {
+                  "sort": {
+                    "description": "Sort field criteria.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "The field to sort by.",
+                          "type": "string",
+                          "enum": [
+                            "value",
+                            "name",
+                            "tenantId",
+                            "variableKey",
+                            "scopeKey",
+                            "processInstanceKey"
+                          ]
+                        },
+                        "order": {
+                          "$ref": "#/components/schemas/SortOrderEnum"
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ]
+                    }
+                  },
+                  "filter": {
+                    "description": "The variable search filters.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/VariableFilter"
+                      }
+                    ]
+                  }
+                }
               }
             }
           }
