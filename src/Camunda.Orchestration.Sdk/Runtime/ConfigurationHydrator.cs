@@ -130,7 +130,7 @@ public static class ConfigurationHydrator
         // IConfiguration section (appsettings.json etc.) — between env and overrides in precedence
         if (configuration != null)
         {
-            var configValues = ExtractFromConfiguration((IConfiguration)configuration);
+            var configValues = ExtractFromConfiguration(configuration);
             foreach (var (k, v) in configValues)
             {
                 // Configuration wins over env vars but loses to explicit overrides
