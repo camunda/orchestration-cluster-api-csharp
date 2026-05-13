@@ -2862,13 +2862,13 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<object> GetDocumentAsync(DocumentId documentId, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
+    public async Task<byte[]> GetDocumentAsync(DocumentId documentId, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (storeId != null) queryParts.Add($"storeId={Uri.EscapeDataString(storeId.ToString()!)}");
         if (contentHash != null) queryParts.Add($"contentHash={Uri.EscapeDataString(contentHash.ToString()!)}");
         var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}";
-        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getDocument", false, ct);
+        return await InvokeWithRetryAsync(() => SendBinaryAsync(HttpMethod.Get, path, null, ct), "getDocument", false, ct);
     }
 
     /// <summary>
@@ -4087,9 +4087,16 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, CancellationToken ct = default)
+    public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, ConsistencyOptions<ResourceResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getResource", true,
+                () => InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct),
+                consistency!, _logger, ct);
+        }
+
         return await InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct);
     }
 
@@ -4126,9 +4133,16 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, CancellationToken ct = default)
+    public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/content";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getResourceContent", true,
+                () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct),
+                consistency!, _logger, ct);
+        }
+
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct);
     }
 

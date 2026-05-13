@@ -243,9 +243,10 @@ internal static class CSharpClientGenerator
                 if (schema?.Format == "binary")
                     return "byte[]";
 
-                // Only create an inline class when the schema has actual properties.
-                // Bare {type: object} with no properties maps to 'object' via MapPrimitiveType.
-                if (schema?.Properties?.Count > 0)
+                // Preserve the original stable/9 response type logic for non-binary schemas.
+                if (GetRefId(mediaType.Schema) != null)
+                    return SanitizeTypeName(GetRefId(mediaType.Schema)!);
+                if (SchemaTypeName(mediaType.Schema) == "object" || mediaType.Schema?.Properties?.Count > 0)
                     return SanitizeOperationId(op.OperationId!) + "Response";
             }
         }
