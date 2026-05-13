@@ -1,3 +1,18 @@
+# [9.0.0-alpha.14](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.13...v9.0.0-alpha.14) (2026-05-13)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([fdd209c](https://github.com/camunda/orchestration-cluster-api-csharp/commit/fdd209cd82f9554d85608ec2a3c82caa7c99f1d9))
+* resolve $ref schemas for binary detection and add SendBinaryAsync tests ([f8b0af8](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f8b0af8ab5367c8e4643f40a4f688da3a66085d6))
+* return byte[] for binary (octet-stream) response operations ([586a926](https://github.com/camunda/orchestration-cluster-api-csharp/commit/586a9262b2b12c7cb1f99c54279bcd32129f010a))
+* return byte[] for binary (octet-stream) response operations ([e5aaaa2](https://github.com/camunda/orchestration-cluster-api-csharp/commit/e5aaaa2e199bdbdcf0ac7f19bffed9df27f43759))
+
+
+### Features
+
+* add SDK examples for new operations ([824564d](https://github.com/camunda/orchestration-cluster-api-csharp/commit/824564d35285292eeb048423522e1c4419e0c7a4))
+
 # [9.0.0-alpha.13](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.12...v9.0.0-alpha.13) (2026-05-11)
 
 
