@@ -315,6 +315,256 @@ public class GeneratorSafeEmitTests
         return SyntaxFacts.IsValidIdentifier(probe);
     }
 
+    // ── Defect class 3: unsanitised spec strings in string literals ──
+    //
+    // The following tests target bypass paths where spec-controlled strings
+    // flow into C# string literals without SafeCSharpStringLiteral routing.
+    // Each test uses the ScanGeneratedSource backstop and Roslyn structural
+    // assertions to verify the generated output is safe. Tests whose hostile
+    // payload reaches the generator (operationId, path, deprecatedInVersion)
+    // fail on unpatched code; tests whose payload is rejected by the upstream
+    // OpenAPI parser (query param name with quotes, backslash in path) serve
+    // as regression guards in case that upstream rejection ever changes.
+
+    // Hostile payload: U+2028 breaks a regular C# string literal and injects
+    // executable code on the next line.
+    private const string HostilePayload = "clean\u2028; System.IO.File.Delete(\"pwned\"); //";
+
+    [Fact]
+    public void Generator_sanitises_hostile_operationId_in_string_literals()
+    {
+        // operationId flows into InvokeWithRetryAsync / EventualPoller string
+        // arguments. A hostile operationId with U+2028 would break the string
+        // literal and inject code. After fix, the generator must sanitize and
+        // complete successfully.
+        using var tmp = TempDir.Create();
+        var spec = MinimalBundledSpec.Build(operationId: HostilePayload);
+        File.WriteAllText(tmp.SpecPath, spec);
+        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+
+        // Must complete — sanitization, not rejection.
+        CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir);
+
+        // Every generated file must be free of forbidden code points AND
+        // structurally contain only the intended declarations.
+        foreach (var file in Directory.GetFiles(tmp.OutputDir, "*.cs"))
+        {
+            var content = File.ReadAllText(file);
+            SafeEmit.ScanGeneratedSource(file, content);
+            AssertNoInjectedDeclarations(content, file);
+        }
+    }
+
+    [Fact]
+    public void Generator_sanitises_hostile_path_in_string_literals()
+    {
+        // op.Path flows into `var path = $"..."` verbatim. A hostile path
+        // with U+2028 would break the interpolated string literal. After fix,
+        // the generator must sanitize and complete successfully.
+        using var tmp = TempDir.Create();
+        var spec = MinimalBundledSpec.Build(path: "/items/\u2028\"; File.Delete(\"x\"); var x = $\"");
+        File.WriteAllText(tmp.SpecPath, spec);
+        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+
+        // Must complete — sanitization, not rejection.
+        CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir);
+
+        foreach (var file in Directory.GetFiles(tmp.OutputDir, "*.cs"))
+        {
+            var content = File.ReadAllText(file);
+            SafeEmit.ScanGeneratedSource(file, content);
+            AssertNoInjectedDeclarations(content, file);
+        }
+    }
+
+    [Fact]
+    public void Generator_sanitises_hostile_query_param_name_in_string_literals()
+    {
+        // q.Name flows into query-string construction. A param name containing
+        // `"` or `\` would break the C# string literal; braces could inject
+        // interpolation expressions. After the fix the generator uses
+        // concatenation (not interpolation) with SafeCSharpStringLiteral.
+        using var tmp = TempDir.Create();
+        var spec = MinimalBundledSpec.Build(
+            queryParamNames: ["filter\"]; File.Delete(\"pwned"]);
+        File.WriteAllText(tmp.SpecPath, spec);
+        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+
+        var ex = Record.Exception(() =>
+            CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir));
+
+        if (ex != null)
+        {
+            // Upstream OpenAPI parser may reject the hostile parameter name.
+            // Verify it's not an unrelated crash in our generator code.
+            Assert.False(
+                ex is NullReferenceException or IndexOutOfRangeException
+                    or ArgumentNullException or StackOverflowException,
+                $"Unexpected {ex.GetType().Name} in generator: {ex.Message}");
+            return;
+        }
+
+        foreach (var file in Directory.GetFiles(tmp.OutputDir, "*.cs"))
+        {
+            var source = File.ReadAllText(file);
+            SafeEmit.ScanGeneratedSource(file, source);
+            AssertNoInjectedDeclarations(source, file);
+        }
+    }
+
+    [Fact]
+    public void Generator_sanitises_hostile_deprecatedInVersion_in_obsolete_attribute()
+    {
+        // deprecatedInVersion flows into [Obsolete("Deprecated since {v}")]
+        // verbatim. A hostile version string with U+2028 or a `"` would
+        // break the attribute string literal. After fix, the generator must
+        // sanitize and complete successfully.
+        using var tmp = TempDir.Create();
+        var spec = MinimalBundledSpec.Build(
+            enumValues: ["Active", "Deprecated"]);
+        File.WriteAllText(tmp.SpecPath, spec);
+        var metadata = MinimalBundledSpec.BuildMetadataWithDeprecatedEnum(
+            "Thing", "Deprecated", HostilePayload);
+        File.WriteAllText(tmp.MetadataPath, metadata);
+
+        // Must complete — sanitization, not rejection.
+        CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir);
+
+        foreach (var file in Directory.GetFiles(tmp.OutputDir, "*.cs"))
+        {
+            var content = File.ReadAllText(file);
+            SafeEmit.ScanGeneratedSource(file, content);
+            AssertNoInjectedDeclarations(content, file);
+        }
+    }
+
+    [Fact]
+    public void Generator_sanitises_quote_in_operationId()
+    {
+        // A `"` in the operationId breaks the string literal even without
+        // Unicode line-terminators. After the fix, SafeCSharpStringLiteral
+        // escapes the quote and generation must succeed.
+        using var tmp = TempDir.Create();
+        var spec = MinimalBundledSpec.Build(operationId: "list\"Things");
+        File.WriteAllText(tmp.SpecPath, spec);
+        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+
+        var ex = Record.Exception(() =>
+            CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir));
+
+        if (ex != null)
+        {
+            // Upstream OpenAPI parser may reject the hostile operationId.
+            // Verify it's not an unrelated crash in our generator code.
+            Assert.False(
+                ex is NullReferenceException or IndexOutOfRangeException
+                    or ArgumentNullException or StackOverflowException,
+                $"Unexpected {ex.GetType().Name} in generator: {ex.Message}");
+            return;
+        }
+
+        foreach (var file in Directory.GetFiles(tmp.OutputDir, "*.cs"))
+        {
+            var source = File.ReadAllText(file);
+            SafeEmit.ScanGeneratedSource(file, source);
+            AssertNoInjectedDeclarations(source, file);
+        }
+    }
+
+    [Fact]
+    public void Generator_sanitises_backslash_in_path()
+    {
+        // A `\` in the path produces invalid escape sequences in the string literal.
+        // After the fix, SafeCSharpStringLiteral escapes the backslash.
+        using var tmp = TempDir.Create();
+        var spec = MinimalBundledSpec.Build(path: "/items/\\nfoo");
+        File.WriteAllText(tmp.SpecPath, spec);
+        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+
+        var ex = Record.Exception(() =>
+            CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir));
+
+        if (ex != null)
+        {
+            // Upstream OpenAPI parser may reject the hostile path.
+            // Verify it's not an unrelated crash in our generator code.
+            Assert.False(
+                ex is NullReferenceException or IndexOutOfRangeException
+                    or ArgumentNullException or StackOverflowException,
+                $"Unexpected {ex.GetType().Name} in generator: {ex.Message}");
+            return;
+        }
+
+        foreach (var file in Directory.GetFiles(tmp.OutputDir, "*.cs"))
+        {
+            var source = File.ReadAllText(file);
+            SafeEmit.ScanGeneratedSource(file, source);
+            AssertNoInjectedDeclarations(source, file);
+        }
+    }
+
+    /// <summary>
+    /// Roslyn structural assertion (follow-up item 3 from the security finding):
+    /// parse the generated source and verify that only the expected top-level
+    /// declarations exist. If hostile content escaped sanitization, additional
+    /// classes, static constructors, or invocation statements would appear in
+    /// the syntax tree. This catches structural injection that the character-level
+    /// <see cref="SafeEmit.ScanGeneratedSource"/> backstop might miss (e.g. a
+    /// purely-ASCII payload injected via an unescaped <c>"</c> or <c>\</c>).
+    /// </summary>
+    private static void AssertNoInjectedDeclarations(string source, string filePath)
+    {
+        var tree = CSharpSyntaxTree.ParseText(source);
+        var diagnostics = tree.GetDiagnostics()
+            .Where(d => d.Severity == DiagnosticSeverity.Error)
+            .ToList();
+        Assert.True(
+            diagnostics.Count == 0,
+            $"Generated {Path.GetFileName(filePath)} has parse errors — possible injection: " +
+            string.Join("; ", diagnostics.Select(d => d.GetMessage(System.Globalization.CultureInfo.InvariantCulture))));
+
+        var root = tree.GetCompilationUnitRoot();
+
+        // No static constructors should exist — this is the primary RCE vector
+        // (code runs on first type access).
+        var staticCtors = root.DescendantNodes()
+            .OfType<ConstructorDeclarationSyntax>()
+            .Where(c => c.Modifiers.Any(SyntaxKind.StaticKeyword))
+            .ToList();
+        Assert.True(
+            staticCtors.Count == 0,
+            $"Generated {Path.GetFileName(filePath)} contains {staticCtors.Count} static constructor(s) — " +
+            "this is the primary injection vector for spec-content RCE.");
+
+        // No top-level statements should exist outside the expected class / struct / enum.
+        var topLevelStatements = root.DescendantNodes()
+            .OfType<GlobalStatementSyntax>()
+            .ToList();
+        Assert.True(
+            topLevelStatements.Count == 0,
+            $"Generated {Path.GetFileName(filePath)} contains {topLevelStatements.Count} top-level statement(s) — " +
+            "likely injected via string-literal breakout.");
+
+        // Verify every type name is a valid C# identifier (no injected tokens).
+        foreach (var node in root.DescendantNodes())
+        {
+            var name = node switch
+            {
+                ClassDeclarationSyntax cls => cls.Identifier.ValueText,
+                StructDeclarationSyntax st => st.Identifier.ValueText,
+                EnumDeclarationSyntax en => en.Identifier.ValueText,
+                _ => null,
+            };
+            if (name == null)
+                continue;
+
+            Assert.True(
+                IsParseableIdentifier(name),
+                $"Generated type \"{name}\" in {Path.GetFileName(filePath)} is not a valid C# identifier — " +
+                "possible injection via spec-controlled schema name.");
+        }
+    }
+
     private sealed class TempDir : IDisposable
     {
         public string Root { get; }
@@ -366,7 +616,13 @@ internal static class MinimalBundledSpec
         }
         """;
 
-    public static string Build(string? schemaDescription = null, string[]? propertyNames = null)
+    public static string Build(
+        string? schemaDescription = null,
+        string[]? propertyNames = null,
+        string? operationId = null,
+        string? path = null,
+        string[]? queryParamNames = null,
+        string[]? enumValues = null)
     {
         var props = propertyNames ?? new[] { "name" };
         var propsJson = string.Join(",\n        ", props.Select(p =>
@@ -374,15 +630,59 @@ internal static class MinimalBundledSpec
         var descPart = schemaDescription == null
             ? ""
             : $"\"description\": {System.Text.Json.JsonSerializer.Serialize(schemaDescription)},";
+        var opId = operationId ?? "listThings";
+        var opPath = path ?? "/things";
+        var queryParams = queryParamNames ?? [];
+        var queryParamsJson = queryParams.Length > 0
+            ? string.Join(",\n", queryParams.Select(q =>
+                $$"""
+                    {
+                      "name": {{System.Text.Json.JsonSerializer.Serialize(q)}},
+                      "in": "query",
+                      "schema": { "type": "string" }
+                    }
+                """))
+            : "";
+        var parametersSection = queryParams.Length > 0
+            ? $"\"parameters\": [\n{queryParamsJson}\n                    ],"
+            : "";
+
+        // If enumValues is provided, make the schema an enum instead of object
+        string schemaBlock;
+        if (enumValues != null)
+        {
+            var enumJson = string.Join(", ", enumValues.Select(v =>
+                System.Text.Json.JsonSerializer.Serialize(v)));
+            schemaBlock = $$"""
+                  "Thing": {
+                    "type": "string",
+                    {{descPart}}
+                    "enum": [{{enumJson}}]
+                  }
+            """;
+        }
+        else
+        {
+            schemaBlock = $$"""
+                  "Thing": {
+                    "type": "object",
+                    {{descPart}}
+                    "properties": {
+                      {{propsJson}}
+                    }
+                  }
+            """;
+        }
 
         return $$"""
             {
               "openapi": "3.0.3",
               "info": { "title": "Test", "version": "1.0.0" },
               "paths": {
-                "/things": {
+                "{{System.Text.Json.JsonEncodedText.Encode(opPath)}}": {
                   "get": {
-                    "operationId": "listThings",
+                    "operationId": {{System.Text.Json.JsonSerializer.Serialize(opId)}},
+                    {{parametersSection}}
                     "responses": {
                       "200": {
                         "description": "ok",
@@ -398,15 +698,39 @@ internal static class MinimalBundledSpec
               },
               "components": {
                 "schemas": {
-                  "Thing": {
-                    "type": "object",
-                    {{descPart}}
-                    "properties": {
-                      {{propsJson}}
-                    }
-                  }
+            {{schemaBlock}}
                 }
               }
+            }
+            """;
+    }
+
+    /// <summary>
+    /// Build metadata JSON with deprecated enum members for testing hostile
+    /// deprecatedInVersion strings.
+    /// </summary>
+    public static string BuildMetadataWithDeprecatedEnum(
+        string schemaName, string memberValue, string deprecatedInVersion)
+    {
+        return $$"""
+            {
+              "schemaVersion": "1",
+              "specHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "semanticKeys": [],
+              "unions": [],
+              "operations": [],
+              "deprecatedEnumMembers": [
+                {
+                  "schemaName": {{System.Text.Json.JsonSerializer.Serialize(schemaName)}},
+                  "enumValues": [],
+                  "deprecatedMembers": [
+                    {
+                      "name": {{System.Text.Json.JsonSerializer.Serialize(memberValue)}},
+                      "deprecatedInVersion": {{System.Text.Json.JsonSerializer.Serialize(deprecatedInVersion)}}
+                    }
+                  ]
+                }
+              ]
             }
             """;
     }
