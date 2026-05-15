@@ -1,3 +1,12 @@
+# [9.0.0-alpha.15](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.14...v9.0.0-alpha.15) (2026-05-15)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([76c4614](https://github.com/camunda/orchestration-cluster-api-csharp/commit/76c4614e17573458ba7b11c66d91e5720dd9fe08))
+* sanitize remaining spec-controlled strings in generator output ([e1bbe6d](https://github.com/camunda/orchestration-cluster-api-csharp/commit/e1bbe6d8cf5fb640cc8644c379fcd989a33893a3))
+* sanitize remaining spec-controlled strings in generator output ([6e9ba17](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6e9ba17ae54fecefe497b92ba1e8645d7e19e266)), closes [camunda/security-testing-findings#65](https://github.com/camunda/security-testing-findings/issues/65)
+
 # [9.0.0-alpha.14](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.13...v9.0.0-alpha.14) (2026-05-13)
 
 
