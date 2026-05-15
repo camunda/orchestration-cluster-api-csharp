@@ -3232,13 +3232,13 @@ public readonly record struct AgentInstanceKey : global::Camunda.Orchestration.S
     /// </summary>
     public static AgentInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new AgentInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -4154,13 +4154,13 @@ public readonly record struct AuditLogKey : global::Camunda.Orchestration.Sdk.IC
     /// </summary>
     public static AuditLogKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new AuditLogKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -4739,13 +4739,13 @@ public readonly record struct AuthorizationKey : global::Camunda.Orchestration.S
     /// </summary>
     public static AuthorizationKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuthorizationKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuthorizationKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new AuthorizationKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6114,13 +6114,13 @@ public readonly record struct ClientId : global::Camunda.Orchestration.Sdk.ICamu
     /// </summary>
     public static ClientId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClientId", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClientId", pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
         return new ClientId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6206,13 +6206,13 @@ public readonly record struct ClusterVariableName : global::Camunda.Orchestratio
     /// </summary>
     public static ClusterVariableName AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClusterVariableName", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClusterVariableName", pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
         return new ClusterVariableName(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -6558,13 +6558,13 @@ public readonly record struct ConditionalEvaluationKey : global::Camunda.Orchest
     /// </summary>
     public static ConditionalEvaluationKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ConditionalEvaluationKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ConditionalEvaluationKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ConditionalEvaluationKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7080,13 +7080,13 @@ public readonly record struct DecisionDefinitionId : global::Camunda.Orchestrati
     /// </summary>
     public static DecisionDefinitionId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionId", pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionId", pattern: "^[\\p{L}_][\\p{L}\\p{N}_\\-\\.]*$", minLength: 1);
         return new DecisionDefinitionId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[\\p{L}_][\\p{L}\\p{N}_\\-\\.]*$", minLength: 1);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7108,13 +7108,13 @@ public readonly record struct DecisionDefinitionKey : global::Camunda.Orchestrat
     /// </summary>
     public static DecisionDefinitionKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionDefinitionKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7404,13 +7404,13 @@ public readonly record struct DecisionEvaluationInstanceKey : global::Camunda.Or
     /// </summary>
     public static DecisionEvaluationInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKey", pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKey", pattern: "^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
         return new DecisionEvaluationInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7432,13 +7432,13 @@ public readonly record struct DecisionEvaluationInstanceKeyExactMatch : global::
     /// </summary>
     public static DecisionEvaluationInstanceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKeyExactMatch", pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationInstanceKeyExactMatch", pattern: "^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
         return new DecisionEvaluationInstanceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[0-9]+-[0-9]+$", minLength: 3, maxLength: 30);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7513,13 +7513,13 @@ public readonly record struct DecisionEvaluationKey : global::Camunda.Orchestrat
     /// </summary>
     public static DecisionEvaluationKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionEvaluationKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7860,13 +7860,13 @@ public readonly record struct DecisionInstanceKey : global::Camunda.Orchestratio
     /// </summary>
     public static DecisionInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionInstanceKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -8206,13 +8206,13 @@ public readonly record struct DecisionRequirementsKey : global::Camunda.Orchestr
     /// </summary>
     public static DecisionRequirementsKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionRequirementsKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionRequirementsKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionRequirementsKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -8655,13 +8655,13 @@ public readonly record struct DeploymentKey : global::Camunda.Orchestration.Sdk.
     /// </summary>
     public static DeploymentKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DeploymentKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DeploymentKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DeploymentKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9348,13 +9348,13 @@ public readonly record struct ElementInstanceKey : global::Camunda.Orchestration
     /// </summary>
     public static ElementInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ElementInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9685,13 +9685,13 @@ public readonly record struct EndCursor : global::Camunda.Orchestration.Sdk.ICam
     /// </summary>
     public static EndCursor AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "EndCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "EndCursor", pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
         return new EndCursor(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -10121,13 +10121,13 @@ public readonly record struct FormKey : global::Camunda.Orchestration.Sdk.ICamun
     /// </summary>
     public static FormKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "FormKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "FormKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new FormKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -10313,13 +10313,13 @@ public readonly record struct GlobalListenerId : global::Camunda.Orchestration.S
     /// </summary>
     public static GlobalListenerId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerId", pattern: @"^[a-zA-Z0-9_~@.+\-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "GlobalListenerId", pattern: "^[a-zA-Z0-9_~@.+\\-]+$", minLength: 1, maxLength: 256);
         return new GlobalListenerId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+\-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[a-zA-Z0-9_~@.+\\-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -11322,13 +11322,13 @@ public readonly record struct IncidentKey : global::Camunda.Orchestration.Sdk.IC
     /// </summary>
     public static IncidentKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "IncidentKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "IncidentKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new IncidentKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -12303,13 +12303,13 @@ public readonly record struct JobKey : global::Camunda.Orchestration.Sdk.ICamund
     /// </summary>
     public static JobKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new JobKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -13507,13 +13507,13 @@ public readonly record struct LongKey : global::Camunda.Orchestration.Sdk.ICamun
     /// </summary>
     public static LongKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "LongKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "LongKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new LongKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -13684,13 +13684,13 @@ public readonly record struct MappingRuleId : global::Camunda.Orchestration.Sdk.
     /// </summary>
     public static MappingRuleId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MappingRuleId", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MappingRuleId", pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
         return new MappingRuleId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -13949,13 +13949,13 @@ public readonly record struct MessageKey : global::Camunda.Orchestration.Sdk.ICa
     /// </summary>
     public static MessageKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new MessageKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -14150,13 +14150,13 @@ public readonly record struct MessageSubscriptionKey : global::Camunda.Orchestra
     /// </summary>
     public static MessageSubscriptionKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new MessageSubscriptionKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -15043,13 +15043,13 @@ public readonly record struct ProcessDefinitionId : global::Camunda.Orchestratio
     /// </summary>
     public static ProcessDefinitionId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionId", pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionId", pattern: "^[\\p{L}_][\\p{L}\\p{N}_\\-\\.]*$", minLength: 1);
         return new ProcessDefinitionId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[\\p{L}_][\\p{L}\\p{N}_\\-\\.]*$", minLength: 1);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -15071,13 +15071,13 @@ public readonly record struct ProcessDefinitionIdExactMatch : global::Camunda.Or
     /// </summary>
     public static ProcessDefinitionIdExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionIdExactMatch", pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionIdExactMatch", pattern: "^[\\p{L}_][\\p{L}\\p{N}_\\-\\.]*$", minLength: 1);
         return new ProcessDefinitionIdExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[\p{L}_][\p{L}\p{N}_\-\.]*$", minLength: 1);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[\\p{L}_][\\p{L}\\p{N}_\\-\\.]*$", minLength: 1);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -15381,13 +15381,13 @@ public readonly record struct ProcessDefinitionKey : global::Camunda.Orchestrati
     /// </summary>
     public static ProcessDefinitionKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ProcessDefinitionKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -16481,13 +16481,13 @@ public readonly record struct ProcessInstanceKey : global::Camunda.Orchestration
     /// </summary>
     public static ProcessInstanceKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ProcessInstanceKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -17722,13 +17722,13 @@ public readonly record struct RoleId : global::Camunda.Orchestration.Sdk.ICamund
     /// </summary>
     public static RoleId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "RoleId", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "RoleId", pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
         return new RoleId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -18251,13 +18251,13 @@ public readonly record struct SignalKey : global::Camunda.Orchestration.Sdk.ICam
     /// </summary>
     public static SignalKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "SignalKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "SignalKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new SignalKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -18342,13 +18342,13 @@ public readonly record struct StartCursor : global::Camunda.Orchestration.Sdk.IC
     /// </summary>
     public static StartCursor AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "StartCursor", pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "StartCursor", pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
         return new StartCursor(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$");
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -18479,13 +18479,13 @@ public readonly record struct Tag : global::Camunda.Orchestration.Sdk.ICamundaKe
     /// </summary>
     public static Tag AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Tag", pattern: @"^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$", minLength: 1, maxLength: 100);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Tag", pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$", minLength: 1, maxLength: 100);
         return new Tag(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$", minLength: 1, maxLength: 100);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$", minLength: 1, maxLength: 100);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -18732,13 +18732,13 @@ public readonly record struct TenantId : global::Camunda.Orchestration.Sdk.ICamu
     /// </summary>
     public static TenantId AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "TenantId", pattern: @"^(<default>|[\w\.\-]{1,31})$", minLength: 1, maxLength: 31);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "TenantId", pattern: "^(<default>|[\\w\\.\\-]{1,31})$", minLength: 1, maxLength: 31);
         return new TenantId(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^(<default>|[\w\.\-]{1,31})$", minLength: 1, maxLength: 31);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^(<default>|[\\w\\.\\-]{1,31})$", minLength: 1, maxLength: 31);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -19211,13 +19211,13 @@ public readonly record struct Username : global::Camunda.Orchestration.Sdk.ICamu
     /// </summary>
     public static Username AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Username", pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "Username", pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
         return new Username(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^[a-zA-Z0-9_~@.+-]+$", minLength: 1, maxLength: 256);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -19621,13 +19621,13 @@ public readonly record struct UserTaskKey : global::Camunda.Orchestration.Sdk.IC
     /// </summary>
     public static UserTaskKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "UserTaskKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "UserTaskKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new UserTaskKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -20247,13 +20247,13 @@ public readonly record struct VariableKey : global::Camunda.Orchestration.Sdk.IC
     /// </summary>
     public static VariableKey AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableKey", pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new VariableKey(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: @"^-?[0-9]+$", minLength: 1, maxLength: 25);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;

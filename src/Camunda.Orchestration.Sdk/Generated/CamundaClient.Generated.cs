@@ -1106,8 +1106,8 @@ public partial class CamundaClient
     public async Task<DocumentReference> CreateDocumentAsync(MultipartFormDataContent content, string? storeId = null, DocumentId? documentId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add($"storeId={Uri.EscapeDataString(storeId.ToString()!)}");
-        if (documentId != null) queryParts.Add($"documentId={Uri.EscapeDataString(documentId.ToString()!)}");
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
+        if (documentId != null) queryParts.Add("documentId=" + Uri.EscapeDataString(documentId.ToString()!));
         var path = queryParts.Count > 0 ? $"/documents?{string.Join("&", queryParts)}" : $"/documents";
         return await InvokeWithRetryAsync(() => SendMultipartAsync<DocumentReference>(path, content, ct), "createDocument", false, ct);
     }
@@ -1153,8 +1153,8 @@ public partial class CamundaClient
     public async Task<DocumentLink> CreateDocumentLinkAsync(DocumentId documentId, DocumentLinkRequest body, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add($"storeId={Uri.EscapeDataString(storeId.ToString()!)}");
-        if (contentHash != null) queryParts.Add($"contentHash={Uri.EscapeDataString(contentHash.ToString()!)}");
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
+        if (contentHash != null) queryParts.Add("contentHash=" + Uri.EscapeDataString(contentHash.ToString()!));
         var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}/links?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}/links";
         return await InvokeWithRetryAsync(() => SendAsync<DocumentLink>(HttpMethod.Post, path, body, ct), "createDocumentLink", false, ct);
     }
@@ -1222,7 +1222,7 @@ public partial class CamundaClient
     public async Task<DocumentCreationBatchResponse> CreateDocumentsAsync(MultipartFormDataContent content, string? storeId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add($"storeId={Uri.EscapeDataString(storeId.ToString()!)}");
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
         var path = queryParts.Count > 0 ? $"/documents/batch?{string.Join("&", queryParts)}" : $"/documents/batch";
         return await InvokeWithRetryAsync(() => SendMultipartAsync<DocumentCreationBatchResponse>(path, content, ct), "createDocuments", false, ct);
     }
@@ -1883,7 +1883,7 @@ public partial class CamundaClient
     public async Task DeleteDocumentAsync(DocumentId documentId, string? storeId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add($"storeId={Uri.EscapeDataString(storeId.ToString()!)}");
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
         var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteDocument", false, ct);
     }
@@ -2980,8 +2980,8 @@ public partial class CamundaClient
     public async Task<byte[]> GetDocumentAsync(DocumentId documentId, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add($"storeId={Uri.EscapeDataString(storeId.ToString()!)}");
-        if (contentHash != null) queryParts.Add($"contentHash={Uri.EscapeDataString(contentHash.ToString()!)}");
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
+        if (contentHash != null) queryParts.Add("contentHash=" + Uri.EscapeDataString(contentHash.ToString()!));
         var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}";
         return await InvokeWithRetryAsync(() => SendBinaryAsync(HttpMethod.Get, path, null, ct), "getDocument", false, ct);
     }
@@ -3156,9 +3156,9 @@ public partial class CamundaClient
     public async Task<GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(DateTimeOffset from, DateTimeOffset to, string? jobType = null, ConsistencyOptions<GlobalJobStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        queryParts.Add($"from={Uri.EscapeDataString(from.ToString()!)}");
-        queryParts.Add($"to={Uri.EscapeDataString(to.ToString()!)}");
-        if (jobType != null) queryParts.Add($"jobType={Uri.EscapeDataString(jobType.ToString()!)}");
+        queryParts.Add("from=" + Uri.EscapeDataString(from.ToString()!));
+        queryParts.Add("to=" + Uri.EscapeDataString(to.ToString()!));
+        if (jobType != null) queryParts.Add("jobType=" + Uri.EscapeDataString(jobType.ToString()!));
         var path = queryParts.Count > 0 ? $"/jobs/statistics/global?{string.Join("&", queryParts)}" : $"/jobs/statistics/global";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
@@ -4686,10 +4686,10 @@ public partial class CamundaClient
     public async Task<UsageMetricsResponse> GetUsageMetricsAsync(DateTimeOffset startTime, DateTimeOffset endTime, TenantId? tenantId = null, bool? withTenants = null, ConsistencyOptions<UsageMetricsResponse>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        queryParts.Add($"startTime={Uri.EscapeDataString(startTime.ToString()!)}");
-        queryParts.Add($"endTime={Uri.EscapeDataString(endTime.ToString()!)}");
-        if (tenantId != null) queryParts.Add($"tenantId={Uri.EscapeDataString(tenantId.ToString()!)}");
-        if (withTenants != null) queryParts.Add($"withTenants={Uri.EscapeDataString(withTenants.ToString()!)}");
+        queryParts.Add("startTime=" + Uri.EscapeDataString(startTime.ToString()!));
+        queryParts.Add("endTime=" + Uri.EscapeDataString(endTime.ToString()!));
+        if (tenantId != null) queryParts.Add("tenantId=" + Uri.EscapeDataString(tenantId.ToString()!));
+        if (withTenants != null) queryParts.Add("withTenants=" + Uri.EscapeDataString(withTenants.ToString()!));
         var path = queryParts.Count > 0 ? $"/system/usage-metrics?{string.Join("&", queryParts)}" : $"/system/usage-metrics";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
@@ -5824,7 +5824,7 @@ public partial class CamundaClient
     public async Task<ClusterVariableSearchQueryResult> SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<ClusterVariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
+        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(truncateValues.ToString()!));
         var path = queryParts.Count > 0 ? $"/cluster-variables/search?{string.Join("&", queryParts)}" : $"/cluster-variables/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
@@ -7276,7 +7276,7 @@ public partial class CamundaClient
     public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, UserTaskEffectiveVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
+        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(truncateValues.ToString()!));
         var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
@@ -7339,7 +7339,7 @@ public partial class CamundaClient
     public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, UserTaskVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
+        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(truncateValues.ToString()!));
         var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/variables/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
@@ -7661,7 +7661,7 @@ public partial class CamundaClient
     public async Task<VariableSearchQueryResult> SearchVariablesAsync(VariableSearchQuery body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (truncateValues != null) queryParts.Add($"truncateValues={Uri.EscapeDataString(truncateValues.ToString()!)}");
+        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(truncateValues.ToString()!));
         var path = queryParts.Count > 0 ? $"/variables/search?{string.Join("&", queryParts)}" : $"/variables/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
