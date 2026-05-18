@@ -1,3 +1,13 @@
+# [9.0.0-alpha.16](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.15...v9.0.0-alpha.16) (2026-05-18)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([8d9b85a](https://github.com/camunda/orchestration-cluster-api-csharp/commit/8d9b85af4260079fbb02c5be639c67c40c49f278))
+* harden release pipeline against unreviewed file staging ([e518c39](https://github.com/camunda/orchestration-cluster-api-csharp/commit/e518c39d88571dabc34dc14c8219ed4b65da2cb5))
+* use git add -f for gitignored spec artifacts in release ([d12cddf](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d12cddf1790ace4eeade8a79940a12383bed908c))
+* use git add -f for gitignored spec artifacts in release ([58381f6](https://github.com/camunda/orchestration-cluster-api-csharp/commit/58381f6c9af5ed2e52c003c60d0fbe7d7e735fbe))
+
 # [9.0.0-alpha.15](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.14...v9.0.0-alpha.15) (2026-05-15)
 
 
