@@ -4004,6 +4004,12 @@
                 },
                 "required": [
                   "files"
+                ],
+                "x-properties-added-in-version": [
+                  {
+                    "propertyName": "metadataList",
+                    "addedInVersion": "8.8"
+                  }
                 ]
               },
               "encoding": {
@@ -18774,6 +18780,12 @@
           "resourcePropertyName",
           "resourceType",
           "permissionTypes"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "resourcePropertyName",
+            "addedInVersion": "8.9"
+          }
         ]
       },
       "AuthorizationRequest": {
@@ -18870,7 +18882,13 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "resourcePropertyNames",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "AuthorizationResult": {
         "required": [
@@ -18924,7 +18942,13 @@
             ],
             "description": "The key of the authorization."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "resourcePropertyName",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "AuthorizationSearchResult": {
         "type": "object",
@@ -19084,7 +19108,17 @@
           "batchOperationType": {
             "$ref": "#/components/schemas/BatchOperationTypeEnum"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "batchOperationKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "batchOperationType",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "BatchOperationSearchQuerySortRequest": {
         "type": "object",
@@ -19181,7 +19215,17 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "actorType",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "actorId",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "BatchOperationSearchQueryResult": {
         "description": "The batch operation search query result.",
@@ -19282,7 +19326,17 @@
               "$ref": "#/components/schemas/BatchOperationError"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "actorType",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "actorId",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "BatchOperationError": {
         "required": [
@@ -19405,7 +19459,13 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "operationType",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "BatchOperationItemSearchQueryResult": {
         "type": "object",
@@ -19495,7 +19555,13 @@
             "nullable": true,
             "type": "string"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "DecisionInstanceDeletionBatchOperationRequest": {
         "type": "object",
@@ -19537,6 +19603,12 @@
         },
         "required": [
           "filter"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "operationReference",
+            "addedInVersion": "8.9"
+          }
         ]
       },
       "ProcessInstanceIncidentResolutionBatchOperationRequest": {
@@ -19558,6 +19630,12 @@
         },
         "required": [
           "filter"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "operationReference",
+            "addedInVersion": "8.9"
+          }
         ]
       },
       "ProcessInstanceDeletionBatchOperationRequest": {
@@ -19608,6 +19686,12 @@
         "required": [
           "filter",
           "migrationPlan"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "operationReference",
+            "addedInVersion": "8.9"
+          }
         ]
       },
       "ProcessInstanceMigrationBatchOperationPlan": {
@@ -19662,6 +19746,12 @@
         "required": [
           "filter",
           "moveInstructions"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "operationReference",
+            "addedInVersion": "8.9"
+          }
         ]
       },
       "ProcessInstanceModificationMoveBatchOperationInstruction": {
@@ -19775,7 +19865,29 @@
           "$like": {
             "$ref": "#/components/schemas/LikeFilter"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$like",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "BatchOperationStateFilterProperty": {
         "description": "BatchOperationStateEnum property with full advanced search capabilities.",
@@ -20208,7 +20320,37 @@
             "type": "string",
             "example": "-1"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "brokers",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "clusterId",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "clusterSize",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "partitionsCount",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "replicationFactor",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "gatewayVersion",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "lastCompletedChangeId",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "BrokerInfo": {
         "description": "Provides information on a broker node.",
@@ -20522,7 +20664,25 @@
             "type": "integer",
             "description": "The assigned version of the decision requirements that the decision definition is part of."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "name",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "isLatestVersion",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "decisionRequirementsName",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "decisionRequirementsVersion",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "DecisionDefinitionSearchQueryResult": {
         "type": "object",
@@ -20611,7 +20771,45 @@
             "description": "The assigned version of the decision definition.",
             "type": "integer"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "decisionDefinitionId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionDefinitionKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionRequirementsId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionRequirementsKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionRequirementsName",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "decisionRequirementsVersion",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "name",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "version",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "DecisionEvaluationInstruction": {
         "x-polymorphic-schema": true,
@@ -20790,7 +20988,13 @@
             ],
             "description": "The tenant ID of the evaluated decision."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "decisionEvaluationKey",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "EvaluatedDecisionResult": {
         "required": [
@@ -20874,7 +21078,13 @@
             ],
             "description": "The unique key identifying this decision evaluation instance."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "decisionEvaluationInstanceKey",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "DecisionInstanceSearchQuerySortRequest": {
         "type": "object",
@@ -21050,7 +21260,73 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "decisionEvaluationInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "evaluationFailure",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "evaluationDate",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "decisionDefinitionId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionDefinitionName",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionDefinitionVersion",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionDefinitionType",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionEvaluationKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processInstanceKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionDefinitionKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "elementInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "rootDecisionDefinitionKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "decisionRequirementsKey",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "DeleteDecisionInstanceRequest": {
         "type": "object",
@@ -21212,7 +21488,77 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "decisionDefinitionId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionDefinitionKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionDefinitionName",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionDefinitionType",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionDefinitionVersion",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionEvaluationInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "decisionEvaluationKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "elementInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "evaluationDate",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "evaluationFailure",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processDefinitionKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processInstanceKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "result",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "rootDecisionDefinitionKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "DecisionInstanceGetQueryResult": {
         "allOf": [
@@ -21265,7 +21611,21 @@
             "description": "The value of the decision input.",
             "type": "string"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "inputId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "inputName",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "inputValue",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "EvaluatedDecisionOutputItem": {
         "required": [
@@ -21301,7 +21661,17 @@
             "type": "integer",
             "format": "int32"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "ruleId",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "ruleIndex",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "MatchedDecisionRuleItem": {
         "required": [
@@ -21328,7 +21698,21 @@
               "$ref": "#/components/schemas/EvaluatedDecisionOutputItem"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "ruleId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "ruleIndex",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "evaluatedOutputs",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "DecisionDefinitionTypeEnum": {
         "description": "The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10",
@@ -21408,7 +21792,33 @@
           "$like": {
             "$ref": "#/components/schemas/LikeFilter"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$like",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "DecisionInstanceStateFilterProperty": {
         "description": "DecisionInstanceStateEnum property with full advanced search capabilities.",
@@ -21501,7 +21911,13 @@
             "type": "string",
             "description": "The name of the resource from which the decision requirements were parsed"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "resourceName",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "DecisionRequirementsSearchQueryResult": {
         "required": [
@@ -21568,7 +21984,33 @@
             "format": "int32",
             "description": "The assigned version of the decision requirements."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "decisionRequirementsId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionRequirementsKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "decisionRequirementsName",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "resourceName",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "version",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "DeploymentResult": {
         "type": "object",
@@ -21658,7 +22100,13 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "resource",
+            "addedInVersion": "8.7"
+          }
+        ]
       },
       "DeploymentProcessResult": {
         "description": "A deployed process.",
@@ -21925,7 +22373,13 @@
             "type": "boolean",
             "default": false
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "deleteHistory",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "DeleteResourceResponse": {
         "type": "object",
@@ -21951,7 +22405,17 @@
             ],
             "description": "The batch operation created for asynchronously deleting the historic data.\n\nThis field is only populated when the request `deleteHistory` is set to `true` and the resource\nis a process definition. For other resource types (decisions, forms, generic resources),\nthis field will be `null`.\n"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "resourceKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "batchOperation",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ResourceResult": {
         "type": "object",
@@ -21998,7 +22462,33 @@
             ],
             "description": "The unique key of this resource."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "resourceName",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "version",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "versionTag",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "resourceId",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "resourceKey",
+            "addedInVersion": "8.7"
+          }
+        ]
       },
       "DeploymentKey": {
         "description": "Key for a deployment.",
@@ -22080,7 +22570,29 @@
               "$ref": "#/components/schemas/DeploymentKey"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ResourceKeyFilterProperty": {
         "description": "ResourceKey property with full advanced search capabilities.",
@@ -22132,7 +22644,29 @@
               "$ref": "#/components/schemas/ResourceKey"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ResourceSearchQuerySortRequest": {
         "type": "object",
@@ -22306,7 +22840,29 @@
           "metadata": {
             "$ref": "#/components/schemas/DocumentMetadataResponse"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "camunda.document.type",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "storeId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "documentId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "contentHash",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "metadata",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "DocumentCreationFailureDetail": {
         "type": "object",
@@ -22334,7 +22890,17 @@
             "type": "string",
             "description": "A human-readable explanation specific to this occurrence of the problem."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "status",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "title",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "DocumentCreationBatchResponse": {
         "allOf": [
@@ -22406,7 +22972,37 @@
             "description": "Custom properties of the document.",
             "additionalProperties": true
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "contentType",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "fileName",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "expiresAt",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "size",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processDefinitionId",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "processInstanceKey",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "customProperties",
+            "addedInVersion": "8.7"
+          }
+        ]
       },
       "DocumentMetadataResponse": {
         "description": "Information about the document that is returned in responses.",
@@ -22463,7 +23059,21 @@
             "description": "Custom properties of the document.",
             "additionalProperties": true
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "processDefinitionId",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "processInstanceKey",
+            "addedInVersion": "8.7"
+          },
+          {
+            "propertyName": "customProperties",
+            "addedInVersion": "8.7"
+          }
+        ]
       },
       "DocumentLinkRequest": {
         "type": "object",
@@ -22907,7 +23517,13 @@
             "description": "Incident key associated with this element instance.",
             "nullable": true
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ElementInstanceStateEnum": {
         "description": "Element states",
@@ -23063,7 +23679,29 @@
               "type": "string"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "AdvancedStringFilter": {
         "title": "Advanced filter",
@@ -23078,7 +23716,13 @@
               "$like": {
                 "$ref": "#/components/schemas/LikeFilter"
               }
-            }
+            },
+            "x-properties-added-in-version": [
+              {
+                "propertyName": "$like",
+                "addedInVersion": "8.8"
+              }
+            ]
           }
         ]
       },
@@ -23155,7 +23799,41 @@
               "format": "int32"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$gt",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$gte",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$lt",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$lte",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "IntegerFilterProperty": {
         "description": "Integer property with advanced search capabilities.",
@@ -23218,7 +23896,41 @@
               "format": "date-time"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$gt",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$gte",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$lt",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$lte",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "DateTimeFilterProperty": {
         "description": "Date-time property with full advanced search capabilities.",
@@ -23281,7 +23993,29 @@
             ],
             "description": "The assigned key, which acts as a unique identifier for this form."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "formId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "schema",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "version",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "formKey",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "GlobalListenerSourceEnum": {
         "type": "string",
@@ -24218,7 +24952,33 @@
           "$like": {
             "$ref": "#/components/schemas/LikeFilter"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$like",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "ProcessDefinitionIdFilterProperty": {
         "description": "ProcessDefinitionId property with full advanced search capabilities.",
@@ -24273,7 +25033,33 @@
           "$like": {
             "$ref": "#/components/schemas/LikeFilter"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "$like",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "IncidentSearchQuery": {
         "additionalProperties": false,
@@ -24299,7 +25085,17 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "sort",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "filter",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "IncidentFilter": {
         "description": "Incident search filter.",
@@ -24401,7 +25197,21 @@
             ],
             "description": "The job key, if exists, associated with this incident."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "elementId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "incidentKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "elementInstanceKey",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "IncidentErrorTypeFilterProperty": {
         "description": "IncidentErrorTypeEnum with full advanced search capabilities.",
@@ -24456,7 +25266,33 @@
           "$like": {
             "$ref": "#/components/schemas/LikeFilter"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$like",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "IncidentErrorTypeEnum": {
         "description": "Incident error type with a defined set of values.",
@@ -24533,7 +25369,33 @@
           "$like": {
             "$ref": "#/components/schemas/LikeFilter"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$like",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "IncidentStateEnum": {
         "description": "Incident states with a defined set of values.",
@@ -24592,7 +25454,13 @@
               "$ref": "#/components/schemas/IncidentResult"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "items",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "IncidentResult": {
         "type": "object",
@@ -24711,7 +25579,61 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "processDefinitionId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "errorType",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "errorMessage",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "elementId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "creationTime",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "incidentKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processInstanceKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "elementInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "jobKey",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "IncidentResolutionRequest": {
         "type": "object",
@@ -24720,7 +25642,13 @@
           "operationReference": {
             "$ref": "#/components/schemas/OperationReference"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "operationReference",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "IncidentProcessInstanceStatisticsByErrorQuery": {
         "type": "object",
@@ -25453,6 +26381,12 @@
           "type",
           "maxJobsToActivate",
           "timeout"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "tenantFilter",
+            "addedInVersion": "8.9"
+          }
         ]
       },
       "JobActivationResult": {
@@ -25622,7 +26556,29 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "kind",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "listenerEventType",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "userTask",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tags",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "UserTaskProperties": {
         "required": [
@@ -25946,7 +26902,17 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "creationTime",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "lastUpdateTime",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "JobSearchQueryResult": {
         "description": "Job search response.",
@@ -26136,7 +27102,21 @@
             "type": "string",
             "format": "date-time"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "creationTime",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "lastUpdateTime",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "JobFailRequest": {
         "type": "object",
@@ -26202,7 +27182,13 @@
           "result": {
             "$ref": "#/components/schemas/JobResult"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "result",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "JobResult": {
         "description": "The result of the completed job as determined by the worker.\n",
@@ -26359,6 +27345,12 @@
         },
         "required": [
           "changeset"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "operationReference",
+            "addedInVersion": "8.8"
+          }
         ]
       },
       "JobChangeset": {
@@ -26834,7 +27826,29 @@
               "$ref": "#/components/schemas/ProcessDefinitionKey"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "ProcessInstanceKeyFilterProperty": {
         "description": "ProcessInstanceKey property with full advanced search capabilities.",
@@ -26886,7 +27900,29 @@
               "$ref": "#/components/schemas/ProcessInstanceKey"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "ElementInstanceKeyFilterProperty": {
         "description": "ElementInstanceKey property with full advanced search capabilities.",
@@ -26938,7 +27974,29 @@
               "$ref": "#/components/schemas/ElementInstanceKey"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "JobKeyFilterProperty": {
         "description": "JobKey property with full advanced search capabilities.",
@@ -26990,7 +28048,29 @@
               "$ref": "#/components/schemas/JobKey"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "DecisionDefinitionKeyFilterProperty": {
         "description": "DecisionDefinitionKey property with full advanced search capabilities.",
@@ -27042,7 +28122,29 @@
               "$ref": "#/components/schemas/DecisionDefinitionKey"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "ScopeKeyFilterProperty": {
         "description": "ScopeKey property with full advanced search capabilities. Filter by the key of the\nelement instance or process instance that defines the scope of a variable.\n",
@@ -27198,7 +28300,29 @@
               "$ref": "#/components/schemas/DecisionEvaluationInstanceKey"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "AgentInstanceKeyFilterProperty": {
         "description": "AgentInstanceKey property with full advanced search capabilities.",
@@ -27490,7 +28614,17 @@
             "type": "string",
             "format": "date-time"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "isCommercial",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "expiresAt",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "MappingRuleCreateUpdateRequest": {
         "type": "object",
@@ -28010,7 +29144,37 @@
           "tenantId": {
             "$ref": "#/components/schemas/TenantId"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "messageSubscriptionType",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "toolProperties",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "processDefinitionName",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "processDefinitionVersion",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "toolName",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "inboundConnectorType",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "MessageSubscriptionSearchQuerySortRequest": {
         "type": "object",
@@ -28202,7 +29366,73 @@
             ],
             "description": "Filter by inbound connector type extracted from the `inbound.type` zeebe:property."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "messageSubscriptionKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "processDefinitionId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "elementId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "elementInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "messageSubscriptionState",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "lastUpdatedDate",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "messageName",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "correlationKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "messageSubscriptionType",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "processDefinitionName",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "processDefinitionVersion",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "toolName",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "inboundConnectorType",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "CorrelatedMessageSubscriptionSearchQueryResult": {
         "required": [
@@ -28331,7 +29561,13 @@
             ],
             "description": "The tenant ID associated with this correlated message subscription."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "CorrelatedMessageSubscriptionSearchQuery": {
         "type": "object",
@@ -29420,7 +30656,21 @@
           "businessId": {
             "$ref": "#/components/schemas/BusinessId"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "runtimeInstructions",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tags",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ProcessInstanceCreationInstructionByKey": {
         "type": "object",
@@ -29499,7 +30749,21 @@
           "businessId": {
             "$ref": "#/components/schemas/BusinessId"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "runtimeInstructions",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tags",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ProcessInstanceCreationStartInstruction": {
         "type": "object",
@@ -29552,7 +30816,13 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "type",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "CreateProcessInstanceResult": {
         "x-semantic-provider": [
@@ -29627,7 +30897,17 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "tags",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ProcessInstanceSearchQuerySortRequest": {
         "type": "object",
@@ -29826,7 +31106,85 @@
             ],
             "description": "The business id associated with the process instance."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "startDate",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "endDate",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "hasIncident",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "variables",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "parentProcessInstanceKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "parentElementInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "batchOperationId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "batchOperationKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "errorMessage",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "hasRetriesLeft",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "elementInstanceState",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "elementId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "hasElementInstanceIncident",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "incidentErrorHashCode",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tags",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ProcessDefinitionStatisticsFilter": {
         "description": "Process definition statistics search filter.",
@@ -29897,7 +31255,29 @@
             ],
             "description": "The process definition key."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "processDefinitionId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionName",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionVersion",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processDefinitionVersionTag",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionKey",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "ProcessInstanceFilter": {
         "description": "Process instance search filter.",
@@ -29915,7 +31295,13 @@
                   "$ref": "#/components/schemas/ProcessInstanceFilterFields"
                 }
               }
-            }
+            },
+            "x-properties-added-in-version": [
+              {
+                "propertyName": "$or",
+                "addedInVersion": "8.8"
+              }
+            ]
           }
         ]
       },
@@ -30056,7 +31442,73 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "processDefinitionId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionName",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processDefinitionVersion",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processDefinitionVersionTag",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "startDate",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "endDate",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "hasIncident",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "parentProcessInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "parentElementInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "tags",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "CancelProcessInstanceRequest": {
         "type": "object",
@@ -30185,7 +31637,13 @@
           "tenantId": {
             "$ref": "#/components/schemas/TenantId"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ProcessInstanceElementStatisticsQueryResult": {
         "description": "Process instance element statistics query response.",
@@ -30256,6 +31714,16 @@
         "required": [
           "sourceElementId",
           "targetElementId"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "sourceElementId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "targetElementId",
+            "addedInVersion": "8.6"
+          }
         ]
       },
       "ProcessInstanceModificationInstruction": {
@@ -30286,7 +31754,13 @@
               "$ref": "#/components/schemas/ProcessInstanceModificationTerminateInstruction"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "moveInstructions",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "ProcessInstanceModificationActivateInstruction": {
         "description": "Instruction describing an element to activate.",
@@ -30536,6 +32010,12 @@
         },
         "required": [
           "elementId"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "elementId",
+            "addedInVersion": "8.9"
+          }
         ]
       },
       "ProcessInstanceModificationTerminateByKeyInstruction": {
@@ -31060,7 +32540,13 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "page",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "SearchQueryPageRequest": {
         "x-polymorphic-schema": true,
@@ -31111,7 +32597,17 @@
             "default": 100,
             "minimum": 1
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "from",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "limit",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "CursorForwardPagination": {
         "type": "object",
@@ -31136,7 +32632,17 @@
             "minimum": 1,
             "maximum": 10000
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "after",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "limit",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "CursorBackwardPagination": {
         "type": "object",
@@ -31161,7 +32667,13 @@
             "minimum": 1,
             "maximum": 10000
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "before",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "SearchQueryResponse": {
         "type": "object",
@@ -31172,7 +32684,13 @@
           "page": {
             "$ref": "#/components/schemas/SearchQueryPageResponse"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "page",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "SortOrderEnum": {
         "description": "The order in which to sort the related field.",
@@ -31224,7 +32742,21 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "hasMoreTotalItems",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "startCursor",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "endCursor",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "SignalBroadcastRequest": {
         "type": "object",
@@ -31376,7 +32908,25 @@
           "cloud": {
             "$ref": "#/components/schemas/CloudConfigurationResponse"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "components",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "deployment",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "authentication",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "cloud",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "JobMetricsConfigurationResponse": {
         "description": "Configuration for job metrics collection and export.",
@@ -32241,7 +33791,57 @@
           "tags": {
             "$ref": "#/components/schemas/TagSet"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "priority",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "name",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "creationDate",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "completionDate",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "followUpDate",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "dueDate",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processInstanceVariables",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "localVariables",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "userTaskKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "elementInstanceKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "tags",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "UserTaskSearchQueryResult": {
         "description": "User task search query response.",
@@ -32444,7 +34044,105 @@
           "tags": {
             "$ref": "#/components/schemas/TagSet"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "name",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "assignee",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "elementId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "candidateGroups",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "candidateUsers",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "creationDate",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "completionDate",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "followUpDate",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "dueDate",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "tenantId",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "externalFormReference",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processDefinitionVersion",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "customHeaders",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "priority",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "userTaskKey",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "elementInstanceKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processName",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "processDefinitionKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "processInstanceKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "formKey",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "tags",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "UserTaskCompletionRequest": {
         "type": "object",
@@ -32541,7 +34239,13 @@
             "maximum": 100,
             "nullable": true
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "priority",
+            "addedInVersion": "8.6"
+          }
+        ]
       },
       "UserTaskVariableSearchQuerySortRequest": {
         "type": "object",
@@ -32720,7 +34424,29 @@
           "$like": {
             "$ref": "#/components/schemas/LikeFilter"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$like",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "UserTaskAuditLogFilter": {
         "description": "The user task audit log search filters.",
@@ -33225,7 +34951,13 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "rootProcessInstanceKey",
+            "addedInVersion": "8.9"
+          }
+        ]
       },
       "VariableValueFilterProperty": {
         "type": "object",
