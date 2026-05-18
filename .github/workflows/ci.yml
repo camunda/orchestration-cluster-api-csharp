@@ -23,6 +23,10 @@ jobs:
     if: github.event_name == 'pull_request'
     uses: camunda/sdk-infra/.github/workflows/sdk-commitlint.yml@v1
 
+  breaking-change-guard:
+    if: github.event_name == 'pull_request'
+    uses: camunda/sdk-infra/.github/workflows/sdk-breaking-change-guard.yml@v1
+
   spec-ref-guard:
     uses: camunda/sdk-infra/.github/workflows/sdk-spec-ref-guard.yml@v1
     with:
