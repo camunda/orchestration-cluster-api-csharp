@@ -6,6 +6,8 @@ on:
   pull_request_target:
     types: [opened]
 
+permissions: {}
+
 jobs:
   notify:
     uses: camunda/sdk-infra/.github/workflows/sdk-slack-community-notify.yml@v1
