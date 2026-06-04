@@ -1,3 +1,16 @@
+# [9.0.0-alpha.17](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.16...v9.0.0-alpha.17) (2026-06-04)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([f248e56](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f248e56d75ec31051e6ce55406cf803d22170d61))
+
+
+### Features
+
+* add Slack notifications for release failures and community events ([d945e1c](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d945e1cab99bab4b08f1d632e9658ee94bcef327))
+* add Slack notifications for release failures and community events ([b5b8a10](https://github.com/camunda/orchestration-cluster-api-csharp/commit/b5b8a10bfcf3e5e348d9c834394288309b6eaaa7))
+
 # [9.0.0-alpha.16](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.15...v9.0.0-alpha.16) (2026-05-18)
 
 
