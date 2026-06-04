@@ -38,6 +38,7 @@ TYPE Camunda.Orchestration.Sdk.ActivatedJobResult : sealed class
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.UserTaskProperties? UserTask { get; set; } [JsonPropertyName("userTask")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag> Tags { get; set; } [JsonPropertyName("tags")]
+  PROP System.Int32 Priority { get; set; } [JsonPropertyName("priority")]
   PROP System.Int32 ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
   PROP System.Int32 Retries { get; set; } [JsonPropertyName("retries")]
   PROP System.Int64 Deadline { get; set; } [JsonPropertyName("deadline")]
@@ -428,6 +429,22 @@ TYPE Camunda.Orchestration.Sdk.AdvancedVariableKeyFilter : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableKey>? In { get; set; } [JsonPropertyName("$in")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableKey>? NotIn { get; set; } [JsonPropertyName("$notIn")]
 
+TYPE Camunda.Orchestration.Sdk.AdvancedWaitStateElementTypeFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.WaitStateElementTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.WaitStateElementTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.WaitStateElementTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.AdvancedWaitStateTypeFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.WaitStateTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.WaitStateTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.WaitStateTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
+
 TYPE Camunda.Orchestration.Sdk.AgentInstanceCreationRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentInstanceDefinition Definition { get; set; } [JsonPropertyName("definition")]
@@ -452,8 +469,11 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceFilter : sealed class
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? CreationDate { get; set; } [JsonPropertyName("creationDate")]
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? LastUpdatedDate { get; set; } [JsonPropertyName("lastUpdatedDate")]
   PROP Camunda.Orchestration.Sdk.ElementIdFilterProperty? ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? ProcessDefinitionVersionTag { get; set; } [JsonPropertyName("processDefinitionVersionTag")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty>? ElementInstanceKeys { get; set; } [JsonPropertyName("elementInstanceKeys")]
 
@@ -485,23 +505,23 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty : sealed class
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceLimits : sealed class
   CTOR ()
-  PROP System.Int64 MaxModelCalls { get; set; } [JsonPropertyName("maxModelCalls")]
+  PROP System.Int32 MaxModelCalls { get; set; } [JsonPropertyName("maxModelCalls")]
+  PROP System.Int32 MaxToolCalls { get; set; } [JsonPropertyName("maxToolCalls")]
   PROP System.Int64 MaxTokens { get; set; } [JsonPropertyName("maxTokens")]
-  PROP System.Int64 MaxToolCalls { get; set; } [JsonPropertyName("maxToolCalls")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceMetrics : sealed class
   CTOR ()
+  PROP System.Int32 ModelCalls { get; set; } [JsonPropertyName("modelCalls")]
+  PROP System.Int32 ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
   PROP System.Int64 InputTokens { get; set; } [JsonPropertyName("inputTokens")]
-  PROP System.Int64 ModelCalls { get; set; } [JsonPropertyName("modelCalls")]
   PROP System.Int64 OutputTokens { get; set; } [JsonPropertyName("outputTokens")]
-  PROP System.Int64 ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta : sealed class
   CTOR ()
+  PROP System.Int32? ModelCalls { get; set; } [JsonPropertyName("modelCalls")]
+  PROP System.Int32? ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
   PROP System.Int64? InputTokens { get; set; } [JsonPropertyName("inputTokens")]
-  PROP System.Int64? ModelCalls { get; set; } [JsonPropertyName("modelCalls")]
   PROP System.Int64? OutputTokens { get; set; } [JsonPropertyName("outputTokens")]
-  PROP System.Int64? ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceResult : sealed class
   CTOR ()
@@ -511,14 +531,18 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceResult : sealed class
   PROP Camunda.Orchestration.Sdk.AgentInstanceMetrics Metrics { get; set; } [JsonPropertyName("metrics")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceStatusEnum Status { get; set; } [JsonPropertyName("status")]
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool> Tools { get; set; } [JsonPropertyName("tools")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ElementInstanceKey> ElementInstanceKeys { get; set; } [JsonPropertyName("elementInstanceKeys")]
   PROP System.DateTimeOffset CreationDate { get; set; } [JsonPropertyName("creationDate")]
   PROP System.DateTimeOffset LastUpdatedDate { get; set; } [JsonPropertyName("lastUpdatedDate")]
   PROP System.DateTimeOffset? CompletionDate { get; set; } [JsonPropertyName("completionDate")]
+  PROP System.Int32 ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
+  PROP System.String? ProcessDefinitionVersionTag { get; set; } [JsonPropertyName("processDefinitionVersionTag")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceSearchQuery : sealed class
   CTOR ()
@@ -547,12 +571,13 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField : enum i
 TYPE Camunda.Orchestration.Sdk.AgentInstanceStatusEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
   underlying=System.Int32
-  MEMBER COMPLETED = 0 json="COMPLETED"
-  MEMBER IDLE = 1 json="IDLE"
-  MEMBER INITIALIZING = 2 json="INITIALIZING"
-  MEMBER THINKING = 3 json="THINKING"
-  MEMBER TOOLCALLING = 4 json="TOOL_CALLING"
-  MEMBER TOOLDISCOVERY = 5 json="TOOL_DISCOVERY"
+  MEMBER UNKNOWN = 0 json="UNKNOWN"
+  MEMBER COMPLETED = 1 json="COMPLETED"
+  MEMBER IDLE = 2 json="IDLE"
+  MEMBER INITIALIZING = 3 json="INITIALIZING"
+  MEMBER THINKING = 4 json="THINKING"
+  MEMBER TOOLCALLING = 5 json="TOOL_CALLING"
+  MEMBER TOOLDISCOVERY = 6 json="TOOL_DISCOVERY"
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceStatusExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.AgentInstanceStatusExactMatch>]
   PROP System.String Value { get; }
@@ -574,8 +599,17 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty : sealed class
 TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta? Metrics { get; set; } [JsonPropertyName("metrics")]
-  PROP Camunda.Orchestration.Sdk.AgentInstanceStatusEnum? Status { get; set; } [JsonPropertyName("status")]
+  PROP Camunda.Orchestration.Sdk.AgentInstanceUpdateStatusEnum? Status { get; set; } [JsonPropertyName("status")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool>? Tools { get; set; } [JsonPropertyName("tools")]
+
+TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateStatusEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER IDLE = 0 json="IDLE"
+  MEMBER THINKING = 1 json="THINKING"
+  MEMBER TOOLCALLING = 2 json="TOOL_CALLING"
+  MEMBER TOOLDISCOVERY = 3 json="TOOL_DISCOVERY"
 
 TYPE Camunda.Orchestration.Sdk.AgentTool : sealed class
   CTOR ()
@@ -1358,6 +1392,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.DocumentReference> CreateDocumentAsync(System.Net.Http.MultipartFormDataContent content, System.String? storeId = null, Camunda.Orchestration.Sdk.DocumentId? documentId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ElementInstanceResult> GetElementInstanceAsync(Camunda.Orchestration.Sdk.ElementInstanceKey elementInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ElementInstanceResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ElementInstanceSearchQueryResult> SearchElementInstancesAsync(Camunda.Orchestration.Sdk.ElementInstanceSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ElementInstanceSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(Camunda.Orchestration.Sdk.ElementInstanceWaitStateQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.EvaluateConditionalResult> EvaluateConditionalsAsync(Camunda.Orchestration.Sdk.ConditionalEvaluationInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.EvaluateDecisionResult> EvaluateDecisionAsync(Camunda.Orchestration.Sdk.DecisionEvaluationInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExpressionEvaluationResult> EvaluateExpressionAsync(Camunda.Orchestration.Sdk.ExpressionEvaluationRequest body, System.Threading.CancellationToken ct = null)
@@ -1565,11 +1600,7 @@ TYPE Camunda.Orchestration.Sdk.ClockPinRequest : sealed class
 
 TYPE Camunda.Orchestration.Sdk.CloudConfigurationResponse : sealed class
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.CloudStage? Stage { get; set; } [JsonPropertyName("stage")]
-  PROP System.String? ClusterId { get; set; } [JsonPropertyName("clusterId")]
-  PROP System.String? MixpanelAPIHost { get; set; } [JsonPropertyName("mixpanelAPIHost")]
-  PROP System.String? MixpanelToken { get; set; } [JsonPropertyName("mixpanelToken")]
-  PROP System.String? OrganizationId { get; set; } [JsonPropertyName("organizationId")]
+  PROP System.String? Stage { get; set; } [JsonPropertyName("stage")]
 
 TYPE Camunda.Orchestration.Sdk.CloudStage : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -2204,10 +2235,8 @@ TYPE Camunda.Orchestration.Sdk.DeleteResourceResponse : sealed class
 
 TYPE Camunda.Orchestration.Sdk.DeploymentConfigurationResponse : sealed class
   CTOR ()
-  PROP System.Boolean IsEnterprise { get; set; } [JsonPropertyName("isEnterprise")]
   PROP System.Boolean IsMultiTenancyEnabled { get; set; } [JsonPropertyName("isMultiTenancyEnabled")]
   PROP System.Int64 MaxRequestSize { get; set; } [JsonPropertyName("maxRequestSize")]
-  PROP System.String ContextPath { get; set; } [JsonPropertyName("contextPath")]
 
 TYPE Camunda.Orchestration.Sdk.DeploymentDecisionRequirementsResult : sealed class
   CTOR ()
@@ -2294,7 +2323,7 @@ TYPE Camunda.Orchestration.Sdk.DeploymentResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.DirectAncestorKeyInstruction : sealed class base=Camunda.Orchestration.Sdk.AncestorScopeInstruction
   CTOR ()
-  PROP System.Object AncestorElementInstanceKey { get; set; } [JsonPropertyName("ancestorElementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKey AncestorElementInstanceKey { get; set; } [JsonPropertyName("ancestorElementInstanceKey")]
 
 TYPE Camunda.Orchestration.Sdk.DocumentCreationBatchResponse : sealed class
   CTOR ()
@@ -2401,7 +2430,56 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceFilter : sealed class
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? ElementName { get; set; } [JsonPropertyName("elementName")]
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Boolean? HasIncident { get; set; } [JsonPropertyName("hasIncident")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ElementInstanceFilterFields>? Or { get; set; } [JsonPropertyName("$or")]
   PROP System.String? ElementInstanceScopeKey { get; set; } [JsonPropertyName("elementInstanceScopeKey")]
+
+TYPE Camunda.Orchestration.Sdk.ElementInstanceFilterFields : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? EndDate { get; set; } [JsonPropertyName("endDate")]
+  PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? StartDate { get; set; } [JsonPropertyName("startDate")]
+  PROP Camunda.Orchestration.Sdk.ElementIdFilterProperty? ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceFilterFieldsType? Type { get; set; } [JsonPropertyName("type")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKey? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty? State { get; set; } [JsonPropertyName("state")]
+  PROP Camunda.Orchestration.Sdk.IncidentKey? IncidentKey { get; set; } [JsonPropertyName("incidentKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId? ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? ElementName { get; set; } [JsonPropertyName("elementName")]
+  PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Boolean? HasIncident { get; set; } [JsonPropertyName("hasIncident")]
+  PROP System.String? ElementInstanceScopeKey { get; set; } [JsonPropertyName("elementInstanceScopeKey")]
+
+TYPE Camunda.Orchestration.Sdk.ElementInstanceFilterFieldsType : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER UNSPECIFIED = 0 json="UNSPECIFIED"
+  MEMBER PROCESS = 1 json="PROCESS"
+  MEMBER SUBPROCESS = 2 json="SUB_PROCESS"
+  MEMBER EVENTSUBPROCESS = 3 json="EVENT_SUB_PROCESS"
+  MEMBER ADHOCSUBPROCESS = 4 json="AD_HOC_SUB_PROCESS"
+  MEMBER ADHOCSUBPROCESSINNERINSTANCE = 5 json="AD_HOC_SUB_PROCESS_INNER_INSTANCE"
+  MEMBER STARTEVENT = 6 json="START_EVENT"
+  MEMBER INTERMEDIATECATCHEVENT = 7 json="INTERMEDIATE_CATCH_EVENT"
+  MEMBER INTERMEDIATETHROWEVENT = 8 json="INTERMEDIATE_THROW_EVENT"
+  MEMBER BOUNDARYEVENT = 9 json="BOUNDARY_EVENT"
+  MEMBER ENDEVENT = 10 json="END_EVENT"
+  MEMBER SERVICETASK = 11 json="SERVICE_TASK"
+  MEMBER RECEIVETASK = 12 json="RECEIVE_TASK"
+  MEMBER USERTASK = 13 json="USER_TASK"
+  MEMBER MANUALTASK = 14 json="MANUAL_TASK"
+  MEMBER TASK = 15 json="TASK"
+  MEMBER EXCLUSIVEGATEWAY = 16 json="EXCLUSIVE_GATEWAY"
+  MEMBER INCLUSIVEGATEWAY = 17 json="INCLUSIVE_GATEWAY"
+  MEMBER PARALLELGATEWAY = 18 json="PARALLEL_GATEWAY"
+  MEMBER EVENTBASEDGATEWAY = 19 json="EVENT_BASED_GATEWAY"
+  MEMBER SEQUENCEFLOW = 20 json="SEQUENCE_FLOW"
+  MEMBER MULTIINSTANCEBODY = 21 json="MULTI_INSTANCE_BODY"
+  MEMBER CALLACTIVITY = 22 json="CALL_ACTIVITY"
+  MEMBER BUSINESSRULETASK = 23 json="BUSINESS_RULE_TASK"
+  MEMBER SCRIPTTASK = 24 json="SCRIPT_TASK"
+  MEMBER SENDTASK = 25 json="SEND_TASK"
+  MEMBER UNKNOWN = 26 json="UNKNOWN"
 
 TYPE Camunda.Orchestration.Sdk.ElementInstanceFilterType : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -2564,6 +2642,37 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty : sealed class
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ElementInstanceStateEnum>? In { get; set; } [JsonPropertyName("$in")]
 
+TYPE Camunda.Orchestration.Sdk.ElementInstanceWaitStateFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ElementIdFilterProperty? ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty? ElementType { get; set; } [JsonPropertyName("elementType")]
+  PROP Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty? WaitStateType { get; set; } [JsonPropertyName("waitStateType")]
+
+TYPE Camunda.Orchestration.Sdk.ElementInstanceWaitStateQuery : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ElementInstanceWaitStateFilter? Filter { get; set; } [JsonPropertyName("filter")]
+  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
+
+TYPE Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult> Items { get; set; } [JsonPropertyName("items")]
+
+TYPE Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.JobWaitStateDetails? JobDetails { get; set; } [JsonPropertyName("jobDetails")]
+  PROP Camunda.Orchestration.Sdk.MessageWaitStateDetails? MessageDetails { get; set; } [JsonPropertyName("messageDetails")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP Camunda.Orchestration.Sdk.WaitStateElementTypeEnum ElementType { get; set; } [JsonPropertyName("elementType")]
+  PROP Camunda.Orchestration.Sdk.WaitStateTypeEnum WaitStateType { get; set; } [JsonPropertyName("waitStateType")]
+
 TYPE Camunda.Orchestration.Sdk.EndCursor : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.EndCursor>]
   PROP System.String Value { get; }
   METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.EndCursor other)
@@ -2649,6 +2758,7 @@ TYPE Camunda.Orchestration.Sdk.EventualConsistencyTimeoutException : sealed clas
 
 TYPE Camunda.Orchestration.Sdk.ExpressionEvaluationRequest : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ScopeKey? ScopeKey { get; set; } [JsonPropertyName("scopeKey")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
   PROP System.String Expression { get; set; } [JsonPropertyName("expression")]
   PROP System.String? TenantId { get; set; } [JsonPropertyName("tenantId")]
@@ -3286,6 +3396,7 @@ TYPE Camunda.Orchestration.Sdk.JobFilter : sealed class
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? EndTime { get; set; } [JsonPropertyName("endTime")]
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? LastUpdateTime { get; set; } [JsonPropertyName("lastUpdateTime")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? Priority { get; set; } [JsonPropertyName("priority")]
   PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? Retries { get; set; } [JsonPropertyName("retries")]
   PROP Camunda.Orchestration.Sdk.JobKeyFilterProperty? JobKey { get; set; } [JsonPropertyName("jobKey")]
   PROP Camunda.Orchestration.Sdk.JobKindFilterProperty? Kind { get; set; } [JsonPropertyName("kind")]
@@ -3366,13 +3477,14 @@ TYPE Camunda.Orchestration.Sdk.JobListenerEventTypeEnum : enum interfaces=[Syste
   underlying=System.Int32
   MEMBER ASSIGNING = 0 json="ASSIGNING"
   MEMBER BEFOREALL = 1 json="BEFORE_ALL"
-  MEMBER CANCELING = 2 json="CANCELING"
-  MEMBER COMPLETING = 3 json="COMPLETING"
-  MEMBER CREATING = 4 json="CREATING"
-  MEMBER END = 5 json="END"
-  MEMBER START = 6 json="START"
-  MEMBER UNSPECIFIED = 7 json="UNSPECIFIED"
-  MEMBER UPDATING = 8 json="UPDATING"
+  MEMBER CANCEL = 2 json="CANCEL"
+  MEMBER CANCELING = 3 json="CANCELING"
+  MEMBER COMPLETING = 4 json="COMPLETING"
+  MEMBER CREATING = 5 json="CREATING"
+  MEMBER END = 6 json="END"
+  MEMBER START = 7 json="START"
+  MEMBER UNSPECIFIED = 8 json="UNSPECIFIED"
+  MEMBER UPDATING = 9 json="UPDATING"
 
 TYPE Camunda.Orchestration.Sdk.JobListenerEventTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.JobListenerEventTypeExactMatch>]
   PROP System.String Value { get; }
@@ -3462,14 +3574,15 @@ TYPE Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField : enum interfaces=
   MEMBER JobKey = 9 json="jobKey"
   MEMBER Kind = 10 json="kind"
   MEMBER ListenerEventType = 11 json="listenerEventType"
-  MEMBER ProcessDefinitionId = 12 json="processDefinitionId"
-  MEMBER ProcessDefinitionKey = 13 json="processDefinitionKey"
-  MEMBER ProcessInstanceKey = 14 json="processInstanceKey"
-  MEMBER Retries = 15 json="retries"
-  MEMBER State = 16 json="state"
-  MEMBER TenantId = 17 json="tenantId"
-  MEMBER Type = 18 json="type"
-  MEMBER Worker = 19 json="worker"
+  MEMBER Priority = 12 json="priority"
+  MEMBER ProcessDefinitionId = 13 json="processDefinitionId"
+  MEMBER ProcessDefinitionKey = 14 json="processDefinitionKey"
+  MEMBER ProcessInstanceKey = 15 json="processInstanceKey"
+  MEMBER Retries = 16 json="retries"
+  MEMBER State = 17 json="state"
+  MEMBER TenantId = 18 json="tenantId"
+  MEMBER Type = 19 json="type"
+  MEMBER Worker = 20 json="worker"
 
 TYPE Camunda.Orchestration.Sdk.JobSearchResult : sealed class
   CTOR ()
@@ -3491,6 +3604,7 @@ TYPE Camunda.Orchestration.Sdk.JobSearchResult : sealed class
   PROP System.DateTimeOffset? Deadline { get; set; } [JsonPropertyName("deadline")]
   PROP System.DateTimeOffset? EndTime { get; set; } [JsonPropertyName("endTime")]
   PROP System.DateTimeOffset? LastUpdateTime { get; set; } [JsonPropertyName("lastUpdateTime")]
+  PROP System.Int32 Priority { get; set; } [JsonPropertyName("priority")]
   PROP System.Int32 Retries { get; set; } [JsonPropertyName("retries")]
   PROP System.String Type { get; set; } [JsonPropertyName("type")]
   PROP System.String Worker { get; set; } [JsonPropertyName("worker")]
@@ -3579,6 +3693,14 @@ TYPE Camunda.Orchestration.Sdk.JobUpdateRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.JobChangeset Changeset { get; set; } [JsonPropertyName("changeset")]
   PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
+
+TYPE Camunda.Orchestration.Sdk.JobWaitStateDetails : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
+  PROP Camunda.Orchestration.Sdk.JobKindEnum JobKind { get; set; } [JsonPropertyName("jobKind")]
+  PROP Camunda.Orchestration.Sdk.JobListenerEventTypeEnum? ListenerEventType { get; set; } [JsonPropertyName("listenerEventType")]
+  PROP System.Int32? Retries { get; set; } [JsonPropertyName("retries")]
+  PROP System.String JobType { get; set; } [JsonPropertyName("jobType")]
 
 TYPE Camunda.Orchestration.Sdk.JobWorker : sealed class interfaces=[System.IAsyncDisposable,System.IDisposable]
   PROP System.Boolean IsRunning { get; }
@@ -3934,6 +4056,11 @@ TYPE Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty : sealed cl
   PROP Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.MessageWaitStateDetails : sealed class
+  CTOR ()
+  PROP System.String MessageName { get; set; } [JsonPropertyName("messageName")]
+  PROP System.String? CorrelationKey { get; set; } [JsonPropertyName("correlationKey")]
 
 TYPE Camunda.Orchestration.Sdk.MigrateProcessInstanceMappingInstruction : sealed class
   CTOR ()
@@ -5560,6 +5687,77 @@ TYPE Camunda.Orchestration.Sdk.VariableValueFilterProperty : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.StringFilterProperty Value { get; set; } [JsonPropertyName("value")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
+
+TYPE Camunda.Orchestration.Sdk.WaitStateElementTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ADHOCSUBPROCESS = 0 json="AD_HOC_SUB_PROCESS"
+  MEMBER ADHOCSUBPROCESSINNERINSTANCE = 1 json="AD_HOC_SUB_PROCESS_INNER_INSTANCE"
+  MEMBER BOUNDARYEVENT = 2 json="BOUNDARY_EVENT"
+  MEMBER BUSINESSRULETASK = 3 json="BUSINESS_RULE_TASK"
+  MEMBER CALLACTIVITY = 4 json="CALL_ACTIVITY"
+  MEMBER ENDEVENT = 5 json="END_EVENT"
+  MEMBER EVENTBASEDGATEWAY = 6 json="EVENT_BASED_GATEWAY"
+  MEMBER EVENTSUBPROCESS = 7 json="EVENT_SUB_PROCESS"
+  MEMBER EXCLUSIVEGATEWAY = 8 json="EXCLUSIVE_GATEWAY"
+  MEMBER INCLUSIVEGATEWAY = 9 json="INCLUSIVE_GATEWAY"
+  MEMBER INTERMEDIATECATCHEVENT = 10 json="INTERMEDIATE_CATCH_EVENT"
+  MEMBER INTERMEDIATETHROWEVENT = 11 json="INTERMEDIATE_THROW_EVENT"
+  MEMBER MANUALTASK = 12 json="MANUAL_TASK"
+  MEMBER MULTIINSTANCEBODY = 13 json="MULTI_INSTANCE_BODY"
+  MEMBER PARALLELGATEWAY = 14 json="PARALLEL_GATEWAY"
+  MEMBER PROCESS = 15 json="PROCESS"
+  MEMBER RECEIVETASK = 16 json="RECEIVE_TASK"
+  MEMBER SCRIPTTASK = 17 json="SCRIPT_TASK"
+  MEMBER SENDTASK = 18 json="SEND_TASK"
+  MEMBER SEQUENCEFLOW = 19 json="SEQUENCE_FLOW"
+  MEMBER SERVICETASK = 20 json="SERVICE_TASK"
+  MEMBER STARTEVENT = 21 json="START_EVENT"
+  MEMBER SUBPROCESS = 22 json="SUB_PROCESS"
+  MEMBER TASK = 23 json="TASK"
+  MEMBER UNKNOWN = 24 json="UNKNOWN"
+  MEMBER UNSPECIFIED = 25 json="UNSPECIFIED"
+  MEMBER USERTASK = 26 json="USER_TASK"
+
+TYPE Camunda.Orchestration.Sdk.WaitStateElementTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.WaitStateElementTypeExactMatch>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.WaitStateElementTypeExactMatch other)
+  METHOD static Camunda.Orchestration.Sdk.WaitStateElementTypeExactMatch AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.WaitStateElementTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.WaitStateElementTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.WaitStateElementTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.WaitStateTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER JOB = 0 json="JOB"
+  MEMBER MESSAGE = 1 json="MESSAGE"
+
+TYPE Camunda.Orchestration.Sdk.WaitStateTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.WaitStateTypeExactMatch>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.WaitStateTypeExactMatch other)
+  METHOD static Camunda.Orchestration.Sdk.WaitStateTypeExactMatch AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.WaitStateTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.WaitStateTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.WaitStateTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
 
 TYPE Camunda.Orchestration.Sdk.WebappComponent : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter

@@ -149,7 +149,7 @@ public class PolymorphicDeserializationTests
         var json = """
         {
             "ancestorScopeType": "direct",
-            "ancestorElementInstanceKey": 99999
+            "ancestorElementInstanceKey": "99999"
         }
         """;
 
