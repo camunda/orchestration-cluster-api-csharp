@@ -1423,6 +1423,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceWaitStatesAsync(Camunda.Orchestration.Sdk.ElementInstanceWaitStateQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/VariableElement.cs#SearchElementInstanceWaitStates)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.SearchGlobalTaskListenersAsync(Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQueryRequest,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.GlobalTaskListenerSearchQueryResult},System.Threading.CancellationToken)
 example:
 - *content

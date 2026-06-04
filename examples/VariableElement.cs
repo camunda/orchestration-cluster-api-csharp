@@ -85,6 +85,33 @@ public static class VariableElementExamples
     // </SearchElementInstanceIncidents>
     #endregion SearchElementInstanceIncidents
 
+    #region SearchElementInstanceWaitStates
+
+    // <SearchElementInstanceWaitStates>
+    public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceKey processInstanceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchElementInstanceWaitStatesAsync(
+            new ElementInstanceWaitStateQuery
+            {
+                Filter = new ElementInstanceWaitStateFilter
+                {
+                    ProcessInstanceKey = new ProcessInstanceKeyFilterProperty
+                    {
+                        Eq = processInstanceKey,
+                    },
+                },
+            });
+
+        foreach (var waitState in result.Items)
+        {
+            Console.WriteLine($"{waitState.ElementId}: {waitState.WaitStateType}");
+        }
+    }
+    // </SearchElementInstanceWaitStates>
+    #endregion SearchElementInstanceWaitStates
+
     #region CreateElementInstanceVariables
 
     // <CreateElementInstanceVariables>

@@ -1066,6 +1066,13 @@
       "label": "Search element instance incidents"
     }
   ],
+  "searchElementInstanceWaitStates": [
+    {
+      "file": "VariableElement.cs",
+      "region": "SearchElementInstanceWaitStates",
+      "label": "Search element instance wait states"
+    }
+  ],
   "createElementInstanceVariables": [
     {
       "file": "VariableElement.cs",

@@ -59,7 +59,7 @@ public static class AgentInstanceExamples
     #region UpdateAgentInstance
 
     // <UpdateAgentInstance>
-    public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
     {
         using var client = CamundaClient.Create();
 
@@ -67,7 +67,8 @@ public static class AgentInstanceExamples
             agentInstanceKey,
             new AgentInstanceUpdateRequest
             {
-                Status = AgentInstanceStatusEnum.THINKING,
+                ElementInstanceKey = elementInstanceKey,
+                Status = AgentInstanceUpdateStatusEnum.THINKING,
                 Metrics = new AgentInstanceMetricsDelta
                 {
                     InputTokens = 150,

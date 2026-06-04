@@ -2410,7 +2410,11 @@ public partial class CamundaClient
 
     /// <summary>
     /// Evaluate an expression
-    /// Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
+    /// Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
+    /// cluster variables when a tenant ID is provided. Optionally, provide a `scopeKey` to make the
+    /// variables of a specific process instance or element instance visible while evaluating the
+    /// expression.
+    /// 
     /// </summary>
     /// <remarks>
     /// Operation: evaluateExpression
@@ -6106,6 +6110,77 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Search element instance wait states
+    /// Returns the wait states for element instances matching the given filter.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: searchElementInstanceWaitStates
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchElementInstanceWaitStatesAsync(
+    ///         new ElementInstanceWaitStateQuery
+    ///         {
+    ///             Filter = new ElementInstanceWaitStateFilter
+    ///             {
+    ///                 ProcessInstanceKey = new ProcessInstanceKeyFilterProperty
+    ///                 {
+    ///                     Eq = processInstanceKey,
+    ///                 },
+    ///             },
+    ///         });
+    /// 
+    ///     foreach (var waitState in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;{waitState.ElementId}: {waitState.WaitStateType}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchElementInstanceWaitStatesAsync(
+    ///         new ElementInstanceWaitStateQuery
+    ///         {
+    ///             Filter = new ElementInstanceWaitStateFilter
+    ///             {
+    ///                 ProcessInstanceKey = new ProcessInstanceKeyFilterProperty
+    ///                 {
+    ///                     Eq = processInstanceKey,
+    ///                 },
+    ///             },
+    ///         });
+    /// 
+    ///     foreach (var waitState in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;{waitState.ElementId}: {waitState.WaitStateType}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery body, ConsistencyOptions<ElementInstanceWaitStateQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/element-instances/wait-states/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchElementInstanceWaitStates", false,
+                () => InvokeWithRetryAsync(() => SendAsync<ElementInstanceWaitStateQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceWaitStates", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<ElementInstanceWaitStateQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceWaitStates", false, ct);
+    }
+
+    /// <summary>
     /// Search element instances
     /// Search for element instances based on given criteria.
     /// </summary>
@@ -8221,15 +8296,14 @@ public partial class CamundaClient
     /// Update agent instance
     /// Updates the mutable fields of an agent instance: status, metric counters, and
     /// tools. Metric values are treated as deltas and applied immediately to the
-    /// aggregate counters. Tool updates replace the existing tool list. At least one of
-    /// status, metrics, or tools must be provided.
+    /// aggregate counters. Tool updates replace the existing tool list.
     /// 
     /// </summary>
     /// <remarks>
     /// Operation: updateAgentInstance
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
@@ -8237,7 +8311,8 @@ public partial class CamundaClient
     ///         agentInstanceKey,
     ///         new AgentInstanceUpdateRequest
     ///         {
-    ///             Status = AgentInstanceStatusEnum.THINKING,
+    ///             ElementInstanceKey = elementInstanceKey,
+    ///             Status = AgentInstanceUpdateStatusEnum.THINKING,
     ///             Metrics = new AgentInstanceMetricsDelta
     ///             {
     ///                 InputTokens = 150,
@@ -8253,7 +8328,7 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
@@ -8261,7 +8336,8 @@ public partial class CamundaClient
     ///         agentInstanceKey,
     ///         new AgentInstanceUpdateRequest
     ///         {
-    ///             Status = AgentInstanceStatusEnum.THINKING,
+    ///             ElementInstanceKey = elementInstanceKey,
+    ///             Status = AgentInstanceUpdateStatusEnum.THINKING,
     ///             Metrics = new AgentInstanceMetricsDelta
     ///             {
     ///                 InputTokens = 150,
