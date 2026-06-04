@@ -18923,23 +18923,23 @@
         "type": "object",
         "required": [
           "agentInstanceKey",
-          "completionDate",
-          "creationDate",
+          "status",
           "definition",
-          "elementId",
-          "elementInstanceKeys",
-          "lastUpdatedDate",
-          "limits",
           "metrics",
-          "processDefinitionId",
-          "processDefinitionKey",
-          "processDefinitionVersion",
-          "processDefinitionVersionTag",
+          "limits",
+          "tools",
+          "elementId",
           "processInstanceKey",
           "rootProcessInstanceKey",
-          "status",
+          "processDefinitionKey",
+          "processDefinitionId",
+          "processDefinitionVersion",
+          "processDefinitionVersionTag",
           "tenantId",
-          "tools"
+          "creationDate",
+          "lastUpdatedDate",
+          "completionDate",
+          "elementInstanceKeys"
         ],
         "properties": {
           "agentInstanceKey": {
@@ -19098,9 +19098,9 @@
         "description": "A tool available to the agent.",
         "type": "object",
         "required": [
+          "name",
           "description",
-          "elementId",
-          "name"
+          "elementId"
         ],
         "properties": {
           "name": {
@@ -19124,8 +19124,8 @@
         "type": "object",
         "required": [
           "inputTokens",
-          "modelCalls",
           "outputTokens",
+          "modelCalls",
           "toolCalls"
         ],
         "properties": {
@@ -19204,8 +19204,8 @@
         "description": "Request to create a new agent instance.",
         "type": "object",
         "required": [
-          "definition",
-          "elementInstanceKey"
+          "elementInstanceKey",
+          "definition"
         ],
         "properties": {
           "elementInstanceKey": {
@@ -19378,37 +19378,37 @@
         "description": "Audit log item.",
         "type": "object",
         "required": [
+          "auditLogKey",
+          "entityKey",
+          "entityType",
+          "operationType",
+          "batchOperationKey",
+          "batchOperationType",
+          "timestamp",
           "actorId",
           "actorType",
           "agentElementId",
-          "auditLogKey",
-          "batchOperationKey",
-          "batchOperationType",
+          "tenantId",
+          "result",
           "category",
-          "decisionDefinitionId",
-          "decisionDefinitionKey",
-          "decisionEvaluationKey",
-          "decisionRequirementsId",
-          "decisionRequirementsKey",
-          "deploymentKey",
-          "elementInstanceKey",
-          "entityDescription",
-          "entityKey",
-          "entityType",
-          "formKey",
-          "jobKey",
-          "operationType",
           "processDefinitionId",
           "processDefinitionKey",
           "processInstanceKey",
+          "rootProcessInstanceKey",
+          "elementInstanceKey",
+          "jobKey",
+          "userTaskKey",
+          "decisionRequirementsId",
+          "decisionRequirementsKey",
+          "decisionDefinitionId",
+          "decisionDefinitionKey",
+          "decisionEvaluationKey",
+          "deploymentKey",
+          "formKey",
+          "resourceKey",
           "relatedEntityKey",
           "relatedEntityType",
-          "resourceKey",
-          "result",
-          "rootProcessInstanceKey",
-          "tenantId",
-          "timestamp",
-          "userTaskKey"
+          "entityDescription"
         ],
         "properties": {
           "auditLogKey": {
@@ -20339,14 +20339,14 @@
         "type": "object",
         "required": [
           "authorizedComponents",
+          "tenants",
+          "groups",
+          "roles",
+          "salesPlanType",
           "c8Links",
           "canLogout",
           "displayName",
           "email",
-          "groups",
-          "roles",
-          "salesPlanType",
-          "tenants",
           "username"
         ],
         "properties": {
@@ -20465,9 +20465,9 @@
         "required": [
           "ownerId",
           "ownerType",
-          "permissionTypes",
           "resourceId",
-          "resourceType"
+          "resourceType",
+          "permissionTypes"
         ]
       },
       "AuthorizationPropertyBasedRequest": {
@@ -20508,9 +20508,9 @@
         "required": [
           "ownerId",
           "ownerType",
-          "permissionTypes",
           "resourcePropertyName",
-          "resourceType"
+          "resourceType",
+          "permissionTypes"
         ],
         "x-properties-added-in-version": [
           {
@@ -20623,13 +20623,13 @@
       },
       "AuthorizationResult": {
         "required": [
-          "authorizationKey",
           "ownerId",
           "ownerType",
-          "permissionTypes",
+          "resourceType",
           "resourceId",
           "resourcePropertyName",
-          "resourceType"
+          "permissionTypes",
+          "authorizationKey"
         ],
         "type": "object",
         "properties": {
@@ -20981,17 +20981,17 @@
       },
       "BatchOperationResponse": {
         "required": [
-          "actorId",
-          "actorType",
           "batchOperationKey",
           "batchOperationType",
-          "endDate",
-          "errors",
+          "state",
           "operationsCompletedCount",
           "operationsFailedCount",
           "operationsTotalCount",
-          "startDate",
-          "state"
+          "actorType",
+          "actorId",
+          "errors",
+          "endDate",
+          "startDate"
         ],
         "type": "object",
         "properties": {
@@ -21221,13 +21221,13 @@
       "BatchOperationItemResponse": {
         "type": "object",
         "required": [
+          "rootProcessInstanceKey",
           "batchOperationKey",
           "errorMessage",
           "itemKey",
           "operationType",
-          "processInstanceKey",
           "processedDate",
-          "rootProcessInstanceKey",
+          "processInstanceKey",
           "state"
         ],
         "properties": {
@@ -21446,8 +21446,8 @@
           }
         },
         "required": [
-          "mappingInstructions",
-          "targetProcessDefinitionKey"
+          "targetProcessDefinitionKey",
+          "mappingInstructions"
         ]
       },
       "ProcessInstanceModificationBatchOperationRequest": {
@@ -21792,8 +21792,8 @@
         "description": "Cluster variable search response item.",
         "type": "object",
         "required": [
-          "isTruncated",
-          "value"
+          "value",
+          "isTruncated"
         ],
         "allOf": [
           {
@@ -22003,12 +22003,12 @@
         "type": "object",
         "required": [
           "brokers",
-          "clusterId",
           "clusterSize",
+          "partitionsCount",
+          "replicationFactor",
           "gatewayVersion",
           "lastCompletedChangeId",
-          "partitionsCount",
-          "replicationFactor"
+          "clusterId"
         ],
         "properties": {
           "brokers": {
@@ -22087,10 +22087,10 @@
         "description": "Provides information on a broker node.",
         "type": "object",
         "required": [
-          "host",
           "nodeId",
-          "partitions",
+          "host",
           "port",
+          "partitions",
           "version"
         ],
         "properties": {
@@ -22129,9 +22129,9 @@
         "description": "Provides information on a partition within a broker node.",
         "type": "object",
         "required": [
-          "health",
           "partitionId",
-          "role"
+          "role",
+          "health"
         ],
         "properties": {
           "partitionId": {
@@ -22197,8 +22197,8 @@
       "EvaluateConditionalResult": {
         "type": "object",
         "required": [
-          "conditionalEvaluationKey",
           "processInstances",
+          "conditionalEvaluationKey",
           "tenantId"
         ],
         "x-semantic-provider": [
@@ -22729,14 +22729,14 @@
       },
       "EvaluatedDecisionResult": {
         "required": [
+          "decisionDefinitionType",
+          "evaluatedInputs",
+          "matchedRules",
           "decisionDefinitionId",
           "decisionDefinitionKey",
           "decisionDefinitionName",
-          "decisionDefinitionType",
           "decisionDefinitionVersion",
           "decisionEvaluationInstanceKey",
-          "evaluatedInputs",
-          "matchedRules",
           "output",
           "tenantId"
         ],
@@ -23360,11 +23360,11 @@
       },
       "EvaluatedDecisionOutputItem": {
         "required": [
+          "ruleId",
+          "ruleIndex",
           "outputId",
           "outputName",
-          "outputValue",
-          "ruleId",
-          "ruleIndex"
+          "outputValue"
         ],
         "type": "object",
         "description": "The evaluated decision outputs.",
@@ -23747,8 +23747,8 @@
         "type": "object",
         "required": [
           "deploymentKey",
-          "deployments",
-          "tenantId"
+          "tenantId",
+          "deployments"
         ],
         "x-semantic-provider": [
           "deploymentKey"
@@ -23782,10 +23782,10 @@
       "DeploymentMetadataResult": {
         "type": "object",
         "required": [
+          "processDefinition",
           "decisionDefinition",
           "decisionRequirements",
           "form",
-          "processDefinition",
           "resource"
         ],
         "properties": {
@@ -23851,9 +23851,9 @@
         "type": "object",
         "required": [
           "processDefinitionId",
-          "processDefinitionKey",
           "processDefinitionVersion",
           "resourceName",
+          "processDefinitionKey",
           "tenantId"
         ],
         "properties": {
@@ -24118,8 +24118,8 @@
       "DeleteResourceResponse": {
         "type": "object",
         "required": [
-          "batchOperation",
-          "resourceKey"
+          "resourceKey",
+          "batchOperation"
         ],
         "properties": {
           "resourceKey": {
@@ -24154,12 +24154,12 @@
       "ResourceResult": {
         "type": "object",
         "required": [
-          "resourceId",
-          "resourceKey",
           "resourceName",
-          "tenantId",
           "version",
-          "versionTag"
+          "versionTag",
+          "resourceId",
+          "tenantId",
+          "resourceKey"
         ],
         "properties": {
           "resourceName": {
@@ -24541,10 +24541,10 @@
         "type": "object",
         "required": [
           "camunda.document.type",
-          "contentHash",
+          "storeId",
           "documentId",
-          "metadata",
-          "storeId"
+          "contentHash",
+          "metadata"
         ],
         "properties": {
           "camunda.document.type": {
@@ -24641,8 +24641,8 @@
           {
             "type": "object",
             "required": [
-              "createdDocuments",
-              "failedDocuments"
+              "failedDocuments",
+              "createdDocuments"
             ],
             "properties": {
               "failedDocuments": {
@@ -24742,13 +24742,13 @@
         "description": "Information about the document that is returned in responses.",
         "type": "object",
         "required": [
+          "fileName",
+          "expiresAt",
+          "size",
           "contentType",
           "customProperties",
-          "expiresAt",
-          "fileName",
           "processDefinitionId",
-          "processInstanceKey",
-          "size"
+          "processInstanceKey"
         ],
         "properties": {
           "contentType": {
@@ -24823,8 +24823,8 @@
       "DocumentLink": {
         "type": "object",
         "required": [
-          "expiresAt",
-          "url"
+          "url",
+          "expiresAt"
         ],
         "properties": {
           "url": {
@@ -25135,20 +25135,20 @@
       "ElementInstanceResult": {
         "type": "object",
         "required": [
-          "elementId",
-          "elementInstanceKey",
-          "elementName",
-          "endDate",
-          "hasIncident",
-          "incidentKey",
           "processDefinitionId",
-          "processDefinitionKey",
-          "processInstanceKey",
-          "rootProcessInstanceKey",
           "startDate",
+          "elementId",
+          "elementName",
+          "type",
           "state",
+          "hasIncident",
           "tenantId",
-          "type"
+          "elementInstanceKey",
+          "processInstanceKey",
+          "processDefinitionKey",
+          "rootProcessInstanceKey",
+          "endDate",
+          "incidentKey"
         ],
         "properties": {
           "processDefinitionId": {
@@ -25541,15 +25541,15 @@
         "description": "An element instance waiting state.",
         "type": "object",
         "required": [
-          "elementId",
-          "elementInstanceKey",
-          "elementType",
-          "jobDetails",
-          "messageDetails",
+          "waitStateType",
           "processInstanceKey",
-          "rootProcessInstanceKey",
+          "elementInstanceKey",
+          "elementId",
+          "elementType",
           "tenantId",
-          "waitStateType"
+          "rootProcessInstanceKey",
+          "jobDetails",
+          "messageDetails"
         ],
         "properties": {
           "waitStateType": {
@@ -25641,8 +25641,8 @@
         "type": "object",
         "required": [
           "jobKey",
-          "jobKind",
           "jobType",
+          "jobKind",
           "listenerEventType",
           "retries"
         ],
@@ -25687,8 +25687,8 @@
       "MessageWaitStateDetails": {
         "type": "object",
         "required": [
-          "correlationKey",
-          "messageName"
+          "messageName",
+          "correlationKey"
         ],
         "properties": {
           "messageName": {
@@ -26115,11 +26115,11 @@
           "formKey"
         ],
         "required": [
-          "formId",
-          "formKey",
-          "schema",
           "tenantId",
-          "version"
+          "formId",
+          "schema",
+          "version",
+          "formKey"
         ],
         "properties": {
           "tenantId": {
@@ -26244,9 +26244,9 @@
       "CreateGlobalTaskListenerRequest": {
         "type": "object",
         "required": [
-          "eventTypes",
           "id",
-          "type"
+          "type",
+          "eventTypes"
         ],
         "allOf": [
           {
@@ -26262,8 +26262,8 @@
       "UpdateGlobalTaskListenerRequest": {
         "type": "object",
         "required": [
-          "eventTypes",
-          "type"
+          "type",
+          "eventTypes"
         ],
         "allOf": [
           {
@@ -26274,13 +26274,13 @@
       "GlobalTaskListenerResult": {
         "type": "object",
         "required": [
-          "afterNonGlobal",
-          "eventTypes",
           "id",
-          "priority",
+          "type",
           "retries",
-          "source",
-          "type"
+          "eventTypes",
+          "afterNonGlobal",
+          "priority",
+          "source"
         ],
         "allOf": [
           {
@@ -26571,9 +26571,9 @@
           }
         },
         "required": [
-          "description",
           "groupId",
-          "name"
+          "name",
+          "description"
         ]
       },
       "GroupUpdateRequest": {
@@ -26614,9 +26614,9 @@
           }
         },
         "required": [
-          "description",
           "groupId",
-          "name"
+          "name",
+          "description"
         ]
       },
       "GroupResult": {
@@ -26642,9 +26642,9 @@
           }
         },
         "required": [
-          "description",
+          "name",
           "groupId",
-          "name"
+          "description"
         ]
       },
       "GroupSearchQuerySortRequest": {
@@ -27627,18 +27627,18 @@
       "IncidentResult": {
         "type": "object",
         "required": [
-          "creationTime",
-          "elementId",
-          "elementInstanceKey",
-          "errorMessage",
-          "errorType",
           "incidentKey",
-          "jobKey",
-          "processDefinitionId",
           "processDefinitionKey",
           "processInstanceKey",
-          "rootProcessInstanceKey",
+          "elementInstanceKey",
+          "creationTime",
           "state",
+          "errorType",
+          "errorMessage",
+          "elementId",
+          "processDefinitionId",
+          "rootProcessInstanceKey",
+          "jobKey",
           "tenantId"
         ],
         "properties": {
@@ -28020,8 +28020,8 @@
         "description": "Global job statistics query result.",
         "type": "object",
         "required": [
-          "completed",
           "created",
+          "completed",
           "failed",
           "isIncomplete"
         ],
@@ -28116,8 +28116,8 @@
         "description": "Job type statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "page",
+          "items"
         ],
         "allOf": [
           {
@@ -28138,10 +28138,10 @@
         "description": "Statistics for a single job type.",
         "type": "object",
         "required": [
-          "completed",
-          "created",
-          "failed",
           "jobType",
+          "created",
+          "completed",
+          "failed",
           "workers"
         ],
         "properties": {
@@ -28192,8 +28192,8 @@
         "type": "object",
         "required": [
           "from",
-          "jobType",
-          "to"
+          "to",
+          "jobType"
         ],
         "properties": {
           "from": {
@@ -28219,8 +28219,8 @@
         "description": "Job worker statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "page",
+          "items"
         ],
         "allOf": [
           {
@@ -28241,10 +28241,10 @@
         "description": "Statistics for a single worker within a job type.",
         "type": "object",
         "required": [
-          "completed",
+          "worker",
           "created",
-          "failed",
-          "worker"
+          "completed",
+          "failed"
         ],
         "properties": {
           "worker": {
@@ -28288,8 +28288,8 @@
         "type": "object",
         "required": [
           "from",
-          "jobType",
-          "to"
+          "to",
+          "jobType"
         ],
         "properties": {
           "from": {
@@ -28320,8 +28320,8 @@
         "description": "Job time-series statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "page",
+          "items"
         ],
         "allOf": [
           {
@@ -28342,10 +28342,10 @@
         "description": "Aggregated job metrics for a single time bucket.",
         "type": "object",
         "required": [
-          "completed",
+          "time",
           "created",
-          "failed",
-          "time"
+          "completed",
+          "failed"
         ],
         "properties": {
           "time": {
@@ -28390,8 +28390,8 @@
         "type": "object",
         "required": [
           "from",
-          "jobType",
-          "to"
+          "to",
+          "jobType"
         ],
         "properties": {
           "from": {
@@ -28433,8 +28433,8 @@
         "description": "Job error statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "page",
+          "items"
         ],
         "allOf": [
           {
@@ -28540,9 +28540,9 @@
           }
         },
         "required": [
+          "type",
           "maxJobsToActivate",
-          "timeout",
-          "type"
+          "timeout"
         ],
         "x-properties-added-in-version": [
           {
@@ -28575,26 +28575,26 @@
         ],
         "type": "object",
         "required": [
-          "customHeaders",
-          "deadline",
+          "type",
+          "processDefinitionId",
+          "processDefinitionVersion",
           "elementId",
-          "elementInstanceKey",
+          "customHeaders",
+          "worker",
+          "retries",
+          "deadline",
+          "variables",
+          "tenantId",
           "jobKey",
+          "processInstanceKey",
+          "processDefinitionKey",
+          "elementInstanceKey",
           "kind",
           "listenerEventType",
-          "priority",
-          "processDefinitionId",
-          "processDefinitionKey",
-          "processDefinitionVersion",
-          "processInstanceKey",
-          "retries",
           "rootProcessInstanceKey",
           "tags",
-          "tenantId",
-          "type",
           "userTask",
-          "variables",
-          "worker"
+          "priority"
         ],
         "properties": {
           "type": {
@@ -28754,11 +28754,11 @@
       },
       "UserTaskProperties": {
         "required": [
-          "action",
-          "assignee",
           "candidateGroups",
           "candidateUsers",
           "changedAttributes",
+          "action",
+          "assignee",
           "dueDate",
           "followUpDate",
           "formKey",
@@ -29123,31 +29123,31 @@
       "JobSearchResult": {
         "type": "object",
         "required": [
-          "creationTime",
           "customHeaders",
-          "deadline",
-          "deniedReason",
           "elementId",
           "elementInstanceKey",
-          "endTime",
-          "errorCode",
-          "errorMessage",
           "hasFailedWithRetriesLeft",
-          "isDenied",
           "jobKey",
           "kind",
-          "lastUpdateTime",
           "listenerEventType",
           "priority",
           "processDefinitionId",
           "processDefinitionKey",
           "processInstanceKey",
           "retries",
-          "rootProcessInstanceKey",
           "state",
           "tenantId",
           "type",
-          "worker"
+          "worker",
+          "rootProcessInstanceKey",
+          "creationTime",
+          "deadline",
+          "deniedReason",
+          "endTime",
+          "errorCode",
+          "errorMessage",
+          "isDenied",
+          "lastUpdateTime"
         ],
         "properties": {
           "customHeaders": {
@@ -30783,10 +30783,10 @@
         "description": "The response of a license request.",
         "type": "object",
         "required": [
-          "expiresAt",
-          "isCommercial",
+          "validLicense",
           "licenseType",
-          "validLicense"
+          "isCommercial",
+          "expiresAt"
         ],
         "properties": {
           "validLicense": {
@@ -30900,8 +30900,8 @@
         "required": [
           "claimName",
           "claimValue",
-          "mappingRuleId",
-          "name"
+          "name",
+          "mappingRuleId"
         ]
       },
       "MappingRuleCreateResult": {
@@ -30967,8 +30967,8 @@
         "required": [
           "claimName",
           "claimValue",
-          "mappingRuleId",
-          "name"
+          "name",
+          "mappingRuleId"
         ]
       },
       "MappingRuleSearchQuerySortRequest": {
@@ -31083,9 +31083,9 @@
         ],
         "type": "object",
         "required": [
+          "tenantId",
           "messageKey",
-          "processInstanceKey",
-          "tenantId"
+          "processInstanceKey"
         ],
         "properties": {
           "tenantId": {
@@ -31163,8 +31163,8 @@
         ],
         "type": "object",
         "required": [
-          "messageKey",
-          "tenantId"
+          "tenantId",
+          "messageKey"
         ],
         "properties": {
           "tenantId": {
@@ -31208,9 +31208,11 @@
       "MessageSubscriptionResult": {
         "type": "object",
         "required": [
+          "rootProcessInstanceKey",
           "correlationKey",
           "elementId",
           "elementInstanceKey",
+          "toolProperties",
           "inboundConnectorType",
           "lastUpdatedDate",
           "messageName",
@@ -31222,10 +31224,8 @@
           "processDefinitionName",
           "processDefinitionVersion",
           "processInstanceKey",
-          "rootProcessInstanceKey",
           "tenantId",
-          "toolName",
-          "toolProperties"
+          "toolName"
         ],
         "properties": {
           "messageSubscriptionKey": {
@@ -31655,16 +31655,16 @@
           "correlationKey",
           "correlationTime",
           "elementId",
-          "elementInstanceKey",
           "messageKey",
           "messageName",
           "partitionId",
           "processDefinitionId",
-          "processDefinitionKey",
           "processInstanceKey",
-          "rootProcessInstanceKey",
           "subscriptionKey",
-          "tenantId"
+          "tenantId",
+          "rootProcessInstanceKey",
+          "elementInstanceKey",
+          "processDefinitionKey"
         ],
         "properties": {
           "correlationKey": {
@@ -32115,11 +32115,11 @@
         "description": "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
         "type": "object",
         "required": [
-          "detail",
-          "instance",
-          "status",
+          "type",
           "title",
-          "type"
+          "status",
+          "detail",
+          "instance"
         ],
         "properties": {
           "type": {
@@ -32287,14 +32287,14 @@
       "ProcessDefinitionResult": {
         "type": "object",
         "required": [
-          "hasStartForm",
-          "name",
-          "processDefinitionId",
           "processDefinitionKey",
+          "name",
           "resourceName",
-          "tenantId",
           "version",
-          "versionTag"
+          "versionTag",
+          "processDefinitionId",
+          "tenantId",
+          "hasStartForm"
         ],
         "properties": {
           "name": {
@@ -32730,13 +32730,13 @@
           }
         },
         "required": [
-          "activeInstancesWithIncidentCount",
-          "activeInstancesWithoutIncidentCount",
           "processDefinitionId",
           "processDefinitionKey",
+          "tenantId",
           "processDefinitionName",
           "processDefinitionVersion",
-          "tenantId"
+          "activeInstancesWithIncidentCount",
+          "activeInstancesWithoutIncidentCount"
         ]
       },
       "ProcessDefinitionInstanceVersionStatisticsQuerySortRequest": {
@@ -33024,14 +33024,14 @@
           "processInstanceKey"
         ],
         "required": [
-          "businessId",
           "processDefinitionId",
           "processDefinitionKey",
           "processDefinitionVersion",
+          "tenantId",
+          "variables",
           "processInstanceKey",
           "tags",
-          "tenantId",
-          "variables"
+          "businessId"
         ],
         "type": "object",
         "properties": {
@@ -33525,22 +33525,22 @@
         "description": "Process instance search response item.",
         "type": "object",
         "required": [
-          "businessId",
-          "endDate",
-          "hasIncident",
-          "parentElementInstanceKey",
-          "parentProcessInstanceKey",
           "processDefinitionId",
-          "processDefinitionKey",
           "processDefinitionName",
           "processDefinitionVersion",
           "processDefinitionVersionTag",
-          "processInstanceKey",
-          "rootProcessInstanceKey",
           "startDate",
+          "endDate",
           "state",
+          "hasIncident",
+          "tenantId",
+          "processInstanceKey",
+          "processDefinitionKey",
+          "parentProcessInstanceKey",
+          "parentElementInstanceKey",
+          "rootProcessInstanceKey",
           "tags",
-          "tenantId"
+          "businessId"
         ],
         "properties": {
           "processDefinitionId": {
@@ -33728,9 +33728,9 @@
       "ProcessInstanceCallHierarchyEntry": {
         "type": "object",
         "required": [
+          "processInstanceKey",
           "processDefinitionKey",
-          "processDefinitionName",
-          "processInstanceKey"
+          "processDefinitionName"
         ],
         "properties": {
           "processInstanceKey": {
@@ -33775,11 +33775,11 @@
         "description": "Process instance sequence flow result.",
         "type": "object",
         "required": [
+          "rootProcessInstanceKey",
           "elementId",
           "processDefinitionId",
           "processDefinitionKey",
           "processInstanceKey",
-          "rootProcessInstanceKey",
           "sequenceFlowId",
           "tenantId"
         ],
@@ -33881,8 +33881,8 @@
           }
         },
         "required": [
-          "mappingInstructions",
-          "targetProcessDefinitionKey"
+          "targetProcessDefinitionKey",
+          "mappingInstructions"
         ]
       },
       "MigrateProcessInstanceMappingInstruction": {
@@ -34309,8 +34309,8 @@
           }
         },
         "required": [
-          "name",
-          "roleId"
+          "roleId",
+          "name"
         ]
       },
       "RoleCreateResult": {
@@ -34335,9 +34335,9 @@
           }
         },
         "required": [
-          "description",
+          "roleId",
           "name",
-          "roleId"
+          "description"
         ]
       },
       "RoleUpdateRequest": {
@@ -34378,9 +34378,9 @@
           }
         },
         "required": [
-          "description",
+          "roleId",
           "name",
-          "roleId"
+          "description"
         ]
       },
       "RoleResult": {
@@ -34406,9 +34406,9 @@
           }
         },
         "required": [
-          "description",
+          "roleId",
           "name",
-          "roleId"
+          "description"
         ]
       },
       "RoleSearchQuerySortRequest": {
@@ -34894,10 +34894,10 @@
         "description": "Pagination information about the search results.",
         "type": "object",
         "required": [
-          "endCursor",
+          "totalItems",
           "hasMoreTotalItems",
           "startCursor",
-          "totalItems"
+          "endCursor"
         ],
         "x-semantic-provider": [
           "startCursor",
@@ -34976,8 +34976,8 @@
       "SignalBroadcastResult": {
         "type": "object",
         "required": [
-          "signalKey",
-          "tenantId"
+          "tenantId",
+          "signalKey"
         ],
         "x-semantic-provider": [
           "signalKey"
@@ -35015,8 +35015,8 @@
       },
       "UsageMetricsResponse": {
         "required": [
-          "activeTenants",
-          "tenants"
+          "tenants",
+          "activeTenants"
         ],
         "type": "object",
         "allOf": [
@@ -35048,9 +35048,9 @@
       },
       "UsageMetricsResponseItem": {
         "required": [
-          "assignees",
+          "processInstances",
           "decisionInstances",
-          "processInstances"
+          "assignees"
         ],
         "type": "object",
         "properties": {
@@ -35075,11 +35075,11 @@
         "description": "Envelope for all system configuration sections. Each property\nrepresents a feature area.\n",
         "type": "object",
         "required": [
-          "authentication",
-          "cloud",
+          "jobMetrics",
           "components",
           "deployment",
-          "jobMetrics"
+          "authentication",
+          "cloud"
         ],
         "properties": {
           "jobMetrics": {
@@ -35123,10 +35123,10 @@
         "required": [
           "enabled",
           "exportInterval",
+          "maxWorkerNameLength",
           "maxJobTypeLength",
           "maxTenantIdLength",
-          "maxUniqueKeys",
-          "maxWorkerNameLength"
+          "maxUniqueKeys"
         ],
         "properties": {
           "enabled": {
@@ -35286,8 +35286,8 @@
           }
         },
         "required": [
-          "name",
-          "tenantId"
+          "tenantId",
+          "name"
         ]
       },
       "TenantCreateResult": {
@@ -35317,9 +35317,9 @@
           }
         },
         "required": [
-          "description",
+          "tenantId",
           "name",
-          "tenantId"
+          "description"
         ]
       },
       "TenantUpdateRequest": {
@@ -35361,9 +35361,9 @@
           }
         },
         "required": [
-          "description",
+          "tenantId",
           "name",
-          "tenantId"
+          "description"
         ]
       },
       "TenantResult": {
@@ -35391,9 +35391,9 @@
           }
         },
         "required": [
-          "description",
+          "tenantId",
           "name",
-          "tenantId"
+          "description"
         ]
       },
       "TenantSearchQuerySortRequest": {
@@ -36017,30 +36017,30 @@
       "UserTaskResult": {
         "type": "object",
         "required": [
-          "assignee",
+          "tenantId",
+          "userTaskKey",
+          "name",
+          "processInstanceKey",
+          "rootProcessInstanceKey",
+          "processDefinitionKey",
+          "elementInstanceKey",
+          "processDefinitionId",
+          "processName",
+          "state",
           "candidateGroups",
           "candidateUsers",
-          "completionDate",
+          "elementId",
           "creationDate",
           "customHeaders",
+          "priority",
+          "tags",
+          "assignee",
+          "completionDate",
           "dueDate",
-          "elementId",
-          "elementInstanceKey",
           "externalFormReference",
           "followUpDate",
-          "formKey",
-          "name",
-          "priority",
-          "processDefinitionId",
-          "processDefinitionKey",
           "processDefinitionVersion",
-          "processInstanceKey",
-          "processName",
-          "rootProcessInstanceKey",
-          "state",
-          "tags",
-          "tenantId",
-          "userTaskKey"
+          "formKey"
         ],
         "properties": {
           "name": {
@@ -36670,8 +36670,8 @@
           }
         },
         "required": [
-          "password",
-          "username"
+          "username",
+          "password"
         ]
       },
       "UserCreateResult": {
@@ -36700,9 +36700,9 @@
           }
         },
         "required": [
-          "email",
+          "username",
           "name",
-          "username"
+          "email"
         ]
       },
       "UserUpdateRequest": {
@@ -36745,9 +36745,9 @@
           }
         },
         "required": [
-          "email",
+          "username",
           "name",
-          "username"
+          "email"
         ]
       },
       "UserResult": {
@@ -36773,9 +36773,9 @@
           }
         },
         "required": [
-          "email",
+          "username",
           "name",
-          "username"
+          "email"
         ]
       },
       "UserSearchQuerySortRequest": {
@@ -37050,10 +37050,10 @@
         "required": [
           "name",
           "processInstanceKey",
-          "rootProcessInstanceKey",
-          "scopeKey",
           "tenantId",
-          "variableKey"
+          "variableKey",
+          "scopeKey",
+          "rootProcessInstanceKey"
         ],
         "properties": {
           "name": {
