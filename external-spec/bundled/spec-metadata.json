@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:f85a4345e56552ece2e63ba93164e70abb16973b17a4256803dc5d64346869c6",
+  "specHash": "sha256:cb633855979423c3641876a384ff83d246452b2d34b631b83fb349a82bd425f7",
   "semanticKeys": [
     {
       "name": "AgentInstanceKey",
@@ -2073,6 +2073,38 @@
         }
       ],
       "stableId": "variable-key-filter-property"
+    },
+    {
+      "name": "WaitStateElementTypeFilterProperty",
+      "kind": "union-wrapper",
+      "description": "Element type property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "WaitStateElementTypeExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedWaitStateElementTypeFilter"
+        }
+      ],
+      "stableId": "wait-state-element-type-filter-property"
+    },
+    {
+      "name": "WaitStateTypeFilterProperty",
+      "kind": "union-wrapper",
+      "description": "Wait state type property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "WaitStateTypeExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedWaitStateTypeFilter"
+        }
+      ],
+      "stableId": "wait-state-type-filter-property"
     }
   ],
   "arrays": [
@@ -2255,6 +2287,14 @@
       "method": "get",
       "tags": [
         "Decision requirements"
+      ]
+    },
+    {
+      "operationId": "searchElementInstanceWaitStates",
+      "path": "/element-instances/wait-states/search",
+      "method": "post",
+      "tags": [
+        "Element instance"
       ]
     },
     {
@@ -2860,7 +2900,7 @@
         "Agent instance"
       ],
       "summary": "Update agent instance",
-      "description": "Updates the mutable fields of an agent instance: status, metric counters, and\ntools. Metric values are treated as deltas and applied immediately to the\naggregate counters. Tool updates replace the existing tool list. At least one of\nstatus, metrics, or tools must be provided.\n",
+      "description": "Updates the mutable fields of an agent instance: status, metric counters, and\ntools. Metric values are treated as deltas and applied immediately to the\naggregate counters. Tool updates replace the existing tool list.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -4348,6 +4388,35 @@
       }
     },
     {
+      "operationId": "searchElementInstanceWaitStates",
+      "path": "/element-instances/wait-states/search",
+      "method": "post",
+      "tags": [
+        "Element instance"
+      ],
+      "summary": "Search element instance wait states",
+      "description": "Returns the wait states for element instances matching the given filter.\n",
+      "eventuallyConsistent": true,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "element-instances.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ElementInstanceWaitStateQuery",
+      "successResponseSchemaRef": "ElementInstanceWaitStateQueryResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": true,
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "searchElementInstances",
       "path": "/element-instances/search",
       "method": "post",
@@ -4473,7 +4542,7 @@
         "Expression"
       ],
       "summary": "Evaluate an expression",
-      "description": "Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.",
+      "description": "Evaluates a FEEL expression and returns the result. Supports references to tenant scoped\ncluster variables when a tenant ID is provided. Optionally, provide a `scopeKey` to make the\nvariables of a specific process instance or element instance visible while evaluating the\nexpression.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -9273,6 +9342,13 @@
       "stableId": "deployment-resource-result"
     },
     {
+      "schemaName": "DeploymentResult",
+      "providers": [
+        "deploymentKey"
+      ],
+      "stableId": "deployment-result"
+    },
+    {
       "schemaName": "DocumentReference",
       "providers": [
         "documentId"
@@ -9354,10 +9430,10 @@
   ],
   "integrity": {
     "totalSemanticKeys": 40,
-    "totalUnions": 57,
-    "totalOperations": 190,
-    "totalEventuallyConsistent": 88,
+    "totalUnions": 59,
+    "totalOperations": 191,
+    "totalEventuallyConsistent": 89,
     "totalDeprecatedEnumSchemas": 2,
-    "totalSemanticProviders": 21
+    "totalSemanticProviders": 22
   }
 }
