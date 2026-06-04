@@ -6114,7 +6114,59 @@ public partial class CamundaClient
     /// Returns the wait states for element instances matching the given filter.
     /// 
     /// </summary>
-    /// <remarks>Operation: searchElementInstanceWaitStates</remarks>
+    /// <remarks>
+    /// Operation: searchElementInstanceWaitStates
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchElementInstanceWaitStatesAsync(
+    ///         new ElementInstanceWaitStateQuery
+    ///         {
+    ///             Filter = new ElementInstanceWaitStateFilter
+    ///             {
+    ///                 ProcessInstanceKey = new ProcessInstanceKeyFilterProperty
+    ///                 {
+    ///                     Eq = processInstanceKey,
+    ///                 },
+    ///             },
+    ///         });
+    /// 
+    ///     foreach (var waitState in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;{waitState.ElementId}: {waitState.WaitStateType}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchElementInstanceWaitStatesAsync(
+    ///         new ElementInstanceWaitStateQuery
+    ///         {
+    ///             Filter = new ElementInstanceWaitStateFilter
+    ///             {
+    ///                 ProcessInstanceKey = new ProcessInstanceKeyFilterProperty
+    ///                 {
+    ///                     Eq = processInstanceKey,
+    ///                 },
+    ///             },
+    ///         });
+    /// 
+    ///     foreach (var waitState in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;{waitState.ElementId}: {waitState.WaitStateType}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery body, ConsistencyOptions<ElementInstanceWaitStateQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/wait-states/search";
@@ -8251,7 +8303,7 @@ public partial class CamundaClient
     /// Operation: updateAgentInstance
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
@@ -8259,7 +8311,8 @@ public partial class CamundaClient
     ///         agentInstanceKey,
     ///         new AgentInstanceUpdateRequest
     ///         {
-    ///             Status = AgentInstanceStatusEnum.THINKING,
+    ///             ElementInstanceKey = elementInstanceKey,
+    ///             Status = AgentInstanceUpdateStatusEnum.THINKING,
     ///             Metrics = new AgentInstanceMetricsDelta
     ///             {
     ///                 InputTokens = 150,
@@ -8275,7 +8328,7 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
@@ -8283,7 +8336,8 @@ public partial class CamundaClient
     ///         agentInstanceKey,
     ///         new AgentInstanceUpdateRequest
     ///         {
-    ///             Status = AgentInstanceStatusEnum.THINKING,
+    ///             ElementInstanceKey = elementInstanceKey,
+    ///             Status = AgentInstanceUpdateStatusEnum.THINKING,
     ///             Metrics = new AgentInstanceMetricsDelta
     ///             {
     ///                 InputTokens = 150,
