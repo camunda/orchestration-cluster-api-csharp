@@ -1,3 +1,10 @@
+# [9.0.0-alpha.18](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.17...v9.0.0-alpha.18) (2026-06-04)
+
+
+### Bug Fixes
+
+* pass author-association to community notification workflow ([e633de5](https://github.com/camunda/orchestration-cluster-api-csharp/commit/e633de55903e21be3c7dc5c02beaba4e72ac785d))
+
 # [9.0.0-alpha.17](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.16...v9.0.0-alpha.17) (2026-06-04)
 
 
