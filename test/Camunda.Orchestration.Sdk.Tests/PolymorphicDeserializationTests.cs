@@ -155,7 +155,8 @@ public class PolymorphicDeserializationTests
 
         var result = JsonSerializer.Deserialize<AncestorScopeInstruction>(json, s_options);
 
-        Assert.IsType<DirectAncestorKeyInstruction>(result);
+        var typed = Assert.IsType<DirectAncestorKeyInstruction>(result);
+        Assert.Equal(ElementInstanceKey.AssumeExists("99999"), typed.AncestorElementInstanceKey);
     }
 
     [Fact]
