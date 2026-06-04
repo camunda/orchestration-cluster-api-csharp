@@ -641,7 +641,10 @@ version of the decision is used.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.EvaluateExpressionAsync.html#Camunda_Orchestration_Sdk_CamundaClient_EvaluateExpressionAsync_Camunda_Orchestration_Sdk_ExpressionEvaluationRequest_System_Threading_CancellationToken_">EvaluateExpressionAsync(ExpressionEvaluationRequest, CancellationToken)</a></dt>
     <dd><p>Evaluate an expression
-Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.</p>
+Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
+cluster variables when a tenant ID is provided. Optionally, provide a <code>scopeKey</code> to make the
+variables of a specific process instance or element instance visible while evaluating the
+expression.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1193,6 +1196,12 @@ to the root element itself.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceWaitStatesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchElementInstanceWaitStatesAsync_Camunda_Orchestration_Sdk_ElementInstanceWaitStateQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ElementInstanceWaitStateQueryResult__System_Threading_CancellationToken_">SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery, ConsistencyOptions&lt;ElementInstanceWaitStateQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search element instance wait states
+Returns the wait states for element instances matching the given filter.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstancesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchElementInstancesAsync_Camunda_Orchestration_Sdk_ElementInstanceSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ElementInstanceSearchQueryResult__System_Threading_CancellationToken_">SearchElementInstancesAsync(ElementInstanceSearchQuery, ConsistencyOptions&lt;ElementInstanceSearchQueryResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Search element instances
 Search for element instances based on given criteria.</p>
@@ -1511,8 +1520,7 @@ Removes the assignee of a task with the given key. Unassignment waits for blocki
     <dd><p>Update agent instance
 Updates the mutable fields of an agent instance: status, metric counters, and
 tools. Metric values are treated as deltas and applied immediately to the
-aggregate counters. Tool updates replace the existing tool list. At least one of
-status, metrics, or tools must be provided.</p>
+aggregate counters. Tool updates replace the existing tool list.</p>
 </dd>
   </dl>
   <dl class="jumplist">

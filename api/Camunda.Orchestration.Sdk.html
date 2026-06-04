@@ -341,6 +341,16 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedWaitStateElementTypeFilter.html">AdvancedWaitStateElementTypeFilter</a></dt>
+      <dd><p>Advanced element type filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedWaitStateTypeFilter.html">AdvancedWaitStateTypeFilter</a></dt>
+      <dd><p>Advanced wait state type filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.html">AgentInstanceCreationRequest</a></dt>
       <dd><p>Request to create a new agent instance.</p>
 </dd>
@@ -409,8 +419,7 @@ are optional; omit a field to leave the corresponding counter unchanged.</p>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.html">AgentInstanceUpdateRequest</a></dt>
-      <dd><p>Request to update the mutable state of an agent instance. At least one of
-status, metrics, or tools must be provided.</p>
+      <dd><p>Request to update the mutable state of an agent instance.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -1102,7 +1111,12 @@ Mirrors the JS SDK's hydrateConfig function.</p>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceFilter.html">ElementInstanceFilter</a></dt>
-      <dd><p>Element instance filter.</p>
+      <dd><p>Element instance search filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceFilterFields.html">ElementInstanceFilterFields</a></dt>
+      <dd><p>Element instance filter fields.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -1133,6 +1147,26 @@ Mirrors the JS SDK's hydrateConfig function.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.html">ElementInstanceStateFilterProperty</a></dt>
       <dd><p>ElementInstanceStateEnum property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceWaitStateFilter.html">ElementInstanceWaitStateFilter</a></dt>
+      <dd><p>Filters for the element instance inspection.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceWaitStateQuery.html">ElementInstanceWaitStateQuery</a></dt>
+      <dd><p>Element instance inspection request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult.html">ElementInstanceWaitStateQueryResult</a></dt>
+      <dd><p>ElementInstanceWaitStateQueryResult</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.html">ElementInstanceWaitStateResult</a></dt>
+      <dd><p>An element instance waiting state.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -1641,6 +1675,11 @@ the persisted attribute's value.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobWaitStateDetails.html">JobWaitStateDetails</a></dt>
+      <dd><p>JobWaitStateDetails</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobWorker.html">JobWorker</a></dt>
       <dd><p>A long-running worker that polls the Camunda broker for jobs of a specific type,
 dispatches them to a handler, and auto-completes or auto-fails based on the outcome.</p>
@@ -1806,6 +1845,11 @@ correlated with.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.html">MessageSubscriptionTypeFilterProperty</a></dt>
       <dd><p>MessageSubscriptionTypeEnum with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageWaitStateDetails.html">MessageWaitStateDetails</a></dt>
+      <dd><p>MessageWaitStateDetails</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -2707,6 +2751,16 @@ For <b>output</b> (receiving variables), call <a class="xref" href="Camunda.Orch
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.html">WaitStateElementTypeFilterProperty</a></dt>
+      <dd><p>Element type property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.html">WaitStateTypeFilterProperty</a></dt>
+      <dd><p>Wait state type property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.WorkerDefaultsConfig.html">WorkerDefaultsConfig</a></dt>
       <dd></dd>
     </dl>
@@ -3175,6 +3229,16 @@ element instance in a BPMN process or the process instance itself.</p>
       <dd><p>Matches the value exactly.</p>
 </dd>
     </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.WaitStateElementTypeExactMatch.html">WaitStateElementTypeExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.WaitStateTypeExactMatch.html">WaitStateTypeExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
@@ -3216,6 +3280,11 @@ Enums
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceStatusEnum.html">AgentInstanceStatusEnum</a></dt>
       <dd><p>The current status of an agent instance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceUpdateStatusEnum.html">AgentInstanceUpdateStatusEnum</a></dt>
+      <dd><p>The status values that can be set on an agent instance via an update request.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3351,6 +3420,11 @@ Enums
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.DocumentReferenceCamundaDocumentType.html">DocumentReferenceCamundaDocumentType</a></dt>
       <dd><p>Document discriminator. Always set to &quot;camunda&quot;.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceFilterFieldsType.html">ElementInstanceFilterFieldsType</a></dt>
+      <dd><p>Type of element as defined set of values.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3606,6 +3680,16 @@ Note: FAILED state is only for legacy job-worker-based tasks.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableSearchQuerySortRequestField.html">VariableSearchQuerySortRequestField</a></dt>
       <dd><p>The field to sort by.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.WaitStateElementTypeEnum.html">WaitStateElementTypeEnum</a></dt>
+      <dd><p>The BPMN element type of a waiting element instance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.WaitStateTypeEnum.html">WaitStateTypeEnum</a></dt>
+      <dd><p>The type of waiting state an element instance is in.</p>
 </dd>
     </dl>
     <dl class="jumplist">

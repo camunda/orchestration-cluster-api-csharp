@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_UpdateAgentInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateAgentInstanceAsync*" class="text-break">
-Method UpdateAgentInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8277"><i class="bi bi-code-slash"></i></a>
+Method UpdateAgentInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8353"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,14 +121,13 @@ Method UpdateAgentInstanceAsync  <a class="header-action link-secondary" title="
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_UpdateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.UpdateAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceKey,Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest,System.Threading.CancellationToken)">
   UpdateAgentInstanceAsync(AgentInstanceKey, AgentInstanceUpdateRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8277"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8353"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Update agent instance
 Updates the mutable fields of an agent instance: status, metric counters, and
 tools. Metric values are treated as deltas and applied immediately to the
-aggregate counters. Tool updates replace the existing tool list. At least one of
-status, metrics, or tools must be provided.</p>
+aggregate counters. Tool updates replace the existing tool list.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -158,7 +157,7 @@ status, metrics, or tools must be provided.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+<pre><code class="lang-csharp">public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
 
@@ -166,7 +165,8 @@ status, metrics, or tools must be provided.</p>
         agentInstanceKey,
         new AgentInstanceUpdateRequest
         {
-            Status = AgentInstanceStatusEnum.THINKING,
+            ElementInstanceKey = elementInstanceKey,
+            Status = AgentInstanceUpdateStatusEnum.THINKING,
             Metrics = new AgentInstanceMetricsDelta
             {
                 InputTokens = 150,
@@ -182,14 +182,15 @@ status, metrics, or tools must be provided.</p>
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: updateAgentInstance</p>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+<pre><code class="lang-csharp">public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
 <pre><code>await client.UpdateAgentInstanceAsync(
     agentInstanceKey,
     new AgentInstanceUpdateRequest
     {
-        Status = AgentInstanceStatusEnum.THINKING,
+        ElementInstanceKey = elementInstanceKey,
+        Status = AgentInstanceUpdateStatusEnum.THINKING,
         Metrics = new AgentInstanceMetricsDelta
         {
             InputTokens = 150,
@@ -209,7 +210,7 @@ Console.WriteLine($&quot;Updated agent instance: {agentInstanceKey}&quot;);
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8277" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L8353" class="edit-link">Edit this page</a>
         </div>
 
 

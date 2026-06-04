@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class AgentInstanceUpdateRequest | Camunda C# SDK ">
       
-      <meta name="description" content="Request to update the mutable state of an agent instance. At least one of status, metrics, or tools must be provided.">
+      <meta name="description" content="Request to update the mutable state of an agent instance.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest" data-uid="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest" class="text-break">
-Class AgentInstanceUpdateRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3654"><i class="bi bi-code-slash"></i></a>
+Class AgentInstanceUpdateRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3860"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,8 +97,7 @@ Class AgentInstanceUpdateRequest  <a class="header-action link-secondary" title=
   <dl><dt>Assembly</dt><dd>Camunda.Orchestration.Sdk.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Request to update the mutable state of an agent instance. At least one of
-status, metrics, or tools must be provided.</p>
+  <div class="markdown summary"><p>Request to update the mutable state of an agent instance.</p>
 </div>
   <div class="markdown conceptual"></div>
 
@@ -157,6 +156,15 @@ status, metrics, or tools must be provided.</p>
 </h2>
 
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.ElementInstanceKey.html#Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_ElementInstanceKey">ElementInstanceKey</a></dt>
+    <dd><p>The key of the currently-active element instance for this agent instance.
+Used for ownership/equality validation against the stored agent instance
+and, when the supplied key differs from the previous association (re-entry
+of an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys
+with the reverse link updated on the supplied element instance.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Metrics.html#Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_Metrics">Metrics</a></dt>
     <dd><p>Metric increments to apply to the aggregate counters.</p>
 </dd>
@@ -179,7 +187,7 @@ this value.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3654" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3860" class="edit-link">Edit this page</a>
         </div>
 
 
