@@ -1824,12 +1824,12 @@ TYPE Camunda.Orchestration.Sdk.CreateProcessInstanceResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.CursorBackwardPagination : sealed class base=Camunda.Orchestration.Sdk.SearchQueryPageRequest
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.StartCursor Before { get; set; } [JsonPropertyName("before")]
+  PROP Camunda.Orchestration.Sdk.StartCursor? Before { get; set; } [JsonPropertyName("before")]
   PROP System.Int32? Limit { get; set; } [JsonPropertyName("limit")]
 
 TYPE Camunda.Orchestration.Sdk.CursorForwardPagination : sealed class base=Camunda.Orchestration.Sdk.SearchQueryPageRequest
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.EndCursor After { get; set; } [JsonPropertyName("after")]
+  PROP Camunda.Orchestration.Sdk.EndCursor? After { get; set; } [JsonPropertyName("after")]
   PROP System.Int32? Limit { get; set; } [JsonPropertyName("limit")]
 
 TYPE Camunda.Orchestration.Sdk.DateTimeFilterProperty : sealed class

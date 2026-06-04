@@ -7120,7 +7120,7 @@ public sealed class CursorBackwardPagination : SearchQueryPageRequest
     /// Use the `startCursor` value from the previous response to fetch the previous page of results.
     /// </summary>
     [JsonPropertyName("before")]
-    public StartCursor Before { get; set; }
+    public StartCursor? Before { get; set; }
 
     /// <summary>
     /// The maximum number of items to return in one request.
@@ -7139,7 +7139,7 @@ public sealed class CursorForwardPagination : SearchQueryPageRequest
     /// Use the `endCursor` value from the previous response to fetch the next page of results.
     /// </summary>
     [JsonPropertyName("after")]
-    public EndCursor After { get; set; }
+    public EndCursor? After { get; set; }
 
     /// <summary>
     /// The maximum number of items to return in one request.
