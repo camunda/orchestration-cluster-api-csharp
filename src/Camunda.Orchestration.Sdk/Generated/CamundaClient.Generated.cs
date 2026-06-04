@@ -2410,7 +2410,11 @@ public partial class CamundaClient
 
     /// <summary>
     /// Evaluate an expression
-    /// Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
+    /// Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
+    /// cluster variables when a tenant ID is provided. Optionally, provide a `scopeKey` to make the
+    /// variables of a specific process instance or element instance visible while evaluating the
+    /// expression.
+    /// 
     /// </summary>
     /// <remarks>
     /// Operation: evaluateExpression
@@ -6106,6 +6110,25 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Search element instance wait states
+    /// Returns the wait states for element instances matching the given filter.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: searchElementInstanceWaitStates</remarks>
+    public async Task<ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery body, ConsistencyOptions<ElementInstanceWaitStateQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/element-instances/wait-states/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchElementInstanceWaitStates", false,
+                () => InvokeWithRetryAsync(() => SendAsync<ElementInstanceWaitStateQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceWaitStates", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<ElementInstanceWaitStateQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceWaitStates", false, ct);
+    }
+
+    /// <summary>
     /// Search element instances
     /// Search for element instances based on given criteria.
     /// </summary>
@@ -8221,8 +8244,7 @@ public partial class CamundaClient
     /// Update agent instance
     /// Updates the mutable fields of an agent instance: status, metric counters, and
     /// tools. Metric values are treated as deltas and applied immediately to the
-    /// aggregate counters. Tool updates replace the existing tool list. At least one of
-    /// status, metrics, or tools must be provided.
+    /// aggregate counters. Tool updates replace the existing tool list.
     /// 
     /// </summary>
     /// <remarks>

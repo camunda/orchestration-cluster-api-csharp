@@ -309,6 +309,68 @@ public enum DocumentReferenceCamundaDocumentType
 /// Type of element as defined set of values.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ElementInstanceFilterFieldsType
+{
+    [JsonPropertyName("UNSPECIFIED")]
+    UNSPECIFIED,
+    [JsonPropertyName("PROCESS")]
+    PROCESS,
+    [JsonPropertyName("SUB_PROCESS")]
+    SUBPROCESS,
+    [JsonPropertyName("EVENT_SUB_PROCESS")]
+    EVENTSUBPROCESS,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS")]
+    ADHOCSUBPROCESS,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS_INNER_INSTANCE")]
+    ADHOCSUBPROCESSINNERINSTANCE,
+    [JsonPropertyName("START_EVENT")]
+    STARTEVENT,
+    [JsonPropertyName("INTERMEDIATE_CATCH_EVENT")]
+    INTERMEDIATECATCHEVENT,
+    [JsonPropertyName("INTERMEDIATE_THROW_EVENT")]
+    INTERMEDIATETHROWEVENT,
+    [JsonPropertyName("BOUNDARY_EVENT")]
+    BOUNDARYEVENT,
+    [JsonPropertyName("END_EVENT")]
+    ENDEVENT,
+    [JsonPropertyName("SERVICE_TASK")]
+    SERVICETASK,
+    [JsonPropertyName("RECEIVE_TASK")]
+    RECEIVETASK,
+    [JsonPropertyName("USER_TASK")]
+    USERTASK,
+    [JsonPropertyName("MANUAL_TASK")]
+    MANUALTASK,
+    [JsonPropertyName("TASK")]
+    TASK,
+    [JsonPropertyName("EXCLUSIVE_GATEWAY")]
+    EXCLUSIVEGATEWAY,
+    [JsonPropertyName("INCLUSIVE_GATEWAY")]
+    INCLUSIVEGATEWAY,
+    [JsonPropertyName("PARALLEL_GATEWAY")]
+    PARALLELGATEWAY,
+    [JsonPropertyName("EVENT_BASED_GATEWAY")]
+    EVENTBASEDGATEWAY,
+    [JsonPropertyName("SEQUENCE_FLOW")]
+    SEQUENCEFLOW,
+    [JsonPropertyName("MULTI_INSTANCE_BODY")]
+    MULTIINSTANCEBODY,
+    [JsonPropertyName("CALL_ACTIVITY")]
+    CALLACTIVITY,
+    [JsonPropertyName("BUSINESS_RULE_TASK")]
+    BUSINESSRULETASK,
+    [JsonPropertyName("SCRIPT_TASK")]
+    SCRIPTTASK,
+    [JsonPropertyName("SEND_TASK")]
+    SENDTASK,
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN,
+}
+
+/// <summary>
+/// Type of element as defined set of values.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ElementInstanceFilterType
 {
     [JsonPropertyName("UNSPECIFIED")]
@@ -597,6 +659,8 @@ public enum JobSearchQuerySortRequestField
     Kind,
     [JsonPropertyName("listenerEventType")]
     ListenerEventType,
+    [JsonPropertyName("priority")]
+    Priority,
     [JsonPropertyName("processDefinitionId")]
     ProcessDefinitionId,
     [JsonPropertyName("processDefinitionKey")]
@@ -1094,6 +1158,13 @@ public sealed class ActivatedJobResult
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.
+    /// 
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int Priority { get; set; }
 
 }
 
@@ -3081,6 +3152,96 @@ public sealed class AdvancedVariableKeyFilter
 }
 
 /// <summary>
+/// Advanced element type filter.
+/// </summary>
+public sealed class AdvancedWaitStateElementTypeFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public WaitStateElementTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public WaitStateElementTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<WaitStateElementTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced wait state type filter.
+/// </summary>
+public sealed class AdvancedWaitStateTypeFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public WaitStateTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public WaitStateTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<WaitStateTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
 /// Request to create a new agent instance.
 /// </summary>
 public sealed class AgentInstanceCreationRequest
@@ -3214,6 +3375,24 @@ public sealed class AgentInstanceFilter
     [JsonPropertyName("elementInstanceKeys")]
     public List<ElementInstanceKeyFilterProperty>? ElementInstanceKeys { get; set; }
 
+    /// <summary>
+    /// The BPMN process ID of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public StringFilterProperty? ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The version of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public IntegerFilterProperty? ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// The version tag of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersionTag")]
+    public StringFilterProperty? ProcessDefinitionVersionTag { get; set; }
+
 }
 
 /// <summary>
@@ -3318,13 +3497,13 @@ public sealed class AgentInstanceLimits
     /// Maximum LLM calls allowed. -1 if no limit is configured.
     /// </summary>
     [JsonPropertyName("maxModelCalls")]
-    public long MaxModelCalls { get; set; }
+    public int MaxModelCalls { get; set; }
 
     /// <summary>
     /// Maximum tool calls allowed. -1 if no limit is configured.
     /// </summary>
     [JsonPropertyName("maxToolCalls")]
-    public long MaxToolCalls { get; set; }
+    public int MaxToolCalls { get; set; }
 
     /// <summary>
     /// Maximum total tokens allowed. -1 if no limit is configured.
@@ -3355,13 +3534,13 @@ public sealed class AgentInstanceMetrics
     /// Total number of LLM calls made.
     /// </summary>
     [JsonPropertyName("modelCalls")]
-    public long ModelCalls { get; set; }
+    public int ModelCalls { get; set; }
 
     /// <summary>
     /// Total number of tool calls made.
     /// </summary>
     [JsonPropertyName("toolCalls")]
-    public long ToolCalls { get; set; }
+    public int ToolCalls { get; set; }
 
 }
 
@@ -3389,13 +3568,13 @@ public sealed class AgentInstanceMetricsDelta
     /// Increment to apply to the total model call counter.
     /// </summary>
     [JsonPropertyName("modelCalls")]
-    public long? ModelCalls { get; set; }
+    public int? ModelCalls { get; set; }
 
     /// <summary>
     /// Increment to apply to the total tool call counter.
     /// </summary>
     [JsonPropertyName("toolCalls")]
-    public long? ToolCalls { get; set; }
+    public int? ToolCalls { get; set; }
 
 }
 
@@ -3453,10 +3632,36 @@ public sealed class AgentInstanceResult
     public ProcessInstanceKey ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey RootProcessInstanceKey { get; set; }
+
+    /// <summary>
     /// The key of the process definition associated with this agent instance.
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
     public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The BPMN process ID of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The version of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// The version tag of the process definition associated with this agent instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersionTag")]
+    public string? ProcessDefinitionVersionTag { get; set; }
 
     /// <summary>
     /// The tenant ID of this agent instance.
@@ -3559,6 +3764,8 @@ public sealed class AgentInstanceSearchQuerySortRequest
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum AgentInstanceStatusEnum
 {
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN,
     [JsonPropertyName("COMPLETED")]
     COMPLETED,
     [JsonPropertyName("IDLE")]
@@ -3647,17 +3854,27 @@ public sealed class AgentInstanceStatusFilterProperty
 }
 
 /// <summary>
-/// Request to update the mutable state of an agent instance. At least one of
-/// status, metrics, or tools must be provided.
+/// Request to update the mutable state of an agent instance.
 /// 
 /// </summary>
 public sealed class AgentInstanceUpdateRequest
 {
     /// <summary>
+    /// The key of the currently-active element instance for this agent instance.
+    /// Used for ownership/equality validation against the stored agent instance
+    /// and, when the supplied key differs from the previous association (re-entry
+    /// of an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys
+    /// with the reverse link updated on the supplied element instance.
+    /// 
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey ElementInstanceKey { get; set; }
+
+    /// <summary>
     /// The new status of the agent instance.
     /// </summary>
     [JsonPropertyName("status")]
-    public AgentInstanceStatusEnum? Status { get; set; }
+    public AgentInstanceUpdateStatusEnum? Status { get; set; }
 
     /// <summary>
     /// Metric increments to apply to the aggregate counters.
@@ -3674,6 +3891,23 @@ public sealed class AgentInstanceUpdateRequest
     [JsonPropertyName("tools")]
     public List<AgentTool>? Tools { get; set; }
 
+}
+
+/// <summary>
+/// The status values that can be set on an agent instance via an update request.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentInstanceUpdateStatusEnum
+{
+    [JsonPropertyName("IDLE")]
+    IDLE,
+    [JsonPropertyName("THINKING")]
+    THINKING,
+    [JsonPropertyName("TOOL_CALLING")]
+    TOOLCALLING,
+    [JsonPropertyName("TOOL_DISCOVERY")]
+    TOOLDISCOVERY,
 }
 
 /// <summary>
@@ -6145,34 +6379,10 @@ public sealed class ClockPinRequest
 public sealed class CloudConfigurationResponse
 {
     /// <summary>
-    /// The SaaS organization ID, if applicable.
-    /// </summary>
-    [JsonPropertyName("organizationId")]
-    public string? OrganizationId { get; set; }
-
-    /// <summary>
-    /// The SaaS cluster ID, if applicable.
-    /// </summary>
-    [JsonPropertyName("clusterId")]
-    public string? ClusterId { get; set; }
-
-    /// <summary>
     /// The cloud deployment stage.
     /// </summary>
     [JsonPropertyName("stage")]
-    public CloudStage? Stage { get; set; }
-
-    /// <summary>
-    /// The Mixpanel analytics token for the cloud UI.
-    /// </summary>
-    [JsonPropertyName("mixpanelToken")]
-    public string? MixpanelToken { get; set; }
-
-    /// <summary>
-    /// The Mixpanel API host URL.
-    /// </summary>
-    [JsonPropertyName("mixpanelAPIHost")]
-    public string? MixpanelAPIHost { get; set; }
+    public string? Stage { get; set; }
 
 }
 
@@ -8477,22 +8687,10 @@ public sealed class DeleteResourceResponse
 public sealed class DeploymentConfigurationResponse
 {
     /// <summary>
-    /// Whether this is an enterprise deployment.
-    /// </summary>
-    [JsonPropertyName("isEnterprise")]
-    public bool IsEnterprise { get; set; }
-
-    /// <summary>
     /// Whether multi-tenancy is enabled.
     /// </summary>
     [JsonPropertyName("isMultiTenancyEnabled")]
     public bool IsMultiTenancyEnabled { get; set; }
-
-    /// <summary>
-    /// The servlet context path for the deployment.
-    /// </summary>
-    [JsonPropertyName("contextPath")]
-    public string ContextPath { get; set; } = null!;
 
     /// <summary>
     /// The maximum HTTP request size in bytes.
@@ -8883,7 +9081,7 @@ public sealed class DirectAncestorKeyInstruction : AncestorScopeInstruction
     /// 
     /// </summary>
     [JsonPropertyName("ancestorElementInstanceKey")]
-    public object AncestorElementInstanceKey { get; set; } = null!;
+    public ElementInstanceKey AncestorElementInstanceKey { get; set; }
 
 }
 
@@ -9240,7 +9438,7 @@ public sealed class ElementIdFilterProperty
 }
 
 /// <summary>
-/// Element instance filter.
+/// Element instance search filter.
 /// </summary>
 public sealed class ElementInstanceFilter
 {
@@ -9261,6 +9459,128 @@ public sealed class ElementInstanceFilter
     /// </summary>
     [JsonPropertyName("type")]
     public ElementInstanceFilterType? Type { get; set; }
+
+    /// <summary>
+    /// The element ID for this element instance.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementIdFilterProperty? ElementId { get; set; }
+
+    /// <summary>
+    /// The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don&apos;t contain this data and cannot be found.
+    /// 
+    /// </summary>
+    [JsonPropertyName("elementName")]
+    public StringFilterProperty? ElementName { get; set; }
+
+    /// <summary>
+    /// Shows whether this element instance has an incident related to.
+    /// </summary>
+    [JsonPropertyName("hasIncident")]
+    public bool? HasIncident { get; set; }
+
+    /// <summary>
+    /// The unique identifier of the tenant.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// The assigned key, which acts as a unique identifier for this element instance.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey? ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The process instance key associated to this element instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The process definition key associated to this element instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The key of incident if field incident is true.
+    /// </summary>
+    [JsonPropertyName("incidentKey")]
+    public IncidentKey? IncidentKey { get; set; }
+
+    /// <summary>
+    /// The start date of this element instance.
+    /// </summary>
+    [JsonPropertyName("startDate")]
+    public DateTimeFilterProperty? StartDate { get; set; }
+
+    /// <summary>
+    /// The end date of this element instance.
+    /// </summary>
+    [JsonPropertyName("endDate")]
+    public DateTimeFilterProperty? EndDate { get; set; }
+
+    /// <summary>
+    /// The scope key of this element instance. If provided with a process instance key it will return element instances that are immediate children of the process instance. If provided with an element instance key it will return element instances that are immediate children of the element instance.
+    /// 
+    /// </summary>
+    [JsonPropertyName("elementInstanceScopeKey")]
+    public string? ElementInstanceScopeKey { get; set; }
+
+    /// <summary>
+    /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+    /// 
+    /// Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+    /// &lt;br&gt;
+    /// &lt;em&gt;Example:&lt;/em&gt;
+    /// 
+    /// ```json
+    /// {
+    ///   &quot;processInstanceKey&quot;: &quot;2251799813685323&quot;,
+    ///   &quot;$or&quot;: [
+    ///     { &quot;elementName&quot;: { &quot;$like&quot;: &quot;*Order*&quot; } },
+    ///     { &quot;elementId&quot;:   { &quot;$like&quot;: &quot;*Order*&quot; } }
+    ///   ]
+    /// }
+    /// ```
+    /// This matches element instances scoped to the given process instance whose:
+    /// 
+    /// &lt;ul style=&quot;padding-left: 20px; margin-left: 20px;&quot;&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;&lt;code&gt;elementName&lt;/code&gt; contains &lt;em&gt;Order&lt;/em&gt;, or&lt;/li&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;&lt;code&gt;elementId&lt;/code&gt; contains &lt;em&gt;Order&lt;/em&gt;&lt;/li&gt;
+    /// &lt;/ul&gt;
+    /// &lt;br&gt;
+    /// &lt;p&gt;Note: Using complex &lt;code&gt;$or&lt;/code&gt; conditions may impact performance, use with caution in high-volume environments.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$or")]
+    public List<ElementInstanceFilterFields>? Or { get; set; }
+
+}
+
+/// <summary>
+/// Element instance filter fields.
+/// </summary>
+public sealed class ElementInstanceFilterFields
+{
+    /// <summary>
+    /// The process definition ID associated to this element instance.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// State of element instance as defined set of values.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public ElementInstanceStateFilterProperty? State { get; set; }
+
+    /// <summary>
+    /// Type of element as defined set of values.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public ElementInstanceFilterFieldsType? Type { get; set; }
 
     /// <summary>
     /// The element ID for this element instance.
@@ -9670,6 +9990,148 @@ public sealed class ElementInstanceStateFilterProperty
 }
 
 /// <summary>
+/// Filters for the element instance inspection.
+/// </summary>
+public sealed class ElementInstanceWaitStateFilter
+{
+    /// <summary>
+    /// Filter by element instance key.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKeyFilterProperty? ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// Filter by process instance key.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// Filter by root process instance key.
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// Filter by element ID.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementIdFilterProperty? ElementId { get; set; }
+
+    /// <summary>
+    /// Filter by element type.
+    /// </summary>
+    [JsonPropertyName("elementType")]
+    public WaitStateElementTypeFilterProperty? ElementType { get; set; }
+
+    /// <summary>
+    /// Filter by wait state type.
+    /// </summary>
+    [JsonPropertyName("waitStateType")]
+    public WaitStateTypeFilterProperty? WaitStateType { get; set; }
+
+}
+
+/// <summary>
+/// Element instance inspection request.
+/// </summary>
+public sealed class ElementInstanceWaitStateQuery
+{
+    /// <summary>
+    /// Filter criteria for the inspection.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ElementInstanceWaitStateFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// ElementInstanceWaitStateQueryResult
+/// </summary>
+public sealed class ElementInstanceWaitStateQueryResult
+{
+    /// <summary>
+    /// The matching waiting states.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<ElementInstanceWaitStateResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// An element instance waiting state.
+/// </summary>
+public sealed class ElementInstanceWaitStateResult
+{
+    /// <summary>
+    /// The type of waiting state an element instance is in.
+    /// </summary>
+    [JsonPropertyName("waitStateType")]
+    public WaitStateTypeEnum WaitStateType { get; set; }
+
+    /// <summary>
+    /// Key of the root process instance.
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The process instance key associated to this element instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The element instance key associated to this element instance.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The element ID for this element instance.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId ElementId { get; set; }
+
+    /// <summary>
+    /// The BPMN element type of this element instance.
+    /// </summary>
+    [JsonPropertyName("elementType")]
+    public WaitStateElementTypeEnum ElementType { get; set; }
+
+    /// <summary>
+    /// The tenant ID of the element instance.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// Job details, present when waitStateType is JOB.
+    /// </summary>
+    [JsonPropertyName("jobDetails")]
+    public JobWaitStateDetails? JobDetails { get; set; }
+
+    /// <summary>
+    /// Message details, present when waitStateType is MESSAGE.
+    /// </summary>
+    [JsonPropertyName("messageDetails")]
+    public MessageWaitStateDetails? MessageDetails { get; set; }
+
+}
+
+/// <summary>
 /// The end cursor in a search query result set.
 /// </summary>
 public readonly record struct EndCursor : global::Camunda.Orchestration.Sdk.ICamundaKey
@@ -10027,6 +10489,17 @@ public sealed class ExpressionEvaluationRequest : global::Camunda.Orchestration.
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
+
+    /// <summary>
+    /// Key of the process instance or element instance whose variables should be made visible
+    /// to the expression. Use a process instance key to evaluate against the process instance
+    /// scope, or an element instance key to evaluate against that element instance scope. If
+    /// omitted, the expression is evaluated unscoped, using only cluster variables
+    /// and request-body variables.
+    /// 
+    /// </summary>
+    [JsonPropertyName("scopeKey")]
+    public ScopeKey? ScopeKey { get; set; }
 
     /// <summary>
     /// Optional variables for expression evaluation. These variables are only used for the current evaluation and do not persist beyond it.
@@ -12226,6 +12699,13 @@ public sealed class JobFilter
     public JobListenerEventTypeFilterProperty? ListenerEventType { get; set; }
 
     /// <summary>
+    /// The priority of the job. Jobs created before 8.10 have no stored priority and are excluded from results when this filter is applied.
+    /// 
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public IntegerFilterProperty? Priority { get; set; }
+
+    /// <summary>
     /// The process definition ID associated with the job.
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
@@ -12479,6 +12959,8 @@ public enum JobListenerEventTypeEnum
     ASSIGNING,
     [JsonPropertyName("BEFORE_ALL")]
     BEFOREALL,
+    [JsonPropertyName("CANCEL")]
+    CANCEL,
     [JsonPropertyName("CANCELING")]
     CANCELING,
     [JsonPropertyName("COMPLETING")]
@@ -12987,6 +13469,13 @@ public sealed class JobSearchResult
     [JsonPropertyName("lastUpdateTime")]
     public DateTimeOffset? LastUpdateTime { get; set; }
 
+    /// <summary>
+    /// The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; they appear last when sorting by this field and are excluded when filtering by this field. The API returns 0 for such jobs.
+    /// 
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int Priority { get; set; }
+
 }
 
 /// <summary>
@@ -13312,6 +13801,43 @@ public sealed class JobUpdateRequest
     /// </summary>
     [JsonPropertyName("operationReference")]
     public OperationReference? OperationReference { get; set; }
+
+}
+
+/// <summary>
+/// JobWaitStateDetails
+/// </summary>
+public sealed class JobWaitStateDetails
+{
+    /// <summary>
+    /// The key of the job.
+    /// </summary>
+    [JsonPropertyName("jobKey")]
+    public JobKey JobKey { get; set; }
+
+    /// <summary>
+    /// The job type (worker subscription identifier).
+    /// </summary>
+    [JsonPropertyName("jobType")]
+    public string JobType { get; set; } = null!;
+
+    /// <summary>
+    /// The kind of job.
+    /// </summary>
+    [JsonPropertyName("jobKind")]
+    public JobKindEnum JobKind { get; set; }
+
+    /// <summary>
+    /// The listener event type of the job (only set for execution listener and task listener jobs).
+    /// </summary>
+    [JsonPropertyName("listenerEventType")]
+    public JobListenerEventTypeEnum? ListenerEventType { get; set; }
+
+    /// <summary>
+    /// The number of retries remaining for the job.
+    /// </summary>
+    [JsonPropertyName("retries")]
+    public int? Retries { get; set; }
 
 }
 
@@ -14600,6 +15126,25 @@ public sealed class MessageSubscriptionTypeFilterProperty
     /// </summary>
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// MessageWaitStateDetails
+/// </summary>
+public sealed class MessageWaitStateDetails
+{
+    /// <summary>
+    /// The name of the message being awaited.
+    /// </summary>
+    [JsonPropertyName("messageName")]
+    public string MessageName { get; set; } = null!;
+
+    /// <summary>
+    /// The correlation key for the message subscription (null for start events).
+    /// </summary>
+    [JsonPropertyName("correlationKey")]
+    public string? CorrelationKey { get; set; }
 
 }
 
@@ -20575,6 +21120,226 @@ public sealed class VariableValueFilterProperty
     /// </summary>
     [JsonPropertyName("value")]
     public StringFilterProperty Value { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The BPMN element type of a waiting element instance.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum WaitStateElementTypeEnum
+{
+    [JsonPropertyName("AD_HOC_SUB_PROCESS")]
+    ADHOCSUBPROCESS,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS_INNER_INSTANCE")]
+    ADHOCSUBPROCESSINNERINSTANCE,
+    [JsonPropertyName("BOUNDARY_EVENT")]
+    BOUNDARYEVENT,
+    [JsonPropertyName("BUSINESS_RULE_TASK")]
+    BUSINESSRULETASK,
+    [JsonPropertyName("CALL_ACTIVITY")]
+    CALLACTIVITY,
+    [JsonPropertyName("END_EVENT")]
+    ENDEVENT,
+    [JsonPropertyName("EVENT_BASED_GATEWAY")]
+    EVENTBASEDGATEWAY,
+    [JsonPropertyName("EVENT_SUB_PROCESS")]
+    EVENTSUBPROCESS,
+    [JsonPropertyName("EXCLUSIVE_GATEWAY")]
+    EXCLUSIVEGATEWAY,
+    [JsonPropertyName("INCLUSIVE_GATEWAY")]
+    INCLUSIVEGATEWAY,
+    [JsonPropertyName("INTERMEDIATE_CATCH_EVENT")]
+    INTERMEDIATECATCHEVENT,
+    [JsonPropertyName("INTERMEDIATE_THROW_EVENT")]
+    INTERMEDIATETHROWEVENT,
+    [JsonPropertyName("MANUAL_TASK")]
+    MANUALTASK,
+    [JsonPropertyName("MULTI_INSTANCE_BODY")]
+    MULTIINSTANCEBODY,
+    [JsonPropertyName("PARALLEL_GATEWAY")]
+    PARALLELGATEWAY,
+    [JsonPropertyName("PROCESS")]
+    PROCESS,
+    [JsonPropertyName("RECEIVE_TASK")]
+    RECEIVETASK,
+    [JsonPropertyName("SCRIPT_TASK")]
+    SCRIPTTASK,
+    [JsonPropertyName("SEND_TASK")]
+    SENDTASK,
+    [JsonPropertyName("SEQUENCE_FLOW")]
+    SEQUENCEFLOW,
+    [JsonPropertyName("SERVICE_TASK")]
+    SERVICETASK,
+    [JsonPropertyName("START_EVENT")]
+    STARTEVENT,
+    [JsonPropertyName("SUB_PROCESS")]
+    SUBPROCESS,
+    [JsonPropertyName("TASK")]
+    TASK,
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN,
+    [JsonPropertyName("UNSPECIFIED")]
+    UNSPECIFIED,
+    [JsonPropertyName("USER_TASK")]
+    USERTASK,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct WaitStateElementTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private WaitStateElementTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="WaitStateElementTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static WaitStateElementTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "WaitStateElementTypeExactMatch");
+        return new WaitStateElementTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Element type property with full advanced search capabilities.
+/// </summary>
+public sealed class WaitStateElementTypeFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public WaitStateElementTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public WaitStateElementTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<WaitStateElementTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// The type of waiting state an element instance is in.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum WaitStateTypeEnum
+{
+    [JsonPropertyName("JOB")]
+    JOB,
+    [JsonPropertyName("MESSAGE")]
+    MESSAGE,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct WaitStateTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private WaitStateTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="WaitStateTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static WaitStateTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "WaitStateTypeExactMatch");
+        return new WaitStateTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Wait state type property with full advanced search capabilities.
+/// </summary>
+public sealed class WaitStateTypeFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public WaitStateTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public WaitStateTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<WaitStateTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
 
 }
 
