@@ -214,6 +214,16 @@ public class TypedVariableSearchTests
         Assert.Contains("orderId", ex.MissingVariableNames);
     }
 
+    [Fact]
+    public void VariableMap_Validate_UndeserializableValueThrowsTypedVariables()
+    {
+        // amount is present but its JSON value cannot bind to decimal.
+        var map = MapOf(("orderId", "\"ord-1\""), ("amount", "\"not-a-number\""));
+
+        var ex = Assert.Throws<TypedVariablesException>(() => map.Validate());
+        Assert.NotNull(ex.InnerException);
+    }
+
     // ---- helpers ----
 
     private static VariableMap<OrderVars> MapOf(params (string Name, string Json)[] entries)

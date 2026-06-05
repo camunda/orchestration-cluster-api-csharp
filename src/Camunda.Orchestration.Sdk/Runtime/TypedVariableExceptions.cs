@@ -49,12 +49,13 @@ public sealed class VariableScopeCollisionException : TypedVariablesException
 }
 
 /// <summary>
-/// Raised when a present variable value is not parseable as JSON.
+/// Raised when a present variable value cannot be deserialized.
 ///
 /// <para>
-/// A <em>missing</em> variable is not an error (it simply does not appear in the map);
-/// a <em>present but malformed</em> value is, and is surfaced here rather than silently
-/// dropped.
+/// This covers both a value that is not parseable as JSON and a syntactically valid value
+/// that cannot be bound to the requested CLR type. A <em>missing</em> variable is not an
+/// error (it simply does not appear in the map); a <em>present but undeserializable</em>
+/// value is, and is surfaced here rather than silently dropped.
 /// </para>
 /// </summary>
 public sealed class VariableDeserializationException : TypedVariablesException
@@ -65,7 +66,7 @@ public sealed class VariableDeserializationException : TypedVariablesException
     /// <summary>Create a new <see cref="VariableDeserializationException"/>.</summary>
     public VariableDeserializationException(string variableName, Exception innerException)
         : base(
-            $"Variable '{variableName}' has a value that is not valid JSON and cannot be deserialized.",
+            $"Variable '{variableName}' has a value that could not be deserialized.",
             innerException)
     {
         VariableName = variableName;

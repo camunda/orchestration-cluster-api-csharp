@@ -92,8 +92,18 @@ public sealed class VariableMap<T>
 
         // Keys in `_raw` are already the resolved variable names, which match what the
         // serializer expects for binding, so a round-trip through JSON reconstructs the DTO.
-        var json = JsonSerializer.SerializeToUtf8Bytes(_raw, _options);
-        var result = JsonSerializer.Deserialize<T>(json, _options);
+        T? result;
+        try
+        {
+            var json = JsonSerializer.SerializeToUtf8Bytes(_raw, _options);
+            result = JsonSerializer.Deserialize<T>(json, _options);
+        }
+        catch (Exception exception) when (exception is JsonException or NotSupportedException)
+        {
+            throw new TypedVariablesException(
+                $"Variables could not be bound to '{typeof(T).Name}'.",
+                exception);
+        }
 
         return result
             ?? throw new VariableValidationException(typeof(T), fields.Select(f => f.VariableName).ToList());
