@@ -727,7 +727,7 @@ public record OrderVariables(string OrderId, decimal Amount, string? Notes);
 var map = await client.SearchVariablesAsDtoAsync<OrderVariables>(processInstanceKey);
 
 // Inspect individual values without materializing the whole DTO
-if (map.Contains("orderId"))
+if (map.Contains("amount"))
 {
     var amount = map.Get<decimal>("amount");
 }

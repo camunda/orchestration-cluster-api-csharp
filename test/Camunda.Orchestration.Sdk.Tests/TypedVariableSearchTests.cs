@@ -239,6 +239,18 @@ public class TypedVariableSearchTests
     }
 
     [Fact]
+    public void VariableMap_Validate_RequiredPresentButNullIsMissing()
+    {
+        // orderId is present but carries a JSON null, which cannot honor the
+        // non-nullable DTO member, so it must be reported as missing.
+        var map = MapOf(("orderId", "null"), ("amount", "9.99"));
+
+        var ex = Assert.Throws<VariableValidationException>(() => map.Validate());
+        Assert.Equal(typeof(OrderVars), ex.DtoType);
+        Assert.Contains("orderId", ex.MissingVariableNames);
+    }
+
+    [Fact]
     public void VariableMap_Validate_UndeserializableValueThrowsTypedVariables()
     {
         // amount is present but its JSON value cannot bind to decimal.

@@ -47,7 +47,7 @@ public static class VariableElementExamples
         var map = await client.SearchVariablesAsDtoAsync<OrderVariables>(processInstanceKey);
 
         // Read individual values lazily without materializing the whole DTO.
-        if (map.Contains("orderId"))
+        if (map.Contains("amount"))
         {
             var amount = map.Get<decimal>("amount");
             Console.WriteLine($"Amount: {amount}");

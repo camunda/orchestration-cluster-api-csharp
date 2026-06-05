@@ -81,7 +81,7 @@ public sealed class VariableMap<T>
         var fields = TypedVariableSearch.ExtractFields(typeof(T), _options);
 
         var missing = fields
-            .Where(field => field.Required && !_raw.ContainsKey(field.VariableName))
+            .Where(field => field.Required && IsAbsent(field.VariableName))
             .Select(field => field.VariableName)
             .ToList();
 
@@ -107,5 +107,17 @@ public sealed class VariableMap<T>
 
         return result
             ?? throw new VariableValidationException(typeof(T), fields.Select(f => f.VariableName).ToList());
+    }
+
+    // A required member is satisfied only by a non-null present value. A JSON null (or an
+    // absent key) cannot honor a non-nullable DTO member, so both count as missing.
+    private bool IsAbsent(string variableName)
+    {
+        if (!_raw.TryGetValue(variableName, out var value))
+        {
+            return true;
+        }
+
+        return value.ValueKind is JsonValueKind.Null or JsonValueKind.Undefined;
     }
 }
