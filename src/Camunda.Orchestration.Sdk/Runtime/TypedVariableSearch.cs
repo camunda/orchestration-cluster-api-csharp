@@ -114,7 +114,7 @@ internal static class TypedVariableSearch
     /// Parse a serialized variable value into a self-contained <see cref="JsonElement"/>.
     /// </summary>
     /// <exception cref="VariableDeserializationException">
-    /// When <paramref name="value"/> is not valid JSON.
+    /// When <paramref name="value"/> is null or not valid JSON.
     /// </exception>
     public static JsonElement ParseValue(string variableName, string value)
     {
@@ -123,7 +123,7 @@ internal static class TypedVariableSearch
             using var document = JsonDocument.Parse(value);
             return document.RootElement.Clone();
         }
-        catch (JsonException exception)
+        catch (Exception exception) when (exception is JsonException or ArgumentNullException)
         {
             throw new VariableDeserializationException(variableName, exception);
         }

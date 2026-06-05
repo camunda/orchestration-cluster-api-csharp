@@ -141,6 +141,16 @@ public class TypedVariableSearchTests
     }
 
     [Fact]
+    public void Collector_NullValue_ThrowsVariableDeserialization()
+    {
+        var collector = new TypedVariableSearch.VariableCollector(s_orderIdOnly);
+        collector.Ingest(new[] { Result("orderId", null!, "100") });
+
+        var ex = Assert.Throws<VariableDeserializationException>(() => collector.Build());
+        Assert.Equal("orderId", ex.VariableName);
+    }
+
+    [Fact]
     public void Collector_SameNameSameScopeAcrossPages_IsNotACollision()
     {
         var collector = new TypedVariableSearch.VariableCollector(s_orderIdOnly);
