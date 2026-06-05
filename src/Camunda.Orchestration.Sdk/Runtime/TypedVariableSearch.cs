@@ -57,6 +57,13 @@ internal static class TypedVariableSearch
                 continue;
             }
 
+            // Skip write-only properties (setter, no getter): they never round-trip
+            // through serialization and must not be treated as required.
+            if (!property.CanRead)
+            {
+                continue;
+            }
+
             if (property.GetCustomAttribute<JsonIgnoreAttribute>() is { Condition: JsonIgnoreCondition.Always })
             {
                 continue;

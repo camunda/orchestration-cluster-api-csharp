@@ -28,6 +28,20 @@ public class TypedVariableSearchTests
 
     public record RequiredValueType(int Quantity, string? Label);
 
+    public class WriteOnlyVars
+    {
+        private string _secret = string.Empty;
+
+        public string OrderId { get; set; } = string.Empty;
+
+        // Write-only: setter, no getter. Must be skipped by ExtractFields.
+        public string Secret
+        {
+            set => _secret = value;
+        }
+    }
+
+
     // ---- ExtractFields: naming ----
 
     [Fact]
@@ -83,6 +97,16 @@ public class TypedVariableSearchTests
         var fields = TypedVariableSearch.ExtractFields(typeof(AllOptional), s_options);
 
         Assert.All(fields, f => Assert.False(f.Required));
+    }
+
+    [Fact]
+    public void ExtractFields_SkipsWriteOnlyProperties()
+    {
+        var fields = TypedVariableSearch.ExtractFields(typeof(WriteOnlyVars), s_options);
+
+        // Only the readable property is derived; the write-only member is ignored
+        // and must not be treated as a required variable.
+        Assert.Equal("orderId", Assert.Single(fields).VariableName);
     }
 
     // ---- VariableCollector: incremental folding ----
