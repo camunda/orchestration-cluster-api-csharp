@@ -1473,6 +1473,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserTaskResult> GetUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserTaskResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserTaskSearchQueryResult> SearchUserTasksAsync(Camunda.Orchestration.Sdk.UserTaskSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserTaskSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserUpdateResult> UpdateUserAsync(Camunda.Orchestration.Sdk.Username username, Camunda.Orchestration.Sdk.UserUpdateRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableMap<T>> SearchVariablesAsDtoAsync<T>(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ScopeKey? scopeKey = null, Camunda.Orchestration.Sdk.TenantId? tenantId = null, System.Int32 pageSize = 100, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableResult> GetVariableAsync(Camunda.Orchestration.Sdk.VariableKey variableKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchUserTaskVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskVariableSearchQueryRequest body, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -5291,6 +5292,10 @@ TYPE Camunda.Orchestration.Sdk.TopologyResponse : sealed class
 TYPE Camunda.Orchestration.Sdk.TypedVariables : static class
   METHOD static T? DeserializeAs<T>(System.Object? payload, System.Text.Json.JsonSerializerOptions? options = null)
 
+TYPE Camunda.Orchestration.Sdk.TypedVariablesException : class base=System.Exception interfaces=[System.Runtime.Serialization.ISerializable]
+  CTOR (System.String message)
+  CTOR (System.String message, System.Exception innerException)
+
 TYPE Camunda.Orchestration.Sdk.UpdateClusterVariableRequest : sealed class
   CTOR ()
   PROP System.Object Value { get; set; } [JsonPropertyName("value")]
@@ -5591,6 +5596,10 @@ TYPE Camunda.Orchestration.Sdk.ValidationMode : enum interfaces=[System.ICompara
   MEMBER Strict = 2
   MEMBER Fanatical = 3
 
+TYPE Camunda.Orchestration.Sdk.VariableDeserializationException : sealed class base=Camunda.Orchestration.Sdk.TypedVariablesException interfaces=[System.Runtime.Serialization.ISerializable]
+  CTOR (System.String variableName, System.Exception innerException)
+  PROP System.String VariableName { get; }
+
 TYPE Camunda.Orchestration.Sdk.VariableFilter : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
@@ -5627,6 +5636,13 @@ TYPE Camunda.Orchestration.Sdk.VariableKeyFilterProperty : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableKey>? In { get; set; } [JsonPropertyName("$in")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableKey>? NotIn { get; set; } [JsonPropertyName("$notIn")]
 
+TYPE Camunda.Orchestration.Sdk.VariableMap<T> : sealed class
+  PROP System.Collections.Generic.IReadOnlyDictionary<System.String,System.Text.Json.JsonElement> Raw { get; }
+  METHOD System.Boolean Contains(System.String variableName)
+  METHOD System.Text.Json.JsonElement? Get(System.String variableName)
+  METHOD T Validate()
+  METHOD TValue? Get<TValue>(System.String variableName)
+
 TYPE Camunda.Orchestration.Sdk.VariableResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
@@ -5645,6 +5661,11 @@ TYPE Camunda.Orchestration.Sdk.VariableResultBase : sealed class
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.VariableKey VariableKey { get; set; } [JsonPropertyName("variableKey")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
+
+TYPE Camunda.Orchestration.Sdk.VariableScopeCollisionException : sealed class base=Camunda.Orchestration.Sdk.TypedVariablesException interfaces=[System.Runtime.Serialization.ISerializable]
+  CTOR (System.String variableName, System.Collections.Generic.IReadOnlyList<System.String> scopeKeys)
+  PROP System.Collections.Generic.IReadOnlyList<System.String> ScopeKeys { get; }
+  PROP System.String VariableName { get; }
 
 TYPE Camunda.Orchestration.Sdk.VariableSearchQuery : sealed class
   CTOR ()
@@ -5682,6 +5703,11 @@ TYPE Camunda.Orchestration.Sdk.VariableSearchResult : sealed class
   PROP System.Boolean IsTruncated { get; set; } [JsonPropertyName("isTruncated")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
   PROP System.String Value { get; set; } [JsonPropertyName("value")]
+
+TYPE Camunda.Orchestration.Sdk.VariableValidationException : sealed class base=Camunda.Orchestration.Sdk.TypedVariablesException interfaces=[System.Runtime.Serialization.ISerializable]
+  CTOR (System.Type dtoType, System.Collections.Generic.IReadOnlyList<System.String> missingVariableNames)
+  PROP System.Collections.Generic.IReadOnlyList<System.String> MissingVariableNames { get; }
+  PROP System.Type DtoType { get; }
 
 TYPE Camunda.Orchestration.Sdk.VariableValueFilterProperty : sealed class
   CTOR ()
