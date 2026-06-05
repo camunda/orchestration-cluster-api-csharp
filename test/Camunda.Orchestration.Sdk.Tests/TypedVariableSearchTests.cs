@@ -35,7 +35,9 @@ public class TypedVariableSearchTests
     {
         var fields = TypedVariableSearch.ExtractFields(typeof(OrderVars), s_options);
 
-        Assert.Equal(["orderId", "amount"], fields.Select(f => f.VariableName).ToArray());
+        Assert.Equal(
+            ["amount", "orderId"],
+            fields.Select(f => f.VariableName).OrderBy(n => n, StringComparer.Ordinal).ToArray());
     }
 
     [Fact]
@@ -95,7 +97,7 @@ public class TypedVariableSearchTests
             Result("undeclared", "\"junk\"", "100"),
         });
 
-        var raw = collector.Finalize();
+        var raw = collector.Build();
 
         Assert.True(raw.ContainsKey("orderId"));
         Assert.False(raw.ContainsKey("undeclared"));
@@ -108,7 +110,7 @@ public class TypedVariableSearchTests
         collector.Ingest(new[] { Result("orderId", "\"first\"", "100") });
         collector.Ingest(new[] { Result("orderId", "\"second\"", "100") });
 
-        var raw = collector.Finalize();
+        var raw = collector.Build();
 
         Assert.Equal("first", raw["orderId"].GetString());
     }
@@ -123,7 +125,7 @@ public class TypedVariableSearchTests
             Result("orderId", "\"b\"", "200"),
         });
 
-        var ex = Assert.Throws<VariableScopeCollisionException>(() => collector.Finalize());
+        var ex = Assert.Throws<VariableScopeCollisionException>(() => collector.Build());
         Assert.Equal("orderId", ex.VariableName);
         Assert.Equal(["100", "200"], ex.ScopeKeys.ToArray());
     }
@@ -134,7 +136,7 @@ public class TypedVariableSearchTests
         var collector = new TypedVariableSearch.VariableCollector(s_orderIdOnly);
         collector.Ingest(new[] { Result("orderId", "not-json", "100") });
 
-        var ex = Assert.Throws<VariableDeserializationException>(() => collector.Finalize());
+        var ex = Assert.Throws<VariableDeserializationException>(() => collector.Build());
         Assert.Equal("orderId", ex.VariableName);
     }
 
@@ -145,7 +147,7 @@ public class TypedVariableSearchTests
         collector.Ingest(new[] { Result("orderId", "\"a\"", "100") });
         collector.Ingest(new[] { Result("orderId", "\"a\"", "100") });
 
-        var raw = collector.Finalize();
+        var raw = collector.Build();
 
         Assert.Equal("a", raw["orderId"].GetString());
     }

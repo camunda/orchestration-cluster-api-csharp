@@ -114,7 +114,7 @@ public partial class CamundaClient
             after = endCursor;
         }
 
-        return new VariableMap<T>(collector.Finalize(), _jsonOptions);
+        return new VariableMap<T>(collector.Build(), _jsonOptions);
     }
 
     private static VariableSearchQuery BuildVariableQuery(

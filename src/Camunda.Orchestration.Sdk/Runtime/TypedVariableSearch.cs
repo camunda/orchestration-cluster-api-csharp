@@ -185,7 +185,7 @@ internal static class TypedVariableSearch
         /// <exception cref="VariableDeserializationException">
         /// When a retained value is not valid JSON.
         /// </exception>
-        public IReadOnlyDictionary<string, JsonElement> Finalize()
+        public IReadOnlyDictionary<string, JsonElement> Build()
         {
             var raw = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
 

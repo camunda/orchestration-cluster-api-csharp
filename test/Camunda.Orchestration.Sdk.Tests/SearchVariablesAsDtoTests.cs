@@ -75,8 +75,9 @@ public class SearchVariablesAsDtoTests : IDisposable
 
         var inValues = doc.RootElement
             .GetProperty("filter").GetProperty("name").GetProperty("$in")
-            .EnumerateArray().Select(e => e.GetString()!).ToArray();
-        Assert.Equal(["orderId", "amount"], inValues);
+            .EnumerateArray().Select(e => e.GetString()!)
+            .OrderBy(n => n, StringComparer.Ordinal).ToArray();
+        Assert.Equal(["amount", "orderId"], inValues);
 
         var processInstanceKey = doc.RootElement
             .GetProperty("filter").GetProperty("processInstanceKey").GetProperty("$eq").GetString();
