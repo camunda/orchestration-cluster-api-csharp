@@ -208,9 +208,15 @@ public class TypedVariableSearchTests
     {
         var raw = entries.ToDictionary(
             e => e.Name,
-            e => JsonDocument.Parse(e.Json).RootElement.Clone(),
+            e => CloneJson(e.Json),
             StringComparer.Ordinal);
         return new VariableMap<OrderVars>(raw, s_options);
+    }
+
+    private static JsonElement CloneJson(string json)
+    {
+        using var document = JsonDocument.Parse(json);
+        return document.RootElement.Clone();
     }
 
     private static VariableSearchResult Result(string name, string value, string scopeKey) => new()

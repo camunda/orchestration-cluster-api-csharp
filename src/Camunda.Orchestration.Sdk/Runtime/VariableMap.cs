@@ -57,7 +57,7 @@ public sealed class VariableMap<T>
         {
             return value.Deserialize<TValue>(_options);
         }
-        catch (JsonException exception)
+        catch (Exception exception) when (exception is JsonException or NotSupportedException)
         {
             throw new VariableDeserializationException(variableName, exception);
         }

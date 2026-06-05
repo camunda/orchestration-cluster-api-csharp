@@ -118,7 +118,7 @@ public partial class CamundaClient
     }
 
     private static VariableSearchQuery BuildVariableQuery(
-        IReadOnlyList<string> queryNames,
+        List<string> queryNames,
         ProcessInstanceKey processInstanceKey,
         ScopeKey? scopeKey,
         TenantId? tenantId,
@@ -127,7 +127,9 @@ public partial class CamundaClient
     {
         var filter = new VariableFilter
         {
-            Name = new StringFilterProperty { In = queryNames.ToList() },
+            // queryNames is already materialized and never mutated here, so it is safe to
+            // share the same list reference across page queries.
+            Name = new StringFilterProperty { In = queryNames },
             ProcessInstanceKey = new ProcessInstanceKeyFilterProperty { Eq = processInstanceKey },
         };
 

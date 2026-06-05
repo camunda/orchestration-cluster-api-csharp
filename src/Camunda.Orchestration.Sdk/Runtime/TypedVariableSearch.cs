@@ -104,7 +104,10 @@ internal static class TypedVariableSearch
         }
 
         // Reference type: required only when the nullable annotation says non-nullable.
-        return nullabilityContext.Create(property).WriteState == NullabilityState.NotNull;
+        // ReadState reflects the declared nullability of the value consumers read; WriteState
+        // can be Unknown for get-only members (common in immutable DTOs), which would wrongly
+        // treat a non-nullable member as optional.
+        return nullabilityContext.Create(property).ReadState == NullabilityState.NotNull;
     }
 
     /// <summary>
