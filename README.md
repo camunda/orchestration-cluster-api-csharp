@@ -714,7 +714,7 @@ Custom `JsonSerializerOptions` can be passed for non-standard naming conventions
 
 ### Searching Variables as a DTO
 
-`SearchVariablesAsDtoAsync<T>()` queries a process instance for exactly the variables declared on your DTO, pages through all results, and collapses them into a typed [`VariableMap<T>`](src/Camunda.Orchestration.Sdk/Runtime/VariableMap.cs). Variable names are derived from the same `JsonSerializerOptions` used to deserialize (camelCase by default, overridable with `[JsonPropertyName]`), so the query filter, the raw keys, and DTO binding always agree.
+`SearchVariablesAsDtoAsync<T>()` queries a process instance for exactly the variables declared on your DTO, pages through all results, and collapses them into a typed `VariableMap<T>`. Variable names are derived from the same `JsonSerializerOptions` used to deserialize (camelCase by default, overridable with `[JsonPropertyName]`), so the query filter, the raw keys, and DTO binding always agree.
 
 <!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+SearchVariablesAsDto+SearchVariablesAsDtoBody -->
 ```csharp
