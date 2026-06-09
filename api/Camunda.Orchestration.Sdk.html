@@ -121,6 +121,21 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedAgentHistoryItemKeyFilter.html">AdvancedAgentHistoryItemKeyFilter</a></dt>
+      <dd><p>Advanced AgentHistoryItemKey filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedAgentInstanceHistoryCommitStatusFilter.html">AdvancedAgentInstanceHistoryCommitStatusFilter</a></dt>
+      <dd><p>Advanced AgentInstanceHistoryCommitStatusEnum filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedAgentInstanceHistoryRoleFilter.html">AdvancedAgentInstanceHistoryRoleFilter</a></dt>
+      <dd><p>Advanced AgentInstanceHistoryRoleEnum filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedAgentInstanceKeyFilter.html">AdvancedAgentInstanceKeyFilter</a></dt>
       <dd><p>Advanced AgentInstanceKey filter.</p>
 </dd>
@@ -351,6 +366,11 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.html">AgentHistoryItemKeyFilterProperty</a></dt>
+      <dd><p>AgentHistoryItemKey property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.html">AgentInstanceCreationRequest</a></dt>
       <dd><p>Request to create a new agent instance.</p>
 </dd>
@@ -366,8 +386,63 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceDocumentContent.html">AgentInstanceDocumentContent</a></dt>
+      <dd><p>A Camunda Document Store reference content block.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceFilter.html">AgentInstanceFilter</a></dt>
       <dd><p>Agent instance search filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.html">AgentInstanceHistoryCommitStatusFilterProperty</a></dt>
+      <dd><p>AgentInstanceHistoryCommitStatusEnum property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.html">AgentInstanceHistoryFilter</a></dt>
+      <dd><p>Agent instance history item search filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.html">AgentInstanceHistoryItemCreationResult</a></dt>
+      <dd><p>Response returned after successfully appending a history item.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.html">AgentInstanceHistoryItemMetrics</a></dt>
+      <dd><p>Per-call token and latency metrics for an ASSISTANT history item.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.html">AgentInstanceHistoryItemRequest</a></dt>
+      <dd><p>Request to append a single history item to an agent instance's conversation history.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.html">AgentInstanceHistoryItemResult</a></dt>
+      <dd><p>A single conversation history item belonging to an agent instance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.html">AgentInstanceHistoryRoleFilterProperty</a></dt>
+      <dd><p>AgentInstanceHistoryRoleEnum property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuery.html">AgentInstanceHistorySearchQuery</a></dt>
+      <dd><p>Agent instance history search request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQueryResult.html">AgentInstanceHistorySearchQueryResult</a></dt>
+      <dd><p>Agent instance history search response.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequest.html">AgentInstanceHistorySearchQuerySortRequest</a></dt>
+      <dd><p>AgentInstanceHistorySearchQuerySortRequest</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -381,6 +456,11 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceMessageContent.html">AgentInstanceMessageContent</a></dt>
+      <dd><p>A single content block within a history item. Discriminated by <code>contentType</code>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceMetrics.html">AgentInstanceMetrics</a></dt>
       <dd><p>Aggregated metrics for an agent instance across all model calls.</p>
 </dd>
@@ -390,6 +470,11 @@ This is what job handler functions receive.</p>
       <dd><p>Metric increments to apply to the agent instance aggregate counters. The engine
 accumulates these deltas into running totals on each UPDATED event. All fields
 are optional; omit a field to leave the corresponding counter unchanged.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceObjectContent.html">AgentInstanceObjectContent</a></dt>
+      <dd><p>An arbitrary structured content block.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -415,6 +500,17 @@ are optional; omit a field to leave the corresponding counter unchanged.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.html">AgentInstanceStatusFilterProperty</a></dt>
       <dd><p>AgentInstanceStatusEnum property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceTextContent.html">AgentInstanceTextContent</a></dt>
+      <dd><p>A plain-text content block.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceToolCall.html">AgentInstanceToolCall</a></dt>
+      <dd><p>A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.
+ASSISTANT items carry arguments; TOOL_RESULT items carry arguments as null.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -1162,6 +1258,11 @@ Mirrors the JS SDK's hydrateConfig function.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult.html">ElementInstanceWaitStateQueryResult</a></dt>
       <dd><p>ElementInstanceWaitStateQueryResult</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceWaitStateQuerySortRequest.html">ElementInstanceWaitStateQuerySortRequest</a></dt>
+      <dd><p>ElementInstanceWaitStateQuerySortRequest</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -2768,6 +2869,26 @@ For <b>output</b> (receiving variables), call <a class="xref" href="Camunda.Orch
 Structs
 </h3>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentHistoryItemKey.html">AgentHistoryItemKey</a></dt>
+      <dd><p>System-generated key for an agent history item.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentHistoryItemKeyExactMatch.html">AgentHistoryItemKeyExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusExactMatch.html">AgentInstanceHistoryCommitStatusExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleExactMatch.html">AgentInstanceHistoryRoleExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceKey.html">AgentInstanceKey</a></dt>
       <dd><p>System-generated key for an agent instance.</p>
 </dd>
@@ -3033,6 +3154,14 @@ that evaluation, joined by a hyphen (format: <code>&lt;decisionEvaluationKey&gt;
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.IterationId.html">IterationId</a></dt>
+      <dd><p>A client-provided sequential integer identifying a logical iteration: one LLM
+call, its tool dispatches, and their results. Must be a positive integer,
+increasing with each iteration. Established by the
+connector when appending the first history item of an iteration.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobKey.html">JobKey</a></dt>
       <dd><p>System-generated key for a job.</p>
 </dd>
@@ -3273,6 +3402,29 @@ the plural array shape.</p>
 Enums
 </h3>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusEnum.html">AgentInstanceHistoryCommitStatusEnum</a></dt>
+      <dd><p>The commit status of a history item.
+COMMITTED: the producing job completed successfully.
+PENDING: the producing job is still active (in-flight).
+DISCARDED: the producing job failed; this item was superseded by a later activation.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum.html">AgentInstanceHistoryRoleEnum</a></dt>
+      <dd><p>The role of a history item in the agent conversation.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.html">AgentInstanceHistorySearchQuerySortRequestField</a></dt>
+      <dd><p>The field to sort by.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceMessageContentTypeEnum.html">AgentInstanceMessageContentTypeEnum</a></dt>
+      <dd><p>The content type discriminator for a history item content block.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceSearchQuerySortRequestField.html">AgentInstanceSearchQuerySortRequestField</a></dt>
       <dd><p>The field to sort by.</p>
 </dd>
@@ -3445,6 +3597,11 @@ Enums
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceStateEnum.html">ElementInstanceStateEnum</a></dt>
       <dd><p>Element states</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ElementInstanceWaitStateQuerySortRequestField.html">ElementInstanceWaitStateQuerySortRequestField</a></dt>
+      <dd><p>The field to sort by.</p>
 </dd>
     </dl>
     <dl class="jumplist">

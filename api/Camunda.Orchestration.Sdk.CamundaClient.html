@@ -359,6 +359,15 @@ be used in subsequent update and query calls.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAgentInstanceHistoryItemAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_System_Threading_CancellationToken_">CreateAgentInstanceHistoryItemAsync(AgentInstanceKey, AgentInstanceHistoryItemRequest, CancellationToken)</a></dt>
+    <dd><p>Create agent instance history item
+Appends a single history item to an agent instance's conversation history.
+The created item has commitStatus PENDING until the job identified by jobLease
+completes successfully, at which point it transitions to COMMITTED. If the job
+fails or is superseded by a retry, the item is marked DISCARDED.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateAuthorizationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationRequest_System_Threading_CancellationToken_">CreateAuthorizationAsync(AuthorizationRequest, CancellationToken)</a></dt>
     <dd><p>Create authorization
 Create the authorization.</p>
@@ -1105,6 +1114,13 @@ This is done asynchronously, the progress can be tracked using the batch operati
     <dd><p>Block until cancellation is requested, keeping all registered workers alive.
 This is the typical entry point for worker-only applications.</p>
 <p>When the token is cancelled, all workers are stopped gracefully.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchAgentInstanceHistoryAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchAgentInstanceHistoryAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceHistorySearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_AgentInstanceHistorySearchQueryResult__System_Threading_CancellationToken_">SearchAgentInstanceHistoryAsync(AgentInstanceKey, AgentInstanceHistorySearchQuery, ConsistencyOptions&lt;AgentInstanceHistorySearchQueryResult&gt;?, CancellationToken)</a></dt>
+    <dd><p>Search agent instance history
+Searches the conversation history of an agent instance. Committed items
+are returned by default.</p>
 </dd>
   </dl>
   <dl class="jumplist">
