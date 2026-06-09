@@ -1,3 +1,13 @@
+# [9.0.0-alpha.19](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.18...v9.0.0-alpha.19) (2026-06-09)
+
+
+### Bug Fixes
+
+* **deps:** bump camunda-schema-bundler to 2.4.3 ([197c422](https://github.com/camunda/orchestration-cluster-api-csharp/commit/197c422196f9514c9b247a4651a63d510b34e703))
+* **deps:** bump camunda-schema-bundler to 2.4.3 ([1696cff](https://github.com/camunda/orchestration-cluster-api-csharp/commit/1696cffe162284c8bfae768d8bacb140b93bc26f))
+* **gen:** regenerate artifacts ([eecaa06](https://github.com/camunda/orchestration-cluster-api-csharp/commit/eecaa06ff1b6a25566347b097afa4fcb00617355))
+* widen integer-backed branded structs to long for ICamundaLongKey contract ([73f42ca](https://github.com/camunda/orchestration-cluster-api-csharp/commit/73f42ca8e78ad0922e833816ad5f907278043a86))
+
 # [9.0.0-alpha.18](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.17...v9.0.0-alpha.18) (2026-06-04)
 
 
