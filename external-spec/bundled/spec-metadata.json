@@ -1,7 +1,37 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:b2ba0d0bc85430aa0146f7430dad7a5e9de916e833676bb97cafd4357f93e8b9",
+  "specHash": "sha256:9a1790204bd0ebcd617b436f47e470015da360693431dcad2b57725ffef1ffe5",
   "semanticKeys": [
+    {
+      "name": "AgentHistoryItemKey",
+      "semanticType": "AgentHistoryItemKey",
+      "category": "system-key",
+      "description": "System-generated key for an agent history item.",
+      "composition": {
+        "schemaKind": "allOf",
+        "refs": [
+          "LongKey"
+        ],
+        "inlineFragments": 0
+      },
+      "constraints": {
+        "pattern": "^-?[0-9]+$",
+        "minLength": 1,
+        "maxLength": 25
+      },
+      "examples": [
+        "6755399441055744"
+      ],
+      "extensions": {
+        "x-semantic-type": "AgentHistoryItemKey"
+      },
+      "flags": {
+        "semanticKey": true,
+        "includesLongKeyRef": true,
+        "deprecated": false
+      },
+      "stableId": "agent-history-item-key"
+    },
     {
       "name": "AgentInstanceKey",
       "semanticType": "AgentInstanceKey",
@@ -1153,6 +1183,54 @@
   ],
   "unions": [
     {
+      "name": "AgentHistoryItemKeyFilterProperty",
+      "kind": "union-wrapper",
+      "description": "AgentHistoryItemKey property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "AgentHistoryItemKeyExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedAgentHistoryItemKeyFilter"
+        }
+      ],
+      "stableId": "agent-history-item-key-filter-property"
+    },
+    {
+      "name": "AgentInstanceHistoryCommitStatusFilterProperty",
+      "kind": "union-wrapper",
+      "description": "AgentInstanceHistoryCommitStatusEnum property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "AgentInstanceHistoryCommitStatusExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedAgentInstanceHistoryCommitStatusFilter"
+        }
+      ],
+      "stableId": "agent-instance-history-commit-status-filter-property"
+    },
+    {
+      "name": "AgentInstanceHistoryRoleFilterProperty",
+      "kind": "union-wrapper",
+      "description": "AgentInstanceHistoryRoleEnum property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "AgentInstanceHistoryRoleExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedAgentInstanceHistoryRoleFilter"
+        }
+      ],
+      "stableId": "agent-instance-history-role-filter-property"
+    },
+    {
       "name": "AgentInstanceKeyFilterProperty",
       "kind": "union-wrapper",
       "description": "AgentInstanceKey property with full advanced search capabilities.",
@@ -1167,6 +1245,26 @@
         }
       ],
       "stableId": "agent-instance-key-filter-property"
+    },
+    {
+      "name": "AgentInstanceMessageContent",
+      "kind": "union-wrapper",
+      "description": "A single content block within a history item. Discriminated by `contentType`.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "AgentInstanceTextContent"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AgentInstanceDocumentContent"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AgentInstanceObjectContent"
+        }
+      ],
+      "stableId": "agent-instance-message-content"
     },
     {
       "name": "AgentInstanceStatusFilterProperty",
@@ -2138,6 +2236,14 @@
       ]
     },
     {
+      "operationId": "searchAgentInstanceHistory",
+      "path": "/agent-instances/{agentInstanceKey}/history/search",
+      "method": "post",
+      "tags": [
+        "Agent instance"
+      ]
+    },
+    {
       "operationId": "searchAuditLogs",
       "path": "/audit-logs/search",
       "method": "post",
@@ -2945,6 +3051,78 @@
       ],
       "requestBodySchemaRef": "AgentInstanceSearchQuery",
       "successResponseSchemaRef": "AgentInstanceSearchQueryResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": true,
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "createAgentInstanceHistoryItem",
+      "path": "/agent-instances/{agentInstanceKey}/history",
+      "method": "post",
+      "tags": [
+        "Agent instance"
+      ],
+      "summary": "Create agent instance history item",
+      "description": "Appends a single history item to an agent instance's conversation history.\nThe created item has commitStatus PENDING until the job identified by jobLease\ncompletes successfully, at which point it transitions to COMMITTED. If the job\nfails or is superseded by a retry, the item is marked DISCARDED.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "agentInstanceKey"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "agent-instances.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "AgentInstanceHistoryItemRequest",
+      "successResponseSchemaRef": "AgentInstanceHistoryItemCreationResult",
+      "successStatus": 201,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-semantic-establishes": {
+          "kind": "AgentInstanceIteration",
+          "identifiedBy": [
+            {
+              "in": "body",
+              "name": "iteration",
+              "semanticType": "IterationId"
+            }
+          ]
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "searchAgentInstanceHistory",
+      "path": "/agent-instances/{agentInstanceKey}/history/search",
+      "method": "post",
+      "tags": [
+        "Agent instance"
+      ],
+      "summary": "Search agent instance history",
+      "description": "Searches the conversation history of an agent instance. Committed items\nare returned by default.\n",
+      "eventuallyConsistent": true,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "agentInstanceKey"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "agent-instances.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "AgentInstanceHistorySearchQuery",
+      "successResponseSchemaRef": "AgentInstanceHistorySearchQueryResult",
       "successStatus": 200,
       "vendorExtensions": {
         "x-eventually-consistent": true,
@@ -9280,6 +9458,13 @@
       "stableId": "agent-instance-creation-result"
     },
     {
+      "schemaName": "AgentInstanceHistoryItemCreationResult",
+      "providers": [
+        "historyItemKey"
+      ],
+      "stableId": "agent-instance-history-item-creation-result"
+    },
+    {
       "schemaName": "AuthorizationCreateResult",
       "providers": [
         "authorizationKey"
@@ -9429,11 +9614,11 @@
     }
   ],
   "integrity": {
-    "totalSemanticKeys": 40,
-    "totalUnions": 59,
-    "totalOperations": 191,
-    "totalEventuallyConsistent": 89,
+    "totalSemanticKeys": 41,
+    "totalUnions": 63,
+    "totalOperations": 193,
+    "totalEventuallyConsistent": 90,
     "totalDeprecatedEnumSchemas": 2,
-    "totalSemanticProviders": 22
+    "totalSemanticProviders": 23
   }
 }

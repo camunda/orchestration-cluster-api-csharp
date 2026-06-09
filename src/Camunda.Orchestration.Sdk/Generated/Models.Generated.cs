@@ -11,16 +11,42 @@ namespace Camunda.Orchestration.Sdk;
 /// The field to sort by.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentInstanceHistorySearchQuerySortRequestField
+{
+    [JsonPropertyName("producedAt")]
+    ProducedAt,
+    [JsonPropertyName("historyItemKey")]
+    HistoryItemKey,
+    [JsonPropertyName("iteration")]
+    Iteration,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum AgentInstanceSearchQuerySortRequestField
 {
+    [JsonPropertyName("agentInstanceKey")]
+    AgentInstanceKey,
+    [JsonPropertyName("status")]
+    Status,
+    [JsonPropertyName("elementId")]
+    ElementId,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("rootProcessInstanceKey")]
+    RootProcessInstanceKey,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("tenantId")]
+    TenantId,
     [JsonPropertyName("creationDate")]
     CreationDate,
     [JsonPropertyName("lastUpdatedDate")]
     LastUpdatedDate,
     [JsonPropertyName("completionDate")]
     CompletionDate,
-    [JsonPropertyName("status")]
-    Status,
 }
 
 /// <summary>
@@ -521,6 +547,22 @@ public enum ElementInstanceSearchQuerySortRequestField
     IncidentKey,
     [JsonPropertyName("tenantId")]
     TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ElementInstanceWaitStateQuerySortRequestField
+{
+    [JsonPropertyName("elementInstanceKey")]
+    ElementInstanceKey,
+    [JsonPropertyName("processInstanceKey")]
+    ProcessInstanceKey,
+    [JsonPropertyName("rootProcessInstanceKey")]
+    RootProcessInstanceKey,
+    [JsonPropertyName("elementId")]
+    ElementId,
 }
 
 /// <summary>
@@ -1248,6 +1290,105 @@ public sealed class AdvancedActorTypeFilter
     /// </summary>
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced AgentHistoryItemKey filter.
+/// </summary>
+public sealed class AdvancedAgentHistoryItemKeyFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentHistoryItemKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentHistoryItemKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentHistoryItemKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentHistoryItemKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// Advanced AgentInstanceHistoryCommitStatusEnum filter.
+/// </summary>
+public sealed class AdvancedAgentInstanceHistoryCommitStatusFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceHistoryCommitStatusEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceHistoryCommitStatusEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceHistoryCommitStatusEnum>? In { get; set; }
+
+}
+
+/// <summary>
+/// Advanced AgentInstanceHistoryRoleEnum filter.
+/// </summary>
+public sealed class AdvancedAgentInstanceHistoryRoleFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceHistoryRoleEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceHistoryRoleEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceHistoryRoleEnum>? In { get; set; }
 
 }
 
@@ -3242,6 +3383,99 @@ public sealed class AdvancedWaitStateTypeFilter
 }
 
 /// <summary>
+/// System-generated key for an agent history item.
+/// </summary>
+public readonly record struct AgentHistoryItemKey : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentHistoryItemKey(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentHistoryItemKey"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentHistoryItemKey AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentHistoryItemKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new AgentHistoryItemKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AgentHistoryItemKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentHistoryItemKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentHistoryItemKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentHistoryItemKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentHistoryItemKeyExactMatch");
+        return new AgentHistoryItemKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// AgentHistoryItemKey property with full advanced search capabilities.
+/// </summary>
+public sealed class AgentHistoryItemKeyFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentHistoryItemKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentHistoryItemKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentHistoryItemKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentHistoryItemKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
 /// Request to create a new agent instance.
 /// </summary>
 public sealed class AgentInstanceCreationRequest
@@ -3310,6 +3544,19 @@ public sealed class AgentInstanceDefinition
 }
 
 /// <summary>
+/// A Camunda Document Store reference content block.
+/// </summary>
+public sealed class AgentInstanceDocumentContent : AgentInstanceMessageContent
+{
+    /// <summary>
+    /// A reference to a document stored in the Camunda Document Store.
+    /// </summary>
+    [JsonPropertyName("documentReference")]
+    public DocumentReference DocumentReference { get; set; } = null!;
+
+}
+
+/// <summary>
 /// Agent instance search filter.
 /// </summary>
 public sealed class AgentInstanceFilter
@@ -3337,6 +3584,15 @@ public sealed class AgentInstanceFilter
     /// </summary>
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. Filters agent instances belonging to a specific
+    /// call hierarchy. The root process instance is the top-level ancestor in the process
+    /// instance hierarchy.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? RootProcessInstanceKey { get; set; }
 
     /// <summary>
     /// The key of the process definition associated with this agent instance.
@@ -3392,6 +3648,456 @@ public sealed class AgentInstanceFilter
     /// </summary>
     [JsonPropertyName("processDefinitionVersionTag")]
     public StringFilterProperty? ProcessDefinitionVersionTag { get; set; }
+
+}
+
+/// <summary>
+/// The commit status of a history item.
+/// COMMITTED: the producing job completed successfully.
+/// PENDING: the producing job is still active (in-flight).
+/// DISCARDED: the producing job failed; this item was superseded by a later activation.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentInstanceHistoryCommitStatusEnum
+{
+    [JsonPropertyName("COMMITTED")]
+    COMMITTED,
+    [JsonPropertyName("PENDING")]
+    PENDING,
+    [JsonPropertyName("DISCARDED")]
+    DISCARDED,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AgentInstanceHistoryCommitStatusExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentInstanceHistoryCommitStatusExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentInstanceHistoryCommitStatusExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentInstanceHistoryCommitStatusExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceHistoryCommitStatusExactMatch");
+        return new AgentInstanceHistoryCommitStatusExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// AgentInstanceHistoryCommitStatusEnum property with full advanced search capabilities.
+/// </summary>
+public sealed class AgentInstanceHistoryCommitStatusFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceHistoryCommitStatusEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceHistoryCommitStatusEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceHistoryCommitStatusEnum>? In { get; set; }
+
+}
+
+/// <summary>
+/// Agent instance history item search filter.
+/// </summary>
+public sealed class AgentInstanceHistoryFilter
+{
+    /// <summary>
+    /// The unique key of the history item.
+    /// </summary>
+    [JsonPropertyName("historyItemKey")]
+    public AgentHistoryItemKeyFilterProperty? HistoryItemKey { get; set; }
+
+    /// <summary>
+    /// The role of the history item.
+    /// </summary>
+    [JsonPropertyName("role")]
+    public AgentInstanceHistoryRoleFilterProperty? Role { get; set; }
+
+    /// <summary>
+    /// The key of the element instance under which the history item was produced.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKeyFilterProperty? ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the job activation that produced the history item.
+    /// </summary>
+    [JsonPropertyName("jobKey")]
+    public JobKeyFilterProperty? JobKey { get; set; }
+
+    /// <summary>
+    /// The iteration number.
+    /// </summary>
+    [JsonPropertyName("iteration")]
+    public IntegerFilterProperty? Iteration { get; set; }
+
+    /// <summary>
+    /// The commit status of the history item. Defaults to COMMITTED only.
+    /// Include PENDING or DISCARDED explicitly to debug in-flight or failed activations.
+    /// 
+    /// </summary>
+    [JsonPropertyName("commitStatus")]
+    public AgentInstanceHistoryCommitStatusFilterProperty? CommitStatus { get; set; }
+
+    /// <summary>
+    /// The timestamp when the history item was produced.
+    /// </summary>
+    [JsonPropertyName("producedAt")]
+    public DateTimeFilterProperty? ProducedAt { get; set; }
+
+}
+
+/// <summary>
+/// Response returned after successfully appending a history item.
+/// </summary>
+public sealed class AgentInstanceHistoryItemCreationResult
+{
+    /// <summary>
+    /// The system-generated key for the created history item.
+    /// </summary>
+    [JsonPropertyName("historyItemKey")]
+    public AgentHistoryItemKey HistoryItemKey { get; set; }
+
+}
+
+/// <summary>
+/// Per-call token and latency metrics for an ASSISTANT history item.
+/// </summary>
+public sealed class AgentInstanceHistoryItemMetrics
+{
+    /// <summary>
+    /// Input tokens consumed by this LLM call.
+    /// </summary>
+    [JsonPropertyName("inputTokens")]
+    public long InputTokens { get; set; }
+
+    /// <summary>
+    /// Output tokens produced by this LLM call.
+    /// </summary>
+    [JsonPropertyName("outputTokens")]
+    public long OutputTokens { get; set; }
+
+    /// <summary>
+    /// Wall-clock duration of the LLM call in milliseconds.
+    /// </summary>
+    [JsonPropertyName("durationMs")]
+    public long DurationMs { get; set; }
+
+}
+
+/// <summary>
+/// Request to append a single history item to an agent instance&apos;s conversation history.
+/// </summary>
+public sealed class AgentInstanceHistoryItemRequest
+{
+    /// <summary>
+    /// The key of the currently-active element instance.
+    /// 
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the current job activation during which this history item was produced.
+    /// </summary>
+    [JsonPropertyName("jobKey")]
+    public JobKey JobKey { get; set; }
+
+    /// <summary>
+    /// Opaque lease token received from the job activation response.
+    /// </summary>
+    [JsonPropertyName("jobLease")]
+    public string JobLease { get; set; } = null!;
+
+    /// <summary>
+    /// Sequential iteration number this item belongs to. Omit if not grouping items into iterations.
+    /// </summary>
+    [JsonPropertyName("iteration")]
+    public IterationId? Iteration { get; set; }
+
+    /// <summary>
+    /// The role of this history item in the conversation.
+    /// </summary>
+    [JsonPropertyName("role")]
+    public AgentInstanceHistoryRoleEnum Role { get; set; }
+
+    /// <summary>
+    /// The content blocks of this history item.
+    /// </summary>
+    [JsonPropertyName("content")]
+    public List<AgentInstanceMessageContent> Content { get; set; } = null!;
+
+    /// <summary>
+    /// Tool calls associated with this history item.
+    /// For ASSISTANT items: tool calls dispatched by this LLM response, with arguments populated.
+    /// For TOOL_RESULT items: single-entry array referencing the originating tool call, with arguments null.
+    /// Omit for USER items.
+    /// 
+    /// </summary>
+    [JsonPropertyName("toolCalls")]
+    public List<AgentInstanceToolCall>? ToolCalls { get; set; }
+
+    /// <summary>
+    /// Per-call token and latency metrics. Present on ASSISTANT items only.
+    /// </summary>
+    [JsonPropertyName("metrics")]
+    public AgentInstanceHistoryItemMetrics? Metrics { get; set; }
+
+    /// <summary>
+    /// The connector-side timestamp of when this message was produced.
+    /// </summary>
+    [JsonPropertyName("producedAt")]
+    public DateTimeOffset ProducedAt { get; set; }
+
+}
+
+/// <summary>
+/// A single conversation history item belonging to an agent instance.
+/// </summary>
+public sealed class AgentInstanceHistoryItemResult
+{
+    /// <summary>
+    /// The unique key for this history item. Stable and sortable by creation order.
+    /// </summary>
+    [JsonPropertyName("historyItemKey")]
+    public AgentHistoryItemKey HistoryItemKey { get; set; }
+
+    /// <summary>
+    /// The key of the agent instance this item belongs to.
+    /// </summary>
+    [JsonPropertyName("agentInstanceKey")]
+    public AgentInstanceKey AgentInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the AI Agent Task or ad-hoc sub-process element instance under which this item was produced.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the job activation during which this item was produced.
+    /// </summary>
+    [JsonPropertyName("jobKey")]
+    public JobKey JobKey { get; set; }
+
+    /// <summary>
+    /// The lease token of the activation that produced this item.
+    /// </summary>
+    [JsonPropertyName("jobLease")]
+    public string JobLease { get; set; } = null!;
+
+    /// <summary>
+    /// The sequential iteration number this item belongs to. Null if not provided by the connector.
+    /// </summary>
+    [JsonPropertyName("iteration")]
+    public IterationId? Iteration { get; set; }
+
+    /// <summary>
+    /// The role of this history item in the conversation.
+    /// </summary>
+    [JsonPropertyName("role")]
+    public AgentInstanceHistoryRoleEnum Role { get; set; }
+
+    /// <summary>
+    /// The content blocks of this history item.
+    /// </summary>
+    [JsonPropertyName("content")]
+    public List<AgentInstanceMessageContent> Content { get; set; } = null!;
+
+    /// <summary>
+    /// Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches.
+    /// ASSISTANT items: dispatched tool calls with arguments populated.
+    /// TOOL_RESULT items: single-entry array referencing the originating tool call (arguments null).
+    /// 
+    /// </summary>
+    [JsonPropertyName("toolCalls")]
+    public List<AgentInstanceToolCall> ToolCalls { get; set; } = null!;
+
+    /// <summary>
+    /// Per-call token and latency metrics. Present on ASSISTANT items only.
+    /// </summary>
+    [JsonPropertyName("metrics")]
+    public AgentInstanceHistoryItemMetrics? Metrics { get; set; }
+
+    /// <summary>
+    /// The commit status of this history item.
+    /// </summary>
+    [JsonPropertyName("commitStatus")]
+    public AgentInstanceHistoryCommitStatusEnum CommitStatus { get; set; }
+
+    /// <summary>
+    /// The connector-side timestamp of when this message was produced.
+    /// </summary>
+    [JsonPropertyName("producedAt")]
+    public DateTimeOffset ProducedAt { get; set; }
+
+}
+
+/// <summary>
+/// The role of a history item in the agent conversation.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentInstanceHistoryRoleEnum
+{
+    [JsonPropertyName("USER")]
+    USER,
+    [JsonPropertyName("ASSISTANT")]
+    ASSISTANT,
+    [JsonPropertyName("TOOL_RESULT")]
+    TOOLRESULT,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AgentInstanceHistoryRoleExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentInstanceHistoryRoleExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentInstanceHistoryRoleExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentInstanceHistoryRoleExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceHistoryRoleExactMatch");
+        return new AgentInstanceHistoryRoleExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// AgentInstanceHistoryRoleEnum property with full advanced search capabilities.
+/// </summary>
+public sealed class AgentInstanceHistoryRoleFilterProperty
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentInstanceHistoryRoleEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentInstanceHistoryRoleEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentInstanceHistoryRoleEnum>? In { get; set; }
+
+}
+
+/// <summary>
+/// Agent instance history search request.
+/// </summary>
+public sealed class AgentInstanceHistorySearchQuery
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AgentInstanceHistorySearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The history item search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public AgentInstanceHistoryFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// Agent instance history search response.
+/// </summary>
+public sealed class AgentInstanceHistorySearchQueryResult
+{
+    /// <summary>
+    /// The matching history items.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<AgentInstanceHistoryItemResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// AgentInstanceHistorySearchQuerySortRequest
+/// </summary>
+public sealed class AgentInstanceHistorySearchQuerySortRequest
+{
+    /// <summary>
+    /// The field to sort by.
+    /// </summary>
+    [JsonPropertyName("field")]
+    public AgentInstanceHistorySearchQuerySortRequestField Field { get; set; }
+
+    /// <summary>
+    /// The order in which to sort the related field.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public SortOrderEnum? Order { get; set; }
 
 }
 
@@ -3514,6 +4220,40 @@ public sealed class AgentInstanceLimits
 }
 
 /// <summary>
+/// A single content block within a history item. Discriminated by `contentType`.
+/// </summary>
+/// <remarks>
+/// Use one of the following concrete types:
+/// <list type="bullet">
+/// <item><description><see cref="AgentInstanceTextContent"/></description></item>
+/// <item><description><see cref="AgentInstanceDocumentContent"/></description></item>
+/// <item><description><see cref="AgentInstanceObjectContent"/></description></item>
+/// </list>
+/// </remarks>
+/// <seealso cref="AgentInstanceTextContent"/>
+/// <seealso cref="AgentInstanceDocumentContent"/>
+/// <seealso cref="AgentInstanceObjectContent"/>
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "contentType")]
+[JsonDerivedType(typeof(AgentInstanceTextContent), "TEXT")]
+[JsonDerivedType(typeof(AgentInstanceDocumentContent), "DOCUMENT")]
+[JsonDerivedType(typeof(AgentInstanceObjectContent), "OBJECT")]
+public abstract class AgentInstanceMessageContent { }
+
+/// <summary>
+/// The content type discriminator for a history item content block.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentInstanceMessageContentTypeEnum
+{
+    [JsonPropertyName("TEXT")]
+    TEXT,
+    [JsonPropertyName("DOCUMENT")]
+    DOCUMENT,
+    [JsonPropertyName("OBJECT")]
+    OBJECT,
+}
+
+/// <summary>
 /// Aggregated metrics for an agent instance across all model calls.
 /// </summary>
 public sealed class AgentInstanceMetrics
@@ -3575,6 +4315,19 @@ public sealed class AgentInstanceMetricsDelta
     /// </summary>
     [JsonPropertyName("toolCalls")]
     public int? ToolCalls { get; set; }
+
+}
+
+/// <summary>
+/// An arbitrary structured content block.
+/// </summary>
+public sealed class AgentInstanceObjectContent : AgentInstanceMessageContent
+{
+    /// <summary>
+    /// Arbitrary structured content.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public object Object { get; set; } = null!;
 
 }
 
@@ -3850,6 +4603,52 @@ public sealed class AgentInstanceStatusFilterProperty
     /// </summary>
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// A plain-text content block.
+/// </summary>
+public sealed class AgentInstanceTextContent : AgentInstanceMessageContent
+{
+    /// <summary>
+    /// The text content.
+    /// </summary>
+    [JsonPropertyName("text")]
+    public string Text { get; set; } = null!;
+
+}
+
+/// <summary>
+/// A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.
+/// ASSISTANT items carry arguments; TOOL_RESULT items carry arguments as null.
+/// 
+/// </summary>
+public sealed class AgentInstanceToolCall
+{
+    /// <summary>
+    /// The LLM-assigned tool call ID. Correlates ASSISTANT items to their matching TOOL_RESULT items.
+    /// </summary>
+    [JsonPropertyName("toolCallId")]
+    public string ToolCallId { get; set; } = null!;
+
+    /// <summary>
+    /// The LLM-visible tool name.
+    /// </summary>
+    [JsonPropertyName("toolName")]
+    public string ToolName { get; set; } = null!;
+
+    /// <summary>
+    /// The BPMN element ID handling this tool.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public string? ElementId { get; set; }
+
+    /// <summary>
+    /// The tool call arguments as provided by the LLM. Null on TOOL_RESULT items.
+    /// </summary>
+    [JsonPropertyName("arguments")]
+    public object? Arguments { get; set; }
 
 }
 
@@ -10038,6 +10837,12 @@ public sealed class ElementInstanceWaitStateFilter
 public sealed class ElementInstanceWaitStateQuery
 {
     /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<ElementInstanceWaitStateQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
     /// Filter criteria for the inspection.
     /// </summary>
     [JsonPropertyName("filter")]
@@ -10067,6 +10872,25 @@ public sealed class ElementInstanceWaitStateQueryResult
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// ElementInstanceWaitStateQuerySortRequest
+/// </summary>
+public sealed class ElementInstanceWaitStateQuerySortRequest
+{
+    /// <summary>
+    /// The field to sort by.
+    /// </summary>
+    [JsonPropertyName("field")]
+    public ElementInstanceWaitStateQuerySortRequestField Field { get; set; }
+
+    /// <summary>
+    /// The order in which to sort the related field.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public SortOrderEnum? Order { get; set; }
 
 }
 
@@ -12340,6 +13164,33 @@ public sealed class IntegerFilterProperty
     [JsonPropertyName("$in")]
     public List<int>? In { get; set; }
 
+}
+
+/// <summary>
+/// A client-provided sequential integer identifying a logical iteration: one LLM
+/// call, its tool dispatches, and their results. Must be a positive integer,
+/// increasing with each iteration. Established by the
+/// connector when appending the first history item of an iteration.
+/// 
+/// </summary>
+public readonly record struct IterationId : global::Camunda.Orchestration.Sdk.ICamundaLongKey
+{
+    /// <summary>The underlying long value.</summary>
+    public long Value { get; }
+
+    private IterationId(long value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="IterationId"/> from a raw long value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static IterationId AssumeExists(long value)
+    {
+        return new IterationId(value);
+    }
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>

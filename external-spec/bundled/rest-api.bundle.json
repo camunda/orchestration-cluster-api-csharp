@@ -559,6 +559,246 @@
         "x-added-in-version": "8.10"
       }
     },
+    "/agent-instances/{agentInstanceKey}/history": {
+      "post": {
+        "x-eventually-consistent": false,
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "tags": [
+          "Agent instance"
+        ],
+        "operationId": "createAgentInstanceHistoryItem",
+        "summary": "Create agent instance history item",
+        "description": "Appends a single history item to an agent instance's conversation history.\nThe created item has commitStatus PENDING until the job identified by jobLease\ncompletes successfully, at which point it transitions to COMMITTED. If the job\nfails or is superseded by a retry, the item is marked DISCARDED.\n",
+        "x-semantic-establishes": {
+          "kind": "AgentInstanceIteration",
+          "identifiedBy": [
+            {
+              "in": "body",
+              "name": "iteration",
+              "semanticType": "IterationId"
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "name": "agentInstanceKey",
+            "in": "path",
+            "required": true,
+            "description": "The key of the agent instance to append the history item to.",
+            "schema": {
+              "$ref": "#/components/schemas/AgentInstanceKey"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentInstanceHistoryItemRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The history item was created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstanceHistoryItemCreationResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The agent instance with the given key was not found, or the specified\njobKey does not correspond to an active job.\nMore details are provided in the response body.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
+    "/agent-instances/{agentInstanceKey}/history/search": {
+      "post": {
+        "x-eventually-consistent": true,
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "tags": [
+          "Agent instance"
+        ],
+        "operationId": "searchAgentInstanceHistory",
+        "summary": "Search agent instance history",
+        "description": "Searches the conversation history of an agent instance. Committed items\nare returned by default.\n",
+        "parameters": [
+          {
+            "name": "agentInstanceKey",
+            "in": "path",
+            "required": true,
+            "description": "The key of the agent instance whose history to search.",
+            "schema": {
+              "$ref": "#/components/schemas/AgentInstanceKey"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentInstanceHistorySearchQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The agent instance history search result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstanceHistorySearchQueryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The agent instance with the given key was not found.\nMore details are provided in the response body.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/audit-logs/search": {
       "post": {
         "x-eventually-consistent": true,
@@ -18747,10 +18987,16 @@
             "description": "The field to sort by.",
             "type": "string",
             "enum": [
+              "agentInstanceKey",
+              "status",
+              "elementId",
+              "processInstanceKey",
+              "rootProcessInstanceKey",
+              "processDefinitionKey",
+              "tenantId",
               "creationDate",
               "lastUpdatedDate",
-              "completionDate",
-              "status"
+              "completionDate"
             ]
           },
           "order": {
@@ -18815,6 +19061,14 @@
           },
           "processInstanceKey": {
             "description": "The key of the process instance that owns this agent instance.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKeyFilterProperty"
+              }
+            ]
+          },
+          "rootProcessInstanceKey": {
+            "description": "The key of the root process instance. Filters agent instances belonging to a specific\ncall hierarchy. The root process instance is the top-level ancestor in the process\ninstance hierarchy.\n",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ProcessInstanceKeyFilterProperty"
@@ -18923,23 +19177,23 @@
         "type": "object",
         "required": [
           "agentInstanceKey",
-          "status",
+          "completionDate",
+          "creationDate",
           "definition",
-          "metrics",
-          "limits",
-          "tools",
           "elementId",
-          "processInstanceKey",
-          "rootProcessInstanceKey",
-          "processDefinitionKey",
+          "elementInstanceKeys",
+          "lastUpdatedDate",
+          "limits",
+          "metrics",
           "processDefinitionId",
+          "processDefinitionKey",
           "processDefinitionVersion",
           "processDefinitionVersionTag",
+          "processInstanceKey",
+          "rootProcessInstanceKey",
+          "status",
           "tenantId",
-          "creationDate",
-          "lastUpdatedDate",
-          "completionDate",
-          "elementInstanceKeys"
+          "tools"
         ],
         "properties": {
           "agentInstanceKey": {
@@ -19098,9 +19352,9 @@
         "description": "A tool available to the agent.",
         "type": "object",
         "required": [
-          "name",
           "description",
-          "elementId"
+          "elementId",
+          "name"
         ],
         "properties": {
           "name": {
@@ -19124,8 +19378,8 @@
         "type": "object",
         "required": [
           "inputTokens",
-          "outputTokens",
           "modelCalls",
+          "outputTokens",
           "toolCalls"
         ],
         "properties": {
@@ -19204,8 +19458,8 @@
         "description": "Request to create a new agent instance.",
         "type": "object",
         "required": [
-          "elementInstanceKey",
-          "definition"
+          "definition",
+          "elementInstanceKey"
         ],
         "properties": {
           "elementInstanceKey": {
@@ -19374,41 +19628,645 @@
           }
         }
       },
+      "AgentInstanceHistoryItemRequest": {
+        "description": "Request to append a single history item to an agent instance's conversation history.",
+        "type": "object",
+        "required": [
+          "content",
+          "elementInstanceKey",
+          "jobKey",
+          "jobLease",
+          "producedAt",
+          "role"
+        ],
+        "properties": {
+          "elementInstanceKey": {
+            "description": "The key of the currently-active element instance.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementInstanceKey"
+              }
+            ]
+          },
+          "jobKey": {
+            "description": "The key of the current job activation during which this history item was produced.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobKey"
+              }
+            ]
+          },
+          "jobLease": {
+            "description": "Opaque lease token received from the job activation response.",
+            "type": "string"
+          },
+          "iteration": {
+            "description": "Sequential iteration number this item belongs to. Omit if not grouping items into iterations.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IterationId"
+              }
+            ]
+          },
+          "role": {
+            "description": "The role of this history item in the conversation.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryRoleEnum"
+              }
+            ]
+          },
+          "content": {
+            "description": "The content blocks of this history item.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceMessageContent"
+            }
+          },
+          "toolCalls": {
+            "description": "Tool calls associated with this history item.\nFor ASSISTANT items: tool calls dispatched by this LLM response, with arguments populated.\nFor TOOL_RESULT items: single-entry array referencing the originating tool call, with arguments null.\nOmit for USER items.\n",
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceToolCall"
+            }
+          },
+          "metrics": {
+            "description": "Per-call token and latency metrics. Present on ASSISTANT items only.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryItemMetrics"
+              }
+            ]
+          },
+          "producedAt": {
+            "description": "The connector-side timestamp of when this message was produced.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AgentInstanceHistoryItemCreationResult": {
+        "description": "Response returned after successfully appending a history item.",
+        "type": "object",
+        "x-semantic-provider": [
+          "historyItemKey"
+        ],
+        "required": [
+          "historyItemKey"
+        ],
+        "properties": {
+          "historyItemKey": {
+            "description": "The system-generated key for the created history item.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentHistoryItemKey"
+              }
+            ]
+          }
+        }
+      },
+      "AgentInstanceHistorySearchQuerySortRequest": {
+        "type": "object",
+        "required": [
+          "field"
+        ],
+        "properties": {
+          "field": {
+            "description": "The field to sort by.",
+            "type": "string",
+            "enum": [
+              "producedAt",
+              "historyItemKey",
+              "iteration"
+            ]
+          },
+          "order": {
+            "$ref": "#/components/schemas/SortOrderEnum"
+          }
+        }
+      },
+      "AgentInstanceHistorySearchQuery": {
+        "description": "Agent instance history search request.",
+        "type": "object",
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryRequest"
+          }
+        ],
+        "properties": {
+          "sort": {
+            "description": "Sort field criteria.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceHistorySearchQuerySortRequest"
+            }
+          },
+          "filter": {
+            "description": "The history item search filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryFilter"
+              }
+            ]
+          }
+        }
+      },
+      "AgentInstanceHistoryFilter": {
+        "description": "Agent instance history item search filter.",
+        "type": "object",
+        "properties": {
+          "historyItemKey": {
+            "description": "The unique key of the history item.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentHistoryItemKeyFilterProperty"
+              }
+            ]
+          },
+          "role": {
+            "description": "The role of the history item.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryRoleFilterProperty"
+              }
+            ]
+          },
+          "elementInstanceKey": {
+            "description": "The key of the element instance under which the history item was produced.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementInstanceKeyFilterProperty"
+              }
+            ]
+          },
+          "jobKey": {
+            "description": "The key of the job activation that produced the history item.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobKeyFilterProperty"
+              }
+            ]
+          },
+          "iteration": {
+            "description": "The iteration number.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntegerFilterProperty"
+              }
+            ]
+          },
+          "commitStatus": {
+            "description": "The commit status of the history item. Defaults to COMMITTED only.\nInclude PENDING or DISCARDED explicitly to debug in-flight or failed activations.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryCommitStatusFilterProperty"
+              }
+            ]
+          },
+          "producedAt": {
+            "description": "The timestamp when the history item was produced.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeFilterProperty"
+              }
+            ]
+          }
+        }
+      },
+      "AgentInstanceHistorySearchQueryResult": {
+        "description": "Agent instance history search response.",
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryResponse"
+          }
+        ],
+        "properties": {
+          "items": {
+            "description": "The matching history items.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceHistoryItemResult"
+            }
+          }
+        }
+      },
+      "AgentInstanceHistoryItemResult": {
+        "description": "A single conversation history item belonging to an agent instance.",
+        "type": "object",
+        "required": [
+          "agentInstanceKey",
+          "commitStatus",
+          "content",
+          "elementInstanceKey",
+          "historyItemKey",
+          "iteration",
+          "jobKey",
+          "jobLease",
+          "metrics",
+          "producedAt",
+          "role",
+          "toolCalls"
+        ],
+        "properties": {
+          "historyItemKey": {
+            "description": "The unique key for this history item. Stable and sortable by creation order.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentHistoryItemKey"
+              }
+            ]
+          },
+          "agentInstanceKey": {
+            "description": "The key of the agent instance this item belongs to.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceKey"
+              }
+            ]
+          },
+          "elementInstanceKey": {
+            "description": "The key of the AI Agent Task or ad-hoc sub-process element instance under which this item was produced.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementInstanceKey"
+              }
+            ]
+          },
+          "jobKey": {
+            "description": "The key of the job activation during which this item was produced.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobKey"
+              }
+            ]
+          },
+          "jobLease": {
+            "description": "The lease token of the activation that produced this item.",
+            "type": "string"
+          },
+          "iteration": {
+            "description": "The sequential iteration number this item belongs to. Null if not provided by the connector.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IterationId"
+              }
+            ]
+          },
+          "role": {
+            "description": "The role of this history item in the conversation.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryRoleEnum"
+              }
+            ]
+          },
+          "content": {
+            "description": "The content blocks of this history item.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceMessageContent"
+            }
+          },
+          "toolCalls": {
+            "description": "Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches.\nASSISTANT items: dispatched tool calls with arguments populated.\nTOOL_RESULT items: single-entry array referencing the originating tool call (arguments null).\n",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceToolCall"
+            }
+          },
+          "metrics": {
+            "description": "Per-call token and latency metrics. Present on ASSISTANT items only.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryItemMetrics"
+              }
+            ]
+          },
+          "commitStatus": {
+            "description": "The commit status of this history item.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryCommitStatusEnum"
+              }
+            ]
+          },
+          "producedAt": {
+            "description": "The connector-side timestamp of when this message was produced.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AgentInstanceHistoryRoleEnum": {
+        "description": "The role of a history item in the agent conversation.",
+        "type": "string",
+        "enum": [
+          "USER",
+          "ASSISTANT",
+          "TOOL_RESULT"
+        ]
+      },
+      "AgentInstanceHistoryCommitStatusEnum": {
+        "description": "The commit status of a history item.\nCOMMITTED: the producing job completed successfully.\nPENDING: the producing job is still active (in-flight).\nDISCARDED: the producing job failed; this item was superseded by a later activation.\n",
+        "type": "string",
+        "enum": [
+          "COMMITTED",
+          "PENDING",
+          "DISCARDED"
+        ]
+      },
+      "AgentInstanceMessageContent": {
+        "x-polymorphic-schema": true,
+        "description": "A single content block within a history item. Discriminated by `contentType`.",
+        "discriminator": {
+          "propertyName": "contentType",
+          "mapping": {
+            "TEXT": "#/components/schemas/AgentInstanceTextContent",
+            "DOCUMENT": "#/components/schemas/AgentInstanceDocumentContent",
+            "OBJECT": "#/components/schemas/AgentInstanceObjectContent"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AgentInstanceTextContent"
+          },
+          {
+            "$ref": "#/components/schemas/AgentInstanceDocumentContent"
+          },
+          {
+            "$ref": "#/components/schemas/AgentInstanceObjectContent"
+          }
+        ]
+      },
+      "AgentInstanceTextContent": {
+        "type": "object",
+        "title": "Text content",
+        "description": "A plain-text content block.",
+        "additionalProperties": false,
+        "required": [
+          "contentType",
+          "text"
+        ],
+        "properties": {
+          "contentType": {
+            "description": "The content type discriminator.",
+            "type": "string",
+            "example": "TEXT"
+          },
+          "text": {
+            "description": "The text content.",
+            "type": "string"
+          }
+        }
+      },
+      "AgentInstanceDocumentContent": {
+        "type": "object",
+        "title": "Document content",
+        "description": "A Camunda Document Store reference content block.",
+        "additionalProperties": false,
+        "required": [
+          "contentType",
+          "documentReference"
+        ],
+        "properties": {
+          "contentType": {
+            "description": "The content type discriminator.",
+            "type": "string",
+            "example": "DOCUMENT"
+          },
+          "documentReference": {
+            "description": "A reference to a document stored in the Camunda Document Store.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DocumentReference"
+              }
+            ]
+          }
+        }
+      },
+      "AgentInstanceObjectContent": {
+        "type": "object",
+        "title": "Object content",
+        "description": "An arbitrary structured content block.",
+        "additionalProperties": false,
+        "required": [
+          "contentType",
+          "object"
+        ],
+        "properties": {
+          "contentType": {
+            "description": "The content type discriminator.",
+            "type": "string",
+            "example": "OBJECT"
+          },
+          "object": {
+            "description": "Arbitrary structured content.",
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "AgentInstanceMessageContentTypeEnum": {
+        "description": "The content type discriminator for a history item content block.",
+        "type": "string",
+        "enum": [
+          "TEXT",
+          "DOCUMENT",
+          "OBJECT"
+        ]
+      },
+      "AgentInstanceToolCall": {
+        "description": "A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.\nASSISTANT items carry arguments; TOOL_RESULT items carry arguments as null.\n",
+        "type": "object",
+        "required": [
+          "arguments",
+          "elementId",
+          "toolCallId",
+          "toolName"
+        ],
+        "properties": {
+          "toolCallId": {
+            "description": "The LLM-assigned tool call ID. Correlates ASSISTANT items to their matching TOOL_RESULT items.",
+            "type": "string"
+          },
+          "toolName": {
+            "description": "The LLM-visible tool name.",
+            "type": "string"
+          },
+          "elementId": {
+            "description": "The BPMN element ID handling this tool.",
+            "type": "string",
+            "nullable": true
+          },
+          "arguments": {
+            "description": "The tool call arguments as provided by the LLM. Null on TOOL_RESULT items.",
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": true
+          }
+        }
+      },
+      "AgentInstanceHistoryItemMetrics": {
+        "description": "Per-call token and latency metrics for an ASSISTANT history item.",
+        "type": "object",
+        "required": [
+          "durationMs",
+          "inputTokens",
+          "outputTokens"
+        ],
+        "properties": {
+          "inputTokens": {
+            "description": "Input tokens consumed by this LLM call.",
+            "type": "integer",
+            "format": "int64"
+          },
+          "outputTokens": {
+            "description": "Output tokens produced by this LLM call.",
+            "type": "integer",
+            "format": "int64"
+          },
+          "durationMs": {
+            "description": "Wall-clock duration of the LLM call in milliseconds.",
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "AgentInstanceHistoryRoleFilterProperty": {
+        "description": "AgentInstanceHistoryRoleEnum property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AgentInstanceHistoryRoleExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedAgentInstanceHistoryRoleFilter"
+          }
+        ]
+      },
+      "AdvancedAgentInstanceHistoryRoleFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced AgentInstanceHistoryRoleEnum filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryRoleEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryRoleEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceHistoryRoleEnum"
+            }
+          }
+        }
+      },
+      "AgentInstanceHistoryCommitStatusFilterProperty": {
+        "description": "AgentInstanceHistoryCommitStatusEnum property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AgentInstanceHistoryCommitStatusExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedAgentInstanceHistoryCommitStatusFilter"
+          }
+        ]
+      },
+      "AdvancedAgentInstanceHistoryCommitStatusFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced AgentInstanceHistoryCommitStatusEnum filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryCommitStatusEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryCommitStatusEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceHistoryCommitStatusEnum"
+            }
+          }
+        }
+      },
       "AuditLogResult": {
         "description": "Audit log item.",
         "type": "object",
         "required": [
-          "auditLogKey",
-          "entityKey",
-          "entityType",
-          "operationType",
-          "batchOperationKey",
-          "batchOperationType",
-          "timestamp",
           "actorId",
           "actorType",
           "agentElementId",
-          "tenantId",
-          "result",
+          "auditLogKey",
+          "batchOperationKey",
+          "batchOperationType",
           "category",
-          "processDefinitionId",
-          "processDefinitionKey",
-          "processInstanceKey",
-          "rootProcessInstanceKey",
-          "elementInstanceKey",
-          "jobKey",
-          "userTaskKey",
-          "decisionRequirementsId",
-          "decisionRequirementsKey",
           "decisionDefinitionId",
           "decisionDefinitionKey",
           "decisionEvaluationKey",
+          "decisionRequirementsId",
+          "decisionRequirementsKey",
           "deploymentKey",
+          "elementInstanceKey",
+          "entityDescription",
+          "entityKey",
+          "entityType",
           "formKey",
-          "resourceKey",
+          "jobKey",
+          "operationType",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processInstanceKey",
           "relatedEntityKey",
           "relatedEntityType",
-          "entityDescription"
+          "resourceKey",
+          "result",
+          "rootProcessInstanceKey",
+          "tenantId",
+          "timestamp",
+          "userTaskKey"
         ],
         "properties": {
           "auditLogKey": {
@@ -20339,14 +21197,14 @@
         "type": "object",
         "required": [
           "authorizedComponents",
-          "tenants",
-          "groups",
-          "roles",
-          "salesPlanType",
           "c8Links",
           "canLogout",
           "displayName",
           "email",
+          "groups",
+          "roles",
+          "salesPlanType",
+          "tenants",
           "username"
         ],
         "properties": {
@@ -20465,9 +21323,9 @@
         "required": [
           "ownerId",
           "ownerType",
+          "permissionTypes",
           "resourceId",
-          "resourceType",
-          "permissionTypes"
+          "resourceType"
         ]
       },
       "AuthorizationPropertyBasedRequest": {
@@ -20508,9 +21366,9 @@
         "required": [
           "ownerId",
           "ownerType",
+          "permissionTypes",
           "resourcePropertyName",
-          "resourceType",
-          "permissionTypes"
+          "resourceType"
         ],
         "x-properties-added-in-version": [
           {
@@ -20623,13 +21481,13 @@
       },
       "AuthorizationResult": {
         "required": [
+          "authorizationKey",
           "ownerId",
           "ownerType",
-          "resourceType",
+          "permissionTypes",
           "resourceId",
           "resourcePropertyName",
-          "permissionTypes",
-          "authorizationKey"
+          "resourceType"
         ],
         "type": "object",
         "properties": {
@@ -20981,17 +21839,17 @@
       },
       "BatchOperationResponse": {
         "required": [
+          "actorId",
+          "actorType",
           "batchOperationKey",
           "batchOperationType",
-          "state",
+          "endDate",
+          "errors",
           "operationsCompletedCount",
           "operationsFailedCount",
           "operationsTotalCount",
-          "actorType",
-          "actorId",
-          "errors",
-          "endDate",
-          "startDate"
+          "startDate",
+          "state"
         ],
         "type": "object",
         "properties": {
@@ -21221,13 +22079,13 @@
       "BatchOperationItemResponse": {
         "type": "object",
         "required": [
-          "rootProcessInstanceKey",
           "batchOperationKey",
           "errorMessage",
           "itemKey",
           "operationType",
-          "processedDate",
           "processInstanceKey",
+          "processedDate",
+          "rootProcessInstanceKey",
           "state"
         ],
         "properties": {
@@ -21446,8 +22304,8 @@
           }
         },
         "required": [
-          "targetProcessDefinitionKey",
-          "mappingInstructions"
+          "mappingInstructions",
+          "targetProcessDefinitionKey"
         ]
       },
       "ProcessInstanceModificationBatchOperationRequest": {
@@ -21792,8 +22650,8 @@
         "description": "Cluster variable search response item.",
         "type": "object",
         "required": [
-          "value",
-          "isTruncated"
+          "isTruncated",
+          "value"
         ],
         "allOf": [
           {
@@ -22003,12 +22861,12 @@
         "type": "object",
         "required": [
           "brokers",
+          "clusterId",
           "clusterSize",
-          "partitionsCount",
-          "replicationFactor",
           "gatewayVersion",
           "lastCompletedChangeId",
-          "clusterId"
+          "partitionsCount",
+          "replicationFactor"
         ],
         "properties": {
           "brokers": {
@@ -22087,10 +22945,10 @@
         "description": "Provides information on a broker node.",
         "type": "object",
         "required": [
-          "nodeId",
           "host",
-          "port",
+          "nodeId",
           "partitions",
+          "port",
           "version"
         ],
         "properties": {
@@ -22129,9 +22987,9 @@
         "description": "Provides information on a partition within a broker node.",
         "type": "object",
         "required": [
+          "health",
           "partitionId",
-          "role",
-          "health"
+          "role"
         ],
         "properties": {
           "partitionId": {
@@ -22197,8 +23055,8 @@
       "EvaluateConditionalResult": {
         "type": "object",
         "required": [
-          "processInstances",
           "conditionalEvaluationKey",
+          "processInstances",
           "tenantId"
         ],
         "x-semantic-provider": [
@@ -22729,14 +23587,14 @@
       },
       "EvaluatedDecisionResult": {
         "required": [
-          "decisionDefinitionType",
-          "evaluatedInputs",
-          "matchedRules",
           "decisionDefinitionId",
           "decisionDefinitionKey",
           "decisionDefinitionName",
+          "decisionDefinitionType",
           "decisionDefinitionVersion",
           "decisionEvaluationInstanceKey",
+          "evaluatedInputs",
+          "matchedRules",
           "output",
           "tenantId"
         ],
@@ -23360,11 +24218,11 @@
       },
       "EvaluatedDecisionOutputItem": {
         "required": [
-          "ruleId",
-          "ruleIndex",
           "outputId",
           "outputName",
-          "outputValue"
+          "outputValue",
+          "ruleId",
+          "ruleIndex"
         ],
         "type": "object",
         "description": "The evaluated decision outputs.",
@@ -23747,8 +24605,8 @@
         "type": "object",
         "required": [
           "deploymentKey",
-          "tenantId",
-          "deployments"
+          "deployments",
+          "tenantId"
         ],
         "x-semantic-provider": [
           "deploymentKey"
@@ -23782,10 +24640,10 @@
       "DeploymentMetadataResult": {
         "type": "object",
         "required": [
-          "processDefinition",
           "decisionDefinition",
           "decisionRequirements",
           "form",
+          "processDefinition",
           "resource"
         ],
         "properties": {
@@ -23851,9 +24709,9 @@
         "type": "object",
         "required": [
           "processDefinitionId",
+          "processDefinitionKey",
           "processDefinitionVersion",
           "resourceName",
-          "processDefinitionKey",
           "tenantId"
         ],
         "properties": {
@@ -24118,8 +24976,8 @@
       "DeleteResourceResponse": {
         "type": "object",
         "required": [
-          "resourceKey",
-          "batchOperation"
+          "batchOperation",
+          "resourceKey"
         ],
         "properties": {
           "resourceKey": {
@@ -24154,12 +25012,12 @@
       "ResourceResult": {
         "type": "object",
         "required": [
-          "resourceName",
-          "version",
-          "versionTag",
           "resourceId",
+          "resourceKey",
+          "resourceName",
           "tenantId",
-          "resourceKey"
+          "version",
+          "versionTag"
         ],
         "properties": {
           "resourceName": {
@@ -24541,10 +25399,10 @@
         "type": "object",
         "required": [
           "camunda.document.type",
-          "storeId",
-          "documentId",
           "contentHash",
-          "metadata"
+          "documentId",
+          "metadata",
+          "storeId"
         ],
         "properties": {
           "camunda.document.type": {
@@ -24641,8 +25499,8 @@
           {
             "type": "object",
             "required": [
-              "failedDocuments",
-              "createdDocuments"
+              "createdDocuments",
+              "failedDocuments"
             ],
             "properties": {
               "failedDocuments": {
@@ -24742,13 +25600,13 @@
         "description": "Information about the document that is returned in responses.",
         "type": "object",
         "required": [
-          "fileName",
-          "expiresAt",
-          "size",
           "contentType",
           "customProperties",
+          "expiresAt",
+          "fileName",
           "processDefinitionId",
-          "processInstanceKey"
+          "processInstanceKey",
+          "size"
         ],
         "properties": {
           "contentType": {
@@ -24823,8 +25681,8 @@
       "DocumentLink": {
         "type": "object",
         "required": [
-          "url",
-          "expiresAt"
+          "expiresAt",
+          "url"
         ],
         "properties": {
           "url": {
@@ -24863,6 +25721,27 @@
               "state",
               "incidentKey",
               "tenantId"
+            ]
+          },
+          "order": {
+            "$ref": "#/components/schemas/SortOrderEnum"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "ElementInstanceWaitStateQuerySortRequest": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "description": "The field to sort by.",
+            "type": "string",
+            "enum": [
+              "elementInstanceKey",
+              "processInstanceKey",
+              "rootProcessInstanceKey",
+              "elementId"
             ]
           },
           "order": {
@@ -25135,20 +26014,20 @@
       "ElementInstanceResult": {
         "type": "object",
         "required": [
-          "processDefinitionId",
-          "startDate",
           "elementId",
-          "elementName",
-          "type",
-          "state",
-          "hasIncident",
-          "tenantId",
           "elementInstanceKey",
-          "processInstanceKey",
-          "processDefinitionKey",
-          "rootProcessInstanceKey",
+          "elementName",
           "endDate",
-          "incidentKey"
+          "hasIncident",
+          "incidentKey",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processInstanceKey",
+          "rootProcessInstanceKey",
+          "startDate",
+          "state",
+          "tenantId",
+          "type"
         ],
         "properties": {
           "processDefinitionId": {
@@ -25324,6 +26203,13 @@
           }
         ],
         "properties": {
+          "sort": {
+            "description": "Sort field criteria.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementInstanceWaitStateQuerySortRequest"
+            }
+          },
           "filter": {
             "description": "Filter criteria for the inspection.",
             "allOf": [
@@ -25541,15 +26427,15 @@
         "description": "An element instance waiting state.",
         "type": "object",
         "required": [
-          "waitStateType",
-          "processInstanceKey",
-          "elementInstanceKey",
           "elementId",
+          "elementInstanceKey",
           "elementType",
-          "tenantId",
-          "rootProcessInstanceKey",
           "jobDetails",
-          "messageDetails"
+          "messageDetails",
+          "processInstanceKey",
+          "rootProcessInstanceKey",
+          "tenantId",
+          "waitStateType"
         ],
         "properties": {
           "waitStateType": {
@@ -25641,8 +26527,8 @@
         "type": "object",
         "required": [
           "jobKey",
-          "jobType",
           "jobKind",
+          "jobType",
           "listenerEventType",
           "retries"
         ],
@@ -25687,8 +26573,8 @@
       "MessageWaitStateDetails": {
         "type": "object",
         "required": [
-          "messageName",
-          "correlationKey"
+          "correlationKey",
+          "messageName"
         ],
         "properties": {
           "messageName": {
@@ -26115,11 +27001,11 @@
           "formKey"
         ],
         "required": [
-          "tenantId",
           "formId",
+          "formKey",
           "schema",
-          "version",
-          "formKey"
+          "tenantId",
+          "version"
         ],
         "properties": {
           "tenantId": {
@@ -26244,9 +27130,9 @@
       "CreateGlobalTaskListenerRequest": {
         "type": "object",
         "required": [
+          "eventTypes",
           "id",
-          "type",
-          "eventTypes"
+          "type"
         ],
         "allOf": [
           {
@@ -26262,8 +27148,8 @@
       "UpdateGlobalTaskListenerRequest": {
         "type": "object",
         "required": [
-          "type",
-          "eventTypes"
+          "eventTypes",
+          "type"
         ],
         "allOf": [
           {
@@ -26274,13 +27160,13 @@
       "GlobalTaskListenerResult": {
         "type": "object",
         "required": [
-          "id",
-          "type",
-          "retries",
-          "eventTypes",
           "afterNonGlobal",
+          "eventTypes",
+          "id",
           "priority",
-          "source"
+          "retries",
+          "source",
+          "type"
         ],
         "allOf": [
           {
@@ -26571,9 +27457,9 @@
           }
         },
         "required": [
+          "description",
           "groupId",
-          "name",
-          "description"
+          "name"
         ]
       },
       "GroupUpdateRequest": {
@@ -26614,9 +27500,9 @@
           }
         },
         "required": [
+          "description",
           "groupId",
-          "name",
-          "description"
+          "name"
         ]
       },
       "GroupResult": {
@@ -26642,9 +27528,9 @@
           }
         },
         "required": [
-          "name",
+          "description",
           "groupId",
-          "description"
+          "name"
         ]
       },
       "GroupSearchQuerySortRequest": {
@@ -27060,6 +27946,15 @@
         "minLength": 1,
         "maxLength": 256,
         "example": "order-12345"
+      },
+      "IterationId": {
+        "description": "A client-provided sequential integer identifying a logical iteration: one LLM\ncall, its tool dispatches, and their results. Must be a positive integer,\nincreasing with each iteration. Established by the\nconnector when appending the first history item of an iteration.\n",
+        "type": "integer",
+        "format": "int32",
+        "minimum": 1,
+        "x-semantic-type": "IterationId",
+        "x-semantic-client-minted": true,
+        "example": 1
       },
       "ElementIdFilterProperty": {
         "description": "ElementId property with full advanced search capabilities.",
@@ -27627,18 +28522,18 @@
       "IncidentResult": {
         "type": "object",
         "required": [
+          "creationTime",
+          "elementId",
+          "elementInstanceKey",
+          "errorMessage",
+          "errorType",
           "incidentKey",
+          "jobKey",
+          "processDefinitionId",
           "processDefinitionKey",
           "processInstanceKey",
-          "elementInstanceKey",
-          "creationTime",
-          "state",
-          "errorType",
-          "errorMessage",
-          "elementId",
-          "processDefinitionId",
           "rootProcessInstanceKey",
-          "jobKey",
+          "state",
           "tenantId"
         ],
         "properties": {
@@ -28020,8 +28915,8 @@
         "description": "Global job statistics query result.",
         "type": "object",
         "required": [
-          "created",
           "completed",
+          "created",
           "failed",
           "isIncomplete"
         ],
@@ -28116,8 +29011,8 @@
         "description": "Job type statistics query result.",
         "type": "object",
         "required": [
-          "page",
-          "items"
+          "items",
+          "page"
         ],
         "allOf": [
           {
@@ -28138,10 +29033,10 @@
         "description": "Statistics for a single job type.",
         "type": "object",
         "required": [
-          "jobType",
-          "created",
           "completed",
+          "created",
           "failed",
+          "jobType",
           "workers"
         ],
         "properties": {
@@ -28192,8 +29087,8 @@
         "type": "object",
         "required": [
           "from",
-          "to",
-          "jobType"
+          "jobType",
+          "to"
         ],
         "properties": {
           "from": {
@@ -28219,8 +29114,8 @@
         "description": "Job worker statistics query result.",
         "type": "object",
         "required": [
-          "page",
-          "items"
+          "items",
+          "page"
         ],
         "allOf": [
           {
@@ -28241,10 +29136,10 @@
         "description": "Statistics for a single worker within a job type.",
         "type": "object",
         "required": [
-          "worker",
-          "created",
           "completed",
-          "failed"
+          "created",
+          "failed",
+          "worker"
         ],
         "properties": {
           "worker": {
@@ -28288,8 +29183,8 @@
         "type": "object",
         "required": [
           "from",
-          "to",
-          "jobType"
+          "jobType",
+          "to"
         ],
         "properties": {
           "from": {
@@ -28320,8 +29215,8 @@
         "description": "Job time-series statistics query result.",
         "type": "object",
         "required": [
-          "page",
-          "items"
+          "items",
+          "page"
         ],
         "allOf": [
           {
@@ -28342,10 +29237,10 @@
         "description": "Aggregated job metrics for a single time bucket.",
         "type": "object",
         "required": [
-          "time",
-          "created",
           "completed",
-          "failed"
+          "created",
+          "failed",
+          "time"
         ],
         "properties": {
           "time": {
@@ -28390,8 +29285,8 @@
         "type": "object",
         "required": [
           "from",
-          "to",
-          "jobType"
+          "jobType",
+          "to"
         ],
         "properties": {
           "from": {
@@ -28433,8 +29328,8 @@
         "description": "Job error statistics query result.",
         "type": "object",
         "required": [
-          "page",
-          "items"
+          "items",
+          "page"
         ],
         "allOf": [
           {
@@ -28540,9 +29435,9 @@
           }
         },
         "required": [
-          "type",
           "maxJobsToActivate",
-          "timeout"
+          "timeout",
+          "type"
         ],
         "x-properties-added-in-version": [
           {
@@ -28575,26 +29470,26 @@
         ],
         "type": "object",
         "required": [
-          "type",
-          "processDefinitionId",
-          "processDefinitionVersion",
-          "elementId",
           "customHeaders",
-          "worker",
-          "retries",
           "deadline",
-          "variables",
-          "tenantId",
-          "jobKey",
-          "processInstanceKey",
-          "processDefinitionKey",
+          "elementId",
           "elementInstanceKey",
+          "jobKey",
           "kind",
           "listenerEventType",
+          "priority",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processDefinitionVersion",
+          "processInstanceKey",
+          "retries",
           "rootProcessInstanceKey",
           "tags",
+          "tenantId",
+          "type",
           "userTask",
-          "priority"
+          "variables",
+          "worker"
         ],
         "properties": {
           "type": {
@@ -28754,11 +29649,11 @@
       },
       "UserTaskProperties": {
         "required": [
+          "action",
+          "assignee",
           "candidateGroups",
           "candidateUsers",
           "changedAttributes",
-          "action",
-          "assignee",
           "dueDate",
           "followUpDate",
           "formKey",
@@ -29123,31 +30018,31 @@
       "JobSearchResult": {
         "type": "object",
         "required": [
+          "creationTime",
           "customHeaders",
+          "deadline",
+          "deniedReason",
           "elementId",
           "elementInstanceKey",
+          "endTime",
+          "errorCode",
+          "errorMessage",
           "hasFailedWithRetriesLeft",
+          "isDenied",
           "jobKey",
           "kind",
+          "lastUpdateTime",
           "listenerEventType",
           "priority",
           "processDefinitionId",
           "processDefinitionKey",
           "processInstanceKey",
           "retries",
+          "rootProcessInstanceKey",
           "state",
           "tenantId",
           "type",
-          "worker",
-          "rootProcessInstanceKey",
-          "creationTime",
-          "deadline",
-          "deniedReason",
-          "endTime",
-          "errorCode",
-          "errorMessage",
-          "isDenied",
-          "lastUpdateTime"
+          "worker"
         ],
         "properties": {
           "customHeaders": {
@@ -29959,6 +30854,18 @@
           }
         ]
       },
+      "AgentHistoryItemKey": {
+        "description": "System-generated key for an agent history item.",
+        "format": "AgentHistoryItemKey",
+        "x-semantic-type": "AgentHistoryItemKey",
+        "example": "6755399441055744",
+        "type": "string",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LongKey"
+          }
+        ]
+      },
       "AuditLogKey": {
         "allOf": [
           {
@@ -30571,6 +31478,58 @@
           }
         }
       },
+      "AgentHistoryItemKeyFilterProperty": {
+        "description": "AgentHistoryItemKey property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AgentHistoryItemKeyExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedAgentHistoryItemKeyFilter"
+          }
+        ]
+      },
+      "AdvancedAgentHistoryItemKeyFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced AgentHistoryItemKey filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentHistoryItemKey"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentHistoryItemKey"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentHistoryItemKey"
+            }
+          },
+          "$notIn": {
+            "description": "Checks if the property matches none of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentHistoryItemKey"
+            }
+          }
+        }
+      },
       "AuditLogKeyFilterProperty": {
         "description": "AuditLogKey property with full advanced search capabilities.",
         "oneOf": [
@@ -30783,10 +31742,10 @@
         "description": "The response of a license request.",
         "type": "object",
         "required": [
-          "validLicense",
-          "licenseType",
+          "expiresAt",
           "isCommercial",
-          "expiresAt"
+          "licenseType",
+          "validLicense"
         ],
         "properties": {
           "validLicense": {
@@ -30900,8 +31859,8 @@
         "required": [
           "claimName",
           "claimValue",
-          "name",
-          "mappingRuleId"
+          "mappingRuleId",
+          "name"
         ]
       },
       "MappingRuleCreateResult": {
@@ -30967,8 +31926,8 @@
         "required": [
           "claimName",
           "claimValue",
-          "name",
-          "mappingRuleId"
+          "mappingRuleId",
+          "name"
         ]
       },
       "MappingRuleSearchQuerySortRequest": {
@@ -31083,9 +32042,9 @@
         ],
         "type": "object",
         "required": [
-          "tenantId",
           "messageKey",
-          "processInstanceKey"
+          "processInstanceKey",
+          "tenantId"
         ],
         "properties": {
           "tenantId": {
@@ -31163,8 +32122,8 @@
         ],
         "type": "object",
         "required": [
-          "tenantId",
-          "messageKey"
+          "messageKey",
+          "tenantId"
         ],
         "properties": {
           "tenantId": {
@@ -31208,11 +32167,9 @@
       "MessageSubscriptionResult": {
         "type": "object",
         "required": [
-          "rootProcessInstanceKey",
           "correlationKey",
           "elementId",
           "elementInstanceKey",
-          "toolProperties",
           "inboundConnectorType",
           "lastUpdatedDate",
           "messageName",
@@ -31224,8 +32181,10 @@
           "processDefinitionName",
           "processDefinitionVersion",
           "processInstanceKey",
+          "rootProcessInstanceKey",
           "tenantId",
-          "toolName"
+          "toolName",
+          "toolProperties"
         ],
         "properties": {
           "messageSubscriptionKey": {
@@ -31655,16 +32614,16 @@
           "correlationKey",
           "correlationTime",
           "elementId",
+          "elementInstanceKey",
           "messageKey",
           "messageName",
           "partitionId",
           "processDefinitionId",
+          "processDefinitionKey",
           "processInstanceKey",
-          "subscriptionKey",
-          "tenantId",
           "rootProcessInstanceKey",
-          "elementInstanceKey",
-          "processDefinitionKey"
+          "subscriptionKey",
+          "tenantId"
         ],
         "properties": {
           "correlationKey": {
@@ -32115,11 +33074,11 @@
         "description": "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
         "type": "object",
         "required": [
-          "type",
-          "title",
-          "status",
           "detail",
-          "instance"
+          "instance",
+          "status",
+          "title",
+          "type"
         ],
         "properties": {
           "type": {
@@ -32287,14 +33246,14 @@
       "ProcessDefinitionResult": {
         "type": "object",
         "required": [
-          "processDefinitionKey",
+          "hasStartForm",
           "name",
-          "resourceName",
-          "version",
-          "versionTag",
           "processDefinitionId",
+          "processDefinitionKey",
+          "resourceName",
           "tenantId",
-          "hasStartForm"
+          "version",
+          "versionTag"
         ],
         "properties": {
           "name": {
@@ -32730,13 +33689,13 @@
           }
         },
         "required": [
+          "activeInstancesWithIncidentCount",
+          "activeInstancesWithoutIncidentCount",
           "processDefinitionId",
           "processDefinitionKey",
-          "tenantId",
           "processDefinitionName",
           "processDefinitionVersion",
-          "activeInstancesWithIncidentCount",
-          "activeInstancesWithoutIncidentCount"
+          "tenantId"
         ]
       },
       "ProcessDefinitionInstanceVersionStatisticsQuerySortRequest": {
@@ -33024,14 +33983,14 @@
           "processInstanceKey"
         ],
         "required": [
+          "businessId",
           "processDefinitionId",
           "processDefinitionKey",
           "processDefinitionVersion",
-          "tenantId",
-          "variables",
           "processInstanceKey",
           "tags",
-          "businessId"
+          "tenantId",
+          "variables"
         ],
         "type": "object",
         "properties": {
@@ -33525,22 +34484,22 @@
         "description": "Process instance search response item.",
         "type": "object",
         "required": [
+          "businessId",
+          "endDate",
+          "hasIncident",
+          "parentElementInstanceKey",
+          "parentProcessInstanceKey",
           "processDefinitionId",
+          "processDefinitionKey",
           "processDefinitionName",
           "processDefinitionVersion",
           "processDefinitionVersionTag",
-          "startDate",
-          "endDate",
-          "state",
-          "hasIncident",
-          "tenantId",
           "processInstanceKey",
-          "processDefinitionKey",
-          "parentProcessInstanceKey",
-          "parentElementInstanceKey",
           "rootProcessInstanceKey",
+          "startDate",
+          "state",
           "tags",
-          "businessId"
+          "tenantId"
         ],
         "properties": {
           "processDefinitionId": {
@@ -33728,9 +34687,9 @@
       "ProcessInstanceCallHierarchyEntry": {
         "type": "object",
         "required": [
-          "processInstanceKey",
           "processDefinitionKey",
-          "processDefinitionName"
+          "processDefinitionName",
+          "processInstanceKey"
         ],
         "properties": {
           "processInstanceKey": {
@@ -33775,11 +34734,11 @@
         "description": "Process instance sequence flow result.",
         "type": "object",
         "required": [
-          "rootProcessInstanceKey",
           "elementId",
           "processDefinitionId",
           "processDefinitionKey",
           "processInstanceKey",
+          "rootProcessInstanceKey",
           "sequenceFlowId",
           "tenantId"
         ],
@@ -33881,8 +34840,8 @@
           }
         },
         "required": [
-          "targetProcessDefinitionKey",
-          "mappingInstructions"
+          "mappingInstructions",
+          "targetProcessDefinitionKey"
         ]
       },
       "MigrateProcessInstanceMappingInstruction": {
@@ -34309,8 +35268,8 @@
           }
         },
         "required": [
-          "roleId",
-          "name"
+          "name",
+          "roleId"
         ]
       },
       "RoleCreateResult": {
@@ -34335,9 +35294,9 @@
           }
         },
         "required": [
-          "roleId",
+          "description",
           "name",
-          "description"
+          "roleId"
         ]
       },
       "RoleUpdateRequest": {
@@ -34378,9 +35337,9 @@
           }
         },
         "required": [
-          "roleId",
+          "description",
           "name",
-          "description"
+          "roleId"
         ]
       },
       "RoleResult": {
@@ -34406,9 +35365,9 @@
           }
         },
         "required": [
-          "roleId",
+          "description",
           "name",
-          "description"
+          "roleId"
         ]
       },
       "RoleSearchQuerySortRequest": {
@@ -34894,10 +35853,10 @@
         "description": "Pagination information about the search results.",
         "type": "object",
         "required": [
-          "totalItems",
+          "endCursor",
           "hasMoreTotalItems",
           "startCursor",
-          "endCursor"
+          "totalItems"
         ],
         "x-semantic-provider": [
           "startCursor",
@@ -34976,8 +35935,8 @@
       "SignalBroadcastResult": {
         "type": "object",
         "required": [
-          "tenantId",
-          "signalKey"
+          "signalKey",
+          "tenantId"
         ],
         "x-semantic-provider": [
           "signalKey"
@@ -35015,8 +35974,8 @@
       },
       "UsageMetricsResponse": {
         "required": [
-          "tenants",
-          "activeTenants"
+          "activeTenants",
+          "tenants"
         ],
         "type": "object",
         "allOf": [
@@ -35048,9 +36007,9 @@
       },
       "UsageMetricsResponseItem": {
         "required": [
-          "processInstances",
+          "assignees",
           "decisionInstances",
-          "assignees"
+          "processInstances"
         ],
         "type": "object",
         "properties": {
@@ -35075,11 +36034,11 @@
         "description": "Envelope for all system configuration sections. Each property\nrepresents a feature area.\n",
         "type": "object",
         "required": [
-          "jobMetrics",
+          "authentication",
+          "cloud",
           "components",
           "deployment",
-          "authentication",
-          "cloud"
+          "jobMetrics"
         ],
         "properties": {
           "jobMetrics": {
@@ -35123,10 +36082,10 @@
         "required": [
           "enabled",
           "exportInterval",
-          "maxWorkerNameLength",
           "maxJobTypeLength",
           "maxTenantIdLength",
-          "maxUniqueKeys"
+          "maxUniqueKeys",
+          "maxWorkerNameLength"
         ],
         "properties": {
           "enabled": {
@@ -35286,8 +36245,8 @@
           }
         },
         "required": [
-          "tenantId",
-          "name"
+          "name",
+          "tenantId"
         ]
       },
       "TenantCreateResult": {
@@ -35317,9 +36276,9 @@
           }
         },
         "required": [
-          "tenantId",
+          "description",
           "name",
-          "description"
+          "tenantId"
         ]
       },
       "TenantUpdateRequest": {
@@ -35361,9 +36320,9 @@
           }
         },
         "required": [
-          "tenantId",
+          "description",
           "name",
-          "description"
+          "tenantId"
         ]
       },
       "TenantResult": {
@@ -35391,9 +36350,9 @@
           }
         },
         "required": [
-          "tenantId",
+          "description",
           "name",
-          "description"
+          "tenantId"
         ]
       },
       "TenantSearchQuerySortRequest": {
@@ -36017,30 +36976,30 @@
       "UserTaskResult": {
         "type": "object",
         "required": [
-          "tenantId",
-          "userTaskKey",
-          "name",
-          "processInstanceKey",
-          "rootProcessInstanceKey",
-          "processDefinitionKey",
-          "elementInstanceKey",
-          "processDefinitionId",
-          "processName",
-          "state",
+          "assignee",
           "candidateGroups",
           "candidateUsers",
-          "elementId",
+          "completionDate",
           "creationDate",
           "customHeaders",
-          "priority",
-          "tags",
-          "assignee",
-          "completionDate",
           "dueDate",
+          "elementId",
+          "elementInstanceKey",
           "externalFormReference",
           "followUpDate",
+          "formKey",
+          "name",
+          "priority",
+          "processDefinitionId",
+          "processDefinitionKey",
           "processDefinitionVersion",
-          "formKey"
+          "processInstanceKey",
+          "processName",
+          "rootProcessInstanceKey",
+          "state",
+          "tags",
+          "tenantId",
+          "userTaskKey"
         ],
         "properties": {
           "name": {
@@ -36670,8 +37629,8 @@
           }
         },
         "required": [
-          "username",
-          "password"
+          "password",
+          "username"
         ]
       },
       "UserCreateResult": {
@@ -36700,9 +37659,9 @@
           }
         },
         "required": [
-          "username",
+          "email",
           "name",
-          "email"
+          "username"
         ]
       },
       "UserUpdateRequest": {
@@ -36745,9 +37704,9 @@
           }
         },
         "required": [
-          "username",
+          "email",
           "name",
-          "email"
+          "username"
         ]
       },
       "UserResult": {
@@ -36773,9 +37732,9 @@
           }
         },
         "required": [
-          "username",
+          "email",
           "name",
-          "email"
+          "username"
         ]
       },
       "UserSearchQuerySortRequest": {
@@ -37050,10 +38009,10 @@
         "required": [
           "name",
           "processInstanceKey",
-          "tenantId",
-          "variableKey",
+          "rootProcessInstanceKey",
           "scopeKey",
-          "rootProcessInstanceKey"
+          "tenantId",
+          "variableKey"
         ],
         "properties": {
           "name": {
@@ -37159,6 +38118,26 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/AgentInstanceStatusEnum"
+          }
+        ]
+      },
+      "AgentInstanceHistoryRoleExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentInstanceHistoryRoleEnum"
+          }
+        ]
+      },
+      "AgentInstanceHistoryCommitStatusExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentInstanceHistoryCommitStatusEnum"
           }
         ]
       },
@@ -37500,6 +38479,16 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/AgentInstanceKey"
+          }
+        ]
+      },
+      "AgentHistoryItemKeyExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentHistoryItemKey"
           }
         ]
       },
