@@ -968,6 +968,81 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Create agent instance history item
+    /// Appends a single history item to an agent instance&apos;s conversation history.
+    /// The created item has commitStatus PENDING until the job identified by jobLease
+    /// completes successfully, at which point it transitions to COMMITTED. If the job
+    /// fails or is superseded by a retry, the item is marked DISCARDED.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: createAgentInstanceHistoryItem
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateAgentInstanceHistoryItemExample(
+    ///     AgentInstanceKey agentInstanceKey,
+    ///     ElementInstanceKey elementInstanceKey,
+    ///     JobKey jobKey,
+    ///     string jobLease)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateAgentInstanceHistoryItemAsync(
+    ///         agentInstanceKey,
+    ///         new AgentInstanceHistoryItemRequest
+    ///         {
+    ///             ElementInstanceKey = elementInstanceKey,
+    ///             JobKey = jobKey,
+    ///             JobLease = jobLease,
+    ///             Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
+    ///             Content = new List&lt;AgentInstanceMessageContent&gt;
+    ///             {
+    ///                 new AgentInstanceTextContent { Text = &quot;How can I help you today?&quot; },
+    ///             },
+    ///             ProducedAt = DateTimeOffset.UtcNow,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Created history item: {result.HistoryItemKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateAgentInstanceHistoryItemExample(
+    ///     AgentInstanceKey agentInstanceKey,
+    ///     ElementInstanceKey elementInstanceKey,
+    ///     JobKey jobKey,
+    ///     string jobLease)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateAgentInstanceHistoryItemAsync(
+    ///         agentInstanceKey,
+    ///         new AgentInstanceHistoryItemRequest
+    ///         {
+    ///             ElementInstanceKey = elementInstanceKey,
+    ///             JobKey = jobKey,
+    ///             JobLease = jobLease,
+    ///             Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
+    ///             Content = new List&lt;AgentInstanceMessageContent&gt;
+    ///             {
+    ///                 new AgentInstanceTextContent { Text = &quot;How can I help you today?&quot; },
+    ///             },
+    ///             ProducedAt = DateTimeOffset.UtcNow,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Created history item: {result.HistoryItemKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<AgentInstanceHistoryItemCreationResult> CreateAgentInstanceHistoryItemAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistoryItemRequest body, CancellationToken ct = default)
+    {
+        var path = $"/agent-instances/{Uri.EscapeDataString(agentInstanceKey.ToString()!)}/history";
+        return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceHistoryItemCreationResult>(HttpMethod.Post, path, body, ct), "createAgentInstanceHistoryItem", false, ct);
+    }
+
+    /// <summary>
     /// Create authorization
     /// Create the authorization.
     /// </summary>
@@ -5365,6 +5440,84 @@ public partial class CamundaClient
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/resumption";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "resumeBatchOperation", false, ct);
+    }
+
+    /// <summary>
+    /// Search agent instance history
+    /// Searches the conversation history of an agent instance. Committed items
+    /// are returned by default.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: searchAgentInstanceHistory
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchAgentInstanceHistoryExample(AgentInstanceKey agentInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAgentInstanceHistoryAsync(
+    ///         agentInstanceKey,
+    ///         new AgentInstanceHistorySearchQuery
+    ///         {
+    ///             Sort = new List&lt;AgentInstanceHistorySearchQuerySortRequest&gt;
+    ///             {
+    ///                 new AgentInstanceHistorySearchQuerySortRequest
+    ///                 {
+    ///                     Field = AgentInstanceHistorySearchQuerySortRequestField.ProducedAt,
+    ///                     Order = SortOrderEnum.ASC,
+    ///                 },
+    ///             },
+    ///             Page = new LimitPagination { Limit = 20 },
+    ///         });
+    /// 
+    ///     foreach (var item in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;{item.HistoryItemKey} ({item.Role})&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchAgentInstanceHistoryExample(AgentInstanceKey agentInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAgentInstanceHistoryAsync(
+    ///         agentInstanceKey,
+    ///         new AgentInstanceHistorySearchQuery
+    ///         {
+    ///             Sort = new List&lt;AgentInstanceHistorySearchQuerySortRequest&gt;
+    ///             {
+    ///                 new AgentInstanceHistorySearchQuerySortRequest
+    ///                 {
+    ///                     Field = AgentInstanceHistorySearchQuerySortRequestField.ProducedAt,
+    ///                     Order = SortOrderEnum.ASC,
+    ///                 },
+    ///             },
+    ///             Page = new LimitPagination { Limit = 20 },
+    ///         });
+    /// 
+    ///     foreach (var item in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;{item.HistoryItemKey} ({item.Role})&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<AgentInstanceHistorySearchQueryResult> SearchAgentInstanceHistoryAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistorySearchQuery body, ConsistencyOptions<AgentInstanceHistorySearchQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/agent-instances/{Uri.EscapeDataString(agentInstanceKey.ToString()!)}/history/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchAgentInstanceHistory", false,
+                () => InvokeWithRetryAsync(() => SendAsync<AgentInstanceHistorySearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentInstanceHistory", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceHistorySearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentInstanceHistory", false, ct);
     }
 
     /// <summary>
