@@ -239,6 +239,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync(Camunda.Orchestration.Sdk.AgentInstanceKey,Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/AgentInstance.cs#CreateAgentInstanceHistoryItem)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationRequest,System.Threading.CancellationToken)
 example:
 - *content
@@ -1290,6 +1300,16 @@ example:
 
 
 [!code-csharp[](../../examples/AgentInstance.cs#SearchAgentInstances)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SearchAgentInstanceHistoryAsync(Camunda.Orchestration.Sdk.AgentInstanceKey,Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQueryResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/AgentInstance.cs#SearchAgentInstanceHistory)]
 
 
 ---
