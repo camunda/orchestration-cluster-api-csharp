@@ -926,6 +926,10 @@ internal static class CSharpClientGenerator
         var underlyingType = GetUnderlyingPrimitiveType(schema, doc);
         var isString = underlyingType == "string";
         var interfaceName = isString ? "global::Camunda.Orchestration.Sdk.ICamundaKey" : "global::Camunda.Orchestration.Sdk.ICamundaLongKey";
+        // ICamundaLongKey mandates a `long` Value and a static AssumeExists(long) factory (the
+        // CamundaLongKeyJsonConverter reflects AssumeExists(long)). Narrower integer primitives
+        // (e.g. int32 IterationId) must be widened to long so the struct satisfies the interface.
+        var valueType = isString ? underlyingType : "long";
         var (pattern, minLength, maxLength) = isString ? GetConstraints(schema, doc) : (null, null, null);
 
         sb.AppendLine($"/// <summary>");
@@ -935,20 +939,20 @@ internal static class CSharpClientGenerator
         sb.AppendLine("{");
 
         // Value property
-        sb.AppendLine($"    /// <summary>The underlying {underlyingType} value.</summary>");
-        sb.AppendLine($"    public {underlyingType} Value {{ get; }}");
+        sb.AppendLine($"    /// <summary>The underlying {valueType} value.</summary>");
+        sb.AppendLine($"    public {valueType} Value {{ get; }}");
         sb.AppendLine();
 
         // Private constructor
-        sb.AppendLine($"    private {typeName}({underlyingType} value) => Value = value;");
+        sb.AppendLine($"    private {typeName}({valueType} value) => Value = value;");
         sb.AppendLine();
 
         // AssumeExists factory
         sb.AppendLine($"    /// <summary>");
-        sb.AppendLine($"    /// Creates a <see cref=\"{typeName}\"/> from a raw {underlyingType} value.");
+        sb.AppendLine($"    /// Creates a <see cref=\"{typeName}\"/> from a raw {valueType} value.");
         sb.AppendLine($"    /// Use this when side-loading values not received from an API call.");
         sb.AppendLine($"    /// </summary>");
-        sb.AppendLine($"    public static {typeName} AssumeExists({underlyingType} value)");
+        sb.AppendLine($"    public static {typeName} AssumeExists({valueType} value)");
         sb.AppendLine("    {");
 
         if (isString)
