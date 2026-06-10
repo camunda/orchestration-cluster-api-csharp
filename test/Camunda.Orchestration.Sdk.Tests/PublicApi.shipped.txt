@@ -932,6 +932,8 @@ TYPE Camunda.Orchestration.Sdk.AuditLogFilter : sealed class
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? DecisionDefinitionId { get; set; } [JsonPropertyName("decisionDefinitionId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? DecisionRequirementsId { get; set; } [JsonPropertyName("decisionRequirementsId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? EntityDescription { get; set; } [JsonPropertyName("entityDescription")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? InboundChannelToolName { get; set; } [JsonPropertyName("inboundChannelToolName")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? InboundChannelType { get; set; } [JsonPropertyName("inboundChannelType")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? TenantId { get; set; } [JsonPropertyName("tenantId")]
 
@@ -1012,6 +1014,8 @@ TYPE Camunda.Orchestration.Sdk.AuditLogResult : sealed class
   PROP System.String? AgentElementId { get; set; } [JsonPropertyName("agentElementId")]
   PROP System.String? DecisionRequirementsId { get; set; } [JsonPropertyName("decisionRequirementsId")]
   PROP System.String? EntityDescription { get; set; } [JsonPropertyName("entityDescription")]
+  PROP System.String? InboundChannelToolName { get; set; } [JsonPropertyName("inboundChannelToolName")]
+  PROP System.String? InboundChannelType { get; set; } [JsonPropertyName("inboundChannelType")]
 
 TYPE Camunda.Orchestration.Sdk.AuditLogResultEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -1074,10 +1078,12 @@ TYPE Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField : enum interf
   MEMBER ProcessDefinitionId = 16 json="processDefinitionId"
   MEMBER ProcessDefinitionKey = 17 json="processDefinitionKey"
   MEMBER ProcessInstanceKey = 18 json="processInstanceKey"
-  MEMBER Result = 19 json="result"
-  MEMBER TenantId = 20 json="tenantId"
-  MEMBER Timestamp = 21 json="timestamp"
-  MEMBER UserTaskKey = 22 json="userTaskKey"
+  MEMBER InboundChannelType = 19 json="inboundChannelType"
+  MEMBER InboundChannelToolName = 20 json="inboundChannelToolName"
+  MEMBER Result = 21 json="result"
+  MEMBER TenantId = 22 json="tenantId"
+  MEMBER Timestamp = 23 json="timestamp"
+  MEMBER UserTaskKey = 24 json="userTaskKey"
 
 TYPE Camunda.Orchestration.Sdk.AuthConfig : sealed class
   CTOR ()
@@ -1212,6 +1218,10 @@ TYPE Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields : sealed class
   PROP System.Boolean? HasRetriesLeft { get; set; } [JsonPropertyName("hasRetriesLeft")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableValueFilterProperty>? Variables { get; set; } [JsonPropertyName("variables")]
+
+TYPE Camunda.Orchestration.Sdk.BaseWaitStateDetails : sealed class
+  CTOR ()
+  PROP System.String WaitStateType { get; set; } [JsonPropertyName("waitStateType")]
 
 TYPE Camunda.Orchestration.Sdk.BasicAuthConfig : sealed class
   CTOR ()
@@ -2885,13 +2895,11 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
-  PROP Camunda.Orchestration.Sdk.JobWaitStateDetails? JobDetails { get; set; } [JsonPropertyName("jobDetails")]
-  PROP Camunda.Orchestration.Sdk.MessageWaitStateDetails? MessageDetails { get; set; } [JsonPropertyName("messageDetails")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP Camunda.Orchestration.Sdk.WaitStateDetails Details { get; set; } [JsonPropertyName("details")]
   PROP Camunda.Orchestration.Sdk.WaitStateElementTypeEnum ElementType { get; set; } [JsonPropertyName("elementType")]
-  PROP Camunda.Orchestration.Sdk.WaitStateTypeEnum WaitStateType { get; set; } [JsonPropertyName("waitStateType")]
 
 TYPE Camunda.Orchestration.Sdk.EndCursor : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.EndCursor>]
   PROP System.String Value { get; }
@@ -3922,7 +3930,7 @@ TYPE Camunda.Orchestration.Sdk.JobUpdateRequest : sealed class
   PROP Camunda.Orchestration.Sdk.JobChangeset Changeset { get; set; } [JsonPropertyName("changeset")]
   PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
 
-TYPE Camunda.Orchestration.Sdk.JobWaitStateDetails : sealed class
+TYPE Camunda.Orchestration.Sdk.JobWaitStateDetails : sealed class base=Camunda.Orchestration.Sdk.WaitStateDetails
   CTOR ()
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
   PROP Camunda.Orchestration.Sdk.JobKindEnum JobKind { get; set; } [JsonPropertyName("jobKind")]
@@ -4285,7 +4293,7 @@ TYPE Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty : sealed cl
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
 
-TYPE Camunda.Orchestration.Sdk.MessageWaitStateDetails : sealed class
+TYPE Camunda.Orchestration.Sdk.MessageWaitStateDetails : sealed class base=Camunda.Orchestration.Sdk.WaitStateDetails
   CTOR ()
   PROP System.String MessageName { get; set; } [JsonPropertyName("messageName")]
   PROP System.String? CorrelationKey { get; set; } [JsonPropertyName("correlationKey")]
@@ -5940,6 +5948,11 @@ TYPE Camunda.Orchestration.Sdk.VariableValueFilterProperty : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.StringFilterProperty Value { get; set; } [JsonPropertyName("value")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
+
+TYPE Camunda.Orchestration.Sdk.WaitStateDetails : abstract class
+  ATTR JsonPolymorphic discriminator=waitStateType
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.JobWaitStateDetails tag=JOB
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.MessageWaitStateDetails tag=MESSAGE
 
 TYPE Camunda.Orchestration.Sdk.WaitStateElementTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
