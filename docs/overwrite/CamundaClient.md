@@ -1713,6 +1713,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SearchVariablesAsDtoAsync``1(Camunda.Orchestration.Sdk.ProcessInstanceKey,System.Nullable{Camunda.Orchestration.Sdk.ScopeKey},System.Nullable{Camunda.Orchestration.Sdk.TenantId},System.Int32,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/VariableElement.cs#SearchVariablesAsDto)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.SearchVariablesAsync(Camunda.Orchestration.Sdk.SearchVariablesRequest,System.Nullable{System.Boolean},Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.VariableSearchQueryResult},System.Threading.CancellationToken)
 example:
 - *content

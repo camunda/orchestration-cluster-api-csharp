@@ -291,6 +291,32 @@ internal static class ReadmeExamples
         // </ReceivingVariablesBody>
     }
 
+    // <SearchVariablesAsDto>
+    public record OrderVariables(string OrderId, decimal Amount, string? Notes);
+    // </SearchVariablesAsDto>
+
+    private static async Task SearchVariablesAsDtoExample(ProcessInstanceKey processInstanceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        // <SearchVariablesAsDtoBody>
+        // Query only the variables declared on the DTO, across all pages, and
+        // collapse them into a single typed object.
+        var map = await client.SearchVariablesAsDtoAsync<OrderVariables>(processInstanceKey);
+
+        // Inspect individual values without materializing the whole DTO
+        if (map.Contains("amount"))
+        {
+            var amount = map.Get<decimal>("amount");
+        }
+
+        // Validate() enforces that every non-nullable DTO member is present,
+        // throwing VariableValidationException if any required variable is missing.
+        OrderVariables order = map.Validate();
+        // order.OrderId, order.Amount — fully typed; order.Notes is optional
+        // </SearchVariablesAsDtoBody>
+    }
+
     // <BasicWorker>
     // Define input/output DTOs
     public record OrderOutput(bool Processed, string InvoiceNumber);

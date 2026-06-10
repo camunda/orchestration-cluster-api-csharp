@@ -33,6 +33,34 @@ public static class VariableElementExamples
     // </SearchVariables>
     #endregion SearchVariables
 
+    #region SearchVariablesAsDto
+
+    // <SearchVariablesAsDto>
+    public record OrderVariables(string OrderId, decimal Amount, string? Notes);
+
+    public static async Task SearchVariablesAsDtoExample(ProcessInstanceKey processInstanceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        // Search a process instance for exactly the variables declared on the DTO,
+        // pages and all, and collapse them into a single typed object.
+        var map = await client.SearchVariablesAsDtoAsync<OrderVariables>(processInstanceKey);
+
+        // Read individual values lazily without materializing the whole DTO.
+        if (map.Contains("amount"))
+        {
+            var amount = map.Get<decimal>("amount");
+            Console.WriteLine($"Amount: {amount}");
+        }
+
+        // Validate() enforces that every non-nullable member is present,
+        // throwing VariableValidationException if a required variable is missing.
+        OrderVariables order = map.Validate();
+        Console.WriteLine($"Order {order.OrderId}: {order.Amount}");
+    }
+    // </SearchVariablesAsDto>
+    #endregion SearchVariablesAsDto
+
     #region GetElementInstance
 
     // <GetElementInstance>
