@@ -1,3 +1,11 @@
+# [9.0.0-alpha.20](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.19...v9.0.0-alpha.20) (2026-06-10)
+
+
+### Features
+
+* add SearchVariablesAsDtoAsync for typed variable maps ([31c96ca](https://github.com/camunda/orchestration-cluster-api-csharp/commit/31c96ca1ef5effbad1bcca33a97d5293d0f1f476))
+* add SearchVariablesAsDtoAsync for typed variable maps ([d8f8e2b](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d8f8e2b970a4204461dff0a75a97304d7c462517))
+
 # [9.0.0-alpha.19](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.18...v9.0.0-alpha.19) (2026-06-09)
 
 
