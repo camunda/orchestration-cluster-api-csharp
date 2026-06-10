@@ -1418,6 +1418,35 @@ Retrieves a filtered and sorted list of users for a specified tenant.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchVariablesAsDtoAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchVariablesAsDtoAsync__1_Camunda_Orchestration_Sdk_ProcessInstanceKey_System_Nullable_Camunda_Orchestration_Sdk_ScopeKey__System_Nullable_Camunda_Orchestration_Sdk_TenantId__System_Int32_System_Threading_CancellationToken_">SearchVariablesAsDtoAsync&lt;T&gt;(ProcessInstanceKey, ScopeKey?, TenantId?, int, CancellationToken)</a></dt>
+    <dd><p>Fetch the variables declared by a DTO type for a process instance, mapping them onto a
+strongly-typed result.</p>
+<p>
+The query is derived from the DTO's members (honouring <code>[JsonPropertyName]</code>): only
+the declared variable names are fetched via a <code>name $in [...]</code> filter, so memory is
+bounded by the DTO shape rather than the total number of variables on the process
+instance. Results are paged to exhaustion over the filtered set, collapsed by name, and
+parsed into a <a class="xref" href="Camunda.Orchestration.Sdk.VariableMap-1.html">VariableMap&lt;T&gt;</a>.
+</p>
+<p>
+Access modes on the returned map:
+<ul><li>
+Lenient — <a class="xref" href="Camunda.Orchestration.Sdk.VariableMap-1.Get.html#Camunda_Orchestration_Sdk_VariableMap_1_Get_System_String_">Get(string)</a> /
+<a class="xref" href="Camunda.Orchestration.Sdk.VariableMap-1.Get.html#Camunda_Orchestration_Sdk_VariableMap_1_Get__1_System_String_">Get&lt;TValue&gt;(string)</a> tolerate absent variables.
+</li><li>
+Strict — <a class="xref" href="Camunda.Orchestration.Sdk.VariableMap-1.Validate.html#Camunda_Orchestration_Sdk_VariableMap_1_Validate">Validate()</a> constructs the DTO and throws if a
+required member is absent.
+</li></ul>
+
+<example>
+<pre><code class="lang-csharp">public record OrderVars(string OrderId, decimal? Amount);
+<p>var vars = await client.SearchVariablesAsDtoAsync&lt;OrderVars&gt;(processInstanceKey);
+var amount = vars.Get&lt;decimal&gt;(&quot;amount&quot;);   // lenient
+var typed = vars.Validate();                    // strict: throws if OrderId missing</p></code></pre>
+</example>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchVariablesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchVariablesAsync_Camunda_Orchestration_Sdk_VariableSearchQuery_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_VariableSearchQueryResult__System_Threading_CancellationToken_">SearchVariablesAsync(VariableSearchQuery, bool?, ConsistencyOptions&lt;VariableSearchQueryResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Search variables
 Search for variables based on given criteria.</p>
