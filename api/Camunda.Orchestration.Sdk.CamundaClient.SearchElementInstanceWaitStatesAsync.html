@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SearchElementInstanceWaitStatesAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceWaitStatesAsync*" class="text-break">
-Method SearchElementInstanceWaitStatesAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6323"><i class="bi bi-code-slash"></i></a>
+Method SearchElementInstanceWaitStatesAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6335"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method SearchElementInstanceWaitStatesAsync  <a class="header-action link-second
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_SearchElementInstanceWaitStatesAsync_Camunda_Orchestration_Sdk_ElementInstanceWaitStateQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ElementInstanceWaitStateQueryResult__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceWaitStatesAsync(Camunda.Orchestration.Sdk.ElementInstanceWaitStateQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult},System.Threading.CancellationToken)">
   SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery, ConsistencyOptions&lt;ElementInstanceWaitStateQueryResult&gt;?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6323"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6335"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Search element instance wait states
@@ -173,7 +173,13 @@ Returns the wait states for element instances matching the given filter.</p>
 
     foreach (var waitState in result.Items)
     {
-        Console.WriteLine($&quot;{waitState.ElementId}: {waitState.WaitStateType}&quot;);
+        var details = waitState.Details switch
+        {
+            JobWaitStateDetails job =&gt; $&quot;waiting on job '{job.JobType}'&quot;,
+            MessageWaitStateDetails message =&gt; $&quot;waiting for message '{message.MessageName}'&quot;,
+            _ =&gt; &quot;waiting&quot;,
+        };
+        Console.WriteLine($&quot;{waitState.ElementId}: {details}&quot;);
     }
 }
 </code></pre>
@@ -198,7 +204,13 @@ Returns the wait states for element instances matching the given filter.</p>
 
 foreach (var waitState in result.Items)
 {
-    Console.WriteLine($&quot;{waitState.ElementId}: {waitState.WaitStateType}&quot;);
+    var details = waitState.Details switch
+    {
+        JobWaitStateDetails job =&gt; $&quot;waiting on job '{job.JobType}'&quot;,
+        MessageWaitStateDetails message =&gt; $&quot;waiting for message '{message.MessageName}'&quot;,
+        _ =&gt; &quot;waiting&quot;,
+    };
+    Console.WriteLine($&quot;{waitState.ElementId}: {details}&quot;);
 }
 </code></pre>
 <p>}</p></code></pre>
@@ -210,7 +222,7 @@ foreach (var waitState in result.Items)
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6323" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6335" class="edit-link">Edit this page</a>
         </div>
 
 

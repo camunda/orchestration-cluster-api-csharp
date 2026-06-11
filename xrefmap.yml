@@ -7105,6 +7105,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogFilter.FormKey
   fullName: Camunda.Orchestration.Sdk.AuditLogFilter.FormKey
   nameWithType: AuditLogFilter.FormKey
+- uid: Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelToolName
+  name: InboundChannelToolName
+  href: api/Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelToolName.html#Camunda_Orchestration_Sdk_AuditLogFilter_InboundChannelToolName
+  commentId: P:Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelToolName
+  fullName: Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelToolName
+  nameWithType: AuditLogFilter.InboundChannelToolName
+- uid: Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelToolName*
+  name: InboundChannelToolName
+  href: api/Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelToolName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelToolName
+  fullName: Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelToolName
+  nameWithType: AuditLogFilter.InboundChannelToolName
+- uid: Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelType
+  name: InboundChannelType
+  href: api/Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelType.html#Camunda_Orchestration_Sdk_AuditLogFilter_InboundChannelType
+  commentId: P:Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelType
+  fullName: Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelType
+  nameWithType: AuditLogFilter.InboundChannelType
+- uid: Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelType*
+  name: InboundChannelType
+  href: api/Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelType
+  fullName: Camunda.Orchestration.Sdk.AuditLogFilter.InboundChannelType
+  nameWithType: AuditLogFilter.InboundChannelType
 - uid: Camunda.Orchestration.Sdk.AuditLogFilter.JobKey
   name: JobKey
   href: api/Camunda.Orchestration.Sdk.AuditLogFilter.JobKey.html#Camunda_Orchestration_Sdk_AuditLogFilter_JobKey
@@ -7747,6 +7771,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogResult.FormKey
   fullName: Camunda.Orchestration.Sdk.AuditLogResult.FormKey
   nameWithType: AuditLogResult.FormKey
+- uid: Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelToolName
+  name: InboundChannelToolName
+  href: api/Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelToolName.html#Camunda_Orchestration_Sdk_AuditLogResult_InboundChannelToolName
+  commentId: P:Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelToolName
+  fullName: Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelToolName
+  nameWithType: AuditLogResult.InboundChannelToolName
+- uid: Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelToolName*
+  name: InboundChannelToolName
+  href: api/Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelToolName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelToolName
+  fullName: Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelToolName
+  nameWithType: AuditLogResult.InboundChannelToolName
+- uid: Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelType
+  name: InboundChannelType
+  href: api/Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelType.html#Camunda_Orchestration_Sdk_AuditLogResult_InboundChannelType
+  commentId: P:Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelType
+  fullName: Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelType
+  nameWithType: AuditLogResult.InboundChannelType
+- uid: Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelType*
+  name: InboundChannelType
+  href: api/Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelType
+  fullName: Camunda.Orchestration.Sdk.AuditLogResult.InboundChannelType
+  nameWithType: AuditLogResult.InboundChannelType
 - uid: Camunda.Orchestration.Sdk.AuditLogResult.JobKey
   name: JobKey
   href: api/Camunda.Orchestration.Sdk.AuditLogResult.JobKey.html#Camunda_Orchestration_Sdk_AuditLogResult_JobKey
@@ -8239,6 +8287,18 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.EntityType
   fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.EntityType
   nameWithType: AuditLogSearchQuerySortRequestField.EntityType
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.InboundChannelToolName
+  name: InboundChannelToolName
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_InboundChannelToolName
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.InboundChannelToolName
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.InboundChannelToolName
+  nameWithType: AuditLogSearchQuerySortRequestField.InboundChannelToolName
+- uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.InboundChannelType
+  name: InboundChannelType
+  href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_InboundChannelType
+  commentId: F:Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.InboundChannelType
+  fullName: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.InboundChannelType
+  nameWithType: AuditLogSearchQuerySortRequestField.InboundChannelType
 - uid: Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.JobKey
   name: JobKey
   href: api/Camunda.Orchestration.Sdk.AuditLogSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AuditLogSearchQuerySortRequestField_JobKey
@@ -9301,6 +9361,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.Variables
   fullName: Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.Variables
   nameWithType: BaseProcessInstanceFilterFields.Variables
+- uid: Camunda.Orchestration.Sdk.BaseWaitStateDetails
+  name: BaseWaitStateDetails
+  href: api/Camunda.Orchestration.Sdk.BaseWaitStateDetails.html
+  commentId: T:Camunda.Orchestration.Sdk.BaseWaitStateDetails
+  fullName: Camunda.Orchestration.Sdk.BaseWaitStateDetails
+  nameWithType: BaseWaitStateDetails
+- uid: Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
+  name: WaitStateType
+  href: api/Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType.html#Camunda_Orchestration_Sdk_BaseWaitStateDetails_WaitStateType
+  commentId: P:Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
+  fullName: Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
+  nameWithType: BaseWaitStateDetails.WaitStateType
+- uid: Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType*
+  name: WaitStateType
+  href: api/Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
+  fullName: Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
+  nameWithType: BaseWaitStateDetails.WaitStateType
 - uid: Camunda.Orchestration.Sdk.BasicAuthConfig
   name: BasicAuthConfig
   href: api/Camunda.Orchestration.Sdk.BasicAuthConfig.html
@@ -22468,6 +22546,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult
   fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult
   nameWithType: ElementInstanceWaitStateResult
+- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details
+  name: Details
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details.html#Camunda_Orchestration_Sdk_ElementInstanceWaitStateResult_Details
+  commentId: P:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details
+  nameWithType: ElementInstanceWaitStateResult.Details
+- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details*
+  name: Details
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details
+  nameWithType: ElementInstanceWaitStateResult.Details
 - uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.ElementId
   name: ElementId
   href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.ElementId.html#Camunda_Orchestration_Sdk_ElementInstanceWaitStateResult_ElementId
@@ -22504,30 +22594,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.ElementType
   fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.ElementType
   nameWithType: ElementInstanceWaitStateResult.ElementType
-- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.JobDetails
-  name: JobDetails
-  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.JobDetails.html#Camunda_Orchestration_Sdk_ElementInstanceWaitStateResult_JobDetails
-  commentId: P:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.JobDetails
-  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.JobDetails
-  nameWithType: ElementInstanceWaitStateResult.JobDetails
-- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.JobDetails*
-  name: JobDetails
-  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.JobDetails.html
-  commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.JobDetails
-  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.JobDetails
-  nameWithType: ElementInstanceWaitStateResult.JobDetails
-- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.MessageDetails
-  name: MessageDetails
-  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.MessageDetails.html#Camunda_Orchestration_Sdk_ElementInstanceWaitStateResult_MessageDetails
-  commentId: P:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.MessageDetails
-  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.MessageDetails
-  nameWithType: ElementInstanceWaitStateResult.MessageDetails
-- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.MessageDetails*
-  name: MessageDetails
-  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.MessageDetails.html
-  commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.MessageDetails
-  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.MessageDetails
-  nameWithType: ElementInstanceWaitStateResult.MessageDetails
 - uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.ProcessInstanceKey
   name: ProcessInstanceKey
   href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.ProcessInstanceKey.html#Camunda_Orchestration_Sdk_ElementInstanceWaitStateResult_ProcessInstanceKey
@@ -22564,18 +22630,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.TenantId
   fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.TenantId
   nameWithType: ElementInstanceWaitStateResult.TenantId
-- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.WaitStateType
-  name: WaitStateType
-  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.WaitStateType.html#Camunda_Orchestration_Sdk_ElementInstanceWaitStateResult_WaitStateType
-  commentId: P:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.WaitStateType
-  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.WaitStateType
-  nameWithType: ElementInstanceWaitStateResult.WaitStateType
-- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.WaitStateType*
-  name: WaitStateType
-  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.WaitStateType.html
-  commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.WaitStateType
-  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.WaitStateType
-  nameWithType: ElementInstanceWaitStateResult.WaitStateType
 - uid: Camunda.Orchestration.Sdk.EndCursor
   name: EndCursor
   href: api/Camunda.Orchestration.Sdk.EndCursor.html
@@ -43909,6 +43963,12 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.VariableValueFilterProperty.Value
   fullName: Camunda.Orchestration.Sdk.VariableValueFilterProperty.Value
   nameWithType: VariableValueFilterProperty.Value
+- uid: Camunda.Orchestration.Sdk.WaitStateDetails
+  name: WaitStateDetails
+  href: api/Camunda.Orchestration.Sdk.WaitStateDetails.html
+  commentId: T:Camunda.Orchestration.Sdk.WaitStateDetails
+  fullName: Camunda.Orchestration.Sdk.WaitStateDetails
+  nameWithType: WaitStateDetails
 - uid: Camunda.Orchestration.Sdk.WaitStateElementTypeEnum
   name: WaitStateElementTypeEnum
   href: api/Camunda.Orchestration.Sdk.WaitStateElementTypeEnum.html
