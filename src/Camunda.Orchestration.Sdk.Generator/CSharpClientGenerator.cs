@@ -450,6 +450,107 @@ internal static class CSharpClientGenerator
     }
 
     /// <summary>
+    /// Identifies component schemas that exist only to carry the discriminator of a
+    /// <c>oneOf</c> polymorphic union. Each variant pulls such a base in via
+    /// <c>allOf</c>, but the generator folds those fields into the variant and makes
+    /// it inherit the abstract union parent (with the discriminator handled by
+    /// <c>[JsonPolymorphic]</c>). Emitting the base as a standalone type therefore
+    /// produces an unused, confusing public class (e.g. <c>BaseWaitStateDetails</c>).
+    /// A base is reported only when it is referenced exclusively as the <c>allOf</c>
+    /// base of union variants and nowhere else, so genuinely-shared bases are kept.
+    /// </summary>
+    private static HashSet<string> ComputeOrphanUnionBases(
+        OpenApiDocument doc,
+        Dictionary<string, List<string>> oneOfParents,
+        Dictionary<string, string> variantToParent,
+        HashSet<string> requestSchemaNames)
+    {
+        var orphans = new HashSet<string>(StringComparer.Ordinal);
+        if (doc.Components?.Schemas == null)
+            return orphans;
+
+        // Candidate bases: schemas pulled in via the top-level allOf of a union variant.
+        var candidates = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var (name, schema) in doc.Components.Schemas)
+        {
+            if (!variantToParent.ContainsKey(SanitizeTypeName(name)))
+                continue;
+            foreach (var allOf in schema.AllOf ?? [])
+            {
+                var refId = GetRefId(allOf);
+                if (refId != null)
+                    candidates.Add(SanitizeTypeName(refId));
+            }
+        }
+        if (candidates.Count == 0)
+            return orphans;
+
+        // Collect every schema reference EXCEPT a union variant's top-level allOf base;
+        // any such reference is a "real" use that disqualifies suppression.
+        var referencedElsewhere = new HashSet<string>(StringComparer.Ordinal);
+        void Collect(IOpenApiSchema? s)
+        {
+            if (s == null)
+                return;
+            // A $ref node is a proxy that forwards member access to its target. Record
+            // the reference and stop — the target component is walked on its own in the
+            // outer loop, where the union-variant allOf exclusion is applied. Recursing
+            // here would traverse into the target and defeat that exclusion.
+            var rid = GetRefId(s);
+            if (rid != null)
+            {
+                referencedElsewhere.Add(SanitizeTypeName(rid));
+                return;
+            }
+            if (s.Properties != null)
+                foreach (var p in s.Properties.Values)
+                    Collect(p);
+            Collect(s.Items);
+            foreach (var v in s.OneOf ?? [])
+                Collect(v);
+            foreach (var v in s.AnyOf ?? [])
+                Collect(v);
+            foreach (var a in s.AllOf ?? [])
+                Collect(a);
+        }
+
+        foreach (var (name, schema) in doc.Components.Schemas)
+        {
+            var isVariant = variantToParent.ContainsKey(SanitizeTypeName(name));
+            if (schema.Properties != null)
+                foreach (var p in schema.Properties.Values)
+                    Collect(p);
+            Collect(schema.Items);
+            foreach (var v in schema.OneOf ?? [])
+                Collect(v);
+            foreach (var v in schema.AnyOf ?? [])
+                Collect(v);
+            foreach (var a in schema.AllOf ?? [])
+            {
+                // A union variant's top-level `allOf: [{$ref: base}]` is the only
+                // suppressible reference — skip it; count every other allOf usage.
+                if (isVariant && GetRefId(a) != null)
+                    continue;
+                Collect(a);
+            }
+        }
+
+        foreach (var c in candidates)
+        {
+            if (referencedElsewhere.Contains(c))
+                continue;                       // used as a real type somewhere → keep
+            if (requestSchemaNames.Contains(c))
+                continue;                       // used directly as a request body → keep
+            if (oneOfParents.ContainsKey(c))
+                continue;                       // it is itself a union parent → keep
+            if (variantToParent.ContainsKey(c))
+                continue;                       // it is itself a union variant → keep
+            orphans.Add(c);
+        }
+        return orphans;
+    }
+
+    /// <summary>
     /// For an inline oneOf body schema, find a matching component oneOf schema
     /// by comparing the required fields of inline variants to component variants.
     /// </summary>
@@ -590,6 +691,7 @@ internal static class CSharpClientGenerator
             return sb.ToString();
 
         var (oneOfParents, variantToParent, discriminators) = BuildOneOfMaps(doc);
+        var orphanUnionBases = ComputeOrphanUnionBases(doc, oneOfParents, variantToParent, requestSchemaNames);
 
         // Collect inline string enum properties across all schemas so we can
         // emit them as typed enums and reference them in property declarations.
@@ -607,6 +709,11 @@ internal static class CSharpClientGenerator
 
             // Skip array-type component schemas — they are resolved inline in MapType
             if (SchemaTypeName(schema) == "array")
+                continue;
+
+            // Skip discriminator-only bases of a oneOf union: their fields are folded
+            // into each variant, so emitting them yields an unused public type.
+            if (orphanUnionBases.Contains(typeName))
                 continue;
 
             // Union of semantic keys — generate with implicit conversion operators and cross-type equality
