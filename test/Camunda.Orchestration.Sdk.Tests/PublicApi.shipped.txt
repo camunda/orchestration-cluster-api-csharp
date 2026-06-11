@@ -1219,10 +1219,6 @@ TYPE Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableValueFilterProperty>? Variables { get; set; } [JsonPropertyName("variables")]
 
-TYPE Camunda.Orchestration.Sdk.BaseWaitStateDetails : sealed class
-  CTOR ()
-  PROP System.String WaitStateType { get; set; } [JsonPropertyName("waitStateType")]
-
 TYPE Camunda.Orchestration.Sdk.BasicAuthConfig : sealed class
   CTOR ()
   PROP System.String? Password { get; init; }

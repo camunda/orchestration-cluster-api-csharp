@@ -503,6 +503,104 @@ public class GeneratorSafeEmitTests
         }
     }
 
+    [Fact]
+    public void Generator_suppresses_discriminator_only_union_base_but_keeps_referenced_bases()
+    {
+        // A schema that exists only as the allOf base of a oneOf union's variants
+        // (carrying just the discriminator) must NOT be emitted as a standalone public
+        // type — its fields are folded into each variant and the variant inherits the
+        // abstract union parent. A base that is ALSO referenced elsewhere (e.g. as a
+        // property type) must still be emitted.
+        using var tmp = TempDir.Create();
+        File.WriteAllText(tmp.SpecPath, OrphanUnionBaseSpec);
+        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+
+        CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir);
+
+        var models = File.ReadAllText(Path.Combine(tmp.OutputDir, "Models.Generated.cs"));
+
+        // Orphan discriminator-only base is suppressed.
+        Assert.DoesNotContain("class BasePet", models);
+
+        // Union parent + variants are still emitted.
+        Assert.Contains("abstract class Pet", models);
+        Assert.Contains("class Cat : Pet", models);
+        Assert.Contains("class Dog : Pet", models);
+
+        // A base referenced outside the union (Garage.spec) is preserved.
+        Assert.Contains("class BaseVehicle", models);
+
+        // A shared mixin composed via a variant's allOf (alongside the discriminator
+        // base) carries real fields, so it is NOT a discriminator-only base and must be
+        // preserved — even though it is only referenced through that variant's allOf.
+        Assert.Contains("class Timestamped", models);
+
+        // A discriminator-only base referenced only via an operation response body
+        // (BaseShape, returned by GET /shapes/base) is a genuine use and must be kept.
+        Assert.Contains("class BaseShape", models);
+    }
+
+    // Two discriminated oneOf unions, each with an allOf base carrying only the
+    // discriminator. BasePet is referenced solely by the Pet variants (orphan →
+    // suppressed); BaseVehicle is also referenced by Garage.spec (→ kept).
+    private const string OrphanUnionBaseSpec = """
+        {
+          "openapi": "3.0.3",
+          "info": { "title": "Test", "version": "1.0.0" },
+          "paths": {
+            "/pets": {
+              "get": {
+                "operationId": "listPets",
+                "responses": {
+                  "200": {
+                    "description": "ok",
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Pet" } } }
+                  }
+                }
+              }
+            },
+            "/shapes/base": {
+              "get": {
+                "operationId": "getShapeBase",
+                "responses": {
+                  "200": {
+                    "description": "ok",
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BaseShape" } } }
+                  }
+                }
+              }
+            }
+          },
+          "components": {
+            "schemas": {
+              "Pet": {
+                "discriminator": { "propertyName": "petType", "mapping": { "CAT": "#/components/schemas/Cat", "DOG": "#/components/schemas/Dog" } },
+                "oneOf": [ { "$ref": "#/components/schemas/Cat" }, { "$ref": "#/components/schemas/Dog" } ]
+              },
+              "BasePet": { "type": "object", "required": ["petType"], "properties": { "petType": { "type": "string" } } },
+              "Cat": { "type": "object", "required": ["petType", "meow"], "allOf": [ { "$ref": "#/components/schemas/BasePet" }, { "$ref": "#/components/schemas/Timestamped" } ], "properties": { "meow": { "type": "string" } } },
+              "Dog": { "type": "object", "required": ["petType", "bark"], "allOf": [ { "$ref": "#/components/schemas/BasePet" } ], "properties": { "bark": { "type": "string" } } },
+              "Timestamped": { "type": "object", "required": ["createdAt"], "properties": { "createdAt": { "type": "string" }, "updatedAt": { "type": "string" } } },
+              "Vehicle": {
+                "discriminator": { "propertyName": "vehicleType", "mapping": { "CAR": "#/components/schemas/Car", "TRUCK": "#/components/schemas/Truck" } },
+                "oneOf": [ { "$ref": "#/components/schemas/Car" }, { "$ref": "#/components/schemas/Truck" } ]
+              },
+              "BaseVehicle": { "type": "object", "required": ["vehicleType"], "properties": { "vehicleType": { "type": "string" } } },
+              "Car": { "type": "object", "required": ["vehicleType", "doors"], "allOf": [ { "$ref": "#/components/schemas/BaseVehicle" } ], "properties": { "doors": { "type": "integer" } } },
+              "Truck": { "type": "object", "required": ["vehicleType", "axles"], "allOf": [ { "$ref": "#/components/schemas/BaseVehicle" } ], "properties": { "axles": { "type": "integer" } } },
+              "Garage": { "type": "object", "properties": { "spec": { "$ref": "#/components/schemas/BaseVehicle" } } },
+              "Shape": {
+                "discriminator": { "propertyName": "shapeType", "mapping": { "BOX": "#/components/schemas/Box", "SPHERE": "#/components/schemas/Sphere" } },
+                "oneOf": [ { "$ref": "#/components/schemas/Box" }, { "$ref": "#/components/schemas/Sphere" } ]
+              },
+              "BaseShape": { "type": "object", "required": ["shapeType"], "properties": { "shapeType": { "type": "string" } } },
+              "Box": { "type": "object", "required": ["shapeType"], "allOf": [ { "$ref": "#/components/schemas/BaseShape" } ], "properties": { "width": { "type": "integer" } } },
+              "Sphere": { "type": "object", "required": ["shapeType"], "allOf": [ { "$ref": "#/components/schemas/BaseShape" } ], "properties": { "radius": { "type": "integer" } } }
+            }
+          }
+        }
+        """;
+
     /// <summary>
     /// Roslyn structural assertion (follow-up item 3 from the security finding):
     /// parse the generated source and verify that only the expected top-level

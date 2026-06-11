@@ -6103,19 +6103,6 @@ public sealed class BaseProcessInstanceFilterFields
 }
 
 /// <summary>
-/// Common fields shared by all wait-state details variants.
-/// </summary>
-public sealed class BaseWaitStateDetails
-{
-    /// <summary>
-    /// The wait state type discriminator.
-    /// </summary>
-    [JsonPropertyName("waitStateType")]
-    public string WaitStateType { get; set; } = null!;
-
-}
-
-/// <summary>
 /// Basic advanced string filter.
 /// </summary>
 public sealed class BasicStringFilter

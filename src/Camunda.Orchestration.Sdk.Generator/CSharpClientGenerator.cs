@@ -450,6 +450,155 @@ internal static class CSharpClientGenerator
     }
 
     /// <summary>
+    /// Identifies component schemas that exist only to carry the discriminator of a
+    /// <c>oneOf</c> polymorphic union. Each variant pulls such a base in via
+    /// <c>allOf</c>, but the generator folds those fields into the variant and makes
+    /// it inherit the abstract union parent (with the discriminator handled by
+    /// <c>[JsonPolymorphic]</c>). Emitting the base as a standalone type therefore
+    /// produces an unused, confusing public class (e.g. <c>BaseWaitStateDetails</c>).
+    /// A base is reported only when it is referenced exclusively as the <c>allOf</c>
+    /// base of union variants and nowhere else, so genuinely-shared bases are kept.
+    /// </summary>
+    private static HashSet<string> ComputeOrphanUnionBases(
+        OpenApiDocument doc,
+        Dictionary<string, List<string>> oneOfParents,
+        Dictionary<string, string> variantToParent,
+        Dictionary<string, (string PropertyName, Dictionary<string, string> ValueToVariant)> discriminators,
+        HashSet<string> requestSchemaNames)
+    {
+        var orphans = new HashSet<string>(StringComparer.Ordinal);
+        if (doc.Components?.Schemas == null)
+            return orphans;
+
+        // Candidate bases: schemas pulled in via a union variant's top-level allOf that
+        // are *discriminator-only* — i.e. their sole property is the union's
+        // discriminator. A composed mixin that contributes real fields is NOT a
+        // candidate (its fields matter), so it is never suppressed here.
+        var candidates = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var (name, schema) in doc.Components.Schemas)
+        {
+            if (!variantToParent.TryGetValue(SanitizeTypeName(name), out var parent))
+                continue;
+            if (!discriminators.TryGetValue(parent, out var disc))
+                continue;   // no discriminator → cannot identify a discriminator-only base
+            foreach (var allOf in schema.AllOf ?? [])
+            {
+                var refId = GetRefId(allOf);
+                if (refId == null)
+                    continue;
+                if (doc.Components.Schemas.TryGetValue(refId, out var baseSchema)
+                    && IsDiscriminatorOnlyBase(baseSchema, disc.PropertyName))
+                {
+                    candidates.Add(SanitizeTypeName(refId));
+                }
+            }
+        }
+        if (candidates.Count == 0)
+            return orphans;
+
+        // Collect every schema reference EXCEPT a variant's allOf ref to one of the
+        // discriminator-only bases above; any other reference (including a variant's
+        // allOf ref to a real mixin) is a genuine use that disqualifies suppression.
+        var referencedElsewhere = new HashSet<string>(StringComparer.Ordinal);
+        void Collect(IOpenApiSchema? s)
+        {
+            if (s == null)
+                return;
+            // A $ref node is a proxy that forwards member access to its target. Record
+            // the reference and stop — the target component is walked on its own in the
+            // outer loop, where the discriminator-base exclusion is applied. Recursing
+            // here would traverse into the target and defeat that exclusion.
+            var rid = GetRefId(s);
+            if (rid != null)
+            {
+                referencedElsewhere.Add(SanitizeTypeName(rid));
+                return;
+            }
+            if (s.Properties != null)
+                foreach (var p in s.Properties.Values)
+                    Collect(p);
+            Collect(s.Items);
+            foreach (var v in s.OneOf ?? [])
+                Collect(v);
+            foreach (var v in s.AnyOf ?? [])
+                Collect(v);
+            foreach (var a in s.AllOf ?? [])
+                Collect(a);
+        }
+
+        foreach (var (name, schema) in doc.Components.Schemas)
+        {
+            var isVariant = variantToParent.ContainsKey(SanitizeTypeName(name));
+            if (schema.Properties != null)
+                foreach (var p in schema.Properties.Values)
+                    Collect(p);
+            Collect(schema.Items);
+            foreach (var v in schema.OneOf ?? [])
+                Collect(v);
+            foreach (var v in schema.AnyOf ?? [])
+                Collect(v);
+            foreach (var a in schema.AllOf ?? [])
+            {
+                // Only a variant's allOf ref to a discriminator-only base is suppressible;
+                // skip exactly those and count everything else (e.g. composed mixins).
+                if (isVariant && GetRefId(a) is { } rid && candidates.Contains(SanitizeTypeName(rid)))
+                    continue;
+                Collect(a);
+            }
+        }
+
+        // A base used directly as an operation parameter, request body, or response
+        // schema is a genuine use too — walk the paths so it is not suppressed.
+        if (doc.Paths != null)
+        {
+            foreach (var (_, pathItem) in doc.Paths)
+            {
+                if (pathItem.Operations is not { } pathOps)
+                    continue;
+                foreach (var (_, op) in pathOps)
+                {
+                    foreach (var p in op.Parameters ?? (IList<IOpenApiParameter>)Array.Empty<IOpenApiParameter>())
+                        Collect(p.Schema);
+                    if (op.RequestBody?.Content != null)
+                        foreach (var (_, mt) in op.RequestBody.Content)
+                            Collect(mt.Schema);
+                    if (op.Responses != null)
+                        foreach (var (_, resp) in op.Responses)
+                            if (resp.Content != null)
+                                foreach (var (_, mt) in resp.Content)
+                                    Collect(mt.Schema);
+                }
+            }
+        }
+
+        foreach (var c in candidates)
+        {
+            if (referencedElsewhere.Contains(c))
+                continue;                       // used as a real type somewhere → keep
+            if (requestSchemaNames.Contains(c))
+                continue;                       // used directly as a request body → keep
+            if (oneOfParents.ContainsKey(c))
+                continue;                       // it is itself a union parent → keep
+            if (variantToParent.ContainsKey(c))
+                continue;                       // it is itself a union variant → keep
+            orphans.Add(c);
+        }
+        return orphans;
+    }
+
+    /// <summary>
+    /// True when <paramref name="schema"/> is a plain object whose only property is the
+    /// union discriminator <paramref name="discriminatorProperty"/> and which composes
+    /// nothing else — i.e. it exists purely to carry the discriminator.
+    /// </summary>
+    private static bool IsDiscriminatorOnlyBase(IOpenApiSchema schema, string discriminatorProperty)
+        => (schema.AllOf is null || schema.AllOf.Count == 0)
+            && (schema.OneOf is null || schema.OneOf.Count == 0)
+            && (schema.AnyOf is null || schema.AnyOf.Count == 0)
+            && schema.Properties is { Count: 1 }
+            && schema.Properties.ContainsKey(discriminatorProperty);
+
+    /// <summary>
     /// For an inline oneOf body schema, find a matching component oneOf schema
     /// by comparing the required fields of inline variants to component variants.
     /// </summary>
@@ -590,6 +739,7 @@ internal static class CSharpClientGenerator
             return sb.ToString();
 
         var (oneOfParents, variantToParent, discriminators) = BuildOneOfMaps(doc);
+        var orphanUnionBases = ComputeOrphanUnionBases(doc, oneOfParents, variantToParent, discriminators, requestSchemaNames);
 
         // Collect inline string enum properties across all schemas so we can
         // emit them as typed enums and reference them in property declarations.
@@ -607,6 +757,11 @@ internal static class CSharpClientGenerator
 
             // Skip array-type component schemas — they are resolved inline in MapType
             if (SchemaTypeName(schema) == "array")
+                continue;
+
+            // Skip discriminator-only bases of a oneOf union: their fields are folded
+            // into each variant, so emitting them yields an unused public type.
+            if (orphanUnionBases.Contains(typeName))
                 continue;
 
             // Union of semantic keys — generate with implicit conversion operators and cross-type equality
