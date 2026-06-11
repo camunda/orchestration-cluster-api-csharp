@@ -6289,7 +6289,13 @@ public partial class CamundaClient
     /// 
     ///     foreach (var waitState in result.Items)
     ///     {
-    ///         Console.WriteLine($&quot;{waitState.ElementId}: {waitState.WaitStateType}&quot;);
+    ///         var details = waitState.Details switch
+    ///         {
+    ///             JobWaitStateDetails job =&gt; $&quot;waiting on job &apos;{job.JobType}&apos;&quot;,
+    ///             MessageWaitStateDetails message =&gt; $&quot;waiting for message &apos;{message.MessageName}&apos;&quot;,
+    ///             _ =&gt; &quot;waiting&quot;,
+    ///         };
+    ///         Console.WriteLine($&quot;{waitState.ElementId}: {details}&quot;);
     ///     }
     /// }
     /// </code>
@@ -6315,7 +6321,13 @@ public partial class CamundaClient
     /// 
     ///     foreach (var waitState in result.Items)
     ///     {
-    ///         Console.WriteLine($&quot;{waitState.ElementId}: {waitState.WaitStateType}&quot;);
+    ///         var details = waitState.Details switch
+    ///         {
+    ///             JobWaitStateDetails job =&gt; $&quot;waiting on job &apos;{job.JobType}&apos;&quot;,
+    ///             MessageWaitStateDetails message =&gt; $&quot;waiting for message &apos;{message.MessageName}&apos;&quot;,
+    ///             _ =&gt; &quot;waiting&quot;,
+    ///         };
+    ///         Console.WriteLine($&quot;{waitState.ElementId}: {details}&quot;);
     ///     }
     /// }
     /// </code>
