@@ -93,6 +93,10 @@ public enum AuditLogSearchQuerySortRequestField
     ProcessDefinitionKey,
     [JsonPropertyName("processInstanceKey")]
     ProcessInstanceKey,
+    [JsonPropertyName("inboundChannelType")]
+    InboundChannelType,
+    [JsonPropertyName("inboundChannelToolName")]
+    InboundChannelToolName,
     [JsonPropertyName("result")]
     Result,
     [JsonPropertyName("tenantId")]
@@ -5169,6 +5173,18 @@ public sealed class AuditLogFilter
     [JsonPropertyName("entityDescription")]
     public StringFilterProperty? EntityDescription { get; set; }
 
+    /// <summary>
+    /// The inbound channel type search filter (e.g. MCP).
+    /// </summary>
+    [JsonPropertyName("inboundChannelType")]
+    public StringFilterProperty? InboundChannelType { get; set; }
+
+    /// <summary>
+    /// The inbound channel tool name search filter.
+    /// </summary>
+    [JsonPropertyName("inboundChannelToolName")]
+    public StringFilterProperty? InboundChannelToolName { get; set; }
+
 }
 
 /// <summary>
@@ -5499,6 +5515,18 @@ public sealed class AuditLogResult
     /// </summary>
     [JsonPropertyName("entityDescription")]
     public string? EntityDescription { get; set; }
+
+    /// <summary>
+    /// The type of the inbound channel that triggered the operation (e.g. MCP).
+    /// </summary>
+    [JsonPropertyName("inboundChannelType")]
+    public string? InboundChannelType { get; set; }
+
+    /// <summary>
+    /// The tool name of the inbound channel (e.g. the MCP tool that triggered the operation).
+    /// </summary>
+    [JsonPropertyName("inboundChannelToolName")]
+    public string? InboundChannelToolName { get; set; }
 
 }
 
@@ -6071,6 +6099,19 @@ public sealed class BaseProcessInstanceFilterFields
     /// </summary>
     [JsonPropertyName("businessId")]
     public StringFilterProperty? BusinessId { get; set; }
+
+}
+
+/// <summary>
+/// Common fields shared by all wait-state details variants.
+/// </summary>
+public sealed class BaseWaitStateDetails
+{
+    /// <summary>
+    /// The wait state type discriminator.
+    /// </summary>
+    [JsonPropertyName("waitStateType")]
+    public string WaitStateType { get; set; } = null!;
 
 }
 
@@ -10900,12 +10941,6 @@ public sealed class ElementInstanceWaitStateQuerySortRequest
 public sealed class ElementInstanceWaitStateResult
 {
     /// <summary>
-    /// The type of waiting state an element instance is in.
-    /// </summary>
-    [JsonPropertyName("waitStateType")]
-    public WaitStateTypeEnum WaitStateType { get; set; }
-
-    /// <summary>
     /// Key of the root process instance.
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
@@ -10942,16 +10977,10 @@ public sealed class ElementInstanceWaitStateResult
     public TenantId TenantId { get; set; }
 
     /// <summary>
-    /// Job details, present when waitStateType is JOB.
+    /// Wait-state-specific details, resolved by waitStateType.
     /// </summary>
-    [JsonPropertyName("jobDetails")]
-    public JobWaitStateDetails? JobDetails { get; set; }
-
-    /// <summary>
-    /// Message details, present when waitStateType is MESSAGE.
-    /// </summary>
-    [JsonPropertyName("messageDetails")]
-    public MessageWaitStateDetails? MessageDetails { get; set; }
+    [JsonPropertyName("details")]
+    public WaitStateDetails Details { get; set; } = null!;
 
 }
 
@@ -14658,7 +14687,7 @@ public sealed class JobUpdateRequest
 /// <summary>
 /// JobWaitStateDetails
 /// </summary>
-public sealed class JobWaitStateDetails
+public sealed class JobWaitStateDetails : WaitStateDetails
 {
     /// <summary>
     /// The key of the job.
@@ -15983,7 +16012,7 @@ public sealed class MessageSubscriptionTypeFilterProperty
 /// <summary>
 /// MessageWaitStateDetails
 /// </summary>
-public sealed class MessageWaitStateDetails
+public sealed class MessageWaitStateDetails : WaitStateDetails
 {
     /// <summary>
     /// The name of the message being awaited.
@@ -21973,6 +22002,23 @@ public sealed class VariableValueFilterProperty
     public StringFilterProperty Value { get; set; } = null!;
 
 }
+
+/// <summary>
+/// Wait-state-specific details of an element instance.
+/// </summary>
+/// <remarks>
+/// Use one of the following concrete types:
+/// <list type="bullet">
+/// <item><description><see cref="JobWaitStateDetails"/></description></item>
+/// <item><description><see cref="MessageWaitStateDetails"/></description></item>
+/// </list>
+/// </remarks>
+/// <seealso cref="JobWaitStateDetails"/>
+/// <seealso cref="MessageWaitStateDetails"/>
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "waitStateType")]
+[JsonDerivedType(typeof(JobWaitStateDetails), "JOB")]
+[JsonDerivedType(typeof(MessageWaitStateDetails), "MESSAGE")]
+public abstract class WaitStateDetails { }
 
 /// <summary>
 /// The BPMN element type of a waiting element instance.

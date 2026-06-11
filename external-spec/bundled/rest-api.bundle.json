@@ -20254,6 +20254,8 @@
           "entityKey",
           "entityType",
           "formKey",
+          "inboundChannelToolName",
+          "inboundChannelType",
           "jobKey",
           "operationType",
           "processDefinitionId",
@@ -20496,8 +20498,28 @@
             "type": "string",
             "description": "Additional description of the entity affected by the operation.\nFor example, for variable operations, this will contain the variable name.\n",
             "nullable": true
+          },
+          "inboundChannelType": {
+            "type": "string",
+            "description": "The type of the inbound channel that triggered the operation (e.g. MCP).",
+            "nullable": true
+          },
+          "inboundChannelToolName": {
+            "type": "string",
+            "description": "The tool name of the inbound channel (e.g. the MCP tool that triggered the operation).",
+            "nullable": true
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "inboundChannelType",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "inboundChannelToolName",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "AuditLogSearchQuerySortRequest": {
         "type": "object",
@@ -20526,6 +20548,8 @@
               "processDefinitionId",
               "processDefinitionKey",
               "processInstanceKey",
+              "inboundChannelType",
+              "inboundChannelToolName",
               "result",
               "tenantId",
               "timestamp",
@@ -20802,8 +20826,34 @@
                 "$ref": "#/components/schemas/StringFilterProperty"
               }
             ]
+          },
+          "inboundChannelType": {
+            "description": "The inbound channel type search filter (e.g. MCP).",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          },
+          "inboundChannelToolName": {
+            "description": "The inbound channel tool name search filter.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "inboundChannelType",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "inboundChannelToolName",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "AuditLogSearchQueryResult": {
         "description": "Audit log search response.",
@@ -26427,25 +26477,15 @@
         "description": "An element instance waiting state.",
         "type": "object",
         "required": [
+          "details",
           "elementId",
           "elementInstanceKey",
           "elementType",
-          "jobDetails",
-          "messageDetails",
           "processInstanceKey",
           "rootProcessInstanceKey",
-          "tenantId",
-          "waitStateType"
+          "tenantId"
         ],
         "properties": {
-          "waitStateType": {
-            "description": "The type of waiting state an element instance is in.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WaitStateTypeEnum"
-              }
-            ]
-          },
           "rootProcessInstanceKey": {
             "description": "Key of the root process instance.",
             "nullable": true,
@@ -26495,25 +26535,34 @@
               }
             ]
           },
-          "jobDetails": {
-            "description": "Job details, present when waitStateType is JOB.",
-            "nullable": true,
+          "details": {
+            "description": "Wait-state-specific details, resolved by waitStateType.",
             "allOf": [
               {
-                "$ref": "#/components/schemas/JobWaitStateDetails"
-              }
-            ]
-          },
-          "messageDetails": {
-            "description": "Message details, present when waitStateType is MESSAGE.",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/MessageWaitStateDetails"
+                "$ref": "#/components/schemas/WaitStateDetails"
               }
             ]
           }
         }
+      },
+      "WaitStateDetails": {
+        "x-polymorphic-schema": true,
+        "description": "Wait-state-specific details of an element instance.",
+        "discriminator": {
+          "propertyName": "waitStateType",
+          "mapping": {
+            "JOB": "#/components/schemas/JobWaitStateDetails",
+            "MESSAGE": "#/components/schemas/MessageWaitStateDetails"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/JobWaitStateDetails"
+          },
+          {
+            "$ref": "#/components/schemas/MessageWaitStateDetails"
+          }
+        ]
       },
       "WaitStateTypeEnum": {
         "description": "The type of waiting state an element instance is in.",
@@ -26523,6 +26572,19 @@
           "MESSAGE"
         ]
       },
+      "BaseWaitStateDetails": {
+        "description": "Common fields shared by all wait-state details variants.",
+        "type": "object",
+        "required": [
+          "waitStateType"
+        ],
+        "properties": {
+          "waitStateType": {
+            "description": "The wait state type discriminator.",
+            "type": "string"
+          }
+        }
+      },
       "JobWaitStateDetails": {
         "type": "object",
         "required": [
@@ -26530,7 +26592,13 @@
           "jobKind",
           "jobType",
           "listenerEventType",
-          "retries"
+          "retries",
+          "waitStateType"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseWaitStateDetails"
+          }
         ],
         "properties": {
           "jobKey": {
@@ -26574,7 +26642,13 @@
         "type": "object",
         "required": [
           "correlationKey",
-          "messageName"
+          "messageName",
+          "waitStateType"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseWaitStateDetails"
+          }
         ],
         "properties": {
           "messageName": {

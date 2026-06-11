@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:61f14b16b2e19192bcdb9b0748d03729298cdfad7fdf9c72fd177ffa82d57a56",
+  "specHash": "sha256:f89b800d7e8f2358254a1f389803e1bd146426b4fb71ec83cec33c9ecde234e8",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -2171,6 +2171,22 @@
         }
       ],
       "stableId": "variable-key-filter-property"
+    },
+    {
+      "name": "WaitStateDetails",
+      "kind": "union-wrapper",
+      "description": "Wait-state-specific details of an element instance.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "JobWaitStateDetails"
+        },
+        {
+          "branchType": "ref",
+          "ref": "MessageWaitStateDetails"
+        }
+      ],
+      "stableId": "wait-state-details"
     },
     {
       "name": "WaitStateElementTypeFilterProperty",
@@ -9615,7 +9631,7 @@
   ],
   "integrity": {
     "totalSemanticKeys": 41,
-    "totalUnions": 63,
+    "totalUnions": 64,
     "totalOperations": 193,
     "totalEventuallyConsistent": 90,
     "totalDeprecatedEnumSchemas": 2,
