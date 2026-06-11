@@ -9361,24 +9361,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.Variables
   fullName: Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.Variables
   nameWithType: BaseProcessInstanceFilterFields.Variables
-- uid: Camunda.Orchestration.Sdk.BaseWaitStateDetails
-  name: BaseWaitStateDetails
-  href: api/Camunda.Orchestration.Sdk.BaseWaitStateDetails.html
-  commentId: T:Camunda.Orchestration.Sdk.BaseWaitStateDetails
-  fullName: Camunda.Orchestration.Sdk.BaseWaitStateDetails
-  nameWithType: BaseWaitStateDetails
-- uid: Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
-  name: WaitStateType
-  href: api/Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType.html#Camunda_Orchestration_Sdk_BaseWaitStateDetails_WaitStateType
-  commentId: P:Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
-  fullName: Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
-  nameWithType: BaseWaitStateDetails.WaitStateType
-- uid: Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType*
-  name: WaitStateType
-  href: api/Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType.html
-  commentId: Overload:Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
-  fullName: Camunda.Orchestration.Sdk.BaseWaitStateDetails.WaitStateType
-  nameWithType: BaseWaitStateDetails.WaitStateType
 - uid: Camunda.Orchestration.Sdk.BasicAuthConfig
   name: BasicAuthConfig
   href: api/Camunda.Orchestration.Sdk.BasicAuthConfig.html
