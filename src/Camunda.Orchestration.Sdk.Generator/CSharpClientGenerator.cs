@@ -463,30 +463,42 @@ internal static class CSharpClientGenerator
         OpenApiDocument doc,
         Dictionary<string, List<string>> oneOfParents,
         Dictionary<string, string> variantToParent,
+        Dictionary<string, (string PropertyName, Dictionary<string, string> ValueToVariant)> discriminators,
         HashSet<string> requestSchemaNames)
     {
         var orphans = new HashSet<string>(StringComparer.Ordinal);
         if (doc.Components?.Schemas == null)
             return orphans;
 
-        // Candidate bases: schemas pulled in via the top-level allOf of a union variant.
+        // Candidate bases: schemas pulled in via a union variant's top-level allOf that
+        // are *discriminator-only* — i.e. their sole property is the union's
+        // discriminator. A composed mixin that contributes real fields is NOT a
+        // candidate (its fields matter), so it is never suppressed here.
         var candidates = new HashSet<string>(StringComparer.Ordinal);
         foreach (var (name, schema) in doc.Components.Schemas)
         {
-            if (!variantToParent.ContainsKey(SanitizeTypeName(name)))
+            if (!variantToParent.TryGetValue(SanitizeTypeName(name), out var parent))
                 continue;
+            if (!discriminators.TryGetValue(parent, out var disc))
+                continue;   // no discriminator → cannot identify a discriminator-only base
             foreach (var allOf in schema.AllOf ?? [])
             {
                 var refId = GetRefId(allOf);
-                if (refId != null)
+                if (refId == null)
+                    continue;
+                if (doc.Components.Schemas.TryGetValue(refId, out var baseSchema)
+                    && IsDiscriminatorOnlyBase(baseSchema, disc.PropertyName))
+                {
                     candidates.Add(SanitizeTypeName(refId));
+                }
             }
         }
         if (candidates.Count == 0)
             return orphans;
 
-        // Collect every schema reference EXCEPT a union variant's top-level allOf base;
-        // any such reference is a "real" use that disqualifies suppression.
+        // Collect every schema reference EXCEPT a variant's allOf ref to one of the
+        // discriminator-only bases above; any other reference (including a variant's
+        // allOf ref to a real mixin) is a genuine use that disqualifies suppression.
         var referencedElsewhere = new HashSet<string>(StringComparer.Ordinal);
         void Collect(IOpenApiSchema? s)
         {
@@ -494,7 +506,7 @@ internal static class CSharpClientGenerator
                 return;
             // A $ref node is a proxy that forwards member access to its target. Record
             // the reference and stop — the target component is walked on its own in the
-            // outer loop, where the union-variant allOf exclusion is applied. Recursing
+            // outer loop, where the discriminator-base exclusion is applied. Recursing
             // here would traverse into the target and defeat that exclusion.
             var rid = GetRefId(s);
             if (rid != null)
@@ -527,9 +539,9 @@ internal static class CSharpClientGenerator
                 Collect(v);
             foreach (var a in schema.AllOf ?? [])
             {
-                // A union variant's top-level `allOf: [{$ref: base}]` is the only
-                // suppressible reference — skip it; count every other allOf usage.
-                if (isVariant && GetRefId(a) != null)
+                // Only a variant's allOf ref to a discriminator-only base is suppressible;
+                // skip exactly those and count everything else (e.g. composed mixins).
+                if (isVariant && GetRefId(a) is { } rid && candidates.Contains(SanitizeTypeName(rid)))
                     continue;
                 Collect(a);
             }
@@ -549,6 +561,18 @@ internal static class CSharpClientGenerator
         }
         return orphans;
     }
+
+    /// <summary>
+    /// True when <paramref name="schema"/> is a plain object whose only property is the
+    /// union discriminator <paramref name="discriminatorProperty"/> and which composes
+    /// nothing else — i.e. it exists purely to carry the discriminator.
+    /// </summary>
+    private static bool IsDiscriminatorOnlyBase(IOpenApiSchema schema, string discriminatorProperty)
+        => (schema.AllOf is null || schema.AllOf.Count == 0)
+            && (schema.OneOf is null || schema.OneOf.Count == 0)
+            && (schema.AnyOf is null || schema.AnyOf.Count == 0)
+            && schema.Properties is { Count: 1 }
+            && schema.Properties.ContainsKey(discriminatorProperty);
 
     /// <summary>
     /// For an inline oneOf body schema, find a matching component oneOf schema
@@ -691,7 +715,7 @@ internal static class CSharpClientGenerator
             return sb.ToString();
 
         var (oneOfParents, variantToParent, discriminators) = BuildOneOfMaps(doc);
-        var orphanUnionBases = ComputeOrphanUnionBases(doc, oneOfParents, variantToParent, requestSchemaNames);
+        var orphanUnionBases = ComputeOrphanUnionBases(doc, oneOfParents, variantToParent, discriminators, requestSchemaNames);
 
         // Collect inline string enum properties across all schemas so we can
         // emit them as typed enums and reference them in property declarations.

@@ -529,6 +529,11 @@ public class GeneratorSafeEmitTests
 
         // A base referenced outside the union (Garage.spec) is preserved.
         Assert.Contains("class BaseVehicle", models);
+
+        // A shared mixin composed via a variant's allOf (alongside the discriminator
+        // base) carries real fields, so it is NOT a discriminator-only base and must be
+        // preserved — even though it is only referenced through that variant's allOf.
+        Assert.Contains("class Timestamped", models);
     }
 
     // Two discriminated oneOf unions, each with an allOf base carrying only the
@@ -558,8 +563,9 @@ public class GeneratorSafeEmitTests
                 "oneOf": [ { "$ref": "#/components/schemas/Cat" }, { "$ref": "#/components/schemas/Dog" } ]
               },
               "BasePet": { "type": "object", "required": ["petType"], "properties": { "petType": { "type": "string" } } },
-              "Cat": { "type": "object", "required": ["petType", "meow"], "allOf": [ { "$ref": "#/components/schemas/BasePet" } ], "properties": { "meow": { "type": "string" } } },
+              "Cat": { "type": "object", "required": ["petType", "meow"], "allOf": [ { "$ref": "#/components/schemas/BasePet" }, { "$ref": "#/components/schemas/Timestamped" } ], "properties": { "meow": { "type": "string" } } },
               "Dog": { "type": "object", "required": ["petType", "bark"], "allOf": [ { "$ref": "#/components/schemas/BasePet" } ], "properties": { "bark": { "type": "string" } } },
+              "Timestamped": { "type": "object", "required": ["createdAt"], "properties": { "createdAt": { "type": "string" }, "updatedAt": { "type": "string" } } },
               "Vehicle": {
                 "discriminator": { "propertyName": "vehicleType", "mapping": { "CAR": "#/components/schemas/Car", "TRUCK": "#/components/schemas/Truck" } },
                 "oneOf": [ { "$ref": "#/components/schemas/Car" }, { "$ref": "#/components/schemas/Truck" } ]
