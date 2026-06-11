@@ -1,3 +1,13 @@
+# [9.0.0-alpha.22](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.21...v9.0.0-alpha.22) (2026-06-11)
+
+
+### Bug Fixes
+
+* **gen:** count operation body/response refs when detecting orphan bases ([3449014](https://github.com/camunda/orchestration-cluster-api-csharp/commit/344901458f1bec9f4505b914aa97324ccd9446ad))
+* **gen:** only suppress true discriminator-only union bases ([ee51d7f](https://github.com/camunda/orchestration-cluster-api-csharp/commit/ee51d7f639bb369a363202c34cea3062bedb7fa6))
+* **gen:** suppress discriminator-only oneOf union base types ([5278690](https://github.com/camunda/orchestration-cluster-api-csharp/commit/527869017a2f24405dafc72d5ec2735db158281d))
+* **gen:** suppress discriminator-only oneOf union base types ([ba5d18e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/ba5d18e888cc3282c3628df526f77d9f5568f162)), closes [#255](https://github.com/camunda/orchestration-cluster-api-csharp/issues/255)
+
 # [9.0.0-alpha.21](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.20...v9.0.0-alpha.21) (2026-06-11)
 
 
