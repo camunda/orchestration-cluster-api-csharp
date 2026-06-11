@@ -1,3 +1,12 @@
+# [9.0.0-alpha.21](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.20...v9.0.0-alpha.21) (2026-06-11)
+
+
+### Bug Fixes
+
+* adopt upstream wait-state details union to unblock main build ([fb63984](https://github.com/camunda/orchestration-cluster-api-csharp/commit/fb63984b831e75000724863f34875a4d4f965f50))
+* adopt upstream wait-state details union to unblock main build ([aac1aac](https://github.com/camunda/orchestration-cluster-api-csharp/commit/aac1aac9736eddb2133e3246e834a486a30cbfa7))
+* **gen:** regenerate artifacts ([ba708c0](https://github.com/camunda/orchestration-cluster-api-csharp/commit/ba708c0edd3899089bc6f4cf26f1033fbdc62741))
+
 # [9.0.0-alpha.20](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.19...v9.0.0-alpha.20) (2026-06-10)
 
 
