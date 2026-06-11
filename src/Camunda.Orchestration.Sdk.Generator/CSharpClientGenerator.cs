@@ -547,6 +547,30 @@ internal static class CSharpClientGenerator
             }
         }
 
+        // A base used directly as an operation parameter, request body, or response
+        // schema is a genuine use too — walk the paths so it is not suppressed.
+        if (doc.Paths != null)
+        {
+            foreach (var (_, pathItem) in doc.Paths)
+            {
+                if (pathItem.Operations is not { } pathOps)
+                    continue;
+                foreach (var (_, op) in pathOps)
+                {
+                    foreach (var p in op.Parameters ?? (IList<IOpenApiParameter>)Array.Empty<IOpenApiParameter>())
+                        Collect(p.Schema);
+                    if (op.RequestBody?.Content != null)
+                        foreach (var (_, mt) in op.RequestBody.Content)
+                            Collect(mt.Schema);
+                    if (op.Responses != null)
+                        foreach (var (_, resp) in op.Responses)
+                            if (resp.Content != null)
+                                foreach (var (_, mt) in resp.Content)
+                                    Collect(mt.Schema);
+                }
+            }
+        }
+
         foreach (var c in candidates)
         {
             if (referencedElsewhere.Contains(c))

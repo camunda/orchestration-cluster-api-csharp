@@ -534,6 +534,10 @@ public class GeneratorSafeEmitTests
         // base) carries real fields, so it is NOT a discriminator-only base and must be
         // preserved — even though it is only referenced through that variant's allOf.
         Assert.Contains("class Timestamped", models);
+
+        // A discriminator-only base referenced only via an operation response body
+        // (BaseShape, returned by GET /shapes/base) is a genuine use and must be kept.
+        Assert.Contains("class BaseShape", models);
     }
 
     // Two discriminated oneOf unions, each with an allOf base carrying only the
@@ -551,6 +555,17 @@ public class GeneratorSafeEmitTests
                   "200": {
                     "description": "ok",
                     "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Pet" } } }
+                  }
+                }
+              }
+            },
+            "/shapes/base": {
+              "get": {
+                "operationId": "getShapeBase",
+                "responses": {
+                  "200": {
+                    "description": "ok",
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BaseShape" } } }
                   }
                 }
               }
@@ -573,7 +588,14 @@ public class GeneratorSafeEmitTests
               "BaseVehicle": { "type": "object", "required": ["vehicleType"], "properties": { "vehicleType": { "type": "string" } } },
               "Car": { "type": "object", "required": ["vehicleType", "doors"], "allOf": [ { "$ref": "#/components/schemas/BaseVehicle" } ], "properties": { "doors": { "type": "integer" } } },
               "Truck": { "type": "object", "required": ["vehicleType", "axles"], "allOf": [ { "$ref": "#/components/schemas/BaseVehicle" } ], "properties": { "axles": { "type": "integer" } } },
-              "Garage": { "type": "object", "properties": { "spec": { "$ref": "#/components/schemas/BaseVehicle" } } }
+              "Garage": { "type": "object", "properties": { "spec": { "$ref": "#/components/schemas/BaseVehicle" } } },
+              "Shape": {
+                "discriminator": { "propertyName": "shapeType", "mapping": { "BOX": "#/components/schemas/Box", "SPHERE": "#/components/schemas/Sphere" } },
+                "oneOf": [ { "$ref": "#/components/schemas/Box" }, { "$ref": "#/components/schemas/Sphere" } ]
+              },
+              "BaseShape": { "type": "object", "required": ["shapeType"], "properties": { "shapeType": { "type": "string" } } },
+              "Box": { "type": "object", "required": ["shapeType"], "allOf": [ { "$ref": "#/components/schemas/BaseShape" } ], "properties": { "width": { "type": "integer" } } },
+              "Sphere": { "type": "object", "required": ["shapeType"], "allOf": [ { "$ref": "#/components/schemas/BaseShape" } ], "properties": { "radius": { "type": "integer" } } }
             }
           }
         }
