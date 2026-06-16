@@ -22528,6 +22528,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult
   fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult
   nameWithType: ElementInstanceWaitStateResult
+- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.BpmnProcessId
+  name: BpmnProcessId
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.BpmnProcessId.html#Camunda_Orchestration_Sdk_ElementInstanceWaitStateResult_BpmnProcessId
+  commentId: P:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.BpmnProcessId
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.BpmnProcessId
+  nameWithType: ElementInstanceWaitStateResult.BpmnProcessId
+- uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.BpmnProcessId*
+  name: BpmnProcessId
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.BpmnProcessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.BpmnProcessId
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.BpmnProcessId
+  nameWithType: ElementInstanceWaitStateResult.BpmnProcessId
 - uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details
   name: Details
   href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult.Details.html#Camunda_Orchestration_Sdk_ElementInstanceWaitStateResult_Details
@@ -42793,6 +42805,36 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.VariableKey
   fullName: Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField.VariableKey
   nameWithType: UserTaskVariableSearchQuerySortRequestField.VariableKey
+- uid: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails
+  name: UserTaskWaitStateDetails
+  href: api/Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.html
+  commentId: T:Camunda.Orchestration.Sdk.UserTaskWaitStateDetails
+  fullName: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails
+  nameWithType: UserTaskWaitStateDetails
+- uid: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.DueDate
+  name: DueDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.DueDate.html#Camunda_Orchestration_Sdk_UserTaskWaitStateDetails_DueDate
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.DueDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.DueDate
+  nameWithType: UserTaskWaitStateDetails.DueDate
+- uid: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.DueDate*
+  name: DueDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.DueDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.DueDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.DueDate
+  nameWithType: UserTaskWaitStateDetails.DueDate
+- uid: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.TaskKey
+  name: TaskKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.TaskKey.html#Camunda_Orchestration_Sdk_UserTaskWaitStateDetails_TaskKey
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.TaskKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.TaskKey
+  nameWithType: UserTaskWaitStateDetails.TaskKey
+- uid: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.TaskKey*
+  name: TaskKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.TaskKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.TaskKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.TaskKey
+  nameWithType: UserTaskWaitStateDetails.TaskKey
 - uid: Camunda.Orchestration.Sdk.UserUpdateRequest
   name: UserUpdateRequest
   href: api/Camunda.Orchestration.Sdk.UserUpdateRequest.html
@@ -44263,6 +44305,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.WaitStateTypeEnum.MESSAGE
   fullName: Camunda.Orchestration.Sdk.WaitStateTypeEnum.MESSAGE
   nameWithType: WaitStateTypeEnum.MESSAGE
+- uid: Camunda.Orchestration.Sdk.WaitStateTypeEnum.USERTASK
+  name: USERTASK
+  href: api/Camunda.Orchestration.Sdk.WaitStateTypeEnum.html#Camunda_Orchestration_Sdk_WaitStateTypeEnum_USERTASK
+  commentId: F:Camunda.Orchestration.Sdk.WaitStateTypeEnum.USERTASK
+  fullName: Camunda.Orchestration.Sdk.WaitStateTypeEnum.USERTASK
+  nameWithType: WaitStateTypeEnum.USERTASK
 - uid: Camunda.Orchestration.Sdk.WaitStateTypeExactMatch
   name: WaitStateTypeExactMatch
   href: api/Camunda.Orchestration.Sdk.WaitStateTypeExactMatch.html

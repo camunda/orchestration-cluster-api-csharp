@@ -376,7 +376,8 @@ Create the authorization.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateDeploymentAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateDeploymentAsync_System_Net_Http_MultipartFormDataContent_System_Threading_CancellationToken_">CreateDeploymentAsync(MultipartFormDataContent, CancellationToken)</a></dt>
     <dd><p>Deploy resources
-Deploys one or more resources (e.g. processes, decision models, or forms).
+Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources, and generic files.
+A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA resources are stored as deployable generic resources in the engine.
 This is an atomic call, i.e. either all resources are deployed or none of them are.</p>
 </dd>
   </dl>

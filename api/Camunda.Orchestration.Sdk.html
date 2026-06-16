@@ -2799,6 +2799,11 @@ For <b>output</b> (receiving variables), call <a class="xref" href="Camunda.Orch
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.UserTaskWaitStateDetails.html">UserTaskWaitStateDetails</a></dt>
+      <dd><p>UserTaskWaitStateDetails</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.UserUpdateRequest.html">UserUpdateRequest</a></dt>
       <dd><p>UserUpdateRequest</p>
 </dd>
@@ -3744,6 +3749,9 @@ DISCARDED: the producing job failed; this item was superseded by a later activat
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionStateEnum.html">MessageSubscriptionStateEnum</a></dt>
       <dd><p>The state of message subscription.</p>
+<p><strong>Note for <code>START_EVENT</code> subscriptions:</strong> The <code>CORRELATED</code> and <code>MIGRATED</code> states are not
+tracked for these subscriptions. To query correlation history for process start events,
+use the <code>/correlated-message-subscriptions/search</code> endpoint.</p>
 </dd>
     </dl>
     <dl class="jumplist">
