@@ -10964,6 +10964,12 @@ public sealed class ElementInstanceWaitStateResult
     public TenantId TenantId { get; set; }
 
     /// <summary>
+    /// The BPMN process ID of the process definition associated to this element instance.
+    /// </summary>
+    [JsonPropertyName("bpmnProcessId")]
+    public string BpmnProcessId { get; set; } = null!;
+
+    /// <summary>
     /// Wait-state-specific details, resolved by waitStateType.
     /// </summary>
     [JsonPropertyName("details")]
@@ -15676,6 +15682,11 @@ public sealed class MessageSubscriptionResult
 
     /// <summary>
     /// The state of message subscription.
+    /// 
+    /// **Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not
+    /// tracked for these subscriptions. To query correlation history for process start events,
+    /// use the `/correlated-message-subscriptions/search` endpoint.
+    /// 
     /// </summary>
     [JsonPropertyName("messageSubscriptionState")]
     public MessageSubscriptionStateEnum MessageSubscriptionState { get; set; }
@@ -15819,6 +15830,11 @@ public sealed class MessageSubscriptionSearchQuerySortRequest
 
 /// <summary>
 /// The state of message subscription.
+/// 
+/// **Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not
+/// tracked for these subscriptions. To query correlation history for process start events,
+/// use the `/correlated-message-subscriptions/search` endpoint.
+/// 
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum MessageSubscriptionStateEnum
@@ -21528,6 +21544,25 @@ public sealed class UserTaskVariableSearchQuerySortRequest
 }
 
 /// <summary>
+/// UserTaskWaitStateDetails
+/// </summary>
+public sealed class UserTaskWaitStateDetails : WaitStateDetails
+{
+    /// <summary>
+    /// The key of the user task.
+    /// </summary>
+    [JsonPropertyName("taskKey")]
+    public UserTaskKey TaskKey { get; set; }
+
+    /// <summary>
+    /// The due date of the user task, if set.
+    /// </summary>
+    [JsonPropertyName("dueDate")]
+    public DateTimeOffset? DueDate { get; set; }
+
+}
+
+/// <summary>
 /// UserUpdateRequest
 /// </summary>
 public sealed class UserUpdateRequest
@@ -21998,13 +22033,16 @@ public sealed class VariableValueFilterProperty
 /// <list type="bullet">
 /// <item><description><see cref="JobWaitStateDetails"/></description></item>
 /// <item><description><see cref="MessageWaitStateDetails"/></description></item>
+/// <item><description><see cref="UserTaskWaitStateDetails"/></description></item>
 /// </list>
 /// </remarks>
 /// <seealso cref="JobWaitStateDetails"/>
 /// <seealso cref="MessageWaitStateDetails"/>
+/// <seealso cref="UserTaskWaitStateDetails"/>
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "waitStateType")]
 [JsonDerivedType(typeof(JobWaitStateDetails), "JOB")]
 [JsonDerivedType(typeof(MessageWaitStateDetails), "MESSAGE")]
+[JsonDerivedType(typeof(UserTaskWaitStateDetails), "USER_TASK")]
 public abstract class WaitStateDetails { }
 
 /// <summary>
@@ -22152,6 +22190,8 @@ public enum WaitStateTypeEnum
     JOB,
     [JsonPropertyName("MESSAGE")]
     MESSAGE,
+    [JsonPropertyName("USER_TASK")]
+    USERTASK,
 }
 
 /// <summary>
