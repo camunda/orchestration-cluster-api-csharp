@@ -4398,7 +4398,7 @@
           }
         ],
         "summary": "Deploy resources",
-        "description": "Deploys one or more resources (e.g. processes, decision models, or forms).\nThis is an atomic call, i.e. either all resources are deployed or none of them are.\n",
+        "description": "Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources, and generic files.\nA deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA resources are stored as deployable generic resources in the engine.\nThis is an atomic call, i.e. either all resources are deployed or none of them are.\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -26477,6 +26477,7 @@
         "description": "An element instance waiting state.",
         "type": "object",
         "required": [
+          "bpmnProcessId",
           "details",
           "elementId",
           "elementInstanceKey",
@@ -26535,6 +26536,10 @@
               }
             ]
           },
+          "bpmnProcessId": {
+            "description": "The BPMN process ID of the process definition associated to this element instance.",
+            "type": "string"
+          },
           "details": {
             "description": "Wait-state-specific details, resolved by waitStateType.",
             "allOf": [
@@ -26552,7 +26557,8 @@
           "propertyName": "waitStateType",
           "mapping": {
             "JOB": "#/components/schemas/JobWaitStateDetails",
-            "MESSAGE": "#/components/schemas/MessageWaitStateDetails"
+            "MESSAGE": "#/components/schemas/MessageWaitStateDetails",
+            "USER_TASK": "#/components/schemas/UserTaskWaitStateDetails"
           }
         },
         "oneOf": [
@@ -26561,6 +26567,9 @@
           },
           {
             "$ref": "#/components/schemas/MessageWaitStateDetails"
+          },
+          {
+            "$ref": "#/components/schemas/UserTaskWaitStateDetails"
           }
         ]
       },
@@ -26569,7 +26578,8 @@
         "type": "string",
         "enum": [
           "JOB",
-          "MESSAGE"
+          "MESSAGE",
+          "USER_TASK"
         ]
       },
       "BaseWaitStateDetails": {
@@ -26659,6 +26669,35 @@
             "description": "The correlation key for the message subscription (null for start events).",
             "nullable": true,
             "type": "string"
+          }
+        }
+      },
+      "UserTaskWaitStateDetails": {
+        "type": "object",
+        "required": [
+          "dueDate",
+          "taskKey",
+          "waitStateType"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseWaitStateDetails"
+          }
+        ],
+        "properties": {
+          "taskKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserTaskKey"
+              }
+            ],
+            "description": "The key of the user task."
+          },
+          "dueDate": {
+            "description": "The due date of the user task, if set.",
+            "nullable": true,
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -32853,7 +32892,7 @@
         ]
       },
       "MessageSubscriptionStateEnum": {
-        "description": "The state of message subscription.",
+        "description": "The state of message subscription.\n\n**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not\ntracked for these subscriptions. To query correlation history for process start events,\nuse the `/correlated-message-subscriptions/search` endpoint.\n",
         "type": "string",
         "enum": [
           "CORRELATED",

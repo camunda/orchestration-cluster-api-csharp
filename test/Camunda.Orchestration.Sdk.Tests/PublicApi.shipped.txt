@@ -2896,6 +2896,7 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceWaitStateResult : sealed class
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.WaitStateDetails Details { get; set; } [JsonPropertyName("details")]
   PROP Camunda.Orchestration.Sdk.WaitStateElementTypeEnum ElementType { get; set; } [JsonPropertyName("elementType")]
+  PROP System.String BpmnProcessId { get; set; } [JsonPropertyName("bpmnProcessId")]
 
 TYPE Camunda.Orchestration.Sdk.EndCursor : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.EndCursor>]
   PROP System.String Value { get; }
@@ -5793,6 +5794,11 @@ TYPE Camunda.Orchestration.Sdk.UserTaskVariableSearchQuerySortRequestField : enu
   MEMBER ScopeKey = 4 json="scopeKey"
   MEMBER ProcessInstanceKey = 5 json="processInstanceKey"
 
+TYPE Camunda.Orchestration.Sdk.UserTaskWaitStateDetails : sealed class base=Camunda.Orchestration.Sdk.WaitStateDetails
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.UserTaskKey TaskKey { get; set; } [JsonPropertyName("taskKey")]
+  PROP System.DateTimeOffset? DueDate { get; set; } [JsonPropertyName("dueDate")]
+
 TYPE Camunda.Orchestration.Sdk.UserUpdateRequest : sealed class
   CTOR ()
   PROP System.String? Email { get; set; } [JsonPropertyName("email")]
@@ -5949,6 +5955,7 @@ TYPE Camunda.Orchestration.Sdk.WaitStateDetails : abstract class
   ATTR JsonPolymorphic discriminator=waitStateType
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.JobWaitStateDetails tag=JOB
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.MessageWaitStateDetails tag=MESSAGE
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.UserTaskWaitStateDetails tag=USER_TASK
 
 TYPE Camunda.Orchestration.Sdk.WaitStateElementTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -6003,6 +6010,7 @@ TYPE Camunda.Orchestration.Sdk.WaitStateTypeEnum : enum interfaces=[System.IComp
   underlying=System.Int32
   MEMBER JOB = 0 json="JOB"
   MEMBER MESSAGE = 1 json="MESSAGE"
+  MEMBER USERTASK = 2 json="USER_TASK"
 
 TYPE Camunda.Orchestration.Sdk.WaitStateTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.WaitStateTypeExactMatch>]
   PROP System.String Value { get; }

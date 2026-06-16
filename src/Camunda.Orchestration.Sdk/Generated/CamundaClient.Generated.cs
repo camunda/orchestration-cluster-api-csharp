@@ -1095,7 +1095,8 @@ public partial class CamundaClient
 
     /// <summary>
     /// Deploy resources
-    /// Deploys one or more resources (e.g. processes, decision models, or forms).
+    /// Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources, and generic files.
+    /// A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA resources are stored as deployable generic resources in the engine.
     /// This is an atomic call, i.e. either all resources are deployed or none of them are.
     /// 
     /// </summary>
