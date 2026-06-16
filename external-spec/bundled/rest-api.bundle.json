@@ -1364,6 +1364,16 @@
               }
             }
           },
+          "409": {
+            "description": "A cluster variable with this name already exists.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
           "500": {
             "description": "An internal error occurred while processing the request.",
             "content": {
@@ -1824,6 +1834,16 @@
           },
           "404": {
             "description": "The tenant with the given ID was not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A cluster variable with this name already exists for the given tenant.",
             "content": {
               "application/problem+json": {
                 "schema": {
