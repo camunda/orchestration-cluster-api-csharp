@@ -19944,8 +19944,7 @@
             }
           },
           "metrics": {
-            "description": "Per-call token and latency metrics. Present on ASSISTANT items only.",
-            "nullable": true,
+            "description": "Per-call token and latency metrics. Zero-valued when not available.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentInstanceHistoryItemMetrics"
@@ -26558,7 +26557,9 @@
           "mapping": {
             "JOB": "#/components/schemas/JobWaitStateDetails",
             "MESSAGE": "#/components/schemas/MessageWaitStateDetails",
-            "USER_TASK": "#/components/schemas/UserTaskWaitStateDetails"
+            "USER_TASK": "#/components/schemas/UserTaskWaitStateDetails",
+            "TIMER": "#/components/schemas/TimerWaitStateDetails",
+            "SIGNAL": "#/components/schemas/SignalWaitStateDetails"
           }
         },
         "oneOf": [
@@ -26570,6 +26571,12 @@
           },
           {
             "$ref": "#/components/schemas/UserTaskWaitStateDetails"
+          },
+          {
+            "$ref": "#/components/schemas/TimerWaitStateDetails"
+          },
+          {
+            "$ref": "#/components/schemas/SignalWaitStateDetails"
           }
         ]
       },
@@ -26579,7 +26586,9 @@
         "enum": [
           "JOB",
           "MESSAGE",
-          "USER_TASK"
+          "USER_TASK",
+          "TIMER",
+          "SIGNAL"
         ]
       },
       "BaseWaitStateDetails": {
@@ -26700,6 +26709,52 @@
             "format": "date-time"
           }
         }
+      },
+      "TimerWaitStateDetails": {
+        "type": "object",
+        "required": [
+          "dueDate",
+          "repetitions",
+          "waitStateType"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseWaitStateDetails"
+          }
+        ],
+        "properties": {
+          "dueDate": {
+            "description": "When the timer is due, as a UNIX epoch timestamp in milliseconds.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          "repetitions": {
+            "description": "The number of remaining timer repetitions (-1 for infinite, 0 for non-repeating).",
+            "nullable": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SignalWaitStateDetails": {
+        "type": "object",
+        "required": [
+          "signalName",
+          "waitStateType"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseWaitStateDetails"
+          }
+        ],
+        "properties": {
+          "signalName": {
+            "description": "The name of the signal being awaited.",
+            "type": "string"
+          }
+        },
+        "x-added-in-version": "8.10"
       },
       "AdHocSubProcessActivateActivityReference": {
         "type": "object",
@@ -30592,6 +30647,7 @@
           "ERROR_THROWN",
           "FAILED",
           "MIGRATED",
+          "PRIORITY_UPDATED",
           "RETRIES_UPDATED",
           "TIMED_OUT"
         ]

@@ -589,7 +589,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentHistoryItemKey HistoryItemKey { get; set; } [JsonPropertyName("historyItemKey")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusEnum CommitStatus { get; set; } [JsonPropertyName("commitStatus")]
-  PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics? Metrics { get; set; } [JsonPropertyName("metrics")]
+  PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics Metrics { get; set; } [JsonPropertyName("metrics")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum Role { get; set; } [JsonPropertyName("role")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceKey AgentInstanceKey { get; set; } [JsonPropertyName("agentInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
@@ -3854,8 +3854,9 @@ TYPE Camunda.Orchestration.Sdk.JobStateEnum : enum interfaces=[System.IComparabl
   MEMBER ERRORTHROWN = 3 json="ERROR_THROWN"
   MEMBER FAILED = 4 json="FAILED"
   MEMBER MIGRATED = 5 json="MIGRATED"
-  MEMBER RETRIESUPDATED = 6 json="RETRIES_UPDATED"
-  MEMBER TIMEDOUT = 7 json="TIMED_OUT"
+  MEMBER PRIORITYUPDATED = 6 json="PRIORITY_UPDATED"
+  MEMBER RETRIESUPDATED = 7 json="RETRIES_UPDATED"
+  MEMBER TIMEDOUT = 8 json="TIMED_OUT"
 
 TYPE Camunda.Orchestration.Sdk.JobStateExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.JobStateExactMatch>]
   PROP System.String Value { get; }
@@ -5278,6 +5279,10 @@ TYPE Camunda.Orchestration.Sdk.SignalKey : struct interfaces=[Camunda.Orchestrat
   METHOD virtual System.Int32 GetHashCode()
   METHOD virtual System.String ToString()
 
+TYPE Camunda.Orchestration.Sdk.SignalWaitStateDetails : sealed class base=Camunda.Orchestration.Sdk.WaitStateDetails
+  CTOR ()
+  PROP System.String SignalName { get; set; } [JsonPropertyName("signalName")]
+
 TYPE Camunda.Orchestration.Sdk.SortOrderEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
   underlying=System.Int32
@@ -5500,6 +5505,11 @@ TYPE Camunda.Orchestration.Sdk.TenantUserSearchResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.TenantUserResult> Items { get; set; } [JsonPropertyName("items")]
+
+TYPE Camunda.Orchestration.Sdk.TimerWaitStateDetails : sealed class base=Camunda.Orchestration.Sdk.WaitStateDetails
+  CTOR ()
+  PROP System.Int32? Repetitions { get; set; } [JsonPropertyName("repetitions")]
+  PROP System.Int64? DueDate { get; set; } [JsonPropertyName("dueDate")]
 
 TYPE Camunda.Orchestration.Sdk.TlsConfig : sealed class
   CTOR ()
@@ -5955,6 +5965,8 @@ TYPE Camunda.Orchestration.Sdk.WaitStateDetails : abstract class
   ATTR JsonPolymorphic discriminator=waitStateType
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.JobWaitStateDetails tag=JOB
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.MessageWaitStateDetails tag=MESSAGE
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.SignalWaitStateDetails tag=SIGNAL
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.TimerWaitStateDetails tag=TIMER
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.UserTaskWaitStateDetails tag=USER_TASK
 
 TYPE Camunda.Orchestration.Sdk.WaitStateElementTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
@@ -6011,6 +6023,8 @@ TYPE Camunda.Orchestration.Sdk.WaitStateTypeEnum : enum interfaces=[System.IComp
   MEMBER JOB = 0 json="JOB"
   MEMBER MESSAGE = 1 json="MESSAGE"
   MEMBER USERTASK = 2 json="USER_TASK"
+  MEMBER TIMER = 3 json="TIMER"
+  MEMBER SIGNAL = 4 json="SIGNAL"
 
 TYPE Camunda.Orchestration.Sdk.WaitStateTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.WaitStateTypeExactMatch>]
   PROP System.String Value { get; }
