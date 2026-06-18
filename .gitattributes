@@ -1,2 +1,6 @@
 # Force LF line endings for shell scripts so they work in WSL/Linux
 *.sh text eol=lf
+
+# Force LF for C# sources so .editorconfig (end_of_line = lf) and
+# `dotnet format` stay consistent regardless of the checkout platform.
+*.cs text eol=lf
