@@ -29341,6 +29341,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.JobStateEnum.MIGRATED
   fullName: Camunda.Orchestration.Sdk.JobStateEnum.MIGRATED
   nameWithType: JobStateEnum.MIGRATED
+- uid: Camunda.Orchestration.Sdk.JobStateEnum.PRIORITYUPDATED
+  name: PRIORITYUPDATED
+  href: api/Camunda.Orchestration.Sdk.JobStateEnum.html#Camunda_Orchestration_Sdk_JobStateEnum_PRIORITYUPDATED
+  commentId: F:Camunda.Orchestration.Sdk.JobStateEnum.PRIORITYUPDATED
+  fullName: Camunda.Orchestration.Sdk.JobStateEnum.PRIORITYUPDATED
+  nameWithType: JobStateEnum.PRIORITYUPDATED
 - uid: Camunda.Orchestration.Sdk.JobStateEnum.RETRIESUPDATED
   name: RETRIESUPDATED
   href: api/Camunda.Orchestration.Sdk.JobStateEnum.html#Camunda_Orchestration_Sdk_JobStateEnum_RETRIESUPDATED
@@ -39373,6 +39379,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.SignalKey.Value
   fullName: Camunda.Orchestration.Sdk.SignalKey.Value
   nameWithType: SignalKey.Value
+- uid: Camunda.Orchestration.Sdk.SignalWaitStateDetails
+  name: SignalWaitStateDetails
+  href: api/Camunda.Orchestration.Sdk.SignalWaitStateDetails.html
+  commentId: T:Camunda.Orchestration.Sdk.SignalWaitStateDetails
+  fullName: Camunda.Orchestration.Sdk.SignalWaitStateDetails
+  nameWithType: SignalWaitStateDetails
+- uid: Camunda.Orchestration.Sdk.SignalWaitStateDetails.SignalName
+  name: SignalName
+  href: api/Camunda.Orchestration.Sdk.SignalWaitStateDetails.SignalName.html#Camunda_Orchestration_Sdk_SignalWaitStateDetails_SignalName
+  commentId: P:Camunda.Orchestration.Sdk.SignalWaitStateDetails.SignalName
+  fullName: Camunda.Orchestration.Sdk.SignalWaitStateDetails.SignalName
+  nameWithType: SignalWaitStateDetails.SignalName
+- uid: Camunda.Orchestration.Sdk.SignalWaitStateDetails.SignalName*
+  name: SignalName
+  href: api/Camunda.Orchestration.Sdk.SignalWaitStateDetails.SignalName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SignalWaitStateDetails.SignalName
+  fullName: Camunda.Orchestration.Sdk.SignalWaitStateDetails.SignalName
+  nameWithType: SignalWaitStateDetails.SignalName
 - uid: Camunda.Orchestration.Sdk.SortOrderEnum
   name: SortOrderEnum
   href: api/Camunda.Orchestration.Sdk.SortOrderEnum.html
@@ -40627,6 +40651,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.TenantUserSearchResult.Page
   fullName: Camunda.Orchestration.Sdk.TenantUserSearchResult.Page
   nameWithType: TenantUserSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.TimerWaitStateDetails
+  name: TimerWaitStateDetails
+  href: api/Camunda.Orchestration.Sdk.TimerWaitStateDetails.html
+  commentId: T:Camunda.Orchestration.Sdk.TimerWaitStateDetails
+  fullName: Camunda.Orchestration.Sdk.TimerWaitStateDetails
+  nameWithType: TimerWaitStateDetails
+- uid: Camunda.Orchestration.Sdk.TimerWaitStateDetails.DueDate
+  name: DueDate
+  href: api/Camunda.Orchestration.Sdk.TimerWaitStateDetails.DueDate.html#Camunda_Orchestration_Sdk_TimerWaitStateDetails_DueDate
+  commentId: P:Camunda.Orchestration.Sdk.TimerWaitStateDetails.DueDate
+  fullName: Camunda.Orchestration.Sdk.TimerWaitStateDetails.DueDate
+  nameWithType: TimerWaitStateDetails.DueDate
+- uid: Camunda.Orchestration.Sdk.TimerWaitStateDetails.DueDate*
+  name: DueDate
+  href: api/Camunda.Orchestration.Sdk.TimerWaitStateDetails.DueDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TimerWaitStateDetails.DueDate
+  fullName: Camunda.Orchestration.Sdk.TimerWaitStateDetails.DueDate
+  nameWithType: TimerWaitStateDetails.DueDate
+- uid: Camunda.Orchestration.Sdk.TimerWaitStateDetails.Repetitions
+  name: Repetitions
+  href: api/Camunda.Orchestration.Sdk.TimerWaitStateDetails.Repetitions.html#Camunda_Orchestration_Sdk_TimerWaitStateDetails_Repetitions
+  commentId: P:Camunda.Orchestration.Sdk.TimerWaitStateDetails.Repetitions
+  fullName: Camunda.Orchestration.Sdk.TimerWaitStateDetails.Repetitions
+  nameWithType: TimerWaitStateDetails.Repetitions
+- uid: Camunda.Orchestration.Sdk.TimerWaitStateDetails.Repetitions*
+  name: Repetitions
+  href: api/Camunda.Orchestration.Sdk.TimerWaitStateDetails.Repetitions.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TimerWaitStateDetails.Repetitions
+  fullName: Camunda.Orchestration.Sdk.TimerWaitStateDetails.Repetitions
+  nameWithType: TimerWaitStateDetails.Repetitions
 - uid: Camunda.Orchestration.Sdk.TlsConfig
   name: TlsConfig
   href: api/Camunda.Orchestration.Sdk.TlsConfig.html
@@ -44305,6 +44359,18 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.WaitStateTypeEnum.MESSAGE
   fullName: Camunda.Orchestration.Sdk.WaitStateTypeEnum.MESSAGE
   nameWithType: WaitStateTypeEnum.MESSAGE
+- uid: Camunda.Orchestration.Sdk.WaitStateTypeEnum.SIGNAL
+  name: SIGNAL
+  href: api/Camunda.Orchestration.Sdk.WaitStateTypeEnum.html#Camunda_Orchestration_Sdk_WaitStateTypeEnum_SIGNAL
+  commentId: F:Camunda.Orchestration.Sdk.WaitStateTypeEnum.SIGNAL
+  fullName: Camunda.Orchestration.Sdk.WaitStateTypeEnum.SIGNAL
+  nameWithType: WaitStateTypeEnum.SIGNAL
+- uid: Camunda.Orchestration.Sdk.WaitStateTypeEnum.TIMER
+  name: TIMER
+  href: api/Camunda.Orchestration.Sdk.WaitStateTypeEnum.html#Camunda_Orchestration_Sdk_WaitStateTypeEnum_TIMER
+  commentId: F:Camunda.Orchestration.Sdk.WaitStateTypeEnum.TIMER
+  fullName: Camunda.Orchestration.Sdk.WaitStateTypeEnum.TIMER
+  nameWithType: WaitStateTypeEnum.TIMER
 - uid: Camunda.Orchestration.Sdk.WaitStateTypeEnum.USERTASK
   name: USERTASK
   href: api/Camunda.Orchestration.Sdk.WaitStateTypeEnum.html#Camunda_Orchestration_Sdk_WaitStateTypeEnum_USERTASK
