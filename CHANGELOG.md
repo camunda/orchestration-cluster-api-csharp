@@ -1,3 +1,11 @@
+# [9.0.0-alpha.23](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.22...v9.0.0-alpha.23) (2026-06-18)
+
+
+### Features
+
+* regenerate SDK for job priority-updated state and timer/signal wait-states ([6e4e1d7](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6e4e1d79d348225dd50c31f5da012aebcb7bfd11))
+* regenerate SDK for upstream wait-state details and job priority-updated state ([3dddcaa](https://github.com/camunda/orchestration-cluster-api-csharp/commit/3dddcaac4d87f7ba9a3e434d474f82cccf6cdd39))
+
 # [9.0.0-alpha.22](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.21...v9.0.0-alpha.22) (2026-06-11)
 
 
