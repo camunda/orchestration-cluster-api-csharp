@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:26f2149071b5d3b472ac5cbebadeed03e4eac7ee29f5f90cb2d9f54fd2f0c16a",
+  "specHash": "sha256:49625da077b57255a2b40d23f9df017147d77cd72a4b4f59b2dcb60b52f81934",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -2188,6 +2188,14 @@
         {
           "branchType": "ref",
           "ref": "UserTaskWaitStateDetails"
+        },
+        {
+          "branchType": "ref",
+          "ref": "TimerWaitStateDetails"
+        },
+        {
+          "branchType": "ref",
+          "ref": "SignalWaitStateDetails"
         }
       ],
       "stableId": "wait-state-details"

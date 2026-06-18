@@ -3950,10 +3950,10 @@ public sealed class AgentInstanceHistoryItemResult
     public List<AgentInstanceToolCall> ToolCalls { get; set; } = null!;
 
     /// <summary>
-    /// Per-call token and latency metrics. Present on ASSISTANT items only.
+    /// Per-call token and latency metrics. Zero-valued when not available.
     /// </summary>
     [JsonPropertyName("metrics")]
-    public AgentInstanceHistoryItemMetrics? Metrics { get; set; }
+    public AgentInstanceHistoryItemMetrics Metrics { get; set; } = null!;
 
     /// <summary>
     /// The commit status of this history item.
@@ -14369,6 +14369,8 @@ public enum JobStateEnum
     FAILED,
     [JsonPropertyName("MIGRATED")]
     MIGRATED,
+    [JsonPropertyName("PRIORITY_UPDATED")]
+    PRIORITYUPDATED,
     [JsonPropertyName("RETRIES_UPDATED")]
     RETRIESUPDATED,
     [JsonPropertyName("TIMED_OUT")]
@@ -19692,6 +19694,19 @@ public readonly record struct SignalKey : global::Camunda.Orchestration.Sdk.ICam
 }
 
 /// <summary>
+/// SignalWaitStateDetails
+/// </summary>
+public sealed class SignalWaitStateDetails : WaitStateDetails
+{
+    /// <summary>
+    /// The name of the signal being awaited.
+    /// </summary>
+    [JsonPropertyName("signalName")]
+    public string SignalName { get; set; } = null!;
+
+}
+
+/// <summary>
 /// The order in which to sort the related field.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -20409,6 +20424,25 @@ public sealed class TenantUserSearchResult
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// TimerWaitStateDetails
+/// </summary>
+public sealed class TimerWaitStateDetails : WaitStateDetails
+{
+    /// <summary>
+    /// When the timer is due, as a UNIX epoch timestamp in milliseconds.
+    /// </summary>
+    [JsonPropertyName("dueDate")]
+    public long? DueDate { get; set; }
+
+    /// <summary>
+    /// The number of remaining timer repetitions (-1 for infinite, 0 for non-repeating).
+    /// </summary>
+    [JsonPropertyName("repetitions")]
+    public int? Repetitions { get; set; }
 
 }
 
@@ -22034,15 +22068,21 @@ public sealed class VariableValueFilterProperty
 /// <item><description><see cref="JobWaitStateDetails"/></description></item>
 /// <item><description><see cref="MessageWaitStateDetails"/></description></item>
 /// <item><description><see cref="UserTaskWaitStateDetails"/></description></item>
+/// <item><description><see cref="TimerWaitStateDetails"/></description></item>
+/// <item><description><see cref="SignalWaitStateDetails"/></description></item>
 /// </list>
 /// </remarks>
 /// <seealso cref="JobWaitStateDetails"/>
 /// <seealso cref="MessageWaitStateDetails"/>
 /// <seealso cref="UserTaskWaitStateDetails"/>
+/// <seealso cref="TimerWaitStateDetails"/>
+/// <seealso cref="SignalWaitStateDetails"/>
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "waitStateType")]
 [JsonDerivedType(typeof(JobWaitStateDetails), "JOB")]
 [JsonDerivedType(typeof(MessageWaitStateDetails), "MESSAGE")]
 [JsonDerivedType(typeof(UserTaskWaitStateDetails), "USER_TASK")]
+[JsonDerivedType(typeof(TimerWaitStateDetails), "TIMER")]
+[JsonDerivedType(typeof(SignalWaitStateDetails), "SIGNAL")]
 public abstract class WaitStateDetails { }
 
 /// <summary>
@@ -22192,6 +22232,10 @@ public enum WaitStateTypeEnum
     MESSAGE,
     [JsonPropertyName("USER_TASK")]
     USERTASK,
+    [JsonPropertyName("TIMER")]
+    TIMER,
+    [JsonPropertyName("SIGNAL")]
+    SIGNAL,
 }
 
 /// <summary>
