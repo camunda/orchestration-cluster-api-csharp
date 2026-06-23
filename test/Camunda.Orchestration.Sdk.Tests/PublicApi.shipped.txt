@@ -2021,7 +2021,11 @@ TYPE Camunda.Orchestration.Sdk.CreateClusterVariableRequest : sealed class
 TYPE Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.GlobalListenerId Id { get; set; } [JsonPropertyName("id")]
+  PROP System.Boolean? AfterNonGlobal { get; set; } [JsonPropertyName("afterNonGlobal")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeEnum> EventTypes { get; set; } [JsonPropertyName("eventTypes")]
+  PROP System.Int32? Priority { get; set; } [JsonPropertyName("priority")]
+  PROP System.Int32? Retries { get; set; } [JsonPropertyName("retries")]
+  PROP System.String Type { get; set; } [JsonPropertyName("type")]
 
 TYPE Camunda.Orchestration.Sdk.CreateProcessInstanceResult : sealed class
   CTOR ()
@@ -4736,12 +4740,31 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceElementStatisticsQueryResult : sea
 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceFilter : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? EndDate { get; set; } [JsonPropertyName("endDate")]
+  PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? StartDate { get; set; } [JsonPropertyName("startDate")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ParentElementInstanceKey { get; set; } [JsonPropertyName("parentElementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty? ElementInstanceState { get; set; } [JsonPropertyName("elementInstanceState")]
+  PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? IncidentErrorHashCode { get; set; } [JsonPropertyName("incidentErrorHashCode")]
   PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? ParentProcessInstanceKey { get; set; } [JsonPropertyName("parentProcessInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty? State { get; set; } [JsonPropertyName("state")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? BatchOperationId { get; set; } [JsonPropertyName("batchOperationId")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? BatchOperationKey { get; set; } [JsonPropertyName("batchOperationKey")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? BusinessId { get; set; } [JsonPropertyName("businessId")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? ErrorMessage { get; set; } [JsonPropertyName("errorMessage")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? ProcessDefinitionName { get; set; } [JsonPropertyName("processDefinitionName")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? ProcessDefinitionVersionTag { get; set; } [JsonPropertyName("processDefinitionVersionTag")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Boolean? HasElementInstanceIncident { get; set; } [JsonPropertyName("hasElementInstanceIncident")]
+  PROP System.Boolean? HasIncident { get; set; } [JsonPropertyName("hasIncident")]
+  PROP System.Boolean? HasRetriesLeft { get; set; } [JsonPropertyName("hasRetriesLeft")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceFilterFields>? Or { get; set; } [JsonPropertyName("$or")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableValueFilterProperty>? Variables { get; set; } [JsonPropertyName("variables")]
 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceFilterFields : sealed class
   CTOR ()
