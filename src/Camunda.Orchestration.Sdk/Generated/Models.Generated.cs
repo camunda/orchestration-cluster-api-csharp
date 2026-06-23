@@ -217,6 +217,8 @@ public enum ClusterVariableSearchQuerySortRequestField
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CorrelatedMessageSubscriptionSearchQuerySortRequestField
 {
+    [JsonPropertyName("businessId")]
+    BusinessId,
     [JsonPropertyName("correlationKey")]
     CorrelationKey,
     [JsonPropertyName("correlationTime")]
@@ -7608,10 +7610,39 @@ public readonly record struct ConditionalEvaluationKey : global::Camunda.Orchest
 }
 
 /// <summary>
+/// ConditionWaitStateDetails
+/// </summary>
+public sealed class ConditionWaitStateDetails : WaitStateDetails
+{
+    /// <summary>
+    /// The condition expression that must evaluate to true to proceed.
+    /// </summary>
+    [JsonPropertyName("expression")]
+    public string Expression { get; set; } = null!;
+
+    /// <summary>
+    /// The variable events that trigger condition re-evaluation. Empty means all events.
+    /// </summary>
+    [JsonPropertyName("events")]
+    public List<string> Events { get; set; } = null!;
+
+}
+
+/// <summary>
 /// Correlated message subscriptions search filter.
 /// </summary>
 public sealed class CorrelatedMessageSubscriptionFilter
 {
+    /// <summary>
+    /// Filter by the business id stored on the correlated message subscription — for message
+    /// start event correlations the correlating message&apos;s business id, and for catch, boundary,
+    /// or intermediate event correlations the subscribing process instance&apos;s business id.
+    /// Supports advanced string filtering, including `$like` with `*`/`?` wildcards.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
+
     /// <summary>
     /// The correlation key of the message.
     /// </summary>
@@ -7691,6 +7722,18 @@ public sealed class CorrelatedMessageSubscriptionFilter
 /// </summary>
 public sealed class CorrelatedMessageSubscriptionResult
 {
+    /// <summary>
+    /// The business id associated with this correlated message subscription. For a message
+    /// start event correlation, it is the business id carried by the correlating message that
+    /// was stamped on the started process instance to enforce its uniqueness. For a catch,
+    /// boundary, or intermediate event correlation, it is the business id of the subscribing
+    /// process instance, captured when the subscription was opened. It is `null` when the
+    /// relevant process instance has no business id.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
     /// <summary>
     /// The correlation key of the message.
     /// </summary>
@@ -13334,6 +13377,12 @@ public sealed class JobChangeset
     [JsonPropertyName("timeout")]
     public long? Timeout { get; set; }
 
+    /// <summary>
+    /// The new priority for the job. Higher values indicate higher priority.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int? Priority { get; set; }
+
 }
 
 /// <summary>
@@ -15326,6 +15375,17 @@ public sealed class MessageCorrelationRequest : global::Camunda.Orchestration.Sd
     [JsonPropertyName("tenantId")]
     public TenantId? TenantId { get; set; }
 
+    /// <summary>
+    /// An optional business id used to enforce uniqueness of the process instance that a
+    /// message start event would create. If provided and uniqueness enforcement is enabled,
+    /// the engine rejects starting a new process instance when another root process instance
+    /// with the same business id is already active for the same process definition. It has no
+    /// effect when the message correlates to a catch, boundary, or intermediate event.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
@@ -15428,6 +15488,17 @@ public sealed class MessagePublicationRequest : global::Camunda.Orchestration.Sd
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// An optional business id used to enforce uniqueness of the process instance that a
+    /// message start event would create. If provided and uniqueness enforcement is enabled,
+    /// the engine rejects starting a new process instance when another root process instance
+    /// with the same business id is already active for the same process definition. It has no
+    /// effect when the message correlates to a catch, boundary, or intermediate event.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
 
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
@@ -16298,6 +16369,8 @@ public enum PermissionTypeEnum
     CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE,
     [JsonPropertyName("CREATE_BATCH_OPERATION_RESOLVE_INCIDENT")]
     CREATEBATCHOPERATIONRESOLVEINCIDENT,
+    [JsonPropertyName("CREATE_BATCH_OPERATION_UPDATE_JOB")]
+    CREATEBATCHOPERATIONUPDATEJOB,
     [JsonPropertyName("CREATE_DECISION_INSTANCE")]
     CREATEDECISIONINSTANCE,
     [JsonPropertyName("CREATE_PROCESS_INSTANCE")]
@@ -22210,6 +22283,7 @@ public sealed class VariableValueFilterProperty
 /// <item><description><see cref="UserTaskWaitStateDetails"/></description></item>
 /// <item><description><see cref="TimerWaitStateDetails"/></description></item>
 /// <item><description><see cref="SignalWaitStateDetails"/></description></item>
+/// <item><description><see cref="ConditionWaitStateDetails"/></description></item>
 /// </list>
 /// </remarks>
 /// <seealso cref="JobWaitStateDetails"/>
@@ -22217,12 +22291,14 @@ public sealed class VariableValueFilterProperty
 /// <seealso cref="UserTaskWaitStateDetails"/>
 /// <seealso cref="TimerWaitStateDetails"/>
 /// <seealso cref="SignalWaitStateDetails"/>
+/// <seealso cref="ConditionWaitStateDetails"/>
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "waitStateType")]
 [JsonDerivedType(typeof(JobWaitStateDetails), "JOB")]
 [JsonDerivedType(typeof(MessageWaitStateDetails), "MESSAGE")]
 [JsonDerivedType(typeof(UserTaskWaitStateDetails), "USER_TASK")]
 [JsonDerivedType(typeof(TimerWaitStateDetails), "TIMER")]
 [JsonDerivedType(typeof(SignalWaitStateDetails), "SIGNAL")]
+[JsonDerivedType(typeof(ConditionWaitStateDetails), "CONDITION")]
 public abstract class WaitStateDetails { }
 
 /// <summary>
@@ -22376,6 +22452,8 @@ public enum WaitStateTypeEnum
     TIMER,
     [JsonPropertyName("SIGNAL")]
     SIGNAL,
+    [JsonPropertyName("CONDITION")]
+    CONDITION,
 }
 
 /// <summary>

@@ -1910,6 +1910,11 @@ TYPE Camunda.Orchestration.Sdk.ComponentsConfigurationResponse : sealed class
   CTOR ()
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.WebappComponent> Active { get; set; } [JsonPropertyName("active")]
 
+TYPE Camunda.Orchestration.Sdk.ConditionWaitStateDetails : sealed class base=Camunda.Orchestration.Sdk.WaitStateDetails
+  CTOR ()
+  PROP System.Collections.Generic.List<System.String> Events { get; set; } [JsonPropertyName("events")]
+  PROP System.String Expression { get; set; } [JsonPropertyName("expression")]
+
 TYPE Camunda.Orchestration.Sdk.ConditionalEvaluationInstruction : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
@@ -1959,6 +1964,7 @@ TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter : sealed clas
   PROP Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty? SubscriptionKey { get; set; } [JsonPropertyName("subscriptionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? CorrelationKey { get; set; } [JsonPropertyName("correlationKey")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? MessageName { get; set; } [JsonPropertyName("messageName")]
@@ -1967,6 +1973,7 @@ TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter : sealed clas
 
 TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.MessageKey MessageKey { get; set; } [JsonPropertyName("messageKey")]
   PROP Camunda.Orchestration.Sdk.MessageSubscriptionKey SubscriptionKey { get; set; } [JsonPropertyName("subscriptionKey")]
@@ -2000,18 +2007,19 @@ TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortReque
 TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
   underlying=System.Int32
-  MEMBER CorrelationKey = 0 json="correlationKey"
-  MEMBER CorrelationTime = 1 json="correlationTime"
-  MEMBER ElementId = 2 json="elementId"
-  MEMBER ElementInstanceKey = 3 json="elementInstanceKey"
-  MEMBER MessageKey = 4 json="messageKey"
-  MEMBER MessageName = 5 json="messageName"
-  MEMBER PartitionId = 6 json="partitionId"
-  MEMBER ProcessDefinitionId = 7 json="processDefinitionId"
-  MEMBER ProcessDefinitionKey = 8 json="processDefinitionKey"
-  MEMBER ProcessInstanceKey = 9 json="processInstanceKey"
-  MEMBER SubscriptionKey = 10 json="subscriptionKey"
-  MEMBER TenantId = 11 json="tenantId"
+  MEMBER BusinessId = 0 json="businessId"
+  MEMBER CorrelationKey = 1 json="correlationKey"
+  MEMBER CorrelationTime = 2 json="correlationTime"
+  MEMBER ElementId = 3 json="elementId"
+  MEMBER ElementInstanceKey = 4 json="elementInstanceKey"
+  MEMBER MessageKey = 5 json="messageKey"
+  MEMBER MessageName = 6 json="messageName"
+  MEMBER PartitionId = 7 json="partitionId"
+  MEMBER ProcessDefinitionId = 8 json="processDefinitionId"
+  MEMBER ProcessDefinitionKey = 9 json="processDefinitionKey"
+  MEMBER ProcessInstanceKey = 10 json="processInstanceKey"
+  MEMBER SubscriptionKey = 11 json="subscriptionKey"
+  MEMBER TenantId = 12 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.CreateClusterVariableRequest : sealed class
   CTOR ()
@@ -3576,6 +3584,7 @@ TYPE Camunda.Orchestration.Sdk.JobActivationResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.JobChangeset : sealed class
   CTOR ()
+  PROP System.Int32? Priority { get; set; } [JsonPropertyName("priority")]
   PROP System.Int32? Retries { get; set; } [JsonPropertyName("retries")]
   PROP System.Int64? Timeout { get; set; } [JsonPropertyName("timeout")]
 
@@ -4110,6 +4119,7 @@ TYPE Camunda.Orchestration.Sdk.MatchedDecisionRuleItem : sealed class
 
 TYPE Camunda.Orchestration.Sdk.MessageCorrelationRequest : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
@@ -4133,6 +4143,7 @@ TYPE Camunda.Orchestration.Sdk.MessageKey : struct interfaces=[Camunda.Orchestra
 
 TYPE Camunda.Orchestration.Sdk.MessagePublicationRequest : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Int64? TimeToLive { get; set; } [JsonPropertyName("timeToLive")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
@@ -4403,32 +4414,33 @@ TYPE Camunda.Orchestration.Sdk.PermissionTypeEnum : enum interfaces=[System.ICom
   MEMBER CREATEBATCHOPERATIONMIGRATEPROCESSINSTANCE = 12 json="CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE"
   MEMBER CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE = 13 json="CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE"
   MEMBER CREATEBATCHOPERATIONRESOLVEINCIDENT = 14 json="CREATE_BATCH_OPERATION_RESOLVE_INCIDENT"
-  MEMBER CREATEDECISIONINSTANCE = 15 json="CREATE_DECISION_INSTANCE"
-  MEMBER CREATEPROCESSINSTANCE = 16 json="CREATE_PROCESS_INSTANCE"
-  MEMBER CREATETASKLISTENER = 17 json="CREATE_TASK_LISTENER"
-  MEMBER DELETE = 18 json="DELETE"
-  MEMBER DELETEDECISIONINSTANCE = 19 json="DELETE_DECISION_INSTANCE"
-  MEMBER DELETEDRD = 20 json="DELETE_DRD"
-  MEMBER DELETEFORM = 21 json="DELETE_FORM"
-  MEMBER DELETEPROCESS = 22 json="DELETE_PROCESS"
-  MEMBER DELETEPROCESSINSTANCE = 23 json="DELETE_PROCESS_INSTANCE"
-  MEMBER DELETERESOURCE = 24 json="DELETE_RESOURCE"
-  MEMBER DELETETASKLISTENER = 25 json="DELETE_TASK_LISTENER"
-  MEMBER EVALUATE = 26 json="EVALUATE"
-  MEMBER MODIFYPROCESSINSTANCE = 27 json="MODIFY_PROCESS_INSTANCE"
-  MEMBER READ = 28 json="READ"
-  MEMBER READDECISIONDEFINITION = 29 json="READ_DECISION_DEFINITION"
-  MEMBER READDECISIONINSTANCE = 30 json="READ_DECISION_INSTANCE"
-  MEMBER READJOBMETRIC = 31 json="READ_JOB_METRIC"
-  MEMBER READPROCESSDEFINITION = 32 json="READ_PROCESS_DEFINITION"
-  MEMBER READPROCESSINSTANCE = 33 json="READ_PROCESS_INSTANCE"
-  MEMBER READUSAGEMETRIC = 34 json="READ_USAGE_METRIC"
-  MEMBER READUSERTASK = 35 json="READ_USER_TASK"
-  MEMBER READTASKLISTENER = 36 json="READ_TASK_LISTENER"
-  MEMBER UPDATE = 37 json="UPDATE"
-  MEMBER UPDATEPROCESSINSTANCE = 38 json="UPDATE_PROCESS_INSTANCE"
-  MEMBER UPDATEUSERTASK = 39 json="UPDATE_USER_TASK"
-  MEMBER UPDATETASKLISTENER = 40 json="UPDATE_TASK_LISTENER"
+  MEMBER CREATEBATCHOPERATIONUPDATEJOB = 15 json="CREATE_BATCH_OPERATION_UPDATE_JOB"
+  MEMBER CREATEDECISIONINSTANCE = 16 json="CREATE_DECISION_INSTANCE"
+  MEMBER CREATEPROCESSINSTANCE = 17 json="CREATE_PROCESS_INSTANCE"
+  MEMBER CREATETASKLISTENER = 18 json="CREATE_TASK_LISTENER"
+  MEMBER DELETE = 19 json="DELETE"
+  MEMBER DELETEDECISIONINSTANCE = 20 json="DELETE_DECISION_INSTANCE"
+  MEMBER DELETEDRD = 21 json="DELETE_DRD"
+  MEMBER DELETEFORM = 22 json="DELETE_FORM"
+  MEMBER DELETEPROCESS = 23 json="DELETE_PROCESS"
+  MEMBER DELETEPROCESSINSTANCE = 24 json="DELETE_PROCESS_INSTANCE"
+  MEMBER DELETERESOURCE = 25 json="DELETE_RESOURCE"
+  MEMBER DELETETASKLISTENER = 26 json="DELETE_TASK_LISTENER"
+  MEMBER EVALUATE = 27 json="EVALUATE"
+  MEMBER MODIFYPROCESSINSTANCE = 28 json="MODIFY_PROCESS_INSTANCE"
+  MEMBER READ = 29 json="READ"
+  MEMBER READDECISIONDEFINITION = 30 json="READ_DECISION_DEFINITION"
+  MEMBER READDECISIONINSTANCE = 31 json="READ_DECISION_INSTANCE"
+  MEMBER READJOBMETRIC = 32 json="READ_JOB_METRIC"
+  MEMBER READPROCESSDEFINITION = 33 json="READ_PROCESS_DEFINITION"
+  MEMBER READPROCESSINSTANCE = 34 json="READ_PROCESS_INSTANCE"
+  MEMBER READUSAGEMETRIC = 35 json="READ_USAGE_METRIC"
+  MEMBER READUSERTASK = 36 json="READ_USER_TASK"
+  MEMBER READTASKLISTENER = 37 json="READ_TASK_LISTENER"
+  MEMBER UPDATE = 38 json="UPDATE"
+  MEMBER UPDATEPROCESSINSTANCE = 39 json="UPDATE_PROCESS_INSTANCE"
+  MEMBER UPDATEUSERTASK = 40 json="UPDATE_USER_TASK"
+  MEMBER UPDATETASKLISTENER = 41 json="UPDATE_TASK_LISTENER"
 
 TYPE Camunda.Orchestration.Sdk.ProblemDetail : sealed class
   CTOR ()
@@ -5986,6 +5998,7 @@ TYPE Camunda.Orchestration.Sdk.VariableValueFilterProperty : sealed class
 
 TYPE Camunda.Orchestration.Sdk.WaitStateDetails : abstract class
   ATTR JsonPolymorphic discriminator=waitStateType
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ConditionWaitStateDetails tag=CONDITION
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.JobWaitStateDetails tag=JOB
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.MessageWaitStateDetails tag=MESSAGE
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.SignalWaitStateDetails tag=SIGNAL
@@ -6048,6 +6061,7 @@ TYPE Camunda.Orchestration.Sdk.WaitStateTypeEnum : enum interfaces=[System.IComp
   MEMBER USERTASK = 2 json="USER_TASK"
   MEMBER TIMER = 3 json="TIMER"
   MEMBER SIGNAL = 4 json="SIGNAL"
+  MEMBER CONDITION = 5 json="CONDITION"
 
 TYPE Camunda.Orchestration.Sdk.WaitStateTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.WaitStateTypeExactMatch>]
   PROP System.String Value { get; }
