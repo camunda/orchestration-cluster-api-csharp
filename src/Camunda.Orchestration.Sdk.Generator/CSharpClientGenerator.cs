@@ -1184,19 +1184,39 @@ internal static class CSharpClientGenerator
     /// </summary>
     private static string GetUnderlyingPrimitiveType(IOpenApiSchema schema, OpenApiDocument doc)
     {
+        var typed = ResolveTypedSchema(schema, doc, new HashSet<string>(StringComparer.Ordinal));
+        return typed != null ? MapPrimitiveType(typed) : "string"; // fallback
+    }
+
+    /// <summary>
+    /// Walks a schema's allOf composition (resolving <c>$ref</c>s and recursing
+    /// into nested allOf) to find the first fragment that declares a concrete
+    /// type. Returns null if none is found. A composing fragment may itself be an
+    /// allOf wrapper (e.g. AuditLogKey → LongKey), so the search must be transitive.
+    /// </summary>
+    private static IOpenApiSchema? ResolveTypedSchema(IOpenApiSchema schema, OpenApiDocument doc, HashSet<string> visited)
+    {
         if (SchemaTypeName(schema) != null)
-            return MapPrimitiveType(schema);
+            return schema;
 
         foreach (var allOf in schema.AllOf ?? [])
         {
-            var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
-                ? refSchema : allOf;
-            if (SchemaTypeName(resolved) != null)
-                return MapPrimitiveType(resolved);
+            var refId = GetRefId(allOf);
+            var resolved = allOf;
+            if (refId != null)
+            {
+                if (!visited.Add(refId))
+                    continue;
+                if (doc.Components?.Schemas != null
+                    && doc.Components.Schemas.TryGetValue(refId, out var refSchema))
+                    resolved = refSchema;
+            }
+            var found = ResolveTypedSchema(resolved, doc, visited);
+            if (found != null)
+                return found;
         }
 
-        return "string"; // fallback
+        return null;
     }
 
     /// <remarks>
@@ -1514,19 +1534,31 @@ internal static class CSharpClientGenerator
     /// Returns true if the schema (or its allOf base) is a primitive scalar,
     /// resolving through allOf composition (e.g. AuditLogKey → allOf[LongKey] → string).
     /// </summary>
-    private static bool IsPrimitiveSchemaResolved(IOpenApiSchema schema, OpenApiDocument doc)
+    private static bool IsPrimitiveSchemaResolved(IOpenApiSchema schema, OpenApiDocument doc) =>
+        IsPrimitiveSchemaResolved(schema, doc, new HashSet<string>(StringComparer.Ordinal));
+
+    private static bool IsPrimitiveSchemaResolved(IOpenApiSchema schema, OpenApiDocument doc, HashSet<string> visited)
     {
         if (IsPrimitiveSchema(schema))
             return true;
-        // Check allOf: if all fragments resolve to primitives, it's a primitive wrapper
+        // A pure wrapper (no own properties) is primitive iff every allOf fragment
+        // resolves — transitively — to a primitive. A fragment may itself be an
+        // allOf wrapper, so recurse rather than checking only one level.
         if (schema.AllOf is { Count: > 0 } && (schema.Properties == null || schema.Properties.Count == 0))
         {
             foreach (var fragment in schema.AllOf)
             {
-                var resolved = GetRefId(fragment) != null && doc.Components?.Schemas != null
-                    && doc.Components.Schemas.TryGetValue(GetRefId(fragment)!, out var refSchema)
-                    ? refSchema : fragment;
-                if (!IsPrimitiveSchema(resolved))
+                var refId = GetRefId(fragment);
+                var resolved = fragment;
+                if (refId != null)
+                {
+                    if (!visited.Add(refId))
+                        continue; // already proven primitive on this path
+                    if (doc.Components?.Schemas != null
+                        && doc.Components.Schemas.TryGetValue(refId, out var refSchema))
+                        resolved = refSchema;
+                }
+                if (!IsPrimitiveSchemaResolved(resolved, doc, visited))
                     return false;
             }
             return true;
@@ -1544,15 +1576,32 @@ internal static class CSharpClientGenerator
         int? minLength = schema.MinLength > 0 ? schema.MinLength : null;
         int? maxLength = schema.MaxLength > 0 ? schema.MaxLength : null;
 
-        foreach (var allOf in schema.AllOf ?? [])
+        // Walk the allOf composition transitively (first writer wins): a key may
+        // wrap another key that itself wraps the constrained primitive — e.g.
+        // ProcessInstanceKeyExactMatch → ProcessInstanceKey → LongKey, where only
+        // LongKey carries the pattern/length bounds.
+        var visited = new HashSet<string>(StringComparer.Ordinal);
+        void Walk(IOpenApiSchema s)
         {
-            var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
-                ? refSchema : allOf;
-            pattern ??= resolved.Pattern;
-            minLength ??= resolved.MinLength > 0 ? resolved.MinLength : null;
-            maxLength ??= resolved.MaxLength > 0 ? resolved.MaxLength : null;
+            foreach (var allOf in s.AllOf ?? [])
+            {
+                var refId = GetRefId(allOf);
+                var resolved = allOf;
+                if (refId != null)
+                {
+                    if (!visited.Add(refId))
+                        continue;
+                    if (doc.Components?.Schemas != null
+                        && doc.Components.Schemas.TryGetValue(refId, out var refSchema))
+                        resolved = refSchema;
+                }
+                pattern ??= resolved.Pattern;
+                minLength ??= resolved.MinLength > 0 ? resolved.MinLength : null;
+                maxLength ??= resolved.MaxLength > 0 ? resolved.MaxLength : null;
+                Walk(resolved);
+            }
         }
+        Walk(schema);
         return (pattern, minLength, maxLength);
     }
 

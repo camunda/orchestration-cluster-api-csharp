@@ -123,6 +123,77 @@ public class GeneratorAllOfFlattenTests
         Assert.Equal("string?", filter["BaseTenant"]);
     }
 
+    // Mirrors the real key shape that ships broken today:
+    //   FlatScalar    : string + pattern/min/max     (like LongKey)
+    //   Wrapper1      : allOf[FlatScalar]             (no own type/constraints)
+    //   TypedWrapper2 : string + allOf[Wrapper1]      (like ProcessInstanceKeyExactMatch:
+    //                                                  own type, constraints two hops away)
+    //   BareWrapper2  : allOf[Wrapper1]               (no own type — only reachable as a
+    //                                                  domain struct if primitive detection recurses)
+    private const string NestedPrimitiveSpec = """
+        {
+          "openapi": "3.0.3",
+          "info": { "title": "Test", "version": "1.0.0" },
+          "paths": {
+            "/thing": {
+              "get": {
+                "operationId": "getThing",
+                "responses": {
+                  "200": {
+                    "description": "ok",
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TypedWrapper2" } } }
+                  }
+                }
+              }
+            }
+          },
+          "components": {
+            "schemas": {
+              "FlatScalar": { "type": "string", "pattern": "^[0-9]+$", "minLength": 1, "maxLength": 25 },
+              "Wrapper1": { "allOf": [ { "$ref": "#/components/schemas/FlatScalar" } ] },
+              "TypedWrapper2": { "type": "string", "allOf": [ { "$ref": "#/components/schemas/Wrapper1" } ] },
+              "BareWrapper2": { "allOf": [ { "$ref": "#/components/schemas/Wrapper1" } ] }
+            }
+          }
+        }
+        """;
+
+    /// <summary>
+    /// Defect-class guard for the primitive/constraint resolvers
+    /// (<c>GetConstraints</c>, <c>GetUnderlyingPrimitiveType</c>,
+    /// <c>IsPrimitiveSchemaResolved</c>). They resolved <c>allOf</c> only one level
+    /// deep, so a scalar whose constraints (or primitiveness) are contributed two
+    /// hops away lost them. This is the exact shape of the generated
+    /// <c>*KeyExactMatch</c> structs, which shipped with their <c>LongKey</c>
+    /// pattern/length validation silently dropped.
+    /// </summary>
+    [Fact]
+    public void Domain_struct_resolves_constraints_and_primitiveness_transitively()
+    {
+        using var tmp = TempSpecDir.Create();
+        File.WriteAllText(tmp.SpecPath, NestedPrimitiveSpec);
+        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+
+        CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir);
+        var models = File.ReadAllText(Path.Combine(tmp.OutputDir, "Models.Generated.cs"));
+
+        // GetConstraints must walk two hops (TypedWrapper2 → Wrapper1 → FlatScalar)
+        // so the emitted validation carries FlatScalar's pattern and length bounds.
+        Assert.Contains("readonly record struct TypedWrapper2", models);
+        Assert.Contains(
+            "AssertConstraints(value, \"TypedWrapper2\", pattern: \"^[0-9]+$\", minLength: 1, maxLength: 25)",
+            models);
+
+        // IsPrimitiveSchemaResolved + GetUnderlyingPrimitiveType must also recurse:
+        // BareWrapper2 has no own type, so it is only recognised as a primitive
+        // wrapper (a domain struct, not an empty class) if detection follows the
+        // nested allOf down to FlatScalar.
+        Assert.Contains("readonly record struct BareWrapper2", models);
+        Assert.Contains(
+            "AssertConstraints(value, \"BareWrapper2\", pattern: \"^[0-9]+$\", minLength: 1, maxLength: 25)",
+            models);
+    }
+
     /// <summary>
     /// Returns a map of property name → declared C# type string for the named
     /// class in the parsed compilation unit.
