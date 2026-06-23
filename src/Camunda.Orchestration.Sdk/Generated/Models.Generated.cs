@@ -217,6 +217,8 @@ public enum ClusterVariableSearchQuerySortRequestField
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CorrelatedMessageSubscriptionSearchQuerySortRequestField
 {
+    [JsonPropertyName("businessId")]
+    BusinessId,
     [JsonPropertyName("correlationKey")]
     CorrelationKey,
     [JsonPropertyName("correlationTime")]
@@ -3430,13 +3432,13 @@ public readonly record struct AgentHistoryItemKeyExactMatch : global::Camunda.Or
     /// </summary>
     public static AgentHistoryItemKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentHistoryItemKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentHistoryItemKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new AgentHistoryItemKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -4149,13 +4151,13 @@ public readonly record struct AgentInstanceKeyExactMatch : global::Camunda.Orche
     /// </summary>
     public static AgentInstanceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentInstanceKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new AgentInstanceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -5231,13 +5233,13 @@ public readonly record struct AuditLogKeyExactMatch : global::Camunda.Orchestrat
     /// </summary>
     public static AuditLogKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AuditLogKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new AuditLogKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -7608,10 +7610,39 @@ public readonly record struct ConditionalEvaluationKey : global::Camunda.Orchest
 }
 
 /// <summary>
+/// ConditionWaitStateDetails
+/// </summary>
+public sealed class ConditionWaitStateDetails : WaitStateDetails
+{
+    /// <summary>
+    /// The condition expression that must evaluate to true to proceed.
+    /// </summary>
+    [JsonPropertyName("expression")]
+    public string Expression { get; set; } = null!;
+
+    /// <summary>
+    /// The variable events that trigger condition re-evaluation. Empty means all events.
+    /// </summary>
+    [JsonPropertyName("events")]
+    public List<string> Events { get; set; } = null!;
+
+}
+
+/// <summary>
 /// Correlated message subscriptions search filter.
 /// </summary>
 public sealed class CorrelatedMessageSubscriptionFilter
 {
+    /// <summary>
+    /// Filter by the business id stored on the correlated message subscription — for message
+    /// start event correlations the correlating message&apos;s business id, and for catch, boundary,
+    /// or intermediate event correlations the subscribing process instance&apos;s business id.
+    /// Supports advanced string filtering, including `$like` with `*`/`?` wildcards.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
+
     /// <summary>
     /// The correlation key of the message.
     /// </summary>
@@ -7691,6 +7722,18 @@ public sealed class CorrelatedMessageSubscriptionFilter
 /// </summary>
 public sealed class CorrelatedMessageSubscriptionResult
 {
+    /// <summary>
+    /// The business id associated with this correlated message subscription. For a message
+    /// start event correlation, it is the business id carried by the correlating message that
+    /// was stamped on the started process instance to enforce its uniqueness. For a catch,
+    /// boundary, or intermediate event correlation, it is the business id of the subscribing
+    /// process instance, captured when the subscription was opened. It is `null` when the
+    /// relevant process instance has no business id.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
     /// <summary>
     /// The correlation key of the message.
     /// </summary>
@@ -7874,6 +7917,30 @@ public sealed class CreateGlobalTaskListenerRequest
     /// </summary>
     [JsonPropertyName("eventTypes")]
     public List<GlobalTaskListenerEventTypeEnum> EventTypes { get; set; } = null!;
+
+    /// <summary>
+    /// The name of the job type, used as a reference to specify which job workers request the respective listener job.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string Type { get; set; } = null!;
+
+    /// <summary>
+    /// Number of retries for the listener job.
+    /// </summary>
+    [JsonPropertyName("retries")]
+    public int? Retries { get; set; }
+
+    /// <summary>
+    /// Whether the listener should run after model-level listeners.
+    /// </summary>
+    [JsonPropertyName("afterNonGlobal")]
+    public bool? AfterNonGlobal { get; set; }
+
+    /// <summary>
+    /// The priority of the listener. Higher priority listeners are executed before lower priority ones.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int? Priority { get; set; }
 
 }
 
@@ -8173,13 +8240,13 @@ public readonly record struct DecisionDefinitionKeyExactMatch : global::Camunda.
     /// </summary>
     public static DecisionDefinitionKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionDefinitionKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionDefinitionKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -8578,13 +8645,13 @@ public readonly record struct DecisionEvaluationKeyExactMatch : global::Camunda.
     /// </summary>
     public static DecisionEvaluationKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionEvaluationKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionEvaluationKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9271,13 +9338,13 @@ public readonly record struct DecisionRequirementsKeyExactMatch : global::Camund
     /// </summary>
     public static DecisionRequirementsKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionRequirementsKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DecisionRequirementsKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DecisionRequirementsKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -9708,13 +9775,13 @@ public readonly record struct DeploymentKeyExactMatch : global::Camunda.Orchestr
     /// </summary>
     public static DeploymentKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DeploymentKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "DeploymentKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new DeploymentKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -10523,13 +10590,13 @@ public readonly record struct ElementInstanceKeyExactMatch : global::Camunda.Orc
     /// </summary>
     public static ElementInstanceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ElementInstanceKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ElementInstanceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -11468,13 +11535,13 @@ public readonly record struct FormKeyExactMatch : global::Camunda.Orchestration.
     /// </summary>
     public static FormKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "FormKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "FormKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new FormKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -13310,6 +13377,12 @@ public sealed class JobChangeset
     [JsonPropertyName("timeout")]
     public long? Timeout { get; set; }
 
+    /// <summary>
+    /// The new priority for the job. Higher values indicate higher priority.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int? Priority { get; set; }
+
 }
 
 /// <summary>
@@ -13684,13 +13757,13 @@ public readonly record struct JobKeyExactMatch : global::Camunda.Orchestration.S
     /// </summary>
     public static JobKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new JobKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -15302,6 +15375,17 @@ public sealed class MessageCorrelationRequest : global::Camunda.Orchestration.Sd
     [JsonPropertyName("tenantId")]
     public TenantId? TenantId { get; set; }
 
+    /// <summary>
+    /// An optional business id used to enforce uniqueness of the process instance that a
+    /// message start event would create. If provided and uniqueness enforcement is enabled,
+    /// the engine rejects starting a new process instance when another root process instance
+    /// with the same business id is already active for the same process definition. It has no
+    /// effect when the message correlates to a catch, boundary, or intermediate event.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
@@ -15404,6 +15488,17 @@ public sealed class MessagePublicationRequest : global::Camunda.Orchestration.Sd
     /// </summary>
     [JsonPropertyName("tenantId")]
     public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// An optional business id used to enforce uniqueness of the process instance that a
+    /// message start event would create. If provided and uniqueness enforcement is enabled,
+    /// the engine rejects starting a new process instance when another root process instance
+    /// with the same business id is already active for the same process definition. It has no
+    /// effect when the message correlates to a catch, boundary, or intermediate event.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
 
     /// <inheritdoc />
     public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
@@ -15579,13 +15674,13 @@ public readonly record struct MessageSubscriptionKeyExactMatch : global::Camunda
     /// </summary>
     public static MessageSubscriptionKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "MessageSubscriptionKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new MessageSubscriptionKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -16274,6 +16369,8 @@ public enum PermissionTypeEnum
     CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE,
     [JsonPropertyName("CREATE_BATCH_OPERATION_RESOLVE_INCIDENT")]
     CREATEBATCHOPERATIONRESOLVEINCIDENT,
+    [JsonPropertyName("CREATE_BATCH_OPERATION_UPDATE_JOB")]
+    CREATEBATCHOPERATIONUPDATEJOB,
     [JsonPropertyName("CREATE_DECISION_INSTANCE")]
     CREATEDECISIONINSTANCE,
     [JsonPropertyName("CREATE_PROCESS_INSTANCE")]
@@ -16839,13 +16936,13 @@ public readonly record struct ProcessDefinitionKeyExactMatch : global::Camunda.O
     /// </summary>
     public static ProcessDefinitionKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessDefinitionKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ProcessDefinitionKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -17684,6 +17781,122 @@ public sealed class ProcessInstanceFilter
     public ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; }
 
     /// <summary>
+    /// The start date.
+    /// </summary>
+    [JsonPropertyName("startDate")]
+    public DateTimeFilterProperty? StartDate { get; set; }
+
+    /// <summary>
+    /// The end date.
+    /// </summary>
+    [JsonPropertyName("endDate")]
+    public DateTimeFilterProperty? EndDate { get; set; }
+
+    /// <summary>
+    /// The process instance state.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public ProcessInstanceStateFilterProperty? State { get; set; }
+
+    /// <summary>
+    /// Whether this process instance has a related incident or not.
+    /// </summary>
+    [JsonPropertyName("hasIncident")]
+    public bool? HasIncident { get; set; }
+
+    /// <summary>
+    /// The tenant id.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public StringFilterProperty? TenantId { get; set; }
+
+    /// <summary>
+    /// The process instance variables.
+    /// </summary>
+    [JsonPropertyName("variables")]
+    public List<VariableValueFilterProperty>? Variables { get; set; }
+
+    /// <summary>
+    /// The key of this process instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The parent process instance key.
+    /// </summary>
+    [JsonPropertyName("parentProcessInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? ParentProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The parent element instance key.
+    /// </summary>
+    [JsonPropertyName("parentElementInstanceKey")]
+    public ElementInstanceKeyFilterProperty? ParentElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The batch operation id.
+    /// **Deprecated**: Use `batchOperationKey` instead. This field will be removed in a future release. If both `batchOperationId` and `batchOperationKey` are provided, the request will be rejected with a 400 error.
+    /// 
+    /// </summary>
+    [JsonPropertyName("batchOperationId")]
+    public StringFilterProperty? BatchOperationId { get; set; }
+
+    /// <summary>
+    /// The batch operation key.
+    /// </summary>
+    [JsonPropertyName("batchOperationKey")]
+    public StringFilterProperty? BatchOperationKey { get; set; }
+
+    /// <summary>
+    /// The error message related to the process.
+    /// </summary>
+    [JsonPropertyName("errorMessage")]
+    public StringFilterProperty? ErrorMessage { get; set; }
+
+    /// <summary>
+    /// Whether the process has failed jobs with retries left.
+    /// </summary>
+    [JsonPropertyName("hasRetriesLeft")]
+    public bool? HasRetriesLeft { get; set; }
+
+    /// <summary>
+    /// The state of the element instances associated with the process instance.
+    /// </summary>
+    [JsonPropertyName("elementInstanceState")]
+    public ElementInstanceStateFilterProperty? ElementInstanceState { get; set; }
+
+    /// <summary>
+    /// The element id associated with the process instance.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public StringFilterProperty? ElementId { get; set; }
+
+    /// <summary>
+    /// Whether the element instance has an incident or not.
+    /// </summary>
+    [JsonPropertyName("hasElementInstanceIncident")]
+    public bool? HasElementInstanceIncident { get; set; }
+
+    /// <summary>
+    /// The incident error hash code, associated with this process.
+    /// </summary>
+    [JsonPropertyName("incidentErrorHashCode")]
+    public IntegerFilterProperty? IncidentErrorHashCode { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// The business id associated with the process instance.
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
+
+    /// <summary>
     /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
     /// 
     /// Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
@@ -17939,13 +18152,13 @@ public readonly record struct ProcessInstanceKeyExactMatch : global::Camunda.Orc
     /// </summary>
     public static ProcessInstanceKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProcessInstanceKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new ProcessInstanceKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -21756,13 +21969,13 @@ public readonly record struct VariableKeyExactMatch : global::Camunda.Orchestrat
     /// </summary>
     public static VariableKeyExactMatch AssumeExists(string value)
     {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableKeyExactMatch");
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
         return new VariableKeyExactMatch(value);
     }
 
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
@@ -22070,6 +22283,7 @@ public sealed class VariableValueFilterProperty
 /// <item><description><see cref="UserTaskWaitStateDetails"/></description></item>
 /// <item><description><see cref="TimerWaitStateDetails"/></description></item>
 /// <item><description><see cref="SignalWaitStateDetails"/></description></item>
+/// <item><description><see cref="ConditionWaitStateDetails"/></description></item>
 /// </list>
 /// </remarks>
 /// <seealso cref="JobWaitStateDetails"/>
@@ -22077,12 +22291,14 @@ public sealed class VariableValueFilterProperty
 /// <seealso cref="UserTaskWaitStateDetails"/>
 /// <seealso cref="TimerWaitStateDetails"/>
 /// <seealso cref="SignalWaitStateDetails"/>
+/// <seealso cref="ConditionWaitStateDetails"/>
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "waitStateType")]
 [JsonDerivedType(typeof(JobWaitStateDetails), "JOB")]
 [JsonDerivedType(typeof(MessageWaitStateDetails), "MESSAGE")]
 [JsonDerivedType(typeof(UserTaskWaitStateDetails), "USER_TASK")]
 [JsonDerivedType(typeof(TimerWaitStateDetails), "TIMER")]
 [JsonDerivedType(typeof(SignalWaitStateDetails), "SIGNAL")]
+[JsonDerivedType(typeof(ConditionWaitStateDetails), "CONDITION")]
 public abstract class WaitStateDetails { }
 
 /// <summary>
@@ -22236,6 +22452,8 @@ public enum WaitStateTypeEnum
     TIMER,
     [JsonPropertyName("SIGNAL")]
     SIGNAL,
+    [JsonPropertyName("CONDITION")]
+    CONDITION,
 }
 
 /// <summary>

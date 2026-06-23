@@ -21646,6 +21646,7 @@
           "CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE",
           "CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE",
           "CREATE_BATCH_OPERATION_RESOLVE_INCIDENT",
+          "CREATE_BATCH_OPERATION_UPDATE_JOB",
           "CREATE_DECISION_INSTANCE",
           "CREATE_PROCESS_INSTANCE",
           "CREATE_TASK_LISTENER",
@@ -26559,7 +26560,8 @@
             "MESSAGE": "#/components/schemas/MessageWaitStateDetails",
             "USER_TASK": "#/components/schemas/UserTaskWaitStateDetails",
             "TIMER": "#/components/schemas/TimerWaitStateDetails",
-            "SIGNAL": "#/components/schemas/SignalWaitStateDetails"
+            "SIGNAL": "#/components/schemas/SignalWaitStateDetails",
+            "CONDITION": "#/components/schemas/ConditionWaitStateDetails"
           }
         },
         "oneOf": [
@@ -26577,6 +26579,9 @@
           },
           {
             "$ref": "#/components/schemas/SignalWaitStateDetails"
+          },
+          {
+            "$ref": "#/components/schemas/ConditionWaitStateDetails"
           }
         ]
       },
@@ -26588,7 +26593,8 @@
           "MESSAGE",
           "USER_TASK",
           "TIMER",
-          "SIGNAL"
+          "SIGNAL",
+          "CONDITION"
         ]
       },
       "BaseWaitStateDetails": {
@@ -26755,6 +26761,36 @@
           }
         },
         "x-added-in-version": "8.10"
+      },
+      "ConditionWaitStateDetails": {
+        "type": "object",
+        "required": [
+          "events",
+          "expression",
+          "waitStateType"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseWaitStateDetails"
+          }
+        ],
+        "properties": {
+          "expression": {
+            "description": "The condition expression that must evaluate to true to proceed.",
+            "type": "string"
+          },
+          "events": {
+            "description": "The variable events that trigger condition re-evaluation. Empty means all events.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "create",
+                "update"
+              ]
+            }
+          }
+        }
       },
       "AdHocSubProcessActivateActivityReference": {
         "type": "object",
@@ -30626,8 +30662,20 @@
             "format": "int64",
             "description": "The new timeout for the job in milliseconds.",
             "nullable": true
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The new priority for the job. Higher values indicate higher priority.",
+            "nullable": true
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "priority",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "TenantFilterEnum": {
         "description": "The tenant filtering strategy for job activation. Determines whether to use tenant IDs provided in the request or tenant IDs assigned to the authenticated principal.\n",
@@ -32201,8 +32249,22 @@
                 "$ref": "#/components/schemas/TenantId"
               }
             ]
+          },
+          "businessId": {
+            "description": "An optional business id used to enforce uniqueness of the process instance that a\nmessage start event would create. If provided and uniqueness enforcement is enabled,\nthe engine rejects starting a new process instance when another root process instance\nwith the same business id is already active for the same process definition. It has no\neffect when the message correlates to a catch, boundary, or intermediate event.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessId"
+              }
+            ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "MessageCorrelationResult": {
         "description": "The message key of the correlated message, as well as the first process instance key it\ncorrelated with.\n",
@@ -32278,10 +32340,24 @@
                 "$ref": "#/components/schemas/TenantId"
               }
             ]
+          },
+          "businessId": {
+            "description": "An optional business id used to enforce uniqueness of the process instance that a\nmessage start event would create. If provided and uniqueness enforcement is enabled,\nthe engine rejects starting a new process instance when another root process instance\nwith the same business id is already active for the same process definition. It has no\neffect when the message correlates to a catch, boundary, or intermediate event.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessId"
+              }
+            ]
           }
         },
         "required": [
           "name"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.10"
+          }
         ]
       },
       "MessagePublicationResult": {
@@ -32780,6 +32856,7 @@
       "CorrelatedMessageSubscriptionResult": {
         "type": "object",
         "required": [
+          "businessId",
           "correlationKey",
           "correlationTime",
           "elementId",
@@ -32795,6 +32872,15 @@
           "tenantId"
         ],
         "properties": {
+          "businessId": {
+            "description": "The business id associated with this correlated message subscription. For a message\nstart event correlation, it is the business id carried by the correlating message that\nwas stamped on the started process instance to enforce its uniqueness. For a catch,\nboundary, or intermediate event correlation, it is the business id of the subscribing\nprocess instance, captured when the subscription was opened. It is `null` when the\nrelevant process instance has no business id.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessId"
+              }
+            ]
+          },
           "correlationKey": {
             "description": "The correlation key of the message.",
             "nullable": true,
@@ -32889,6 +32975,10 @@
           {
             "propertyName": "rootProcessInstanceKey",
             "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.10"
           }
         ]
       },
@@ -32925,6 +33015,7 @@
             "description": "The field to sort by.",
             "type": "string",
             "enum": [
+              "businessId",
               "correlationKey",
               "correlationTime",
               "elementId",
@@ -32969,6 +33060,14 @@
         "description": "Correlated message subscriptions search filter.",
         "type": "object",
         "properties": {
+          "businessId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "Filter by the business id stored on the correlated message subscription — for message\nstart event correlations the correlating message's business id, and for catch, boundary,\nor intermediate event correlations the subscribing process instance's business id.\nSupports advanced string filtering, including `$like` with `*`/`?` wildcards.\n"
+          },
           "correlationKey": {
             "allOf": [
               {
@@ -33065,7 +33164,13 @@
             ],
             "description": "The tenant ID associated with this correlated message subscription."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "MessageSubscriptionTypeFilterProperty": {
         "description": "MessageSubscriptionTypeEnum with full advanced search capabilities.",
