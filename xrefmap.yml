@@ -15454,6 +15454,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ComponentsConfigurationResponse.Active
   fullName: Camunda.Orchestration.Sdk.ComponentsConfigurationResponse.Active
   nameWithType: ComponentsConfigurationResponse.Active
+- uid: Camunda.Orchestration.Sdk.ConditionWaitStateDetails
+  name: ConditionWaitStateDetails
+  href: api/Camunda.Orchestration.Sdk.ConditionWaitStateDetails.html
+  commentId: T:Camunda.Orchestration.Sdk.ConditionWaitStateDetails
+  fullName: Camunda.Orchestration.Sdk.ConditionWaitStateDetails
+  nameWithType: ConditionWaitStateDetails
+- uid: Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Events
+  name: Events
+  href: api/Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Events.html#Camunda_Orchestration_Sdk_ConditionWaitStateDetails_Events
+  commentId: P:Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Events
+  fullName: Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Events
+  nameWithType: ConditionWaitStateDetails.Events
+- uid: Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Events*
+  name: Events
+  href: api/Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Events.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Events
+  fullName: Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Events
+  nameWithType: ConditionWaitStateDetails.Events
+- uid: Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Expression
+  name: Expression
+  href: api/Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Expression.html#Camunda_Orchestration_Sdk_ConditionWaitStateDetails_Expression
+  commentId: P:Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Expression
+  fullName: Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Expression
+  nameWithType: ConditionWaitStateDetails.Expression
+- uid: Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Expression*
+  name: Expression
+  href: api/Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Expression.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Expression
+  fullName: Camunda.Orchestration.Sdk.ConditionWaitStateDetails.Expression
+  nameWithType: ConditionWaitStateDetails.Expression
 - uid: Camunda.Orchestration.Sdk.ConditionalEvaluationInstruction
   name: ConditionalEvaluationInstruction
   href: api/Camunda.Orchestration.Sdk.ConditionalEvaluationInstruction.html
@@ -15748,6 +15778,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter
   fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter
   nameWithType: CorrelatedMessageSubscriptionFilter
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.BusinessId.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionFilter_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.BusinessId
+  nameWithType: CorrelatedMessageSubscriptionFilter.BusinessId
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.BusinessId
+  nameWithType: CorrelatedMessageSubscriptionFilter.BusinessId
 - uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.CorrelationKey
   name: CorrelationKey
   href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter.CorrelationKey.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionFilter_CorrelationKey
@@ -15898,6 +15940,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult
   fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult
   nameWithType: CorrelatedMessageSubscriptionResult
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.BusinessId.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionResult_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.BusinessId
+  nameWithType: CorrelatedMessageSubscriptionResult.BusinessId
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.BusinessId
+  nameWithType: CorrelatedMessageSubscriptionResult.BusinessId
 - uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.CorrelationKey
   name: CorrelationKey
   href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult.CorrelationKey.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionResult_CorrelationKey
@@ -16162,6 +16216,12 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField
   fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField
   nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_BusinessId
+  commentId: F:Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.BusinessId
+  fullName: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.BusinessId
+  nameWithType: CorrelatedMessageSubscriptionSearchQuerySortRequestField.BusinessId
 - uid: Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.CorrelationKey
   name: CorrelationKey
   href: api/Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_CorrelatedMessageSubscriptionSearchQuerySortRequestField_CorrelationKey
@@ -16270,6 +16330,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest
   fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest
   nameWithType: CreateGlobalTaskListenerRequest
+- uid: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.AfterNonGlobal
+  name: AfterNonGlobal
+  href: api/Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.AfterNonGlobal.html#Camunda_Orchestration_Sdk_CreateGlobalTaskListenerRequest_AfterNonGlobal
+  commentId: P:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.AfterNonGlobal
+  fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.AfterNonGlobal
+  nameWithType: CreateGlobalTaskListenerRequest.AfterNonGlobal
+- uid: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.AfterNonGlobal*
+  name: AfterNonGlobal
+  href: api/Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.AfterNonGlobal.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.AfterNonGlobal
+  fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.AfterNonGlobal
+  nameWithType: CreateGlobalTaskListenerRequest.AfterNonGlobal
 - uid: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.EventTypes
   name: EventTypes
   href: api/Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.EventTypes.html#Camunda_Orchestration_Sdk_CreateGlobalTaskListenerRequest_EventTypes
@@ -16294,6 +16366,42 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Id
   fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Id
   nameWithType: CreateGlobalTaskListenerRequest.Id
+- uid: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Priority
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Priority.html#Camunda_Orchestration_Sdk_CreateGlobalTaskListenerRequest_Priority
+  commentId: P:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Priority
+  fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Priority
+  nameWithType: CreateGlobalTaskListenerRequest.Priority
+- uid: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Priority*
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Priority.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Priority
+  fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Priority
+  nameWithType: CreateGlobalTaskListenerRequest.Priority
+- uid: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Retries
+  name: Retries
+  href: api/Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Retries.html#Camunda_Orchestration_Sdk_CreateGlobalTaskListenerRequest_Retries
+  commentId: P:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Retries
+  fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Retries
+  nameWithType: CreateGlobalTaskListenerRequest.Retries
+- uid: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Retries*
+  name: Retries
+  href: api/Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Retries.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Retries
+  fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Retries
+  nameWithType: CreateGlobalTaskListenerRequest.Retries
+- uid: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Type
+  name: Type
+  href: api/Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Type.html#Camunda_Orchestration_Sdk_CreateGlobalTaskListenerRequest_Type
+  commentId: P:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Type
+  fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Type
+  nameWithType: CreateGlobalTaskListenerRequest.Type
+- uid: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Type*
+  name: Type
+  href: api/Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Type.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Type
+  fullName: Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest.Type
+  nameWithType: CreateGlobalTaskListenerRequest.Type
 - uid: Camunda.Orchestration.Sdk.CreateProcessInstanceResult
   name: CreateProcessInstanceResult
   href: api/Camunda.Orchestration.Sdk.CreateProcessInstanceResult.html
@@ -27295,6 +27403,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.JobChangeset
   fullName: Camunda.Orchestration.Sdk.JobChangeset
   nameWithType: JobChangeset
+- uid: Camunda.Orchestration.Sdk.JobChangeset.Priority
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.JobChangeset.Priority.html#Camunda_Orchestration_Sdk_JobChangeset_Priority
+  commentId: P:Camunda.Orchestration.Sdk.JobChangeset.Priority
+  fullName: Camunda.Orchestration.Sdk.JobChangeset.Priority
+  nameWithType: JobChangeset.Priority
+- uid: Camunda.Orchestration.Sdk.JobChangeset.Priority*
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.JobChangeset.Priority.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobChangeset.Priority
+  fullName: Camunda.Orchestration.Sdk.JobChangeset.Priority
+  nameWithType: JobChangeset.Priority
 - uid: Camunda.Orchestration.Sdk.JobChangeset.Retries
   name: Retries
   href: api/Camunda.Orchestration.Sdk.JobChangeset.Retries.html#Camunda_Orchestration_Sdk_JobChangeset_Retries
@@ -31141,6 +31261,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.MessageCorrelationRequest
   fullName: Camunda.Orchestration.Sdk.MessageCorrelationRequest
   nameWithType: MessageCorrelationRequest
+- uid: Camunda.Orchestration.Sdk.MessageCorrelationRequest.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.MessageCorrelationRequest.BusinessId.html#Camunda_Orchestration_Sdk_MessageCorrelationRequest_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.MessageCorrelationRequest.BusinessId
+  fullName: Camunda.Orchestration.Sdk.MessageCorrelationRequest.BusinessId
+  nameWithType: MessageCorrelationRequest.BusinessId
+- uid: Camunda.Orchestration.Sdk.MessageCorrelationRequest.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.MessageCorrelationRequest.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageCorrelationRequest.BusinessId
+  fullName: Camunda.Orchestration.Sdk.MessageCorrelationRequest.BusinessId
+  nameWithType: MessageCorrelationRequest.BusinessId
 - uid: Camunda.Orchestration.Sdk.MessageCorrelationRequest.CorrelationKey
   name: CorrelationKey
   href: api/Camunda.Orchestration.Sdk.MessageCorrelationRequest.CorrelationKey.html#Camunda_Orchestration_Sdk_MessageCorrelationRequest_CorrelationKey
@@ -31312,6 +31444,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.MessagePublicationRequest
   fullName: Camunda.Orchestration.Sdk.MessagePublicationRequest
   nameWithType: MessagePublicationRequest
+- uid: Camunda.Orchestration.Sdk.MessagePublicationRequest.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.MessagePublicationRequest.BusinessId.html#Camunda_Orchestration_Sdk_MessagePublicationRequest_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.MessagePublicationRequest.BusinessId
+  fullName: Camunda.Orchestration.Sdk.MessagePublicationRequest.BusinessId
+  nameWithType: MessagePublicationRequest.BusinessId
+- uid: Camunda.Orchestration.Sdk.MessagePublicationRequest.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.MessagePublicationRequest.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessagePublicationRequest.BusinessId
+  fullName: Camunda.Orchestration.Sdk.MessagePublicationRequest.BusinessId
+  nameWithType: MessagePublicationRequest.BusinessId
 - uid: Camunda.Orchestration.Sdk.MessagePublicationRequest.CorrelationKey
   name: CorrelationKey
   href: api/Camunda.Orchestration.Sdk.MessagePublicationRequest.CorrelationKey.html#Camunda_Orchestration_Sdk_MessagePublicationRequest_CorrelationKey
@@ -33172,6 +33316,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONRESOLVEINCIDENT
   fullName: Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONRESOLVEINCIDENT
   nameWithType: PermissionTypeEnum.CREATEBATCHOPERATIONRESOLVEINCIDENT
+- uid: Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONUPDATEJOB
+  name: CREATEBATCHOPERATIONUPDATEJOB
+  href: api/Camunda.Orchestration.Sdk.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_PermissionTypeEnum_CREATEBATCHOPERATIONUPDATEJOB
+  commentId: F:Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONUPDATEJOB
+  fullName: Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONUPDATEJOB
+  nameWithType: PermissionTypeEnum.CREATEBATCHOPERATIONUPDATEJOB
 - uid: Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEDECISIONINSTANCE
   name: CREATEDECISIONINSTANCE
   href: api/Camunda.Orchestration.Sdk.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_PermissionTypeEnum_CREATEDECISIONINSTANCE
@@ -35578,6 +35728,138 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.ProcessInstanceFilter
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter
   nameWithType: ProcessInstanceFilter
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationId
+  name: BatchOperationId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationId.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_BatchOperationId
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationId
+  nameWithType: ProcessInstanceFilter.BatchOperationId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationId*
+  name: BatchOperationId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationId
+  nameWithType: ProcessInstanceFilter.BatchOperationId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationKey
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationKey.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_BatchOperationKey
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationKey
+  nameWithType: ProcessInstanceFilter.BatchOperationKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationKey*
+  name: BatchOperationKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BatchOperationKey
+  nameWithType: ProcessInstanceFilter.BatchOperationKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.BusinessId.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BusinessId
+  nameWithType: ProcessInstanceFilter.BusinessId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.BusinessId
+  nameWithType: ProcessInstanceFilter.BusinessId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementId
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementId.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_ElementId
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementId
+  nameWithType: ProcessInstanceFilter.ElementId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementId*
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementId
+  nameWithType: ProcessInstanceFilter.ElementId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementInstanceState
+  name: ElementInstanceState
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementInstanceState.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_ElementInstanceState
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementInstanceState
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementInstanceState
+  nameWithType: ProcessInstanceFilter.ElementInstanceState
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementInstanceState*
+  name: ElementInstanceState
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementInstanceState.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementInstanceState
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ElementInstanceState
+  nameWithType: ProcessInstanceFilter.ElementInstanceState
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.EndDate
+  name: EndDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.EndDate.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_EndDate
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.EndDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.EndDate
+  nameWithType: ProcessInstanceFilter.EndDate
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.EndDate*
+  name: EndDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.EndDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.EndDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.EndDate
+  nameWithType: ProcessInstanceFilter.EndDate
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ErrorMessage
+  name: ErrorMessage
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ErrorMessage.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_ErrorMessage
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ErrorMessage
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ErrorMessage
+  nameWithType: ProcessInstanceFilter.ErrorMessage
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ErrorMessage*
+  name: ErrorMessage
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ErrorMessage.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ErrorMessage
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ErrorMessage
+  nameWithType: ProcessInstanceFilter.ErrorMessage
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasElementInstanceIncident
+  name: HasElementInstanceIncident
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasElementInstanceIncident.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_HasElementInstanceIncident
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasElementInstanceIncident
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasElementInstanceIncident
+  nameWithType: ProcessInstanceFilter.HasElementInstanceIncident
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasElementInstanceIncident*
+  name: HasElementInstanceIncident
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasElementInstanceIncident.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasElementInstanceIncident
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasElementInstanceIncident
+  nameWithType: ProcessInstanceFilter.HasElementInstanceIncident
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasIncident
+  name: HasIncident
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasIncident.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_HasIncident
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasIncident
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasIncident
+  nameWithType: ProcessInstanceFilter.HasIncident
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasIncident*
+  name: HasIncident
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasIncident.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasIncident
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasIncident
+  nameWithType: ProcessInstanceFilter.HasIncident
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasRetriesLeft
+  name: HasRetriesLeft
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasRetriesLeft.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_HasRetriesLeft
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasRetriesLeft
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasRetriesLeft
+  nameWithType: ProcessInstanceFilter.HasRetriesLeft
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasRetriesLeft*
+  name: HasRetriesLeft
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasRetriesLeft.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasRetriesLeft
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.HasRetriesLeft
+  nameWithType: ProcessInstanceFilter.HasRetriesLeft
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.IncidentErrorHashCode
+  name: IncidentErrorHashCode
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.IncidentErrorHashCode.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_IncidentErrorHashCode
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.IncidentErrorHashCode
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.IncidentErrorHashCode
+  nameWithType: ProcessInstanceFilter.IncidentErrorHashCode
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.IncidentErrorHashCode*
+  name: IncidentErrorHashCode
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.IncidentErrorHashCode.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.IncidentErrorHashCode
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.IncidentErrorHashCode
+  nameWithType: ProcessInstanceFilter.IncidentErrorHashCode
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Or
   name: Or
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.Or.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_Or
@@ -35590,6 +35872,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.Or
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Or
   nameWithType: ProcessInstanceFilter.Or
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentElementInstanceKey
+  name: ParentElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentElementInstanceKey.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_ParentElementInstanceKey
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentElementInstanceKey
+  nameWithType: ProcessInstanceFilter.ParentElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentElementInstanceKey*
+  name: ParentElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentElementInstanceKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentElementInstanceKey
+  nameWithType: ProcessInstanceFilter.ParentElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentProcessInstanceKey
+  name: ParentProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentProcessInstanceKey.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_ParentProcessInstanceKey
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentProcessInstanceKey
+  nameWithType: ProcessInstanceFilter.ParentProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentProcessInstanceKey*
+  name: ParentProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentProcessInstanceKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ParentProcessInstanceKey
+  nameWithType: ProcessInstanceFilter.ParentProcessInstanceKey
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessDefinitionId
   name: ProcessDefinitionId
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessDefinitionId.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_ProcessDefinitionId
@@ -35650,6 +35956,78 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessDefinitionVersionTag
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessDefinitionVersionTag
   nameWithType: ProcessInstanceFilter.ProcessDefinitionVersionTag
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessInstanceKey.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_ProcessInstanceKey
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessInstanceKey
+  nameWithType: ProcessInstanceFilter.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessInstanceKey*
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessInstanceKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.ProcessInstanceKey
+  nameWithType: ProcessInstanceFilter.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.StartDate
+  name: StartDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.StartDate.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_StartDate
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.StartDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.StartDate
+  nameWithType: ProcessInstanceFilter.StartDate
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.StartDate*
+  name: StartDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.StartDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.StartDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.StartDate
+  nameWithType: ProcessInstanceFilter.StartDate
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.State.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_State
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.State
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.State
+  nameWithType: ProcessInstanceFilter.State
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.State
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.State
+  nameWithType: ProcessInstanceFilter.State
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags
+  name: Tags
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_Tags
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags
+  nameWithType: ProcessInstanceFilter.Tags
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags*
+  name: Tags
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags
+  nameWithType: ProcessInstanceFilter.Tags
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.TenantId.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_TenantId
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.TenantId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.TenantId
+  nameWithType: ProcessInstanceFilter.TenantId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.TenantId*
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.TenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.TenantId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.TenantId
+  nameWithType: ProcessInstanceFilter.TenantId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Variables
+  name: Variables
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.Variables.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_Variables
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.Variables
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Variables
+  nameWithType: ProcessInstanceFilter.Variables
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Variables*
+  name: Variables
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.Variables.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.Variables
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Variables
+  nameWithType: ProcessInstanceFilter.Variables
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceFilterFields
   name: ProcessInstanceFilterFields
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.html
@@ -44347,6 +44725,12 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.WaitStateTypeEnum
   fullName: Camunda.Orchestration.Sdk.WaitStateTypeEnum
   nameWithType: WaitStateTypeEnum
+- uid: Camunda.Orchestration.Sdk.WaitStateTypeEnum.CONDITION
+  name: CONDITION
+  href: api/Camunda.Orchestration.Sdk.WaitStateTypeEnum.html#Camunda_Orchestration_Sdk_WaitStateTypeEnum_CONDITION
+  commentId: F:Camunda.Orchestration.Sdk.WaitStateTypeEnum.CONDITION
+  fullName: Camunda.Orchestration.Sdk.WaitStateTypeEnum.CONDITION
+  nameWithType: WaitStateTypeEnum.CONDITION
 - uid: Camunda.Orchestration.Sdk.WaitStateTypeEnum.JOB
   name: JOB
   href: api/Camunda.Orchestration.Sdk.WaitStateTypeEnum.html#Camunda_Orchestration_Sdk_WaitStateTypeEnum_JOB
