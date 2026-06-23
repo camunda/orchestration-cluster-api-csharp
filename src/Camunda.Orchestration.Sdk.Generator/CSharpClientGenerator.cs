@@ -324,24 +324,9 @@ internal static class CSharpClientGenerator
             schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
         var required = new HashSet<string>(
             schema.Required ?? new HashSet<string>());
-        foreach (var allOf in schema.AllOf ?? [])
-        {
-            // Resolve `allOf: [{$ref: ...}]` against the document — Microsoft.OpenApi
-            // does not auto-resolve refs into the AllOf entry. Without this, a schema
-            // that composes `tenantIds` via a referenced component would be missed.
-            // Matches the pattern used elsewhere in this file (e.g. GetConstraints).
-            var resolved = GetRefId(allOf) != null
-                && doc?.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
-                ? refSchema
-                : allOf;
-            if (resolved.Properties != null)
-                foreach (var (k, v) in resolved.Properties)
-                    properties.TryAdd(k, v);
-            if (resolved.Required != null)
-                foreach (var r in resolved.Required)
-                    required.Add(r);
-        }
+        // Resolve and flatten allOf transitively — a schema that composes
+        // `tenantIds` through a nested allOf chain would otherwise be missed.
+        FlattenAllOf(schema, doc, properties, required);
         if (!properties.TryGetValue("tenantIds", out var tenantIdsProp))
             return false;
         if (required.Contains("tenantIds"))
@@ -853,31 +838,18 @@ internal static class CSharpClientGenerator
                     sb.AppendLine($"public sealed class {typeName}");
                     sb.AppendLine("{");
 
-                    var filterRequired = classVariantSchema.Required ?? new HashSet<string>();
+                    var filterRequired = new HashSet<string>(
+                        classVariantSchema.Required ?? new HashSet<string>());
                     var filterProperties = new Dictionary<string, IOpenApiSchema>();
 
                     // Collect properties from the variant, including allOf composition
+                    // (transitively — see FlattenAllOf).
                     if (classVariantSchema.Properties != null)
                     {
                         foreach (var (propName, propSchema) in classVariantSchema.Properties)
                             filterProperties.TryAdd(propName, propSchema);
                     }
-                    foreach (var allOf in classVariantSchema.AllOf ?? [])
-                    {
-                        var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
-                            && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
-                            ? refSchema : allOf;
-                        if (resolved.Properties != null)
-                        {
-                            foreach (var (propName, propSchema) in resolved.Properties)
-                                filterProperties.TryAdd(propName, propSchema);
-                        }
-                        if (resolved.Required != null)
-                        {
-                            foreach (var r in resolved.Required)
-                                filterRequired.Add(r);
-                        }
-                    }
+                    FlattenAllOf(classVariantSchema, doc, filterProperties, filterRequired);
 
                     foreach (var (propName, propSchema) in filterProperties)
                     {
@@ -912,7 +884,7 @@ internal static class CSharpClientGenerator
             var baseClass = variantToParent.TryGetValue(typeName, out var parent) ? $" : {parent}" : "";
 
             // Check if this class has an optional tenantId property AND is used as a request body
-            var tenantIdInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdInfo(schema) : null;
+            var tenantIdInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdInfo(schema, doc) : null;
             var tenantIdsInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdsInfo(schema, doc) : null;
             var ifaceList = new List<string>();
             if (tenantIdInfo != null)
@@ -930,26 +902,12 @@ internal static class CSharpClientGenerator
             sb.AppendLine($"public sealed class {typeName}{baseClass}{interfaces}");
             sb.AppendLine("{");
 
-            var required = schema.Required ?? new HashSet<string>();
-            var properties = schema.Properties ?? new Dictionary<string, IOpenApiSchema>();
+            var required = new HashSet<string>(schema.Required ?? new HashSet<string>());
+            var properties = new Dictionary<string, IOpenApiSchema>(
+                schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
 
-            // Handle allOf composition
-            foreach (var allOf in schema.AllOf ?? [])
-            {
-                if (allOf.Properties != null)
-                {
-                    foreach (var (propName, propSchema) in allOf.Properties)
-                    {
-                        if (!properties.ContainsKey(propName))
-                            properties[propName] = propSchema;
-                    }
-                }
-                if (allOf.Required != null)
-                {
-                    foreach (var r in allOf.Required)
-                        required.Add(r);
-                }
-            }
+            // Handle allOf composition (transitively — see FlattenAllOf).
+            FlattenAllOf(schema, doc, properties, required);
 
             // If this type is a variant of a polymorphic parent, skip the discriminator
             // property — it is managed by [JsonPolymorphic] on the base class and
@@ -1004,7 +962,7 @@ internal static class CSharpClientGenerator
 
     private static void GenerateClass(StringBuilder sb, string typeName, IOpenApiSchema schema, OpenApiDocument? doc = null, Dictionary<string, InlineEnumEntry>? inlineEnums = null, HashSet<string>? inlineEnumTypeNames = null, bool isRequestSchema = false)
     {
-        var tenantIdInfo = isRequestSchema ? GetOptionalTenantIdInfo(schema) : null;
+        var tenantIdInfo = isRequestSchema ? GetOptionalTenantIdInfo(schema, doc) : null;
         var tenantIdsInfo = isRequestSchema ? GetOptionalTenantIdsInfo(schema, doc) : null;
         var ifaceList = new List<string>();
         if (tenantIdInfo != null)
@@ -1019,26 +977,12 @@ internal static class CSharpClientGenerator
         sb.AppendLine($"public sealed class {typeName}{interfaces}");
         sb.AppendLine("{");
 
-        var required = schema.Required ?? new HashSet<string>();
-        var properties = schema.Properties ?? new Dictionary<string, IOpenApiSchema>();
+        var required = new HashSet<string>(schema.Required ?? new HashSet<string>());
+        var properties = new Dictionary<string, IOpenApiSchema>(
+            schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
 
-        // Handle allOf composition
-        foreach (var allOf in schema.AllOf ?? [])
-        {
-            if (allOf.Properties != null)
-            {
-                foreach (var (propName, propSchema) in allOf.Properties)
-                {
-                    if (!properties.ContainsKey(propName))
-                        properties[propName] = propSchema;
-                }
-            }
-            if (allOf.Required != null)
-            {
-                foreach (var r in allOf.Required)
-                    required.Add(r);
-            }
-        }
+        // Handle allOf composition (transitively — see FlattenAllOf).
+        FlattenAllOf(schema, doc, properties, required);
 
         foreach (var (propName, propSchema) in properties)
         {
@@ -1707,22 +1651,15 @@ internal static class CSharpClientGenerator
     /// Returns the C# type of the optional tenantId property if present, or null if not.
     /// Used to determine the SetDefaultTenantId implementation.
     /// </summary>
-    private static (string CSharpType, bool IsBrandedKey)? GetOptionalTenantIdInfo(IOpenApiSchema schema)
+    private static (string CSharpType, bool IsBrandedKey)? GetOptionalTenantIdInfo(IOpenApiSchema schema, OpenApiDocument? doc = null)
     {
-        // Collect all properties including allOf composition
+        // Collect all properties including allOf composition (transitively — see
+        // FlattenAllOf).
         var properties = new Dictionary<string, IOpenApiSchema>(
             schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
         var required = new HashSet<string>(
             schema.Required ?? new HashSet<string>());
-        foreach (var allOf in schema.AllOf ?? [])
-        {
-            if (allOf.Properties != null)
-                foreach (var (k, v) in allOf.Properties)
-                    properties.TryAdd(k, v);
-            if (allOf.Required != null)
-                foreach (var r in allOf.Required)
-                    required.Add(r);
-        }
+        FlattenAllOf(schema, doc, properties, required);
 
         if (!properties.TryGetValue("tenantId", out var tenantProp))
             return null;
@@ -1778,22 +1715,8 @@ internal static class CSharpClientGenerator
             schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
         var required = new HashSet<string>(
             schema.Required ?? new HashSet<string>());
-        foreach (var allOf in schema.AllOf ?? [])
-        {
-            // Resolve `allOf: [{$ref: ...}]` against the document — see
-            // HasOptionalTenantIdsArrayDirect for rationale.
-            var resolved = GetRefId(allOf) != null
-                && doc?.Components?.Schemas != null
-                && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
-                ? refSchema
-                : allOf;
-            if (resolved.Properties != null)
-                foreach (var (k, v) in resolved.Properties)
-                    properties.TryAdd(k, v);
-            if (resolved.Required != null)
-                foreach (var r in resolved.Required)
-                    required.Add(r);
-        }
+        // Resolve and flatten allOf transitively — see FlattenAllOf.
+        FlattenAllOf(schema, doc, properties, required);
 
         if (!properties.TryGetValue("tenantIds", out var tenantIdsProp))
             return null;
@@ -2009,6 +1932,59 @@ internal static class CSharpClientGenerator
         (schema as OpenApiSchemaReference)?.Reference?.Id;
 
     /// <summary>
+    /// Flattens a schema's <c>allOf</c> composition into <paramref name="properties"/>
+    /// and <paramref name="required"/>, resolving <c>$ref</c> entries against the
+    /// document and recursing into nested <c>allOf</c>.
+    ///
+    /// Microsoft.OpenApi's reference proxy surfaces only a referenced schema's
+    /// <em>direct</em> members, so a schema composed of another schema that is
+    /// <em>itself</em> an <c>allOf</c> (e.g. <c>Filter → Fields → BaseFields</c>)
+    /// would otherwise silently drop every transitively-inherited member — the
+    /// exact shape of the orchestration-cluster filter schemas (issue #265).
+    /// Flattening must therefore be transitive, not one level deep.
+    ///
+    /// First writer wins: properties pre-seeded by the caller (the schema's own
+    /// declarations) take precedence, and among <c>allOf</c> entries the earliest
+    /// contributor wins (via <see cref="IDictionary{TKey,TValue}.TryAdd"/>),
+    /// preserving the behaviour of the per-site loops this consolidates.
+    /// </summary>
+    private static void FlattenAllOf(
+        IOpenApiSchema schema,
+        OpenApiDocument? doc,
+        IDictionary<string, IOpenApiSchema> properties,
+        ISet<string> required,
+        HashSet<string>? visitedRefs = null)
+    {
+        visitedRefs ??= new HashSet<string>(StringComparer.Ordinal);
+        foreach (var allOf in schema.AllOf ?? [])
+        {
+            var refId = GetRefId(allOf);
+            var resolved = allOf;
+            if (refId != null)
+            {
+                // Cycle guard: a component already merged on this path must not be
+                // re-entered (self/mutual allOf references would otherwise recurse
+                // without end).
+                if (!visitedRefs.Add(refId))
+                    continue;
+                if (doc?.Components?.Schemas != null
+                    && doc.Components.Schemas.TryGetValue(refId, out var refSchema))
+                    resolved = refSchema;
+            }
+
+            if (resolved.Properties != null)
+                foreach (var (propName, propSchema) in resolved.Properties)
+                    properties.TryAdd(propName, propSchema);
+            if (resolved.Required != null)
+                foreach (var r in resolved.Required)
+                    required.Add(r);
+
+            // Recurse — the resolved schema may itself compose via allOf.
+            FlattenAllOf(resolved, doc, properties, required, visitedRefs);
+        }
+    }
+
+    /// <summary>
     /// OpenAPI requires every parameter to have a non-empty <c>name</c>. The v3
     /// model surfaces <see cref="IOpenApiParameter.Name"/> as nullable, so guard
     /// here rather than substituting <see cref="string.Empty"/> (which would
@@ -2105,23 +2081,13 @@ internal static class CSharpClientGenerator
 
         void ScanProperties(string parentTypeName, IOpenApiSchema schema)
         {
-            var properties = schema.Properties ?? new Dictionary<string, IOpenApiSchema>();
+            var properties = new Dictionary<string, IOpenApiSchema>(
+                schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
+            var ignoredRequired = new HashSet<string>(StringComparer.Ordinal);
 
-            // Also gather properties from allOf composition
-            foreach (var allOf in schema.AllOf ?? [])
-            {
-                var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
-                    && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var refSchema)
-                    ? refSchema : allOf;
-                if (resolved.Properties != null)
-                {
-                    foreach (var (propName, propSchema) in resolved.Properties)
-                    {
-                        if (!properties.ContainsKey(propName))
-                            properties = new Dictionary<string, IOpenApiSchema>(properties) { [propName] = propSchema };
-                    }
-                }
-            }
+            // Also gather properties from allOf composition (transitively — see
+            // FlattenAllOf).
+            FlattenAllOf(schema, doc, properties, ignoredRequired);
 
             // Also scan oneOf variants for filter pattern schemas
             if (schema.OneOf is { Count: > 0 })
@@ -2131,20 +2097,7 @@ internal static class CSharpClientGenerator
                     var variantSchema = GetRefId(oneOfVariant) != null && doc.Components?.Schemas != null
                         && doc.Components.Schemas.TryGetValue(GetRefId(oneOfVariant)!, out var refSchema)
                         ? refSchema : oneOfVariant;
-                    foreach (var allOf in variantSchema.AllOf ?? [])
-                    {
-                        var resolved = GetRefId(allOf) != null && doc.Components?.Schemas != null
-                            && doc.Components.Schemas.TryGetValue(GetRefId(allOf)!, out var innerRef)
-                            ? innerRef : allOf;
-                        if (resolved.Properties != null)
-                        {
-                            foreach (var (propName, propSchema) in resolved.Properties)
-                            {
-                                if (!properties.ContainsKey(propName))
-                                    properties = new Dictionary<string, IOpenApiSchema>(properties) { [propName] = propSchema };
-                            }
-                        }
-                    }
+                    FlattenAllOf(variantSchema, doc, properties, ignoredRequired);
                 }
             }
 
