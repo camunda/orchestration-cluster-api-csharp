@@ -1,3 +1,16 @@
+# [9.0.0-alpha.24](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.23...v9.0.0-alpha.24) (2026-06-23)
+
+
+### Bug Fixes
+
+* flatten allOf composition transitively in the generator ([3f9fd6b](https://github.com/camunda/orchestration-cluster-api-csharp/commit/3f9fd6b98ef9dcbe652f1332a83178b8f292d49f)), closes [#265](https://github.com/camunda/orchestration-cluster-api-csharp/issues/265)
+* resolve key constraints through nested allOf in the generator ([f493e30](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f493e3013a238a42677d4c6d65f08b6e1f534284))
+
+
+### Features
+
+* regenerate SDK for condition wait-state (upstream main sync) ([287b3d0](https://github.com/camunda/orchestration-cluster-api-csharp/commit/287b3d07be8019d876edd76bff6de746ee14a016))
+
 # [9.0.0-alpha.23](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.22...v9.0.0-alpha.23) (2026-06-18)
 
 
