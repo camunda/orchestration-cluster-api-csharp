@@ -4877,6 +4877,30 @@ public sealed class CreateGlobalTaskListenerRequest
     [JsonPropertyName("eventTypes")]
     public List<GlobalTaskListenerEventTypeEnum> EventTypes { get; set; } = null!;
 
+    /// <summary>
+    /// The name of the job type, used as a reference to specify which job workers request the respective listener job.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string Type { get; set; } = null!;
+
+    /// <summary>
+    /// Number of retries for the listener job.
+    /// </summary>
+    [JsonPropertyName("retries")]
+    public int? Retries { get; set; }
+
+    /// <summary>
+    /// Whether the listener should run after model-level listeners.
+    /// </summary>
+    [JsonPropertyName("afterNonGlobal")]
+    public bool? AfterNonGlobal { get; set; }
+
+    /// <summary>
+    /// The priority of the listener. Higher priority listeners are executed before lower priority ones.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int? Priority { get; set; }
+
 }
 
 /// <summary>
@@ -13869,6 +13893,122 @@ public sealed class ProcessInstanceFilter
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
     public ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The start date.
+    /// </summary>
+    [JsonPropertyName("startDate")]
+    public DateTimeFilterProperty? StartDate { get; set; }
+
+    /// <summary>
+    /// The end date.
+    /// </summary>
+    [JsonPropertyName("endDate")]
+    public DateTimeFilterProperty? EndDate { get; set; }
+
+    /// <summary>
+    /// The process instance state.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public ProcessInstanceStateFilterProperty? State { get; set; }
+
+    /// <summary>
+    /// Whether this process instance has a related incident or not.
+    /// </summary>
+    [JsonPropertyName("hasIncident")]
+    public bool? HasIncident { get; set; }
+
+    /// <summary>
+    /// The tenant id.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public StringFilterProperty? TenantId { get; set; }
+
+    /// <summary>
+    /// The process instance variables.
+    /// </summary>
+    [JsonPropertyName("variables")]
+    public List<VariableValueFilterProperty>? Variables { get; set; }
+
+    /// <summary>
+    /// The key of this process instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The parent process instance key.
+    /// </summary>
+    [JsonPropertyName("parentProcessInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? ParentProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The parent element instance key.
+    /// </summary>
+    [JsonPropertyName("parentElementInstanceKey")]
+    public ElementInstanceKeyFilterProperty? ParentElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The batch operation id.
+    /// **Deprecated**: Use `batchOperationKey` instead. This field will be removed in a future release. If both `batchOperationId` and `batchOperationKey` are provided, the request will be rejected with a 400 error.
+    /// 
+    /// </summary>
+    [JsonPropertyName("batchOperationId")]
+    public StringFilterProperty? BatchOperationId { get; set; }
+
+    /// <summary>
+    /// The batch operation key.
+    /// </summary>
+    [JsonPropertyName("batchOperationKey")]
+    public StringFilterProperty? BatchOperationKey { get; set; }
+
+    /// <summary>
+    /// The error message related to the process.
+    /// </summary>
+    [JsonPropertyName("errorMessage")]
+    public StringFilterProperty? ErrorMessage { get; set; }
+
+    /// <summary>
+    /// Whether the process has failed jobs with retries left.
+    /// </summary>
+    [JsonPropertyName("hasRetriesLeft")]
+    public bool? HasRetriesLeft { get; set; }
+
+    /// <summary>
+    /// The state of the element instances associated with the process instance.
+    /// </summary>
+    [JsonPropertyName("elementInstanceState")]
+    public ElementInstanceStateFilterProperty? ElementInstanceState { get; set; }
+
+    /// <summary>
+    /// The element id associated with the process instance.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public StringFilterProperty? ElementId { get; set; }
+
+    /// <summary>
+    /// Whether the element instance has an incident or not.
+    /// </summary>
+    [JsonPropertyName("hasElementInstanceIncident")]
+    public bool? HasElementInstanceIncident { get; set; }
+
+    /// <summary>
+    /// The incident error hash code, associated with this process.
+    /// </summary>
+    [JsonPropertyName("incidentErrorHashCode")]
+    public IntegerFilterProperty? IncidentErrorHashCode { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// The business id associated with the process instance.
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
 
     /// <summary>
     /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
