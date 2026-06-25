@@ -1,3 +1,11 @@
+# [9.0.0-alpha.25](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.24...v9.0.0-alpha.25) (2026-06-25)
+
+
+### Features
+
+* regenerate SDK for upstream main spec sync ([912e45e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/912e45e54c436ecc37e17c325bc3bf6b0cb1b37e))
+* regenerate SDK for upstream main spec sync ([77e5dd2](https://github.com/camunda/orchestration-cluster-api-csharp/commit/77e5dd2340cda4e1c95c0eafe4c8a9da95008abf))
+
 # [9.0.0-alpha.24](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.23...v9.0.0-alpha.24) (2026-06-23)
 
 
