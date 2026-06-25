@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_JobKeyFilterProperty" data-uid="Camunda.Orchestration.Sdk.JobKeyFilterProperty" class="text-break">
-Class JobKeyFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L13777"><i class="bi bi-code-slash"></i></a>
+Class JobKeyFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L16318"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,8 @@ Class JobKeyFilterProperty  <a class="header-action link-secondary" title="View 
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class JobKeyFilterProperty</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(JobKeyFilterPropertyJsonConverter))]
+public sealed class JobKeyFilterProperty</code></pre>
   </div>
 
 
@@ -161,6 +162,12 @@ Class JobKeyFilterProperty  <a class="header-action link-secondary" title="View 
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_JobKeyFilterProperty_ExactMatch">ExactMatch</a></dt>
+    <dd><p>Matches the value exactly. Serialized as the bare value — the form
+servers that predate advanced filtering on this field accept.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_JobKeyFilterProperty_Exists">Exists</a></dt>
     <dd><p>Checks if the current property exists.</p>
 </dd>
@@ -181,12 +188,21 @@ Class JobKeyFilterProperty  <a class="header-action link-secondary" title="View 
 </dd>
   </dl>
 
+  <h2 class="section" id="operators">Operators
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_JobKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_JobKey__Camunda_Orchestration_Sdk_JobKeyFilterProperty">implicit operator JobKeyFilterProperty(JobKey)</a></dt>
+    <dd><p>Wraps a bare value as an exact-match filter.</p>
+</dd>
+  </dl>
+
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L13777" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L16318" class="edit-link">Edit this page</a>
         </div>
 
 

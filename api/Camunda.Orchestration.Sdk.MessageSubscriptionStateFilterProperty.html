@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_MessageSubscriptionStateFilterProperty" data-uid="Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty" class="text-break">
-Class MessageSubscriptionStateFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15982"><i class="bi bi-code-slash"></i></a>
+Class MessageSubscriptionStateFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L18908"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,8 @@ Class MessageSubscriptionStateFilterProperty  <a class="header-action link-secon
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class MessageSubscriptionStateFilterProperty</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(MessageSubscriptionStateFilterPropertyJsonConverter))]
+public sealed class MessageSubscriptionStateFilterProperty</code></pre>
   </div>
 
 
@@ -161,6 +162,12 @@ Class MessageSubscriptionStateFilterProperty  <a class="header-action link-secon
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_MessageSubscriptionStateFilterProperty_ExactMatch">ExactMatch</a></dt>
+    <dd><p>Matches the value exactly. Serialized as the bare value — the form
+servers that predate advanced filtering on this field accept.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_MessageSubscriptionStateFilterProperty_Exists">Exists</a></dt>
     <dd><p>Checks if the current property exists.</p>
 </dd>
@@ -187,12 +194,21 @@ Class MessageSubscriptionStateFilterProperty  <a class="header-action link-secon
 </dd>
   </dl>
 
+  <h2 class="section" id="operators">Operators
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_MessageSubscriptionStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_MessageSubscriptionStateEnum__Camunda_Orchestration_Sdk_MessageSubscriptionStateFilterProperty">implicit operator MessageSubscriptionStateFilterProperty(MessageSubscriptionStateEnum)</a></dt>
+    <dd><p>Wraps a bare value as an exact-match filter.</p>
+</dd>
+  </dl>
+
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15982" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L18908" class="edit-link">Edit this page</a>
         </div>
 
 

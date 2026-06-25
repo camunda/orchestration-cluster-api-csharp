@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_DecisionRequirementsKeyFilterProperty" data-uid="Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty" class="text-break">
-Class DecisionRequirementsKeyFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9358"><i class="bi bi-code-slash"></i></a>
+Class DecisionRequirementsKeyFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L10939"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,8 @@ Class DecisionRequirementsKeyFilterProperty  <a class="header-action link-second
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class DecisionRequirementsKeyFilterProperty</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(DecisionRequirementsKeyFilterPropertyJsonConverter))]
+public sealed class DecisionRequirementsKeyFilterProperty</code></pre>
   </div>
 
 
@@ -161,6 +162,12 @@ Class DecisionRequirementsKeyFilterProperty  <a class="header-action link-second
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_DecisionRequirementsKeyFilterProperty_ExactMatch">ExactMatch</a></dt>
+    <dd><p>Matches the value exactly. Serialized as the bare value — the form
+servers that predate advanced filtering on this field accept.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_DecisionRequirementsKeyFilterProperty_Exists">Exists</a></dt>
     <dd><p>Checks if the current property exists.</p>
 </dd>
@@ -181,12 +188,21 @@ Class DecisionRequirementsKeyFilterProperty  <a class="header-action link-second
 </dd>
   </dl>
 
+  <h2 class="section" id="operators">Operators
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_DecisionRequirementsKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_DecisionRequirementsKey__Camunda_Orchestration_Sdk_DecisionRequirementsKeyFilterProperty">implicit operator DecisionRequirementsKeyFilterProperty(DecisionRequirementsKey)</a></dt>
+    <dd><p>Wraps a bare value as an exact-match filter.</p>
+</dd>
+  </dl>
+
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9358" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L10939" class="edit-link">Edit this page</a>
         </div>
 
 

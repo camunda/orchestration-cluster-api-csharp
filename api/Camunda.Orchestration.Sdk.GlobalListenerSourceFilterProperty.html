@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_GlobalListenerSourceFilterProperty" data-uid="Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty" class="text-break">
-Class GlobalListenerSourceFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L11759"><i class="bi bi-code-slash"></i></a>
+Class GlobalListenerSourceFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L13885"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,8 @@ Class GlobalListenerSourceFilterProperty  <a class="header-action link-secondary
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class GlobalListenerSourceFilterProperty</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(GlobalListenerSourceFilterPropertyJsonConverter))]
+public sealed class GlobalListenerSourceFilterProperty</code></pre>
   </div>
 
 
@@ -161,6 +162,12 @@ Class GlobalListenerSourceFilterProperty  <a class="header-action link-secondary
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_GlobalListenerSourceFilterProperty_ExactMatch">ExactMatch</a></dt>
+    <dd><p>Matches the value exactly. Serialized as the bare value — the form
+servers that predate advanced filtering on this field accept.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.Exists.html#Camunda_Orchestration_Sdk_GlobalListenerSourceFilterProperty_Exists">Exists</a></dt>
     <dd><p>Checks if the current property exists.</p>
 </dd>
@@ -187,12 +194,21 @@ Class GlobalListenerSourceFilterProperty  <a class="header-action link-secondary
 </dd>
   </dl>
 
+  <h2 class="section" id="operators">Operators
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_GlobalListenerSourceFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_GlobalListenerSourceEnum__Camunda_Orchestration_Sdk_GlobalListenerSourceFilterProperty">implicit operator GlobalListenerSourceFilterProperty(GlobalListenerSourceEnum)</a></dt>
+    <dd><p>Wraps a bare value as an exact-match filter.</p>
+</dd>
+  </dl>
+
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L11759" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L13885" class="edit-link">Edit this page</a>
         </div>
 
 

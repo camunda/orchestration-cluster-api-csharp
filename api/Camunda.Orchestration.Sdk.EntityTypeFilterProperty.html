@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_EntityTypeFilterProperty" data-uid="Camunda.Orchestration.Sdk.EntityTypeFilterProperty" class="text-break">
-Class EntityTypeFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L11108"><i class="bi bi-code-slash"></i></a>
+Class EntityTypeFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L13080"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,8 @@ Class EntityTypeFilterProperty  <a class="header-action link-secondary" title="V
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class EntityTypeFilterProperty</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(EntityTypeFilterPropertyJsonConverter))]
+public sealed class EntityTypeFilterProperty</code></pre>
   </div>
 
 
@@ -161,6 +162,12 @@ Class EntityTypeFilterProperty  <a class="header-action link-secondary" title="V
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.EntityTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_EntityTypeFilterProperty_ExactMatch">ExactMatch</a></dt>
+    <dd><p>Matches the value exactly. Serialized as the bare value — the form
+servers that predate advanced filtering on this field accept.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.EntityTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_EntityTypeFilterProperty_Exists">Exists</a></dt>
     <dd><p>Checks if the current property exists.</p>
 </dd>
@@ -187,12 +194,21 @@ Class EntityTypeFilterProperty  <a class="header-action link-secondary" title="V
 </dd>
   </dl>
 
+  <h2 class="section" id="operators">Operators
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.EntityTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_EntityTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AuditLogEntityTypeEnum__Camunda_Orchestration_Sdk_EntityTypeFilterProperty">implicit operator EntityTypeFilterProperty(AuditLogEntityTypeEnum)</a></dt>
+    <dd><p>Wraps a bare value as an exact-match filter.</p>
+</dd>
+  </dl>
+
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L11108" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L13080" class="edit-link">Edit this page</a>
         </div>
 
 

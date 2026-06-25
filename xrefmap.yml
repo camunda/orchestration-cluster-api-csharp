@@ -4123,6 +4123,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.Eq
   nameWithType: AgentHistoryItemKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_AgentHistoryItemKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.ExactMatch
+  nameWithType: AgentHistoryItemKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.ExactMatch
+  nameWithType: AgentHistoryItemKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_AgentHistoryItemKeyFilterProperty_Exists
@@ -4171,6 +4183,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.NotIn
   nameWithType: AgentHistoryItemKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentHistoryItemKey)~Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty
+  name: implicit operator AgentHistoryItemKeyFilterProperty(AgentHistoryItemKey)
+  href: api/Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_AgentHistoryItemKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AgentHistoryItemKey__Camunda_Orchestration_Sdk_AgentHistoryItemKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentHistoryItemKey)~Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty
+  name.vb: CType(AgentHistoryItemKey)
+  fullName: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty(Camunda.Orchestration.Sdk.AgentHistoryItemKey)
+  fullName.vb: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.CType(Camunda.Orchestration.Sdk.AgentHistoryItemKey)
+  nameWithType: AgentHistoryItemKeyFilterProperty.implicit operator AgentHistoryItemKeyFilterProperty(AgentHistoryItemKey)
+  nameWithType.vb: AgentHistoryItemKeyFilterProperty.CType(AgentHistoryItemKey)
+- uid: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty.CType
+  nameWithType: AgentHistoryItemKeyFilterProperty.implicit operator
+  nameWithType.vb: AgentHistoryItemKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest
   name: AgentInstanceCreationRequest
   href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.html
@@ -4567,6 +4597,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.Eq
   nameWithType: AgentInstanceHistoryCommitStatusFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryCommitStatusFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch
+  nameWithType: AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch
+  nameWithType: AgentInstanceHistoryCommitStatusFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.Exists.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryCommitStatusFilterProperty_Exists
@@ -4603,6 +4645,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.Neq
   nameWithType: AgentInstanceHistoryCommitStatusFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusEnum)~Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty
+  name: implicit operator AgentInstanceHistoryCommitStatusFilterProperty(AgentInstanceHistoryCommitStatusEnum)
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryCommitStatusFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AgentInstanceHistoryCommitStatusEnum__Camunda_Orchestration_Sdk_AgentInstanceHistoryCommitStatusFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusEnum)~Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty
+  name.vb: CType(AgentInstanceHistoryCommitStatusEnum)
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.implicit operator Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty(Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.CType(Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusEnum)
+  nameWithType: AgentInstanceHistoryCommitStatusFilterProperty.implicit operator AgentInstanceHistoryCommitStatusFilterProperty(AgentInstanceHistoryCommitStatusEnum)
+  nameWithType.vb: AgentInstanceHistoryCommitStatusFilterProperty.CType(AgentInstanceHistoryCommitStatusEnum)
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusFilterProperty.CType
+  nameWithType: AgentInstanceHistoryCommitStatusFilterProperty.implicit operator
+  nameWithType.vb: AgentInstanceHistoryCommitStatusFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter
   name: AgentInstanceHistoryFilter
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.html
@@ -5119,6 +5179,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.Eq
   nameWithType: AgentInstanceHistoryRoleFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryRoleFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.ExactMatch
+  nameWithType: AgentInstanceHistoryRoleFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.ExactMatch
+  nameWithType: AgentInstanceHistoryRoleFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.Exists.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryRoleFilterProperty_Exists
@@ -5155,6 +5227,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.Neq
   nameWithType: AgentInstanceHistoryRoleFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum)~Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty
+  name: implicit operator AgentInstanceHistoryRoleFilterProperty(AgentInstanceHistoryRoleEnum)
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryRoleFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AgentInstanceHistoryRoleEnum__Camunda_Orchestration_Sdk_AgentInstanceHistoryRoleFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum)~Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty
+  name.vb: CType(AgentInstanceHistoryRoleEnum)
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.implicit operator Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty(Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.CType(Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum)
+  nameWithType: AgentInstanceHistoryRoleFilterProperty.implicit operator AgentInstanceHistoryRoleFilterProperty(AgentInstanceHistoryRoleEnum)
+  nameWithType.vb: AgentInstanceHistoryRoleFilterProperty.CType(AgentInstanceHistoryRoleEnum)
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty.CType
+  nameWithType: AgentInstanceHistoryRoleFilterProperty.implicit operator
+  nameWithType.vb: AgentInstanceHistoryRoleFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuery
   name: AgentInstanceHistorySearchQuery
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuery.html
@@ -5419,6 +5509,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.Eq
   nameWithType: AgentInstanceKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_AgentInstanceKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.ExactMatch
+  nameWithType: AgentInstanceKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.ExactMatch
+  nameWithType: AgentInstanceKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_AgentInstanceKeyFilterProperty_Exists
@@ -5467,6 +5569,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.NotIn
   nameWithType: AgentInstanceKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentInstanceKey)~Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty
+  name: implicit operator AgentInstanceKeyFilterProperty(AgentInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_AgentInstanceKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AgentInstanceKey__Camunda_Orchestration_Sdk_AgentInstanceKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentInstanceKey)~Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty
+  name.vb: CType(AgentInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty(Camunda.Orchestration.Sdk.AgentInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.CType(Camunda.Orchestration.Sdk.AgentInstanceKey)
+  nameWithType: AgentInstanceKeyFilterProperty.implicit operator AgentInstanceKeyFilterProperty(AgentInstanceKey)
+  nameWithType.vb: AgentInstanceKeyFilterProperty.CType(AgentInstanceKey)
+- uid: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.AgentInstanceKeyFilterProperty.CType
+  nameWithType: AgentInstanceKeyFilterProperty.implicit operator
+  nameWithType.vb: AgentInstanceKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.AgentInstanceLimits
   name: AgentInstanceLimits
   href: api/Camunda.Orchestration.Sdk.AgentInstanceLimits.html
@@ -6181,6 +6301,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.Eq
   nameWithType: AgentInstanceStatusFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_AgentInstanceStatusFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.ExactMatch
+  nameWithType: AgentInstanceStatusFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.ExactMatch
+  nameWithType: AgentInstanceStatusFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.Exists.html#Camunda_Orchestration_Sdk_AgentInstanceStatusFilterProperty_Exists
@@ -6229,6 +6361,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.Neq
   nameWithType: AgentInstanceStatusFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentInstanceStatusEnum)~Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty
+  name: implicit operator AgentInstanceStatusFilterProperty(AgentInstanceStatusEnum)
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_AgentInstanceStatusFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AgentInstanceStatusEnum__Camunda_Orchestration_Sdk_AgentInstanceStatusFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AgentInstanceStatusEnum)~Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty
+  name.vb: CType(AgentInstanceStatusEnum)
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.implicit operator Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty(Camunda.Orchestration.Sdk.AgentInstanceStatusEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.CType(Camunda.Orchestration.Sdk.AgentInstanceStatusEnum)
+  nameWithType: AgentInstanceStatusFilterProperty.implicit operator AgentInstanceStatusFilterProperty(AgentInstanceStatusEnum)
+  nameWithType.vb: AgentInstanceStatusFilterProperty.CType(AgentInstanceStatusEnum)
+- uid: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.AgentInstanceStatusFilterProperty.CType
+  nameWithType: AgentInstanceStatusFilterProperty.implicit operator
+  nameWithType.vb: AgentInstanceStatusFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.AgentInstanceTextContent
   name: AgentInstanceTextContent
   href: api/Camunda.Orchestration.Sdk.AgentInstanceTextContent.html
@@ -6541,6 +6691,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.Eq
   nameWithType: AuditLogActorTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_AuditLogActorTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.ExactMatch
+  nameWithType: AuditLogActorTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.ExactMatch
+  nameWithType: AuditLogActorTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_AuditLogActorTypeFilterProperty_Exists
@@ -6589,6 +6751,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.Neq
   nameWithType: AuditLogActorTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogActorTypeEnum)~Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty
+  name: implicit operator AuditLogActorTypeFilterProperty(AuditLogActorTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_AuditLogActorTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AuditLogActorTypeEnum__Camunda_Orchestration_Sdk_AuditLogActorTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogActorTypeEnum)~Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty
+  name.vb: CType(AuditLogActorTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty(Camunda.Orchestration.Sdk.AuditLogActorTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.CType(Camunda.Orchestration.Sdk.AuditLogActorTypeEnum)
+  nameWithType: AuditLogActorTypeFilterProperty.implicit operator AuditLogActorTypeFilterProperty(AuditLogActorTypeEnum)
+  nameWithType.vb: AuditLogActorTypeFilterProperty.CType(AuditLogActorTypeEnum)
+- uid: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.AuditLogActorTypeFilterProperty.CType
+  nameWithType: AuditLogActorTypeFilterProperty.implicit operator
+  nameWithType.vb: AuditLogActorTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.AuditLogCategoryEnum
   name: AuditLogCategoryEnum
   href: api/Camunda.Orchestration.Sdk.AuditLogCategoryEnum.html
@@ -6751,6 +6931,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.Eq
   nameWithType: AuditLogEntityKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_AuditLogEntityKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.ExactMatch
+  nameWithType: AuditLogEntityKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.ExactMatch
+  nameWithType: AuditLogEntityKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_AuditLogEntityKeyFilterProperty_Exists
@@ -6799,6 +6991,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.NotIn
   nameWithType: AuditLogEntityKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogEntityKey)~Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty
+  name: implicit operator AuditLogEntityKeyFilterProperty(AuditLogEntityKey)
+  href: api/Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_AuditLogEntityKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AuditLogEntityKey__Camunda_Orchestration_Sdk_AuditLogEntityKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogEntityKey)~Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty
+  name.vb: CType(AuditLogEntityKey)
+  fullName: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty(Camunda.Orchestration.Sdk.AuditLogEntityKey)
+  fullName.vb: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.CType(Camunda.Orchestration.Sdk.AuditLogEntityKey)
+  nameWithType: AuditLogEntityKeyFilterProperty.implicit operator AuditLogEntityKeyFilterProperty(AuditLogEntityKey)
+  nameWithType.vb: AuditLogEntityKeyFilterProperty.CType(AuditLogEntityKey)
+- uid: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.AuditLogEntityKeyFilterProperty.CType
+  nameWithType: AuditLogEntityKeyFilterProperty.implicit operator
+  nameWithType.vb: AuditLogEntityKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.AuditLogEntityTypeEnum
   name: AuditLogEntityTypeEnum
   href: api/Camunda.Orchestration.Sdk.AuditLogEntityTypeEnum.html
@@ -7411,6 +7621,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.Eq
   nameWithType: AuditLogKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_AuditLogKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.ExactMatch
+  nameWithType: AuditLogKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.ExactMatch
+  nameWithType: AuditLogKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_AuditLogKeyFilterProperty_Exists
@@ -7459,6 +7681,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.NotIn
   nameWithType: AuditLogKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogKey)~Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty
+  name: implicit operator AuditLogKeyFilterProperty(AuditLogKey)
+  href: api/Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_AuditLogKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AuditLogKey__Camunda_Orchestration_Sdk_AuditLogKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogKey)~Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty
+  name.vb: CType(AuditLogKey)
+  fullName: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty(Camunda.Orchestration.Sdk.AuditLogKey)
+  fullName.vb: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.CType(Camunda.Orchestration.Sdk.AuditLogKey)
+  nameWithType: AuditLogKeyFilterProperty.implicit operator AuditLogKeyFilterProperty(AuditLogKey)
+  nameWithType.vb: AuditLogKeyFilterProperty.CType(AuditLogKey)
+- uid: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.AuditLogKeyFilterProperty.CType
+  nameWithType: AuditLogKeyFilterProperty.implicit operator
+  nameWithType.vb: AuditLogKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.AuditLogOperationTypeEnum
   name: AuditLogOperationTypeEnum
   href: api/Camunda.Orchestration.Sdk.AuditLogOperationTypeEnum.html
@@ -8047,6 +8287,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.Eq
   nameWithType: AuditLogResultFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_AuditLogResultFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.ExactMatch
+  nameWithType: AuditLogResultFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.ExactMatch
+  nameWithType: AuditLogResultFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.Exists.html#Camunda_Orchestration_Sdk_AuditLogResultFilterProperty_Exists
@@ -8095,6 +8347,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.Neq
   nameWithType: AuditLogResultFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogResultEnum)~Camunda.Orchestration.Sdk.AuditLogResultFilterProperty
+  name: implicit operator AuditLogResultFilterProperty(AuditLogResultEnum)
+  href: api/Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_AuditLogResultFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AuditLogResultEnum__Camunda_Orchestration_Sdk_AuditLogResultFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogResultEnum)~Camunda.Orchestration.Sdk.AuditLogResultFilterProperty
+  name.vb: CType(AuditLogResultEnum)
+  fullName: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.implicit operator Camunda.Orchestration.Sdk.AuditLogResultFilterProperty(Camunda.Orchestration.Sdk.AuditLogResultEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.CType(Camunda.Orchestration.Sdk.AuditLogResultEnum)
+  nameWithType: AuditLogResultFilterProperty.implicit operator AuditLogResultFilterProperty(AuditLogResultEnum)
+  nameWithType.vb: AuditLogResultFilterProperty.CType(AuditLogResultEnum)
+- uid: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.AuditLogResultFilterProperty.CType
+  nameWithType: AuditLogResultFilterProperty.implicit operator
+  nameWithType.vb: AuditLogResultFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.AuditLogSearchQueryRequest
   name: AuditLogSearchQueryRequest
   href: api/Camunda.Orchestration.Sdk.AuditLogSearchQueryRequest.html
@@ -9475,6 +9745,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BasicStringFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.BasicStringFilterProperty.Eq
   nameWithType: BasicStringFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.BasicStringFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.BasicStringFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_BasicStringFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.BasicStringFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.BasicStringFilterProperty.ExactMatch
+  nameWithType: BasicStringFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.BasicStringFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.BasicStringFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BasicStringFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.BasicStringFilterProperty.ExactMatch
+  nameWithType: BasicStringFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.BasicStringFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.BasicStringFilterProperty.Exists.html#Camunda_Orchestration_Sdk_BasicStringFilterProperty_Exists
@@ -9523,6 +9805,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BasicStringFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.BasicStringFilterProperty.NotIn
   nameWithType: BasicStringFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.BasicStringFilterProperty.op_Implicit(System.String)~Camunda.Orchestration.Sdk.BasicStringFilterProperty
+  name: implicit operator BasicStringFilterProperty(string)
+  href: api/Camunda.Orchestration.Sdk.BasicStringFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_BasicStringFilterProperty_op_Implicit_System_String__Camunda_Orchestration_Sdk_BasicStringFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.BasicStringFilterProperty.op_Implicit(System.String)~Camunda.Orchestration.Sdk.BasicStringFilterProperty
+  name.vb: CType(String)
+  fullName: Camunda.Orchestration.Sdk.BasicStringFilterProperty.implicit operator Camunda.Orchestration.Sdk.BasicStringFilterProperty(string)
+  fullName.vb: Camunda.Orchestration.Sdk.BasicStringFilterProperty.CType(String)
+  nameWithType: BasicStringFilterProperty.implicit operator BasicStringFilterProperty(string)
+  nameWithType.vb: BasicStringFilterProperty.CType(String)
+- uid: Camunda.Orchestration.Sdk.BasicStringFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.BasicStringFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BasicStringFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.BasicStringFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.BasicStringFilterProperty.CType
+  nameWithType: BasicStringFilterProperty.implicit operator
+  nameWithType.vb: BasicStringFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.BatchOperationCreatedResult
   name: BatchOperationCreatedResult
   href: api/Camunda.Orchestration.Sdk.BatchOperationCreatedResult.html
@@ -10129,6 +10429,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.Eq
   nameWithType: BatchOperationItemStateFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_BatchOperationItemStateFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.ExactMatch
+  nameWithType: BatchOperationItemStateFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.ExactMatch
+  nameWithType: BatchOperationItemStateFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_BatchOperationItemStateFilterProperty_Exists
@@ -10177,6 +10489,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.Neq
   nameWithType: BatchOperationItemStateFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.BatchOperationItemStateEnum)~Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty
+  name: implicit operator BatchOperationItemStateFilterProperty(BatchOperationItemStateEnum)
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_BatchOperationItemStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_BatchOperationItemStateEnum__Camunda_Orchestration_Sdk_BatchOperationItemStateFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.BatchOperationItemStateEnum)~Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty
+  name.vb: CType(BatchOperationItemStateEnum)
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.implicit operator Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty(Camunda.Orchestration.Sdk.BatchOperationItemStateEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.CType(Camunda.Orchestration.Sdk.BatchOperationItemStateEnum)
+  nameWithType: BatchOperationItemStateFilterProperty.implicit operator BatchOperationItemStateFilterProperty(BatchOperationItemStateEnum)
+  nameWithType.vb: BatchOperationItemStateFilterProperty.CType(BatchOperationItemStateEnum)
+- uid: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.BatchOperationItemStateFilterProperty.CType
+  nameWithType: BatchOperationItemStateFilterProperty.implicit operator
+  nameWithType.vb: BatchOperationItemStateFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.BatchOperationKey
   name: BatchOperationKey
   href: api/Camunda.Orchestration.Sdk.BatchOperationKey.html
@@ -10651,6 +10981,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.Eq
   nameWithType: BatchOperationStateFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_BatchOperationStateFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.ExactMatch
+  nameWithType: BatchOperationStateFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.ExactMatch
+  nameWithType: BatchOperationStateFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_BatchOperationStateFilterProperty_Exists
@@ -10699,6 +11041,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.Neq
   nameWithType: BatchOperationStateFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.BatchOperationStateEnum)~Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty
+  name: implicit operator BatchOperationStateFilterProperty(BatchOperationStateEnum)
+  href: api/Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_BatchOperationStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_BatchOperationStateEnum__Camunda_Orchestration_Sdk_BatchOperationStateFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.BatchOperationStateEnum)~Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty
+  name.vb: CType(BatchOperationStateEnum)
+  fullName: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.implicit operator Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty(Camunda.Orchestration.Sdk.BatchOperationStateEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.CType(Camunda.Orchestration.Sdk.BatchOperationStateEnum)
+  nameWithType: BatchOperationStateFilterProperty.implicit operator BatchOperationStateFilterProperty(BatchOperationStateEnum)
+  nameWithType.vb: BatchOperationStateFilterProperty.CType(BatchOperationStateEnum)
+- uid: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.BatchOperationStateFilterProperty.CType
+  nameWithType: BatchOperationStateFilterProperty.implicit operator
+  nameWithType.vb: BatchOperationStateFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.BatchOperationTypeEnum
   name: BatchOperationTypeEnum
   href: api/Camunda.Orchestration.Sdk.BatchOperationTypeEnum.html
@@ -10843,6 +11203,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.Eq
   nameWithType: BatchOperationTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_BatchOperationTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.ExactMatch
+  nameWithType: BatchOperationTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.ExactMatch
+  nameWithType: BatchOperationTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_BatchOperationTypeFilterProperty_Exists
@@ -10891,6 +11263,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.Neq
   nameWithType: BatchOperationTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.BatchOperationTypeEnum)~Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty
+  name: implicit operator BatchOperationTypeFilterProperty(BatchOperationTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_BatchOperationTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_BatchOperationTypeEnum__Camunda_Orchestration_Sdk_BatchOperationTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.BatchOperationTypeEnum)~Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty
+  name.vb: CType(BatchOperationTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty(Camunda.Orchestration.Sdk.BatchOperationTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.CType(Camunda.Orchestration.Sdk.BatchOperationTypeEnum)
+  nameWithType: BatchOperationTypeFilterProperty.implicit operator BatchOperationTypeFilterProperty(BatchOperationTypeEnum)
+  nameWithType.vb: BatchOperationTypeFilterProperty.CType(BatchOperationTypeEnum)
+- uid: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.BatchOperationTypeFilterProperty.CType
+  nameWithType: BatchOperationTypeFilterProperty.implicit operator
+  nameWithType.vb: BatchOperationTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.BpmnErrorException
   name: BpmnErrorException
   href: api/Camunda.Orchestration.Sdk.BpmnErrorException.html
@@ -14638,6 +15028,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CategoryFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.CategoryFilterProperty.Eq
   nameWithType: CategoryFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.CategoryFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.CategoryFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_CategoryFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.CategoryFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.CategoryFilterProperty.ExactMatch
+  nameWithType: CategoryFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.CategoryFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.CategoryFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CategoryFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.CategoryFilterProperty.ExactMatch
+  nameWithType: CategoryFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.CategoryFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.CategoryFilterProperty.Exists.html#Camunda_Orchestration_Sdk_CategoryFilterProperty_Exists
@@ -14686,6 +15088,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CategoryFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.CategoryFilterProperty.Neq
   nameWithType: CategoryFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.CategoryFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogCategoryEnum)~Camunda.Orchestration.Sdk.CategoryFilterProperty
+  name: implicit operator CategoryFilterProperty(AuditLogCategoryEnum)
+  href: api/Camunda.Orchestration.Sdk.CategoryFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_CategoryFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AuditLogCategoryEnum__Camunda_Orchestration_Sdk_CategoryFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.CategoryFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogCategoryEnum)~Camunda.Orchestration.Sdk.CategoryFilterProperty
+  name.vb: CType(AuditLogCategoryEnum)
+  fullName: Camunda.Orchestration.Sdk.CategoryFilterProperty.implicit operator Camunda.Orchestration.Sdk.CategoryFilterProperty(Camunda.Orchestration.Sdk.AuditLogCategoryEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.CategoryFilterProperty.CType(Camunda.Orchestration.Sdk.AuditLogCategoryEnum)
+  nameWithType: CategoryFilterProperty.implicit operator CategoryFilterProperty(AuditLogCategoryEnum)
+  nameWithType.vb: CategoryFilterProperty.CType(AuditLogCategoryEnum)
+- uid: Camunda.Orchestration.Sdk.CategoryFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.CategoryFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CategoryFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.CategoryFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.CategoryFilterProperty.CType
+  nameWithType: CategoryFilterProperty.implicit operator
+  nameWithType.vb: CategoryFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.Changeset
   name: Changeset
   href: api/Camunda.Orchestration.Sdk.Changeset.html
@@ -15124,6 +15544,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.Eq
   nameWithType: ClusterVariableScopeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ClusterVariableScopeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.ExactMatch
+  nameWithType: ClusterVariableScopeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.ExactMatch
+  nameWithType: ClusterVariableScopeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ClusterVariableScopeFilterProperty_Exists
@@ -15172,6 +15604,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.Neq
   nameWithType: ClusterVariableScopeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ClusterVariableScopeEnum)~Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty
+  name: implicit operator ClusterVariableScopeFilterProperty(ClusterVariableScopeEnum)
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ClusterVariableScopeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ClusterVariableScopeEnum__Camunda_Orchestration_Sdk_ClusterVariableScopeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ClusterVariableScopeEnum)~Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty
+  name.vb: CType(ClusterVariableScopeEnum)
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.implicit operator Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty(Camunda.Orchestration.Sdk.ClusterVariableScopeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.CType(Camunda.Orchestration.Sdk.ClusterVariableScopeEnum)
+  nameWithType: ClusterVariableScopeFilterProperty.implicit operator ClusterVariableScopeFilterProperty(ClusterVariableScopeEnum)
+  nameWithType.vb: ClusterVariableScopeFilterProperty.CType(ClusterVariableScopeEnum)
+- uid: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty.CType
+  nameWithType: ClusterVariableScopeFilterProperty.implicit operator
+  nameWithType.vb: ClusterVariableScopeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.ClusterVariableSearchQueryFilterRequest
   name: ClusterVariableSearchQueryFilterRequest
   href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchQueryFilterRequest.html
@@ -16582,6 +17032,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DateTimeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.DateTimeFilterProperty.Eq
   nameWithType: DateTimeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.DateTimeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DateTimeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_DateTimeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.DateTimeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DateTimeFilterProperty.ExactMatch
+  nameWithType: DateTimeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.DateTimeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DateTimeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DateTimeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DateTimeFilterProperty.ExactMatch
+  nameWithType: DateTimeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.DateTimeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.DateTimeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_DateTimeFilterProperty_Exists
@@ -16666,6 +17128,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DateTimeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.DateTimeFilterProperty.Neq
   nameWithType: DateTimeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.DateTimeFilterProperty.op_Implicit(System.DateTimeOffset)~Camunda.Orchestration.Sdk.DateTimeFilterProperty
+  name: implicit operator DateTimeFilterProperty(DateTimeOffset)
+  href: api/Camunda.Orchestration.Sdk.DateTimeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_DateTimeFilterProperty_op_Implicit_System_DateTimeOffset__Camunda_Orchestration_Sdk_DateTimeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.DateTimeFilterProperty.op_Implicit(System.DateTimeOffset)~Camunda.Orchestration.Sdk.DateTimeFilterProperty
+  name.vb: CType(DateTimeOffset)
+  fullName: Camunda.Orchestration.Sdk.DateTimeFilterProperty.implicit operator Camunda.Orchestration.Sdk.DateTimeFilterProperty(System.DateTimeOffset)
+  fullName.vb: Camunda.Orchestration.Sdk.DateTimeFilterProperty.CType(System.DateTimeOffset)
+  nameWithType: DateTimeFilterProperty.implicit operator DateTimeFilterProperty(DateTimeOffset)
+  nameWithType.vb: DateTimeFilterProperty.CType(DateTimeOffset)
+- uid: Camunda.Orchestration.Sdk.DateTimeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.DateTimeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DateTimeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.DateTimeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.DateTimeFilterProperty.CType
+  nameWithType: DateTimeFilterProperty.implicit operator
+  nameWithType.vb: DateTimeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.DecisionDefinitionFilter
   name: DecisionDefinitionFilter
   href: api/Camunda.Orchestration.Sdk.DecisionDefinitionFilter.html
@@ -16990,6 +17470,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.Eq
   nameWithType: DecisionDefinitionKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_DecisionDefinitionKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.ExactMatch
+  nameWithType: DecisionDefinitionKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.ExactMatch
+  nameWithType: DecisionDefinitionKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_DecisionDefinitionKeyFilterProperty_Exists
@@ -17038,6 +17530,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.NotIn
   nameWithType: DecisionDefinitionKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionDefinitionKey)~Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty
+  name: implicit operator DecisionDefinitionKeyFilterProperty(DecisionDefinitionKey)
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_DecisionDefinitionKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_DecisionDefinitionKey__Camunda_Orchestration_Sdk_DecisionDefinitionKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionDefinitionKey)~Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty
+  name.vb: CType(DecisionDefinitionKey)
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty(Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.CType(Camunda.Orchestration.Sdk.DecisionDefinitionKey)
+  nameWithType: DecisionDefinitionKeyFilterProperty.implicit operator DecisionDefinitionKeyFilterProperty(DecisionDefinitionKey)
+  nameWithType.vb: DecisionDefinitionKeyFilterProperty.CType(DecisionDefinitionKey)
+- uid: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.CType
+  nameWithType: DecisionDefinitionKeyFilterProperty.implicit operator
+  nameWithType.vb: DecisionDefinitionKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.DecisionDefinitionResult
   name: DecisionDefinitionResult
   href: api/Camunda.Orchestration.Sdk.DecisionDefinitionResult.html
@@ -17596,6 +18106,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.Eq
   nameWithType: DecisionEvaluationInstanceKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_DecisionEvaluationInstanceKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.ExactMatch
+  nameWithType: DecisionEvaluationInstanceKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.ExactMatch
+  nameWithType: DecisionEvaluationInstanceKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_DecisionEvaluationInstanceKeyFilterProperty_Exists
@@ -17644,6 +18166,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.NotIn
   nameWithType: DecisionEvaluationInstanceKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKey)~Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty
+  name: implicit operator DecisionEvaluationInstanceKeyFilterProperty(DecisionEvaluationInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_DecisionEvaluationInstanceKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_DecisionEvaluationInstanceKey__Camunda_Orchestration_Sdk_DecisionEvaluationInstanceKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKey)~Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty
+  name.vb: CType(DecisionEvaluationInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty(Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.CType(Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKey)
+  nameWithType: DecisionEvaluationInstanceKeyFilterProperty.implicit operator DecisionEvaluationInstanceKeyFilterProperty(DecisionEvaluationInstanceKey)
+  nameWithType.vb: DecisionEvaluationInstanceKeyFilterProperty.CType(DecisionEvaluationInstanceKey)
+- uid: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionEvaluationInstanceKeyFilterProperty.CType
+  nameWithType: DecisionEvaluationInstanceKeyFilterProperty.implicit operator
+  nameWithType.vb: DecisionEvaluationInstanceKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.DecisionEvaluationInstruction
   name: DecisionEvaluationInstruction
   href: api/Camunda.Orchestration.Sdk.DecisionEvaluationInstruction.html
@@ -17788,6 +18328,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.Eq
   nameWithType: DecisionEvaluationKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_DecisionEvaluationKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.ExactMatch
+  nameWithType: DecisionEvaluationKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.ExactMatch
+  nameWithType: DecisionEvaluationKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_DecisionEvaluationKeyFilterProperty_Exists
@@ -17836,6 +18388,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.NotIn
   nameWithType: DecisionEvaluationKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionEvaluationKey)~Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty
+  name: implicit operator DecisionEvaluationKeyFilterProperty(DecisionEvaluationKey)
+  href: api/Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_DecisionEvaluationKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_DecisionEvaluationKey__Camunda_Orchestration_Sdk_DecisionEvaluationKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionEvaluationKey)~Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty
+  name.vb: CType(DecisionEvaluationKey)
+  fullName: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty(Camunda.Orchestration.Sdk.DecisionEvaluationKey)
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.CType(Camunda.Orchestration.Sdk.DecisionEvaluationKey)
+  nameWithType: DecisionEvaluationKeyFilterProperty.implicit operator DecisionEvaluationKeyFilterProperty(DecisionEvaluationKey)
+  nameWithType.vb: DecisionEvaluationKeyFilterProperty.CType(DecisionEvaluationKey)
+- uid: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionEvaluationKeyFilterProperty.CType
+  nameWithType: DecisionEvaluationKeyFilterProperty.implicit operator
+  nameWithType.vb: DecisionEvaluationKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.DecisionInstanceDeletionBatchOperationRequest
   name: DecisionInstanceDeletionBatchOperationRequest
   href: api/Camunda.Orchestration.Sdk.DecisionInstanceDeletionBatchOperationRequest.html
@@ -17872,6 +18442,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.DecisionInstanceFilter
   fullName: Camunda.Orchestration.Sdk.DecisionInstanceFilter
   nameWithType: DecisionInstanceFilter
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceFilter.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceFilter.BusinessId.html#Camunda_Orchestration_Sdk_DecisionInstanceFilter_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.DecisionInstanceFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceFilter.BusinessId
+  nameWithType: DecisionInstanceFilter.BusinessId
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceFilter.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceFilter.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceFilter.BusinessId
+  nameWithType: DecisionInstanceFilter.BusinessId
 - uid: Camunda.Orchestration.Sdk.DecisionInstanceFilter.DecisionDefinitionId
   name: DecisionDefinitionId
   href: api/Camunda.Orchestration.Sdk.DecisionInstanceFilter.DecisionDefinitionId.html#Camunda_Orchestration_Sdk_DecisionInstanceFilter_DecisionDefinitionId
@@ -18070,6 +18652,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult
   fullName: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult
   nameWithType: DecisionInstanceGetQueryResult
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.BusinessId.html#Camunda_Orchestration_Sdk_DecisionInstanceGetQueryResult_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.BusinessId
+  nameWithType: DecisionInstanceGetQueryResult.BusinessId
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.BusinessId
+  nameWithType: DecisionInstanceGetQueryResult.BusinessId
 - uid: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.DecisionDefinitionId
   name: DecisionDefinitionId
   href: api/Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.DecisionDefinitionId.html#Camunda_Orchestration_Sdk_DecisionInstanceGetQueryResult_DecisionDefinitionId
@@ -18364,6 +18958,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.DecisionInstanceResult
   fullName: Camunda.Orchestration.Sdk.DecisionInstanceResult
   nameWithType: DecisionInstanceResult
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceResult.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceResult.BusinessId.html#Camunda_Orchestration_Sdk_DecisionInstanceResult_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.DecisionInstanceResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceResult.BusinessId
+  nameWithType: DecisionInstanceResult.BusinessId
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceResult.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceResult.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceResult.BusinessId
+  nameWithType: DecisionInstanceResult.BusinessId
 - uid: Camunda.Orchestration.Sdk.DecisionInstanceResult.DecisionDefinitionId
   name: DecisionDefinitionId
   href: api/Camunda.Orchestration.Sdk.DecisionInstanceResult.DecisionDefinitionId.html#Camunda_Orchestration_Sdk_DecisionInstanceResult_DecisionDefinitionId
@@ -18676,6 +19282,12 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField
   fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField
   nameWithType: DecisionInstanceSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_BusinessId
+  commentId: F:Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.BusinessId
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.BusinessId
+  nameWithType: DecisionInstanceSearchQuerySortRequestField.BusinessId
 - uid: Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.DecisionDefinitionId
   name: DecisionDefinitionId
   href: api/Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_DecisionInstanceSearchQuerySortRequestField_DecisionDefinitionId
@@ -18874,6 +19486,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.Eq
   nameWithType: DecisionInstanceStateFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_DecisionInstanceStateFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.ExactMatch
+  nameWithType: DecisionInstanceStateFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.ExactMatch
+  nameWithType: DecisionInstanceStateFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_DecisionInstanceStateFilterProperty_Exists
@@ -18934,6 +19558,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.NotIn
   nameWithType: DecisionInstanceStateFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionInstanceStateEnum)~Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty
+  name: implicit operator DecisionInstanceStateFilterProperty(DecisionInstanceStateEnum)
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_DecisionInstanceStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_DecisionInstanceStateEnum__Camunda_Orchestration_Sdk_DecisionInstanceStateFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionInstanceStateEnum)~Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty
+  name.vb: CType(DecisionInstanceStateEnum)
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.implicit operator Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty(Camunda.Orchestration.Sdk.DecisionInstanceStateEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.CType(Camunda.Orchestration.Sdk.DecisionInstanceStateEnum)
+  nameWithType: DecisionInstanceStateFilterProperty.implicit operator DecisionInstanceStateFilterProperty(DecisionInstanceStateEnum)
+  nameWithType.vb: DecisionInstanceStateFilterProperty.CType(DecisionInstanceStateEnum)
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionInstanceStateFilterProperty.CType
+  nameWithType: DecisionInstanceStateFilterProperty.implicit operator
+  nameWithType.vb: DecisionInstanceStateFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.DecisionRequirementsFilter
   name: DecisionRequirementsFilter
   href: api/Camunda.Orchestration.Sdk.DecisionRequirementsFilter.html
@@ -19150,6 +19792,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.Eq
   nameWithType: DecisionRequirementsKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_DecisionRequirementsKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.ExactMatch
+  nameWithType: DecisionRequirementsKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.ExactMatch
+  nameWithType: DecisionRequirementsKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_DecisionRequirementsKeyFilterProperty_Exists
@@ -19198,6 +19852,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.NotIn
   nameWithType: DecisionRequirementsKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionRequirementsKey)~Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty
+  name: implicit operator DecisionRequirementsKeyFilterProperty(DecisionRequirementsKey)
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_DecisionRequirementsKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_DecisionRequirementsKey__Camunda_Orchestration_Sdk_DecisionRequirementsKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DecisionRequirementsKey)~Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty
+  name.vb: CType(DecisionRequirementsKey)
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty(Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.CType(Camunda.Orchestration.Sdk.DecisionRequirementsKey)
+  nameWithType: DecisionRequirementsKeyFilterProperty.implicit operator DecisionRequirementsKeyFilterProperty(DecisionRequirementsKey)
+  nameWithType.vb: DecisionRequirementsKeyFilterProperty.CType(DecisionRequirementsKey)
+- uid: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.DecisionRequirementsKeyFilterProperty.CType
+  nameWithType: DecisionRequirementsKeyFilterProperty.implicit operator
+  nameWithType.vb: DecisionRequirementsKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.DecisionRequirementsResult
   name: DecisionRequirementsResult
   href: api/Camunda.Orchestration.Sdk.DecisionRequirementsResult.html
@@ -19912,6 +20584,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.Eq
   nameWithType: DeploymentKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_DeploymentKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.ExactMatch
+  nameWithType: DeploymentKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.ExactMatch
+  nameWithType: DeploymentKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_DeploymentKeyFilterProperty_Exists
@@ -19960,6 +20644,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.NotIn
   nameWithType: DeploymentKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DeploymentKey)~Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty
+  name: implicit operator DeploymentKeyFilterProperty(DeploymentKey)
+  href: api/Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_DeploymentKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_DeploymentKey__Camunda_Orchestration_Sdk_DeploymentKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.DeploymentKey)~Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty
+  name.vb: CType(DeploymentKey)
+  fullName: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty(Camunda.Orchestration.Sdk.DeploymentKey)
+  fullName.vb: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.CType(Camunda.Orchestration.Sdk.DeploymentKey)
+  nameWithType: DeploymentKeyFilterProperty.implicit operator DeploymentKeyFilterProperty(DeploymentKey)
+  nameWithType.vb: DeploymentKeyFilterProperty.CType(DeploymentKey)
+- uid: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty.CType
+  nameWithType: DeploymentKeyFilterProperty.implicit operator
+  nameWithType.vb: DeploymentKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.DeploymentMetadataResult
   name: DeploymentMetadataResult
   href: api/Camunda.Orchestration.Sdk.DeploymentMetadataResult.html
@@ -20806,6 +21508,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Eq
   nameWithType: ElementIdFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ElementIdFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ElementIdFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.ExactMatch
+  nameWithType: ElementIdFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.ExactMatch
+  nameWithType: ElementIdFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ElementIdFilterProperty_Exists
@@ -20866,6 +21580,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.NotIn
   nameWithType: ElementIdFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ElementId)~Camunda.Orchestration.Sdk.ElementIdFilterProperty
+  name: implicit operator ElementIdFilterProperty(ElementId)
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ElementIdFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ElementId__Camunda_Orchestration_Sdk_ElementIdFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ElementIdFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ElementId)~Camunda.Orchestration.Sdk.ElementIdFilterProperty
+  name.vb: CType(ElementId)
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.implicit operator Camunda.Orchestration.Sdk.ElementIdFilterProperty(Camunda.Orchestration.Sdk.ElementId)
+  fullName.vb: Camunda.Orchestration.Sdk.ElementIdFilterProperty.CType(Camunda.Orchestration.Sdk.ElementId)
+  nameWithType: ElementIdFilterProperty.implicit operator ElementIdFilterProperty(ElementId)
+  nameWithType.vb: ElementIdFilterProperty.CType(ElementId)
+- uid: Camunda.Orchestration.Sdk.ElementIdFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ElementIdFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementIdFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ElementIdFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ElementIdFilterProperty.CType
+  nameWithType: ElementIdFilterProperty.implicit operator
+  nameWithType.vb: ElementIdFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.ElementInstanceFilter
   name: ElementInstanceFilter
   href: api/Camunda.Orchestration.Sdk.ElementInstanceFilter.html
@@ -21700,6 +22432,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.Eq
   nameWithType: ElementInstanceKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ElementInstanceKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.ExactMatch
+  nameWithType: ElementInstanceKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.ExactMatch
+  nameWithType: ElementInstanceKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ElementInstanceKeyFilterProperty_Exists
@@ -21748,6 +22492,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.NotIn
   nameWithType: ElementInstanceKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ElementInstanceKey)~Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty
+  name: implicit operator ElementInstanceKeyFilterProperty(ElementInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ElementInstanceKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ElementInstanceKey__Camunda_Orchestration_Sdk_ElementInstanceKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ElementInstanceKey)~Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty
+  name.vb: CType(ElementInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty(Camunda.Orchestration.Sdk.ElementInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.CType(Camunda.Orchestration.Sdk.ElementInstanceKey)
+  nameWithType: ElementInstanceKeyFilterProperty.implicit operator ElementInstanceKeyFilterProperty(ElementInstanceKey)
+  nameWithType.vb: ElementInstanceKeyFilterProperty.CType(ElementInstanceKey)
+- uid: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty.CType
+  nameWithType: ElementInstanceKeyFilterProperty.implicit operator
+  nameWithType.vb: ElementInstanceKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.ElementInstanceResult
   name: ElementInstanceResult
   href: api/Camunda.Orchestration.Sdk.ElementInstanceResult.html
@@ -22372,6 +23134,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.Eq
   nameWithType: ElementInstanceStateFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ElementInstanceStateFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.ExactMatch
+  nameWithType: ElementInstanceStateFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.ExactMatch
+  nameWithType: ElementInstanceStateFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ElementInstanceStateFilterProperty_Exists
@@ -22420,6 +23194,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.Neq
   nameWithType: ElementInstanceStateFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ElementInstanceStateEnum)~Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty
+  name: implicit operator ElementInstanceStateFilterProperty(ElementInstanceStateEnum)
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ElementInstanceStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ElementInstanceStateEnum__Camunda_Orchestration_Sdk_ElementInstanceStateFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ElementInstanceStateEnum)~Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty
+  name.vb: CType(ElementInstanceStateEnum)
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.implicit operator Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty(Camunda.Orchestration.Sdk.ElementInstanceStateEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.CType(Camunda.Orchestration.Sdk.ElementInstanceStateEnum)
+  nameWithType: ElementInstanceStateFilterProperty.implicit operator ElementInstanceStateFilterProperty(ElementInstanceStateEnum)
+  nameWithType.vb: ElementInstanceStateFilterProperty.CType(ElementInstanceStateEnum)
+- uid: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty.CType
+  nameWithType: ElementInstanceStateFilterProperty.implicit operator
+  nameWithType.vb: ElementInstanceStateFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.ElementInstanceWaitStateFilter
   name: ElementInstanceWaitStateFilter
   href: api/Camunda.Orchestration.Sdk.ElementInstanceWaitStateFilter.html
@@ -22870,6 +23662,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.EntityTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.Eq
   nameWithType: EntityTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.EntityTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_EntityTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.EntityTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.ExactMatch
+  nameWithType: EntityTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.EntityTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.EntityTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.ExactMatch
+  nameWithType: EntityTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.EntityTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_EntityTypeFilterProperty_Exists
@@ -22918,6 +23722,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.EntityTypeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.Neq
   nameWithType: EntityTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogEntityTypeEnum)~Camunda.Orchestration.Sdk.EntityTypeFilterProperty
+  name: implicit operator EntityTypeFilterProperty(AuditLogEntityTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.EntityTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_EntityTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AuditLogEntityTypeEnum__Camunda_Orchestration_Sdk_EntityTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.EntityTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogEntityTypeEnum)~Camunda.Orchestration.Sdk.EntityTypeFilterProperty
+  name.vb: CType(AuditLogEntityTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.EntityTypeFilterProperty(Camunda.Orchestration.Sdk.AuditLogEntityTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.CType(Camunda.Orchestration.Sdk.AuditLogEntityTypeEnum)
+  nameWithType: EntityTypeFilterProperty.implicit operator EntityTypeFilterProperty(AuditLogEntityTypeEnum)
+  nameWithType.vb: EntityTypeFilterProperty.CType(AuditLogEntityTypeEnum)
+- uid: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.EntityTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.EntityTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.EntityTypeFilterProperty.CType
+  nameWithType: EntityTypeFilterProperty.implicit operator
+  nameWithType.vb: EntityTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.EvaluateConditionalResult
   name: EvaluateConditionalResult
   href: api/Camunda.Orchestration.Sdk.EvaluateConditionalResult.html
@@ -23869,6 +24691,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.FormKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.FormKeyFilterProperty.Eq
   nameWithType: FormKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.FormKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.FormKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_FormKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.FormKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.FormKeyFilterProperty.ExactMatch
+  nameWithType: FormKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.FormKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.FormKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.FormKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.FormKeyFilterProperty.ExactMatch
+  nameWithType: FormKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.FormKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.FormKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_FormKeyFilterProperty_Exists
@@ -23917,6 +24751,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.FormKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.FormKeyFilterProperty.NotIn
   nameWithType: FormKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.FormKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.FormKey)~Camunda.Orchestration.Sdk.FormKeyFilterProperty
+  name: implicit operator FormKeyFilterProperty(FormKey)
+  href: api/Camunda.Orchestration.Sdk.FormKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_FormKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_FormKey__Camunda_Orchestration_Sdk_FormKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.FormKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.FormKey)~Camunda.Orchestration.Sdk.FormKeyFilterProperty
+  name.vb: CType(FormKey)
+  fullName: Camunda.Orchestration.Sdk.FormKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.FormKeyFilterProperty(Camunda.Orchestration.Sdk.FormKey)
+  fullName.vb: Camunda.Orchestration.Sdk.FormKeyFilterProperty.CType(Camunda.Orchestration.Sdk.FormKey)
+  nameWithType: FormKeyFilterProperty.implicit operator FormKeyFilterProperty(FormKey)
+  nameWithType.vb: FormKeyFilterProperty.CType(FormKey)
+- uid: Camunda.Orchestration.Sdk.FormKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.FormKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.FormKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.FormKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.FormKeyFilterProperty.CType
+  nameWithType: FormKeyFilterProperty.implicit operator
+  nameWithType.vb: FormKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.FormResult
   name: FormResult
   href: api/Camunda.Orchestration.Sdk.FormResult.html
@@ -24247,6 +25099,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.Eq
   nameWithType: GlobalListenerSourceFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_GlobalListenerSourceFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.ExactMatch
+  nameWithType: GlobalListenerSourceFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.ExactMatch
+  nameWithType: GlobalListenerSourceFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.Exists.html#Camunda_Orchestration_Sdk_GlobalListenerSourceFilterProperty_Exists
@@ -24295,6 +25159,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.Neq
   nameWithType: GlobalListenerSourceFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.GlobalListenerSourceEnum)~Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty
+  name: implicit operator GlobalListenerSourceFilterProperty(GlobalListenerSourceEnum)
+  href: api/Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_GlobalListenerSourceFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_GlobalListenerSourceEnum__Camunda_Orchestration_Sdk_GlobalListenerSourceFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.GlobalListenerSourceEnum)~Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty
+  name.vb: CType(GlobalListenerSourceEnum)
+  fullName: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.implicit operator Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty(Camunda.Orchestration.Sdk.GlobalListenerSourceEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.CType(Camunda.Orchestration.Sdk.GlobalListenerSourceEnum)
+  nameWithType: GlobalListenerSourceFilterProperty.implicit operator GlobalListenerSourceFilterProperty(GlobalListenerSourceEnum)
+  nameWithType.vb: GlobalListenerSourceFilterProperty.CType(GlobalListenerSourceEnum)
+- uid: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.GlobalListenerSourceFilterProperty.CType
+  nameWithType: GlobalListenerSourceFilterProperty.implicit operator
+  nameWithType.vb: GlobalListenerSourceFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.GlobalTaskListenerBase
   name: GlobalTaskListenerBase
   href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerBase.html
@@ -24481,6 +25363,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.Eq
   nameWithType: GlobalTaskListenerEventTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_GlobalTaskListenerEventTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.ExactMatch
+  nameWithType: GlobalTaskListenerEventTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.ExactMatch
+  nameWithType: GlobalTaskListenerEventTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_GlobalTaskListenerEventTypeFilterProperty_Exists
@@ -24529,6 +25423,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.Neq
   nameWithType: GlobalTaskListenerEventTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeEnum)~Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty
+  name: implicit operator GlobalTaskListenerEventTypeFilterProperty(GlobalTaskListenerEventTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_GlobalTaskListenerEventTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_GlobalTaskListenerEventTypeEnum__Camunda_Orchestration_Sdk_GlobalTaskListenerEventTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeEnum)~Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty
+  name.vb: CType(GlobalTaskListenerEventTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty(Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.CType(Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeEnum)
+  nameWithType: GlobalTaskListenerEventTypeFilterProperty.implicit operator GlobalTaskListenerEventTypeFilterProperty(GlobalTaskListenerEventTypeEnum)
+  nameWithType.vb: GlobalTaskListenerEventTypeFilterProperty.CType(GlobalTaskListenerEventTypeEnum)
+- uid: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.GlobalTaskListenerEventTypeFilterProperty.CType
+  nameWithType: GlobalTaskListenerEventTypeFilterProperty.implicit operator
+  nameWithType.vb: GlobalTaskListenerEventTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.GlobalTaskListenerResult
   name: GlobalTaskListenerResult
   href: api/Camunda.Orchestration.Sdk.GlobalTaskListenerResult.html
@@ -25939,6 +26851,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.Eq
   nameWithType: IncidentErrorTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_IncidentErrorTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.ExactMatch
+  nameWithType: IncidentErrorTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.ExactMatch
+  nameWithType: IncidentErrorTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_IncidentErrorTypeFilterProperty_Exists
@@ -25999,6 +26923,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.NotIn
   nameWithType: IncidentErrorTypeFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.IncidentErrorTypeEnum)~Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty
+  name: implicit operator IncidentErrorTypeFilterProperty(IncidentErrorTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_IncidentErrorTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_IncidentErrorTypeEnum__Camunda_Orchestration_Sdk_IncidentErrorTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.IncidentErrorTypeEnum)~Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty
+  name.vb: CType(IncidentErrorTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty(Camunda.Orchestration.Sdk.IncidentErrorTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.CType(Camunda.Orchestration.Sdk.IncidentErrorTypeEnum)
+  nameWithType: IncidentErrorTypeFilterProperty.implicit operator IncidentErrorTypeFilterProperty(IncidentErrorTypeEnum)
+  nameWithType.vb: IncidentErrorTypeFilterProperty.CType(IncidentErrorTypeEnum)
+- uid: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.IncidentErrorTypeFilterProperty.CType
+  nameWithType: IncidentErrorTypeFilterProperty.implicit operator
+  nameWithType.vb: IncidentErrorTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.IncidentFilter
   name: IncidentFilter
   href: api/Camunda.Orchestration.Sdk.IncidentFilter.html
@@ -27049,6 +27991,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IncidentStateFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.Eq
   nameWithType: IncidentStateFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.IncidentStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_IncidentStateFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.IncidentStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.ExactMatch
+  nameWithType: IncidentStateFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.IncidentStateFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.IncidentStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.ExactMatch
+  nameWithType: IncidentStateFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.IncidentStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_IncidentStateFilterProperty_Exists
@@ -27109,6 +28063,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IncidentStateFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.NotIn
   nameWithType: IncidentStateFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.IncidentStateEnum)~Camunda.Orchestration.Sdk.IncidentStateFilterProperty
+  name: implicit operator IncidentStateFilterProperty(IncidentStateEnum)
+  href: api/Camunda.Orchestration.Sdk.IncidentStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_IncidentStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_IncidentStateEnum__Camunda_Orchestration_Sdk_IncidentStateFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.IncidentStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.IncidentStateEnum)~Camunda.Orchestration.Sdk.IncidentStateFilterProperty
+  name.vb: CType(IncidentStateEnum)
+  fullName: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.implicit operator Camunda.Orchestration.Sdk.IncidentStateFilterProperty(Camunda.Orchestration.Sdk.IncidentStateEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.CType(Camunda.Orchestration.Sdk.IncidentStateEnum)
+  nameWithType: IncidentStateFilterProperty.implicit operator IncidentStateFilterProperty(IncidentStateEnum)
+  nameWithType.vb: IncidentStateFilterProperty.CType(IncidentStateEnum)
+- uid: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.IncidentStateFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.IncidentStateFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.IncidentStateFilterProperty.CType
+  nameWithType: IncidentStateFilterProperty.implicit operator
+  nameWithType.vb: IncidentStateFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction
   name: InferredAncestorKeyInstruction
   href: api/Camunda.Orchestration.Sdk.InferredAncestorKeyInstruction.html
@@ -27133,6 +28105,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IntegerFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.IntegerFilterProperty.Eq
   nameWithType: IntegerFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.IntegerFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.IntegerFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_IntegerFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.IntegerFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.IntegerFilterProperty.ExactMatch
+  nameWithType: IntegerFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.IntegerFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.IntegerFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.IntegerFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.IntegerFilterProperty.ExactMatch
+  nameWithType: IntegerFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.IntegerFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.IntegerFilterProperty.Exists.html#Camunda_Orchestration_Sdk_IntegerFilterProperty_Exists
@@ -27217,6 +28201,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IntegerFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.IntegerFilterProperty.Neq
   nameWithType: IntegerFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.IntegerFilterProperty.op_Implicit(System.Int32)~Camunda.Orchestration.Sdk.IntegerFilterProperty
+  name: implicit operator IntegerFilterProperty(int)
+  href: api/Camunda.Orchestration.Sdk.IntegerFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_IntegerFilterProperty_op_Implicit_System_Int32__Camunda_Orchestration_Sdk_IntegerFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.IntegerFilterProperty.op_Implicit(System.Int32)~Camunda.Orchestration.Sdk.IntegerFilterProperty
+  name.vb: CType(Integer)
+  fullName: Camunda.Orchestration.Sdk.IntegerFilterProperty.implicit operator Camunda.Orchestration.Sdk.IntegerFilterProperty(int)
+  fullName.vb: Camunda.Orchestration.Sdk.IntegerFilterProperty.CType(Integer)
+  nameWithType: IntegerFilterProperty.implicit operator IntegerFilterProperty(int)
+  nameWithType.vb: IntegerFilterProperty.CType(Integer)
+- uid: Camunda.Orchestration.Sdk.IntegerFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.IntegerFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.IntegerFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.IntegerFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.IntegerFilterProperty.CType
+  nameWithType: IntegerFilterProperty.implicit operator
+  nameWithType.vb: IntegerFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.IterationId
   name: IterationId
   href: api/Camunda.Orchestration.Sdk.IterationId.html
@@ -28207,6 +29209,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.JobKeyFilterProperty.Eq
   nameWithType: JobKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.JobKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.JobKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_JobKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.JobKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.JobKeyFilterProperty.ExactMatch
+  nameWithType: JobKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.JobKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.JobKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.JobKeyFilterProperty.ExactMatch
+  nameWithType: JobKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.JobKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.JobKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_JobKeyFilterProperty_Exists
@@ -28255,6 +29269,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.JobKeyFilterProperty.NotIn
   nameWithType: JobKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.JobKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.JobKey)~Camunda.Orchestration.Sdk.JobKeyFilterProperty
+  name: implicit operator JobKeyFilterProperty(JobKey)
+  href: api/Camunda.Orchestration.Sdk.JobKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_JobKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_JobKey__Camunda_Orchestration_Sdk_JobKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.JobKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.JobKey)~Camunda.Orchestration.Sdk.JobKeyFilterProperty
+  name.vb: CType(JobKey)
+  fullName: Camunda.Orchestration.Sdk.JobKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.JobKeyFilterProperty(Camunda.Orchestration.Sdk.JobKey)
+  fullName.vb: Camunda.Orchestration.Sdk.JobKeyFilterProperty.CType(Camunda.Orchestration.Sdk.JobKey)
+  nameWithType: JobKeyFilterProperty.implicit operator JobKeyFilterProperty(JobKey)
+  nameWithType.vb: JobKeyFilterProperty.CType(JobKey)
+- uid: Camunda.Orchestration.Sdk.JobKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.JobKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.JobKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.JobKeyFilterProperty.CType
+  nameWithType: JobKeyFilterProperty.implicit operator
+  nameWithType.vb: JobKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.JobKindEnum
   name: JobKindEnum
   href: api/Camunda.Orchestration.Sdk.JobKindEnum.html
@@ -28363,6 +29395,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobKindFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.JobKindFilterProperty.Eq
   nameWithType: JobKindFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.JobKindFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.JobKindFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_JobKindFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.JobKindFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.JobKindFilterProperty.ExactMatch
+  nameWithType: JobKindFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.JobKindFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.JobKindFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobKindFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.JobKindFilterProperty.ExactMatch
+  nameWithType: JobKindFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.JobKindFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.JobKindFilterProperty.Exists.html#Camunda_Orchestration_Sdk_JobKindFilterProperty_Exists
@@ -28411,6 +29455,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobKindFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.JobKindFilterProperty.Neq
   nameWithType: JobKindFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.JobKindFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.JobKindEnum)~Camunda.Orchestration.Sdk.JobKindFilterProperty
+  name: implicit operator JobKindFilterProperty(JobKindEnum)
+  href: api/Camunda.Orchestration.Sdk.JobKindFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_JobKindFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_JobKindEnum__Camunda_Orchestration_Sdk_JobKindFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.JobKindFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.JobKindEnum)~Camunda.Orchestration.Sdk.JobKindFilterProperty
+  name.vb: CType(JobKindEnum)
+  fullName: Camunda.Orchestration.Sdk.JobKindFilterProperty.implicit operator Camunda.Orchestration.Sdk.JobKindFilterProperty(Camunda.Orchestration.Sdk.JobKindEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.JobKindFilterProperty.CType(Camunda.Orchestration.Sdk.JobKindEnum)
+  nameWithType: JobKindFilterProperty.implicit operator JobKindFilterProperty(JobKindEnum)
+  nameWithType.vb: JobKindFilterProperty.CType(JobKindEnum)
+- uid: Camunda.Orchestration.Sdk.JobKindFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.JobKindFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobKindFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.JobKindFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.JobKindFilterProperty.CType
+  nameWithType: JobKindFilterProperty.implicit operator
+  nameWithType.vb: JobKindFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.JobListenerEventTypeEnum
   name: JobListenerEventTypeEnum
   href: api/Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.html
@@ -28555,6 +29617,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.Eq
   nameWithType: JobListenerEventTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_JobListenerEventTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.ExactMatch
+  nameWithType: JobListenerEventTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.ExactMatch
+  nameWithType: JobListenerEventTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_JobListenerEventTypeFilterProperty_Exists
@@ -28603,6 +29677,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.Neq
   nameWithType: JobListenerEventTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.JobListenerEventTypeEnum)~Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty
+  name: implicit operator JobListenerEventTypeFilterProperty(JobListenerEventTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_JobListenerEventTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_JobListenerEventTypeEnum__Camunda_Orchestration_Sdk_JobListenerEventTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.JobListenerEventTypeEnum)~Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty
+  name.vb: CType(JobListenerEventTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty(Camunda.Orchestration.Sdk.JobListenerEventTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.CType(Camunda.Orchestration.Sdk.JobListenerEventTypeEnum)
+  nameWithType: JobListenerEventTypeFilterProperty.implicit operator JobListenerEventTypeFilterProperty(JobListenerEventTypeEnum)
+  nameWithType.vb: JobListenerEventTypeFilterProperty.CType(JobListenerEventTypeEnum)
+- uid: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.JobListenerEventTypeFilterProperty.CType
+  nameWithType: JobListenerEventTypeFilterProperty.implicit operator
+  nameWithType.vb: JobListenerEventTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.JobMetricsConfigurationResponse
   name: JobMetricsConfigurationResponse
   href: api/Camunda.Orchestration.Sdk.JobMetricsConfigurationResponse.html
@@ -29557,6 +30649,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobStateFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.JobStateFilterProperty.Eq
   nameWithType: JobStateFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.JobStateFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.JobStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_JobStateFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.JobStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.JobStateFilterProperty.ExactMatch
+  nameWithType: JobStateFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.JobStateFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.JobStateFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.JobStateFilterProperty.ExactMatch
+  nameWithType: JobStateFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.JobStateFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.JobStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_JobStateFilterProperty_Exists
@@ -29605,6 +30709,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobStateFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.JobStateFilterProperty.Neq
   nameWithType: JobStateFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.JobStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.JobStateEnum)~Camunda.Orchestration.Sdk.JobStateFilterProperty
+  name: implicit operator JobStateFilterProperty(JobStateEnum)
+  href: api/Camunda.Orchestration.Sdk.JobStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_JobStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_JobStateEnum__Camunda_Orchestration_Sdk_JobStateFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.JobStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.JobStateEnum)~Camunda.Orchestration.Sdk.JobStateFilterProperty
+  name.vb: CType(JobStateEnum)
+  fullName: Camunda.Orchestration.Sdk.JobStateFilterProperty.implicit operator Camunda.Orchestration.Sdk.JobStateFilterProperty(Camunda.Orchestration.Sdk.JobStateEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.JobStateFilterProperty.CType(Camunda.Orchestration.Sdk.JobStateEnum)
+  nameWithType: JobStateFilterProperty.implicit operator JobStateFilterProperty(JobStateEnum)
+  nameWithType.vb: JobStateFilterProperty.CType(JobStateEnum)
+- uid: Camunda.Orchestration.Sdk.JobStateFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.JobStateFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobStateFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.JobStateFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.JobStateFilterProperty.CType
+  nameWithType: JobStateFilterProperty.implicit operator
+  nameWithType.vb: JobStateFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.JobTimeSeriesStatisticsFilter
   name: JobTimeSeriesStatisticsFilter
   href: api/Camunda.Orchestration.Sdk.JobTimeSeriesStatisticsFilter.html
@@ -31909,6 +33031,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.Eq
   nameWithType: MessageSubscriptionKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_MessageSubscriptionKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.ExactMatch
+  nameWithType: MessageSubscriptionKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.ExactMatch
+  nameWithType: MessageSubscriptionKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_MessageSubscriptionKeyFilterProperty_Exists
@@ -31957,6 +33091,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.NotIn
   nameWithType: MessageSubscriptionKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.MessageSubscriptionKey)~Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty
+  name: implicit operator MessageSubscriptionKeyFilterProperty(MessageSubscriptionKey)
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_MessageSubscriptionKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_MessageSubscriptionKey__Camunda_Orchestration_Sdk_MessageSubscriptionKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.MessageSubscriptionKey)~Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty
+  name.vb: CType(MessageSubscriptionKey)
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty(Camunda.Orchestration.Sdk.MessageSubscriptionKey)
+  fullName.vb: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.CType(Camunda.Orchestration.Sdk.MessageSubscriptionKey)
+  nameWithType: MessageSubscriptionKeyFilterProperty.implicit operator MessageSubscriptionKeyFilterProperty(MessageSubscriptionKey)
+  nameWithType.vb: MessageSubscriptionKeyFilterProperty.CType(MessageSubscriptionKey)
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.MessageSubscriptionKeyFilterProperty.CType
+  nameWithType: MessageSubscriptionKeyFilterProperty.implicit operator
+  nameWithType.vb: MessageSubscriptionKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult
   name: MessageSubscriptionResult
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.html
@@ -32485,6 +33637,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.Eq
   nameWithType: MessageSubscriptionStateFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_MessageSubscriptionStateFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.ExactMatch
+  nameWithType: MessageSubscriptionStateFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.ExactMatch
+  nameWithType: MessageSubscriptionStateFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_MessageSubscriptionStateFilterProperty_Exists
@@ -32533,6 +33697,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.Neq
   nameWithType: MessageSubscriptionStateFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.MessageSubscriptionStateEnum)~Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty
+  name: implicit operator MessageSubscriptionStateFilterProperty(MessageSubscriptionStateEnum)
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_MessageSubscriptionStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_MessageSubscriptionStateEnum__Camunda_Orchestration_Sdk_MessageSubscriptionStateFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.MessageSubscriptionStateEnum)~Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty
+  name.vb: CType(MessageSubscriptionStateEnum)
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.implicit operator Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty(Camunda.Orchestration.Sdk.MessageSubscriptionStateEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.CType(Camunda.Orchestration.Sdk.MessageSubscriptionStateEnum)
+  nameWithType: MessageSubscriptionStateFilterProperty.implicit operator MessageSubscriptionStateFilterProperty(MessageSubscriptionStateEnum)
+  nameWithType.vb: MessageSubscriptionStateFilterProperty.CType(MessageSubscriptionStateEnum)
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.MessageSubscriptionStateFilterProperty.CType
+  nameWithType: MessageSubscriptionStateFilterProperty.implicit operator
+  nameWithType.vb: MessageSubscriptionStateFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum
   name: MessageSubscriptionTypeEnum
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum.html
@@ -32629,6 +33811,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Eq
   nameWithType: MessageSubscriptionTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.ExactMatch
+  nameWithType: MessageSubscriptionTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.ExactMatch
+  nameWithType: MessageSubscriptionTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeFilterProperty_Exists
@@ -32677,6 +33871,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.Neq
   nameWithType: MessageSubscriptionTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum)~Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty
+  name: implicit operator MessageSubscriptionTypeFilterProperty(MessageSubscriptionTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_MessageSubscriptionTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_MessageSubscriptionTypeEnum__Camunda_Orchestration_Sdk_MessageSubscriptionTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum)~Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty
+  name.vb: CType(MessageSubscriptionTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty(Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.CType(Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum)
+  nameWithType: MessageSubscriptionTypeFilterProperty.implicit operator MessageSubscriptionTypeFilterProperty(MessageSubscriptionTypeEnum)
+  nameWithType.vb: MessageSubscriptionTypeFilterProperty.CType(MessageSubscriptionTypeEnum)
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.MessageSubscriptionTypeFilterProperty.CType
+  nameWithType: MessageSubscriptionTypeFilterProperty.implicit operator
+  nameWithType.vb: MessageSubscriptionTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.MessageWaitStateDetails
   name: MessageWaitStateDetails
   href: api/Camunda.Orchestration.Sdk.MessageWaitStateDetails.html
@@ -33040,6 +34252,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.OperationTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.Eq
   nameWithType: OperationTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.OperationTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_OperationTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.OperationTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.ExactMatch
+  nameWithType: OperationTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.OperationTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.OperationTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.ExactMatch
+  nameWithType: OperationTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.OperationTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_OperationTypeFilterProperty_Exists
@@ -33088,6 +34312,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.OperationTypeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.Neq
   nameWithType: OperationTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogOperationTypeEnum)~Camunda.Orchestration.Sdk.OperationTypeFilterProperty
+  name: implicit operator OperationTypeFilterProperty(AuditLogOperationTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.OperationTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_OperationTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_AuditLogOperationTypeEnum__Camunda_Orchestration_Sdk_OperationTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.OperationTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.AuditLogOperationTypeEnum)~Camunda.Orchestration.Sdk.OperationTypeFilterProperty
+  name.vb: CType(AuditLogOperationTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.OperationTypeFilterProperty(Camunda.Orchestration.Sdk.AuditLogOperationTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.CType(Camunda.Orchestration.Sdk.AuditLogOperationTypeEnum)
+  nameWithType: OperationTypeFilterProperty.implicit operator OperationTypeFilterProperty(AuditLogOperationTypeEnum)
+  nameWithType.vb: OperationTypeFilterProperty.CType(AuditLogOperationTypeEnum)
+- uid: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.OperationTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.OperationTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.CType
+  nameWithType: OperationTypeFilterProperty.implicit operator
+  nameWithType.vb: OperationTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.OwnerTypeEnum
   name: OwnerTypeEnum
   href: api/Camunda.Orchestration.Sdk.OwnerTypeEnum.html
@@ -33832,6 +35074,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Eq
   nameWithType: ProcessDefinitionIdFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.ExactMatch
+  nameWithType: ProcessDefinitionIdFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.ExactMatch
+  nameWithType: ProcessDefinitionIdFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty_Exists
@@ -33892,6 +35146,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.NotIn
   nameWithType: ProcessDefinitionIdFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProcessDefinitionId)~Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty
+  name: implicit operator ProcessDefinitionIdFilterProperty(ProcessDefinitionId)
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ProcessDefinitionId__Camunda_Orchestration_Sdk_ProcessDefinitionIdFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProcessDefinitionId)~Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty
+  name.vb: CType(ProcessDefinitionId)
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.implicit operator Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty(Camunda.Orchestration.Sdk.ProcessDefinitionId)
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.CType(Camunda.Orchestration.Sdk.ProcessDefinitionId)
+  nameWithType: ProcessDefinitionIdFilterProperty.implicit operator ProcessDefinitionIdFilterProperty(ProcessDefinitionId)
+  nameWithType.vb: ProcessDefinitionIdFilterProperty.CType(ProcessDefinitionId)
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty.CType
+  nameWithType: ProcessDefinitionIdFilterProperty.implicit operator
+  nameWithType.vb: ProcessDefinitionIdFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuery
   name: ProcessDefinitionInstanceStatisticsQuery
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuery.html
@@ -34486,6 +35758,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.Eq
   nameWithType: ProcessDefinitionKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ProcessDefinitionKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.ExactMatch
+  nameWithType: ProcessDefinitionKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.ExactMatch
+  nameWithType: ProcessDefinitionKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ProcessDefinitionKeyFilterProperty_Exists
@@ -34534,6 +35818,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.NotIn
   nameWithType: ProcessDefinitionKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProcessDefinitionKey)~Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty
+  name: implicit operator ProcessDefinitionKeyFilterProperty(ProcessDefinitionKey)
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ProcessDefinitionKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ProcessDefinitionKey__Camunda_Orchestration_Sdk_ProcessDefinitionKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProcessDefinitionKey)~Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty
+  name.vb: CType(ProcessDefinitionKey)
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty(Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.CType(Camunda.Orchestration.Sdk.ProcessDefinitionKey)
+  nameWithType: ProcessDefinitionKeyFilterProperty.implicit operator ProcessDefinitionKeyFilterProperty(ProcessDefinitionKey)
+  nameWithType.vb: ProcessDefinitionKeyFilterProperty.CType(ProcessDefinitionKey)
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty.CType
+  nameWithType: ProcessDefinitionKeyFilterProperty.implicit operator
+  nameWithType.vb: ProcessDefinitionKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionMessageSubscriptionStatisticsQuery
   name: ProcessDefinitionMessageSubscriptionStatisticsQuery
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionMessageSubscriptionStatisticsQuery.html
@@ -36490,6 +37792,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.Eq
   nameWithType: ProcessInstanceKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ProcessInstanceKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.ExactMatch
+  nameWithType: ProcessInstanceKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.ExactMatch
+  nameWithType: ProcessInstanceKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ProcessInstanceKeyFilterProperty_Exists
@@ -36538,6 +37852,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.NotIn
   nameWithType: ProcessInstanceKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProcessInstanceKey)~Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty
+  name: implicit operator ProcessInstanceKeyFilterProperty(ProcessInstanceKey)
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ProcessInstanceKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ProcessInstanceKey__Camunda_Orchestration_Sdk_ProcessInstanceKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProcessInstanceKey)~Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty
+  name.vb: CType(ProcessInstanceKey)
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty(Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.CType(Camunda.Orchestration.Sdk.ProcessInstanceKey)
+  nameWithType: ProcessInstanceKeyFilterProperty.implicit operator ProcessInstanceKeyFilterProperty(ProcessInstanceKey)
+  nameWithType.vb: ProcessInstanceKeyFilterProperty.CType(ProcessInstanceKey)
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty.CType
+  nameWithType: ProcessInstanceKeyFilterProperty.implicit operator
+  nameWithType.vb: ProcessInstanceKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceMigrationBatchOperationPlan
   name: ProcessInstanceMigrationBatchOperationPlan
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceMigrationBatchOperationPlan.html
@@ -37546,6 +38878,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.Eq
   nameWithType: ProcessInstanceStateFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ProcessInstanceStateFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.ExactMatch
+  nameWithType: ProcessInstanceStateFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.ExactMatch
+  nameWithType: ProcessInstanceStateFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ProcessInstanceStateFilterProperty_Exists
@@ -37594,6 +38938,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.Neq
   nameWithType: ProcessInstanceStateFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProcessInstanceStateEnum)~Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty
+  name: implicit operator ProcessInstanceStateFilterProperty(ProcessInstanceStateEnum)
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ProcessInstanceStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ProcessInstanceStateEnum__Camunda_Orchestration_Sdk_ProcessInstanceStateFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProcessInstanceStateEnum)~Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty
+  name.vb: CType(ProcessInstanceStateEnum)
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.implicit operator Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty(Camunda.Orchestration.Sdk.ProcessInstanceStateEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.CType(Camunda.Orchestration.Sdk.ProcessInstanceStateEnum)
+  nameWithType: ProcessInstanceStateFilterProperty.implicit operator ProcessInstanceStateFilterProperty(ProcessInstanceStateEnum)
+  nameWithType.vb: ProcessInstanceStateFilterProperty.CType(ProcessInstanceStateEnum)
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.CType
+  nameWithType: ProcessInstanceStateFilterProperty.implicit operator
+  nameWithType.vb: ProcessInstanceStateFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.ResourceFilter
   name: ResourceFilter
   href: api/Camunda.Orchestration.Sdk.ResourceFilter.html
@@ -37957,6 +39319,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.Eq
   nameWithType: ResourceKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ResourceKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.ExactMatch
+  nameWithType: ResourceKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.ExactMatch
+  nameWithType: ResourceKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ResourceKeyFilterProperty_Exists
@@ -38005,6 +39379,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.NotIn
   nameWithType: ResourceKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ResourceKey)~Camunda.Orchestration.Sdk.ResourceKeyFilterProperty
+  name: implicit operator ResourceKeyFilterProperty(ResourceKey)
+  href: api/Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ResourceKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ResourceKey__Camunda_Orchestration_Sdk_ResourceKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ResourceKey)~Camunda.Orchestration.Sdk.ResourceKeyFilterProperty
+  name.vb: CType(ResourceKey)
+  fullName: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.ResourceKeyFilterProperty(Camunda.Orchestration.Sdk.ResourceKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.CType(Camunda.Orchestration.Sdk.ResourceKey)
+  nameWithType: ResourceKeyFilterProperty.implicit operator ResourceKeyFilterProperty(ResourceKey)
+  nameWithType.vb: ResourceKeyFilterProperty.CType(ResourceKey)
+- uid: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ResourceKeyFilterProperty.CType
+  nameWithType: ResourceKeyFilterProperty.implicit operator
+  nameWithType.vb: ResourceKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.ResourceResult
   name: ResourceResult
   href: api/Camunda.Orchestration.Sdk.ResourceResult.html
@@ -39424,6 +40816,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.Eq
   nameWithType: ScopeKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ScopeKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.ExactMatch
+  nameWithType: ScopeKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.ExactMatch
+  nameWithType: ScopeKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ScopeKeyFilterProperty_Exists
@@ -39472,6 +40876,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.NotIn
   nameWithType: ScopeKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ScopeKey)~Camunda.Orchestration.Sdk.ScopeKeyFilterProperty
+  name: implicit operator ScopeKeyFilterProperty(ScopeKey)
+  href: api/Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ScopeKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ScopeKey__Camunda_Orchestration_Sdk_ScopeKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ScopeKey)~Camunda.Orchestration.Sdk.ScopeKeyFilterProperty
+  name.vb: CType(ScopeKey)
+  fullName: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.ScopeKeyFilterProperty(Camunda.Orchestration.Sdk.ScopeKey)
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.CType(Camunda.Orchestration.Sdk.ScopeKey)
+  nameWithType: ScopeKeyFilterProperty.implicit operator ScopeKeyFilterProperty(ScopeKey)
+  nameWithType.vb: ScopeKeyFilterProperty.CType(ScopeKey)
+- uid: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.CType
+  nameWithType: ScopeKeyFilterProperty.implicit operator
+  nameWithType.vb: ScopeKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.SearchQueryPageRequest
   name: SearchQueryPageRequest
   href: api/Camunda.Orchestration.Sdk.SearchQueryPageRequest.html
@@ -39991,6 +41413,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.StringFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.StringFilterProperty.Eq
   nameWithType: StringFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.StringFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.StringFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_StringFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.StringFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.StringFilterProperty.ExactMatch
+  nameWithType: StringFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.StringFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.StringFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.StringFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.StringFilterProperty.ExactMatch
+  nameWithType: StringFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.StringFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.StringFilterProperty.Exists.html#Camunda_Orchestration_Sdk_StringFilterProperty_Exists
@@ -40051,6 +41485,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.StringFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.StringFilterProperty.NotIn
   nameWithType: StringFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.StringFilterProperty.op_Implicit(System.String)~Camunda.Orchestration.Sdk.StringFilterProperty
+  name: implicit operator StringFilterProperty(string)
+  href: api/Camunda.Orchestration.Sdk.StringFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_StringFilterProperty_op_Implicit_System_String__Camunda_Orchestration_Sdk_StringFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.StringFilterProperty.op_Implicit(System.String)~Camunda.Orchestration.Sdk.StringFilterProperty
+  name.vb: CType(String)
+  fullName: Camunda.Orchestration.Sdk.StringFilterProperty.implicit operator Camunda.Orchestration.Sdk.StringFilterProperty(string)
+  fullName.vb: Camunda.Orchestration.Sdk.StringFilterProperty.CType(String)
+  nameWithType: StringFilterProperty.implicit operator StringFilterProperty(string)
+  nameWithType.vb: StringFilterProperty.CType(String)
+- uid: Camunda.Orchestration.Sdk.StringFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.StringFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.StringFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.StringFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.StringFilterProperty.CType
+  nameWithType: StringFilterProperty.implicit operator
+  nameWithType.vb: StringFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.SystemConfigurationResponse
   name: SystemConfigurationResponse
   href: api/Camunda.Orchestration.Sdk.SystemConfigurationResponse.html
@@ -43057,6 +44509,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.Eq
   nameWithType: UserTaskStateFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_UserTaskStateFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.ExactMatch
+  nameWithType: UserTaskStateFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.ExactMatch
+  nameWithType: UserTaskStateFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_UserTaskStateFilterProperty_Exists
@@ -43105,6 +44569,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.Neq
   nameWithType: UserTaskStateFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.UserTaskStateEnum)~Camunda.Orchestration.Sdk.UserTaskStateFilterProperty
+  name: implicit operator UserTaskStateFilterProperty(UserTaskStateEnum)
+  href: api/Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_UserTaskStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_UserTaskStateEnum__Camunda_Orchestration_Sdk_UserTaskStateFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.UserTaskStateEnum)~Camunda.Orchestration.Sdk.UserTaskStateFilterProperty
+  name.vb: CType(UserTaskStateEnum)
+  fullName: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.implicit operator Camunda.Orchestration.Sdk.UserTaskStateFilterProperty(Camunda.Orchestration.Sdk.UserTaskStateEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.CType(Camunda.Orchestration.Sdk.UserTaskStateEnum)
+  nameWithType: UserTaskStateFilterProperty.implicit operator UserTaskStateFilterProperty(UserTaskStateEnum)
+  nameWithType.vb: UserTaskStateFilterProperty.CType(UserTaskStateEnum)
+- uid: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.CType
+  nameWithType: UserTaskStateFilterProperty.implicit operator
+  nameWithType.vb: UserTaskStateFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.UserTaskUpdateRequest
   name: UserTaskUpdateRequest
   href: api/Camunda.Orchestration.Sdk.UserTaskUpdateRequest.html
@@ -43777,6 +45259,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.VariableKeyFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.Eq
   nameWithType: VariableKeyFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.VariableKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_VariableKeyFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.VariableKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.ExactMatch
+  nameWithType: VariableKeyFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.VariableKeyFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.VariableKeyFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.ExactMatch
+  nameWithType: VariableKeyFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.VariableKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_VariableKeyFilterProperty_Exists
@@ -43825,6 +45319,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.VariableKeyFilterProperty.NotIn
   fullName: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.NotIn
   nameWithType: VariableKeyFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.VariableKey)~Camunda.Orchestration.Sdk.VariableKeyFilterProperty
+  name: implicit operator VariableKeyFilterProperty(VariableKey)
+  href: api/Camunda.Orchestration.Sdk.VariableKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_VariableKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_VariableKey__Camunda_Orchestration_Sdk_VariableKeyFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.VariableKeyFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.VariableKey)~Camunda.Orchestration.Sdk.VariableKeyFilterProperty
+  name.vb: CType(VariableKey)
+  fullName: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.implicit operator Camunda.Orchestration.Sdk.VariableKeyFilterProperty(Camunda.Orchestration.Sdk.VariableKey)
+  fullName.vb: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.CType(Camunda.Orchestration.Sdk.VariableKey)
+  nameWithType: VariableKeyFilterProperty.implicit operator VariableKeyFilterProperty(VariableKey)
+  nameWithType.vb: VariableKeyFilterProperty.CType(VariableKey)
+- uid: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.VariableKeyFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.VariableKeyFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.VariableKeyFilterProperty.CType
+  nameWithType: VariableKeyFilterProperty.implicit operator
+  nameWithType.vb: VariableKeyFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.VariableMap`1
   name: VariableMap<T>
   href: api/Camunda.Orchestration.Sdk.VariableMap-1.html
@@ -44701,6 +46213,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.Eq
   nameWithType: WaitStateElementTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_WaitStateElementTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.ExactMatch
+  nameWithType: WaitStateElementTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.ExactMatch
+  nameWithType: WaitStateElementTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_WaitStateElementTypeFilterProperty_Exists
@@ -44749,6 +46273,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.Neq
   nameWithType: WaitStateElementTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.WaitStateElementTypeEnum)~Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty
+  name: implicit operator WaitStateElementTypeFilterProperty(WaitStateElementTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_WaitStateElementTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_WaitStateElementTypeEnum__Camunda_Orchestration_Sdk_WaitStateElementTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.WaitStateElementTypeEnum)~Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty
+  name.vb: CType(WaitStateElementTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty(Camunda.Orchestration.Sdk.WaitStateElementTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.CType(Camunda.Orchestration.Sdk.WaitStateElementTypeEnum)
+  nameWithType: WaitStateElementTypeFilterProperty.implicit operator WaitStateElementTypeFilterProperty(WaitStateElementTypeEnum)
+  nameWithType.vb: WaitStateElementTypeFilterProperty.CType(WaitStateElementTypeEnum)
+- uid: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.WaitStateElementTypeFilterProperty.CType
+  nameWithType: WaitStateElementTypeFilterProperty.implicit operator
+  nameWithType.vb: WaitStateElementTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.WaitStateTypeEnum
   name: WaitStateTypeEnum
   href: api/Camunda.Orchestration.Sdk.WaitStateTypeEnum.html
@@ -44869,6 +46411,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.Eq
   fullName: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.Eq
   nameWithType: WaitStateTypeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.ExactMatch
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_WaitStateTypeFilterProperty_ExactMatch
+  commentId: P:Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.ExactMatch
+  nameWithType: WaitStateTypeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.ExactMatch*
+  name: ExactMatch
+  href: api/Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.ExactMatch.html
+  commentId: Overload:Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.ExactMatch
+  fullName: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.ExactMatch
+  nameWithType: WaitStateTypeFilterProperty.ExactMatch
 - uid: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.Exists
   name: Exists
   href: api/Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_WaitStateTypeFilterProperty_Exists
@@ -44917,6 +46471,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.Neq
   fullName: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.Neq
   nameWithType: WaitStateTypeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.WaitStateTypeEnum)~Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty
+  name: implicit operator WaitStateTypeFilterProperty(WaitStateTypeEnum)
+  href: api/Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_WaitStateTypeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_WaitStateTypeEnum__Camunda_Orchestration_Sdk_WaitStateTypeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.WaitStateTypeEnum)~Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty
+  name.vb: CType(WaitStateTypeEnum)
+  fullName: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.implicit operator Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty(Camunda.Orchestration.Sdk.WaitStateTypeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.CType(Camunda.Orchestration.Sdk.WaitStateTypeEnum)
+  nameWithType: WaitStateTypeFilterProperty.implicit operator WaitStateTypeFilterProperty(WaitStateTypeEnum)
+  nameWithType.vb: WaitStateTypeFilterProperty.CType(WaitStateTypeEnum)
+- uid: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.op_Implicit*
+  name: implicit operator
+  href: api/Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.op_Implicit.html
+  commentId: Overload:Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.op_Implicit
+  name.vb: CType
+  fullName: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.implicit operator
+  fullName.vb: Camunda.Orchestration.Sdk.WaitStateTypeFilterProperty.CType
+  nameWithType: WaitStateTypeFilterProperty.implicit operator
+  nameWithType.vb: WaitStateTypeFilterProperty.CType
 - uid: Camunda.Orchestration.Sdk.WebappComponent
   name: WebappComponent
   href: api/Camunda.Orchestration.Sdk.WebappComponent.html

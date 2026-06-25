@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_UserTaskStateFilterProperty" data-uid="Camunda.Orchestration.Sdk.UserTaskStateFilterProperty" class="text-break">
-Class UserTaskStateFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L21676"><i class="bi bi-code-slash"></i></a>
+Class UserTaskStateFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L25384"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,8 @@ Class UserTaskStateFilterProperty  <a class="header-action link-secondary" title
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class UserTaskStateFilterProperty</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(UserTaskStateFilterPropertyJsonConverter))]
+public sealed class UserTaskStateFilterProperty</code></pre>
   </div>
 
 
@@ -161,6 +162,12 @@ Class UserTaskStateFilterProperty  <a class="header-action link-secondary" title
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_UserTaskStateFilterProperty_ExactMatch">ExactMatch</a></dt>
+    <dd><p>Matches the value exactly. Serialized as the bare value — the form
+servers that predate advanced filtering on this field accept.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.Exists.html#Camunda_Orchestration_Sdk_UserTaskStateFilterProperty_Exists">Exists</a></dt>
     <dd><p>Checks if the current property exists.</p>
 </dd>
@@ -187,12 +194,21 @@ Class UserTaskStateFilterProperty  <a class="header-action link-secondary" title
 </dd>
   </dl>
 
+  <h2 class="section" id="operators">Operators
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.UserTaskStateFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_UserTaskStateFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_UserTaskStateEnum__Camunda_Orchestration_Sdk_UserTaskStateFilterProperty">implicit operator UserTaskStateFilterProperty(UserTaskStateEnum)</a></dt>
+    <dd><p>Wraps a bare value as an exact-match filter.</p>
+</dd>
+  </dl>
+
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L21676" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L25384" class="edit-link">Edit this page</a>
         </div>
 
 

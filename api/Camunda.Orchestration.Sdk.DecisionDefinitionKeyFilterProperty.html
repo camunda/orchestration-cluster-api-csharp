@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_DecisionDefinitionKeyFilterProperty" data-uid="Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty" class="text-break">
-Class DecisionDefinitionKeyFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L8260"><i class="bi bi-code-slash"></i></a>
+Class DecisionDefinitionKeyFilterProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9500"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,8 @@ Class DecisionDefinitionKeyFilterProperty  <a class="header-action link-secondar
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class DecisionDefinitionKeyFilterProperty</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(DecisionDefinitionKeyFilterPropertyJsonConverter))]
+public sealed class DecisionDefinitionKeyFilterProperty</code></pre>
   </div>
 
 
@@ -161,6 +162,12 @@ Class DecisionDefinitionKeyFilterProperty  <a class="header-action link-secondar
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_DecisionDefinitionKeyFilterProperty_ExactMatch">ExactMatch</a></dt>
+    <dd><p>Matches the value exactly. Serialized as the bare value — the form
+servers that predate advanced filtering on this field accept.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.Exists.html#Camunda_Orchestration_Sdk_DecisionDefinitionKeyFilterProperty_Exists">Exists</a></dt>
     <dd><p>Checks if the current property exists.</p>
 </dd>
@@ -181,12 +188,21 @@ Class DecisionDefinitionKeyFilterProperty  <a class="header-action link-secondar
 </dd>
   </dl>
 
+  <h2 class="section" id="operators">Operators
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.DecisionDefinitionKeyFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_DecisionDefinitionKeyFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_DecisionDefinitionKey__Camunda_Orchestration_Sdk_DecisionDefinitionKeyFilterProperty">implicit operator DecisionDefinitionKeyFilterProperty(DecisionDefinitionKey)</a></dt>
+    <dd><p>Wraps a bare value as an exact-match filter.</p>
+</dd>
+  </dl>
+
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L8260" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9500" class="edit-link">Edit this page</a>
         </div>
 
 
