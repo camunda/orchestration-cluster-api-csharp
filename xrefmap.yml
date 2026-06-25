@@ -42037,6 +42037,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilter.Assignee
   fullName: Camunda.Orchestration.Sdk.UserTaskFilter.Assignee
   nameWithType: UserTaskFilter.Assignee
+- uid: Camunda.Orchestration.Sdk.UserTaskFilter.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilter.BusinessId.html#Camunda_Orchestration_Sdk_UserTaskFilter_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilter.BusinessId
+  nameWithType: UserTaskFilter.BusinessId
+- uid: Camunda.Orchestration.Sdk.UserTaskFilter.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilter.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilter.BusinessId
+  nameWithType: UserTaskFilter.BusinessId
 - uid: Camunda.Orchestration.Sdk.UserTaskFilter.CandidateGroup
   name: CandidateGroup
   href: api/Camunda.Orchestration.Sdk.UserTaskFilter.CandidateGroup.html#Camunda_Orchestration_Sdk_UserTaskFilter_CandidateGroup
@@ -42469,6 +42481,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskResult.Assignee
   fullName: Camunda.Orchestration.Sdk.UserTaskResult.Assignee
   nameWithType: UserTaskResult.Assignee
+- uid: Camunda.Orchestration.Sdk.UserTaskResult.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.UserTaskResult.BusinessId.html#Camunda_Orchestration_Sdk_UserTaskResult_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.UserTaskResult.BusinessId
+  nameWithType: UserTaskResult.BusinessId
+- uid: Camunda.Orchestration.Sdk.UserTaskResult.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.UserTaskResult.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.UserTaskResult.BusinessId
+  nameWithType: UserTaskResult.BusinessId
 - uid: Camunda.Orchestration.Sdk.UserTaskResult.CandidateGroups
   name: CandidateGroups
   href: api/Camunda.Orchestration.Sdk.UserTaskResult.CandidateGroups.html#Camunda_Orchestration_Sdk_UserTaskResult_CandidateGroups
@@ -42853,6 +42877,12 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField
   fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField
   nameWithType: UserTaskSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskSearchQuerySortRequestField_BusinessId
+  commentId: F:Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.BusinessId
+  fullName: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.BusinessId
+  nameWithType: UserTaskSearchQuerySortRequestField.BusinessId
 - uid: Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.CompletionDate
   name: CompletionDate
   href: api/Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_UserTaskSearchQuerySortRequestField_CompletionDate
