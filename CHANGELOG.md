@@ -1,3 +1,11 @@
+# [10.0.0-alpha.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.0...v10.0.0-alpha.1) (2026-06-25)
+
+
+### Bug Fixes
+
+* **gen:** enforce oneOf semantics in advanced-filter converters ([b6eb9bf](https://github.com/camunda/orchestration-cluster-api-csharp/commit/b6eb9bfe99726e0efaa41203efad2dbee8bb9088))
+* **gen:** surface the exact-match branch of advanced-filter oneOf properties ([aee2094](https://github.com/camunda/orchestration-cluster-api-csharp/commit/aee20947e7dcee74332b862a8bdb7846b17d78a2)), closes [#267](https://github.com/camunda/orchestration-cluster-api-csharp/issues/267)
+
 # [9.0.0-alpha.26](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.25...v9.0.0-alpha.26) (2026-06-25)
 
 
