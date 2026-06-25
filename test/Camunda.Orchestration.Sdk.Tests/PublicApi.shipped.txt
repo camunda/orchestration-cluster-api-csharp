@@ -5694,6 +5694,7 @@ TYPE Camunda.Orchestration.Sdk.UserTaskFilter : sealed class
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? Assignee { get; set; } [JsonPropertyName("assignee")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? CandidateGroup { get; set; } [JsonPropertyName("candidateGroup")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? CandidateUser { get; set; } [JsonPropertyName("candidateUser")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
@@ -5728,6 +5729,7 @@ TYPE Camunda.Orchestration.Sdk.UserTaskProperties : sealed class
 
 TYPE Camunda.Orchestration.Sdk.UserTaskResult : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.FormKey? FormKey { get; set; } [JsonPropertyName("formKey")]
@@ -5778,6 +5780,7 @@ TYPE Camunda.Orchestration.Sdk.UserTaskSearchQuerySortRequestField : enum interf
   MEMBER DueDate = 3 json="dueDate"
   MEMBER Priority = 4 json="priority"
   MEMBER Name = 5 json="name"
+  MEMBER BusinessId = 6 json="businessId"
 
 TYPE Camunda.Orchestration.Sdk.UserTaskStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
