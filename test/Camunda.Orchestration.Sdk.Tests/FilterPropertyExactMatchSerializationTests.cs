@@ -58,4 +58,17 @@ public class FilterPropertyExactMatchSerializationTests
         Assert.Equal(Key, filter!.Eq?.Value);
         Assert.Null(filter.ExactMatch);
     }
+
+    [Fact]
+    public void Setting_both_branches_throws()
+    {
+        // oneOf semantics: exactly one branch. Populating both is ambiguous and must fail
+        // loudly rather than silently dropping ExactMatch.
+        var filter = new ProcessInstanceKeyFilterProperty
+        {
+            ExactMatch = ProcessInstanceKey.AssumeExists(Key),
+            Eq = ProcessInstanceKey.AssumeExists(Key),
+        };
+        Assert.Throws<JsonException>(() => JsonSerializer.Serialize(filter, Options));
+    }
 }

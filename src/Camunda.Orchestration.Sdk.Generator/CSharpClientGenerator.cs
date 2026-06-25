@@ -682,9 +682,9 @@ internal static class CSharpClientGenerator
 
     /// <summary>
     /// The primitive (exact-match) variant of a 2-way <c>oneOf</c>, returned as the
-    /// original variant (i.e. the <c>$ref</c>) so it maps to its declared type name.
-    /// Used as a fallback for the exact-match value type when the advanced variant has
-    /// no <c>$eq</c> operator to borrow the type from.
+    /// original variant (a <c>$ref</c> or an inline primitive schema) so it maps to its
+    /// declared/underlying type. Used as a fallback for the exact-match value type when
+    /// the advanced variant has no <c>$eq</c> operator to borrow the type from.
     /// </summary>
     private static IOpenApiSchema? FindPrimitiveOneOfVariantRef(IOpenApiSchema schema, OpenApiDocument doc)
     {
@@ -1069,7 +1069,9 @@ internal static class CSharpClientGenerator
         sb.AppendLine($"    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, {typeName} value, global::System.Text.Json.JsonSerializerOptions options)");
         sb.AppendLine("    {");
         sb.AppendLine($"        var hasAdvanced = {hasAdvanced};");
-        sb.AppendLine("        if (value.ExactMatch is not null && !hasAdvanced)");
+        sb.AppendLine("        if (value.ExactMatch is not null && hasAdvanced)");
+        sb.AppendLine($"            throw new global::System.Text.Json.JsonException(\"{typeName}: set either ExactMatch (a bare value) or advanced operators, not both.\");");
+        sb.AppendLine("        if (value.ExactMatch is not null)");
         sb.AppendLine("        {");
         sb.AppendLine("            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);");
         sb.AppendLine("            return;");
