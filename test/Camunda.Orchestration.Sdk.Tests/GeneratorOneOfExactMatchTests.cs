@@ -144,7 +144,8 @@ public class GeneratorOneOfExactMatchTests
 
         public void Dispose()
         {
-            try { Directory.Delete(Root, recursive: true); }
+            try
+            { Directory.Delete(Root, recursive: true); }
             catch { /* best-effort cleanup */ }
         }
     }
