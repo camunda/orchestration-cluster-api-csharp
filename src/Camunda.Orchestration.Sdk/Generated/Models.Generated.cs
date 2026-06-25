@@ -277,6 +277,8 @@ public enum DecisionDefinitionSearchQuerySortRequestField
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum DecisionInstanceSearchQuerySortRequestField
 {
+    [JsonPropertyName("businessId")]
+    BusinessId,
     [JsonPropertyName("decisionDefinitionId")]
     DecisionDefinitionId,
     [JsonPropertyName("decisionDefinitionKey")]
@@ -3449,8 +3451,15 @@ public readonly record struct AgentHistoryItemKeyExactMatch : global::Camunda.Or
 /// <summary>
 /// AgentHistoryItemKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(AgentHistoryItemKeyFilterPropertyJsonConverter))]
 public sealed class AgentHistoryItemKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AgentHistoryItemKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -3481,6 +3490,76 @@ public sealed class AgentHistoryItemKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<AgentHistoryItemKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AgentHistoryItemKeyFilterProperty(AgentHistoryItemKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AgentHistoryItemKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AgentHistoryItemKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AgentHistoryItemKeyFilterProperty>
+{
+    public override AgentHistoryItemKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AgentHistoryItemKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AgentHistoryItemKey?>(ref reader, options) };
+        var result = new AgentHistoryItemKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AgentHistoryItemKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AgentHistoryItemKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentHistoryItemKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentHistoryItemKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentHistoryItemKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentHistoryItemKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -3708,8 +3787,15 @@ public readonly record struct AgentInstanceHistoryCommitStatusExactMatch : globa
 /// <summary>
 /// AgentInstanceHistoryCommitStatusEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(AgentInstanceHistoryCommitStatusFilterPropertyJsonConverter))]
 public sealed class AgentInstanceHistoryCommitStatusFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AgentInstanceHistoryCommitStatusEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -3734,6 +3820,70 @@ public sealed class AgentInstanceHistoryCommitStatusFilterProperty
     [JsonPropertyName("$in")]
     public List<AgentInstanceHistoryCommitStatusEnum>? In { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AgentInstanceHistoryCommitStatusFilterProperty(AgentInstanceHistoryCommitStatusEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AgentInstanceHistoryCommitStatusFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AgentInstanceHistoryCommitStatusFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AgentInstanceHistoryCommitStatusFilterProperty>
+{
+    public override AgentInstanceHistoryCommitStatusFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AgentInstanceHistoryCommitStatusFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceHistoryCommitStatusEnum?>(ref reader, options) };
+        var result = new AgentInstanceHistoryCommitStatusFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceHistoryCommitStatusEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceHistoryCommitStatusEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentInstanceHistoryCommitStatusEnum>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentInstanceHistoryCommitStatusFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentInstanceHistoryCommitStatusFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -4018,8 +4168,15 @@ public readonly record struct AgentInstanceHistoryRoleExactMatch : global::Camun
 /// <summary>
 /// AgentInstanceHistoryRoleEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(AgentInstanceHistoryRoleFilterPropertyJsonConverter))]
 public sealed class AgentInstanceHistoryRoleFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AgentInstanceHistoryRoleEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -4044,6 +4201,70 @@ public sealed class AgentInstanceHistoryRoleFilterProperty
     [JsonPropertyName("$in")]
     public List<AgentInstanceHistoryRoleEnum>? In { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AgentInstanceHistoryRoleFilterProperty(AgentInstanceHistoryRoleEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AgentInstanceHistoryRoleFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AgentInstanceHistoryRoleFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AgentInstanceHistoryRoleFilterProperty>
+{
+    public override AgentInstanceHistoryRoleFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AgentInstanceHistoryRoleFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceHistoryRoleEnum?>(ref reader, options) };
+        var result = new AgentInstanceHistoryRoleFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceHistoryRoleEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceHistoryRoleEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentInstanceHistoryRoleEnum>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentInstanceHistoryRoleFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentInstanceHistoryRoleFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -4168,8 +4389,15 @@ public readonly record struct AgentInstanceKeyExactMatch : global::Camunda.Orche
 /// <summary>
 /// AgentInstanceKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(AgentInstanceKeyFilterPropertyJsonConverter))]
 public sealed class AgentInstanceKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AgentInstanceKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -4200,6 +4428,76 @@ public sealed class AgentInstanceKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<AgentInstanceKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AgentInstanceKeyFilterProperty(AgentInstanceKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AgentInstanceKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AgentInstanceKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AgentInstanceKeyFilterProperty>
+{
+    public override AgentInstanceKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AgentInstanceKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceKey?>(ref reader, options) };
+        var result = new AgentInstanceKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentInstanceKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentInstanceKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentInstanceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentInstanceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -4572,8 +4870,15 @@ public readonly record struct AgentInstanceStatusExactMatch : global::Camunda.Or
 /// <summary>
 /// AgentInstanceStatusEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(AgentInstanceStatusFilterPropertyJsonConverter))]
 public sealed class AgentInstanceStatusFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AgentInstanceStatusEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -4612,6 +4917,76 @@ public sealed class AgentInstanceStatusFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AgentInstanceStatusFilterProperty(AgentInstanceStatusEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AgentInstanceStatusFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AgentInstanceStatusFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AgentInstanceStatusFilterProperty>
+{
+    public override AgentInstanceStatusFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AgentInstanceStatusFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceStatusEnum?>(ref reader, options) };
+        var result = new AgentInstanceStatusFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceStatusEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AgentInstanceStatusEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentInstanceStatusEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentInstanceStatusFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentInstanceStatusFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -4811,8 +5186,15 @@ public readonly record struct AuditLogActorTypeExactMatch : global::Camunda.Orch
 /// <summary>
 /// AuditLogActorTypeEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(AuditLogActorTypeFilterPropertyJsonConverter))]
 public sealed class AuditLogActorTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AuditLogActorTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -4851,6 +5233,76 @@ public sealed class AuditLogActorTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AuditLogActorTypeFilterProperty(AuditLogActorTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AuditLogActorTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AuditLogActorTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AuditLogActorTypeFilterProperty>
+{
+    public override AuditLogActorTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AuditLogActorTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogActorTypeEnum?>(ref reader, options) };
+        var result = new AuditLogActorTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogActorTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogActorTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AuditLogActorTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AuditLogActorTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AuditLogActorTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -4926,8 +5378,15 @@ public readonly record struct AuditLogEntityKeyExactMatch : global::Camunda.Orch
 /// <summary>
 /// EntityKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(AuditLogEntityKeyFilterPropertyJsonConverter))]
 public sealed class AuditLogEntityKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AuditLogEntityKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -4958,6 +5417,76 @@ public sealed class AuditLogEntityKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<AuditLogEntityKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AuditLogEntityKeyFilterProperty(AuditLogEntityKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AuditLogEntityKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AuditLogEntityKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AuditLogEntityKeyFilterProperty>
+{
+    public override AuditLogEntityKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AuditLogEntityKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogEntityKey?>(ref reader, options) };
+        var result = new AuditLogEntityKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogEntityKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogEntityKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AuditLogEntityKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<AuditLogEntityKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AuditLogEntityKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AuditLogEntityKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -5250,8 +5779,15 @@ public readonly record struct AuditLogKeyExactMatch : global::Camunda.Orchestrat
 /// <summary>
 /// AuditLogKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(AuditLogKeyFilterPropertyJsonConverter))]
 public sealed class AuditLogKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AuditLogKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -5282,6 +5818,76 @@ public sealed class AuditLogKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<AuditLogKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AuditLogKeyFilterProperty(AuditLogKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AuditLogKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AuditLogKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AuditLogKeyFilterProperty>
+{
+    public override AuditLogKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AuditLogKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogKey?>(ref reader, options) };
+        var result = new AuditLogKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AuditLogKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<AuditLogKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AuditLogKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AuditLogKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -5577,8 +6183,15 @@ public readonly record struct AuditLogResultExactMatch : global::Camunda.Orchest
 /// <summary>
 /// AuditLogResultEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(AuditLogResultFilterPropertyJsonConverter))]
 public sealed class AuditLogResultFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AuditLogResultEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -5617,6 +6230,76 @@ public sealed class AuditLogResultFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AuditLogResultFilterProperty(AuditLogResultEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AuditLogResultFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AuditLogResultFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AuditLogResultFilterProperty>
+{
+    public override AuditLogResultFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AuditLogResultFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogResultEnum?>(ref reader, options) };
+        var result = new AuditLogResultFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogResultEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogResultEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AuditLogResultEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AuditLogResultFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AuditLogResultFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -6146,8 +6829,15 @@ public sealed class BasicStringFilter
 /// <summary>
 /// String property with basic advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(BasicStringFilterPropertyJsonConverter))]
 public sealed class BasicStringFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public string? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -6178,6 +6868,76 @@ public sealed class BasicStringFilterProperty
     [JsonPropertyName("$notIn")]
     public List<string>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator BasicStringFilterProperty(string value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="BasicStringFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class BasicStringFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<BasicStringFilterProperty>
+{
+    public override BasicStringFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new BasicStringFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<string?>(ref reader, options) };
+        var result = new BasicStringFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<string?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<string?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<string>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<string>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, BasicStringFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("BasicStringFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -6471,8 +7231,15 @@ public readonly record struct BatchOperationItemStateExactMatch : global::Camund
 /// <summary>
 /// BatchOperationItemStateEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(BatchOperationItemStateFilterPropertyJsonConverter))]
 public sealed class BatchOperationItemStateFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public BatchOperationItemStateEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -6511,6 +7278,76 @@ public sealed class BatchOperationItemStateFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator BatchOperationItemStateFilterProperty(BatchOperationItemStateEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="BatchOperationItemStateFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class BatchOperationItemStateFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<BatchOperationItemStateFilterProperty>
+{
+    public override BatchOperationItemStateFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new BatchOperationItemStateFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<BatchOperationItemStateEnum?>(ref reader, options) };
+        var result = new BatchOperationItemStateFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<BatchOperationItemStateEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<BatchOperationItemStateEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<BatchOperationItemStateEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, BatchOperationItemStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("BatchOperationItemStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -6737,8 +7574,15 @@ public readonly record struct BatchOperationStateExactMatch : global::Camunda.Or
 /// <summary>
 /// BatchOperationStateEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(BatchOperationStateFilterPropertyJsonConverter))]
 public sealed class BatchOperationStateFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public BatchOperationStateEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -6777,6 +7621,76 @@ public sealed class BatchOperationStateFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator BatchOperationStateFilterProperty(BatchOperationStateEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="BatchOperationStateFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class BatchOperationStateFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<BatchOperationStateFilterProperty>
+{
+    public override BatchOperationStateFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new BatchOperationStateFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<BatchOperationStateEnum?>(ref reader, options) };
+        var result = new BatchOperationStateFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<BatchOperationStateEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<BatchOperationStateEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<BatchOperationStateEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, BatchOperationStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("BatchOperationStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -6838,8 +7752,15 @@ public readonly record struct BatchOperationTypeExactMatch : global::Camunda.Orc
 /// <summary>
 /// BatchOperationTypeEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(BatchOperationTypeFilterPropertyJsonConverter))]
 public sealed class BatchOperationTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public BatchOperationTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -6878,6 +7799,76 @@ public sealed class BatchOperationTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator BatchOperationTypeFilterProperty(BatchOperationTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="BatchOperationTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class BatchOperationTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<BatchOperationTypeFilterProperty>
+{
+    public override BatchOperationTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new BatchOperationTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<BatchOperationTypeEnum?>(ref reader, options) };
+        var result = new BatchOperationTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<BatchOperationTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<BatchOperationTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<BatchOperationTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, BatchOperationTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("BatchOperationTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -7063,8 +8054,15 @@ public readonly record struct CategoryExactMatch : global::Camunda.Orchestration
 /// <summary>
 /// AuditLogCategoryEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(CategoryFilterPropertyJsonConverter))]
 public sealed class CategoryFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AuditLogCategoryEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -7103,6 +8101,76 @@ public sealed class CategoryFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator CategoryFilterProperty(AuditLogCategoryEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="CategoryFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class CategoryFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<CategoryFilterProperty>
+{
+    public override CategoryFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new CategoryFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogCategoryEnum?>(ref reader, options) };
+        var result = new CategoryFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogCategoryEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogCategoryEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AuditLogCategoryEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, CategoryFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("CategoryFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -7358,8 +8426,15 @@ public readonly record struct ClusterVariableScopeExactMatch : global::Camunda.O
 /// <summary>
 /// ClusterVariableScopeEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(ClusterVariableScopeFilterPropertyJsonConverter))]
 public sealed class ClusterVariableScopeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ClusterVariableScopeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -7398,6 +8473,76 @@ public sealed class ClusterVariableScopeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ClusterVariableScopeFilterProperty(ClusterVariableScopeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ClusterVariableScopeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ClusterVariableScopeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ClusterVariableScopeFilterProperty>
+{
+    public override ClusterVariableScopeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ClusterVariableScopeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ClusterVariableScopeEnum?>(ref reader, options) };
+        var result = new ClusterVariableScopeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ClusterVariableScopeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ClusterVariableScopeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ClusterVariableScopeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ClusterVariableScopeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ClusterVariableScopeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -8048,8 +9193,15 @@ public sealed class CursorForwardPagination : SearchQueryPageRequest
 /// <summary>
 /// Date-time property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(DateTimeFilterPropertyJsonConverter))]
 public sealed class DateTimeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public DateTimeOffset? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -8098,6 +9250,94 @@ public sealed class DateTimeFilterProperty
     [JsonPropertyName("$in")]
     public List<DateTimeOffset>? In { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator DateTimeFilterProperty(DateTimeOffset value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="DateTimeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class DateTimeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<DateTimeFilterProperty>
+{
+    public override DateTimeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new DateTimeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options) };
+        var result = new DateTimeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$gt": result.Gt = global::System.Text.Json.JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options); break;
+                case "$gte": result.Gte = global::System.Text.Json.JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options); break;
+                case "$lt": result.Lt = global::System.Text.Json.JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options); break;
+                case "$lte": result.Lte = global::System.Text.Json.JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<DateTimeOffset>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DateTimeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.Gt is not null || value.Gte is not null || value.Lt is not null || value.Lte is not null || value.In is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DateTimeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.Gt is not null)
+        {
+            writer.WritePropertyName("$gt");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Gt, options);
+        }
+        if (value.Gte is not null)
+        {
+            writer.WritePropertyName("$gte");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Gte, options);
+        }
+        if (value.Lt is not null)
+        {
+            writer.WritePropertyName("$lt");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Lt, options);
+        }
+        if (value.Lte is not null)
+        {
+            writer.WritePropertyName("$lte");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Lte, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -8257,8 +9497,15 @@ public readonly record struct DecisionDefinitionKeyExactMatch : global::Camunda.
 /// <summary>
 /// DecisionDefinitionKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(DecisionDefinitionKeyFilterPropertyJsonConverter))]
 public sealed class DecisionDefinitionKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public DecisionDefinitionKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -8289,6 +9536,76 @@ public sealed class DecisionDefinitionKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<DecisionDefinitionKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator DecisionDefinitionKeyFilterProperty(DecisionDefinitionKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="DecisionDefinitionKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class DecisionDefinitionKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<DecisionDefinitionKeyFilterProperty>
+{
+    public override DecisionDefinitionKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new DecisionDefinitionKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<DecisionDefinitionKey?>(ref reader, options) };
+        var result = new DecisionDefinitionKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionDefinitionKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionDefinitionKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionDefinitionKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionDefinitionKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionDefinitionKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionDefinitionKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -8553,8 +9870,15 @@ public readonly record struct DecisionEvaluationInstanceKeyExactMatch : global::
 /// <summary>
 /// DecisionEvaluationInstanceKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(DecisionEvaluationInstanceKeyFilterPropertyJsonConverter))]
 public sealed class DecisionEvaluationInstanceKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public DecisionEvaluationInstanceKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -8585,6 +9909,76 @@ public sealed class DecisionEvaluationInstanceKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<DecisionEvaluationInstanceKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator DecisionEvaluationInstanceKeyFilterProperty(DecisionEvaluationInstanceKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="DecisionEvaluationInstanceKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class DecisionEvaluationInstanceKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<DecisionEvaluationInstanceKeyFilterProperty>
+{
+    public override DecisionEvaluationInstanceKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new DecisionEvaluationInstanceKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<DecisionEvaluationInstanceKey?>(ref reader, options) };
+        var result = new DecisionEvaluationInstanceKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionEvaluationInstanceKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionEvaluationInstanceKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionEvaluationInstanceKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionEvaluationInstanceKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionEvaluationInstanceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionEvaluationInstanceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -8662,8 +10056,15 @@ public readonly record struct DecisionEvaluationKeyExactMatch : global::Camunda.
 /// <summary>
 /// DecisionEvaluationKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(DecisionEvaluationKeyFilterPropertyJsonConverter))]
 public sealed class DecisionEvaluationKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public DecisionEvaluationKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -8694,6 +10095,76 @@ public sealed class DecisionEvaluationKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<DecisionEvaluationKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator DecisionEvaluationKeyFilterProperty(DecisionEvaluationKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="DecisionEvaluationKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class DecisionEvaluationKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<DecisionEvaluationKeyFilterProperty>
+{
+    public override DecisionEvaluationKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new DecisionEvaluationKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<DecisionEvaluationKey?>(ref reader, options) };
+        var result = new DecisionEvaluationKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionEvaluationKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionEvaluationKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionEvaluationKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionEvaluationKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionEvaluationKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionEvaluationKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -8796,6 +10267,13 @@ public sealed class DecisionInstanceFilter
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The business ID of the owning process instance the decision instance belongs to. This only works for decision instances created with 8.10 and onwards. Decision instances from prior versions and standalone evaluations don&apos;t contain this data and cannot be found.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
+
+    /// <summary>
     /// The key of the decision.
     /// </summary>
     [JsonPropertyName("decisionDefinitionKey")]
@@ -8826,6 +10304,16 @@ public sealed class DecisionInstanceFilter
 /// </summary>
 public sealed class DecisionInstanceGetQueryResult
 {
+    /// <summary>
+    /// The business ID of the owning process instance, inherited when the decision instance was
+    /// evaluated. This is `null` for decision instances created before version 8.10, for
+    /// standalone decision evaluations, and for decision instances whose owning process instance
+    /// has no business ID.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
     /// <summary>
     /// The ID of the DMN decision.
     /// </summary>
@@ -8983,6 +10471,16 @@ public readonly record struct DecisionInstanceKey : global::Camunda.Orchestratio
 /// </summary>
 public sealed class DecisionInstanceResult
 {
+    /// <summary>
+    /// The business ID of the owning process instance, inherited when the decision instance was
+    /// evaluated. This is `null` for decision instances created before version 8.10, for
+    /// standalone decision evaluations, and for decision instances whose owning process instance
+    /// has no business ID.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
     /// <summary>
     /// The ID of the DMN decision.
     /// </summary>
@@ -9205,8 +10703,15 @@ public readonly record struct DecisionInstanceStateExactMatch : global::Camunda.
 /// <summary>
 /// DecisionInstanceStateEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(DecisionInstanceStateFilterPropertyJsonConverter))]
 public sealed class DecisionInstanceStateFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public DecisionInstanceStateEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -9251,6 +10756,82 @@ public sealed class DecisionInstanceStateFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator DecisionInstanceStateFilterProperty(DecisionInstanceStateEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="DecisionInstanceStateFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class DecisionInstanceStateFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<DecisionInstanceStateFilterProperty>
+{
+    public override DecisionInstanceStateFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new DecisionInstanceStateFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<DecisionInstanceStateEnum?>(ref reader, options) };
+        var result = new DecisionInstanceStateFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionInstanceStateEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionInstanceStateEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionInstanceStateEnum>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionInstanceStateEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionInstanceStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionInstanceStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -9355,8 +10936,15 @@ public readonly record struct DecisionRequirementsKeyExactMatch : global::Camund
 /// <summary>
 /// DecisionRequirementsKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(DecisionRequirementsKeyFilterPropertyJsonConverter))]
 public sealed class DecisionRequirementsKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public DecisionRequirementsKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -9387,6 +10975,76 @@ public sealed class DecisionRequirementsKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<DecisionRequirementsKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator DecisionRequirementsKeyFilterProperty(DecisionRequirementsKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="DecisionRequirementsKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class DecisionRequirementsKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<DecisionRequirementsKeyFilterProperty>
+{
+    public override DecisionRequirementsKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new DecisionRequirementsKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<DecisionRequirementsKey?>(ref reader, options) };
+        var result = new DecisionRequirementsKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionRequirementsKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<DecisionRequirementsKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionRequirementsKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<DecisionRequirementsKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionRequirementsKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionRequirementsKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -9792,8 +11450,15 @@ public readonly record struct DeploymentKeyExactMatch : global::Camunda.Orchestr
 /// <summary>
 /// DeploymentKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(DeploymentKeyFilterPropertyJsonConverter))]
 public sealed class DeploymentKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public DeploymentKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -9824,6 +11489,76 @@ public sealed class DeploymentKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<DeploymentKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator DeploymentKeyFilterProperty(DeploymentKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="DeploymentKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class DeploymentKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<DeploymentKeyFilterProperty>
+{
+    public override DeploymentKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new DeploymentKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<DeploymentKey?>(ref reader, options) };
+        var result = new DeploymentKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<DeploymentKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<DeploymentKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<DeploymentKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<DeploymentKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DeploymentKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DeploymentKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -10285,8 +12020,15 @@ public readonly record struct ElementIdExactMatch : global::Camunda.Orchestratio
 /// <summary>
 /// ElementId property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(ElementIdFilterPropertyJsonConverter))]
 public sealed class ElementIdFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ElementId? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -10331,6 +12073,82 @@ public sealed class ElementIdFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ElementIdFilterProperty(ElementId value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ElementIdFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ElementIdFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ElementIdFilterProperty>
+{
+    public override ElementIdFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ElementIdFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ElementId?>(ref reader, options) };
+        var result = new ElementIdFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ElementId?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ElementId?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ElementId>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<ElementId>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ElementIdFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ElementIdFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -10607,8 +12425,15 @@ public readonly record struct ElementInstanceKeyExactMatch : global::Camunda.Orc
 /// <summary>
 /// ElementInstanceKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(ElementInstanceKeyFilterPropertyJsonConverter))]
 public sealed class ElementInstanceKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ElementInstanceKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -10639,6 +12464,76 @@ public sealed class ElementInstanceKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<ElementInstanceKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ElementInstanceKeyFilterProperty(ElementInstanceKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ElementInstanceKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ElementInstanceKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ElementInstanceKeyFilterProperty>
+{
+    public override ElementInstanceKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ElementInstanceKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ElementInstanceKey?>(ref reader, options) };
+        var result = new ElementInstanceKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ElementInstanceKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ElementInstanceKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ElementInstanceKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<ElementInstanceKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ElementInstanceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ElementInstanceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -10843,8 +12738,15 @@ public readonly record struct ElementInstanceStateExactMatch : global::Camunda.O
 /// <summary>
 /// ElementInstanceStateEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(ElementInstanceStateFilterPropertyJsonConverter))]
 public sealed class ElementInstanceStateFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ElementInstanceStateEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -10883,6 +12785,76 @@ public sealed class ElementInstanceStateFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ElementInstanceStateFilterProperty(ElementInstanceStateEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ElementInstanceStateFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ElementInstanceStateFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ElementInstanceStateFilterProperty>
+{
+    public override ElementInstanceStateFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ElementInstanceStateFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ElementInstanceStateEnum?>(ref reader, options) };
+        var result = new ElementInstanceStateFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ElementInstanceStateEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ElementInstanceStateEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ElementInstanceStateEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ElementInstanceStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ElementInstanceStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -11105,8 +13077,15 @@ public readonly record struct EntityTypeExactMatch : global::Camunda.Orchestrati
 /// <summary>
 /// AuditLogEntityTypeEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(EntityTypeFilterPropertyJsonConverter))]
 public sealed class EntityTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AuditLogEntityTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -11145,6 +13124,76 @@ public sealed class EntityTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator EntityTypeFilterProperty(AuditLogEntityTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="EntityTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class EntityTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<EntityTypeFilterProperty>
+{
+    public override EntityTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new EntityTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogEntityTypeEnum?>(ref reader, options) };
+        var result = new EntityTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogEntityTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogEntityTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AuditLogEntityTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, EntityTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("EntityTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -11552,8 +13601,15 @@ public readonly record struct FormKeyExactMatch : global::Camunda.Orchestration.
 /// <summary>
 /// FormKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(FormKeyFilterPropertyJsonConverter))]
 public sealed class FormKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public FormKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -11584,6 +13640,76 @@ public sealed class FormKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<FormKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator FormKeyFilterProperty(FormKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="FormKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class FormKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<FormKeyFilterProperty>
+{
+    public override FormKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new FormKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<FormKey?>(ref reader, options) };
+        var result = new FormKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<FormKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<FormKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<FormKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<FormKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, FormKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("FormKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -11756,8 +13882,15 @@ public readonly record struct GlobalListenerSourceExactMatch : global::Camunda.O
 /// <summary>
 /// Global listener source property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(GlobalListenerSourceFilterPropertyJsonConverter))]
 public sealed class GlobalListenerSourceFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public GlobalListenerSourceEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -11796,6 +13929,76 @@ public sealed class GlobalListenerSourceFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator GlobalListenerSourceFilterProperty(GlobalListenerSourceEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="GlobalListenerSourceFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class GlobalListenerSourceFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<GlobalListenerSourceFilterProperty>
+{
+    public override GlobalListenerSourceFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new GlobalListenerSourceFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<GlobalListenerSourceEnum?>(ref reader, options) };
+        var result = new GlobalListenerSourceFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<GlobalListenerSourceEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<GlobalListenerSourceEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<GlobalListenerSourceEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, GlobalListenerSourceFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("GlobalListenerSourceFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -11886,8 +14089,15 @@ public readonly record struct GlobalTaskListenerEventTypeExactMatch : global::Ca
 /// <summary>
 /// Global listener event type property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(GlobalTaskListenerEventTypeFilterPropertyJsonConverter))]
 public sealed class GlobalTaskListenerEventTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public GlobalTaskListenerEventTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -11926,6 +14136,76 @@ public sealed class GlobalTaskListenerEventTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator GlobalTaskListenerEventTypeFilterProperty(GlobalTaskListenerEventTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="GlobalTaskListenerEventTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class GlobalTaskListenerEventTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<GlobalTaskListenerEventTypeFilterProperty>
+{
+    public override GlobalTaskListenerEventTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new GlobalTaskListenerEventTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<GlobalTaskListenerEventTypeEnum?>(ref reader, options) };
+        var result = new GlobalTaskListenerEventTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<GlobalTaskListenerEventTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<GlobalTaskListenerEventTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<GlobalTaskListenerEventTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, GlobalTaskListenerEventTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("GlobalTaskListenerEventTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -12567,8 +14847,15 @@ public readonly record struct IncidentErrorTypeExactMatch : global::Camunda.Orch
 /// <summary>
 /// IncidentErrorTypeEnum with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(IncidentErrorTypeFilterPropertyJsonConverter))]
 public sealed class IncidentErrorTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public IncidentErrorTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -12613,6 +14900,82 @@ public sealed class IncidentErrorTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator IncidentErrorTypeFilterProperty(IncidentErrorTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="IncidentErrorTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class IncidentErrorTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<IncidentErrorTypeFilterProperty>
+{
+    public override IncidentErrorTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new IncidentErrorTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<IncidentErrorTypeEnum?>(ref reader, options) };
+        var result = new IncidentErrorTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<IncidentErrorTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<IncidentErrorTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<IncidentErrorTypeEnum>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<IncidentErrorTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, IncidentErrorTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("IncidentErrorTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -13146,8 +15509,15 @@ public readonly record struct IncidentStateExactMatch : global::Camunda.Orchestr
 /// <summary>
 /// IncidentStateEnum with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(IncidentStateFilterPropertyJsonConverter))]
 public sealed class IncidentStateFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public IncidentStateEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -13192,6 +15562,82 @@ public sealed class IncidentStateFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator IncidentStateFilterProperty(IncidentStateEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="IncidentStateFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class IncidentStateFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<IncidentStateFilterProperty>
+{
+    public override IncidentStateFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new IncidentStateFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<IncidentStateEnum?>(ref reader, options) };
+        var result = new IncidentStateFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<IncidentStateEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<IncidentStateEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<IncidentStateEnum>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<IncidentStateEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, IncidentStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("IncidentStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -13205,8 +15651,15 @@ public sealed class InferredAncestorKeyInstruction : AncestorScopeInstruction
 /// <summary>
 /// Integer property with advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(IntegerFilterPropertyJsonConverter))]
 public sealed class IntegerFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public int? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -13255,6 +15708,94 @@ public sealed class IntegerFilterProperty
     [JsonPropertyName("$in")]
     public List<int>? In { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator IntegerFilterProperty(int value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="IntegerFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class IntegerFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<IntegerFilterProperty>
+{
+    public override IntegerFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new IntegerFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<int?>(ref reader, options) };
+        var result = new IntegerFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<int?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<int?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$gt": result.Gt = global::System.Text.Json.JsonSerializer.Deserialize<int?>(ref reader, options); break;
+                case "$gte": result.Gte = global::System.Text.Json.JsonSerializer.Deserialize<int?>(ref reader, options); break;
+                case "$lt": result.Lt = global::System.Text.Json.JsonSerializer.Deserialize<int?>(ref reader, options); break;
+                case "$lte": result.Lte = global::System.Text.Json.JsonSerializer.Deserialize<int?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<int>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, IntegerFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.Gt is not null || value.Gte is not null || value.Lt is not null || value.Lte is not null || value.In is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("IntegerFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.Gt is not null)
+        {
+            writer.WritePropertyName("$gt");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Gt, options);
+        }
+        if (value.Gte is not null)
+        {
+            writer.WritePropertyName("$gte");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Gte, options);
+        }
+        if (value.Lt is not null)
+        {
+            writer.WritePropertyName("$lt");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Lt, options);
+        }
+        if (value.Lte is not null)
+        {
+            writer.WritePropertyName("$lte");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Lte, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -13774,8 +16315,15 @@ public readonly record struct JobKeyExactMatch : global::Camunda.Orchestration.S
 /// <summary>
 /// JobKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(JobKeyFilterPropertyJsonConverter))]
 public sealed class JobKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public JobKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -13806,6 +16354,76 @@ public sealed class JobKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<JobKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator JobKeyFilterProperty(JobKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="JobKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class JobKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<JobKeyFilterProperty>
+{
+    public override JobKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new JobKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<JobKey?>(ref reader, options) };
+        var result = new JobKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<JobKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<JobKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<JobKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<JobKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, JobKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("JobKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -13855,8 +16473,15 @@ public readonly record struct JobKindExactMatch : global::Camunda.Orchestration.
 /// <summary>
 /// JobKindEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(JobKindFilterPropertyJsonConverter))]
 public sealed class JobKindFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public JobKindEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -13895,6 +16520,76 @@ public sealed class JobKindFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator JobKindFilterProperty(JobKindEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="JobKindFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class JobKindFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<JobKindFilterProperty>
+{
+    public override JobKindFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new JobKindFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<JobKindEnum?>(ref reader, options) };
+        var result = new JobKindFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<JobKindEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<JobKindEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<JobKindEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, JobKindFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("JobKindFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -13956,8 +16651,15 @@ public readonly record struct JobListenerEventTypeExactMatch : global::Camunda.O
 /// <summary>
 /// JobListenerEventTypeEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(JobListenerEventTypeFilterPropertyJsonConverter))]
 public sealed class JobListenerEventTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public JobListenerEventTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -13996,6 +16698,76 @@ public sealed class JobListenerEventTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator JobListenerEventTypeFilterProperty(JobListenerEventTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="JobListenerEventTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class JobListenerEventTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<JobListenerEventTypeFilterProperty>
+{
+    public override JobListenerEventTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new JobListenerEventTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<JobListenerEventTypeEnum?>(ref reader, options) };
+        var result = new JobListenerEventTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<JobListenerEventTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<JobListenerEventTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<JobListenerEventTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, JobListenerEventTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("JobListenerEventTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -14483,8 +17255,15 @@ public readonly record struct JobStateExactMatch : global::Camunda.Orchestration
 /// <summary>
 /// JobStateEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(JobStateFilterPropertyJsonConverter))]
 public sealed class JobStateFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public JobStateEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -14523,6 +17302,76 @@ public sealed class JobStateFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator JobStateFilterProperty(JobStateEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="JobStateFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class JobStateFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<JobStateFilterProperty>
+{
+    public override JobStateFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new JobStateFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<JobStateEnum?>(ref reader, options) };
+        var result = new JobStateFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<JobStateEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<JobStateEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<JobStateEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, JobStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("JobStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -15691,8 +18540,15 @@ public readonly record struct MessageSubscriptionKeyExactMatch : global::Camunda
 /// <summary>
 /// MessageSubscriptionKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(MessageSubscriptionKeyFilterPropertyJsonConverter))]
 public sealed class MessageSubscriptionKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public MessageSubscriptionKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -15723,6 +18579,76 @@ public sealed class MessageSubscriptionKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<MessageSubscriptionKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator MessageSubscriptionKeyFilterProperty(MessageSubscriptionKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="MessageSubscriptionKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class MessageSubscriptionKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<MessageSubscriptionKeyFilterProperty>
+{
+    public override MessageSubscriptionKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new MessageSubscriptionKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<MessageSubscriptionKey?>(ref reader, options) };
+        var result = new MessageSubscriptionKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<MessageSubscriptionKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<MessageSubscriptionKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<MessageSubscriptionKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<MessageSubscriptionKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, MessageSubscriptionKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("MessageSubscriptionKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -15979,8 +18905,15 @@ public readonly record struct MessageSubscriptionStateExactMatch : global::Camun
 /// <summary>
 /// MessageSubscriptionStateEnum with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(MessageSubscriptionStateFilterPropertyJsonConverter))]
 public sealed class MessageSubscriptionStateFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public MessageSubscriptionStateEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -16019,6 +18952,76 @@ public sealed class MessageSubscriptionStateFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator MessageSubscriptionStateFilterProperty(MessageSubscriptionStateEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="MessageSubscriptionStateFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class MessageSubscriptionStateFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<MessageSubscriptionStateFilterProperty>
+{
+    public override MessageSubscriptionStateFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new MessageSubscriptionStateFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<MessageSubscriptionStateEnum?>(ref reader, options) };
+        var result = new MessageSubscriptionStateFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<MessageSubscriptionStateEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<MessageSubscriptionStateEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<MessageSubscriptionStateEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, MessageSubscriptionStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("MessageSubscriptionStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -16069,8 +19072,15 @@ public readonly record struct MessageSubscriptionTypeExactMatch : global::Camund
 /// <summary>
 /// MessageSubscriptionTypeEnum with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(MessageSubscriptionTypeFilterPropertyJsonConverter))]
 public sealed class MessageSubscriptionTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public MessageSubscriptionTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -16109,6 +19119,76 @@ public sealed class MessageSubscriptionTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator MessageSubscriptionTypeFilterProperty(MessageSubscriptionTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="MessageSubscriptionTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class MessageSubscriptionTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<MessageSubscriptionTypeFilterProperty>
+{
+    public override MessageSubscriptionTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new MessageSubscriptionTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<MessageSubscriptionTypeEnum?>(ref reader, options) };
+        var result = new MessageSubscriptionTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<MessageSubscriptionTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<MessageSubscriptionTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<MessageSubscriptionTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, MessageSubscriptionTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("MessageSubscriptionTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -16248,8 +19328,15 @@ public readonly record struct OperationTypeExactMatch : global::Camunda.Orchestr
 /// <summary>
 /// AuditLogOperationTypeEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(OperationTypeFilterPropertyJsonConverter))]
 public sealed class OperationTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AuditLogOperationTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -16288,6 +19375,76 @@ public sealed class OperationTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator OperationTypeFilterProperty(AuditLogOperationTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="OperationTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class OperationTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<OperationTypeFilterProperty>
+{
+    public override OperationTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new OperationTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogOperationTypeEnum?>(ref reader, options) };
+        var result = new OperationTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogOperationTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AuditLogOperationTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AuditLogOperationTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, OperationTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("OperationTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -16615,8 +19772,15 @@ public readonly record struct ProcessDefinitionIdExactMatch : global::Camunda.Or
 /// <summary>
 /// ProcessDefinitionId property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(ProcessDefinitionIdFilterPropertyJsonConverter))]
 public sealed class ProcessDefinitionIdFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ProcessDefinitionId? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -16661,6 +19825,82 @@ public sealed class ProcessDefinitionIdFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ProcessDefinitionIdFilterProperty(ProcessDefinitionId value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ProcessDefinitionIdFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ProcessDefinitionIdFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ProcessDefinitionIdFilterProperty>
+{
+    public override ProcessDefinitionIdFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ProcessDefinitionIdFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ProcessDefinitionId?>(ref reader, options) };
+        var result = new ProcessDefinitionIdFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ProcessDefinitionId?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ProcessDefinitionId?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ProcessDefinitionId>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<ProcessDefinitionId>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProcessDefinitionIdFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ProcessDefinitionIdFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -16953,8 +20193,15 @@ public readonly record struct ProcessDefinitionKeyExactMatch : global::Camunda.O
 /// <summary>
 /// ProcessDefinitionKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(ProcessDefinitionKeyFilterPropertyJsonConverter))]
 public sealed class ProcessDefinitionKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ProcessDefinitionKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -16985,6 +20232,76 @@ public sealed class ProcessDefinitionKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<ProcessDefinitionKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ProcessDefinitionKeyFilterProperty(ProcessDefinitionKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ProcessDefinitionKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ProcessDefinitionKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ProcessDefinitionKeyFilterProperty>
+{
+    public override ProcessDefinitionKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ProcessDefinitionKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ProcessDefinitionKey?>(ref reader, options) };
+        var result = new ProcessDefinitionKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ProcessDefinitionKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ProcessDefinitionKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ProcessDefinitionKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<ProcessDefinitionKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProcessDefinitionKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ProcessDefinitionKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -18169,8 +21486,15 @@ public readonly record struct ProcessInstanceKeyExactMatch : global::Camunda.Orc
 /// <summary>
 /// ProcessInstanceKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(ProcessInstanceKeyFilterPropertyJsonConverter))]
 public sealed class ProcessInstanceKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ProcessInstanceKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -18201,6 +21525,76 @@ public sealed class ProcessInstanceKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<ProcessInstanceKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ProcessInstanceKeyFilterProperty(ProcessInstanceKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ProcessInstanceKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ProcessInstanceKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ProcessInstanceKeyFilterProperty>
+{
+    public override ProcessInstanceKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ProcessInstanceKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ProcessInstanceKey?>(ref reader, options) };
+        var result = new ProcessInstanceKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ProcessInstanceKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ProcessInstanceKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ProcessInstanceKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<ProcessInstanceKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProcessInstanceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ProcessInstanceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -18772,8 +22166,15 @@ public readonly record struct ProcessInstanceStateExactMatch : global::Camunda.O
 /// <summary>
 /// ProcessInstanceStateEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(ProcessInstanceStateFilterPropertyJsonConverter))]
 public sealed class ProcessInstanceStateFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ProcessInstanceStateEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -18812,6 +22213,76 @@ public sealed class ProcessInstanceStateFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ProcessInstanceStateFilterProperty(ProcessInstanceStateEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ProcessInstanceStateFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ProcessInstanceStateFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ProcessInstanceStateFilterProperty>
+{
+    public override ProcessInstanceStateFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ProcessInstanceStateFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ProcessInstanceStateEnum?>(ref reader, options) };
+        var result = new ProcessInstanceStateFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ProcessInstanceStateEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ProcessInstanceStateEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ProcessInstanceStateEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProcessInstanceStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ProcessInstanceStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -18954,8 +22425,15 @@ public readonly record struct ResourceKeyExactMatch : global::Camunda.Orchestrat
 /// <summary>
 /// ResourceKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(ResourceKeyFilterPropertyJsonConverter))]
 public sealed class ResourceKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ResourceKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -18986,6 +22464,76 @@ public sealed class ResourceKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<ResourceKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ResourceKeyFilterProperty(ResourceKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ResourceKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ResourceKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ResourceKeyFilterProperty>
+{
+    public override ResourceKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ResourceKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ResourceKey?>(ref reader, options) };
+        var result = new ResourceKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ResourceKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ResourceKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ResourceKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<ResourceKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ResourceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ResourceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -19679,8 +23227,15 @@ public readonly record struct ScopeKeyExactMatch : global::Camunda.Orchestration
 /// element instance or process instance that defines the scope of a variable.
 /// 
 /// </summary>
+[JsonConverter(typeof(ScopeKeyFilterPropertyJsonConverter))]
 public sealed class ScopeKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ScopeKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -19711,6 +23266,76 @@ public sealed class ScopeKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<ScopeKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ScopeKeyFilterProperty(ScopeKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ScopeKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ScopeKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ScopeKeyFilterProperty>
+{
+    public override ScopeKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ScopeKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ScopeKey?>(ref reader, options) };
+        var result = new ScopeKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ScopeKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ScopeKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ScopeKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<ScopeKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ScopeKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ScopeKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -20034,8 +23659,15 @@ public sealed class StatusMetric
 /// <summary>
 /// String property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(StringFilterPropertyJsonConverter))]
 public sealed class StringFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public string? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -20080,6 +23712,82 @@ public sealed class StringFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator StringFilterProperty(string value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="StringFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class StringFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<StringFilterProperty>
+{
+    public override StringFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new StringFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<string?>(ref reader, options) };
+        var result = new StringFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<string?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<string?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<string>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<string>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, StringFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("StringFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -21673,8 +25381,15 @@ public readonly record struct UserTaskStateExactMatch : global::Camunda.Orchestr
 /// <summary>
 /// UserTaskStateEnum property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(UserTaskStateFilterPropertyJsonConverter))]
 public sealed class UserTaskStateFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public UserTaskStateEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -21713,6 +25428,76 @@ public sealed class UserTaskStateFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator UserTaskStateFilterProperty(UserTaskStateEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="UserTaskStateFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class UserTaskStateFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<UserTaskStateFilterProperty>
+{
+    public override UserTaskStateFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new UserTaskStateFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<UserTaskStateEnum?>(ref reader, options) };
+        var result = new UserTaskStateFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<UserTaskStateEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<UserTaskStateEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<UserTaskStateEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, UserTaskStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("UserTaskStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -22002,8 +25787,15 @@ public readonly record struct VariableKeyExactMatch : global::Camunda.Orchestrat
 /// <summary>
 /// VariableKey property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(VariableKeyFilterPropertyJsonConverter))]
 public sealed class VariableKeyFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public VariableKey? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -22034,6 +25826,76 @@ public sealed class VariableKeyFilterProperty
     [JsonPropertyName("$notIn")]
     public List<VariableKey>? NotIn { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator VariableKeyFilterProperty(VariableKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="VariableKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class VariableKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<VariableKeyFilterProperty>
+{
+    public override VariableKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new VariableKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<VariableKey?>(ref reader, options) };
+        var result = new VariableKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<VariableKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<VariableKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<VariableKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<VariableKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, VariableKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("VariableKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -22412,8 +26274,15 @@ public readonly record struct WaitStateElementTypeExactMatch : global::Camunda.O
 /// <summary>
 /// Element type property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(WaitStateElementTypeFilterPropertyJsonConverter))]
 public sealed class WaitStateElementTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public WaitStateElementTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -22452,6 +26321,76 @@ public sealed class WaitStateElementTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator WaitStateElementTypeFilterProperty(WaitStateElementTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="WaitStateElementTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class WaitStateElementTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<WaitStateElementTypeFilterProperty>
+{
+    public override WaitStateElementTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new WaitStateElementTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<WaitStateElementTypeEnum?>(ref reader, options) };
+        var result = new WaitStateElementTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<WaitStateElementTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<WaitStateElementTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<WaitStateElementTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, WaitStateElementTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("WaitStateElementTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -22505,8 +26444,15 @@ public readonly record struct WaitStateTypeExactMatch : global::Camunda.Orchestr
 /// <summary>
 /// Wait state type property with full advanced search capabilities.
 /// </summary>
+[JsonConverter(typeof(WaitStateTypeFilterPropertyJsonConverter))]
 public sealed class WaitStateTypeFilterProperty
 {
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public WaitStateTypeEnum? ExactMatch { get; set; }
+
     /// <summary>
     /// Checks for equality with the provided value.
     /// </summary>
@@ -22545,6 +26491,76 @@ public sealed class WaitStateTypeFilterProperty
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator WaitStateTypeFilterProperty(WaitStateTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="WaitStateTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class WaitStateTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<WaitStateTypeFilterProperty>
+{
+    public override WaitStateTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new WaitStateTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<WaitStateTypeEnum?>(ref reader, options) };
+        var result = new WaitStateTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<WaitStateTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<WaitStateTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<WaitStateTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, WaitStateTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("WaitStateTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>

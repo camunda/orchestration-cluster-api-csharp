@@ -681,6 +681,30 @@ internal static class CSharpClientGenerator
     }
 
     /// <summary>
+    /// The primitive (exact-match) variant of a 2-way <c>oneOf</c>, returned as the
+    /// original variant (a <c>$ref</c> or an inline primitive schema) so it maps to its
+    /// declared/underlying type. Used as a fallback for the exact-match value type when
+    /// the advanced variant has no <c>$eq</c> operator to borrow the type from.
+    /// </summary>
+    private static IOpenApiSchema? FindPrimitiveOneOfVariantRef(IOpenApiSchema schema, OpenApiDocument doc)
+    {
+        if (schema.OneOf is not { Count: 2 })
+            return null;
+
+        foreach (var variant in schema.OneOf)
+        {
+            var resolved = GetRefId(variant) != null && doc.Components?.Schemas != null
+                && doc.Components.Schemas.TryGetValue(GetRefId(variant)!, out var refSchema)
+                ? refSchema : variant;
+
+            if (IsPrimitiveSchemaResolved(resolved, doc))
+                return variant;
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// Build a set of schema type names that are used as request bodies.
     /// Includes oneOf variant names when a parent is used as a body type.
     /// </summary>
@@ -825,19 +849,19 @@ internal static class CSharpClientGenerator
                 continue;
             }
 
-            // oneOf with mixed primitive/class variants (FilterProperty pattern)
-            // → generate class using properties from the non-primitive (advanced filter) variant
+            // oneOf with mixed primitive/class variants (the advanced-filter pattern):
+            //   XFilterProperty = oneOf[ XExactMatch (a bare scalar), AdvancedXFilter ({ $eq, … }) ]
+            // The wire accepts EITHER form, so emit a class carrying the advanced operators
+            // AND an ExactMatch member for the scalar branch, plus an implicit conversion
+            // from the value type and a converter that serialises the bare value when only
+            // the exact match is set. Dropping the scalar branch (the old behaviour) made the
+            // bare form unreachable and broke newer-SDK ↔ older-server calls for these
+            // fields (see #267).
             if (schema.OneOf is { Count: > 0 } && !oneOfParents.ContainsKey(typeName))
             {
                 var classVariantSchema = FindNonPrimitiveOneOfVariant(schema, doc);
                 if (classVariantSchema != null)
                 {
-                    sb.AppendLine($"/// <summary>");
-                    AppendXmlDocLines(sb, schema.Description ?? name, "");
-                    sb.AppendLine($"/// </summary>");
-                    sb.AppendLine($"public sealed class {typeName}");
-                    sb.AppendLine("{");
-
                     var filterRequired = new HashSet<string>(
                         classVariantSchema.Required ?? new HashSet<string>());
                     var filterProperties = new Dictionary<string, IOpenApiSchema>();
@@ -851,6 +875,38 @@ internal static class CSharpClientGenerator
                     }
                     FlattenAllOf(classVariantSchema, doc, filterProperties, filterRequired);
 
+                    // Value type of the exact-match branch: prefer the equality operator's
+                    // type so ExactMatch and $eq agree; else the primitive variant's type.
+                    string? exactType = null;
+                    if (filterProperties.TryGetValue("$eq", out var eqSchema))
+                        exactType = ResolvePropertyType(eqSchema, doc, inlineEnums, typeName, "$eq");
+                    if (string.IsNullOrEmpty(exactType))
+                    {
+                        var primVariant = FindPrimitiveOneOfVariantRef(schema, doc);
+                        if (primVariant != null)
+                            exactType = ResolvePropertyType(primVariant, doc, inlineEnums, typeName, "exactMatch");
+                    }
+                    exactType = string.IsNullOrEmpty(exactType) ? null : exactType.TrimEnd('?');
+
+                    sb.AppendLine($"/// <summary>");
+                    AppendXmlDocLines(sb, schema.Description ?? name, "");
+                    sb.AppendLine($"/// </summary>");
+                    if (exactType != null)
+                        sb.AppendLine($"[JsonConverter(typeof({typeName}JsonConverter))]");
+                    sb.AppendLine($"public sealed class {typeName}");
+                    sb.AppendLine("{");
+
+                    if (exactType != null)
+                    {
+                        sb.AppendLine($"    /// <summary>");
+                        sb.AppendLine($"    /// Matches the value exactly. Serialized as the bare value — the form");
+                        sb.AppendLine($"    /// servers that predate advanced filtering on this field accept.");
+                        sb.AppendLine($"    /// </summary>");
+                        sb.AppendLine($"    public {exactType}? ExactMatch {{ get; set; }}");
+                        sb.AppendLine();
+                    }
+
+                    var advancedOps = new List<(string Json, string Name, string Type)>();
                     foreach (var (propName, propSchema) in filterProperties)
                     {
                         var csharpType = ResolvePropertyType(propSchema, doc, inlineEnums, typeName, propName);
@@ -860,6 +916,8 @@ internal static class CSharpClientGenerator
 
                         if ((!isRequired || isNullable) && !csharpType.EndsWith('?'))
                             csharpType += "?";
+
+                        advancedOps.Add((propName, csharpPropName, csharpType));
 
                         if (!string.IsNullOrEmpty(propSchema.Description))
                         {
@@ -874,8 +932,19 @@ internal static class CSharpClientGenerator
                         sb.AppendLine();
                     }
 
+                    if (exactType != null)
+                    {
+                        sb.AppendLine($"    /// <summary>Wraps a bare value as an exact-match filter.</summary>");
+                        sb.AppendLine($"    public static implicit operator {typeName}({exactType} value) => new() {{ ExactMatch = value }};");
+                        sb.AppendLine();
+                    }
+
                     sb.AppendLine("}");
                     sb.AppendLine();
+
+                    if (exactType != null)
+                        EmitFilterPropertyConverter(sb, typeName, exactType, advancedOps);
+
                     continue;
                 }
             }
@@ -958,6 +1027,68 @@ internal static class CSharpClientGenerator
         }
 
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// Emits a <see cref="System.Text.Json.Serialization.JsonConverter{T}"/> for an
+    /// advanced-filter property so it round-trips its <c>oneOf</c> faithfully: a bare
+    /// scalar when only <c>ExactMatch</c> is set, otherwise the <c>{ $eq, … }</c> object.
+    /// Fully-qualified names keep this self-contained (no extra <c>using</c>).
+    /// </summary>
+    private static void EmitFilterPropertyConverter(
+        StringBuilder sb, string typeName, string exactType, List<(string Json, string Name, string Type)> ops)
+    {
+        var hasAdvanced = ops.Count == 0
+            ? "false"
+            : string.Join(" || ", ops.Select(o => $"value.{o.Name} is not null"));
+
+        sb.AppendLine($"/// <summary>Serializes <see cref=\"{typeName}\"/> as a bare exact-match value or an advanced filter object.</summary>");
+        sb.AppendLine($"internal sealed class {typeName}JsonConverter : global::System.Text.Json.Serialization.JsonConverter<{typeName}>");
+        sb.AppendLine("{");
+        sb.AppendLine($"    public override {typeName}? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)");
+        sb.AppendLine("    {");
+        sb.AppendLine("        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;");
+        sb.AppendLine("        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)");
+        sb.AppendLine($"            return new {typeName} {{ ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<{exactType}?>(ref reader, options) }};");
+        sb.AppendLine($"        var result = new {typeName}();");
+        sb.AppendLine("        while (reader.Read())");
+        sb.AppendLine("        {");
+        sb.AppendLine("            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;");
+        sb.AppendLine("            var prop = reader.GetString();");
+        sb.AppendLine("            reader.Read();");
+        sb.AppendLine("            switch (prop)");
+        sb.AppendLine("            {");
+        foreach (var o in ops)
+            sb.AppendLine($"                case \"{SafeEmit.SafeCSharpStringLiteral(o.Json)}\": result.{o.Name} = global::System.Text.Json.JsonSerializer.Deserialize<{o.Type}>(ref reader, options); break;");
+        sb.AppendLine("                default: reader.Skip(); break;");
+        sb.AppendLine("            }");
+        sb.AppendLine("        }");
+        sb.AppendLine("        return result;");
+        sb.AppendLine("    }");
+        sb.AppendLine();
+        sb.AppendLine($"    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, {typeName} value, global::System.Text.Json.JsonSerializerOptions options)");
+        sb.AppendLine("    {");
+        sb.AppendLine($"        var hasAdvanced = {hasAdvanced};");
+        sb.AppendLine("        if (value.ExactMatch is not null && hasAdvanced)");
+        sb.AppendLine($"            throw new global::System.Text.Json.JsonException(\"{typeName}: set either ExactMatch (a bare value) or advanced operators, not both.\");");
+        sb.AppendLine("        if (value.ExactMatch is not null)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);");
+        sb.AppendLine("            return;");
+        sb.AppendLine("        }");
+        sb.AppendLine("        writer.WriteStartObject();");
+        foreach (var o in ops)
+        {
+            sb.AppendLine($"        if (value.{o.Name} is not null)");
+            sb.AppendLine("        {");
+            sb.AppendLine($"            writer.WritePropertyName(\"{SafeEmit.SafeCSharpStringLiteral(o.Json)}\");");
+            sb.AppendLine($"            global::System.Text.Json.JsonSerializer.Serialize(writer, value.{o.Name}, options);");
+            sb.AppendLine("        }");
+        }
+        sb.AppendLine("        writer.WriteEndObject();");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
     }
 
     private static void GenerateClass(StringBuilder sb, string typeName, IOpenApiSchema schema, OpenApiDocument? doc = null, Dictionary<string, InlineEnumEntry>? inlineEnums = null, HashSet<string>? inlineEnumTypeNames = null, bool isRequestSchema = false)
