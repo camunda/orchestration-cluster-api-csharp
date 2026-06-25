@@ -3523,7 +3523,9 @@ internal sealed class AgentHistoryItemKeyFilterPropertyJsonConverter : global::S
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentHistoryItemKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentHistoryItemKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -3850,7 +3852,9 @@ internal sealed class AgentInstanceHistoryCommitStatusFilterPropertyJsonConverte
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentInstanceHistoryCommitStatusFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentInstanceHistoryCommitStatusFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -4229,7 +4233,9 @@ internal sealed class AgentInstanceHistoryRoleFilterPropertyJsonConverter : glob
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentInstanceHistoryRoleFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentInstanceHistoryRoleFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -4455,7 +4461,9 @@ internal sealed class AgentInstanceKeyFilterPropertyJsonConverter : global::Syst
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentInstanceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentInstanceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -4942,7 +4950,9 @@ internal sealed class AgentInstanceStatusFilterPropertyJsonConverter : global::S
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentInstanceStatusFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentInstanceStatusFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -5256,7 +5266,9 @@ internal sealed class AuditLogActorTypeFilterPropertyJsonConverter : global::Sys
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AuditLogActorTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AuditLogActorTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -5438,7 +5450,9 @@ internal sealed class AuditLogEntityKeyFilterPropertyJsonConverter : global::Sys
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AuditLogEntityKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AuditLogEntityKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -5837,7 +5851,9 @@ internal sealed class AuditLogKeyFilterPropertyJsonConverter : global::System.Te
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AuditLogKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AuditLogKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -6247,7 +6263,9 @@ internal sealed class AuditLogResultFilterPropertyJsonConverter : global::System
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AuditLogResultFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AuditLogResultFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -6883,7 +6901,9 @@ internal sealed class BasicStringFilterPropertyJsonConverter : global::System.Te
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, BasicStringFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("BasicStringFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -7291,7 +7311,9 @@ internal sealed class BatchOperationItemStateFilterPropertyJsonConverter : globa
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, BatchOperationItemStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("BatchOperationItemStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -7632,7 +7654,9 @@ internal sealed class BatchOperationStateFilterPropertyJsonConverter : global::S
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, BatchOperationStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("BatchOperationStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -7808,7 +7832,9 @@ internal sealed class BatchOperationTypeFilterPropertyJsonConverter : global::Sy
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, BatchOperationTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("BatchOperationTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -8108,7 +8134,9 @@ internal sealed class CategoryFilterPropertyJsonConverter : global::System.Text.
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, CategoryFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("CategoryFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -8478,7 +8506,9 @@ internal sealed class ClusterVariableScopeFilterPropertyJsonConverter : global::
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ClusterVariableScopeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ClusterVariableScopeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -9256,7 +9286,9 @@ internal sealed class DateTimeFilterPropertyJsonConverter : global::System.Text.
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DateTimeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.Gt is not null || value.Gte is not null || value.Lt is not null || value.Lte is not null || value.In is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DateTimeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -9537,7 +9569,9 @@ internal sealed class DecisionDefinitionKeyFilterPropertyJsonConverter : global:
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionDefinitionKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionDefinitionKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -9908,7 +9942,9 @@ internal sealed class DecisionEvaluationInstanceKeyFilterPropertyJsonConverter :
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionEvaluationInstanceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionEvaluationInstanceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -10092,7 +10128,9 @@ internal sealed class DecisionEvaluationKeyFilterPropertyJsonConverter : global:
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionEvaluationKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionEvaluationKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -10725,7 +10763,9 @@ internal sealed class DecisionInstanceStateFilterPropertyJsonConverter : global:
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionInstanceStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionInstanceStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -10941,7 +10981,9 @@ internal sealed class DecisionRequirementsKeyFilterPropertyJsonConverter : globa
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DecisionRequirementsKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DecisionRequirementsKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -11453,7 +11495,9 @@ internal sealed class DeploymentKeyFilterPropertyJsonConverter : global::System.
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, DeploymentKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("DeploymentKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -12036,7 +12080,9 @@ internal sealed class ElementIdFilterPropertyJsonConverter : global::System.Text
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ElementIdFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ElementIdFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -12424,7 +12470,9 @@ internal sealed class ElementInstanceKeyFilterPropertyJsonConverter : global::Sy
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ElementInstanceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ElementInstanceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -12743,7 +12791,9 @@ internal sealed class ElementInstanceStateFilterPropertyJsonConverter : global::
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ElementInstanceStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ElementInstanceStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -13080,7 +13130,9 @@ internal sealed class EntityTypeFilterPropertyJsonConverter : global::System.Tex
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, EntityTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("EntityTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -13594,7 +13646,9 @@ internal sealed class FormKeyFilterPropertyJsonConverter : global::System.Text.J
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, FormKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("FormKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -13881,7 +13935,9 @@ internal sealed class GlobalListenerSourceFilterPropertyJsonConverter : global::
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, GlobalListenerSourceFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("GlobalListenerSourceFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -14086,7 +14142,9 @@ internal sealed class GlobalTaskListenerEventTypeFilterPropertyJsonConverter : g
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, GlobalTaskListenerEventTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("GlobalTaskListenerEventTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -14849,7 +14907,9 @@ internal sealed class IncidentErrorTypeFilterPropertyJsonConverter : global::Sys
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, IncidentErrorTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("IncidentErrorTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -15509,7 +15569,9 @@ internal sealed class IncidentStateFilterPropertyJsonConverter : global::System.
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, IncidentStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("IncidentStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -15655,7 +15717,9 @@ internal sealed class IntegerFilterPropertyJsonConverter : global::System.Text.J
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, IntegerFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.Gt is not null || value.Gte is not null || value.Lt is not null || value.Lte is not null || value.In is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("IntegerFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -16296,7 +16360,9 @@ internal sealed class JobKeyFilterPropertyJsonConverter : global::System.Text.Js
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, JobKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("JobKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -16460,7 +16526,9 @@ internal sealed class JobKindFilterPropertyJsonConverter : global::System.Text.J
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, JobKindFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("JobKindFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -16636,7 +16704,9 @@ internal sealed class JobListenerEventTypeFilterPropertyJsonConverter : global::
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, JobListenerEventTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("JobListenerEventTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -17238,7 +17308,9 @@ internal sealed class JobStateFilterPropertyJsonConverter : global::System.Text.
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, JobStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("JobStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -18513,7 +18585,9 @@ internal sealed class MessageSubscriptionKeyFilterPropertyJsonConverter : global
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, MessageSubscriptionKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("MessageSubscriptionKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -18884,7 +18958,9 @@ internal sealed class MessageSubscriptionStateFilterPropertyJsonConverter : glob
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, MessageSubscriptionStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("MessageSubscriptionStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -19049,7 +19125,9 @@ internal sealed class MessageSubscriptionTypeFilterPropertyJsonConverter : globa
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, MessageSubscriptionTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("MessageSubscriptionTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -19303,7 +19381,9 @@ internal sealed class OperationTypeFilterPropertyJsonConverter : global::System.
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, OperationTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("OperationTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -19752,7 +19832,9 @@ internal sealed class ProcessDefinitionIdFilterPropertyJsonConverter : global::S
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProcessDefinitionIdFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ProcessDefinitionIdFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -20156,7 +20238,9 @@ internal sealed class ProcessDefinitionKeyFilterPropertyJsonConverter : global::
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProcessDefinitionKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ProcessDefinitionKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -21447,7 +21531,9 @@ internal sealed class ProcessInstanceKeyFilterPropertyJsonConverter : global::Sy
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProcessInstanceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ProcessInstanceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -22133,7 +22219,9 @@ internal sealed class ProcessInstanceStateFilterPropertyJsonConverter : global::
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProcessInstanceStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ProcessInstanceStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -22382,7 +22470,9 @@ internal sealed class ResourceKeyFilterPropertyJsonConverter : global::System.Te
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ResourceKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ResourceKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -23182,7 +23272,9 @@ internal sealed class ScopeKeyFilterPropertyJsonConverter : global::System.Text.
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ScopeKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ScopeKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -23627,7 +23719,9 @@ internal sealed class StringFilterPropertyJsonConverter : global::System.Text.Js
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, StringFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("StringFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -25340,7 +25434,9 @@ internal sealed class UserTaskStateFilterPropertyJsonConverter : global::System.
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, UserTaskStateFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("UserTaskStateFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -25736,7 +25832,9 @@ internal sealed class VariableKeyFilterPropertyJsonConverter : global::System.Te
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, VariableKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("VariableKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -26229,7 +26327,9 @@ internal sealed class WaitStateElementTypeFilterPropertyJsonConverter : global::
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, WaitStateElementTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("WaitStateElementTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
@@ -26397,7 +26497,9 @@ internal sealed class WaitStateTypeFilterPropertyJsonConverter : global::System.
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, WaitStateTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
         var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
-        if (value.ExactMatch is not null && !hasAdvanced)
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("WaitStateTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
         {
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
             return;
