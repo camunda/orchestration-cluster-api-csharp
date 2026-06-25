@@ -36979,7 +36979,8 @@
               "followUpDate",
               "dueDate",
               "priority",
-              "name"
+              "name",
+              "businessId"
             ]
           },
           "order": {
@@ -37036,6 +37037,14 @@
               }
             ],
             "description": "The assignee of the user task."
+          },
+          "businessId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "The business ID of the owning process instance the user task belongs to. This only works for user tasks created with 8.10 and onwards. Tasks from prior versions don't contain this data and cannot be found.\n"
           },
           "priority": {
             "allOf": [
@@ -37223,6 +37232,10 @@
           {
             "propertyName": "tags",
             "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.10"
           }
         ]
       },
@@ -37251,6 +37264,7 @@
         "type": "object",
         "required": [
           "assignee",
+          "businessId",
           "candidateGroups",
           "candidateUsers",
           "completionDate",
@@ -37415,6 +37429,15 @@
               }
             ]
           },
+          "businessId": {
+            "description": "The business ID of the owning process instance, inherited when the user task was\ncreated. This is `null` for user tasks created before version 8.10, and for user tasks\nwhose owning process instance has no business ID.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessId"
+              }
+            ]
+          },
           "formKey": {
             "description": "The key of the form.",
             "nullable": true,
@@ -37516,6 +37539,10 @@
           {
             "propertyName": "rootProcessInstanceKey",
             "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.10"
           },
           {
             "propertyName": "formKey",

@@ -1041,6 +1041,8 @@ public enum UserTaskSearchQuerySortRequestField
     Priority,
     [JsonPropertyName("name")]
     Name,
+    [JsonPropertyName("businessId")]
+    BusinessId,
 }
 
 /// <summary>
@@ -21170,6 +21172,13 @@ public sealed class UserTaskFilter
     public StringFilterProperty? Assignee { get; set; }
 
     /// <summary>
+    /// The business ID of the owning process instance the user task belongs to. This only works for user tasks created with 8.10 and onwards. Tasks from prior versions don&apos;t contain this data and cannot be found.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
+
+    /// <summary>
     /// The priority of the user task.
     /// </summary>
     [JsonPropertyName("priority")]
@@ -21518,6 +21527,15 @@ public sealed class UserTaskResult
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The business ID of the owning process instance, inherited when the user task was
+    /// created. This is `null` for user tasks created before version 8.10, and for user tasks
+    /// whose owning process instance has no business ID.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
 
     /// <summary>
     /// The key of the form.
