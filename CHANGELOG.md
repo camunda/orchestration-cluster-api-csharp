@@ -1,3 +1,17 @@
+# [9.0.0-alpha.26](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.25...v9.0.0-alpha.26) (2026-06-25)
+
+
+* feat!: advance main to the 10.x alpha line (Camunda 8.10) ([e607354](https://github.com/camunda/orchestration-cluster-api-csharp/commit/e607354db96b63e1b59208a7a279a8c682a6a561))
+
+
+### BREAKING CHANGES
+
+* main now publishes the 10.x alpha line targeting Camunda
+8.10. Consumers on the main/alpha channel move from 9.0.0-alpha.N to
+10.0.0-alpha.N; pin to the 9.x line to stay on Camunda 8.9.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
 # [9.0.0-alpha.25](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.0.0-alpha.24...v9.0.0-alpha.25) (2026-06-25)
 
 
