@@ -1,3 +1,10 @@
+## [9.1.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.1.2...v9.1.3) (2026-06-25)
+
+
+### Bug Fixes
+
+* flatten allOf composition transitively in the generator ([89df4fb](https://github.com/camunda/orchestration-cluster-api-csharp/commit/89df4fbb8095579d0c1ed482285a0960eeae2dc4)), closes [#265](https://github.com/camunda/orchestration-cluster-api-csharp/issues/265)
+
 ## [9.1.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.1.1...v9.1.2) (2026-06-16)
 
 
