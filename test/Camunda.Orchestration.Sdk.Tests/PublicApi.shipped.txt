@@ -2291,6 +2291,7 @@ TYPE Camunda.Orchestration.Sdk.DecisionInstanceFilter : sealed class
   PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Int32? DecisionDefinitionVersion { get; set; } [JsonPropertyName("decisionDefinitionVersion")]
   PROP System.String? DecisionDefinitionName { get; set; } [JsonPropertyName("decisionDefinitionName")]
@@ -2298,6 +2299,7 @@ TYPE Camunda.Orchestration.Sdk.DecisionInstanceFilter : sealed class
 
 TYPE Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.DecisionDefinitionId DecisionDefinitionId { get; set; } [JsonPropertyName("decisionDefinitionId")]
   PROP Camunda.Orchestration.Sdk.DecisionDefinitionKey DecisionDefinitionKey { get; set; } [JsonPropertyName("decisionDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.DecisionDefinitionKey RootDecisionDefinitionKey { get; set; } [JsonPropertyName("rootDecisionDefinitionKey")]
@@ -2329,6 +2331,7 @@ TYPE Camunda.Orchestration.Sdk.DecisionInstanceKey : struct interfaces=[Camunda.
 
 TYPE Camunda.Orchestration.Sdk.DecisionInstanceResult : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.DecisionDefinitionId DecisionDefinitionId { get; set; } [JsonPropertyName("decisionDefinitionId")]
   PROP Camunda.Orchestration.Sdk.DecisionDefinitionKey DecisionDefinitionKey { get; set; } [JsonPropertyName("decisionDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.DecisionDefinitionKey RootDecisionDefinitionKey { get; set; } [JsonPropertyName("rootDecisionDefinitionKey")]
@@ -2366,21 +2369,22 @@ TYPE Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequest : sealed c
 TYPE Camunda.Orchestration.Sdk.DecisionInstanceSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
   underlying=System.Int32
-  MEMBER DecisionDefinitionId = 0 json="decisionDefinitionId"
-  MEMBER DecisionDefinitionKey = 1 json="decisionDefinitionKey"
-  MEMBER DecisionDefinitionName = 2 json="decisionDefinitionName"
-  MEMBER DecisionDefinitionType = 3 json="decisionDefinitionType"
-  MEMBER DecisionDefinitionVersion = 4 json="decisionDefinitionVersion"
-  MEMBER DecisionEvaluationInstanceKey = 5 json="decisionEvaluationInstanceKey"
-  MEMBER DecisionEvaluationKey = 6 json="decisionEvaluationKey"
-  MEMBER ElementInstanceKey = 7 json="elementInstanceKey"
-  MEMBER EvaluationDate = 8 json="evaluationDate"
-  MEMBER EvaluationFailure = 9 json="evaluationFailure"
-  MEMBER ProcessDefinitionKey = 10 json="processDefinitionKey"
-  MEMBER ProcessInstanceKey = 11 json="processInstanceKey"
-  MEMBER RootDecisionDefinitionKey = 12 json="rootDecisionDefinitionKey"
-  MEMBER State = 13 json="state"
-  MEMBER TenantId = 14 json="tenantId"
+  MEMBER BusinessId = 0 json="businessId"
+  MEMBER DecisionDefinitionId = 1 json="decisionDefinitionId"
+  MEMBER DecisionDefinitionKey = 2 json="decisionDefinitionKey"
+  MEMBER DecisionDefinitionName = 3 json="decisionDefinitionName"
+  MEMBER DecisionDefinitionType = 4 json="decisionDefinitionType"
+  MEMBER DecisionDefinitionVersion = 5 json="decisionDefinitionVersion"
+  MEMBER DecisionEvaluationInstanceKey = 6 json="decisionEvaluationInstanceKey"
+  MEMBER DecisionEvaluationKey = 7 json="decisionEvaluationKey"
+  MEMBER ElementInstanceKey = 8 json="elementInstanceKey"
+  MEMBER EvaluationDate = 9 json="evaluationDate"
+  MEMBER EvaluationFailure = 10 json="evaluationFailure"
+  MEMBER ProcessDefinitionKey = 11 json="processDefinitionKey"
+  MEMBER ProcessInstanceKey = 12 json="processInstanceKey"
+  MEMBER RootDecisionDefinitionKey = 13 json="rootDecisionDefinitionKey"
+  MEMBER State = 14 json="state"
+  MEMBER TenantId = 15 json="tenantId"
 
 TYPE Camunda.Orchestration.Sdk.DecisionInstanceStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter

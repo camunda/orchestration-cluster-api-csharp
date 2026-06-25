@@ -23732,6 +23732,7 @@
             "description": "The field to sort by.",
             "type": "string",
             "enum": [
+              "businessId",
               "decisionDefinitionId",
               "decisionDefinitionKey",
               "decisionDefinitionName",
@@ -23867,6 +23868,14 @@
             ],
             "description": "The key of the process instance."
           },
+          "businessId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "The business ID of the owning process instance the decision instance belongs to. This only works for decision instances created with 8.10 and onwards. Decision instances from prior versions and standalone evaluations don't contain this data and cannot be found.\n"
+          },
           "decisionDefinitionKey": {
             "description": "The key of the decision.",
             "allOf": [
@@ -23964,6 +23973,10 @@
           {
             "propertyName": "decisionRequirementsKey",
             "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.10"
           }
         ]
       },
@@ -24000,6 +24013,7 @@
       "DecisionInstanceResult": {
         "type": "object",
         "required": [
+          "businessId",
           "decisionDefinitionId",
           "decisionDefinitionKey",
           "decisionDefinitionName",
@@ -24019,6 +24033,15 @@
           "tenantId"
         ],
         "properties": {
+          "businessId": {
+            "description": "The business ID of the owning process instance, inherited when the decision instance was\nevaluated. This is `null` for decision instances created before version 8.10, for\nstandalone decision evaluations, and for decision instances whose owning process instance\nhas no business ID.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessId"
+              }
+            ]
+          },
           "decisionDefinitionId": {
             "allOf": [
               {
@@ -24129,6 +24152,10 @@
           }
         },
         "x-properties-added-in-version": [
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.10"
+          },
           {
             "propertyName": "decisionDefinitionId",
             "addedInVersion": "8.6"

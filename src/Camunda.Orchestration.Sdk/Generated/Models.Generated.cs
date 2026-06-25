@@ -277,6 +277,8 @@ public enum DecisionDefinitionSearchQuerySortRequestField
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum DecisionInstanceSearchQuerySortRequestField
 {
+    [JsonPropertyName("businessId")]
+    BusinessId,
     [JsonPropertyName("decisionDefinitionId")]
     DecisionDefinitionId,
     [JsonPropertyName("decisionDefinitionKey")]
@@ -10265,6 +10267,13 @@ public sealed class DecisionInstanceFilter
     public ProcessInstanceKey? ProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The business ID of the owning process instance the decision instance belongs to. This only works for decision instances created with 8.10 and onwards. Decision instances from prior versions and standalone evaluations don&apos;t contain this data and cannot be found.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
+
+    /// <summary>
     /// The key of the decision.
     /// </summary>
     [JsonPropertyName("decisionDefinitionKey")]
@@ -10295,6 +10304,16 @@ public sealed class DecisionInstanceFilter
 /// </summary>
 public sealed class DecisionInstanceGetQueryResult
 {
+    /// <summary>
+    /// The business ID of the owning process instance, inherited when the decision instance was
+    /// evaluated. This is `null` for decision instances created before version 8.10, for
+    /// standalone decision evaluations, and for decision instances whose owning process instance
+    /// has no business ID.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
     /// <summary>
     /// The ID of the DMN decision.
     /// </summary>
@@ -10452,6 +10471,16 @@ public readonly record struct DecisionInstanceKey : global::Camunda.Orchestratio
 /// </summary>
 public sealed class DecisionInstanceResult
 {
+    /// <summary>
+    /// The business ID of the owning process instance, inherited when the decision instance was
+    /// evaluated. This is `null` for decision instances created before version 8.10, for
+    /// standalone decision evaluations, and for decision instances whose owning process instance
+    /// has no business ID.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
     /// <summary>
     /// The ID of the DMN decision.
     /// </summary>
