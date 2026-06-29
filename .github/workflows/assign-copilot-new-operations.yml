@@ -1,0 +1,99 @@
+name: Auto-assign Copilot to coverage issues
+
+# The daily "new operations" check (camunda/sdk-infra) files issues labeled
+# `new-operations` when the upstream API gains an operation that lacks example
+# coverage. This workflow assigns the Copilot coding agent to such issues so it
+# opens a PR adding the operation-map entry + example, following the repo's
+# example conventions (see .github/prompts/add-missing-examples.prompt.md if
+# that prompt is present).
+#
+# Prerequisite: the Copilot coding agent must be enabled for the repo/org
+# (Settings -> Copilot -> Coding agent). If the default GITHUB_TOKEN lacks
+# permission to assign Copilot in your org, set a `COPILOT_ASSIGN_TOKEN` repo
+# secret (a PAT / app token with `issues: write`); the workflow prefers it.
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  issues: write
+
+jobs:
+  assign-copilot:
+    # Run only when `new-operations` is the label that was just added, or when
+    # an issue is opened already carrying it. This avoids re-triggering (and
+    # re-commenting/re-assigning) every time some other label is added later.
+    if: >-
+      (github.event.action == 'labeled' && github.event.label.name == 'new-operations') ||
+      (github.event.action == 'opened' && contains(github.event.issue.labels.*.name, 'new-operations'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign the Copilot coding agent
+        env:
+          GH_TOKEN: ${{ secrets.COPILOT_ASSIGN_TOKEN || secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          NAME: ${{ github.event.repository.name }}
+          ISSUE_ID: ${{ github.event.issue.node_id }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+
+          # The Copilot coding agent is an assignable "Bot" actor only when it is
+          # enabled for the repo/org. Match its known login(s); `first // empty`
+          # yields an empty string (never "null") when it is absent.
+          bot_id="$(gh api graphql -f query='
+            query($owner: String!, $name: String!) {
+              repository(owner: $owner, name: $name) {
+                suggestedActors(capabilities: [CAN_BE_ASSIGNED], first: 100) {
+                  nodes { login __typename ... on Bot { id } }
+                }
+              }
+            }' -f owner="$OWNER" -f name="$NAME" \
+            --jq '[.data.repository.suggestedActors.nodes[]
+                     | select(.__typename == "Bot")
+                     | select((.login | ascii_downcase) == "copilot-swe-agent"
+                              or (.login | ascii_downcase) == "copilot")
+                     | .id] | first // empty')"
+
+          if [ -z "${bot_id}" ]; then
+            echo "::warning::Copilot coding agent is not an available assignee for ${OWNER}/${NAME}. Enable it (Settings -> Copilot -> Coding agent) or assign Copilot manually."
+            gh issue comment "${ISSUE_NUMBER}" --body "🤖 Tried to auto-assign the Copilot coding agent, but it isn't available as an assignee for this repo yet. Enable the Copilot coding agent (or assign Copilot to this issue manually) to have a PR opened automatically." \
+              || echo "::warning::Could not comment on issue #${ISSUE_NUMBER}."
+            exit 0
+          fi
+
+          # Assigning the Copilot bot requires the actor API
+          # (replaceActorsForAssignable) — addAssigneesToAssignable does not
+          # accept a Bot actor. Since that mutation sets the *entire* actor list,
+          # union the current assignees with Copilot so existing (human)
+          # assignees are preserved rather than clobbered.
+          existing_ids="$(gh api graphql -f query='
+            query($id: ID!) {
+              node(id: $id) {
+                ... on Issue { assignees(first: 50) { nodes { id } } }
+              }
+            }' -f id="${ISSUE_ID}" \
+            --jq '.data.node.assignees.nodes[].id' || true)"
+
+          actor_ids_json="$(printf '%s\n%s\n' "${existing_ids}" "${bot_id}" \
+            | sed '/^[[:space:]]*$/d' | sort -u | jq -R . | jq -s -c .)"
+
+          # actorIds is inlined (values are trusted GitHub node IDs) because gh
+          # cannot bind a list-typed GraphQL variable. Assignment can fail when
+          # the token isn't permitted to assign bot actors in the org; treat
+          # that as a warning + no-op rather than a hard (red) failure.
+          if gh api graphql -f query="
+            mutation {
+              replaceActorsForAssignable(input: { assignableId: \"${ISSUE_ID}\", actorIds: ${actor_ids_json} }) {
+                assignable { ... on Issue { number } }
+              }
+            }"; then
+            echo "Assigned the Copilot coding agent to issue #${ISSUE_NUMBER}."
+          else
+            echo "::warning::Could not assign the Copilot coding agent to issue #${ISSUE_NUMBER}. The token may lack permission to assign bot actors — set a COPILOT_ASSIGN_TOKEN secret (PAT/app token with issues:write), or assign Copilot manually."
+            gh issue comment "${ISSUE_NUMBER}" --body "🤖 Couldn't auto-assign the Copilot coding agent — the Actions token may not be permitted to assign bot actors. Set a \`COPILOT_ASSIGN_TOKEN\` secret (PAT/app token with \`issues: write\`) or assign Copilot to this issue manually." \
+              || echo "::warning::Could not comment on issue #${ISSUE_NUMBER}."
+            exit 0
+          fi
