@@ -7717,6 +7717,8 @@ public enum BatchOperationTypeEnum
     MODIFYPROCESSINSTANCE,
     [JsonPropertyName("RESOLVE_INCIDENT")]
     RESOLVEINCIDENT,
+    [JsonPropertyName("UPDATE_JOB")]
+    UPDATEJOB,
     [JsonPropertyName("UPDATE_VARIABLE")]
     UPDATEVARIABLE,
 }
@@ -15900,6 +15902,34 @@ public sealed class JobActivationResult
     /// </summary>
     [JsonPropertyName("jobs")]
     public List<ActivatedJobResult> Jobs { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The filter and changeset for a batch job update operation. The filter defines which jobs are updated; the changeset defines what to update. At least one changeset field must be non-null.
+/// 
+/// </summary>
+public sealed class JobBatchUpdateRequest
+{
+    /// <summary>
+    /// The job filter. At least one dimension must be set.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public JobFilter Filter { get; set; } = null!;
+
+    /// <summary>
+    /// The fields to update. At least one field must be non-null.
+    /// </summary>
+    [JsonPropertyName("changeset")]
+    public JobChangeset Changeset { get; set; } = null!;
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
 
 }
 

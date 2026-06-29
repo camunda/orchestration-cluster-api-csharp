@@ -8754,6 +8754,18 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Update jobs (batch)
+    /// Creates a batch operation to update jobs matching the given filter. At least one changeset field must be non-null. This is done asynchronously; the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+    /// 
+    /// </summary>
+    /// <remarks>Operation: updateJobsBatchOperation</remarks>
+    public async Task<BatchOperationCreatedResult> UpdateJobsBatchOperationAsync(JobBatchUpdateRequest body, CancellationToken ct = default)
+    {
+        var path = $"/jobs/batch-update";
+        return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "updateJobsBatchOperation", false, ct);
+    }
+
+    /// <summary>
     /// Update mapping rule
     /// Update a mapping rule.
     /// 
