@@ -1212,6 +1212,15 @@ public sealed class ActivatedJobResult
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
+    /// The business ID of the owning process instance, inherited when the job was created.
+    /// This is `null` for jobs created before version 8.10 and for jobs whose owning process
+    /// instance has no business ID.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
+    /// <summary>
     /// The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.
     /// 
     /// </summary>
@@ -17176,6 +17185,15 @@ public sealed class JobSearchResult
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The business ID of the owning process instance, inherited when the job was created.
+    /// This is `null` for jobs created before version 8.10 and for jobs whose owning process
+    /// instance has no business ID.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
 
     /// <summary>
     /// The amount of retries left to this job.

@@ -10,5 +10,5 @@ public partial class CamundaClient
     /// <summary>
     /// SHA-256 digest of the OpenAPI spec this SDK was generated from.
     /// </summary>
-    public const string SpecHash = "sha256:9d03097114dc146e0d6358fa42ec4032548cf62b4b4af3e8bebc558c9188894e";
+    public const string SpecHash = "sha256:0664b8f0c7c9f1fff9e2378f2bd78c8d1b0282f7f177cfc1834c63317af1c10e";
 }
