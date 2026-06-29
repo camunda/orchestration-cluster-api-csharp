@@ -11119,6 +11119,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.BatchOperationTypeEnum.RESOLVEINCIDENT
   fullName: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.RESOLVEINCIDENT
   nameWithType: BatchOperationTypeEnum.RESOLVEINCIDENT
+- uid: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.UPDATEJOB
+  name: UPDATEJOB
+  href: api/Camunda.Orchestration.Sdk.BatchOperationTypeEnum.html#Camunda_Orchestration_Sdk_BatchOperationTypeEnum_UPDATEJOB
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationTypeEnum.UPDATEJOB
+  fullName: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.UPDATEJOB
+  nameWithType: BatchOperationTypeEnum.UPDATEJOB
 - uid: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.UPDATEVARIABLE
   name: UPDATEVARIABLE
   href: api/Camunda.Orchestration.Sdk.BatchOperationTypeEnum.html#Camunda_Orchestration_Sdk_BatchOperationTypeEnum_UPDATEVARIABLE
@@ -14269,6 +14275,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.UpdateJobAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateJobAsync
   nameWithType: CamundaClient.UpdateJobAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateJobsBatchOperationAsync(Camunda.Orchestration.Sdk.JobBatchUpdateRequest,System.Threading.CancellationToken)
+  name: UpdateJobsBatchOperationAsync(JobBatchUpdateRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.UpdateJobsBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateJobsBatchOperationAsync_Camunda_Orchestration_Sdk_JobBatchUpdateRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.UpdateJobsBatchOperationAsync(Camunda.Orchestration.Sdk.JobBatchUpdateRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateJobsBatchOperationAsync(Camunda.Orchestration.Sdk.JobBatchUpdateRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.UpdateJobsBatchOperationAsync(JobBatchUpdateRequest, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateJobsBatchOperationAsync*
+  name: UpdateJobsBatchOperationAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.UpdateJobsBatchOperationAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.UpdateJobsBatchOperationAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.UpdateJobsBatchOperationAsync
+  nameWithType: CamundaClient.UpdateJobsBatchOperationAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateMappingRuleAsync(Camunda.Orchestration.Sdk.MappingRuleId,Camunda.Orchestration.Sdk.MappingRuleUpdateRequest,System.Threading.CancellationToken)
   name: UpdateMappingRuleAsync(MappingRuleId, MappingRuleUpdateRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.UpdateMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateMappingRuleAsync_Camunda_Orchestration_Sdk_MappingRuleId_Camunda_Orchestration_Sdk_MappingRuleUpdateRequest_System_Threading_CancellationToken_
@@ -28399,6 +28417,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobActivationResult.Jobs
   fullName: Camunda.Orchestration.Sdk.JobActivationResult.Jobs
   nameWithType: JobActivationResult.Jobs
+- uid: Camunda.Orchestration.Sdk.JobBatchUpdateRequest
+  name: JobBatchUpdateRequest
+  href: api/Camunda.Orchestration.Sdk.JobBatchUpdateRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.JobBatchUpdateRequest
+  fullName: Camunda.Orchestration.Sdk.JobBatchUpdateRequest
+  nameWithType: JobBatchUpdateRequest
+- uid: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Changeset
+  name: Changeset
+  href: api/Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Changeset.html#Camunda_Orchestration_Sdk_JobBatchUpdateRequest_Changeset
+  commentId: P:Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Changeset
+  fullName: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Changeset
+  nameWithType: JobBatchUpdateRequest.Changeset
+- uid: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Changeset*
+  name: Changeset
+  href: api/Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Changeset.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Changeset
+  fullName: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Changeset
+  nameWithType: JobBatchUpdateRequest.Changeset
+- uid: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Filter.html#Camunda_Orchestration_Sdk_JobBatchUpdateRequest_Filter
+  commentId: P:Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Filter
+  nameWithType: JobBatchUpdateRequest.Filter
+- uid: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.Filter
+  nameWithType: JobBatchUpdateRequest.Filter
+- uid: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.OperationReference
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.JobBatchUpdateRequest.OperationReference.html#Camunda_Orchestration_Sdk_JobBatchUpdateRequest_OperationReference
+  commentId: P:Camunda.Orchestration.Sdk.JobBatchUpdateRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.OperationReference
+  nameWithType: JobBatchUpdateRequest.OperationReference
+- uid: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.OperationReference*
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.JobBatchUpdateRequest.OperationReference.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobBatchUpdateRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.JobBatchUpdateRequest.OperationReference
+  nameWithType: JobBatchUpdateRequest.OperationReference
 - uid: Camunda.Orchestration.Sdk.JobChangeset
   name: JobChangeset
   href: api/Camunda.Orchestration.Sdk.JobChangeset.html
