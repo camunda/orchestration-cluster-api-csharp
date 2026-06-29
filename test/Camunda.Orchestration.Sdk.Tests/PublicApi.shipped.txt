@@ -1457,7 +1457,8 @@ TYPE Camunda.Orchestration.Sdk.BatchOperationTypeEnum : enum interfaces=[System.
   MEMBER MIGRATEPROCESSINSTANCE = 6 json="MIGRATE_PROCESS_INSTANCE"
   MEMBER MODIFYPROCESSINSTANCE = 7 json="MODIFY_PROCESS_INSTANCE"
   MEMBER RESOLVEINCIDENT = 8 json="RESOLVE_INCIDENT"
-  MEMBER UPDATEVARIABLE = 9 json="UPDATE_VARIABLE"
+  MEMBER UPDATEJOB = 9 json="UPDATE_JOB"
+  MEMBER UPDATEVARIABLE = 10 json="UPDATE_VARIABLE"
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.BatchOperationTypeExactMatch>]
   PROP System.String Value { get; }
@@ -1603,6 +1604,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceModificationBatchOperationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceIncidentResolutionBatchOperationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> UpdateJobsBatchOperationAsync(Camunda.Orchestration.Sdk.JobBatchUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationItemSearchQueryResult> SearchBatchOperationItemsAsync(Camunda.Orchestration.Sdk.BatchOperationItemSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationItemSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationResponse> GetBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult> SearchBatchOperationsAsync(Camunda.Orchestration.Sdk.BatchOperationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -3649,6 +3651,12 @@ TYPE Camunda.Orchestration.Sdk.JobActivationRequest : sealed class interfaces=[C
 TYPE Camunda.Orchestration.Sdk.JobActivationResult : sealed class
   CTOR ()
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ActivatedJobResult> Jobs { get; set; } [JsonPropertyName("jobs")]
+
+TYPE Camunda.Orchestration.Sdk.JobBatchUpdateRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.JobChangeset Changeset { get; set; } [JsonPropertyName("changeset")]
+  PROP Camunda.Orchestration.Sdk.JobFilter Filter { get; set; } [JsonPropertyName("filter")]
+  PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
 
 TYPE Camunda.Orchestration.Sdk.JobChangeset : sealed class
   CTOR ()

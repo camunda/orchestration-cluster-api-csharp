@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:58b138a72a997a92677d7303929b2ff3acd80d14726313fd87eb6e9625d38bd4",
+  "specHash": "sha256:9d03097114dc146e0d6358fa42ec4032548cf62b4b4af3e8bebc558c9188894e",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -5902,6 +5902,35 @@
       }
     },
     {
+      "operationId": "updateJobsBatchOperation",
+      "path": "/jobs/batch-update",
+      "method": "post",
+      "tags": [
+        "Job"
+      ],
+      "summary": "Update jobs (batch)",
+      "description": "Creates a batch operation to update jobs matching the given filter. At least one changeset field must be non-null. This is done asynchronously; the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "jobs.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "JobBatchUpdateRequest",
+      "successResponseSchemaRef": "BatchOperationCreatedResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "getGlobalJobStatistics",
       "path": "/jobs/statistics/global",
       "method": "get",
@@ -9648,7 +9677,7 @@
   "integrity": {
     "totalSemanticKeys": 41,
     "totalUnions": 64,
-    "totalOperations": 193,
+    "totalOperations": 194,
     "totalEventuallyConsistent": 90,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23

@@ -1953,6 +1953,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateJobsBatchOperationAsync(Camunda.Orchestration.Sdk.JobBatchUpdateRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/BatchOperation.cs#UpdateJobsBatchOperation)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.UpdateMappingRuleAsync(System.String,Camunda.Orchestration.Sdk.MappingRuleUpdateRequest,System.Threading.CancellationToken)
 example:
 - *content
