@@ -36,6 +36,10 @@ internal static class CSharpClientGenerator
 
         Directory.CreateDirectory(outputDir);
 
+        // Load the stable enum-value manifest so adding spec members never shifts
+        // the numeric value of existing enum members (see EnumValueRegistry).
+        EnumValueRegistry.LoadFrom(Path.Combine(outputDir, "EnumValues.json"));
+
         // Load operation → example map (optional — generation succeeds without it)
         var examplesDir = Path.GetFullPath(Path.Combine(outputDir, "..", "..", "..", "examples"));
         var operationExamples = LoadOperationExamples(examplesDir);
@@ -76,6 +80,9 @@ internal static class CSharpClientGenerator
         SafeEmit.ScanGeneratedSource(specHashPath, specHashCode);
         File.WriteAllText(specHashPath, specHashCode);
         Console.WriteLine($"[generator] Generated SpecHash.Generated.cs (specHash: {metadata.SpecHash})");
+
+        // Persist any newly-assigned enum values for stability on the next run.
+        EnumValueRegistry.Save();
     }
 
     private static List<OperationMeta> CollectOperations(OpenApiDocument doc, SpecMetadata metadata, Dictionary<string, IOpenApiSchema> inlineSchemas)
@@ -801,13 +808,14 @@ internal static class CSharpClientGenerator
                 foreach (var e in EnumStringValues(schema))
                 {
                     var enumName = ToPascalCase(e);
+                    var enumValue = EnumValueRegistry.Assign(typeName, e);
                     var deprecatedVersion = metadata.GetDeprecatedEnumMemberVersion(name, e);
                     if (deprecatedVersion != null)
                     {
                         sb.AppendLine($"    [Obsolete(\"Deprecated since {SafeEmit.SafeCSharpStringLiteral(deprecatedVersion)}\")]");
                     }
                     sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(e)}\")]");
-                    sb.AppendLine($"    {enumName},");
+                    sb.AppendLine($"    {enumName} = {enumValue},");
                 }
                 sb.AppendLine("}");
                 sb.AppendLine();
@@ -2338,8 +2346,9 @@ internal static class CSharpClientGenerator
         foreach (var e in EnumStringValues(propSchema))
         {
             var enumName = ToPascalCase(e);
+            var enumValue = EnumValueRegistry.Assign(enumTypeName, e);
             sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(e)}\")]");
-            sb.AppendLine($"    {enumName},");
+            sb.AppendLine($"    {enumName} = {enumValue},");
         }
         sb.AppendLine("}");
         sb.AppendLine();
