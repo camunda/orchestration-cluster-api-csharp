@@ -1,3 +1,16 @@
+# [10.0.0-alpha.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.1...v10.0.0-alpha.2) (2026-06-29)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([28fb16b](https://github.com/camunda/orchestration-cluster-api-csharp/commit/28fb16b6ed3d59c1979ead8b3efe0b081adfb02d))
+
+
+### Features
+
+* add updateJobsBatchOperation endpoint ([c52fcec](https://github.com/camunda/orchestration-cluster-api-csharp/commit/c52fcecc63fda6cd1d41e798b62865dada0c71a9))
+* add updateJobsBatchOperation endpoint and example coverage ([9abc999](https://github.com/camunda/orchestration-cluster-api-csharp/commit/9abc999baadad9e93b093c2427797fb2ff517076))
+
 # [10.0.0-alpha.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.0...v10.0.0-alpha.1) (2026-06-25)
 
 
