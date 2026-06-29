@@ -29791,6 +29791,7 @@
         ],
         "type": "object",
         "required": [
+          "businessId",
           "customHeaders",
           "deadline",
           "elementId",
@@ -29935,6 +29936,15 @@
               }
             ]
           },
+          "businessId": {
+            "description": "The business ID of the owning process instance, inherited when the job was created.\nThis is `null` for jobs created before version 8.10 and for jobs whose owning process\ninstance has no business ID.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessId"
+              }
+            ]
+          },
           "priority": {
             "description": "The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.\n",
             "type": "integer",
@@ -29964,6 +29974,10 @@
           },
           {
             "propertyName": "priority",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "businessId",
             "addedInVersion": "8.10"
           }
         ]
@@ -30419,6 +30433,7 @@
       "JobSearchResult": {
         "type": "object",
         "required": [
+          "businessId",
           "creationTime",
           "customHeaders",
           "deadline",
@@ -30553,6 +30568,15 @@
               }
             ]
           },
+          "businessId": {
+            "description": "The business ID of the owning process instance, inherited when the job was created.\nThis is `null` for jobs created before version 8.10 and for jobs whose owning process\ninstance has no business ID.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessId"
+              }
+            ]
+          },
           "retries": {
             "description": "The amount of retries left to this job.",
             "type": "integer",
@@ -30605,6 +30629,10 @@
           },
           {
             "propertyName": "priority",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "businessId",
             "addedInVersion": "8.10"
           }
         ]

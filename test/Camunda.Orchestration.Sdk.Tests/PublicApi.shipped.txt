@@ -26,6 +26,7 @@ TYPE Camunda.Orchestration.Sdk.ActivatedJob : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ActivatedJobResult : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
@@ -3914,6 +3915,7 @@ TYPE Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField : enum interfaces=
 
 TYPE Camunda.Orchestration.Sdk.JobSearchResult : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.ElementId? ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
