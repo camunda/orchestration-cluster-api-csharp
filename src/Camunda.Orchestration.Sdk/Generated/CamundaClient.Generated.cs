@@ -8758,7 +8758,49 @@ public partial class CamundaClient
     /// Creates a batch operation to update jobs matching the given filter. At least one changeset field must be non-null. This is done asynchronously; the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
     /// </summary>
-    /// <remarks>Operation: updateJobsBatchOperation</remarks>
+    /// <remarks>
+    /// Operation: updateJobsBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateJobsBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.UpdateJobsBatchOperationAsync(
+    ///         new JobBatchUpdateRequest
+    ///         {
+    ///             Filter = new JobFilter
+    ///             {
+    ///                 Type = new StringFilterProperty { Eq = &quot;my-job-type&quot; },
+    ///             },
+    ///             Changeset = new JobChangeset { Retries = 3 },
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task UpdateJobsBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.UpdateJobsBatchOperationAsync(
+    ///         new JobBatchUpdateRequest
+    ///         {
+    ///             Filter = new JobFilter
+    ///             {
+    ///                 Type = new StringFilterProperty { Eq = &quot;my-job-type&quot; },
+    ///             },
+    ///             Changeset = new JobChangeset { Retries = 3 },
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<BatchOperationCreatedResult> UpdateJobsBatchOperationAsync(JobBatchUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/jobs/batch-update";
