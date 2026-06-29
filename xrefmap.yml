@@ -265,6 +265,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.ActivatedJobResult
   fullName: Camunda.Orchestration.Sdk.ActivatedJobResult
   nameWithType: ActivatedJobResult
+- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.BusinessId.html#Camunda_Orchestration_Sdk_ActivatedJobResult_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.ActivatedJobResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.BusinessId
+  nameWithType: ActivatedJobResult.BusinessId
+- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJobResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.BusinessId
+  nameWithType: ActivatedJobResult.BusinessId
 - uid: Camunda.Orchestration.Sdk.ActivatedJobResult.CustomHeaders
   name: CustomHeaders
   href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.CustomHeaders.html#Camunda_Orchestration_Sdk_ActivatedJobResult_CustomHeaders
@@ -30271,6 +30283,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.JobSearchResult
   fullName: Camunda.Orchestration.Sdk.JobSearchResult
   nameWithType: JobSearchResult
+- uid: Camunda.Orchestration.Sdk.JobSearchResult.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.JobSearchResult.BusinessId.html#Camunda_Orchestration_Sdk_JobSearchResult_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.JobSearchResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.JobSearchResult.BusinessId
+  nameWithType: JobSearchResult.BusinessId
+- uid: Camunda.Orchestration.Sdk.JobSearchResult.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.JobSearchResult.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobSearchResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.JobSearchResult.BusinessId
+  nameWithType: JobSearchResult.BusinessId
 - uid: Camunda.Orchestration.Sdk.JobSearchResult.CreationTime
   name: CreationTime
   href: api/Camunda.Orchestration.Sdk.JobSearchResult.CreationTime.html#Camunda_Orchestration_Sdk_JobSearchResult_CreationTime
