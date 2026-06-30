@@ -1,25 +1,23 @@
 name: Dependabot auto-merge
 
-# Auto-merge Dependabot patch/minor updates once CI passes, and keep Dependabot
-# PRs rebased on main — without branch protection, the repo "auto-merge"
-# setting, or any effect on human PRs / the release bot's pushes to main.
+# Auto-merge Dependabot patch/minor updates once CI passes — self-contained:
+# no branch protection, no repo "auto-merge" setting, no secrets, and no effect
+# on human PRs or the release bot's pushes to main.
 #
 # Jobs:
-#   1. mark   (pull_request_target): label Dependabot patch/minor PRs
+#   1. mark  (pull_request_target): label Dependabot patch/minor PRs
 #      `dependabot-automerge`. Major updates are left for manual review.
-#   2. merge  (workflow_run): when a CI run for a PR finishes, squash-merge the
-#      labelled Dependabot PR for that branch *iff* its current check rollup is
-#      fully green. (We re-check the rollup rather than trust the run's head_sha,
-#      which for pull_request runs can be a synthetic merge commit.)
-#   3. rebase (push to main + daily schedule): ask Dependabot to rebase its open
-#      PRs onto main. Dependabot's default rebase-strategy only rebases on
-#      conflicts, and merges done with GITHUB_TOKEN don't fire `push`, so the
-#      schedule backstops a moving main.
+#   2. merge (workflow_run): when a CI run for a PR finishes, squash-merge the
+#      labelled Dependabot PR for that branch iff its current check rollup is
+#      fully green.
 #
-# Merges use the default GITHUB_TOKEN, whose pushes don't trigger other
-# `on: push` workflows. That's fine here — Dependabot commits are `chore(deps)`
-# (semantic-release produces no release) and dependency bumps don't change the
-# generated docs. Swap in a PAT/App token if you ever need those to fire.
+# Note on rebasing: we intentionally do NOT force-rebase PRs onto main here.
+# `@dependabot rebase` is rejected when sent by github-actions[bot] (Dependabot
+# only honors commands from accounts with push access), and updating the branch
+# via GITHUB_TOKEN would not re-trigger CI. Dependabot still rebases its PRs on
+# real conflicts. If you want main to auto-rebase + re-run CI, use GitHub's
+# native auto-merge with branch protection ("require branches up to date") and a
+# GitHub App token for the release pipeline's bypass.
 
 on:
   pull_request_target:
@@ -27,10 +25,6 @@ on:
   workflow_run:
     workflows: ["PR & Branch CI"]
     types: [completed]
-  push:
-    branches: [main]
-  schedule:
-    - cron: "0 6 * * *"
 
 # Least privilege: default read-only; each job elevates only what it needs.
 permissions:
@@ -102,9 +96,9 @@ jobs:
           fi
 
           # Trust the PR's *current* check rollup rather than the triggering
-          # run's head_sha (which can be a synthetic merge commit, and only
-          # reflects one workflow). Merge only when every check has a passing
-          # conclusion and none are still pending.
+          # run's head_sha (which for pull_request runs can be a synthetic merge
+          # commit, and reflects only one workflow). Merge only when every check
+          # has a passing conclusion and none are still pending.
           all_green="$(gh pr view "${pr}" --json statusCheckRollup \
             --jq '[.statusCheckRollup[] | (.conclusion // .state // "PENDING")] as $s
                    | (($s | length) > 0)
@@ -120,30 +114,3 @@ jobs:
             echo "::warning::Could not merge Dependabot PR #${pr} (it may be blocked by reviews, conflicts, or branch protection). Leaving it for manual handling."
             exit 0
           fi
-
-  rebase:
-    if: github.event_name == 'push' || github.event_name == 'schedule'
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write   # comment @dependabot rebase
-    steps:
-      - name: Ask Dependabot to rebase its open PRs onto main
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-
-          # Comment @dependabot rebase on every open Dependabot PR targeting
-          # main. Dependabot no-ops when a PR is already up to date, so there's
-          # no need to compute "behind" ourselves (which would require URL-
-          # encoding slashy branch refs in the compare API).
-          gh pr list --state open --base main \
-            --json number,author \
-            --jq '.[] | select(.author.login == "app/dependabot" or .author.login == "dependabot[bot]") | .number' \
-          | while read -r num; do
-              [ -z "${num:-}" ] && continue
-              echo "Requesting rebase of Dependabot PR #${num}."
-              gh pr comment "${num}" --body "@dependabot rebase" \
-                || echo "::warning::Could not comment @dependabot rebase on #${num}."
-            done
