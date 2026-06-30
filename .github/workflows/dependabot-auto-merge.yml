@@ -1,0 +1,149 @@
+name: Dependabot auto-merge
+
+# Auto-merge Dependabot patch/minor updates once CI passes, and keep Dependabot
+# PRs rebased on main — without branch protection, the repo "auto-merge"
+# setting, or any effect on human PRs / the release bot's pushes to main.
+#
+# Jobs:
+#   1. mark   (pull_request_target): label Dependabot patch/minor PRs
+#      `dependabot-automerge`. Major updates are left for manual review.
+#   2. merge  (workflow_run): when a CI run for a PR finishes, squash-merge the
+#      labelled Dependabot PR for that branch *iff* its current check rollup is
+#      fully green. (We re-check the rollup rather than trust the run's head_sha,
+#      which for pull_request runs can be a synthetic merge commit.)
+#   3. rebase (push to main + daily schedule): ask Dependabot to rebase its open
+#      PRs onto main. Dependabot's default rebase-strategy only rebases on
+#      conflicts, and merges done with GITHUB_TOKEN don't fire `push`, so the
+#      schedule backstops a moving main.
+#
+# Merges use the default GITHUB_TOKEN, whose pushes don't trigger other
+# `on: push` workflows. That's fine here — Dependabot commits are `chore(deps)`
+# (semantic-release produces no release) and dependency bumps don't change the
+# generated docs. Swap in a PAT/App token if you ever need those to fire.
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+  workflow_run:
+    workflows: ["PR & Branch CI"]
+    types: [completed]
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * *"
+
+# Least privilege: default read-only; each job elevates only what it needs.
+permissions:
+  contents: read
+
+jobs:
+  mark:
+    if: >-
+      github.event_name == 'pull_request_target' &&
+      (github.event.pull_request.user.login == 'dependabot[bot]' ||
+       github.event.pull_request.user.login == 'app/dependabot')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write   # gh pr edit
+      issues: write          # create/apply labels (labels are the Issues API)
+    steps:
+      - name: Fetch Dependabot metadata
+        id: meta
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Label patch/minor updates as auto-merge candidates
+        if: >-
+          steps.meta.outputs.update-type == 'version-update:semver-patch' ||
+          steps.meta.outputs.update-type == 'version-update:semver-minor'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          gh label create dependabot-automerge \
+            --color 0e8a16 \
+            --description "Dependabot patch/minor update eligible for auto-merge once CI passes" \
+            2>/dev/null || true
+          gh pr edit "$PR" --add-label dependabot-automerge
+
+  merge:
+    if: >-
+      github.event_name == 'workflow_run' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # squash-merge + delete branch
+      pull-requests: write   # merge the PR
+    steps:
+      - name: Merge eligible Dependabot PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          set -euo pipefail
+
+          # Find an open, labelled Dependabot PR for this run's head branch.
+          # gh may report the author as "app/dependabot" or "dependabot[bot]".
+          pr="$(gh pr list --head "$HEAD_BRANCH" --state open \
+            --json number,author,labels \
+            --jq '.[]
+                    | select(.author.login == "app/dependabot" or .author.login == "dependabot[bot]")
+                    | select(any(.labels[]; .name == "dependabot-automerge"))
+                    | .number' | head -n1)"
+
+          if [ -z "${pr}" ]; then
+            echo "No eligible Dependabot PR for ${HEAD_BRANCH}; nothing to merge."
+            exit 0
+          fi
+
+          # Trust the PR's *current* check rollup rather than the triggering
+          # run's head_sha (which can be a synthetic merge commit, and only
+          # reflects one workflow). Merge only when every check has a passing
+          # conclusion and none are still pending.
+          all_green="$(gh pr view "${pr}" --json statusCheckRollup \
+            --jq '[.statusCheckRollup[] | (.conclusion // .state // "PENDING")] as $s
+                   | (($s | length) > 0)
+                     and ($s | all(. as $c | ["SUCCESS","SKIPPED","NEUTRAL"] | index($c) != null))')"
+
+          if [ "${all_green}" != "true" ]; then
+            echo "PR #${pr} does not have an all-green check rollup yet; skipping."
+            exit 0
+          fi
+
+          echo "All checks green for Dependabot PR #${pr}; squash-merging."
+          if ! gh pr merge "${pr}" --squash --delete-branch; then
+            echo "::warning::Could not merge Dependabot PR #${pr} (it may be blocked by reviews, conflicts, or branch protection). Leaving it for manual handling."
+            exit 0
+          fi
+
+  rebase:
+    if: github.event_name == 'push' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write   # comment @dependabot rebase
+    steps:
+      - name: Ask Dependabot to rebase its open PRs onto main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # Comment @dependabot rebase on every open Dependabot PR targeting
+          # main. Dependabot no-ops when a PR is already up to date, so there's
+          # no need to compute "behind" ourselves (which would require URL-
+          # encoding slashy branch refs in the compare API).
+          gh pr list --state open --base main \
+            --json number,author \
+            --jq '.[] | select(.author.login == "app/dependabot" or .author.login == "dependabot[bot]") | .number' \
+          | while read -r num; do
+              [ -z "${num:-}" ] && continue
+              echo "Requesting rebase of Dependabot PR #${num}."
+              gh pr comment "${num}" --body "@dependabot rebase" \
+                || echo "::warning::Could not comment @dependabot rebase on #${num}."
+            done
