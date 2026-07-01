@@ -993,6 +993,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/ProcessInstance.cs#GetProcessInstanceWaitStateStatistics)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,System.Threading.CancellationToken)
 example:
 - *content
