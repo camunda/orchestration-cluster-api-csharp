@@ -1,3 +1,10 @@
+# [10.0.0-alpha.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.2...v10.0.0-alpha.3) (2026-07-01)
+
+
+### Features
+
+* add example coverage for getProcessInstanceWaitStateStatistics ([5bf77d3](https://github.com/camunda/orchestration-cluster-api-csharp/commit/5bf77d321080fe260ce2d43a0e330bd322cfbb68)), closes [#291](https://github.com/camunda/orchestration-cluster-api-csharp/issues/291)
+
 # [10.0.0-alpha.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.1...v10.0.0-alpha.2) (2026-06-29)
 
 
