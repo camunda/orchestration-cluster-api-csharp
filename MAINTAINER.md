@@ -301,9 +301,9 @@ The release config (`release.config.cjs`) uses a dynamic branch model from the s
 
 This avoids version conflicts when semantic-release reconciles version history across branches. The published versions (alpha on main, stable on stable/N) are identical to a static model.
 
-### Dependabot
+### Renovate
 
-Dependabot is configured in [.github/dependabot.yml](.github/dependabot.yml) for NuGet, npm, and GitHub Actions updates. When creating a new `stable/*` branch, add a Dependabot entry for it — Dependabot does not support wildcard branch patterns, so each stable branch must be listed explicitly.
+Dependency updates are handled by [Mend Renovate](https://docs.renovatebot.com/), configured in [.github/renovate.json](.github/renovate.json) (NuGet, npm, and GitHub Actions are auto-detected). Minor updates auto-merge once CI is green; stable branches receive patch updates only. When creating a new `stable/*` branch, add it to `baseBranchPatterns` in `renovate.json` (and mirror the patch-only `packageRules` entry for it).
 
 ### Version bumping
 
@@ -385,7 +385,7 @@ When a new Camunda server minor ships (e.g. 8.10), the SDK bumps its major (e.g.
    ```
    This ensures main publishes `11.0.0-alpha.x` while `stable/10` publishes `10.0.x`.
 
-6. **Add Dependabot entries** for the new stable branch in `.github/dependabot.yml` (nuget, npm, github-actions). Dependabot does not support wildcard branch patterns.
+6. **Add the new stable branch to Renovate** in `.github/renovate.json`: append it to `baseBranchPatterns` and mirror the patch-only `packageRules` entry (and any package pins) for it.
 
 7. **Switch back to `main`** for ongoing development:
    ```bash
