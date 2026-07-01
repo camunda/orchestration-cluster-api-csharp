@@ -12955,6 +12955,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceStatisticsByErrorAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceStatisticsByErrorAsync
   nameWithType: CamundaClient.GetProcessInstanceStatisticsByErrorAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult},System.Threading.CancellationToken)
+  name: GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetProcessInstanceWaitStateStatisticsAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ProcessInstanceWaitStateStatisticsQueryResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult},System.Threading.CancellationToken)
+  name.vb: GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey, ConsistencyOptions(Of ProcessInstanceWaitStateStatisticsQueryResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions(Of Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey, ConsistencyOptions(Of ProcessInstanceWaitStateStatisticsQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync*
+  name: GetProcessInstanceWaitStateStatisticsAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetProcessInstanceWaitStateStatisticsAsync
+  nameWithType: CamundaClient.GetProcessInstanceWaitStateStatisticsAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ResourceResult},System.Threading.CancellationToken)
   name: GetResourceAsync(ResourceKey, ConsistencyOptions<ResourceResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetResourceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ResourceResult__System_Threading_CancellationToken_
@@ -39040,6 +39055,54 @@ references:
   fullName.vb: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.CType
   nameWithType: ProcessInstanceStateFilterProperty.implicit operator
   nameWithType.vb: ProcessInstanceStateFilterProperty.CType
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult
+  name: ProcessInstanceWaitStateStatisticsQueryResult
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult
+  nameWithType: ProcessInstanceWaitStateStatisticsQueryResult
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.Items.html#Camunda_Orchestration_Sdk_ProcessInstanceWaitStateStatisticsQueryResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.Items
+  nameWithType: ProcessInstanceWaitStateStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.Items
+  nameWithType: ProcessInstanceWaitStateStatisticsQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult
+  name: ProcessInstanceWaitStateStatisticsResult
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult
+  nameWithType: ProcessInstanceWaitStateStatisticsResult
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.ElementId
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.ElementId.html#Camunda_Orchestration_Sdk_ProcessInstanceWaitStateStatisticsResult_ElementId
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.ElementId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.ElementId
+  nameWithType: ProcessInstanceWaitStateStatisticsResult.ElementId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.ElementId*
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.ElementId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.ElementId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.ElementId
+  nameWithType: ProcessInstanceWaitStateStatisticsResult.ElementId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount
+  name: WaitingCount
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount.html#Camunda_Orchestration_Sdk_ProcessInstanceWaitStateStatisticsResult_WaitingCount
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount
+  nameWithType: ProcessInstanceWaitStateStatisticsResult.WaitingCount
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount*
+  name: WaitingCount
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount
+  nameWithType: ProcessInstanceWaitStateStatisticsResult.WaitingCount
 - uid: Camunda.Orchestration.Sdk.ResourceFilter
   name: ResourceFilter
   href: api/Camunda.Orchestration.Sdk.ResourceFilter.html
