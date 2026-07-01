@@ -1683,6 +1683,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceResult> GetProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(Camunda.Orchestration.Sdk.ProcessInstanceSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowsQueryResult> GetProcessInstanceSequenceFlowsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult> GetProcessInstanceWaitStateStatisticsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ResourceResult> GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ResourceResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ResourceSearchQueryResult> SearchResourcesAsync(Camunda.Orchestration.Sdk.ResourceSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ResourceSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleClientSearchResult> SearchClientsForRoleAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.RoleClientSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleClientSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -5093,6 +5094,15 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty : sealed class
   PROP Camunda.Orchestration.Sdk.ProcessInstanceStateEnum? Neq { get; set; } [JsonPropertyName("$neq")]
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceStateEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult> Items { get; set; } [JsonPropertyName("items")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP System.Int64 WaitingCount { get; set; } [JsonPropertyName("waitingCount")]
 
 TYPE Camunda.Orchestration.Sdk.ResourceFilter : sealed class
   CTOR ()

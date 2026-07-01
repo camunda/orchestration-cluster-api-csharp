@@ -157,6 +157,12 @@
           "Agent instance"
         ],
         "operationId": "createAgentInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -266,6 +272,12 @@
           "Agent instance"
         ],
         "operationId": "getAgentInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -374,6 +386,12 @@
           "Agent instance"
         ],
         "operationId": "updateAgentInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -477,6 +495,13 @@
           "Agent instance"
         ],
         "operationId": "searchAgentInstances",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -574,6 +599,12 @@
           "Agent instance"
         ],
         "operationId": "createAgentInstanceHistoryItem",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "summary": "Create agent instance history item",
         "description": "Appends a single history item to an agent instance's conversation history.\nThe created item has commitStatus PENDING until the job identified by jobLease\ncompletes successfully, at which point it transitions to COMMITTED. If the job\nfails or is superseded by a retry, the item is marked DISCARDED.\n",
         "x-semantic-establishes": {
@@ -704,6 +735,12 @@
           "Agent instance"
         ],
         "operationId": "searchAgentInstanceHistory",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "summary": "Search agent instance history",
         "description": "Searches the conversation history of an agent instance. Committed items\nare returned by default.\n",
         "parameters": [
@@ -806,6 +843,13 @@
           "Audit Log"
         ],
         "operationId": "searchAuditLogs",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "AUDIT_LOG",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -888,6 +932,12 @@
           "Audit Log"
         ],
         "operationId": "getAuditLog",
+        "x-required-permissions": [
+          {
+            "resourceType": "AUDIT_LOG",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -978,6 +1028,7 @@
           "Authentication"
         ],
         "operationId": "getAuthentication",
+        "x-required-permissions": [],
         "summary": "Get current user",
         "description": "Retrieves the current authenticated user.",
         "security": [
@@ -1044,6 +1095,12 @@
           "Authorization"
         ],
         "operationId": "createAuthorization",
+        "x-required-permissions": [
+          {
+            "resourceType": "AUTHORIZATION",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1155,6 +1212,13 @@
         "summary": "Search authorizations",
         "description": "Search for authorizations based on given criteria.",
         "operationId": "searchAuthorizations",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "AUTHORIZATION",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1241,6 +1305,12 @@
           "Authorization"
         ],
         "operationId": "updateAuthorization",
+        "x-required-permissions": [
+          {
+            "resourceType": "AUTHORIZATION",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1332,6 +1402,12 @@
           "Authorization"
         ],
         "operationId": "getAuthorization",
+        "x-required-permissions": [
+          {
+            "resourceType": "AUTHORIZATION",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1420,6 +1496,12 @@
           "Authorization"
         ],
         "operationId": "deleteAuthorization",
+        "x-required-permissions": [
+          {
+            "resourceType": "AUTHORIZATION",
+            "permissionType": "DELETE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1503,6 +1585,13 @@
           "Batch operation"
         ],
         "operationId": "searchBatchOperationItems",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "BATCH",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1565,6 +1654,13 @@
           "Batch operation"
         ],
         "operationId": "searchBatchOperations",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "BATCH",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1627,6 +1723,12 @@
           "Batch operation"
         ],
         "operationId": "getBatchOperation",
+        "x-required-permissions": [
+          {
+            "resourceType": "BATCH",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1700,6 +1802,12 @@
           "Batch operation"
         ],
         "operationId": "cancelBatchOperation",
+        "x-required-permissions": [
+          {
+            "resourceType": "BATCH",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1783,6 +1891,12 @@
           "Batch operation"
         ],
         "operationId": "resumeBatchOperation",
+        "x-required-permissions": [
+          {
+            "resourceType": "BATCH",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1876,6 +1990,12 @@
           "Batch operation"
         ],
         "operationId": "suspendBatchOperation",
+        "x-required-permissions": [
+          {
+            "resourceType": "BATCH",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1969,6 +2089,12 @@
           "Clock"
         ],
         "operationId": "pinClock",
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -2034,6 +2160,12 @@
           "Clock"
         ],
         "operationId": "resetClock",
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -2075,6 +2207,12 @@
     "/cluster-variables/global": {
       "post": {
         "operationId": "createGlobalClusterVariable",
+        "x-required-permissions": [
+          {
+            "resourceType": "CLUSTER_VARIABLE",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -2184,6 +2322,12 @@
     "/cluster-variables/global/{name}": {
       "get": {
         "operationId": "getGlobalClusterVariable",
+        "x-required-permissions": [
+          {
+            "resourceType": "CLUSTER_VARIABLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -2291,6 +2435,12 @@
       },
       "put": {
         "operationId": "updateGlobalClusterVariable",
+        "x-required-permissions": [
+          {
+            "resourceType": "CLUSTER_VARIABLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -2408,6 +2558,12 @@
       },
       "delete": {
         "operationId": "deleteGlobalClusterVariable",
+        "x-required-permissions": [
+          {
+            "resourceType": "CLUSTER_VARIABLE",
+            "permissionType": "DELETE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -2513,6 +2669,13 @@
           "Cluster Variable"
         ],
         "operationId": "searchClusterVariables",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "CLUSTER_VARIABLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -2609,6 +2772,12 @@
     "/cluster-variables/tenants/{tenantId}": {
       "post": {
         "operationId": "createTenantClusterVariable",
+        "x-required-permissions": [
+          {
+            "resourceType": "CLUSTER_VARIABLE",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -2753,6 +2922,12 @@
     "/cluster-variables/tenants/{tenantId}/{name}": {
       "get": {
         "operationId": "getTenantClusterVariable",
+        "x-required-permissions": [
+          {
+            "resourceType": "CLUSTER_VARIABLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -2873,6 +3048,12 @@
       },
       "put": {
         "operationId": "updateTenantClusterVariable",
+        "x-required-permissions": [
+          {
+            "resourceType": "CLUSTER_VARIABLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3003,6 +3184,12 @@
       },
       "delete": {
         "operationId": "deleteTenantClusterVariable",
+        "x-required-permissions": [
+          {
+            "resourceType": "CLUSTER_VARIABLE",
+            "permissionType": "DELETE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3122,6 +3309,12 @@
           "Conditional"
         ],
         "operationId": "evaluateConditionals",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "CREATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3243,6 +3436,13 @@
           "Message subscription"
         ],
         "operationId": "searchCorrelatedMessageSubscriptions",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3332,6 +3532,12 @@
           "Decision definition"
         ],
         "operationId": "evaluateDecision",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_DEFINITION",
+            "permissionType": "CREATE_DECISION_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3430,6 +3636,13 @@
           "Decision definition"
         ],
         "operationId": "searchDecisionDefinitions",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_DEFINITION",
+            "permissionType": "READ_DECISION_DEFINITION"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3519,6 +3732,12 @@
           "Decision definition"
         ],
         "operationId": "getDecisionDefinition",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_DEFINITION",
+            "permissionType": "READ_DECISION_DEFINITION"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3619,6 +3838,12 @@
           "Decision definition"
         ],
         "operationId": "getDecisionDefinitionXML",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_DEFINITION",
+            "permissionType": "READ_DECISION_DEFINITION"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3719,6 +3944,13 @@
           "Decision instance"
         ],
         "operationId": "searchDecisionInstances",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_DEFINITION",
+            "permissionType": "READ_DECISION_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3808,6 +4040,12 @@
           "Decision instance"
         ],
         "operationId": "getDecisionInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_DEFINITION",
+            "permissionType": "READ_DECISION_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -3908,6 +4146,12 @@
           "Decision instance"
         ],
         "operationId": "deleteDecisionInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_DEFINITION",
+            "permissionType": "DELETE_DECISION_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4011,6 +4255,20 @@
           "Decision instance"
         ],
         "operationId": "deleteDecisionInstancesBatchOperation",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE"
+              },
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4100,6 +4358,13 @@
           "Decision requirements"
         ],
         "operationId": "searchDecisionRequirements",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_REQUIREMENTS_DEFINITION",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4189,6 +4454,12 @@
           "Decision requirements"
         ],
         "operationId": "getDecisionRequirements",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_REQUIREMENTS_DEFINITION",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4289,6 +4560,12 @@
           "Decision requirements"
         ],
         "operationId": "getDecisionRequirementsXML",
+        "x-required-permissions": [
+          {
+            "resourceType": "DECISION_REQUIREMENTS_DEFINITION",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4389,6 +4666,12 @@
           "Resource"
         ],
         "operationId": "createDeployment",
+        "x-required-permissions": [
+          {
+            "resourceType": "RESOURCE",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4468,6 +4751,12 @@
           "Document"
         ],
         "operationId": "createDocument",
+        "x-required-permissions": [
+          {
+            "resourceType": "DOCUMENT",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4568,6 +4857,12 @@
           "Document"
         ],
         "operationId": "createDocuments",
+        "x-required-permissions": [
+          {
+            "resourceType": "DOCUMENT",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4691,6 +4986,12 @@
           "Document"
         ],
         "operationId": "getDocument",
+        "x-required-permissions": [
+          {
+            "resourceType": "DOCUMENT",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4771,6 +5072,12 @@
           "Document"
         ],
         "operationId": "deleteDocument",
+        "x-required-permissions": [
+          {
+            "resourceType": "DOCUMENT",
+            "permissionType": "DELETE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4836,6 +5143,12 @@
           "Document"
         ],
         "operationId": "createDocumentLink",
+        "x-required-permissions": [
+          {
+            "resourceType": "DOCUMENT",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -4917,6 +5230,12 @@
           "Ad-hoc sub-process"
         ],
         "operationId": "activateAdHocSubProcessActivities",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5030,6 +5349,13 @@
           "Element instance"
         ],
         "operationId": "searchElementInstanceWaitStates",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5119,6 +5445,13 @@
           "Element instance"
         ],
         "operationId": "searchElementInstances",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5208,6 +5541,12 @@
           "Element instance"
         ],
         "operationId": "getElementInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5308,6 +5647,12 @@
           "Element instance"
         ],
         "operationId": "searchElementInstanceIncidents",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5418,6 +5763,12 @@
           "Element instance"
         ],
         "operationId": "createElementInstanceVariables",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5511,6 +5862,16 @@
     "/expression/evaluation": {
       "post": {
         "operationId": "evaluateExpression",
+        "x-required-permissions": [
+          {
+            "resourceType": "EXPRESSION",
+            "permissionType": "EVALUATE"
+          },
+          {
+            "dynamic": true,
+            "note": "When the expression is evaluated in the scope of a process instance (scopeKey resolves to an instance), additionally requires READ_PROCESS_INSTANCE on PROCESS_DEFINITION for that process. Skipped when unscoped."
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5604,6 +5965,12 @@
           "Form"
         ],
         "operationId": "getFormByKey",
+        "x-required-permissions": [
+          {
+            "resourceType": "RESOURCE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5704,6 +6071,12 @@
           "Global listener"
         ],
         "operationId": "createGlobalTaskListener",
+        "x-required-permissions": [
+          {
+            "resourceType": "GLOBAL_LISTENER",
+            "permissionType": "CREATE_TASK_LISTENER"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5823,6 +6196,12 @@
           "Global listener"
         ],
         "operationId": "getGlobalTaskListener",
+        "x-required-permissions": [
+          {
+            "resourceType": "GLOBAL_LISTENER",
+            "permissionType": "READ_TASK_LISTENER"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -5920,6 +6299,12 @@
           "Global listener"
         ],
         "operationId": "updateGlobalTaskListener",
+        "x-required-permissions": [
+          {
+            "resourceType": "GLOBAL_LISTENER",
+            "permissionType": "UPDATE_TASK_LISTENER"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6047,6 +6432,12 @@
           "Global listener"
         ],
         "operationId": "deleteGlobalTaskListener",
+        "x-required-permissions": [
+          {
+            "resourceType": "GLOBAL_LISTENER",
+            "permissionType": "DELETE_TASK_LISTENER"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6159,6 +6550,13 @@
           "Global listener"
         ],
         "operationId": "searchGlobalTaskListeners",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "GLOBAL_LISTENER",
+            "permissionType": "READ_TASK_LISTENER"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6247,6 +6645,12 @@
           "Group"
         ],
         "operationId": "createGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6365,6 +6769,13 @@
           "Group"
         ],
         "operationId": "searchGroups",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6454,6 +6865,12 @@
           "Group"
         ],
         "operationId": "getGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6551,6 +6968,12 @@
           "Group"
         ],
         "operationId": "updateGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6668,6 +7091,12 @@
           "Group"
         ],
         "operationId": "deleteGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "DELETE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6760,6 +7189,13 @@
           "Group"
         ],
         "operationId": "searchClientsForGroup",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6879,6 +7315,12 @@
           "Group"
         ],
         "operationId": "assignClientToGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -6998,6 +7440,12 @@
           "Group"
         ],
         "operationId": "unassignClientFromGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -7106,6 +7554,13 @@
           "Group"
         ],
         "operationId": "searchMappingRulesForGroup",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "MAPPING_RULE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -7225,6 +7680,12 @@
           "Group"
         ],
         "operationId": "assignMappingRuleToGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -7344,6 +7805,12 @@
           "Group"
         ],
         "operationId": "unassignMappingRuleFromGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -7452,6 +7919,13 @@
           "Group"
         ],
         "operationId": "searchRolesForGroup",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -7571,6 +8045,13 @@
           "Group"
         ],
         "operationId": "searchUsersForGroup",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -7690,6 +8171,12 @@
           "Group"
         ],
         "operationId": "assignUserToGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -7809,6 +8296,12 @@
           "Group"
         ],
         "operationId": "unassignUserFromGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "GROUP",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -7917,6 +8410,13 @@
           "Incident"
         ],
         "operationId": "searchIncidents",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8006,6 +8506,12 @@
           "Incident"
         ],
         "operationId": "getIncident",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8106,6 +8612,12 @@
           "Incident"
         ],
         "operationId": "resolveIncident",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8202,6 +8714,12 @@
           "Incident"
         ],
         "operationId": "getProcessInstanceStatisticsByDefinition",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8291,6 +8809,12 @@
           "Incident"
         ],
         "operationId": "getProcessInstanceStatisticsByError",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8380,6 +8904,13 @@
           "Job"
         ],
         "operationId": "activateJobs",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8469,6 +9000,13 @@
           "Job"
         ],
         "operationId": "searchJobs",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8558,6 +9096,12 @@
           "Job"
         ],
         "operationId": "updateJob",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8654,6 +9198,12 @@
           "Job"
         ],
         "operationId": "completeJob",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8750,6 +9300,12 @@
           "Job"
         ],
         "operationId": "throwJobError",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8846,6 +9402,12 @@
           "Job"
         ],
         "operationId": "failJob",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -8942,6 +9504,20 @@
           "Job"
         ],
         "operationId": "updateJobsBatchOperation",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE"
+              },
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE_BATCH_OPERATION_UPDATE_JOB"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9031,6 +9607,13 @@
           "Job"
         ],
         "operationId": "getGlobalJobStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ_JOB_METRIC"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9144,6 +9727,13 @@
           "Job"
         ],
         "operationId": "getJobTypeStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ_JOB_METRIC"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9233,6 +9823,13 @@
           "Job"
         ],
         "operationId": "getJobWorkerStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ_JOB_METRIC"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9322,6 +9919,13 @@
           "Job"
         ],
         "operationId": "getJobTimeSeriesStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ_JOB_METRIC"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9411,6 +10015,13 @@
           "Job"
         ],
         "operationId": "getJobErrorStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9500,6 +10111,7 @@
           "License"
         ],
         "operationId": "getLicense",
+        "x-required-permissions": [],
         "security": [],
         "summary": "Get license status",
         "description": "Obtains the status of the current Camunda license.",
@@ -9535,6 +10147,12 @@
           "Mapping rule"
         ],
         "operationId": "createMappingRule",
+        "x-required-permissions": [
+          {
+            "resourceType": "MAPPING_RULE",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9636,6 +10254,13 @@
           "Mapping rule"
         ],
         "operationId": "searchMappingRule",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "MAPPING_RULE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9724,6 +10349,12 @@
           "Mapping rule"
         ],
         "operationId": "updateMappingRule",
+        "x-required-permissions": [
+          {
+            "resourceType": "MAPPING_RULE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9833,6 +10464,12 @@
           "Mapping rule"
         ],
         "operationId": "deleteMappingRule",
+        "x-required-permissions": [
+          {
+            "resourceType": "MAPPING_RULE",
+            "permissionType": "DELETE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -9923,6 +10560,12 @@
           "Mapping rule"
         ],
         "operationId": "getMappingRule",
+        "x-required-permissions": [
+          {
+            "resourceType": "MAPPING_RULE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10012,6 +10655,13 @@
           "Message subscription"
         ],
         "operationId": "searchMessageSubscriptions",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10101,6 +10751,12 @@
           "Message"
         ],
         "operationId": "correlateMessage",
+        "x-required-permissions": [
+          {
+            "dynamic": true,
+            "note": "Resolved from the matched subscription — CREATE_PROCESS_INSTANCE (start-event) or UPDATE_PROCESS_INSTANCE (intermediate) on PROCESS_DEFINITION."
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10193,6 +10849,12 @@
           "Message"
         ],
         "operationId": "publishMessage",
+        "x-required-permissions": [
+          {
+            "resourceType": "MESSAGE",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10265,6 +10927,13 @@
           "Process definition"
         ],
         "operationId": "searchProcessDefinitions",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_DEFINITION"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10354,6 +11023,13 @@
           "Process definition"
         ],
         "operationId": "getProcessDefinitionMessageSubscriptionStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10443,6 +11119,13 @@
           "Process definition"
         ],
         "operationId": "getProcessDefinitionInstanceStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10532,6 +11215,12 @@
           "Process definition"
         ],
         "operationId": "getProcessDefinition",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_DEFINITION"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10632,6 +11321,12 @@
           "Process definition"
         ],
         "operationId": "getStartProcessForm",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_DEFINITION"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10735,6 +11430,13 @@
           "Process definition"
         ],
         "operationId": "getProcessDefinitionStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10835,6 +11537,12 @@
           "Process definition"
         ],
         "operationId": "getProcessDefinitionXML",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_DEFINITION"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -10945,6 +11653,13 @@
           "Process definition"
         ],
         "operationId": "getProcessDefinitionInstanceVersionStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11034,6 +11749,12 @@
           "Process instance"
         ],
         "operationId": "createProcessInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "CREATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11143,6 +11864,20 @@
           "Process instance"
         ],
         "operationId": "cancelProcessInstancesBatchOperation",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE"
+              },
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11232,6 +11967,20 @@
           "Process instance"
         ],
         "operationId": "deleteProcessInstancesBatchOperation",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE"
+              },
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11321,6 +12070,20 @@
           "Process instance"
         ],
         "operationId": "resolveIncidentsBatchOperation",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE"
+              },
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE_BATCH_OPERATION_RESOLVE_INCIDENT"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11410,6 +12173,20 @@
           "Process instance"
         ],
         "operationId": "migrateProcessInstancesBatchOperation",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE"
+              },
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11499,6 +12276,20 @@
           "Process instance"
         ],
         "operationId": "modifyProcessInstancesBatchOperation",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE"
+              },
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11588,6 +12379,13 @@
           "Process instance"
         ],
         "operationId": "searchProcessInstances",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11677,6 +12475,12 @@
           "Process instance"
         ],
         "operationId": "getProcessInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11777,6 +12581,12 @@
           "Process instance"
         ],
         "operationId": "getProcessInstanceCallHierarchy",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11880,6 +12690,12 @@
           "Process instance"
         ],
         "operationId": "cancelProcessInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "CANCEL_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -11987,6 +12803,12 @@
           "Process instance"
         ],
         "operationId": "deleteProcessInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "DELETE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12100,6 +12922,12 @@
           "Process instance"
         ],
         "operationId": "resolveProcessInstanceIncidents",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12200,6 +13028,12 @@
           "Process instance"
         ],
         "operationId": "searchProcessInstanceIncidents",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12310,6 +13144,12 @@
           "Process instance"
         ],
         "operationId": "migrateProcessInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12406,6 +13246,12 @@
           "Process instance"
         ],
         "operationId": "modifyProcessInstance",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "MODIFY_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12492,6 +13338,12 @@
           "Process instance"
         ],
         "operationId": "getProcessInstanceSequenceFlows",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12582,6 +13434,13 @@
           "Process instance"
         ],
         "operationId": "getProcessInstanceStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12665,6 +13524,103 @@
         "x-added-in-version": "8.8"
       }
     },
+    "/process-instances/{processInstanceKey}/statistics/wait-states": {
+      "get": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Process instance"
+        ],
+        "operationId": "getProcessInstanceWaitStateStatistics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get wait state statistics",
+        "description": "Get statistics about waiting element instances by the process instance key, grouped by element id.",
+        "parameters": [
+          {
+            "name": "processInstanceKey",
+            "in": "path",
+            "required": true,
+            "description": "The assigned key of the process instance, which acts as a unique identifier for this process instance.",
+            "schema": {
+              "$ref": "#/components/schemas/ProcessInstanceKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The process instance wait state statistics result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessInstanceWaitStateStatisticsQueryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/resources/search": {
       "post": {
         "x-eventually-consistent": true,
@@ -12672,6 +13628,13 @@
           "Resource"
         ],
         "operationId": "searchResources",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "RESOURCE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12761,6 +13724,12 @@
           "Resource"
         ],
         "operationId": "getResource",
+        "x-required-permissions": [
+          {
+            "resourceType": "RESOURCE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12825,6 +13794,12 @@
           "Resource"
         ],
         "operationId": "getResourceContent",
+        "x-required-permissions": [
+          {
+            "resourceType": "RESOURCE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12899,6 +13874,12 @@
           "Resource"
         ],
         "operationId": "getResourceContentBinary",
+        "x-required-permissions": [
+          {
+            "resourceType": "RESOURCE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -12963,6 +13944,12 @@
           "Resource"
         ],
         "operationId": "deleteResource",
+        "x-required-permissions": [
+          {
+            "dynamic": true,
+            "note": "Resolved from the deployed resource type — DELETE_PROCESS, DELETE_DRD, DELETE_FORM or DELETE_RESOURCE on RESOURCE."
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -13056,6 +14043,12 @@
           "Role"
         ],
         "operationId": "createRole",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -13174,6 +14167,13 @@
           "Role"
         ],
         "operationId": "searchRoles",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -13263,6 +14263,12 @@
           "Role"
         ],
         "operationId": "getRole",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -13360,6 +14366,12 @@
           "Role"
         ],
         "operationId": "updateRole",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -13477,6 +14489,12 @@
           "Role"
         ],
         "operationId": "deleteRole",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "DELETE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -13569,6 +14587,13 @@
           "Role"
         ],
         "operationId": "searchClientsForRole",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -13688,6 +14713,12 @@
           "Role"
         ],
         "operationId": "assignRoleToClient",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -13807,6 +14838,12 @@
           "Role"
         ],
         "operationId": "unassignRoleFromClient",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -13915,6 +14952,13 @@
           "Role"
         ],
         "operationId": "searchGroupsForRole",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -14034,6 +15078,12 @@
           "Role"
         ],
         "operationId": "assignRoleToGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -14154,6 +15204,12 @@
           "Role"
         ],
         "operationId": "unassignRoleFromGroup",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -14262,6 +15318,13 @@
           "Role"
         ],
         "operationId": "searchMappingRulesForRole",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "MAPPING_RULE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -14381,6 +15444,12 @@
           "Role"
         ],
         "operationId": "assignRoleToMappingRule",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -14500,6 +15569,12 @@
           "Role"
         ],
         "operationId": "unassignRoleFromMappingRule",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -14608,6 +15683,13 @@
           "Role"
         ],
         "operationId": "searchUsersForRole",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -14727,6 +15809,12 @@
           "Role"
         ],
         "operationId": "assignRoleToUser",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -14846,6 +15934,12 @@
           "Role"
         ],
         "operationId": "unassignRoleFromUser",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -14954,6 +16048,12 @@
           "Setup"
         ],
         "operationId": "createAdminUser",
+        "x-required-permissions": [
+          {
+            "dynamic": true,
+            "note": "First-admin bootstrap — allowed anonymously until an initial admin exists; otherwise requires USER CREATE and ROLE UPDATE."
+          }
+        ],
         "security": [],
         "summary": "Create admin user",
         "description": "Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.",
@@ -15039,6 +16139,12 @@
           "Signal"
         ],
         "operationId": "broadcastSignal",
+        "x-required-permissions": [
+          {
+            "dynamic": true,
+            "note": "Resolved from the matched signal subscription — CREATE_PROCESS_INSTANCE (start-event) or UPDATE_PROCESS_INSTANCE (intermediate) on PROCESS_DEFINITION."
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -15121,6 +16227,7 @@
           "Cluster"
         ],
         "operationId": "getStatus",
+        "x-required-permissions": [],
         "security": [],
         "summary": "Get cluster status",
         "description": "Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.",
@@ -15142,6 +16249,13 @@
           "System"
         ],
         "operationId": "getUsageMetrics",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ_USAGE_METRIC"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -15294,6 +16408,7 @@
           "System"
         ],
         "operationId": "getSystemConfiguration",
+        "x-required-permissions": [],
         "security": [
           {
             "bearerAuth": []
@@ -15385,6 +16500,12 @@
           "Tenant"
         ],
         "operationId": "createTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -15497,6 +16618,13 @@
           "Tenant"
         ],
         "operationId": "searchTenants",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -15596,6 +16724,12 @@
           "Tenant"
         ],
         "operationId": "getTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -15703,6 +16837,12 @@
           "Tenant"
         ],
         "operationId": "updateTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -15813,6 +16953,12 @@
           "Tenant"
         ],
         "operationId": "deleteTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "DELETE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -15908,6 +17054,13 @@
           "Tenant"
         ],
         "operationId": "searchClientsForTenant",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -15970,6 +17123,12 @@
           "Tenant"
         ],
         "operationId": "assignClientToTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16079,6 +17238,12 @@
           "Tenant"
         ],
         "operationId": "unassignClientFromTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16187,6 +17352,13 @@
           "Tenant"
         ],
         "operationId": "searchGroupIdsForTenant",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16249,6 +17421,12 @@
           "Tenant"
         ],
         "operationId": "assignGroupToTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16359,6 +17537,12 @@
           "Tenant"
         ],
         "operationId": "unassignGroupFromTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16467,6 +17651,13 @@
           "Tenant"
         ],
         "operationId": "searchMappingRulesForTenant",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "MAPPING_RULE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16529,6 +17720,12 @@
           "Tenant"
         ],
         "operationId": "assignMappingRuleToTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16638,6 +17835,12 @@
           "Tenant"
         ],
         "operationId": "unassignMappingRuleFromTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16746,6 +17949,13 @@
           "Tenant"
         ],
         "operationId": "searchRolesForTenant",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "ROLE",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16808,6 +18018,12 @@
           "Tenant"
         ],
         "operationId": "assignRoleToTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -16917,6 +18133,12 @@
           "Tenant"
         ],
         "operationId": "unassignRoleFromTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17025,6 +18247,13 @@
           "Tenant"
         ],
         "operationId": "searchUsersForTenant",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17087,6 +18316,12 @@
           "Tenant"
         ],
         "operationId": "assignUserToTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17196,6 +18431,12 @@
           "Tenant"
         ],
         "operationId": "unassignUserFromTenant",
+        "x-required-permissions": [
+          {
+            "resourceType": "TENANT",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17304,6 +18545,7 @@
           "Cluster"
         ],
         "operationId": "getTopology",
+        "x-required-permissions": [],
         "security": [
           {
             "bearerAuth": []
@@ -17363,6 +18605,12 @@
           "User"
         ],
         "operationId": "createUser",
+        "x-required-permissions": [
+          {
+            "resourceType": "USER",
+            "permissionType": "CREATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17482,6 +18730,13 @@
           "User"
         ],
         "operationId": "searchUsers",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "USER",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17570,6 +18825,12 @@
           "User"
         ],
         "operationId": "getUser",
+        "x-required-permissions": [
+          {
+            "resourceType": "USER",
+            "permissionType": "READ"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17667,6 +18928,12 @@
           "User"
         ],
         "operationId": "updateUser",
+        "x-required-permissions": [
+          {
+            "resourceType": "USER",
+            "permissionType": "UPDATE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17777,6 +19044,12 @@
           "User"
         ],
         "operationId": "deleteUser",
+        "x-required-permissions": [
+          {
+            "resourceType": "USER",
+            "permissionType": "DELETE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17862,6 +19135,21 @@
           "User task"
         ],
         "operationId": "searchUserTasks",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "READ_USER_TASK"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "READ"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -17951,6 +19239,20 @@
           "User task"
         ],
         "operationId": "getUserTask",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "READ_USER_TASK"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "READ"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18049,6 +19351,20 @@
           "User task"
         ],
         "operationId": "updateUserTask",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "UPDATE_USER_TASK"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "UPDATE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18166,6 +19482,20 @@
           "User task"
         ],
         "operationId": "unassignUserTask",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "UPDATE_USER_TASK"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "UPDATE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18273,6 +19603,20 @@
           "User task"
         ],
         "operationId": "assignUserTask",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "UPDATE_USER_TASK"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "UPDATE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18390,6 +19734,20 @@
           "User task"
         ],
         "operationId": "searchUserTaskAuditLogs",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "READ_USER_TASK"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "READ"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18463,6 +19821,28 @@
           "User task"
         ],
         "operationId": "completeUserTask",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "UPDATE_USER_TASK"
+              },
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "COMPLETE_USER_TASK"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "UPDATE"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "COMPLETE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18580,6 +19960,12 @@
           "User task"
         ],
         "operationId": "searchUserTaskEffectiveVariables",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18662,6 +20048,20 @@
           "User task"
         ],
         "operationId": "getUserTaskForm",
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "READ_USER_TASK"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "READ"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18765,6 +20165,12 @@
           "User task"
         ],
         "operationId": "searchUserTaskVariables",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18847,6 +20253,13 @@
           "Variable"
         ],
         "operationId": "searchVariables",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -18947,6 +20360,12 @@
           "Variable"
         ],
         "operationId": "getVariable",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -35350,6 +36769,45 @@
             "items": {
               "$ref": "#/components/schemas/ProcessElementStatisticsResult"
             }
+          }
+        }
+      },
+      "ProcessInstanceWaitStateStatisticsQueryResult": {
+        "description": "Process instance wait state statistics query response.",
+        "required": [
+          "items"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "description": "The wait state statistics.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessInstanceWaitStateStatisticsResult"
+            }
+          }
+        }
+      },
+      "ProcessInstanceWaitStateStatisticsResult": {
+        "description": "Process instance wait state statistics response item.",
+        "type": "object",
+        "required": [
+          "elementId",
+          "waitingCount"
+        ],
+        "properties": {
+          "elementId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementId"
+              }
+            ],
+            "description": "The element id for which the wait states are aggregated."
+          },
+          "waitingCount": {
+            "description": "The total number of waiting instances of the element.",
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
