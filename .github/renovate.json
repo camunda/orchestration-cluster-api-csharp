@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  "semanticCommits": "enabled",
+  "baseBranchPatterns": ["main", "stable/9"],
+  "rebaseWhen": "behind-base-branch",
+  "packageRules": [
+    {
+      "description": "stable/9 is a maintenance branch: patch updates only.",
+      "matchBaseBranches": ["stable/9"],
+      "matchUpdateTypes": ["major", "minor", "pin", "digest", "pinDigest", "rollback", "replacement"],
+      "enabled": false
+    },
+    {
+      "description": "camunda-schema-bundler 2.x renames generated response types; keep stable/9 on 1.x.",
+      "matchBaseBranches": ["stable/9"],
+      "matchPackageNames": ["camunda-schema-bundler"],
+      "allowedVersions": "<2.0.0"
+    },
+    {
+      "description": "Auto-merge minor updates once CI is green.",
+      "matchUpdateTypes": ["minor"],
+      "automerge": true
+    }
+  ],
+  "vulnerabilityAlerts": { "enabled": false }
+}
