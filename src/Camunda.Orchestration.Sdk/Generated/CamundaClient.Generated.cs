@@ -4293,6 +4293,58 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get wait state statistics
+    /// Get statistics about waiting element instances by the process instance key, grouped by element id.
+    /// </summary>
+    /// <remarks>
+    /// Operation: getProcessInstanceWaitStateStatistics
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessInstanceWaitStateStatisticsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceWaitStateStatisticsAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Element: {stat.ElementId}, waiting: {stat.WaitingCount}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetProcessInstanceWaitStateStatisticsExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetProcessInstanceWaitStateStatisticsAsync(
+    ///         processInstanceKey);
+    /// 
+    ///     foreach (var stat in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Element: {stat.ElementId}, waiting: {stat.WaitingCount}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ProcessInstanceWaitStateStatisticsQueryResult> GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/statistics/wait-states";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getProcessInstanceWaitStateStatistics", true,
+                () => InvokeWithRetryAsync(() => SendAsync<ProcessInstanceWaitStateStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceWaitStateStatistics", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<ProcessInstanceWaitStateStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceWaitStateStatistics", false, ct);
+    }
+
+    /// <summary>
     /// Get resource
     /// Returns a deployed resource.
     /// :::info

@@ -22334,6 +22334,38 @@ internal sealed class ProcessInstanceStateFilterPropertyJsonConverter : global::
 }
 
 /// <summary>
+/// Process instance wait state statistics query response.
+/// </summary>
+public sealed class ProcessInstanceWaitStateStatisticsQueryResult
+{
+    /// <summary>
+    /// The wait state statistics.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<ProcessInstanceWaitStateStatisticsResult> Items { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Process instance wait state statistics response item.
+/// </summary>
+public sealed class ProcessInstanceWaitStateStatisticsResult
+{
+    /// <summary>
+    /// The element id for which the wait states are aggregated.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId ElementId { get; set; }
+
+    /// <summary>
+    /// The total number of waiting instances of the element.
+    /// </summary>
+    [JsonPropertyName("waitingCount")]
+    public long WaitingCount { get; set; }
+
+}
+
+/// <summary>
 /// Resource search filter.
 /// </summary>
 public sealed class ResourceFilter
