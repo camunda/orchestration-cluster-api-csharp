@@ -7,10 +7,14 @@ name: Auto-assign Copilot to coverage issues
 # example conventions (see .github/prompts/add-missing-examples.prompt.md if
 # that prompt is present).
 #
-# Prerequisite: the Copilot coding agent must be enabled for the repo/org
-# (Settings -> Copilot -> Coding agent). If the default GITHUB_TOKEN lacks
-# permission to assign Copilot in your org, set a `COPILOT_ASSIGN_TOKEN` repo
-# secret (a PAT / app token with `issues: write`); the workflow prefers it.
+# Prerequisites:
+#   1. The Copilot coding agent must be enabled for the repo/org
+#      (Settings -> Copilot -> Coding agent).
+#   2. A `COPILOT_ASSIGN_TOKEN` repo secret holding a fine-grained PAT
+#      (Issues: read/write on this repo) created by a user WITH A COPILOT
+#      SEAT. The Copilot assignment API only works with user tokens — the
+#      default GITHUB_TOKEN and GitHub App installation tokens cannot see
+#      or assign the agent (it works on behalf of a licensed user).
 
 on:
   issues:
@@ -58,8 +62,8 @@ jobs:
                      | .id] | first // empty')"
 
           if [ -z "${bot_id}" ]; then
-            echo "::warning::Copilot coding agent is not an available assignee for ${OWNER}/${NAME}. Enable it (Settings -> Copilot -> Coding agent) or assign Copilot manually."
-            gh issue comment "${ISSUE_NUMBER}" --body "🤖 Tried to auto-assign the Copilot coding agent, but it isn't available as an assignee for this repo yet. Enable the Copilot coding agent (or assign Copilot to this issue manually) to have a PR opened automatically." \
+            echo "::warning::The workflow token cannot see the Copilot coding agent as an assignee in ${OWNER}/${NAME}. The Copilot assignment API requires a PAT from a Copilot-licensed user — set the COPILOT_ASSIGN_TOKEN repo secret (the default GITHUB_TOKEN and app tokens are not supported)."
+            gh issue comment "${ISSUE_NUMBER}" --body "🤖 Couldn't auto-assign the Copilot coding agent: the workflow token can't see it as an assignee. This is expected with the default \`GITHUB_TOKEN\` — the Copilot assignment API requires a **PAT from a user with a Copilot seat**. Fix: that user creates a fine-grained PAT (Issues: read/write on this repo) and saves it as the \`COPILOT_ASSIGN_TOKEN\` repository secret. Until then, assign Copilot to this issue manually from the Assignees picker." \
               || echo "::warning::Could not comment on issue #${ISSUE_NUMBER}."
             exit 0
           fi
@@ -92,8 +96,8 @@ jobs:
             }"; then
             echo "Assigned the Copilot coding agent to issue #${ISSUE_NUMBER}."
           else
-            echo "::warning::Could not assign the Copilot coding agent to issue #${ISSUE_NUMBER}. The token may lack permission to assign bot actors — set a COPILOT_ASSIGN_TOKEN secret (PAT/app token with issues:write), or assign Copilot manually."
-            gh issue comment "${ISSUE_NUMBER}" --body "🤖 Couldn't auto-assign the Copilot coding agent — the Actions token may not be permitted to assign bot actors. Set a \`COPILOT_ASSIGN_TOKEN\` secret (PAT/app token with \`issues: write\`) or assign Copilot to this issue manually." \
+            echo "::warning::Could not assign the Copilot coding agent to issue #${ISSUE_NUMBER}. The Copilot assignment API requires a PAT from a Copilot-licensed user — check the COPILOT_ASSIGN_TOKEN secret (app tokens and GITHUB_TOKEN are not supported), or assign Copilot manually."
+            gh issue comment "${ISSUE_NUMBER}" --body "🤖 Couldn't auto-assign the Copilot coding agent — the assignment call failed. The Copilot assignment API requires a **PAT from a user with a Copilot seat** in the \`COPILOT_ASSIGN_TOKEN\` secret (app tokens and the default \`GITHUB_TOKEN\` are not supported). Check the secret, or assign Copilot to this issue manually." \
               || echo "::warning::Could not comment on issue #${ISSUE_NUMBER}."
             exit 0
           fi
