@@ -21,8 +21,8 @@
       "allowedVersions": "<2.0.0"
     },
     {
-      "description": "Auto-merge minor updates once CI is green.",
-      "matchUpdateTypes": ["minor"],
+      "description": "Auto-merge minor and patch updates once CI is green.",
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
   ],
