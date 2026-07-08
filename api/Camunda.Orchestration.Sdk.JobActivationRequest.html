@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_JobActivationRequest" data-uid="Camunda.Orchestration.Sdk.JobActivationRequest" class="text-break">
-Class JobActivationRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15842"><i class="bi bi-code-slash"></i></a>
+Class JobActivationRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15879"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -197,6 +197,11 @@ Class JobActivationRequest  <a class="header-action link-secondary" title="View 
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobActivationRequest.WithLease.html#Camunda_Orchestration_Sdk_JobActivationRequest_WithLease">WithLease</a></dt>
+    <dd><p>Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.leaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobActivationRequest.Worker.html#Camunda_Orchestration_Sdk_JobActivationRequest_Worker">Worker</a></dt>
     <dd><p>The name of the worker activating the jobs, mostly used for logging purposes.</p>
 </dd>
@@ -217,7 +222,7 @@ been set (or is empty) by the caller.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15842" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15879" class="edit-link">Edit this page</a>
         </div>
 
 

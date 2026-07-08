@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Property Value | Camunda C# SDK </title>
+      <title>Property LoopIteration | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Property Value | Camunda C# SDK ">
+      <meta name="title" content="Property LoopIteration | Camunda C# SDK ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_IterationId_Value_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.IterationId.Value*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_AgentInstanceHistoryFilter_LoopIteration_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,14 +84,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.IterationId.Value*">
+        <article data-uid="Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration*">
 
 
 
 
 
-<h1 id="Camunda_Orchestration_Sdk_IterationId_Value_" data-uid="Camunda.Orchestration.Sdk.IterationId.Value*" class="text-break">
-Property Value  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15822"><i class="bi bi-code-slash"></i></a>
+<h1 id="Camunda_Orchestration_Sdk_AgentInstanceHistoryFilter_LoopIteration_" data-uid="Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration*" class="text-break">
+Property LoopIteration  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3946"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -117,19 +117,20 @@ Property Value  <a class="header-action link-secondary" title="View source" href
 
 
 
-<a id="Camunda_Orchestration_Sdk_IterationId_Value_" data-uid="Camunda.Orchestration.Sdk.IterationId.Value*"></a>
+<a id="Camunda_Orchestration_Sdk_AgentInstanceHistoryFilter_LoopIteration_" data-uid="Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_IterationId_Value" data-uid="Camunda.Orchestration.Sdk.IterationId.Value">
-  Value
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15822"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_AgentInstanceHistoryFilter_LoopIteration" data-uid="Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration">
+  LoopIteration
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3946"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"><p>The underlying long value.</p>
+<div class="markdown level1 summary"><p>Filter by loopIteration number. A loopIteration is one pass through the agent feedback loop (one LLM call, its tool dispatches, and their results).</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public long Value { get; }</code></pre>
+  <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;loopIteration&quot;)]
+public IntegerFilterProperty? LoopIteration { get; set; }</code></pre>
 </div>
 
 
@@ -138,7 +139,7 @@ Property Value  <a class="header-action link-secondary" title="View source" href
 
 <h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+  <dt><a class="xref" href="Camunda.Orchestration.Sdk.IntegerFilterProperty.html">IntegerFilterProperty</a></dt>
   <dd></dd>
 </dl>
 
@@ -152,7 +153,7 @@ Property Value  <a class="header-action link-secondary" title="View source" href
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L15822" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L3946" class="edit-link">Edit this page</a>
         </div>
 
 

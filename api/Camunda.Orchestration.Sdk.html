@@ -474,7 +474,10 @@ are optional; omit a field to leave the corresponding counter unchanged.</p>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceObjectContent.html">AgentInstanceObjectContent</a></dt>
-      <dd><p>An arbitrary structured content block.</p>
+      <dd><p>An arbitrary structured content block. Accepts any valid JSON value:
+objects, arrays, numbers, booleans, or strings.
+Use TEXT content for human-readable natural language;
+use OBJECT content for machine-readable structured data.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -848,6 +851,16 @@ This ensures correct event emission for assignee changes.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.CloudConfigurationResponse.html">CloudConfigurationResponse</a></dt>
       <dd><p>Configuration for SaaS/cloud-specific settings.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterModeChangeOperation.html">ClusterModeChangeOperation</a></dt>
+      <dd><p>A single operation that is part of a cluster mode change.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterModeChangeResponse.html">ClusterModeChangeResponse</a></dt>
+      <dd><p>The planned changes resulting from a cluster mode transition request.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3241,14 +3254,6 @@ that evaluation, joined by a hyphen (format: <code>&lt;decisionEvaluationKey&gt;
 </dd>
     </dl>
     <dl class="jumplist">
-      <dt><a class="xref" href="Camunda.Orchestration.Sdk.IterationId.html">IterationId</a></dt>
-      <dd><p>A client-provided sequential integer identifying a logical iteration: one LLM
-call, its tool dispatches, and their results. Must be a positive integer,
-increasing with each iteration. Established by the
-connector when appending the first history item of an iteration.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobKey.html">JobKey</a></dt>
       <dd><p>System-generated key for a job.</p>
 </dd>
@@ -3287,6 +3292,14 @@ connector when appending the first history item of an iteration.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.LongKey.html">LongKey</a></dt>
       <dd><p>Zeebe Engine resource key (Java long serialized as string)</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.LoopIterationId.html">LoopIterationId</a></dt>
+      <dd><p>A client-provided sequential integer identifying one pass through the agent
+feedback loop: one LLM call, its tool dispatches, and their results. Must be
+a positive integer, increasing with each loopIteration. Established by the
+connector when appending the first history item of a loopIteration.</p>
 </dd>
     </dl>
     <dl class="jumplist">

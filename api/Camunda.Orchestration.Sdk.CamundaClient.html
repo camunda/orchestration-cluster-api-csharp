@@ -320,6 +320,12 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_System_String_System_Nullable_System_Boolean__System_Threading_CancellationToken_">ChangeClusterModeAsync(string, bool?, CancellationToken)</a></dt>
+    <dd><p>Change cluster mode
+Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CompleteJobAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CompleteJobAsync_Camunda_Orchestration_Sdk_JobKey_Camunda_Orchestration_Sdk_JobCompletionRequest_System_Threading_CancellationToken_">CompleteJobAsync(JobKey, JobCompletionRequest, CancellationToken)</a></dt>
     <dd><p>Complete job
 Complete a job with the given payload, which allows completing the associated service task.</p>

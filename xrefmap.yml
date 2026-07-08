@@ -349,6 +349,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJobResult.Kind
   fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.Kind
   nameWithType: ActivatedJobResult.Kind
+- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken.html#Camunda_Orchestration_Sdk_ActivatedJobResult_LeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
+  nameWithType: ActivatedJobResult.LeaseToken
+- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken*
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
+  nameWithType: ActivatedJobResult.LeaseToken
 - uid: Camunda.Orchestration.Sdk.ActivatedJobResult.ListenerEventType
   name: ListenerEventType
   href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.ListenerEventType.html#Camunda_Orchestration_Sdk_ActivatedJobResult_ListenerEventType
@@ -361,6 +373,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJobResult.ListenerEventType
   fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.ListenerEventType
   nameWithType: ActivatedJobResult.ListenerEventType
+- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.PhysicalTenantId
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.PhysicalTenantId.html#Camunda_Orchestration_Sdk_ActivatedJobResult_PhysicalTenantId
+  commentId: P:Camunda.Orchestration.Sdk.ActivatedJobResult.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.PhysicalTenantId
+  nameWithType: ActivatedJobResult.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.PhysicalTenantId*
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.PhysicalTenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJobResult.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.PhysicalTenantId
+  nameWithType: ActivatedJobResult.PhysicalTenantId
 - uid: Camunda.Orchestration.Sdk.ActivatedJobResult.Priority
   name: Priority
   href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.Priority.html#Camunda_Orchestration_Sdk_ActivatedJobResult_Priority
@@ -4717,18 +4741,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.HistoryItemKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.HistoryItemKey
   nameWithType: AgentInstanceHistoryFilter.HistoryItemKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.Iteration
-  name: Iteration
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.Iteration.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryFilter_Iteration
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.Iteration
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.Iteration
-  nameWithType: AgentInstanceHistoryFilter.Iteration
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.Iteration*
-  name: Iteration
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.Iteration.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.Iteration
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.Iteration
-  nameWithType: AgentInstanceHistoryFilter.Iteration
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.JobKey
   name: JobKey
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.JobKey.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryFilter_JobKey
@@ -4741,6 +4753,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.JobKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.JobKey
   nameWithType: AgentInstanceHistoryFilter.JobKey
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration
+  name: LoopIteration
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryFilter_LoopIteration
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration
+  nameWithType: AgentInstanceHistoryFilter.LoopIteration
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration*
+  name: LoopIteration
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.LoopIteration
+  nameWithType: AgentInstanceHistoryFilter.LoopIteration
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.ProducedAt
   name: ProducedAt
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.ProducedAt.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryFilter_ProducedAt
@@ -4855,18 +4879,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey
   nameWithType: AgentInstanceHistoryItemRequest.ElementInstanceKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Iteration
-  name: Iteration
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Iteration.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_Iteration
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Iteration
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Iteration
-  nameWithType: AgentInstanceHistoryItemRequest.Iteration
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Iteration*
-  name: Iteration
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Iteration.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Iteration
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Iteration
-  nameWithType: AgentInstanceHistoryItemRequest.Iteration
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey
   name: JobKey
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_JobKey
@@ -4891,6 +4903,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease
   nameWithType: AgentInstanceHistoryItemRequest.JobLease
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
+  name: LoopIteration
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_LoopIteration
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
+  nameWithType: AgentInstanceHistoryItemRequest.LoopIteration
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration*
+  name: LoopIteration
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
+  nameWithType: AgentInstanceHistoryItemRequest.LoopIteration
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics
   name: Metrics
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_Metrics
@@ -5005,18 +5029,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.HistoryItemKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.HistoryItemKey
   nameWithType: AgentInstanceHistoryItemResult.HistoryItemKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Iteration
-  name: Iteration
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Iteration.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemResult_Iteration
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Iteration
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Iteration
-  nameWithType: AgentInstanceHistoryItemResult.Iteration
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Iteration*
-  name: Iteration
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Iteration.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Iteration
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Iteration
-  nameWithType: AgentInstanceHistoryItemResult.Iteration
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobKey
   name: JobKey
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobKey.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemResult_JobKey
@@ -5041,6 +5053,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease
   nameWithType: AgentInstanceHistoryItemResult.JobLease
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.LoopIteration
+  name: LoopIteration
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.LoopIteration.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemResult_LoopIteration
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.LoopIteration
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.LoopIteration
+  nameWithType: AgentInstanceHistoryItemResult.LoopIteration
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.LoopIteration*
+  name: LoopIteration
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.LoopIteration.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.LoopIteration
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.LoopIteration
+  nameWithType: AgentInstanceHistoryItemResult.LoopIteration
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Metrics
   name: Metrics
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Metrics.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemResult_Metrics
@@ -5371,12 +5395,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.HistoryItemKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.HistoryItemKey
   nameWithType: AgentInstanceHistorySearchQuerySortRequestField.HistoryItemKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.Iteration
-  name: Iteration
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AgentInstanceHistorySearchQuerySortRequestField_Iteration
-  commentId: F:Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.Iteration
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.Iteration
-  nameWithType: AgentInstanceHistorySearchQuerySortRequestField.Iteration
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.LoopIteration
+  name: LoopIteration
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AgentInstanceHistorySearchQuerySortRequestField_LoopIteration
+  commentId: F:Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.LoopIteration
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.LoopIteration
+  nameWithType: AgentInstanceHistorySearchQuerySortRequestField.LoopIteration
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.ProducedAt
   name: ProducedAt
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_AgentInstanceHistorySearchQuerySortRequestField_ProducedAt
@@ -11830,6 +11854,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync
   nameWithType: CamundaClient.CancelProcessInstancesBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name: ChangeClusterModeAsync(string, bool?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_System_String_System_Nullable_System_Boolean__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name.vb: ChangeClusterModeAsync(String, Boolean?, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(string, bool?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(String, Boolean?, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ChangeClusterModeAsync(string, bool?, CancellationToken)
+  nameWithType.vb: CamundaClient.ChangeClusterModeAsync(String, Boolean?, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync*
+  name: ChangeClusterModeAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync
+  nameWithType: CamundaClient.ChangeClusterModeAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.CompleteJobAsync(Camunda.Orchestration.Sdk.JobKey,Camunda.Orchestration.Sdk.JobCompletionRequest,System.Threading.CancellationToken)
   name: CompleteJobAsync(JobKey, JobCompletionRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.CompleteJobAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CompleteJobAsync_Camunda_Orchestration_Sdk_JobKey_Camunda_Orchestration_Sdk_JobCompletionRequest_System_Threading_CancellationToken_
@@ -15337,6 +15376,66 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.CloudStage.Prod
   fullName: Camunda.Orchestration.Sdk.CloudStage.Prod
   nameWithType: CloudStage.Prod
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeOperation
+  name: ClusterModeChangeOperation
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeOperation.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterModeChangeOperation
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeOperation
+  nameWithType: ClusterModeChangeOperation
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Mode
+  name: Mode
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Mode.html#Camunda_Orchestration_Sdk_ClusterModeChangeOperation_Mode
+  commentId: P:Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Mode
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Mode
+  nameWithType: ClusterModeChangeOperation.Mode
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Mode*
+  name: Mode
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Mode.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Mode
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Mode
+  nameWithType: ClusterModeChangeOperation.Mode
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Operation
+  name: Operation
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Operation.html#Camunda_Orchestration_Sdk_ClusterModeChangeOperation_Operation
+  commentId: P:Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Operation
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Operation
+  nameWithType: ClusterModeChangeOperation.Operation
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Operation*
+  name: Operation
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Operation.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Operation
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeOperation.Operation
+  nameWithType: ClusterModeChangeOperation.Operation
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeResponse
+  name: ClusterModeChangeResponse
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterModeChangeResponse
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeResponse
+  nameWithType: ClusterModeChangeResponse
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeResponse.ChangeId
+  name: ChangeId
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeResponse.ChangeId.html#Camunda_Orchestration_Sdk_ClusterModeChangeResponse_ChangeId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterModeChangeResponse.ChangeId
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeResponse.ChangeId
+  nameWithType: ClusterModeChangeResponse.ChangeId
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeResponse.ChangeId*
+  name: ChangeId
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeResponse.ChangeId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterModeChangeResponse.ChangeId
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeResponse.ChangeId
+  nameWithType: ClusterModeChangeResponse.ChangeId
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges
+  name: PlannedChanges
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges.html#Camunda_Orchestration_Sdk_ClusterModeChangeResponse_PlannedChanges
+  commentId: P:Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges
+  nameWithType: ClusterModeChangeResponse.PlannedChanges
+- uid: Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges*
+  name: PlannedChanges
+  href: api/Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges
+  fullName: Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges
+  nameWithType: ClusterModeChangeResponse.PlannedChanges
 - uid: Camunda.Orchestration.Sdk.ClusterVariableName
   name: ClusterVariableName
   href: api/Camunda.Orchestration.Sdk.ClusterVariableName.html
@@ -28264,51 +28363,6 @@ references:
   fullName.vb: Camunda.Orchestration.Sdk.IntegerFilterProperty.CType
   nameWithType: IntegerFilterProperty.implicit operator
   nameWithType.vb: IntegerFilterProperty.CType
-- uid: Camunda.Orchestration.Sdk.IterationId
-  name: IterationId
-  href: api/Camunda.Orchestration.Sdk.IterationId.html
-  commentId: T:Camunda.Orchestration.Sdk.IterationId
-  fullName: Camunda.Orchestration.Sdk.IterationId
-  nameWithType: IterationId
-- uid: Camunda.Orchestration.Sdk.IterationId.AssumeExists(System.Int64)
-  name: AssumeExists(long)
-  href: api/Camunda.Orchestration.Sdk.IterationId.AssumeExists.html#Camunda_Orchestration_Sdk_IterationId_AssumeExists_System_Int64_
-  commentId: M:Camunda.Orchestration.Sdk.IterationId.AssumeExists(System.Int64)
-  name.vb: AssumeExists(Long)
-  fullName: Camunda.Orchestration.Sdk.IterationId.AssumeExists(long)
-  fullName.vb: Camunda.Orchestration.Sdk.IterationId.AssumeExists(Long)
-  nameWithType: IterationId.AssumeExists(long)
-  nameWithType.vb: IterationId.AssumeExists(Long)
-- uid: Camunda.Orchestration.Sdk.IterationId.AssumeExists*
-  name: AssumeExists
-  href: api/Camunda.Orchestration.Sdk.IterationId.AssumeExists.html
-  commentId: Overload:Camunda.Orchestration.Sdk.IterationId.AssumeExists
-  fullName: Camunda.Orchestration.Sdk.IterationId.AssumeExists
-  nameWithType: IterationId.AssumeExists
-- uid: Camunda.Orchestration.Sdk.IterationId.ToString
-  name: ToString()
-  href: api/Camunda.Orchestration.Sdk.IterationId.ToString.html#Camunda_Orchestration_Sdk_IterationId_ToString
-  commentId: M:Camunda.Orchestration.Sdk.IterationId.ToString
-  fullName: Camunda.Orchestration.Sdk.IterationId.ToString()
-  nameWithType: IterationId.ToString()
-- uid: Camunda.Orchestration.Sdk.IterationId.ToString*
-  name: ToString
-  href: api/Camunda.Orchestration.Sdk.IterationId.ToString.html
-  commentId: Overload:Camunda.Orchestration.Sdk.IterationId.ToString
-  fullName: Camunda.Orchestration.Sdk.IterationId.ToString
-  nameWithType: IterationId.ToString
-- uid: Camunda.Orchestration.Sdk.IterationId.Value
-  name: Value
-  href: api/Camunda.Orchestration.Sdk.IterationId.Value.html#Camunda_Orchestration_Sdk_IterationId_Value
-  commentId: P:Camunda.Orchestration.Sdk.IterationId.Value
-  fullName: Camunda.Orchestration.Sdk.IterationId.Value
-  nameWithType: IterationId.Value
-- uid: Camunda.Orchestration.Sdk.IterationId.Value*
-  name: Value
-  href: api/Camunda.Orchestration.Sdk.IterationId.Value.html
-  commentId: Overload:Camunda.Orchestration.Sdk.IterationId.Value
-  fullName: Camunda.Orchestration.Sdk.IterationId.Value
-  nameWithType: IterationId.Value
 - uid: Camunda.Orchestration.Sdk.JobActivationRequest
   name: JobActivationRequest
   href: api/Camunda.Orchestration.Sdk.JobActivationRequest.html
@@ -28414,6 +28468,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobActivationRequest.Type
   fullName: Camunda.Orchestration.Sdk.JobActivationRequest.Type
   nameWithType: JobActivationRequest.Type
+- uid: Camunda.Orchestration.Sdk.JobActivationRequest.WithLease
+  name: WithLease
+  href: api/Camunda.Orchestration.Sdk.JobActivationRequest.WithLease.html#Camunda_Orchestration_Sdk_JobActivationRequest_WithLease
+  commentId: P:Camunda.Orchestration.Sdk.JobActivationRequest.WithLease
+  fullName: Camunda.Orchestration.Sdk.JobActivationRequest.WithLease
+  nameWithType: JobActivationRequest.WithLease
+- uid: Camunda.Orchestration.Sdk.JobActivationRequest.WithLease*
+  name: WithLease
+  href: api/Camunda.Orchestration.Sdk.JobActivationRequest.WithLease.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobActivationRequest.WithLease
+  fullName: Camunda.Orchestration.Sdk.JobActivationRequest.WithLease
+  nameWithType: JobActivationRequest.WithLease
 - uid: Camunda.Orchestration.Sdk.JobActivationRequest.Worker
   name: Worker
   href: api/Camunda.Orchestration.Sdk.JobActivationRequest.Worker.html#Camunda_Orchestration_Sdk_JobActivationRequest_Worker
@@ -30670,6 +30736,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.JobStateEnum.TIMEDOUT
   fullName: Camunda.Orchestration.Sdk.JobStateEnum.TIMEDOUT
   nameWithType: JobStateEnum.TIMEDOUT
+- uid: Camunda.Orchestration.Sdk.JobStateEnum.TIMEOUTUPDATED
+  name: TIMEOUTUPDATED
+  href: api/Camunda.Orchestration.Sdk.JobStateEnum.html#Camunda_Orchestration_Sdk_JobStateEnum_TIMEOUTUPDATED
+  commentId: F:Camunda.Orchestration.Sdk.JobStateEnum.TIMEOUTUPDATED
+  fullName: Camunda.Orchestration.Sdk.JobStateEnum.TIMEOUTUPDATED
+  nameWithType: JobStateEnum.TIMEOUTUPDATED
 - uid: Camunda.Orchestration.Sdk.JobStateExactMatch
   name: JobStateExactMatch
   href: api/Camunda.Orchestration.Sdk.JobStateExactMatch.html
@@ -31834,6 +31906,51 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.LongKey.Value
   fullName: Camunda.Orchestration.Sdk.LongKey.Value
   nameWithType: LongKey.Value
+- uid: Camunda.Orchestration.Sdk.LoopIterationId
+  name: LoopIterationId
+  href: api/Camunda.Orchestration.Sdk.LoopIterationId.html
+  commentId: T:Camunda.Orchestration.Sdk.LoopIterationId
+  fullName: Camunda.Orchestration.Sdk.LoopIterationId
+  nameWithType: LoopIterationId
+- uid: Camunda.Orchestration.Sdk.LoopIterationId.AssumeExists(System.Int64)
+  name: AssumeExists(long)
+  href: api/Camunda.Orchestration.Sdk.LoopIterationId.AssumeExists.html#Camunda_Orchestration_Sdk_LoopIterationId_AssumeExists_System_Int64_
+  commentId: M:Camunda.Orchestration.Sdk.LoopIterationId.AssumeExists(System.Int64)
+  name.vb: AssumeExists(Long)
+  fullName: Camunda.Orchestration.Sdk.LoopIterationId.AssumeExists(long)
+  fullName.vb: Camunda.Orchestration.Sdk.LoopIterationId.AssumeExists(Long)
+  nameWithType: LoopIterationId.AssumeExists(long)
+  nameWithType.vb: LoopIterationId.AssumeExists(Long)
+- uid: Camunda.Orchestration.Sdk.LoopIterationId.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.LoopIterationId.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.LoopIterationId.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.LoopIterationId.AssumeExists
+  nameWithType: LoopIterationId.AssumeExists
+- uid: Camunda.Orchestration.Sdk.LoopIterationId.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.LoopIterationId.ToString.html#Camunda_Orchestration_Sdk_LoopIterationId_ToString
+  commentId: M:Camunda.Orchestration.Sdk.LoopIterationId.ToString
+  fullName: Camunda.Orchestration.Sdk.LoopIterationId.ToString()
+  nameWithType: LoopIterationId.ToString()
+- uid: Camunda.Orchestration.Sdk.LoopIterationId.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.LoopIterationId.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.LoopIterationId.ToString
+  fullName: Camunda.Orchestration.Sdk.LoopIterationId.ToString
+  nameWithType: LoopIterationId.ToString
+- uid: Camunda.Orchestration.Sdk.LoopIterationId.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.LoopIterationId.Value.html#Camunda_Orchestration_Sdk_LoopIterationId_Value
+  commentId: P:Camunda.Orchestration.Sdk.LoopIterationId.Value
+  fullName: Camunda.Orchestration.Sdk.LoopIterationId.Value
+  nameWithType: LoopIterationId.Value
+- uid: Camunda.Orchestration.Sdk.LoopIterationId.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.LoopIterationId.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.LoopIterationId.Value
+  fullName: Camunda.Orchestration.Sdk.LoopIterationId.Value
+  nameWithType: LoopIterationId.Value
 - uid: Camunda.Orchestration.Sdk.MappingRuleCreateRequest
   name: MappingRuleCreateRequest
   href: api/Camunda.Orchestration.Sdk.MappingRuleCreateRequest.html
