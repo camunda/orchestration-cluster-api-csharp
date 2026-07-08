@@ -189,6 +189,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#ChangeClusterMode)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.CompleteJobAsync(Camunda.Orchestration.Sdk.JobKey,Camunda.Orchestration.Sdk.JobCompletionRequest,System.Threading.CancellationToken)
 example:
 - *content

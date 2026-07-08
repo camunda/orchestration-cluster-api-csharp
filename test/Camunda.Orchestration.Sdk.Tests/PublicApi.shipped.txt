@@ -45,8 +45,10 @@ TYPE Camunda.Orchestration.Sdk.ActivatedJobResult : sealed class
   PROP System.Int64 Deadline { get; set; } [JsonPropertyName("deadline")]
   PROP System.Object CustomHeaders { get; set; } [JsonPropertyName("customHeaders")]
   PROP System.Object Variables { get; set; } [JsonPropertyName("variables")]
+  PROP System.String PhysicalTenantId { get; set; } [JsonPropertyName("physicalTenantId")]
   PROP System.String Type { get; set; } [JsonPropertyName("type")]
   PROP System.String Worker { get; set; } [JsonPropertyName("worker")]
+  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.AdHocSubProcessActivateActivitiesInstruction : sealed class
   CTOR ()
@@ -565,7 +567,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter : sealed class
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleFilterProperty? Role { get; set; } [JsonPropertyName("role")]
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? ProducedAt { get; set; } [JsonPropertyName("producedAt")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
-  PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? Iteration { get; set; } [JsonPropertyName("iteration")]
+  PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP Camunda.Orchestration.Sdk.JobKeyFilterProperty? JobKey { get; set; } [JsonPropertyName("jobKey")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult : sealed class
@@ -583,8 +585,8 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest : sealed class
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics? Metrics { get; set; } [JsonPropertyName("metrics")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum Role { get; set; } [JsonPropertyName("role")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
-  PROP Camunda.Orchestration.Sdk.IterationId? Iteration { get; set; } [JsonPropertyName("iteration")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
+  PROP Camunda.Orchestration.Sdk.LoopIterationId? LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceToolCall>? ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
   PROP System.DateTimeOffset ProducedAt { get; set; } [JsonPropertyName("producedAt")]
@@ -598,8 +600,8 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum Role { get; set; } [JsonPropertyName("role")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceKey AgentInstanceKey { get; set; } [JsonPropertyName("agentInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
-  PROP Camunda.Orchestration.Sdk.IterationId? Iteration { get; set; } [JsonPropertyName("iteration")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
+  PROP Camunda.Orchestration.Sdk.LoopIterationId? LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceToolCall> ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
   PROP System.DateTimeOffset ProducedAt { get; set; } [JsonPropertyName("producedAt")]
@@ -651,7 +653,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuerySortRequestField :
   underlying=System.Int32
   MEMBER ProducedAt = 0 json="producedAt"
   MEMBER HistoryItemKey = 1 json="historyItemKey"
-  MEMBER Iteration = 2 json="iteration"
+  MEMBER LoopIteration = 2 json="loopIteration"
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceKey : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.AgentInstanceKey>]
   PROP System.String Value { get; }
@@ -1610,6 +1612,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationResponse> GetBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult> SearchBatchOperationsAsync(Camunda.Orchestration.Sdk.BatchOperationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CamundaUserResult> GetAuthenticationAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsync(System.String mode, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> GetGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.ClusterVariableName name, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ClusterVariableResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1852,6 +1855,16 @@ TYPE Camunda.Orchestration.Sdk.CloudStage : enum interfaces=[System.IComparable,
   MEMBER Dev = 0 json="dev"
   MEMBER Int = 1 json="int"
   MEMBER Prod = 2 json="prod"
+
+TYPE Camunda.Orchestration.Sdk.ClusterModeChangeOperation : sealed class
+  CTOR ()
+  PROP System.String Operation { get; set; } [JsonPropertyName("operation")]
+  PROP System.String? Mode { get; set; } [JsonPropertyName("mode")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterModeChangeResponse : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterModeChangeOperation> PlannedChanges { get; set; } [JsonPropertyName("plannedChanges")]
+  PROP System.String ChangeId { get; set; } [JsonPropertyName("changeId")]
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableName : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ClusterVariableName>]
   PROP System.String Value { get; }
@@ -3630,17 +3643,10 @@ TYPE Camunda.Orchestration.Sdk.IntegerFilterProperty : sealed class
   PROP System.Int32? Lte { get; set; } [JsonPropertyName("$lte")]
   PROP System.Int32? Neq { get; set; } [JsonPropertyName("$neq")]
 
-TYPE Camunda.Orchestration.Sdk.IterationId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaLongKey,System.IEquatable<Camunda.Orchestration.Sdk.IterationId>]
-  PROP System.Int64 Value { get; }
-  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.IterationId other)
-  METHOD static Camunda.Orchestration.Sdk.IterationId AssumeExists(System.Int64 value)
-  METHOD virtual System.Boolean Equals(System.Object obj)
-  METHOD virtual System.Int32 GetHashCode()
-  METHOD virtual System.String ToString()
-
 TYPE Camunda.Orchestration.Sdk.JobActivationRequest : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdsSettable]
   CTOR ()
   PROP Camunda.Orchestration.Sdk.TenantFilterEnum? TenantFilter { get; set; } [JsonPropertyName("tenantFilter")]
+  PROP System.Boolean? WithLease { get; set; } [JsonPropertyName("withLease")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.TenantId>? TenantIds { get; set; } [JsonPropertyName("tenantIds")]
   PROP System.Collections.Generic.List<System.String>? FetchVariable { get; set; } [JsonPropertyName("fetchVariable")]
   PROP System.Int32 MaxJobsToActivate { get; set; } [JsonPropertyName("maxJobsToActivate")]
@@ -3954,7 +3960,8 @@ TYPE Camunda.Orchestration.Sdk.JobStateEnum : enum interfaces=[System.IComparabl
   MEMBER MIGRATED = 5 json="MIGRATED"
   MEMBER PRIORITYUPDATED = 6 json="PRIORITY_UPDATED"
   MEMBER RETRIESUPDATED = 7 json="RETRIES_UPDATED"
-  MEMBER TIMEDOUT = 8 json="TIMED_OUT"
+  MEMBER TIMEOUTUPDATED = 8 json="TIMEOUT_UPDATED"
+  MEMBER TIMEDOUT = 9 json="TIMED_OUT"
 
 TYPE Camunda.Orchestration.Sdk.JobStateExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.JobStateExactMatch>]
   PROP System.String Value { get; }
@@ -4107,6 +4114,14 @@ TYPE Camunda.Orchestration.Sdk.LongKey : struct interfaces=[Camunda.Orchestratio
   METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.LongKey other)
   METHOD static Camunda.Orchestration.Sdk.LongKey AssumeExists(System.String value)
   METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.LoopIterationId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaLongKey,System.IEquatable<Camunda.Orchestration.Sdk.LoopIterationId>]
+  PROP System.Int64 Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.LoopIterationId other)
+  METHOD static Camunda.Orchestration.Sdk.LoopIterationId AssumeExists(System.Int64 value)
   METHOD virtual System.Boolean Equals(System.Object obj)
   METHOD virtual System.Int32 GetHashCode()
   METHOD virtual System.String ToString()

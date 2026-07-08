@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:73ad42fb782f5c72dd84bdc40ef81313976c3f4083436c18c7019e7e0a3295cc",
+  "specHash": "sha256:280d2e6b69d447778def1673ffe33375e21960b31e259ddade66fc7feea6a3e1",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -3157,12 +3157,12 @@
           }
         ],
         "x-semantic-establishes": {
-          "kind": "AgentInstanceIteration",
+          "kind": "AgentInstanceLoopIteration",
           "identifiedBy": [
             {
               "in": "body",
-              "name": "iteration",
-              "semanticType": "IterationId"
+              "name": "loopIteration",
+              "semanticType": "LoopIterationId"
             }
           ]
         },
@@ -10103,6 +10103,42 @@
       }
     },
     {
+      "operationId": "changeClusterMode",
+      "path": "/mode",
+      "method": "patch",
+      "tags": [
+        "Recovery"
+      ],
+      "summary": "Change cluster mode",
+      "description": "Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "mode",
+          "required": true
+        },
+        {
+          "name": "dryRun",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "ClusterModeChangeResponse",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "createUser",
       "path": "/users",
       "method": "post",
@@ -11042,7 +11078,7 @@
   "integrity": {
     "totalSemanticKeys": 41,
     "totalUnions": 64,
-    "totalOperations": 195,
+    "totalOperations": 196,
     "totalEventuallyConsistent": 91,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23
