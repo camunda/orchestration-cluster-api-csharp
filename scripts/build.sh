@@ -48,14 +48,24 @@ echo ""
 echo "--- Step 7: Check README snippets are in sync ---"
 python3 scripts/sync-readme-snippets.py --check
 
-# Step 8: Unit tests (acceptance gate — integration tests are separate)
+# Step 8: Check SDK example coverage (operation-map vs. bundled spec)
 echo ""
-echo "--- Step 8: Unit tests ---"
+echo "--- Step 8: Check SDK example coverage ---"
+node scripts/check-example-coverage.js
+
+# Step 9: Check DocFX overwrite completeness (every public method has an entry)
+echo ""
+echo "--- Step 9: Check overwrite completeness ---"
+node scripts/check-overwrite-completeness.js
+
+# Step 10: Unit tests (acceptance gate — integration tests are separate)
+echo ""
+echo "--- Step 10: Unit tests ---"
 dotnet test test/Camunda.Orchestration.Sdk.Tests --configuration Release --no-build
 
- # Step 8: Build documentation
+# Step 11: Build documentation
 echo ""
-echo "--- Step 8: Build documentation ---"
+echo "--- Step 11: Build documentation ---"
 bash scripts/build-docs.sh
 
 echo ""
