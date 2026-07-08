@@ -1,3 +1,18 @@
+# [10.0.0-alpha.4](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.3...v10.0.0-alpha.4) (2026-07-08)
+
+
+### chore
+
+* **gen:** signal breaking API surface changes from spec refresh ([781e7b8](https://github.com/camunda/orchestration-cluster-api-csharp/commit/781e7b830adb442e5ae1366fac0b417d6d76dff9))
+
+
+### BREAKING CHANGES
+
+* **gen:** Iteration renamed to LoopIteration (struct IterationId removed,
+LoopIterationId added; JSON wire field 'iteration' -> 'loopIteration').
+JobStateEnum adds TIMEOUTUPDATED (=8, wire 'TIMEOUT_UPDATED'). ActivatedJobResult
+adds new properties.
+
 # [10.0.0-alpha.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.2...v10.0.0-alpha.3) (2026-07-01)
 
 
