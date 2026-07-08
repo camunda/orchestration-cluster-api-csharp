@@ -17,8 +17,8 @@ public enum AgentInstanceHistorySearchQuerySortRequestField
     ProducedAt,
     [JsonPropertyName("historyItemKey")]
     HistoryItemKey,
-    [JsonPropertyName("iteration")]
-    Iteration,
+    [JsonPropertyName("loopIteration")]
+    LoopIteration,
 }
 
 /// <summary>
@@ -1153,6 +1153,14 @@ public sealed class ActivatedJobResult
     public TenantId TenantId { get; set; }
 
     /// <summary>
+    /// The ID of the physical tenant that the job-activation request was routed to;
+    /// the default physical tenant when the request did not specify one.
+    /// 
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
     /// The key, a unique identifier for the job.
     /// </summary>
     [JsonPropertyName("jobKey")]
@@ -1226,6 +1234,14 @@ public sealed class ActivatedJobResult
     /// </summary>
     [JsonPropertyName("priority")]
     public int Priority { get; set; }
+
+    /// <summary>
+    /// The lease token identifying this activation. This is `null` when the job was
+    /// activated without a lease.
+    /// 
+    /// </summary>
+    [JsonPropertyName("leaseToken")]
+    public string? LeaseToken { get; set; }
 
 }
 
@@ -3925,10 +3941,10 @@ public sealed class AgentInstanceHistoryFilter
     public JobKeyFilterProperty? JobKey { get; set; }
 
     /// <summary>
-    /// The iteration number.
+    /// Filter by loopIteration number. A loopIteration is one pass through the agent feedback loop (one LLM call, its tool dispatches, and their results).
     /// </summary>
-    [JsonPropertyName("iteration")]
-    public IntegerFilterProperty? Iteration { get; set; }
+    [JsonPropertyName("loopIteration")]
+    public IntegerFilterProperty? LoopIteration { get; set; }
 
     /// <summary>
     /// The commit status of the history item. Defaults to COMMITTED only.
@@ -4009,10 +4025,13 @@ public sealed class AgentInstanceHistoryItemRequest
     public string JobLease { get; set; } = null!;
 
     /// <summary>
-    /// Sequential iteration number this item belongs to. Omit if not grouping items into iterations.
+    /// The loopIteration this item belongs to. A loopIteration is one pass through the agent
+    /// feedback loop: one LLM call, its tool dispatches, and their results. Omit if not grouping
+    /// items by loopIteration.
+    /// 
     /// </summary>
-    [JsonPropertyName("iteration")]
-    public IterationId? Iteration { get; set; }
+    [JsonPropertyName("loopIteration")]
+    public LoopIterationId? LoopIteration { get; set; }
 
     /// <summary>
     /// The role of this history item in the conversation.
@@ -4086,10 +4105,13 @@ public sealed class AgentInstanceHistoryItemResult
     public string JobLease { get; set; } = null!;
 
     /// <summary>
-    /// The sequential iteration number this item belongs to. Null if not provided by the connector.
+    /// The loopIteration this item belongs to. A loopIteration is one pass through the agent
+    /// feedback loop: one LLM call, its tool dispatches, and their results. Null if not provided
+    /// by the connector.
+    /// 
     /// </summary>
-    [JsonPropertyName("iteration")]
-    public IterationId? Iteration { get; set; }
+    [JsonPropertyName("loopIteration")]
+    public LoopIterationId? LoopIteration { get; set; }
 
     /// <summary>
     /// The role of this history item in the conversation.
@@ -4634,12 +4656,16 @@ public sealed class AgentInstanceMetricsDelta
 }
 
 /// <summary>
-/// An arbitrary structured content block.
+/// An arbitrary structured content block. Accepts any valid JSON value:
+/// objects, arrays, numbers, booleans, or strings.
+/// Use TEXT content for human-readable natural language;
+/// use OBJECT content for machine-readable structured data.
+/// 
 /// </summary>
 public sealed class AgentInstanceObjectContent : AgentInstanceMessageContent
 {
     /// <summary>
-    /// Arbitrary structured content.
+    /// Arbitrary structured content — any valid JSON value (object, array, number, boolean, or string).
     /// </summary>
     [JsonPropertyName("object")]
     public object Object { get; set; } = null!;
@@ -4670,7 +4696,7 @@ public sealed class AgentInstanceResult
     public AgentInstanceDefinition Definition { get; set; } = null!;
 
     /// <summary>
-    /// Aggregated metrics across all iterations of this agent instance.
+    /// Aggregated metrics across all loopIterations of this agent instance.
     /// </summary>
     [JsonPropertyName("metrics")]
     public AgentInstanceMetrics Metrics { get; set; } = null!;
@@ -8308,6 +8334,44 @@ public enum CloudStage
     Int,
     [JsonPropertyName("prod")]
     Prod,
+}
+
+/// <summary>
+/// A single operation that is part of a cluster mode change.
+/// </summary>
+public sealed class ClusterModeChangeOperation
+{
+    /// <summary>
+    /// The type of the operation.
+    /// </summary>
+    [JsonPropertyName("operation")]
+    public string Operation { get; set; } = null!;
+
+    /// <summary>
+    /// The target mode of the operation, if applicable.
+    /// </summary>
+    [JsonPropertyName("mode")]
+    public string? Mode { get; set; }
+
+}
+
+/// <summary>
+/// The planned changes resulting from a cluster mode transition request.
+/// </summary>
+public sealed class ClusterModeChangeResponse
+{
+    /// <summary>
+    /// The ID of the cluster change that was triggered by the request.
+    /// </summary>
+    [JsonPropertyName("changeId")]
+    public string ChangeId { get; set; } = null!;
+
+    /// <summary>
+    /// The ordered list of operations that will be applied to complete the change.
+    /// </summary>
+    [JsonPropertyName("plannedChanges")]
+    public List<ClusterModeChangeOperation> PlannedChanges { get; set; } = null!;
+
 }
 
 /// <summary>
@@ -15810,33 +15874,6 @@ internal sealed class IntegerFilterPropertyJsonConverter : global::System.Text.J
 }
 
 /// <summary>
-/// A client-provided sequential integer identifying a logical iteration: one LLM
-/// call, its tool dispatches, and their results. Must be a positive integer,
-/// increasing with each iteration. Established by the
-/// connector when appending the first history item of an iteration.
-/// 
-/// </summary>
-public readonly record struct IterationId : global::Camunda.Orchestration.Sdk.ICamundaLongKey
-{
-    /// <summary>The underlying long value.</summary>
-    public long Value { get; }
-
-    private IterationId(long value) => Value = value;
-
-    /// <summary>
-    /// Creates a <see cref="IterationId"/> from a raw long value.
-    /// Use this when side-loading values not received from an API call.
-    /// </summary>
-    public static IterationId AssumeExists(long value)
-    {
-        return new IterationId(value);
-    }
-
-    /// <inheritdoc />
-    public override string ToString() => Value.ToString()!;
-}
-
-/// <summary>
 /// JobActivationRequest
 /// </summary>
 public sealed class JobActivationRequest : global::Camunda.Orchestration.Sdk.ITenantIdsSettable
@@ -15891,6 +15928,13 @@ public sealed class JobActivationRequest : global::Camunda.Orchestration.Sdk.ITe
     /// </summary>
     [JsonPropertyName("tenantFilter")]
     public TenantFilterEnum? TenantFilter { get; set; }
+
+    /// <summary>
+    /// Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.leaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.
+    /// 
+    /// </summary>
+    [JsonPropertyName("withLease")]
+    public bool? WithLease { get; set; }
 
     /// <inheritdoc />
     public void SetDefaultTenantIds(string tenantId)
@@ -17268,6 +17312,8 @@ public enum JobStateEnum
     PRIORITYUPDATED,
     [JsonPropertyName("RETRIES_UPDATED")]
     RETRIESUPDATED,
+    [JsonPropertyName("TIMEOUT_UPDATED")]
+    TIMEOUTUPDATED,
     [JsonPropertyName("TIMED_OUT")]
     TIMEDOUT,
 }
@@ -17887,6 +17933,33 @@ public readonly record struct LongKey : global::Camunda.Orchestration.Sdk.ICamun
     /// <summary>Returns true if the value satisfies this type's constraints.</summary>
     public static bool IsValid(string value) =>
         global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// A client-provided sequential integer identifying one pass through the agent
+/// feedback loop: one LLM call, its tool dispatches, and their results. Must be
+/// a positive integer, increasing with each loopIteration. Established by the
+/// connector when appending the first history item of a loopIteration.
+/// 
+/// </summary>
+public readonly record struct LoopIterationId : global::Camunda.Orchestration.Sdk.ICamundaLongKey
+{
+    /// <summary>The underlying long value.</summary>
+    public long Value { get; }
+
+    private LoopIterationId(long value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="LoopIterationId"/> from a raw long value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static LoopIterationId AssumeExists(long value)
+    {
+        return new LoopIterationId(value);
+    }
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;

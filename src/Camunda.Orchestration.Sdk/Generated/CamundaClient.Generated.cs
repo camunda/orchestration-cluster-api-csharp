@@ -736,6 +736,60 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Change cluster mode
+    /// Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.
+    /// </summary>
+    /// <remarks>
+    /// Operation: changeClusterMode
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ChangeClusterModeExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Pass dryRun: true to validate the request and inspect the resulting plan
+    ///     // without applying it. Omit it (or set it to false) to trigger the transition.
+    ///     var change = await client.ChangeClusterModeAsync(&quot;RECOVERING&quot;, dryRun: true);
+    /// 
+    ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+    ///     foreach (var operation in change.PlannedChanges)
+    ///     {
+    ///         var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///         Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ChangeClusterModeExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Pass dryRun: true to validate the request and inspect the resulting plan
+    ///     // without applying it. Omit it (or set it to false) to trigger the transition.
+    ///     var change = await client.ChangeClusterModeAsync(&quot;RECOVERING&quot;, dryRun: true);
+    /// 
+    ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+    ///     foreach (var operation in change.PlannedChanges)
+    ///     {
+    ///         var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///         Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ClusterModeChangeResponse> ChangeClusterModeAsync(string mode, bool? dryRun = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        queryParts.Add("mode=" + Uri.EscapeDataString(mode.ToString()!));
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        var path = queryParts.Count > 0 ? $"/mode?{string.Join("&", queryParts)}" : $"/mode";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterModeChangeResponse>(HttpMethod.Patch, path, null, ct), "changeClusterMode", false, ct);
+    }
+
+    /// <summary>
     /// Complete job
     /// Complete a job with the given payload, which allows completing the associated service task.
     /// 

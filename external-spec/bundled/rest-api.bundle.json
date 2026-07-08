@@ -122,6 +122,9 @@
       "name": "Process instance"
     },
     {
+      "name": "Recovery"
+    },
+    {
       "name": "Resource"
     },
     {
@@ -608,12 +611,12 @@
         "summary": "Create agent instance history item",
         "description": "Appends a single history item to an agent instance's conversation history.\nThe created item has commitStatus PENDING until the job identified by jobLease\ncompletes successfully, at which point it transitions to COMMITTED. If the job\nfails or is superseded by a retry, the item is marked DISCARDED.\n",
         "x-semantic-establishes": {
-          "kind": "AgentInstanceIteration",
+          "kind": "AgentInstanceLoopIteration",
           "identifiedBy": [
             {
               "in": "body",
-              "name": "iteration",
-              "semanticType": "IterationId"
+              "name": "loopIteration",
+              "semanticType": "LoopIterationId"
             }
           ]
         },
@@ -18598,6 +18601,101 @@
         "x-added-in-version": "8.5"
       }
     },
+    "/mode": {
+      "patch": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Recovery"
+        ],
+        "operationId": "changeClusterMode",
+        "x-required-permissions": [],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Change cluster mode",
+        "description": "Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.",
+        "parameters": [
+          {
+            "name": "mode",
+            "in": "query",
+            "required": true,
+            "description": "The target cluster mode.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PROCESSING",
+                "RECOVERING"
+              ]
+            }
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "required": false,
+            "description": "If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The mode change request was accepted; returns the planned cluster changes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterModeChangeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/users": {
       "post": {
         "x-eventually-consistent": false,
@@ -20724,7 +20822,7 @@
             ]
           },
           "metrics": {
-            "description": "Aggregated metrics across all iterations of this agent instance.",
+            "description": "Aggregated metrics across all loopIterations of this agent instance.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentInstanceMetrics"
@@ -21168,12 +21266,12 @@
             "description": "Opaque lease token received from the job activation response.",
             "type": "string"
           },
-          "iteration": {
-            "description": "Sequential iteration number this item belongs to. Omit if not grouping items into iterations.",
+          "loopIteration": {
+            "description": "The loopIteration this item belongs to. A loopIteration is one pass through the agent\nfeedback loop: one LLM call, its tool dispatches, and their results. Omit if not grouping\nitems by loopIteration.\n",
             "nullable": true,
             "allOf": [
               {
-                "$ref": "#/components/schemas/IterationId"
+                "$ref": "#/components/schemas/LoopIterationId"
               }
             ]
           },
@@ -21248,7 +21346,7 @@
             "enum": [
               "producedAt",
               "historyItemKey",
-              "iteration"
+              "loopIteration"
             ]
           },
           "order": {
@@ -21319,8 +21417,8 @@
               }
             ]
           },
-          "iteration": {
-            "description": "The iteration number.",
+          "loopIteration": {
+            "description": "Filter by loopIteration number. A loopIteration is one pass through the agent feedback loop (one LLM call, its tool dispatches, and their results).",
             "allOf": [
               {
                 "$ref": "#/components/schemas/IntegerFilterProperty"
@@ -21375,9 +21473,9 @@
           "content",
           "elementInstanceKey",
           "historyItemKey",
-          "iteration",
           "jobKey",
           "jobLease",
+          "loopIteration",
           "metrics",
           "producedAt",
           "role",
@@ -21420,12 +21518,12 @@
             "description": "The lease token of the activation that produced this item.",
             "type": "string"
           },
-          "iteration": {
-            "description": "The sequential iteration number this item belongs to. Null if not provided by the connector.",
+          "loopIteration": {
+            "description": "The loopIteration this item belongs to. A loopIteration is one pass through the agent\nfeedback loop: one LLM call, its tool dispatches, and their results. Null if not provided\nby the connector.\n",
             "nullable": true,
             "allOf": [
               {
-                "$ref": "#/components/schemas/IterationId"
+                "$ref": "#/components/schemas/LoopIterationId"
               }
             ]
           },
@@ -21564,7 +21662,7 @@
       "AgentInstanceObjectContent": {
         "type": "object",
         "title": "Object content",
-        "description": "An arbitrary structured content block.",
+        "description": "An arbitrary structured content block. Accepts any valid JSON value:\nobjects, arrays, numbers, booleans, or strings.\nUse TEXT content for human-readable natural language;\nuse OBJECT content for machine-readable structured data.\n",
         "additionalProperties": false,
         "required": [
           "contentType",
@@ -21577,9 +21675,7 @@
             "example": "OBJECT"
           },
           "object": {
-            "description": "Arbitrary structured content.",
-            "type": "object",
-            "additionalProperties": true
+            "description": "Arbitrary structured content — any valid JSON value (object, array, number, boolean, or string)."
           }
         }
       },
@@ -24576,6 +24672,49 @@
               "unhealthy",
               "dead"
             ]
+          }
+        }
+      },
+      "ClusterModeChangeResponse": {
+        "description": "The planned changes resulting from a cluster mode transition request.",
+        "type": "object",
+        "required": [
+          "changeId",
+          "plannedChanges"
+        ],
+        "properties": {
+          "changeId": {
+            "description": "The ID of the cluster change that was triggered by the request.",
+            "type": "string",
+            "example": "7"
+          },
+          "plannedChanges": {
+            "description": "The ordered list of operations that will be applied to complete the change.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterModeChangeOperation"
+            }
+          }
+        }
+      },
+      "ClusterModeChangeOperation": {
+        "description": "A single operation that is part of a cluster mode change.",
+        "type": "object",
+        "required": [
+          "mode",
+          "operation"
+        ],
+        "properties": {
+          "operation": {
+            "description": "The type of the operation.",
+            "type": "string",
+            "example": "ModeChangeOperation"
+          },
+          "mode": {
+            "description": "The target mode of the operation, if applicable.",
+            "type": "string",
+            "nullable": true,
+            "example": "RECOVERING"
           }
         }
       },
@@ -29687,12 +29826,12 @@
         "maxLength": 256,
         "example": "order-12345"
       },
-      "IterationId": {
-        "description": "A client-provided sequential integer identifying a logical iteration: one LLM\ncall, its tool dispatches, and their results. Must be a positive integer,\nincreasing with each iteration. Established by the\nconnector when appending the first history item of an iteration.\n",
+      "LoopIterationId": {
+        "description": "A client-provided sequential integer identifying one pass through the agent\nfeedback loop: one LLM call, its tool dispatches, and their results. Must be\na positive integer, increasing with each loopIteration. Established by the\nconnector when appending the first history item of a loopIteration.\n",
         "type": "integer",
         "format": "int32",
         "minimum": 1,
-        "x-semantic-type": "IterationId",
+        "x-semantic-type": "LoopIterationId",
         "x-semantic-client-minted": true,
         "example": 1
       },
@@ -31172,6 +31311,11 @@
             ],
             "description": "The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.\n",
             "default": "PROVIDED"
+          },
+          "withLease": {
+            "description": "Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.leaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.\n",
+            "type": "boolean",
+            "nullable": true
           }
         },
         "required": [
@@ -31183,6 +31327,10 @@
           {
             "propertyName": "tenantFilter",
             "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "withLease",
+            "addedInVersion": "8.10"
           }
         ]
       },
@@ -31217,7 +31365,9 @@
           "elementInstanceKey",
           "jobKey",
           "kind",
+          "leaseToken",
           "listenerEventType",
+          "physicalTenantId",
           "priority",
           "processDefinitionId",
           "processDefinitionKey",
@@ -31296,6 +31446,10 @@
             ],
             "description": "The ID of the tenant that owns the job."
           },
+          "physicalTenantId": {
+            "type": "string",
+            "description": "The ID of the physical tenant that the job-activation request was routed to;\nthe default physical tenant when the request did not specify one.\n"
+          },
           "jobKey": {
             "allOf": [
               {
@@ -31368,6 +31522,11 @@
             "description": "The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.\n",
             "type": "integer",
             "format": "int32"
+          },
+          "leaseToken": {
+            "description": "The lease token identifying this activation. This is `null` when the job was\nactivated without a lease.\n",
+            "nullable": true,
+            "type": "string"
           }
         },
         "x-properties-added-in-version": [
@@ -31397,6 +31556,14 @@
           },
           {
             "propertyName": "businessId",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "leaseToken",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "physicalTenantId",
             "addedInVersion": "8.10"
           }
         ]
@@ -32380,6 +32547,7 @@
           "MIGRATED",
           "PRIORITY_UPDATED",
           "RETRIES_UPDATED",
+          "TIMEOUT_UPDATED",
           "TIMED_OUT"
         ]
       },
