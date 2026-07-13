@@ -1236,8 +1236,7 @@ public sealed class ActivatedJobResult
     public int Priority { get; set; }
 
     /// <summary>
-    /// The lease token identifying this activation. This is `null` when the job was
-    /// activated without a lease.
+    /// The lease token identifying this activation. This is `null` when the job was activated without a lease.
     /// 
     /// </summary>
     [JsonPropertyName("leaseToken")]
@@ -16029,6 +16028,15 @@ public sealed class JobCompletionRequest
     [JsonPropertyName("result")]
     public JobResult? Result { get; set; }
 
+    /// <summary>
+    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.leaseToken`.
+    /// For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
+    /// A job that was activated without a lease requires no token.
+    /// 
+    /// </summary>
+    [JsonPropertyName("leaseToken")]
+    public string? LeaseToken { get; set; }
+
 }
 
 /// <summary>
@@ -16056,6 +16064,15 @@ public sealed class JobErrorRequest
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
+
+    /// <summary>
+    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.leaseToken`.
+    /// For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
+    /// A job that was activated without a lease requires no token.
+    /// 
+    /// </summary>
+    [JsonPropertyName("leaseToken")]
+    public string? LeaseToken { get; set; }
 
 }
 
@@ -16190,6 +16207,15 @@ public sealed class JobFailRequest
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
+
+    /// <summary>
+    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.leaseToken`.
+    /// For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
+    /// A job that was activated without a lease requires no token.
+    /// 
+    /// </summary>
+    [JsonPropertyName("leaseToken")]
+    public string? LeaseToken { get; set; }
 
 }
 
@@ -17694,6 +17720,16 @@ public sealed class JobUpdateRequest
     /// </summary>
     [JsonPropertyName("operationReference")]
     public OperationReference? OperationReference { get; set; }
+
+    /// <summary>
+    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.leaseToken`.
+    /// For a leased job, a supplied token is validated to prove the command comes from the worker that holds the current lease; a command carrying a stale token is rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
+    /// An update without a token always applies to support operator and bulk updates of leased jobs. Note that this is different from lifecycle requests like complete, fail, and throw-error that always require a token for leased jobs.
+    /// A job that was activated without a lease requires no token.
+    /// 
+    /// </summary>
+    [JsonPropertyName("leaseToken")]
+    public string? LeaseToken { get; set; }
 
 }
 
@@ -22841,6 +22877,31 @@ public enum ResourceTypeEnum
     USER,
     [JsonPropertyName("USER_TASK")]
     USERTASK,
+}
+
+/// <summary>
+/// Describes a restore request. Provide either a list of backup IDs or a time range (`from`/`to`) that selects the backups to restore; the two are mutually exclusive.
+/// </summary>
+public sealed class RestoreRequest
+{
+    /// <summary>
+    /// The start of the time range to restore from, as an ISO 8601 timestamp.
+    /// </summary>
+    [JsonPropertyName("from")]
+    public DateTimeOffset? From { get; set; }
+
+    /// <summary>
+    /// The end of the time range to restore from, as an ISO 8601 timestamp.
+    /// </summary>
+    [JsonPropertyName("to")]
+    public DateTimeOffset? To { get; set; }
+
+    /// <summary>
+    /// The IDs of the backups to restore from, one per partition.
+    /// </summary>
+    [JsonPropertyName("backupIds")]
+    public List<long>? BackupIds { get; set; }
+
 }
 
 /// <summary>
