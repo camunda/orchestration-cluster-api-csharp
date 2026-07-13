@@ -13357,6 +13357,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ResolveProcessInstanceIncidentsAsync
   nameWithType: CamundaClient.ResolveProcessInstanceIncidentsAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest,System.Threading.CancellationToken)
+  name: RestoreAsync(RestoreRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync.html#Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.RestoreAsync(RestoreRequest, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync*
+  name: RestoreAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync
+  nameWithType: CamundaClient.RestoreAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey,System.Threading.CancellationToken)
   name: ResumeBatchOperationAsync(BatchOperationKey, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeBatchOperationAsync_Camunda_Orchestration_Sdk_BatchOperationKey_System_Threading_CancellationToken_
@@ -28600,6 +28612,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.JobCompletionRequest
   fullName: Camunda.Orchestration.Sdk.JobCompletionRequest
   nameWithType: JobCompletionRequest
+- uid: Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken.html#Camunda_Orchestration_Sdk_JobCompletionRequest_LeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
+  nameWithType: JobCompletionRequest.LeaseToken
+- uid: Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken*
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
+  nameWithType: JobCompletionRequest.LeaseToken
 - uid: Camunda.Orchestration.Sdk.JobCompletionRequest.Result
   name: Result
   href: api/Camunda.Orchestration.Sdk.JobCompletionRequest.Result.html#Camunda_Orchestration_Sdk_JobCompletionRequest_Result
@@ -28654,6 +28678,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobErrorRequest.ErrorMessage
   fullName: Camunda.Orchestration.Sdk.JobErrorRequest.ErrorMessage
   nameWithType: JobErrorRequest.ErrorMessage
+- uid: Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken.html#Camunda_Orchestration_Sdk_JobErrorRequest_LeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
+  nameWithType: JobErrorRequest.LeaseToken
+- uid: Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken*
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
+  nameWithType: JobErrorRequest.LeaseToken
 - uid: Camunda.Orchestration.Sdk.JobErrorRequest.Variables
   name: Variables
   href: api/Camunda.Orchestration.Sdk.JobErrorRequest.Variables.html#Camunda_Orchestration_Sdk_JobErrorRequest_Variables
@@ -28852,6 +28888,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobFailRequest.ErrorMessage
   fullName: Camunda.Orchestration.Sdk.JobFailRequest.ErrorMessage
   nameWithType: JobFailRequest.ErrorMessage
+- uid: Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken.html#Camunda_Orchestration_Sdk_JobFailRequest_LeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
+  nameWithType: JobFailRequest.LeaseToken
+- uid: Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken*
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
+  nameWithType: JobFailRequest.LeaseToken
 - uid: Camunda.Orchestration.Sdk.JobFailRequest.Retries
   name: Retries
   href: api/Camunda.Orchestration.Sdk.JobFailRequest.Retries.html#Camunda_Orchestration_Sdk_JobFailRequest_Retries
@@ -31252,6 +31300,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobUpdateRequest.Changeset
   fullName: Camunda.Orchestration.Sdk.JobUpdateRequest.Changeset
   nameWithType: JobUpdateRequest.Changeset
+- uid: Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken.html#Camunda_Orchestration_Sdk_JobUpdateRequest_LeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
+  nameWithType: JobUpdateRequest.LeaseToken
+- uid: Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken*
+  name: LeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
+  nameWithType: JobUpdateRequest.LeaseToken
 - uid: Camunda.Orchestration.Sdk.JobUpdateRequest.OperationReference
   name: OperationReference
   href: api/Camunda.Orchestration.Sdk.JobUpdateRequest.OperationReference.html#Camunda_Orchestration_Sdk_JobUpdateRequest_OperationReference
@@ -40015,6 +40075,48 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.ResourceTypeEnum.USERTASK
   fullName: Camunda.Orchestration.Sdk.ResourceTypeEnum.USERTASK
   nameWithType: ResourceTypeEnum.USERTASK
+- uid: Camunda.Orchestration.Sdk.RestoreRequest
+  name: RestoreRequest
+  href: api/Camunda.Orchestration.Sdk.RestoreRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.RestoreRequest
+  fullName: Camunda.Orchestration.Sdk.RestoreRequest
+  nameWithType: RestoreRequest
+- uid: Camunda.Orchestration.Sdk.RestoreRequest.BackupIds
+  name: BackupIds
+  href: api/Camunda.Orchestration.Sdk.RestoreRequest.BackupIds.html#Camunda_Orchestration_Sdk_RestoreRequest_BackupIds
+  commentId: P:Camunda.Orchestration.Sdk.RestoreRequest.BackupIds
+  fullName: Camunda.Orchestration.Sdk.RestoreRequest.BackupIds
+  nameWithType: RestoreRequest.BackupIds
+- uid: Camunda.Orchestration.Sdk.RestoreRequest.BackupIds*
+  name: BackupIds
+  href: api/Camunda.Orchestration.Sdk.RestoreRequest.BackupIds.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RestoreRequest.BackupIds
+  fullName: Camunda.Orchestration.Sdk.RestoreRequest.BackupIds
+  nameWithType: RestoreRequest.BackupIds
+- uid: Camunda.Orchestration.Sdk.RestoreRequest.From
+  name: From
+  href: api/Camunda.Orchestration.Sdk.RestoreRequest.From.html#Camunda_Orchestration_Sdk_RestoreRequest_From
+  commentId: P:Camunda.Orchestration.Sdk.RestoreRequest.From
+  fullName: Camunda.Orchestration.Sdk.RestoreRequest.From
+  nameWithType: RestoreRequest.From
+- uid: Camunda.Orchestration.Sdk.RestoreRequest.From*
+  name: From
+  href: api/Camunda.Orchestration.Sdk.RestoreRequest.From.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RestoreRequest.From
+  fullName: Camunda.Orchestration.Sdk.RestoreRequest.From
+  nameWithType: RestoreRequest.From
+- uid: Camunda.Orchestration.Sdk.RestoreRequest.To
+  name: To
+  href: api/Camunda.Orchestration.Sdk.RestoreRequest.To.html#Camunda_Orchestration_Sdk_RestoreRequest_To
+  commentId: P:Camunda.Orchestration.Sdk.RestoreRequest.To
+  fullName: Camunda.Orchestration.Sdk.RestoreRequest.To
+  nameWithType: RestoreRequest.To
+- uid: Camunda.Orchestration.Sdk.RestoreRequest.To*
+  name: To
+  href: api/Camunda.Orchestration.Sdk.RestoreRequest.To.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RestoreRequest.To
+  fullName: Camunda.Orchestration.Sdk.RestoreRequest.To
+  nameWithType: RestoreRequest.To
 - uid: Camunda.Orchestration.Sdk.RetryDecision
   name: RetryDecision
   href: api/Camunda.Orchestration.Sdk.RetryDecision.html
