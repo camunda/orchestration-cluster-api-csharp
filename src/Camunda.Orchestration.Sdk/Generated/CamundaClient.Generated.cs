@@ -5515,6 +5515,65 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Restore from a backup
+    /// Restores the cluster from a backup. The restore is described either by a single backup ID or by a time range (`from`/`to`) that selects the backups to restore. This endpoint is only accessible while the cluster is in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.
+    /// </summary>
+    /// <remarks>
+    /// Operation: restore
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task RestoreExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // The cluster must be in recovery mode before a restore is accepted.
+    ///     // Provide either a list of backup IDs (one per partition) or a time
+    ///     // range (From/To) that selects the backups to restore, but not both.
+    ///     var change = await client.RestoreAsync(new RestoreRequest
+    ///     {
+    ///         BackupIds = new List&lt;long&gt; { 100, 101 },
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+    ///     foreach (var operation in change.PlannedChanges)
+    ///     {
+    ///         var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///         Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task RestoreExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // The cluster must be in recovery mode before a restore is accepted.
+    ///     // Provide either a list of backup IDs (one per partition) or a time
+    ///     // range (From/To) that selects the backups to restore, but not both.
+    ///     var change = await client.RestoreAsync(new RestoreRequest
+    ///     {
+    ///         BackupIds = new List&lt;long&gt; { 100, 101 },
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+    ///     foreach (var operation in change.PlannedChanges)
+    ///     {
+    ///         var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///         Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ClusterModeChangeResponse> RestoreAsync(RestoreRequest body, CancellationToken ct = default)
+    {
+        var path = $"/restore";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterModeChangeResponse>(HttpMethod.Post, path, body, ct), "restore", false, ct);
+    }
+
+    /// <summary>
     /// Resume Batch operation
     /// Resumes a suspended batch operation.
     /// This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).

@@ -18696,6 +18696,89 @@
         "x-added-in-version": "8.10"
       }
     },
+    "/restore": {
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Recovery"
+        ],
+        "operationId": "restore",
+        "x-required-permissions": [],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Restore from a backup",
+        "description": "Restores the cluster from a backup. The restore is described either by a single backup ID or by a time range (`from`/`to`) that selects the backups to restore. This endpoint is only accessible while the cluster is in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestoreRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "The restore request was accepted; returns the planned cluster changes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterModeChangeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The cluster is not in recovery mode, so the restore cannot be accepted."
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/users": {
       "post": {
         "x-eventually-consistent": false,
@@ -24715,6 +24798,39 @@
             "type": "string",
             "nullable": true,
             "example": "RECOVERING"
+          }
+        }
+      },
+      "RestoreRequest": {
+        "description": "Describes a restore request. Provide either a list of backup IDs or a time range (`from`/`to`) that selects the backups to restore; the two are mutually exclusive.",
+        "type": "object",
+        "properties": {
+          "from": {
+            "description": "The start of the time range to restore from, as an ISO 8601 timestamp.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2024-01-01T10:00:00Z"
+          },
+          "to": {
+            "description": "The end of the time range to restore from, as an ISO 8601 timestamp.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2024-01-01T12:00:00Z"
+          },
+          "backupIds": {
+            "description": "The IDs of the backups to restore from, one per partition.",
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": [
+              100,
+              101
+            ]
           }
         }
       },
@@ -31524,7 +31640,7 @@
             "format": "int32"
           },
           "leaseToken": {
-            "description": "The lease token identifying this activation. This is `null` when the job was\nactivated without a lease.\n",
+            "description": "The lease token identifying this activation. This is `null` when the job was activated without a lease.\n",
             "nullable": true,
             "type": "string"
           }
@@ -32247,8 +32363,19 @@
             "description": "JSON object that will instantiate the variables at the local scope of the job's associated task.\n",
             "type": "object",
             "additionalProperties": true
+          },
+          "leaseToken": {
+            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
+            "type": "string",
+            "nullable": true
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "leaseToken",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "JobErrorRequest": {
         "type": "object",
@@ -32268,10 +32395,21 @@
             "description": "JSON object that will instantiate the variables at the local scope of the error catch event that catches the thrown error.\n",
             "type": "object",
             "nullable": true
+          },
+          "leaseToken": {
+            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
           "errorCode"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "leaseToken",
+            "addedInVersion": "8.10"
+          }
         ]
       },
       "JobCompletionRequest": {
@@ -32286,12 +32424,21 @@
           },
           "result": {
             "$ref": "#/components/schemas/JobResult"
+          },
+          "leaseToken": {
+            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
+            "type": "string",
+            "nullable": true
           }
         },
         "x-properties-added-in-version": [
           {
             "propertyName": "result",
             "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "leaseToken",
+            "addedInVersion": "8.10"
           }
         ]
       },
@@ -32446,6 +32593,11 @@
           },
           "operationReference": {
             "$ref": "#/components/schemas/OperationReference"
+          },
+          "leaseToken": {
+            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.\nFor a leased job, a supplied token is validated to prove the command comes from the worker that holds the current lease; a command carrying a stale token is rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nAn update without a token always applies to support operator and bulk updates of leased jobs. Note that this is different from lifecycle requests like complete, fail, and throw-error that always require a token for leased jobs.\nA job that was activated without a lease requires no token.\n",
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -32455,6 +32607,10 @@
           {
             "propertyName": "operationReference",
             "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "leaseToken",
+            "addedInVersion": "8.10"
           }
         ]
       },

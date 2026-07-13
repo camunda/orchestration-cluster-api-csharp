@@ -1283,6 +1283,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#Restore)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.RunWorkersAsync(System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
 example:
 - *content

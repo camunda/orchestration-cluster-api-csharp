@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:280d2e6b69d447778def1673ffe33375e21960b31e259ddade66fc7feea6a3e1",
+  "specHash": "sha256:bf97c32b4090a2316b417ebf3d024c5476a4d941b24e8dce133e785685effe26",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -10139,6 +10139,36 @@
       }
     },
     {
+      "operationId": "restore",
+      "path": "/restore",
+      "method": "post",
+      "tags": [
+        "Recovery"
+      ],
+      "summary": "Restore from a backup",
+      "description": "Restores the cluster from a backup. The restore is described either by a single backup ID or by a time range (`from`/`to`) that selects the backups to restore. This endpoint is only accessible while the cluster is in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "RestoreRequest",
+      "successResponseSchemaRef": "ClusterModeChangeResponse",
+      "successStatus": 202,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "createUser",
       "path": "/users",
       "method": "post",
@@ -11078,7 +11108,7 @@
   "integrity": {
     "totalSemanticKeys": 41,
     "totalUnions": 64,
-    "totalOperations": 196,
+    "totalOperations": 197,
     "totalEventuallyConsistent": 91,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23

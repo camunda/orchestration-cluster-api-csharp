@@ -1613,6 +1613,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult> SearchBatchOperationsAsync(Camunda.Orchestration.Sdk.BatchOperationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CamundaUserResult> GetAuthenticationAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsync(System.String mode, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> GetGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.ClusterVariableName name, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ClusterVariableResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -3676,12 +3677,14 @@ TYPE Camunda.Orchestration.Sdk.JobCompletionRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.JobResult? Result { get; set; } [JsonPropertyName("result")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
+  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.JobErrorRequest : sealed class
   CTOR ()
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
   PROP System.String ErrorCode { get; set; } [JsonPropertyName("errorCode")]
   PROP System.String? ErrorMessage { get; set; } [JsonPropertyName("errorMessage")]
+  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.JobErrorStatisticsFilter : sealed class
   CTOR ()
@@ -3713,6 +3716,7 @@ TYPE Camunda.Orchestration.Sdk.JobFailRequest : sealed class
   PROP System.Int64? RetryBackOff { get; set; } [JsonPropertyName("retryBackOff")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
   PROP System.String? ErrorMessage { get; set; } [JsonPropertyName("errorMessage")]
+  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.JobFailureException : sealed class base=System.Exception interfaces=[System.Runtime.Serialization.ISerializable]
   CTOR (System.String message, System.Int32? retries = null, System.Int64? retryBackOffMs = null)
@@ -4034,6 +4038,7 @@ TYPE Camunda.Orchestration.Sdk.JobUpdateRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.JobChangeset Changeset { get; set; } [JsonPropertyName("changeset")]
   PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
+  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.JobWaitStateDetails : sealed class base=Camunda.Orchestration.Sdk.WaitStateDetails
   CTOR ()
@@ -5216,6 +5221,12 @@ TYPE Camunda.Orchestration.Sdk.ResourceTypeEnum : enum interfaces=[System.ICompa
   MEMBER TENANT = 17 json="TENANT"
   MEMBER USER = 18 json="USER"
   MEMBER USERTASK = 19 json="USER_TASK"
+
+TYPE Camunda.Orchestration.Sdk.RestoreRequest : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<System.Int64>? BackupIds { get; set; } [JsonPropertyName("backupIds")]
+  PROP System.DateTimeOffset? From { get; set; } [JsonPropertyName("from")]
+  PROP System.DateTimeOffset? To { get; set; } [JsonPropertyName("to")]
 
 TYPE Camunda.Orchestration.Sdk.RetryDecision : struct interfaces=[System.IEquatable<Camunda.Orchestration.Sdk.RetryDecision>]
   CTOR (System.Boolean Retryable, System.String Reason)
