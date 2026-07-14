@@ -103,3 +103,92 @@ public class ConfigSingleSourceGuardTests
         Assert.Equal(c.Eventual!.PollDefaultMs, eventual.PollDefaultMs);
     }
 }
+
+/// <summary>
+/// Integrity guards for the <see cref="ConfigSchema"/> registry itself (single source of
+/// truth). These lock the schema's internal consistency and its wiring into the config
+/// classes, so drift is caught at test time rather than shipped.
+/// </summary>
+public class ConfigSchemaIntegrityTests
+{
+    [Fact]
+    public void IntTypedDefaultsAreParseable()
+    {
+        foreach (var d in ConfigSchema.All.Where(d => d.Type == ConfigValueType.Int && d.Default != null))
+        {
+            Assert.True(
+                int.TryParse(d.Default, out _),
+                $"{d.EnvVar} is declared Int but its default '{d.Default}' is not an integer.");
+        }
+    }
+
+    [Fact]
+    public void EnumDefaultsAreWithinChoices()
+    {
+        foreach (var d in ConfigSchema.All.Where(d => d.Type == ConfigValueType.Enum && d.Default != null))
+        {
+            Assert.NotNull(d.Choices);
+            Assert.Contains(d.Default, d.Choices!);
+        }
+    }
+
+    [Fact]
+    public void ConfigPathsMapToExactlyOneEnvVar()
+    {
+        var duplicates = ConfigSchema.All
+            .SelectMany(d => d.ConfigPaths.Select(p => (Path: p, d.EnvVar)))
+            .GroupBy(x => x.Path, StringComparer.OrdinalIgnoreCase)
+            .Where(g => g.Select(x => x.EnvVar).Distinct().Count() > 1)
+            .Select(g => g.Key)
+            .ToList();
+
+        Assert.Empty(duplicates);
+    }
+
+    [Fact]
+    public void EnvVarsAreUnique()
+    {
+        var dupes = ConfigSchema.All
+            .GroupBy(d => d.EnvVar, StringComparer.Ordinal)
+            .Where(g => g.Count() > 1)
+            .Select(g => g.Key)
+            .ToList();
+
+        Assert.Empty(dupes);
+    }
+
+    /// <summary>
+    /// The sub-config initializer defaults must be sourced from the schema (not restated
+    /// literals). Assert equality directly against the schema so a divergent literal fails.
+    /// </summary>
+    [Fact]
+    public void SubConfigDefaultsAreSourcedFromSchema()
+    {
+        var httpRetry = new HttpRetryConfig();
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.HttpRetryMaxAttempts), httpRetry.MaxAttempts);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.HttpRetryBaseDelayMs), httpRetry.BaseDelayMs);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.HttpRetryMaxDelayMs), httpRetry.MaxDelayMs);
+
+        var bp = new BackpressureConfig();
+        Assert.Equal(ConfigSchema.StringDefault(ConfigKeys.BackpressureProfile), bp.Profile);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.BackpressureInitialMax), bp.InitialMax);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.BackpressureSoftFactor) / 100.0, bp.SoftFactor);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.BackpressureSevereFactor) / 100.0, bp.SevereFactor);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.BackpressureRecoveryIntervalMs), bp.RecoveryIntervalMs);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.BackpressureRecoveryStep), bp.RecoveryStep);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.BackpressureDecayQuietMs), bp.DecayQuietMs);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.BackpressureFloor), bp.Floor);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.BackpressureSevereThreshold), bp.SevereThreshold);
+
+        var oauth = new OAuthConfig();
+        Assert.Equal(ConfigSchema.StringDefault(ConfigKeys.OAuthGrantType), oauth.GrantType);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.OAuthTimeoutMs), oauth.TimeoutMs);
+
+        var oauthRetry = new OAuthRetryConfig();
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.OAuthRetryMax), oauthRetry.Max);
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.OAuthRetryBaseDelayMs), oauthRetry.BaseDelayMs);
+
+        Assert.Equal(ConfigSchema.IntDefault(ConfigKeys.EventualPollDefaultMs), new EventualConfig().PollDefaultMs);
+        Assert.Equal(ConfigSchema.StringDefault(ConfigKeys.Validation), new ValidationConfig().Raw);
+    }
+}
