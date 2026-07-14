@@ -42,33 +42,10 @@ public sealed class CamundaConfigurationException : Exception
 /// </summary>
 public static class ConfigurationHydrator
 {
-    private static readonly Dictionary<string, string> Defaults = new()
-    {
-        ["CAMUNDA_REST_ADDRESS"] = "http://localhost:8080/v2",
-        ["CAMUNDA_TOKEN_AUDIENCE"] = "zeebe.camunda.io",
-        ["CAMUNDA_DEFAULT_TENANT_ID"] = "<default>",
-        ["CAMUNDA_AUTH_STRATEGY"] = "NONE",
-        ["CAMUNDA_OAUTH_URL"] = "https://login.cloud.camunda.io/oauth/token",
-        ["CAMUNDA_OAUTH_GRANT_TYPE"] = "client_credentials",
-        ["CAMUNDA_OAUTH_TIMEOUT_MS"] = "5000",
-        ["CAMUNDA_OAUTH_RETRY_MAX"] = "5",
-        ["CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS"] = "1000",
-        ["CAMUNDA_SDK_LOG_LEVEL"] = "error",
-        ["CAMUNDA_SDK_VALIDATION"] = "req:none,res:none",
-        ["CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS"] = "3",
-        ["CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS"] = "100",
-        ["CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS"] = "2000",
-        ["CAMUNDA_SDK_BACKPRESSURE_PROFILE"] = "BALANCED",
-        ["CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS"] = "500",
-    };
+    // Defaults and secret keys are derived from the single-source ConfigSchema.
+    private static readonly IReadOnlyDictionary<string, string> Defaults = ConfigSchema.Defaults;
 
-    private static readonly HashSet<string> SecretKeys =
-    [
-        "CAMUNDA_CLIENT_SECRET",
-        "CAMUNDA_BASIC_AUTH_PASSWORD",
-        "CAMUNDA_MTLS_KEY",
-        "CAMUNDA_MTLS_KEY_PASSPHRASE",
-    ];
+    private static readonly IReadOnlySet<string> SecretKeys = ConfigSchema.SecretKeys;
 
     /// <summary>
     /// Hydrate configuration from environment and optional overrides.
@@ -93,31 +70,18 @@ public static class ConfigurationHydrator
         }
         else
         {
-            // Read from actual environment
-            foreach (var key in Defaults.Keys)
+            // Read every schema key (and its legacy aliases) from the actual environment.
+            foreach (var key in ConfigSchema.AllEnvVars)
             {
                 var v = Environment.GetEnvironmentVariable(key);
                 if (v != null && v.Trim().Length > 0)
                     input[key] = v.Trim();
             }
-            // Also check for CAMUNDA_CLIENT_ID, CAMUNDA_CLIENT_SECRET, etc.
-            foreach (var extra in new[]
-                     {
-                         "CAMUNDA_CLIENT_ID", "CAMUNDA_CLIENT_SECRET",
-                         "CAMUNDA_BASIC_AUTH_USERNAME", "CAMUNDA_BASIC_AUTH_PASSWORD",
-                         "CAMUNDA_OAUTH_SCOPE", "CAMUNDA_OAUTH_CACHE_DIR",
-                         "ZEEBE_REST_ADDRESS",
-                         "CAMUNDA_WORKER_TIMEOUT", "CAMUNDA_WORKER_MAX_CONCURRENT_JOBS",
-                         "CAMUNDA_WORKER_REQUEST_TIMEOUT", "CAMUNDA_WORKER_NAME",
-                         "CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS",
-                         "CAMUNDA_MTLS_CERT", "CAMUNDA_MTLS_KEY", "CAMUNDA_MTLS_CA",
-                         "CAMUNDA_MTLS_CERT_PATH", "CAMUNDA_MTLS_KEY_PATH", "CAMUNDA_MTLS_CA_PATH",
-                         "CAMUNDA_MTLS_KEY_PASSPHRASE"
-                     })
+            foreach (var (alias, _) in ConfigSchema.Aliases)
             {
-                var v = Environment.GetEnvironmentVariable(extra);
+                var v = Environment.GetEnvironmentVariable(alias);
                 if (v != null && v.Trim().Length > 0)
-                    input[extra] = v.Trim();
+                    input[alias] = v.Trim();
             }
         }
 
@@ -139,9 +103,12 @@ public static class ConfigurationHydrator
             }
         }
 
-        // Alias: ZEEBE_REST_ADDRESS → CAMUNDA_REST_ADDRESS
-        if (!input.ContainsKey("CAMUNDA_REST_ADDRESS") && input.TryGetValue("ZEEBE_REST_ADDRESS", out var zeebe))
-            input["CAMUNDA_REST_ADDRESS"] = zeebe;
+        // Aliases: accept schema-declared legacy env-var names when the canonical key is unset.
+        foreach (var (alias, envVar) in ConfigSchema.Aliases)
+        {
+            if (!input.ContainsKey(envVar) && input.TryGetValue(alias, out var aliasVal))
+                input[envVar] = aliasVal;
+        }
 
         // Fill defaults for missing keys
         foreach (var (k, def) in Defaults)
@@ -460,61 +427,11 @@ public static class ConfigurationHydrator
     }
 
     /// <summary>
-    /// Maps PascalCase <c>IConfiguration</c> keys (from <c>appsettings.json</c>) to canonical <c>CAMUNDA_*</c> env-var names.
-    /// Supports both flat keys (<c>"RestAddress"</c>) and nested sections (<c>"Auth:Strategy"</c>, <c>"Backpressure:Profile"</c>).
+    /// Maps PascalCase <c>IConfiguration</c> keys (from <c>appsettings.json</c>) to canonical
+    /// <c>CAMUNDA_*</c> env-var names. Derived from the single-source <see cref="ConfigSchema"/>
+    /// (each descriptor's <c>ConfigPaths</c>).
     /// </summary>
-    private static readonly Dictionary<string, string> ConfigKeyMap = new(StringComparer.OrdinalIgnoreCase)
-    {
-        // Top-level
-        ["RestAddress"] = "CAMUNDA_REST_ADDRESS",
-        ["TokenAudience"] = "CAMUNDA_TOKEN_AUDIENCE",
-        ["DefaultTenantId"] = "CAMUNDA_DEFAULT_TENANT_ID",
-        ["LogLevel"] = "CAMUNDA_SDK_LOG_LEVEL",
-        ["Validation"] = "CAMUNDA_SDK_VALIDATION",
-
-        // Auth section
-        ["Auth:Strategy"] = "CAMUNDA_AUTH_STRATEGY",
-        ["Auth:ClientId"] = "CAMUNDA_CLIENT_ID",
-        ["Auth:ClientSecret"] = "CAMUNDA_CLIENT_SECRET",
-        ["Auth:BasicUsername"] = "CAMUNDA_BASIC_AUTH_USERNAME",
-        ["Auth:BasicPassword"] = "CAMUNDA_BASIC_AUTH_PASSWORD",
-
-        // OAuth section
-        ["OAuth:Url"] = "CAMUNDA_OAUTH_URL",
-        ["OAuth:ClientId"] = "CAMUNDA_CLIENT_ID",
-        ["OAuth:ClientSecret"] = "CAMUNDA_CLIENT_SECRET",
-        ["OAuth:GrantType"] = "CAMUNDA_OAUTH_GRANT_TYPE",
-        ["OAuth:Scope"] = "CAMUNDA_OAUTH_SCOPE",
-        ["OAuth:TimeoutMs"] = "CAMUNDA_OAUTH_TIMEOUT_MS",
-        ["OAuth:RetryMax"] = "CAMUNDA_OAUTH_RETRY_MAX",
-        ["OAuth:RetryBaseDelayMs"] = "CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS",
-
-        // HTTP Retry section
-        ["HttpRetry:MaxAttempts"] = "CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS",
-        ["HttpRetry:BaseDelayMs"] = "CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS",
-        ["HttpRetry:MaxDelayMs"] = "CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS",
-
-        // Backpressure section
-        ["Backpressure:Profile"] = "CAMUNDA_SDK_BACKPRESSURE_PROFILE",
-        ["Backpressure:InitialMax"] = "CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX",
-        ["Backpressure:SoftFactor"] = "CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR",
-        ["Backpressure:SevereFactor"] = "CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR",
-        ["Backpressure:RecoveryIntervalMs"] = "CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS",
-        ["Backpressure:RecoveryStep"] = "CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP",
-        ["Backpressure:DecayQuietMs"] = "CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS",
-        ["Backpressure:Floor"] = "CAMUNDA_SDK_BACKPRESSURE_FLOOR",
-        ["Backpressure:SevereThreshold"] = "CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD",
-
-        // Eventual consistency
-        ["Eventual:PollDefaultMs"] = "CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS",
-
-        // Worker defaults
-        ["Worker:Timeout"] = "CAMUNDA_WORKER_TIMEOUT",
-        ["Worker:MaxConcurrentJobs"] = "CAMUNDA_WORKER_MAX_CONCURRENT_JOBS",
-        ["Worker:RequestTimeout"] = "CAMUNDA_WORKER_REQUEST_TIMEOUT",
-        ["Worker:Name"] = "CAMUNDA_WORKER_NAME",
-        ["Worker:StartupJitterMaxSeconds"] = "CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS",
-    };
+    private static readonly IReadOnlyDictionary<string, string> ConfigKeyMap = ConfigSchema.ConfigKeyMap;
 
     /// <summary>
     /// Extract configuration values from an <see cref="IConfiguration"/> section,
