@@ -62,8 +62,9 @@ public static class ConfigurationHydrator
         {
             foreach (var (k, v) in env)
             {
-                if (v != null && v.Trim().Length > 0)
-                    input[k] = v.Trim();
+                var trimmed = v?.Trim();
+                if (!string.IsNullOrEmpty(trimmed))
+                    input[k] = trimmed;
             }
         }
         else
@@ -71,15 +72,15 @@ public static class ConfigurationHydrator
             // Read every schema key (and its legacy aliases) from the actual environment.
             foreach (var key in ConfigSchema.AllEnvVars)
             {
-                var v = Environment.GetEnvironmentVariable(key);
-                if (v != null && v.Trim().Length > 0)
-                    input[key] = v.Trim();
+                var trimmed = Environment.GetEnvironmentVariable(key)?.Trim();
+                if (!string.IsNullOrEmpty(trimmed))
+                    input[key] = trimmed;
             }
             foreach (var (alias, _) in ConfigSchema.Aliases)
             {
-                var v = Environment.GetEnvironmentVariable(alias);
-                if (v != null && v.Trim().Length > 0)
-                    input[alias] = v.Trim();
+                var trimmed = Environment.GetEnvironmentVariable(alias)?.Trim();
+                if (!string.IsNullOrEmpty(trimmed))
+                    input[alias] = trimmed;
             }
         }
 
@@ -273,7 +274,7 @@ public static class ConfigurationHydrator
             throw new CamundaConfigurationException(errors);
 
         // Normalize restAddress to /v2
-        var restAddress = rawMap.GetValueOrDefault("CAMUNDA_REST_ADDRESS", "")!;
+        var restAddress = rawMap.GetValueOrDefault(ConfigKeys.RestAddress, ConfigSchema.StringDefault(ConfigKeys.RestAddress))!;
         if (!string.IsNullOrEmpty(restAddress) && !restAddress.TrimEnd('/').EndsWith("/v2", StringComparison.OrdinalIgnoreCase))
             restAddress = restAddress.TrimEnd('/') + "/v2";
 
@@ -283,7 +284,7 @@ public static class ConfigurationHydrator
         return new CamundaConfig
         {
             RestAddress = restAddress,
-            TokenAudience = rawMap.GetValueOrDefault("CAMUNDA_TOKEN_AUDIENCE", "")!,
+            TokenAudience = rawMap.GetValueOrDefault(ConfigKeys.TokenAudience, ConfigSchema.StringDefault(ConfigKeys.TokenAudience))!,
             DefaultTenantId = rawMap.GetValueOrDefault(ConfigKeys.DefaultTenantId, ConfigSchema.StringDefault(ConfigKeys.DefaultTenantId))!,
             HttpRetry = new HttpRetryConfig
             {
@@ -309,7 +310,7 @@ public static class ConfigurationHydrator
             {
                 ClientId = rawMap.GetValueOrDefault("CAMUNDA_CLIENT_ID"),
                 ClientSecret = rawMap.GetValueOrDefault("CAMUNDA_CLIENT_SECRET"),
-                OAuthUrl = rawMap.GetValueOrDefault("CAMUNDA_OAUTH_URL", "")!,
+                OAuthUrl = rawMap.GetValueOrDefault(ConfigKeys.OAuthUrl, ConfigSchema.StringDefault(ConfigKeys.OAuthUrl))!,
                 GrantType = rawMap.GetValueOrDefault(ConfigKeys.OAuthGrantType, ConfigSchema.StringDefault(ConfigKeys.OAuthGrantType))!,
                 Scope = rawMap.GetValueOrDefault("CAMUNDA_OAUTH_SCOPE"),
                 TimeoutMs = oauthTimeoutMs,
