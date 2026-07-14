@@ -117,8 +117,8 @@ public class ConfigSchemaIntegrityTests
         foreach (var d in ConfigSchema.All.Where(d => d.Type == ConfigValueType.Int && d.Default != null))
         {
             Assert.True(
-                int.TryParse(d.Default, out _),
-                $"{d.EnvVar} is declared Int but its default '{d.Default}' is not an integer.");
+                int.TryParse(d.Default, System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out _),
+                $"{d.EnvVar} is declared Int but its default '{d.Default}' is not an unsigned invariant integer.");
         }
     }
 

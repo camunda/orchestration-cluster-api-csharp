@@ -171,4 +171,25 @@ public class ConfigurationTests
         Assert.Equal("****efgh", ConfigurationHydrator.RedactSecret("abcdefgh"));
         Assert.Equal("**", ConfigurationHydrator.RedactSecret("ab"));
     }
+
+    [Fact]
+    public void RejectsNegativeValueForUnsignedIntegerKey()
+    {
+        // Unsigned int keys must reject a negative value, matching ParseInt's contract.
+        var act = () => ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?> { ["CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS"] = "-1" });
+
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains(ex.Errors, e => e.Code == ConfigErrorCode.InvalidInteger);
+    }
+
+    [Fact]
+    public void AcceptsNegativeWorkerRequestTimeout()
+    {
+        // CAMUNDA_WORKER_REQUEST_TIMEOUT is signed: a negative value disables long polling.
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?> { ["CAMUNDA_WORKER_REQUEST_TIMEOUT"] = "-1" });
+
+        Assert.Equal(-1, config.WorkerDefaults!.PollTimeoutMs);
+    }
 }

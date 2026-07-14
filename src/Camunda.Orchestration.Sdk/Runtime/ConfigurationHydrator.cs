@@ -215,17 +215,34 @@ public static class ConfigurationHydrator
             || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA"))
             || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA_PATH"));
 
-        // Validate integers
+        // Validate integers. Unsigned + invariant to match the contract in the error
+        // message: rejects signs, whitespace, digit separators, and decimals.
         int ParseInt(string key, int fallback)
         {
             var raw = rawMap.GetValueOrDefault(key, fallback.ToString(System.Globalization.CultureInfo.InvariantCulture))!;
-            if (int.TryParse(raw, out var val))
+            if (int.TryParse(raw.Trim(), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var val))
                 return val;
             errors.Add(new ConfigErrorDetail
             {
                 Code = ConfigErrorCode.InvalidInteger,
                 Key = key,
                 Message = $"Invalid integer '{raw}'. Only unsigned base-10 integers allowed."
+            });
+            return fallback;
+        }
+
+        // Signed integer parse (invariant) for keys documented to accept negatives,
+        // e.g. CAMUNDA_WORKER_REQUEST_TIMEOUT (negative = long polling disabled).
+        int ParseSignedInt(string key, int fallback)
+        {
+            var raw = rawMap.GetValueOrDefault(key, fallback.ToString(System.Globalization.CultureInfo.InvariantCulture))!;
+            if (int.TryParse(raw.Trim(), System.Globalization.NumberStyles.AllowLeadingSign, System.Globalization.CultureInfo.InvariantCulture, out var val))
+                return val;
+            errors.Add(new ConfigErrorDetail
+            {
+                Code = ConfigErrorCode.InvalidInteger,
+                Key = key,
+                Message = $"Invalid integer '{raw}'. Only base-10 integers (optionally negative) allowed."
             });
             return fallback;
         }
@@ -260,8 +277,8 @@ public static class ConfigurationHydrator
         int? workerMaxConcurrent = rawMap.ContainsKey("CAMUNDA_WORKER_MAX_CONCURRENT_JOBS")
             ? ParseInt("CAMUNDA_WORKER_MAX_CONCURRENT_JOBS", 0)
             : null;
-        int? workerRequestTimeout = rawMap.ContainsKey("CAMUNDA_WORKER_REQUEST_TIMEOUT")
-            ? ParseInt("CAMUNDA_WORKER_REQUEST_TIMEOUT", 0)
+        int? workerRequestTimeout = rawMap.ContainsKey(ConfigKeys.WorkerRequestTimeout)
+            ? ParseSignedInt(ConfigKeys.WorkerRequestTimeout, 0)
             : null;
         var workerName = rawMap.GetValueOrDefault("CAMUNDA_WORKER_NAME");
         int? workerJitter = rawMap.ContainsKey("CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS")

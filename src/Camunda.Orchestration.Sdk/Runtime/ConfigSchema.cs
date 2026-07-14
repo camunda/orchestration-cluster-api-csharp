@@ -56,6 +56,7 @@ internal enum ConfigValueType
 {
     String,
     Int,
+    SignedInt,
     Bool,
     Enum,
 }
@@ -132,7 +133,7 @@ internal static class ConfigSchema
         new() { EnvVar = ConfigKeys.EventualPollDefaultMs, Type = ConfigValueType.Int, Default = "500", ConfigPaths = ["Eventual:PollDefaultMs"], Doc = "Default poll interval (ms) for eventually consistent endpoints." },
         new() { EnvVar = ConfigKeys.WorkerTimeout, Type = ConfigValueType.Int, ConfigPaths = ["Worker:Timeout"], Doc = "Default job timeout (ms) for all workers." },
         new() { EnvVar = ConfigKeys.WorkerMaxConcurrentJobs, Type = ConfigValueType.Int, ConfigPaths = ["Worker:MaxConcurrentJobs"], Doc = "Default max parallel jobs for all workers." },
-        new() { EnvVar = ConfigKeys.WorkerRequestTimeout, Type = ConfigValueType.Int, ConfigPaths = ["Worker:RequestTimeout"], Doc = "Default long-poll timeout (ms) for all workers." },
+        new() { EnvVar = ConfigKeys.WorkerRequestTimeout, Type = ConfigValueType.SignedInt, ConfigPaths = ["Worker:RequestTimeout"], Doc = "Default long-poll timeout (ms) for all workers; a negative value disables long polling." },
         new() { EnvVar = ConfigKeys.WorkerName, ConfigPaths = ["Worker:Name"], Doc = "Default worker name for all workers." },
         new() { EnvVar = ConfigKeys.WorkerStartupJitterMaxSeconds, Type = ConfigValueType.Int, ConfigPaths = ["Worker:StartupJitterMaxSeconds"], Doc = "Default startup jitter (seconds) for all workers." },
         new() { EnvVar = ConfigKeys.MtlsCert, Doc = "Inline PEM client certificate." },
