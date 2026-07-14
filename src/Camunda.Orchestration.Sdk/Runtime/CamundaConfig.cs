@@ -28,14 +28,14 @@ public sealed class CamundaConfig
 {
     public string RestAddress { get; init; } = string.Empty;
     public string TokenAudience { get; init; } = string.Empty;
-    public string DefaultTenantId { get; init; } = "<default>";
+    public string DefaultTenantId { get; init; } = ConfigSchema.StringDefault(ConfigKeys.DefaultTenantId);
 
     public HttpRetryConfig HttpRetry { get; init; } = new();
     public BackpressureConfig Backpressure { get; init; } = new();
     public OAuthConfig OAuth { get; init; } = new();
     public AuthConfig Auth { get; init; } = new();
     public ValidationConfig Validation { get; init; } = new();
-    public string LogLevel { get; init; } = "error";
+    public string LogLevel { get; init; } = ConfigSchema.StringDefault(ConfigKeys.LogLevel);
     public EventualConfig? Eventual { get; init; }
     public WorkerDefaultsConfig? WorkerDefaults { get; init; }
     public TlsConfig? Tls { get; init; }
@@ -43,24 +43,24 @@ public sealed class CamundaConfig
 
 public sealed class HttpRetryConfig
 {
-    public int MaxAttempts { get; init; } = 3;
-    public int BaseDelayMs { get; init; } = 100;
-    public int MaxDelayMs { get; init; } = 2000;
+    public int MaxAttempts { get; init; } = ConfigSchema.IntDefault(ConfigKeys.HttpRetryMaxAttempts);
+    public int BaseDelayMs { get; init; } = ConfigSchema.IntDefault(ConfigKeys.HttpRetryBaseDelayMs);
+    public int MaxDelayMs { get; init; } = ConfigSchema.IntDefault(ConfigKeys.HttpRetryMaxDelayMs);
 }
 
 public sealed class BackpressureConfig
 {
     public bool Enabled { get; init; } = true;
-    public string Profile { get; init; } = "BALANCED";
+    public string Profile { get; init; } = ConfigSchema.StringDefault(ConfigKeys.BackpressureProfile);
     public bool ObserveOnly { get; init; }
-    public int InitialMax { get; init; } = 16;
-    public double SoftFactor { get; init; } = 0.70;
-    public double SevereFactor { get; init; } = 0.50;
-    public int RecoveryIntervalMs { get; init; } = 1000;
-    public int RecoveryStep { get; init; } = 1;
-    public int DecayQuietMs { get; init; } = 2000;
-    public int Floor { get; init; } = 1;
-    public int SevereThreshold { get; init; } = 3;
+    public int InitialMax { get; init; } = ConfigSchema.IntDefault(ConfigKeys.BackpressureInitialMax);
+    public double SoftFactor { get; init; } = ConfigSchema.IntDefault(ConfigKeys.BackpressureSoftFactor) / 100.0;
+    public double SevereFactor { get; init; } = ConfigSchema.IntDefault(ConfigKeys.BackpressureSevereFactor) / 100.0;
+    public int RecoveryIntervalMs { get; init; } = ConfigSchema.IntDefault(ConfigKeys.BackpressureRecoveryIntervalMs);
+    public int RecoveryStep { get; init; } = ConfigSchema.IntDefault(ConfigKeys.BackpressureRecoveryStep);
+    public int DecayQuietMs { get; init; } = ConfigSchema.IntDefault(ConfigKeys.BackpressureDecayQuietMs);
+    public int Floor { get; init; } = ConfigSchema.IntDefault(ConfigKeys.BackpressureFloor);
+    public int SevereThreshold { get; init; } = ConfigSchema.IntDefault(ConfigKeys.BackpressureSevereThreshold);
 }
 
 public sealed class OAuthConfig
@@ -68,16 +68,16 @@ public sealed class OAuthConfig
     public string? ClientId { get; init; }
     public string? ClientSecret { get; init; }
     public string OAuthUrl { get; init; } = string.Empty;
-    public string GrantType { get; init; } = "client_credentials";
+    public string GrantType { get; init; } = ConfigSchema.StringDefault(ConfigKeys.OAuthGrantType);
     public string? Scope { get; init; }
-    public int TimeoutMs { get; init; } = 5000;
+    public int TimeoutMs { get; init; } = ConfigSchema.IntDefault(ConfigKeys.OAuthTimeoutMs);
     public OAuthRetryConfig Retry { get; init; } = new();
 }
 
 public sealed class OAuthRetryConfig
 {
-    public int Max { get; init; } = 5;
-    public int BaseDelayMs { get; init; } = 1000;
+    public int Max { get; init; } = ConfigSchema.IntDefault(ConfigKeys.OAuthRetryMax);
+    public int BaseDelayMs { get; init; } = ConfigSchema.IntDefault(ConfigKeys.OAuthRetryBaseDelayMs);
 }
 
 public sealed class AuthConfig
@@ -96,12 +96,12 @@ public sealed class ValidationConfig
 {
     public ValidationMode Request { get; init; } = ValidationMode.None;
     public ValidationMode Response { get; init; } = ValidationMode.None;
-    public string Raw { get; init; } = "req:none,res:none";
+    public string Raw { get; init; } = ConfigSchema.StringDefault(ConfigKeys.Validation);
 }
 
 public sealed class EventualConfig
 {
-    public int PollDefaultMs { get; init; } = 500;
+    public int PollDefaultMs { get; init; } = ConfigSchema.IntDefault(ConfigKeys.EventualPollDefaultMs);
 }
 
 public sealed class WorkerDefaultsConfig

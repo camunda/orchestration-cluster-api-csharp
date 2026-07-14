@@ -231,25 +231,28 @@ public static class ConfigurationHydrator
             return fallback;
         }
 
+        // Parse an integer key using its schema default as the fallback (no literal duplication).
+        int ParseSchemaInt(string key) => ParseInt(key, ConfigSchema.IntDefault(key));
+
         // Parse validation
-        var validation = ParseValidation(rawMap.GetValueOrDefault("CAMUNDA_SDK_VALIDATION", "req:none,res:none")!, errors);
+        var validation = ParseValidation(rawMap.GetValueOrDefault(ConfigKeys.Validation, ConfigSchema.StringDefault(ConfigKeys.Validation))!, errors);
 
         // Eagerly parse all integer config values so errors are collected before the check
-        var retryMaxAttempts = ParseInt("CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS", 3);
-        var retryBaseDelayMs = ParseInt("CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS", 100);
-        var retryMaxDelayMs = ParseInt("CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS", 2000);
-        var bpInitialMax = ParseInt("CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX", 16);
-        var bpSoftFactor = ParseInt("CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR", 70);
-        var bpSevereFactor = ParseInt("CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR", 50);
-        var bpRecoveryIntervalMs = ParseInt("CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS", 1000);
-        var bpRecoveryStep = ParseInt("CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP", 1);
-        var bpDecayQuietMs = ParseInt("CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS", 2000);
-        var bpFloor = ParseInt("CAMUNDA_SDK_BACKPRESSURE_FLOOR", 1);
-        var bpSevereThreshold = ParseInt("CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD", 3);
-        var oauthTimeoutMs = ParseInt("CAMUNDA_OAUTH_TIMEOUT_MS", 5000);
-        var oauthRetryMax = ParseInt("CAMUNDA_OAUTH_RETRY_MAX", 5);
-        var oauthRetryBaseDelayMs = ParseInt("CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS", 1000);
-        var eventualPollDefaultMs = ParseInt("CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS", 500);
+        var retryMaxAttempts = ParseSchemaInt(ConfigKeys.HttpRetryMaxAttempts);
+        var retryBaseDelayMs = ParseSchemaInt(ConfigKeys.HttpRetryBaseDelayMs);
+        var retryMaxDelayMs = ParseSchemaInt(ConfigKeys.HttpRetryMaxDelayMs);
+        var bpInitialMax = ParseSchemaInt(ConfigKeys.BackpressureInitialMax);
+        var bpSoftFactor = ParseSchemaInt(ConfigKeys.BackpressureSoftFactor);
+        var bpSevereFactor = ParseSchemaInt(ConfigKeys.BackpressureSevereFactor);
+        var bpRecoveryIntervalMs = ParseSchemaInt(ConfigKeys.BackpressureRecoveryIntervalMs);
+        var bpRecoveryStep = ParseSchemaInt(ConfigKeys.BackpressureRecoveryStep);
+        var bpDecayQuietMs = ParseSchemaInt(ConfigKeys.BackpressureDecayQuietMs);
+        var bpFloor = ParseSchemaInt(ConfigKeys.BackpressureFloor);
+        var bpSevereThreshold = ParseSchemaInt(ConfigKeys.BackpressureSevereThreshold);
+        var oauthTimeoutMs = ParseSchemaInt(ConfigKeys.OAuthTimeoutMs);
+        var oauthRetryMax = ParseSchemaInt(ConfigKeys.OAuthRetryMax);
+        var oauthRetryBaseDelayMs = ParseSchemaInt(ConfigKeys.OAuthRetryBaseDelayMs);
+        var eventualPollDefaultMs = ParseSchemaInt(ConfigKeys.EventualPollDefaultMs);
 
         // Parse optional worker defaults
         int? workerTimeout = rawMap.ContainsKey("CAMUNDA_WORKER_TIMEOUT")
@@ -277,13 +280,13 @@ public static class ConfigurationHydrator
             restAddress = restAddress.TrimEnd('/') + "/v2";
 
         // Backpressure profile
-        var profile = rawMap.GetValueOrDefault("CAMUNDA_SDK_BACKPRESSURE_PROFILE", "BALANCED")!.Trim().ToUpperInvariant();
+        var profile = rawMap.GetValueOrDefault(ConfigKeys.BackpressureProfile, ConfigSchema.StringDefault(ConfigKeys.BackpressureProfile))!.Trim().ToUpperInvariant();
 
         return new CamundaConfig
         {
             RestAddress = restAddress,
             TokenAudience = rawMap.GetValueOrDefault("CAMUNDA_TOKEN_AUDIENCE", "")!,
-            DefaultTenantId = rawMap.GetValueOrDefault("CAMUNDA_DEFAULT_TENANT_ID", "<default>")!,
+            DefaultTenantId = rawMap.GetValueOrDefault(ConfigKeys.DefaultTenantId, ConfigSchema.StringDefault(ConfigKeys.DefaultTenantId))!,
             HttpRetry = new HttpRetryConfig
             {
                 MaxAttempts = retryMaxAttempts,
@@ -309,7 +312,7 @@ public static class ConfigurationHydrator
                 ClientId = rawMap.GetValueOrDefault("CAMUNDA_CLIENT_ID"),
                 ClientSecret = rawMap.GetValueOrDefault("CAMUNDA_CLIENT_SECRET"),
                 OAuthUrl = rawMap.GetValueOrDefault("CAMUNDA_OAUTH_URL", "")!,
-                GrantType = rawMap.GetValueOrDefault("CAMUNDA_OAUTH_GRANT_TYPE", "client_credentials")!,
+                GrantType = rawMap.GetValueOrDefault(ConfigKeys.OAuthGrantType, ConfigSchema.StringDefault(ConfigKeys.OAuthGrantType))!,
                 Scope = rawMap.GetValueOrDefault("CAMUNDA_OAUTH_SCOPE"),
                 TimeoutMs = oauthTimeoutMs,
                 Retry = new OAuthRetryConfig
@@ -330,7 +333,7 @@ public static class ConfigurationHydrator
                     : null,
             },
             Validation = validation,
-            LogLevel = rawMap.GetValueOrDefault("CAMUNDA_SDK_LOG_LEVEL", "error")!,
+            LogLevel = rawMap.GetValueOrDefault(ConfigKeys.LogLevel, ConfigSchema.StringDefault(ConfigKeys.LogLevel))!,
             Eventual = new EventualConfig
             {
                 PollDefaultMs = eventualPollDefaultMs,
