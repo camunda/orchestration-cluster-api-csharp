@@ -179,6 +179,13 @@
       "label": "Search process definitions"
     }
   ],
+  "searchProcessDefinitionVariableNames": [
+    {
+      "file": "ProcessDefinition.cs",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
+    }
+  ],
   "getProcessDefinitionStatistics": [
     {
       "file": "ProcessDefinition.cs",

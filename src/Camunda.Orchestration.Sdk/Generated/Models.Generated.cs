@@ -19685,6 +19685,8 @@ public enum PermissionTypeEnum
     CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE,
     [JsonPropertyName("CREATE_BATCH_OPERATION_RESOLVE_INCIDENT")]
     CREATEBATCHOPERATIONRESOLVEINCIDENT,
+    [JsonPropertyName("CREATE_BATCH_OPERATION_SUSPEND_PROCESS_INSTANCE")]
+    CREATEBATCHOPERATIONSUSPENDPROCESSINSTANCE,
     [JsonPropertyName("CREATE_BATCH_OPERATION_UPDATE_JOB")]
     CREATEBATCHOPERATIONUPDATEJOB,
     [JsonPropertyName("CREATE_DECISION_INSTANCE")]
@@ -19731,6 +19733,8 @@ public enum PermissionTypeEnum
     READUSERTASK,
     [JsonPropertyName("READ_TASK_LISTENER")]
     READTASKLISTENER,
+    [JsonPropertyName("SUSPEND_PROCESS_INSTANCE")]
+    SUSPENDPROCESSINSTANCE,
     [JsonPropertyName("UPDATE")]
     UPDATE,
     [JsonPropertyName("UPDATE_PROCESS_INSTANCE")]
@@ -19867,6 +19871,16 @@ public sealed class ProcessDefinitionFilter
     /// </summary>
     [JsonPropertyName("hasStartForm")]
     public bool? HasStartForm { get; set; }
+
+    /// <summary>
+    /// Filter by whether the process definition has been deleted.
+    /// When not set, both deleted and non-deleted process definitions are returned.
+    /// Set to `false` to exclude deleted definitions (recommended for most use cases).
+    /// Set to `true` to return only deleted definitions that are still retained in secondary storage.
+    /// 
+    /// </summary>
+    [JsonPropertyName("isDeleted")]
+    public bool? IsDeleted { get; set; }
 
 }
 
@@ -20589,6 +20603,12 @@ public sealed class ProcessDefinitionResult
     [JsonPropertyName("hasStartForm")]
     public bool HasStartForm { get; set; }
 
+    /// <summary>
+    /// Whether this process definition has been deleted but is still retained in secondary storage.
+    /// </summary>
+    [JsonPropertyName("isDeleted")]
+    public bool IsDeleted { get; set; }
+
 }
 
 /// <summary>
@@ -20810,6 +20830,70 @@ public sealed class ProcessDefinitionStatisticsFilter
     /// </summary>
     [JsonPropertyName("$or")]
     public List<BaseProcessInstanceFilterFields>? Or { get; set; }
+
+}
+
+/// <summary>
+/// Process definition variable name filter request.
+/// </summary>
+public sealed class ProcessDefinitionVariableNameFilter
+{
+    /// <summary>
+    /// The variable name search filter.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public StringFilterProperty? Name { get; set; }
+
+}
+
+/// <summary>
+/// Process definition variable name search query request.
+/// </summary>
+public sealed class ProcessDefinitionVariableNameSearchQuery
+{
+    /// <summary>
+    /// The process definition variable name search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ProcessDefinitionVariableNameFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// Process definition variable name search query response.
+/// </summary>
+public sealed class ProcessDefinitionVariableNameSearchQueryResult
+{
+    /// <summary>
+    /// The matching variable names.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<ProcessDefinitionVariableNameSearchResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Process definition variable name search response item.
+/// </summary>
+public sealed class ProcessDefinitionVariableNameSearchResult
+{
+    /// <summary>
+    /// The variable name.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = null!;
 
 }
 

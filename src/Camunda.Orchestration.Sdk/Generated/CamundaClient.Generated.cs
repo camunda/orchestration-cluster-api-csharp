@@ -7155,6 +7155,60 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Search process definition variable names
+    /// Search for distinct variable names defined on a process definition, optionally narrowed by the name filter.
+    /// </summary>
+    /// <remarks>
+    /// Operation: searchProcessDefinitionVariableNames
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchProcessDefinitionVariableNamesExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchProcessDefinitionVariableNamesAsync(
+    ///         processDefinitionKey,
+    ///         new ProcessDefinitionVariableNameSearchQuery());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable name: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchProcessDefinitionVariableNamesExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchProcessDefinitionVariableNamesAsync(
+    ///         processDefinitionKey,
+    ///         new ProcessDefinitionVariableNameSearchQuery());
+    /// 
+    ///     foreach (var variable in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Variable name: {variable.Name}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ProcessDefinitionVariableNameSearchQueryResult> SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionVariableNameSearchQuery body, ConsistencyOptions<ProcessDefinitionVariableNameSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/variable-names/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchProcessDefinitionVariableNames", false,
+                () => InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionVariableNameSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessDefinitionVariableNames", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionVariableNameSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessDefinitionVariableNames", false, ct);
+    }
+
+    /// <summary>
     /// Search process definitions
     /// Search for process definitions based on given criteria.
     /// </summary>

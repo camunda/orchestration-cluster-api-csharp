@@ -1603,6 +1603,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey,Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/ProcessDefinition.cs#SearchProcessDefinitionVariableNames)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.SearchProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.IncidentSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.IncidentSearchQueryResult},System.Threading.CancellationToken)
 example:
 - *content
