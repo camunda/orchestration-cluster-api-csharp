@@ -13813,6 +13813,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync
   nameWithType: CamundaClient.SearchMessageSubscriptionsAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey,Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult},System.Threading.CancellationToken)
+  name: SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey, ProcessDefinitionVariableNameSearchQuery, ConsistencyOptions<ProcessDefinitionVariableNameSearchQueryResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchProcessDefinitionVariableNamesAsync_Camunda_Orchestration_Sdk_ProcessDefinitionKey_Camunda_Orchestration_Sdk_ProcessDefinitionVariableNameSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ProcessDefinitionVariableNameSearchQueryResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey,Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult},System.Threading.CancellationToken)
+  name.vb: SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey, ProcessDefinitionVariableNameSearchQuery, ConsistencyOptions(Of ProcessDefinitionVariableNameSearchQueryResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey, Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey, Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery, Camunda.Orchestration.Sdk.ConsistencyOptions(Of Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey, ProcessDefinitionVariableNameSearchQuery, ConsistencyOptions<ProcessDefinitionVariableNameSearchQueryResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey, ProcessDefinitionVariableNameSearchQuery, ConsistencyOptions(Of ProcessDefinitionVariableNameSearchQueryResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync*
+  name: SearchProcessDefinitionVariableNamesAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionVariableNamesAsync
+  nameWithType: CamundaClient.SearchProcessDefinitionVariableNamesAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.ProcessDefinitionSearchQueryResult},System.Threading.CancellationToken)
   name: SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery, ConsistencyOptions<ProcessDefinitionSearchQueryResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchProcessDefinitionsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchProcessDefinitionsAsync_Camunda_Orchestration_Sdk_ProcessDefinitionSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ProcessDefinitionSearchQueryResult__System_Threading_CancellationToken_
@@ -34834,6 +34849,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONRESOLVEINCIDENT
   fullName: Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONRESOLVEINCIDENT
   nameWithType: PermissionTypeEnum.CREATEBATCHOPERATIONRESOLVEINCIDENT
+- uid: Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONSUSPENDPROCESSINSTANCE
+  name: CREATEBATCHOPERATIONSUSPENDPROCESSINSTANCE
+  href: api/Camunda.Orchestration.Sdk.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_PermissionTypeEnum_CREATEBATCHOPERATIONSUSPENDPROCESSINSTANCE
+  commentId: F:Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONSUSPENDPROCESSINSTANCE
+  fullName: Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONSUSPENDPROCESSINSTANCE
+  nameWithType: PermissionTypeEnum.CREATEBATCHOPERATIONSUSPENDPROCESSINSTANCE
 - uid: Camunda.Orchestration.Sdk.PermissionTypeEnum.CREATEBATCHOPERATIONUPDATEJOB
   name: CREATEBATCHOPERATIONUPDATEJOB
   href: api/Camunda.Orchestration.Sdk.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_PermissionTypeEnum_CREATEBATCHOPERATIONUPDATEJOB
@@ -34972,6 +34993,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.PermissionTypeEnum.READUSERTASK
   fullName: Camunda.Orchestration.Sdk.PermissionTypeEnum.READUSERTASK
   nameWithType: PermissionTypeEnum.READUSERTASK
+- uid: Camunda.Orchestration.Sdk.PermissionTypeEnum.SUSPENDPROCESSINSTANCE
+  name: SUSPENDPROCESSINSTANCE
+  href: api/Camunda.Orchestration.Sdk.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_PermissionTypeEnum_SUSPENDPROCESSINSTANCE
+  commentId: F:Camunda.Orchestration.Sdk.PermissionTypeEnum.SUSPENDPROCESSINSTANCE
+  fullName: Camunda.Orchestration.Sdk.PermissionTypeEnum.SUSPENDPROCESSINSTANCE
+  nameWithType: PermissionTypeEnum.SUSPENDPROCESSINSTANCE
 - uid: Camunda.Orchestration.Sdk.PermissionTypeEnum.UPDATE
   name: UPDATE
   href: api/Camunda.Orchestration.Sdk.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_PermissionTypeEnum_UPDATE
@@ -35116,6 +35143,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.HasStartForm
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.HasStartForm
   nameWithType: ProcessDefinitionFilter.HasStartForm
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
+  name: IsDeleted
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted.html#Camunda_Orchestration_Sdk_ProcessDefinitionFilter_IsDeleted
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
+  nameWithType: ProcessDefinitionFilter.IsDeleted
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted*
+  name: IsDeleted
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
+  nameWithType: ProcessDefinitionFilter.IsDeleted
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsLatestVersion
   name: IsLatestVersion
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsLatestVersion.html#Camunda_Orchestration_Sdk_ProcessDefinitionFilter_IsLatestVersion
@@ -36256,6 +36295,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionResult.HasStartForm
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.HasStartForm
   nameWithType: ProcessDefinitionResult.HasStartForm
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
+  name: IsDeleted
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted.html#Camunda_Orchestration_Sdk_ProcessDefinitionResult_IsDeleted
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
+  nameWithType: ProcessDefinitionResult.IsDeleted
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted*
+  name: IsDeleted
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
+  nameWithType: ProcessDefinitionResult.IsDeleted
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionResult.Name
   name: Name
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResult.Name.html#Camunda_Orchestration_Sdk_ProcessDefinitionResult_Name
@@ -36736,6 +36787,102 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.Variables
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.Variables
   nameWithType: ProcessDefinitionStatisticsFilter.Variables
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter
+  name: ProcessDefinitionVariableNameFilter
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter
+  nameWithType: ProcessDefinitionVariableNameFilter
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter.Name.html#Camunda_Orchestration_Sdk_ProcessDefinitionVariableNameFilter_Name
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter.Name
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter.Name
+  nameWithType: ProcessDefinitionVariableNameFilter.Name
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter.Name*
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter.Name.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter.Name
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter.Name
+  nameWithType: ProcessDefinitionVariableNameFilter.Name
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery
+  name: ProcessDefinitionVariableNameSearchQuery
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery
+  nameWithType: ProcessDefinitionVariableNameSearchQuery
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Filter.html#Camunda_Orchestration_Sdk_ProcessDefinitionVariableNameSearchQuery_Filter
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Filter
+  nameWithType: ProcessDefinitionVariableNameSearchQuery.Filter
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Filter
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Filter
+  nameWithType: ProcessDefinitionVariableNameSearchQuery.Filter
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Page.html#Camunda_Orchestration_Sdk_ProcessDefinitionVariableNameSearchQuery_Page
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Page
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Page
+  nameWithType: ProcessDefinitionVariableNameSearchQuery.Page
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Page
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery.Page
+  nameWithType: ProcessDefinitionVariableNameSearchQuery.Page
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult
+  name: ProcessDefinitionVariableNameSearchQueryResult
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult
+  nameWithType: ProcessDefinitionVariableNameSearchQueryResult
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Items.html#Camunda_Orchestration_Sdk_ProcessDefinitionVariableNameSearchQueryResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Items
+  nameWithType: ProcessDefinitionVariableNameSearchQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Items
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Items
+  nameWithType: ProcessDefinitionVariableNameSearchQueryResult.Items
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Page.html#Camunda_Orchestration_Sdk_ProcessDefinitionVariableNameSearchQueryResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Page
+  nameWithType: ProcessDefinitionVariableNameSearchQueryResult.Page
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Page
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult.Page
+  nameWithType: ProcessDefinitionVariableNameSearchQueryResult.Page
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult
+  name: ProcessDefinitionVariableNameSearchResult
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult
+  nameWithType: ProcessDefinitionVariableNameSearchResult
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult.Name.html#Camunda_Orchestration_Sdk_ProcessDefinitionVariableNameSearchResult_Name
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult.Name
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult.Name
+  nameWithType: ProcessDefinitionVariableNameSearchResult.Name
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult.Name*
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult.Name.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult.Name
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchResult.Name
+  nameWithType: ProcessDefinitionVariableNameSearchResult.Name
 - uid: Camunda.Orchestration.Sdk.ProcessElementStatisticsResult
   name: ProcessElementStatisticsResult
   href: api/Camunda.Orchestration.Sdk.ProcessElementStatisticsResult.html
