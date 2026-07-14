@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:bf97c32b4090a2316b417ebf3d024c5476a4d941b24e8dce133e785685effe26",
+  "specHash": "sha256:83242850b1f3570de5fa8fb6d52f4741286347f3e1601c4f58617dd28211974e",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -2678,6 +2678,14 @@
     {
       "operationId": "getProcessDefinitionStatistics",
       "path": "/process-definitions/{processDefinitionKey}/statistics/element-instances",
+      "method": "post",
+      "tags": [
+        "Process definition"
+      ]
+    },
+    {
+      "operationId": "searchProcessDefinitionVariableNames",
+      "path": "/process-definitions/{processDefinitionKey}/variable-names/search",
       "method": "post",
       "tags": [
         "Process definition"
@@ -7264,6 +7272,44 @@
       }
     },
     {
+      "operationId": "searchProcessDefinitionVariableNames",
+      "path": "/process-definitions/{processDefinitionKey}/variable-names/search",
+      "method": "post",
+      "tags": [
+        "Process definition"
+      ],
+      "summary": "Search process definition variable names",
+      "description": "Search for distinct variable names defined on a process definition, optionally narrowed by the name filter.",
+      "eventuallyConsistent": true,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "processDefinitionKey"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "process-definitions.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ProcessDefinitionVariableNameSearchQuery",
+      "successResponseSchemaRef": "ProcessDefinitionVariableNameSearchQueryResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": true,
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "getProcessDefinitionXML",
       "path": "/process-definitions/{processDefinitionKey}/xml",
       "method": "get",
@@ -11108,8 +11154,8 @@
   "integrity": {
     "totalSemanticKeys": 41,
     "totalUnions": 64,
-    "totalOperations": 197,
-    "totalEventuallyConsistent": 91,
+    "totalOperations": 198,
+    "totalEventuallyConsistent": 92,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23
   }

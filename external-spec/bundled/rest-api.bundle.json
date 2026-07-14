@@ -11533,6 +11533,113 @@
         "x-added-in-version": "8.8"
       }
     },
+    "/process-definitions/{processDefinitionKey}/variable-names/search": {
+      "post": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Process definition"
+        ],
+        "operationId": "searchProcessDefinitionVariableNames",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Search process definition variable names",
+        "description": "Search for distinct variable names defined on a process definition, optionally narrowed by the name filter.",
+        "parameters": [
+          {
+            "name": "processDefinitionKey",
+            "in": "path",
+            "required": true,
+            "description": "The assigned key of the process definition, which acts as a unique identifier for this process definition.",
+            "schema": {
+              "$ref": "#/components/schemas/ProcessDefinitionKey"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDefinitionVariableNameSearchQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The process definition variable name search result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessDefinitionVariableNameSearchQueryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/process-definitions/{processDefinitionKey}/xml": {
       "get": {
         "x-eventually-consistent": true,
@@ -23333,6 +23440,7 @@
           "CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE",
           "CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE",
           "CREATE_BATCH_OPERATION_RESOLVE_INCIDENT",
+          "CREATE_BATCH_OPERATION_SUSPEND_PROCESS_INSTANCE",
           "CREATE_BATCH_OPERATION_UPDATE_JOB",
           "CREATE_DECISION_INSTANCE",
           "CREATE_PROCESS_INSTANCE",
@@ -23356,6 +23464,7 @@
           "READ_USAGE_METRIC",
           "READ_USER_TASK",
           "READ_TASK_LISTENER",
+          "SUSPEND_PROCESS_INSTANCE",
           "UPDATE",
           "UPDATE_PROCESS_INSTANCE",
           "UPDATE_USER_TASK",
@@ -35501,8 +35610,18 @@
           "hasStartForm": {
             "description": "Indicates whether the start event of the process has an associated Form Key.",
             "type": "boolean"
+          },
+          "isDeleted": {
+            "description": "Filter by whether the process definition has been deleted.\nWhen not set, both deleted and non-deleted process definitions are returned.\nSet to `false` to exclude deleted definitions (recommended for most use cases).\nSet to `true` to return only deleted definitions that are still retained in secondary storage.\n",
+            "type": "boolean"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "isDeleted",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "ProcessDefinitionSearchQueryResult": {
         "type": "object",
@@ -35528,6 +35647,7 @@
         "type": "object",
         "required": [
           "hasStartForm",
+          "isDeleted",
           "name",
           "processDefinitionId",
           "processDefinitionKey",
@@ -35583,8 +35703,18 @@
           "hasStartForm": {
             "description": "Indicates whether the start event of the process has an associated Form Key.",
             "type": "boolean"
+          },
+          "isDeleted": {
+            "description": "Whether this process definition has been deleted but is still retained in secondary storage.",
+            "type": "boolean"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "isDeleted",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "ProcessDefinitionElementStatisticsQuery": {
         "description": "Process definition element statistics request.",
@@ -35655,6 +35785,75 @@
             "description": "The total number of completed instances of the element.",
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "ProcessDefinitionVariableNameSearchQuery": {
+        "description": "Process definition variable name search query request.",
+        "additionalProperties": false,
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryRequest"
+          }
+        ],
+        "properties": {
+          "filter": {
+            "description": "The process definition variable name search filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionVariableNameFilter"
+              }
+            ]
+          }
+        }
+      },
+      "ProcessDefinitionVariableNameFilter": {
+        "description": "Process definition variable name filter request.",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "description": "The variable name search filter.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          }
+        }
+      },
+      "ProcessDefinitionVariableNameSearchQueryResult": {
+        "description": "Process definition variable name search query response.",
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryResponse"
+          }
+        ],
+        "properties": {
+          "items": {
+            "description": "The matching variable names.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessDefinitionVariableNameSearchResult"
+            }
+          }
+        }
+      },
+      "ProcessDefinitionVariableNameSearchResult": {
+        "description": "Process definition variable name search response item.",
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "description": "The variable name.",
+            "type": "string"
           }
         }
       },
