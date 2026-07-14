@@ -42,10 +42,8 @@ public sealed class CamundaConfigurationException : Exception
 /// </summary>
 public static class ConfigurationHydrator
 {
-    // Defaults and secret keys are derived from the single-source ConfigSchema.
+    // Defaults are derived from the single-source ConfigSchema.
     private static readonly IReadOnlyDictionary<string, string> Defaults = ConfigSchema.Defaults;
-
-    private static readonly IReadOnlySet<string> SecretKeys = ConfigSchema.SecretKeys;
 
     /// <summary>
     /// Hydrate configuration from environment and optional overrides.

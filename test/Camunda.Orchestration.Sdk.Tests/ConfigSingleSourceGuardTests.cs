@@ -133,12 +133,15 @@ public class ConfigSchemaIntegrityTests
     }
 
     [Fact]
-    public void ConfigPathsMapToExactlyOneEnvVar()
+    public void ConfigPathsAreUnique()
     {
+        // ConfigSchema.ConfigKeyMap is built via ToDictionary, which throws on a duplicate
+        // path even when both map to the same env var — so the schema requires paths to be
+        // globally unique (case-insensitive), not merely non-conflicting.
         var duplicates = ConfigSchema.All
-            .SelectMany(d => d.ConfigPaths.Select(p => (Path: p, d.EnvVar)))
-            .GroupBy(x => x.Path, StringComparer.OrdinalIgnoreCase)
-            .Where(g => g.Select(x => x.EnvVar).Distinct().Count() > 1)
+            .SelectMany(d => d.ConfigPaths)
+            .GroupBy(p => p, StringComparer.OrdinalIgnoreCase)
+            .Where(g => g.Count() > 1)
             .Select(g => g.Key)
             .ToList();
 
