@@ -95,7 +95,7 @@ internal sealed class ConfigKeyDescriptor
 /// The canonical configuration schema. Every default value, alias, and
 /// <c>IConfiguration</c> binding path is declared exactly once here; the hydrator and
 /// the <see cref="CamundaConfig"/> classes derive from it rather than restating literals.
-/// Mirrors the JS SDK's <c>SCHEMA</c> (issue #145).
+/// Mirrors the JS SDK's <c>SCHEMA</c> (see camunda/orchestration-cluster-api-js#145).
 /// </summary>
 internal static class ConfigSchema
 {
@@ -180,5 +180,5 @@ internal static class ConfigSchema
 
     /// <summary>Schema default for an integer key.</summary>
     public static int IntDefault(string envVar) =>
-        int.Parse(RequireDefault(envVar), System.Globalization.CultureInfo.InvariantCulture);
+        int.Parse(RequireDefault(envVar), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture);
 }

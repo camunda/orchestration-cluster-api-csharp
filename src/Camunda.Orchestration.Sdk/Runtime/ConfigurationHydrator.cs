@@ -216,7 +216,8 @@ public static class ConfigurationHydrator
             || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA_PATH"));
 
         // Validate integers. Unsigned + invariant to match the contract in the error
-        // message: rejects signs, whitespace, digit separators, and decimals.
+        // message: rejects signs, digit separators, and decimals. Leading/trailing
+        // whitespace is trimmed first (env values are already trimmed at ingest).
         int ParseInt(string key, int fallback)
         {
             var raw = rawMap.GetValueOrDefault(key, fallback.ToString(System.Globalization.CultureInfo.InvariantCulture))!;

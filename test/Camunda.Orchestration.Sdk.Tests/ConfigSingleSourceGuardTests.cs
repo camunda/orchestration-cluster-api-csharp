@@ -2,7 +2,7 @@ namespace Camunda.Orchestration.Sdk.Tests;
 
 /// <summary>
 /// Guard tests for the "single source of truth for configuration defaults" refactor
-/// (mirrors the JS SDK's config-single-source guards / issue #145).
+/// (mirrors the JS SDK's config-single-source guards; see camunda/orchestration-cluster-api-js#145).
 ///
 /// These lock in two invariants so that collapsing the currently triple-maintained
 /// defaults (CamundaConfig initializers, ConfigurationHydrator.Defaults, and the
