@@ -42,33 +42,8 @@ public sealed class CamundaConfigurationException : Exception
 /// </summary>
 public static class ConfigurationHydrator
 {
-    private static readonly Dictionary<string, string> Defaults = new()
-    {
-        ["CAMUNDA_REST_ADDRESS"] = "http://localhost:8080/v2",
-        ["CAMUNDA_TOKEN_AUDIENCE"] = "zeebe.camunda.io",
-        ["CAMUNDA_DEFAULT_TENANT_ID"] = "<default>",
-        ["CAMUNDA_AUTH_STRATEGY"] = "NONE",
-        ["CAMUNDA_OAUTH_URL"] = "https://login.cloud.camunda.io/oauth/token",
-        ["CAMUNDA_OAUTH_GRANT_TYPE"] = "client_credentials",
-        ["CAMUNDA_OAUTH_TIMEOUT_MS"] = "5000",
-        ["CAMUNDA_OAUTH_RETRY_MAX"] = "5",
-        ["CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS"] = "1000",
-        ["CAMUNDA_SDK_LOG_LEVEL"] = "error",
-        ["CAMUNDA_SDK_VALIDATION"] = "req:none,res:none",
-        ["CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS"] = "3",
-        ["CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS"] = "100",
-        ["CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS"] = "2000",
-        ["CAMUNDA_SDK_BACKPRESSURE_PROFILE"] = "BALANCED",
-        ["CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS"] = "500",
-    };
-
-    private static readonly HashSet<string> SecretKeys =
-    [
-        "CAMUNDA_CLIENT_SECRET",
-        "CAMUNDA_BASIC_AUTH_PASSWORD",
-        "CAMUNDA_MTLS_KEY",
-        "CAMUNDA_MTLS_KEY_PASSPHRASE",
-    ];
+    // Defaults are derived from the single-source ConfigSchema.
+    private static readonly IReadOnlyDictionary<string, string> Defaults = ConfigSchema.Defaults;
 
     /// <summary>
     /// Hydrate configuration from environment and optional overrides.
@@ -87,37 +62,25 @@ public static class ConfigurationHydrator
         {
             foreach (var (k, v) in env)
             {
-                if (v != null && v.Trim().Length > 0)
-                    input[k] = v.Trim();
+                var trimmed = v?.Trim();
+                if (!string.IsNullOrEmpty(trimmed))
+                    input[k] = trimmed;
             }
         }
         else
         {
-            // Read from actual environment
-            foreach (var key in Defaults.Keys)
+            // Read every schema key (and its legacy aliases) from the actual environment.
+            foreach (var key in ConfigSchema.AllEnvVars)
             {
-                var v = Environment.GetEnvironmentVariable(key);
-                if (v != null && v.Trim().Length > 0)
-                    input[key] = v.Trim();
+                var trimmed = Environment.GetEnvironmentVariable(key)?.Trim();
+                if (!string.IsNullOrEmpty(trimmed))
+                    input[key] = trimmed;
             }
-            // Also check for CAMUNDA_CLIENT_ID, CAMUNDA_CLIENT_SECRET, etc.
-            foreach (var extra in new[]
-                     {
-                         "CAMUNDA_CLIENT_ID", "CAMUNDA_CLIENT_SECRET",
-                         "CAMUNDA_BASIC_AUTH_USERNAME", "CAMUNDA_BASIC_AUTH_PASSWORD",
-                         "CAMUNDA_OAUTH_SCOPE", "CAMUNDA_OAUTH_CACHE_DIR",
-                         "ZEEBE_REST_ADDRESS",
-                         "CAMUNDA_WORKER_TIMEOUT", "CAMUNDA_WORKER_MAX_CONCURRENT_JOBS",
-                         "CAMUNDA_WORKER_REQUEST_TIMEOUT", "CAMUNDA_WORKER_NAME",
-                         "CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS",
-                         "CAMUNDA_MTLS_CERT", "CAMUNDA_MTLS_KEY", "CAMUNDA_MTLS_CA",
-                         "CAMUNDA_MTLS_CERT_PATH", "CAMUNDA_MTLS_KEY_PATH", "CAMUNDA_MTLS_CA_PATH",
-                         "CAMUNDA_MTLS_KEY_PASSPHRASE"
-                     })
+            foreach (var (alias, _) in ConfigSchema.Aliases)
             {
-                var v = Environment.GetEnvironmentVariable(extra);
-                if (v != null && v.Trim().Length > 0)
-                    input[extra] = v.Trim();
+                var trimmed = Environment.GetEnvironmentVariable(alias)?.Trim();
+                if (!string.IsNullOrEmpty(trimmed))
+                    input[alias] = trimmed;
             }
         }
 
@@ -139,9 +102,12 @@ public static class ConfigurationHydrator
             }
         }
 
-        // Alias: ZEEBE_REST_ADDRESS → CAMUNDA_REST_ADDRESS
-        if (!input.ContainsKey("CAMUNDA_REST_ADDRESS") && input.TryGetValue("ZEEBE_REST_ADDRESS", out var zeebe))
-            input["CAMUNDA_REST_ADDRESS"] = zeebe;
+        // Aliases: accept schema-declared legacy env-var names when the canonical key is unset.
+        foreach (var (alias, envVar) in ConfigSchema.Aliases)
+        {
+            if (!input.ContainsKey(envVar) && input.TryGetValue(alias, out var aliasVal))
+                input[envVar] = aliasVal;
+        }
 
         // Fill defaults for missing keys
         foreach (var (k, def) in Defaults)
@@ -160,24 +126,24 @@ public static class ConfigurationHydrator
         }
 
         // Auth strategy inference
-        var userSetStrategy = input.ContainsKey("CAMUNDA_AUTH_STRATEGY");
+        var userSetStrategy = input.ContainsKey(ConfigKeys.AuthStrategy);
         if (!userSetStrategy &&
-            rawMap.GetValueOrDefault("CAMUNDA_AUTH_STRATEGY") == "NONE" &&
-            !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_OAUTH_URL")) &&
-            !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_CLIENT_ID")) &&
-            !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_CLIENT_SECRET")))
+            rawMap.GetValueOrDefault(ConfigKeys.AuthStrategy) == "NONE" &&
+            !string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.OAuthUrl)) &&
+            !string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.ClientId)) &&
+            !string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.ClientSecret)))
         {
-            rawMap["CAMUNDA_AUTH_STRATEGY"] = "OAUTH";
+            rawMap[ConfigKeys.AuthStrategy] = "OAUTH";
         }
 
         // Validate auth strategy
-        var authStrategyRaw = rawMap.GetValueOrDefault("CAMUNDA_AUTH_STRATEGY", "NONE")!.Trim().ToUpperInvariant();
+        var authStrategyRaw = rawMap.GetValueOrDefault(ConfigKeys.AuthStrategy, "NONE")!.Trim().ToUpperInvariant();
         if (!Enum.TryParse<AuthStrategy>(authStrategyRaw, true, out var authStrategy))
         {
             errors.Add(new ConfigErrorDetail
             {
                 Code = ConfigErrorCode.InvalidEnum,
-                Key = "CAMUNDA_AUTH_STRATEGY",
+                Key = ConfigKeys.AuthStrategy,
                 Message = $"Invalid auth strategy '{authStrategyRaw}'. Expected NONE|OAUTH|BASIC."
             });
             authStrategy = AuthStrategy.None;
@@ -187,12 +153,12 @@ public static class ConfigurationHydrator
         if (authStrategy == AuthStrategy.OAuth)
         {
             var missing = new List<string>();
-            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_CLIENT_ID")))
-                missing.Add("CAMUNDA_CLIENT_ID");
-            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_CLIENT_SECRET")))
-                missing.Add("CAMUNDA_CLIENT_SECRET");
-            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_OAUTH_URL")))
-                missing.Add("CAMUNDA_OAUTH_URL");
+            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.ClientId)))
+                missing.Add(ConfigKeys.ClientId);
+            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.ClientSecret)))
+                missing.Add(ConfigKeys.ClientSecret);
+            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.OAuthUrl)))
+                missing.Add(ConfigKeys.OAuthUrl);
             if (missing.Count > 0)
             {
                 errors.Add(new ConfigErrorDetail
@@ -205,10 +171,10 @@ public static class ConfigurationHydrator
         else if (authStrategy == AuthStrategy.Basic)
         {
             var missing = new List<string>();
-            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_BASIC_AUTH_USERNAME")))
-                missing.Add("CAMUNDA_BASIC_AUTH_USERNAME");
-            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_BASIC_AUTH_PASSWORD")))
-                missing.Add("CAMUNDA_BASIC_AUTH_PASSWORD");
+            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.BasicAuthUsername)))
+                missing.Add(ConfigKeys.BasicAuthUsername);
+            if (string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.BasicAuthPassword)))
+                missing.Add(ConfigKeys.BasicAuthPassword);
             if (missing.Count > 0)
             {
                 errors.Add(new ConfigErrorDetail
@@ -223,10 +189,10 @@ public static class ConfigurationHydrator
         // CA-only is valid (trust a self-signed server cert without client identity).
         // Client cert and key must come as a pair.
         // A passphrase without a client key is invalid.
-        var mtlsCertProvided = !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CERT"))
-                            || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CERT_PATH"));
-        var mtlsKeyProvided = !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY"))
-                           || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY_PATH"));
+        var mtlsCertProvided = !string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.MtlsCert))
+                            || !string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.MtlsCertPath));
+        var mtlsKeyProvided = !string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.MtlsKey))
+                           || !string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.MtlsKeyPath));
         if (mtlsCertProvided != mtlsKeyProvided)
         {
             errors.Add(new ConfigErrorDetail
@@ -237,7 +203,7 @@ public static class ConfigurationHydrator
                     + "(CAMUNDA_MTLS_KEY or CAMUNDA_MTLS_KEY_PATH) must be provided together."
             });
         }
-        if (!string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY_PASSPHRASE")) && !mtlsKeyProvided)
+        if (!string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.MtlsKeyPassphrase)) && !mtlsKeyProvided)
         {
             errors.Add(new ConfigErrorDetail
             {
@@ -246,14 +212,16 @@ public static class ConfigurationHydrator
             });
         }
         var hasTls = mtlsCertProvided || mtlsKeyProvided
-            || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA"))
-            || !string.IsNullOrEmpty(rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA_PATH"));
+            || !string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.MtlsCa))
+            || !string.IsNullOrEmpty(rawMap.GetValueOrDefault(ConfigKeys.MtlsCaPath));
 
-        // Validate integers
+        // Validate integers. Unsigned + invariant to match the contract in the error
+        // message: rejects signs, digit separators, and decimals. Leading/trailing
+        // whitespace is trimmed first (env values are already trimmed at ingest).
         int ParseInt(string key, int fallback)
         {
             var raw = rawMap.GetValueOrDefault(key, fallback.ToString(System.Globalization.CultureInfo.InvariantCulture))!;
-            if (int.TryParse(raw, out var val))
+            if (int.TryParse(raw.Trim(), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var val))
                 return val;
             errors.Add(new ConfigErrorDetail
             {
@@ -264,39 +232,58 @@ public static class ConfigurationHydrator
             return fallback;
         }
 
+        // Signed integer parse (invariant) for keys documented to accept negatives,
+        // e.g. CAMUNDA_WORKER_REQUEST_TIMEOUT (negative = long polling disabled).
+        int ParseSignedInt(string key, int fallback)
+        {
+            var raw = rawMap.GetValueOrDefault(key, fallback.ToString(System.Globalization.CultureInfo.InvariantCulture))!;
+            if (int.TryParse(raw.Trim(), System.Globalization.NumberStyles.AllowLeadingSign, System.Globalization.CultureInfo.InvariantCulture, out var val))
+                return val;
+            errors.Add(new ConfigErrorDetail
+            {
+                Code = ConfigErrorCode.InvalidInteger,
+                Key = key,
+                Message = $"Invalid integer '{raw}'. Only base-10 integers (optionally negative) allowed."
+            });
+            return fallback;
+        }
+
+        // Parse an integer key using its schema default as the fallback (no literal duplication).
+        int ParseSchemaInt(string key) => ParseInt(key, ConfigSchema.IntDefault(key));
+
         // Parse validation
-        var validation = ParseValidation(rawMap.GetValueOrDefault("CAMUNDA_SDK_VALIDATION", "req:none,res:none")!, errors);
+        var validation = ParseValidation(rawMap.GetValueOrDefault(ConfigKeys.Validation, ConfigSchema.StringDefault(ConfigKeys.Validation))!, errors);
 
         // Eagerly parse all integer config values so errors are collected before the check
-        var retryMaxAttempts = ParseInt("CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS", 3);
-        var retryBaseDelayMs = ParseInt("CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS", 100);
-        var retryMaxDelayMs = ParseInt("CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS", 2000);
-        var bpInitialMax = ParseInt("CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX", 16);
-        var bpSoftFactor = ParseInt("CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR", 70);
-        var bpSevereFactor = ParseInt("CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR", 50);
-        var bpRecoveryIntervalMs = ParseInt("CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS", 1000);
-        var bpRecoveryStep = ParseInt("CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP", 1);
-        var bpDecayQuietMs = ParseInt("CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS", 2000);
-        var bpFloor = ParseInt("CAMUNDA_SDK_BACKPRESSURE_FLOOR", 1);
-        var bpSevereThreshold = ParseInt("CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD", 3);
-        var oauthTimeoutMs = ParseInt("CAMUNDA_OAUTH_TIMEOUT_MS", 5000);
-        var oauthRetryMax = ParseInt("CAMUNDA_OAUTH_RETRY_MAX", 5);
-        var oauthRetryBaseDelayMs = ParseInt("CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS", 1000);
-        var eventualPollDefaultMs = ParseInt("CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS", 500);
+        var retryMaxAttempts = ParseSchemaInt(ConfigKeys.HttpRetryMaxAttempts);
+        var retryBaseDelayMs = ParseSchemaInt(ConfigKeys.HttpRetryBaseDelayMs);
+        var retryMaxDelayMs = ParseSchemaInt(ConfigKeys.HttpRetryMaxDelayMs);
+        var bpInitialMax = ParseSchemaInt(ConfigKeys.BackpressureInitialMax);
+        var bpSoftFactor = ParseSchemaInt(ConfigKeys.BackpressureSoftFactor);
+        var bpSevereFactor = ParseSchemaInt(ConfigKeys.BackpressureSevereFactor);
+        var bpRecoveryIntervalMs = ParseSchemaInt(ConfigKeys.BackpressureRecoveryIntervalMs);
+        var bpRecoveryStep = ParseSchemaInt(ConfigKeys.BackpressureRecoveryStep);
+        var bpDecayQuietMs = ParseSchemaInt(ConfigKeys.BackpressureDecayQuietMs);
+        var bpFloor = ParseSchemaInt(ConfigKeys.BackpressureFloor);
+        var bpSevereThreshold = ParseSchemaInt(ConfigKeys.BackpressureSevereThreshold);
+        var oauthTimeoutMs = ParseSchemaInt(ConfigKeys.OAuthTimeoutMs);
+        var oauthRetryMax = ParseSchemaInt(ConfigKeys.OAuthRetryMax);
+        var oauthRetryBaseDelayMs = ParseSchemaInt(ConfigKeys.OAuthRetryBaseDelayMs);
+        var eventualPollDefaultMs = ParseSchemaInt(ConfigKeys.EventualPollDefaultMs);
 
         // Parse optional worker defaults
-        int? workerTimeout = rawMap.ContainsKey("CAMUNDA_WORKER_TIMEOUT")
-            ? ParseInt("CAMUNDA_WORKER_TIMEOUT", 0)
+        int? workerTimeout = rawMap.ContainsKey(ConfigKeys.WorkerTimeout)
+            ? ParseInt(ConfigKeys.WorkerTimeout, 0)
             : null;
-        int? workerMaxConcurrent = rawMap.ContainsKey("CAMUNDA_WORKER_MAX_CONCURRENT_JOBS")
-            ? ParseInt("CAMUNDA_WORKER_MAX_CONCURRENT_JOBS", 0)
+        int? workerMaxConcurrent = rawMap.ContainsKey(ConfigKeys.WorkerMaxConcurrentJobs)
+            ? ParseInt(ConfigKeys.WorkerMaxConcurrentJobs, 0)
             : null;
-        int? workerRequestTimeout = rawMap.ContainsKey("CAMUNDA_WORKER_REQUEST_TIMEOUT")
-            ? ParseInt("CAMUNDA_WORKER_REQUEST_TIMEOUT", 0)
+        int? workerRequestTimeout = rawMap.ContainsKey(ConfigKeys.WorkerRequestTimeout)
+            ? ParseSignedInt(ConfigKeys.WorkerRequestTimeout, 0)
             : null;
-        var workerName = rawMap.GetValueOrDefault("CAMUNDA_WORKER_NAME");
-        int? workerJitter = rawMap.ContainsKey("CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS")
-            ? ParseInt("CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS", 0)
+        var workerName = rawMap.GetValueOrDefault(ConfigKeys.WorkerName);
+        int? workerJitter = rawMap.ContainsKey(ConfigKeys.WorkerStartupJitterMaxSeconds)
+            ? ParseInt(ConfigKeys.WorkerStartupJitterMaxSeconds, 0)
             : null;
         var hasWorkerDefaults = workerTimeout != null || workerMaxConcurrent != null
             || workerRequestTimeout != null || workerName != null || workerJitter != null;
@@ -305,18 +292,18 @@ public static class ConfigurationHydrator
             throw new CamundaConfigurationException(errors);
 
         // Normalize restAddress to /v2
-        var restAddress = rawMap.GetValueOrDefault("CAMUNDA_REST_ADDRESS", "")!;
+        var restAddress = rawMap.GetValueOrDefault(ConfigKeys.RestAddress, ConfigSchema.StringDefault(ConfigKeys.RestAddress))!;
         if (!string.IsNullOrEmpty(restAddress) && !restAddress.TrimEnd('/').EndsWith("/v2", StringComparison.OrdinalIgnoreCase))
             restAddress = restAddress.TrimEnd('/') + "/v2";
 
         // Backpressure profile
-        var profile = rawMap.GetValueOrDefault("CAMUNDA_SDK_BACKPRESSURE_PROFILE", "BALANCED")!.Trim().ToUpperInvariant();
+        var profile = rawMap.GetValueOrDefault(ConfigKeys.BackpressureProfile, ConfigSchema.StringDefault(ConfigKeys.BackpressureProfile))!.Trim().ToUpperInvariant();
 
         return new CamundaConfig
         {
             RestAddress = restAddress,
-            TokenAudience = rawMap.GetValueOrDefault("CAMUNDA_TOKEN_AUDIENCE", "")!,
-            DefaultTenantId = rawMap.GetValueOrDefault("CAMUNDA_DEFAULT_TENANT_ID", "<default>")!,
+            TokenAudience = rawMap.GetValueOrDefault(ConfigKeys.TokenAudience, ConfigSchema.StringDefault(ConfigKeys.TokenAudience))!,
+            DefaultTenantId = rawMap.GetValueOrDefault(ConfigKeys.DefaultTenantId, ConfigSchema.StringDefault(ConfigKeys.DefaultTenantId))!,
             HttpRetry = new HttpRetryConfig
             {
                 MaxAttempts = retryMaxAttempts,
@@ -339,11 +326,11 @@ public static class ConfigurationHydrator
             },
             OAuth = new OAuthConfig
             {
-                ClientId = rawMap.GetValueOrDefault("CAMUNDA_CLIENT_ID"),
-                ClientSecret = rawMap.GetValueOrDefault("CAMUNDA_CLIENT_SECRET"),
-                OAuthUrl = rawMap.GetValueOrDefault("CAMUNDA_OAUTH_URL", "")!,
-                GrantType = rawMap.GetValueOrDefault("CAMUNDA_OAUTH_GRANT_TYPE", "client_credentials")!,
-                Scope = rawMap.GetValueOrDefault("CAMUNDA_OAUTH_SCOPE"),
+                ClientId = rawMap.GetValueOrDefault(ConfigKeys.ClientId),
+                ClientSecret = rawMap.GetValueOrDefault(ConfigKeys.ClientSecret),
+                OAuthUrl = rawMap.GetValueOrDefault(ConfigKeys.OAuthUrl, ConfigSchema.StringDefault(ConfigKeys.OAuthUrl))!,
+                GrantType = rawMap.GetValueOrDefault(ConfigKeys.OAuthGrantType, ConfigSchema.StringDefault(ConfigKeys.OAuthGrantType))!,
+                Scope = rawMap.GetValueOrDefault(ConfigKeys.OAuthScope),
                 TimeoutMs = oauthTimeoutMs,
                 Retry = new OAuthRetryConfig
                 {
@@ -357,13 +344,13 @@ public static class ConfigurationHydrator
                 Basic = authStrategy == AuthStrategy.Basic
                     ? new BasicAuthConfig
                     {
-                        Username = rawMap.GetValueOrDefault("CAMUNDA_BASIC_AUTH_USERNAME"),
-                        Password = rawMap.GetValueOrDefault("CAMUNDA_BASIC_AUTH_PASSWORD"),
+                        Username = rawMap.GetValueOrDefault(ConfigKeys.BasicAuthUsername),
+                        Password = rawMap.GetValueOrDefault(ConfigKeys.BasicAuthPassword),
                     }
                     : null,
             },
             Validation = validation,
-            LogLevel = rawMap.GetValueOrDefault("CAMUNDA_SDK_LOG_LEVEL", "error")!,
+            LogLevel = rawMap.GetValueOrDefault(ConfigKeys.LogLevel, ConfigSchema.StringDefault(ConfigKeys.LogLevel))!,
             Eventual = new EventualConfig
             {
                 PollDefaultMs = eventualPollDefaultMs,
@@ -381,13 +368,13 @@ public static class ConfigurationHydrator
             Tls = hasTls
                 ? new TlsConfig
                 {
-                    Cert = rawMap.GetValueOrDefault("CAMUNDA_MTLS_CERT"),
-                    CertPath = rawMap.GetValueOrDefault("CAMUNDA_MTLS_CERT_PATH"),
-                    Key = rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY"),
-                    KeyPath = rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY_PATH"),
-                    Ca = rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA"),
-                    CaPath = rawMap.GetValueOrDefault("CAMUNDA_MTLS_CA_PATH"),
-                    KeyPassphrase = rawMap.GetValueOrDefault("CAMUNDA_MTLS_KEY_PASSPHRASE"),
+                    Cert = rawMap.GetValueOrDefault(ConfigKeys.MtlsCert),
+                    CertPath = rawMap.GetValueOrDefault(ConfigKeys.MtlsCertPath),
+                    Key = rawMap.GetValueOrDefault(ConfigKeys.MtlsKey),
+                    KeyPath = rawMap.GetValueOrDefault(ConfigKeys.MtlsKeyPath),
+                    Ca = rawMap.GetValueOrDefault(ConfigKeys.MtlsCa),
+                    CaPath = rawMap.GetValueOrDefault(ConfigKeys.MtlsCaPath),
+                    KeyPassphrase = rawMap.GetValueOrDefault(ConfigKeys.MtlsKeyPassphrase),
                 }
                 : null,
         };
@@ -414,7 +401,7 @@ public static class ConfigurationHydrator
                 errors.Add(new ConfigErrorDetail
                 {
                     Code = ConfigErrorCode.InvalidValidationSyntax,
-                    Key = "CAMUNDA_SDK_VALIDATION",
+                    Key = ConfigKeys.Validation,
                     Message = $"Malformed segment '{part}'"
                 });
                 continue;
@@ -428,7 +415,7 @@ public static class ConfigurationHydrator
                 errors.Add(new ConfigErrorDetail
                 {
                     Code = ConfigErrorCode.InvalidValidationSyntax,
-                    Key = "CAMUNDA_SDK_VALIDATION",
+                    Key = ConfigKeys.Validation,
                     Message = $"Unknown scope '{scope}'"
                 });
                 continue;
@@ -439,7 +426,7 @@ public static class ConfigurationHydrator
                 errors.Add(new ConfigErrorDetail
                 {
                     Code = ConfigErrorCode.InvalidValidationSyntax,
-                    Key = "CAMUNDA_SDK_VALIDATION",
+                    Key = ConfigKeys.Validation,
                     Message = $"Unknown mode '{mode}'"
                 });
                 continue;
@@ -460,61 +447,11 @@ public static class ConfigurationHydrator
     }
 
     /// <summary>
-    /// Maps PascalCase <c>IConfiguration</c> keys (from <c>appsettings.json</c>) to canonical <c>CAMUNDA_*</c> env-var names.
-    /// Supports both flat keys (<c>"RestAddress"</c>) and nested sections (<c>"Auth:Strategy"</c>, <c>"Backpressure:Profile"</c>).
+    /// Maps PascalCase <c>IConfiguration</c> keys (from <c>appsettings.json</c>) to canonical
+    /// <c>CAMUNDA_*</c> env-var names. Derived from the single-source <see cref="ConfigSchema"/>
+    /// (each descriptor's <c>ConfigPaths</c>).
     /// </summary>
-    private static readonly Dictionary<string, string> ConfigKeyMap = new(StringComparer.OrdinalIgnoreCase)
-    {
-        // Top-level
-        ["RestAddress"] = "CAMUNDA_REST_ADDRESS",
-        ["TokenAudience"] = "CAMUNDA_TOKEN_AUDIENCE",
-        ["DefaultTenantId"] = "CAMUNDA_DEFAULT_TENANT_ID",
-        ["LogLevel"] = "CAMUNDA_SDK_LOG_LEVEL",
-        ["Validation"] = "CAMUNDA_SDK_VALIDATION",
-
-        // Auth section
-        ["Auth:Strategy"] = "CAMUNDA_AUTH_STRATEGY",
-        ["Auth:ClientId"] = "CAMUNDA_CLIENT_ID",
-        ["Auth:ClientSecret"] = "CAMUNDA_CLIENT_SECRET",
-        ["Auth:BasicUsername"] = "CAMUNDA_BASIC_AUTH_USERNAME",
-        ["Auth:BasicPassword"] = "CAMUNDA_BASIC_AUTH_PASSWORD",
-
-        // OAuth section
-        ["OAuth:Url"] = "CAMUNDA_OAUTH_URL",
-        ["OAuth:ClientId"] = "CAMUNDA_CLIENT_ID",
-        ["OAuth:ClientSecret"] = "CAMUNDA_CLIENT_SECRET",
-        ["OAuth:GrantType"] = "CAMUNDA_OAUTH_GRANT_TYPE",
-        ["OAuth:Scope"] = "CAMUNDA_OAUTH_SCOPE",
-        ["OAuth:TimeoutMs"] = "CAMUNDA_OAUTH_TIMEOUT_MS",
-        ["OAuth:RetryMax"] = "CAMUNDA_OAUTH_RETRY_MAX",
-        ["OAuth:RetryBaseDelayMs"] = "CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS",
-
-        // HTTP Retry section
-        ["HttpRetry:MaxAttempts"] = "CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS",
-        ["HttpRetry:BaseDelayMs"] = "CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS",
-        ["HttpRetry:MaxDelayMs"] = "CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS",
-
-        // Backpressure section
-        ["Backpressure:Profile"] = "CAMUNDA_SDK_BACKPRESSURE_PROFILE",
-        ["Backpressure:InitialMax"] = "CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX",
-        ["Backpressure:SoftFactor"] = "CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR",
-        ["Backpressure:SevereFactor"] = "CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR",
-        ["Backpressure:RecoveryIntervalMs"] = "CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS",
-        ["Backpressure:RecoveryStep"] = "CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP",
-        ["Backpressure:DecayQuietMs"] = "CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS",
-        ["Backpressure:Floor"] = "CAMUNDA_SDK_BACKPRESSURE_FLOOR",
-        ["Backpressure:SevereThreshold"] = "CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD",
-
-        // Eventual consistency
-        ["Eventual:PollDefaultMs"] = "CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS",
-
-        // Worker defaults
-        ["Worker:Timeout"] = "CAMUNDA_WORKER_TIMEOUT",
-        ["Worker:MaxConcurrentJobs"] = "CAMUNDA_WORKER_MAX_CONCURRENT_JOBS",
-        ["Worker:RequestTimeout"] = "CAMUNDA_WORKER_REQUEST_TIMEOUT",
-        ["Worker:Name"] = "CAMUNDA_WORKER_NAME",
-        ["Worker:StartupJitterMaxSeconds"] = "CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS",
-    };
+    private static readonly IReadOnlyDictionary<string, string> ConfigKeyMap = ConfigSchema.ConfigKeyMap;
 
     /// <summary>
     /// Extract configuration values from an <see cref="IConfiguration"/> section,
