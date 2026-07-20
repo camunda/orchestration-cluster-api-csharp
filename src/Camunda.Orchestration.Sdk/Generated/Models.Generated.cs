@@ -3592,7 +3592,7 @@ internal sealed class AgentHistoryItemKeyFilterPropertyJsonConverter : global::S
 public sealed class AgentInstanceCreationRequest
 {
     /// <summary>
-    /// The key of the AHSP or AI Agent Task element instance.
+    /// The key of the AI Agent Sub-process or AI Agent Task element instance.
     /// The engine uses this key to infer processInstanceKey, elementId,
     /// processDefinitionKey, and tenantId.
     /// 
@@ -3980,22 +3980,22 @@ public sealed class AgentInstanceHistoryItemCreationResult
 public sealed class AgentInstanceHistoryItemMetrics
 {
     /// <summary>
-    /// Input tokens consumed by this LLM call.
+    /// Input tokens consumed by this LLM call. Null when not provided.
     /// </summary>
     [JsonPropertyName("inputTokens")]
-    public long InputTokens { get; set; }
+    public long? InputTokens { get; set; }
 
     /// <summary>
-    /// Output tokens produced by this LLM call.
+    /// Output tokens produced by this LLM call. Null when not provided.
     /// </summary>
     [JsonPropertyName("outputTokens")]
-    public long OutputTokens { get; set; }
+    public long? OutputTokens { get; set; }
 
     /// <summary>
-    /// Wall-clock duration of the LLM call in milliseconds.
+    /// Wall-clock duration of the LLM call in milliseconds. Null when not provided.
     /// </summary>
     [JsonPropertyName("durationMs")]
-    public long DurationMs { get; set; }
+    public long? DurationMs { get; set; }
 
 }
 
@@ -4134,10 +4134,10 @@ public sealed class AgentInstanceHistoryItemResult
     public List<AgentInstanceToolCall> ToolCalls { get; set; } = null!;
 
     /// <summary>
-    /// Per-call token and latency metrics. Zero-valued when not available.
+    /// Per-call token and latency metrics. Null when metrics were not provided at creation time.
     /// </summary>
     [JsonPropertyName("metrics")]
-    public AgentInstanceHistoryItemMetrics Metrics { get; set; } = null!;
+    public AgentInstanceHistoryItemMetrics? Metrics { get; set; }
 
     /// <summary>
     /// The commit status of this history item.
@@ -7751,6 +7751,10 @@ public enum BatchOperationTypeEnum
     MODIFYPROCESSINSTANCE,
     [JsonPropertyName("RESOLVE_INCIDENT")]
     RESOLVEINCIDENT,
+    [JsonPropertyName("RESUME_PROCESS_INSTANCE")]
+    RESUMEPROCESSINSTANCE,
+    [JsonPropertyName("SUSPEND_PROCESS_INSTANCE")]
+    SUSPENDPROCESSINSTANCE,
     [JsonPropertyName("UPDATE_JOB")]
     UPDATEJOB,
     [JsonPropertyName("UPDATE_VARIABLE")]
@@ -8430,6 +8434,12 @@ public sealed class ClusterVariableResult
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
 
+    /// <summary>
+    /// A generic key-value metadata bag attached to the cluster variable. Values are strings or numbers.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, object> Metadata { get; set; } = null!;
+
 }
 
 /// <summary>
@@ -8454,6 +8464,12 @@ public sealed class ClusterVariableResultBase
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
+
+    /// <summary>
+    /// A generic key-value metadata bag attached to the cluster variable. Values are strings or numbers.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, object> Metadata { get; set; } = null!;
 
 }
 
@@ -8754,6 +8770,12 @@ public sealed class ClusterVariableSearchResult
     /// </summary>
     [JsonPropertyName("tenantId")]
     public string? TenantId { get; set; }
+
+    /// <summary>
+    /// A generic key-value metadata bag attached to the cluster variable. Values are strings or numbers.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, object> Metadata { get; set; } = null!;
 
 }
 
@@ -9119,6 +9141,12 @@ public sealed class CreateClusterVariableRequest
     /// </summary>
     [JsonPropertyName("value")]
     public object Value { get; set; } = null!;
+
+    /// <summary>
+    /// A generic key-value metadata bag attached to the cluster variable. Values must be strings or numbers. Limited to 100 entries and a configurable maximum serialized size (default: 100 entries at max key length of a cluster variable name (256 chars) plus the maximum value length, 8192 characters).
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, object>? Metadata { get; set; }
 
 }
 
@@ -20935,6 +20963,25 @@ public sealed class ProcessElementStatisticsResult
 }
 
 /// <summary>
+/// The instruction describing the business id to assign to a running process instance.
+/// 
+/// </summary>
+public sealed class ProcessInstanceBusinessIdAssignmentInstruction
+{
+    /// <summary>
+    /// An optional, user-defined string identifier that identifies the process instance
+    /// within the scope of a process definition (scoped by tenant). If provided and uniqueness
+    /// enforcement is enabled, the engine will reject creation if another root process instance
+    /// with the same business id is already active for the same process definition.
+    /// Note that any active child process instances with the same business id are not taken into account.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId BusinessId { get; set; }
+
+}
+
+/// <summary>
 /// ProcessInstanceCallHierarchyEntry
 /// </summary>
 public sealed class ProcessInstanceCallHierarchyEntry
@@ -22235,6 +22282,27 @@ public sealed class ProcessInstanceResult
 }
 
 /// <summary>
+/// The process instance filter that defines which process instances should be resumed.
+/// </summary>
+public sealed class ProcessInstanceResumptionBatchOperationRequest
+{
+    /// <summary>
+    /// The process instance filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ProcessInstanceFilter Filter { get; set; } = null!;
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
+
+}
+
+/// <summary>
 /// Process instance search request.
 /// </summary>
 public sealed class ProcessInstanceSearchQuery
@@ -22524,6 +22592,27 @@ internal sealed class ProcessInstanceStateFilterPropertyJsonConverter : global::
         }
         writer.WriteEndObject();
     }
+}
+
+/// <summary>
+/// The process instance filter that defines which process instances should be suspended.
+/// </summary>
+public sealed class ProcessInstanceSuspensionBatchOperationRequest
+{
+    /// <summary>
+    /// The process instance filter.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public ProcessInstanceFilter Filter { get; set; } = null!;
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
+
 }
 
 /// <summary>
@@ -22985,6 +23074,21 @@ public sealed class RestoreRequest
     /// </summary>
     [JsonPropertyName("backupIds")]
     public List<long>? BackupIds { get; set; }
+
+}
+
+/// <summary>
+/// ResumeProcessInstanceRequest
+/// </summary>
+public sealed class ResumeProcessInstanceRequest
+{
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
 
 }
 
@@ -24089,6 +24193,21 @@ internal sealed class StringFilterPropertyJsonConverter : global::System.Text.Js
 }
 
 /// <summary>
+/// SuspendProcessInstanceRequest
+/// </summary>
+public sealed class SuspendProcessInstanceRequest
+{
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
+
+}
+
+/// <summary>
 /// Envelope for all system configuration sections. Each property
 /// represents a feature area.
 /// 
@@ -24726,6 +24845,12 @@ public sealed class UpdateClusterVariableRequest
     /// </summary>
     [JsonPropertyName("value")]
     public object Value { get; set; } = null!;
+
+    /// <summary>
+    /// A generic key-value metadata bag attached to the cluster variable. Values must be strings or numbers. Limited to 100 entries and a configurable maximum serialized size (default: 100 entries at max key length of a cluster variable name (256 chars) plus the maximum value length, 8192 characters).
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, object>? Metadata { get; set; }
 
 }
 

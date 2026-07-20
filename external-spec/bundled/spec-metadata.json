@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:83242850b1f3570de5fa8fb6d52f4741286347f3e1601c4f58617dd28211974e",
+  "specHash": "sha256:16fd114798a5e976be4d3d59829256c4e783a6ab29bc8ca2b4060cd37266c86d",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -7632,6 +7632,49 @@
       }
     },
     {
+      "operationId": "resumeProcessInstancesBatchOperation",
+      "path": "/process-instances/resumption",
+      "method": "post",
+      "tags": [
+        "Process instance"
+      ],
+      "summary": "Resume process instances (batch)",
+      "description": "Resumes multiple suspended process instances.\nSince only SUSPENDED root instances can be resumed, any given filters for state and\nparentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "process-instances.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ProcessInstanceResumptionBatchOperationRequest",
+      "successResponseSchemaRef": "BatchOperationCreatedResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE"
+              },
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE_BATCH_OPERATION_SUSPEND_PROCESS_INSTANCE"
+              }
+            ]
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "searchProcessInstances",
       "path": "/process-instances/search",
       "method": "post",
@@ -7668,6 +7711,49 @@
       }
     },
     {
+      "operationId": "suspendProcessInstancesBatchOperation",
+      "path": "/process-instances/suspension",
+      "method": "post",
+      "tags": [
+        "Process instance"
+      ],
+      "summary": "Suspend process instances (batch)",
+      "description": "Suspends multiple running process instances.\nSince only ACTIVE root instances can be suspended, any given filters for state and\nparentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "process-instances.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ProcessInstanceSuspensionBatchOperationRequest",
+      "successResponseSchemaRef": "BatchOperationCreatedResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE"
+              },
+              {
+                "resourceType": "BATCH",
+                "permissionType": "CREATE_BATCH_OPERATION_SUSPEND_PROCESS_INSTANCE"
+              }
+            ]
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "getProcessInstance",
       "path": "/process-instances/{processInstanceKey}",
       "method": "get",
@@ -7699,6 +7785,42 @@
           }
         ],
         "x-added-in-version": "8.8"
+      }
+    },
+    {
+      "operationId": "assignProcessInstanceBusinessId",
+      "path": "/process-instances/{processInstanceKey}/business-id-assignment",
+      "method": "post",
+      "tags": [
+        "Process instance"
+      ],
+      "summary": "Assign business id to process instance",
+      "description": "Assigns a business id to an already-running process instance that currently has none.\n\nThe assignment is single and irreversible: only artifacts created after the assignment\n(for example future jobs, user tasks, decision instances, and message subscriptions) carry\nthe business id, while existing artifacts are not retroactively enriched. Re-sending the\nsame business id succeeds as a no-op. This endpoint is only useful while business id\nuniqueness enforcement is disabled; when it is enabled, the request is rejected with a 409\nresponse.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "processInstanceKey"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "process-instances.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ProcessInstanceBusinessIdAssignmentInstruction",
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "UPDATE_PROCESS_INSTANCE"
+          }
+        ],
+        "x-added-in-version": "8.10"
       }
     },
     {
@@ -7950,6 +8072,42 @@
       }
     },
     {
+      "operationId": "resumeProcessInstance",
+      "path": "/process-instances/{processInstanceKey}/resumption",
+      "method": "post",
+      "tags": [
+        "Process instance"
+      ],
+      "summary": "Resume process instance",
+      "description": "Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.\nOnly process instances in the SUSPENDED state can be resumed.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "processInstanceKey"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "process-instances.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ResumeProcessInstanceRequest",
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "SUSPEND_PROCESS_INSTANCE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "getProcessInstanceSequenceFlows",
       "path": "/process-instances/{processInstanceKey}/sequence-flows",
       "method": "get",
@@ -8048,6 +8206,42 @@
           {
             "resourceType": "PROCESS_DEFINITION",
             "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "suspendProcessInstance",
+      "path": "/process-instances/{processInstanceKey}/suspension",
+      "method": "post",
+      "tags": [
+        "Process instance"
+      ],
+      "summary": "Suspend process instance",
+      "description": "Suspends a running process instance, pausing further processing until it is resumed.\nOnly process instances in the ACTIVE state can be suspended.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "processInstanceKey"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "process-instances.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "SuspendProcessInstanceRequest",
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "SUSPEND_PROCESS_INSTANCE"
           }
         ],
         "x-added-in-version": "8.10"
@@ -11154,7 +11348,7 @@
   "integrity": {
     "totalSemanticKeys": 41,
     "totalUnions": 64,
-    "totalOperations": 198,
+    "totalOperations": 203,
     "totalEventuallyConsistent": 92,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23
