@@ -11155,6 +11155,18 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.BatchOperationTypeEnum.RESOLVEINCIDENT
   fullName: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.RESOLVEINCIDENT
   nameWithType: BatchOperationTypeEnum.RESOLVEINCIDENT
+- uid: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.RESUMEPROCESSINSTANCE
+  name: RESUMEPROCESSINSTANCE
+  href: api/Camunda.Orchestration.Sdk.BatchOperationTypeEnum.html#Camunda_Orchestration_Sdk_BatchOperationTypeEnum_RESUMEPROCESSINSTANCE
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationTypeEnum.RESUMEPROCESSINSTANCE
+  fullName: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.RESUMEPROCESSINSTANCE
+  nameWithType: BatchOperationTypeEnum.RESUMEPROCESSINSTANCE
+- uid: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.SUSPENDPROCESSINSTANCE
+  name: SUSPENDPROCESSINSTANCE
+  href: api/Camunda.Orchestration.Sdk.BatchOperationTypeEnum.html#Camunda_Orchestration_Sdk_BatchOperationTypeEnum_SUSPENDPROCESSINSTANCE
+  commentId: F:Camunda.Orchestration.Sdk.BatchOperationTypeEnum.SUSPENDPROCESSINSTANCE
+  fullName: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.SUSPENDPROCESSINSTANCE
+  nameWithType: BatchOperationTypeEnum.SUSPENDPROCESSINSTANCE
 - uid: Camunda.Orchestration.Sdk.BatchOperationTypeEnum.UPDATEJOB
   name: UPDATEJOB
   href: api/Camunda.Orchestration.Sdk.BatchOperationTypeEnum.html#Camunda_Orchestration_Sdk_BatchOperationTypeEnum_UPDATEJOB
@@ -11710,6 +11722,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.AssignMappingRuleToTenantAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.AssignMappingRuleToTenantAsync
   nameWithType: CamundaClient.AssignMappingRuleToTenantAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction,System.Threading.CancellationToken)
+  name: AssignProcessInstanceBusinessIdAsync(ProcessInstanceKey, ProcessInstanceBusinessIdAssignmentInstruction, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignProcessInstanceBusinessIdAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ProcessInstanceBusinessIdAssignmentInstruction_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey, Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.AssignProcessInstanceBusinessIdAsync(ProcessInstanceKey, ProcessInstanceBusinessIdAssignmentInstruction, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync*
+  name: AssignProcessInstanceBusinessIdAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync
+  nameWithType: CamundaClient.AssignProcessInstanceBusinessIdAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToClientAsync(Camunda.Orchestration.Sdk.RoleId,Camunda.Orchestration.Sdk.ClientId,System.Threading.CancellationToken)
   name: AssignRoleToClientAsync(RoleId, ClientId, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToClientAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToClientAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_ClientId_System_Threading_CancellationToken_
@@ -13381,6 +13405,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync
   nameWithType: CamundaClient.ResumeBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest,System.Threading.CancellationToken)
+  name: ResumeProcessInstanceAsync(ProcessInstanceKey, ResumeProcessInstanceRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ResumeProcessInstanceRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey, Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ResumeProcessInstanceAsync(ProcessInstanceKey, ResumeProcessInstanceRequest, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync*
+  name: ResumeProcessInstanceAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync
+  nameWithType: CamundaClient.ResumeProcessInstanceAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest,System.Threading.CancellationToken)
+  name: ResumeProcessInstancesBatchOperationAsync(ProcessInstanceResumptionBatchOperationRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_ProcessInstanceResumptionBatchOperationRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ResumeProcessInstancesBatchOperationAsync(ProcessInstanceResumptionBatchOperationRequest, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync*
+  name: ResumeProcessInstancesBatchOperationAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync
+  nameWithType: CamundaClient.ResumeProcessInstancesBatchOperationAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.RunWorkersAsync(System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
   name: RunWorkersAsync(TimeSpan?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.RunWorkersAsync.html#Camunda_Orchestration_Sdk_CamundaClient_RunWorkersAsync_System_Nullable_System_TimeSpan__System_Threading_CancellationToken_
@@ -14128,6 +14176,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync
   nameWithType: CamundaClient.SuspendBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest,System.Threading.CancellationToken)
+  name: SuspendProcessInstanceAsync(ProcessInstanceKey, SuspendProcessInstanceRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_SuspendProcessInstanceRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey, Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SuspendProcessInstanceAsync(ProcessInstanceKey, SuspendProcessInstanceRequest, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync*
+  name: SuspendProcessInstanceAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync
+  nameWithType: CamundaClient.SuspendProcessInstanceAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest,System.Threading.CancellationToken)
+  name: SuspendProcessInstancesBatchOperationAsync(ProcessInstanceSuspensionBatchOperationRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_ProcessInstanceSuspensionBatchOperationRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SuspendProcessInstancesBatchOperationAsync(ProcessInstanceSuspensionBatchOperationRequest, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync*
+  name: SuspendProcessInstancesBatchOperationAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync
+  nameWithType: CamundaClient.SuspendProcessInstancesBatchOperationAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ThrowJobErrorAsync(Camunda.Orchestration.Sdk.JobKey,Camunda.Orchestration.Sdk.JobErrorRequest,System.Threading.CancellationToken)
   name: ThrowJobErrorAsync(JobKey, JobErrorRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ThrowJobErrorAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ThrowJobErrorAsync_Camunda_Orchestration_Sdk_JobKey_Camunda_Orchestration_Sdk_JobErrorRequest_System_Threading_CancellationToken_
@@ -15529,6 +15601,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.ClusterVariableResult
   fullName: Camunda.Orchestration.Sdk.ClusterVariableResult
   nameWithType: ClusterVariableResult
+- uid: Camunda.Orchestration.Sdk.ClusterVariableResult.Metadata
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableResult.Metadata.html#Camunda_Orchestration_Sdk_ClusterVariableResult_Metadata
+  commentId: P:Camunda.Orchestration.Sdk.ClusterVariableResult.Metadata
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableResult.Metadata
+  nameWithType: ClusterVariableResult.Metadata
+- uid: Camunda.Orchestration.Sdk.ClusterVariableResult.Metadata*
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableResult.Metadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterVariableResult.Metadata
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableResult.Metadata
+  nameWithType: ClusterVariableResult.Metadata
 - uid: Camunda.Orchestration.Sdk.ClusterVariableResult.Name
   name: Name
   href: api/Camunda.Orchestration.Sdk.ClusterVariableResult.Name.html#Camunda_Orchestration_Sdk_ClusterVariableResult_Name
@@ -15583,6 +15667,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.ClusterVariableResultBase
   fullName: Camunda.Orchestration.Sdk.ClusterVariableResultBase
   nameWithType: ClusterVariableResultBase
+- uid: Camunda.Orchestration.Sdk.ClusterVariableResultBase.Metadata
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableResultBase.Metadata.html#Camunda_Orchestration_Sdk_ClusterVariableResultBase_Metadata
+  commentId: P:Camunda.Orchestration.Sdk.ClusterVariableResultBase.Metadata
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableResultBase.Metadata
+  nameWithType: ClusterVariableResultBase.Metadata
+- uid: Camunda.Orchestration.Sdk.ClusterVariableResultBase.Metadata*
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableResultBase.Metadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterVariableResultBase.Metadata
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableResultBase.Metadata
+  nameWithType: ClusterVariableResultBase.Metadata
 - uid: Camunda.Orchestration.Sdk.ClusterVariableResultBase.Name
   name: Name
   href: api/Camunda.Orchestration.Sdk.ClusterVariableResultBase.Name.html#Camunda_Orchestration_Sdk_ClusterVariableResultBase_Name
@@ -16009,6 +16105,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ClusterVariableSearchResult.IsTruncated
   fullName: Camunda.Orchestration.Sdk.ClusterVariableSearchResult.IsTruncated
   nameWithType: ClusterVariableSearchResult.IsTruncated
+- uid: Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Metadata
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Metadata.html#Camunda_Orchestration_Sdk_ClusterVariableSearchResult_Metadata
+  commentId: P:Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Metadata
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Metadata
+  nameWithType: ClusterVariableSearchResult.Metadata
+- uid: Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Metadata*
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Metadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Metadata
+  fullName: Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Metadata
+  nameWithType: ClusterVariableSearchResult.Metadata
 - uid: Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Name
   name: Name
   href: api/Camunda.Orchestration.Sdk.ClusterVariableSearchResult.Name.html#Camunda_Orchestration_Sdk_ClusterVariableSearchResult_Name
@@ -16921,6 +17029,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.CreateClusterVariableRequest
   fullName: Camunda.Orchestration.Sdk.CreateClusterVariableRequest
   nameWithType: CreateClusterVariableRequest
+- uid: Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Metadata
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Metadata.html#Camunda_Orchestration_Sdk_CreateClusterVariableRequest_Metadata
+  commentId: P:Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Metadata
+  fullName: Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Metadata
+  nameWithType: CreateClusterVariableRequest.Metadata
+- uid: Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Metadata*
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Metadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Metadata
+  fullName: Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Metadata
+  nameWithType: CreateClusterVariableRequest.Metadata
 - uid: Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Name
   name: Name
   href: api/Camunda.Orchestration.Sdk.CreateClusterVariableRequest.Name.html#Camunda_Orchestration_Sdk_CreateClusterVariableRequest_Name
@@ -36949,6 +37069,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessElementStatisticsResult.Incidents
   fullName: Camunda.Orchestration.Sdk.ProcessElementStatisticsResult.Incidents
   nameWithType: ProcessElementStatisticsResult.Incidents
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction
+  name: ProcessInstanceBusinessIdAssignmentInstruction
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction
+  nameWithType: ProcessInstanceBusinessIdAssignmentInstruction
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction.BusinessId.html#Camunda_Orchestration_Sdk_ProcessInstanceBusinessIdAssignmentInstruction_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction.BusinessId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction.BusinessId
+  nameWithType: ProcessInstanceBusinessIdAssignmentInstruction.BusinessId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction.BusinessId
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction.BusinessId
+  nameWithType: ProcessInstanceBusinessIdAssignmentInstruction.BusinessId
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceCallHierarchyEntry
   name: ProcessInstanceCallHierarchyEntry
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceCallHierarchyEntry.html
@@ -38899,6 +39037,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceResult.TenantId
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceResult.TenantId
   nameWithType: ProcessInstanceResult.TenantId
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest
+  name: ProcessInstanceResumptionBatchOperationRequest
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest
+  nameWithType: ProcessInstanceResumptionBatchOperationRequest
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.Filter.html#Camunda_Orchestration_Sdk_ProcessInstanceResumptionBatchOperationRequest_Filter
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.Filter
+  nameWithType: ProcessInstanceResumptionBatchOperationRequest.Filter
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.Filter
+  nameWithType: ProcessInstanceResumptionBatchOperationRequest.Filter
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.OperationReference
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.OperationReference.html#Camunda_Orchestration_Sdk_ProcessInstanceResumptionBatchOperationRequest_OperationReference
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.OperationReference
+  nameWithType: ProcessInstanceResumptionBatchOperationRequest.OperationReference
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.OperationReference*
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.OperationReference.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest.OperationReference
+  nameWithType: ProcessInstanceResumptionBatchOperationRequest.OperationReference
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuery
   name: ProcessInstanceSearchQuery
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuery.html
@@ -39379,6 +39547,36 @@ references:
   fullName.vb: Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty.CType
   nameWithType: ProcessInstanceStateFilterProperty.implicit operator
   nameWithType.vb: ProcessInstanceStateFilterProperty.CType
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest
+  name: ProcessInstanceSuspensionBatchOperationRequest
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest
+  nameWithType: ProcessInstanceSuspensionBatchOperationRequest
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.Filter.html#Camunda_Orchestration_Sdk_ProcessInstanceSuspensionBatchOperationRequest_Filter
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.Filter
+  nameWithType: ProcessInstanceSuspensionBatchOperationRequest.Filter
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.Filter
+  nameWithType: ProcessInstanceSuspensionBatchOperationRequest.Filter
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.OperationReference
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.OperationReference.html#Camunda_Orchestration_Sdk_ProcessInstanceSuspensionBatchOperationRequest_OperationReference
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.OperationReference
+  nameWithType: ProcessInstanceSuspensionBatchOperationRequest.OperationReference
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.OperationReference*
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.OperationReference.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest.OperationReference
+  nameWithType: ProcessInstanceSuspensionBatchOperationRequest.OperationReference
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult
   name: ProcessInstanceWaitStateStatisticsQueryResult
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult.html
@@ -40264,6 +40462,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.RestoreRequest.To
   fullName: Camunda.Orchestration.Sdk.RestoreRequest.To
   nameWithType: RestoreRequest.To
+- uid: Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest
+  name: ResumeProcessInstanceRequest
+  href: api/Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest
+  fullName: Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest
+  nameWithType: ResumeProcessInstanceRequest
+- uid: Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest.OperationReference
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest.OperationReference.html#Camunda_Orchestration_Sdk_ResumeProcessInstanceRequest_OperationReference
+  commentId: P:Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest.OperationReference
+  nameWithType: ResumeProcessInstanceRequest.OperationReference
+- uid: Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest.OperationReference*
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest.OperationReference.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest.OperationReference
+  nameWithType: ResumeProcessInstanceRequest.OperationReference
 - uid: Camunda.Orchestration.Sdk.RetryDecision
   name: RetryDecision
   href: api/Camunda.Orchestration.Sdk.RetryDecision.html
@@ -42016,6 +42232,24 @@ references:
   fullName.vb: Camunda.Orchestration.Sdk.StringFilterProperty.CType
   nameWithType: StringFilterProperty.implicit operator
   nameWithType.vb: StringFilterProperty.CType
+- uid: Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest
+  name: SuspendProcessInstanceRequest
+  href: api/Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest
+  fullName: Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest
+  nameWithType: SuspendProcessInstanceRequest
+- uid: Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest.OperationReference
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest.OperationReference.html#Camunda_Orchestration_Sdk_SuspendProcessInstanceRequest_OperationReference
+  commentId: P:Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest.OperationReference
+  nameWithType: SuspendProcessInstanceRequest.OperationReference
+- uid: Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest.OperationReference*
+  name: OperationReference
+  href: api/Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest.OperationReference.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest.OperationReference
+  fullName: Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest.OperationReference
+  nameWithType: SuspendProcessInstanceRequest.OperationReference
 - uid: Camunda.Orchestration.Sdk.SystemConfigurationResponse
   name: SystemConfigurationResponse
   href: api/Camunda.Orchestration.Sdk.SystemConfigurationResponse.html
@@ -43264,6 +43498,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.UpdateClusterVariableRequest
   fullName: Camunda.Orchestration.Sdk.UpdateClusterVariableRequest
   nameWithType: UpdateClusterVariableRequest
+- uid: Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Metadata
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Metadata.html#Camunda_Orchestration_Sdk_UpdateClusterVariableRequest_Metadata
+  commentId: P:Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Metadata
+  fullName: Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Metadata
+  nameWithType: UpdateClusterVariableRequest.Metadata
+- uid: Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Metadata*
+  name: Metadata
+  href: api/Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Metadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Metadata
+  fullName: Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Metadata
+  nameWithType: UpdateClusterVariableRequest.Metadata
 - uid: Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Value
   name: Value
   href: api/Camunda.Orchestration.Sdk.UpdateClusterVariableRequest.Value.html#Camunda_Orchestration_Sdk_UpdateClusterVariableRequest_Value

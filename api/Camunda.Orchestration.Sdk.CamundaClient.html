@@ -242,6 +242,18 @@ Assign a single mapping rule to a specified tenant.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignProcessInstanceBusinessIdAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ProcessInstanceBusinessIdAssignmentInstruction_System_Threading_CancellationToken_">AssignProcessInstanceBusinessIdAsync(ProcessInstanceKey, ProcessInstanceBusinessIdAssignmentInstruction, CancellationToken)</a></dt>
+    <dd><p>Assign business id to process instance
+Assigns a business id to an already-running process instance that currently has none.</p>
+<p>The assignment is single and irreversible: only artifacts created after the assignment
+(for example future jobs, user tasks, decision instances, and message subscriptions) carry
+the business id, while existing artifacts are not retroactively enriched. Re-sending the
+same business id succeeds as a no-op. This endpoint is only useful while business id
+uniqueness enforcement is disabled; when it is enabled, the request is rejected with a 409
+response.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AssignRoleToClientAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AssignRoleToClientAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_ClientId_System_Threading_CancellationToken_">AssignRoleToClientAsync(RoleId, ClientId, CancellationToken)</a></dt>
     <dd><p>Assign a role to a client
 Assigns the specified role to the client. The client will inherit the authorizations associated with this role.</p>
@@ -1129,6 +1141,22 @@ This is done asynchronously, the progress can be tracked using the batch operati
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ResumeProcessInstanceRequest_System_Threading_CancellationToken_">ResumeProcessInstanceAsync(ProcessInstanceKey, ResumeProcessInstanceRequest, CancellationToken)</a></dt>
+    <dd><p>Resume process instance
+Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.
+Only process instances in the SUSPENDED state can be resumed.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_ProcessInstanceResumptionBatchOperationRequest_System_Threading_CancellationToken_">ResumeProcessInstancesBatchOperationAsync(ProcessInstanceResumptionBatchOperationRequest, CancellationToken)</a></dt>
+    <dd><p>Resume process instances (batch)
+Resumes multiple suspended process instances.
+Since only SUSPENDED root instances can be resumed, any given filters for state and
+parentProcessInstanceKey are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.RunWorkersAsync.html#Camunda_Orchestration_Sdk_CamundaClient_RunWorkersAsync_System_Nullable_System_TimeSpan__System_Threading_CancellationToken_">RunWorkersAsync(TimeSpan?, CancellationToken)</a></dt>
     <dd><p>Block until cancellation is requested, keeping all registered workers alive.
 This is the typical entry point for worker-only applications.</p>
@@ -1492,6 +1520,22 @@ BPMN elements like tasks, subprocesses, etc.).</p>
     <dd><p>Suspend Batch operation
 Suspends a running batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_SuspendProcessInstanceRequest_System_Threading_CancellationToken_">SuspendProcessInstanceAsync(ProcessInstanceKey, SuspendProcessInstanceRequest, CancellationToken)</a></dt>
+    <dd><p>Suspend process instance
+Suspends a running process instance, pausing further processing until it is resumed.
+Only process instances in the ACTIVE state can be suspended.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_ProcessInstanceSuspensionBatchOperationRequest_System_Threading_CancellationToken_">SuspendProcessInstancesBatchOperationAsync(ProcessInstanceSuspensionBatchOperationRequest, CancellationToken)</a></dt>
+    <dd><p>Suspend process instances (batch)
+Suspends multiple running process instances.
+Since only ACTIVE root instances can be suspended, any given filters for state and
+parentProcessInstanceKey are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
 </dd>
   </dl>
   <dl class="jumplist">
