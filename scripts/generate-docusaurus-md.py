@@ -299,6 +299,37 @@ def _clean_summary(s: str | None) -> str:
     return s.strip()
 
 
+def _escape_heading(text: str) -> str:
+    """Escape angle brackets so generic type arguments survive MDX heading rendering.
+
+    Method-name headings carry generic arguments such as
+    ``ConsistencyOptions<Result>?``. MDX parses ``<Result>`` as a (self-closing)
+    JSX element and drops it, which also corrupts the surrounding text styling.
+    Backslash-escaping the angle brackets renders them literally.
+    """
+    return text.replace("<", "\\<").replace(">", "\\>")
+
+
+def _format_description(s: str) -> str:
+    """Render a DocFX summary as clean Markdown paragraphs.
+
+    DocFX carries the short OpenAPI summary on the first line and the longer
+    description on the following lines, joined by single newlines. A single
+    newline collapses to a space in rendered HTML, so the title runs directly
+    into the description (``Restore from a backup Restores the cluster...``).
+    Separate the first line into its own paragraph and flow the remainder as a
+    single paragraph.
+    """
+    if not s:
+        return s
+    parts = s.split("\n", 1)
+    if len(parts) == 2 and parts[0].strip() and parts[1].strip():
+        title = parts[0].strip()
+        body = re.sub(r"\s+", " ", parts[1]).strip()
+        return f"{title}\n\n{body}"
+    return re.sub(r"[ \t]*\n[ \t]*", " ", s).strip()
+
+
 # ---------------------------------------------------------------------------
 # Load all types
 # ---------------------------------------------------------------------------
@@ -328,7 +359,7 @@ def load_all_types(
             name=first.get("name", ""),
             full_name=first.get("fullName", ""),
             type_kind=kind,
-            summary=_clean_summary(first.get("summary")),
+            summary=_format_description(_clean_summary(first.get("summary"))),
             remarks=_clean_summary(first.get("remarks")),
             syntax_content=first.get("syntax", {}).get("content", ""),
             namespace=first.get("namespace", ""),
@@ -352,7 +383,7 @@ def load_all_types(
                 uid=item.get("uid", ""),
                 name=item.get("name", ""),
                 type_kind=item.get("type", ""),
-                summary=_clean_summary(item.get("summary")),
+                summary=_format_description(_clean_summary(item.get("summary"))),
                 syntax_content=item.get("syntax", {}).get("content", ""),
                 parameters=[
                     {"name": p.get("id", ""), "type": _short_type(p.get("type", "")), "description": _clean_summary(p.get("description"))}
@@ -535,7 +566,7 @@ def generate_camunda_client(types: list[TypeItem]) -> str:
         out += (extensions.summary or "Extension methods for Microsoft.Extensions.DependencyInjection.") + "\n\n"
         for m in extensions.members:
             if m.type_kind == "Method":
-                out += f"### {m.name}\n\n"
+                out += f"### {_escape_heading(m.name)}\n\n"
                 out += _md_signature(m.syntax_content)
                 if m.summary:
                     out += m.summary + "\n\n"
@@ -579,7 +610,7 @@ def generate_camunda_client(types: list[TypeItem]) -> str:
         for group_name, group_methods in groups.items():
             out += f"\n### {group_name}\n\n"
             for m in group_methods:
-                out += f"#### {m.name}\n\n"
+                out += f"#### {_escape_heading(m.name)}\n\n"
                 out += _md_signature(m.syntax_content)
                 if m.summary:
                     out += m.summary + "\n\n"
@@ -708,7 +739,7 @@ def generate_runtime(types: list[TypeItem]) -> str:
             if methods:
                 out += "\n### Methods\n\n"
                 for m in methods:
-                    out += f"#### {m.name}\n\n"
+                    out += f"#### {_escape_heading(m.name)}\n\n"
                     out += _md_signature(m.syntax_content)
                     if m.summary:
                         out += m.summary + "\n\n"
