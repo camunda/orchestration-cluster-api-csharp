@@ -1283,6 +1283,36 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/ProcessInstance.cs#SuspendProcessInstance)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/ProcessInstance.cs#ResumeProcessInstance)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.AssignProcessInstanceBusinessIdAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/ProcessInstance.cs#AssignProcessInstanceBusinessId)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest,System.Threading.CancellationToken)
 example:
 - *content
@@ -1310,6 +1340,26 @@ example:
 
 
 [!code-csharp[](../../examples/BatchOperation.cs#ResumeBatchOperation)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/BatchOperation.cs#SuspendProcessInstancesBatchOperation)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/BatchOperation.cs#ResumeProcessInstancesBatchOperation)]
 
 
 ---

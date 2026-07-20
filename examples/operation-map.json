@@ -158,6 +158,27 @@
       "label": "Resolve process instance incidents"
     }
   ],
+  "suspendProcessInstance": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "SuspendProcessInstance",
+      "label": "Suspend a process instance"
+    }
+  ],
+  "resumeProcessInstance": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "ResumeProcessInstance",
+      "label": "Resume a process instance"
+    }
+  ],
+  "assignProcessInstanceBusinessId": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "AssignProcessInstanceBusinessId",
+      "label": "Assign a business ID to a process instance"
+    }
+  ],
   "getProcessDefinition": [
     {
       "file": "ProcessDefinition.cs",
@@ -1078,6 +1099,20 @@
       "file": "BatchOperation.cs",
       "region": "UpdateJobsBatchOperation",
       "label": "Update jobs in batch"
+    }
+  ],
+  "suspendProcessInstancesBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "SuspendProcessInstancesBatchOperation",
+      "label": "Suspend process instances in batch"
+    }
+  ],
+  "resumeProcessInstancesBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "ResumeProcessInstancesBatchOperation",
+      "label": "Resume process instances in batch"
     }
   ],
   "getVariable": [
