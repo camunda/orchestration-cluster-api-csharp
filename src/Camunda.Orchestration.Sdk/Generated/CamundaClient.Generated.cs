@@ -289,6 +289,57 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Assign business id to process instance
+    /// Assigns a business id to an already-running process instance that currently has none.
+    /// 
+    /// The assignment is single and irreversible: only artifacts created after the assignment
+    /// (for example future jobs, user tasks, decision instances, and message subscriptions) carry
+    /// the business id, while existing artifacts are not retroactively enriched. Re-sending the
+    /// same business id succeeds as a no-op. This endpoint is only useful while business id
+    /// uniqueness enforcement is disabled; when it is enabled, the request is rejected with a 409
+    /// response.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: assignProcessInstanceBusinessId
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignProcessInstanceBusinessIdExample(ProcessInstanceKey processInstanceKey, BusinessId businessId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignProcessInstanceBusinessIdAsync(
+    ///         processInstanceKey,
+    ///         new ProcessInstanceBusinessIdAssignmentInstruction
+    ///         {
+    ///             BusinessId = businessId,
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AssignProcessInstanceBusinessIdExample(ProcessInstanceKey processInstanceKey, BusinessId businessId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AssignProcessInstanceBusinessIdAsync(
+    ///         processInstanceKey,
+    ///         new ProcessInstanceBusinessIdAssignmentInstruction
+    ///         {
+    ///             BusinessId = businessId,
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
+    public async Task AssignProcessInstanceBusinessIdAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceBusinessIdAssignmentInstruction body, CancellationToken ct = default)
+    {
+        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/business-id-assignment";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "assignProcessInstanceBusinessId", false, ct);
+    }
+
+    /// <summary>
     /// Assign a role to a client
     /// Assigns the specified role to the client. The client will inherit the authorizations associated with this role.
     /// </summary>
@@ -5609,6 +5660,94 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Resume process instance
+    /// Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.
+    /// Only process instances in the SUSPENDED state can be resumed.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: resumeProcessInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResumeProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResumeProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new ResumeProcessInstanceRequest());
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResumeProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResumeProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new ResumeProcessInstanceRequest());
+    /// }
+    /// </code>
+    /// </example>
+    public async Task ResumeProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ResumeProcessInstanceRequest body, CancellationToken ct = default)
+    {
+        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/resumption";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "resumeProcessInstance", false, ct);
+    }
+
+    /// <summary>
+    /// Resume process instances (batch)
+    /// Resumes multiple suspended process instances.
+    /// Since only SUSPENDED root instances can be resumed, any given filters for state and
+    /// parentProcessInstanceKey are ignored and overridden during this batch operation.
+    /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: resumeProcessInstancesBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResumeProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResumeProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceResumptionBatchOperationRequest
+    ///         {
+    ///             Filter = new ProcessInstanceFilter(),
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResumeProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResumeProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceResumptionBatchOperationRequest
+    ///         {
+    ///             Filter = new ProcessInstanceFilter(),
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<BatchOperationCreatedResult> ResumeProcessInstancesBatchOperationAsync(ProcessInstanceResumptionBatchOperationRequest body, CancellationToken ct = default)
+    {
+        var path = $"/process-instances/resumption";
+        return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "resumeProcessInstancesBatchOperation", false, ct);
+    }
+
+    /// <summary>
     /// Search agent instance history
     /// Searches the conversation history of an agent instance. Committed items
     /// are returned by default.
@@ -8166,6 +8305,94 @@ public partial class CamundaClient
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/suspension";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "suspendBatchOperation", false, ct);
+    }
+
+    /// <summary>
+    /// Suspend process instance
+    /// Suspends a running process instance, pausing further processing until it is resumed.
+    /// Only process instances in the ACTIVE state can be suspended.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: suspendProcessInstance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SuspendProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.SuspendProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new SuspendProcessInstanceRequest());
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SuspendProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.SuspendProcessInstanceAsync(
+    ///         processInstanceKey,
+    ///         new SuspendProcessInstanceRequest());
+    /// }
+    /// </code>
+    /// </example>
+    public async Task SuspendProcessInstanceAsync(ProcessInstanceKey processInstanceKey, SuspendProcessInstanceRequest body, CancellationToken ct = default)
+    {
+        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/suspension";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "suspendProcessInstance", false, ct);
+    }
+
+    /// <summary>
+    /// Suspend process instances (batch)
+    /// Suspends multiple running process instances.
+    /// Since only ACTIVE root instances can be suspended, any given filters for state and
+    /// parentProcessInstanceKey are ignored and overridden during this batch operation.
+    /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: suspendProcessInstancesBatchOperation
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SuspendProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SuspendProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceSuspensionBatchOperationRequest
+    ///         {
+    ///             Filter = new ProcessInstanceFilter(),
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SuspendProcessInstancesBatchOperationExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SuspendProcessInstancesBatchOperationAsync(
+    ///         new ProcessInstanceSuspensionBatchOperationRequest
+    ///         {
+    ///             Filter = new ProcessInstanceFilter(),
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<BatchOperationCreatedResult> SuspendProcessInstancesBatchOperationAsync(ProcessInstanceSuspensionBatchOperationRequest body, CancellationToken ct = default)
+    {
+        var path = $"/process-instances/suspension";
+        return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "suspendProcessInstancesBatchOperation", false, ct);
     }
 
     /// <summary>

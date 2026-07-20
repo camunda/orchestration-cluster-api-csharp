@@ -576,9 +576,9 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult : sealed c
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics : sealed class
   CTOR ()
-  PROP System.Int64 DurationMs { get; set; } [JsonPropertyName("durationMs")]
-  PROP System.Int64 InputTokens { get; set; } [JsonPropertyName("inputTokens")]
-  PROP System.Int64 OutputTokens { get; set; } [JsonPropertyName("outputTokens")]
+  PROP System.Int64? DurationMs { get; set; } [JsonPropertyName("durationMs")]
+  PROP System.Int64? InputTokens { get; set; } [JsonPropertyName("inputTokens")]
+  PROP System.Int64? OutputTokens { get; set; } [JsonPropertyName("outputTokens")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest : sealed class
   CTOR ()
@@ -596,7 +596,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentHistoryItemKey HistoryItemKey { get; set; } [JsonPropertyName("historyItemKey")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryCommitStatusEnum CommitStatus { get; set; } [JsonPropertyName("commitStatus")]
-  PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics Metrics { get; set; } [JsonPropertyName("metrics")]
+  PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics? Metrics { get; set; } [JsonPropertyName("metrics")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum Role { get; set; } [JsonPropertyName("role")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceKey AgentInstanceKey { get; set; } [JsonPropertyName("agentInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
@@ -1460,8 +1460,10 @@ TYPE Camunda.Orchestration.Sdk.BatchOperationTypeEnum : enum interfaces=[System.
   MEMBER MIGRATEPROCESSINSTANCE = 6 json="MIGRATE_PROCESS_INSTANCE"
   MEMBER MODIFYPROCESSINSTANCE = 7 json="MODIFY_PROCESS_INSTANCE"
   MEMBER RESOLVEINCIDENT = 8 json="RESOLVE_INCIDENT"
-  MEMBER UPDATEJOB = 9 json="UPDATE_JOB"
-  MEMBER UPDATEVARIABLE = 10 json="UPDATE_VARIABLE"
+  MEMBER RESUMEPROCESSINSTANCE = 9 json="RESUME_PROCESS_INSTANCE"
+  MEMBER SUSPENDPROCESSINSTANCE = 10 json="SUSPEND_PROCESS_INSTANCE"
+  MEMBER UPDATEJOB = 11 json="UPDATE_JOB"
+  MEMBER UPDATEVARIABLE = 12 json="UPDATE_VARIABLE"
 
 TYPE Camunda.Orchestration.Sdk.BatchOperationTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.BatchOperationTypeExactMatch>]
   PROP System.String Value { get; }
@@ -1535,6 +1537,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task AssignGroupToTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.GroupId groupId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task AssignMappingRuleToGroupAsync(Camunda.Orchestration.Sdk.GroupId groupId, Camunda.Orchestration.Sdk.MappingRuleId mappingRuleId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task AssignMappingRuleToTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.MappingRuleId mappingRuleId, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task AssignProcessInstanceBusinessIdAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task AssignRoleToClientAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.ClientId clientId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task AssignRoleToGroupAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.GroupId groupId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task AssignRoleToMappingRuleAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.MappingRuleId mappingRuleId, System.Threading.CancellationToken ct = null)
@@ -1568,9 +1571,11 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task ResetClockAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResolveIncidentAsync(Camunda.Orchestration.Sdk.IncidentKey incidentKey, Camunda.Orchestration.Sdk.IncidentResolutionRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task ResumeProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task RunWorkersAsync(System.TimeSpan? gracePeriod = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task StopAllWorkersAsync(System.TimeSpan? gracePeriod = null)
   METHOD System.Threading.Tasks.Task SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task SuspendProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ThrowJobErrorAsync(Camunda.Orchestration.Sdk.JobKey jobKey, Camunda.Orchestration.Sdk.JobErrorRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UnassignClientFromGroupAsync(Camunda.Orchestration.Sdk.GroupId groupId, Camunda.Orchestration.Sdk.ClientId clientId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UnassignClientFromTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.ClientId clientId, System.Threading.CancellationToken ct = null)
@@ -1607,6 +1612,8 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceModificationBatchOperationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceIncidentResolutionBatchOperationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> ResumeProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> SuspendProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> UpdateJobsBatchOperationAsync(Camunda.Orchestration.Sdk.JobBatchUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationItemSearchQueryResult> SearchBatchOperationItemsAsync(Camunda.Orchestration.Sdk.BatchOperationItemSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationItemSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationResponse> GetBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationResponse>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1881,6 +1888,7 @@ TYPE Camunda.Orchestration.Sdk.ClusterVariableResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ClusterVariableName Name { get; set; } [JsonPropertyName("name")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableScopeEnum Scope { get; set; } [JsonPropertyName("scope")]
+  PROP System.Collections.Generic.Dictionary<System.String,System.Object> Metadata { get; set; } [JsonPropertyName("metadata")]
   PROP System.String Value { get; set; } [JsonPropertyName("value")]
   PROP System.String? TenantId { get; set; } [JsonPropertyName("tenantId")]
 
@@ -1888,6 +1896,7 @@ TYPE Camunda.Orchestration.Sdk.ClusterVariableResultBase : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ClusterVariableName Name { get; set; } [JsonPropertyName("name")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableScopeEnum Scope { get; set; } [JsonPropertyName("scope")]
+  PROP System.Collections.Generic.Dictionary<System.String,System.Object> Metadata { get; set; } [JsonPropertyName("metadata")]
   PROP System.String? TenantId { get; set; } [JsonPropertyName("tenantId")]
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableScopeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
@@ -1952,6 +1961,7 @@ TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchResult : sealed class
   PROP Camunda.Orchestration.Sdk.ClusterVariableName Name { get; set; } [JsonPropertyName("name")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableScopeEnum Scope { get; set; } [JsonPropertyName("scope")]
   PROP System.Boolean IsTruncated { get; set; } [JsonPropertyName("isTruncated")]
+  PROP System.Collections.Generic.Dictionary<System.String,System.Object> Metadata { get; set; } [JsonPropertyName("metadata")]
   PROP System.String Value { get; set; } [JsonPropertyName("value")]
   PROP System.String? TenantId { get; set; } [JsonPropertyName("tenantId")]
 
@@ -2073,6 +2083,7 @@ TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortReque
 TYPE Camunda.Orchestration.Sdk.CreateClusterVariableRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ClusterVariableName Name { get; set; } [JsonPropertyName("name")]
+  PROP System.Collections.Generic.Dictionary<System.String,System.Object>? Metadata { get; set; } [JsonPropertyName("metadata")]
   PROP System.Object Value { get; set; } [JsonPropertyName("value")]
 
 TYPE Camunda.Orchestration.Sdk.CreateGlobalTaskListenerRequest : sealed class
@@ -4824,6 +4835,10 @@ TYPE Camunda.Orchestration.Sdk.ProcessElementStatisticsResult : sealed class
   PROP System.Int64 Completed { get; set; } [JsonPropertyName("completed")]
   PROP System.Int64 Incidents { get; set; } [JsonPropertyName("incidents")]
 
+TYPE Camunda.Orchestration.Sdk.ProcessInstanceBusinessIdAssignmentInstruction : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId BusinessId { get; set; } [JsonPropertyName("businessId")]
+
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceCallHierarchyEntry : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
@@ -5064,6 +5079,11 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceResult : sealed class
   PROP System.String? ProcessDefinitionName { get; set; } [JsonPropertyName("processDefinitionName")]
   PROP System.String? ProcessDefinitionVersionTag { get; set; } [JsonPropertyName("processDefinitionVersionTag")]
 
+TYPE Camunda.Orchestration.Sdk.ProcessInstanceResumptionBatchOperationRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceFilter Filter { get; set; } [JsonPropertyName("filter")]
+
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceSearchQuery : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ProcessInstanceFilter? Filter { get; set; } [JsonPropertyName("filter")]
@@ -5137,6 +5157,11 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceStateFilterProperty : sealed class
   PROP Camunda.Orchestration.Sdk.ProcessInstanceStateEnum? Neq { get; set; } [JsonPropertyName("$neq")]
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceStateEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceFilter Filter { get; set; } [JsonPropertyName("filter")]
 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult : sealed class
   CTOR ()
@@ -5250,6 +5275,10 @@ TYPE Camunda.Orchestration.Sdk.RestoreRequest : sealed class
   PROP System.Collections.Generic.List<System.Int64>? BackupIds { get; set; } [JsonPropertyName("backupIds")]
   PROP System.DateTimeOffset? From { get; set; } [JsonPropertyName("from")]
   PROP System.DateTimeOffset? To { get; set; } [JsonPropertyName("to")]
+
+TYPE Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
 
 TYPE Camunda.Orchestration.Sdk.RetryDecision : struct interfaces=[System.IEquatable<Camunda.Orchestration.Sdk.RetryDecision>]
   CTOR (System.Boolean Retryable, System.String Reason)
@@ -5537,6 +5566,10 @@ TYPE Camunda.Orchestration.Sdk.StringFilterProperty : sealed class
   PROP System.String? ExactMatch { get; set; }
   PROP System.String? Neq { get; set; } [JsonPropertyName("$neq")]
 
+TYPE Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
+
 TYPE Camunda.Orchestration.Sdk.SystemConfigurationResponse : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse Authentication { get; set; } [JsonPropertyName("authentication")]
@@ -5742,6 +5775,7 @@ TYPE Camunda.Orchestration.Sdk.TypedVariablesException : class base=System.Excep
 
 TYPE Camunda.Orchestration.Sdk.UpdateClusterVariableRequest : sealed class
   CTOR ()
+  PROP System.Collections.Generic.Dictionary<System.String,System.Object>? Metadata { get; set; } [JsonPropertyName("metadata")]
   PROP System.Object Value { get; set; } [JsonPropertyName("value")]
 
 TYPE Camunda.Orchestration.Sdk.UpdateGlobalTaskListenerRequest : sealed class
