@@ -26,6 +26,7 @@ import re
 import subprocess
 import sys
 import textwrap
+import urllib.parse
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -281,22 +282,149 @@ class MemberItem:
 
 
 def _short_type(full: str) -> str:
-    """Shorten a fully-qualified type name: keep only the last segment."""
+    """Shorten a DocFX generic type ID, keeping the last segment of each name.
+
+    DocFX carries types in its friendly ID form: ``{..}`` delimits a generic
+    argument list and ``{{T}}`` denotes a *method* type-parameter argument.
+    The conversion is brace-balanced so arbitrarily nested generics such as
+    ``Task{...VariableMap{{T}}}`` render as ``Task<VariableMap<T>>`` rather
+    than the mangled ``Task<VariableMap{{T>}}`` produced by a flat regex.
+    """
     if not full:
         return full
-    # Handle generic syntax {T} → <T>
-    full = re.sub(r"\{([^}]+)\}", lambda m: f"<{_short_type(m.group(1))}>", full)
-    parts = full.rsplit(".", 1)
-    return parts[-1] if len(parts) > 1 else full
+    # A method type-parameter argument list is doubled (``{{T}}``); normalise
+    # it to a single generic list so the balanced walk treats it like any other.
+    full = re.sub(r"\{\{(\w+)\}\}", r"{\1}", full)
+
+    out: list[str] = []
+    token: list[str] = []
+
+    def flush() -> None:
+        name = "".join(token).strip()
+        token.clear()
+        if name:
+            out.append(name.rsplit(".", 1)[-1])
+
+    for ch in full:
+        if ch == "{":
+            flush()
+            out.append("<")
+        elif ch == "}":
+            flush()
+            out.append(">")
+        elif ch == ",":
+            flush()
+            out.append(", ")
+        else:
+            token.append(ch)
+    flush()
+    return "".join(out)
 
 
 def _clean_summary(s: str | None) -> str:
+    """Convert a DocFX HTML ``<summary>`` into clean Markdown.
+
+    DocFX carries summaries as HTML: ``<p>`` paragraphs, ``<code>`` inline
+    code, ``<pre><code class="lang-…">`` code blocks (often wrapped in
+    ``<example>``), ``<ul>/<ol>/<li>`` lists and ``<xref>`` cross-references.
+    Facade methods additionally carry ``:::admonition`::: Markdown verbatim.
+
+    Naively stripping every tag (the previous behaviour) destroyed code
+    fences, inline-code backticks and list structure, and left empty gaps
+    where cross-references were removed. This renders each construct as its
+    Markdown equivalent instead, so downstream reflow can preserve the block
+    structure.
+    """
     if not s:
         return ""
-    # Remove XML doc artifacts like <xref uid="..."/>
-    s = re.sub(r"<xref\s+href=\"[^\"]*\"\s*data-throw-if-not-resolved=\"false\"\s*></xref>", "", s)
+
+    # 1. Code blocks -> fenced Markdown, stashed behind placeholders so their
+    #    internal whitespace survives the later prose-oriented passes.
+    placeholders: dict[str, str] = {}
+
+    def _stash_code(m: re.Match) -> str:  # type: ignore[type-arg]
+        lang = (m.group(1) or "csharp").strip()
+        code = _unescape_entities(m.group(2)).strip("\n")
+        key = f"\x00CODE{len(placeholders)}\x00"
+        placeholders[key] = f"```{lang}\n{code}\n```"
+        return f"\n\n{key}\n\n"
+
+    s = _CODE_BLOCK_RE.sub(_stash_code, s)
+    s = re.sub(r"</?example>", "", s)
+
+    # 2. Lists -> Markdown bullets, collapsing each item's soft wrapping.
+    def _conv_list(m: re.Match) -> str:  # type: ignore[type-arg]
+        items = []
+        for raw in _LI_RE.findall(m.group(1)):
+            item = re.sub(r"\s+", " ", _xref_and_inline(raw)).strip()
+            if item:
+                items.append(f"- {item}")
+        return "\n\n" + "\n".join(items) + "\n\n" if items else ""
+
+    s = _LIST_RE.sub(_conv_list, s)
+
+    # 3. Cross-references and inline code across the remaining prose.
+    s = _xref_and_inline(s)
+
+    # 4. Paragraph tags -> blank lines; drop any remaining tags; unescape.
+    s = re.sub(r"</?p>", "\n\n", s)
     s = re.sub(r"</?[a-z][^>]*>", "", s)
+    s = _unescape_entities(s)
+
+    # 5. Normalise whitespace, then restore the protected code blocks.
+    s = re.sub(r"[ \t]+\n", "\n", s)
+    s = re.sub(r"\n{3,}", "\n\n", s)
+    for key, block in placeholders.items():
+        s = s.replace(key, block)
     return s.strip()
+
+
+_CODE_BLOCK_RE = re.compile(
+    r'<pre>\s*<code(?:\s+class="lang-([^"]*)")?\s*>(.*?)</code>\s*</pre>',
+    re.DOTALL,
+)
+_INLINE_CODE_RE = re.compile(r"<code>(.*?)</code>", re.DOTALL)
+_LIST_RE = re.compile(r"<[uo]l>(.*?)</[uo]l>", re.DOTALL)
+_LI_RE = re.compile(r"<li>(.*?)</li>", re.DOTALL)
+_XREF_RE = re.compile(r'<xref\s+href="([^"]*)"[^>]*>\s*</xref>')
+
+
+def _unescape_entities(s: str) -> str:
+    return (
+        s.replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", '"')
+        .replace("&#39;", "'")
+        .replace("&amp;", "&")
+    )
+
+
+def _xref_and_inline(s: str) -> str:
+    s = _XREF_RE.sub(lambda m: f"`{_xref_short_name(m.group(1))}`", s)
+    s = _INLINE_CODE_RE.sub(
+        lambda m: f"`{_unescape_entities(m.group(1)).strip()}`", s
+    )
+    return s
+
+
+def _xref_short_name(uid: str) -> str:
+    """Reduce a DocFX xref UID to a readable ``Type`` or ``Type.Member`` name.
+
+    ``Camunda.Orchestration.Sdk.VariableMap%601`` -> ``VariableMap``;
+    ``…VariableMap%601.Validate`` -> ``VariableMap.Validate``;
+    ``…VariableMap%601.Get%60%601(System.String)`` -> ``VariableMap.Get``.
+    """
+    name = urllib.parse.unquote(uid)
+    name = re.sub(r"\([^)]*\)", "", name)  # drop method parameter lists
+    name = re.sub(r"`+\d+", "", name)  # drop generic-arity markers (`1, ``1)
+    name = name.strip(".")
+    for prefix in ("Camunda.Orchestration.Sdk.", "System."):
+        if name.startswith(prefix):
+            name = name[len(prefix):]
+    parts = [p for p in name.split(".") if p]
+    if len(parts) > 2:
+        parts = parts[-2:]
+    return ".".join(parts)
 
 
 def _escape_heading(text: str) -> str:
@@ -310,24 +438,123 @@ def _escape_heading(text: str) -> str:
     return text.replace("<", "\\<").replace(">", "\\>")
 
 
+# Maximum length of a first line still treated as a standalone summary title.
+_TITLE_MAX_LEN = 60
+
+_FENCE_RE = re.compile(r"^(```+|~~~+)")
+_ADMONITION_OPEN_RE = re.compile(r"^:::+\s*\S")
+_ADMONITION_CLOSE_RE = re.compile(r"^:::+\s*$")
+_LIST_ITEM_RE = re.compile(r"^\s*([-*+]|\d+\.)\s+")
+
+
+def _reflow_blocks(text: str) -> str:
+    """Reflow soft-wrapped prose while preserving block structure.
+
+    Fenced code blocks, ``:::`` admonitions and list items are kept verbatim
+    (admonition bodies are themselves reflowed); consecutive prose lines are
+    joined into a single paragraph. Blocks are separated by blank lines.
+    """
+    lines = text.split("\n")
+    blocks: list[str] = []
+    prose: list[str] = []
+    i = 0
+    n = len(lines)
+
+    def flush_prose() -> None:
+        if prose:
+            joined = " ".join(p.strip() for p in prose).strip()
+            if joined:
+                blocks.append(joined)
+            prose.clear()
+
+    while i < n:
+        line = lines[i]
+        stripped = line.strip()
+
+        if not stripped:
+            flush_prose()
+            i += 1
+            continue
+
+        fence = _FENCE_RE.match(stripped)
+        if fence:
+            flush_prose()
+            marker = fence.group(1)
+            buf = [stripped]
+            i += 1
+            while i < n:
+                buf.append(lines[i])
+                if lines[i].strip().startswith(marker):
+                    i += 1
+                    break
+                i += 1
+            blocks.append("\n".join(buf))
+            continue
+
+        if _ADMONITION_OPEN_RE.match(stripped):
+            flush_prose()
+            inner: list[str] = []
+            i += 1
+            while i < n and not _ADMONITION_CLOSE_RE.match(lines[i].strip()):
+                inner.append(lines[i])
+                i += 1
+            if i < n:
+                i += 1  # consume closing :::
+            body = _reflow_blocks("\n".join(inner))
+            blocks.append(f"{stripped}\n{body}\n:::" if body else f"{stripped}\n:::")
+            continue
+
+        if _LIST_ITEM_RE.match(line):
+            flush_prose()
+            items: list[str] = []
+            while i < n and _LIST_ITEM_RE.match(lines[i]):
+                items.append(lines[i].strip())
+                i += 1
+            blocks.append("\n".join(items))
+            continue
+
+        prose.append(stripped)
+        i += 1
+
+    flush_prose()
+    return "\n\n".join(blocks)
+
+
 def _format_description(s: str) -> str:
-    """Render a DocFX summary as clean Markdown paragraphs.
+    """Render a DocFX summary as clean, block-aware Markdown.
 
     DocFX carries the short OpenAPI summary on the first line and the longer
-    description on the following lines, joined by single newlines. A single
-    newline collapses to a space in rendered HTML, so the title runs directly
-    into the description (``Restore from a backup Restores the cluster...``).
-    Separate the first line into its own paragraph and flow the remainder as a
-    single paragraph.
+    description on the following lines. A single newline collapses to a space
+    in rendered HTML, so a short title runs directly into the description
+    (``Restore from a backup Restores the cluster...``). Split a short first
+    line into its own paragraph, then reflow the remainder with
+    :func:`_reflow_blocks` so soft-wrapped prose is joined while code blocks,
+    admonitions and lists keep their structure.
     """
     if not s:
         return s
-    parts = s.split("\n", 1)
-    if len(parts) == 2 and parts[0].strip() and parts[1].strip():
-        title = parts[0].strip()
-        body = re.sub(r"\s+", " ", parts[1]).strip()
-        return f"{title}\n\n{body}"
-    return re.sub(r"[ \t]*\n[ \t]*", " ", s).strip()
+
+    s = s.strip("\n")
+    lines = s.split("\n")
+    title: str | None = None
+    if len(lines) >= 2:
+        first = lines[0].strip()
+        rest = "\n".join(lines[1:])
+        if (
+            first
+            and rest.strip()
+            and len(first) <= _TITLE_MAX_LEN
+            and not first.endswith((",", ";", ":", "-"))
+            and not first.startswith((":::", "```", "~~~", "-", "*", "+", "|"))
+            and not _LIST_ITEM_RE.match(first)
+        ):
+            title = first
+            s = rest
+
+    body = _reflow_blocks(s)
+    if title is not None:
+        return f"{title}\n\n{body}".strip()
+    return body.strip()
 
 
 # ---------------------------------------------------------------------------
