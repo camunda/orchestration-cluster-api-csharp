@@ -282,13 +282,43 @@ class MemberItem:
 
 
 def _short_type(full: str) -> str:
-    """Shorten a fully-qualified type name: keep only the last segment."""
+    """Shorten a DocFX generic type ID, keeping the last segment of each name.
+
+    DocFX carries types in its friendly ID form: ``{..}`` delimits a generic
+    argument list and ``{{T}}`` denotes a *method* type-parameter argument.
+    The conversion is brace-balanced so arbitrarily nested generics such as
+    ``Task{...VariableMap{{T}}}`` render as ``Task<VariableMap<T>>`` rather
+    than the mangled ``Task<VariableMap{{T>}}`` produced by a flat regex.
+    """
     if not full:
         return full
-    # Handle generic syntax {T} → <T>
-    full = re.sub(r"\{([^}]+)\}", lambda m: f"<{_short_type(m.group(1))}>", full)
-    parts = full.rsplit(".", 1)
-    return parts[-1] if len(parts) > 1 else full
+    # A method type-parameter argument list is doubled (``{{T}}``); normalise
+    # it to a single generic list so the balanced walk treats it like any other.
+    full = re.sub(r"\{\{(\w+)\}\}", r"{\1}", full)
+
+    out: list[str] = []
+    token: list[str] = []
+
+    def flush() -> None:
+        name = "".join(token).strip()
+        token.clear()
+        if name:
+            out.append(name.rsplit(".", 1)[-1])
+
+    for ch in full:
+        if ch == "{":
+            flush()
+            out.append("<")
+        elif ch == "}":
+            flush()
+            out.append(">")
+        elif ch == ",":
+            flush()
+            out.append(", ")
+        else:
+            token.append(ch)
+    flush()
+    return "".join(out)
 
 
 def _clean_summary(s: str | None) -> str:

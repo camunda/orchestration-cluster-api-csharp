@@ -67,6 +67,47 @@ def test_escape_heading_noop_without_brackets():
 
 
 # ---------------------------------------------------------------------------
+# C#-4 — shorten DocFX generic type IDs with balanced angle brackets
+#
+# DocFX carries return/parameter types in its friendly ID form, using ``{..}``
+# for generic argument lists and ``{{T}}`` for a *method* type-parameter
+# argument. The previous ``\{([^}]+)\}`` regex was not brace-balanced, so any
+# nested generic (e.g. ``Task<VariableMap<T>>``) mangled into
+# ``Task<VariableMap{{T>}}``. These guards are class-scoped: they assert
+# balanced conversion for *any* nesting depth and *any* method type param.
+# ---------------------------------------------------------------------------
+
+
+def test_short_type_non_generic():
+    assert gen._short_type("System.Int32") == "Int32"
+    assert gen._short_type("") == ""
+
+
+def test_short_type_single_generic():
+    raw = "System.Threading.Tasks.Task{Camunda.Orchestration.Sdk.ResourceResult}"
+    assert gen._short_type(raw) == "Task<ResourceResult>"
+
+
+def test_short_type_nested_generic():
+    raw = (
+        "System.Threading.Tasks.Task{"
+        "System.Collections.Generic.List{Camunda.Orchestration.Sdk.ResourceResult}}"
+    )
+    assert gen._short_type(raw) == "Task<List<ResourceResult>>"
+
+
+def test_short_type_method_type_parameter_argument():
+    # Task<VariableMap<T>> where T is a method type parameter.
+    raw = "System.Threading.Tasks.Task{Camunda.Orchestration.Sdk.VariableMap{{T}}}"
+    assert gen._short_type(raw) == "Task<VariableMap<T>>"
+
+
+def test_short_type_nullable_parameter():
+    raw = "System.Nullable{Camunda.Orchestration.Sdk.ScopeKey}"
+    assert gen._short_type(raw) == "Nullable<ScopeKey>"
+
+
+# ---------------------------------------------------------------------------
 # C#-1 — separate summary title from description body
 # ---------------------------------------------------------------------------
 
