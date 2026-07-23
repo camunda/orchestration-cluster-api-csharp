@@ -5602,9 +5602,12 @@ public partial class CamundaClient
     /// 
     ///     // Successfully resolved references are returned in Resolved; references that
     ///     // could not be resolved are returned in Errors, each with a typed error code.
+    ///     // Never log resolved.Value — it holds secret material. Pass it directly to the
+    ///     // consumer that needs it (HTTP client, DB driver, ...) instead.
     ///     foreach (var resolved in result.Resolved)
     ///     {
-    ///         Console.WriteLine($&quot;Resolved {resolved.Reference}: {resolved.Value}&quot;);
+    ///         Console.WriteLine($&quot;Resolved {resolved.Reference} (value redacted)&quot;);
+    ///         UseSecret(resolved.Value);
     ///     }
     /// 
     ///     foreach (var error in result.Errors)
@@ -5612,6 +5615,9 @@ public partial class CamundaClient
     ///         Console.WriteLine($&quot;Failed to resolve {error.Reference}: {error.Code} - {error.Message}&quot;);
     ///     }
     /// }
+    /// 
+    /// // Hands the resolved secret to whatever needs it, without logging it.
+    /// private static void UseSecret(string value) { }
     /// </code>
     /// </remarks>
     /// <example>
@@ -5632,9 +5638,12 @@ public partial class CamundaClient
     /// 
     ///     // Successfully resolved references are returned in Resolved; references that
     ///     // could not be resolved are returned in Errors, each with a typed error code.
+    ///     // Never log resolved.Value — it holds secret material. Pass it directly to the
+    ///     // consumer that needs it (HTTP client, DB driver, ...) instead.
     ///     foreach (var resolved in result.Resolved)
     ///     {
-    ///         Console.WriteLine($&quot;Resolved {resolved.Reference}: {resolved.Value}&quot;);
+    ///         Console.WriteLine($&quot;Resolved {resolved.Reference} (value redacted)&quot;);
+    ///         UseSecret(resolved.Value);
     ///     }
     /// 
     ///     foreach (var error in result.Errors)
@@ -5642,6 +5651,9 @@ public partial class CamundaClient
     ///         Console.WriteLine($&quot;Failed to resolve {error.Reference}: {error.Code} - {error.Message}&quot;);
     ///     }
     /// }
+    /// 
+    /// // Hands the resolved secret to whatever needs it, without logging it.
+    /// private static void UseSecret(string value) { }
     /// </code>
     /// </example>
     public async Task<SecretResolveResult> ResolveSecretsAsync(SecretResolveRequest body, CancellationToken ct = default)
