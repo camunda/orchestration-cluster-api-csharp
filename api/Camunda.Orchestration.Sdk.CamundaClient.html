@@ -1128,6 +1128,22 @@ Creates a batch operation to resolve multiple incidents of a process instance.</
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResolveSecretsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResolveSecretsAsync_Camunda_Orchestration_Sdk_SecretResolveRequest_System_Threading_CancellationToken_">ResolveSecretsAsync(SecretResolveRequest, CancellationToken)</a></dt>
+    <dd><p>Resolve secrets (alpha)
+Resolve a deduplicated batch of <code>camunda.secrets.*</code> references for the caller's
+physical tenant in a single round-trip.</p>
+<p>Each reference is authorized and resolved independently. For valid requests, the endpoint
+always responds with HTTP 200: successfully resolved references are returned in <code>resolved</code>,
+while references that could not be resolved (for example not found, malformed or over-long,
+or the caller lacks <code>SECRET:REVEAL</code> on that reference) are returned in <code>errors</code>. A failure of
+one reference never fails the others. Only structurally invalid requests are rejected with
+HTTP 400: a missing or non-array <code>references</code> field, more than 20 references, or a null entry.</p>
+<p>This endpoint is an alpha feature and may be subject to change in future releases.</p>
+<p>Phase 1: the secret backend is mocked. Only a fixed allow-list of references resolves;
+every other authorized, valid reference returns <code>NOT_FOUND</code>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync.html#Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Threading_CancellationToken_">RestoreAsync(RestoreRequest, CancellationToken)</a></dt>
     <dd><p>Restore from a backup
 Restores the cluster from a backup. The restore is described either by a single backup ID or by a time range (<code>from</code>/<code>to</code>) that selects the backups to restore. This endpoint is only accessible while the cluster is in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.</p>
