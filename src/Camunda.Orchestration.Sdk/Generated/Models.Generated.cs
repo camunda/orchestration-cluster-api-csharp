@@ -812,6 +812,25 @@ public enum PartitionRole
 }
 
 /// <summary>
+/// Describes the current operational state of the partition within the cluster configuration.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum PartitionState
+{
+    [JsonPropertyName("unknown")]
+    Unknown,
+    [JsonPropertyName("joining")]
+    Joining,
+    [JsonPropertyName("active")]
+    Active,
+    [JsonPropertyName("leaving")]
+    Leaving,
+    [JsonPropertyName("recovering")]
+    Recovering,
+}
+
+/// <summary>
 /// The field to sort by.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -1745,6 +1764,51 @@ public sealed class AdvancedCategoryFilter
     /// </summary>
     [JsonPropertyName("$in")]
     public List<AuditLogCategoryEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced ClusterVariableKindEnum filter.
+/// </summary>
+public sealed class AdvancedClusterVariableKindFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ClusterVariableKindEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ClusterVariableKindEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ClusterVariableKindEnum>? In { get; set; }
 
     /// <summary>
     /// Checks if the property matches the provided like value.
@@ -2842,6 +2906,75 @@ public sealed class AdvancedMessageSubscriptionTypeFilter
     /// </summary>
     [JsonPropertyName("$in")]
     public List<MessageSubscriptionTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced filter on a metadata value (string or number).
+/// </summary>
+public sealed class AdvancedMetadataValueFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public object? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public object? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the metadata key exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Greater than comparison with the provided value.
+    /// </summary>
+    [JsonPropertyName("$gt")]
+    public double? Gt { get; set; }
+
+    /// <summary>
+    /// Greater than or equal comparison with the provided value.
+    /// </summary>
+    [JsonPropertyName("$gte")]
+    public double? Gte { get; set; }
+
+    /// <summary>
+    /// Lower than comparison with the provided value.
+    /// </summary>
+    [JsonPropertyName("$lt")]
+    public double? Lt { get; set; }
+
+    /// <summary>
+    /// Lower than or equal comparison with the provided value.
+    /// </summary>
+    [JsonPropertyName("$lte")]
+    public double? Lte { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<object>? In { get; set; }
 
     /// <summary>
     /// Checks if the property matches the provided like value.
@@ -7917,10 +8050,18 @@ internal sealed class BatchOperationTypeFilterPropertyJsonConverter : global::Sy
 public sealed class BrokerInfo
 {
     /// <summary>
-    /// The unique (within a cluster) node ID for the broker.
+    /// The node ID for the broker. The uniqueness of this identifier depends if the cluster is zone-aware or not. - non zone-aware: (default) nodeId is unique across the cluster - zone-aware:  (opt-in) nodeId is unique only within its zone. If you are migrating to a zone aware cluster, you must use `brokerId` instead. This property is deprecated, as it&apos;s been replaced by `brokerId`.
+    /// 
     /// </summary>
     [JsonPropertyName("nodeId")]
     public int NodeId { get; set; }
+
+    /// <summary>
+    /// The unique (within a cluster) broker identifier. When the cluster is not zoned, then it&apos;s a string that represents the nodeId (an integer). When the cluster is zoned, instead, it&apos;s of the form &quot;$zoneName_$nodeId&quot;, providing uniqueness even across zones.
+    /// 
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public string BrokerId { get; set; } = null!;
 
     /// <summary>
     /// The hostname for reaching the broker.
@@ -8378,6 +8519,168 @@ public sealed class ClusterModeChangeResponse
 }
 
 /// <summary>
+/// The kind of a cluster variable. JSON is the default. SECRET_REFERENCE allows the value to contain camunda.secrets.X references that are resolved at job activation time.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterVariableKindEnum
+{
+    [JsonPropertyName("JSON")]
+    JSON,
+    [JsonPropertyName("SECRET_REFERENCE")]
+    SECRETREFERENCE,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct ClusterVariableKindExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ClusterVariableKindExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ClusterVariableKindExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ClusterVariableKindExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ClusterVariableKindExactMatch");
+        return new ClusterVariableKindExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// ClusterVariableKindEnum property with full advanced search capabilities.
+/// </summary>
+[JsonConverter(typeof(ClusterVariableKindFilterPropertyJsonConverter))]
+public sealed class ClusterVariableKindFilterProperty
+{
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ClusterVariableKindEnum? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ClusterVariableKindEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ClusterVariableKindEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ClusterVariableKindEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ClusterVariableKindFilterProperty(ClusterVariableKindEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ClusterVariableKindFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ClusterVariableKindFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ClusterVariableKindFilterProperty>
+{
+    public override ClusterVariableKindFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ClusterVariableKindFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ClusterVariableKindEnum?>(ref reader, options) };
+        var result = new ClusterVariableKindFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ClusterVariableKindEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ClusterVariableKindEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ClusterVariableKindEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ClusterVariableKindFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ClusterVariableKindFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
+}
+
+/// <summary>
 /// The name of a cluster variable. Unique within its scope (global or tenant-specific).
 /// </summary>
 public readonly record struct ClusterVariableName : global::Camunda.Orchestration.Sdk.ICamundaKey
@@ -8440,6 +8743,12 @@ public sealed class ClusterVariableResult
     [JsonPropertyName("metadata")]
     public Dictionary<string, object> Metadata { get; set; } = null!;
 
+    /// <summary>
+    /// The kind of a cluster variable. JSON is the default. SECRET_REFERENCE allows the value to contain camunda.secrets.X references that are resolved at job activation time.
+    /// </summary>
+    [JsonPropertyName("kind")]
+    public ClusterVariableKindEnum Kind { get; set; }
+
 }
 
 /// <summary>
@@ -8470,6 +8779,12 @@ public sealed class ClusterVariableResultBase
     /// </summary>
     [JsonPropertyName("metadata")]
     public Dictionary<string, object> Metadata { get; set; } = null!;
+
+    /// <summary>
+    /// The kind of a cluster variable. JSON is the default. SECRET_REFERENCE allows the value to contain camunda.secrets.X references that are resolved at job activation time.
+    /// </summary>
+    [JsonPropertyName("kind")]
+    public ClusterVariableKindEnum Kind { get; set; }
 
 }
 
@@ -8671,6 +8986,18 @@ public sealed class ClusterVariableSearchQueryFilterRequest
     [JsonPropertyName("isTruncated")]
     public bool? IsTruncated { get; set; }
 
+    /// <summary>
+    /// Filter by metadata entries. A map of metadata key to an advanced filter on that key&apos;s value. Metadata values are strings or numbers.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, AdvancedMetadataValueFilter>? Metadata { get; set; }
+
+    /// <summary>
+    /// The kind filter for cluster variables.
+    /// </summary>
+    [JsonPropertyName("kind")]
+    public ClusterVariableKindFilterProperty? Kind { get; set; }
+
 }
 
 /// <summary>
@@ -8776,6 +9103,12 @@ public sealed class ClusterVariableSearchResult
     /// </summary>
     [JsonPropertyName("metadata")]
     public Dictionary<string, object> Metadata { get; set; } = null!;
+
+    /// <summary>
+    /// The kind of a cluster variable. JSON is the default. SECRET_REFERENCE allows the value to contain camunda.secrets.X references that are resolved at job activation time.
+    /// </summary>
+    [JsonPropertyName("kind")]
+    public ClusterVariableKindEnum Kind { get; set; }
 
 }
 
@@ -9147,6 +9480,12 @@ public sealed class CreateClusterVariableRequest
     /// </summary>
     [JsonPropertyName("metadata")]
     public Dictionary<string, object>? Metadata { get; set; }
+
+    /// <summary>
+    /// The kind of the cluster variable. Defaults to JSON if not specified.
+    /// </summary>
+    [JsonPropertyName("kind")]
+    public ClusterVariableKindEnum? Kind { get; set; }
 
 }
 
@@ -16065,6 +16404,14 @@ public sealed class JobCompletionRequest
     [JsonPropertyName("leaseToken")]
     public string? LeaseToken { get; set; }
 
+    /// <summary>
+    /// An optional business id to assign to the process instance the job belongs to, as part of completing the job, letting a worker set the identifier from work it just performed.
+    /// The business id can only be assigned to a root process instance: if the job belongs to a child process instance (one started by a call activity), the completion is rejected. An empty business id is likewise rejected. The assignment is single and irreversible and is only accepted while business id uniqueness is disabled. Only artifacts created after the assignment carry the business id; already-existing ones are not enriched. Completing with a business id that differs from one already assigned rejects the whole completion, leaving the job open; re-sending the identical business id is an idempotent no-op.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
 }
 
 /// <summary>
@@ -19675,6 +20022,13 @@ public sealed class Partition
     [JsonPropertyName("health")]
     public PartitionHealth Health { get; set; }
 
+    /// <summary>
+    /// Describes the current operational state of the partition within the cluster configuration.
+    /// 
+    /// </summary>
+    [JsonPropertyName("state")]
+    public PartitionState State { get; set; }
+
 }
 
 /// <summary>
@@ -19743,6 +20097,8 @@ public enum PermissionTypeEnum
     EVALUATE,
     [JsonPropertyName("MODIFY_PROCESS_INSTANCE")]
     MODIFYPROCESSINSTANCE,
+    [JsonPropertyName("PAUSE")]
+    PAUSE,
     [JsonPropertyName("READ")]
     READ,
     [JsonPropertyName("READ_DECISION_DEFINITION")]
@@ -19761,6 +20117,10 @@ public enum PermissionTypeEnum
     READUSERTASK,
     [JsonPropertyName("READ_TASK_LISTENER")]
     READTASKLISTENER,
+    [JsonPropertyName("RESTORE")]
+    RESTORE,
+    [JsonPropertyName("REVEAL")]
+    REVEAL,
     [JsonPropertyName("SUSPEND_PROCESS_INSTANCE")]
     SUSPENDPROCESSINSTANCE,
     [JsonPropertyName("UPDATE")]
@@ -22648,6 +23008,25 @@ public sealed class ProcessInstanceWaitStateStatisticsResult
 }
 
 /// <summary>
+/// ResolvedSecret
+/// </summary>
+public sealed class ResolvedSecret
+{
+    /// <summary>
+    /// The resolved secret reference of the form `camunda.secrets.&lt;name&gt;`.
+    /// </summary>
+    [JsonPropertyName("reference")]
+    public string Reference { get; set; } = null!;
+
+    /// <summary>
+    /// The resolved secret value.
+    /// </summary>
+    [JsonPropertyName("value")]
+    public string Value { get; set; } = null!;
+
+}
+
+/// <summary>
 /// Resource search filter.
 /// </summary>
 public sealed class ResourceFilter
@@ -23014,6 +23393,8 @@ public enum ResourceTypeEnum
     AUDITLOG,
     [JsonPropertyName("AUTHORIZATION")]
     AUTHORIZATION,
+    [JsonPropertyName("BACKUP")]
+    BACKUP,
     [JsonPropertyName("BATCH")]
     BATCH,
     [JsonPropertyName("CLUSTER_VARIABLE")]
@@ -23026,6 +23407,8 @@ public enum ResourceTypeEnum
     DECISIONREQUIREMENTSDEFINITION,
     [JsonPropertyName("DOCUMENT")]
     DOCUMENT,
+    [JsonPropertyName("EXPORTER")]
+    EXPORTER,
     [JsonPropertyName("EXPRESSION")]
     EXPRESSION,
     [JsonPropertyName("GLOBAL_LISTENER")]
@@ -23042,6 +23425,8 @@ public enum ResourceTypeEnum
     RESOURCE,
     [JsonPropertyName("ROLE")]
     ROLE,
+    [JsonPropertyName("SECRET")]
+    SECRET,
     [JsonPropertyName("SYSTEM")]
     SYSTEM,
     [JsonPropertyName("TENANT")]
@@ -23817,6 +24202,92 @@ public sealed class SearchQueryResponse
     /// </summary>
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The typed reason a reference could not be resolved.
+/// 
+/// - `NOT_FOUND`: no secret exists for the reference.
+/// - `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference.
+/// - `INVALID_REFERENCE`: the reference is malformed.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum SecretErrorCode
+{
+    [JsonPropertyName("NOT_FOUND")]
+    NOTFOUND,
+    [JsonPropertyName("ACCESS_DENIED")]
+    ACCESSDENIED,
+    [JsonPropertyName("INVALID_REFERENCE")]
+    INVALIDREFERENCE,
+}
+
+/// <summary>
+/// SecretResolutionError
+/// </summary>
+public sealed class SecretResolutionError
+{
+    /// <summary>
+    /// The secret reference that could not be resolved.
+    /// </summary>
+    [JsonPropertyName("reference")]
+    public string Reference { get; set; } = null!;
+
+    /// <summary>
+    /// The typed reason a reference could not be resolved.
+    /// 
+    /// - `NOT_FOUND`: no secret exists for the reference.
+    /// - `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference.
+    /// - `INVALID_REFERENCE`: the reference is malformed.
+    /// 
+    /// </summary>
+    [JsonPropertyName("code")]
+    public SecretErrorCode Code { get; set; }
+
+    /// <summary>
+    /// A human-readable description of the failure. Never contains the secret value;
+    /// only error metadata (codes, names) is included.
+    /// 
+    /// </summary>
+    [JsonPropertyName("message")]
+    public string Message { get; set; } = null!;
+
+}
+
+/// <summary>
+/// SecretResolveRequest
+/// </summary>
+public sealed class SecretResolveRequest
+{
+    /// <summary>
+    /// The secret references to resolve, each of the form `camunda.secrets.&lt;name&gt;`.
+    /// Duplicate references are deduplicated by the server and resolved once.
+    /// At most 20 references may be requested in a single batch.
+    /// 
+    /// </summary>
+    [JsonPropertyName("references")]
+    public List<string> References { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The per-reference outcome of a resolve request.
+/// </summary>
+public sealed class SecretResolveResult
+{
+    /// <summary>
+    /// The references that were successfully resolved.
+    /// </summary>
+    [JsonPropertyName("resolved")]
+    public List<ResolvedSecret> Resolved { get; set; } = null!;
+
+    /// <summary>
+    /// The references that could not be resolved, each with a typed error code.
+    /// </summary>
+    [JsonPropertyName("errors")]
+    public List<SecretResolutionError> Errors { get; set; } = null!;
 
 }
 

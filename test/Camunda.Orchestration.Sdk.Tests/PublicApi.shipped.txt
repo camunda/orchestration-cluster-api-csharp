@@ -154,6 +154,14 @@ TYPE Camunda.Orchestration.Sdk.AdvancedCategoryFilter : sealed class
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AuditLogCategoryEnum>? In { get; set; } [JsonPropertyName("$in")]
 
+TYPE Camunda.Orchestration.Sdk.AdvancedClusterVariableKindFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterVariableKindEnum>? In { get; set; } [JsonPropertyName("$in")]
+
 TYPE Camunda.Orchestration.Sdk.AdvancedClusterVariableScopeFilter : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ClusterVariableScopeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
@@ -363,6 +371,18 @@ TYPE Camunda.Orchestration.Sdk.AdvancedMessageSubscriptionTypeFilter : sealed cl
   PROP Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.MessageSubscriptionTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.AdvancedMetadataValueFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<System.Object>? In { get; set; } [JsonPropertyName("$in")]
+  PROP System.Double? Gt { get; set; } [JsonPropertyName("$gt")]
+  PROP System.Double? Gte { get; set; } [JsonPropertyName("$gte")]
+  PROP System.Double? Lt { get; set; } [JsonPropertyName("$lt")]
+  PROP System.Double? Lte { get; set; } [JsonPropertyName("$lte")]
+  PROP System.Object? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP System.Object? Neq { get; set; } [JsonPropertyName("$neq")]
 
 TYPE Camunda.Orchestration.Sdk.AdvancedOperationTypeFilter : sealed class
   CTOR ()
@@ -1495,6 +1515,7 @@ TYPE Camunda.Orchestration.Sdk.BrokerInfo : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Partition> Partitions { get; set; } [JsonPropertyName("partitions")]
   PROP System.Int32 NodeId { get; set; } [JsonPropertyName("nodeId")]
   PROP System.Int32 Port { get; set; } [JsonPropertyName("port")]
+  PROP System.String BrokerId { get; set; } [JsonPropertyName("brokerId")]
   PROP System.String Host { get; set; } [JsonPropertyName("host")]
   PROP System.String Version { get; set; } [JsonPropertyName("version")]
 
@@ -1706,6 +1727,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleSearchQueryResult> SearchRolesAsync(Camunda.Orchestration.Sdk.RoleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleUpdateResult> UpdateRoleAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.RoleUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleUserSearchResult> SearchUsersForRoleAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleUserSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SecretResolveResult> ResolveSecretsAsync(Camunda.Orchestration.Sdk.SecretResolveRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SignalBroadcastResult> BroadcastSignalAsync(Camunda.Orchestration.Sdk.SignalBroadcastRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SystemConfigurationResponse> GetSystemConfigurationAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantClientSearchResult> SearchClientsForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.TenantClientSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantClientSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1875,6 +1897,31 @@ TYPE Camunda.Orchestration.Sdk.ClusterModeChangeResponse : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterModeChangeOperation> PlannedChanges { get; set; } [JsonPropertyName("plannedChanges")]
   PROP System.String ChangeId { get; set; } [JsonPropertyName("changeId")]
 
+TYPE Camunda.Orchestration.Sdk.ClusterVariableKindEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER JSON = 0 json="JSON"
+  MEMBER SECRETREFERENCE = 1 json="SECRET_REFERENCE"
+
+TYPE Camunda.Orchestration.Sdk.ClusterVariableKindExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ClusterVariableKindExactMatch>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.ClusterVariableKindExactMatch other)
+  METHOD static Camunda.Orchestration.Sdk.ClusterVariableKindExactMatch AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.ClusterVariableKindFilterProperty : sealed class
+  ATTR JsonConverter Camunda.Orchestration.Sdk.ClusterVariableKindFilterPropertyJsonConverter
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindEnum? ExactMatch { get; set; }
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterVariableKindEnum>? In { get; set; } [JsonPropertyName("$in")]
+
 TYPE Camunda.Orchestration.Sdk.ClusterVariableName : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ClusterVariableName>]
   PROP System.String Value { get; }
   METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.ClusterVariableName other)
@@ -1886,6 +1933,7 @@ TYPE Camunda.Orchestration.Sdk.ClusterVariableName : struct interfaces=[Camunda.
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableResult : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindEnum Kind { get; set; } [JsonPropertyName("kind")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableName Name { get; set; } [JsonPropertyName("name")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableScopeEnum Scope { get; set; } [JsonPropertyName("scope")]
   PROP System.Collections.Generic.Dictionary<System.String,System.Object> Metadata { get; set; } [JsonPropertyName("metadata")]
@@ -1894,6 +1942,7 @@ TYPE Camunda.Orchestration.Sdk.ClusterVariableResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableResultBase : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindEnum Kind { get; set; } [JsonPropertyName("kind")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableName Name { get; set; } [JsonPropertyName("name")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableScopeEnum Scope { get; set; } [JsonPropertyName("scope")]
   PROP System.Collections.Generic.Dictionary<System.String,System.Object> Metadata { get; set; } [JsonPropertyName("metadata")]
@@ -1926,11 +1975,13 @@ TYPE Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty : sealed class
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchQueryFilterRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindFilterProperty? Kind { get; set; } [JsonPropertyName("kind")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableScopeFilterProperty? Scope { get; set; } [JsonPropertyName("scope")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? Value { get; set; } [JsonPropertyName("value")]
   PROP System.Boolean? IsTruncated { get; set; } [JsonPropertyName("isTruncated")]
+  PROP System.Collections.Generic.Dictionary<System.String,Camunda.Orchestration.Sdk.AdvancedMetadataValueFilter>? Metadata { get; set; } [JsonPropertyName("metadata")]
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchQueryRequest : sealed class
   CTOR ()
@@ -1958,6 +2009,7 @@ TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchQuerySortRequestField : enum
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableSearchResult : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindEnum Kind { get; set; } [JsonPropertyName("kind")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableName Name { get; set; } [JsonPropertyName("name")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableScopeEnum Scope { get; set; } [JsonPropertyName("scope")]
   PROP System.Boolean IsTruncated { get; set; } [JsonPropertyName("isTruncated")]
@@ -2082,6 +2134,7 @@ TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionSearchQuerySortReque
 
 TYPE Camunda.Orchestration.Sdk.CreateClusterVariableRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterVariableKindEnum? Kind { get; set; } [JsonPropertyName("kind")]
   PROP Camunda.Orchestration.Sdk.ClusterVariableName Name { get; set; } [JsonPropertyName("name")]
   PROP System.Collections.Generic.Dictionary<System.String,System.Object>? Metadata { get; set; } [JsonPropertyName("metadata")]
   PROP System.Object Value { get; set; } [JsonPropertyName("value")]
@@ -3687,6 +3740,7 @@ TYPE Camunda.Orchestration.Sdk.JobChangeset : sealed class
 
 TYPE Camunda.Orchestration.Sdk.JobCompletionRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
   PROP Camunda.Orchestration.Sdk.JobResult? Result { get; set; } [JsonPropertyName("result")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
   PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
@@ -4507,6 +4561,7 @@ TYPE Camunda.Orchestration.Sdk.Partition : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.PartitionHealth Health { get; set; } [JsonPropertyName("health")]
   PROP Camunda.Orchestration.Sdk.PartitionRole Role { get; set; } [JsonPropertyName("role")]
+  PROP Camunda.Orchestration.Sdk.PartitionState State { get; set; } [JsonPropertyName("state")]
   PROP System.Int32 PartitionId { get; set; } [JsonPropertyName("partitionId")]
 
 TYPE Camunda.Orchestration.Sdk.PartitionHealth : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
@@ -4522,6 +4577,15 @@ TYPE Camunda.Orchestration.Sdk.PartitionRole : enum interfaces=[System.IComparab
   MEMBER Leader = 0 json="leader"
   MEMBER Follower = 1 json="follower"
   MEMBER Inactive = 2 json="inactive"
+
+TYPE Camunda.Orchestration.Sdk.PartitionState : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER Unknown = 0 json="unknown"
+  MEMBER Joining = 1 json="joining"
+  MEMBER Active = 2 json="active"
+  MEMBER Leaving = 3 json="leaving"
+  MEMBER Recovering = 4 json="recovering"
 
 TYPE Camunda.Orchestration.Sdk.PermissionTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -4556,20 +4620,23 @@ TYPE Camunda.Orchestration.Sdk.PermissionTypeEnum : enum interfaces=[System.ICom
   MEMBER DELETETASKLISTENER = 27 json="DELETE_TASK_LISTENER"
   MEMBER EVALUATE = 28 json="EVALUATE"
   MEMBER MODIFYPROCESSINSTANCE = 29 json="MODIFY_PROCESS_INSTANCE"
-  MEMBER READ = 30 json="READ"
-  MEMBER READDECISIONDEFINITION = 31 json="READ_DECISION_DEFINITION"
-  MEMBER READDECISIONINSTANCE = 32 json="READ_DECISION_INSTANCE"
-  MEMBER READJOBMETRIC = 33 json="READ_JOB_METRIC"
-  MEMBER READPROCESSDEFINITION = 34 json="READ_PROCESS_DEFINITION"
-  MEMBER READPROCESSINSTANCE = 35 json="READ_PROCESS_INSTANCE"
-  MEMBER READUSAGEMETRIC = 36 json="READ_USAGE_METRIC"
-  MEMBER READUSERTASK = 37 json="READ_USER_TASK"
-  MEMBER READTASKLISTENER = 38 json="READ_TASK_LISTENER"
-  MEMBER SUSPENDPROCESSINSTANCE = 39 json="SUSPEND_PROCESS_INSTANCE"
-  MEMBER UPDATE = 40 json="UPDATE"
-  MEMBER UPDATEPROCESSINSTANCE = 41 json="UPDATE_PROCESS_INSTANCE"
-  MEMBER UPDATEUSERTASK = 42 json="UPDATE_USER_TASK"
-  MEMBER UPDATETASKLISTENER = 43 json="UPDATE_TASK_LISTENER"
+  MEMBER PAUSE = 30 json="PAUSE"
+  MEMBER READ = 31 json="READ"
+  MEMBER READDECISIONDEFINITION = 32 json="READ_DECISION_DEFINITION"
+  MEMBER READDECISIONINSTANCE = 33 json="READ_DECISION_INSTANCE"
+  MEMBER READJOBMETRIC = 34 json="READ_JOB_METRIC"
+  MEMBER READPROCESSDEFINITION = 35 json="READ_PROCESS_DEFINITION"
+  MEMBER READPROCESSINSTANCE = 36 json="READ_PROCESS_INSTANCE"
+  MEMBER READUSAGEMETRIC = 37 json="READ_USAGE_METRIC"
+  MEMBER READUSERTASK = 38 json="READ_USER_TASK"
+  MEMBER READTASKLISTENER = 39 json="READ_TASK_LISTENER"
+  MEMBER RESTORE = 40 json="RESTORE"
+  MEMBER REVEAL = 41 json="REVEAL"
+  MEMBER SUSPENDPROCESSINSTANCE = 42 json="SUSPEND_PROCESS_INSTANCE"
+  MEMBER UPDATE = 43 json="UPDATE"
+  MEMBER UPDATEPROCESSINSTANCE = 44 json="UPDATE_PROCESS_INSTANCE"
+  MEMBER UPDATEUSERTASK = 45 json="UPDATE_USER_TASK"
+  MEMBER UPDATETASKLISTENER = 46 json="UPDATE_TASK_LISTENER"
 
 TYPE Camunda.Orchestration.Sdk.ProblemDetail : sealed class
   CTOR ()
@@ -5172,6 +5239,11 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult : sealed
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP System.Int64 WaitingCount { get; set; } [JsonPropertyName("waitingCount")]
 
+TYPE Camunda.Orchestration.Sdk.ResolvedSecret : sealed class
+  CTOR ()
+  PROP System.String Reference { get; set; } [JsonPropertyName("reference")]
+  PROP System.String Value { get; set; } [JsonPropertyName("value")]
+
 TYPE Camunda.Orchestration.Sdk.ResourceFilter : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.DeploymentKeyFilterProperty? DeploymentKey { get; set; } [JsonPropertyName("deploymentKey")]
@@ -5251,24 +5323,27 @@ TYPE Camunda.Orchestration.Sdk.ResourceTypeEnum : enum interfaces=[System.ICompa
   underlying=System.Int32
   MEMBER AUDITLOG = 0 json="AUDIT_LOG"
   MEMBER AUTHORIZATION = 1 json="AUTHORIZATION"
-  MEMBER BATCH = 2 json="BATCH"
-  MEMBER CLUSTERVARIABLE = 3 json="CLUSTER_VARIABLE"
-  MEMBER COMPONENT = 4 json="COMPONENT"
-  MEMBER DECISIONDEFINITION = 5 json="DECISION_DEFINITION"
-  MEMBER DECISIONREQUIREMENTSDEFINITION = 6 json="DECISION_REQUIREMENTS_DEFINITION"
-  MEMBER DOCUMENT = 7 json="DOCUMENT"
-  MEMBER EXPRESSION = 8 json="EXPRESSION"
-  MEMBER GLOBALLISTENER = 9 json="GLOBAL_LISTENER"
-  MEMBER GROUP = 10 json="GROUP"
-  MEMBER MAPPINGRULE = 11 json="MAPPING_RULE"
-  MEMBER MESSAGE = 12 json="MESSAGE"
-  MEMBER PROCESSDEFINITION = 13 json="PROCESS_DEFINITION"
-  MEMBER RESOURCE = 14 json="RESOURCE"
-  MEMBER ROLE = 15 json="ROLE"
-  MEMBER SYSTEM = 16 json="SYSTEM"
-  MEMBER TENANT = 17 json="TENANT"
-  MEMBER USER = 18 json="USER"
-  MEMBER USERTASK = 19 json="USER_TASK"
+  MEMBER BACKUP = 2 json="BACKUP"
+  MEMBER BATCH = 3 json="BATCH"
+  MEMBER CLUSTERVARIABLE = 4 json="CLUSTER_VARIABLE"
+  MEMBER COMPONENT = 5 json="COMPONENT"
+  MEMBER DECISIONDEFINITION = 6 json="DECISION_DEFINITION"
+  MEMBER DECISIONREQUIREMENTSDEFINITION = 7 json="DECISION_REQUIREMENTS_DEFINITION"
+  MEMBER DOCUMENT = 8 json="DOCUMENT"
+  MEMBER EXPORTER = 9 json="EXPORTER"
+  MEMBER EXPRESSION = 10 json="EXPRESSION"
+  MEMBER GLOBALLISTENER = 11 json="GLOBAL_LISTENER"
+  MEMBER GROUP = 12 json="GROUP"
+  MEMBER MAPPINGRULE = 13 json="MAPPING_RULE"
+  MEMBER MESSAGE = 14 json="MESSAGE"
+  MEMBER PROCESSDEFINITION = 15 json="PROCESS_DEFINITION"
+  MEMBER RESOURCE = 16 json="RESOURCE"
+  MEMBER ROLE = 17 json="ROLE"
+  MEMBER SECRET = 18 json="SECRET"
+  MEMBER SYSTEM = 19 json="SYSTEM"
+  MEMBER TENANT = 20 json="TENANT"
+  MEMBER USER = 21 json="USER"
+  MEMBER USERTASK = 22 json="USER_TASK"
 
 TYPE Camunda.Orchestration.Sdk.RestoreRequest : sealed class
   CTOR ()
@@ -5480,6 +5555,28 @@ TYPE Camunda.Orchestration.Sdk.SearchQueryRequest : sealed class
 TYPE Camunda.Orchestration.Sdk.SearchQueryResponse : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
+
+TYPE Camunda.Orchestration.Sdk.SecretErrorCode : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER NOTFOUND = 0 json="NOT_FOUND"
+  MEMBER ACCESSDENIED = 1 json="ACCESS_DENIED"
+  MEMBER INVALIDREFERENCE = 2 json="INVALID_REFERENCE"
+
+TYPE Camunda.Orchestration.Sdk.SecretResolutionError : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.SecretErrorCode Code { get; set; } [JsonPropertyName("code")]
+  PROP System.String Message { get; set; } [JsonPropertyName("message")]
+  PROP System.String Reference { get; set; } [JsonPropertyName("reference")]
+
+TYPE Camunda.Orchestration.Sdk.SecretResolveRequest : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<System.String> References { get; set; } [JsonPropertyName("references")]
+
+TYPE Camunda.Orchestration.Sdk.SecretResolveResult : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ResolvedSecret> Resolved { get; set; } [JsonPropertyName("resolved")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.SecretResolutionError> Errors { get; set; } [JsonPropertyName("errors")]
 
 TYPE Camunda.Orchestration.Sdk.SetVariableRequest : sealed class
   CTOR ()
