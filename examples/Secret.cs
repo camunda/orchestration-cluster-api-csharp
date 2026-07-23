@@ -21,9 +21,12 @@ public static class SecretExamples
 
         // Successfully resolved references are returned in Resolved; references that
         // could not be resolved are returned in Errors, each with a typed error code.
+        // Never log resolved.Value — it holds secret material. Pass it directly to the
+        // consumer that needs it (HTTP client, DB driver, ...) instead.
         foreach (var resolved in result.Resolved)
         {
-            Console.WriteLine($"Resolved {resolved.Reference}: {resolved.Value}");
+            Console.WriteLine($"Resolved {resolved.Reference} (value redacted)");
+            UseSecret(resolved.Value);
         }
 
         foreach (var error in result.Errors)
@@ -31,6 +34,9 @@ public static class SecretExamples
             Console.WriteLine($"Failed to resolve {error.Reference}: {error.Code} - {error.Message}");
         }
     }
+
+    // Hands the resolved secret to whatever needs it, without logging it.
+    private static void UseSecret(string value) { }
     // </ResolveSecrets>
     #endregion ResolveSecrets
 }
