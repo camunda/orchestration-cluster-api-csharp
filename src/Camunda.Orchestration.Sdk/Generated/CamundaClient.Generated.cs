@@ -5566,6 +5566,103 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Resolve secrets (alpha)
+    /// Resolve a deduplicated batch of `camunda.secrets.*` references for the caller&apos;s
+    /// physical tenant in a single round-trip.
+    /// 
+    /// Each reference is authorized and resolved independently. For valid requests, the endpoint
+    /// always responds with HTTP 200: successfully resolved references are returned in `resolved`,
+    /// while references that could not be resolved (for example not found, malformed or over-long,
+    /// or the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of
+    /// one reference never fails the others. Only structurally invalid requests are rejected with
+    /// HTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.
+    /// 
+    /// This endpoint is an alpha feature and may be subject to change in future releases.
+    /// 
+    /// Phase 1: the secret backend is mocked. Only a fixed allow-list of references resolves;
+    /// every other authorized, valid reference returns `NOT_FOUND`.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: resolveSecrets
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResolveSecretsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResolveSecretsAsync(new SecretResolveRequest
+    ///     {
+    ///         References = new List&lt;string&gt;
+    ///         {
+    ///             &quot;camunda.secrets.myApiToken&quot;,
+    ///             &quot;camunda.secrets.dbPassword&quot;,
+    ///         },
+    ///     });
+    /// 
+    ///     // Successfully resolved references are returned in Resolved; references that
+    ///     // could not be resolved are returned in Errors, each with a typed error code.
+    ///     // Never log resolved.Value — it holds secret material. Pass it directly to the
+    ///     // consumer that needs it (HTTP client, DB driver, ...) instead.
+    ///     foreach (var resolved in result.Resolved)
+    ///     {
+    ///         Console.WriteLine($&quot;Resolved {resolved.Reference} (value redacted)&quot;);
+    ///         UseSecret(resolved.Value);
+    ///     }
+    /// 
+    ///     foreach (var error in result.Errors)
+    ///     {
+    ///         Console.WriteLine($&quot;Failed to resolve {error.Reference}: {error.Code} - {error.Message}&quot;);
+    ///     }
+    /// }
+    /// 
+    /// // Hands the resolved secret to whatever needs it, without logging it.
+    /// private static void UseSecret(string value) { }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResolveSecretsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResolveSecretsAsync(new SecretResolveRequest
+    ///     {
+    ///         References = new List&lt;string&gt;
+    ///         {
+    ///             &quot;camunda.secrets.myApiToken&quot;,
+    ///             &quot;camunda.secrets.dbPassword&quot;,
+    ///         },
+    ///     });
+    /// 
+    ///     // Successfully resolved references are returned in Resolved; references that
+    ///     // could not be resolved are returned in Errors, each with a typed error code.
+    ///     // Never log resolved.Value — it holds secret material. Pass it directly to the
+    ///     // consumer that needs it (HTTP client, DB driver, ...) instead.
+    ///     foreach (var resolved in result.Resolved)
+    ///     {
+    ///         Console.WriteLine($&quot;Resolved {resolved.Reference} (value redacted)&quot;);
+    ///         UseSecret(resolved.Value);
+    ///     }
+    /// 
+    ///     foreach (var error in result.Errors)
+    ///     {
+    ///         Console.WriteLine($&quot;Failed to resolve {error.Reference}: {error.Code} - {error.Message}&quot;);
+    ///     }
+    /// }
+    /// 
+    /// // Hands the resolved secret to whatever needs it, without logging it.
+    /// private static void UseSecret(string value) { }
+    /// </code>
+    /// </example>
+    public async Task<SecretResolveResult> ResolveSecretsAsync(SecretResolveRequest body, CancellationToken ct = default)
+    {
+        var path = $"/secrets/resolve";
+        return await InvokeWithRetryAsync(() => SendAsync<SecretResolveResult>(HttpMethod.Post, path, body, ct), "resolveSecrets", false, ct);
+    }
+
+    /// <summary>
     /// Restore from a backup
     /// Restores the cluster from a backup. The restore is described either by a single backup ID or by a time range (`from`/`to`) that selects the backups to restore. This endpoint is only accessible while the cluster is in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.
     /// </summary>

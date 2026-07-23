@@ -131,6 +131,9 @@
       "name": "Role"
     },
     {
+      "name": "Secret"
+    },
+    {
       "name": "Setup"
     },
     {
@@ -236,6 +239,16 @@
           },
           "404": {
             "description": "The elementInstanceKey does not correspond to an active element instance.\nMore details are provided in the response body.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "An agent instance already exists for the given element instance.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -16663,6 +16676,102 @@
         "x-added-in-version": "8.8"
       }
     },
+    "/secrets/resolve": {
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Secret"
+        ],
+        "operationId": "resolveSecrets",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "SECRET",
+            "permissionType": "REVEAL"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Resolve secrets (alpha)",
+        "description": "Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's\nphysical tenant in a single round-trip.\n\nEach reference is authorized and resolved independently. For valid requests, the endpoint\nalways responds with HTTP 200: successfully resolved references are returned in `resolved`,\nwhile references that could not be resolved (for example not found, malformed or over-long,\nor the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of\none reference never fails the others. Only structurally invalid requests are rejected with\nHTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n\nPhase 1: the secret backend is mocked. Only a fixed allow-list of references resolves;\nevery other authorized, valid reference returns `NOT_FOUND`.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SecretResolveRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The batch was processed. Per-reference outcomes are split between `resolved` and\n`errors`; this status is returned even when some or all references failed.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SecretResolveResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/setup/user": {
       "post": {
         "x-eventually-consistent": false,
@@ -23971,6 +24080,7 @@
           "DELETE_TASK_LISTENER",
           "EVALUATE",
           "MODIFY_PROCESS_INSTANCE",
+          "PAUSE",
           "READ",
           "READ_DECISION_DEFINITION",
           "READ_DECISION_INSTANCE",
@@ -23980,6 +24090,8 @@
           "READ_USAGE_METRIC",
           "READ_USER_TASK",
           "READ_TASK_LISTENER",
+          "RESTORE",
+          "REVEAL",
           "SUSPEND_PROCESS_INSTANCE",
           "UPDATE",
           "UPDATE_PROCESS_INSTANCE",
@@ -23993,12 +24105,14 @@
         "enum": [
           "AUDIT_LOG",
           "AUTHORIZATION",
+          "BACKUP",
           "BATCH",
           "CLUSTER_VARIABLE",
           "COMPONENT",
           "DECISION_DEFINITION",
           "DECISION_REQUIREMENTS_DEFINITION",
           "DOCUMENT",
+          "EXPORTER",
           "EXPRESSION",
           "GLOBAL_LISTENER",
           "GROUP",
@@ -24007,6 +24121,7 @@
           "PROCESS_DEFINITION",
           "RESOURCE",
           "ROLE",
+          "SECRET",
           "SYSTEM",
           "TENANT",
           "USER",
@@ -24995,6 +25110,14 @@
           "timestamp"
         ]
       },
+      "ClusterVariableKindEnum": {
+        "type": "string",
+        "enum": [
+          "JSON",
+          "SECRET_REFERENCE"
+        ],
+        "description": "The kind of a cluster variable. JSON is the default. SECRET_REFERENCE allows the value to contain camunda.secrets.X references that are resolved at job activation time."
+      },
       "ClusterVariableScopeEnum": {
         "type": "string",
         "enum": [
@@ -25036,11 +25159,23 @@
                 }
               ]
             }
+          },
+          "kind": {
+            "description": "The kind of the cluster variable. Defaults to JSON if not specified.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClusterVariableKindEnum"
+              }
+            ]
           }
         },
         "x-properties-added-in-version": [
           {
             "propertyName": "metadata",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "kind",
             "addedInVersion": "8.10"
           }
         ]
@@ -25122,6 +25257,7 @@
         "description": "Cluster variable response item.",
         "type": "object",
         "required": [
+          "kind",
           "metadata",
           "name",
           "scope",
@@ -25158,11 +25294,18 @@
                 }
               ]
             }
+          },
+          "kind": {
+            "$ref": "#/components/schemas/ClusterVariableKindEnum"
           }
         },
         "x-properties-added-in-version": [
           {
             "propertyName": "metadata",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "kind",
             "addedInVersion": "8.10"
           }
         ]
@@ -25254,6 +25397,97 @@
           "isTruncated": {
             "description": "Filter cluster variables by truncation status of their stored values. When true, returns only variables whose stored values are truncated (i.e., the value exceeds the storage size limit and is truncated in storage). When false, returns only variables with non-truncated stored values. This filter is based on the underlying storage characteristic, not the response format.\n",
             "type": "boolean"
+          },
+          "metadata": {
+            "description": "Filter by metadata entries. A map of metadata key to an advanced filter on that key's value. Metadata values are strings or numbers.",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AdvancedMetadataValueFilter"
+            }
+          },
+          "kind": {
+            "description": "The kind filter for cluster variables.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClusterVariableKindFilterProperty"
+              }
+            ]
+          }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "kind",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "metadata",
+            "addedInVersion": "8.10"
+          }
+        ]
+      },
+      "AdvancedMetadataValueFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced filter on a metadata value (string or number).",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the metadata key exists.",
+            "type": "boolean"
+          },
+          "$gt": {
+            "description": "Greater than comparison with the provided value.",
+            "type": "number"
+          },
+          "$gte": {
+            "description": "Greater than or equal comparison with the provided value.",
+            "type": "number"
+          },
+          "$lt": {
+            "description": "Lower than comparison with the provided value.",
+            "type": "number"
+          },
+          "$lte": {
+            "description": "Lower than or equal comparison with the provided value.",
+            "type": "number"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
           }
         }
       },
@@ -25298,6 +25532,54 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ClusterVariableScopeEnum"
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
+          }
+        }
+      },
+      "ClusterVariableKindFilterProperty": {
+        "description": "ClusterVariableKindEnum property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ClusterVariableKindExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedClusterVariableKindFilter"
+          }
+        ]
+      },
+      "AdvancedClusterVariableKindFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced ClusterVariableKindEnum filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClusterVariableKindEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClusterVariableKindEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterVariableKindEnum"
             }
           },
           "$like": {
@@ -25416,6 +25698,7 @@
         "description": "Provides information on a broker node.",
         "type": "object",
         "required": [
+          "brokerId",
           "host",
           "nodeId",
           "partitions",
@@ -25424,10 +25707,16 @@
         ],
         "properties": {
           "nodeId": {
-            "description": "The unique (within a cluster) node ID for the broker.",
+            "description": "The node ID for the broker. The uniqueness of this identifier depends if the cluster is zone-aware or not. - non zone-aware: (default) nodeId is unique across the cluster - zone-aware:  (opt-in) nodeId is unique only within its zone. If you are migrating to a zone aware cluster, you must use `brokerId` instead. This property is deprecated, as it's been replaced by `brokerId`.\n",
             "type": "integer",
             "format": "int32",
+            "deprecated": true,
             "example": 0
+          },
+          "brokerId": {
+            "description": "The unique (within a cluster) broker identifier. When the cluster is not zoned, then it's a string that represents the nodeId (an integer). When the cluster is zoned, instead, it's of the form \"$zoneName_$nodeId\", providing uniqueness even across zones.\n",
+            "type": "string",
+            "example": "eu-west-1_0"
           },
           "host": {
             "description": "The hostname for reaching the broker.",
@@ -25452,7 +25741,13 @@
             "type": "string",
             "example": "8.8.0"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "brokerId",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "Partition": {
         "description": "Provides information on a partition within a broker node.",
@@ -25460,7 +25755,8 @@
         "required": [
           "health",
           "partitionId",
-          "role"
+          "role",
+          "state"
         ],
         "properties": {
           "partitionId": {
@@ -25488,8 +25784,26 @@
               "unhealthy",
               "dead"
             ]
+          },
+          "state": {
+            "description": "Describes the current operational state of the partition within the cluster configuration.\n",
+            "type": "string",
+            "example": "active",
+            "enum": [
+              "unknown",
+              "joining",
+              "active",
+              "leaving",
+              "recovering"
+            ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "ClusterModeChangeResponse": {
         "description": "The planned changes resulting from a cluster mode transition request.",
@@ -33162,6 +33476,15 @@
             "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
             "type": "string",
             "nullable": true
+          },
+          "businessId": {
+            "nullable": true,
+            "description": "An optional business id to assign to the process instance the job belongs to, as part of completing the job, letting a worker set the identifier from work it just performed.\nThe business id can only be assigned to a root process instance: if the job belongs to a child process instance (one started by a call activity), the completion is rejected. An empty business id is likewise rejected. The assignment is single and irreversible and is only accepted while business id uniqueness is disabled. Only artifacts created after the assignment carry the business id; already-existing ones are not enriched. Completing with a business id that differs from one already assigned rejects the whole completion, leaving the job open; re-sending the identical business id is an idempotent no-op.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessId"
+              }
+            ]
           }
         },
         "x-properties-added-in-version": [
@@ -33171,6 +33494,10 @@
           },
           {
             "propertyName": "leaseToken",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "businessId",
             "addedInVersion": "8.10"
           }
         ]
@@ -39082,6 +39409,95 @@
           }
         ]
       },
+      "SecretResolveRequest": {
+        "type": "object",
+        "required": [
+          "references"
+        ],
+        "properties": {
+          "references": {
+            "type": "array",
+            "maxItems": 20,
+            "description": "The secret references to resolve, each of the form `camunda.secrets.<name>`.\nDuplicate references are deduplicated by the server and resolved once.\nAt most 20 references may be requested in a single batch.\n",
+            "items": {
+              "type": "string",
+              "maxLength": 256,
+              "description": "A secret reference of the form `camunda.secrets.<name>`."
+            }
+          }
+        }
+      },
+      "SecretResolveResult": {
+        "type": "object",
+        "required": [
+          "errors",
+          "resolved"
+        ],
+        "description": "The per-reference outcome of a resolve request.",
+        "properties": {
+          "resolved": {
+            "type": "array",
+            "description": "The references that were successfully resolved.",
+            "items": {
+              "$ref": "#/components/schemas/ResolvedSecret"
+            }
+          },
+          "errors": {
+            "type": "array",
+            "description": "The references that could not be resolved, each with a typed error code.",
+            "items": {
+              "$ref": "#/components/schemas/SecretResolutionError"
+            }
+          }
+        }
+      },
+      "ResolvedSecret": {
+        "type": "object",
+        "required": [
+          "reference",
+          "value"
+        ],
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "The resolved secret reference of the form `camunda.secrets.<name>`."
+          },
+          "value": {
+            "type": "string",
+            "description": "The resolved secret value."
+          }
+        }
+      },
+      "SecretResolutionError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "reference"
+        ],
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "The secret reference that could not be resolved."
+          },
+          "code": {
+            "$ref": "#/components/schemas/SecretErrorCode"
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable description of the failure. Never contains the secret value;\nonly error metadata (codes, names) is included.\n"
+          }
+        }
+      },
+      "SecretErrorCode": {
+        "type": "string",
+        "description": "The typed reason a reference could not be resolved.\n\n- `NOT_FOUND`: no secret exists for the reference.\n- `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference.\n- `INVALID_REFERENCE`: the reference is malformed.\n",
+        "enum": [
+          "NOT_FOUND",
+          "ACCESS_DENIED",
+          "INVALID_REFERENCE"
+        ]
+      },
       "SignalBroadcastRequest": {
         "type": "object",
         "additionalProperties": false,
@@ -41441,6 +41857,16 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/ClusterVariableScopeEnum"
+          }
+        ]
+      },
+      "ClusterVariableKindExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ClusterVariableKindEnum"
           }
         ]
       },

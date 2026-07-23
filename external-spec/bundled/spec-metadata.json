@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:16fd114798a5e976be4d3d59829256c4e783a6ab29bc8ca2b4060cd37266c86d",
+  "specHash": "sha256:3fb1bc2818276e0b4ccf61cedabf3dcfbd42d64d13826f0a9de0cedf7115640e",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -1460,6 +1460,22 @@
         }
       ],
       "stableId": "category-filter-property"
+    },
+    {
+      "name": "ClusterVariableKindFilterProperty",
+      "kind": "union-wrapper",
+      "description": "ClusterVariableKindEnum property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "ClusterVariableKindExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedClusterVariableKindFilter"
+        }
+      ],
+      "stableId": "cluster-variable-kind-filter-property"
     },
     {
       "name": "ClusterVariableScopeFilterProperty",
@@ -9210,6 +9226,42 @@
       }
     },
     {
+      "operationId": "resolveSecrets",
+      "path": "/secrets/resolve",
+      "method": "post",
+      "tags": [
+        "Secret"
+      ],
+      "summary": "Resolve secrets (alpha)",
+      "description": "Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's\nphysical tenant in a single round-trip.\n\nEach reference is authorized and resolved independently. For valid requests, the endpoint\nalways responds with HTTP 200: successfully resolved references are returned in `resolved`,\nwhile references that could not be resolved (for example not found, malformed or over-long,\nor the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of\none reference never fails the others. Only structurally invalid requests are rejected with\nHTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n\nPhase 1: the secret backend is mocked. Only a fixed allow-list of references resolves;\nevery other authorized, valid reference returns `NOT_FOUND`.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "secrets.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "SecretResolveRequest",
+      "successResponseSchemaRef": "SecretResolveResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "SECRET",
+            "permissionType": "REVEAL"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "createAdminUser",
       "path": "/setup/user",
       "method": "post",
@@ -11347,8 +11399,8 @@
   ],
   "integrity": {
     "totalSemanticKeys": 41,
-    "totalUnions": 64,
-    "totalOperations": 203,
+    "totalUnions": 65,
+    "totalOperations": 204,
     "totalEventuallyConsistent": 92,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23

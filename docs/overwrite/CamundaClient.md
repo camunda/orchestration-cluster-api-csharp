@@ -1283,6 +1283,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ResolveSecretsAsync(Camunda.Orchestration.Sdk.SecretResolveRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Secret.cs#ResolveSecrets)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.SuspendProcessInstanceRequest,System.Threading.CancellationToken)
 example:
 - *content
