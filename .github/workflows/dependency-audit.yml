@@ -1,0 +1,64 @@
+name: Dependency Audit
+
+# Surfaces known-vulnerable NuGet dependencies (direct + transitive). Runs off the
+# merge-blocking path (weekly schedule + manual dispatch) since CVE disclosure is a
+# longer-tail signal than PR CI. Fails the job on High/Critical advisories so the
+# scheduled run turns red and notifies maintainers; Moderate/Low are reported only.
+
+on:
+  schedule:
+    # Mondays 05:47 UTC (staggered from the CodeQL scan).
+    - cron: '47 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: NuGet vulnerability audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: List vulnerable packages
+        id: audit
+        run: |
+          set -o pipefail
+          dotnet list package --vulnerable --include-transitive 2>&1 | tee _vuln.txt
+
+      - name: Job summary
+        if: always()
+        run: |
+          {
+            echo '### NuGet vulnerability audit';
+            echo '';
+            echo '```';
+            cat _vuln.txt 2>/dev/null || echo '(no output)';
+            echo '```';
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail on High/Critical advisories
+        # Only meaningful when the audit step actually ran and produced _vuln.txt.
+        # A failed restore/audit already turns the job red on its own; gating here
+        # avoids a misleading "no vulnerabilities" pass when _vuln.txt is missing.
+        if: steps.audit.outcome == 'success'
+        run: |
+          if grep -qiE '\b(High|Critical)\b' _vuln.txt; then
+            echo "::error::High or Critical vulnerable dependency detected. See the job summary." >&2
+            grep -iE '\b(High|Critical)\b' _vuln.txt >&2 || true
+            exit 1
+          fi
+          echo 'No High/Critical vulnerable dependencies detected.'

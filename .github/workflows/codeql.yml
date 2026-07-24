@@ -1,0 +1,51 @@
+name: CodeQL
+
+# Static analysis (SAST) for the SDK sources. Runs off the merge-blocking path:
+# weekly on a schedule plus manual dispatch. Uses build-mode "none" so the scan
+# analyses the committed sources (hand-written runtime + committed Generated/)
+# without needing the full spec-fetch/generate pipeline.
+
+on:
+  schedule:
+    # Mondays 05:17 UTC (off-peak, avoids the top-of-hour cron stampede).
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      # required for CodeQL to upload results
+      security-events: write
+      # required to read the Actions workflow status
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: csharp
+            build-mode: none
+          - language: javascript-typescript
+            build-mode: none
+          - language: python
+            build-mode: none
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:${{ matrix.language }}'
