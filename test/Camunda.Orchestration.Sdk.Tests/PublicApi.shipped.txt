@@ -1242,6 +1242,7 @@ TYPE Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? EndDate { get; set; } [JsonPropertyName("endDate")]
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? StartDate { get; set; } [JsonPropertyName("startDate")]
+  PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? SuspendedDate { get; set; } [JsonPropertyName("suspendedDate")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ParentElementInstanceKey { get; set; } [JsonPropertyName("parentElementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty? ElementInstanceState { get; set; } [JsonPropertyName("elementInstanceState")]
   PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? IncidentErrorHashCode { get; set; } [JsonPropertyName("incidentErrorHashCode")]
@@ -4857,6 +4858,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? EndDate { get; set; } [JsonPropertyName("endDate")]
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? StartDate { get; set; } [JsonPropertyName("startDate")]
+  PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? SuspendedDate { get; set; } [JsonPropertyName("suspendedDate")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ParentElementInstanceKey { get; set; } [JsonPropertyName("parentElementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty? ElementInstanceState { get; set; } [JsonPropertyName("elementInstanceState")]
   PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? IncidentErrorHashCode { get; set; } [JsonPropertyName("incidentErrorHashCode")]
@@ -4978,6 +4980,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceFilter : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? EndDate { get; set; } [JsonPropertyName("endDate")]
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? StartDate { get; set; } [JsonPropertyName("startDate")]
+  PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? SuspendedDate { get; set; } [JsonPropertyName("suspendedDate")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ParentElementInstanceKey { get; set; } [JsonPropertyName("parentElementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty? ElementInstanceState { get; set; } [JsonPropertyName("elementInstanceState")]
   PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? IncidentErrorHashCode { get; set; } [JsonPropertyName("incidentErrorHashCode")]
@@ -5006,6 +5009,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceFilterFields : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? EndDate { get; set; } [JsonPropertyName("endDate")]
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? StartDate { get; set; } [JsonPropertyName("startDate")]
+  PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? SuspendedDate { get; set; } [JsonPropertyName("suspendedDate")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ParentElementInstanceKey { get; set; } [JsonPropertyName("parentElementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceStateFilterProperty? ElementInstanceState { get; set; } [JsonPropertyName("elementInstanceState")]
   PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? IncidentErrorHashCode { get; set; } [JsonPropertyName("incidentErrorHashCode")]
@@ -5142,6 +5146,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceResult : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag> Tags { get; set; } [JsonPropertyName("tags")]
   PROP System.DateTimeOffset StartDate { get; set; } [JsonPropertyName("startDate")]
   PROP System.DateTimeOffset? EndDate { get; set; } [JsonPropertyName("endDate")]
+  PROP System.DateTimeOffset? SuspendedDate { get; set; } [JsonPropertyName("suspendedDate")]
   PROP System.Int32 ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
   PROP System.String? ProcessDefinitionName { get; set; } [JsonPropertyName("processDefinitionName")]
   PROP System.String? ProcessDefinitionVersionTag { get; set; } [JsonPropertyName("processDefinitionVersionTag")]
@@ -5180,10 +5185,11 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField : enum
   MEMBER ParentElementInstanceKey = 7 json="parentElementInstanceKey"
   MEMBER StartDate = 8 json="startDate"
   MEMBER EndDate = 9 json="endDate"
-  MEMBER State = 10 json="state"
-  MEMBER HasIncident = 11 json="hasIncident"
-  MEMBER TenantId = 12 json="tenantId"
-  MEMBER BusinessId = 13 json="businessId"
+  MEMBER SuspendedDate = 10 json="suspendedDate"
+  MEMBER State = 11 json="state"
+  MEMBER HasIncident = 12 json="hasIncident"
+  MEMBER TenantId = 13 json="tenantId"
+  MEMBER BusinessId = 14 json="businessId"
 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowResult : sealed class
   CTOR ()
@@ -5204,7 +5210,8 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceStateEnum : enum interfaces=[Syste
   underlying=System.Int32
   MEMBER ACTIVE = 0 json="ACTIVE"
   MEMBER COMPLETED = 1 json="COMPLETED"
-  MEMBER TERMINATED = 2 json="TERMINATED"
+  MEMBER SUSPENDED = 2 json="SUSPENDED"
+  MEMBER TERMINATED = 3 json="TERMINATED"
 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceStateExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ProcessInstanceStateExactMatch>]
   PROP System.String Value { get; }
