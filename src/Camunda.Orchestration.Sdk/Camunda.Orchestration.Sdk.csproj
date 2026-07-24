@@ -10,6 +10,8 @@
 
     <!-- XML documentation for DocFX API docs -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- CS1591 (Missing XML comment for publicly visible type or member): the generated API
+         surface has no doc comments; the doc file is still emitted for the hand-written runtime. -->
     <NoWarn>$(NoWarn);CS1591</NoWarn>
 
     <!-- NuGet Package Metadata -->

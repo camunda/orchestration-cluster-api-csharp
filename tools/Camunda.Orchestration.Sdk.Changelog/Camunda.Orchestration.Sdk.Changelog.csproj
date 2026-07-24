@@ -7,7 +7,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- Tool project — relax style enforcement inherited from Directory.Build.props -->
     <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>

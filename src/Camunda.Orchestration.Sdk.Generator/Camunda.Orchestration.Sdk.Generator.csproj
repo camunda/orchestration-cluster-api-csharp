@@ -7,6 +7,8 @@
     <Nullable>enable</Nullable>
     <RootNamespace>Camunda.Orchestration.Sdk.Generator</RootNamespace>
     <LangVersion>12</LangVersion>
+    <!-- CA1305 (Specify IFormatProvider): the generator builds source text from spec
+         identifiers, not locale-sensitive data; culture-specific formatting is not applicable. -->
     <NoWarn>CA1305</NoWarn>
   </PropertyGroup>
 
