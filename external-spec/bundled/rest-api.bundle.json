@@ -12525,7 +12525,7 @@
           }
         ],
         "summary": "Resume process instances (batch)",
-        "description": "Resumes multiple suspended process instances.\nSince only SUSPENDED root instances can be resumed, any given filters for state and\nparentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+        "description": "Resumes multiple suspended process instances.\nSince only SUSPENDED root instances can be resumed, any given\nfilters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -12724,7 +12724,7 @@
           }
         ],
         "summary": "Suspend process instances (batch)",
-        "description": "Suspends multiple running process instances.\nSince only ACTIVE root instances can be suspended, any given filters for state and\nparentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+        "description": "Suspends multiple running process instances.\nSince only ACTIVE root instances can be suspended, any given\nfilters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -37511,6 +37511,7 @@
               "parentElementInstanceKey",
               "startDate",
               "endDate",
+              "suspendedDate",
               "state",
               "hasIncident",
               "tenantId",
@@ -37583,6 +37584,14 @@
           "hasIncident": {
             "type": "boolean",
             "description": "Whether this process instance has a related incident or not."
+          },
+          "suspendedDate": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeFilterProperty"
+              }
+            ],
+            "description": "The time this process instance most recently entered the SUSPENDED state.\nThis is cleared (null) again once the process instance is resumed.\n"
           },
           "tenantId": {
             "allOf": [
@@ -37708,6 +37717,10 @@
           {
             "propertyName": "hasIncident",
             "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "suspendedDate",
+            "addedInVersion": "8.10"
           },
           {
             "propertyName": "tenantId",
@@ -37929,6 +37942,7 @@
           "rootProcessInstanceKey",
           "startDate",
           "state",
+          "suspendedDate",
           "tags",
           "tenantId"
         ],
@@ -37964,6 +37978,12 @@
           },
           "state": {
             "$ref": "#/components/schemas/ProcessInstanceStateEnum"
+          },
+          "suspendedDate": {
+            "description": "The time this process instance most recently entered the `SUSPENDED` state.\nThis is `null` if the process instance is not currently suspended.\n",
+            "nullable": true,
+            "type": "string",
+            "format": "date-time"
           },
           "hasIncident": {
             "type": "boolean",
@@ -38056,6 +38076,10 @@
           {
             "propertyName": "state",
             "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "suspendedDate",
+            "addedInVersion": "8.10"
           },
           {
             "propertyName": "hasIncident",
@@ -38698,6 +38722,7 @@
         "enum": [
           "ACTIVE",
           "COMPLETED",
+          "SUSPENDED",
           "TERMINATED"
         ]
       },

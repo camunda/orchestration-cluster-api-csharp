@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:3fb1bc2818276e0b4ccf61cedabf3dcfbd42d64d13826f0a9de0cedf7115640e",
+  "specHash": "sha256:d13bc9d204c7e72691377d7ac75c580db83acec006dbd3f4635c4fbe05245865",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -7655,7 +7655,7 @@
         "Process instance"
       ],
       "summary": "Resume process instances (batch)",
-      "description": "Resumes multiple suspended process instances.\nSince only SUSPENDED root instances can be resumed, any given filters for state and\nparentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "description": "Resumes multiple suspended process instances.\nSince only SUSPENDED root instances can be resumed, any given\nfilters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -7734,7 +7734,7 @@
         "Process instance"
       ],
       "summary": "Suspend process instances (batch)",
-      "description": "Suspends multiple running process instances.\nSince only ACTIVE root instances can be suspended, any given filters for state and\nparentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "description": "Suspends multiple running process instances.\nSince only ACTIVE root instances can be suspended, any given\nfilters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
