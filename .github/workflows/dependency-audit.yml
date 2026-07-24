@@ -51,7 +51,10 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Fail on High/Critical advisories
-        if: always()
+        # Only meaningful when the audit step actually ran and produced _vuln.txt.
+        # A failed restore/audit already turns the job red on its own; gating here
+        # avoids a misleading "no vulnerabilities" pass when _vuln.txt is missing.
+        if: steps.audit.outcome == 'success'
         run: |
           if grep -qiE '\b(High|Critical)\b' _vuln.txt; then
             echo "::error::High or Critical vulnerable dependency detected. See the job summary." >&2
