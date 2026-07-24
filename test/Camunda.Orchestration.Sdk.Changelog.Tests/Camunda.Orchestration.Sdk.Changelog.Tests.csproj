@@ -8,7 +8,6 @@
     <IsTestProject>true</IsTestProject>
     <!-- Relax style enforcement for tool tests -->
     <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
