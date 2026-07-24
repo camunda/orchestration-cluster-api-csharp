@@ -912,6 +912,8 @@ public enum ProcessInstanceSearchQuerySortRequestField
     StartDate,
     [JsonPropertyName("endDate")]
     EndDate,
+    [JsonPropertyName("suspendedDate")]
+    SuspendedDate,
     [JsonPropertyName("state")]
     State,
     [JsonPropertyName("hasIncident")]
@@ -6861,6 +6863,14 @@ public sealed class BaseProcessInstanceFilterFields
     /// </summary>
     [JsonPropertyName("hasIncident")]
     public bool? HasIncident { get; set; }
+
+    /// <summary>
+    /// The time this process instance most recently entered the SUSPENDED state.
+    /// This is cleared (null) again once the process instance is resumed.
+    /// 
+    /// </summary>
+    [JsonPropertyName("suspendedDate")]
+    public DateTimeFilterProperty? SuspendedDate { get; set; }
 
     /// <summary>
     /// The tenant id.
@@ -21092,6 +21102,14 @@ public sealed class ProcessDefinitionStatisticsFilter
     public bool? HasIncident { get; set; }
 
     /// <summary>
+    /// The time this process instance most recently entered the SUSPENDED state.
+    /// This is cleared (null) again once the process instance is resumed.
+    /// 
+    /// </summary>
+    [JsonPropertyName("suspendedDate")]
+    public DateTimeFilterProperty? SuspendedDate { get; set; }
+
+    /// <summary>
     /// The tenant id.
     /// </summary>
     [JsonPropertyName("tenantId")]
@@ -21772,6 +21790,14 @@ public sealed class ProcessInstanceFilter
     public bool? HasIncident { get; set; }
 
     /// <summary>
+    /// The time this process instance most recently entered the SUSPENDED state.
+    /// This is cleared (null) again once the process instance is resumed.
+    /// 
+    /// </summary>
+    [JsonPropertyName("suspendedDate")]
+    public DateTimeFilterProperty? SuspendedDate { get; set; }
+
+    /// <summary>
     /// The tenant id.
     /// </summary>
     [JsonPropertyName("tenantId")]
@@ -21959,6 +21985,14 @@ public sealed class ProcessInstanceFilterFields
     /// </summary>
     [JsonPropertyName("hasIncident")]
     public bool? HasIncident { get; set; }
+
+    /// <summary>
+    /// The time this process instance most recently entered the SUSPENDED state.
+    /// This is cleared (null) again once the process instance is resumed.
+    /// 
+    /// </summary>
+    [JsonPropertyName("suspendedDate")]
+    public DateTimeFilterProperty? SuspendedDate { get; set; }
 
     /// <summary>
     /// The tenant id.
@@ -22583,6 +22617,14 @@ public sealed class ProcessInstanceResult
     public ProcessInstanceStateEnum State { get; set; }
 
     /// <summary>
+    /// The time this process instance most recently entered the `SUSPENDED` state.
+    /// This is `null` if the process instance is not currently suspended.
+    /// 
+    /// </summary>
+    [JsonPropertyName("suspendedDate")]
+    public DateTimeOffset? SuspendedDate { get; set; }
+
+    /// <summary>
     /// Whether this process instance has a related incident or not.
     /// </summary>
     [JsonPropertyName("hasIncident")]
@@ -22800,6 +22842,8 @@ public enum ProcessInstanceStateEnum
     ACTIVE,
     [JsonPropertyName("COMPLETED")]
     COMPLETED,
+    [JsonPropertyName("SUSPENDED")]
+    SUSPENDED,
     [JsonPropertyName("TERMINATED")]
     TERMINATED,
 }
