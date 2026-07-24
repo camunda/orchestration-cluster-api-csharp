@@ -9811,6 +9811,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.State
   fullName: Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.State
   nameWithType: BaseProcessInstanceFilterFields.State
+- uid: Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.SuspendedDate
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.SuspendedDate.html#Camunda_Orchestration_Sdk_BaseProcessInstanceFilterFields_SuspendedDate
+  commentId: P:Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.SuspendedDate
+  nameWithType: BaseProcessInstanceFilterFields.SuspendedDate
+- uid: Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.SuspendedDate*
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.SuspendedDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.SuspendedDate
+  nameWithType: BaseProcessInstanceFilterFields.SuspendedDate
 - uid: Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.Tags
   name: Tags
   href: api/Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.Tags.html#Camunda_Orchestration_Sdk_BaseProcessInstanceFilterFields_Tags
@@ -37399,6 +37411,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.State
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.State
   nameWithType: ProcessDefinitionStatisticsFilter.State
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.SuspendedDate
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.SuspendedDate.html#Camunda_Orchestration_Sdk_ProcessDefinitionStatisticsFilter_SuspendedDate
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.SuspendedDate
+  nameWithType: ProcessDefinitionStatisticsFilter.SuspendedDate
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.SuspendedDate*
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.SuspendedDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.SuspendedDate
+  nameWithType: ProcessDefinitionStatisticsFilter.SuspendedDate
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.Tags
   name: Tags
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.Tags.html#Camunda_Orchestration_Sdk_ProcessDefinitionStatisticsFilter_Tags
@@ -38383,6 +38407,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.State
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.State
   nameWithType: ProcessInstanceFilter.State
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.SuspendedDate
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.SuspendedDate.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_SuspendedDate
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilter.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.SuspendedDate
+  nameWithType: ProcessInstanceFilter.SuspendedDate
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.SuspendedDate*
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.SuspendedDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilter.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilter.SuspendedDate
+  nameWithType: ProcessInstanceFilter.SuspendedDate
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags
   name: Tags
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilter.Tags.html#Camunda_Orchestration_Sdk_ProcessInstanceFilter_Tags
@@ -38677,6 +38713,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.State
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.State
   nameWithType: ProcessInstanceFilterFields.State
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.SuspendedDate
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.SuspendedDate.html#Camunda_Orchestration_Sdk_ProcessInstanceFilterFields_SuspendedDate
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.SuspendedDate
+  nameWithType: ProcessInstanceFilterFields.SuspendedDate
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.SuspendedDate*
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.SuspendedDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.SuspendedDate
+  nameWithType: ProcessInstanceFilterFields.SuspendedDate
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.Tags
   name: Tags
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceFilterFields.Tags.html#Camunda_Orchestration_Sdk_ProcessInstanceFilterFields_Tags
@@ -39541,6 +39589,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceResult.State
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceResult.State
   nameWithType: ProcessInstanceResult.State
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate.html#Camunda_Orchestration_Sdk_ProcessInstanceResult_SuspendedDate
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate
+  nameWithType: ProcessInstanceResult.SuspendedDate
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate*
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate
+  nameWithType: ProcessInstanceResult.SuspendedDate
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceResult.Tags
   name: Tags
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceResult.Tags.html#Camunda_Orchestration_Sdk_ProcessInstanceResult_Tags
@@ -39781,6 +39841,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.State
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.State
   nameWithType: ProcessInstanceSearchQuerySortRequestField.State
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.SuspendedDate
+  name: SuspendedDate
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_SuspendedDate
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.SuspendedDate
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.SuspendedDate
+  nameWithType: ProcessInstanceSearchQuerySortRequestField.SuspendedDate
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.TenantId
   name: TenantId
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_ProcessInstanceSearchQuerySortRequestField_TenantId
@@ -39913,6 +39979,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceStateEnum.COMPLETED
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceStateEnum.COMPLETED
   nameWithType: ProcessInstanceStateEnum.COMPLETED
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceStateEnum.SUSPENDED
+  name: SUSPENDED
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceStateEnum.html#Camunda_Orchestration_Sdk_ProcessInstanceStateEnum_SUSPENDED
+  commentId: F:Camunda.Orchestration.Sdk.ProcessInstanceStateEnum.SUSPENDED
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceStateEnum.SUSPENDED
+  nameWithType: ProcessInstanceStateEnum.SUSPENDED
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceStateEnum.TERMINATED
   name: TERMINATED
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceStateEnum.html#Camunda_Orchestration_Sdk_ProcessInstanceStateEnum_TERMINATED

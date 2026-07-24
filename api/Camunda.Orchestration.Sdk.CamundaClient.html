@@ -1167,8 +1167,8 @@ Only process instances in the SUSPENDED state can be resumed.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_ProcessInstanceResumptionBatchOperationRequest_System_Threading_CancellationToken_">ResumeProcessInstancesBatchOperationAsync(ProcessInstanceResumptionBatchOperationRequest, CancellationToken)</a></dt>
     <dd><p>Resume process instances (batch)
 Resumes multiple suspended process instances.
-Since only SUSPENDED root instances can be resumed, any given filters for state and
-parentProcessInstanceKey are ignored and overridden during this batch operation.
+Since only SUSPENDED root instances can be resumed, any given
+filters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
 </dd>
   </dl>
@@ -1549,8 +1549,8 @@ Only process instances in the ACTIVE state can be suspended.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_ProcessInstanceSuspensionBatchOperationRequest_System_Threading_CancellationToken_">SuspendProcessInstancesBatchOperationAsync(ProcessInstanceSuspensionBatchOperationRequest, CancellationToken)</a></dt>
     <dd><p>Suspend process instances (batch)
 Suspends multiple running process instances.
-Since only ACTIVE root instances can be suspended, any given filters for state and
-parentProcessInstanceKey are ignored and overridden during this batch operation.
+Since only ACTIVE root instances can be suspended, any given
+filters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
 </dd>
   </dl>
