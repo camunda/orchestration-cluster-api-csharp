@@ -3927,6 +3927,15 @@ no value stored; the API returns <code>PROCESS_EVENT</code> as a default for tho
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.html">ProcessDefinitionFilterState</a></dt>
+      <dd><p>Filter by the process definition's state.
+When not set, process definitions in any state are returned.
+Set to <code>ACTIVE</code> to exclude deleted definitions (recommended for most use cases).
+Set to <code>DELETED</code> to return only definitions that have been deleted but are still
+retained in secondary storage.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuerySortRequestField.html">ProcessDefinitionInstanceStatisticsQuerySortRequestField</a></dt>
       <dd><p>The field to sort by.</p>
 </dd>
@@ -3934,6 +3943,11 @@ no value stored; the API returns <code>PROCESS_EVENT</code> as a default for tho
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField.html">ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField</a></dt>
       <dd><p>The field to sort by.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionResultState.html">ProcessDefinitionResultState</a></dt>
+      <dd><p>The state of this process definition.</p>
 </dd>
     </dl>
     <dl class="jumplist">

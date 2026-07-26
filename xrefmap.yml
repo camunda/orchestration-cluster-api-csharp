@@ -27502,6 +27502,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.IncidentErrorTypeEnum.RESOURCENOTFOUND
   fullName: Camunda.Orchestration.Sdk.IncidentErrorTypeEnum.RESOURCENOTFOUND
   nameWithType: IncidentErrorTypeEnum.RESOURCENOTFOUND
+- uid: Camunda.Orchestration.Sdk.IncidentErrorTypeEnum.SECRETRESOLUTIONERROR
+  name: SECRETRESOLUTIONERROR
+  href: api/Camunda.Orchestration.Sdk.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_IncidentErrorTypeEnum_SECRETRESOLUTIONERROR
+  commentId: F:Camunda.Orchestration.Sdk.IncidentErrorTypeEnum.SECRETRESOLUTIONERROR
+  fullName: Camunda.Orchestration.Sdk.IncidentErrorTypeEnum.SECRETRESOLUTIONERROR
+  nameWithType: IncidentErrorTypeEnum.SECRETRESOLUTIONERROR
 - uid: Camunda.Orchestration.Sdk.IncidentErrorTypeEnum.TASKLISTENERNORETRIES
   name: TASKLISTENERNORETRIES
   href: api/Camunda.Orchestration.Sdk.IncidentErrorTypeEnum.html#Camunda_Orchestration_Sdk_IncidentErrorTypeEnum_TASKLISTENERNORETRIES
@@ -35803,18 +35809,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.HasStartForm
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.HasStartForm
   nameWithType: ProcessDefinitionFilter.HasStartForm
-- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
-  name: IsDeleted
-  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted.html#Camunda_Orchestration_Sdk_ProcessDefinitionFilter_IsDeleted
-  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
-  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
-  nameWithType: ProcessDefinitionFilter.IsDeleted
-- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted*
-  name: IsDeleted
-  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted.html
-  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
-  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsDeleted
-  nameWithType: ProcessDefinitionFilter.IsDeleted
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsLatestVersion
   name: IsLatestVersion
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilter.IsLatestVersion.html#Camunda_Orchestration_Sdk_ProcessDefinitionFilter_IsLatestVersion
@@ -35875,6 +35869,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.ResourceName
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.ResourceName
   nameWithType: ProcessDefinitionFilter.ResourceName
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilter.State.html#Camunda_Orchestration_Sdk_ProcessDefinitionFilter_State
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.State
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.State
+  nameWithType: ProcessDefinitionFilter.State
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilter.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.State
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.State
+  nameWithType: ProcessDefinitionFilter.State
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.TenantId
   name: TenantId
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilter.TenantId.html#Camunda_Orchestration_Sdk_ProcessDefinitionFilter_TenantId
@@ -35911,6 +35917,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionFilter.VersionTag
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilter.VersionTag
   nameWithType: ProcessDefinitionFilter.VersionTag
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilterState
+  name: ProcessDefinitionFilterState
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionFilterState
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilterState
+  nameWithType: ProcessDefinitionFilterState
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.ACTIVE
+  name: ACTIVE
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.html#Camunda_Orchestration_Sdk_ProcessDefinitionFilterState_ACTIVE
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.ACTIVE
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.ACTIVE
+  nameWithType: ProcessDefinitionFilterState.ACTIVE
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.DELETED
+  name: DELETED
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.html#Camunda_Orchestration_Sdk_ProcessDefinitionFilterState_DELETED
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.DELETED
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.DELETED
+  nameWithType: ProcessDefinitionFilterState.DELETED
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionId
   name: ProcessDefinitionId
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionId.html
@@ -36955,18 +36979,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionResult.HasStartForm
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.HasStartForm
   nameWithType: ProcessDefinitionResult.HasStartForm
-- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
-  name: IsDeleted
-  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted.html#Camunda_Orchestration_Sdk_ProcessDefinitionResult_IsDeleted
-  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
-  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
-  nameWithType: ProcessDefinitionResult.IsDeleted
-- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted*
-  name: IsDeleted
-  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted.html
-  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
-  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.IsDeleted
-  nameWithType: ProcessDefinitionResult.IsDeleted
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionResult.Name
   name: Name
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResult.Name.html#Camunda_Orchestration_Sdk_ProcessDefinitionResult_Name
@@ -37015,6 +37027,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionResult.ResourceName
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.ResourceName
   nameWithType: ProcessDefinitionResult.ResourceName
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResult.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResult.State.html#Camunda_Orchestration_Sdk_ProcessDefinitionResult_State
+  commentId: P:Camunda.Orchestration.Sdk.ProcessDefinitionResult.State
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.State
+  nameWithType: ProcessDefinitionResult.State
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResult.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResult.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionResult.State
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.State
+  nameWithType: ProcessDefinitionResult.State
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionResult.TenantId
   name: TenantId
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResult.TenantId.html#Camunda_Orchestration_Sdk_ProcessDefinitionResult_TenantId
@@ -37051,6 +37075,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessDefinitionResult.VersionTag
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResult.VersionTag
   nameWithType: ProcessDefinitionResult.VersionTag
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResultState
+  name: ProcessDefinitionResultState
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResultState.html
+  commentId: T:Camunda.Orchestration.Sdk.ProcessDefinitionResultState
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResultState
+  nameWithType: ProcessDefinitionResultState
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResultState.ACTIVE
+  name: ACTIVE
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResultState.html#Camunda_Orchestration_Sdk_ProcessDefinitionResultState_ACTIVE
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionResultState.ACTIVE
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResultState.ACTIVE
+  nameWithType: ProcessDefinitionResultState.ACTIVE
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResultState.DELETED
+  name: DELETED
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResultState.html#Camunda_Orchestration_Sdk_ProcessDefinitionResultState_DELETED
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionResultState.DELETED
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResultState.DELETED
+  nameWithType: ProcessDefinitionResultState.DELETED
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuery
   name: ProcessDefinitionSearchQuery
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuery.html
