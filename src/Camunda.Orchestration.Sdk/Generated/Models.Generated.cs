@@ -831,6 +831,23 @@ public enum PartitionState
 }
 
 /// <summary>
+/// Filter by the process definition&apos;s state.
+/// When not set, process definitions in any state are returned.
+/// Set to `ACTIVE` to exclude deleted definitions (recommended for most use cases).
+/// Set to `DELETED` to return only definitions that have been deleted but are still
+/// retained in secondary storage.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ProcessDefinitionFilterState
+{
+    [JsonPropertyName("ACTIVE")]
+    ACTIVE,
+    [JsonPropertyName("DELETED")]
+    DELETED,
+}
+
+/// <summary>
 /// The field to sort by.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -862,6 +879,18 @@ public enum ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField
     ActiveInstancesWithIncidentCount,
     [JsonPropertyName("activeInstancesWithoutIncidentCount")]
     ActiveInstancesWithoutIncidentCount,
+}
+
+/// <summary>
+/// The state of this process definition.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ProcessDefinitionResultState
+{
+    [JsonPropertyName("ACTIVE")]
+    ACTIVE,
+    [JsonPropertyName("DELETED")]
+    DELETED,
 }
 
 /// <summary>
@@ -15257,6 +15286,8 @@ public enum IncidentErrorTypeEnum
     MESSAGESIZEEXCEEDED,
     [JsonPropertyName("RESOURCE_NOT_FOUND")]
     RESOURCENOTFOUND,
+    [JsonPropertyName("SECRET_RESOLUTION_ERROR")]
+    SECRETRESOLUTIONERROR,
     [JsonPropertyName("TASK_LISTENER_NO_RETRIES")]
     TASKLISTENERNORETRIES,
     [JsonPropertyName("UNHANDLED_ERROR_EVENT")]
@@ -20271,14 +20302,15 @@ public sealed class ProcessDefinitionFilter
     public bool? HasStartForm { get; set; }
 
     /// <summary>
-    /// Filter by whether the process definition has been deleted.
-    /// When not set, both deleted and non-deleted process definitions are returned.
-    /// Set to `false` to exclude deleted definitions (recommended for most use cases).
-    /// Set to `true` to return only deleted definitions that are still retained in secondary storage.
+    /// Filter by the process definition&apos;s state.
+    /// When not set, process definitions in any state are returned.
+    /// Set to `ACTIVE` to exclude deleted definitions (recommended for most use cases).
+    /// Set to `DELETED` to return only definitions that have been deleted but are still
+    /// retained in secondary storage.
     /// 
     /// </summary>
-    [JsonPropertyName("isDeleted")]
-    public bool? IsDeleted { get; set; }
+    [JsonPropertyName("state")]
+    public ProcessDefinitionFilterState? State { get; set; }
 
 }
 
@@ -21002,10 +21034,10 @@ public sealed class ProcessDefinitionResult
     public bool HasStartForm { get; set; }
 
     /// <summary>
-    /// Whether this process definition has been deleted but is still retained in secondary storage.
+    /// The state of this process definition.
     /// </summary>
-    [JsonPropertyName("isDeleted")]
-    public bool IsDeleted { get; set; }
+    [JsonPropertyName("state")]
+    public ProcessDefinitionResultState State { get; set; }
 
 }
 

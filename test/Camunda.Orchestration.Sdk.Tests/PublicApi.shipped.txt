@@ -3502,10 +3502,11 @@ TYPE Camunda.Orchestration.Sdk.IncidentErrorTypeEnum : enum interfaces=[System.I
   MEMBER JOBNORETRIES = 9 json="JOB_NO_RETRIES"
   MEMBER MESSAGESIZEEXCEEDED = 10 json="MESSAGE_SIZE_EXCEEDED"
   MEMBER RESOURCENOTFOUND = 11 json="RESOURCE_NOT_FOUND"
-  MEMBER TASKLISTENERNORETRIES = 12 json="TASK_LISTENER_NO_RETRIES"
-  MEMBER UNHANDLEDERROREVENT = 13 json="UNHANDLED_ERROR_EVENT"
-  MEMBER UNKNOWN = 14 json="UNKNOWN"
-  MEMBER UNSPECIFIED = 15 json="UNSPECIFIED"
+  MEMBER SECRETRESOLUTIONERROR = 12 json="SECRET_RESOLUTION_ERROR"
+  MEMBER TASKLISTENERNORETRIES = 13 json="TASK_LISTENER_NO_RETRIES"
+  MEMBER UNHANDLEDERROREVENT = 14 json="UNHANDLED_ERROR_EVENT"
+  MEMBER UNKNOWN = 15 json="UNKNOWN"
+  MEMBER UNSPECIFIED = 16 json="UNSPECIFIED"
 
 TYPE Camunda.Orchestration.Sdk.IncidentErrorTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.IncidentErrorTypeExactMatch>]
   PROP System.String Value { get; }
@@ -4657,16 +4658,22 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionElementStatisticsQueryResult : s
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionFilter : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionFilterState? State { get; set; } [JsonPropertyName("state")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Boolean? HasStartForm { get; set; } [JsonPropertyName("hasStartForm")]
-  PROP System.Boolean? IsDeleted { get; set; } [JsonPropertyName("isDeleted")]
   PROP System.Boolean? IsLatestVersion { get; set; } [JsonPropertyName("isLatestVersion")]
   PROP System.Int32? Version { get; set; } [JsonPropertyName("version")]
   PROP System.String? ResourceName { get; set; } [JsonPropertyName("resourceName")]
   PROP System.String? VersionTag { get; set; } [JsonPropertyName("versionTag")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionFilterState : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ACTIVE = 0 json="ACTIVE"
+  MEMBER DELETED = 1 json="DELETED"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ProcessDefinitionId>]
   PROP System.String Value { get; }
@@ -4819,13 +4826,19 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionResultState State { get; set; } [JsonPropertyName("state")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Boolean HasStartForm { get; set; } [JsonPropertyName("hasStartForm")]
-  PROP System.Boolean IsDeleted { get; set; } [JsonPropertyName("isDeleted")]
   PROP System.Int32 Version { get; set; } [JsonPropertyName("version")]
   PROP System.String ResourceName { get; set; } [JsonPropertyName("resourceName")]
   PROP System.String? Name { get; set; } [JsonPropertyName("name")]
   PROP System.String? VersionTag { get; set; } [JsonPropertyName("versionTag")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResultState : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ACTIVE = 0 json="ACTIVE"
+  MEMBER DELETED = 1 json="DELETED"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuery : sealed class
   CTOR ()
