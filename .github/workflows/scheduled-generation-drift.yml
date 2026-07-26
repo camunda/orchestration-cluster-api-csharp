@@ -25,7 +25,16 @@ env:
   SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
 
 jobs:
+  spec-ref-guard:
+    uses: camunda/sdk-infra/.github/workflows/sdk-spec-ref-guard.yml@v1
+    with:
+      spec-ref: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
+      default-ref: 'main'
+      ack: ${{ vars.SPEC_REF_OVERRIDE_ACK || '' }}
+      expires: ${{ vars.SPEC_REF_OVERRIDE_EXPIRES || '' }}
+
   drift:
+    needs: [spec-ref-guard]
     name: Regenerate and check for drift
     runs-on: ubuntu-latest
     timeout-minutes: 30
