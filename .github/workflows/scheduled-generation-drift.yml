@@ -80,7 +80,9 @@ jobs:
           {
             echo '### Scheduled generation drift';
             echo '';
-            if [ "${{ steps.drift.outputs.drift }}" = 'true' ]; then
+            if [ "${{ steps.drift.outcome }}" != 'success' ]; then
+              echo "Drift check did not run — an earlier step failed (outcome: \`${{ steps.drift.outcome }}\`). See the job logs.";
+            elif [ "${{ steps.drift.outputs.drift }}" = 'true' ]; then
               echo "Regeneration from upstream \`${SPEC_REF}\` produced changes — committed generated output is stale.";
               echo '';
               echo 'Regenerate locally (`bash scripts/build.sh`) and commit, or open a regeneration PR.';
