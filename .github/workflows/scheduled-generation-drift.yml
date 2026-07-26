@@ -77,7 +77,7 @@ jobs:
           if ! git diff --quiet; then
             echo 'drift=true' >> "$GITHUB_OUTPUT"
             git diff --name-only | sed 's/^/CHANGED: /'
-            git diff > _gen-drift.patch || true
+            git diff > _gen-drift.patch
           else
             echo 'drift=false' >> "$GITHUB_OUTPUT"
             echo 'No generation drift.'
