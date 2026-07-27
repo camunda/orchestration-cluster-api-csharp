@@ -1,0 +1,118 @@
+name: Scheduled Generation Drift
+
+# Regenerates the SDK from the upstream OpenAPI spec on a schedule and fails if the
+# committed output drifts from what the generator produces. This closes the blind spot
+# where PR/branch CI uses `branches-ignore: [main]` and the PR-time drift step is
+# non-blocking (reporting only), so upstream spec changes stay invisible on main until
+# they ambush an unrelated PR. Fails the job on drift so the scheduled run turns red and
+# notifies maintainers (mirrors the Dependency Audit off-merge-path signal pattern).
+
+on:
+  schedule:
+    # Daily 04:23 UTC (staggered from the weekly Dependency Audit + CodeQL scans).
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+    inputs:
+      spec_ref:
+        description: 'Git ref (branch/tag/SHA) in camunda/camunda to fetch spec from'
+        required: false
+        default: 'main'
+
+permissions:
+  contents: read
+
+env:
+  SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
+
+jobs:
+  spec-ref-guard:
+    uses: camunda/sdk-infra/.github/workflows/sdk-spec-ref-guard.yml@v1
+    with:
+      spec-ref: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
+      default-ref: 'main'
+      ack: ${{ vars.SPEC_REF_OVERRIDE_ACK || '' }}
+      expires: ${{ vars.SPEC_REF_OVERRIDE_EXPIRES || '' }}
+
+  drift:
+    needs: [spec-ref-guard]
+    name: Regenerate and check for drift
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Fetch & Bundle spec
+        run: bash scripts/bundle-spec.sh
+
+      - name: Generate SDK
+        run: dotnet run --project src/Camunda.Orchestration.Sdk.Generator
+
+      - name: Format Generated Code
+        run: dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore
+
+      - name: Detect generation drift
+        id: drift
+        run: |
+          if ! git diff --quiet; then
+            echo 'drift=true' >> "$GITHUB_OUTPUT"
+            git diff --name-only | sed 's/^/CHANGED: /'
+            git diff > _gen-drift.patch
+          else
+            echo 'drift=false' >> "$GITHUB_OUTPUT"
+            echo 'No generation drift.'
+          fi
+
+      - name: Job summary
+        if: always()
+        run: |
+          {
+            echo '### Scheduled generation drift';
+            echo '';
+            if [ "${{ steps.drift.outcome }}" != 'success' ]; then
+              echo "Drift check did not run — an earlier step failed (outcome: \`${{ steps.drift.outcome }}\`). See the job logs.";
+            elif [ "${{ steps.drift.outputs.drift }}" = 'true' ]; then
+              echo "Regeneration from upstream \`${SPEC_REF}\` produced changes — committed generated output is stale.";
+              echo '';
+              echo 'Regenerate locally (`bash scripts/build.sh`) and commit, or open a regeneration PR.';
+              echo '';
+              echo '```';
+              git --no-pager diff --stat 2>/dev/null || echo '(diff unavailable)';
+              echo '```';
+            else
+              echo "No drift — committed output matches regeneration from upstream \`${SPEC_REF}\`.";
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload drift patch
+        if: steps.drift.outputs.drift == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: generation-drift
+          path: _gen-drift.patch
+
+      - name: Fail on drift
+        if: steps.drift.outputs.drift == 'true'
+        run: |
+          echo "::error::Committed generated output drifts from upstream ${SPEC_REF}. See the job summary and the generation-drift patch artifact." >&2
+          exit 1
