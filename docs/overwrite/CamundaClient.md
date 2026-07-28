@@ -1333,6 +1333,96 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#TakeRuntimeBackup)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync(System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#ListRuntimeBackups)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#GetRuntimeBackup)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#DeleteRuntimeBackup)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#GetRuntimeBackupState)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#SyncRuntimeBackupState)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#DeleteRuntimeBackupState)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync(System.Nullable{System.Boolean},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Exporting.cs#PauseExporting)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Exporting.cs#ResumeExporting)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.RunWorkersAsync(System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
 example:
 - *content

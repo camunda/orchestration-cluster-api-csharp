@@ -6865,6 +6865,113 @@ public sealed class AuthorizationSearchResult
 }
 
 /// <summary>
+/// The id of the backup. Must be a positive numerical value. As backups are logically
+/// ordered by their ids (ascending), each successive backup must use a higher id than the
+/// previous one.
+/// 
+/// </summary>
+public readonly record struct BackupId : global::Camunda.Orchestration.Sdk.ICamundaLongKey
+{
+    /// <summary>The underlying long value.</summary>
+    public long Value { get; }
+
+    private BackupId(long value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="BackupId"/> from a raw long value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static BackupId AssumeExists(long value)
+    {
+        return new BackupId(value);
+    }
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// A prefix of a backup id, followed by a single &apos;*&apos; as a wildcard, matching any backup id
+/// starting with the given prefix.
+/// 
+/// </summary>
+public readonly record struct BackupIdPrefix : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private BackupIdPrefix(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="BackupIdPrefix"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static BackupIdPrefix AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "BackupIdPrefix", pattern: "^\\d*\\*$");
+        return new BackupIdPrefix(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^\\d*\\*$");
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Detailed status of a runtime backup. The aggregated state is computed from the backup
+/// state of each partition as:
+/// - If the backup of all partitions is &apos;COMPLETED&apos;, the overall state is &apos;COMPLETED&apos;.
+/// - If one partition is &apos;FAILED&apos;, the overall state is &apos;FAILED&apos;.
+/// - Otherwise, if one partition is &apos;DOES_NOT_EXIST&apos;, the overall state is &apos;INCOMPLETE&apos;.
+/// - Otherwise, if one partition is &apos;IN_PROGRESS&apos;, the overall state is &apos;IN_PROGRESS&apos;.
+/// 
+/// </summary>
+public sealed class BackupInfo
+{
+    /// <summary>
+    /// The id of the backup.
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId BackupId { get; set; }
+
+    /// <summary>
+    /// The aggregated state of the backup.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public StateCode State { get; set; }
+
+    /// <summary>
+    /// Reason for failure if the state is &apos;FAILED&apos;.
+    /// </summary>
+    [JsonPropertyName("failureReason")]
+    public string? FailureReason { get; set; }
+
+    /// <summary>
+    /// Detailed status of the backup per partition. Always contains every partition of
+    /// the physical tenant.
+    /// 
+    /// </summary>
+    [JsonPropertyName("details")]
+    public List<PartitionBackupInfo> Details { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The type of the backup.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum BackupType
+{
+    [JsonPropertyName("MANUAL_BACKUP")]
+    MANUALBACKUP,
+    [JsonPropertyName("SCHEDULED_BACKUP")]
+    SCHEDULEDBACKUP,
+}
+
+/// <summary>
 /// Base process instance search filter.
 /// </summary>
 public sealed class BaseProcessInstanceFilterFields
@@ -8444,6 +8551,46 @@ public sealed class Changeset
     [JsonPropertyName("priority")]
     public int? Priority { get; set; }
 
+}
+
+/// <summary>
+/// The id of the checkpoint. Must be a non-negative numerical value. As checkpoints are
+/// logically ordered by their ids (ascending), each successive checkpoint must use a
+/// higher id than the previous one.
+/// 
+/// </summary>
+public readonly record struct CheckpointId : global::Camunda.Orchestration.Sdk.ICamundaLongKey
+{
+    /// <summary>The underlying long value.</summary>
+    public long Value { get; }
+
+    private CheckpointId(long value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="CheckpointId"/> from a raw long value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static CheckpointId AssumeExists(long value)
+    {
+        return new CheckpointId(value);
+    }
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// The type of the checkpoint.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum CheckpointType
+{
+    [JsonPropertyName("MARKER")]
+    MARKER,
+    [JsonPropertyName("SCHEDULED_BACKUP")]
+    SCHEDULEDBACKUP,
+    [JsonPropertyName("MANUAL_BACKUP")]
+    MANUALBACKUP,
 }
 
 /// <summary>
@@ -20073,6 +20220,206 @@ public sealed class Partition
 }
 
 /// <summary>
+/// Detailed info of the backup for a given partition.
+/// </summary>
+public sealed class PartitionBackupInfo
+{
+    /// <summary>
+    /// The id of the partition.
+    /// </summary>
+    [JsonPropertyName("partitionId")]
+    public PartitionId PartitionId { get; set; }
+
+    /// <summary>
+    /// The state of the backup on this partition.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public StateCode State { get; set; }
+
+    /// <summary>
+    /// Failure reason if the state is &apos;FAILED&apos;.
+    /// </summary>
+    [JsonPropertyName("failureReason")]
+    public string? FailureReason { get; set; }
+
+    /// <summary>
+    /// The timestamp at which the backup was started on this partition.
+    /// </summary>
+    [JsonPropertyName("createdAt")]
+    public DateTimeOffset? CreatedAt { get; set; }
+
+    /// <summary>
+    /// The timestamp at which the backup was last updated on this partition, e.g. changed
+    /// state from &apos;IN_PROGRESS&apos; to &apos;COMPLETED&apos;.
+    /// 
+    /// </summary>
+    [JsonPropertyName("lastUpdatedAt")]
+    public DateTimeOffset? LastUpdatedAt { get; set; }
+
+    /// <summary>
+    /// The id of the snapshot which is included in this backup.
+    /// </summary>
+    [JsonPropertyName("snapshotId")]
+    public string? SnapshotId { get; set; }
+
+    /// <summary>
+    /// The first log position included in this backup.
+    /// </summary>
+    [JsonPropertyName("firstLogPosition")]
+    public long? FirstLogPosition { get; set; }
+
+    /// <summary>
+    /// The position of the checkpoint for this backup.
+    /// </summary>
+    [JsonPropertyName("checkpointPosition")]
+    public long? CheckpointPosition { get; set; }
+
+    /// <summary>
+    /// The id of the broker from which the backup was taken for this partition.
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public int? BrokerId { get; set; }
+
+    /// <summary>
+    /// The version of the broker from which the backup was taken for this partition.
+    /// 
+    /// </summary>
+    [JsonPropertyName("brokerVersion")]
+    public string? BrokerVersion { get; set; }
+
+}
+
+/// <summary>
+/// Information about one backup range for a partition.
+/// </summary>
+public sealed class PartitionBackupRange
+{
+    /// <summary>
+    /// The id of the partition.
+    /// </summary>
+    [JsonPropertyName("partitionId")]
+    public PartitionId PartitionId { get; set; }
+
+    /// <summary>
+    /// The oldest backup in the range.
+    /// </summary>
+    [JsonPropertyName("start")]
+    public PartitionBackupState? Start { get; set; }
+
+    /// <summary>
+    /// The newest backup in the range.
+    /// </summary>
+    [JsonPropertyName("end")]
+    public PartitionBackupState? End { get; set; }
+
+}
+
+/// <summary>
+/// Detailed information about the backup state for a given partition.
+/// </summary>
+public sealed class PartitionBackupState
+{
+    /// <summary>
+    /// The id of the checkpoint this backup is based on.
+    /// </summary>
+    [JsonPropertyName("checkpointId")]
+    public CheckpointId CheckpointId { get; set; }
+
+    /// <summary>
+    /// The type of the backup.
+    /// </summary>
+    [JsonPropertyName("checkpointType")]
+    public BackupType CheckpointType { get; set; }
+
+    /// <summary>
+    /// The id of the partition. Omitted when nested inside a backup range&apos;s `start`/`end`,
+    /// where the partition is already identified by the enclosing range.
+    /// 
+    /// </summary>
+    [JsonPropertyName("partitionId")]
+    public PartitionId? PartitionId { get; set; }
+
+    /// <summary>
+    /// The log position of the checkpoint this backup is based on.
+    /// </summary>
+    [JsonPropertyName("checkpointPosition")]
+    public long CheckpointPosition { get; set; }
+
+    /// <summary>
+    /// The first log position included in this backup.
+    /// </summary>
+    [JsonPropertyName("firstLogPosition")]
+    public long FirstLogPosition { get; set; }
+
+    /// <summary>
+    /// The timestamp at which the checkpoint was created.
+    /// </summary>
+    [JsonPropertyName("checkpointTimestamp")]
+    public DateTimeOffset CheckpointTimestamp { get; set; }
+
+}
+
+/// <summary>
+/// Detailed information about the checkpoint state for a given partition.
+/// </summary>
+public sealed class PartitionCheckpointState
+{
+    /// <summary>
+    /// The id of the checkpoint.
+    /// </summary>
+    [JsonPropertyName("checkpointId")]
+    public CheckpointId CheckpointId { get; set; }
+
+    /// <summary>
+    /// The type of the checkpoint.
+    /// </summary>
+    [JsonPropertyName("checkpointType")]
+    public CheckpointType CheckpointType { get; set; }
+
+    /// <summary>
+    /// The id of the partition.
+    /// </summary>
+    [JsonPropertyName("partitionId")]
+    public PartitionId PartitionId { get; set; }
+
+    /// <summary>
+    /// The log position of the checkpoint.
+    /// </summary>
+    [JsonPropertyName("checkpointPosition")]
+    public long CheckpointPosition { get; set; }
+
+    /// <summary>
+    /// The timestamp at which the checkpoint was created.
+    /// </summary>
+    [JsonPropertyName("checkpointTimestamp")]
+    public DateTimeOffset CheckpointTimestamp { get; set; }
+
+}
+
+/// <summary>
+/// The id of a partition. Always a positive number greater than or equal to 1.
+/// </summary>
+public readonly record struct PartitionId : global::Camunda.Orchestration.Sdk.ICamundaLongKey
+{
+    /// <summary>The underlying long value.</summary>
+    public long Value { get; }
+
+    private PartitionId(long value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="PartitionId"/> from a raw long value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static PartitionId AssumeExists(long value)
+    {
+        return new PartitionId(value);
+    }
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// Specifies the type of permissions.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -24012,6 +24359,31 @@ public sealed class RoleUserSearchResult
 }
 
 /// <summary>
+/// Information about the checkpoint and backup state of the physical tenant.
+/// </summary>
+public sealed class RuntimeBackupState
+{
+    /// <summary>
+    /// List of partition checkpoint states.
+    /// </summary>
+    [JsonPropertyName("checkpointStates")]
+    public List<PartitionCheckpointState> CheckpointStates { get; set; } = null!;
+
+    /// <summary>
+    /// List of partition backup states.
+    /// </summary>
+    [JsonPropertyName("backupStates")]
+    public List<PartitionBackupState> BackupStates { get; set; } = null!;
+
+    /// <summary>
+    /// List of partition backup ranges.
+    /// </summary>
+    [JsonPropertyName("ranges")]
+    public List<PartitionBackupRange> Ranges { get; set; } = null!;
+
+}
+
+/// <summary>
 /// System-generated key for a scope. A scope can hold variables and represents either an
 /// element instance in a BPMN process or the process instance itself.
 /// 
@@ -24587,6 +24959,26 @@ public readonly record struct StartCursor : global::Camunda.Orchestration.Sdk.IC
 }
 
 /// <summary>
+/// The aggregated state of the backup, computed from the state of each partition.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum StateCode
+{
+    [JsonPropertyName("DOES_NOT_EXIST")]
+    DOESNOTEXIST,
+    [JsonPropertyName("IN_PROGRESS")]
+    INPROGRESS,
+    [JsonPropertyName("COMPLETED")]
+    COMPLETED,
+    [JsonPropertyName("FAILED")]
+    FAILED,
+    [JsonPropertyName("INCOMPLETE")]
+    INCOMPLETE,
+    [JsonPropertyName("DELETED")]
+    DELETED,
+}
+
+/// <summary>
 /// Metric for a single job status.
 /// </summary>
 public sealed class StatusMetric
@@ -24819,6 +25211,34 @@ public readonly record struct Tag : global::Camunda.Orchestration.Sdk.ICamundaKe
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Request body for taking a runtime backup.
+/// </summary>
+public sealed class TakeRuntimeBackupRequest
+{
+    /// <summary>
+    /// The id of the backup to take. Must be omitted if continuous backups and/or a
+    /// backup or checkpoint schedule is enabled for the physical tenant.
+    /// 
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId? BackupId { get; set; }
+
+}
+
+/// <summary>
+/// Response body for taking a runtime backup.
+/// </summary>
+public sealed class TakeRuntimeBackupResponse
+{
+    /// <summary>
+    /// The id of the backup that has been scheduled.
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId BackupId { get; set; }
+
 }
 
 /// <summary>

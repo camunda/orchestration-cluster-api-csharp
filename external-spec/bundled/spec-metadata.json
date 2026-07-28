@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:dc1ef7b1e5da255e2693943a9869f29fbca4ce5250eface7865437c113284d5f",
+  "specHash": "sha256:a855a2b8055d58b73113e05937657239fd13e40fd8c5648ce7f84c6db1a99717",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -3508,6 +3508,239 @@
       }
     },
     {
+      "operationId": "listRuntimeBackups",
+      "path": "/backups/runtime",
+      "method": "get",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "List runtime backups",
+      "description": "Returns a list of all available runtime backups of the physical tenant, with their\nstate and additional info, sorted in descending order of backupId.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "prefix",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "takeRuntimeBackup",
+      "path": "/backups/runtime",
+      "method": "post",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Take a runtime backup",
+      "description": "Triggers a backup of runtime data on all partitions of the physical tenant.\n\nThe `backupId` must be omitted if continuous backups and/or a backup or checkpoint\nschedule is enabled for the physical tenant, as the id is generated automatically.\nOtherwise, `backupId` is required.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "TakeRuntimeBackupRequest",
+      "successResponseSchemaRef": "TakeRuntimeBackupResponse",
+      "successStatus": 202,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "UPDATE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "getRuntimeBackupState",
+      "path": "/backups/runtime/state",
+      "method": "get",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Get runtime backup state",
+      "description": "Returns the current checkpoint and backup state of every partition of the physical\ntenant. Unlike the `backupRuntime` actuator, this fails the whole request if the\ncheckpoint state or the backup ranges cannot be retrieved from any partition, instead\nof silently returning an empty section.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "RuntimeBackupState",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "deleteRuntimeBackupState",
+      "path": "/backups/runtime/state",
+      "method": "delete",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Delete runtime backup state",
+      "description": "Resets the runtime backup state of every partition of the physical tenant, clearing\nall checkpoint info, backup info, checkpoint metadata, and backup ranges. Used when\nswitching backup stores.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "UPDATE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "syncRuntimeBackupState",
+      "path": "/backups/runtime/state/sync",
+      "method": "post",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Force-write runtime backup state",
+      "description": "Force-writes the checkpoint and backup metadata of every partition of the physical\ntenant to the backup store, independent of any backup being taken or confirmed, and\nreturns the updated state.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "RuntimeBackupState",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "UPDATE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "getRuntimeBackup",
+      "path": "/backups/runtime/{backupId}",
+      "method": "get",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Get runtime backup",
+      "description": "Returns detailed status of the runtime backup with the given id.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "backupId"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "BackupInfo",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "deleteRuntimeBackup",
+      "path": "/backups/runtime/{backupId}",
+      "method": "delete",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Delete runtime backup",
+      "description": "Deletes the runtime backup with the given id.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "backupId"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "UPDATE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "searchBatchOperationItems",
       "path": "/batch-operation-items/search",
       "method": "post",
@@ -5125,6 +5358,73 @@
           }
         ],
         "x-added-in-version": "8.6"
+      }
+    },
+    {
+      "operationId": "pauseExporting",
+      "path": "/exporting/pause",
+      "method": "post",
+      "tags": [
+        "Exporting"
+      ],
+      "summary": "Pause exporting",
+      "description": "Pauses exporting on all partitions of the physical tenant. While paused, exported records\nare not committed, so the log is not compacted for the affected partitions.\n\nWith `soft=true`, exporting continues to run but its position is not committed, so the\nstate after resuming is identical to a hard pause; use this variant when exporting must\nkeep progressing (e.g. to avoid falling behind) while still preventing log compaction,\nsuch as during a backup.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "soft",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "exporting.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "UPDATE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "resumeExporting",
+      "path": "/exporting/resume",
+      "method": "post",
+      "tags": [
+        "Exporting"
+      ],
+      "summary": "Resume exporting",
+      "description": "Resumes exporting on all partitions of the physical tenant after a pause or soft pause.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "exporting.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "UPDATE"
+          }
+        ],
+        "x-added-in-version": "8.10"
       }
     },
     {
@@ -9338,8 +9638,8 @@
       "tags": [
         "Cluster"
       ],
-      "summary": "Get cluster status",
-      "description": "Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.",
+      "summary": "Get physical tenant status",
+      "description": "Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). If the cluster has only a single physical tenant (the default), this endpoint is equivalent to `/cluster/v2/status`. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant's partitions.",
       "eventuallyConsistent": false,
       "hasRequestBody": false,
       "requestBodyUnion": false,
@@ -11400,7 +11700,7 @@
   "integrity": {
     "totalSemanticKeys": 41,
     "totalUnions": 65,
-    "totalOperations": 204,
+    "totalOperations": 213,
     "totalEventuallyConsistent": 92,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23

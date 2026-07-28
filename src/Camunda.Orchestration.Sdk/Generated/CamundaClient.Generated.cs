@@ -2366,6 +2366,79 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Delete runtime backup
+    /// Deletes the runtime backup with the given id.
+    /// </summary>
+    /// <remarks>
+    /// Operation: deleteRuntimeBackup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteRuntimeBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteRuntimeBackupAsync(backupId);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteRuntimeBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteRuntimeBackupAsync(backupId);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task DeleteRuntimeBackupAsync(BackupId backupId, CancellationToken ct = default)
+    {
+        var path = $"/backups/runtime/{Uri.EscapeDataString(backupId.ToString()!)}";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteRuntimeBackup", false, ct);
+    }
+
+    /// <summary>
+    /// Delete runtime backup state
+    /// Resets the runtime backup state of every partition of the physical tenant, clearing
+    /// all checkpoint info, backup info, checkpoint metadata, and backup ranges. Used when
+    /// switching backup stores.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: deleteRuntimeBackupState
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteRuntimeBackupStateExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Clears all checkpoint info, backup info, checkpoint metadata, and backup
+    ///     // ranges on every partition. Used when switching backup stores.
+    ///     await client.DeleteRuntimeBackupStateAsync();
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteRuntimeBackupStateExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Clears all checkpoint info, backup info, checkpoint metadata, and backup
+    ///     // ranges on every partition. Used when switching backup stores.
+    ///     await client.DeleteRuntimeBackupStateAsync();
+    /// }
+    /// </code>
+    /// </example>
+    public async Task DeleteRuntimeBackupStateAsync(CancellationToken ct = default)
+    {
+        var path = $"/backups/runtime/state";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteRuntimeBackupState", false, ct);
+    }
+
+    /// <summary>
     /// Delete tenant
     /// Deletes an existing tenant.
     /// </summary>
@@ -4638,6 +4711,110 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get runtime backup
+    /// Returns detailed status of the runtime backup with the given id.
+    /// </summary>
+    /// <remarks>
+    /// Operation: getRuntimeBackup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRuntimeBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var backup = await client.GetRuntimeBackupAsync(backupId);
+    /// 
+    ///     Console.WriteLine($&quot;Backup {backup.BackupId}: {backup.State}&quot;);
+    ///     foreach (var partition in backup.Details)
+    ///     {
+    ///         Console.WriteLine($&quot;  Partition {partition.PartitionId}: {partition.State}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRuntimeBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var backup = await client.GetRuntimeBackupAsync(backupId);
+    /// 
+    ///     Console.WriteLine($&quot;Backup {backup.BackupId}: {backup.State}&quot;);
+    ///     foreach (var partition in backup.Details)
+    ///     {
+    ///         Console.WriteLine($&quot;  Partition {partition.PartitionId}: {partition.State}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<BackupInfo> GetRuntimeBackupAsync(BackupId backupId, CancellationToken ct = default)
+    {
+        var path = $"/backups/runtime/{Uri.EscapeDataString(backupId.ToString()!)}";
+        return await InvokeWithRetryAsync(() => SendAsync<BackupInfo>(HttpMethod.Get, path, null, ct), "getRuntimeBackup", false, ct);
+    }
+
+    /// <summary>
+    /// Get runtime backup state
+    /// Returns the current checkpoint and backup state of every partition of the physical
+    /// tenant. Unlike the `backupRuntime` actuator, this fails the whole request if the
+    /// checkpoint state or the backup ranges cannot be retrieved from any partition, instead
+    /// of silently returning an empty section.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: getRuntimeBackupState
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRuntimeBackupStateExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var state = await client.GetRuntimeBackupStateAsync();
+    /// 
+    ///     foreach (var checkpoint in state.CheckpointStates)
+    ///     {
+    ///         Console.WriteLine(
+    ///             $&quot;Partition {checkpoint.PartitionId} checkpoint {checkpoint.CheckpointId} ({checkpoint.CheckpointType})&quot;);
+    ///     }
+    ///     foreach (var range in state.Ranges)
+    ///     {
+    ///         Console.WriteLine(
+    ///             $&quot;Partition {range.PartitionId} range: {range.Start?.CheckpointId} -&gt; {range.End?.CheckpointId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRuntimeBackupStateExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var state = await client.GetRuntimeBackupStateAsync();
+    /// 
+    ///     foreach (var checkpoint in state.CheckpointStates)
+    ///     {
+    ///         Console.WriteLine(
+    ///             $&quot;Partition {checkpoint.PartitionId} checkpoint {checkpoint.CheckpointId} ({checkpoint.CheckpointType})&quot;);
+    ///     }
+    ///     foreach (var range in state.Ranges)
+    ///     {
+    ///         Console.WriteLine(
+    ///             $&quot;Partition {range.PartitionId} range: {range.Start?.CheckpointId} -&gt; {range.End?.CheckpointId}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<RuntimeBackupState> GetRuntimeBackupStateAsync(CancellationToken ct = default)
+    {
+        var path = $"/backups/runtime/state";
+        return await InvokeWithRetryAsync(() => SendAsync<RuntimeBackupState>(HttpMethod.Get, path, null, ct), "getRuntimeBackupState", false, ct);
+    }
+
+    /// <summary>
     /// Get process start form
     /// Get the start form of a process.
     /// Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
@@ -4686,8 +4863,8 @@ public partial class CamundaClient
     }
 
     /// <summary>
-    /// Get cluster status
-    /// Checks the health status of the cluster by verifying if there&apos;s at least one partition with a healthy leader.
+    /// Get physical tenant status
+    /// Checks the health status of the default physical tenant by verifying if there&apos;s at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). If the cluster has only a single physical tenant (the default), this endpoint is equivalent to `/cluster/v2/status`. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant&apos;s partitions.
     /// </summary>
     /// <remarks>
     /// Operation: getStatus
@@ -5113,6 +5290,51 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// List runtime backups
+    /// Returns a list of all available runtime backups of the physical tenant, with their
+    /// state and additional info, sorted in descending order of backupId.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: listRuntimeBackups
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ListRuntimeBackupsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // `prefix` must end in a single &apos;*&apos;. Omit it to list every backup.
+    ///     var backups = await client.ListRuntimeBackupsAsync(
+    ///         BackupIdPrefix.AssumeExists(&quot;10*&quot;));
+    /// 
+    ///     Console.WriteLine($&quot;Runtime backups: {backups}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ListRuntimeBackupsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // `prefix` must end in a single &apos;*&apos;. Omit it to list every backup.
+    ///     var backups = await client.ListRuntimeBackupsAsync(
+    ///         BackupIdPrefix.AssumeExists(&quot;10*&quot;));
+    /// 
+    ///     Console.WriteLine($&quot;Runtime backups: {backups}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<object> ListRuntimeBackupsAsync(BackupIdPrefix? prefix = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(prefix.ToString()!));
+        var path = queryParts.Count > 0 ? $"/backups/runtime?{string.Join("&", queryParts)}" : $"/backups/runtime";
+        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "listRuntimeBackups", false, ct);
+    }
+
+    /// <summary>
     /// Migrate process instance
     /// Migrates a process instance to a new process definition.
     /// This request can contain multiple mapping instructions to define mapping between the active
@@ -5305,6 +5527,54 @@ public partial class CamundaClient
     {
         var path = $"/process-instances/modification";
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "modifyProcessInstancesBatchOperation", false, ct);
+    }
+
+    /// <summary>
+    /// Pause exporting
+    /// Pauses exporting on all partitions of the physical tenant. While paused, exported records
+    /// are not committed, so the log is not compacted for the affected partitions.
+    /// 
+    /// With `soft=true`, exporting continues to run but its position is not committed, so the
+    /// state after resuming is identical to a hard pause; use this variant when exporting must
+    /// keep progressing (e.g. to avoid falling behind) while still preventing log compaction,
+    /// such as during a backup.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: pauseExporting
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task PauseExportingExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // With `soft: true` exporting keeps running but its position is not committed,
+    ///     // so the log is still not compacted — use it when exporting must keep
+    ///     // progressing, for example while a backup is taken.
+    ///     await client.PauseExportingAsync(soft: true);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task PauseExportingExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // With `soft: true` exporting keeps running but its position is not committed,
+    ///     // so the log is still not compacted — use it when exporting must keep
+    ///     // progressing, for example while a backup is taken.
+    ///     await client.PauseExportingAsync(soft: true);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task PauseExportingAsync(bool? soft = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (soft != null) queryParts.Add("soft=" + Uri.EscapeDataString(soft.ToString()!));
+        var path = queryParts.Count > 0 ? $"/exporting/pause?{string.Join("&", queryParts)}" : $"/exporting/pause";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "pauseExporting", false, ct);
     }
 
     /// <summary>
@@ -5754,6 +6024,40 @@ public partial class CamundaClient
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/resumption";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "resumeBatchOperation", false, ct);
+    }
+
+    /// <summary>
+    /// Resume exporting
+    /// Resumes exporting on all partitions of the physical tenant after a pause or soft pause.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: resumeExporting
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResumeExportingExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResumeExportingAsync();
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResumeExportingExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.ResumeExportingAsync();
+    /// }
+    /// </code>
+    /// </example>
+    public async Task ResumeExportingAsync(CancellationToken ct = default)
+    {
+        var path = $"/exporting/resume";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "resumeExporting", false, ct);
     }
 
     /// <summary>
@@ -8490,6 +8794,100 @@ public partial class CamundaClient
     {
         var path = $"/process-instances/suspension";
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "suspendProcessInstancesBatchOperation", false, ct);
+    }
+
+    /// <summary>
+    /// Force-write runtime backup state
+    /// Force-writes the checkpoint and backup metadata of every partition of the physical
+    /// tenant to the backup store, independent of any backup being taken or confirmed, and
+    /// returns the updated state.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: syncRuntimeBackupState
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SyncRuntimeBackupStateExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Force-writes checkpoint and backup metadata of every partition to the backup
+    ///     // store, independent of any backup being taken, and returns the updated state.
+    ///     var state = await client.SyncRuntimeBackupStateAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Synced {state.BackupStates.Count} partition backup states&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SyncRuntimeBackupStateExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Force-writes checkpoint and backup metadata of every partition to the backup
+    ///     // store, independent of any backup being taken, and returns the updated state.
+    ///     var state = await client.SyncRuntimeBackupStateAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Synced {state.BackupStates.Count} partition backup states&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<RuntimeBackupState> SyncRuntimeBackupStateAsync(CancellationToken ct = default)
+    {
+        var path = $"/backups/runtime/state/sync";
+        return await InvokeWithRetryAsync(() => SendAsync<RuntimeBackupState>(HttpMethod.Post, path, null, ct), "syncRuntimeBackupState", false, ct);
+    }
+
+    /// <summary>
+    /// Take a runtime backup
+    /// Triggers a backup of runtime data on all partitions of the physical tenant.
+    /// 
+    /// The `backupId` must be omitted if continuous backups and/or a backup or checkpoint
+    /// schedule is enabled for the physical tenant, as the id is generated automatically.
+    /// Otherwise, `backupId` is required.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: takeRuntimeBackup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task TakeRuntimeBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Omit `BackupId` when continuous backups or a backup/checkpoint schedule is
+    ///     // enabled for the physical tenant — the id is then generated by the cluster.
+    ///     // Otherwise `BackupId` is required and must be higher than any existing one.
+    ///     var backup = await client.TakeRuntimeBackupAsync(
+    ///         new TakeRuntimeBackupRequest { BackupId = backupId });
+    /// 
+    ///     Console.WriteLine($&quot;Scheduled backup {backup.BackupId}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task TakeRuntimeBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Omit `BackupId` when continuous backups or a backup/checkpoint schedule is
+    ///     // enabled for the physical tenant — the id is then generated by the cluster.
+    ///     // Otherwise `BackupId` is required and must be higher than any existing one.
+    ///     var backup = await client.TakeRuntimeBackupAsync(
+    ///         new TakeRuntimeBackupRequest { BackupId = backupId });
+    /// 
+    ///     Console.WriteLine($&quot;Scheduled backup {backup.BackupId}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<TakeRuntimeBackupResponse> TakeRuntimeBackupAsync(TakeRuntimeBackupRequest body, CancellationToken ct = default)
+    {
+        var path = $"/backups/runtime";
+        return await InvokeWithRetryAsync(() => SendAsync<TakeRuntimeBackupResponse>(HttpMethod.Post, path, body, ct), "takeRuntimeBackup", false, ct);
     }
 
     /// <summary>
