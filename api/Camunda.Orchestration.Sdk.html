@@ -651,6 +651,18 @@ Either an id-based or a property-based authorization can be provided.</p>
       <dd></dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.BackupInfo.html">BackupInfo</a></dt>
+      <dd><p>Detailed status of a runtime backup. The aggregated state is computed from the backup
+state of each partition as:</p>
+<ul>
+<li>If the backup of all partitions is 'COMPLETED', the overall state is 'COMPLETED'.</li>
+<li>If one partition is 'FAILED', the overall state is 'FAILED'.</li>
+<li>Otherwise, if one partition is 'DOES_NOT_EXIST', the overall state is 'INCOMPLETE'.</li>
+<li>Otherwise, if one partition is 'IN_PROGRESS', the overall state is 'IN_PROGRESS'.</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.html">BaseProcessInstanceFilterFields</a></dt>
       <dd><p>Base process instance search filter.</p>
 </dd>
@@ -2025,6 +2037,26 @@ correlated with.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.PartitionBackupInfo.html">PartitionBackupInfo</a></dt>
+      <dd><p>Detailed info of the backup for a given partition.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.PartitionBackupRange.html">PartitionBackupRange</a></dt>
+      <dd><p>Information about one backup range for a partition.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.PartitionBackupState.html">PartitionBackupState</a></dt>
+      <dd><p>Detailed information about the backup state for a given partition.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.PartitionCheckpointState.html">PartitionCheckpointState</a></dt>
+      <dd><p>Detailed information about the checkpoint state for a given partition.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProblemDetail.html">ProblemDetail</a></dt>
       <dd><p>A Problem detail object as described in <a href="https://www.rfc-editor.org/rfc/rfc9457">RFC 9457</a>. There may be additional properties specific to the problem type.</p>
 </dd>
@@ -2519,6 +2551,11 @@ at runtime by the given id.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.RuntimeBackupState.html">RuntimeBackupState</a></dt>
+      <dd><p>Information about the checkpoint and backup state of the physical tenant.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ScopeKeyFilterProperty.html">ScopeKeyFilterProperty</a></dt>
       <dd><p>ScopeKey property with full advanced search capabilities. Filter by the key of the
 element instance or process instance that defines the scope of a variable.</p>
@@ -2616,6 +2653,16 @@ instance with the sourceElementInstanceKey and activate a new element instance a
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SystemConfigurationResponse.html">SystemConfigurationResponse</a></dt>
       <dd><p>Envelope for all system configuration sections. Each property
 represents a feature area.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.html">TakeRuntimeBackupRequest</a></dt>
+      <dd><p>Request body for taking a runtime backup.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.html">TakeRuntimeBackupResponse</a></dt>
+      <dd><p>Response body for taking a runtime backup.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3124,6 +3171,19 @@ Structs
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.BackupId.html">BackupId</a></dt>
+      <dd><p>The id of the backup. Must be a positive numerical value. As backups are logically
+ordered by their ids (ascending), each successive backup must use a higher id than the
+previous one.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.BackupIdPrefix.html">BackupIdPrefix</a></dt>
+      <dd><p>A prefix of a backup id, followed by a single '*' as a wildcard, matching any backup id
+starting with the given prefix.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.BatchOperationItemStateExactMatch.html">BatchOperationItemStateExactMatch</a></dt>
       <dd><p>Matches the value exactly.</p>
 </dd>
@@ -3155,6 +3215,13 @@ Note that any active child process instances with the same business id are not t
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.CategoryExactMatch.html">CategoryExactMatch</a></dt>
       <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.CheckpointId.html">CheckpointId</a></dt>
+      <dd><p>The id of the checkpoint. Must be a non-negative numerical value. As checkpoints are
+logically ordered by their ids (ascending), each successive checkpoint must use a
+higher id than the previous one.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3434,6 +3501,11 @@ Must be &gt; 0 if provided.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.PartitionId.html">PartitionId</a></dt>
+      <dd><p>The id of a partition. Always a positive number greater than or equal to 1.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionId.html">ProcessDefinitionId</a></dt>
       <dd><p>Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.</p>
 </dd>
@@ -3670,6 +3742,11 @@ DISCARDED: the producing job failed; this item was superseded by a later activat
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.BackupType.html">BackupType</a></dt>
+      <dd><p>The type of the backup.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.BatchOperationErrorType.html">BatchOperationErrorType</a></dt>
       <dd><p>The type of the error that occurred during the batch operation.</p>
 </dd>
@@ -3707,6 +3784,11 @@ DISCARDED: the producing job failed; this item was superseded by a later activat
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaAuthErrorCode.html">CamundaAuthErrorCode</a></dt>
       <dd><p>Auth error codes matching the JS SDK.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.CheckpointType.html">CheckpointType</a></dt>
+      <dd><p>The type of the checkpoint.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -4008,6 +4090,11 @@ retained in secondary storage.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SortOrderEnum.html">SortOrderEnum</a></dt>
       <dd><p>The order in which to sort the related field.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.StateCode.html">StateCode</a></dt>
+      <dd><p>The aggregated state of the backup, computed from the state of each partition.</p>
 </dd>
     </dl>
     <dl class="jumplist">

@@ -615,6 +615,20 @@ Deletes the role with the given ID.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_">DeleteRuntimeBackupAsync(BackupId, CancellationToken)</a></dt>
+    <dd><p>Delete runtime backup
+Deletes the runtime backup with the given id.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupStateAsync_System_Threading_CancellationToken_">DeleteRuntimeBackupStateAsync(CancellationToken)</a></dt>
+    <dd><p>Delete runtime backup state
+Resets the runtime backup state of every partition of the physical tenant, clearing
+all checkpoint info, backup info, checkpoint metadata, and backup ranges. Used when
+switching backup stores.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_Threading_CancellationToken_">DeleteTenantAsync(TenantId, CancellationToken)</a></dt>
     <dd><p>Delete tenant
 Deletes an existing tenant.</p>
@@ -956,6 +970,21 @@ Get a role by its ID.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_">GetRuntimeBackupAsync(BackupId, CancellationToken)</a></dt>
+    <dd><p>Get runtime backup
+Returns detailed status of the runtime backup with the given id.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupStateAsync_System_Threading_CancellationToken_">GetRuntimeBackupStateAsync(CancellationToken)</a></dt>
+    <dd><p>Get runtime backup state
+Returns the current checkpoint and backup state of every partition of the physical
+tenant. Unlike the <code>backupRuntime</code> actuator, this fails the whole request if the
+checkpoint state or the backup ranges cannot be retrieved from any partition, instead
+of silently returning an empty section.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetStartProcessFormAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetStartProcessFormAsync_Camunda_Orchestration_Sdk_ProcessDefinitionKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_FormResult__System_Threading_CancellationToken_">GetStartProcessFormAsync(ProcessDefinitionKey, ConsistencyOptions&lt;FormResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get process start form
 Get the start form of a process.
@@ -964,8 +993,8 @@ Note that this endpoint will only return linked forms. This endpoint does not su
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetStatusAsync_System_Threading_CancellationToken_">GetStatusAsync(CancellationToken)</a></dt>
-    <dd><p>Get cluster status
-Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.</p>
+    <dd><p>Get physical tenant status
+Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at <code>/physical-tenants/default/v2/status</code>, but not for any other physical tenant id (<code>/physical-tenants/{id}/v2/status</code> returns 404 for every other id, whether or not a physical tenant with that id exists). If the cluster has only a single physical tenant (the default), this endpoint is equivalent to <code>/cluster/v2/status</code>. Use <code>/cluster/v2/status</code> for the aggregated status of the whole cluster, or <code>/physical-tenants/{id}/v2/topology</code> for the health of a specific physical tenant's partitions.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1035,6 +1064,13 @@ specific element instance.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListRuntimeBackupsAsync_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Threading_CancellationToken_">ListRuntimeBackupsAsync(BackupIdPrefix?, CancellationToken)</a></dt>
+    <dd><p>List runtime backups
+Returns a list of all available runtime backups of the physical tenant, with their
+state and additional info, sorted in descending order of backupId.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ProcessInstanceMigrationInstruction_System_Threading_CancellationToken_">MigrateProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceMigrationInstruction, CancellationToken)</a></dt>
     <dd><p>Migrate process instance
 Migrates a process instance to a new process definition.
@@ -1073,6 +1109,17 @@ filters for state are ignored and overridden during this batch operation.
 In contrast to single modification operation, it is not possible to add variable instructions or modify by element key.
 It is only possible to use the element id of the source and target.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_PauseExportingAsync_System_Nullable_System_Boolean__System_Threading_CancellationToken_">PauseExportingAsync(bool?, CancellationToken)</a></dt>
+    <dd><p>Pause exporting
+Pauses exporting on all partitions of the physical tenant. While paused, exported records
+are not committed, so the log is not compacted for the affected partitions.</p>
+<p>With <code>soft=true</code>, exporting continues to run but its position is not committed, so the
+state after resuming is identical to a hard pause; use this variant when exporting must
+keep progressing (e.g. to avoid falling behind) while still preventing log compaction,
+such as during a backup.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1154,6 +1201,12 @@ Restores the cluster from a backup. The restore is described either by a single 
     <dd><p>Resume Batch operation
 Resumes a suspended batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeExportingAsync_System_Threading_CancellationToken_">ResumeExportingAsync(CancellationToken)</a></dt>
+    <dd><p>Resume exporting
+Resumes exporting on all partitions of the physical tenant after a pause or soft pause.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1552,6 +1605,23 @@ Suspends multiple running process instances.
 Since only ACTIVE root instances can be suspended, any given
 filters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SyncRuntimeBackupStateAsync_System_Threading_CancellationToken_">SyncRuntimeBackupStateAsync(CancellationToken)</a></dt>
+    <dd><p>Force-write runtime backup state
+Force-writes the checkpoint and backup metadata of every partition of the physical
+tenant to the backup store, independent of any backup being taken or confirmed, and
+returns the updated state.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TakeRuntimeBackupAsync_Camunda_Orchestration_Sdk_TakeRuntimeBackupRequest_System_Threading_CancellationToken_">TakeRuntimeBackupAsync(TakeRuntimeBackupRequest, CancellationToken)</a></dt>
+    <dd><p>Take a runtime backup
+Triggers a backup of runtime data on all partitions of the physical tenant.</p>
+<p>The <code>backupId</code> must be omitted if continuous backups and/or a backup or checkpoint
+schedule is enabled for the physical tenant, as the id is generated automatically.
+Otherwise, <code>backupId</code> is required.</p>
 </dd>
   </dl>
   <dl class="jumplist">

@@ -9613,6 +9613,183 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.BackpressureState.Severity
   fullName: Camunda.Orchestration.Sdk.BackpressureState.Severity
   nameWithType: BackpressureState.Severity
+- uid: Camunda.Orchestration.Sdk.BackupId
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.BackupId.html
+  commentId: T:Camunda.Orchestration.Sdk.BackupId
+  fullName: Camunda.Orchestration.Sdk.BackupId
+  nameWithType: BackupId
+- uid: Camunda.Orchestration.Sdk.BackupId.AssumeExists(System.Int64)
+  name: AssumeExists(long)
+  href: api/Camunda.Orchestration.Sdk.BackupId.AssumeExists.html#Camunda_Orchestration_Sdk_BackupId_AssumeExists_System_Int64_
+  commentId: M:Camunda.Orchestration.Sdk.BackupId.AssumeExists(System.Int64)
+  name.vb: AssumeExists(Long)
+  fullName: Camunda.Orchestration.Sdk.BackupId.AssumeExists(long)
+  fullName.vb: Camunda.Orchestration.Sdk.BackupId.AssumeExists(Long)
+  nameWithType: BackupId.AssumeExists(long)
+  nameWithType.vb: BackupId.AssumeExists(Long)
+- uid: Camunda.Orchestration.Sdk.BackupId.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.BackupId.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupId.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.BackupId.AssumeExists
+  nameWithType: BackupId.AssumeExists
+- uid: Camunda.Orchestration.Sdk.BackupId.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.BackupId.ToString.html#Camunda_Orchestration_Sdk_BackupId_ToString
+  commentId: M:Camunda.Orchestration.Sdk.BackupId.ToString
+  fullName: Camunda.Orchestration.Sdk.BackupId.ToString()
+  nameWithType: BackupId.ToString()
+- uid: Camunda.Orchestration.Sdk.BackupId.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.BackupId.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupId.ToString
+  fullName: Camunda.Orchestration.Sdk.BackupId.ToString
+  nameWithType: BackupId.ToString
+- uid: Camunda.Orchestration.Sdk.BackupId.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.BackupId.Value.html#Camunda_Orchestration_Sdk_BackupId_Value
+  commentId: P:Camunda.Orchestration.Sdk.BackupId.Value
+  fullName: Camunda.Orchestration.Sdk.BackupId.Value
+  nameWithType: BackupId.Value
+- uid: Camunda.Orchestration.Sdk.BackupId.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.BackupId.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupId.Value
+  fullName: Camunda.Orchestration.Sdk.BackupId.Value
+  nameWithType: BackupId.Value
+- uid: Camunda.Orchestration.Sdk.BackupIdPrefix
+  name: BackupIdPrefix
+  href: api/Camunda.Orchestration.Sdk.BackupIdPrefix.html
+  commentId: T:Camunda.Orchestration.Sdk.BackupIdPrefix
+  fullName: Camunda.Orchestration.Sdk.BackupIdPrefix
+  nameWithType: BackupIdPrefix
+- uid: Camunda.Orchestration.Sdk.BackupIdPrefix.AssumeExists(System.String)
+  name: AssumeExists(string)
+  href: api/Camunda.Orchestration.Sdk.BackupIdPrefix.AssumeExists.html#Camunda_Orchestration_Sdk_BackupIdPrefix_AssumeExists_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.BackupIdPrefix.AssumeExists(System.String)
+  name.vb: AssumeExists(String)
+  fullName: Camunda.Orchestration.Sdk.BackupIdPrefix.AssumeExists(string)
+  fullName.vb: Camunda.Orchestration.Sdk.BackupIdPrefix.AssumeExists(String)
+  nameWithType: BackupIdPrefix.AssumeExists(string)
+  nameWithType.vb: BackupIdPrefix.AssumeExists(String)
+- uid: Camunda.Orchestration.Sdk.BackupIdPrefix.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.BackupIdPrefix.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupIdPrefix.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.BackupIdPrefix.AssumeExists
+  nameWithType: BackupIdPrefix.AssumeExists
+- uid: Camunda.Orchestration.Sdk.BackupIdPrefix.IsValid(System.String)
+  name: IsValid(string)
+  href: api/Camunda.Orchestration.Sdk.BackupIdPrefix.IsValid.html#Camunda_Orchestration_Sdk_BackupIdPrefix_IsValid_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.BackupIdPrefix.IsValid(System.String)
+  name.vb: IsValid(String)
+  fullName: Camunda.Orchestration.Sdk.BackupIdPrefix.IsValid(string)
+  fullName.vb: Camunda.Orchestration.Sdk.BackupIdPrefix.IsValid(String)
+  nameWithType: BackupIdPrefix.IsValid(string)
+  nameWithType.vb: BackupIdPrefix.IsValid(String)
+- uid: Camunda.Orchestration.Sdk.BackupIdPrefix.IsValid*
+  name: IsValid
+  href: api/Camunda.Orchestration.Sdk.BackupIdPrefix.IsValid.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupIdPrefix.IsValid
+  fullName: Camunda.Orchestration.Sdk.BackupIdPrefix.IsValid
+  nameWithType: BackupIdPrefix.IsValid
+- uid: Camunda.Orchestration.Sdk.BackupIdPrefix.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.BackupIdPrefix.ToString.html#Camunda_Orchestration_Sdk_BackupIdPrefix_ToString
+  commentId: M:Camunda.Orchestration.Sdk.BackupIdPrefix.ToString
+  fullName: Camunda.Orchestration.Sdk.BackupIdPrefix.ToString()
+  nameWithType: BackupIdPrefix.ToString()
+- uid: Camunda.Orchestration.Sdk.BackupIdPrefix.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.BackupIdPrefix.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupIdPrefix.ToString
+  fullName: Camunda.Orchestration.Sdk.BackupIdPrefix.ToString
+  nameWithType: BackupIdPrefix.ToString
+- uid: Camunda.Orchestration.Sdk.BackupIdPrefix.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.BackupIdPrefix.Value.html#Camunda_Orchestration_Sdk_BackupIdPrefix_Value
+  commentId: P:Camunda.Orchestration.Sdk.BackupIdPrefix.Value
+  fullName: Camunda.Orchestration.Sdk.BackupIdPrefix.Value
+  nameWithType: BackupIdPrefix.Value
+- uid: Camunda.Orchestration.Sdk.BackupIdPrefix.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.BackupIdPrefix.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupIdPrefix.Value
+  fullName: Camunda.Orchestration.Sdk.BackupIdPrefix.Value
+  nameWithType: BackupIdPrefix.Value
+- uid: Camunda.Orchestration.Sdk.BackupInfo
+  name: BackupInfo
+  href: api/Camunda.Orchestration.Sdk.BackupInfo.html
+  commentId: T:Camunda.Orchestration.Sdk.BackupInfo
+  fullName: Camunda.Orchestration.Sdk.BackupInfo
+  nameWithType: BackupInfo
+- uid: Camunda.Orchestration.Sdk.BackupInfo.BackupId
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.BackupInfo.BackupId.html#Camunda_Orchestration_Sdk_BackupInfo_BackupId
+  commentId: P:Camunda.Orchestration.Sdk.BackupInfo.BackupId
+  fullName: Camunda.Orchestration.Sdk.BackupInfo.BackupId
+  nameWithType: BackupInfo.BackupId
+- uid: Camunda.Orchestration.Sdk.BackupInfo.BackupId*
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.BackupInfo.BackupId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupInfo.BackupId
+  fullName: Camunda.Orchestration.Sdk.BackupInfo.BackupId
+  nameWithType: BackupInfo.BackupId
+- uid: Camunda.Orchestration.Sdk.BackupInfo.Details
+  name: Details
+  href: api/Camunda.Orchestration.Sdk.BackupInfo.Details.html#Camunda_Orchestration_Sdk_BackupInfo_Details
+  commentId: P:Camunda.Orchestration.Sdk.BackupInfo.Details
+  fullName: Camunda.Orchestration.Sdk.BackupInfo.Details
+  nameWithType: BackupInfo.Details
+- uid: Camunda.Orchestration.Sdk.BackupInfo.Details*
+  name: Details
+  href: api/Camunda.Orchestration.Sdk.BackupInfo.Details.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupInfo.Details
+  fullName: Camunda.Orchestration.Sdk.BackupInfo.Details
+  nameWithType: BackupInfo.Details
+- uid: Camunda.Orchestration.Sdk.BackupInfo.FailureReason
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.BackupInfo.FailureReason.html#Camunda_Orchestration_Sdk_BackupInfo_FailureReason
+  commentId: P:Camunda.Orchestration.Sdk.BackupInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.BackupInfo.FailureReason
+  nameWithType: BackupInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.BackupInfo.FailureReason*
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.BackupInfo.FailureReason.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.BackupInfo.FailureReason
+  nameWithType: BackupInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.BackupInfo.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.BackupInfo.State.html#Camunda_Orchestration_Sdk_BackupInfo_State
+  commentId: P:Camunda.Orchestration.Sdk.BackupInfo.State
+  fullName: Camunda.Orchestration.Sdk.BackupInfo.State
+  nameWithType: BackupInfo.State
+- uid: Camunda.Orchestration.Sdk.BackupInfo.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.BackupInfo.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.BackupInfo.State
+  fullName: Camunda.Orchestration.Sdk.BackupInfo.State
+  nameWithType: BackupInfo.State
+- uid: Camunda.Orchestration.Sdk.BackupType
+  name: BackupType
+  href: api/Camunda.Orchestration.Sdk.BackupType.html
+  commentId: T:Camunda.Orchestration.Sdk.BackupType
+  fullName: Camunda.Orchestration.Sdk.BackupType
+  nameWithType: BackupType
+- uid: Camunda.Orchestration.Sdk.BackupType.MANUALBACKUP
+  name: MANUALBACKUP
+  href: api/Camunda.Orchestration.Sdk.BackupType.html#Camunda_Orchestration_Sdk_BackupType_MANUALBACKUP
+  commentId: F:Camunda.Orchestration.Sdk.BackupType.MANUALBACKUP
+  fullName: Camunda.Orchestration.Sdk.BackupType.MANUALBACKUP
+  nameWithType: BackupType.MANUALBACKUP
+- uid: Camunda.Orchestration.Sdk.BackupType.SCHEDULEDBACKUP
+  name: SCHEDULEDBACKUP
+  href: api/Camunda.Orchestration.Sdk.BackupType.html#Camunda_Orchestration_Sdk_BackupType_SCHEDULEDBACKUP
+  commentId: F:Camunda.Orchestration.Sdk.BackupType.SCHEDULEDBACKUP
+  fullName: Camunda.Orchestration.Sdk.BackupType.SCHEDULEDBACKUP
+  nameWithType: BackupType.SCHEDULEDBACKUP
 - uid: Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields
   name: BaseProcessInstanceFilterFields
   href: api/Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields.html
@@ -12553,6 +12730,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteRoleAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRoleAsync
   nameWithType: CamundaClient.DeleteRoleAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
+  name: DeleteRuntimeBackupAsync(BackupId, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteRuntimeBackupAsync(BackupId, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync*
+  name: DeleteRuntimeBackupAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync
+  nameWithType: CamundaClient.DeleteRuntimeBackupAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync(System.Threading.CancellationToken)
+  name: DeleteRuntimeBackupStateAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupStateAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteRuntimeBackupStateAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync*
+  name: DeleteRuntimeBackupStateAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync
+  nameWithType: CamundaClient.DeleteRuntimeBackupStateAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteTenantAsync(Camunda.Orchestration.Sdk.TenantId,System.Threading.CancellationToken)
   name: DeleteTenantAsync(TenantId, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteTenantAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteTenantAsync_Camunda_Orchestration_Sdk_TenantId_System_Threading_CancellationToken_
@@ -13297,6 +13498,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync
   nameWithType: CamundaClient.GetRoleAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
+  name: GetRuntimeBackupAsync(BackupId, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetRuntimeBackupAsync(BackupId, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync*
+  name: GetRuntimeBackupAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync
+  nameWithType: CamundaClient.GetRuntimeBackupAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync(System.Threading.CancellationToken)
+  name: GetRuntimeBackupStateAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupStateAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetRuntimeBackupStateAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync*
+  name: GetRuntimeBackupStateAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync
+  nameWithType: CamundaClient.GetRuntimeBackupStateAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetStartProcessFormAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.FormResult},System.Threading.CancellationToken)
   name: GetStartProcessFormAsync(ProcessDefinitionKey, ConsistencyOptions<FormResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetStartProcessFormAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetStartProcessFormAsync_Camunda_Orchestration_Sdk_ProcessDefinitionKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_FormResult__System_Threading_CancellationToken_
@@ -13465,6 +13690,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetWorkers
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetWorkers
   nameWithType: CamundaClient.GetWorkers
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync(System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Threading.CancellationToken)
+  name: ListRuntimeBackupsAsync(BackupIdPrefix?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListRuntimeBackupsAsync_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync(System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync(Camunda.Orchestration.Sdk.BackupIdPrefix?, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ListRuntimeBackupsAsync(BackupIdPrefix?, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync*
+  name: ListRuntimeBackupsAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync
+  nameWithType: CamundaClient.ListRuntimeBackupsAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ProcessInstanceMigrationInstruction,System.Threading.CancellationToken)
   name: MigrateProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceMigrationInstruction, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ProcessInstanceMigrationInstruction_System_Threading_CancellationToken_
@@ -13513,6 +13750,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync
   nameWithType: CamundaClient.ModifyProcessInstancesBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync(System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name: PauseExportingAsync(bool?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_PauseExportingAsync_System_Nullable_System_Boolean__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync(System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name.vb: PauseExportingAsync(Boolean?, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync(bool?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync(Boolean?, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.PauseExportingAsync(bool?, CancellationToken)
+  nameWithType.vb: CamundaClient.PauseExportingAsync(Boolean?, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync*
+  name: PauseExportingAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync
+  nameWithType: CamundaClient.PauseExportingAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.PinClockAsync(Camunda.Orchestration.Sdk.ClockPinRequest,System.Threading.CancellationToken)
   name: PinClockAsync(ClockPinRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.PinClockAsync.html#Camunda_Orchestration_Sdk_CamundaClient_PinClockAsync_Camunda_Orchestration_Sdk_ClockPinRequest_System_Threading_CancellationToken_
@@ -13621,6 +13873,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync
   nameWithType: CamundaClient.ResumeBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync(System.Threading.CancellationToken)
+  name: ResumeExportingAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeExportingAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ResumeExportingAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync*
+  name: ResumeExportingAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync
+  nameWithType: CamundaClient.ResumeExportingAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest,System.Threading.CancellationToken)
   name: ResumeProcessInstanceAsync(ProcessInstanceKey, ResumeProcessInstanceRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ResumeProcessInstanceRequest_System_Threading_CancellationToken_
@@ -14416,6 +14680,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync
   nameWithType: CamundaClient.SuspendProcessInstancesBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync(System.Threading.CancellationToken)
+  name: SyncRuntimeBackupStateAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SyncRuntimeBackupStateAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SyncRuntimeBackupStateAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync*
+  name: SyncRuntimeBackupStateAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync
+  nameWithType: CamundaClient.SyncRuntimeBackupStateAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest,System.Threading.CancellationToken)
+  name: TakeRuntimeBackupAsync(TakeRuntimeBackupRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TakeRuntimeBackupAsync_Camunda_Orchestration_Sdk_TakeRuntimeBackupRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.TakeRuntimeBackupAsync(TakeRuntimeBackupRequest, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync*
+  name: TakeRuntimeBackupAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync
+  nameWithType: CamundaClient.TakeRuntimeBackupAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ThrowJobErrorAsync(Camunda.Orchestration.Sdk.JobKey,Camunda.Orchestration.Sdk.JobErrorRequest,System.Threading.CancellationToken)
   name: ThrowJobErrorAsync(JobKey, JobErrorRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ThrowJobErrorAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ThrowJobErrorAsync_Camunda_Orchestration_Sdk_JobKey_Camunda_Orchestration_Sdk_JobErrorRequest_System_Threading_CancellationToken_
@@ -15571,6 +15859,75 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Changeset.Priority
   fullName: Camunda.Orchestration.Sdk.Changeset.Priority
   nameWithType: Changeset.Priority
+- uid: Camunda.Orchestration.Sdk.CheckpointId
+  name: CheckpointId
+  href: api/Camunda.Orchestration.Sdk.CheckpointId.html
+  commentId: T:Camunda.Orchestration.Sdk.CheckpointId
+  fullName: Camunda.Orchestration.Sdk.CheckpointId
+  nameWithType: CheckpointId
+- uid: Camunda.Orchestration.Sdk.CheckpointId.AssumeExists(System.Int64)
+  name: AssumeExists(long)
+  href: api/Camunda.Orchestration.Sdk.CheckpointId.AssumeExists.html#Camunda_Orchestration_Sdk_CheckpointId_AssumeExists_System_Int64_
+  commentId: M:Camunda.Orchestration.Sdk.CheckpointId.AssumeExists(System.Int64)
+  name.vb: AssumeExists(Long)
+  fullName: Camunda.Orchestration.Sdk.CheckpointId.AssumeExists(long)
+  fullName.vb: Camunda.Orchestration.Sdk.CheckpointId.AssumeExists(Long)
+  nameWithType: CheckpointId.AssumeExists(long)
+  nameWithType.vb: CheckpointId.AssumeExists(Long)
+- uid: Camunda.Orchestration.Sdk.CheckpointId.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.CheckpointId.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CheckpointId.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.CheckpointId.AssumeExists
+  nameWithType: CheckpointId.AssumeExists
+- uid: Camunda.Orchestration.Sdk.CheckpointId.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.CheckpointId.ToString.html#Camunda_Orchestration_Sdk_CheckpointId_ToString
+  commentId: M:Camunda.Orchestration.Sdk.CheckpointId.ToString
+  fullName: Camunda.Orchestration.Sdk.CheckpointId.ToString()
+  nameWithType: CheckpointId.ToString()
+- uid: Camunda.Orchestration.Sdk.CheckpointId.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.CheckpointId.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CheckpointId.ToString
+  fullName: Camunda.Orchestration.Sdk.CheckpointId.ToString
+  nameWithType: CheckpointId.ToString
+- uid: Camunda.Orchestration.Sdk.CheckpointId.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.CheckpointId.Value.html#Camunda_Orchestration_Sdk_CheckpointId_Value
+  commentId: P:Camunda.Orchestration.Sdk.CheckpointId.Value
+  fullName: Camunda.Orchestration.Sdk.CheckpointId.Value
+  nameWithType: CheckpointId.Value
+- uid: Camunda.Orchestration.Sdk.CheckpointId.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.CheckpointId.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CheckpointId.Value
+  fullName: Camunda.Orchestration.Sdk.CheckpointId.Value
+  nameWithType: CheckpointId.Value
+- uid: Camunda.Orchestration.Sdk.CheckpointType
+  name: CheckpointType
+  href: api/Camunda.Orchestration.Sdk.CheckpointType.html
+  commentId: T:Camunda.Orchestration.Sdk.CheckpointType
+  fullName: Camunda.Orchestration.Sdk.CheckpointType
+  nameWithType: CheckpointType
+- uid: Camunda.Orchestration.Sdk.CheckpointType.MANUALBACKUP
+  name: MANUALBACKUP
+  href: api/Camunda.Orchestration.Sdk.CheckpointType.html#Camunda_Orchestration_Sdk_CheckpointType_MANUALBACKUP
+  commentId: F:Camunda.Orchestration.Sdk.CheckpointType.MANUALBACKUP
+  fullName: Camunda.Orchestration.Sdk.CheckpointType.MANUALBACKUP
+  nameWithType: CheckpointType.MANUALBACKUP
+- uid: Camunda.Orchestration.Sdk.CheckpointType.MARKER
+  name: MARKER
+  href: api/Camunda.Orchestration.Sdk.CheckpointType.html#Camunda_Orchestration_Sdk_CheckpointType_MARKER
+  commentId: F:Camunda.Orchestration.Sdk.CheckpointType.MARKER
+  fullName: Camunda.Orchestration.Sdk.CheckpointType.MARKER
+  nameWithType: CheckpointType.MARKER
+- uid: Camunda.Orchestration.Sdk.CheckpointType.SCHEDULEDBACKUP
+  name: SCHEDULEDBACKUP
+  href: api/Camunda.Orchestration.Sdk.CheckpointType.html#Camunda_Orchestration_Sdk_CheckpointType_SCHEDULEDBACKUP
+  commentId: F:Camunda.Orchestration.Sdk.CheckpointType.SCHEDULEDBACKUP
+  fullName: Camunda.Orchestration.Sdk.CheckpointType.SCHEDULEDBACKUP
+  nameWithType: CheckpointType.SCHEDULEDBACKUP
 - uid: Camunda.Orchestration.Sdk.ClientId
   name: ClientId
   href: api/Camunda.Orchestration.Sdk.ClientId.html
@@ -35317,6 +35674,318 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Partition.State
   fullName: Camunda.Orchestration.Sdk.Partition.State
   nameWithType: Partition.State
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo
+  name: PartitionBackupInfo
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.html
+  commentId: T:Camunda.Orchestration.Sdk.PartitionBackupInfo
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo
+  nameWithType: PartitionBackupInfo
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerId
+  name: BrokerId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerId.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_BrokerId
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerId
+  nameWithType: PartitionBackupInfo.BrokerId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerId*
+  name: BrokerId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerId
+  nameWithType: PartitionBackupInfo.BrokerId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerVersion
+  name: BrokerVersion
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerVersion.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_BrokerVersion
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerVersion
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerVersion
+  nameWithType: PartitionBackupInfo.BrokerVersion
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerVersion*
+  name: BrokerVersion
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerVersion.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerVersion
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.BrokerVersion
+  nameWithType: PartitionBackupInfo.BrokerVersion
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.CheckpointPosition
+  name: CheckpointPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.CheckpointPosition.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_CheckpointPosition
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.CheckpointPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.CheckpointPosition
+  nameWithType: PartitionBackupInfo.CheckpointPosition
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.CheckpointPosition*
+  name: CheckpointPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.CheckpointPosition.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.CheckpointPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.CheckpointPosition
+  nameWithType: PartitionBackupInfo.CheckpointPosition
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.CreatedAt
+  name: CreatedAt
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.CreatedAt.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_CreatedAt
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.CreatedAt
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.CreatedAt
+  nameWithType: PartitionBackupInfo.CreatedAt
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.CreatedAt*
+  name: CreatedAt
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.CreatedAt.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.CreatedAt
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.CreatedAt
+  nameWithType: PartitionBackupInfo.CreatedAt
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.FailureReason
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.FailureReason.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_FailureReason
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.FailureReason
+  nameWithType: PartitionBackupInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.FailureReason*
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.FailureReason.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.FailureReason
+  nameWithType: PartitionBackupInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.FirstLogPosition
+  name: FirstLogPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.FirstLogPosition.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_FirstLogPosition
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.FirstLogPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.FirstLogPosition
+  nameWithType: PartitionBackupInfo.FirstLogPosition
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.FirstLogPosition*
+  name: FirstLogPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.FirstLogPosition.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.FirstLogPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.FirstLogPosition
+  nameWithType: PartitionBackupInfo.FirstLogPosition
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.LastUpdatedAt
+  name: LastUpdatedAt
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.LastUpdatedAt.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_LastUpdatedAt
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.LastUpdatedAt
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.LastUpdatedAt
+  nameWithType: PartitionBackupInfo.LastUpdatedAt
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.LastUpdatedAt*
+  name: LastUpdatedAt
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.LastUpdatedAt.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.LastUpdatedAt
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.LastUpdatedAt
+  nameWithType: PartitionBackupInfo.LastUpdatedAt
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.PartitionId
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.PartitionId.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_PartitionId
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.PartitionId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.PartitionId
+  nameWithType: PartitionBackupInfo.PartitionId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.PartitionId*
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.PartitionId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.PartitionId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.PartitionId
+  nameWithType: PartitionBackupInfo.PartitionId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.SnapshotId
+  name: SnapshotId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.SnapshotId.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_SnapshotId
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.SnapshotId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.SnapshotId
+  nameWithType: PartitionBackupInfo.SnapshotId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.SnapshotId*
+  name: SnapshotId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.SnapshotId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.SnapshotId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.SnapshotId
+  nameWithType: PartitionBackupInfo.SnapshotId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.State.html#Camunda_Orchestration_Sdk_PartitionBackupInfo_State
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupInfo.State
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.State
+  nameWithType: PartitionBackupInfo.State
+- uid: Camunda.Orchestration.Sdk.PartitionBackupInfo.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupInfo.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupInfo.State
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupInfo.State
+  nameWithType: PartitionBackupInfo.State
+- uid: Camunda.Orchestration.Sdk.PartitionBackupRange
+  name: PartitionBackupRange
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupRange.html
+  commentId: T:Camunda.Orchestration.Sdk.PartitionBackupRange
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupRange
+  nameWithType: PartitionBackupRange
+- uid: Camunda.Orchestration.Sdk.PartitionBackupRange.End
+  name: End
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupRange.End.html#Camunda_Orchestration_Sdk_PartitionBackupRange_End
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupRange.End
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupRange.End
+  nameWithType: PartitionBackupRange.End
+- uid: Camunda.Orchestration.Sdk.PartitionBackupRange.End*
+  name: End
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupRange.End.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupRange.End
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupRange.End
+  nameWithType: PartitionBackupRange.End
+- uid: Camunda.Orchestration.Sdk.PartitionBackupRange.PartitionId
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupRange.PartitionId.html#Camunda_Orchestration_Sdk_PartitionBackupRange_PartitionId
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupRange.PartitionId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupRange.PartitionId
+  nameWithType: PartitionBackupRange.PartitionId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupRange.PartitionId*
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupRange.PartitionId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupRange.PartitionId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupRange.PartitionId
+  nameWithType: PartitionBackupRange.PartitionId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupRange.Start
+  name: Start
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupRange.Start.html#Camunda_Orchestration_Sdk_PartitionBackupRange_Start
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupRange.Start
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupRange.Start
+  nameWithType: PartitionBackupRange.Start
+- uid: Camunda.Orchestration.Sdk.PartitionBackupRange.Start*
+  name: Start
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupRange.Start.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupRange.Start
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupRange.Start
+  nameWithType: PartitionBackupRange.Start
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState
+  name: PartitionBackupState
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.html
+  commentId: T:Camunda.Orchestration.Sdk.PartitionBackupState
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState
+  nameWithType: PartitionBackupState
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointId
+  name: CheckpointId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointId.html#Camunda_Orchestration_Sdk_PartitionBackupState_CheckpointId
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointId
+  nameWithType: PartitionBackupState.CheckpointId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointId*
+  name: CheckpointId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointId
+  nameWithType: PartitionBackupState.CheckpointId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointPosition
+  name: CheckpointPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointPosition.html#Camunda_Orchestration_Sdk_PartitionBackupState_CheckpointPosition
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointPosition
+  nameWithType: PartitionBackupState.CheckpointPosition
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointPosition*
+  name: CheckpointPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointPosition.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointPosition
+  nameWithType: PartitionBackupState.CheckpointPosition
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointTimestamp
+  name: CheckpointTimestamp
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointTimestamp.html#Camunda_Orchestration_Sdk_PartitionBackupState_CheckpointTimestamp
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointTimestamp
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointTimestamp
+  nameWithType: PartitionBackupState.CheckpointTimestamp
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointTimestamp*
+  name: CheckpointTimestamp
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointTimestamp.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointTimestamp
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointTimestamp
+  nameWithType: PartitionBackupState.CheckpointTimestamp
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointType
+  name: CheckpointType
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointType.html#Camunda_Orchestration_Sdk_PartitionBackupState_CheckpointType
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointType
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointType
+  nameWithType: PartitionBackupState.CheckpointType
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointType*
+  name: CheckpointType
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointType
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.CheckpointType
+  nameWithType: PartitionBackupState.CheckpointType
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.FirstLogPosition
+  name: FirstLogPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.FirstLogPosition.html#Camunda_Orchestration_Sdk_PartitionBackupState_FirstLogPosition
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupState.FirstLogPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.FirstLogPosition
+  nameWithType: PartitionBackupState.FirstLogPosition
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.FirstLogPosition*
+  name: FirstLogPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.FirstLogPosition.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupState.FirstLogPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.FirstLogPosition
+  nameWithType: PartitionBackupState.FirstLogPosition
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.PartitionId
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.PartitionId.html#Camunda_Orchestration_Sdk_PartitionBackupState_PartitionId
+  commentId: P:Camunda.Orchestration.Sdk.PartitionBackupState.PartitionId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.PartitionId
+  nameWithType: PartitionBackupState.PartitionId
+- uid: Camunda.Orchestration.Sdk.PartitionBackupState.PartitionId*
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.PartitionBackupState.PartitionId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionBackupState.PartitionId
+  fullName: Camunda.Orchestration.Sdk.PartitionBackupState.PartitionId
+  nameWithType: PartitionBackupState.PartitionId
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState
+  name: PartitionCheckpointState
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.html
+  commentId: T:Camunda.Orchestration.Sdk.PartitionCheckpointState
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState
+  nameWithType: PartitionCheckpointState
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointId
+  name: CheckpointId
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointId.html#Camunda_Orchestration_Sdk_PartitionCheckpointState_CheckpointId
+  commentId: P:Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointId
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointId
+  nameWithType: PartitionCheckpointState.CheckpointId
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointId*
+  name: CheckpointId
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointId
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointId
+  nameWithType: PartitionCheckpointState.CheckpointId
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointPosition
+  name: CheckpointPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointPosition.html#Camunda_Orchestration_Sdk_PartitionCheckpointState_CheckpointPosition
+  commentId: P:Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointPosition
+  nameWithType: PartitionCheckpointState.CheckpointPosition
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointPosition*
+  name: CheckpointPosition
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointPosition.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointPosition
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointPosition
+  nameWithType: PartitionCheckpointState.CheckpointPosition
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointTimestamp
+  name: CheckpointTimestamp
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointTimestamp.html#Camunda_Orchestration_Sdk_PartitionCheckpointState_CheckpointTimestamp
+  commentId: P:Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointTimestamp
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointTimestamp
+  nameWithType: PartitionCheckpointState.CheckpointTimestamp
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointTimestamp*
+  name: CheckpointTimestamp
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointTimestamp.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointTimestamp
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointTimestamp
+  nameWithType: PartitionCheckpointState.CheckpointTimestamp
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointType
+  name: CheckpointType
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointType.html#Camunda_Orchestration_Sdk_PartitionCheckpointState_CheckpointType
+  commentId: P:Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointType
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointType
+  nameWithType: PartitionCheckpointState.CheckpointType
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointType*
+  name: CheckpointType
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointType.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointType
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.CheckpointType
+  nameWithType: PartitionCheckpointState.CheckpointType
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.PartitionId
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.PartitionId.html#Camunda_Orchestration_Sdk_PartitionCheckpointState_PartitionId
+  commentId: P:Camunda.Orchestration.Sdk.PartitionCheckpointState.PartitionId
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.PartitionId
+  nameWithType: PartitionCheckpointState.PartitionId
+- uid: Camunda.Orchestration.Sdk.PartitionCheckpointState.PartitionId*
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.PartitionCheckpointState.PartitionId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionCheckpointState.PartitionId
+  fullName: Camunda.Orchestration.Sdk.PartitionCheckpointState.PartitionId
+  nameWithType: PartitionCheckpointState.PartitionId
 - uid: Camunda.Orchestration.Sdk.PartitionHealth
   name: PartitionHealth
   href: api/Camunda.Orchestration.Sdk.PartitionHealth.html
@@ -35341,6 +36010,51 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.PartitionHealth.Unhealthy
   fullName: Camunda.Orchestration.Sdk.PartitionHealth.Unhealthy
   nameWithType: PartitionHealth.Unhealthy
+- uid: Camunda.Orchestration.Sdk.PartitionId
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.PartitionId.html
+  commentId: T:Camunda.Orchestration.Sdk.PartitionId
+  fullName: Camunda.Orchestration.Sdk.PartitionId
+  nameWithType: PartitionId
+- uid: Camunda.Orchestration.Sdk.PartitionId.AssumeExists(System.Int64)
+  name: AssumeExists(long)
+  href: api/Camunda.Orchestration.Sdk.PartitionId.AssumeExists.html#Camunda_Orchestration_Sdk_PartitionId_AssumeExists_System_Int64_
+  commentId: M:Camunda.Orchestration.Sdk.PartitionId.AssumeExists(System.Int64)
+  name.vb: AssumeExists(Long)
+  fullName: Camunda.Orchestration.Sdk.PartitionId.AssumeExists(long)
+  fullName.vb: Camunda.Orchestration.Sdk.PartitionId.AssumeExists(Long)
+  nameWithType: PartitionId.AssumeExists(long)
+  nameWithType.vb: PartitionId.AssumeExists(Long)
+- uid: Camunda.Orchestration.Sdk.PartitionId.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.PartitionId.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionId.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.PartitionId.AssumeExists
+  nameWithType: PartitionId.AssumeExists
+- uid: Camunda.Orchestration.Sdk.PartitionId.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.PartitionId.ToString.html#Camunda_Orchestration_Sdk_PartitionId_ToString
+  commentId: M:Camunda.Orchestration.Sdk.PartitionId.ToString
+  fullName: Camunda.Orchestration.Sdk.PartitionId.ToString()
+  nameWithType: PartitionId.ToString()
+- uid: Camunda.Orchestration.Sdk.PartitionId.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.PartitionId.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionId.ToString
+  fullName: Camunda.Orchestration.Sdk.PartitionId.ToString
+  nameWithType: PartitionId.ToString
+- uid: Camunda.Orchestration.Sdk.PartitionId.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.PartitionId.Value.html#Camunda_Orchestration_Sdk_PartitionId_Value
+  commentId: P:Camunda.Orchestration.Sdk.PartitionId.Value
+  fullName: Camunda.Orchestration.Sdk.PartitionId.Value
+  nameWithType: PartitionId.Value
+- uid: Camunda.Orchestration.Sdk.PartitionId.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.PartitionId.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.PartitionId.Value
+  fullName: Camunda.Orchestration.Sdk.PartitionId.Value
+  nameWithType: PartitionId.Value
 - uid: Camunda.Orchestration.Sdk.PartitionRole
   name: PartitionRole
   href: api/Camunda.Orchestration.Sdk.PartitionRole.html
@@ -42016,6 +42730,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.RoleUserSearchResult.Page
   fullName: Camunda.Orchestration.Sdk.RoleUserSearchResult.Page
   nameWithType: RoleUserSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.RuntimeBackupState
+  name: RuntimeBackupState
+  href: api/Camunda.Orchestration.Sdk.RuntimeBackupState.html
+  commentId: T:Camunda.Orchestration.Sdk.RuntimeBackupState
+  fullName: Camunda.Orchestration.Sdk.RuntimeBackupState
+  nameWithType: RuntimeBackupState
+- uid: Camunda.Orchestration.Sdk.RuntimeBackupState.BackupStates
+  name: BackupStates
+  href: api/Camunda.Orchestration.Sdk.RuntimeBackupState.BackupStates.html#Camunda_Orchestration_Sdk_RuntimeBackupState_BackupStates
+  commentId: P:Camunda.Orchestration.Sdk.RuntimeBackupState.BackupStates
+  fullName: Camunda.Orchestration.Sdk.RuntimeBackupState.BackupStates
+  nameWithType: RuntimeBackupState.BackupStates
+- uid: Camunda.Orchestration.Sdk.RuntimeBackupState.BackupStates*
+  name: BackupStates
+  href: api/Camunda.Orchestration.Sdk.RuntimeBackupState.BackupStates.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RuntimeBackupState.BackupStates
+  fullName: Camunda.Orchestration.Sdk.RuntimeBackupState.BackupStates
+  nameWithType: RuntimeBackupState.BackupStates
+- uid: Camunda.Orchestration.Sdk.RuntimeBackupState.CheckpointStates
+  name: CheckpointStates
+  href: api/Camunda.Orchestration.Sdk.RuntimeBackupState.CheckpointStates.html#Camunda_Orchestration_Sdk_RuntimeBackupState_CheckpointStates
+  commentId: P:Camunda.Orchestration.Sdk.RuntimeBackupState.CheckpointStates
+  fullName: Camunda.Orchestration.Sdk.RuntimeBackupState.CheckpointStates
+  nameWithType: RuntimeBackupState.CheckpointStates
+- uid: Camunda.Orchestration.Sdk.RuntimeBackupState.CheckpointStates*
+  name: CheckpointStates
+  href: api/Camunda.Orchestration.Sdk.RuntimeBackupState.CheckpointStates.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RuntimeBackupState.CheckpointStates
+  fullName: Camunda.Orchestration.Sdk.RuntimeBackupState.CheckpointStates
+  nameWithType: RuntimeBackupState.CheckpointStates
+- uid: Camunda.Orchestration.Sdk.RuntimeBackupState.Ranges
+  name: Ranges
+  href: api/Camunda.Orchestration.Sdk.RuntimeBackupState.Ranges.html#Camunda_Orchestration_Sdk_RuntimeBackupState_Ranges
+  commentId: P:Camunda.Orchestration.Sdk.RuntimeBackupState.Ranges
+  fullName: Camunda.Orchestration.Sdk.RuntimeBackupState.Ranges
+  nameWithType: RuntimeBackupState.Ranges
+- uid: Camunda.Orchestration.Sdk.RuntimeBackupState.Ranges*
+  name: Ranges
+  href: api/Camunda.Orchestration.Sdk.RuntimeBackupState.Ranges.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RuntimeBackupState.Ranges
+  fullName: Camunda.Orchestration.Sdk.RuntimeBackupState.Ranges
+  nameWithType: RuntimeBackupState.Ranges
 - uid: Camunda.Orchestration.Sdk.ScopeKey
   name: ScopeKey
   href: api/Camunda.Orchestration.Sdk.ScopeKey.html
@@ -42850,6 +43606,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.StartCursor.Value
   fullName: Camunda.Orchestration.Sdk.StartCursor.Value
   nameWithType: StartCursor.Value
+- uid: Camunda.Orchestration.Sdk.StateCode
+  name: StateCode
+  href: api/Camunda.Orchestration.Sdk.StateCode.html
+  commentId: T:Camunda.Orchestration.Sdk.StateCode
+  fullName: Camunda.Orchestration.Sdk.StateCode
+  nameWithType: StateCode
+- uid: Camunda.Orchestration.Sdk.StateCode.COMPLETED
+  name: COMPLETED
+  href: api/Camunda.Orchestration.Sdk.StateCode.html#Camunda_Orchestration_Sdk_StateCode_COMPLETED
+  commentId: F:Camunda.Orchestration.Sdk.StateCode.COMPLETED
+  fullName: Camunda.Orchestration.Sdk.StateCode.COMPLETED
+  nameWithType: StateCode.COMPLETED
+- uid: Camunda.Orchestration.Sdk.StateCode.DELETED
+  name: DELETED
+  href: api/Camunda.Orchestration.Sdk.StateCode.html#Camunda_Orchestration_Sdk_StateCode_DELETED
+  commentId: F:Camunda.Orchestration.Sdk.StateCode.DELETED
+  fullName: Camunda.Orchestration.Sdk.StateCode.DELETED
+  nameWithType: StateCode.DELETED
+- uid: Camunda.Orchestration.Sdk.StateCode.DOESNOTEXIST
+  name: DOESNOTEXIST
+  href: api/Camunda.Orchestration.Sdk.StateCode.html#Camunda_Orchestration_Sdk_StateCode_DOESNOTEXIST
+  commentId: F:Camunda.Orchestration.Sdk.StateCode.DOESNOTEXIST
+  fullName: Camunda.Orchestration.Sdk.StateCode.DOESNOTEXIST
+  nameWithType: StateCode.DOESNOTEXIST
+- uid: Camunda.Orchestration.Sdk.StateCode.FAILED
+  name: FAILED
+  href: api/Camunda.Orchestration.Sdk.StateCode.html#Camunda_Orchestration_Sdk_StateCode_FAILED
+  commentId: F:Camunda.Orchestration.Sdk.StateCode.FAILED
+  fullName: Camunda.Orchestration.Sdk.StateCode.FAILED
+  nameWithType: StateCode.FAILED
+- uid: Camunda.Orchestration.Sdk.StateCode.INCOMPLETE
+  name: INCOMPLETE
+  href: api/Camunda.Orchestration.Sdk.StateCode.html#Camunda_Orchestration_Sdk_StateCode_INCOMPLETE
+  commentId: F:Camunda.Orchestration.Sdk.StateCode.INCOMPLETE
+  fullName: Camunda.Orchestration.Sdk.StateCode.INCOMPLETE
+  nameWithType: StateCode.INCOMPLETE
+- uid: Camunda.Orchestration.Sdk.StateCode.INPROGRESS
+  name: INPROGRESS
+  href: api/Camunda.Orchestration.Sdk.StateCode.html#Camunda_Orchestration_Sdk_StateCode_INPROGRESS
+  commentId: F:Camunda.Orchestration.Sdk.StateCode.INPROGRESS
+  fullName: Camunda.Orchestration.Sdk.StateCode.INPROGRESS
+  nameWithType: StateCode.INPROGRESS
 - uid: Camunda.Orchestration.Sdk.StatusMetric
   name: StatusMetric
   href: api/Camunda.Orchestration.Sdk.StatusMetric.html
@@ -43180,6 +43978,42 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.Tag.Value
   fullName: Camunda.Orchestration.Sdk.Tag.Value
   nameWithType: Tag.Value
+- uid: Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest
+  name: TakeRuntimeBackupRequest
+  href: api/Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest
+  fullName: Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest
+  nameWithType: TakeRuntimeBackupRequest
+- uid: Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.BackupId
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.BackupId.html#Camunda_Orchestration_Sdk_TakeRuntimeBackupRequest_BackupId
+  commentId: P:Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.BackupId
+  fullName: Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.BackupId
+  nameWithType: TakeRuntimeBackupRequest.BackupId
+- uid: Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.BackupId*
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.BackupId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.BackupId
+  fullName: Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest.BackupId
+  nameWithType: TakeRuntimeBackupRequest.BackupId
+- uid: Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse
+  name: TakeRuntimeBackupResponse
+  href: api/Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse
+  fullName: Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse
+  nameWithType: TakeRuntimeBackupResponse
+- uid: Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.BackupId
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.BackupId.html#Camunda_Orchestration_Sdk_TakeRuntimeBackupResponse_BackupId
+  commentId: P:Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.BackupId
+  fullName: Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.BackupId
+  nameWithType: TakeRuntimeBackupResponse.BackupId
+- uid: Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.BackupId*
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.BackupId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.BackupId
+  fullName: Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse.BackupId
+  nameWithType: TakeRuntimeBackupResponse.BackupId
 - uid: Camunda.Orchestration.Sdk.TenantClientResult
   name: TenantClientResult
   href: api/Camunda.Orchestration.Sdk.TenantClientResult.html
