@@ -1238,6 +1238,36 @@ TYPE Camunda.Orchestration.Sdk.BackpressureState : sealed class
   PROP System.Int32? PermitsMax { get; init; }
   PROP System.String Severity { get; init; }
 
+TYPE Camunda.Orchestration.Sdk.BackupId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaLongKey,System.IEquatable<Camunda.Orchestration.Sdk.BackupId>]
+  PROP System.Int64 Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.BackupId other)
+  METHOD static Camunda.Orchestration.Sdk.BackupId AssumeExists(System.Int64 value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.BackupIdPrefix : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.BackupIdPrefix>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.BackupIdPrefix other)
+  METHOD static Camunda.Orchestration.Sdk.BackupIdPrefix AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.BackupInfo : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BackupId BackupId { get; set; } [JsonPropertyName("backupId")]
+  PROP Camunda.Orchestration.Sdk.StateCode State { get; set; } [JsonPropertyName("state")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.PartitionBackupInfo> Details { get; set; } [JsonPropertyName("details")]
+  PROP System.String? FailureReason { get; set; } [JsonPropertyName("failureReason")]
+
+TYPE Camunda.Orchestration.Sdk.BackupType : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER MANUALBACKUP = 0 json="MANUAL_BACKUP"
+  MEMBER SCHEDULEDBACKUP = 1 json="SCHEDULED_BACKUP"
+
 TYPE Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? EndDate { get; set; } [JsonPropertyName("endDate")]
@@ -1582,6 +1612,8 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task DeleteMappingRuleAsync(Camunda.Orchestration.Sdk.MappingRuleId mappingRuleId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.DeleteProcessInstanceRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteRoleAsync(Camunda.Orchestration.Sdk.RoleId roleId, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task DeleteRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId backupId, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task DeleteRuntimeBackupStateAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.ClusterVariableName name, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteUserAsync(Camunda.Orchestration.Sdk.Username username, System.Threading.CancellationToken ct = null)
@@ -1589,10 +1621,12 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task GetStatusAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task MigrateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ProcessInstanceMigrationInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ModifyProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ProcessInstanceModificationInstruction body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task PauseExportingAsync(System.Boolean? soft = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task PinClockAsync(Camunda.Orchestration.Sdk.ClockPinRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResetClockAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResolveIncidentAsync(Camunda.Orchestration.Sdk.IncidentKey incidentKey, Camunda.Orchestration.Sdk.IncidentResolutionRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task ResumeExportingAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResumeProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task RunWorkersAsync(System.TimeSpan? gracePeriod = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task StopAllWorkersAsync(System.TimeSpan? gracePeriod = null)
@@ -1627,6 +1661,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuthorizationCreateResult> CreateAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuthorizationResult> GetAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationKey authorizationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuthorizationResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuthorizationSearchResult> SearchAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuthorizationSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BackupInfo> GetRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId backupId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceCancellationBatchOperationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.DecisionInstanceDeletionBatchOperationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> DeleteProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceDeletionBatchOperationRequest body, System.Threading.CancellationToken ct = null)
@@ -1728,9 +1763,12 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleSearchQueryResult> SearchRolesAsync(Camunda.Orchestration.Sdk.RoleSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleUpdateResult> UpdateRoleAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.RoleUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleUserSearchResult> SearchUsersForRoleAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleUserSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RuntimeBackupState> GetRuntimeBackupStateAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RuntimeBackupState> SyncRuntimeBackupStateAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SecretResolveResult> ResolveSecretsAsync(Camunda.Orchestration.Sdk.SecretResolveRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SignalBroadcastResult> BroadcastSignalAsync(Camunda.Orchestration.Sdk.SignalBroadcastRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SystemConfigurationResponse> GetSystemConfigurationAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse> TakeRuntimeBackupAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantClientSearchResult> SearchClientsForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.TenantClientSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantClientSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantCreateResult> CreateTenantAsync(Camunda.Orchestration.Sdk.TenantCreateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.TenantGroupSearchResult> SearchGroupIdsForTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.TenantGroupSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.TenantGroupSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1761,6 +1799,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessDefinitionXmlAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessInstanceCallHierarchyAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<System.Object> ListRuntimeBackupsAsync(Camunda.Orchestration.Sdk.BackupIdPrefix? prefix = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.ValueTask DisposeAsync()
   METHOD System.Void Dispose()
   METHOD static Camunda.Orchestration.Sdk.CamundaClient Create(Camunda.Orchestration.Sdk.CamundaOptions? options = null)
@@ -1863,6 +1902,21 @@ TYPE Camunda.Orchestration.Sdk.Changeset : sealed class
   PROP System.DateTimeOffset? DueDate { get; set; } [JsonPropertyName("dueDate")]
   PROP System.DateTimeOffset? FollowUpDate { get; set; } [JsonPropertyName("followUpDate")]
   PROP System.Int32? Priority { get; set; } [JsonPropertyName("priority")]
+
+TYPE Camunda.Orchestration.Sdk.CheckpointId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaLongKey,System.IEquatable<Camunda.Orchestration.Sdk.CheckpointId>]
+  PROP System.Int64 Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.CheckpointId other)
+  METHOD static Camunda.Orchestration.Sdk.CheckpointId AssumeExists(System.Int64 value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.CheckpointType : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER MARKER = 0 json="MARKER"
+  MEMBER SCHEDULEDBACKUP = 1 json="SCHEDULED_BACKUP"
+  MEMBER MANUALBACKUP = 2 json="MANUAL_BACKUP"
 
 TYPE Camunda.Orchestration.Sdk.ClientId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ClientId>]
   PROP System.String Value { get; }
@@ -4566,12 +4620,56 @@ TYPE Camunda.Orchestration.Sdk.Partition : sealed class
   PROP Camunda.Orchestration.Sdk.PartitionState State { get; set; } [JsonPropertyName("state")]
   PROP System.Int32 PartitionId { get; set; } [JsonPropertyName("partitionId")]
 
+TYPE Camunda.Orchestration.Sdk.PartitionBackupInfo : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.PartitionId PartitionId { get; set; } [JsonPropertyName("partitionId")]
+  PROP Camunda.Orchestration.Sdk.StateCode State { get; set; } [JsonPropertyName("state")]
+  PROP System.DateTimeOffset? CreatedAt { get; set; } [JsonPropertyName("createdAt")]
+  PROP System.DateTimeOffset? LastUpdatedAt { get; set; } [JsonPropertyName("lastUpdatedAt")]
+  PROP System.Int32? BrokerId { get; set; } [JsonPropertyName("brokerId")]
+  PROP System.Int64? CheckpointPosition { get; set; } [JsonPropertyName("checkpointPosition")]
+  PROP System.Int64? FirstLogPosition { get; set; } [JsonPropertyName("firstLogPosition")]
+  PROP System.String? BrokerVersion { get; set; } [JsonPropertyName("brokerVersion")]
+  PROP System.String? FailureReason { get; set; } [JsonPropertyName("failureReason")]
+  PROP System.String? SnapshotId { get; set; } [JsonPropertyName("snapshotId")]
+
+TYPE Camunda.Orchestration.Sdk.PartitionBackupRange : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.PartitionBackupState? End { get; set; } [JsonPropertyName("end")]
+  PROP Camunda.Orchestration.Sdk.PartitionBackupState? Start { get; set; } [JsonPropertyName("start")]
+  PROP Camunda.Orchestration.Sdk.PartitionId PartitionId { get; set; } [JsonPropertyName("partitionId")]
+
+TYPE Camunda.Orchestration.Sdk.PartitionBackupState : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BackupType CheckpointType { get; set; } [JsonPropertyName("checkpointType")]
+  PROP Camunda.Orchestration.Sdk.CheckpointId CheckpointId { get; set; } [JsonPropertyName("checkpointId")]
+  PROP Camunda.Orchestration.Sdk.PartitionId? PartitionId { get; set; } [JsonPropertyName("partitionId")]
+  PROP System.DateTimeOffset CheckpointTimestamp { get; set; } [JsonPropertyName("checkpointTimestamp")]
+  PROP System.Int64 CheckpointPosition { get; set; } [JsonPropertyName("checkpointPosition")]
+  PROP System.Int64 FirstLogPosition { get; set; } [JsonPropertyName("firstLogPosition")]
+
+TYPE Camunda.Orchestration.Sdk.PartitionCheckpointState : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.CheckpointId CheckpointId { get; set; } [JsonPropertyName("checkpointId")]
+  PROP Camunda.Orchestration.Sdk.CheckpointType CheckpointType { get; set; } [JsonPropertyName("checkpointType")]
+  PROP Camunda.Orchestration.Sdk.PartitionId PartitionId { get; set; } [JsonPropertyName("partitionId")]
+  PROP System.DateTimeOffset CheckpointTimestamp { get; set; } [JsonPropertyName("checkpointTimestamp")]
+  PROP System.Int64 CheckpointPosition { get; set; } [JsonPropertyName("checkpointPosition")]
+
 TYPE Camunda.Orchestration.Sdk.PartitionHealth : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
   underlying=System.Int32
   MEMBER Healthy = 0 json="healthy"
   MEMBER Unhealthy = 1 json="unhealthy"
   MEMBER Dead = 2 json="dead"
+
+TYPE Camunda.Orchestration.Sdk.PartitionId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaLongKey,System.IEquatable<Camunda.Orchestration.Sdk.PartitionId>]
+  PROP System.Int64 Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.PartitionId other)
+  METHOD static Camunda.Orchestration.Sdk.PartitionId AssumeExists(System.Int64 value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
 
 TYPE Camunda.Orchestration.Sdk.PartitionRole : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -5527,6 +5625,12 @@ TYPE Camunda.Orchestration.Sdk.RoleUserSearchResult : sealed class
   PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.RoleUserResult> Items { get; set; } [JsonPropertyName("items")]
 
+TYPE Camunda.Orchestration.Sdk.RuntimeBackupState : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.PartitionBackupRange> Ranges { get; set; } [JsonPropertyName("ranges")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.PartitionBackupState> BackupStates { get; set; } [JsonPropertyName("backupStates")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.PartitionCheckpointState> CheckpointStates { get; set; } [JsonPropertyName("checkpointStates")]
+
 TYPE Camunda.Orchestration.Sdk.ScopeKey : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ScopeKey>]
   PROP System.String Value { get; }
   METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.ScopeKey other)
@@ -5657,6 +5761,16 @@ TYPE Camunda.Orchestration.Sdk.StartCursor : struct interfaces=[Camunda.Orchestr
   METHOD virtual System.Int32 GetHashCode()
   METHOD virtual System.String ToString()
 
+TYPE Camunda.Orchestration.Sdk.StateCode : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER DOESNOTEXIST = 0 json="DOES_NOT_EXIST"
+  MEMBER INPROGRESS = 1 json="IN_PROGRESS"
+  MEMBER COMPLETED = 2 json="COMPLETED"
+  MEMBER FAILED = 3 json="FAILED"
+  MEMBER INCOMPLETE = 4 json="INCOMPLETE"
+  MEMBER DELETED = 5 json="DELETED"
+
 TYPE Camunda.Orchestration.Sdk.StatusMetric : sealed class
   CTOR ()
   PROP System.DateTimeOffset? LastUpdatedAt { get; set; } [JsonPropertyName("lastUpdatedAt")]
@@ -5703,6 +5817,14 @@ TYPE Camunda.Orchestration.Sdk.Tag : struct interfaces=[Camunda.Orchestration.Sd
   METHOD virtual System.Boolean Equals(System.Object obj)
   METHOD virtual System.Int32 GetHashCode()
   METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BackupId? BackupId { get; set; } [JsonPropertyName("backupId")]
+
+TYPE Camunda.Orchestration.Sdk.TakeRuntimeBackupResponse : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BackupId BackupId { get; set; } [JsonPropertyName("backupId")]
 
 TYPE Camunda.Orchestration.Sdk.TenantClientResult : sealed class
   CTOR ()
