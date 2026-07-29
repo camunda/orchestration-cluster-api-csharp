@@ -91,10 +91,12 @@ public class BareObjectSchemaTests
             @"public sealed class (\w+)\s*\{\s*\}",
             RegexOptions.Multiline);
 
+        var sealedEmptySchemas = LoadDeliberatelySealedEmptySchemas(repoRoot);
+
         var offenders = emptyClassPattern.Matches(content)
             .Cast<Match>()
             .Select(m => m.Groups[1].Value)
-            .Where(name => !IsDeliberatelySealedEmptySchema(repoRoot, name))
+            .Where(name => !sealedEmptySchemas.Contains(name))
             .ToList();
 
         if (offenders.Count > 0)
@@ -107,41 +109,53 @@ public class BareObjectSchemaTests
     }
 
     /// <summary>
-    /// True when the bundled spec declares <paramref name="schemaName"/> as an
-    /// object with no properties and <c>additionalProperties: false</c> — an
-    /// intentionally empty contract rather than a free-form object.
+    /// Names of component schemas the bundled spec declares as objects with no
+    /// properties and <c>additionalProperties: false</c> — intentionally empty
+    /// contracts rather than free-form objects. The spec is parsed once per
+    /// call so reporting many offenders does not re-read it per candidate.
+    /// Anything not in this set (including inline schemas the generator
+    /// materialised) is treated as the defect this test guards.
     /// </summary>
-    private static bool IsDeliberatelySealedEmptySchema(string repoRoot, string schemaName)
+    private static HashSet<string> LoadDeliberatelySealedEmptySchemas(string repoRoot)
     {
+        var result = new HashSet<string>(StringComparer.Ordinal);
+
         var specPath = Path.Combine(repoRoot, "external-spec", "bundled", "rest-api.bundle.json");
         if (!File.Exists(specPath))
-            return false;
+            return result;
 
         using var doc = JsonDocument.Parse(File.ReadAllText(specPath));
         if (!doc.RootElement.TryGetProperty("components", out var components) ||
-            !components.TryGetProperty("schemas", out var schemas) ||
-            !schemas.TryGetProperty(schemaName, out var schema))
+            !components.TryGetProperty("schemas", out var schemas))
         {
-            // Not a named component (e.g. an inline schema the generator
-            // materialised) — that is the defect this test exists for.
-            return false;
+            return result;
         }
 
-        var isObject = schema.TryGetProperty("type", out var type) &&
-                       type.ValueKind == JsonValueKind.String &&
-                       type.GetString() == "object";
+        foreach (var entry in schemas.EnumerateObject())
+        {
+            var schema = entry.Value;
+            if (schema.ValueKind != JsonValueKind.Object)
+                continue;
 
-        var hasNoProperties = !schema.TryGetProperty("properties", out var props) ||
-                              props.EnumerateObject().Any() == false;
+            var isObject = schema.TryGetProperty("type", out var type) &&
+                           type.ValueKind == JsonValueKind.String &&
+                           type.GetString() == "object";
 
-        var sealsAdditional = schema.TryGetProperty("additionalProperties", out var addl) &&
-                              addl.ValueKind == JsonValueKind.False;
+            var hasNoProperties = !schema.TryGetProperty("properties", out var props) ||
+                                  !props.EnumerateObject().Any();
 
-        var hasNoComposition = !schema.TryGetProperty("allOf", out _) &&
-                               !schema.TryGetProperty("oneOf", out _) &&
-                               !schema.TryGetProperty("anyOf", out _);
+            var sealsAdditional = schema.TryGetProperty("additionalProperties", out var addl) &&
+                                  addl.ValueKind == JsonValueKind.False;
 
-        return isObject && hasNoProperties && sealsAdditional && hasNoComposition;
+            var hasNoComposition = !schema.TryGetProperty("allOf", out _) &&
+                                   !schema.TryGetProperty("oneOf", out _) &&
+                                   !schema.TryGetProperty("anyOf", out _);
+
+            if (isObject && hasNoProperties && sealsAdditional && hasNoComposition)
+                result.Add(entry.Name);
+        }
+
+        return result;
     }
 
     private static string FindRepoRoot()
