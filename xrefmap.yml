@@ -12259,15 +12259,15 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync
   nameWithType: CamundaClient.CancelProcessInstancesBatchOperationAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)
-  name: ChangeClusterModeAsync(string, bool?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_System_String_System_Nullable_System_Boolean__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)
-  name.vb: ChangeClusterModeAsync(String, Boolean?, CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(string, bool?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(String, Boolean?, System.Threading.CancellationToken)
-  nameWithType: CamundaClient.ChangeClusterModeAsync(string, bool?, CancellationToken)
-  nameWithType.vb: CamundaClient.ChangeClusterModeAsync(String, Boolean?, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name: ChangeClusterModeAsync(Mode, bool?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_Camunda_Orchestration_Sdk_Mode_System_Nullable_System_Boolean__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name.vb: ChangeClusterModeAsync(Mode, Boolean?, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode, bool?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode, Boolean?, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ChangeClusterModeAsync(Mode, bool?, CancellationToken)
+  nameWithType.vb: CamundaClient.ChangeClusterModeAsync(Mode, Boolean?, CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync*
   name: ChangeClusterModeAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync.html
@@ -13702,6 +13702,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync
   nameWithType: CamundaClient.ListRuntimeBackupsAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync(Camunda.Orchestration.Sdk.SecretListRequest,System.Threading.CancellationToken)
+  name: ListSecretsAsync(SecretListRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListSecretsAsync_Camunda_Orchestration_Sdk_SecretListRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync(Camunda.Orchestration.Sdk.SecretListRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync(Camunda.Orchestration.Sdk.SecretListRequest, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ListSecretsAsync(SecretListRequest, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync*
+  name: ListSecretsAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync
+  nameWithType: CamundaClient.ListSecretsAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ProcessInstanceMigrationInstruction,System.Threading.CancellationToken)
   name: MigrateProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceMigrationInstruction, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ProcessInstanceMigrationInstruction_System_Threading_CancellationToken_
@@ -35197,6 +35209,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MigrateProcessInstanceMappingInstruction.TargetElementId
   fullName: Camunda.Orchestration.Sdk.MigrateProcessInstanceMappingInstruction.TargetElementId
   nameWithType: MigrateProcessInstanceMappingInstruction.TargetElementId
+- uid: Camunda.Orchestration.Sdk.Mode
+  name: Mode
+  href: api/Camunda.Orchestration.Sdk.Mode.html
+  commentId: T:Camunda.Orchestration.Sdk.Mode
+  fullName: Camunda.Orchestration.Sdk.Mode
+  nameWithType: Mode
+- uid: Camunda.Orchestration.Sdk.Mode.PROCESSING
+  name: PROCESSING
+  href: api/Camunda.Orchestration.Sdk.Mode.html#Camunda_Orchestration_Sdk_Mode_PROCESSING
+  commentId: F:Camunda.Orchestration.Sdk.Mode.PROCESSING
+  fullName: Camunda.Orchestration.Sdk.Mode.PROCESSING
+  nameWithType: Mode.PROCESSING
+- uid: Camunda.Orchestration.Sdk.Mode.RECOVERING
+  name: RECOVERING
+  href: api/Camunda.Orchestration.Sdk.Mode.html#Camunda_Orchestration_Sdk_Mode_RECOVERING
+  commentId: F:Camunda.Orchestration.Sdk.Mode.RECOVERING
+  fullName: Camunda.Orchestration.Sdk.Mode.RECOVERING
+  nameWithType: Mode.RECOVERING
 - uid: Camunda.Orchestration.Sdk.ModifyProcessInstanceVariableInstruction
   name: ModifyProcessInstanceVariableInstruction
   href: api/Camunda.Orchestration.Sdk.ModifyProcessInstanceVariableInstruction.html
@@ -43189,6 +43219,30 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.SecretErrorCode.NOTFOUND
   fullName: Camunda.Orchestration.Sdk.SecretErrorCode.NOTFOUND
   nameWithType: SecretErrorCode.NOTFOUND
+- uid: Camunda.Orchestration.Sdk.SecretListRequest
+  name: SecretListRequest
+  href: api/Camunda.Orchestration.Sdk.SecretListRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.SecretListRequest
+  fullName: Camunda.Orchestration.Sdk.SecretListRequest
+  nameWithType: SecretListRequest
+- uid: Camunda.Orchestration.Sdk.SecretListResult
+  name: SecretListResult
+  href: api/Camunda.Orchestration.Sdk.SecretListResult.html
+  commentId: T:Camunda.Orchestration.Sdk.SecretListResult
+  fullName: Camunda.Orchestration.Sdk.SecretListResult
+  nameWithType: SecretListResult
+- uid: Camunda.Orchestration.Sdk.SecretListResult.References
+  name: References
+  href: api/Camunda.Orchestration.Sdk.SecretListResult.References.html#Camunda_Orchestration_Sdk_SecretListResult_References
+  commentId: P:Camunda.Orchestration.Sdk.SecretListResult.References
+  fullName: Camunda.Orchestration.Sdk.SecretListResult.References
+  nameWithType: SecretListResult.References
+- uid: Camunda.Orchestration.Sdk.SecretListResult.References*
+  name: References
+  href: api/Camunda.Orchestration.Sdk.SecretListResult.References.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SecretListResult.References
+  fullName: Camunda.Orchestration.Sdk.SecretListResult.References
+  nameWithType: SecretListResult.References
 - uid: Camunda.Orchestration.Sdk.SecretResolutionError
   name: SecretResolutionError
   href: api/Camunda.Orchestration.Sdk.SecretResolutionError.html

@@ -119,8 +119,8 @@ Method ChangeClusterModeAsync  <a class="header-action link-secondary" title="Vi
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_System_String_System_Nullable_System_Boolean__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
-  ChangeClusterModeAsync(string, bool?, CancellationToken)
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_Camunda_Orchestration_Sdk_Mode_System_Nullable_System_Boolean__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+  ChangeClusterModeAsync(Mode, bool?, CancellationToken)
   <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L834"><i class="bi bi-code-slash"></i></a>
 </h3>
 
@@ -130,12 +130,12 @@ Transitions the cluster between processing and recovery mode. This is a non-bloc
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;ClusterModeChangeResponse&gt; ChangeClusterModeAsync(string mode, bool? dryRun = null, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;ClusterModeChangeResponse&gt; ChangeClusterModeAsync(Mode mode, bool? dryRun = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
-  <dt><code>mode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><code>mode</code> <a class="xref" href="Camunda.Orchestration.Sdk.Mode.html">Mode</a></dt>
   <dd></dd>
   <dt><code>dryRun</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
   <dd></dd>
@@ -154,25 +154,26 @@ Transitions the cluster between processing and recovery mode. This is a non-bloc
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_System_String_System_Nullable_System_Boolean__System_Threading_CancellationToken__examples">Examples</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_Camunda_Orchestration_Sdk_Mode_System_Nullable_System_Boolean__System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task ChangeClusterModeExample()
 {
     using var client = CamundaClient.Create();
+<pre><code>// Pass dryRun: true to validate the request and inspect the resulting plan
+// without applying it. Omit it (or set it to false) to trigger the transition.
+var change = await client.ChangeClusterModeAsync(Mode.RECOVERING, dryRun: true);
 
-    // Pass dryRun: true to validate the request and inspect the resulting plan
-    // without applying it. Omit it (or set it to false) to trigger the transition.
-    var change = await client.ChangeClusterModeAsync(&quot;RECOVERING&quot;, dryRun: true);
-
-    Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-    foreach (var operation in change.PlannedChanges)
-    {
-        var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-        Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
-    }
+Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+foreach (var operation in change.PlannedChanges)
+{
+    var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
 }
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_System_String_System_Nullable_System_Boolean__System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_Camunda_Orchestration_Sdk_Mode_System_Nullable_System_Boolean__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: changeClusterMode</p>
 <p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task ChangeClusterModeExample()
@@ -180,7 +181,7 @@ Transitions the cluster between processing and recovery mode. This is a non-bloc
     using var client = CamundaClient.Create();
 <pre><code>// Pass dryRun: true to validate the request and inspect the resulting plan
 // without applying it. Omit it (or set it to false) to trigger the transition.
-var change = await client.ChangeClusterModeAsync(&quot;RECOVERING&quot;, dryRun: true);
+var change = await client.ChangeClusterModeAsync(Mode.RECOVERING, dryRun: true);
 
 Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
 foreach (var operation in change.PlannedChanges)

@@ -332,7 +332,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_System_String_System_Nullable_System_Boolean__System_Threading_CancellationToken_">ChangeClusterModeAsync(string, bool?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_Camunda_Orchestration_Sdk_Mode_System_Nullable_System_Boolean__System_Threading_CancellationToken_">ChangeClusterModeAsync(Mode, bool?, CancellationToken)</a></dt>
     <dd><p>Change cluster mode
 Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.</p>
 </dd>
@@ -1068,6 +1068,15 @@ specific element instance.</p>
     <dd><p>List runtime backups
 Returns a list of all available runtime backups of the physical tenant, with their
 state and additional info, sorted in descending order of backupId.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListSecretsAsync_Camunda_Orchestration_Sdk_SecretListRequest_System_Threading_CancellationToken_">ListSecretsAsync(SecretListRequest, CancellationToken)</a></dt>
+    <dd><p>List secrets (alpha)
+List the <code>camunda.secrets.*</code> references known for the caller's physical tenant.</p>
+<p>Only references the caller holds <code>SECRET:READ</code> on are returned. This endpoint never
+returns secret values, only the reference names.</p>
+<p>This endpoint is an alpha feature and may be subject to change in future releases.</p>
 </dd>
   </dl>
   <dl class="jumplist">

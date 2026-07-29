@@ -2582,6 +2582,21 @@ element instance or process instance that defines the scope of a variable.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretListRequest.html">SecretListRequest</a></dt>
+      <dd><p>Reserved for future filtering options. Currently takes no properties. The request body is
+optional: omitting it (or sending an empty object) applies no filters.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretListResult.html">SecretListResult</a></dt>
+      <dd><p>The secret references the caller is authorized to see.</p>
+<p>Unbounded for now: Phase 1's backend is mocked with at most 3 references. Pagination is
+expected to land here before GA, once a real secret store can return a tenant's full
+enumeration in one response. This is an alpha endpoint, so that is not yet a
+breaking-contract concern.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretResolutionError.html">SecretResolutionError</a></dt>
       <dd><p>SecretResolutionError</p>
 </dd>
@@ -3981,6 +3996,11 @@ use the <code>/correlated-message-subscriptions/search</code> endpoint.</p>
 captured from Camunda 8.10 onwards.
 <code>PROCESS_EVENT</code> is instance-scoped (intermediate catch events). Pre-8.10 entries have
 no value stored; the API returns <code>PROCESS_EVENT</code> as a default for those entries.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.Mode.html">Mode</a></dt>
+      <dd><p>The operating mode of a cluster's partitions.</p>
 </dd>
     </dl>
     <dl class="jumplist">
