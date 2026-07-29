@@ -800,7 +800,7 @@ public partial class CamundaClient
     /// 
     ///     // Pass dryRun: true to validate the request and inspect the resulting plan
     ///     // without applying it. Omit it (or set it to false) to trigger the transition.
-    ///     var change = await client.ChangeClusterModeAsync(&quot;RECOVERING&quot;, dryRun: true);
+    ///     var change = await client.ChangeClusterModeAsync(Mode.RECOVERING, dryRun: true);
     /// 
     ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
     ///     foreach (var operation in change.PlannedChanges)
@@ -820,7 +820,7 @@ public partial class CamundaClient
     /// 
     ///     // Pass dryRun: true to validate the request and inspect the resulting plan
     ///     // without applying it. Omit it (or set it to false) to trigger the transition.
-    ///     var change = await client.ChangeClusterModeAsync(&quot;RECOVERING&quot;, dryRun: true);
+    ///     var change = await client.ChangeClusterModeAsync(Mode.RECOVERING, dryRun: true);
     /// 
     ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
     ///     foreach (var operation in change.PlannedChanges)
@@ -5344,7 +5344,47 @@ public partial class CamundaClient
     /// This endpoint is an alpha feature and may be subject to change in future releases.
     /// 
     /// </summary>
-    /// <remarks>Operation: listSecrets</remarks>
+    /// <remarks>
+    /// Operation: listSecrets
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ListSecretsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // The request body is reserved for future filtering options and currently
+    ///     // takes no properties.
+    ///     var result = await client.ListSecretsAsync(new SecretListRequest());
+    /// 
+    ///     // Only the references are returned — never the secret values. Use
+    ///     // ResolveSecretsAsync to fetch a value when one is actually needed.
+    ///     foreach (var reference in result.References)
+    ///     {
+    ///         Console.WriteLine($&quot;Secret available: {reference}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ListSecretsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // The request body is reserved for future filtering options and currently
+    ///     // takes no properties.
+    ///     var result = await client.ListSecretsAsync(new SecretListRequest());
+    /// 
+    ///     // Only the references are returned — never the secret values. Use
+    ///     // ResolveSecretsAsync to fetch a value when one is actually needed.
+    ///     foreach (var reference in result.References)
+    ///     {
+    ///         Console.WriteLine($&quot;Secret available: {reference}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<SecretListResult> ListSecretsAsync(SecretListRequest body, CancellationToken ct = default)
     {
         var path = $"/secrets/list";
