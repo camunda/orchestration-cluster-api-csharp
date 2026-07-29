@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Camunda.Orchestration.Sdk.Generator;
 using Microsoft.OpenApi;
@@ -62,16 +63,25 @@ public class BareObjectSchemaTests
     }
 
     /// <summary>
-    /// Class-scoped sweep: no generated model in the current SDK should be
-    /// an empty sealed class. If a response schema has no properties, it
-    /// should not have been emitted as a class at all.
+    /// Class-scoped sweep: no generated model may be an empty sealed class
+    /// <em>unless</em> the spec deliberately declares it sealed and empty
+    /// (<c>additionalProperties: false</c> with no properties).
+    ///
+    /// The defect this guards is a free-form <c>{ "type": "object" }</c> schema
+    /// producing a useless empty class instead of mapping to <c>object</c> /
+    /// <c>Dictionary&lt;string, …&gt;</c>. A named component that explicitly
+    /// forbids additional properties is a different thing: an intentionally
+    /// empty contract (e.g. a request body reserved for future filters). Those
+    /// stay classes on purpose — when the spec later adds properties, callers
+    /// keep compiling, whereas an <c>object</c> parameter would have to change
+    /// type and break them.
     /// </summary>
     [Fact]
-    public void GeneratedModels_NoEmptyClasses()
+    public void GeneratedModels_NoEmptyClasses_ExceptDeliberatelySealedSchemas()
     {
+        var repoRoot = FindRepoRoot();
         var modelsPath = Path.Combine(
-            FindRepoRoot(),
-            "src", "Camunda.Orchestration.Sdk", "Generated", "Models.Generated.cs");
+            repoRoot, "src", "Camunda.Orchestration.Sdk", "Generated", "Models.Generated.cs");
 
         Assert.True(File.Exists(modelsPath), $"Models.Generated.cs not found at {modelsPath}");
         var content = File.ReadAllText(modelsPath);
@@ -81,14 +91,71 @@ public class BareObjectSchemaTests
             @"public sealed class (\w+)\s*\{\s*\}",
             RegexOptions.Multiline);
 
-        var matches = emptyClassPattern.Matches(content);
-        if (matches.Count > 0)
+        var sealedEmptySchemas = LoadDeliberatelySealedEmptySchemas(repoRoot);
+
+        var offenders = emptyClassPattern.Matches(content)
+            .Cast<Match>()
+            .Select(m => m.Groups[1].Value)
+            .Where(name => !sealedEmptySchemas.Contains(name))
+            .ToList();
+
+        if (offenders.Count > 0)
         {
-            var names = string.Join(", ", matches.Cast<Match>().Select(m => m.Groups[1].Value));
             Assert.Fail(
-                $"Found {matches.Count} empty class(es) in Models.Generated.cs: {names}. " +
-                "Bare 'type: object' schemas should map to 'object' or 'Dictionary<string, ...>', not empty classes.");
+                $"Found {offenders.Count} empty class(es) in Models.Generated.cs: {string.Join(", ", offenders)}. " +
+                "Free-form 'type: object' schemas should map to 'object' or 'Dictionary<string, ...>', not empty classes. " +
+                "Only components that declare 'additionalProperties: false' with no properties may be emitted as empty classes.");
         }
+    }
+
+    /// <summary>
+    /// Names of component schemas the bundled spec declares as objects with no
+    /// properties and <c>additionalProperties: false</c> — intentionally empty
+    /// contracts rather than free-form objects. The spec is parsed once per
+    /// call so reporting many offenders does not re-read it per candidate.
+    /// Anything not in this set (including inline schemas the generator
+    /// materialised) is treated as the defect this test guards.
+    /// </summary>
+    private static HashSet<string> LoadDeliberatelySealedEmptySchemas(string repoRoot)
+    {
+        var result = new HashSet<string>(StringComparer.Ordinal);
+
+        var specPath = Path.Combine(repoRoot, "external-spec", "bundled", "rest-api.bundle.json");
+        if (!File.Exists(specPath))
+            return result;
+
+        using var doc = JsonDocument.Parse(File.ReadAllText(specPath));
+        if (!doc.RootElement.TryGetProperty("components", out var components) ||
+            !components.TryGetProperty("schemas", out var schemas))
+        {
+            return result;
+        }
+
+        foreach (var entry in schemas.EnumerateObject())
+        {
+            var schema = entry.Value;
+            if (schema.ValueKind != JsonValueKind.Object)
+                continue;
+
+            var isObject = schema.TryGetProperty("type", out var type) &&
+                           type.ValueKind == JsonValueKind.String &&
+                           type.GetString() == "object";
+
+            var hasNoProperties = !schema.TryGetProperty("properties", out var props) ||
+                                  !props.EnumerateObject().Any();
+
+            var sealsAdditional = schema.TryGetProperty("additionalProperties", out var addl) &&
+                                  addl.ValueKind == JsonValueKind.False;
+
+            var hasNoComposition = !schema.TryGetProperty("allOf", out _) &&
+                                   !schema.TryGetProperty("oneOf", out _) &&
+                                   !schema.TryGetProperty("anyOf", out _);
+
+            if (isObject && hasNoProperties && sealsAdditional && hasNoComposition)
+                result.Add(entry.Name);
+        }
+
+        return result;
     }
 
     private static string FindRepoRoot()

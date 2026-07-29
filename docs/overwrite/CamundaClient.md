@@ -1353,6 +1353,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ListSecretsAsync(Camunda.Orchestration.Sdk.SecretListRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Secret.cs#ListSecrets)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
 example:
 - *content

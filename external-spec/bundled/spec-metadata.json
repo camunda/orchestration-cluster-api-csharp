@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:a855a2b8055d58b73113e05937657239fd13e40fd8c5648ce7f84c6db1a99717",
+  "specHash": "sha256:a7939e6269dd779f0b706ea2869d62646eeec0b54b8f35cb0f8185da92e84a9d",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -9562,6 +9562,42 @@
       }
     },
     {
+      "operationId": "listSecrets",
+      "path": "/secrets/list",
+      "method": "post",
+      "tags": [
+        "Secret"
+      ],
+      "summary": "List secrets (alpha)",
+      "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "secrets.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "SecretListRequest",
+      "successResponseSchemaRef": "SecretListResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "SECRET",
+            "permissionType": "READ"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "createAdminUser",
       "path": "/setup/user",
       "method": "post",
@@ -11700,7 +11736,7 @@
   "integrity": {
     "totalSemanticKeys": 41,
     "totalUnions": 65,
-    "totalOperations": 213,
+    "totalOperations": 214,
     "totalEventuallyConsistent": 92,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23

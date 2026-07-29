@@ -17627,6 +17627,102 @@
         "x-added-in-version": "8.10"
       }
     },
+    "/secrets/list": {
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Secret"
+        ],
+        "operationId": "listSecrets",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "SECRET",
+            "permissionType": "READ"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "List secrets (alpha)",
+        "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SecretListRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The references the caller is authorized to see.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SecretListResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/setup/user": {
       "post": {
         "x-eventually-consistent": false,
@@ -20209,11 +20305,7 @@
             "required": true,
             "description": "The target cluster mode.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "PROCESSING",
-                "RECOVERING"
-              ]
+              "$ref": "#/components/schemas/Mode"
             }
           },
           {
@@ -26885,6 +26977,14 @@
             }
           }
         }
+      },
+      "Mode": {
+        "description": "The operating mode of a cluster's partitions.",
+        "type": "string",
+        "enum": [
+          "PROCESSING",
+          "RECOVERING"
+        ]
       },
       "TopologyResponse": {
         "description": "The response of a topology request.",
@@ -37848,13 +37948,7 @@
               "DELETED"
             ]
           }
-        },
-        "x-properties-added-in-version": [
-          {
-            "propertyName": "state",
-            "addedInVersion": "8.10"
-          }
-        ]
+        }
       },
       "ProcessDefinitionSearchQueryResult": {
         "type": "object",
@@ -37945,13 +38039,7 @@
               "DELETED"
             ]
           }
-        },
-        "x-properties-added-in-version": [
-          {
-            "propertyName": "state",
-            "addedInVersion": "8.10"
-          }
-        ]
+        }
       },
       "ProcessDefinitionElementStatisticsQuery": {
         "description": "Process definition element statistics request.",
@@ -40808,6 +40896,28 @@
           "ACCESS_DENIED",
           "INVALID_REFERENCE"
         ]
+      },
+      "SecretListRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Reserved for future filtering options. Currently takes no properties. The request body is\noptional: omitting it (or sending an empty object) applies no filters.\n"
+      },
+      "SecretListResult": {
+        "type": "object",
+        "required": [
+          "references"
+        ],
+        "description": "The secret references the caller is authorized to see.\n\nUnbounded for now: Phase 1's backend is mocked with at most 3 references. Pagination is\nexpected to land here before GA, once a real secret store can return a tenant's full\nenumeration in one response. This is an alpha endpoint, so that is not yet a\nbreaking-contract concern.\n",
+        "properties": {
+          "references": {
+            "type": "array",
+            "description": "The secret references, each of the form `camunda.secrets.<name>`.",
+            "items": {
+              "type": "string",
+              "description": "A secret reference of the form `camunda.secrets.<name>`."
+            }
+          }
+        }
       },
       "SignalBroadcastRequest": {
         "type": "object",

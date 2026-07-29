@@ -19951,6 +19951,18 @@ public sealed class MigrateProcessInstanceMappingInstruction
 }
 
 /// <summary>
+/// The operating mode of a cluster&apos;s partitions.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum Mode
+{
+    [JsonPropertyName("PROCESSING")]
+    PROCESSING,
+    [JsonPropertyName("RECOVERING")]
+    RECOVERING,
+}
+
+/// <summary>
 /// Instruction describing which variables to create or update.
 /// </summary>
 public sealed class ModifyProcessInstanceVariableInstruction
@@ -24670,6 +24682,34 @@ public enum SecretErrorCode
     ACCESSDENIED,
     [JsonPropertyName("INVALID_REFERENCE")]
     INVALIDREFERENCE,
+}
+
+/// <summary>
+/// Reserved for future filtering options. Currently takes no properties. The request body is
+/// optional: omitting it (or sending an empty object) applies no filters.
+/// 
+/// </summary>
+public sealed class SecretListRequest
+{
+}
+
+/// <summary>
+/// The secret references the caller is authorized to see.
+/// 
+/// Unbounded for now: Phase 1&apos;s backend is mocked with at most 3 references. Pagination is
+/// expected to land here before GA, once a real secret store can return a tenant&apos;s full
+/// enumeration in one response. This is an alpha endpoint, so that is not yet a
+/// breaking-contract concern.
+/// 
+/// </summary>
+public sealed class SecretListResult
+{
+    /// <summary>
+    /// The secret references, each of the form `camunda.secrets.&lt;name&gt;`.
+    /// </summary>
+    [JsonPropertyName("references")]
+    public List<string> References { get; set; } = null!;
+
 }
 
 /// <summary>

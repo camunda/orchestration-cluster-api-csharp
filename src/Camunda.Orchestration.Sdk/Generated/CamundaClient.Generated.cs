@@ -831,7 +831,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterModeChangeResponse> ChangeClusterModeAsync(string mode, bool? dryRun = null, CancellationToken ct = default)
+    public async Task<ClusterModeChangeResponse> ChangeClusterModeAsync(Mode mode, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         queryParts.Add("mode=" + Uri.EscapeDataString(mode.ToString()!));
@@ -5332,6 +5332,23 @@ public partial class CamundaClient
         if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(prefix.ToString()!));
         var path = queryParts.Count > 0 ? $"/backups/runtime?{string.Join("&", queryParts)}" : $"/backups/runtime";
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "listRuntimeBackups", false, ct);
+    }
+
+    /// <summary>
+    /// List secrets (alpha)
+    /// List the `camunda.secrets.*` references known for the caller&apos;s physical tenant.
+    /// 
+    /// Only references the caller holds `SECRET:READ` on are returned. This endpoint never
+    /// returns secret values, only the reference names.
+    /// 
+    /// This endpoint is an alpha feature and may be subject to change in future releases.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: listSecrets</remarks>
+    public async Task<SecretListResult> ListSecretsAsync(SecretListRequest body, CancellationToken ct = default)
+    {
+        var path = $"/secrets/list";
+        return await InvokeWithRetryAsync(() => SendAsync<SecretListResult>(HttpMethod.Post, path, body, ct), "listSecrets", false, ct);
     }
 
     /// <summary>

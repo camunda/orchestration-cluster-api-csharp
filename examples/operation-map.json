@@ -1499,5 +1499,12 @@
       "region": "ResolveSecrets",
       "label": "Resolve secrets"
     }
+  ],
+  "listSecrets": [
+    {
+      "file": "Secret.cs",
+      "region": "ListSecrets",
+      "label": "List secret references"
+    }
   ]
 }

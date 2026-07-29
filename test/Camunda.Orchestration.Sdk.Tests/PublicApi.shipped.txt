@@ -1676,7 +1676,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationResponse> GetBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult> SearchBatchOperationsAsync(Camunda.Orchestration.Sdk.BatchOperationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CamundaUserResult> GetAuthenticationAsync(System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsync(System.String mode, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode mode, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
@@ -1765,6 +1765,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleUserSearchResult> SearchUsersForRoleAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleUserSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RuntimeBackupState> GetRuntimeBackupStateAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RuntimeBackupState> SyncRuntimeBackupStateAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SecretListResult> ListSecretsAsync(Camunda.Orchestration.Sdk.SecretListRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SecretResolveResult> ResolveSecretsAsync(Camunda.Orchestration.Sdk.SecretResolveRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SignalBroadcastResult> BroadcastSignalAsync(Camunda.Orchestration.Sdk.SignalBroadcastRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.SystemConfigurationResponse> GetSystemConfigurationAsync(System.Threading.CancellationToken ct = null)
@@ -4551,6 +4552,12 @@ TYPE Camunda.Orchestration.Sdk.MigrateProcessInstanceMappingInstruction : sealed
   PROP Camunda.Orchestration.Sdk.ElementId SourceElementId { get; set; } [JsonPropertyName("sourceElementId")]
   PROP Camunda.Orchestration.Sdk.ElementId TargetElementId { get; set; } [JsonPropertyName("targetElementId")]
 
+TYPE Camunda.Orchestration.Sdk.Mode : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER PROCESSING = 0 json="PROCESSING"
+  MEMBER RECOVERING = 1 json="RECOVERING"
+
 TYPE Camunda.Orchestration.Sdk.ModifyProcessInstanceVariableInstruction : sealed class
   CTOR ()
   PROP System.Object Variables { get; set; } [JsonPropertyName("variables")]
@@ -5686,6 +5693,13 @@ TYPE Camunda.Orchestration.Sdk.SecretErrorCode : enum interfaces=[System.ICompar
   MEMBER NOTFOUND = 0 json="NOT_FOUND"
   MEMBER ACCESSDENIED = 1 json="ACCESS_DENIED"
   MEMBER INVALIDREFERENCE = 2 json="INVALID_REFERENCE"
+
+TYPE Camunda.Orchestration.Sdk.SecretListRequest : sealed class
+  CTOR ()
+
+TYPE Camunda.Orchestration.Sdk.SecretListResult : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<System.String> References { get; set; } [JsonPropertyName("references")]
 
 TYPE Camunda.Orchestration.Sdk.SecretResolutionError : sealed class
   CTOR ()
