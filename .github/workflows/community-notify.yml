@@ -12,7 +12,9 @@ jobs:
   notify:
     permissions:
       pull-requests: write
-    uses: camunda/sdk-infra/.github/workflows/sdk-slack-community-notify.yml@v1
+    # PILOT: temporarily pinned to the sdk-infra feature branch to validate the
+    # merge-reaction flow before v1 is retagged. Revert this commit to restore @v1.
+    uses: camunda/sdk-infra/.github/workflows/sdk-slack-community-notify.yml@feat/slack-reaction-on-merge
     with:
       repo-name: orchestration-cluster-api-csharp
       mention-group: ${{ vars.SLACK_MENTION_GROUP }}
