@@ -117,16 +117,28 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue-number }}
         run: |
           set -euo pipefail
+
+          # workflow_dispatch takes a free-form string; reject anything that is not a
+          # plain issue number before it reaches gh or a git branch name.
+          if ! printf '%s' "$ISSUE_NUMBER" | grep -Eq '^[0-9]+$'; then
+            echo "::error::issue-number must be digits only; got '${ISSUE_NUMBER}'."
+            exit 1
+          fi
+
           body="$(gh issue view "$ISSUE_NUMBER" --json body --jq '.body')"
           title="$(gh issue view "$ISSUE_NUMBER" --json title --jq '.title')"
           branch="agent/example-coverage-${ISSUE_NUMBER}"
 
           git switch -c "$branch"
 
+          # `title` is issue-controlled: a newline in a KEY=VALUE line would corrupt
+          # the whole output file, so emit it with the multiline delimiter form.
           {
             echo "issue-number=${ISSUE_NUMBER}"
             echo "branch=${branch}"
-            echo "title=${title}"
+            echo "title<<AGENT_TITLE_EOF"
+            printf '%s\n' "$title"
+            echo "AGENT_TITLE_EOF"
           } >> "$GITHUB_OUTPUT"
 
           # Hand the issue body to the agent via file rather than an env var so
@@ -211,6 +223,17 @@ jobs:
           git push --force-with-lease \
             "https://x-access-token:${APP_TOKEN}@github.com/${GH_REPO}.git" \
             "HEAD:refs/heads/${BRANCH}"
+
+          # A re-run pushes to the same branch, where an open PR may already exist.
+          # `gh pr create` would exit non-zero there, failing the job and dropping the
+          # link from the issue comment even though the push succeeded. Reuse it.
+          existing="$(gh pr list --head "$BRANCH" --state open --json url --jq '.[0].url // empty')"
+          if [ -n "$existing" ]; then
+            echo "Updated existing pull request: $existing"
+            echo "opened=true" >> "$GITHUB_OUTPUT"
+            echo "url=${existing}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
 
           url="$(gh pr create \
             --base "$BASE" \
