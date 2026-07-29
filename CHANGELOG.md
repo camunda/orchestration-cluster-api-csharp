@@ -1,3 +1,16 @@
+# [10.0.0-alpha.5](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.4...v10.0.0-alpha.5) (2026-07-29)
+
+
+### Bug Fixes
+
+* **examples:** pass Mode enum to ChangeClusterModeAsync ([8dc5bc4](https://github.com/camunda/orchestration-cluster-api-csharp/commit/8dc5bc463d551e4ef8c6ac2f3f9b4d07dbb2cd67))
+* **gen:** regenerate artifacts ([bf4d28a](https://github.com/camunda/orchestration-cluster-api-csharp/commit/bf4d28a75482e95ee216a54cd6ca1071eb93168e))
+
+
+### Features
+
+* add example coverage for listSecrets ([9635b87](https://github.com/camunda/orchestration-cluster-api-csharp/commit/9635b878d16aca315a014e0153ebd2620b0a38fd))
+
 # [10.0.0-alpha.4](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.3...v10.0.0-alpha.4) (2026-07-08)
 
 
