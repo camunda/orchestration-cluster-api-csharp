@@ -76,9 +76,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
         with:
-          # Check out with the app token so the branch push and PR are authored by
-          # the app — that is what makes the PR's CI run without manual approval.
-          token: ${{ steps.app-token.outputs.token }}
+          # Deliberately check out with the read-only job token and do NOT persist
+          # credentials: the agent runs with `--yolo`, so no write credential may sit
+          # in git config while it works. The app token is introduced only in the
+          # push step, via an explicit remote URL.
+          token: ${{ github.token }}
+          persist-credentials: false
           fetch-depth: 0
 
       - uses: actions/setup-dotnet@v5
@@ -171,23 +174,39 @@ jobs:
         id: pr
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_TOKEN: ${{ steps.app-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
           BRANCH: ${{ steps.setup.outputs.branch }}
           ISSUE_NUMBER: ${{ steps.setup.outputs.issue-number }}
           TITLE: ${{ steps.setup.outputs.title }}
+          BASE: ${{ github.event.repository.default_branch }}
         run: |
           set -euo pipefail
 
-          if git diff --quiet HEAD && [ -z "$(git log --oneline "origin/${GITHUB_REF_NAME}..HEAD" 2>/dev/null)" ]; then
+          # The agent is instructed to commit its work. A dirty tree means it did
+          # not, so fail loudly rather than opening a PR that omits the changes.
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "::error::The agent left uncommitted changes in the working tree; refusing to open a partial PR."
+            git status --short
+            exit 1
+          fi
+
+          ahead="$(git rev-list --count "origin/${BASE}..HEAD")"
+          if [ "$ahead" -eq 0 ]; then
             echo "::warning::The agent produced no commits; nothing to open a PR for."
             echo "opened=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          echo "Agent produced ${ahead} commit(s)."
 
-          git push --force-with-lease origin "$BRANCH"
+          # Push with the app token supplied inline, so a write credential is never
+          # persisted in git config (see the checkout step).
+          git push --force-with-lease \
+            "https://x-access-token:${APP_TOKEN}@github.com/${GH_REPO}.git" \
+            "HEAD:refs/heads/${BRANCH}"
 
           url="$(gh pr create \
-            --base "${GITHUB_REF_NAME}" \
+            --base "$BASE" \
             --head "$BRANCH" \
             --title "feat: add example coverage for ${TITLE#Missing example coverage: }" \
             --body "Resolves #${ISSUE_NUMBER}.
