@@ -1,0 +1,245 @@
+name: Agent — example coverage
+
+# Resolves the auto-filed "Missing example coverage" issues (label `new-operations`)
+# by running the Copilot CLI in CI and opening a pull request with the result.
+#
+# Why not assign the Copilot coding agent to the issue instead? Assigning it
+# requires a user PAT — GitHub does not support bot/App tokens for that API
+# (https://github.com/github/gh-aw/issues/19765), and PATs are not permitted
+# here. Running the agent inside Actions avoids tokens entirely:
+#
+#   * `copilot-requests: write` lets the Copilot CLI authenticate with the
+#     built-in GITHUB_TOKEN, billed to the organization. No PAT, no API key.
+#   * The branch push and the pull request are made with a Vault-minted GitHub
+#     App installation token, so the PR is authored by the app and its CI runs
+#     without a manual "approve workflows" step (a PR opened with GITHUB_TOKEN
+#     does not trigger workflows).
+#
+# Mirrors the proven pattern in camunda/infra-core
+# (.github/workflows/agent-stale-workaround-reaper.yml).
+
+on:
+  issues:
+    types: [opened, labeled]
+  workflow_dispatch:
+    inputs:
+      issue-number:
+        description: 'Coverage issue to work on (for re-runs).'
+        required: true
+        type: string
+
+permissions: {}
+
+# One agent run per issue at a time; a re-label must not race a running agent.
+concurrency:
+  group: agent-example-coverage-${{ github.event.issue.number || inputs.issue-number }}
+  cancel-in-progress: false
+
+jobs:
+  implement:
+    # Only for `new-operations` issues: on the label being added, on an issue
+    # opened already carrying it, or on an explicit manual dispatch.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.action == 'labeled' && github.event.label.name == 'new-operations') ||
+      (github.event.action == 'opened' && contains(github.event.issue.labels.*.name, 'new-operations'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read           # checkout; the app token does the pushing
+      id-token: write          # mint GitHub OIDC token for Vault JWT auth
+      copilot-requests: write  # required for Copilot CLI GITHUB_TOKEN auth (billed to the org)
+      issues: write            # report the outcome back on the issue
+    steps:
+      - name: Import secrets
+        id: secrets
+        uses: hashicorp/vault-action@v4.0.0
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: jwt
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_ID | APP_ID ;
+            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_PRIVATE_KEY | APP_PRIVATE_KEY ;
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          # Deliberately check out with the read-only job token and do NOT persist
+          # credentials: the agent runs with `--yolo`, so no write credential may sit
+          # in git config while it works. The app token is introduced only in the
+          # push step, via an explicit remote URL.
+          token: ${{ github.token }}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Install Copilot CLI
+        env:
+          # Pin deliberately by setting the COPILOT_CLI_VERSION repository variable
+          # (e.g. `0.0.x`); defaults to `latest` when unset.
+          COPILOT_CLI_VERSION: ${{ vars.COPILOT_CLI_VERSION || 'latest' }}
+        run: npm install -g "@github/copilot@${COPILOT_CLI_VERSION}"
+
+      - name: Configure committer identity
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        run: |
+          git config --global user.name "${APP_SLUG}[bot]"
+          git config --global user.email "${APP_SLUG}[bot]@users.noreply.github.com"
+
+      - name: Resolve issue and create branch
+        id: setup
+        env:
+          # Read-only issue lookup: use the job token (already has issues: write) so
+          # the app does not need Issues permissions. The app token is reserved for
+          # pushing the branch and opening the PR.
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue-number }}
+        run: |
+          set -euo pipefail
+          body="$(gh issue view "$ISSUE_NUMBER" --json body --jq '.body')"
+          title="$(gh issue view "$ISSUE_NUMBER" --json title --jq '.title')"
+          branch="agent/example-coverage-${ISSUE_NUMBER}"
+
+          git switch -c "$branch"
+
+          {
+            echo "issue-number=${ISSUE_NUMBER}"
+            echo "branch=${branch}"
+            echo "title=${title}"
+          } >> "$GITHUB_OUTPUT"
+
+          # Hand the issue body to the agent via file rather than an env var so
+          # its markdown (tables, backticks) survives untouched.
+          printf '%s\n' "$body" > /tmp/issue-body.md
+
+      - name: Run Copilot CLI
+        env:
+          # Built-in token authenticates the Copilot CLI, billed to the org.
+          # It is deliberately NOT used to push or open the PR.
+          GITHUB_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ steps.setup.outputs.issue-number }}
+        run: |
+          set -euo pipefail
+          prompt="$(cat <<EOF
+          You are working in the ${GITHUB_REPOSITORY} repository to resolve issue #${ISSUE_NUMBER}.
+
+          Read AGENTS.md first and follow it strictly. Also read
+          .github/prompts/add-missing-examples.prompt.md if it exists — it documents the
+          example conventions in detail.
+
+          The issue body is:
+
+          $(cat /tmp/issue-body.md)
+
+          Do the following:
+          1. For each operation listed in the issue, add a region-tagged example under
+             examples/, copying the exact structure of an existing example in the matching
+             domain file, and add the corresponding examples/operation-map.json entry.
+          2. Never hand-edit generated code. If the SDK does not yet expose an operation,
+             regenerate it with the repo pipeline documented in AGENTS.md and commit the
+             regenerated output separately from hand-written changes.
+          3. Commit with Conventional Commits messages that pass commitlint: an allowed type,
+             lower-case imperative subject, 5-100 characters. Never use 'fix:' for something
+             that is not a user-facing bug fix, and never add 'BREAKING CHANGE:' markers.
+          4. Verify your work by running the repo's build/verification pipeline as documented
+             in AGENTS.md. Do not stop until it passes.
+
+          Do not push and do not open a pull request — the workflow does that.
+          EOF
+          )"
+          copilot --yolo -p "$prompt" --model claude-sonnet-4.6
+
+      - name: Verify example coverage
+        id: verify
+        run: |
+          set -euo pipefail
+          node scripts/check-example-coverage.js
+          dotnet build docs/examples/Examples.csproj --configuration Release
+
+      - name: Push branch and open pull request
+        id: pr
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: ${{ steps.setup.outputs.branch }}
+          ISSUE_NUMBER: ${{ steps.setup.outputs.issue-number }}
+          TITLE: ${{ steps.setup.outputs.title }}
+          BASE: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+
+          # The agent is instructed to commit its work. A dirty tree means it did
+          # not, so fail loudly rather than opening a PR that omits the changes.
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "::error::The agent left uncommitted changes in the working tree; refusing to open a partial PR."
+            git status --short
+            exit 1
+          fi
+
+          ahead="$(git rev-list --count "origin/${BASE}..HEAD")"
+          if [ "$ahead" -eq 0 ]; then
+            echo "::warning::The agent produced no commits; nothing to open a PR for."
+            echo "opened=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "Agent produced ${ahead} commit(s)."
+
+          # Push with the app token supplied inline, so a write credential is never
+          # persisted in git config (see the checkout step).
+          git push --force-with-lease \
+            "https://x-access-token:${APP_TOKEN}@github.com/${GH_REPO}.git" \
+            "HEAD:refs/heads/${BRANCH}"
+
+          url="$(gh pr create \
+            --base "$BASE" \
+            --head "$BRANCH" \
+            --title "feat: add example coverage for ${TITLE#Missing example coverage: }" \
+            --body "Resolves #${ISSUE_NUMBER}.
+
+          Generated by the Copilot CLI in CI (\`agent-example-coverage\` workflow), following AGENTS.md and the repo's example conventions. Coverage check and example build passed before this PR was opened — please still review the example bodies for correctness and idiomatic style.")"
+
+          echo "opened=true" >> "$GITHUB_OUTPUT"
+          echo "url=${url}" >> "$GITHUB_OUTPUT"
+
+      - name: Report outcome on the issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue-number }}
+          RESULT: ${{ job.status }}
+          PR_URL: ${{ steps.pr.outputs.url }}
+          OPENED: ${{ steps.pr.outputs.opened }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          if [ "$RESULT" = "success" ] && [ "${OPENED:-false}" = "true" ]; then
+            msg="🤖 Opened ${PR_URL} with example coverage for this issue. Coverage check and example build passed; please review."
+          elif [ "$RESULT" = "success" ]; then
+            msg="🤖 The agent ran but produced no changes — see the [run log](${RUN_URL}). This issue needs a human look."
+          else
+            msg="🤖 The agent run failed — see the [run log](${RUN_URL}). Re-run it with the \`Agent — example coverage\` workflow (\`workflow_dispatch\`, issue number \`${ISSUE_NUMBER}\`), or implement the coverage manually."
+          fi
+          gh issue comment "$ISSUE_NUMBER" --body "$msg" || echo "::warning::Could not comment on issue #${ISSUE_NUMBER}."
