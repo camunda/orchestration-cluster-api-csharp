@@ -131,18 +131,16 @@ jobs:
 
           git switch -c "$branch"
 
-          # `title` is issue-controlled: a newline in a KEY=VALUE line would corrupt
-          # the whole output file, so emit it with the multiline delimiter form.
           {
             echo "issue-number=${ISSUE_NUMBER}"
             echo "branch=${branch}"
-            echo "title<<AGENT_TITLE_EOF"
-            printf '%s\n' "$title"
-            echo "AGENT_TITLE_EOF"
           } >> "$GITHUB_OUTPUT"
 
-          # Hand the issue body to the agent via file rather than an env var so
-          # its markdown (tables, backticks) survives untouched.
+          # The title and body are issue-controlled, so neither is written to
+          # $GITHUB_OUTPUT: any delimiter, fixed or random, is a collision surface
+          # that a crafted issue title could exploit. A file has no such format
+          # to escape, and the body already needed one to keep its markdown intact.
+          printf '%s\n' "$title" > /tmp/issue-title.txt
           printf '%s\n' "$body" > /tmp/issue-body.md
 
       - name: Run Copilot CLI
@@ -197,10 +195,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
           BRANCH: ${{ steps.setup.outputs.branch }}
           ISSUE_NUMBER: ${{ steps.setup.outputs.issue-number }}
-          TITLE: ${{ steps.setup.outputs.title }}
           BASE: ${{ github.event.repository.default_branch }}
         run: |
           set -euo pipefail
+          TITLE="$(cat /tmp/issue-title.txt)"
 
           # The agent is instructed to commit its work. A dirty tree means it did
           # not, so fail loudly rather than opening a PR that omits the changes.
@@ -227,7 +225,9 @@ jobs:
           # A re-run pushes to the same branch, where an open PR may already exist.
           # `gh pr create` would exit non-zero there, failing the job and dropping the
           # link from the issue comment even though the push succeeded. Reuse it.
-          existing="$(gh pr list --head "$BRANCH" --state open --json url --jq '.[0].url // empty')"
+          existing="$(gh pr list --repo "$GH_REPO" --head "$BRANCH" --state open \
+            --json url,headRepositoryOwner \
+            --jq "[.[] | select(.headRepositoryOwner.login == \"${GITHUB_REPOSITORY_OWNER}\")] | .[0].url // empty")"
           if [ -n "$existing" ]; then
             echo "Updated existing pull request: $existing"
             echo "opened=true" >> "$GITHUB_OUTPUT"
