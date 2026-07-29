@@ -71,7 +71,7 @@ jobs:
         with:
           app-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
-          owner: camunda
+          owner: ${{ github.repository_owner }}
 
       - name: Check out repository
         uses: actions/checkout@v6
@@ -93,7 +93,11 @@ jobs:
           node-version: '22'
 
       - name: Install Copilot CLI
-        run: npm install -g @github/copilot
+        env:
+          # Pin deliberately by setting the COPILOT_CLI_VERSION repository variable
+          # (e.g. `0.0.x`); defaults to `latest` when unset.
+          COPILOT_CLI_VERSION: ${{ vars.COPILOT_CLI_VERSION || 'latest' }}
+        run: npm install -g "@github/copilot@${COPILOT_CLI_VERSION}"
 
       - name: Configure committer identity
         env:
@@ -105,7 +109,10 @@ jobs:
       - name: Resolve issue and create branch
         id: setup
         env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          # Read-only issue lookup: use the job token (already has issues: write) so
+          # the app does not need Issues permissions. The app token is reserved for
+          # pushing the branch and opening the PR.
+          GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue-number }}
         run: |
@@ -135,7 +142,7 @@ jobs:
         run: |
           set -euo pipefail
           prompt="$(cat <<EOF
-          You are working in the camunda/${GITHUB_REPOSITORY##*/} repository to resolve issue #${ISSUE_NUMBER}.
+          You are working in the ${GITHUB_REPOSITORY} repository to resolve issue #${ISSUE_NUMBER}.
 
           Read AGENTS.md first and follow it strictly. Also read
           .github/prompts/add-missing-examples.prompt.md if it exists — it documents the
