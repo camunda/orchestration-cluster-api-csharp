@@ -58,7 +58,7 @@ jobs:
           echo "CAMUNDA_SDK_CURRENT_STABLE_MAJOR=${{ vars['CAMUNDA_SDK_CURRENT_STABLE_MAJOR'] }}" >> $GITHUB_ENV
 
       - name: Setup .NET ${{ matrix.dotnet }}
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
@@ -169,7 +169,7 @@ jobs:
           echo "CAMUNDA_SDK_CURRENT_STABLE_MAJOR=${{ vars['CAMUNDA_SDK_CURRENT_STABLE_MAJOR'] }}" >> $GITHUB_ENV
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '8.0.x'
 
