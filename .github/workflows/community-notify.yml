@@ -11,6 +11,10 @@ permissions: {}
 jobs:
   notify:
     permissions:
+      # The Slack message reference is recorded via the Issues Comments API,
+      # which is shared between issues and PRs. Both scopes are granted because
+      # GitHub does not document which one is checked for a PR target.
+      issues: write
       pull-requests: write
     # PILOT: temporarily pinned to the sdk-infra feature branch to validate the
     # merge-reaction flow before v1 is retagged. Revert this commit to restore @v1.
