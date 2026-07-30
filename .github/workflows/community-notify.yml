@@ -20,11 +20,7 @@ jobs:
       # GitHub does not document which one is checked for a PR target.
       issues: write
       pull-requests: write
-    # PILOT: temporarily pinned to an sdk-infra feature-branch commit to validate
-    # the merge-reaction flow before v1 is retagged. Pinned by SHA rather than by
-    # branch so the executed code is immutable and auditable.
-    # Revert this commit to restore @v1.
-    uses: camunda/sdk-infra/.github/workflows/sdk-slack-community-notify.yml@aaacb8a6f5e536ee80431853a7acbb170ab8b3fb # feat/slack-reaction-on-merge
+    uses: camunda/sdk-infra/.github/workflows/sdk-slack-community-notify.yml@v1
     with:
       repo-name: orchestration-cluster-api-csharp
       mention-group: ${{ vars.SLACK_MENTION_GROUP }}
