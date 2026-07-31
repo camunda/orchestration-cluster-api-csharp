@@ -20,7 +20,9 @@ name: Agent — example coverage
 
 on:
   issues:
-    types: [opened, labeled]
+    # `labeled` only: creating an issue with labels fires BOTH `opened` and
+    # `labeled`, which ran the agent twice for every auto-filed issue.
+    types: [labeled]
   workflow_dispatch:
     inputs:
       issue-number:
@@ -41,8 +43,7 @@ jobs:
     # opened already carrying it, or on an explicit manual dispatch.
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      (github.event.action == 'labeled' && github.event.label.name == 'new-operations') ||
-      (github.event.action == 'opened' && contains(github.event.issue.labels.*.name, 'new-operations'))
+      (github.event.action == 'labeled' && github.event.label.name == 'new-operations')
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     permissions:
@@ -129,6 +130,19 @@ jobs:
           title="$(gh issue view "$ISSUE_NUMBER" --json title --jq '.title')"
           branch="agent/example-coverage-${ISSUE_NUMBER}"
 
+          # Re-labelling or a re-dispatch must not start a second agent run for an
+          # issue that already has an open PR: that burns a Copilot run and races
+          # the first run's branch.
+          existing_pr="$(gh pr list --repo "$GH_REPO" --head "$branch" --state open \
+            --json url,headRepositoryOwner \
+            --jq "[.[] | select(.headRepositoryOwner.login == \"${GITHUB_REPOSITORY_OWNER}\")] | .[0].url // empty")"
+          if [ -n "$existing_pr" ]; then
+            echo "::notice::${existing_pr} is already open for this issue; skipping the agent run."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
           git switch -c "$branch"
 
           {
@@ -144,6 +158,7 @@ jobs:
           printf '%s\n' "$body" > /tmp/issue-body.md
 
       - name: Run Copilot CLI
+        if: steps.setup.outputs.skip != 'true'
         env:
           # Built-in token authenticates the Copilot CLI, billed to the org.
           # It is deliberately NOT used to push or open the PR.
@@ -166,13 +181,22 @@ jobs:
           1. For each operation listed in the issue, add a region-tagged example under
              examples/, copying the exact structure of an existing example in the matching
              domain file, and add the corresponding examples/operation-map.json entry.
+             Also add a docs/overwrite/CamundaClient.md entry for each new public method —
+             CI gates this with scripts/check-overwrite-completeness.js.
           2. Never hand-edit generated code. If the SDK does not yet expose an operation,
              regenerate it with the repo pipeline documented in AGENTS.md and commit the
              regenerated output separately from hand-written changes.
           3. Commit with Conventional Commits messages that pass commitlint: an allowed type,
              lower-case imperative subject, 5-100 characters. Never use 'fix:' for something
              that is not a user-facing bug fix, and never add 'BREAKING CHANGE:' markers.
-          4. Verify your work by running the repo's build/verification pipeline as documented
+          4. Stay inside the example surface: examples/, examples/operation-map.json, any
+             docs the repo requires for a new operation, and regenerated SDK output. Do
+             NOT modify generator sources (hooks/, scripts/, the generator project). If
+             the pipeline itself looks like it needs changing, stop and explain that in
+             your final message instead of editing it.
+          5. Commit every change you make and leave the working tree clean — uncommitted
+             work is discarded and fails the run.
+          6. Verify your work by running the repo's build/verification pipeline as documented
              in AGENTS.md. Do not stop until it passes.
 
           Do not push and do not open a pull request — the workflow does that.
@@ -181,14 +205,17 @@ jobs:
           copilot --yolo -p "$prompt" --model claude-sonnet-4.6
 
       - name: Verify example coverage
+        if: steps.setup.outputs.skip != 'true'
         id: verify
         run: |
           set -euo pipefail
           node scripts/check-example-coverage.js
+          node scripts/check-overwrite-completeness.js
           dotnet build docs/examples/Examples.csproj --configuration Release
 
       - name: Push branch and open pull request
         id: pr
+        if: steps.setup.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           APP_TOKEN: ${{ steps.app-token.outputs.token }}
