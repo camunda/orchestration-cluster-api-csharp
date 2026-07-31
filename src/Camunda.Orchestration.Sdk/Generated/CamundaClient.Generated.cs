@@ -2975,7 +2975,33 @@ public partial class CamundaClient
     /// Get the status of the whole cluster
     /// Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.
     /// </summary>
-    /// <remarks>Operation: getClusterStatus</remarks>
+    /// <remarks>
+    /// Operation: getClusterStatus
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClusterStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var status = await client.GetClusterStatusAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Cluster status: {status.Status}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClusterStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var status = await client.GetClusterStatusAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Cluster status: {status.Status}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterStatusResponse> GetClusterStatusAsync(CancellationToken ct = default)
     {
         var path = $"/cluster/v2/status";
@@ -4683,7 +4709,35 @@ public partial class CamundaClient
     /// Get the status of the restore that is currently in progress
     /// Returns the status of the restore that is currently in progress, reported per broker and per partition. There is at most one restore in flight at any time. Once the restore has finished this endpoint returns 404; the per-partition detail is not retained after completion.
     /// </summary>
-    /// <remarks>Operation: getRestoreStatus</remarks>
+    /// <remarks>
+    /// Operation: getRestoreStatus
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRestoreStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Poll this endpoint while the cluster is in recovery mode to track progress.
+    ///     var status = await client.GetRestoreStatusAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Restore {status.ChangeId}: {status.Status}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRestoreStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Poll this endpoint while the cluster is in recovery mode to track progress.
+    ///     var status = await client.GetRestoreStatusAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Restore {status.ChangeId}: {status.Status}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<RestoreStatusResponse> GetRestoreStatusAsync(CancellationToken ct = default)
     {
         var path = $"/restore";
