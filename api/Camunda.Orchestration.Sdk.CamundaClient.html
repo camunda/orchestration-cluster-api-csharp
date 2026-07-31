@@ -731,6 +731,12 @@ Get batch operation by key.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetClusterStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterStatusAsync_System_Threading_CancellationToken_">GetClusterStatusAsync(CancellationToken)</a></dt>
+    <dd><p>Get the status of the whole cluster
+Checks the health status of the whole cluster, aggregated over all physical tenants. Returns <code>HEALTHY</code> when every physical tenant is healthy, <code>DOWN</code> when no physical tenant can process work, and <code>DEGRADED</code> in every other case. No per-tenant detail is reported; use <code>GET /cluster/v2/topology</code> for that.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetDecisionDefinitionAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionDefinitionAsync_Camunda_Orchestration_Sdk_DecisionDefinitionKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_DecisionDefinitionResult__System_Threading_CancellationToken_">GetDecisionDefinitionAsync(DecisionDefinitionKey, ConsistencyOptions&lt;DecisionDefinitionResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get decision definition
 Returns a decision definition by key.</p>
@@ -964,6 +970,12 @@ respective APIs.
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetRestoreStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRestoreStatusAsync_System_Threading_CancellationToken_">GetRestoreStatusAsync(CancellationToken)</a></dt>
+    <dd><p>Get the status of the restore that is currently in progress
+Returns the status of the restore that is currently in progress, reported per broker and per partition. There is at most one restore in flight at any time. Once the restore has finished this endpoint returns 404; the per-partition detail is not retained after completion.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleResult__System_Threading_CancellationToken_">GetRoleAsync(RoleId, ConsistencyOptions&lt;RoleResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get role
 Get a role by its ID.</p>
@@ -994,7 +1006,7 @@ Note that this endpoint will only return linked forms. This endpoint does not su
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetStatusAsync_System_Threading_CancellationToken_">GetStatusAsync(CancellationToken)</a></dt>
     <dd><p>Get physical tenant status
-Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at <code>/physical-tenants/default/v2/status</code>, but not for any other physical tenant id (<code>/physical-tenants/{id}/v2/status</code> returns 404 for every other id, whether or not a physical tenant with that id exists). If the cluster has only a single physical tenant (the default), this endpoint is equivalent to <code>/cluster/v2/status</code>. Use <code>/cluster/v2/status</code> for the aggregated status of the whole cluster, or <code>/physical-tenants/{id}/v2/topology</code> for the health of a specific physical tenant's partitions.</p>
+Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at <code>/physical-tenants/default/v2/status</code>, but not for any other physical tenant id (<code>/physical-tenants/{id}/v2/status</code> returns 404 for every other id, whether or not a physical tenant with that id exists). On a cluster with only the default physical tenant this endpoint answers the same question as <code>/cluster/v2/status</code>, though not with the same response: <code>/cluster/v2/status</code> reports its status in a body and so also distinguishes a degraded tenant from a healthy one. Use <code>/cluster/v2/status</code> for the aggregated status of the whole cluster, or <code>/physical-tenants/{id}/v2/topology</code> for the health of a specific physical tenant's partitions.</p>
 </dd>
   </dl>
   <dl class="jumplist">

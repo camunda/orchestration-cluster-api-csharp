@@ -886,6 +886,11 @@ This ensures correct event emission for assignee changes.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterStatusResponse.html">ClusterStatusResponse</a></dt>
+      <dd><p>The aggregated status of the whole cluster.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterVariableKindFilterProperty.html">ClusterVariableKindFilterProperty</a></dt>
       <dd><p>ClusterVariableKindEnum property with full advanced search capabilities.</p>
 </dd>
@@ -2431,8 +2436,23 @@ at runtime by the given id.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.RestoreBrokerStatus.html">RestoreBrokerStatus</a></dt>
+      <dd><p>The restore status of a single broker.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.RestorePartitionStatus.html">RestorePartitionStatus</a></dt>
+      <dd><p>The restore status of a single partition on a broker.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.RestoreRequest.html">RestoreRequest</a></dt>
       <dd><p>Describes a restore request. Provide either a list of backup IDs or a time range (<code>from</code>/<code>to</code>) that selects the backups to restore; the two are mutually exclusive.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.RestoreStatusResponse.html">RestoreStatusResponse</a></dt>
+      <dd><p>The status of the restore that is currently in progress.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3812,6 +3832,11 @@ DISCARDED: the producing job failed; this item was superseded by a later activat
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterStatusResponseStatus.html">ClusterStatusResponseStatus</a></dt>
+      <dd><p><code>HEALTHY</code> when every physical tenant is healthy, <code>DOWN</code> when no physical tenant can process work, <code>DEGRADED</code> in every other case.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterVariableKindEnum.html">ClusterVariableKindEnum</a></dt>
       <dd><p>The kind of a cluster variable. JSON is the default. SECRET_REFERENCE allows the value to contain camunda.secrets.X references that are resolved at job activation time.</p>
 </dd>
@@ -4075,6 +4100,16 @@ retained in secondary storage.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ResourceTypeEnum.html">ResourceTypeEnum</a></dt>
       <dd><p>The type of resource to add/remove permissions to/from.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.RestorePartitionStatusState.html">RestorePartitionStatusState</a></dt>
+      <dd><p>The restore state of the partition.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.RestoreStatusResponseStatus.html">RestoreStatusResponseStatus</a></dt>
+      <dd><p>The overall status of the restore.</p>
 </dd>
     </dl>
     <dl class="jumplist">
