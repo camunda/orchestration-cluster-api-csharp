@@ -2972,6 +2972,17 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get the status of the whole cluster
+    /// Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.
+    /// </summary>
+    /// <remarks>Operation: getClusterStatus</remarks>
+    public async Task<ClusterStatusResponse> GetClusterStatusAsync(CancellationToken ct = default)
+    {
+        var path = $"/cluster/v2/status";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterStatusResponse>(HttpMethod.Get, path, null, ct), "getClusterStatus", false, ct);
+    }
+
+    /// <summary>
     /// Get decision definition
     /// Returns a decision definition by key.
     /// </summary>
@@ -4669,6 +4680,17 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get the status of the restore that is currently in progress
+    /// Returns the status of the restore that is currently in progress, reported per broker and per partition. There is at most one restore in flight at any time. Once the restore has finished this endpoint returns 404; the per-partition detail is not retained after completion.
+    /// </summary>
+    /// <remarks>Operation: getRestoreStatus</remarks>
+    public async Task<RestoreStatusResponse> GetRestoreStatusAsync(CancellationToken ct = default)
+    {
+        var path = $"/restore";
+        return await InvokeWithRetryAsync(() => SendAsync<RestoreStatusResponse>(HttpMethod.Get, path, null, ct), "getRestoreStatus", false, ct);
+    }
+
+    /// <summary>
     /// Get role
     /// Get a role by its ID.
     /// </summary>
@@ -4864,7 +4886,7 @@ public partial class CamundaClient
 
     /// <summary>
     /// Get physical tenant status
-    /// Checks the health status of the default physical tenant by verifying if there&apos;s at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). If the cluster has only a single physical tenant (the default), this endpoint is equivalent to `/cluster/v2/status`. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant&apos;s partitions.
+    /// Checks the health status of the default physical tenant by verifying if there&apos;s at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). On a cluster with only the default physical tenant this endpoint answers the same question as `/cluster/v2/status`, though not with the same response: `/cluster/v2/status` reports its status in a body and so also distinguishes a degraded tenant from a healthy one. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant&apos;s partitions.
     /// </summary>
     /// <remarks>
     /// Operation: getStatus

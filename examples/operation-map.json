@@ -1506,5 +1506,19 @@
       "region": "ListSecrets",
       "label": "List secret references"
     }
+  ],
+  "getClusterStatus": [
+    {
+      "file": "Client.cs",
+      "region": "GetClusterStatus",
+      "label": "Get cluster status"
+    }
+  ],
+  "getRestoreStatus": [
+    {
+      "file": "Client.cs",
+      "region": "GetRestoreStatus",
+      "label": "Get restore status"
+    }
   ]
 }

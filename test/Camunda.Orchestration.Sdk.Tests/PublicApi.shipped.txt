@@ -621,7 +621,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   PROP Camunda.Orchestration.Sdk.AgentInstanceKey AgentInstanceKey { get; set; } [JsonPropertyName("agentInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
-  PROP Camunda.Orchestration.Sdk.LoopIterationId? LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
+  PROP Camunda.Orchestration.Sdk.LoopIterationId LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceToolCall> ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
   PROP System.DateTimeOffset ProducedAt { get; set; } [JsonPropertyName("producedAt")]
@@ -1678,6 +1678,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CamundaUserResult> GetAuthenticationAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode mode, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterStatusResponse> GetClusterStatusAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> GetGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.ClusterVariableName name, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ClusterVariableResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1755,6 +1756,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult> GetProcessInstanceWaitStateStatisticsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ResourceResult> GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ResourceResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ResourceSearchQueryResult> SearchResourcesAsync(Camunda.Orchestration.Sdk.ResourceSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ResourceSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RestoreStatusResponse> GetRestoreStatusAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleClientSearchResult> SearchClientsForRoleAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.RoleClientSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleClientSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleCreateResult> CreateRoleAsync(Camunda.Orchestration.Sdk.RoleCreateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RoleGroupSearchResult> SearchGroupsForRoleAsync(Camunda.Orchestration.Sdk.RoleId roleId, Camunda.Orchestration.Sdk.RoleGroupSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.RoleGroupSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1952,6 +1954,17 @@ TYPE Camunda.Orchestration.Sdk.ClusterModeChangeResponse : sealed class
   CTOR ()
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterModeChangeOperation> PlannedChanges { get; set; } [JsonPropertyName("plannedChanges")]
   PROP System.String ChangeId { get; set; } [JsonPropertyName("changeId")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterStatusResponse : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterStatusResponseStatus Status { get; set; } [JsonPropertyName("status")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterStatusResponseStatus : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER HEALTHY = 0 json="HEALTHY"
+  MEMBER DEGRADED = 1 json="DEGRADED"
+  MEMBER DOWN = 2 json="DOWN"
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableKindEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -5470,11 +5483,47 @@ TYPE Camunda.Orchestration.Sdk.ResourceTypeEnum : enum interfaces=[System.ICompa
   MEMBER USER = 21 json="USER"
   MEMBER USERTASK = 22 json="USER_TASK"
 
+TYPE Camunda.Orchestration.Sdk.RestoreBrokerStatus : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.RestorePartitionStatus> Partitions { get; set; } [JsonPropertyName("partitions")]
+  PROP System.Int32 PartitionsRestored { get; set; } [JsonPropertyName("partitionsRestored")]
+  PROP System.Int32 PartitionsToRestore { get; set; } [JsonPropertyName("partitionsToRestore")]
+  PROP System.String BrokerId { get; set; } [JsonPropertyName("brokerId")]
+
+TYPE Camunda.Orchestration.Sdk.RestorePartitionStatus : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.RestorePartitionStatusState State { get; set; } [JsonPropertyName("state")]
+  PROP System.Collections.Generic.List<System.Int64> BackupIds { get; set; } [JsonPropertyName("backupIds")]
+  PROP System.DateTimeOffset? CompletedAt { get; set; } [JsonPropertyName("completedAt")]
+  PROP System.Int32 PartitionId { get; set; } [JsonPropertyName("partitionId")]
+
+TYPE Camunda.Orchestration.Sdk.RestorePartitionStatusState : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER PENDING = 0 json="PENDING"
+  MEMBER RESTORING = 1 json="RESTORING"
+  MEMBER RESTORED = 2 json="RESTORED"
+
 TYPE Camunda.Orchestration.Sdk.RestoreRequest : sealed class
   CTOR ()
   PROP System.Collections.Generic.List<System.Int64>? BackupIds { get; set; } [JsonPropertyName("backupIds")]
   PROP System.DateTimeOffset? From { get; set; } [JsonPropertyName("from")]
   PROP System.DateTimeOffset? To { get; set; } [JsonPropertyName("to")]
+
+TYPE Camunda.Orchestration.Sdk.RestoreStatusResponse : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.RestoreStatusResponseStatus Status { get; set; } [JsonPropertyName("status")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.RestoreBrokerStatus> Brokers { get; set; } [JsonPropertyName("brokers")]
+  PROP System.DateTimeOffset? StartedAt { get; set; } [JsonPropertyName("startedAt")]
+  PROP System.String ChangeId { get; set; } [JsonPropertyName("changeId")]
+
+TYPE Camunda.Orchestration.Sdk.RestoreStatusResponseStatus : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER INPROGRESS = 0 json="IN_PROGRESS"
+  MEMBER COMPLETED = 1 json="COMPLETED"
+  MEMBER FAILED = 2 json="FAILED"
+  MEMBER CANCELLED = 3 json="CANCELLED"
 
 TYPE Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest : sealed class
   CTOR ()

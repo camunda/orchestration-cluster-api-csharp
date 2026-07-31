@@ -50,6 +50,35 @@ public static class ClientExamples
     // </ChangeClusterMode>
     #endregion ChangeClusterMode
 
+    #region GetClusterStatus
+
+    // <GetClusterStatus>
+    public static async Task GetClusterStatusExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var status = await client.GetClusterStatusAsync();
+
+        Console.WriteLine($"Cluster status: {status.Status}");
+    }
+    // </GetClusterStatus>
+    #endregion GetClusterStatus
+
+    #region GetRestoreStatus
+
+    // <GetRestoreStatus>
+    public static async Task GetRestoreStatusExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // Poll this endpoint while the cluster is in recovery mode to track progress.
+        var status = await client.GetRestoreStatusAsync();
+
+        Console.WriteLine($"Restore {status.ChangeId}: {status.Status}");
+    }
+    // </GetRestoreStatus>
+    #endregion GetRestoreStatus
+
     #region Restore
 
     // <Restore>
