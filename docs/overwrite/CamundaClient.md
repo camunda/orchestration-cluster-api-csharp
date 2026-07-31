@@ -1083,6 +1083,26 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterStatusAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#GetClusterStatus)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetRestoreStatusAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#GetRestoreStatus)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetSystemConfigurationAsync(System.Threading.CancellationToken)
 example:
 - *content
