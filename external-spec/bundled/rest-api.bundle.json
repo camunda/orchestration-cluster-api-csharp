@@ -17912,7 +17912,7 @@
         "x-required-permissions": [],
         "security": [],
         "summary": "Get physical tenant status",
-        "description": "Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). If the cluster has only a single physical tenant (the default), this endpoint is equivalent to `/cluster/v2/status`. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant's partitions.",
+        "description": "Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). On a cluster with only the default physical tenant this endpoint answers the same question as `/cluster/v2/status`, though not with the same response: `/cluster/v2/status` reports its status in a body and so also distinguishes a degraded tenant from a healthy one. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant's partitions.",
         "responses": {
           "204": {
             "description": "The default physical tenant is UP and has at least one partition with a healthy leader."
@@ -17922,6 +17922,61 @@
           }
         },
         "x-added-in-version": "8.8"
+      }
+    },
+    "/cluster/v2/status": {
+      "servers": [
+        {
+          "url": "{schema}://{host}:{port}",
+          "variables": {
+            "host": {
+              "default": "localhost",
+              "description": "The hostname of the Orchestration Cluster REST Gateway."
+            },
+            "port": {
+              "default": "8080",
+              "description": "The port of the Orchestration Cluster REST API server."
+            },
+            "schema": {
+              "default": "http",
+              "description": "The schema of the Orchestration Cluster REST API server."
+            }
+          }
+        }
+      ],
+      "get": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "getClusterStatus",
+        "x-required-permissions": [],
+        "security": [],
+        "summary": "Get the status of the whole cluster",
+        "description": "Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.",
+        "responses": {
+          "200": {
+            "description": "The cluster can process work; the body reports whether it is fully healthy or degraded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterStatusResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The cluster is DOWN because no physical tenant can process work.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterStatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
       }
     },
     "/system/usage-metrics": {
@@ -20439,6 +20494,67 @@
           },
           "409": {
             "description": "The cluster is not in recovery mode, so the restore cannot be accepted."
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      },
+      "get": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Recovery"
+        ],
+        "operationId": "getRestoreStatus",
+        "x-required-permissions": [],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get the status of the restore that is currently in progress",
+        "description": "Returns the status of the restore that is currently in progress, reported per broker and per partition. There is at most one restore in flight at any time. Once the restore has finished this endpoint returns 404; the per-partition detail is not retained after completion.",
+        "responses": {
+          "200": {
+            "description": "The status of the restore that is currently in progress.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestoreStatusResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No restore is currently in progress."
           },
           "500": {
             "description": "An internal error occurred while processing the request.",
@@ -23277,8 +23393,7 @@
             "type": "string"
           },
           "loopIteration": {
-            "description": "The loopIteration this item belongs to. A loopIteration is one pass through the agent\nfeedback loop: one LLM call, its tool dispatches, and their results. Null if not provided\nby the connector.\n",
-            "nullable": true,
+            "description": "The loopIteration this item belongs to. A loopIteration is one pass through the agent\nfeedback loop: one LLM call, its tool dispatches, and their results.\n",
             "allOf": [
               {
                 "$ref": "#/components/schemas/LoopIterationId"
@@ -26978,6 +27093,25 @@
           }
         }
       },
+      "ClusterStatusResponse": {
+        "description": "The aggregated status of the whole cluster.",
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "description": "`HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, `DEGRADED` in every other case.",
+            "type": "string",
+            "example": "HEALTHY",
+            "enum": [
+              "HEALTHY",
+              "DEGRADED",
+              "DOWN"
+            ]
+          }
+        }
+      },
       "Mode": {
         "description": "The operating mode of a cluster's partitions.",
         "type": "string",
@@ -27255,6 +27389,131 @@
               100,
               101
             ]
+          }
+        }
+      },
+      "RestoreStatusResponse": {
+        "description": "The status of the restore that is currently in progress.",
+        "type": "object",
+        "required": [
+          "brokers",
+          "changeId",
+          "startedAt",
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "description": "The overall status of the restore.",
+            "type": "string",
+            "enum": [
+              "IN_PROGRESS",
+              "COMPLETED",
+              "FAILED",
+              "CANCELLED"
+            ],
+            "example": "IN_PROGRESS"
+          },
+          "changeId": {
+            "description": "The ID of the cluster change that performs the restore.",
+            "type": "string",
+            "example": "-2"
+          },
+          "startedAt": {
+            "description": "The time the restore started, as an ISO 8601 timestamp.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2024-01-01T10:00:00Z"
+          },
+          "brokers": {
+            "description": "The per-broker restore status.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RestoreBrokerStatus"
+            }
+          }
+        }
+      },
+      "RestoreBrokerStatus": {
+        "description": "The restore status of a single broker.",
+        "type": "object",
+        "required": [
+          "brokerId",
+          "partitions",
+          "partitionsRestored",
+          "partitionsToRestore"
+        ],
+        "properties": {
+          "brokerId": {
+            "description": "The ID of the broker, including its zone if it belongs to one.",
+            "type": "string",
+            "example": "1"
+          },
+          "partitionsRestored": {
+            "description": "The number of the broker's partitions that have been restored so far.",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "partitionsToRestore": {
+            "description": "The total number of the broker's partitions to restore.",
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "partitions": {
+            "description": "The per-partition restore status for this broker.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RestorePartitionStatus"
+            }
+          }
+        }
+      },
+      "RestorePartitionStatus": {
+        "description": "The restore status of a single partition on a broker.",
+        "type": "object",
+        "required": [
+          "backupIds",
+          "completedAt",
+          "partitionId",
+          "state"
+        ],
+        "properties": {
+          "partitionId": {
+            "description": "The ID of the partition.",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "state": {
+            "description": "The restore state of the partition.",
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RESTORING",
+              "RESTORED"
+            ],
+            "example": "RESTORING"
+          },
+          "backupIds": {
+            "description": "The IDs of the backups this partition is restored from.",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": [
+              100,
+              101
+            ]
+          },
+          "completedAt": {
+            "description": "The time the partition was restored, as an ISO 8601 timestamp; null unless the partition state is `RESTORED`.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2024-01-01T10:02:00Z"
           }
         }
       },

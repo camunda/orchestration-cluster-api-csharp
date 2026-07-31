@@ -196,6 +196,20 @@ public enum BatchOperationSearchQuerySortRequestField
 }
 
 /// <summary>
+/// `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, `DEGRADED` in every other case.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterStatusResponseStatus
+{
+    [JsonPropertyName("HEALTHY")]
+    HEALTHY,
+    [JsonPropertyName("DEGRADED")]
+    DEGRADED,
+    [JsonPropertyName("DOWN")]
+    DOWN,
+}
+
+/// <summary>
 /// The field to sort by.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -973,6 +987,36 @@ public enum ResourceSearchQuerySortRequestField
     DeploymentKey,
     [JsonPropertyName("tenantId")]
     TenantId,
+}
+
+/// <summary>
+/// The restore state of the partition.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RestorePartitionStatusState
+{
+    [JsonPropertyName("PENDING")]
+    PENDING,
+    [JsonPropertyName("RESTORING")]
+    RESTORING,
+    [JsonPropertyName("RESTORED")]
+    RESTORED,
+}
+
+/// <summary>
+/// The overall status of the restore.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RestoreStatusResponseStatus
+{
+    [JsonPropertyName("IN_PROGRESS")]
+    INPROGRESS,
+    [JsonPropertyName("COMPLETED")]
+    COMPLETED,
+    [JsonPropertyName("FAILED")]
+    FAILED,
+    [JsonPropertyName("CANCELLED")]
+    CANCELLED,
 }
 
 /// <summary>
@@ -4269,12 +4313,11 @@ public sealed class AgentInstanceHistoryItemResult
 
     /// <summary>
     /// The loopIteration this item belongs to. A loopIteration is one pass through the agent
-    /// feedback loop: one LLM call, its tool dispatches, and their results. Null if not provided
-    /// by the connector.
+    /// feedback loop: one LLM call, its tool dispatches, and their results.
     /// 
     /// </summary>
     [JsonPropertyName("loopIteration")]
-    public LoopIterationId? LoopIteration { get; set; }
+    public LoopIterationId LoopIteration { get; set; }
 
     /// <summary>
     /// The role of this history item in the conversation.
@@ -8701,6 +8744,19 @@ public sealed class ClusterModeChangeResponse
     /// </summary>
     [JsonPropertyName("plannedChanges")]
     public List<ClusterModeChangeOperation> PlannedChanges { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The aggregated status of the whole cluster.
+/// </summary>
+public sealed class ClusterStatusResponse
+{
+    /// <summary>
+    /// `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, `DEGRADED` in every other case.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public ClusterStatusResponseStatus Status { get; set; }
 
 }
 
@@ -23873,6 +23929,68 @@ public enum ResourceTypeEnum
 }
 
 /// <summary>
+/// The restore status of a single broker.
+/// </summary>
+public sealed class RestoreBrokerStatus
+{
+    /// <summary>
+    /// The ID of the broker, including its zone if it belongs to one.
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public string BrokerId { get; set; } = null!;
+
+    /// <summary>
+    /// The number of the broker&apos;s partitions that have been restored so far.
+    /// </summary>
+    [JsonPropertyName("partitionsRestored")]
+    public int PartitionsRestored { get; set; }
+
+    /// <summary>
+    /// The total number of the broker&apos;s partitions to restore.
+    /// </summary>
+    [JsonPropertyName("partitionsToRestore")]
+    public int PartitionsToRestore { get; set; }
+
+    /// <summary>
+    /// The per-partition restore status for this broker.
+    /// </summary>
+    [JsonPropertyName("partitions")]
+    public List<RestorePartitionStatus> Partitions { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The restore status of a single partition on a broker.
+/// </summary>
+public sealed class RestorePartitionStatus
+{
+    /// <summary>
+    /// The ID of the partition.
+    /// </summary>
+    [JsonPropertyName("partitionId")]
+    public int PartitionId { get; set; }
+
+    /// <summary>
+    /// The restore state of the partition.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public RestorePartitionStatusState State { get; set; }
+
+    /// <summary>
+    /// The IDs of the backups this partition is restored from.
+    /// </summary>
+    [JsonPropertyName("backupIds")]
+    public List<long> BackupIds { get; set; } = null!;
+
+    /// <summary>
+    /// The time the partition was restored, as an ISO 8601 timestamp; null unless the partition state is `RESTORED`.
+    /// </summary>
+    [JsonPropertyName("completedAt")]
+    public DateTimeOffset? CompletedAt { get; set; }
+
+}
+
+/// <summary>
 /// Describes a restore request. Provide either a list of backup IDs or a time range (`from`/`to`) that selects the backups to restore; the two are mutually exclusive.
 /// </summary>
 public sealed class RestoreRequest
@@ -23894,6 +24012,37 @@ public sealed class RestoreRequest
     /// </summary>
     [JsonPropertyName("backupIds")]
     public List<long>? BackupIds { get; set; }
+
+}
+
+/// <summary>
+/// The status of the restore that is currently in progress.
+/// </summary>
+public sealed class RestoreStatusResponse
+{
+    /// <summary>
+    /// The overall status of the restore.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public RestoreStatusResponseStatus Status { get; set; }
+
+    /// <summary>
+    /// The ID of the cluster change that performs the restore.
+    /// </summary>
+    [JsonPropertyName("changeId")]
+    public string ChangeId { get; set; } = null!;
+
+    /// <summary>
+    /// The time the restore started, as an ISO 8601 timestamp.
+    /// </summary>
+    [JsonPropertyName("startedAt")]
+    public DateTimeOffset? StartedAt { get; set; }
+
+    /// <summary>
+    /// The per-broker restore status.
+    /// </summary>
+    [JsonPropertyName("brokers")]
+    public List<RestoreBrokerStatus> Brokers { get; set; } = null!;
 
 }
 
