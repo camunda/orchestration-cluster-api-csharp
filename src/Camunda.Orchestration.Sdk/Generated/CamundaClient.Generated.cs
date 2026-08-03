@@ -3328,6 +3328,24 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get exporting status
+    /// Returns the exporting status of the physical tenant, aggregated over every replica of
+    /// every one of its partitions.
+    /// 
+    /// Because pause and resume are applied to all replicas, the status is only a single phase
+    /// if every replica reports that phase; otherwise it is `MIXED`, which means a pause or
+    /// resume is still in flight or was only partially applied. Backup tooling should treat
+    /// only `PAUSED` and `SOFT_PAUSED` as confirmation that exporting is paused.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: getExportingStatus</remarks>
+    public async Task<ExportingStatusResponse> GetExportingStatusAsync(CancellationToken ct = default)
+    {
+        var path = $"/exporting";
+        return await InvokeWithRetryAsync(() => SendAsync<ExportingStatusResponse>(HttpMethod.Get, path, null, ct), "getExportingStatus", false, ct);
+    }
+
+    /// <summary>
     /// Get form by key
     /// Get a form by its unique form key.
     /// 
@@ -5417,6 +5435,11 @@ public partial class CamundaClient
     /// Only references the caller holds `SECRET:READ` on are returned. This endpoint never
     /// returns secret values, only the reference names.
     /// 
+    /// The references are read from the secret stores configured for the caller&apos;s physical tenant.
+    /// Secret names that cannot form a valid `camunda.secrets.&lt;name&gt;` reference (for example names
+    /// containing a dot or a dash) are omitted, since they could neither be resolved nor be used in
+    /// a BPMN expression.
+    /// 
     /// This endpoint is an alpha feature and may be subject to change in future releases.
     /// 
     /// </summary>
@@ -5980,10 +6003,11 @@ public partial class CamundaClient
     /// one reference never fails the others. Only structurally invalid requests are rejected with
     /// HTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.
     /// 
-    /// This endpoint is an alpha feature and may be subject to change in future releases.
+    /// References are resolved against the secret stores configured for the caller&apos;s physical
+    /// tenant, served from the gateway&apos;s secret cache when the value is already cached and read
+    /// from the store otherwise.
     /// 
-    /// Phase 1: the secret backend is mocked. Only a fixed allow-list of references resolves;
-    /// every other authorized, valid reference returns `NOT_FOUND`.
+    /// This endpoint is an alpha feature and may be subject to change in future releases.
     /// 
     /// </summary>
     /// <remarks>

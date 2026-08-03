@@ -699,6 +699,8 @@ public enum IncidentSearchQuerySortRequestField
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum JobSearchQuerySortRequestField
 {
+    [JsonPropertyName("creationTime")]
+    CreationTime,
     [JsonPropertyName("deadline")]
     Deadline,
     [JsonPropertyName("deniedReason")]
@@ -14121,6 +14123,41 @@ public sealed class EvaluateDecisionResult
 }
 
 /// <summary>
+/// The exporting status of a physical tenant, aggregated over every replica of every one of
+/// its partitions:
+/// - `EXPORTING`: all replicas are exporting and committing their position.
+/// - `PAUSED`: all replicas are paused, nothing is being exported.
+/// - `SOFT_PAUSED`: all replicas keep exporting but do not commit their position.
+/// - `MIXED`: replicas report different phases, so the tenant is in no single phase.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ExportingStatusCode
+{
+    [JsonPropertyName("EXPORTING")]
+    EXPORTING,
+    [JsonPropertyName("PAUSED")]
+    PAUSED,
+    [JsonPropertyName("SOFT_PAUSED")]
+    SOFTPAUSED,
+    [JsonPropertyName("MIXED")]
+    MIXED,
+}
+
+/// <summary>
+/// Response body for the exporting status of a physical tenant.
+/// </summary>
+public sealed class ExportingStatusResponse
+{
+    /// <summary>
+    /// The aggregated exporting status of the physical tenant.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public ExportingStatusCode Status { get; set; }
+
+}
+
+/// <summary>
 /// ExpressionEvaluationRequest
 /// </summary>
 public sealed class ExpressionEvaluationRequest : global::Camunda.Orchestration.Sdk.ITenantIdSettable
@@ -24819,7 +24856,11 @@ public sealed class SearchQueryResponse
 /// 
 /// - `NOT_FOUND`: no secret exists for the reference.
 /// - `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference.
-/// - `INVALID_REFERENCE`: the reference is malformed.
+/// - `INVALID_REFERENCE`: the reference is malformed, or the configured store rejected it as
+///   an invalid secret identifier.
+/// - `UNREADABLE`: the configured store could not return a value for the reference, for
+///   example because it rejected the cluster&apos;s own store credentials or the stored value could
+///   not be read. Whether the secret exists is not implied.
 /// 
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -24831,6 +24872,8 @@ public enum SecretErrorCode
     ACCESSDENIED,
     [JsonPropertyName("INVALID_REFERENCE")]
     INVALIDREFERENCE,
+    [JsonPropertyName("UNREADABLE")]
+    UNREADABLE,
 }
 
 /// <summary>
@@ -24845,10 +24888,9 @@ public sealed class SecretListRequest
 /// <summary>
 /// The secret references the caller is authorized to see.
 /// 
-/// Unbounded for now: Phase 1&apos;s backend is mocked with at most 3 references. Pagination is
-/// expected to land here before GA, once a real secret store can return a tenant&apos;s full
-/// enumeration in one response. This is an alpha endpoint, so that is not yet a
-/// breaking-contract concern.
+/// Unbounded for now: the response carries the configured stores&apos; full enumeration for the
+/// physical tenant. Pagination is expected to land here before GA. This is an alpha endpoint,
+/// so that is not yet a breaking-contract concern.
 /// 
 /// </summary>
 public sealed class SecretListResult
@@ -24877,7 +24919,11 @@ public sealed class SecretResolutionError
     /// 
     /// - `NOT_FOUND`: no secret exists for the reference.
     /// - `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference.
-    /// - `INVALID_REFERENCE`: the reference is malformed.
+    /// - `INVALID_REFERENCE`: the reference is malformed, or the configured store rejected it as
+    ///   an invalid secret identifier.
+    /// - `UNREADABLE`: the configured store could not return a value for the reference, for
+    ///   example because it rejected the cluster&apos;s own store credentials or the stored value could
+    ///   not be read. Whether the secret exists is not implied.
     /// 
     /// </summary>
     [JsonPropertyName("code")]
