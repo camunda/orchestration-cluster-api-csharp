@@ -32,6 +32,15 @@ on:
 
 permissions: {}
 
+env:
+  # Single source of truth for what "verified" means. The verify step runs exactly
+  # this, and the agent prompt is handed exactly this, so the agent cannot mistake a
+  # green lint or test run for a passing gate — and the two cannot drift apart.
+  VERIFY_COMMANDS: |
+    node scripts/check-example-coverage.js
+    node scripts/check-overwrite-completeness.js
+    dotnet build docs/examples/Examples.csproj --configuration Release
+
 # One agent run per issue at a time; a re-label must not race a running agent.
 concurrency:
   group: agent-example-coverage-${{ github.event.issue.number || inputs.issue-number }}
@@ -204,11 +213,18 @@ jobs:
              your final message instead of editing it.
           5. Commit every change you make and leave the working tree clean — uncommitted
              work is discarded and fails the run.
-          6. Verify your work by running the repo's build/verification pipeline as documented
-             in AGENTS.md. Do not stop until it passes.
-
-          Do not push and do not open a pull request — the workflow does that.
+          6. Read AGENTS.md for the build/verification pipeline, then finish by running
+             the exact commands below. They are the gate this workflow applies: a green
+             lint, typecheck or test run does NOT mean they pass. Do not stop until
+             every one of them passes.
           PROMPT_TAIL
+            # $( ) strips every trailing newline, so the blank line before the
+            # closing instruction is emitted here and does not depend on how
+            # VERIFY_COMMANDS happens to be quoted.
+            printf '%s\n\n' "$(printf '%s' "$VERIFY_COMMANDS" | sed 's/^/      /')"
+            cat <<'PROMPT_FOOT'
+          Do not push and do not open a pull request — the workflow does that.
+          PROMPT_FOOT
           } > /tmp/prompt.md
 
           copilot --yolo -p "$(cat /tmp/prompt.md)" --model claude-sonnet-4.6
@@ -216,11 +232,7 @@ jobs:
       - name: Verify example coverage
         if: steps.setup.outputs.skip != 'true'
         id: verify
-        run: |
-          set -euo pipefail
-          node scripts/check-example-coverage.js
-          node scripts/check-overwrite-completeness.js
-          dotnet build docs/examples/Examples.csproj --configuration Release
+        run: bash -euo pipefail -c "$VERIFY_COMMANDS"
 
       - name: Push branch and open pull request
         id: pr
