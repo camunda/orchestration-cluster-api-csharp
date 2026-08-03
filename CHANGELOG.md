@@ -1,3 +1,10 @@
+# [10.0.0-alpha.8](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.7...v10.0.0-alpha.8) (2026-08-03)
+
+
+### Bug Fixes
+
+* **ci:** put the branch in the prompt and catch untracked leftovers ([#371](https://github.com/camunda/orchestration-cluster-api-csharp/issues/371)) ([1b2d21f](https://github.com/camunda/orchestration-cluster-api-csharp/commit/1b2d21fd3976991c9e00bb6a5d0219c29cca40d7))
+
 # [10.0.0-alpha.7](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.6...v10.0.0-alpha.7) (2026-08-03)
 
 
