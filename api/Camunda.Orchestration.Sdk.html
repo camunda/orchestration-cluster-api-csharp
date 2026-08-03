@@ -1360,6 +1360,11 @@ Mirrors the JS SDK's hydrateConfig function.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ExportingStatusResponse.html">ExportingStatusResponse</a></dt>
+      <dd><p>Response body for the exporting status of a physical tenant.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ExpressionEvaluationRequest.html">ExpressionEvaluationRequest</a></dt>
       <dd><p>ExpressionEvaluationRequest</p>
 </dd>
@@ -2610,10 +2615,9 @@ optional: omitting it (or sending an empty object) applies no filters.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretListResult.html">SecretListResult</a></dt>
       <dd><p>The secret references the caller is authorized to see.</p>
-<p>Unbounded for now: Phase 1's backend is mocked with at most 3 references. Pagination is
-expected to land here before GA, once a real secret store can return a tenant's full
-enumeration in one response. This is an alpha endpoint, so that is not yet a
-breaking-contract concern.</p>
+<p>Unbounded for now: the response carries the configured stores' full enumeration for the
+physical tenant. Pagination is expected to land here before GA. This is an alpha endpoint,
+so that is not yet a breaking-contract concern.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3922,6 +3926,18 @@ DISCARDED: the producing job failed; this item was superseded by a later activat
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ExportingStatusCode.html">ExportingStatusCode</a></dt>
+      <dd><p>The exporting status of a physical tenant, aggregated over every replica of every one of
+its partitions:</p>
+<ul>
+<li><code>EXPORTING</code>: all replicas are exporting and committing their position.</li>
+<li><code>PAUSED</code>: all replicas are paused, nothing is being exported.</li>
+<li><code>SOFT_PAUSED</code>: all replicas keep exporting but do not commit their position.</li>
+<li><code>MIXED</code>: replicas report different phases, so the tenant is in no single phase.</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.GlobalListenerSourceEnum.html">GlobalListenerSourceEnum</a></dt>
       <dd><p>How the global listener was defined.</p>
 </dd>
@@ -4138,7 +4154,11 @@ retained in secondary storage.</p>
 <ul>
 <li><code>NOT_FOUND</code>: no secret exists for the reference.</li>
 <li><code>ACCESS_DENIED</code>: the caller lacks <code>SECRET:REVEAL</code> on the reference.</li>
-<li><code>INVALID_REFERENCE</code>: the reference is malformed.</li>
+<li><code>INVALID_REFERENCE</code>: the reference is malformed, or the configured store rejected it as
+an invalid secret identifier.</li>
+<li><code>UNREADABLE</code>: the configured store could not return a value for the reference, for
+example because it rejected the cluster's own store credentials or the stored value could
+not be read. Whether the secret exists is not implied.</li>
 </ul>
 </dd>
     </dl>

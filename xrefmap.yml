@@ -13078,6 +13078,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetElementInstanceAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetElementInstanceAsync
   nameWithType: CamundaClient.GetElementInstanceAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetExportingStatusAsync(System.Threading.CancellationToken)
+  name: GetExportingStatusAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetExportingStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetExportingStatusAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetExportingStatusAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetExportingStatusAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetExportingStatusAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetExportingStatusAsync*
+  name: GetExportingStatusAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetExportingStatusAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetExportingStatusAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetExportingStatusAsync
+  nameWithType: CamundaClient.GetExportingStatusAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetFormByKeyAsync(Camunda.Orchestration.Sdk.FormKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.FormResult},System.Threading.CancellationToken)
   name: GetFormByKeyAsync(FormKey, ConsistencyOptions<FormResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetFormByKeyAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetFormByKeyAsync_Camunda_Orchestration_Sdk_FormKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_FormResult__System_Threading_CancellationToken_
@@ -25420,6 +25432,54 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.EventualConsistencyTimeoutException.WaitedMs
   fullName: Camunda.Orchestration.Sdk.EventualConsistencyTimeoutException.WaitedMs
   nameWithType: EventualConsistencyTimeoutException.WaitedMs
+- uid: Camunda.Orchestration.Sdk.ExportingStatusCode
+  name: ExportingStatusCode
+  href: api/Camunda.Orchestration.Sdk.ExportingStatusCode.html
+  commentId: T:Camunda.Orchestration.Sdk.ExportingStatusCode
+  fullName: Camunda.Orchestration.Sdk.ExportingStatusCode
+  nameWithType: ExportingStatusCode
+- uid: Camunda.Orchestration.Sdk.ExportingStatusCode.EXPORTING
+  name: EXPORTING
+  href: api/Camunda.Orchestration.Sdk.ExportingStatusCode.html#Camunda_Orchestration_Sdk_ExportingStatusCode_EXPORTING
+  commentId: F:Camunda.Orchestration.Sdk.ExportingStatusCode.EXPORTING
+  fullName: Camunda.Orchestration.Sdk.ExportingStatusCode.EXPORTING
+  nameWithType: ExportingStatusCode.EXPORTING
+- uid: Camunda.Orchestration.Sdk.ExportingStatusCode.MIXED
+  name: MIXED
+  href: api/Camunda.Orchestration.Sdk.ExportingStatusCode.html#Camunda_Orchestration_Sdk_ExportingStatusCode_MIXED
+  commentId: F:Camunda.Orchestration.Sdk.ExportingStatusCode.MIXED
+  fullName: Camunda.Orchestration.Sdk.ExportingStatusCode.MIXED
+  nameWithType: ExportingStatusCode.MIXED
+- uid: Camunda.Orchestration.Sdk.ExportingStatusCode.PAUSED
+  name: PAUSED
+  href: api/Camunda.Orchestration.Sdk.ExportingStatusCode.html#Camunda_Orchestration_Sdk_ExportingStatusCode_PAUSED
+  commentId: F:Camunda.Orchestration.Sdk.ExportingStatusCode.PAUSED
+  fullName: Camunda.Orchestration.Sdk.ExportingStatusCode.PAUSED
+  nameWithType: ExportingStatusCode.PAUSED
+- uid: Camunda.Orchestration.Sdk.ExportingStatusCode.SOFTPAUSED
+  name: SOFTPAUSED
+  href: api/Camunda.Orchestration.Sdk.ExportingStatusCode.html#Camunda_Orchestration_Sdk_ExportingStatusCode_SOFTPAUSED
+  commentId: F:Camunda.Orchestration.Sdk.ExportingStatusCode.SOFTPAUSED
+  fullName: Camunda.Orchestration.Sdk.ExportingStatusCode.SOFTPAUSED
+  nameWithType: ExportingStatusCode.SOFTPAUSED
+- uid: Camunda.Orchestration.Sdk.ExportingStatusResponse
+  name: ExportingStatusResponse
+  href: api/Camunda.Orchestration.Sdk.ExportingStatusResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.ExportingStatusResponse
+  fullName: Camunda.Orchestration.Sdk.ExportingStatusResponse
+  nameWithType: ExportingStatusResponse
+- uid: Camunda.Orchestration.Sdk.ExportingStatusResponse.Status
+  name: Status
+  href: api/Camunda.Orchestration.Sdk.ExportingStatusResponse.Status.html#Camunda_Orchestration_Sdk_ExportingStatusResponse_Status
+  commentId: P:Camunda.Orchestration.Sdk.ExportingStatusResponse.Status
+  fullName: Camunda.Orchestration.Sdk.ExportingStatusResponse.Status
+  nameWithType: ExportingStatusResponse.Status
+- uid: Camunda.Orchestration.Sdk.ExportingStatusResponse.Status*
+  name: Status
+  href: api/Camunda.Orchestration.Sdk.ExportingStatusResponse.Status.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ExportingStatusResponse.Status
+  fullName: Camunda.Orchestration.Sdk.ExportingStatusResponse.Status
+  nameWithType: ExportingStatusResponse.Status
 - uid: Camunda.Orchestration.Sdk.ExpressionEvaluationRequest
   name: ExpressionEvaluationRequest
   href: api/Camunda.Orchestration.Sdk.ExpressionEvaluationRequest.html
@@ -31330,6 +31390,12 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField
   fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField
   nameWithType: JobSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.CreationTime
+  name: CreationTime
+  href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_CreationTime
+  commentId: F:Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.CreationTime
+  fullName: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.CreationTime
+  nameWithType: JobSearchQuerySortRequestField.CreationTime
 - uid: Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.Deadline
   name: Deadline
   href: api/Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_JobSearchQuerySortRequestField_Deadline
@@ -43501,6 +43567,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.SecretErrorCode.NOTFOUND
   fullName: Camunda.Orchestration.Sdk.SecretErrorCode.NOTFOUND
   nameWithType: SecretErrorCode.NOTFOUND
+- uid: Camunda.Orchestration.Sdk.SecretErrorCode.UNREADABLE
+  name: UNREADABLE
+  href: api/Camunda.Orchestration.Sdk.SecretErrorCode.html#Camunda_Orchestration_Sdk_SecretErrorCode_UNREADABLE
+  commentId: F:Camunda.Orchestration.Sdk.SecretErrorCode.UNREADABLE
+  fullName: Camunda.Orchestration.Sdk.SecretErrorCode.UNREADABLE
+  nameWithType: SecretErrorCode.UNREADABLE
 - uid: Camunda.Orchestration.Sdk.SecretListRequest
   name: SecretListRequest
   href: api/Camunda.Orchestration.Sdk.SecretListRequest.html
