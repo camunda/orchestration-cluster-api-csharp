@@ -1,3 +1,10 @@
+# [10.0.0-alpha.9](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.8...v10.0.0-alpha.9) (2026-08-03)
+
+
+### Bug Fixes
+
+* **ci:** tell the agent which commands actually gate its work ([#372](https://github.com/camunda/orchestration-cluster-api-csharp/issues/372)) ([5f4d516](https://github.com/camunda/orchestration-cluster-api-csharp/commit/5f4d516cbdfe0a079a64fd8c823a5a037f35fa37))
+
 # [10.0.0-alpha.8](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.7...v10.0.0-alpha.8) (2026-08-03)
 
 
