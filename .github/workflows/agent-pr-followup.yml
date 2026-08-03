@@ -88,9 +88,13 @@ jobs:
             issue_comment)
               [ "$IS_PR" = "true" ] || { echo "Not a PR comment."; exit 0; }
               is_self "$COMMENT_AUTHOR" && { echo "Own comment; ignoring."; exit 0; }
-              case "$COMMENT_BODY" in
-                */agent\ fix*) ;;
-                *) echo "No /agent fix command."; exit 0 ;;
+              # The command must open the comment (leading whitespace allowed) rather
+              # than appear anywhere in it, so prose that merely mentions the command
+              # — "please don't /agent fix this" — cannot start a privileged run.
+              first_line="$(printf '%s\n' "$COMMENT_BODY" | head -n 1 | sed 's/^[[:space:]]*//')"
+              case "$first_line" in
+                "/agent fix"*) ;;
+                *) echo "Comment does not start with /agent fix."; exit 0 ;;
               esac
               # This command mints an App token and runs Copilot with --yolo, so it
               # must not be steerable by arbitrary commenters on a public repo.
@@ -177,6 +181,7 @@ jobs:
       copilot-requests: write
       pull-requests: write
       issues: write          # the outcome comment goes through the Issues API
+      actions: read          # `gh run view --log-failed` reads the failing run's log
     steps:
       - name: Import secrets
         id: secrets
@@ -258,10 +263,18 @@ jobs:
               } > /tmp/feedback.md
               ;;
             ci)
+              # stderr is deliberately not silenced: if this cannot read the log
+              # (missing `actions: read`, expired logs), that has to be visible in the
+              # run log rather than degrading into an empty prompt the agent guesses at.
+              log="$(gh run view "$RUN_ID" --repo "$GH_REPO" --log-failed | tail -n 200 || true)"
+              if [ -z "${log//[[:space:]]/}" ]; then
+                echo "::error::No failing-step output for run ${RUN_ID}; refusing to run the agent with no feedback."
+                exit 1
+              fi
               {
                 echo "The CI run failed. Failing step output:"
                 echo
-                gh run view "$RUN_ID" --repo "$GH_REPO" --log-failed 2>/dev/null | tail -n 200 || true
+                printf '%s\n' "$log"
               } > /tmp/feedback.md
               ;;
           esac
