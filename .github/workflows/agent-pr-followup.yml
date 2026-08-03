@@ -284,6 +284,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PR: ${{ needs.triage.outputs.pr }}
+          BRANCH: ${{ needs.triage.outputs.branch }}
           REASON: ${{ needs.triage.outputs.reason }}
         run: |
           set -euo pipefail
@@ -301,8 +302,8 @@ jobs:
 
           Something needs fixing. The trigger and the feedback to act on follow.
           PROMPT_HEAD
-            printf '\n  Repository: %s\n  Pull request: #%s\n  Trigger: %s\n\n' \
-              "$GITHUB_REPOSITORY" "$PR" "$REASON"
+            printf '\n  Repository: %s\n  Pull request: #%s\n  Branch: %s\n  Trigger: %s\n\n' \
+              "$GITHUB_REPOSITORY" "$PR" "$BRANCH" "$REASON"
             echo "  Feedback:"
             sed 's/^/  /' /tmp/feedback.md
             cat <<'PROMPT_TAIL'
@@ -343,8 +344,12 @@ jobs:
         run: |
           set -euo pipefail
 
-          if ! git diff --quiet || ! git diff --cached --quiet; then
-            echo "::error::The agent left uncommitted changes; refusing to push a partial fix."
+          # --porcelain rather than `git diff`, so untracked leftovers (scratch files,
+          # stray build output) also fail the run. The prompt demands a clean tree, and
+          # tracked-only checks let the most common form of mess through. Ignored paths
+          # are still excluded, so normal build artefacts do not trip this.
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::The agent left the working tree dirty; refusing to push a partial fix."
             git status --short
             exit 1
           fi
