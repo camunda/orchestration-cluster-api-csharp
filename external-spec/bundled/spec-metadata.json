@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:f017493adcfd1d6f933879fc3cefc02ab23f2406cca0e5af6be135fdb564cffd",
+  "specHash": "sha256:76fefd1a18156576292c4ab17ecb57ad528ca44e5eb3cb2d75fb3f436d0b0e8d",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -3536,7 +3536,7 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [
           {
-            "resourceType": "SYSTEM",
+            "resourceType": "BACKUP",
             "permissionType": "READ"
           }
         ],
@@ -3571,8 +3571,8 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [
           {
-            "resourceType": "SYSTEM",
-            "permissionType": "UPDATE"
+            "resourceType": "BACKUP",
+            "permissionType": "CREATE"
           }
         ],
         "x-added-in-version": "8.10"
@@ -3603,7 +3603,7 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [
           {
-            "resourceType": "SYSTEM",
+            "resourceType": "BACKUP",
             "permissionType": "READ"
           }
         ],
@@ -3634,8 +3634,8 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [
           {
-            "resourceType": "SYSTEM",
-            "permissionType": "UPDATE"
+            "resourceType": "BACKUP",
+            "permissionType": "DELETE"
           }
         ],
         "x-added-in-version": "8.10"
@@ -3666,8 +3666,8 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [
           {
-            "resourceType": "SYSTEM",
-            "permissionType": "UPDATE"
+            "resourceType": "BACKUP",
+            "permissionType": "CREATE"
           }
         ],
         "x-added-in-version": "8.10"
@@ -3700,7 +3700,7 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [
           {
-            "resourceType": "SYSTEM",
+            "resourceType": "BACKUP",
             "permissionType": "READ"
           }
         ],
@@ -3733,8 +3733,8 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [
           {
-            "resourceType": "SYSTEM",
-            "permissionType": "UPDATE"
+            "resourceType": "BACKUP",
+            "permissionType": "DELETE"
           }
         ],
         "x-added-in-version": "8.10"
@@ -5361,6 +5361,38 @@
       }
     },
     {
+      "operationId": "getExportingStatus",
+      "path": "/exporting",
+      "method": "get",
+      "tags": [
+        "Exporting"
+      ],
+      "summary": "Get exporting status",
+      "description": "Returns the exporting status of the physical tenant, aggregated over every replica of\nevery one of its partitions.\n\nBecause pause and resume are applied to all replicas, the status is only a single phase\nif every replica reports that phase; otherwise it is `MIXED`, which means a pause or\nresume is still in flight or was only partially applied. Backup tooling should treat\nonly `PAUSED` and `SOFT_PAUSED` as confirmation that exporting is paused.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "exporting.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "ExportingStatusResponse",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "EXPORTER",
+            "permissionType": "PAUSE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "pauseExporting",
       "path": "/exporting/pause",
       "method": "post",
@@ -5389,8 +5421,8 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [
           {
-            "resourceType": "SYSTEM",
-            "permissionType": "UPDATE"
+            "resourceType": "EXPORTER",
+            "permissionType": "PAUSE"
           }
         ],
         "x-added-in-version": "8.10"
@@ -5420,8 +5452,8 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [
           {
-            "resourceType": "SYSTEM",
-            "permissionType": "UPDATE"
+            "resourceType": "EXPORTER",
+            "permissionType": "PAUSE"
           }
         ],
         "x-added-in-version": "8.10"
@@ -9533,7 +9565,7 @@
         "Secret"
       ],
       "summary": "Resolve secrets (alpha)",
-      "description": "Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's\nphysical tenant in a single round-trip.\n\nEach reference is authorized and resolved independently. For valid requests, the endpoint\nalways responds with HTTP 200: successfully resolved references are returned in `resolved`,\nwhile references that could not be resolved (for example not found, malformed or over-long,\nor the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of\none reference never fails the others. Only structurally invalid requests are rejected with\nHTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n\nPhase 1: the secret backend is mocked. Only a fixed allow-list of references resolves;\nevery other authorized, valid reference returns `NOT_FOUND`.\n",
+      "description": "Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's\nphysical tenant in a single round-trip.\n\nEach reference is authorized and resolved independently. For valid requests, the endpoint\nalways responds with HTTP 200: successfully resolved references are returned in `resolved`,\nwhile references that could not be resolved (for example not found, malformed or over-long,\nor the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of\none reference never fails the others. Only structurally invalid requests are rejected with\nHTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.\n\nReferences are resolved against the secret stores configured for the caller's physical\ntenant, served from the gateway's secret cache when the value is already cached and read\nfrom the store otherwise.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -9569,7 +9601,7 @@
         "Secret"
       ],
       "summary": "List secrets (alpha)",
-      "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
+      "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nSecret names that cannot form a valid `camunda.secrets.<name>` reference (for example names\ncontaining a dot or a dash) are omitted, since they could neither be resolved nor be used in\na BPMN expression.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -11790,7 +11822,7 @@
   "integrity": {
     "totalSemanticKeys": 41,
     "totalUnions": 65,
-    "totalOperations": 216,
+    "totalOperations": 217,
     "totalEventuallyConsistent": 92,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23
