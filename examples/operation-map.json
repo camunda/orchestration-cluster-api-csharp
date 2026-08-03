@@ -1520,5 +1520,12 @@
       "region": "GetRestoreStatus",
       "label": "Get restore status"
     }
+  ],
+  "getExportingStatus": [
+    {
+      "file": "Exporting.cs",
+      "region": "GetExportingStatus",
+      "label": "Get exporting status"
+    }
   ]
 }

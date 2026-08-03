@@ -1453,6 +1453,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetExportingStatusAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Exporting.cs#GetExportingStatus)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.RunWorkersAsync(System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
 example:
 - *content
