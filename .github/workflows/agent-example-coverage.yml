@@ -39,8 +39,10 @@ env:
   VERIFY_COMMANDS: |
     node scripts/check-example-coverage.js
     node scripts/check-overwrite-completeness.js
+    dotnet build --configuration Release
     dotnet build docs/examples/Examples.csproj --configuration Release
-
+    dotnet format --verify-no-changes
+    dotnet test test/Camunda.Orchestration.Sdk.Tests --configuration Release --no-build
 # One agent run per issue at a time; a re-label must not race a running agent.
 concurrency:
   group: agent-example-coverage-${{ github.event.issue.number || inputs.issue-number }}

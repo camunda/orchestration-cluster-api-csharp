@@ -38,8 +38,10 @@ env:
   VERIFY_COMMANDS: |
     node scripts/check-example-coverage.js
     node scripts/check-overwrite-completeness.js
+    dotnet build --configuration Release
     dotnet build docs/examples/Examples.csproj --configuration Release
-
+    dotnet format --verify-no-changes
+    dotnet test test/Camunda.Orchestration.Sdk.Tests --configuration Release --no-build
 concurrency:
   group: agent-followup-${{ github.event.issue.number || github.event.pull_request.number || github.event.workflow_run.head_branch }}
   cancel-in-progress: false
