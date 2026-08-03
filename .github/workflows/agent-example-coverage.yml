@@ -166,16 +166,24 @@ jobs:
           ISSUE_NUMBER: ${{ steps.setup.outputs.issue-number }}
         run: |
           set -euo pipefail
-          prompt="$(cat <<EOF
-          You are working in the ${GITHUB_REPOSITORY} repository to resolve issue #${ISSUE_NUMBER}.
+          # The issue body is author-controlled, so it is never interpolated into a
+          # heredoc: a line equal to the terminator would truncate or rewrite the
+          # prompt. Static parts use quoted heredocs; the body is spliced in as data.
+          {
+            cat <<'PROMPT_HEAD'
+          You are resolving the SDK example-coverage issue identified below.
 
           Read AGENTS.md first and follow it strictly. Also read
           .github/prompts/add-missing-examples.prompt.md if it exists — it documents the
           example conventions in detail.
-
-          The issue body is:
-
-          $(cat /tmp/issue-body.md)
+          PROMPT_HEAD
+            echo ""
+            echo "  Repository: ${GITHUB_REPOSITORY}"
+            echo "  Issue: #${ISSUE_NUMBER}"
+            echo ""
+            echo "  Issue body:"
+            sed 's/^/  /' /tmp/issue-body.md
+            cat <<'PROMPT_TAIL'
 
           Do the following:
           1. For each operation listed in the issue, add a region-tagged example under
@@ -200,9 +208,10 @@ jobs:
              in AGENTS.md. Do not stop until it passes.
 
           Do not push and do not open a pull request — the workflow does that.
-          EOF
-          )"
-          copilot --yolo -p "$prompt" --model claude-sonnet-4.6
+          PROMPT_TAIL
+          } > /tmp/prompt.md
+
+          copilot --yolo -p "$(cat /tmp/prompt.md)" --model claude-sonnet-4.6
 
       - name: Verify example coverage
         if: steps.setup.outputs.skip != 'true'
