@@ -345,7 +345,10 @@ jobs:
           copilot --yolo -p "$(cat /tmp/prompt.md)" --model claude-sonnet-4.6
 
       - name: Verify
-        run: bash -euo pipefail -c "$VERIFY_COMMANDS"
+        run: |
+          # `:?` so an empty or unset constant aborts here: `bash -c ""` exits 0,
+          # which would turn a missing gate into a silently passing one.
+          bash -euo pipefail -c "${VERIFY_COMMANDS:?is empty; refusing to run an empty verify gate}"
 
       - name: Push any fix
         id: push

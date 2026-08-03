@@ -234,7 +234,10 @@ jobs:
       - name: Verify example coverage
         if: steps.setup.outputs.skip != 'true'
         id: verify
-        run: bash -euo pipefail -c "$VERIFY_COMMANDS"
+        run: |
+          # `:?` so an empty or unset constant aborts here: `bash -c ""` exits 0,
+          # which would turn a missing gate into a silently passing one.
+          bash -euo pipefail -c "${VERIFY_COMMANDS:?is empty; refusing to run an empty verify gate}"
 
       - name: Push branch and open pull request
         id: pr
