@@ -1,0 +1,383 @@
+name: Agent — PR follow-up
+
+# The example-coverage agent opens a PR and then goes silent: it cannot react to a
+# CI failure or to review feedback. This workflow closes that loop by re-running the
+# Copilot CLI on an existing agent branch.
+#
+# Three ways in:
+#   1. `/agent fix [instructions]` in a PR comment — human-directed, uncapped.
+#   2. A CI run failing on an agent branch — automatic.
+#   3. A review submitted by a *different* bot reviewer (e.g. the Copilot PR
+#      reviewer) — automatic. A second opinion catches things the author missed.
+#
+# The two automatic paths share a hard attempt cap (see MAX_AUTO_ATTEMPTS) tracked
+# with `agent-attempt-N` labels, so a fix → CI → fix → review → fix chain always
+# terminates instead of burning Copilot runs in a loop. Human `/agent fix` bypasses
+# the cap, because a person is deciding each time.
+#
+# Only branches matching `agent/example-coverage-*` are eligible, and the agent
+# never reacts to its own output.
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+  workflow_run:
+    workflows: ["PR & Branch CI"]
+    types: [completed]
+
+permissions: {}
+
+env:
+  MAX_AUTO_ATTEMPTS: '2'
+  AGENT_BRANCH_PREFIX: agent/example-coverage-
+
+concurrency:
+  group: agent-followup-${{ github.event.issue.number || github.event.pull_request.number || github.event.workflow_run.head_branch }}
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write   # attempt labels
+      issues: write          # PR labels and comments go through the Issues API
+    outputs:
+      eligible: ${{ steps.decide.outputs.eligible }}
+      pr: ${{ steps.decide.outputs.pr }}
+      branch: ${{ steps.decide.outputs.branch }}
+      reason: ${{ steps.decide.outputs.reason }}
+    steps:
+      - name: Decide whether to run the agent
+        id: decide
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          EVENT: ${{ github.event_name }}
+          # issue_comment
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          COMMENT_ASSOC: ${{ github.event.comment.author_association }}
+          IS_PR: ${{ github.event.issue.pull_request != null }}
+          ISSUE_PR_NUMBER: ${{ github.event.issue.number }}
+          # pull_request_review
+          REVIEW_AUTHOR: ${{ github.event.review.user.login }}
+          REVIEW_STATE: ${{ github.event.review.state }}
+          REVIEW_PR_NUMBER: ${{ github.event.pull_request.number }}
+          # workflow_run
+          RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          RUN_HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          set -euo pipefail
+          echo "eligible=false" >> "$GITHUB_OUTPUT"
+
+          # Never react to our own output, or to any actor that this workflow drives.
+          is_self() {
+            case "$1" in
+              github-actions\[bot\]|camunda-sdk-automation\[bot\]) return 0 ;;
+              *) return 1 ;;
+            esac
+          }
+
+          pr=""; reason=""; capped="true"
+
+          case "$EVENT" in
+            issue_comment)
+              [ "$IS_PR" = "true" ] || { echo "Not a PR comment."; exit 0; }
+              is_self "$COMMENT_AUTHOR" && { echo "Own comment; ignoring."; exit 0; }
+              # The command must open the comment (leading whitespace allowed) rather
+              # than appear anywhere in it, so prose that merely mentions the command
+              # — "please don't /agent fix this" — cannot start a privileged run.
+              first_line="$(printf '%s\n' "$COMMENT_BODY" | head -n 1 | sed 's/^[[:space:]]*//')"
+              case "$first_line" in
+                "/agent fix"*) ;;
+                *) echo "Comment does not start with /agent fix."; exit 0 ;;
+              esac
+              # This command mints an App token and runs Copilot with --yolo, so it
+              # must not be steerable by arbitrary commenters on a public repo.
+              case "$COMMENT_ASSOC" in
+                OWNER|MEMBER|COLLABORATOR) ;;
+                *)
+                  echo "::warning::/agent fix from ${COMMENT_AUTHOR} (${COMMENT_ASSOC}) ignored — not a repo collaborator."
+                  gh pr comment "$ISSUE_PR_NUMBER" --repo "$GH_REPO" --body \
+                    "🤖 Only repository collaborators can run \`/agent fix\`." \
+                    || echo "::warning::Could not comment."
+                  exit 0
+                  ;;
+              esac
+              pr="$ISSUE_PR_NUMBER"
+              reason="comment"
+              capped="false"   # a human asked for this explicitly
+              ;;
+            pull_request_review)
+              [ "$REVIEW_STATE" != "approved" ] || { echo "Approving review; nothing to fix."; exit 0; }
+              is_self "$REVIEW_AUTHOR" && { echo "Own review; ignoring."; exit 0; }
+              case "$REVIEW_AUTHOR" in
+                *\[bot\]) ;;   # a second-opinion bot review is exactly what we want
+                *) echo "Human review: leave it to /agent fix so the reviewer stays in control."; exit 0 ;;
+              esac
+              pr="$REVIEW_PR_NUMBER"
+              reason="review"
+              ;;
+            workflow_run)
+              [ "$RUN_CONCLUSION" = "failure" ] || { echo "CI did not fail."; exit 0; }
+              case "$RUN_HEAD_BRANCH" in
+                "${AGENT_BRANCH_PREFIX}"*) ;;
+                *) echo "Not an agent branch."; exit 0 ;;
+              esac
+              pr="$(gh pr list --repo "$GH_REPO" --head "$RUN_HEAD_BRANCH" --state open \
+                --json number,headRepositoryOwner \
+                --jq "[.[] | select(.headRepositoryOwner.login == \"${GITHUB_REPOSITORY_OWNER}\")] | .[0].number // empty")"
+              [ -n "$pr" ] || { echo "No open PR for ${RUN_HEAD_BRANCH}."; exit 0; }
+              reason="ci"
+              ;;
+          esac
+
+          branch="$(gh pr view "$pr" --repo "$GH_REPO" --json headRefName --jq '.headRefName')"
+          case "$branch" in
+            "${AGENT_BRANCH_PREFIX}"*) ;;
+            *) echo "PR #${pr} is not an agent branch (${branch})."; exit 0 ;;
+          esac
+
+          # Automatic paths share one budget so fix → CI → fix → review cannot loop.
+          if [ "$capped" = "true" ]; then
+            # Filter before parsing: `capture` errors on a non-matching label, which
+            # under `set -e` would abort triage for any PR carrying other labels.
+            used="$(gh pr view "$pr" --repo "$GH_REPO" --json labels \
+              --jq '[.labels[].name
+                       | select(test("^agent-attempt-[0-9]+$"))
+                       | sub("^agent-attempt-"; "")
+                       | tonumber] | max // 0')"
+            if [ "$used" -ge "$MAX_AUTO_ATTEMPTS" ]; then
+              echo "::warning::PR #${pr} has used all ${MAX_AUTO_ATTEMPTS} automatic attempts."
+              gh pr comment "$pr" --repo "$GH_REPO" --body \
+                "🤖 I've used my ${MAX_AUTO_ATTEMPTS} automatic follow-up attempts on this PR without getting it green, so I'm stopping to avoid a loop. Comment \`/agent fix <what to change>\` if you want me to try again with direction." \
+                || echo "::warning::Could not comment on #${pr}."
+              exit 0
+            fi
+            next=$((used + 1))
+            gh pr edit "$pr" --repo "$GH_REPO" --add-label "agent-attempt-${next}" \
+              || echo "::warning::Could not label #${pr}."
+          fi
+
+          {
+            echo "eligible=true"
+            echo "pr=${pr}"
+            echo "branch=${branch}"
+            echo "reason=${reason}"
+          } >> "$GITHUB_OUTPUT"
+
+  fix:
+    needs: triage
+    if: needs.triage.outputs.eligible == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      id-token: write
+      copilot-requests: write
+      pull-requests: write
+      issues: write          # the outcome comment goes through the Issues API
+      actions: read          # `gh run view --log-failed` reads the failing run's log
+    steps:
+      - name: Import secrets
+        id: secrets
+        uses: hashicorp/vault-action@v4.0.0
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: jwt
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_ID | APP_ID ;
+            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_PRIVATE_KEY | APP_PRIVATE_KEY ;
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Check out the agent branch
+        uses: actions/checkout@v6
+        with:
+          # Read-only token and no persisted credentials while the agent runs with
+          # --yolo; the app token is introduced only at push time.
+          token: ${{ github.token }}
+          persist-credentials: false
+          ref: ${{ needs.triage.outputs.branch }}
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Install Copilot CLI
+        env:
+          COPILOT_CLI_VERSION: ${{ vars.COPILOT_CLI_VERSION || 'latest' }}
+        run: npm install -g "@github/copilot@${COPILOT_CLI_VERSION}"
+
+      - name: Configure committer identity
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        run: |
+          git config --global user.name "${APP_SLUG}[bot]"
+          git config --global user.email "${APP_SLUG}[bot]@users.noreply.github.com"
+
+      - name: Collect the feedback to act on
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ needs.triage.outputs.pr }}
+          REASON: ${{ needs.triage.outputs.reason }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          REVIEW_BODY: ${{ github.event.review.body }}
+          REVIEW_ID: ${{ github.event.review.id }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          set -euo pipefail
+          # Feedback is author-controlled text, so it goes to a file rather than
+          # through $GITHUB_OUTPUT or an env var interpolated into the prompt.
+          case "$REASON" in
+            comment)
+              printf '%s\n' "$COMMENT_BODY" > /tmp/feedback.md
+              ;;
+            review)
+              {
+                printf '%s\n\n' "$REVIEW_BODY"
+                echo "Inline comments:"
+                gh api "repos/${GH_REPO}/pulls/${PR}/comments" \
+                  --jq ".[] | select(.pull_request_review_id == ${REVIEW_ID}) | \"- \(.path):\(.line // .original_line) — \(.body)\"" \
+                  || true
+              } > /tmp/feedback.md
+              ;;
+            ci)
+              # stderr is deliberately not silenced: if this cannot read the log
+              # (missing `actions: read`, expired logs), that has to be visible in the
+              # run log rather than degrading into an empty prompt the agent guesses at.
+              log="$(gh run view "$RUN_ID" --repo "$GH_REPO" --log-failed | tail -n 200 || true)"
+              if [ -z "${log//[[:space:]]/}" ]; then
+                echo "::error::No failing-step output for run ${RUN_ID}; refusing to run the agent with no feedback."
+                exit 1
+              fi
+              {
+                echo "The CI run failed. Failing step output:"
+                echo
+                printf '%s\n' "$log"
+              } > /tmp/feedback.md
+              ;;
+          esac
+          echo "Collected $(wc -l < /tmp/feedback.md) lines of feedback."
+
+      - name: Run Copilot CLI
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR: ${{ needs.triage.outputs.pr }}
+          REASON: ${{ needs.triage.outputs.reason }}
+        run: |
+          set -euo pipefail
+
+          # The feedback is author-controlled (a CI log, a bot review, a comment), so it
+          # is never interpolated into a heredoc: a line equal to the terminator would
+          # truncate or rewrite the prompt. Static parts use quoted heredocs and the
+          # feedback is spliced in as plain data between them.
+          {
+            cat <<'PROMPT_HEAD'
+          You are working on the branch of the pull request named below, which you opened
+          earlier to add SDK example coverage.
+
+          Read AGENTS.md first and follow it strictly.
+
+          Something needs fixing. The trigger and the feedback to act on follow.
+          PROMPT_HEAD
+            printf '\n  Repository: %s\n  Pull request: #%s\n  Trigger: %s\n\n' \
+              "$GITHUB_REPOSITORY" "$PR" "$REASON"
+            echo "  Feedback:"
+            sed 's/^/  /' /tmp/feedback.md
+            cat <<'PROMPT_TAIL'
+
+          Do the following:
+          1. Work out the root cause and fix it properly — do not paper over a failing
+             check by weakening or skipping it.
+          2. Stay inside the example surface: examples/, examples/operation-map.json, the
+             docs the repo requires for a new operation, and regenerated SDK output. Do
+             NOT modify generator sources (hooks/, scripts/, the generator project). If
+             the pipeline itself looks like it needs changing, stop and explain that in
+             your final message instead of editing it.
+          3. If you disagree with the feedback, do not change the code — explain your
+             reasoning in your final message instead.
+          4. Commit every change you make and leave the working tree clean.
+          5. Verify with the repo's build/verification pipeline as documented in AGENTS.md
+             before you finish.
+
+          Do not push and do not open a pull request — the workflow does that.
+          PROMPT_TAIL
+          } > /tmp/prompt.md
+
+          copilot --yolo -p "$(cat /tmp/prompt.md)" --model claude-sonnet-4.6
+
+      - name: Verify
+        run: |
+          set -euo pipefail
+          node scripts/check-example-coverage.js
+          node scripts/check-overwrite-completeness.js
+          dotnet build docs/examples/Examples.csproj --configuration Release
+
+      - name: Push any fix
+        id: push
+        env:
+          APP_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: ${{ needs.triage.outputs.branch }}
+        run: |
+          set -euo pipefail
+
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "::error::The agent left uncommitted changes; refusing to push a partial fix."
+            git status --short
+            exit 1
+          fi
+
+          if [ -z "$(git log --oneline "origin/${BRANCH}..HEAD")" ]; then
+            echo "::warning::The agent made no commits."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git push \
+            "https://x-access-token:${APP_TOKEN}@github.com/${GH_REPO}.git" \
+            "HEAD:refs/heads/${BRANCH}"
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Report back on the pull request
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ needs.triage.outputs.pr }}
+          REASON: ${{ needs.triage.outputs.reason }}
+          RESULT: ${{ job.status }}
+          PUSHED: ${{ steps.push.outputs.pushed }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          case "${RESULT}:${PUSHED:-false}" in
+            success:true)
+              msg="🤖 Pushed a fix in response to the ${REASON} feedback. Checks will re-run — please re-review." ;;
+            success:false)
+              msg="🤖 I looked at the ${REASON} feedback but made no changes. See the [run log](${RUN_URL}) for my reasoning — this one needs a human." ;;
+            *)
+              msg="🤖 My follow-up attempt failed — see the [run log](${RUN_URL}). Comment \`/agent fix <what to change>\` to point me at it more precisely." ;;
+          esac
+          gh pr comment "$PR" --repo "$GH_REPO" --body "$msg" || echo "::warning::Could not comment on #${PR}."
