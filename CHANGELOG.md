@@ -1,3 +1,15 @@
+# [10.0.0-alpha.7](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.6...v10.0.0-alpha.7) (2026-08-03)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([7884093](https://github.com/camunda/orchestration-cluster-api-csharp/commit/7884093db5b404f1eb87bec4b6be2d097fd13a23))
+
+
+### Features
+
+* add example coverage for getExportingStatus ([#370](https://github.com/camunda/orchestration-cluster-api-csharp/issues/370)) ([cfd507e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/cfd507e2286be8490cfdafa57c92391c2a43c094))
+
 # [10.0.0-alpha.6](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.5...v10.0.0-alpha.6) (2026-07-31)
 
 
