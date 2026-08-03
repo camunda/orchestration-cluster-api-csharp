@@ -3338,7 +3338,31 @@ public partial class CamundaClient
     /// only `PAUSED` and `SOFT_PAUSED` as confirmation that exporting is paused.
     /// 
     /// </summary>
-    /// <remarks>Operation: getExportingStatus</remarks>
+    /// <remarks>
+    /// Operation: getExportingStatus
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetExportingStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetExportingStatusAsync();
+    ///     Console.WriteLine($&quot;Status: {result.Status}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetExportingStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetExportingStatusAsync();
+    ///     Console.WriteLine($&quot;Status: {result.Status}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ExportingStatusResponse> GetExportingStatusAsync(CancellationToken ct = default)
     {
         var path = $"/exporting";
