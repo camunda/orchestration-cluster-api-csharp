@@ -1704,6 +1704,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(Camunda.Orchestration.Sdk.ElementInstanceWaitStateQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.EvaluateConditionalResult> EvaluateConditionalsAsync(Camunda.Orchestration.Sdk.ConditionalEvaluationInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.EvaluateDecisionResult> EvaluateDecisionAsync(Camunda.Orchestration.Sdk.DecisionEvaluationInstruction body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExportingStatusResponse> GetExportingStatusAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExpressionEvaluationResult> EvaluateExpressionAsync(Camunda.Orchestration.Sdk.ExpressionEvaluationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExtendedDeploymentResponse> DeployResourcesFromFilesAsync(System.String[] resourceFilePaths, System.String? tenantId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.FormResult> GetFormByKeyAsync(Camunda.Orchestration.Sdk.FormKey formKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.FormResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -3201,6 +3202,18 @@ TYPE Camunda.Orchestration.Sdk.EventualConsistencyTimeoutException : sealed clas
   CTOR (System.String message, System.String? operationId = null, System.Int32 waitedMs = 0)
   PROP System.Int32 WaitedMs { get; init; }
 
+TYPE Camunda.Orchestration.Sdk.ExportingStatusCode : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER EXPORTING = 0 json="EXPORTING"
+  MEMBER PAUSED = 1 json="PAUSED"
+  MEMBER SOFTPAUSED = 2 json="SOFT_PAUSED"
+  MEMBER MIXED = 3 json="MIXED"
+
+TYPE Camunda.Orchestration.Sdk.ExportingStatusResponse : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ExportingStatusCode Status { get; set; } [JsonPropertyName("status")]
+
 TYPE Camunda.Orchestration.Sdk.ExpressionEvaluationRequest : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ScopeKey? ScopeKey { get; set; } [JsonPropertyName("scopeKey")]
@@ -4038,27 +4051,28 @@ TYPE Camunda.Orchestration.Sdk.JobSearchQuerySortRequest : sealed class
 TYPE Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
   underlying=System.Int32
-  MEMBER Deadline = 0 json="deadline"
-  MEMBER DeniedReason = 1 json="deniedReason"
-  MEMBER ElementId = 2 json="elementId"
-  MEMBER ElementInstanceKey = 3 json="elementInstanceKey"
-  MEMBER EndTime = 4 json="endTime"
-  MEMBER ErrorCode = 5 json="errorCode"
-  MEMBER ErrorMessage = 6 json="errorMessage"
-  MEMBER HasFailedWithRetriesLeft = 7 json="hasFailedWithRetriesLeft"
-  MEMBER IsDenied = 8 json="isDenied"
-  MEMBER JobKey = 9 json="jobKey"
-  MEMBER Kind = 10 json="kind"
-  MEMBER ListenerEventType = 11 json="listenerEventType"
-  MEMBER Priority = 12 json="priority"
-  MEMBER ProcessDefinitionId = 13 json="processDefinitionId"
-  MEMBER ProcessDefinitionKey = 14 json="processDefinitionKey"
-  MEMBER ProcessInstanceKey = 15 json="processInstanceKey"
-  MEMBER Retries = 16 json="retries"
-  MEMBER State = 17 json="state"
-  MEMBER TenantId = 18 json="tenantId"
-  MEMBER Type = 19 json="type"
-  MEMBER Worker = 20 json="worker"
+  MEMBER CreationTime = 0 json="creationTime"
+  MEMBER Deadline = 1 json="deadline"
+  MEMBER DeniedReason = 2 json="deniedReason"
+  MEMBER ElementId = 3 json="elementId"
+  MEMBER ElementInstanceKey = 4 json="elementInstanceKey"
+  MEMBER EndTime = 5 json="endTime"
+  MEMBER ErrorCode = 6 json="errorCode"
+  MEMBER ErrorMessage = 7 json="errorMessage"
+  MEMBER HasFailedWithRetriesLeft = 8 json="hasFailedWithRetriesLeft"
+  MEMBER IsDenied = 9 json="isDenied"
+  MEMBER JobKey = 10 json="jobKey"
+  MEMBER Kind = 11 json="kind"
+  MEMBER ListenerEventType = 12 json="listenerEventType"
+  MEMBER Priority = 13 json="priority"
+  MEMBER ProcessDefinitionId = 14 json="processDefinitionId"
+  MEMBER ProcessDefinitionKey = 15 json="processDefinitionKey"
+  MEMBER ProcessInstanceKey = 16 json="processInstanceKey"
+  MEMBER Retries = 17 json="retries"
+  MEMBER State = 18 json="state"
+  MEMBER TenantId = 19 json="tenantId"
+  MEMBER Type = 20 json="type"
+  MEMBER Worker = 21 json="worker"
 
 TYPE Camunda.Orchestration.Sdk.JobSearchResult : sealed class
   CTOR ()
@@ -5742,6 +5756,7 @@ TYPE Camunda.Orchestration.Sdk.SecretErrorCode : enum interfaces=[System.ICompar
   MEMBER NOTFOUND = 0 json="NOT_FOUND"
   MEMBER ACCESSDENIED = 1 json="ACCESS_DENIED"
   MEMBER INVALIDREFERENCE = 2 json="INVALID_REFERENCE"
+  MEMBER UNREADABLE = 3 json="UNREADABLE"
 
 TYPE Camunda.Orchestration.Sdk.SecretListRequest : sealed class
   CTOR ()
