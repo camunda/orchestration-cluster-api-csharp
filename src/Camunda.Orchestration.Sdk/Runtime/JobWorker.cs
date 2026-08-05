@@ -93,9 +93,10 @@ public sealed class JobWorkerConfig
     /// rejected with <see cref="ArgumentException"/>.
     ///
     /// <para>If neither <see cref="TenantIds"/> nor <see cref="TenantId"/> is set
-    /// (or <see cref="TenantIds"/> is empty), the activation request falls back
-    /// to <c>[CamundaConfig.DefaultTenantId]</c> (which itself defaults to
-    /// <c>"&lt;default&gt;"</c> and can be overridden via the
+    /// (or <see cref="TenantIds"/> is empty), the activation request falls back to
+    /// <c>CamundaConfig.TenantIds</c> (from the <c>CAMUNDA_TENANT_IDS</c> environment
+    /// variable, comma-separated), then to <c>[CamundaConfig.DefaultTenantId]</c>
+    /// (which itself defaults to <c>"&lt;default&gt;"</c> and can be overridden via the
     /// <c>CAMUNDA_DEFAULT_TENANT_ID</c> environment variable).</para>
     /// </summary>
     public IReadOnlyList<string>? TenantIds { get; init; }
@@ -106,6 +107,25 @@ public sealed class JobWorkerConfig
     /// <see cref="TenantIds"/>.
     /// </summary>
     public string? TenantId { get; init; }
+
+    /// <summary>
+    /// Tenant filtering strategy for job activation.
+    ///
+    /// <para><see cref="TenantFilterEnum.PROVIDED"/> (the server default when this is
+    /// <c>null</c>) activates jobs for the tenants named in <see cref="TenantIds"/> /
+    /// <see cref="TenantId"/>, falling back to the default tenant.</para>
+    ///
+    /// <para><see cref="TenantFilterEnum.ASSIGNED"/> activates jobs for whichever tenants
+    /// are currently assigned to the authenticated client, re-evaluated by the server on
+    /// every activation request — so tenant assignment changes take effect without
+    /// restarting the worker. No tenant IDs are sent, and
+    /// <see cref="TenantIds"/> / <see cref="TenantId"/> must not be set (the server would
+    /// silently ignore them). Requires multi-tenancy to be enabled on the cluster;
+    /// otherwise the server rejects the activation request with HTTP 400.</para>
+    ///
+    /// <para>Requires Camunda 8.9 or later.</para>
+    /// </summary>
+    public TenantFilterEnum? TenantFilter { get; init; }
 }
 
 /// <summary>
@@ -252,6 +272,16 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 "JobWorkerConfig.TenantId must not be empty or whitespace — omit it (null) to use the default tenant.",
                 nameof(config));
 
+        // The server derives the tenant set from the authenticated principal under
+        // ASSIGNED and ignores any tenant IDs in the body. Fail fast rather than let
+        // an explicit tenant list be silently dropped.
+        if (config.TenantFilter is TenantFilterEnum.ASSIGNED
+            && (config.TenantIds is not null || config.TenantId is not null))
+            throw new ArgumentException(
+                "JobWorkerConfig.TenantFilter = ASSIGNED cannot be combined with TenantIds or TenantId — " +
+                "the server activates jobs for the tenants assigned to the authenticated client and ignores provided tenant IDs.",
+                nameof(config));
+
         _resolvedTenantIds = ResolveTenantIds(config);
 
         _jobTimeoutMs = config.JobTimeoutMs.Value;
@@ -373,6 +403,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                         FetchVariable = _config.FetchVariables,
                         RequestTimeout = _config.PollTimeoutMs ?? 0,
                         TenantIds = _resolvedTenantIds,
+                        TenantFilter = _config.TenantFilter,
                     }, ct: ct).ConfigureAwait(false);
 
                     if (response?.Jobs == null || response.Jobs.Count == 0)
@@ -513,7 +544,9 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             return new List<TenantId> { global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(config.TenantId) };
 
         // Leave null so the generated ActivateJobsAsync injects [DefaultTenantId]
-        // via ITenantIdsSettable.SetDefaultTenantIds.
+        // via ITenantIdsSettable.SetDefaultTenantIds — except under a non-PROVIDED
+        // tenant filter, where SetDefaultTenantIds stands down and the request goes
+        // out with no tenantIds at all.
         return null;
     }
 

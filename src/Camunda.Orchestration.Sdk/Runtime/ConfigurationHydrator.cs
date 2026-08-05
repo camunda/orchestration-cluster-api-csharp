@@ -288,6 +288,14 @@ public static class ConfigurationHydrator
         var hasWorkerDefaults = workerTimeout != null || workerMaxConcurrent != null
             || workerRequestTimeout != null || workerName != null || workerJitter != null;
 
+        // Plural tenant ids: comma-separated. Blank entries are dropped, and a value
+        // that yields no entries at all is treated as unset (falls back to the
+        // singular DefaultTenantId).
+        var tenantIds = rawMap.GetValueOrDefault(ConfigKeys.TenantIds)
+            ?.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        if (tenantIds is { Length: 0 })
+            tenantIds = null;
+
         if (errors.Count > 0)
             throw new CamundaConfigurationException(errors);
 
@@ -304,6 +312,7 @@ public static class ConfigurationHydrator
             RestAddress = restAddress,
             TokenAudience = rawMap.GetValueOrDefault(ConfigKeys.TokenAudience, ConfigSchema.StringDefault(ConfigKeys.TokenAudience))!,
             DefaultTenantId = rawMap.GetValueOrDefault(ConfigKeys.DefaultTenantId, ConfigSchema.StringDefault(ConfigKeys.DefaultTenantId))!,
+            TenantIds = tenantIds,
             HttpRetry = new HttpRetryConfig
             {
                 MaxAttempts = retryMaxAttempts,
@@ -465,7 +474,20 @@ public static class ConfigurationHydrator
         {
             var value = configuration[configKey];
             if (!string.IsNullOrEmpty(value))
+            {
                 result[envKey] = value;
+                continue;
+            }
+
+            // A JSON array (e.g. "TenantIds": ["acme", "globex"]) has no scalar value —
+            // it binds as indexed children. Join them into the canonical comma-separated
+            // form the env-var path already uses.
+            var children = configuration.GetSection(configKey).GetChildren()
+                .Select(c => c.Value)
+                .Where(v => !string.IsNullOrEmpty(v))
+                .ToList();
+            if (children.Count > 0)
+                result[envKey] = string.Join(',', children);
         }
 
         return result;

@@ -30,6 +30,13 @@ public sealed class CamundaConfig
     public string TokenAudience { get; init; } = string.Empty;
     public string DefaultTenantId { get; init; } = ConfigSchema.StringDefault(ConfigKeys.DefaultTenantId);
 
+    /// <summary>
+    /// Tenant ids job workers activate for, from <c>CAMUNDA_TENANT_IDS</c> (comma-separated)
+    /// or the <c>TenantIds</c> configuration path. <c>null</c> when unset, in which case
+    /// activation falls back to <see cref="DefaultTenantId"/>.
+    /// </summary>
+    public IReadOnlyList<string>? TenantIds { get; init; }
+
     public HttpRetryConfig HttpRetry { get; init; } = new();
     public BackpressureConfig Backpressure { get; init; } = new();
     public OAuthConfig OAuth { get; init; } = new();
