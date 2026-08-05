@@ -70,6 +70,28 @@ public class AppSettingsConfigurationTests
         Assert.Equal(AcmeGlobex, config.TenantIds);
     }
 
+    /// <summary>
+    /// Only array-shaped sections (numeric child keys) are folded into a comma-separated
+    /// value. An object-shaped section under a scalar key must not be fabricated into one.
+    /// </summary>
+    [Fact]
+    public void ObjectShapedSection_IsNotJoinedIntoScalarKey()
+    {
+        var configSection = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                ["Camunda:Validation:Request"] = "strict",
+            })
+            .Build()
+            .GetSection("Camunda");
+
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>(),
+            configuration: configSection);
+
+        Assert.Equal("req:none,res:none", config.Validation.Raw);
+    }
+
     [Fact]
     public void TenantIdsIsNull_WhenUnset()
     {
