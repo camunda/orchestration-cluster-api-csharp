@@ -3449,6 +3449,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionFilter : sealed class
   PROP System.Boolean? IsLatestVersion { get; set; } [JsonPropertyName("isLatestVersion")]
   PROP System.Int32? Version { get; set; } [JsonPropertyName("version")]
   PROP System.String? ResourceName { get; set; } [JsonPropertyName("resourceName")]
+  PROP System.String? State { get; set; } [JsonPropertyName("state")]
   PROP System.String? VersionTag { get; set; } [JsonPropertyName("versionTag")]
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ProcessDefinitionId>]
@@ -3567,6 +3568,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResult : sealed class
   PROP System.Boolean HasStartForm { get; set; } [JsonPropertyName("hasStartForm")]
   PROP System.Int32 Version { get; set; } [JsonPropertyName("version")]
   PROP System.String ResourceName { get; set; } [JsonPropertyName("resourceName")]
+  PROP System.String State { get; set; } [JsonPropertyName("state")]
   PROP System.String? Name { get; set; } [JsonPropertyName("name")]
   PROP System.String? VersionTag { get; set; } [JsonPropertyName("versionTag")]
 

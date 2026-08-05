@@ -12747,6 +12747,17 @@ public sealed class ProcessDefinitionFilter
     [JsonPropertyName("hasStartForm")]
     public bool? HasStartForm { get; set; }
 
+    /// <summary>
+    /// Filter by the process definition&apos;s state.
+    /// When not set, process definitions in any state are returned.
+    /// Set to `ACTIVE` to exclude deleted definitions (recommended for most use cases).
+    /// Set to `DELETED` to return only definitions that have been deleted but are still
+    /// retained in secondary storage.
+    /// 
+    /// </summary>
+    [JsonPropertyName("state")]
+    public string? State { get; set; }
+
 }
 
 /// <summary>
@@ -13228,6 +13239,12 @@ public sealed class ProcessDefinitionResult
     /// </summary>
     [JsonPropertyName("hasStartForm")]
     public bool HasStartForm { get; set; }
+
+    /// <summary>
+    /// The state of this process definition.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public string State { get; set; } = null!;
 
 }
 

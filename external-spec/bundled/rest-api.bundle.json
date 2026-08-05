@@ -26957,8 +26957,22 @@
           "hasStartForm": {
             "description": "Indicates whether the start event of the process has an associated Form Key.",
             "type": "boolean"
+          },
+          "state": {
+            "description": "Filter by the process definition's state.\nWhen not set, process definitions in any state are returned.\nSet to `ACTIVE` to exclude deleted definitions (recommended for most use cases).\nSet to `DELETED` to return only definitions that have been deleted but are still\nretained in secondary storage.\n",
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "DELETED"
+            ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.9.14"
+          }
+        ]
       },
       "ProcessDefinitionSearchQueryResult": {
         "type": "object",
@@ -26990,7 +27004,8 @@
           "versionTag",
           "processDefinitionId",
           "tenantId",
-          "hasStartForm"
+          "hasStartForm",
+          "state"
         ],
         "properties": {
           "name": {
@@ -27039,8 +27054,22 @@
           "hasStartForm": {
             "description": "Indicates whether the start event of the process has an associated Form Key.",
             "type": "boolean"
+          },
+          "state": {
+            "description": "The state of this process definition.",
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "DELETED"
+            ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.9.14"
+          }
+        ]
       },
       "ProcessDefinitionElementStatisticsQuery": {
         "description": "Process definition element statistics request.",
