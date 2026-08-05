@@ -409,6 +409,36 @@ internal static class ReadmeExamples
         // </JobCorrectionsDenied>
     }
 
+    private static void MultiTenantWorkerExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // <MultiTenantWorker>
+        // Fixed tenant set — activate jobs for these tenants only
+        client.CreateJobWorker(
+            new JobWorkerConfig
+            {
+                JobType = "process-order",
+                JobTimeoutMs = 30_000,
+                TenantIds = new[] { "acme", "globex" },
+            },
+            async (job, ct) => null);
+
+        // Dynamic tenant set — activate jobs for whichever tenants are currently
+        // assigned to the authenticated client. The server re-evaluates the
+        // assignment on every activation request, so tenants added or removed in
+        // Camunda take effect without restarting the worker.
+        client.CreateJobWorker(
+            new JobWorkerConfig
+            {
+                JobType = "process-order",
+                JobTimeoutMs = 30_000,
+                TenantFilter = TenantFilterEnum.ASSIGNED,
+            },
+            async (job, ct) => null);
+        // </MultiTenantWorker>
+    }
+
     private static void WorkerDefaultsEnvExample()
     {
         using var client = CamundaClient.Create();

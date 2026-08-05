@@ -173,6 +173,115 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
         Assert.Empty(missing);
     }
 
+    [Fact]
+    public async Task ActivateJobs_AssignedTenantFilter_SendsNoTenantIds()
+    {
+        // Regression for #376: under a non-PROVIDED tenant filter the server derives
+        // the tenant set from the authenticated principal and ignores body tenant IDs,
+        // so the default-tenant injection must stand down rather than put the
+        // configured default on the wire.
+        string? capturedBody = null;
+        _handlerCustom.Enqueue(async req =>
+        {
+            capturedBody = await req.Content!.ReadAsStringAsync();
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"jobs\":[]}", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        await _clientCustomTenant.ActivateJobsAsync(new JobActivationRequest
+        {
+            Type = "demo-task",
+            Timeout = 30_000,
+            MaxJobsToActivate = 1,
+            TenantFilter = TenantFilterEnum.ASSIGNED,
+        });
+
+        Assert.NotNull(capturedBody);
+        var doc = JsonDocument.Parse(capturedBody!);
+        Assert.False(doc.RootElement.TryGetProperty("tenantIds", out _));
+        Assert.Equal("ASSIGNED", doc.RootElement.GetProperty("tenantFilter").GetString());
+    }
+
+    [Fact]
+    public async Task ActivateJobs_ProvidedTenantFilter_StillInjectsDefaultTenantId()
+    {
+        // PROVIDED is the server-side default, so an explicit PROVIDED must behave
+        // exactly like omitting the filter.
+        string? capturedBody = null;
+        _handlerCustom.Enqueue(async req =>
+        {
+            capturedBody = await req.Content!.ReadAsStringAsync();
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"jobs\":[]}", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        await _clientCustomTenant.ActivateJobsAsync(new JobActivationRequest
+        {
+            Type = "demo-task",
+            Timeout = 30_000,
+            MaxJobsToActivate = 1,
+            TenantFilter = TenantFilterEnum.PROVIDED,
+        });
+
+        Assert.NotNull(capturedBody);
+        var doc = JsonDocument.Parse(capturedBody!);
+        var tenantIds = doc.RootElement.GetProperty("tenantIds").EnumerateArray().Select(e => e.GetString()).ToList();
+        Assert.Equal(CustomTenantSingle, tenantIds);
+    }
+
+    [Fact]
+    public void EveryTenantIdsSchemaWithTenantFilter_SuppressesDefaultInjection_UnderNonProvidedFilter()
+    {
+        // Class-scoped guard for #376: every request schema that carries both an
+        // optional `tenantIds` array and a sibling tenant-filter enum must no-op its
+        // SetDefaultTenantIds under a non-PROVIDED filter, and must still inject when
+        // the filter is unset. Today only JobActivationRequest matches; the scan keeps
+        // a future sibling schema from silently regressing.
+        var spec = LoadBundledSpec();
+        var matches = FindRequestSchemasWithOptionalTenantIdsArray(spec);
+        var sdkAssembly = typeof(CamundaClient).Assembly;
+
+        var checkedTypes = new List<string>();
+        foreach (var schemaName in matches)
+        {
+            var typeName = $"Camunda.Orchestration.Sdk.{CSharpClientGenerator.SanitizeTypeName(schemaName)}";
+            var t = sdkAssembly.GetType(typeName);
+            Assert.NotNull(t);
+
+            var filterProp = t!.GetProperty("TenantFilter");
+            var filterEnumType = filterProp == null ? null : Nullable.GetUnderlyingType(filterProp.PropertyType);
+            if (filterProp == null || filterEnumType is not { IsEnum: true })
+                continue; // No tenant filter on this schema — unconditional injection is correct.
+
+            var nonProvided = Enum.GetValues(filterEnumType)
+                .Cast<object>()
+                .FirstOrDefault(v => !string.Equals(v.ToString(), "PROVIDED", StringComparison.Ordinal));
+            Assert.NotNull(nonProvided);
+
+            var setDefaults = t.GetMethod("SetDefaultTenantIds");
+            Assert.NotNull(setDefaults);
+            var tenantIdsProp = t.GetProperty("TenantIds");
+            Assert.NotNull(tenantIdsProp);
+
+            var suppressed = Activator.CreateInstance(t)!;
+            filterProp.SetValue(suppressed, nonProvided);
+            setDefaults!.Invoke(suppressed, new object[] { "tenant-alpha" });
+            Assert.Null(tenantIdsProp!.GetValue(suppressed));
+
+            var injected = Activator.CreateInstance(t)!;
+            setDefaults.Invoke(injected, new object[] { "tenant-alpha" });
+            Assert.NotNull(tenantIdsProp.GetValue(injected));
+
+            checkedTypes.Add(schemaName);
+        }
+
+        Assert.Contains("JobActivationRequest", checkedTypes); // Sanity: upstream spec changed if this fails.
+    }
+
     private static JsonNode LoadBundledSpec()
     {
         // The test process runs from test/.../bin/Debug/net8.0/. Walk up to repo root.

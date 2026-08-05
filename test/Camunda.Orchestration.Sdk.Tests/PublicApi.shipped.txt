@@ -1183,6 +1183,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaConfig : sealed class
   PROP Camunda.Orchestration.Sdk.TlsConfig? Tls { get; init; }
   PROP Camunda.Orchestration.Sdk.ValidationConfig Validation { get; init; }
   PROP Camunda.Orchestration.Sdk.WorkerDefaultsConfig? WorkerDefaults { get; init; }
+  PROP System.Collections.Generic.IReadOnlyList<System.String>? TenantIds { get; init; }
   PROP System.String DefaultTenantId { get; init; }
   PROP System.String LogLevel { get; init; }
   PROP System.String RestAddress { get; init; }
@@ -3031,6 +3032,7 @@ TYPE Camunda.Orchestration.Sdk.JobWorker : sealed class interfaces=[System.IAsyn
 
 TYPE Camunda.Orchestration.Sdk.JobWorkerConfig : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.TenantFilterEnum? TenantFilter { get; init; }
   PROP System.Boolean AutoStart { get; init; }
   PROP System.Collections.Generic.IReadOnlyList<System.String>? TenantIds { get; init; }
   PROP System.Collections.Generic.List<System.String>? FetchVariables { get; init; }

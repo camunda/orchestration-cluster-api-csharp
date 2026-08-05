@@ -301,6 +301,14 @@ public static class ConfigurationHydrator
         var hasWorkerDefaults = workerTimeout != null || workerMaxConcurrent != null
             || workerRequestTimeout != null || workerName != null || workerJitter != null;
 
+        // Plural tenant ids: comma-separated. Blank entries are dropped, and a value
+        // that yields no entries at all is treated as unset (falls back to the
+        // singular DefaultTenantId).
+        var tenantIds = rawMap.GetValueOrDefault("CAMUNDA_TENANT_IDS")
+            ?.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        if (tenantIds is { Length: 0 })
+            tenantIds = null;
+
         if (errors.Count > 0)
             throw new CamundaConfigurationException(errors);
 
@@ -317,6 +325,7 @@ public static class ConfigurationHydrator
             RestAddress = restAddress,
             TokenAudience = rawMap.GetValueOrDefault("CAMUNDA_TOKEN_AUDIENCE", "")!,
             DefaultTenantId = rawMap.GetValueOrDefault("CAMUNDA_DEFAULT_TENANT_ID", "<default>")!,
+            TenantIds = tenantIds,
             HttpRetry = new HttpRetryConfig
             {
                 MaxAttempts = retryMaxAttempts,
@@ -469,6 +478,7 @@ public static class ConfigurationHydrator
         ["RestAddress"] = "CAMUNDA_REST_ADDRESS",
         ["TokenAudience"] = "CAMUNDA_TOKEN_AUDIENCE",
         ["DefaultTenantId"] = "CAMUNDA_DEFAULT_TENANT_ID",
+        ["TenantIds"] = "CAMUNDA_TENANT_IDS",
         ["LogLevel"] = "CAMUNDA_SDK_LOG_LEVEL",
         ["Validation"] = "CAMUNDA_SDK_VALIDATION",
 
@@ -528,7 +538,20 @@ public static class ConfigurationHydrator
         {
             var value = configuration[configKey];
             if (!string.IsNullOrEmpty(value))
+            {
                 result[envKey] = value;
+                continue;
+            }
+
+            // A JSON array (e.g. "TenantIds": ["acme", "globex"]) has no scalar value —
+            // it binds as indexed children. Join them into the canonical comma-separated
+            // form the env-var path already uses.
+            var children = configuration.GetSection(configKey).GetChildren()
+                .Select(c => c.Value)
+                .Where(v => !string.IsNullOrEmpty(v))
+                .ToList();
+            if (children.Count > 0)
+                result[envKey] = string.Join(',', children);
         }
 
         return result;
