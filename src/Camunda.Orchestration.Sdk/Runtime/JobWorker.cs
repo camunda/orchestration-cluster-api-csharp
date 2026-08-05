@@ -98,6 +98,10 @@ public sealed class JobWorkerConfig
     /// variable, comma-separated), then to <c>[CamundaConfig.DefaultTenantId]</c>
     /// (which itself defaults to <c>"&lt;default&gt;"</c> and can be overridden via the
     /// <c>CAMUNDA_DEFAULT_TENANT_ID</c> environment variable).</para>
+    ///
+    /// <para>The whole fallback chain is skipped under
+    /// <see cref="TenantFilterEnum.ASSIGNED"/>: the server picks the tenants, so the
+    /// activation request carries no tenant IDs at all.</para>
     /// </summary>
     public IReadOnlyList<string>? TenantIds { get; init; }
 
