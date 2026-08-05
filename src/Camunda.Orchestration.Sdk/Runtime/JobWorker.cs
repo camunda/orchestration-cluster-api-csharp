@@ -94,8 +94,9 @@ public sealed class JobWorkerConfig
     ///
     /// <para>If neither <see cref="TenantIds"/> nor <see cref="TenantId"/> is set
     /// (or <see cref="TenantIds"/> is empty), the activation request falls back to
-    /// <c>CamundaConfig.TenantIds</c> (from the <c>CAMUNDA_TENANT_IDS</c> environment
-    /// variable, comma-separated), then to <c>[CamundaConfig.DefaultTenantId]</c>
+    /// <c>CamundaConfig.TenantIds</c> (from the comma-separated <c>CAMUNDA_TENANT_IDS</c>
+    /// environment variable, or the <c>TenantIds</c> configuration path as either a
+    /// comma-separated string or a JSON array), then to <c>[CamundaConfig.DefaultTenantId]</c>
     /// (which itself defaults to <c>"&lt;default&gt;"</c> and can be overridden via the
     /// <c>CAMUNDA_DEFAULT_TENANT_ID</c> environment variable).</para>
     /// </summary>
