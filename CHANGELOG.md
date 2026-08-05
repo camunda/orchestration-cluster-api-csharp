@@ -1,3 +1,15 @@
+# [10.0.0-alpha.11](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.10...v10.0.0-alpha.11) (2026-08-05)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([d3596f7](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d3596f7a02966ff7889d0c59955c02b261ebf3ae))
+
+
+### Features
+
+* **worker:** support TenantFilter and CAMUNDA_TENANT_IDS in job workers ([#377](https://github.com/camunda/orchestration-cluster-api-csharp/issues/377)) ([47e354e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/47e354e7943a4afcd69000314d0a031a5d91d14c)), closes [#376](https://github.com/camunda/orchestration-cluster-api-csharp/issues/376) [#122](https://github.com/camunda/orchestration-cluster-api-csharp/issues/122)
+
 # [10.0.0-alpha.10](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.9...v10.0.0-alpha.10) (2026-08-05)
 
 
