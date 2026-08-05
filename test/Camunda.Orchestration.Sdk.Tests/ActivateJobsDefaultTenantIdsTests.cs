@@ -199,7 +199,7 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
         });
 
         Assert.NotNull(capturedBody);
-        var doc = JsonDocument.Parse(capturedBody!);
+        using var doc = JsonDocument.Parse(capturedBody!);
         Assert.False(doc.RootElement.TryGetProperty("tenantIds", out _));
         Assert.Equal("ASSIGNED", doc.RootElement.GetProperty("tenantFilter").GetString());
     }
@@ -228,7 +228,7 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
         });
 
         Assert.NotNull(capturedBody);
-        var doc = JsonDocument.Parse(capturedBody!);
+        using var doc = JsonDocument.Parse(capturedBody!);
         var tenantIds = doc.RootElement.GetProperty("tenantIds").EnumerateArray().Select(e => e.GetString()).ToList();
         Assert.Equal(CustomTenantSingle, tenantIds);
     }

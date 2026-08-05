@@ -70,6 +70,51 @@ public class AppSettingsConfigurationTests
         Assert.Equal(AcmeGlobex, config.TenantIds);
     }
 
+    /// <summary>
+    /// The env-var read set is an explicit allowlist, so a new key that is absent from
+    /// it is silently ignored when it comes from the real process environment (only the
+    /// Config dictionary and IConfiguration paths would work). Guards that gap.
+    /// </summary>
+    [Fact]
+    public void BindsTenantIdsFromProcessEnvironment()
+    {
+        var previous = Environment.GetEnvironmentVariable("CAMUNDA_TENANT_IDS");
+        try
+        {
+            Environment.SetEnvironmentVariable("CAMUNDA_TENANT_IDS", "acme,globex");
+
+            var config = ConfigurationHydrator.Hydrate();
+
+            Assert.Equal(AcmeGlobex, config.TenantIds);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable("CAMUNDA_TENANT_IDS", previous);
+        }
+    }
+
+    /// <summary>
+    /// Only array-shaped sections (numeric child keys) are folded into a comma-separated
+    /// value. An object-shaped section under a scalar key must not be fabricated into one.
+    /// </summary>
+    [Fact]
+    public void ObjectShapedSection_IsNotJoinedIntoScalarKey()
+    {
+        var configSection = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                ["Camunda:Validation:Request"] = "strict",
+            })
+            .Build()
+            .GetSection("Camunda");
+
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>(),
+            configuration: configSection);
+
+        Assert.Equal("req:none,res:none", config.Validation.Raw);
+    }
+
     [Fact]
     public void TenantIdsIsNull_WhenUnset()
     {

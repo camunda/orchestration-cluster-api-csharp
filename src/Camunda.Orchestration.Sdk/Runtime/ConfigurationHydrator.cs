@@ -112,7 +112,8 @@ public static class ConfigurationHydrator
                          "CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS",
                          "CAMUNDA_MTLS_CERT", "CAMUNDA_MTLS_KEY", "CAMUNDA_MTLS_CA",
                          "CAMUNDA_MTLS_CERT_PATH", "CAMUNDA_MTLS_KEY_PATH", "CAMUNDA_MTLS_CA_PATH",
-                         "CAMUNDA_MTLS_KEY_PASSPHRASE"
+                         "CAMUNDA_MTLS_KEY_PASSPHRASE",
+                         "CAMUNDA_TENANT_IDS"
                      })
             {
                 var v = Environment.GetEnvironmentVariable(extra);
@@ -544,14 +545,21 @@ public static class ConfigurationHydrator
             }
 
             // A JSON array (e.g. "TenantIds": ["acme", "globex"]) has no scalar value —
-            // it binds as indexed children. Join them into the canonical comma-separated
-            // form the env-var path already uses.
-            var children = configuration.GetSection(configKey).GetChildren()
+            // it binds as children keyed by numeric index. Join those into the canonical
+            // comma-separated form the env-var path already uses. Object-shaped sections
+            // (non-numeric keys) are left alone: joining them would fabricate a nonsense
+            // value for a key that never accepts a list.
+            var children = configuration.GetSection(configKey).GetChildren().ToList();
+            if (children.Count == 0 || !children.All(c => int.TryParse(c.Key, out _)))
+                continue;
+
+            var values = children
+                .OrderBy(c => int.Parse(c.Key, System.Globalization.CultureInfo.InvariantCulture))
                 .Select(c => c.Value)
                 .Where(v => !string.IsNullOrEmpty(v))
                 .ToList();
-            if (children.Count > 0)
-                result[envKey] = string.Join(',', children);
+            if (values.Count > 0)
+                result[envKey] = string.Join(',', values);
         }
 
         return result;
