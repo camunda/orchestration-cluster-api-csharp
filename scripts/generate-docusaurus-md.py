@@ -71,28 +71,6 @@ def _escape_yaml(s: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Technical Preview banner (injected after first H1 on every page)
-# ---------------------------------------------------------------------------
-
-TECH_PREVIEW_BANNER = (
-    "\n:::caution Technical Preview\n"
-    "The C# SDK is a **technical preview** available from Camunda 8.9. "
-    "It will become fully supported in Camunda 8.10. "
-    "Its API surface may change in future releases without following semver.\n"
-    ":::\n"
-)
-
-
-def inject_tech_preview_banner(content: str) -> str:
-    """Insert the Technical Preview banner after the first H1 heading."""
-    m = re.search(r"^#\s+.+$", content, re.MULTILINE)
-    if m:
-        pos = m.end()
-        return content[:pos] + "\n" + TECH_PREVIEW_BANNER + content[pos:]
-    return content
-
-
-# ---------------------------------------------------------------------------
 # Link rewriting: docs.camunda.io → relative
 # ---------------------------------------------------------------------------
 
@@ -1205,8 +1183,8 @@ def _make_section_frontmatter(
 LANDING_FRONTMATTER = textwrap.dedent("""\
     ---
     id: csharp-sdk
-    title: "C# SDK (Technical Preview)"
-    sidebar_label: "C# SDK (Technical Preview)"
+    title: "C# SDK"
+    sidebar_label: "C# SDK"
     sidebar_position: 1
     mdx:
       format: md
@@ -1225,7 +1203,7 @@ def generate_readme_pages(readme_path: Path, output_dir: Path) -> None:
     # Replace the H1 title with a shorter one
     content = re.sub(
         r"^#\s+.*$",
-        "# C# SDK (Technical Preview)",
+        "# C# SDK",
         content,
         count=1,
         flags=re.MULTILINE,
@@ -1240,7 +1218,6 @@ def generate_readme_pages(readme_path: Path, output_dir: Path) -> None:
 
     # --- Landing page: sibling of the section directory ---
     landing_preamble = _rewrite_docs_links(preamble, depth=_LANDING_PAGE_DEPTH)
-    landing_preamble = inject_tech_preview_banner(landing_preamble)
     landing_path = output_dir / "csharp-sdk.md"
     landing_path.write_text(
         LANDING_FRONTMATTER + landing_preamble.strip() + "\n", encoding="utf-8"
@@ -1257,7 +1234,6 @@ def generate_readme_pages(readme_path: Path, output_dir: Path) -> None:
         section_content = _rewrite_docs_links(body, depth=_SECTION_PAGE_DEPTH)
         section_content = _rewrite_internal_anchors(section_content, slug, anchor_map)
         page_content = _promote_headings(section_content)
-        page_content = inject_tech_preview_banner(page_content)
         fm = _make_section_frontmatter(slug, title, position)
         page_path = section_dir / f"{slug}.md"
         page_path.write_text(fm + page_content.strip() + "\n", encoding="utf-8")
@@ -1395,7 +1371,6 @@ def main() -> None:
         for filename, gen_fn in generators.items():
             content = gen_fn()
             content = rewrite_camunda_docs_links(content)
-            content = inject_tech_preview_banner(content)
             out_path = OUTPUT_DIR / filename
             out_path.write_text(content, encoding="utf-8")
             print(f"  Wrote {out_path} ({len(content)} bytes)")
