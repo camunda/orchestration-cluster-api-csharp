@@ -10,6 +10,7 @@ internal static class ConfigKeys
     public const string RestAddress = "CAMUNDA_REST_ADDRESS";
     public const string TokenAudience = "CAMUNDA_TOKEN_AUDIENCE";
     public const string DefaultTenantId = "CAMUNDA_DEFAULT_TENANT_ID";
+    public const string TenantIds = "CAMUNDA_TENANT_IDS";
     public const string AuthStrategy = "CAMUNDA_AUTH_STRATEGY";
     public const string ClientId = "CAMUNDA_CLIENT_ID";
     public const string ClientSecret = "CAMUNDA_CLIENT_SECRET";
@@ -104,6 +105,7 @@ internal static class ConfigSchema
         new() { EnvVar = ConfigKeys.RestAddress, Default = "http://localhost:8080/v2", Aliases = ["ZEEBE_REST_ADDRESS"], ConfigPaths = ["RestAddress"], Doc = "Base REST endpoint address." },
         new() { EnvVar = ConfigKeys.TokenAudience, Default = "zeebe.camunda.io", ConfigPaths = ["TokenAudience"], Doc = "Token audience for OAuth flows." },
         new() { EnvVar = ConfigKeys.DefaultTenantId, Default = "<default>", ConfigPaths = ["DefaultTenantId"], Doc = "Default tenant id applied when none is provided." },
+        new() { EnvVar = ConfigKeys.TenantIds, ConfigPaths = ["TenantIds"], Doc = "Comma-separated tenant ids job workers activate for; overrides the single default tenant id." },
         new() { EnvVar = ConfigKeys.AuthStrategy, Type = ConfigValueType.Enum, Choices = ["NONE", "OAUTH", "BASIC"], Default = "NONE", ConfigPaths = ["Auth:Strategy"], Doc = "Authentication strategy." },
         new() { EnvVar = ConfigKeys.ClientId, ConfigPaths = ["Auth:ClientId", "OAuth:ClientId"], Doc = "OAuth client id (required when strategy is OAUTH)." },
         new() { EnvVar = ConfigKeys.ClientSecret, Secret = true, ConfigPaths = ["Auth:ClientSecret", "OAuth:ClientSecret"], Doc = "OAuth client secret (required when strategy is OAUTH)." },

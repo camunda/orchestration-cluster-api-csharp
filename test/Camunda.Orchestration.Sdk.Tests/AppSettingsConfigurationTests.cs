@@ -4,6 +4,8 @@ namespace Camunda.Orchestration.Sdk.Tests;
 
 public class AppSettingsConfigurationTests
 {
+    private static readonly string[] AcmeGlobex = ["acme", "globex"];
+
     [Fact]
     public void BindsTopLevelKeysFromIConfiguration()
     {
@@ -24,6 +26,56 @@ public class AppSettingsConfigurationTests
         Assert.Contains("cluster.example.com", config.RestAddress);
         Assert.Equal("my-tenant", config.DefaultTenantId);
         Assert.Equal("debug", config.LogLevel);
+    }
+
+    /// <summary>
+    /// camunda/orchestration-cluster-api-csharp#122 — `CAMUNDA_TENANT_IDS` binds from
+    /// the `TenantIds` path in either idiomatic JSON shape: a comma-separated string or
+    /// a JSON array (which `IConfiguration` exposes as indexed children, not a scalar).
+    /// </summary>
+    [Fact]
+    public void BindsTenantIdsFromIConfiguration_AsCommaSeparatedString()
+    {
+        var configSection = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                ["Camunda:TenantIds"] = "acme, globex",
+            })
+            .Build()
+            .GetSection("Camunda");
+
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>(),
+            configuration: configSection);
+
+        Assert.Equal(AcmeGlobex, config.TenantIds);
+    }
+
+    [Fact]
+    public void BindsTenantIdsFromIConfiguration_AsJsonArray()
+    {
+        var configSection = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                ["Camunda:TenantIds:0"] = "acme",
+                ["Camunda:TenantIds:1"] = "globex",
+            })
+            .Build()
+            .GetSection("Camunda");
+
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>(),
+            configuration: configSection);
+
+        Assert.Equal(AcmeGlobex, config.TenantIds);
+    }
+
+    [Fact]
+    public void TenantIdsIsNull_WhenUnset()
+    {
+        var config = ConfigurationHydrator.Hydrate(env: new Dictionary<string, string?>());
+
+        Assert.Null(config.TenantIds);
     }
 
     [Fact]

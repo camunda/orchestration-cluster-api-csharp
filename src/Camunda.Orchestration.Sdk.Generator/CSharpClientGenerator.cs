@@ -955,6 +955,7 @@ internal static class CSharpClientGenerator
             // Check if this class has an optional tenantId property AND is used as a request body
             var tenantIdInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdInfo(schema, doc) : null;
             var tenantIdsInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdsInfo(schema, doc) : null;
+            var tenantFilterGuard = tenantIdsInfo != null ? GetTenantFilterGuardInfo(schema, doc) : null;
             var ifaceList = new List<string>();
             if (tenantIdInfo != null)
                 ifaceList.Add("global::Camunda.Orchestration.Sdk.ITenantIdSettable");
@@ -1014,7 +1015,7 @@ internal static class CSharpClientGenerator
             if (tenantIdInfo != null)
                 EmitSetDefaultTenantIdMethod(sb, tenantIdInfo.Value);
             if (tenantIdsInfo != null)
-                EmitSetDefaultTenantIdsMethod(sb, tenantIdsInfo.Value);
+                EmitSetDefaultTenantIdsMethod(sb, tenantIdsInfo.Value, tenantFilterGuard);
 
             sb.AppendLine("}");
             sb.AppendLine();
@@ -1095,6 +1096,7 @@ internal static class CSharpClientGenerator
     {
         var tenantIdInfo = isRequestSchema ? GetOptionalTenantIdInfo(schema, doc) : null;
         var tenantIdsInfo = isRequestSchema ? GetOptionalTenantIdsInfo(schema, doc) : null;
+        var tenantFilterGuard = tenantIdsInfo != null ? GetTenantFilterGuardInfo(schema, doc) : null;
         var ifaceList = new List<string>();
         if (tenantIdInfo != null)
             ifaceList.Add("global::Camunda.Orchestration.Sdk.ITenantIdSettable");
@@ -1141,7 +1143,7 @@ internal static class CSharpClientGenerator
         if (tenantIdInfo != null)
             EmitSetDefaultTenantIdMethod(sb, tenantIdInfo.Value);
         if (tenantIdsInfo != null)
-            EmitSetDefaultTenantIdsMethod(sb, tenantIdsInfo.Value);
+            EmitSetDefaultTenantIdsMethod(sb, tenantIdsInfo.Value, tenantFilterGuard);
 
         sb.AppendLine("}");
         sb.AppendLine();
@@ -1913,15 +1915,94 @@ internal static class CSharpClientGenerator
     }
 
     /// <summary>
+    /// Detects a sibling tenant-filter enum property (e.g. <c>tenantFilter</c> on
+    /// <c>JobActivationRequest</c>) on a schema that also carries an optional
+    /// <c>tenantIds</c> array. When the caller selects a strategy other than
+    /// <c>PROVIDED</c>, the server derives the tenant set from the authenticated
+    /// principal and ignores the body's tenant IDs — so the default-tenant
+    /// injection emitted by <c>SetDefaultTenantIds</c> must stand down.
+    ///
+    /// Returns the C# property name, the enum type name, and the <c>PROVIDED</c>
+    /// member name, or <c>null</c> when the schema has no such property (in which
+    /// case injection is unconditional, as before).
+    /// </summary>
+    private static (string PropertyName, string EnumTypeName, string ProvidedMember)? GetTenantFilterGuardInfo(IOpenApiSchema schema, OpenApiDocument? doc = null)
+    {
+        // Mirror GetOptionalTenantIdsInfo: for a oneOf/anyOf, every variant must
+        // agree, otherwise the guard would apply inconsistently across variants.
+        var variants = schema.OneOf?.Count > 0 ? schema.OneOf : (schema.AnyOf?.Count > 0 ? schema.AnyOf : null);
+        if (variants is { Count: > 0 })
+        {
+            (string PropertyName, string EnumTypeName, string ProvidedMember)? agreed = null;
+            foreach (var v in variants)
+            {
+                var resolvedVariant = GetRefId(v) != null
+                    && doc?.Components?.Schemas != null
+                    && doc.Components.Schemas.TryGetValue(GetRefId(v)!, out var r)
+                    ? r
+                    : v;
+                var info = GetTenantFilterGuardInfo(resolvedVariant, doc);
+                if (info == null)
+                    return null;
+                if (agreed == null)
+                    agreed = info;
+                else if (agreed.Value != info.Value)
+                    return null;
+            }
+            return agreed;
+        }
+
+        var properties = new Dictionary<string, IOpenApiSchema>(
+            schema.Properties ?? new Dictionary<string, IOpenApiSchema>());
+        var required = new HashSet<string>(
+            schema.Required ?? new HashSet<string>());
+        FlattenAllOf(schema, doc, properties, required);
+
+        if (!properties.TryGetValue("tenantFilter", out var tenantFilterProp))
+            return null;
+
+        // Unwrap the `allOf: [ $ref ]` wrapper the spec uses to attach a
+        // description and default to a shared enum.
+        var refId = GetRefId(tenantFilterProp)
+            ?? (tenantFilterProp.AllOf?.Count == 1 ? GetRefId(tenantFilterProp.AllOf[0]) : null);
+        if (refId == null || doc?.Components?.Schemas == null)
+            return null;
+        if (!doc.Components.Schemas.TryGetValue(refId, out var tenantFilterSchema))
+            return null;
+        if (SchemaTypeName(tenantFilterSchema) != "string" || !(tenantFilterSchema.Enum?.Count > 0))
+            return null;
+
+        // Only guard against an enum that actually models the "caller provided the
+        // tenants" case — without it there is no safe member to compare against.
+        var provided = EnumStringValues(tenantFilterSchema).FirstOrDefault(v => v == "PROVIDED");
+        if (provided == null)
+            return null;
+
+        return (ToPascalCase("tenantFilter"), SanitizeTypeName(refId), ToPascalCase(provided));
+    }
+
+    /// <summary>
     /// Emits the SetDefaultTenantIds method implementation for ITenantIdsSettable.
     /// Mirrors <see cref="EmitSetDefaultTenantIdMethod"/> but for the plural
     /// array shape (e.g. JobActivationRequest.TenantIds).
     /// </summary>
-    private static void EmitSetDefaultTenantIdsMethod(StringBuilder sb, (string ItemCSharpType, bool IsBrandedKey) info)
+    private static void EmitSetDefaultTenantIdsMethod(
+        StringBuilder sb,
+        (string ItemCSharpType, bool IsBrandedKey) info,
+        (string PropertyName, string EnumTypeName, string ProvidedMember)? tenantFilterGuard = null)
     {
         sb.AppendLine("    /// <inheritdoc />");
         sb.AppendLine("    public void SetDefaultTenantIds(string tenantId)");
         sb.AppendLine("    {");
+        if (tenantFilterGuard is { } guard)
+        {
+            // A non-PROVIDED tenant filter means the server resolves the tenant set
+            // itself (ASSIGNED = the authenticated principal's assigned tenants) and
+            // ignores any tenantIds in the body, so injecting the default tenant would
+            // only put a meaningless value on the wire. See issue #376.
+            sb.AppendLine($"        if ({guard.PropertyName} != null && {guard.PropertyName} != {guard.EnumTypeName}.{guard.ProvidedMember})");
+            sb.AppendLine("            return;");
+        }
         sb.AppendLine("        if (TenantIds == null || TenantIds.Count == 0)");
         if (info.IsBrandedKey)
         {

@@ -16586,6 +16586,8 @@ public sealed class JobActivationRequest : global::Camunda.Orchestration.Sdk.ITe
     /// <inheritdoc />
     public void SetDefaultTenantIds(string tenantId)
     {
+        if (TenantFilter != null && TenantFilter != TenantFilterEnum.PROVIDED)
+            return;
         if (TenantIds == null || TenantIds.Count == 0)
             TenantIds = new List<TenantId> { global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId) };
     }
