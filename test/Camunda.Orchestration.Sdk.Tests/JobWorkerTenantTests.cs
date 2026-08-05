@@ -418,6 +418,21 @@ public class JobWorkerTenantTests
         Assert.Contains("ASSIGNED cannot be combined", ex.Message, StringComparison.Ordinal);
     }
 
+    [Fact]
+    public async Task AssignedTenantFilter_AcceptsEmptyTenantIds()
+    {
+        // An empty list is "unset" everywhere else (ResolveTenantIds, the env-var
+        // fallback), so it must not trip the ASSIGNED conflict check.
+        var body = await RunOnePollAndCaptureBodyAsync(new Dictionary<string, string>
+        {
+            ["CAMUNDA_REST_ADDRESS"] = "https://mock.local",
+        }, tenantIds: Array.Empty<string>(), tenantFilter: TenantFilterEnum.ASSIGNED);
+
+        using var doc = JsonDocument.Parse(body);
+        Assert.Equal("ASSIGNED", doc.RootElement.GetProperty("tenantFilter").GetString());
+        Assert.False(doc.RootElement.TryGetProperty("tenantIds", out _));
+    }
+
     private static ArgumentException AssertCreateJobWorkerThrows(JobWorkerConfig config)
     {
         using var client = new CamundaClient(new CamundaOptions

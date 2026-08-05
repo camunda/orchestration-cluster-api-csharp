@@ -274,9 +274,10 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
         // The server derives the tenant set from the authenticated principal under
         // ASSIGNED and ignores any tenant IDs in the body. Fail fast rather than let
-        // an explicit tenant list be silently dropped.
+        // an explicit tenant list be silently dropped. An empty TenantIds list counts
+        // as unset here, consistently with ResolveTenantIds and the env-var fallback.
         if (config.TenantFilter is TenantFilterEnum.ASSIGNED
-            && (config.TenantIds is not null || config.TenantId is not null))
+            && (config.TenantIds is { Count: > 0 } || config.TenantId is not null))
             throw new ArgumentException(
                 "JobWorkerConfig.TenantFilter = ASSIGNED cannot be combined with TenantIds or TenantId — " +
                 "the server activates jobs for the tenants assigned to the authenticated client and ignores provided tenant IDs.",
