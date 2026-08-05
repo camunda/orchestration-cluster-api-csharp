@@ -20541,7 +20541,12 @@
           "Recovery"
         ],
         "operationId": "restore",
-        "x-required-permissions": [],
+        "x-required-permissions": [
+          {
+            "resourceType": "BACKUP",
+            "permissionType": "RESTORE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -20600,6 +20605,16 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
           "409": {
             "description": "The cluster is not in recovery mode, so the restore cannot be accepted."
           },
@@ -20622,7 +20637,12 @@
           "Recovery"
         ],
         "operationId": "getRestoreStatus",
-        "x-required-permissions": [],
+        "x-required-permissions": [
+          {
+            "resourceType": "BACKUP",
+            "permissionType": "RESTORE"
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -20653,6 +20673,16 @@
                 }
               }
             },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
             "content": {
               "application/problem+json": {
                 "schema": {
