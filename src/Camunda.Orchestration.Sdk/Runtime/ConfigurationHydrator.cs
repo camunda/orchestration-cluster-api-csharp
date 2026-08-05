@@ -480,14 +480,38 @@ public static class ConfigurationHydrator
             }
 
             // A JSON array (e.g. "TenantIds": ["acme", "globex"]) has no scalar value —
-            // it binds as indexed children. Join them into the canonical comma-separated
-            // form the env-var path already uses.
-            var children = configuration.GetSection(configKey).GetChildren()
-                .Select(c => c.Value)
+            // it binds as children keyed by numeric index. Join those into the canonical
+            // comma-separated form the env-var path already uses. Object-shaped sections
+            // (non-numeric keys) are left alone: joining them would fabricate a nonsense
+            // value for a key that never accepts a list.
+            var children = configuration.GetSection(configKey).GetChildren().ToList();
+            if (children.Count == 0)
+                continue;
+
+            // Parse each index exactly once, invariant and strict: NumberStyles.None
+            // rejects signs, separators, and surrounding whitespace, so what counts as
+            // an index cannot shift with the ambient culture.
+            var indexed = new List<(int Index, string? Value)>(children.Count);
+            foreach (var child in children)
+            {
+                if (!int.TryParse(child.Key, System.Globalization.NumberStyles.None,
+                        System.Globalization.CultureInfo.InvariantCulture, out var index))
+                {
+                    indexed.Clear();
+                    break;
+                }
+                indexed.Add((index, child.Value));
+            }
+            if (indexed.Count == 0)
+                continue;
+
+            var values = indexed
+                .OrderBy(x => x.Index)
+                .Select(x => x.Value)
                 .Where(v => !string.IsNullOrEmpty(v))
                 .ToList();
-            if (children.Count > 0)
-                result[envKey] = string.Join(',', children);
+            if (values.Count > 0)
+                result[envKey] = string.Join(',', values);
         }
 
         return result;
