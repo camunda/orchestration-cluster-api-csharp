@@ -24,6 +24,20 @@ public partial class CamundaClient : IAsyncDisposable
     public JobWorker CreateJobWorker(JobWorkerConfig config, JobHandler handler)
     {
         var defaults = _config.WorkerDefaults;
+
+        // Tenant precedence: explicit JobWorkerConfig tenants > CAMUNDA_TENANT_IDS >
+        // [DefaultTenantId] (injected on the activation request). An empty explicit
+        // list counts as unset. Under TenantFilter.ASSIGNED the server picks the
+        // tenants, so the env default must not be applied — it would collide with the
+        // ASSIGNED validation in the JobWorker constructor.
+        var tenantIds = config.TenantIds;
+        if (tenantIds is not { Count: > 0 }
+            && config.TenantId is null
+            && config.TenantFilter is not TenantFilterEnum.ASSIGNED)
+        {
+            tenantIds = _config.TenantIds ?? tenantIds;
+        }
+
         var merged = new JobWorkerConfig
         {
             JobType = config.JobType,
@@ -37,8 +51,9 @@ public partial class CamundaClient : IAsyncDisposable
             StartupJitterMaxSeconds = config.StartupJitterMaxSeconds > 0
                 ? config.StartupJitterMaxSeconds
                 : defaults?.StartupJitterMaxSeconds ?? 0,
-            TenantIds = config.TenantIds,
+            TenantIds = tenantIds,
             TenantId = config.TenantId,
+            TenantFilter = config.TenantFilter,
         };
         var worker = new JobWorker(this, merged, handler, _loggerFactory, _jsonOptions);
         _workers.Add(worker);

@@ -172,6 +172,7 @@ CAMUNDA_OAUTH_URL=https://login.cloud.camunda.io/oauth/token
 | `RestAddress` | `CAMUNDA_REST_ADDRESS` |
 | `TokenAudience` | `CAMUNDA_TOKEN_AUDIENCE` |
 | `DefaultTenantId` | `CAMUNDA_DEFAULT_TENANT_ID` |
+| `TenantIds` | `CAMUNDA_TENANT_IDS` (JSON array or comma-separated string) |
 | `LogLevel` | `CAMUNDA_SDK_LOG_LEVEL` |
 | `Validation` | `CAMUNDA_SDK_VALIDATION` |
 | `Auth:Strategy` | `CAMUNDA_AUTH_STRATEGY` |
@@ -292,6 +293,7 @@ The SDK uses environment variables for configuration, matching the [JS SDK](http
 | `CAMUNDA_BASIC_AUTH_USERNAME` | Basic auth username | — |
 | `CAMUNDA_BASIC_AUTH_PASSWORD` | Basic auth password | — |
 | `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID | `<default>` |
+| `CAMUNDA_TENANT_IDS` | Comma-separated tenant IDs for job activation (overrides `CAMUNDA_DEFAULT_TENANT_ID` for workers) | — |
 | `CAMUNDA_SDK_LOG_LEVEL` | Log level (`error`, `warn`, `info`, `debug`, `trace`, `silent`) | `error` |
 | `CAMUNDA_SDK_VALIDATION` | Validation mode (see below) | `req:none,res:none` |
 | `CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS` | Total HTTP retry attempts (initial + retries) | `3` |
@@ -840,6 +842,66 @@ client.CreateJobWorker(config, async (job, ct) =>
 | `WorkerName` | auto | Worker name for logging. Falls back to `CAMUNDA_WORKER_NAME` env var. |
 | `AutoStart` | `true` | Start polling on creation |
 | `StartupJitterMaxSeconds` | `0` | Max random delay (seconds) before first poll. Falls back to `CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS` env var. |
+| `TenantIds` | `null` | Tenant IDs to activate jobs for. Falls back to `CAMUNDA_TENANT_IDS`, then `[CAMUNDA_DEFAULT_TENANT_ID]`. Mutually exclusive with `TenantId`. |
+| `TenantId` | `null` | Single-tenant convenience for `TenantIds`. Mutually exclusive with `TenantIds`. |
+| `TenantFilter` | `null` | Tenant filtering strategy (`PROVIDED` / `ASSIGNED`). See [Multi-Tenant Workers](#multi-tenant-workers). Requires Camunda 8.9+. |
+
+### Multi-Tenant Workers
+
+A worker activates jobs for a fixed tenant set (`TenantIds` / `TenantId`), or delegates the choice to the server with `TenantFilter`:
+
+| `TenantFilter` | Behavior |
+|---|---|
+| `null` / `PROVIDED` | Activate jobs for the tenants named in `TenantIds` / `TenantId`, falling back to `CAMUNDA_TENANT_IDS`, then the default tenant. |
+| `ASSIGNED` | Activate jobs for whichever tenants are currently assigned to the authenticated client. No tenant IDs are sent. |
+
+The fixed tenant set can also come from configuration, so a fleet of workers shares one tenant list:
+
+```bash
+export CAMUNDA_TENANT_IDS=acme,globex
+```
+
+```json
+// appsettings.json — array or comma-separated string
+{
+  "Camunda": {
+    "TenantIds": ["acme", "globex"]
+  }
+}
+```
+
+**Tenant precedence** (highest wins): `JobWorkerConfig.TenantIds` / `TenantId` > `CAMUNDA_TENANT_IDS` > `[CAMUNDA_DEFAULT_TENANT_ID]`. An empty `TenantIds` list counts as unset. `TenantFilter = ASSIGNED` opts out of the chain entirely — the configured tenant IDs are ignored, not sent.
+
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: MultiTenantWorker -->
+```csharp
+// Fixed tenant set — activate jobs for these tenants only
+client.CreateJobWorker(
+    new JobWorkerConfig
+    {
+        JobType = "process-order",
+        JobTimeoutMs = 30_000,
+        TenantIds = new[] { "acme", "globex" },
+    },
+    async (job, ct) => null);
+
+// Dynamic tenant set — activate jobs for whichever tenants are currently
+// assigned to the authenticated client. The server re-evaluates the
+// assignment on every activation request, so tenants added or removed in
+// Camunda take effect without restarting the worker.
+client.CreateJobWorker(
+    new JobWorkerConfig
+    {
+        JobType = "process-order",
+        JobTimeoutMs = 30_000,
+        TenantFilter = TenantFilterEnum.ASSIGNED,
+    },
+    async (job, ct) => null);
+```
+
+`ASSIGNED` re-reads the assignment on every activation request, so the worker picks up newly assigned tenants and drops removed ones without restarting and without the application querying or caching the tenant list. Notes:
+
+- `ASSIGNED` cannot be combined with `TenantIds` or `TenantId` — the server would ignore them, so `CreateJobWorker` throws `ArgumentException` instead.
+- `ASSIGNED` requires multi-tenancy to be enabled on the cluster; otherwise the activation request is rejected with HTTP 400.
 
 ### Heritable Worker Defaults
 
