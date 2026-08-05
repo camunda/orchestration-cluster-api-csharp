@@ -20427,7 +20427,20 @@
           "Recovery"
         ],
         "operationId": "changeClusterMode",
-        "x-required-permissions": [],
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "SYSTEM",
+                "permissionType": "UPDATE"
+              },
+              {
+                "resourceType": "BACKUP",
+                "permissionType": "RESTORE"
+              }
+            ]
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -20489,6 +20502,16 @@
                 }
               }
             },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
             "content": {
               "application/problem+json": {
                 "schema": {
