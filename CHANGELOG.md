@@ -1,3 +1,10 @@
+# [10.0.0-alpha.12](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.11...v10.0.0-alpha.12) (2026-08-05)
+
+
+### Bug Fixes
+
+* **config:** fold only array-shaped IConfiguration sections ([#379](https://github.com/camunda/orchestration-cluster-api-csharp/issues/379)) ([5d75944](https://github.com/camunda/orchestration-cluster-api-csharp/commit/5d75944ac2f52990e54d999be378b7eb3d3424e1)), closes [#377](https://github.com/camunda/orchestration-cluster-api-csharp/issues/377) [#378](https://github.com/camunda/orchestration-cluster-api-csharp/issues/378)
+
 # [10.0.0-alpha.11](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.10...v10.0.0-alpha.11) (2026-08-05)
 
 
