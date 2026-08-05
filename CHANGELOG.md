@@ -1,3 +1,10 @@
+# [9.2.0](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.1.3...v9.2.0) (2026-08-05)
+
+
+### Features
+
+* **worker:** support TenantFilter and CAMUNDA_TENANT_IDS in job workers ([#378](https://github.com/camunda/orchestration-cluster-api-csharp/issues/378)) ([f6c6ae8](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f6c6ae8c021f52d3e8bf04b54c279752a39def78)), closes [#377](https://github.com/camunda/orchestration-cluster-api-csharp/issues/377)
+
 ## [9.1.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.1.2...v9.1.3) (2026-06-25)
 
 
