@@ -15178,6 +15178,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaConfig.RestAddress
   fullName: Camunda.Orchestration.Sdk.CamundaConfig.RestAddress
   nameWithType: CamundaConfig.RestAddress
+- uid: Camunda.Orchestration.Sdk.CamundaConfig.TenantIds
+  name: TenantIds
+  href: api/Camunda.Orchestration.Sdk.CamundaConfig.TenantIds.html#Camunda_Orchestration_Sdk_CamundaConfig_TenantIds
+  commentId: P:Camunda.Orchestration.Sdk.CamundaConfig.TenantIds
+  fullName: Camunda.Orchestration.Sdk.CamundaConfig.TenantIds
+  nameWithType: CamundaConfig.TenantIds
+- uid: Camunda.Orchestration.Sdk.CamundaConfig.TenantIds*
+  name: TenantIds
+  href: api/Camunda.Orchestration.Sdk.CamundaConfig.TenantIds.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaConfig.TenantIds
+  fullName: Camunda.Orchestration.Sdk.CamundaConfig.TenantIds
+  nameWithType: CamundaConfig.TenantIds
 - uid: Camunda.Orchestration.Sdk.CamundaConfig.Tls
   name: Tls
   href: api/Camunda.Orchestration.Sdk.CamundaConfig.Tls.html#Camunda_Orchestration_Sdk_CamundaConfig_Tls
@@ -32698,6 +32710,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobWorkerConfig.StartupJitterMaxSeconds
   fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.StartupJitterMaxSeconds
   nameWithType: JobWorkerConfig.StartupJitterMaxSeconds
+- uid: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantFilter
+  name: TenantFilter
+  href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.TenantFilter.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantFilter
+  commentId: P:Camunda.Orchestration.Sdk.JobWorkerConfig.TenantFilter
+  fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantFilter
+  nameWithType: JobWorkerConfig.TenantFilter
+- uid: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantFilter*
+  name: TenantFilter
+  href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.TenantFilter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobWorkerConfig.TenantFilter
+  fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantFilter
+  nameWithType: JobWorkerConfig.TenantFilter
 - uid: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId
   name: TenantId
   href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.TenantId.html#Camunda_Orchestration_Sdk_JobWorkerConfig_TenantId
