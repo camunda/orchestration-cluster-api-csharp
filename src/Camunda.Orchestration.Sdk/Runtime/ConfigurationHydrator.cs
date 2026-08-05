@@ -485,12 +485,29 @@ public static class ConfigurationHydrator
             // (non-numeric keys) are left alone: joining them would fabricate a nonsense
             // value for a key that never accepts a list.
             var children = configuration.GetSection(configKey).GetChildren().ToList();
-            if (children.Count == 0 || !children.All(c => int.TryParse(c.Key, out _)))
+            if (children.Count == 0)
                 continue;
 
-            var values = children
-                .OrderBy(c => int.Parse(c.Key, System.Globalization.CultureInfo.InvariantCulture))
-                .Select(c => c.Value)
+            // Parse each index exactly once, invariant and strict: NumberStyles.None
+            // rejects signs, separators, and surrounding whitespace, so what counts as
+            // an index cannot shift with the ambient culture.
+            var indexed = new List<(int Index, string? Value)>(children.Count);
+            foreach (var child in children)
+            {
+                if (!int.TryParse(child.Key, System.Globalization.NumberStyles.None,
+                        System.Globalization.CultureInfo.InvariantCulture, out var index))
+                {
+                    indexed.Clear();
+                    break;
+                }
+                indexed.Add((index, child.Value));
+            }
+            if (indexed.Count == 0)
+                continue;
+
+            var values = indexed
+                .OrderBy(x => x.Index)
+                .Select(x => x.Value)
                 .Where(v => !string.IsNullOrEmpty(v))
                 .ToList();
             if (values.Count > 0)

@@ -92,6 +92,49 @@ public class AppSettingsConfigurationTests
         Assert.Equal("req:none,res:none", config.Validation.Raw);
     }
 
+    /// <summary>
+    /// Index parsing is invariant and strict, so a signed key is not an array index —
+    /// a lenient parse would both accept it here and risk diverging from the parse used
+    /// for ordering once the ambient culture defines a different sign character.
+    /// </summary>
+    [Fact]
+    public void SignedChildKey_IsNotTreatedAsArrayIndex()
+    {
+        var configSection = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                ["Camunda:TenantIds:-1"] = "acme",
+            })
+            .Build()
+            .GetSection("Camunda");
+
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>(),
+            configuration: configSection);
+
+        Assert.Null(config.TenantIds);
+    }
+
+    [Fact]
+    public void ArrayChildren_AreJoinedInIndexOrder()
+    {
+        var configSection = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                // Deliberately out of lexical order: "10" sorts before "9" as a string.
+                ["Camunda:TenantIds:9"] = "acme",
+                ["Camunda:TenantIds:10"] = "globex",
+            })
+            .Build()
+            .GetSection("Camunda");
+
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>(),
+            configuration: configSection);
+
+        Assert.Equal(AcmeGlobex, config.TenantIds);
+    }
+
     [Fact]
     public void TenantIdsIsNull_WhenUnset()
     {
