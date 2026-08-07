@@ -1527,5 +1527,12 @@
       "region": "GetExportingStatus",
       "label": "Get exporting status"
     }
+  ],
+  "searchOwnAuthorizations": [
+    {
+      "file": "Authorization.cs",
+      "region": "SearchOwnAuthorizations",
+      "label": "Search own authorizations"
+    }
   ]
 }
