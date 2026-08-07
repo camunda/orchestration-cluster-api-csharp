@@ -1543,6 +1543,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.AuthorizationSearchResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Authorization.cs#SearchOwnAuthorizations)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.SearchBatchOperationItemsAsync(Camunda.Orchestration.Sdk.BatchOperationItemSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.BatchOperationItemSearchQueryResult},System.Threading.CancellationToken)
 example:
 - *content

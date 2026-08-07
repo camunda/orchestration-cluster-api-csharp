@@ -7876,6 +7876,24 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Search own authorizations
+    /// Search for the current authenticated principal&apos;s own authorization records — including authorizations granted directly to the user or client, as well as those granted via a group, role, or mapping rule the principal belongs to.
+    /// </summary>
+    /// <remarks>Operation: searchOwnAuthorizations</remarks>
+    public async Task<AuthorizationSearchResult> SearchOwnAuthorizationsAsync(AuthorizationSearchQuery body, ConsistencyOptions<AuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/authentication/me/authorizations/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchOwnAuthorizations", false,
+                () => InvokeWithRetryAsync(() => SendAsync<AuthorizationSearchResult>(HttpMethod.Post, path, body, ct), "searchOwnAuthorizations", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<AuthorizationSearchResult>(HttpMethod.Post, path, body, ct), "searchOwnAuthorizations", false, ct);
+    }
+
+    /// <summary>
     /// Search process definition variable names
     /// Search for distinct variable names defined on a process definition, optionally narrowed by the name filter.
     /// </summary>
