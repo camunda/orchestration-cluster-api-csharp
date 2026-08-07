@@ -1661,6 +1661,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuthorizationCreateResult> CreateAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuthorizationResult> GetAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationKey authorizationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuthorizationResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuthorizationSearchResult> SearchAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuthorizationSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuthorizationSearchResult> SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuthorizationSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BackupInfo> GetRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId backupId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceCancellationBatchOperationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.DecisionInstanceDeletionBatchOperationRequest body, System.Threading.CancellationToken ct = null)
@@ -4807,7 +4808,8 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionFilterState : enum interfaces=[S
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
   underlying=System.Int32
   MEMBER ACTIVE = 0 json="ACTIVE"
-  MEMBER DELETED = 1 json="DELETED"
+  MEMBER DRAINING = 1 json="DRAINING"
+  MEMBER DELETED = 2 json="DELETED"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ProcessDefinitionId>]
   PROP System.String Value { get; }
@@ -4972,7 +4974,8 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResultState : enum interfaces=[S
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
   underlying=System.Int32
   MEMBER ACTIVE = 0 json="ACTIVE"
-  MEMBER DELETED = 1 json="DELETED"
+  MEMBER DRAINING = 1 json="DRAINING"
+  MEMBER DELETED = 2 json="DELETED"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuery : sealed class
   CTOR ()
