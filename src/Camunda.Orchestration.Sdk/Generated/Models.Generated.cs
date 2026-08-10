@@ -3806,6 +3806,39 @@ internal sealed class AgentHistoryItemKeyFilterPropertyJsonConverter : global::S
 }
 
 /// <summary>
+/// The outcome of appending a single history item from an update request&apos;s
+/// history batch.
+/// 
+/// </summary>
+public sealed class AgentInstanceCreatedHistoryItem
+{
+    /// <summary>
+    /// The historyItemId of the corresponding item in the request, echoed back
+    /// so callers can correlate response entries with request items by id.
+    /// 
+    /// </summary>
+    [JsonPropertyName("historyItemId")]
+    public string HistoryItemId { get; set; } = null!;
+
+    /// <summary>
+    /// The system-generated key for the history item. When isDuplicate is true,
+    /// this is the key of the original entry, not a new one.
+    /// 
+    /// </summary>
+    [JsonPropertyName("historyItemKey")]
+    public AgentHistoryItemKey HistoryItemKey { get; set; }
+
+    /// <summary>
+    /// True if this item had already been recorded and no new AGENT_HISTORY event
+    /// was created for it; false if a new event was created.
+    /// 
+    /// </summary>
+    [JsonPropertyName("isDuplicate")]
+    public bool IsDuplicate { get; set; }
+
+}
+
+/// <summary>
 /// Request to create a new agent instance.
 /// </summary>
 public sealed class AgentInstanceCreationRequest
@@ -4159,7 +4192,7 @@ public sealed class AgentInstanceHistoryFilter
     public JobKeyFilterProperty? JobKey { get; set; }
 
     /// <summary>
-    /// Filter by loopIteration number. A loopIteration is one pass through the agent feedback loop (one LLM call, its tool dispatches, and their results).
+    /// Filter by loop iteration number.
     /// </summary>
     [JsonPropertyName("loopIteration")]
     public IntegerFilterProperty? LoopIteration { get; set; }
@@ -4177,6 +4210,65 @@ public sealed class AgentInstanceHistoryFilter
     /// </summary>
     [JsonPropertyName("producedAt")]
     public DateTimeFilterProperty? ProducedAt { get; set; }
+
+}
+
+/// <summary>
+/// A single history item to append to the agent instance&apos;s conversation history,
+/// submitted as part of the batch on an agent instance update request.
+/// 
+/// </summary>
+public sealed class AgentInstanceHistoryItem
+{
+    /// <summary>
+    /// Caller-assigned identifier used to detect and dedupe retries of the same
+    /// item. For example, when a retried job activation resubmits history items
+    /// it already sent in an earlier attempt, those items are not rejected; they
+    /// are flagged via isDuplicate in the response instead. Must be non-blank.
+    /// 
+    /// </summary>
+    [JsonPropertyName("historyItemId")]
+    public string HistoryItemId { get; set; } = null!;
+
+    /// <summary>
+    /// The loop iteration this item belongs to.
+    /// </summary>
+    [JsonPropertyName("loopIteration")]
+    public LoopIterationId LoopIteration { get; set; }
+
+    /// <summary>
+    /// The role of this history item in the conversation.
+    /// </summary>
+    [JsonPropertyName("role")]
+    public AgentInstanceHistoryRoleEnum Role { get; set; }
+
+    /// <summary>
+    /// The content blocks of this history item.
+    /// </summary>
+    [JsonPropertyName("content")]
+    public List<AgentInstanceMessageContent> Content { get; set; } = null!;
+
+    /// <summary>
+    /// Tool calls associated with this history item.
+    /// For ASSISTANT items: tool calls dispatched by this LLM response.
+    /// For TOOL_RESULT items: single-entry array referencing the originating tool call.
+    /// Omit for USER items.
+    /// 
+    /// </summary>
+    [JsonPropertyName("toolCalls")]
+    public List<AgentInstanceToolCall>? ToolCalls { get; set; }
+
+    /// <summary>
+    /// Per-call token and latency metrics. Present on ASSISTANT items only.
+    /// </summary>
+    [JsonPropertyName("metrics")]
+    public AgentInstanceHistoryItemMetrics? Metrics { get; set; }
+
+    /// <summary>
+    /// The agent-side timestamp of when this message was produced.
+    /// </summary>
+    [JsonPropertyName("producedAt")]
+    public DateTimeOffset ProducedAt { get; set; }
 
 }
 
@@ -4243,9 +4335,8 @@ public sealed class AgentInstanceHistoryItemRequest
     public string JobLease { get; set; } = null!;
 
     /// <summary>
-    /// The loopIteration this item belongs to. A loopIteration is one pass through the agent
-    /// feedback loop: one LLM call, its tool dispatches, and their results. Omit if not grouping
-    /// items by loopIteration.
+    /// The loop iteration this item belongs to. Omit if not grouping items by
+    /// loopIteration.
     /// 
     /// </summary>
     [JsonPropertyName("loopIteration")]
@@ -4265,8 +4356,8 @@ public sealed class AgentInstanceHistoryItemRequest
 
     /// <summary>
     /// Tool calls associated with this history item.
-    /// For ASSISTANT items: tool calls dispatched by this LLM response, with arguments populated.
-    /// For TOOL_RESULT items: single-entry array referencing the originating tool call, with arguments null.
+    /// For ASSISTANT items: tool calls dispatched by this LLM response.
+    /// For TOOL_RESULT items: single-entry array referencing the originating tool call.
     /// Omit for USER items.
     /// 
     /// </summary>
@@ -4280,7 +4371,7 @@ public sealed class AgentInstanceHistoryItemRequest
     public AgentInstanceHistoryItemMetrics? Metrics { get; set; }
 
     /// <summary>
-    /// The connector-side timestamp of when this message was produced.
+    /// The agent-side timestamp of when this message was produced.
     /// </summary>
     [JsonPropertyName("producedAt")]
     public DateTimeOffset ProducedAt { get; set; }
@@ -4297,6 +4388,14 @@ public sealed class AgentInstanceHistoryItemResult
     /// </summary>
     [JsonPropertyName("historyItemKey")]
     public AgentHistoryItemKey HistoryItemKey { get; set; }
+
+    /// <summary>
+    /// The client-supplied identifier this item was created with. Empty for items that don&apos;t
+    /// carry one.
+    /// 
+    /// </summary>
+    [JsonPropertyName("historyItemId")]
+    public string HistoryItemId { get; set; } = null!;
 
     /// <summary>
     /// The key of the agent instance this item belongs to.
@@ -4323,9 +4422,7 @@ public sealed class AgentInstanceHistoryItemResult
     public string JobLease { get; set; } = null!;
 
     /// <summary>
-    /// The loopIteration this item belongs to. A loopIteration is one pass through the agent
-    /// feedback loop: one LLM call, its tool dispatches, and their results.
-    /// 
+    /// The loop iteration this item belongs to.
     /// </summary>
     [JsonPropertyName("loopIteration")]
     public LoopIterationId LoopIteration { get; set; }
@@ -4344,8 +4441,8 @@ public sealed class AgentInstanceHistoryItemResult
 
     /// <summary>
     /// Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches.
-    /// ASSISTANT items: dispatched tool calls with arguments populated.
-    /// TOOL_RESULT items: single-entry array referencing the originating tool call (arguments null).
+    /// ASSISTANT items: dispatched tool calls.
+    /// TOOL_RESULT items: single-entry array referencing the originating tool call.
     /// 
     /// </summary>
     [JsonPropertyName("toolCalls")]
@@ -4364,10 +4461,49 @@ public sealed class AgentInstanceHistoryItemResult
     public AgentInstanceHistoryCommitStatusEnum CommitStatus { get; set; }
 
     /// <summary>
-    /// The connector-side timestamp of when this message was produced.
+    /// The agent-side timestamp of when this message was produced.
     /// </summary>
     [JsonPropertyName("producedAt")]
     public DateTimeOffset ProducedAt { get; set; }
+
+    /// <summary>
+    /// The complete list of tools available to the agent as of this entry. CONFIGURATION
+    /// items only; empty for other roles.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tools")]
+    public List<AgentTool> Tools { get; set; } = null!;
+
+    /// <summary>
+    /// The LLM model identifier as of this entry. CONFIGURATION items only; null for other
+    /// roles.
+    /// 
+    /// </summary>
+    [JsonPropertyName("model")]
+    public string? Model { get; set; }
+
+    /// <summary>
+    /// The LLM provider as of this entry. CONFIGURATION items only; null for other roles.
+    /// 
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string? Provider { get; set; }
+
+    /// <summary>
+    /// The operational limits as of this entry. CONFIGURATION items only; -1 on any field
+    /// means &quot;no limit configured&quot; for other roles.
+    /// 
+    /// </summary>
+    [JsonPropertyName("limits")]
+    public AgentInstanceLimits Limits { get; set; } = null!;
+
+    /// <summary>
+    /// The system prompt, as content blocks, as of this entry. CONFIGURATION items only;
+    /// empty for other roles.
+    /// 
+    /// </summary>
+    [JsonPropertyName("systemPrompt")]
+    public List<AgentInstanceMessageContent> SystemPrompt { get; set; } = null!;
 
 }
 
@@ -4383,6 +4519,8 @@ public enum AgentInstanceHistoryRoleEnum
     ASSISTANT,
     [JsonPropertyName("TOOL_RESULT")]
     TOOLRESULT,
+    [JsonPropertyName("CONFIGURATION")]
+    CONFIGURATION,
 }
 
 /// <summary>
@@ -5256,7 +5394,6 @@ public sealed class AgentInstanceTextContent : AgentInstanceMessageContent
 
 /// <summary>
 /// A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.
-/// ASSISTANT items carry arguments; TOOL_RESULT items carry arguments as null.
 /// 
 /// </summary>
 public sealed class AgentInstanceToolCall
@@ -5280,7 +5417,9 @@ public sealed class AgentInstanceToolCall
     public string? ElementId { get; set; }
 
     /// <summary>
-    /// The tool call arguments as provided by the LLM. Null on TOOL_RESULT items.
+    /// The tool call arguments as provided by the LLM. May be null or populated on
+    /// any item, including TOOL_RESULT.
+    /// 
     /// </summary>
     [JsonPropertyName("arguments")]
     public object? Arguments { get; set; }
@@ -5324,6 +5463,48 @@ public sealed class AgentInstanceUpdateRequest
     /// </summary>
     [JsonPropertyName("tools")]
     public List<AgentTool>? Tools { get; set; }
+
+    /// <summary>
+    /// The key of the job activation during which this update is being made.
+    /// Required whenever history is provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("jobKey")]
+    public JobKey? JobKey { get; set; }
+
+    /// <summary>
+    /// Opaque lease token received from the job activation response. Disambiguates
+    /// this activation from any other activation of the same job: if the job is
+    /// later retried, history items submitted under a superseded lease are discarded
+    /// rather than committed.
+    /// 
+    /// </summary>
+    [JsonPropertyName("jobLease")]
+    public string? JobLease { get; set; }
+
+    /// <summary>
+    /// A batch of history items to append to the agent instance&apos;s conversation
+    /// history, in request order. Each created item is echoed back in the
+    /// response&apos;s createdHistory, positionally correlated.
+    /// 
+    /// </summary>
+    [JsonPropertyName("history")]
+    public List<AgentInstanceHistoryItem>? History { get; set; }
+
+}
+
+/// <summary>
+/// Response returned after successfully updating an agent instance.
+/// </summary>
+public sealed class AgentInstanceUpdateResult
+{
+    /// <summary>
+    /// One entry per history item submitted in the request, in request order.
+    /// Empty when no history items were submitted.
+    /// 
+    /// </summary>
+    [JsonPropertyName("createdHistory")]
+    public List<AgentInstanceCreatedHistoryItem> CreatedHistory { get; set; } = null!;
 
 }
 
@@ -18642,9 +18823,12 @@ public readonly record struct LongKey : global::Camunda.Orchestration.Sdk.ICamun
 }
 
 /// <summary>
-/// A client-provided sequential integer identifying one pass through the agent
-/// feedback loop: one LLM call, its tool dispatches, and their results. Must be
-/// a positive integer, increasing with each loopIteration. Established by the
+/// A client-provided sequential integer identifying a loop iteration: one pass
+/// through an AI agent&apos;s loop, during which the model reasons, selects tools,
+/// evaluates the result, and decides whether to continue. One iteration covers
+/// the input for the LLM call, the call itself, and the tools it dispatches;
+/// the results of those tool calls are input to the next iteration. Must be a
+/// positive integer, increasing with each loopIteration. Established by the
 /// connector when appending the first history item of a loopIteration.
 /// 
 /// </summary>

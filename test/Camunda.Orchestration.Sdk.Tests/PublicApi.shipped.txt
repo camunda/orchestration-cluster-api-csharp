@@ -518,6 +518,12 @@ TYPE Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentHistoryItemKey>? In { get; set; } [JsonPropertyName("$in")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentHistoryItemKey>? NotIn { get; set; } [JsonPropertyName("$notIn")]
 
+TYPE Camunda.Orchestration.Sdk.AgentInstanceCreatedHistoryItem : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.AgentHistoryItemKey HistoryItemKey { get; set; } [JsonPropertyName("historyItemKey")]
+  PROP System.Boolean IsDuplicate { get; set; } [JsonPropertyName("isDuplicate")]
+  PROP System.String HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
+
 TYPE Camunda.Orchestration.Sdk.AgentInstanceCreationRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentInstanceDefinition Definition { get; set; } [JsonPropertyName("definition")]
@@ -590,6 +596,16 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter : sealed class
   PROP Camunda.Orchestration.Sdk.IntegerFilterProperty? LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP Camunda.Orchestration.Sdk.JobKeyFilterProperty? JobKey { get; set; } [JsonPropertyName("jobKey")]
 
+TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItem : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics? Metrics { get; set; } [JsonPropertyName("metrics")]
+  PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum Role { get; set; } [JsonPropertyName("role")]
+  PROP Camunda.Orchestration.Sdk.LoopIterationId LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceToolCall>? ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
+  PROP System.DateTimeOffset ProducedAt { get; set; } [JsonPropertyName("producedAt")]
+  PROP System.String HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
+
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentHistoryItemKey HistoryItemKey { get; set; } [JsonPropertyName("historyItemKey")]
@@ -619,13 +635,19 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics? Metrics { get; set; } [JsonPropertyName("metrics")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum Role { get; set; } [JsonPropertyName("role")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceKey AgentInstanceKey { get; set; } [JsonPropertyName("agentInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.AgentInstanceLimits Limits { get; set; } [JsonPropertyName("limits")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
   PROP Camunda.Orchestration.Sdk.LoopIterationId LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> SystemPrompt { get; set; } [JsonPropertyName("systemPrompt")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceToolCall> ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool> Tools { get; set; } [JsonPropertyName("tools")]
   PROP System.DateTimeOffset ProducedAt { get; set; } [JsonPropertyName("producedAt")]
+  PROP System.String HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
   PROP System.String JobLease { get; set; } [JsonPropertyName("jobLease")]
+  PROP System.String? Model { get; set; } [JsonPropertyName("model")]
+  PROP System.String? Provider { get; set; } [JsonPropertyName("provider")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -633,6 +655,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum : enum interfaces=[S
   MEMBER USER = 0 json="USER"
   MEMBER ASSISTANT = 1 json="ASSISTANT"
   MEMBER TOOLRESULT = 2 json="TOOL_RESULT"
+  MEMBER CONFIGURATION = 3 json="CONFIGURATION"
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleExactMatch>]
   PROP System.String Value { get; }
@@ -837,7 +860,14 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest : sealed class
   PROP Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta? Metrics { get; set; } [JsonPropertyName("metrics")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceUpdateStatusEnum? Status { get; set; } [JsonPropertyName("status")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.JobKey? JobKey { get; set; } [JsonPropertyName("jobKey")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceHistoryItem>? History { get; set; } [JsonPropertyName("history")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool>? Tools { get; set; } [JsonPropertyName("tools")]
+  PROP System.String? JobLease { get; set; } [JsonPropertyName("jobLease")]
+
+TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateResult : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceCreatedHistoryItem> CreatedHistory { get; set; } [JsonPropertyName("createdHistory")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateStatusEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -1646,7 +1676,6 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task UnassignUserFromGroupAsync(Camunda.Orchestration.Sdk.GroupId groupId, Camunda.Orchestration.Sdk.Username username, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UnassignUserFromTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.Username username, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UnassignUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task UpdateAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceKey agentInstanceKey, Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UpdateAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationKey authorizationKey, Camunda.Orchestration.Sdk.AuthorizationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UpdateJobAsync(Camunda.Orchestration.Sdk.JobKey jobKey, Camunda.Orchestration.Sdk.JobUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task UpdateUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskUpdateRequest body, System.Threading.CancellationToken ct = null)
@@ -1655,6 +1684,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQueryResult> SearchAgentInstanceHistoryAsync(Camunda.Orchestration.Sdk.AgentInstanceKey agentInstanceKey, Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AgentInstanceHistorySearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AgentInstanceResult> GetAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceKey agentInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AgentInstanceResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AgentInstanceSearchQueryResult> SearchAgentInstancesAsync(Camunda.Orchestration.Sdk.AgentInstanceSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AgentInstanceSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AgentInstanceUpdateResult> UpdateAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceKey agentInstanceKey, Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuditLogResult> GetAuditLogAsync(Camunda.Orchestration.Sdk.AuditLogKey auditLogKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuditLogResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuditLogSearchQueryResult> SearchAuditLogsAsync(Camunda.Orchestration.Sdk.AuditLogSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuditLogSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.AuditLogSearchQueryResult> SearchUserTaskAuditLogsAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskAuditLogSearchQueryRequest body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuditLogSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -1678,7 +1708,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult> SearchBatchOperationsAsync(Camunda.Orchestration.Sdk.BatchOperationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CamundaUserResult> GetAuthenticationAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode mode, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
-  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest body, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterStatusResponse> GetClusterStatusAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)

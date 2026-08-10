@@ -6166,9 +6166,11 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterModeChangeResponse> RestoreAsync(RestoreRequest body, CancellationToken ct = default)
+    public async Task<ClusterModeChangeResponse> RestoreAsync(RestoreRequest body, bool? dryRun = null, CancellationToken ct = default)
     {
-        var path = $"/restore";
+        var queryParts = new List<string>();
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        var path = queryParts.Count > 0 ? $"/restore?{string.Join("&", queryParts)}" : $"/restore";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterModeChangeResponse>(HttpMethod.Post, path, body, ct), "restore", false, ct);
     }
 
@@ -9634,9 +9636,11 @@ public partial class CamundaClient
 
     /// <summary>
     /// Update agent instance
-    /// Updates the mutable fields of an agent instance: status, metric counters, and
-    /// tools. Metric values are treated as deltas and applied immediately to the
-    /// aggregate counters. Tool updates replace the existing tool list.
+    /// Updates the mutable fields of an agent instance (status, metric counters, and
+    /// tools) and appends a batch of history items to its conversation history. Metric
+    /// values are treated as deltas and applied immediately to the aggregate counters.
+    /// Tool updates replace the existing tool list. Each history item created for this
+    /// request is echoed back in the response.
     /// 
     /// </summary>
     /// <remarks>
@@ -9690,10 +9694,10 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task UpdateAgentInstanceAsync(AgentInstanceKey agentInstanceKey, AgentInstanceUpdateRequest body, CancellationToken ct = default)
+    public async Task<AgentInstanceUpdateResult> UpdateAgentInstanceAsync(AgentInstanceKey agentInstanceKey, AgentInstanceUpdateRequest body, CancellationToken ct = default)
     {
         var path = $"/agent-instances/{Uri.EscapeDataString(agentInstanceKey.ToString()!)}";
-        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Patch, path, body, ct); return 0; }, "updateAgentInstance", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceUpdateResult>(HttpMethod.Patch, path, body, ct), "updateAgentInstance", false, ct);
     }
 
     /// <summary>
