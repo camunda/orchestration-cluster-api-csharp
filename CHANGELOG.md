@@ -1,3 +1,15 @@
+# [10.0.0-alpha.13](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.12...v10.0.0-alpha.13) (2026-08-10)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([b60ec93](https://github.com/camunda/orchestration-cluster-api-csharp/commit/b60ec93948d1440769638175aa95cd503b6bf9df))
+
+
+### Features
+
+* add example coverage for searchOwnAuthorizations ([#382](https://github.com/camunda/orchestration-cluster-api-csharp/issues/382)) ([9df2888](https://github.com/camunda/orchestration-cluster-api-csharp/commit/9df2888fcda48fc79704d751a8db07b83617aa7d))
+
 # [10.0.0-alpha.12](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.11...v10.0.0-alpha.12) (2026-08-05)
 
 
