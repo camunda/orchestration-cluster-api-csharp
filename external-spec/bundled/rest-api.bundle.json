@@ -423,7 +423,7 @@
           }
         ],
         "summary": "Update agent instance",
-        "description": "Updates the mutable fields of an agent instance: status, metric counters, and\ntools. Metric values are treated as deltas and applied immediately to the\naggregate counters. Tool updates replace the existing tool list.\n",
+        "description": "Updates the mutable fields of an agent instance (status, metric counters, and\ntools) and appends a batch of history items to its conversation history. Metric\nvalues are treated as deltas and applied immediately to the aggregate counters.\nTool updates replace the existing tool list. Each history item created for this\nrequest is echoed back in the response.\n",
         "parameters": [
           {
             "name": "agentInstanceKey",
@@ -446,8 +446,15 @@
           }
         },
         "responses": {
-          "204": {
-            "description": "The agent instance was updated successfully."
+          "200": {
+            "description": "The agent instance was updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstanceUpdateResult"
+                }
+              }
+            }
           },
           "400": {
             "description": "The provided data is not valid.",
@@ -20633,6 +20640,18 @@
         ],
         "summary": "Restore from a backup",
         "description": "Restores the cluster from a backup. The restore is described either by a single backup ID or by a time range (`from`/`to`) that selects the backups to restore. This endpoint is only accessible while the cluster is in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.",
+        "parameters": [
+          {
+            "name": "dryRun",
+            "in": "query",
+            "required": false,
+            "description": "If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -23271,6 +23290,71 @@
             "items": {
               "$ref": "#/components/schemas/AgentTool"
             }
+          },
+          "jobKey": {
+            "description": "The key of the job activation during which this update is being made.\nRequired whenever history is provided.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobKey"
+              }
+            ]
+          },
+          "jobLease": {
+            "description": "Opaque lease token received from the job activation response. Disambiguates\nthis activation from any other activation of the same job: if the job is\nlater retried, history items submitted under a superseded lease are discarded\nrather than committed.\n",
+            "nullable": true,
+            "type": "string"
+          },
+          "history": {
+            "description": "A batch of history items to append to the agent instance's conversation\nhistory, in request order. Each created item is echoed back in the\nresponse's createdHistory, positionally correlated.\n",
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceHistoryItem"
+            }
+          }
+        }
+      },
+      "AgentInstanceUpdateResult": {
+        "description": "Response returned after successfully updating an agent instance.",
+        "type": "object",
+        "required": [
+          "createdHistory"
+        ],
+        "properties": {
+          "createdHistory": {
+            "description": "One entry per history item submitted in the request, in request order.\nEmpty when no history items were submitted.\n",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceCreatedHistoryItem"
+            }
+          }
+        }
+      },
+      "AgentInstanceCreatedHistoryItem": {
+        "description": "The outcome of appending a single history item from an update request's\nhistory batch.\n",
+        "type": "object",
+        "required": [
+          "historyItemId",
+          "historyItemKey",
+          "isDuplicate"
+        ],
+        "properties": {
+          "historyItemId": {
+            "description": "The historyItemId of the corresponding item in the request, echoed back\nso callers can correlate response entries with request items by id.\n",
+            "type": "string"
+          },
+          "historyItemKey": {
+            "description": "The system-generated key for the history item. When isDuplicate is true,\nthis is the key of the original entry, not a new one.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentHistoryItemKey"
+              }
+            ]
+          },
+          "isDuplicate": {
+            "description": "True if this item had already been recorded and no new AGENT_HISTORY event\nwas created for it; false if a new event was created.\n",
+            "type": "boolean"
           }
         }
       },
@@ -23355,7 +23439,7 @@
             "type": "string"
           },
           "loopIteration": {
-            "description": "The loopIteration this item belongs to. A loopIteration is one pass through the agent\nfeedback loop: one LLM call, its tool dispatches, and their results. Omit if not grouping\nitems by loopIteration.\n",
+            "description": "The loop iteration this item belongs to. Omit if not grouping items by\nloopIteration.\n",
             "nullable": true,
             "allOf": [
               {
@@ -23379,7 +23463,7 @@
             }
           },
           "toolCalls": {
-            "description": "Tool calls associated with this history item.\nFor ASSISTANT items: tool calls dispatched by this LLM response, with arguments populated.\nFor TOOL_RESULT items: single-entry array referencing the originating tool call, with arguments null.\nOmit for USER items.\n",
+            "description": "Tool calls associated with this history item.\nFor ASSISTANT items: tool calls dispatched by this LLM response.\nFor TOOL_RESULT items: single-entry array referencing the originating tool call.\nOmit for USER items.\n",
             "type": "array",
             "nullable": true,
             "items": {
@@ -23396,7 +23480,69 @@
             ]
           },
           "producedAt": {
-            "description": "The connector-side timestamp of when this message was produced.",
+            "description": "The agent-side timestamp of when this message was produced.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AgentInstanceHistoryItem": {
+        "description": "A single history item to append to the agent instance's conversation history,\nsubmitted as part of the batch on an agent instance update request.\n",
+        "type": "object",
+        "required": [
+          "content",
+          "historyItemId",
+          "loopIteration",
+          "producedAt",
+          "role"
+        ],
+        "properties": {
+          "historyItemId": {
+            "description": "Caller-assigned identifier used to detect and dedupe retries of the same\nitem. For example, when a retried job activation resubmits history items\nit already sent in an earlier attempt, those items are not rejected; they\nare flagged via isDuplicate in the response instead. Must be non-blank.\n",
+            "type": "string"
+          },
+          "loopIteration": {
+            "description": "The loop iteration this item belongs to.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LoopIterationId"
+              }
+            ]
+          },
+          "role": {
+            "description": "The role of this history item in the conversation.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryRoleEnum"
+              }
+            ]
+          },
+          "content": {
+            "description": "The content blocks of this history item.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceMessageContent"
+            }
+          },
+          "toolCalls": {
+            "description": "Tool calls associated with this history item.\nFor ASSISTANT items: tool calls dispatched by this LLM response.\nFor TOOL_RESULT items: single-entry array referencing the originating tool call.\nOmit for USER items.\n",
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceToolCall"
+            }
+          },
+          "metrics": {
+            "description": "Per-call token and latency metrics. Present on ASSISTANT items only.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceHistoryItemMetrics"
+              }
+            ]
+          },
+          "producedAt": {
+            "description": "The agent-side timestamp of when this message was produced.",
             "type": "string",
             "format": "date-time"
           }
@@ -23506,7 +23652,7 @@
             ]
           },
           "loopIteration": {
-            "description": "Filter by loopIteration number. A loopIteration is one pass through the agent feedback loop (one LLM call, its tool dispatches, and their results).",
+            "description": "Filter by loop iteration number.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/IntegerFilterProperty"
@@ -23560,14 +23706,20 @@
           "commitStatus",
           "content",
           "elementInstanceKey",
+          "historyItemId",
           "historyItemKey",
           "jobKey",
           "jobLease",
+          "limits",
           "loopIteration",
           "metrics",
+          "model",
           "producedAt",
+          "provider",
           "role",
-          "toolCalls"
+          "systemPrompt",
+          "toolCalls",
+          "tools"
         ],
         "properties": {
           "historyItemKey": {
@@ -23577,6 +23729,10 @@
                 "$ref": "#/components/schemas/AgentHistoryItemKey"
               }
             ]
+          },
+          "historyItemId": {
+            "description": "The client-supplied identifier this item was created with. Empty for items that don't\ncarry one.\n",
+            "type": "string"
           },
           "agentInstanceKey": {
             "description": "The key of the agent instance this item belongs to.",
@@ -23607,7 +23763,7 @@
             "type": "string"
           },
           "loopIteration": {
-            "description": "The loopIteration this item belongs to. A loopIteration is one pass through the agent\nfeedback loop: one LLM call, its tool dispatches, and their results.\n",
+            "description": "The loop iteration this item belongs to.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/LoopIterationId"
@@ -23630,7 +23786,7 @@
             }
           },
           "toolCalls": {
-            "description": "Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches.\nASSISTANT items: dispatched tool calls with arguments populated.\nTOOL_RESULT items: single-entry array referencing the originating tool call (arguments null).\n",
+            "description": "Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches.\nASSISTANT items: dispatched tool calls.\nTOOL_RESULT items: single-entry array referencing the originating tool call.\n",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AgentInstanceToolCall"
@@ -23654,9 +23810,41 @@
             ]
           },
           "producedAt": {
-            "description": "The connector-side timestamp of when this message was produced.",
+            "description": "The agent-side timestamp of when this message was produced.",
             "type": "string",
             "format": "date-time"
+          },
+          "tools": {
+            "description": "The complete list of tools available to the agent as of this entry. CONFIGURATION\nitems only; empty for other roles.\n",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentTool"
+            }
+          },
+          "model": {
+            "description": "The LLM model identifier as of this entry. CONFIGURATION items only; null for other\nroles.\n",
+            "type": "string",
+            "nullable": true
+          },
+          "provider": {
+            "description": "The LLM provider as of this entry. CONFIGURATION items only; null for other roles.\n",
+            "type": "string",
+            "nullable": true
+          },
+          "limits": {
+            "description": "The operational limits as of this entry. CONFIGURATION items only; -1 on any field\nmeans \"no limit configured\" for other roles.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentInstanceLimits"
+              }
+            ]
+          },
+          "systemPrompt": {
+            "description": "The system prompt, as content blocks, as of this entry. CONFIGURATION items only;\nempty for other roles.\n",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentInstanceMessageContent"
+            }
           }
         }
       },
@@ -23666,7 +23854,8 @@
         "enum": [
           "USER",
           "ASSISTANT",
-          "TOOL_RESULT"
+          "TOOL_RESULT",
+          "CONFIGURATION"
         ]
       },
       "AgentInstanceHistoryCommitStatusEnum": {
@@ -23777,7 +23966,7 @@
         ]
       },
       "AgentInstanceToolCall": {
-        "description": "A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.\nASSISTANT items carry arguments; TOOL_RESULT items carry arguments as null.\n",
+        "description": "A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.\n",
         "type": "object",
         "required": [
           "arguments",
@@ -23800,7 +23989,7 @@
             "nullable": true
           },
           "arguments": {
-            "description": "The tool call arguments as provided by the LLM. Null on TOOL_RESULT items.",
+            "description": "The tool call arguments as provided by the LLM. May be null or populated on\nany item, including TOOL_RESULT.\n",
             "type": "object",
             "nullable": true,
             "additionalProperties": true
@@ -32911,7 +33100,7 @@
         "example": "order-12345"
       },
       "LoopIterationId": {
-        "description": "A client-provided sequential integer identifying one pass through the agent\nfeedback loop: one LLM call, its tool dispatches, and their results. Must be\na positive integer, increasing with each loopIteration. Established by the\nconnector when appending the first history item of a loopIteration.\n",
+        "description": "A client-provided sequential integer identifying a loop iteration: one pass\nthrough an AI agent's loop, during which the model reasons, selects tools,\nevaluates the result, and decides whether to continue. One iteration covers\nthe input for the LLM call, the call itself, and the tools it dispatches;\nthe results of those tool calls are input to the next iteration. Must be a\npositive integer, increasing with each loopIteration. Established by the\nconnector when appending the first history item of a loopIteration.\n",
         "type": "integer",
         "format": "int32",
         "minimum": 1,

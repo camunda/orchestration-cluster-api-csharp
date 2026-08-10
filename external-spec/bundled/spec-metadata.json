@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:e5409e756373e35ebaad932216c4cb7c562be0187a06dea6bde62c1dc57423d1",
+  "specHash": "sha256:8ad022cab102155a1607ad1234615fc4d5588dad645b51dba4d0157291b1b12b",
   "semanticKeys": [
     {
       "name": "AgentHistoryItemKey",
@@ -3090,7 +3090,7 @@
         "Agent instance"
       ],
       "summary": "Update agent instance",
-      "description": "Updates the mutable fields of an agent instance: status, metric counters, and\ntools. Metric values are treated as deltas and applied immediately to the\naggregate counters. Tool updates replace the existing tool list.\n",
+      "description": "Updates the mutable fields of an agent instance (status, metric counters, and\ntools) and appends a batch of history items to its conversation history. Metric\nvalues are treated as deltas and applied immediately to the aggregate counters.\nTool updates replace the existing tool list. Each history item created for this\nrequest is echoed back in the response.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -3106,7 +3106,8 @@
         "application/json"
       ],
       "requestBodySchemaRef": "AgentInstanceUpdateRequest",
-      "successStatus": 204,
+      "successResponseSchemaRef": "AgentInstanceUpdateResult",
+      "successStatus": 200,
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [
@@ -10920,9 +10921,14 @@
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
-      "bodyOnly": true,
+      "bodyOnly": false,
       "pathParams": [],
-      "queryParams": [],
+      "queryParams": [
+        {
+          "name": "dryRun",
+          "required": false
+        }
+      ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
       "sourceFile": "cluster.yaml",
