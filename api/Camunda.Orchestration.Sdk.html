@@ -4073,7 +4073,9 @@ no value stored; the API returns <code>PROCESS_EVENT</code> as a default for tho
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.html">ProcessDefinitionFilterState</a></dt>
       <dd><p>Filter by the process definition's state.
 When not set, process definitions in any state are returned.
-Set to <code>ACTIVE</code> to exclude deleted definitions (recommended for most use cases).
+Set to <code>ACTIVE</code> to exclude draining and deleted definitions (recommended for most use cases).
+Set to <code>DRAINING</code> to return only definitions that are being deleted but still have
+active process instances draining.
 Set to <code>DELETED</code> to return only definitions that have been deleted but are still
 retained in secondary storage.</p>
 </dd>
@@ -4090,7 +4092,9 @@ retained in secondary storage.</p>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionResultState.html">ProcessDefinitionResultState</a></dt>
-      <dd><p>The state of this process definition.</p>
+      <dd><p>The state of this process definition.
+<code>DRAINING</code> indicates the definition is being deleted but still has active process
+instances draining before it is removed.</p>
 </dd>
     </dl>
     <dl class="jumplist">

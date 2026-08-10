@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Enum ProcessDefinitionFilterState | Camunda C# SDK ">
       
-      <meta name="description" content="Filter by the process definition&#39;s state. When not set, process definitions in any state are returned. Set to ACTIVE to exclude deleted definitions (recommended for most use cases). Set to DELETED to return only definitions that have been deleted but are still retained in secondary storage.">
+      <meta name="description" content="Filter by the process definition&#39;s state. When not set, process definitions in any state are returned. Set to ACTIVE to exclude draining and deleted definitions (recommended for most use cases). Set to DRAINING to return only definitions that are being deleted but still have active process instances draining. Set to DELETED to return only definitions that have been deleted but are still retained in secondary storage.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -90,7 +90,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_ProcessDefinitionFilterState" data-uid="Camunda.Orchestration.Sdk.ProcessDefinitionFilterState" class="text-break">
-Enum ProcessDefinitionFilterState  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L857"><i class="bi bi-code-slash"></i></a>
+Enum ProcessDefinitionFilterState  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L859"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -100,7 +100,9 @@ Enum ProcessDefinitionFilterState  <a class="header-action link-secondary" title
 
   <div class="markdown summary"><p>Filter by the process definition's state.
 When not set, process definitions in any state are returned.
-Set to <code>ACTIVE</code> to exclude deleted definitions (recommended for most use cases).
+Set to <code>ACTIVE</code> to exclude draining and deleted definitions (recommended for most use cases).
+Set to <code>DRAINING</code> to return only definitions that are being deleted but still have
+active process instances draining.
 Set to <code>DELETED</code> to return only definitions that have been deleted but are still
 retained in secondary storage.</p>
 </div>
@@ -134,7 +136,11 @@ ACTIVE = 0</code></dt>
   
   <dd></dd>
     <dt id="Camunda_Orchestration_Sdk_ProcessDefinitionFilterState_DELETED"><code>[JsonPropertyName(&quot;DELETED&quot;)]
-DELETED = 1</code></dt>
+DELETED = 2</code></dt>
+  
+  <dd></dd>
+    <dt id="Camunda_Orchestration_Sdk_ProcessDefinitionFilterState_DRAINING"><code>[JsonPropertyName(&quot;DRAINING&quot;)]
+DRAINING = 1</code></dt>
   
   <dd></dd>
   </dl>
@@ -144,7 +150,7 @@ DELETED = 1</code></dt>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L857" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L859" class="edit-link">Edit this page</a>
         </div>
 
 
