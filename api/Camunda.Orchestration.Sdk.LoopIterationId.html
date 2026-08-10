@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Struct LoopIterationId | Camunda C# SDK ">
       
-      <meta name="description" content="A client-provided sequential integer identifying one pass through the agent feedback loop: one LLM call, its tool dispatches, and their results. Must be a positive integer, increasing with each loopIteration. Established by the connector when appending the first history item of a loopIteration.">
+      <meta name="description" content="A client-provided sequential integer identifying a loop iteration: one pass through an AI agent&#39;s loop, during which the model reasons, selects tools, evaluates the result, and decides whether to continue. One iteration covers the input for the LLM call, the call itself, and the tools it dispatches; the results of those tool calls are input to the next iteration. Must be a positive integer, increasing with each loopIteration. Established by the connector when appending the first history item of a loopIteration.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_LoopIterationId" data-uid="Camunda.Orchestration.Sdk.LoopIterationId" class="text-break">
-Struct LoopIterationId  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L18651"><i class="bi bi-code-slash"></i></a>
+Struct LoopIterationId  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L18835"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,9 +97,12 @@ Struct LoopIterationId  <a class="header-action link-secondary" title="View sour
   <dl><dt>Assembly</dt><dd>Camunda.Orchestration.Sdk.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>A client-provided sequential integer identifying one pass through the agent
-feedback loop: one LLM call, its tool dispatches, and their results. Must be
-a positive integer, increasing with each loopIteration. Established by the
+  <div class="markdown summary"><p>A client-provided sequential integer identifying a loop iteration: one pass
+through an AI agent's loop, during which the model reasons, selects tools,
+evaluates the result, and decides whether to continue. One iteration covers
+the input for the LLM call, the call itself, and the tools it dispatches;
+the results of those tool calls are input to the next iteration. Must be a
+positive integer, increasing with each loopIteration. Established by the
 connector when appending the first history item of a loopIteration.</p>
 </div>
   <div class="markdown conceptual"></div>
@@ -181,7 +184,7 @@ Use this when side-loading values not received from an API call.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L18651" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L18835" class="edit-link">Edit this page</a>
         </div>
 
 

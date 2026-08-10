@@ -381,6 +381,12 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreatedHistoryItem.html">AgentInstanceCreatedHistoryItem</a></dt>
+      <dd><p>The outcome of appending a single history item from an update request's
+history batch.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.html">AgentInstanceCreationRequest</a></dt>
       <dd><p>Request to create a new agent instance.</p>
 </dd>
@@ -413,6 +419,12 @@ This is what job handler functions receive.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter.html">AgentInstanceHistoryFilter</a></dt>
       <dd><p>Agent instance history item search filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.html">AgentInstanceHistoryItem</a></dt>
+      <dd><p>A single history item to append to the agent instance's conversation history,
+submitted as part of the batch on an agent instance update request.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -522,13 +534,17 @@ use OBJECT content for machine-readable structured data.</p>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceToolCall.html">AgentInstanceToolCall</a></dt>
-      <dd><p>A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.
-ASSISTANT items carry arguments; TOOL_RESULT items carry arguments as null.</p>
+      <dd><p>A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.</p>
 </dd>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.html">AgentInstanceUpdateRequest</a></dt>
       <dd><p>Request to update the mutable state of an agent instance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceUpdateResult.html">AgentInstanceUpdateResult</a></dt>
+      <dd><p>Response returned after successfully updating an agent instance.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3492,9 +3508,12 @@ that evaluation, joined by a hyphen (format: <code>&lt;decisionEvaluationKey&gt;
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.LoopIterationId.html">LoopIterationId</a></dt>
-      <dd><p>A client-provided sequential integer identifying one pass through the agent
-feedback loop: one LLM call, its tool dispatches, and their results. Must be
-a positive integer, increasing with each loopIteration. Established by the
+      <dd><p>A client-provided sequential integer identifying a loop iteration: one pass
+through an AI agent's loop, during which the model reasons, selects tools,
+evaluates the result, and decides whether to continue. One iteration covers
+the input for the LLM call, the call itself, and the tools it dispatches;
+the results of those tool calls are input to the next iteration. Must be a
+positive integer, increasing with each loopIteration. Established by the
 connector when appending the first history item of a loopIteration.</p>
 </dd>
     </dl>

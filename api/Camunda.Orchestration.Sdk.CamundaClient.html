@@ -1228,7 +1228,7 @@ from the store otherwise.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync.html#Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Threading_CancellationToken_">RestoreAsync(RestoreRequest, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync.html#Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Nullable_System_Boolean__System_Threading_CancellationToken_">RestoreAsync(RestoreRequest, bool?, CancellationToken)</a></dt>
     <dd><p>Restore from a backup
 Restores the cluster from a backup. The restore is described either by a single backup ID or by a time range (<code>from</code>/<code>to</code>) that selects the backups to restore. This endpoint is only accessible while the cluster is in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.</p>
 </dd>
@@ -1761,9 +1761,11 @@ Removes the assignee of a task with the given key. Unassignment waits for blocki
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateAgentInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_System_Threading_CancellationToken_">UpdateAgentInstanceAsync(AgentInstanceKey, AgentInstanceUpdateRequest, CancellationToken)</a></dt>
     <dd><p>Update agent instance
-Updates the mutable fields of an agent instance: status, metric counters, and
-tools. Metric values are treated as deltas and applied immediately to the
-aggregate counters. Tool updates replace the existing tool list.</p>
+Updates the mutable fields of an agent instance (status, metric counters, and
+tools) and appends a batch of history items to its conversation history. Metric
+values are treated as deltas and applied immediately to the aggregate counters.
+Tool updates replace the existing tool list. Each history item created for this
+request is echoed back in the response.</p>
 </dd>
   </dl>
   <dl class="jumplist">

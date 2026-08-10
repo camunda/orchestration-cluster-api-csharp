@@ -119,8 +119,8 @@ Method RestoreAsync  <a class="header-action link-secondary" title="View source"
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest,System.Threading.CancellationToken)">
-  RestoreAsync(RestoreRequest, CancellationToken)
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Nullable_System_Boolean__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+  RestoreAsync(RestoreRequest, bool?, CancellationToken)
   <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6169"><i class="bi bi-code-slash"></i></a>
 </h3>
 
@@ -130,12 +130,14 @@ Restores the cluster from a backup. The restore is described either by a single 
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public Task&lt;ClusterModeChangeResponse&gt; RestoreAsync(RestoreRequest body, CancellationToken ct = default)</code></pre>
+  <pre><code class="lang-csharp hljs">public Task&lt;ClusterModeChangeResponse&gt; RestoreAsync(RestoreRequest body, bool? dryRun = null, CancellationToken ct = default)</code></pre>
 </div>
 
 <h4 class="section">Parameters</h4>
 <dl class="parameters">
   <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.RestoreRequest.html">RestoreRequest</a></dt>
+  <dd></dd>
+  <dt><code>dryRun</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
   <dd></dd>
   <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
   <dd></dd>
@@ -152,29 +154,30 @@ Restores the cluster from a backup. The restore is described either by a single 
 
 
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Nullable_System_Boolean__System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task RestoreExample()
 {
     using var client = CamundaClient.Create();
+<pre><code>// The cluster must be in recovery mode before a restore is accepted.
+// Provide either a list of backup IDs (one per partition) or a time
+// range (From/To) that selects the backups to restore, but not both.
+var change = await client.RestoreAsync(new RestoreRequest
+{
+    BackupIds = new List&lt;long&gt; { 100, 101 },
+});
 
-    // The cluster must be in recovery mode before a restore is accepted.
-    // Provide either a list of backup IDs (one per partition) or a time
-    // range (From/To) that selects the backups to restore, but not both.
-    var change = await client.RestoreAsync(new RestoreRequest
-    {
-        BackupIds = new List&lt;long&gt; { 100, 101 },
-    });
-
-    Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-    foreach (var operation in change.PlannedChanges)
-    {
-        var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-        Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
-    }
+Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+foreach (var operation in change.PlannedChanges)
+{
+    var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
 }
 </code></pre>
+<p>}</p></code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Nullable_System_Boolean__System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: restore</p>
 <p><b>Example:</b></p>
 <pre><code class="lang-csharp">public static async Task RestoreExample()
