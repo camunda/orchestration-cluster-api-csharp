@@ -7879,7 +7879,41 @@ public partial class CamundaClient
     /// Search own authorizations
     /// Search for the current authenticated principal&apos;s own authorization records — including authorizations granted directly to the user or client, as well as those granted via a group, role, or mapping rule the principal belongs to.
     /// </summary>
-    /// <remarks>Operation: searchOwnAuthorizations</remarks>
+    /// <remarks>
+    /// Operation: searchOwnAuthorizations
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchOwnAuthorizationsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchOwnAuthorizationsAsync(
+    ///         new AuthorizationSearchQuery());
+    /// 
+    ///     foreach (var auth in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Authorization: {auth.AuthorizationKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchOwnAuthorizationsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchOwnAuthorizationsAsync(
+    ///         new AuthorizationSearchQuery());
+    /// 
+    ///     foreach (var auth in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Authorization: {auth.AuthorizationKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<AuthorizationSearchResult> SearchOwnAuthorizationsAsync(AuthorizationSearchQuery body, ConsistencyOptions<AuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/authentication/me/authorizations/search";
