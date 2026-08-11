@@ -2761,6 +2761,24 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get agent definition
+    /// Returns an agent definition by key.
+    /// </summary>
+    /// <remarks>Operation: getAgentDefinition</remarks>
+    public async Task<AgentDefinitionResult> GetAgentDefinitionAsync(AgentDefinitionKey agentDefinitionKey, ConsistencyOptions<AgentDefinitionResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/agent-definitions/{Uri.EscapeDataString(agentDefinitionKey.ToString()!)}";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("getAgentDefinition", true,
+                () => InvokeWithRetryAsync(() => SendAsync<AgentDefinitionResult>(HttpMethod.Get, path, null, ct), "getAgentDefinition", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<AgentDefinitionResult>(HttpMethod.Get, path, null, ct), "getAgentDefinition", false, ct);
+    }
+
+    /// <summary>
     /// Get agent instance
     /// Returns agent instance as JSON.
     /// </summary>
@@ -6329,6 +6347,24 @@ public partial class CamundaClient
     {
         var path = $"/process-instances/resumption";
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "resumeProcessInstancesBatchOperation", false, ct);
+    }
+
+    /// <summary>
+    /// Search agent definitions
+    /// Search for agent definitions based on given criteria.
+    /// </summary>
+    /// <remarks>Operation: searchAgentDefinitions</remarks>
+    public async Task<AgentDefinitionSearchQueryResult> SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery body, ConsistencyOptions<AgentDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var path = $"/agent-definitions/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchAgentDefinitions", false,
+                () => InvokeWithRetryAsync(() => SendAsync<AgentDefinitionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentDefinitions", false, ct),
+                consistency!, _logger, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<AgentDefinitionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentDefinitions", false, ct);
     }
 
     /// <summary>

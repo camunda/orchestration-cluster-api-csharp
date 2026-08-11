@@ -1,7 +1,37 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:8ad022cab102155a1607ad1234615fc4d5588dad645b51dba4d0157291b1b12b",
+  "specHash": "sha256:d21a56ff57b5ac9ea382b871b283d90eb8c93ab92b9ee1e490e616137f7909c5",
   "semanticKeys": [
+    {
+      "name": "AgentDefinitionKey",
+      "semanticType": "AgentDefinitionKey",
+      "category": "system-key",
+      "description": "System-generated key for an agent definition.",
+      "composition": {
+        "schemaKind": "allOf",
+        "refs": [
+          "LongKey"
+        ],
+        "inlineFragments": 0
+      },
+      "constraints": {
+        "pattern": "^-?[0-9]+$",
+        "minLength": 1,
+        "maxLength": 25
+      },
+      "examples": [
+        "2251799813691958"
+      ],
+      "extensions": {
+        "x-semantic-type": "AgentDefinitionKey"
+      },
+      "flags": {
+        "semanticKey": true,
+        "includesLongKeyRef": true,
+        "deprecated": false
+      },
+      "stableId": "agent-definition-key"
+    },
     {
       "name": "AgentHistoryItemKey",
       "semanticType": "AgentHistoryItemKey",
@@ -1183,6 +1213,38 @@
   ],
   "unions": [
     {
+      "name": "AgentDefinitionKeyFilterProperty",
+      "kind": "union-wrapper",
+      "description": "AgentDefinitionKey property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "AgentDefinitionKeyExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedAgentDefinitionKeyFilter"
+        }
+      ],
+      "stableId": "agent-definition-key-filter-property"
+    },
+    {
+      "name": "AgentDefinitionTypeFilterProperty",
+      "kind": "union-wrapper",
+      "description": "AgentDefinitionTypeEnum property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "AgentDefinitionTypeExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedAgentDefinitionTypeFilter"
+        }
+      ],
+      "stableId": "agent-definition-type-filter-property"
+    },
+    {
       "name": "AgentHistoryItemKeyFilterProperty",
       "kind": "union-wrapper",
       "description": "AgentHistoryItemKey property with full advanced search capabilities.",
@@ -2268,6 +2330,22 @@
   ],
   "eventuallyConsistentOps": [
     {
+      "operationId": "getAgentDefinition",
+      "path": "/agent-definitions/{agentDefinitionKey}",
+      "method": "get",
+      "tags": [
+        "Agent definition"
+      ]
+    },
+    {
+      "operationId": "searchAgentDefinitions",
+      "path": "/agent-definitions/search",
+      "method": "post",
+      "tags": [
+        "Agent definition"
+      ]
+    },
+    {
       "operationId": "getAgentInstance",
       "path": "/agent-instances/{agentInstanceKey}",
       "method": "get",
@@ -3013,6 +3091,76 @@
     }
   ],
   "operations": [
+    {
+      "operationId": "getAgentDefinition",
+      "path": "/agent-definitions/{agentDefinitionKey}",
+      "method": "get",
+      "tags": [
+        "Agent definition"
+      ],
+      "summary": "Get agent definition",
+      "description": "Returns an agent definition by key.",
+      "eventuallyConsistent": true,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "agentDefinitionKey"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "agent-definitions.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "AgentDefinitionResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": true,
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_DEFINITION"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "searchAgentDefinitions",
+      "path": "/agent-definitions/search",
+      "method": "post",
+      "tags": [
+        "Agent definition"
+      ],
+      "summary": "Search agent definitions",
+      "description": "Search for agent definitions based on given criteria.",
+      "eventuallyConsistent": true,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "agent-definitions.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "AgentDefinitionSearchQuery",
+      "successResponseSchemaRef": "AgentDefinitionSearchQueryResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": true,
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_DEFINITION"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
     {
       "operationId": "createAgentInstance",
       "path": "/agent-instances",
@@ -5396,7 +5544,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-added-in-version-override": "8.6"
       }
     },
     {
@@ -11027,7 +11176,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-added-in-version-override": "8.8"
       }
     },
     {
@@ -11512,7 +11662,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-added-in-version-override": "8.8"
       }
     },
     {
@@ -11887,10 +12038,10 @@
     }
   ],
   "integrity": {
-    "totalSemanticKeys": 41,
-    "totalUnions": 65,
-    "totalOperations": 218,
-    "totalEventuallyConsistent": 93,
+    "totalSemanticKeys": 42,
+    "totalUnions": 67,
+    "totalOperations": 220,
+    "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23
   }
