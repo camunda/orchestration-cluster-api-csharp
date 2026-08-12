@@ -2764,7 +2764,31 @@ public partial class CamundaClient
     /// Get agent definition
     /// Returns an agent definition by key.
     /// </summary>
-    /// <remarks>Operation: getAgentDefinition</remarks>
+    /// <remarks>
+    /// Operation: getAgentDefinition
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetAgentDefinitionExample(AgentDefinitionKey agentDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAgentDefinitionAsync(agentDefinitionKey);
+    ///     Console.WriteLine($&quot;Agent definition: {result.AgentDefinitionKey}, name: {result.Name}, type: {result.AgentType}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetAgentDefinitionExample(AgentDefinitionKey agentDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.GetAgentDefinitionAsync(agentDefinitionKey);
+    ///     Console.WriteLine($&quot;Agent definition: {result.AgentDefinitionKey}, name: {result.Name}, type: {result.AgentType}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<AgentDefinitionResult> GetAgentDefinitionAsync(AgentDefinitionKey agentDefinitionKey, ConsistencyOptions<AgentDefinitionResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/agent-definitions/{Uri.EscapeDataString(agentDefinitionKey.ToString()!)}";
@@ -6353,7 +6377,59 @@ public partial class CamundaClient
     /// Search agent definitions
     /// Search for agent definitions based on given criteria.
     /// </summary>
-    /// <remarks>Operation: searchAgentDefinitions</remarks>
+    /// <remarks>
+    /// Operation: searchAgentDefinitions
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchAgentDefinitionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAgentDefinitionsAsync(new AgentDefinitionSearchQuery
+    ///     {
+    ///         Filter = new AgentDefinitionFilter
+    ///         {
+    ///             AgentType = AgentDefinitionTypeEnum.AIAGENTTASK,
+    ///         },
+    ///         Page = new LimitPagination
+    ///         {
+    ///             Limit = 50,
+    ///         },
+    ///     });
+    /// 
+    ///     foreach (var def in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Agent definition: {def.AgentDefinitionKey}, name: {def.Name}, type: {def.AgentType}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchAgentDefinitionsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchAgentDefinitionsAsync(new AgentDefinitionSearchQuery
+    ///     {
+    ///         Filter = new AgentDefinitionFilter
+    ///         {
+    ///             AgentType = AgentDefinitionTypeEnum.AIAGENTTASK,
+    ///         },
+    ///         Page = new LimitPagination
+    ///         {
+    ///             Limit = 50,
+    ///         },
+    ///     });
+    /// 
+    ///     foreach (var def in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;Agent definition: {def.AgentDefinitionKey}, name: {def.Name}, type: {def.AgentType}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<AgentDefinitionSearchQueryResult> SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery body, ConsistencyOptions<AgentDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/agent-definitions/search";
