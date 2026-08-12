@@ -36,7 +36,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
     <!-- Version: set by semantic-release during publish; 0.0.0-dev for local builds -->
-    <Version>10.0.0-alpha.13</Version>
+    <Version>10.0.0-alpha.14</Version>
   </PropertyGroup>
 
   <ItemGroup>

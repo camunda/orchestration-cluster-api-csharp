@@ -1,3 +1,15 @@
+# [10.0.0-alpha.14](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.13...v10.0.0-alpha.14) (2026-08-12)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([3f64c74](https://github.com/camunda/orchestration-cluster-api-csharp/commit/3f64c74d772ce84709aa7557459e863524eab2fd))
+
+
+### Features
+
+* add example coverage for getAgentDefinition, searchAgentDefinitions ([#389](https://github.com/camunda/orchestration-cluster-api-csharp/issues/389)) ([d653b61](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d653b61c94ba7a32efc20447a515012a8dc039b0))
+
 # [10.0.0-alpha.13](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.12...v10.0.0-alpha.13) (2026-08-10)
 
 
