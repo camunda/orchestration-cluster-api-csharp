@@ -11,6 +11,32 @@ namespace Camunda.Orchestration.Sdk;
 /// The field to sort by.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentDefinitionSearchQuerySortRequestField
+{
+    [JsonPropertyName("agentDefinitionKey")]
+    AgentDefinitionKey,
+    [JsonPropertyName("agentType")]
+    AgentType,
+    [JsonPropertyName("name")]
+    Name,
+    [JsonPropertyName("elementId")]
+    ElementId,
+    [JsonPropertyName("processDefinitionId")]
+    ProcessDefinitionId,
+    [JsonPropertyName("processDefinitionKey")]
+    ProcessDefinitionKey,
+    [JsonPropertyName("processDefinitionVersion")]
+    ProcessDefinitionVersion,
+    [JsonPropertyName("processDefinitionVersionTag")]
+    ProcessDefinitionVersionTag,
+    [JsonPropertyName("tenantId")]
+    TenantId,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum AgentInstanceHistorySearchQuerySortRequestField
 {
     [JsonPropertyName("producedAt")]
@@ -1415,6 +1441,94 @@ public sealed class AdvancedActorTypeFilter
     /// </summary>
     [JsonPropertyName("$in")]
     public List<AuditLogActorTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced AgentDefinitionKey filter.
+/// </summary>
+public sealed class AdvancedAgentDefinitionKeyFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentDefinitionKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentDefinitionKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentDefinitionKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentDefinitionKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// Advanced AgentDefinitionTypeEnum filter.
+/// </summary>
+public sealed class AdvancedAgentDefinitionTypeFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentDefinitionTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentDefinitionTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentDefinitionTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentDefinitionTypeEnum>? NotIn { get; set; }
 
     /// <summary>
     /// Checks if the property matches the provided like value.
@@ -3633,6 +3747,540 @@ public sealed class AdvancedWaitStateTypeFilter
     [JsonPropertyName("$like")]
     public LikeFilter? Like { get; set; }
 
+}
+
+/// <summary>
+/// Agent definition search filter.
+/// </summary>
+public sealed class AgentDefinitionFilter
+{
+    /// <summary>
+    /// The unique key of the agent definition.
+    /// </summary>
+    [JsonPropertyName("agentDefinitionKey")]
+    public AgentDefinitionKeyFilterProperty? AgentDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The kind of agent this agent definition describes.
+    /// </summary>
+    [JsonPropertyName("agentType")]
+    public AgentDefinitionTypeFilterProperty? AgentType { get; set; }
+
+    /// <summary>
+    /// The human-readable name of the process element that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public StringFilterProperty? Name { get; set; }
+
+    /// <summary>
+    /// The BPMN element ID of the process element that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementIdFilterProperty? ElementId { get; set; }
+
+    /// <summary>
+    /// The BPMN process ID of the process definition that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionIdFilterProperty? ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The key of the process definition that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The version of the process definition that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public IntegerFilterProperty? ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// The version tag of the process definition that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersionTag")]
+    public StringFilterProperty? ProcessDefinitionVersionTag { get; set; }
+
+    /// <summary>
+    /// The tenant ID of the agent definition.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public StringFilterProperty? TenantId { get; set; }
+
+}
+
+/// <summary>
+/// System-generated key for an agent definition.
+/// </summary>
+public readonly record struct AgentDefinitionKey : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentDefinitionKey(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentDefinitionKey"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentDefinitionKey AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentDefinitionKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new AgentDefinitionKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AgentDefinitionKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentDefinitionKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentDefinitionKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentDefinitionKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentDefinitionKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new AgentDefinitionKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// AgentDefinitionKey property with full advanced search capabilities.
+/// </summary>
+[JsonConverter(typeof(AgentDefinitionKeyFilterPropertyJsonConverter))]
+public sealed class AgentDefinitionKeyFilterProperty
+{
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AgentDefinitionKey? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentDefinitionKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentDefinitionKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentDefinitionKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentDefinitionKey>? NotIn { get; set; }
+
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AgentDefinitionKeyFilterProperty(AgentDefinitionKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AgentDefinitionKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AgentDefinitionKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AgentDefinitionKeyFilterProperty>
+{
+    public override AgentDefinitionKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AgentDefinitionKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AgentDefinitionKey?>(ref reader, options) };
+        var result = new AgentDefinitionKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AgentDefinitionKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AgentDefinitionKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentDefinitionKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentDefinitionKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentDefinitionKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentDefinitionKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
+}
+
+/// <summary>
+/// An agent definition, created at deploy time for the process element it belongs to.
+/// </summary>
+public sealed class AgentDefinitionResult
+{
+    /// <summary>
+    /// The unique key for this agent definition. Unique across process definition versions.
+    /// 
+    /// </summary>
+    [JsonPropertyName("agentDefinitionKey")]
+    public AgentDefinitionKey AgentDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The kind of agent an agent definition describes.
+    /// </summary>
+    [JsonPropertyName("agentType")]
+    public AgentDefinitionTypeEnum AgentType { get; set; }
+
+    /// <summary>
+    /// The human-readable name of the process element that owns the agent definition. Falls
+    /// back to elementId when the element has no BPMN name configured.
+    /// 
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = null!;
+
+    /// <summary>
+    /// The BPMN element ID of the process element that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId ElementId { get; set; }
+
+    /// <summary>
+    /// The BPMN process ID of the process definition that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The key of the process definition that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The version of the process definition that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// The version tag of the process definition that owns the agent definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersionTag")]
+    public string? ProcessDefinitionVersionTag { get; set; }
+
+    /// <summary>
+    /// The tenant ID of this agent definition.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+}
+
+/// <summary>
+/// Agent definition search request.
+/// </summary>
+public sealed class AgentDefinitionSearchQuery
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<AgentDefinitionSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The agent definition search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public AgentDefinitionFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// Agent definition search response.
+/// </summary>
+public sealed class AgentDefinitionSearchQueryResult
+{
+    /// <summary>
+    /// The matching agent definitions.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<AgentDefinitionResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// AgentDefinitionSearchQuerySortRequest
+/// </summary>
+public sealed class AgentDefinitionSearchQuerySortRequest
+{
+    /// <summary>
+    /// The field to sort by.
+    /// </summary>
+    [JsonPropertyName("field")]
+    public AgentDefinitionSearchQuerySortRequestField Field { get; set; }
+
+    /// <summary>
+    /// The order in which to sort the related field.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public SortOrderEnum? Order { get; set; }
+
+}
+
+/// <summary>
+/// The kind of agent an agent definition describes.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AgentDefinitionTypeEnum
+{
+    [JsonPropertyName("AI_AGENT_SUB_PROCESS")]
+    AIAGENTSUBPROCESS,
+    [JsonPropertyName("AI_AGENT_TASK")]
+    AIAGENTTASK,
+    [JsonPropertyName("EXTERNAL_AGENT")]
+    EXTERNALAGENT,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct AgentDefinitionTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private AgentDefinitionTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="AgentDefinitionTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static AgentDefinitionTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "AgentDefinitionTypeExactMatch");
+        return new AgentDefinitionTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// AgentDefinitionTypeEnum property with full advanced search capabilities.
+/// </summary>
+[JsonConverter(typeof(AgentDefinitionTypeFilterPropertyJsonConverter))]
+public sealed class AgentDefinitionTypeFilterProperty
+{
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public AgentDefinitionTypeEnum? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public AgentDefinitionTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public AgentDefinitionTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<AgentDefinitionTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<AgentDefinitionTypeEnum>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator AgentDefinitionTypeFilterProperty(AgentDefinitionTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="AgentDefinitionTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class AgentDefinitionTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<AgentDefinitionTypeFilterProperty>
+{
+    public override AgentDefinitionTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new AgentDefinitionTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<AgentDefinitionTypeEnum?>(ref reader, options) };
+        var result = new AgentDefinitionTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<AgentDefinitionTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<AgentDefinitionTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentDefinitionTypeEnum>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<AgentDefinitionTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, AgentDefinitionTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("AgentDefinitionTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>

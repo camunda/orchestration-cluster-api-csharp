@@ -643,6 +643,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetAgentDefinitionAsync(Camunda.Orchestration.Sdk.AgentDefinitionKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.AgentDefinitionResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/AgentDefinition.cs#GetAgentDefinition)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.AgentInstanceResult},System.Threading.CancellationToken)
 example:
 - *content
@@ -1510,6 +1520,16 @@ example:
 
 
 [!code-csharp[](../../examples/Admin.cs#SearchAuditLogs)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SearchAgentDefinitionsAsync(Camunda.Orchestration.Sdk.AgentDefinitionSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.AgentDefinitionSearchQueryResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/AgentDefinition.cs#SearchAgentDefinitions)]
 
 
 ---

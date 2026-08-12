@@ -41,6 +41,9 @@
       "name": "Ad-hoc sub-process"
     },
     {
+      "name": "Agent definition"
+    },
+    {
       "name": "Agent instance"
     },
     {
@@ -162,6 +165,208 @@
     }
   ],
   "paths": {
+    "/agent-definitions/{agentDefinitionKey}": {
+      "get": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Agent definition"
+        ],
+        "operationId": "getAgentDefinition",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_DEFINITION"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get agent definition",
+        "description": "Returns an agent definition by key.",
+        "parameters": [
+          {
+            "name": "agentDefinitionKey",
+            "in": "path",
+            "required": true,
+            "description": "The assigned key of the agent definition, which acts as a unique identifier for this agent definition.",
+            "schema": {
+              "$ref": "#/components/schemas/AgentDefinitionKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The agent definition is successfully returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentDefinitionResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The agent definition with the given key was not found. More details are provided in the response body.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
+    "/agent-definitions/search": {
+      "post": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Agent definition"
+        ],
+        "operationId": "searchAgentDefinitions",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_DEFINITION"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Search agent definitions",
+        "description": "Search for agent definitions based on given criteria.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentDefinitionSearchQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The agent definition search result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentDefinitionSearchQueryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/agent-instances": {
       "post": {
         "x-eventually-consistent": false,
@@ -6642,7 +6847,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-added-in-version-override": "8.6"
       }
     },
     "/exporting": {
@@ -21020,7 +21226,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-added-in-version-override": "8.8"
       }
     },
     "/users/{username}": {
@@ -22243,7 +22450,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-added-in-version-override": "8.8"
       }
     },
     "/user-tasks/{userTaskKey}/form": {
@@ -22690,6 +22898,296 @@
       }
     },
     "schemas": {
+      "AgentDefinitionSearchQuerySortRequest": {
+        "type": "object",
+        "required": [
+          "field"
+        ],
+        "properties": {
+          "field": {
+            "description": "The field to sort by.",
+            "type": "string",
+            "enum": [
+              "agentDefinitionKey",
+              "agentType",
+              "name",
+              "elementId",
+              "processDefinitionId",
+              "processDefinitionKey",
+              "processDefinitionVersion",
+              "processDefinitionVersionTag",
+              "tenantId"
+            ]
+          },
+          "order": {
+            "$ref": "#/components/schemas/SortOrderEnum"
+          }
+        }
+      },
+      "AgentDefinitionSearchQuery": {
+        "description": "Agent definition search request.",
+        "type": "object",
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryRequest"
+          }
+        ],
+        "properties": {
+          "sort": {
+            "description": "Sort field criteria.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentDefinitionSearchQuerySortRequest"
+            }
+          },
+          "filter": {
+            "description": "The agent definition search filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentDefinitionFilter"
+              }
+            ]
+          }
+        }
+      },
+      "AgentDefinitionFilter": {
+        "description": "Agent definition search filter.",
+        "type": "object",
+        "properties": {
+          "agentDefinitionKey": {
+            "description": "The unique key of the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentDefinitionKeyFilterProperty"
+              }
+            ]
+          },
+          "agentType": {
+            "description": "The kind of agent this agent definition describes.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentDefinitionTypeFilterProperty"
+              }
+            ]
+          },
+          "name": {
+            "description": "The human-readable name of the process element that owns the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          },
+          "elementId": {
+            "description": "The BPMN element ID of the process element that owns the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementIdFilterProperty"
+              }
+            ]
+          },
+          "processDefinitionId": {
+            "description": "The BPMN process ID of the process definition that owns the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionIdFilterProperty"
+              }
+            ]
+          },
+          "processDefinitionKey": {
+            "description": "The key of the process definition that owns the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionKeyFilterProperty"
+              }
+            ]
+          },
+          "processDefinitionVersion": {
+            "description": "The version of the process definition that owns the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntegerFilterProperty"
+              }
+            ]
+          },
+          "processDefinitionVersionTag": {
+            "description": "The version tag of the process definition that owns the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          },
+          "tenantId": {
+            "description": "The tenant ID of the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          }
+        }
+      },
+      "AgentDefinitionSearchQueryResult": {
+        "description": "Agent definition search response.",
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryResponse"
+          }
+        ],
+        "properties": {
+          "items": {
+            "description": "The matching agent definitions.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentDefinitionResult"
+            }
+          }
+        }
+      },
+      "AgentDefinitionResult": {
+        "description": "An agent definition, created at deploy time for the process element it belongs to.",
+        "type": "object",
+        "required": [
+          "agentDefinitionKey",
+          "agentType",
+          "elementId",
+          "name",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processDefinitionVersion",
+          "processDefinitionVersionTag",
+          "tenantId"
+        ],
+        "properties": {
+          "agentDefinitionKey": {
+            "description": "The unique key for this agent definition. Unique across process definition versions.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentDefinitionKey"
+              }
+            ]
+          },
+          "agentType": {
+            "$ref": "#/components/schemas/AgentDefinitionTypeEnum"
+          },
+          "name": {
+            "description": "The human-readable name of the process element that owns the agent definition. Falls\nback to elementId when the element has no BPMN name configured.\n",
+            "type": "string"
+          },
+          "elementId": {
+            "description": "The BPMN element ID of the process element that owns the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementId"
+              }
+            ]
+          },
+          "processDefinitionId": {
+            "description": "The BPMN process ID of the process definition that owns the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionId"
+              }
+            ]
+          },
+          "processDefinitionKey": {
+            "description": "The key of the process definition that owns the agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionKey"
+              }
+            ]
+          },
+          "processDefinitionVersion": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The version of the process definition that owns the agent definition."
+          },
+          "processDefinitionVersionTag": {
+            "type": "string",
+            "nullable": true,
+            "description": "The version tag of the process definition that owns the agent definition."
+          },
+          "tenantId": {
+            "description": "The tenant ID of this agent definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ]
+          }
+        }
+      },
+      "AgentDefinitionTypeEnum": {
+        "description": "The kind of agent an agent definition describes.",
+        "type": "string",
+        "enum": [
+          "AI_AGENT_SUB_PROCESS",
+          "AI_AGENT_TASK",
+          "EXTERNAL_AGENT"
+        ]
+      },
+      "AgentDefinitionTypeFilterProperty": {
+        "description": "AgentDefinitionTypeEnum property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinitionTypeExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedAgentDefinitionTypeFilter"
+          }
+        ]
+      },
+      "AdvancedAgentDefinitionTypeFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced AgentDefinitionTypeEnum filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentDefinitionTypeEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentDefinitionTypeEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentDefinitionTypeEnum"
+            }
+          },
+          "$notIn": {
+            "description": "Checks if the property matches none of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentDefinitionTypeEnum"
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
+          }
+        }
+      },
       "AgentInstanceSearchQuerySortRequest": {
         "type": "object",
         "required": [
@@ -30458,6 +30956,14 @@
           {
             "propertyName": "title",
             "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "fileName",
+            "addedInVersionOverride": "8.7"
+          },
+          {
+            "propertyName": "detail",
+            "addedInVersionOverride": "8.7"
           }
         ]
       },
@@ -30484,7 +30990,17 @@
                   "$ref": "#/components/schemas/DocumentReference"
                 }
               }
-            }
+            },
+            "x-properties-added-in-version": [
+              {
+                "propertyName": "createdDocuments",
+                "addedInVersionOverride": "8.7"
+              },
+              {
+                "propertyName": "failedDocuments",
+                "addedInVersionOverride": "8.7"
+              }
+            ]
           }
         ]
       },
@@ -34805,6 +35321,10 @@
         },
         "x-properties-added-in-version": [
           {
+            "propertyName": "jobKey",
+            "addedInVersionOverride": "8.6"
+          },
+          {
             "propertyName": "kind",
             "addedInVersion": "8.8"
           },
@@ -36238,6 +36758,18 @@
         "format": "int64",
         "minimum": 1
       },
+      "AgentDefinitionKey": {
+        "description": "System-generated key for an agent definition.",
+        "format": "AgentDefinitionKey",
+        "x-semantic-type": "AgentDefinitionKey",
+        "example": "2251799813691958",
+        "type": "string",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LongKey"
+          }
+        ]
+      },
       "AgentInstanceKey": {
         "description": "System-generated key for an agent instance.",
         "format": "AgentInstanceKey",
@@ -36821,6 +37353,58 @@
             "addedInVersion": "8.9"
           }
         ]
+      },
+      "AgentDefinitionKeyFilterProperty": {
+        "description": "AgentDefinitionKey property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinitionKeyExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedAgentDefinitionKeyFilter"
+          }
+        ]
+      },
+      "AdvancedAgentDefinitionKeyFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced AgentDefinitionKey filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentDefinitionKey"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentDefinitionKey"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentDefinitionKey"
+            }
+          },
+          "$notIn": {
+            "description": "Checks if the property matches none of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentDefinitionKey"
+            }
+          }
+        }
       },
       "AgentInstanceKeyFilterProperty": {
         "description": "AgentInstanceKey property with full advanced search capabilities.",
@@ -38683,7 +39267,13 @@
               "DELETED"
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "ProcessDefinitionSearchQueryResult": {
         "type": "object",
@@ -38775,7 +39365,13 @@
               "DELETED"
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "state",
+            "addedInVersion": "8.10"
+          }
+        ]
       },
       "ProcessDefinitionElementStatisticsQuery": {
         "description": "Process definition element statistics request.",
@@ -39858,7 +40454,8 @@
           },
           {
             "propertyName": "batchOperationKey",
-            "addedInVersion": "8.8"
+            "addedInVersion": "8.8",
+            "addedInVersionOverride": "8.8"
           },
           {
             "propertyName": "errorMessage",
@@ -43211,7 +43808,21 @@
             ],
             "description": "The user task variable search filters."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "page",
+            "addedInVersionOverride": "8.8"
+          },
+          {
+            "propertyName": "sort",
+            "addedInVersionOverride": "8.8"
+          },
+          {
+            "propertyName": "filter",
+            "addedInVersionOverride": "8.8"
+          }
+        ]
       },
       "UserTaskAuditLogSearchQueryRequest": {
         "allOf": [
@@ -43512,6 +44123,20 @@
           "email",
           "name",
           "username"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "username",
+            "addedInVersionOverride": "8.8"
+          },
+          {
+            "propertyName": "name",
+            "addedInVersionOverride": "8.8"
+          },
+          {
+            "propertyName": "email",
+            "addedInVersionOverride": "8.8"
+          }
         ]
       },
       "UserSearchQuerySortRequest": {
@@ -43532,6 +44157,16 @@
         },
         "required": [
           "field"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "field",
+            "addedInVersionOverride": "8.8"
+          },
+          {
+            "propertyName": "order",
+            "addedInVersionOverride": "8.8"
+          }
         ]
       },
       "UserSearchQueryRequest": {
@@ -43558,7 +44193,17 @@
             ],
             "description": "The user search filters."
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "sort",
+            "addedInVersionOverride": "8.8"
+          },
+          {
+            "propertyName": "filter",
+            "addedInVersionOverride": "8.8"
+          }
+        ]
       },
       "UserFilter": {
         "description": "User search filter.",
@@ -43588,7 +44233,21 @@
               }
             ]
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "username",
+            "addedInVersionOverride": "8.8"
+          },
+          {
+            "propertyName": "name",
+            "addedInVersionOverride": "8.8"
+          },
+          {
+            "propertyName": "email",
+            "addedInVersionOverride": "8.8"
+          }
+        ]
       },
       "UserSearchResult": {
         "type": "object",
@@ -43608,7 +44267,13 @@
               "$ref": "#/components/schemas/UserResult"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "items",
+            "addedInVersionOverride": "8.8"
+          }
+        ]
       },
       "VariableSearchQuerySortRequest": {
         "type": "object",
@@ -43886,6 +44551,30 @@
         },
         "required": [
           "variables"
+        ],
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "variables",
+            "addedInVersionOverride": "8.6"
+          },
+          {
+            "propertyName": "local",
+            "addedInVersionOverride": "8.6"
+          },
+          {
+            "propertyName": "operationReference",
+            "addedInVersionOverride": "8.6"
+          }
+        ]
+      },
+      "AgentDefinitionTypeExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinitionTypeEnum"
+          }
         ]
       },
       "AgentInstanceStatusExactMatch": {
@@ -44256,6 +44945,16 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/DecisionEvaluationInstanceKey"
+          }
+        ]
+      },
+      "AgentDefinitionKeyExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinitionKey"
           }
         ]
       },
