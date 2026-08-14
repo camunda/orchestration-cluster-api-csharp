@@ -942,6 +942,11 @@ This ensures correct event emission for assignee changes.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterModeChangePlannedChange.html">ClusterModeChangePlannedChange</a></dt>
+      <dd><p>The operations of a cluster mode change that apply to one physical tenant.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterModeChangeResponse.html">ClusterModeChangeResponse</a></dt>
       <dd><p>The planned changes resulting from a cluster mode transition request.</p>
 </dd>
@@ -1599,6 +1604,26 @@ to deployed artifacts by category (processes, decisions, forms, etc.).</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.GroupUserSearchResult.html">GroupUserSearchResult</a></dt>
       <dd><p>GroupUserSearchResult</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.HistoryBackupInfo.html">HistoryBackupInfo</a></dt>
+      <dd><p>Detailed status of a history backup. The aggregated state is computed from the state of
+each of its snapshots as:</p>
+<ul>
+<li>If every expected snapshot exists and all are complete, the overall state is
+'COMPLETED'.</li>
+<li>If one snapshot failed or is partial, the overall state is 'FAILED'.</li>
+<li>Otherwise, if one snapshot is incompatible, the overall state is 'INCOMPATIBLE'.</li>
+<li>Otherwise, if one snapshot is still running, the overall state is 'IN_PROGRESS'.</li>
+<li>Otherwise, if snapshots are missing and the backup has not progressed within the
+configured timeout, the overall state is 'INCOMPLETE'.</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.HistoryBackupSnapshotInfo.html">HistoryBackupSnapshotInfo</a></dt>
+      <dd><p>Detailed info of a single snapshot making up a history backup.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -2753,6 +2778,16 @@ instance with the sourceElementInstanceKey and activate a new element instance a
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SystemConfigurationResponse.html">SystemConfigurationResponse</a></dt>
       <dd><p>Envelope for all system configuration sections. Each property
 represents a feature area.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.TakeHistoryBackupRequest.html">TakeHistoryBackupRequest</a></dt>
+      <dd><p>Request body for taking a history backup.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.TakeHistoryBackupResponse.html">TakeHistoryBackupResponse</a></dt>
+      <dd><p>Response body for taking a history backup.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -4054,6 +4089,12 @@ its partitions:</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.GroupUserSearchQuerySortRequestField.html">GroupUserSearchQuerySortRequestField</a></dt>
       <dd><p>The field to sort by.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.HistoryBackupStateCode.html">HistoryBackupStateCode</a></dt>
+      <dd><p>The aggregated state of a history backup, computed from the state of each of its
+snapshots.</p>
 </dd>
     </dl>
     <dl class="jumplist">

@@ -332,6 +332,14 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsClusterAdminAsync_Camunda_Orchestration_Sdk_Mode_System_String_System_Nullable_System_Boolean__System_Threading_CancellationToken_">ChangeClusterModeAsClusterAdminAsync(Mode, string?, bool?, CancellationToken)</a></dt>
+    <dd><p>Change the cluster mode of one or every physical tenant
+Transitions physical tenants between processing and recovery mode.</p>
+<p>If the <code>physicalTenantId</code> parameter is not provided, all available physical tenants are transitioned individually.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ChangeClusterModeAsync_Camunda_Orchestration_Sdk_Mode_System_Nullable_System_Boolean__System_Threading_CancellationToken_">ChangeClusterModeAsync(Mode, bool?, CancellationToken)</a></dt>
     <dd><p>Change cluster mode
 Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.</p>
@@ -573,6 +581,14 @@ Deletes the group with the given ID.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteHistoryBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_">DeleteHistoryBackupAsync(BackupId, CancellationToken)</a></dt>
+    <dd><p>Delete history backup
+Deletes the history backup with the given id, by deleting every snapshot that makes it
+up.</p>
+<p>Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteMappingRuleAsync_Camunda_Orchestration_Sdk_MappingRuleId_System_Threading_CancellationToken_">DeleteMappingRuleAsync(MappingRuleId, CancellationToken)</a></dt>
     <dd><p>Delete a mapping rule
 Deletes the mapping rule with the given ID.</p>
@@ -602,10 +618,14 @@ resource you want to delete in the <code>resourceKey</code> parameter.</p>
 available again, a new deployment of the resource is required.</p>
 <p>By default, only the resource itself is deleted from the runtime state. To also delete the
 historic data associated with a resource, set the <code>deleteHistory</code> flag in the request body
-to <code>true</code>. The historic data is deleted asynchronously via a batch operation. The details of
-the created batch operation are included in the response. Note that history deletion is only
-supported for process resources; for other resource types this flag is ignored and no history
-will be deleted.</p>
+to <code>true</code>. History deletion is supported for process definitions and decision requirements
+definitions; for other resource types (forms, generic resources) the flag is ignored and no
+history is deleted.</p>
+<p>The two supported types differ in how the history is removed. For a decision requirements
+definition the history is deleted asynchronously via a batch operation whose details are
+returned in the <code>batchOperation</code> field of the response. For a process definition the
+definition first drains its running instances and its history is deleted asynchronously once
+the definition is fully removed cluster-wide; no batch operation is returned in the response.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -740,6 +760,7 @@ Get batch operation by key.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetClusterStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterStatusAsync_System_Threading_CancellationToken_">GetClusterStatusAsync(CancellationToken)</a></dt>
     <dd><p>Get the status of the whole cluster
 Checks the health status of the whole cluster, aggregated over all physical tenants. Returns <code>HEALTHY</code> when every physical tenant is healthy, <code>DOWN</code> when no physical tenant can process work, and <code>DEGRADED</code> in every other case. No per-tenant detail is reported; use <code>GET /cluster/v2/topology</code> for that.</p>
+<p>This endpoint is public and requires no authentication, unlike <code>PATCH /cluster/v2/mode</code> below, which needs cluster-admin credentials.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -824,6 +845,13 @@ Get a global user task listener by its id.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_GroupResult__System_Threading_CancellationToken_">GetGroupAsync(GroupId, ConsistencyOptions&lt;GroupResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get group
 Get a group by its ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetHistoryBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_">GetHistoryBackupAsync(BackupId, CancellationToken)</a></dt>
+    <dd><p>Get history backup
+Returns detailed status of the history backup with the given id.</p>
+<p>Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1090,6 +1118,14 @@ specific element instance.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetWorkers.html#Camunda_Orchestration_Sdk_CamundaClient_GetWorkers">GetWorkers()</a></dt>
     <dd><p>Returns a snapshot of all registered workers.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListHistoryBackupsAsync_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Nullable_System_Boolean__System_Threading_CancellationToken_">ListHistoryBackupsAsync(BackupIdPrefix?, bool?, CancellationToken)</a></dt>
+    <dd><p>List history backups
+Returns a list of all available history backups of the physical tenant, with their state
+and additional info, most recent first by snapshot start time.</p>
+<p>Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1668,6 +1704,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 Force-writes the checkpoint and backup metadata of every partition of the physical
 tenant to the backup store, independent of any backup being taken or confirmed, and
 returns the updated state.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TakeHistoryBackupAsync_Camunda_Orchestration_Sdk_TakeHistoryBackupRequest_System_Threading_CancellationToken_">TakeHistoryBackupAsync(TakeHistoryBackupRequest, CancellationToken)</a></dt>
+    <dd><p>Take a history backup
+Triggers a backup of the physical tenant's history, by scheduling a snapshot of every
+secondary storage index it owns.</p>
+<p>Unlike runtime backups, history backups have no generated-id mode: <code>backupId</code> is always
+required.</p>
+<p>Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.</p>
 </dd>
   </dl>
   <dl class="jumplist">

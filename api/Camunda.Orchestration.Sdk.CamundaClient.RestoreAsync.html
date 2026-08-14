@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync*" class="text-break">
-Method RestoreAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6211"><i class="bi bi-code-slash"></i></a>
+Method RestoreAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6440"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method RestoreAsync  <a class="header-action link-secondary" title="View source"
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Nullable_System_Boolean__System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
   RestoreAsync(RestoreRequest, bool?, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6211"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6440"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Restore from a backup
@@ -168,10 +168,15 @@ var change = await client.RestoreAsync(new RestoreRequest
 });
 
 Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-foreach (var operation in change.PlannedChanges)
+foreach (var group in change.PlannedChanges)
 {
-    var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-    Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    Console.WriteLine($&quot;  {tenant}:&quot;);
+    foreach (var operation in group.Operations)
+    {
+        var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+        Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
+    }
 }
 </code></pre>
 <p>}</p></code></pre>
@@ -192,10 +197,15 @@ var change = await client.RestoreAsync(new RestoreRequest
 });
 
 Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-foreach (var operation in change.PlannedChanges)
+foreach (var group in change.PlannedChanges)
 {
-    var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-    Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    Console.WriteLine($&quot;  {tenant}:&quot;);
+    foreach (var operation in group.Operations)
+    {
+        var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+        Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
+    }
 }
 </code></pre>
 <p>}</p></code></pre>
@@ -207,7 +217,7 @@ foreach (var operation in change.PlannedChanges)
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6211" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L6440" class="edit-link">Edit this page</a>
         </div>
 
 
