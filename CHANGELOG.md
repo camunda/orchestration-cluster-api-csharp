@@ -1,3 +1,10 @@
+# [10.0.0-alpha.15](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.14...v10.0.0-alpha.15) (2026-08-14)
+
+
+### Bug Fixes
+
+* **examples:** group plannedChanges by physical tenant and cover new operations ([#392](https://github.com/camunda/orchestration-cluster-api-csharp/issues/392)) ([deda1ad](https://github.com/camunda/orchestration-cluster-api-csharp/commit/deda1ad353b2df0a46cc83e2f17718efab20450e))
+
 # [10.0.0-alpha.14](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.13...v10.0.0-alpha.14) (2026-08-12)
 
 
