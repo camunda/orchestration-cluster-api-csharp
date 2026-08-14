@@ -57,6 +57,33 @@ public static class ClientExamples
     // </ChangeClusterMode>
     #endregion ChangeClusterMode
 
+    #region ChangeClusterModeAsClusterAdmin
+
+    // <ChangeClusterModeAsClusterAdmin>
+    public static async Task ChangeClusterModeAsClusterAdminExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // The cluster-admin variant can target a single physical tenant. Omit
+        // physicalTenantId to apply the change to every physical tenant.
+        var change = await client.ChangeClusterModeAsClusterAdminAsync(
+            Mode.RECOVERING, physicalTenantId: "default", dryRun: true);
+
+        Console.WriteLine($"Cluster change {change.ChangeId}:");
+        foreach (var group in change.PlannedChanges)
+        {
+            var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+            Console.WriteLine($"  {tenant}:");
+            foreach (var operation in group.Operations)
+            {
+                var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
+                Console.WriteLine($"    {operation.Operation}{suffix}");
+            }
+        }
+    }
+    // </ChangeClusterModeAsClusterAdmin>
+    #endregion ChangeClusterModeAsClusterAdmin
+
     #region GetClusterStatus
 
     // <GetClusterStatus>

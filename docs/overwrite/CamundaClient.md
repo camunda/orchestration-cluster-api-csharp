@@ -199,6 +199,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ChangeClusterModeAsClusterAdminAsync(Camunda.Orchestration.Sdk.Mode,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#ChangeClusterModeAsClusterAdmin)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.CompleteJobAsync(Camunda.Orchestration.Sdk.JobKey,Camunda.Orchestration.Sdk.JobCompletionRequest,System.Threading.CancellationToken)
 example:
 - *content
@@ -1410,6 +1420,46 @@ example:
 
 
 [!code-csharp[](../../examples/Backup.cs#DeleteRuntimeBackup)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsync(Camunda.Orchestration.Sdk.TakeHistoryBackupRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#TakeHistoryBackup)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsync(System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Nullable{System.Boolean},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#ListHistoryBackups)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#GetHistoryBackup)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#DeleteHistoryBackup)]
 
 
 ---
