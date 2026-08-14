@@ -40,15 +40,49 @@ public static class ClientExamples
         // without applying it. Omit it (or set it to false) to trigger the transition.
         var change = await client.ChangeClusterModeAsync(Mode.RECOVERING, dryRun: true);
 
+        // Operations are grouped by physical tenant; a null tenant means the operation
+        // is not scoped to one, such as a broker lifecycle operation.
         Console.WriteLine($"Cluster change {change.ChangeId}:");
-        foreach (var operation in change.PlannedChanges)
+        foreach (var group in change.PlannedChanges)
         {
-            var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
-            Console.WriteLine($"  {operation.Operation}{suffix}");
+            var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+            Console.WriteLine($"  {tenant}:");
+            foreach (var operation in group.Operations)
+            {
+                var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
+                Console.WriteLine($"    {operation.Operation}{suffix}");
+            }
         }
     }
     // </ChangeClusterMode>
     #endregion ChangeClusterMode
+
+    #region ChangeClusterModeAsClusterAdmin
+
+    // <ChangeClusterModeAsClusterAdmin>
+    public static async Task ChangeClusterModeAsClusterAdminExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // The cluster-admin variant can target a single physical tenant. Omit
+        // physicalTenantId to apply the change to every physical tenant.
+        var change = await client.ChangeClusterModeAsClusterAdminAsync(
+            Mode.RECOVERING, physicalTenantId: "default", dryRun: true);
+
+        Console.WriteLine($"Cluster change {change.ChangeId}:");
+        foreach (var group in change.PlannedChanges)
+        {
+            var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+            Console.WriteLine($"  {tenant}:");
+            foreach (var operation in group.Operations)
+            {
+                var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
+                Console.WriteLine($"    {operation.Operation}{suffix}");
+            }
+        }
+    }
+    // </ChangeClusterModeAsClusterAdmin>
+    #endregion ChangeClusterModeAsClusterAdmin
 
     #region GetClusterStatus
 
@@ -95,10 +129,15 @@ public static class ClientExamples
         });
 
         Console.WriteLine($"Cluster change {change.ChangeId}:");
-        foreach (var operation in change.PlannedChanges)
+        foreach (var group in change.PlannedChanges)
         {
-            var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
-            Console.WriteLine($"  {operation.Operation}{suffix}");
+            var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+            Console.WriteLine($"  {tenant}:");
+            foreach (var operation in group.Operations)
+            {
+                var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
+                Console.WriteLine($"    {operation.Operation}{suffix}");
+            }
         }
     }
     // </Restore>
