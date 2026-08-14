@@ -802,11 +802,18 @@ public partial class CamundaClient
     ///     // without applying it. Omit it (or set it to false) to trigger the transition.
     ///     var change = await client.ChangeClusterModeAsync(Mode.RECOVERING, dryRun: true);
     /// 
+    ///     // Operations are grouped by physical tenant; a null tenant means the operation
+    ///     // is not scoped to one, such as a broker lifecycle operation.
     ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-    ///     foreach (var operation in change.PlannedChanges)
+    ///     foreach (var group in change.PlannedChanges)
     ///     {
-    ///         var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-    ///         Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    ///         Console.WriteLine($&quot;  {tenant}:&quot;);
+    ///         foreach (var operation in group.Operations)
+    ///         {
+    ///             var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///             Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
+    ///         }
     ///     }
     /// }
     /// </code>
@@ -822,11 +829,18 @@ public partial class CamundaClient
     ///     // without applying it. Omit it (or set it to false) to trigger the transition.
     ///     var change = await client.ChangeClusterModeAsync(Mode.RECOVERING, dryRun: true);
     /// 
+    ///     // Operations are grouped by physical tenant; a null tenant means the operation
+    ///     // is not scoped to one, such as a broker lifecycle operation.
     ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-    ///     foreach (var operation in change.PlannedChanges)
+    ///     foreach (var group in change.PlannedChanges)
     ///     {
-    ///         var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-    ///         Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    ///         Console.WriteLine($&quot;  {tenant}:&quot;);
+    ///         foreach (var operation in group.Operations)
+    ///         {
+    ///             var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///             Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
+    ///         }
     ///     }
     /// }
     /// </code>
@@ -838,6 +852,77 @@ public partial class CamundaClient
         if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
         var path = queryParts.Count > 0 ? $"/mode?{string.Join("&", queryParts)}" : $"/mode";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterModeChangeResponse>(HttpMethod.Patch, path, null, ct), "changeClusterMode", false, ct);
+    }
+
+    /// <summary>
+    /// Change the cluster mode of one or every physical tenant
+    /// Transitions physical tenants between processing and recovery mode.
+    /// 
+    /// If the `physicalTenantId` parameter is not provided, all available physical tenants are transitioned individually.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
+    /// </summary>
+    /// <remarks>
+    /// Operation: changeClusterModeAsClusterAdmin
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ChangeClusterModeAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // The cluster-admin variant can target a single physical tenant. Omit
+    ///     // physicalTenantId to apply the change to every physical tenant.
+    ///     var change = await client.ChangeClusterModeAsClusterAdminAsync(
+    ///         Mode.RECOVERING, physicalTenantId: &quot;default&quot;, dryRun: true);
+    /// 
+    ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+    ///     foreach (var group in change.PlannedChanges)
+    ///     {
+    ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    ///         Console.WriteLine($&quot;  {tenant}:&quot;);
+    ///         foreach (var operation in group.Operations)
+    ///         {
+    ///             var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///             Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
+    ///         }
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ChangeClusterModeAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // The cluster-admin variant can target a single physical tenant. Omit
+    ///     // physicalTenantId to apply the change to every physical tenant.
+    ///     var change = await client.ChangeClusterModeAsClusterAdminAsync(
+    ///         Mode.RECOVERING, physicalTenantId: &quot;default&quot;, dryRun: true);
+    /// 
+    ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+    ///     foreach (var group in change.PlannedChanges)
+    ///     {
+    ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    ///         Console.WriteLine($&quot;  {tenant}:&quot;);
+    ///         foreach (var operation in group.Operations)
+    ///         {
+    ///             var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///             Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
+    ///         }
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ClusterModeChangeResponse> ChangeClusterModeAsClusterAdminAsync(Mode mode, string? physicalTenantId = null, bool? dryRun = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        queryParts.Add("mode=" + Uri.EscapeDataString(mode.ToString()!));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/mode?{string.Join("&", queryParts)}" : $"/cluster/v2/mode";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterModeChangeResponse>(HttpMethod.Patch, path, null, ct), "changeClusterModeAsClusterAdmin", false, ct);
     }
 
     /// <summary>
@@ -2171,6 +2256,43 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Delete history backup
+    /// Deletes the history backup with the given id, by deleting every snapshot that makes it
+    /// up.
+    /// 
+    /// Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: deleteHistoryBackup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteHistoryBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteHistoryBackupAsync(backupId);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteHistoryBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteHistoryBackupAsync(backupId);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task DeleteHistoryBackupAsync(BackupId backupId, CancellationToken ct = default)
+    {
+        var path = $"/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteHistoryBackup", false, ct);
+    }
+
+    /// <summary>
     /// Delete a mapping rule
     /// Deletes the mapping rule with the given ID.
     /// 
@@ -2294,10 +2416,15 @@ public partial class CamundaClient
     /// 
     /// By default, only the resource itself is deleted from the runtime state. To also delete the
     /// historic data associated with a resource, set the `deleteHistory` flag in the request body
-    /// to `true`. The historic data is deleted asynchronously via a batch operation. The details of
-    /// the created batch operation are included in the response. Note that history deletion is only
-    /// supported for process resources; for other resource types this flag is ignored and no history
-    /// will be deleted.
+    /// to `true`. History deletion is supported for process definitions and decision requirements
+    /// definitions; for other resource types (forms, generic resources) the flag is ignored and no
+    /// history is deleted.
+    /// 
+    /// The two supported types differ in how the history is removed. For a decision requirements
+    /// definition the history is deleted asynchronously via a batch operation whose details are
+    /// returned in the `batchOperation` field of the response. For a process definition the
+    /// definition first drains its running instances and its history is deleted asynchronously once
+    /// the definition is fully removed cluster-wide; no batch operation is returned in the response.
     /// </summary>
     /// <remarks>
     /// Operation: deleteResource
@@ -3016,6 +3143,8 @@ public partial class CamundaClient
     /// <summary>
     /// Get the status of the whole cluster
     /// Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.
+    /// 
+    /// This endpoint is public and requires no authentication, unlike `PATCH /cluster/v2/mode` below, which needs cluster-admin credentials.
     /// </summary>
     /// <remarks>
     /// Operation: getClusterStatus
@@ -3635,6 +3764,48 @@ public partial class CamundaClient
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GroupResult>(HttpMethod.Get, path, null, ct), "getGroup", false, ct);
+    }
+
+    /// <summary>
+    /// Get history backup
+    /// Returns detailed status of the history backup with the given id.
+    /// 
+    /// Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: getHistoryBackup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetHistoryBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var backup = await client.GetHistoryBackupAsync(backupId);
+    /// 
+    ///     // The aggregated state is derived from the state of every expected snapshot.
+    ///     Console.WriteLine($&quot;History backup {backup.BackupId}: {backup.State}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetHistoryBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var backup = await client.GetHistoryBackupAsync(backupId);
+    /// 
+    ///     // The aggregated state is derived from the state of every expected snapshot.
+    ///     Console.WriteLine($&quot;History backup {backup.BackupId}: {backup.State}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<HistoryBackupInfo> GetHistoryBackupAsync(BackupId backupId, CancellationToken ct = default)
+    {
+        var path = $"/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}";
+        return await InvokeWithRetryAsync(() => SendAsync<HistoryBackupInfo>(HttpMethod.Get, path, null, ct), "getHistoryBackup", false, ct);
     }
 
     /// <summary>
@@ -5450,6 +5621,54 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// List history backups
+    /// Returns a list of all available history backups of the physical tenant, with their state
+    /// and additional info, most recent first by snapshot start time.
+    /// 
+    /// Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: listHistoryBackups
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ListHistoryBackupsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // `prefix` must end in a single &apos;*&apos;. Omit it to list every history backup.
+    ///     var backups = await client.ListHistoryBackupsAsync(
+    ///         BackupIdPrefix.AssumeExists(&quot;10*&quot;));
+    /// 
+    ///     Console.WriteLine($&quot;History backups: {backups}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ListHistoryBackupsExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // `prefix` must end in a single &apos;*&apos;. Omit it to list every history backup.
+    ///     var backups = await client.ListHistoryBackupsAsync(
+    ///         BackupIdPrefix.AssumeExists(&quot;10*&quot;));
+    /// 
+    ///     Console.WriteLine($&quot;History backups: {backups}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<object> ListHistoryBackupsAsync(BackupIdPrefix? prefix = null, bool? verbose = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(prefix.ToString()!));
+        if (verbose != null) queryParts.Add("verbose=" + Uri.EscapeDataString(verbose.ToString()!));
+        var path = queryParts.Count > 0 ? $"/backups/history?{string.Join("&", queryParts)}" : $"/backups/history";
+        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "listHistoryBackups", false, ct);
+    }
+
+    /// <summary>
     /// List runtime backups
     /// Returns a list of all available runtime backups of the physical tenant, with their
     /// state and additional info, sorted in descending order of backupId.
@@ -6176,10 +6395,15 @@ public partial class CamundaClient
     ///     });
     /// 
     ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-    ///     foreach (var operation in change.PlannedChanges)
+    ///     foreach (var group in change.PlannedChanges)
     ///     {
-    ///         var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-    ///         Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    ///         Console.WriteLine($&quot;  {tenant}:&quot;);
+    ///         foreach (var operation in group.Operations)
+    ///         {
+    ///             var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///             Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
+    ///         }
     ///     }
     /// }
     /// </code>
@@ -6200,10 +6424,15 @@ public partial class CamundaClient
     ///     });
     /// 
     ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-    ///     foreach (var operation in change.PlannedChanges)
+    ///     foreach (var group in change.PlannedChanges)
     ///     {
-    ///         var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-    ///         Console.WriteLine($&quot;  {operation.Operation}{suffix}&quot;);
+    ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    ///         Console.WriteLine($&quot;  {tenant}:&quot;);
+    ///         foreach (var operation in group.Operations)
+    ///         {
+    ///             var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
+    ///             Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
+    ///         }
     ///     }
     /// }
     /// </code>
@@ -9185,6 +9414,64 @@ public partial class CamundaClient
     {
         var path = $"/backups/runtime/state/sync";
         return await InvokeWithRetryAsync(() => SendAsync<RuntimeBackupState>(HttpMethod.Post, path, null, ct), "syncRuntimeBackupState", false, ct);
+    }
+
+    /// <summary>
+    /// Take a history backup
+    /// Triggers a backup of the physical tenant&apos;s history, by scheduling a snapshot of every
+    /// secondary storage index it owns.
+    /// 
+    /// Unlike runtime backups, history backups have no generated-id mode: `backupId` is always
+    /// required.
+    /// 
+    /// Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: takeHistoryBackup
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task TakeHistoryBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Backups are logically ordered by id, so each successive backup must use a
+    ///     // higher id than the previous one.
+    ///     var backup = await client.TakeHistoryBackupAsync(
+    ///         new TakeHistoryBackupRequest { BackupId = backupId });
+    /// 
+    ///     Console.WriteLine($&quot;Scheduled history backup {backup.BackupId}&quot;);
+    ///     foreach (var snapshot in backup.ScheduledSnapshots)
+    ///     {
+    ///         Console.WriteLine($&quot;  {snapshot}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task TakeHistoryBackupExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Backups are logically ordered by id, so each successive backup must use a
+    ///     // higher id than the previous one.
+    ///     var backup = await client.TakeHistoryBackupAsync(
+    ///         new TakeHistoryBackupRequest { BackupId = backupId });
+    /// 
+    ///     Console.WriteLine($&quot;Scheduled history backup {backup.BackupId}&quot;);
+    ///     foreach (var snapshot in backup.ScheduledSnapshots)
+    ///     {
+    ///         Console.WriteLine($&quot;  {snapshot}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<TakeHistoryBackupResponse> TakeHistoryBackupAsync(TakeHistoryBackupRequest body, CancellationToken ct = default)
+    {
+        var path = $"/backups/history";
+        return await InvokeWithRetryAsync(() => SendAsync<TakeHistoryBackupResponse>(HttpMethod.Post, path, body, ct), "takeHistoryBackup", false, ct);
     }
 
     /// <summary>

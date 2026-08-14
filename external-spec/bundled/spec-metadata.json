@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:d21a56ff57b5ac9ea382b871b283d90eb8c93ab92b9ee1e490e616137f7909c5",
+  "specHash": "sha256:2d638fa54edfff38ce1e05e76f1b26575927ac261d240dc8e35843dfe5326846",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -3903,6 +3903,148 @@
       ],
       "summary": "Delete runtime backup",
       "description": "Deletes the runtime backup with the given id.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "backupId"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "BACKUP",
+            "permissionType": "DELETE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "listHistoryBackups",
+      "path": "/backups/history",
+      "method": "get",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "List history backups",
+      "description": "Returns a list of all available history backups of the physical tenant, with their state\nand additional info, most recent first by snapshot start time.\n\nOnly available on clusters whose secondary storage is Elasticsearch or OpenSearch.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "prefix",
+          "required": false
+        },
+        {
+          "name": "verbose",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "BACKUP",
+            "permissionType": "READ"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "takeHistoryBackup",
+      "path": "/backups/history",
+      "method": "post",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Take a history backup",
+      "description": "Triggers a backup of the physical tenant's history, by scheduling a snapshot of every\nsecondary storage index it owns.\n\nUnlike runtime backups, history backups have no generated-id mode: `backupId` is always\nrequired.\n\nOnly available on clusters whose secondary storage is Elasticsearch or OpenSearch.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "TakeHistoryBackupRequest",
+      "successResponseSchemaRef": "TakeHistoryBackupResponse",
+      "successStatus": 202,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "BACKUP",
+            "permissionType": "CREATE"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "getHistoryBackup",
+      "path": "/backups/history/{backupId}",
+      "method": "get",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Get history backup",
+      "description": "Returns detailed status of the history backup with the given id.\n\nOnly available on clusters whose secondary storage is Elasticsearch or OpenSearch.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "backupId"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "backups.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "HistoryBackupInfo",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "BACKUP",
+            "permissionType": "READ"
+          }
+        ],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "deleteHistoryBackup",
+      "path": "/backups/history/{backupId}",
+      "method": "delete",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Delete history backup",
+      "description": "Deletes the history backup with the given id, by deleting every snapshot that makes it\nup.\n\nOnly available on clusters whose secondary storage is Elasticsearch or OpenSearch.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": false,
       "requestBodyUnion": false,
@@ -8927,7 +9069,7 @@
         "Resource"
       ],
       "summary": "Delete resource",
-      "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. The historic data is deleted asynchronously via a batch operation. The details of\nthe created batch operation are included in the response. Note that history deletion is only\nsupported for process resources; for other resource types this flag is ignored and no history\nwill be deleted.",
+      "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition the\ndefinition first drains its running instances and its history is deleted asynchronously once\nthe definition is fully removed cluster-wide; no batch operation is returned in the response.",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -9911,33 +10053,6 @@
         "x-eventually-consistent": false,
         "x-required-permissions": [],
         "x-added-in-version": "8.8"
-      }
-    },
-    {
-      "operationId": "getClusterStatus",
-      "path": "/cluster/v2/status",
-      "method": "get",
-      "tags": [
-        "Cluster"
-      ],
-      "summary": "Get the status of the whole cluster",
-      "description": "Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.",
-      "eventuallyConsistent": false,
-      "hasRequestBody": false,
-      "requestBodyUnion": false,
-      "bodyOnly": false,
-      "pathParams": [],
-      "queryParams": [],
-      "requestBodyUnionRefs": [],
-      "optionalTenantIdInBody": false,
-      "sourceFile": "cluster.yaml",
-      "requestBodyContentTypes": [],
-      "successResponseSchemaRef": "ClusterStatusResponse",
-      "successStatus": 200,
-      "vendorExtensions": {
-        "x-eventually-consistent": false,
-        "x-required-permissions": [],
-        "x-added-in-version": "8.10"
       }
     },
     {
@@ -11099,6 +11214,73 @@
       }
     },
     {
+      "operationId": "changeClusterModeAsClusterAdmin",
+      "path": "/cluster/v2/mode",
+      "method": "patch",
+      "tags": [
+        "Recovery"
+      ],
+      "summary": "Change the cluster mode of one or every physical tenant",
+      "description": "Transitions physical tenants between processing and recovery mode.\n\nIf the `physicalTenantId` parameter is not provided, all available physical tenants are transitioned individually.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "mode",
+          "required": true
+        },
+        {
+          "name": "physicalTenantId",
+          "required": false
+        },
+        {
+          "name": "dryRun",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "ClusterModeChangeResponse",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "getClusterStatus",
+      "path": "/cluster/v2/status",
+      "method": "get",
+      "tags": [
+        "Cluster"
+      ],
+      "summary": "Get the status of the whole cluster",
+      "description": "Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.\n\nThis endpoint is public and requires no authentication, unlike `PATCH /cluster/v2/mode` below, which needs cluster-admin credentials.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "ClusterStatusResponse",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "createUser",
       "path": "/users",
       "method": "post",
@@ -12040,7 +12222,7 @@
   "integrity": {
     "totalSemanticKeys": 42,
     "totalUnions": 67,
-    "totalOperations": 220,
+    "totalOperations": 225,
     "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23

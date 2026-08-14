@@ -5687,6 +5687,12 @@ public sealed class AgentInstanceResult
     public AgentInstanceKey AgentInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the agent definition this agent instance runs on.
+    /// </summary>
+    [JsonPropertyName("agentDefinitionKey")]
+    public AgentDefinitionKey AgentDefinitionKey { get; set; }
+
+    /// <summary>
     /// The current status of an agent instance.
     /// </summary>
     [JsonPropertyName("status")]
@@ -9569,6 +9575,25 @@ public sealed class ClusterModeChangeOperation
 }
 
 /// <summary>
+/// The operations of a cluster mode change that apply to one physical tenant.
+/// </summary>
+public sealed class ClusterModeChangePlannedChange
+{
+    /// <summary>
+    /// The physical tenant the operations apply to; null for operations that are not scoped to a single physical tenant, such as broker lifecycle operations.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string? PhysicalTenantId { get; set; }
+
+    /// <summary>
+    /// The ordered list of operations that will be applied to the physical tenant.
+    /// </summary>
+    [JsonPropertyName("operations")]
+    public List<ClusterModeChangeOperation> Operations { get; set; } = null!;
+
+}
+
+/// <summary>
 /// The planned changes resulting from a cluster mode transition request.
 /// </summary>
 public sealed class ClusterModeChangeResponse
@@ -9580,10 +9605,10 @@ public sealed class ClusterModeChangeResponse
     public string ChangeId { get; set; } = null!;
 
     /// <summary>
-    /// The ordered list of operations that will be applied to complete the change.
+    /// The operations that will be applied to complete the change, grouped by the physical tenant they belong to. Groups are transitioned in parallel; the operations within a group are applied in the given order.
     /// </summary>
     [JsonPropertyName("plannedChanges")]
-    public List<ClusterModeChangeOperation> PlannedChanges { get; set; } = null!;
+    public List<ClusterModeChangePlannedChange> PlannedChanges { get; set; } = null!;
 
 }
 
@@ -12720,13 +12745,15 @@ public sealed class DeleteResourceRequest
     public OperationReference? OperationReference { get; set; }
 
     /// <summary>
-    /// Indicates if the historic data of a process resource should be deleted via a
-    /// batch operation asynchronously.
+    /// Indicates if the historic data associated with the resource should also be deleted
+    /// asynchronously.
     /// 
-    /// This flag is only effective for process resources. For other resource types
-    /// (decisions, forms, generic resources), this flag is ignored and no history
-    /// will be deleted. In those cases, the `batchOperation` field in the response
-    /// will not be populated.
+    /// This flag is effective for process definitions and decision requirements definitions.
+    /// For other resource types (forms, generic resources) it is ignored and no history is
+    /// deleted. For a decision requirements definition the `batchOperation` field in the
+    /// response carries the created batch operation. For a process definition the history is
+    /// deleted as part of the definition&apos;s draining/deletion lifecycle and no batch operation is
+    /// returned.
     /// 
     /// </summary>
     [JsonPropertyName("deleteHistory")]
@@ -12748,9 +12775,14 @@ public sealed class DeleteResourceResponse
     /// <summary>
     /// The batch operation created for asynchronously deleting the historic data.
     /// 
-    /// This field is only populated when the request `deleteHistory` is set to `true` and the resource
-    /// is a process definition. For other resource types (decisions, forms, generic resources),
-    /// this field will be `null`.
+    /// Populated when `deleteHistory` is `true` and either the resource is a decision
+    /// requirements definition, or the resource is a process definition that is already fully
+    /// deleted from the runtime state (its history is purged directly by a batch operation).
+    /// 
+    /// For a process definition that still exists in the runtime state, deletion first drains
+    /// the definition and its history is removed asynchronously as part of that lifecycle, so no
+    /// batch operation is returned and this field is `null`. It is also `null` for forms and
+    /// generic resources.
     /// 
     /// </summary>
     [JsonPropertyName("batchOperation")]
@@ -16332,6 +16364,106 @@ public sealed class GroupUserSearchResult
     [JsonPropertyName("page")]
     public SearchQueryPageResponse Page { get; set; } = null!;
 
+}
+
+/// <summary>
+/// Detailed status of a history backup. The aggregated state is computed from the state of
+/// each of its snapshots as:
+/// - If every expected snapshot exists and all are complete, the overall state is
+///   &apos;COMPLETED&apos;.
+/// - If one snapshot failed or is partial, the overall state is &apos;FAILED&apos;.
+/// - Otherwise, if one snapshot is incompatible, the overall state is &apos;INCOMPATIBLE&apos;.
+/// - Otherwise, if one snapshot is still running, the overall state is &apos;IN_PROGRESS&apos;.
+/// - Otherwise, if snapshots are missing and the backup has not progressed within the
+///   configured timeout, the overall state is &apos;INCOMPLETE&apos;.
+/// 
+/// </summary>
+public sealed class HistoryBackupInfo
+{
+    /// <summary>
+    /// The id of the backup.
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId BackupId { get; set; }
+
+    /// <summary>
+    /// The aggregated state of the backup.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public HistoryBackupStateCode State { get; set; }
+
+    /// <summary>
+    /// Reason for failure if the state is &apos;FAILED&apos;.
+    /// </summary>
+    [JsonPropertyName("failureReason")]
+    public string? FailureReason { get; set; }
+
+    /// <summary>
+    /// Detailed status of the backup per snapshot. Always lists every snapshot found for
+    /// the backup; when the backup was read without snapshot detail, each entry carries
+    /// only its name.
+    /// 
+    /// </summary>
+    [JsonPropertyName("details")]
+    public List<HistoryBackupSnapshotInfo> Details { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Detailed info of a single snapshot making up a history backup.
+/// </summary>
+public sealed class HistoryBackupSnapshotInfo
+{
+    /// <summary>
+    /// The name of the snapshot.
+    /// </summary>
+    [JsonPropertyName("snapshotName")]
+    public string SnapshotName { get; set; } = null!;
+
+    /// <summary>
+    /// The state of the snapshot, reported verbatim by the secondary storage (for example
+    /// &apos;SUCCESS&apos;, &apos;IN_PROGRESS&apos; or &apos;PARTIAL&apos;). Deliberately not a closed set: Elasticsearch
+    /// and OpenSearch report different vocabularies. Not reported when the backup was
+    /// listed without snapshot detail.
+    /// 
+    /// </summary>
+    [JsonPropertyName("state")]
+    public string? State { get; set; }
+
+    /// <summary>
+    /// The timestamp at which the snapshot was started. Not reported when the backup was
+    /// listed without snapshot detail.
+    /// 
+    /// </summary>
+    [JsonPropertyName("startTime")]
+    public DateTimeOffset? StartTime { get; set; }
+
+    /// <summary>
+    /// The failures reported for this snapshot. Empty if there were none.
+    /// </summary>
+    [JsonPropertyName("failures")]
+    public List<string> Failures { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The aggregated state of a history backup, computed from the state of each of its
+/// snapshots.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum HistoryBackupStateCode
+{
+    [JsonPropertyName("IN_PROGRESS")]
+    INPROGRESS,
+    [JsonPropertyName("COMPLETED")]
+    COMPLETED,
+    [JsonPropertyName("FAILED")]
+    FAILED,
+    [JsonPropertyName("INCOMPLETE")]
+    INCOMPLETE,
+    [JsonPropertyName("INCOMPATIBLE")]
+    INCOMPATIBLE,
 }
 
 /// <summary>
@@ -26294,6 +26426,38 @@ public readonly record struct Tag : global::Camunda.Orchestration.Sdk.ICamundaKe
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Request body for taking a history backup.
+/// </summary>
+public sealed class TakeHistoryBackupRequest
+{
+    /// <summary>
+    /// The id of the backup to take.
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId BackupId { get; set; }
+
+}
+
+/// <summary>
+/// Response body for taking a history backup.
+/// </summary>
+public sealed class TakeHistoryBackupResponse
+{
+    /// <summary>
+    /// The id of the backup that has been scheduled.
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId BackupId { get; set; }
+
+    /// <summary>
+    /// The names of the snapshots that have been scheduled for this backup.
+    /// </summary>
+    [JsonPropertyName("scheduledSnapshots")]
+    public List<string> ScheduledSnapshots { get; set; } = null!;
+
 }
 
 /// <summary>
