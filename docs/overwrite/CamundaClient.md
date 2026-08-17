@@ -1113,6 +1113,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterTopologyAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#GetClusterTopology)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetRestoreStatusAsync(System.Threading.CancellationToken)
 example:
 - *content
@@ -1370,6 +1380,16 @@ example:
 
 
 [!code-csharp[](../../examples/Client.cs#Restore)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.RestoreAsClusterAdminAsync(Camunda.Orchestration.Sdk.ClusterRestoreRequest,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#RestoreAsClusterAdmin)]
 
 
 ---
