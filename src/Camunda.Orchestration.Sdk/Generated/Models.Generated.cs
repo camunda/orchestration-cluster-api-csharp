@@ -55,6 +55,8 @@ public enum AgentInstanceSearchQuerySortRequestField
 {
     [JsonPropertyName("agentInstanceKey")]
     AgentInstanceKey,
+    [JsonPropertyName("agentDefinitionKey")]
+    AgentDefinitionKey,
     [JsonPropertyName("status")]
     Status,
     [JsonPropertyName("elementId")]
@@ -4579,6 +4581,12 @@ public sealed class AgentInstanceFilter
     public AgentInstanceKeyFilterProperty? AgentInstanceKey { get; set; }
 
     /// <summary>
+    /// The key of the agent definition this agent instance is an instance of.
+    /// </summary>
+    [JsonPropertyName("agentDefinitionKey")]
+    public AgentDefinitionKeyFilterProperty? AgentDefinitionKey { get; set; }
+
+    /// <summary>
     /// The current status of the agent instance.
     /// </summary>
     [JsonPropertyName("status")]
@@ -5687,7 +5695,7 @@ public sealed class AgentInstanceResult
     public AgentInstanceKey AgentInstanceKey { get; set; }
 
     /// <summary>
-    /// The key of the agent definition this agent instance runs on.
+    /// The key of the agent definition this agent instance is an instance of.
     /// </summary>
     [JsonPropertyName("agentDefinitionKey")]
     public AgentDefinitionKey AgentDefinitionKey { get; set; }
@@ -9556,6 +9564,38 @@ public enum CloudStage
 }
 
 /// <summary>
+/// Provides information on a broker node, independent of any physical tenant.
+/// </summary>
+public sealed class ClusterBrokerInfo
+{
+    /// <summary>
+    /// The unique (within a cluster) broker identifier. When the cluster is not zoned, then it&apos;s a string that represents the nodeId (an integer). When the cluster is zoned, instead, it&apos;s of the form &quot;$zoneName_$nodeId&quot;, providing uniqueness even across zones.
+    /// 
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public string BrokerId { get; set; } = null!;
+
+    /// <summary>
+    /// The hostname for reaching the broker.
+    /// </summary>
+    [JsonPropertyName("host")]
+    public string Host { get; set; } = null!;
+
+    /// <summary>
+    /// The port for reaching the broker.
+    /// </summary>
+    [JsonPropertyName("port")]
+    public int Port { get; set; }
+
+    /// <summary>
+    /// The broker version.
+    /// </summary>
+    [JsonPropertyName("version")]
+    public string Version { get; set; } = null!;
+
+}
+
+/// <summary>
 /// A single operation that is part of a cluster mode change.
 /// </summary>
 public sealed class ClusterModeChangeOperation
@@ -9613,6 +9653,196 @@ public sealed class ClusterModeChangeResponse
 }
 
 /// <summary>
+/// The operation that awaits the transition of a broker to a mode.
+/// </summary>
+public sealed class ClusterRestoreAwaitModeChangeOperation : ClusterRestoreOperation
+{
+    /// <summary>
+    /// The ID of the broker that applies the operation, including its zone if it belongs to one.
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public string BrokerId { get; set; } = null!;
+
+    /// <summary>
+    /// The mode the broker is awaited to have transitioned to.
+    /// </summary>
+    [JsonPropertyName("mode")]
+    public string Mode { get; set; } = null!;
+
+}
+
+/// <summary>
+/// A restore operation that applies to a broker as a whole, such as the one that updates its incarnation number.
+/// </summary>
+public sealed class ClusterRestoreBrokerOperation : ClusterRestoreOperation
+{
+    /// <summary>
+    /// The ID of the broker that applies the operation, including its zone if it belongs to one.
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public string BrokerId { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The operation that transitions a broker to a mode once its partitions are restored.
+/// </summary>
+public sealed class ClusterRestoreModeChangeOperation : ClusterRestoreOperation
+{
+    /// <summary>
+    /// The ID of the broker that applies the operation, including its zone if it belongs to one.
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public string BrokerId { get; set; } = null!;
+
+    /// <summary>
+    /// The mode the broker is transitioned to.
+    /// </summary>
+    [JsonPropertyName("mode")]
+    public string Mode { get; set; } = null!;
+
+}
+
+/// <summary>
+/// A single operation that is part of a restore. Every operation names the broker that applies it; the rest of its properties depend on what the operation does, so it is reported as one of the variants below, distinguished by `operation`. A property a variant does not declare is absent from the response rather than reported as null.
+/// </summary>
+/// <remarks>
+/// Use one of the following concrete types:
+/// <list type="bullet">
+/// <item><description><see cref="ClusterRestoreBrokerOperation"/></description></item>
+/// <item><description><see cref="ClusterRestorePartitionOperation"/></description></item>
+/// <item><description><see cref="ClusterRestorePartitionRestoreOperation"/></description></item>
+/// <item><description><see cref="ClusterRestoreModeChangeOperation"/></description></item>
+/// <item><description><see cref="ClusterRestoreAwaitModeChangeOperation"/></description></item>
+/// </list>
+/// </remarks>
+/// <seealso cref="ClusterRestoreBrokerOperation"/>
+/// <seealso cref="ClusterRestorePartitionOperation"/>
+/// <seealso cref="ClusterRestorePartitionRestoreOperation"/>
+/// <seealso cref="ClusterRestoreModeChangeOperation"/>
+/// <seealso cref="ClusterRestoreAwaitModeChangeOperation"/>
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "operation")]
+[JsonDerivedType(typeof(ClusterRestoreBrokerOperation), "UpdateIncarnationNumberOperation")]
+[JsonDerivedType(typeof(ClusterRestorePartitionOperation), "PartitionPreRestoreOperation")]
+[JsonDerivedType(typeof(ClusterRestorePartitionRestoreOperation), "PartitionRestoreOperation")]
+[JsonDerivedType(typeof(ClusterRestoreModeChangeOperation), "ModeChangeOperation")]
+[JsonDerivedType(typeof(ClusterRestoreAwaitModeChangeOperation), "AwaitModeChangeOperation")]
+public abstract class ClusterRestoreOperation { }
+
+/// <summary>
+/// A restore operation that targets a single partition without restoring it, such as the one that prepares the partition for its restore.
+/// </summary>
+public sealed class ClusterRestorePartitionOperation : ClusterRestoreOperation
+{
+    /// <summary>
+    /// The ID of the broker that applies the operation, including its zone if it belongs to one.
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public string BrokerId { get; set; } = null!;
+
+    /// <summary>
+    /// The partition the operation applies to.
+    /// </summary>
+    [JsonPropertyName("partitionId")]
+    public int PartitionId { get; set; }
+
+}
+
+/// <summary>
+/// The operation that restores a single partition from the backups resolved for it.
+/// </summary>
+public sealed class ClusterRestorePartitionRestoreOperation : ClusterRestoreOperation
+{
+    /// <summary>
+    /// The ID of the broker that applies the operation, including its zone if it belongs to one.
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public string BrokerId { get; set; } = null!;
+
+    /// <summary>
+    /// The partition the operation restores.
+    /// </summary>
+    [JsonPropertyName("partitionId")]
+    public int PartitionId { get; set; }
+
+    /// <summary>
+    /// The IDs of the backups the partition is restored from.
+    /// </summary>
+    [JsonPropertyName("backupIds")]
+    public List<long> BackupIds { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The operations of a restore that apply to one physical tenant.
+/// </summary>
+public sealed class ClusterRestorePlannedChange
+{
+    /// <summary>
+    /// The physical tenant the operations apply to; null for operations that are not scoped to a single physical tenant, such as broker lifecycle operations.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string? PhysicalTenantId { get; set; }
+
+    /// <summary>
+    /// The ordered list of operations that will be applied to the physical tenant.
+    /// </summary>
+    [JsonPropertyName("operations")]
+    public List<ClusterRestoreOperation> Operations { get; set; } = null!;
+
+}
+
+/// <summary>
+/// Describes a restore request issued by a cluster admin. The backup selection at the top level applies to every targeted physical tenant, except for the ones listed in `overrides`.
+/// </summary>
+public sealed class ClusterRestoreRequest
+{
+    /// <summary>
+    /// The backup selection to apply to individual physical tenants, keyed by physical tenant id. Only allowed for a cluster-wide restore, that is when no `physicalTenantId` parameter is given.
+    /// </summary>
+    [JsonPropertyName("overrides")]
+    public Dictionary<string, RestoreRequest>? Overrides { get; set; }
+
+    /// <summary>
+    /// The start of the time range to restore from, as an ISO 8601 timestamp.
+    /// </summary>
+    [JsonPropertyName("from")]
+    public DateTimeOffset? From { get; set; }
+
+    /// <summary>
+    /// The end of the time range to restore from, as an ISO 8601 timestamp.
+    /// </summary>
+    [JsonPropertyName("to")]
+    public DateTimeOffset? To { get; set; }
+
+    /// <summary>
+    /// The IDs of the backups to restore from, one per partition.
+    /// </summary>
+    [JsonPropertyName("backupIds")]
+    public List<long>? BackupIds { get; set; }
+
+}
+
+/// <summary>
+/// The planned changes resulting from a restore request.
+/// </summary>
+public sealed class ClusterRestoreResponse
+{
+    /// <summary>
+    /// The ID of the cluster change that was triggered by the request.
+    /// </summary>
+    [JsonPropertyName("changeId")]
+    public string ChangeId { get; set; } = null!;
+
+    /// <summary>
+    /// The operations that will be applied to complete the restore, grouped by the physical tenant they belong to. Groups are restored in parallel; the operations within a group are applied in the given order.
+    /// </summary>
+    [JsonPropertyName("plannedChanges")]
+    public List<ClusterRestorePlannedChange> PlannedChanges { get; set; } = null!;
+
+}
+
+/// <summary>
 /// The aggregated status of the whole cluster.
 /// </summary>
 public sealed class ClusterStatusResponse
@@ -9622,6 +9852,43 @@ public sealed class ClusterStatusResponse
     /// </summary>
     [JsonPropertyName("status")]
     public ClusterStatusResponseStatus Status { get; set; }
+
+}
+
+/// <summary>
+/// The topology of the whole cluster, aggregated over all physical tenants.
+/// </summary>
+public sealed class ClusterTopologyResponse
+{
+    /// <summary>
+    /// The brokers that are part of this cluster, across all physical tenants.
+    /// </summary>
+    [JsonPropertyName("brokers")]
+    public List<ClusterBrokerInfo> Brokers { get; set; } = null!;
+
+    /// <summary>
+    /// The cluster Id.
+    /// </summary>
+    [JsonPropertyName("clusterId")]
+    public string? ClusterId { get; set; }
+
+    /// <summary>
+    /// The number of brokers in the cluster.
+    /// </summary>
+    [JsonPropertyName("clusterSize")]
+    public int ClusterSize { get; set; }
+
+    /// <summary>
+    /// The version of the Orchestration Cluster Gateway.
+    /// </summary>
+    [JsonPropertyName("gatewayVersion")]
+    public string? GatewayVersion { get; set; }
+
+    /// <summary>
+    /// The topology of each physical tenant of this cluster.
+    /// </summary>
+    [JsonPropertyName("physicalTenants")]
+    public List<PhysicalTenantTopology> PhysicalTenants { get; set; } = null!;
 
 }
 
@@ -21599,6 +21866,63 @@ public enum PermissionTypeEnum
     UPDATEUSERTASK,
     [JsonPropertyName("UPDATE_TASK_LISTENER")]
     UPDATETASKLISTENER,
+}
+
+/// <summary>
+/// The partitions of one physical tenant that one broker manages or replicates.
+/// </summary>
+public sealed class PhysicalTenantBrokerTopology
+{
+    /// <summary>
+    /// The unique (within a cluster) identifier of the broker, as reported in the cluster-level broker list.
+    /// 
+    /// </summary>
+    [JsonPropertyName("brokerId")]
+    public string BrokerId { get; set; } = null!;
+
+    /// <summary>
+    /// The partitions of this physical tenant managed or replicated on this broker.
+    /// </summary>
+    [JsonPropertyName("partitions")]
+    public List<Partition> Partitions { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The topology of a single physical tenant.
+/// </summary>
+public sealed class PhysicalTenantTopology
+{
+    /// <summary>
+    /// The id of the physical tenant.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
+    /// The number of partitions spread across this physical tenant.
+    /// </summary>
+    [JsonPropertyName("partitionsCount")]
+    public int PartitionsCount { get; set; }
+
+    /// <summary>
+    /// The configured replication factor for this physical tenant.
+    /// </summary>
+    [JsonPropertyName("replicationFactor")]
+    public int ReplicationFactor { get; set; }
+
+    /// <summary>
+    /// ID of the last completed change of this physical tenant.
+    /// </summary>
+    [JsonPropertyName("lastCompletedChangeId")]
+    public string LastCompletedChangeId { get; set; } = null!;
+
+    /// <summary>
+    /// The brokers holding partitions of this physical tenant.
+    /// </summary>
+    [JsonPropertyName("brokers")]
+    public List<PhysicalTenantBrokerTopology> Brokers { get; set; } = null!;
+
 }
 
 /// <summary>
