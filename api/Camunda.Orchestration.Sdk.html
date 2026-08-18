@@ -937,6 +937,11 @@ This ensures correct event emission for assignee changes.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterBrokerInfo.html">ClusterBrokerInfo</a></dt>
+      <dd><p>Provides information on a broker node, independent of any physical tenant.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterModeChangeOperation.html">ClusterModeChangeOperation</a></dt>
       <dd><p>A single operation that is part of a cluster mode change.</p>
 </dd>
@@ -952,8 +957,58 @@ This ensures correct event emission for assignee changes.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRestoreAwaitModeChangeOperation.html">ClusterRestoreAwaitModeChangeOperation</a></dt>
+      <dd><p>The operation that awaits the transition of a broker to a mode.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRestoreBrokerOperation.html">ClusterRestoreBrokerOperation</a></dt>
+      <dd><p>A restore operation that applies to a broker as a whole, such as the one that updates its incarnation number.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRestoreModeChangeOperation.html">ClusterRestoreModeChangeOperation</a></dt>
+      <dd><p>The operation that transitions a broker to a mode once its partitions are restored.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRestoreOperation.html">ClusterRestoreOperation</a></dt>
+      <dd><p>A single operation that is part of a restore. Every operation names the broker that applies it; the rest of its properties depend on what the operation does, so it is reported as one of the variants below, distinguished by <code>operation</code>. A property a variant does not declare is absent from the response rather than reported as null.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRestorePartitionOperation.html">ClusterRestorePartitionOperation</a></dt>
+      <dd><p>A restore operation that targets a single partition without restoring it, such as the one that prepares the partition for its restore.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRestorePartitionRestoreOperation.html">ClusterRestorePartitionRestoreOperation</a></dt>
+      <dd><p>The operation that restores a single partition from the backups resolved for it.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRestorePlannedChange.html">ClusterRestorePlannedChange</a></dt>
+      <dd><p>The operations of a restore that apply to one physical tenant.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRestoreRequest.html">ClusterRestoreRequest</a></dt>
+      <dd><p>Describes a restore request issued by a cluster admin. The backup selection at the top level applies to every targeted physical tenant, except for the ones listed in <code>overrides</code>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRestoreResponse.html">ClusterRestoreResponse</a></dt>
+      <dd><p>The planned changes resulting from a restore request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterStatusResponse.html">ClusterStatusResponse</a></dt>
       <dd><p>The aggregated status of the whole cluster.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterTopologyResponse.html">ClusterTopologyResponse</a></dt>
+      <dd><p>The topology of the whole cluster, aggregated over all physical tenants.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -2150,6 +2205,16 @@ correlated with.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.PartitionCheckpointState.html">PartitionCheckpointState</a></dt>
       <dd><p>Detailed information about the checkpoint state for a given partition.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.PhysicalTenantBrokerTopology.html">PhysicalTenantBrokerTopology</a></dt>
+      <dd><p>The partitions of one physical tenant that one broker manages or replicates.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.PhysicalTenantTopology.html">PhysicalTenantTopology</a></dt>
+      <dd><p>The topology of a single physical tenant.</p>
 </dd>
     </dl>
     <dl class="jumplist">
