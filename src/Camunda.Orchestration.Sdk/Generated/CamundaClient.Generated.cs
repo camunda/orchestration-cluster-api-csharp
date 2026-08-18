@@ -3185,7 +3185,47 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/topology` for the topology of a single physical tenant.
     /// </summary>
-    /// <remarks>Operation: getClusterTopology</remarks>
+    /// <remarks>
+    /// Operation: getClusterTopology
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClusterTopologyExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Returns the topology of the whole cluster aggregated over all physical
+    ///     // tenants. Requires cluster-admin credentials, not Orchestration Cluster
+    ///     // user credentials. Use GetTopologyAsync for single-tenant topology.
+    ///     var topology = await client.GetClusterTopologyAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Cluster {topology.ClusterId}: {topology.ClusterSize} broker(s), gateway {topology.GatewayVersion}&quot;);
+    ///     foreach (var tenant in topology.PhysicalTenants)
+    ///     {
+    ///         Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: {tenant.PartitionsCount} partition(s), replication {tenant.ReplicationFactor}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClusterTopologyExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Returns the topology of the whole cluster aggregated over all physical
+    ///     // tenants. Requires cluster-admin credentials, not Orchestration Cluster
+    ///     // user credentials. Use GetTopologyAsync for single-tenant topology.
+    ///     var topology = await client.GetClusterTopologyAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Cluster {topology.ClusterId}: {topology.ClusterSize} broker(s), gateway {topology.GatewayVersion}&quot;);
+    ///     foreach (var tenant in topology.PhysicalTenants)
+    ///     {
+    ///         Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: {tenant.PartitionsCount} partition(s), replication {tenant.ReplicationFactor}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterTopologyResponse> GetClusterTopologyAsync(CancellationToken ct = default)
     {
         var path = $"/cluster/v2/topology";
@@ -6411,12 +6451,7 @@ public partial class CamundaClient
     ///     foreach (var group in change.PlannedChanges)
     ///     {
     ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
-    ///         Console.WriteLine($&quot;  {tenant}:&quot;);
-    ///         foreach (var operation in group.Operations)
-    ///         {
-    ///             var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-    ///             Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
-    ///         }
+    ///         Console.WriteLine($&quot;  {tenant}: {group.Operations.Count} operation(s)&quot;);
     ///     }
     /// }
     /// </code>
@@ -6440,12 +6475,7 @@ public partial class CamundaClient
     ///     foreach (var group in change.PlannedChanges)
     ///     {
     ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
-    ///         Console.WriteLine($&quot;  {tenant}:&quot;);
-    ///         foreach (var operation in group.Operations)
-    ///         {
-    ///             var suffix = operation.Mode is null ? &quot;&quot; : $&quot; -&gt; {operation.Mode}&quot;;
-    ///             Console.WriteLine($&quot;    {operation.Operation}{suffix}&quot;);
-    ///         }
+    ///         Console.WriteLine($&quot;  {tenant}: {group.Operations.Count} operation(s)&quot;);
     ///     }
     /// }
     /// </code>
@@ -6468,7 +6498,67 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
     /// </summary>
-    /// <remarks>Operation: restoreAsClusterAdmin</remarks>
+    /// <remarks>
+    /// Operation: restoreAsClusterAdmin
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task RestoreAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // The cluster must be in recovery mode before a restore is accepted.
+    ///     // Use physicalTenantId to restore a single physical tenant; omit it to
+    ///     // restore every physical tenant. Pass dryRun: true to validate the
+    ///     // request and inspect the plan without applying it.
+    ///     // Provide either a list of backup IDs (one per partition) or a time
+    ///     // range (From/To), but not both.
+    ///     var change = await client.RestoreAsClusterAdminAsync(
+    ///         new ClusterRestoreRequest
+    ///         {
+    ///             BackupIds = new List&lt;long&gt; { 100, 101 },
+    ///         },
+    ///         physicalTenantId: &quot;default&quot;,
+    ///         dryRun: true);
+    /// 
+    ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+    ///     foreach (var group in change.PlannedChanges)
+    ///     {
+    ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    ///         Console.WriteLine($&quot;  {tenant}: {group.Operations.Count} operation(s)&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task RestoreAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // The cluster must be in recovery mode before a restore is accepted.
+    ///     // Use physicalTenantId to restore a single physical tenant; omit it to
+    ///     // restore every physical tenant. Pass dryRun: true to validate the
+    ///     // request and inspect the plan without applying it.
+    ///     // Provide either a list of backup IDs (one per partition) or a time
+    ///     // range (From/To), but not both.
+    ///     var change = await client.RestoreAsClusterAdminAsync(
+    ///         new ClusterRestoreRequest
+    ///         {
+    ///             BackupIds = new List&lt;long&gt; { 100, 101 },
+    ///         },
+    ///         physicalTenantId: &quot;default&quot;,
+    ///         dryRun: true);
+    /// 
+    ///     Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
+    ///     foreach (var group in change.PlannedChanges)
+    ///     {
+    ///         var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
+    ///         Console.WriteLine($&quot;  {tenant}: {group.Operations.Count} operation(s)&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterRestoreResponse> RestoreAsClusterAdminAsync(ClusterRestoreRequest body, string? physicalTenantId = null, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
