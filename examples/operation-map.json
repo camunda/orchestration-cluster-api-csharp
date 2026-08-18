@@ -1583,5 +1583,19 @@
       "region": "SearchAgentDefinitions",
       "label": "Search agent definitions"
     }
+  ],
+  "restoreAsClusterAdmin": [
+    {
+      "file": "Client.cs",
+      "region": "RestoreAsClusterAdmin",
+      "label": "Restore physical tenant(s) from a backup as cluster admin"
+    }
+  ],
+  "getClusterTopology": [
+    {
+      "file": "Client.cs",
+      "region": "GetClusterTopology",
+      "label": "Get the topology of the whole cluster"
+    }
   ]
 }

@@ -3180,6 +3180,19 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get the topology of the whole cluster
+    /// Obtains the topology of the whole cluster, aggregated over all physical tenants. Cluster-level information is reported once; partition layout, replication and per-partition role, health and state are reported per physical tenant.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/topology` for the topology of a single physical tenant.
+    /// </summary>
+    /// <remarks>Operation: getClusterTopology</remarks>
+    public async Task<ClusterTopologyResponse> GetClusterTopologyAsync(CancellationToken ct = default)
+    {
+        var path = $"/cluster/v2/topology";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterTopologyResponse>(HttpMethod.Get, path, null, ct), "getClusterTopology", false, ct);
+    }
+
+    /// <summary>
     /// Get decision definition
     /// Returns a decision definition by key.
     /// </summary>
@@ -6437,12 +6450,32 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterModeChangeResponse> RestoreAsync(RestoreRequest body, bool? dryRun = null, CancellationToken ct = default)
+    public async Task<ClusterRestoreResponse> RestoreAsync(RestoreRequest body, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
         var path = queryParts.Count > 0 ? $"/restore?{string.Join("&", queryParts)}" : $"/restore";
-        return await InvokeWithRetryAsync(() => SendAsync<ClusterModeChangeResponse>(HttpMethod.Post, path, body, ct), "restore", false, ct);
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterRestoreResponse>(HttpMethod.Post, path, body, ct), "restore", false, ct);
+    }
+
+    /// <summary>
+    /// Restore one or every physical tenant from a backup
+    /// Restores physical tenants from backups. The restore is described either by a list of backup IDs or by a time range (`from`/`to`) that selects the backups to restore. Restores are only accepted while the targeted physical tenants are in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.
+    /// 
+    /// If the `physicalTenantId` parameter is provided, only that physical tenant is restored and `overrides` must be omitted.
+    /// 
+    /// If it is not provided, every physical tenant of the cluster is restored: those named in `overrides` with their own backup selection, all others with the selection at the top level of the request body.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
+    /// </summary>
+    /// <remarks>Operation: restoreAsClusterAdmin</remarks>
+    public async Task<ClusterRestoreResponse> RestoreAsClusterAdminAsync(ClusterRestoreRequest body, string? physicalTenantId = null, bool? dryRun = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/restore?{string.Join("&", queryParts)}" : $"/cluster/v2/restore";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterRestoreResponse>(HttpMethod.Post, path, body, ct), "restoreAsClusterAdmin", false, ct);
     }
 
     /// <summary>
