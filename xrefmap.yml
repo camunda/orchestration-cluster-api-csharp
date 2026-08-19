@@ -27376,6 +27376,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ExpressionEvaluationResult.Expression
   fullName: Camunda.Orchestration.Sdk.ExpressionEvaluationResult.Expression
   nameWithType: ExpressionEvaluationResult.Expression
+- uid: Camunda.Orchestration.Sdk.ExpressionEvaluationResult.ReferencedSecrets
+  name: ReferencedSecrets
+  href: api/Camunda.Orchestration.Sdk.ExpressionEvaluationResult.ReferencedSecrets.html#Camunda_Orchestration_Sdk_ExpressionEvaluationResult_ReferencedSecrets
+  commentId: P:Camunda.Orchestration.Sdk.ExpressionEvaluationResult.ReferencedSecrets
+  fullName: Camunda.Orchestration.Sdk.ExpressionEvaluationResult.ReferencedSecrets
+  nameWithType: ExpressionEvaluationResult.ReferencedSecrets
+- uid: Camunda.Orchestration.Sdk.ExpressionEvaluationResult.ReferencedSecrets*
+  name: ReferencedSecrets
+  href: api/Camunda.Orchestration.Sdk.ExpressionEvaluationResult.ReferencedSecrets.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ExpressionEvaluationResult.ReferencedSecrets
+  fullName: Camunda.Orchestration.Sdk.ExpressionEvaluationResult.ReferencedSecrets
+  nameWithType: ExpressionEvaluationResult.ReferencedSecrets
 - uid: Camunda.Orchestration.Sdk.ExpressionEvaluationResult.Result
   name: Result
   href: api/Camunda.Orchestration.Sdk.ExpressionEvaluationResult.Result.html#Camunda_Orchestration_Sdk_ExpressionEvaluationResult_Result
@@ -27418,6 +27430,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ExpressionEvaluationWarningItem.Message
   fullName: Camunda.Orchestration.Sdk.ExpressionEvaluationWarningItem.Message
   nameWithType: ExpressionEvaluationWarningItem.Message
+- uid: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem
+  name: ExpressionSecretReferenceItem
+  href: api/Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.html
+  commentId: T:Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem
+  fullName: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem
+  nameWithType: ExpressionSecretReferenceItem
+- uid: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.SecretName
+  name: SecretName
+  href: api/Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.SecretName.html#Camunda_Orchestration_Sdk_ExpressionSecretReferenceItem_SecretName
+  commentId: P:Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.SecretName
+  fullName: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.SecretName
+  nameWithType: ExpressionSecretReferenceItem.SecretName
+- uid: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.SecretName*
+  name: SecretName
+  href: api/Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.SecretName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.SecretName
+  fullName: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.SecretName
+  nameWithType: ExpressionSecretReferenceItem.SecretName
+- uid: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.StoreId
+  name: StoreId
+  href: api/Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.StoreId.html#Camunda_Orchestration_Sdk_ExpressionSecretReferenceItem_StoreId
+  commentId: P:Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.StoreId
+  fullName: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.StoreId
+  nameWithType: ExpressionSecretReferenceItem.StoreId
+- uid: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.StoreId*
+  name: StoreId
+  href: api/Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.StoreId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.StoreId
+  fullName: Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem.StoreId
+  nameWithType: ExpressionSecretReferenceItem.StoreId
 - uid: Camunda.Orchestration.Sdk.ExtendedDeploymentResponse
   name: ExtendedDeploymentResponse
   href: api/Camunda.Orchestration.Sdk.ExtendedDeploymentResponse.html

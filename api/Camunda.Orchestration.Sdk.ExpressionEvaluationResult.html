@@ -161,6 +161,16 @@ Class ExpressionEvaluationResult  <a class="header-action link-secondary" title=
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.ExpressionEvaluationResult.ReferencedSecrets.html#Camunda_Orchestration_Sdk_ExpressionEvaluationResult_ReferencedSecrets">ReferencedSecrets</a></dt>
+    <dd><p>The secret references resolved from trusted sources while evaluating the expression: a
+<code>camunda.secrets.&lt;name&gt;</code> reference used directly in the expression, or a reference
+carried by a <code>SECRET_REFERENCE</code>-kind cluster variable the expression read. References
+appearing only in request-body variables or plain cluster variables are excluded.
+Callers use this to know which <code>camunda.secrets.&lt;name&gt;</code> occurrences in the result they
+may safely resolve.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.ExpressionEvaluationResult.Result.html#Camunda_Orchestration_Sdk_ExpressionEvaluationResult_Result">Result</a></dt>
     <dd><p>The result value. Its type can vary.</p>
 </dd>
