@@ -1,6 +1,11 @@
 # Reacts to feedback on an agent-authored pull request: a `/agent fix` comment,
 # a failing CI run, or a review from another bot.
 #
+# The bot-review path polls on a schedule instead of listening for
+# `pull_request_review`: GitHub parks every run whose triggering actor is
+# `Copilot` behind manual approval, so the event path never fires unattended.
+# See camunda/sdk-infra#42.
+#
 # The mechanics live in camunda/sdk-infra so all five SDKs share one implementation;
 # this file supplies only what is genuinely repo-specific: the name of the CI
 # workflow to watch, the toolchain to install, and the verification commands.
@@ -10,8 +15,8 @@ name: Agent — PR follow-up
 on:
   issue_comment:
     types: [created]
-  pull_request_review:
-    types: [submitted]
+  schedule:
+    - cron: '17 * * * *'
   workflow_run:
     # Named here rather than in the shared workflow because each SDK repo calls
     # its CI workflow something different.
