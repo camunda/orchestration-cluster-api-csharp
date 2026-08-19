@@ -1,3 +1,10 @@
+# [10.0.0-alpha.17](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.16...v10.0.0-alpha.17) (2026-08-19)
+
+
+### Features
+
+* **gen:** surface referencedSecrets on expression evaluation results ([#398](https://github.com/camunda/orchestration-cluster-api-csharp/issues/398)) ([3a8c427](https://github.com/camunda/orchestration-cluster-api-csharp/commit/3a8c42727a5c7f95a0d8bba09449ac4e488f5f00))
+
 # [10.0.0-alpha.16](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.15...v10.0.0-alpha.16) (2026-08-18)
 
 
