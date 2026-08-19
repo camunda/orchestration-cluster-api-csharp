@@ -1,3 +1,15 @@
+# [10.0.0-alpha.16](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.15...v10.0.0-alpha.16) (2026-08-18)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([e1b0f5e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/e1b0f5e45e8bd2f3c2405036a0a12ad2a1f8816e))
+
+
+### Features
+
+* add example coverage for restoreAsClusterAdmin, getClusterTopology ([#395](https://github.com/camunda/orchestration-cluster-api-csharp/issues/395)) ([48045db](https://github.com/camunda/orchestration-cluster-api-csharp/commit/48045db11d8f7484009d1a1825bc330d6ed77404))
+
 # [10.0.0-alpha.15](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.14...v10.0.0-alpha.15) (2026-08-14)
 
 

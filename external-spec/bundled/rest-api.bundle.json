@@ -21254,7 +21254,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ClusterModeChangeResponse"
+                  "$ref": "#/components/schemas/ClusterRestoreResponse"
                 }
               }
             }
@@ -21522,6 +21522,140 @@
         "x-added-in-version": "8.10"
       }
     },
+    "/cluster/v2/restore": {
+      "servers": [
+        {
+          "url": "{schema}://{host}:{port}",
+          "variables": {
+            "host": {
+              "default": "localhost",
+              "description": "The hostname of the Orchestration Cluster REST Gateway."
+            },
+            "port": {
+              "default": "8080",
+              "description": "The port of the Orchestration Cluster REST API server."
+            },
+            "schema": {
+              "default": "http",
+              "description": "The schema of the Orchestration Cluster REST API server."
+            }
+          }
+        }
+      ],
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Recovery"
+        ],
+        "operationId": "restoreAsClusterAdmin",
+        "x-required-permissions": [],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Restore one or every physical tenant from a backup",
+        "description": "Restores physical tenants from backups. The restore is described either by a list of backup IDs or by a time range (`from`/`to`) that selects the backups to restore. Restores are only accepted while the targeted physical tenants are in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.\n\nIf the `physicalTenantId` parameter is provided, only that physical tenant is restored and `overrides` must be omitted.\n\nIf it is not provided, every physical tenant of the cluster is restored: those named in `overrides` with their own backup selection, all others with the selection at the top level of the request body.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.",
+        "parameters": [
+          {
+            "name": "physicalTenantId",
+            "in": "query",
+            "required": false,
+            "description": "The physical tenant to apply the change to. When omitted, the change is applied to every physical tenant of the cluster.",
+            "schema": {
+              "type": "string",
+              "example": "default"
+            }
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "required": false,
+            "description": "If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClusterRestoreRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "The restore request was accepted; returns the planned cluster change covering every requested physical tenant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterRestoreResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested `physicalTenantId`, or a physical tenant named in `overrides`, does not exist in this cluster.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A targeted physical tenant is not in recovery mode, so the restore cannot be accepted."
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
     "/cluster/v2/status": {
       "servers": [
         {
@@ -21569,6 +21703,95 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ClusterStatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10"
+      }
+    },
+    "/cluster/v2/topology": {
+      "servers": [
+        {
+          "url": "{schema}://{host}:{port}",
+          "variables": {
+            "host": {
+              "default": "localhost",
+              "description": "The hostname of the Orchestration Cluster REST Gateway."
+            },
+            "port": {
+              "default": "8080",
+              "description": "The port of the Orchestration Cluster REST API server."
+            },
+            "schema": {
+              "default": "http",
+              "description": "The schema of the Orchestration Cluster REST API server."
+            }
+          }
+        }
+      ],
+      "get": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "getClusterTopology",
+        "x-required-permissions": [],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get the topology of the whole cluster",
+        "description": "Obtains the topology of the whole cluster, aggregated over all physical tenants. Cluster-level information is reported once; partition layout, replication and per-partition role, health and state are reported per physical tenant.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/topology` for the topology of a single physical tenant.",
+        "responses": {
+          "200": {
+            "description": "The topology of the whole cluster, aggregated over all physical tenants.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterTopologyResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
                 }
               }
             }
@@ -23767,6 +23990,7 @@
             "type": "string",
             "enum": [
               "agentInstanceKey",
+              "agentDefinitionKey",
               "status",
               "elementId",
               "processInstanceKey",
@@ -23819,6 +24043,14 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentInstanceKeyFilterProperty"
+              }
+            ]
+          },
+          "agentDefinitionKey": {
+            "description": "The key of the agent definition this agent instance is an instance of.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentDefinitionKeyFilterProperty"
               }
             ]
           },
@@ -23985,7 +24217,7 @@
             ]
           },
           "agentDefinitionKey": {
-            "description": "The key of the agent definition this agent instance runs on.",
+            "description": "The key of the agent definition this agent instance is an instance of.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentDefinitionKey"
@@ -28278,6 +28510,173 @@
           }
         }
       },
+      "ClusterRestoreRequest": {
+        "description": "Describes a restore request issued by a cluster admin. The backup selection at the top level applies to every targeted physical tenant, except for the ones listed in `overrides`.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RestoreRequest"
+          }
+        ],
+        "properties": {
+          "overrides": {
+            "description": "The backup selection to apply to individual physical tenants, keyed by physical tenant id. Only allowed for a cluster-wide restore, that is when no `physicalTenantId` parameter is given.",
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RestoreRequest"
+            },
+            "example": {
+              "tenant-a": {
+                "backupIds": [
+                  55
+                ]
+              }
+            }
+          }
+        }
+      },
+      "ClusterTopologyResponse": {
+        "description": "The topology of the whole cluster, aggregated over all physical tenants.",
+        "type": "object",
+        "required": [
+          "brokers",
+          "clusterId",
+          "clusterSize",
+          "gatewayVersion",
+          "physicalTenants"
+        ],
+        "properties": {
+          "brokers": {
+            "description": "The brokers that are part of this cluster, across all physical tenants.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterBrokerInfo"
+            }
+          },
+          "clusterId": {
+            "description": "The cluster Id.",
+            "type": "string",
+            "nullable": true
+          },
+          "clusterSize": {
+            "description": "The number of brokers in the cluster.",
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "gatewayVersion": {
+            "description": "The version of the Orchestration Cluster Gateway.",
+            "type": "string",
+            "nullable": true,
+            "example": "8.10.0"
+          },
+          "physicalTenants": {
+            "description": "The topology of each physical tenant of this cluster.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalTenantTopology"
+            }
+          }
+        }
+      },
+      "ClusterBrokerInfo": {
+        "description": "Provides information on a broker node, independent of any physical tenant.",
+        "type": "object",
+        "required": [
+          "brokerId",
+          "host",
+          "port",
+          "version"
+        ],
+        "properties": {
+          "brokerId": {
+            "description": "The unique (within a cluster) broker identifier. When the cluster is not zoned, then it's a string that represents the nodeId (an integer). When the cluster is zoned, instead, it's of the form \"$zoneName_$nodeId\", providing uniqueness even across zones.\n",
+            "type": "string",
+            "example": "eu-west-1_0"
+          },
+          "host": {
+            "description": "The hostname for reaching the broker.",
+            "type": "string",
+            "example": "zeebe-0.zeebe-broker-service"
+          },
+          "port": {
+            "description": "The port for reaching the broker.",
+            "type": "integer",
+            "format": "int32",
+            "example": 26501
+          },
+          "version": {
+            "description": "The broker version.",
+            "type": "string",
+            "example": "8.10.0"
+          }
+        }
+      },
+      "PhysicalTenantTopology": {
+        "description": "The topology of a single physical tenant.",
+        "type": "object",
+        "required": [
+          "brokers",
+          "lastCompletedChangeId",
+          "partitionsCount",
+          "physicalTenantId",
+          "replicationFactor"
+        ],
+        "properties": {
+          "physicalTenantId": {
+            "description": "The id of the physical tenant.",
+            "type": "string",
+            "example": "default"
+          },
+          "partitionsCount": {
+            "description": "The number of partitions spread across this physical tenant.",
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "replicationFactor": {
+            "description": "The configured replication factor for this physical tenant.",
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "lastCompletedChangeId": {
+            "description": "ID of the last completed change of this physical tenant.",
+            "type": "string",
+            "example": "-1"
+          },
+          "brokers": {
+            "description": "The brokers holding partitions of this physical tenant.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalTenantBrokerTopology"
+            }
+          }
+        }
+      },
+      "PhysicalTenantBrokerTopology": {
+        "description": "The partitions of one physical tenant that one broker manages or replicates.",
+        "type": "object",
+        "required": [
+          "brokerId",
+          "partitions"
+        ],
+        "properties": {
+          "brokerId": {
+            "description": "The unique (within a cluster) identifier of the broker, as reported in the cluster-level broker list.\n",
+            "type": "string",
+            "example": "eu-west-1_0"
+          },
+          "partitions": {
+            "description": "The partitions of this physical tenant managed or replicated on this broker.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Partition"
+            }
+          }
+        }
+      },
       "ClusterVariableKindEnum": {
         "type": "string",
         "enum": [
@@ -28976,6 +29375,18 @@
         },
         "x-properties-added-in-version": [
           {
+            "propertyName": "partitionId",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "role",
+            "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "health",
+            "addedInVersion": "8.6"
+          },
+          {
             "propertyName": "state",
             "addedInVersion": "8.10"
           }
@@ -29044,6 +29455,220 @@
             "type": "string",
             "nullable": true,
             "example": "RECOVERING"
+          }
+        }
+      },
+      "ClusterRestoreResponse": {
+        "description": "The planned changes resulting from a restore request.",
+        "type": "object",
+        "required": [
+          "changeId",
+          "plannedChanges"
+        ],
+        "properties": {
+          "changeId": {
+            "description": "The ID of the cluster change that was triggered by the request.",
+            "type": "string",
+            "example": "7"
+          },
+          "plannedChanges": {
+            "description": "The operations that will be applied to complete the restore, grouped by the physical tenant they belong to. Groups are restored in parallel; the operations within a group are applied in the given order.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterRestorePlannedChange"
+            }
+          }
+        }
+      },
+      "ClusterRestorePlannedChange": {
+        "description": "The operations of a restore that apply to one physical tenant.",
+        "type": "object",
+        "required": [
+          "operations",
+          "physicalTenantId"
+        ],
+        "properties": {
+          "physicalTenantId": {
+            "description": "The physical tenant the operations apply to; null for operations that are not scoped to a single physical tenant, such as broker lifecycle operations.",
+            "type": "string",
+            "nullable": true,
+            "example": "default"
+          },
+          "operations": {
+            "description": "The ordered list of operations that will be applied to the physical tenant.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterRestoreOperation"
+            }
+          }
+        }
+      },
+      "ClusterRestoreOperation": {
+        "description": "A single operation that is part of a restore. Every operation names the broker that applies it; the rest of its properties depend on what the operation does, so it is reported as one of the variants below, distinguished by `operation`. A property a variant does not declare is absent from the response rather than reported as null.",
+        "discriminator": {
+          "propertyName": "operation",
+          "mapping": {
+            "PartitionPreRestoreOperation": "#/components/schemas/ClusterRestorePartitionOperation",
+            "PartitionRestoreOperation": "#/components/schemas/ClusterRestorePartitionRestoreOperation",
+            "ModeChangeOperation": "#/components/schemas/ClusterRestoreModeChangeOperation",
+            "AwaitModeChangeOperation": "#/components/schemas/ClusterRestoreAwaitModeChangeOperation",
+            "UpdateIncarnationNumberOperation": "#/components/schemas/ClusterRestoreBrokerOperation"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ClusterRestoreBrokerOperation"
+          },
+          {
+            "$ref": "#/components/schemas/ClusterRestorePartitionOperation"
+          },
+          {
+            "$ref": "#/components/schemas/ClusterRestorePartitionRestoreOperation"
+          },
+          {
+            "$ref": "#/components/schemas/ClusterRestoreModeChangeOperation"
+          },
+          {
+            "$ref": "#/components/schemas/ClusterRestoreAwaitModeChangeOperation"
+          }
+        ]
+      },
+      "ClusterRestoreBrokerOperation": {
+        "description": "A restore operation that applies to a broker as a whole, such as the one that updates its incarnation number.",
+        "type": "object",
+        "required": [
+          "brokerId",
+          "operation"
+        ],
+        "properties": {
+          "operation": {
+            "description": "The type of the operation.",
+            "type": "string",
+            "example": "UpdateIncarnationNumberOperation"
+          },
+          "brokerId": {
+            "description": "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+            "type": "string",
+            "example": "1"
+          }
+        }
+      },
+      "ClusterRestorePartitionOperation": {
+        "description": "A restore operation that targets a single partition without restoring it, such as the one that prepares the partition for its restore.",
+        "type": "object",
+        "required": [
+          "brokerId",
+          "operation",
+          "partitionId"
+        ],
+        "properties": {
+          "operation": {
+            "description": "The type of the operation.",
+            "type": "string",
+            "example": "PartitionPreRestoreOperation"
+          },
+          "brokerId": {
+            "description": "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+            "type": "string",
+            "example": "1"
+          },
+          "partitionId": {
+            "description": "The partition the operation applies to.",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          }
+        }
+      },
+      "ClusterRestorePartitionRestoreOperation": {
+        "description": "The operation that restores a single partition from the backups resolved for it.",
+        "type": "object",
+        "required": [
+          "backupIds",
+          "brokerId",
+          "operation",
+          "partitionId"
+        ],
+        "properties": {
+          "operation": {
+            "description": "The type of the operation.",
+            "type": "string",
+            "example": "PartitionRestoreOperation"
+          },
+          "brokerId": {
+            "description": "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+            "type": "string",
+            "example": "1"
+          },
+          "partitionId": {
+            "description": "The partition the operation restores.",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "backupIds": {
+            "description": "The IDs of the backups the partition is restored from.",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": [
+              100,
+              101
+            ]
+          }
+        }
+      },
+      "ClusterRestoreModeChangeOperation": {
+        "description": "The operation that transitions a broker to a mode once its partitions are restored.",
+        "type": "object",
+        "required": [
+          "brokerId",
+          "mode",
+          "operation"
+        ],
+        "properties": {
+          "operation": {
+            "description": "The type of the operation.",
+            "type": "string",
+            "example": "ModeChangeOperation"
+          },
+          "brokerId": {
+            "description": "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+            "type": "string",
+            "example": "1"
+          },
+          "mode": {
+            "description": "The mode the broker is transitioned to.",
+            "type": "string",
+            "example": "PROCESSING"
+          }
+        }
+      },
+      "ClusterRestoreAwaitModeChangeOperation": {
+        "description": "The operation that awaits the transition of a broker to a mode.",
+        "type": "object",
+        "required": [
+          "brokerId",
+          "mode",
+          "operation"
+        ],
+        "properties": {
+          "operation": {
+            "description": "The type of the operation.",
+            "type": "string",
+            "example": "AwaitModeChangeOperation"
+          },
+          "brokerId": {
+            "description": "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+            "type": "string",
+            "example": "1"
+          },
+          "mode": {
+            "description": "The mode the broker is awaited to have transitioned to.",
+            "type": "string",
+            "example": "PROCESSING"
           }
         }
       },

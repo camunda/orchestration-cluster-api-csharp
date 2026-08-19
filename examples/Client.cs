@@ -132,14 +132,61 @@ public static class ClientExamples
         foreach (var group in change.PlannedChanges)
         {
             var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
-            Console.WriteLine($"  {tenant}:");
-            foreach (var operation in group.Operations)
-            {
-                var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
-                Console.WriteLine($"    {operation.Operation}{suffix}");
-            }
+            Console.WriteLine($"  {tenant}: {group.Operations.Count} operation(s)");
         }
     }
     // </Restore>
     #endregion Restore
+
+    #region RestoreAsClusterAdmin
+
+    // <RestoreAsClusterAdmin>
+    public static async Task RestoreAsClusterAdminExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // The cluster must be in recovery mode before a restore is accepted.
+        // Use physicalTenantId to restore a single physical tenant; omit it to
+        // restore every physical tenant. Pass dryRun: true to validate the
+        // request and inspect the plan without applying it.
+        // Provide either a list of backup IDs (one per partition) or a time
+        // range (From/To), but not both.
+        var change = await client.RestoreAsClusterAdminAsync(
+            new ClusterRestoreRequest
+            {
+                BackupIds = new List<long> { 100, 101 },
+            },
+            physicalTenantId: "default",
+            dryRun: true);
+
+        Console.WriteLine($"Cluster change {change.ChangeId}:");
+        foreach (var group in change.PlannedChanges)
+        {
+            var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+            Console.WriteLine($"  {tenant}: {group.Operations.Count} operation(s)");
+        }
+    }
+    // </RestoreAsClusterAdmin>
+    #endregion RestoreAsClusterAdmin
+
+    #region GetClusterTopology
+
+    // <GetClusterTopology>
+    public static async Task GetClusterTopologyExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // Returns the topology of the whole cluster aggregated over all physical
+        // tenants. Requires cluster-admin credentials, not Orchestration Cluster
+        // user credentials. Use GetTopologyAsync for single-tenant topology.
+        var topology = await client.GetClusterTopologyAsync();
+
+        Console.WriteLine($"Cluster {topology.ClusterId}: {topology.ClusterSize} broker(s), gateway {topology.GatewayVersion}");
+        foreach (var tenant in topology.PhysicalTenants)
+        {
+            Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.PartitionsCount} partition(s), replication {tenant.ReplicationFactor}");
+        }
+    }
+    // </GetClusterTopology>
+    #endregion GetClusterTopology
 }
