@@ -33695,6 +33695,7 @@
         "type": "object",
         "required": [
           "expression",
+          "referencedSecrets",
           "result",
           "warnings"
         ],
@@ -33716,6 +33717,39 @@
               "$ref": "#/components/schemas/ExpressionEvaluationWarningItem"
             },
             "example": []
+          },
+          "referencedSecrets": {
+            "type": "array",
+            "description": "The secret references resolved from trusted sources while evaluating the expression: a\n`camunda.secrets.<name>` reference used directly in the expression, or a reference\ncarried by a `SECRET_REFERENCE`-kind cluster variable the expression read. References\nappearing only in request-body variables or plain cluster variables are excluded.\nCallers use this to know which `camunda.secrets.<name>` occurrences in the result they\nmay safely resolve.\n",
+            "items": {
+              "$ref": "#/components/schemas/ExpressionSecretReferenceItem"
+            },
+            "example": []
+          }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "referencedSecrets",
+            "addedInVersion": "8.10"
+          }
+        ]
+      },
+      "ExpressionSecretReferenceItem": {
+        "type": "object",
+        "required": [
+          "secretName",
+          "storeId"
+        ],
+        "properties": {
+          "storeId": {
+            "type": "string",
+            "description": "The identifier of the secret store that holds the referenced secret",
+            "example": "default"
+          },
+          "secretName": {
+            "type": "string",
+            "description": "The secret name, e.g. \"token\" for \"camunda.secrets.token\"",
+            "example": "token"
           }
         }
       },

@@ -3464,12 +3464,18 @@ TYPE Camunda.Orchestration.Sdk.ExpressionEvaluationRequest : sealed class interf
 TYPE Camunda.Orchestration.Sdk.ExpressionEvaluationResult : sealed class
   CTOR ()
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ExpressionEvaluationWarningItem> Warnings { get; set; } [JsonPropertyName("warnings")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem> ReferencedSecrets { get; set; } [JsonPropertyName("referencedSecrets")]
   PROP System.Object? Result { get; set; } [JsonPropertyName("result")]
   PROP System.String Expression { get; set; } [JsonPropertyName("expression")]
 
 TYPE Camunda.Orchestration.Sdk.ExpressionEvaluationWarningItem : sealed class
   CTOR ()
   PROP System.String Message { get; set; } [JsonPropertyName("message")]
+
+TYPE Camunda.Orchestration.Sdk.ExpressionSecretReferenceItem : sealed class
+  CTOR ()
+  PROP System.String SecretName { get; set; } [JsonPropertyName("secretName")]
+  PROP System.String StoreId { get; set; } [JsonPropertyName("storeId")]
 
 TYPE Camunda.Orchestration.Sdk.ExtendedDeploymentResponse : sealed class
   CTOR (Camunda.Orchestration.Sdk.DeploymentResult raw)
