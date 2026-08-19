@@ -15356,6 +15356,18 @@ public sealed class ExpressionEvaluationResult
     [JsonPropertyName("warnings")]
     public List<ExpressionEvaluationWarningItem> Warnings { get; set; } = null!;
 
+    /// <summary>
+    /// The secret references resolved from trusted sources while evaluating the expression: a
+    /// `camunda.secrets.&lt;name&gt;` reference used directly in the expression, or a reference
+    /// carried by a `SECRET_REFERENCE`-kind cluster variable the expression read. References
+    /// appearing only in request-body variables or plain cluster variables are excluded.
+    /// Callers use this to know which `camunda.secrets.&lt;name&gt;` occurrences in the result they
+    /// may safely resolve.
+    /// 
+    /// </summary>
+    [JsonPropertyName("referencedSecrets")]
+    public List<ExpressionSecretReferenceItem> ReferencedSecrets { get; set; } = null!;
+
 }
 
 /// <summary>
@@ -15368,6 +15380,25 @@ public sealed class ExpressionEvaluationWarningItem
     /// </summary>
     [JsonPropertyName("message")]
     public string Message { get; set; } = null!;
+
+}
+
+/// <summary>
+/// ExpressionSecretReferenceItem
+/// </summary>
+public sealed class ExpressionSecretReferenceItem
+{
+    /// <summary>
+    /// The identifier of the secret store that holds the referenced secret
+    /// </summary>
+    [JsonPropertyName("storeId")]
+    public string StoreId { get; set; } = null!;
+
+    /// <summary>
+    /// The secret name, e.g. &quot;token&quot; for &quot;camunda.secrets.token&quot;
+    /// </summary>
+    [JsonPropertyName("secretName")]
+    public string SecretName { get; set; } = null!;
 
 }
 
