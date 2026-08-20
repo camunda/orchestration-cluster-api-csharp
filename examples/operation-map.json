@@ -1597,5 +1597,54 @@
       "region": "GetClusterTopology",
       "label": "Get the topology of the whole cluster"
     }
+  ],
+  "getClusterExportingStatus": [
+    {
+      "file": "Exporting.cs",
+      "region": "GetClusterExportingStatus",
+      "label": "Get cluster exporting status"
+    }
+  ],
+  "pauseClusterExporting": [
+    {
+      "file": "Exporting.cs",
+      "region": "PauseClusterExporting",
+      "label": "Pause cluster exporting"
+    }
+  ],
+  "resumeClusterExporting": [
+    {
+      "file": "Exporting.cs",
+      "region": "ResumeClusterExporting",
+      "label": "Resume cluster exporting"
+    }
+  ],
+  "takeHistoryBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "TakeHistoryBackupAsClusterAdmin",
+      "label": "Take a history backup (cluster admin)"
+    }
+  ],
+  "listHistoryBackupsAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "ListHistoryBackupsAsClusterAdmin",
+      "label": "List history backups (cluster admin)"
+    }
+  ],
+  "getHistoryBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "GetHistoryBackupAsClusterAdmin",
+      "label": "Get a history backup (cluster admin)"
+    }
+  ],
+  "deleteHistoryBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteHistoryBackupAsClusterAdmin",
+      "label": "Delete a history backup (cluster admin)"
+    }
   ]
 }
