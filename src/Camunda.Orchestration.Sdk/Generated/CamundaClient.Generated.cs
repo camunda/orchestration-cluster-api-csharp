@@ -2293,6 +2293,23 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Delete a history backup across physical tenants
+    /// Deletes the history backup with the given id from every physical tenant of the cluster, or from the one named by `physicalTenantId`. A tenant that does not hold the backup has already reached the requested end state, so it counts as deleted rather than as a failure.
+    /// 
+    /// The request is all-or-nothing: a physical tenant the backup cannot be deleted from fails the whole request, and the deletions that already succeeded on other tenants are not undone. Narrow the request with `physicalTenantId` to delete from the tenants that can still be reached.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `DELETE /v2/backups/history/{backupId}` to act as a single physical tenant.
+    /// </summary>
+    /// <remarks>Operation: deleteHistoryBackupAsClusterAdmin</remarks>
+    public async Task DeleteHistoryBackupAsClusterAdminAsync(BackupId backupId, string? physicalTenantId = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteHistoryBackupAsClusterAdmin", false, ct);
+    }
+
+    /// <summary>
     /// Delete a mapping rule
     /// Deletes the mapping rule with the given ID.
     /// 
@@ -3141,6 +3158,19 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get exporting status of the whole cluster
+    /// Returns the exporting status of the whole cluster, folded over the exporting status of every physical tenant. Only `PAUSED` and `SOFT_PAUSED` confirm that exporting is paused cluster-wide; every other value means at least one physical tenant is not paused, so callers should keep polling. A physical tenant that itself reports `MIXED` makes the whole cluster `MIXED`.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
+    /// </summary>
+    /// <remarks>Operation: getClusterExportingStatus</remarks>
+    public async Task<ExportingStatusResponse> GetClusterExportingStatusAsync(CancellationToken ct = default)
+    {
+        var path = $"/cluster/v2/exporting";
+        return await InvokeWithRetryAsync(() => SendAsync<ExportingStatusResponse>(HttpMethod.Get, path, null, ct), "getClusterExportingStatus", false, ct);
+    }
+
+    /// <summary>
     /// Get the status of the whole cluster
     /// Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.
     /// 
@@ -3859,6 +3889,23 @@ public partial class CamundaClient
     {
         var path = $"/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}";
         return await InvokeWithRetryAsync(() => SendAsync<HistoryBackupInfo>(HttpMethod.Get, path, null, ct), "getHistoryBackup", false, ct);
+    }
+
+    /// <summary>
+    /// Get a history backup across physical tenants
+    /// Reports what every physical tenant of the cluster, or the one named by `physicalTenantId`, holds for the given backup id. There is no aggregated cluster-level state: a tenant that was reached and does not hold this backup reports `NOT_FOUND`, which is a successful observation rather than a failure.
+    /// 
+    /// The request is all-or-nothing: a physical tenant whose state cannot be read fails the whole request. Narrow the request with `physicalTenantId` to read the tenants that can still be reached.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `GET /v2/backups/history/{backupId}` to act as a single physical tenant.
+    /// </summary>
+    /// <remarks>Operation: getHistoryBackupAsClusterAdmin</remarks>
+    public async Task<ClusterHistoryBackupInfo> GetHistoryBackupAsClusterAdminAsync(BackupId backupId, string? physicalTenantId = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterHistoryBackupInfo>(HttpMethod.Get, path, null, ct), "getHistoryBackupAsClusterAdmin", false, ct);
     }
 
     /// <summary>
@@ -5722,6 +5769,25 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// List history backups across physical tenants
+    /// Lists the history backups of every physical tenant of the cluster, or of the one named by `physicalTenantId`, grouped by backup id. A backup id that only some physical tenants hold is a supported outcome rather than a degraded one, so only the tenants that hold it are listed under it.
+    /// 
+    /// The request is all-or-nothing: a physical tenant whose backups cannot be read fails the whole request rather than silently dropping out of the listing. Narrow the request with `physicalTenantId` to list the backups of the tenants that can still be read.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `GET /v2/backups/history` to act as a single physical tenant.
+    /// </summary>
+    /// <remarks>Operation: listHistoryBackupsAsClusterAdmin</remarks>
+    public async Task<object> ListHistoryBackupsAsClusterAdminAsync(string? physicalTenantId = null, BackupIdPrefix? prefix = null, bool? verbose = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(prefix.ToString()!));
+        if (verbose != null) queryParts.Add("verbose=" + Uri.EscapeDataString(verbose.ToString()!));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history";
+        return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "listHistoryBackupsAsClusterAdmin", false, ct);
+    }
+
+    /// <summary>
     /// List runtime backups
     /// Returns a list of all available runtime backups of the physical tenant, with their
     /// state and additional info, sorted in descending order of backupId.
@@ -5774,9 +5840,14 @@ public partial class CamundaClient
     /// returns secret values, only the reference names.
     /// 
     /// The references are read from the secret stores configured for the caller&apos;s physical tenant.
-    /// Secret names that cannot form a valid `camunda.secrets.&lt;name&gt;` reference (for example names
-    /// containing a dot or a dash) are omitted, since they could neither be resolved nor be used in
-    /// a BPMN expression.
+    /// A store may hold names outside the reference name charset (for example one containing a
+    /// dot); those are omitted, since `/secrets/resolve` would reject them and no permission can
+    /// be granted on them.
+    /// 
+    /// A returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,
+    /// however, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads
+    /// a bare dash as the minus operator: a listed `camunda.secrets.db-password` is written
+    /// `` =camunda.secrets.`db-password` `` in a BPMN input mapping.
     /// 
     /// This endpoint is an alpha feature and may be subject to change in future releases.
     /// 
@@ -6021,6 +6092,21 @@ public partial class CamundaClient
     {
         var path = $"/process-instances/modification";
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, body, ct), "modifyProcessInstancesBatchOperation", false, ct);
+    }
+
+    /// <summary>
+    /// Pause exporting across the whole cluster
+    /// Pauses exporting on every physical tenant of the cluster in one call. With `soft=true`, every physical tenant is soft-paused instead.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
+    /// </summary>
+    /// <remarks>Operation: pauseClusterExporting</remarks>
+    public async Task PauseClusterExportingAsync(bool? soft = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (soft != null) queryParts.Add("soft=" + Uri.EscapeDataString(soft.ToString()!));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/exporting/pause?{string.Join("&", queryParts)}" : $"/cluster/v2/exporting/pause";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "pauseClusterExporting", false, ct);
     }
 
     /// <summary>
@@ -6601,6 +6687,19 @@ public partial class CamundaClient
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/resumption";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "resumeBatchOperation", false, ct);
+    }
+
+    /// <summary>
+    /// Resume exporting across the whole cluster
+    /// Resumes exporting on every physical tenant of the cluster in one call, after a pause or soft pause.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
+    /// </summary>
+    /// <remarks>Operation: resumeClusterExporting</remarks>
+    public async Task ResumeClusterExportingAsync(CancellationToken ct = default)
+    {
+        var path = $"/cluster/v2/exporting/resume";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "resumeClusterExporting", false, ct);
     }
 
     /// <summary>
@@ -9595,6 +9694,23 @@ public partial class CamundaClient
     {
         var path = $"/backups/history";
         return await InvokeWithRetryAsync(() => SendAsync<TakeHistoryBackupResponse>(HttpMethod.Post, path, body, ct), "takeHistoryBackup", false, ct);
+    }
+
+    /// <summary>
+    /// Take a history backup on one or every physical tenant
+    /// Triggers a history backup on every physical tenant of the cluster, or on the one named by `physicalTenantId`. Every targeted tenant uses the same caller-supplied `backupId`, but the backups are independent: they are neither coordinated nor rolled back together.
+    /// 
+    /// The request is all-or-nothing: the `backupId` is checked on every targeted tenant before any snapshot is scheduled, so a tenant that already holds this id, or that cannot be reached, fails the whole request and no backup is started anywhere. There is no aggregated cluster-level state in the response.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `POST /v2/backups/history` to act as a single physical tenant.
+    /// </summary>
+    /// <remarks>Operation: takeHistoryBackupAsClusterAdmin</remarks>
+    public async Task<ClusterTakeHistoryBackupResponse> TakeHistoryBackupAsClusterAdminAsync(TakeHistoryBackupRequest body, string? physicalTenantId = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterTakeHistoryBackupResponse>(HttpMethod.Post, path, body, ct), "takeHistoryBackupAsClusterAdmin", false, ct);
     }
 
     /// <summary>

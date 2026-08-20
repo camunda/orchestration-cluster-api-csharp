@@ -4926,6 +4926,47 @@ public sealed class AgentInstanceHistoryItem
     [JsonPropertyName("producedAt")]
     public DateTimeOffset ProducedAt { get; set; }
 
+    /// <summary>
+    /// The complete list of tools available to the agent as of this entry. CONFIGURATION
+    /// items only; omit for other roles. Omit to leave the tool list unchanged; send an
+    /// empty array to clear it.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tools")]
+    public List<AgentTool>? Tools { get; set; }
+
+    /// <summary>
+    /// The LLM model identifier as of this entry. CONFIGURATION items only; omit for other
+    /// roles.
+    /// 
+    /// </summary>
+    [JsonPropertyName("model")]
+    public string? Model { get; set; }
+
+    /// <summary>
+    /// The LLM provider as of this entry. CONFIGURATION items only; omit for other roles.
+    /// 
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string? Provider { get; set; }
+
+    /// <summary>
+    /// The operational limits as of this entry. CONFIGURATION items only; omit for other
+    /// roles.
+    /// 
+    /// </summary>
+    [JsonPropertyName("limits")]
+    public AgentInstanceLimits? Limits { get; set; }
+
+    /// <summary>
+    /// The system prompt, as content blocks, as of this entry. CONFIGURATION items only;
+    /// omit for other roles. Omit to leave the system prompt unchanged; when present, must
+    /// be non-empty.
+    /// 
+    /// </summary>
+    [JsonPropertyName("systemPrompt")]
+    public List<AgentInstanceMessageContent>? SystemPrompt { get; set; }
+
 }
 
 /// <summary>
@@ -9596,6 +9637,95 @@ public sealed class ClusterBrokerInfo
 }
 
 /// <summary>
+/// A history backup id and what each physical tenant reports for it. No cluster-level state is aggregated from the per-tenant states.
+/// </summary>
+public sealed class ClusterHistoryBackupInfo
+{
+    /// <summary>
+    /// The id of the backup.
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId BackupId { get; set; }
+
+    /// <summary>
+    /// What each physical tenant reports for this backup id, ordered by physical tenant id. When looking a backup id up directly, every targeted tenant is listed, including the ones reporting `NOT_FOUND`. Within a listing, only the tenants that hold the id are listed.
+    /// </summary>
+    [JsonPropertyName("physicalTenants")]
+    public List<ClusterHistoryBackupTenantInfo> PhysicalTenants { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The snapshots scheduled on a single physical tenant. Only successfully scheduled tenants are reported: the request fails as a whole if any targeted tenant could not schedule the backup.
+/// </summary>
+public sealed class ClusterHistoryBackupTakeResult
+{
+    /// <summary>
+    /// The id of the physical tenant.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
+    /// The names of the snapshots scheduled on this physical tenant.
+    /// </summary>
+    [JsonPropertyName("scheduledSnapshots")]
+    public List<string> ScheduledSnapshots { get; set; } = null!;
+
+}
+
+/// <summary>
+/// What a single physical tenant reports for a history backup id.
+/// </summary>
+public sealed class ClusterHistoryBackupTenantInfo
+{
+    /// <summary>
+    /// The id of the physical tenant.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
+    /// The state of the backup on this physical tenant.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public ClusterHistoryBackupTenantState State { get; set; }
+
+    /// <summary>
+    /// Reason for failure if the state is &apos;FAILED&apos;.
+    /// </summary>
+    [JsonPropertyName("failureReason")]
+    public string? FailureReason { get; set; }
+
+    /// <summary>
+    /// Detailed status of the backup per snapshot on this physical tenant. Empty when the tenant does not hold the backup.
+    /// </summary>
+    [JsonPropertyName("details")]
+    public List<HistoryBackupSnapshotInfo> Details { get; set; } = null!;
+
+}
+
+/// <summary>
+/// What a physical tenant reports for a history backup id: the per-tenant `HistoryBackupStateCode` extended with `NOT_FOUND` for a tenant that was read and does not hold the backup. `NOT_FOUND` is a successful observation, not a failure — a backup that only some physical tenants hold is a supported outcome. There is no state for a tenant that could not be read at all, because such a tenant fails the whole request.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterHistoryBackupTenantState
+{
+    [JsonPropertyName("IN_PROGRESS")]
+    INPROGRESS,
+    [JsonPropertyName("COMPLETED")]
+    COMPLETED,
+    [JsonPropertyName("FAILED")]
+    FAILED,
+    [JsonPropertyName("INCOMPLETE")]
+    INCOMPLETE,
+    [JsonPropertyName("INCOMPATIBLE")]
+    INCOMPATIBLE,
+    [JsonPropertyName("NOT_FOUND")]
+    NOTFOUND,
+}
+
+/// <summary>
 /// A single operation that is part of a cluster mode change.
 /// </summary>
 public sealed class ClusterModeChangeOperation
@@ -9852,6 +9982,25 @@ public sealed class ClusterStatusResponse
     /// </summary>
     [JsonPropertyName("status")]
     public ClusterStatusResponseStatus Status { get; set; }
+
+}
+
+/// <summary>
+/// The snapshots scheduled on every targeted physical tenant. No cluster-level state is aggregated from the per-tenant outcomes.
+/// </summary>
+public sealed class ClusterTakeHistoryBackupResponse
+{
+    /// <summary>
+    /// The id requested for the backup on every targeted physical tenant.
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId BackupId { get; set; }
+
+    /// <summary>
+    /// The outcome for each targeted physical tenant, ordered by physical tenant id.
+    /// </summary>
+    [JsonPropertyName("physicalTenants")]
+    public List<ClusterHistoryBackupTakeResult> PhysicalTenants { get; set; } = null!;
 
 }
 

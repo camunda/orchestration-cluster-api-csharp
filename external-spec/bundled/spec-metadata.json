@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:f51763444fecf87d4b0ca7798ac9b0cbad7ba2a377070d35a0c9093fcee6442f",
+  "specHash": "sha256:26f148434b44532d51a65c5cedc96032ac6c39ef3f8733f1b76d51dbe7e9055d",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -9959,7 +9959,7 @@
         "Secret"
       ],
       "summary": "List secrets (alpha)",
-      "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nSecret names that cannot form a valid `camunda.secrets.<name>` reference (for example names\ncontaining a dot or a dash) are omitted, since they could neither be resolved nor be used in\na BPMN expression.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
+      "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nA store may hold names outside the reference name charset (for example one containing a\ndot); those are omitted, since `/secrets/resolve` would reject them and no permission can\nbe granted on them.\n\nA returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,\nhowever, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads\na bare dash as the minus operator: a listed `camunda.secrets.db-password` is written\n`` =camunda.secrets.`db-password` `` in a BPMN input mapping.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -11242,6 +11242,231 @@
       }
     },
     {
+      "operationId": "getClusterExportingStatus",
+      "path": "/cluster/v2/exporting",
+      "method": "get",
+      "tags": [
+        "Exporting"
+      ],
+      "summary": "Get exporting status of the whole cluster",
+      "description": "Returns the exporting status of the whole cluster, folded over the exporting status of every physical tenant. Only `PAUSED` and `SOFT_PAUSED` confirm that exporting is paused cluster-wide; every other value means at least one physical tenant is not paused, so callers should keep polling. A physical tenant that itself reports `MIXED` makes the whole cluster `MIXED`.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "ExportingStatusResponse",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "pauseClusterExporting",
+      "path": "/cluster/v2/exporting/pause",
+      "method": "post",
+      "tags": [
+        "Exporting"
+      ],
+      "summary": "Pause exporting across the whole cluster",
+      "description": "Pauses exporting on every physical tenant of the cluster in one call. With `soft=true`, every physical tenant is soft-paused instead.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "soft",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "resumeClusterExporting",
+      "path": "/cluster/v2/exporting/resume",
+      "method": "post",
+      "tags": [
+        "Exporting"
+      ],
+      "summary": "Resume exporting across the whole cluster",
+      "description": "Resumes exporting on every physical tenant of the cluster in one call, after a pause or soft pause.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "listHistoryBackupsAsClusterAdmin",
+      "path": "/cluster/v2/backups/history",
+      "method": "get",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "List history backups across physical tenants",
+      "description": "Lists the history backups of every physical tenant of the cluster, or of the one named by `physicalTenantId`, grouped by backup id. A backup id that only some physical tenants hold is a supported outcome rather than a degraded one, so only the tenants that hold it are listed under it.\n\nThe request is all-or-nothing: a physical tenant whose backups cannot be read fails the whole request rather than silently dropping out of the listing. Narrow the request with `physicalTenantId` to list the backups of the tenants that can still be read.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `GET /v2/backups/history` to act as a single physical tenant.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "physicalTenantId",
+          "required": false
+        },
+        {
+          "name": "prefix",
+          "required": false
+        },
+        {
+          "name": "verbose",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "takeHistoryBackupAsClusterAdmin",
+      "path": "/cluster/v2/backups/history",
+      "method": "post",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Take a history backup on one or every physical tenant",
+      "description": "Triggers a history backup on every physical tenant of the cluster, or on the one named by `physicalTenantId`. Every targeted tenant uses the same caller-supplied `backupId`, but the backups are independent: they are neither coordinated nor rolled back together.\n\nThe request is all-or-nothing: the `backupId` is checked on every targeted tenant before any snapshot is scheduled, so a tenant that already holds this id, or that cannot be reached, fails the whole request and no backup is started anywhere. There is no aggregated cluster-level state in the response.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `POST /v2/backups/history` to act as a single physical tenant.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "physicalTenantId",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "TakeHistoryBackupRequest",
+      "successResponseSchemaRef": "ClusterTakeHistoryBackupResponse",
+      "successStatus": 202,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "getHistoryBackupAsClusterAdmin",
+      "path": "/cluster/v2/backups/history/{backupId}",
+      "method": "get",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Get a history backup across physical tenants",
+      "description": "Reports what every physical tenant of the cluster, or the one named by `physicalTenantId`, holds for the given backup id. There is no aggregated cluster-level state: a tenant that was reached and does not hold this backup reports `NOT_FOUND`, which is a successful observation rather than a failure.\n\nThe request is all-or-nothing: a physical tenant whose state cannot be read fails the whole request. Narrow the request with `physicalTenantId` to read the tenants that can still be reached.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `GET /v2/backups/history/{backupId}` to act as a single physical tenant.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "backupId"
+      ],
+      "queryParams": [
+        {
+          "name": "physicalTenantId",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "ClusterHistoryBackupInfo",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "deleteHistoryBackupAsClusterAdmin",
+      "path": "/cluster/v2/backups/history/{backupId}",
+      "method": "delete",
+      "tags": [
+        "Backup"
+      ],
+      "summary": "Delete a history backup across physical tenants",
+      "description": "Deletes the history backup with the given id from every physical tenant of the cluster, or from the one named by `physicalTenantId`. A tenant that does not hold the backup has already reached the requested end state, so it counts as deleted rather than as a failure.\n\nThe request is all-or-nothing: a physical tenant the backup cannot be deleted from fails the whole request, and the deletions that already succeeded on other tenants are not undone. Narrow the request with `physicalTenantId` to delete from the tenants that can still be reached.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `DELETE /v2/backups/history/{backupId}` to act as a single physical tenant.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "backupId"
+      ],
+      "queryParams": [
+        {
+          "name": "physicalTenantId",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "changeClusterModeAsClusterAdmin",
       "path": "/cluster/v2/mode",
       "method": "patch",
@@ -12316,7 +12541,7 @@
   "integrity": {
     "totalSemanticKeys": 42,
     "totalUnions": 68,
-    "totalOperations": 227,
+    "totalOperations": 234,
     "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23
