@@ -63,8 +63,8 @@ jobs:
           jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
           exportEnv: false
           secrets: |
-            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_ID | APP_ID ;
-            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_PRIVATE_KEY | APP_PRIVATE_KEY ;
+            secret/data/products/agentic-experience/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_ID | APP_ID ;
+            secret/data/products/agentic-experience/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_PRIVATE_KEY | APP_PRIVATE_KEY ;
 
       - name: Generate GitHub App token
         id: app-token
@@ -194,8 +194,8 @@ jobs:
           jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
           exportEnv: false
           secrets: |
-            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_ID | APP_ID ;
-            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_PRIVATE_KEY | APP_PRIVATE_KEY ;
+            secret/data/products/agentic-experience/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_ID | APP_ID ;
+            secret/data/products/agentic-experience/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_PRIVATE_KEY | APP_PRIVATE_KEY ;
 
       - name: Generate GitHub App token
         id: app-token
