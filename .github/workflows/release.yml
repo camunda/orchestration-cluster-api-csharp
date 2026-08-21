@@ -49,9 +49,36 @@ jobs:
           - dotnet: '8.0.x'
             stack: full
     steps:
+      # This job pushes drift commits directly to a ruleset-protected branch. GITHUB_TOKEN
+      # can never bypass a ruleset (the GitHub Actions app is not an eligible bypass actor),
+      # so the push is made as camunda-sdk-automation, which is registered as one.
+      - name: Import secrets
+        id: secrets
+        uses: hashicorp/vault-action@v4.0.0
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: jwt
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_ID | APP_ID ;
+            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_PRIVATE_KEY | APP_PRIVATE_KEY ;
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Export stable line config
         run: |
@@ -122,16 +149,20 @@ jobs:
 
       - name: Commit generated artifacts (canonical)
         if: steps.detect.outputs.changed == 'true' && matrix.stack == 'simple'
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
         run: |
-          git config user.name 'github-actions'
-          git config user.email 'actions@github.com'
+          git config user.name "${APP_SLUG}[bot]"
+          git config user.email "${APP_SLUG}[bot]@users.noreply.github.com"
           git add -f \
             src/Camunda.Orchestration.Sdk/Generated/ \
             external-spec/bundled/ \
             spec-snapshots/
           echo "--- staged files ---"
           git diff --cached --stat
-          git commit -m "fix(gen): regenerate artifacts"
+          # [skip ci] is required: unlike GITHUB_TOKEN, a GitHub App token re-triggers
+          # workflows, so without it this push would start another release run.
+          git commit -m "fix(gen): regenerate artifacts [skip ci]"
           git push origin "HEAD:${{ github.ref_name }}"
 
       - name: Stop Integration Stack
@@ -150,9 +181,42 @@ jobs:
     needs: generate
     runs-on: ubuntu-latest
     steps:
+      # semantic-release commits and pushes to a ruleset-protected branch; GITHUB_TOKEN
+      # cannot bypass a ruleset, so it runs as camunda-sdk-automation instead.
+      - name: Import secrets
+        id: secrets
+        uses: hashicorp/vault-action@v4.0.0
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: jwt
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_ID | APP_ID ;
+            secret/data/products/onboarding-and-migration/github.com/apps/camunda/camunda-sdk-automation GITHUB_APP_PRIVATE_KEY | APP_PRIVATE_KEY ;
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Configure committer identity
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        run: |
+          git config user.name "${APP_SLUG}[bot]"
+          git config user.email "${APP_SLUG}[bot]@users.noreply.github.com"
 
       - name: Fetch remote refs for semantic-release
         run: |
@@ -193,7 +257,7 @@ jobs:
       - name: Determine next version (dry-run)
         id: next_version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           set -e
           node scripts/next-version.mjs > next-version.out 2>&1 || {
@@ -217,7 +281,7 @@ jobs:
       - name: Publish (semantic-release)
         if: steps.next_version.outputs.publish_needed == 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
         run: npx semantic-release
 
