@@ -726,11 +726,16 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItem : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics? Metrics { get; set; } [JsonPropertyName("metrics")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum Role { get; set; } [JsonPropertyName("role")]
+  PROP Camunda.Orchestration.Sdk.AgentInstanceLimits? Limits { get; set; } [JsonPropertyName("limits")]
   PROP Camunda.Orchestration.Sdk.LoopIterationId LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent>? SystemPrompt { get; set; } [JsonPropertyName("systemPrompt")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceToolCall>? ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool>? Tools { get; set; } [JsonPropertyName("tools")]
   PROP System.DateTimeOffset ProducedAt { get; set; } [JsonPropertyName("producedAt")]
   PROP System.String HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
+  PROP System.String? Model { get; set; } [JsonPropertyName("model")]
+  PROP System.String? Provider { get; set; } [JsonPropertyName("provider")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult : sealed class
   CTOR ()
@@ -1767,6 +1772,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task DeleteGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.ClusterVariableName name, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteGlobalTaskListenerAsync(Camunda.Orchestration.Sdk.GlobalListenerId id, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteGroupAsync(Camunda.Orchestration.Sdk.GroupId groupId, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task DeleteHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId backupId, System.String? physicalTenantId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteHistoryBackupAsync(Camunda.Orchestration.Sdk.BackupId backupId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteMappingRuleAsync(Camunda.Orchestration.Sdk.MappingRuleId mappingRuleId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task DeleteProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.DeleteProcessInstanceRequest body, System.Threading.CancellationToken ct = null)
@@ -1780,11 +1786,13 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task GetStatusAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task MigrateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ProcessInstanceMigrationInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ModifyProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ProcessInstanceModificationInstruction body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task PauseClusterExportingAsync(System.Boolean? soft = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task PauseExportingAsync(System.Boolean? soft = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task PinClockAsync(Camunda.Orchestration.Sdk.ClockPinRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResetClockAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResolveIncidentAsync(Camunda.Orchestration.Sdk.IncidentKey incidentKey, Camunda.Orchestration.Sdk.IncidentResolutionRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResumeBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task ResumeClusterExportingAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResumeExportingAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResumeProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ResumeProcessInstanceRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task RunWorkersAsync(System.TimeSpan? gracePeriod = null, System.Threading.CancellationToken ct = null)
@@ -1838,11 +1846,13 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationResponse> GetBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult> SearchBatchOperationsAsync(Camunda.Orchestration.Sdk.BatchOperationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CamundaUserResult> GetAuthenticationAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo> GetHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId backupId, System.String? physicalTenantId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsClusterAdminAsync(Camunda.Orchestration.Sdk.Mode mode, System.String? physicalTenantId = null, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode mode, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterRestoreResponse> RestoreAsClusterAdminAsync(Camunda.Orchestration.Sdk.ClusterRestoreRequest body, System.String? physicalTenantId = null, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterRestoreResponse> RestoreAsync(Camunda.Orchestration.Sdk.RestoreRequest body, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterStatusResponse> GetClusterStatusAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse> TakeHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeHistoryBackupRequest body, System.String? physicalTenantId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterTopologyResponse> GetClusterTopologyAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
@@ -1869,6 +1879,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(Camunda.Orchestration.Sdk.ElementInstanceWaitStateQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ElementInstanceWaitStateQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.EvaluateConditionalResult> EvaluateConditionalsAsync(Camunda.Orchestration.Sdk.ConditionalEvaluationInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.EvaluateDecisionResult> EvaluateDecisionAsync(Camunda.Orchestration.Sdk.DecisionEvaluationInstruction body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExportingStatusResponse> GetClusterExportingStatusAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExportingStatusResponse> GetExportingStatusAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExpressionEvaluationResult> EvaluateExpressionAsync(Camunda.Orchestration.Sdk.ExpressionEvaluationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ExtendedDeploymentResponse> DeployResourcesFromFilesAsync(System.String[] resourceFilePaths, System.String? tenantId = null, System.Threading.CancellationToken ct = null)
@@ -1970,6 +1981,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessDefinitionXmlAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetProcessInstanceCallHierarchyAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> GetResourceContentAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<System.Object>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<System.Object> ListHistoryBackupsAsClusterAdminAsync(System.String? physicalTenantId = null, Camunda.Orchestration.Sdk.BackupIdPrefix? prefix = null, System.Boolean? verbose = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> ListHistoryBackupsAsync(Camunda.Orchestration.Sdk.BackupIdPrefix? prefix = null, System.Boolean? verbose = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<System.Object> ListRuntimeBackupsAsync(Camunda.Orchestration.Sdk.BackupIdPrefix? prefix = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.ValueTask DisposeAsync()
@@ -2122,6 +2134,33 @@ TYPE Camunda.Orchestration.Sdk.ClusterBrokerInfo : sealed class
   PROP System.String Host { get; set; } [JsonPropertyName("host")]
   PROP System.String Version { get; set; } [JsonPropertyName("version")]
 
+TYPE Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BackupId BackupId { get; set; } [JsonPropertyName("backupId")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo> PhysicalTenants { get; set; } [JsonPropertyName("physicalTenants")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<System.String> ScheduledSnapshots { get; set; } [JsonPropertyName("scheduledSnapshots")]
+  PROP System.String PhysicalTenantId { get; set; } [JsonPropertyName("physicalTenantId")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState State { get; set; } [JsonPropertyName("state")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.HistoryBackupSnapshotInfo> Details { get; set; } [JsonPropertyName("details")]
+  PROP System.String PhysicalTenantId { get; set; } [JsonPropertyName("physicalTenantId")]
+  PROP System.String? FailureReason { get; set; } [JsonPropertyName("failureReason")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER INPROGRESS = 0 json="IN_PROGRESS"
+  MEMBER COMPLETED = 1 json="COMPLETED"
+  MEMBER FAILED = 2 json="FAILED"
+  MEMBER INCOMPLETE = 3 json="INCOMPLETE"
+  MEMBER INCOMPATIBLE = 4 json="INCOMPATIBLE"
+  MEMBER NOTFOUND = 5 json="NOT_FOUND"
+
 TYPE Camunda.Orchestration.Sdk.ClusterModeChangeOperation : sealed class
   CTOR ()
   PROP System.String Operation { get; set; } [JsonPropertyName("operation")]
@@ -2197,6 +2236,11 @@ TYPE Camunda.Orchestration.Sdk.ClusterStatusResponseStatus : enum interfaces=[Sy
   MEMBER HEALTHY = 0 json="HEALTHY"
   MEMBER DEGRADED = 1 json="DEGRADED"
   MEMBER DOWN = 2 json="DOWN"
+
+TYPE Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BackupId BackupId { get; set; } [JsonPropertyName("backupId")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult> PhysicalTenants { get; set; } [JsonPropertyName("physicalTenants")]
 
 TYPE Camunda.Orchestration.Sdk.ClusterTopologyResponse : sealed class
   CTOR ()

@@ -183,4 +183,72 @@ public static class BackupExamples
     }
     // </DeleteHistoryBackup>
     #endregion DeleteHistoryBackup
+
+    #region TakeHistoryBackupAsClusterAdmin
+
+    // <TakeHistoryBackupAsClusterAdmin>
+    public static async Task TakeHistoryBackupAsClusterAdminExample(BackupId backupId)
+    {
+        using var client = CamundaClient.Create();
+
+        // Takes a history backup across all physical tenants in the cluster.
+        // Backups are logically ordered by id, so each successive backup must use a
+        // higher id than the previous one.
+        var backup = await client.TakeHistoryBackupAsClusterAdminAsync(
+            new TakeHistoryBackupRequest { BackupId = backupId });
+
+        Console.WriteLine($"Scheduled cluster history backup {backup.BackupId}");
+        foreach (var tenant in backup.PhysicalTenants)
+        {
+            Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: scheduled {tenant.ScheduledSnapshots?.Count} snapshot(s)");
+        }
+    }
+    // </TakeHistoryBackupAsClusterAdmin>
+    #endregion TakeHistoryBackupAsClusterAdmin
+
+    #region ListHistoryBackupsAsClusterAdmin
+
+    // <ListHistoryBackupsAsClusterAdmin>
+    public static async Task ListHistoryBackupsAsClusterAdminExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // `prefix` must end in a single '*'. Omit it to list every history backup across all tenants.
+        var backups = await client.ListHistoryBackupsAsClusterAdminAsync(
+            prefix: BackupIdPrefix.AssumeExists("10*"));
+
+        Console.WriteLine($"Cluster history backups: {backups}");
+    }
+    // </ListHistoryBackupsAsClusterAdmin>
+    #endregion ListHistoryBackupsAsClusterAdmin
+
+    #region GetHistoryBackupAsClusterAdmin
+
+    // <GetHistoryBackupAsClusterAdmin>
+    public static async Task GetHistoryBackupAsClusterAdminExample(BackupId backupId)
+    {
+        using var client = CamundaClient.Create();
+
+        var backup = await client.GetHistoryBackupAsClusterAdminAsync(backupId);
+
+        Console.WriteLine($"Cluster history backup {backup.BackupId}");
+        foreach (var tenant in backup.PhysicalTenants)
+        {
+            Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.State}");
+        }
+    }
+    // </GetHistoryBackupAsClusterAdmin>
+    #endregion GetHistoryBackupAsClusterAdmin
+
+    #region DeleteHistoryBackupAsClusterAdmin
+
+    // <DeleteHistoryBackupAsClusterAdmin>
+    public static async Task DeleteHistoryBackupAsClusterAdminExample(BackupId backupId)
+    {
+        using var client = CamundaClient.Create();
+
+        await client.DeleteHistoryBackupAsClusterAdminAsync(backupId);
+    }
+    // </DeleteHistoryBackupAsClusterAdmin>
+    #endregion DeleteHistoryBackupAsClusterAdmin
 }

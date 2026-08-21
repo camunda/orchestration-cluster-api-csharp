@@ -1483,6 +1483,46 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeHistoryBackupRequest,System.Nullable{System.String},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#TakeHistoryBackupAsClusterAdmin)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync(System.Nullable{System.String},System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Nullable{System.Boolean},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#ListHistoryBackupsAsClusterAdmin)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.Nullable{System.String},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#GetHistoryBackupAsClusterAdmin)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.Nullable{System.String},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#DeleteHistoryBackupAsClusterAdmin)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync(System.Threading.CancellationToken)
 example:
 - *content
@@ -1540,6 +1580,36 @@ example:
 
 
 [!code-csharp[](../../examples/Exporting.cs#GetExportingStatus)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Exporting.cs#GetClusterExportingStatus)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync(System.Nullable{System.Boolean},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Exporting.cs#PauseClusterExporting)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Exporting.cs#ResumeClusterExporting)]
 
 
 ---
