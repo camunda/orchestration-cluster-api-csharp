@@ -1646,5 +1646,54 @@
       "region": "DeleteHistoryBackupAsClusterAdmin",
       "label": "Delete a history backup (cluster admin)"
     }
+  ],
+  "takeRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "TakeRuntimeBackupAsClusterAdmin",
+      "label": "Take a runtime backup (cluster admin)"
+    }
+  ],
+  "listRuntimeBackupsAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "ListRuntimeBackupsAsClusterAdmin",
+      "label": "List runtime backups (cluster admin)"
+    }
+  ],
+  "getRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "GetRuntimeBackupAsClusterAdmin",
+      "label": "Get a runtime backup (cluster admin)"
+    }
+  ],
+  "deleteRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteRuntimeBackupAsClusterAdmin",
+      "label": "Delete a runtime backup (cluster admin)"
+    }
+  ],
+  "getRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "GetRuntimeBackupStateAsClusterAdmin",
+      "label": "Get runtime backup state (cluster admin)"
+    }
+  ],
+  "syncRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "SyncRuntimeBackupStateAsClusterAdmin",
+      "label": "Sync runtime backup state (cluster admin)"
+    }
+  ],
+  "deleteRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteRuntimeBackupStateAsClusterAdmin",
+      "label": "Delete runtime backup state (cluster admin)"
+    }
   ]
 }
