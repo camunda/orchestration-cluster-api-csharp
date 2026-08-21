@@ -2572,7 +2572,29 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Use `DELETE /v2/backups/runtime/{backupId}` to act as a single physical tenant.
     /// </summary>
-    /// <remarks>Operation: deleteRuntimeBackupAsClusterAdmin</remarks>
+    /// <remarks>
+    /// Operation: deleteRuntimeBackupAsClusterAdmin
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteRuntimeBackupAsClusterAdminExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteRuntimeBackupAsClusterAdminAsync(backupId);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteRuntimeBackupAsClusterAdminExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.DeleteRuntimeBackupAsClusterAdminAsync(backupId);
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteRuntimeBackupAsClusterAdminAsync(BackupId backupId, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -2629,7 +2651,35 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Use `DELETE /v2/backups/runtime/state` to act as a single physical tenant.
     /// </summary>
-    /// <remarks>Operation: deleteRuntimeBackupStateAsClusterAdmin</remarks>
+    /// <remarks>
+    /// Operation: deleteRuntimeBackupStateAsClusterAdmin
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteRuntimeBackupStateAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Clears all checkpoint info, backup info, checkpoint metadata, and backup
+    ///     // ranges on every partition of every physical tenant in the cluster. Used
+    ///     // when switching backup stores.
+    ///     await client.DeleteRuntimeBackupStateAsClusterAdminAsync();
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task DeleteRuntimeBackupStateAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Clears all checkpoint info, backup info, checkpoint metadata, and backup
+    ///     // ranges on every partition of every physical tenant in the cluster. Used
+    ///     // when switching backup stores.
+    ///     await client.DeleteRuntimeBackupStateAsClusterAdminAsync();
+    /// }
+    /// </code>
+    /// </example>
     public async Task DeleteRuntimeBackupStateAsClusterAdminAsync(string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -5310,7 +5360,41 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/backups/runtime/{backupId}` to act as a single physical tenant.
     /// </summary>
-    /// <remarks>Operation: getRuntimeBackupAsClusterAdmin</remarks>
+    /// <remarks>
+    /// Operation: getRuntimeBackupAsClusterAdmin
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRuntimeBackupAsClusterAdminExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var backup = await client.GetRuntimeBackupAsClusterAdminAsync(backupId);
+    /// 
+    ///     Console.WriteLine($&quot;Cluster runtime backup {backup.BackupId}: {backup.State}&quot;);
+    ///     if (backup.FailureReason != null)
+    ///     {
+    ///         Console.WriteLine($&quot;  Failure: {backup.FailureReason}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRuntimeBackupAsClusterAdminExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var backup = await client.GetRuntimeBackupAsClusterAdminAsync(backupId);
+    /// 
+    ///     Console.WriteLine($&quot;Cluster runtime backup {backup.BackupId}: {backup.State}&quot;);
+    ///     if (backup.FailureReason != null)
+    ///     {
+    ///         Console.WriteLine($&quot;  Failure: {backup.FailureReason}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterRuntimeBackupInfo> GetRuntimeBackupAsClusterAdminAsync(BackupId backupId, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -5386,7 +5470,39 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/backups/runtime/state` to act as a single physical tenant.
     /// </summary>
-    /// <remarks>Operation: getRuntimeBackupStateAsClusterAdmin</remarks>
+    /// <remarks>
+    /// Operation: getRuntimeBackupStateAsClusterAdmin
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRuntimeBackupStateAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var state = await client.GetRuntimeBackupStateAsClusterAdminAsync();
+    /// 
+    ///     foreach (var tenant in state.PhysicalTenants)
+    ///     {
+    ///         Console.WriteLine($&quot;Tenant {tenant.PhysicalTenantId}: {tenant.State.CheckpointStates?.Count} checkpoint state(s)&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetRuntimeBackupStateAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var state = await client.GetRuntimeBackupStateAsClusterAdminAsync();
+    /// 
+    ///     foreach (var tenant in state.PhysicalTenants)
+    ///     {
+    ///         Console.WriteLine($&quot;Tenant {tenant.PhysicalTenantId}: {tenant.State.CheckpointStates?.Count} checkpoint state(s)&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterRuntimeBackupState> GetRuntimeBackupStateAsClusterAdminAsync(string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -6020,7 +6136,37 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/backups/runtime` to act as a single physical tenant.
     /// </summary>
-    /// <remarks>Operation: listRuntimeBackupsAsClusterAdmin</remarks>
+    /// <remarks>
+    /// Operation: listRuntimeBackupsAsClusterAdmin
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ListRuntimeBackupsAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // `prefix` must end in a single &apos;*&apos;. Omit it to list every runtime backup across all tenants.
+    ///     var backups = await client.ListRuntimeBackupsAsClusterAdminAsync(
+    ///         prefix: BackupIdPrefix.AssumeExists(&quot;10*&quot;));
+    /// 
+    ///     Console.WriteLine($&quot;Cluster runtime backups: {backups}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ListRuntimeBackupsAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // `prefix` must end in a single &apos;*&apos;. Omit it to list every runtime backup across all tenants.
+    ///     var backups = await client.ListRuntimeBackupsAsClusterAdminAsync(
+    ///         prefix: BackupIdPrefix.AssumeExists(&quot;10*&quot;));
+    /// 
+    ///     Console.WriteLine($&quot;Cluster runtime backups: {backups}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<object> ListRuntimeBackupsAsClusterAdminAsync(string? physicalTenantId = null, BackupIdPrefix? prefix = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -9894,7 +10040,37 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Use `POST /v2/backups/runtime/state/sync` to act as a single physical tenant.
     /// </summary>
-    /// <remarks>Operation: syncRuntimeBackupStateAsClusterAdmin</remarks>
+    /// <remarks>
+    /// Operation: syncRuntimeBackupStateAsClusterAdmin
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SyncRuntimeBackupStateAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Force-writes checkpoint and backup metadata for every partition of every
+    ///     // physical tenant in the cluster to the backup store, and returns the updated state.
+    ///     var state = await client.SyncRuntimeBackupStateAsClusterAdminAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Synced runtime backup state for {state.PhysicalTenants.Count} tenant(s)&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SyncRuntimeBackupStateAsClusterAdminExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Force-writes checkpoint and backup metadata for every partition of every
+    ///     // physical tenant in the cluster to the backup store, and returns the updated state.
+    ///     var state = await client.SyncRuntimeBackupStateAsClusterAdminAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Synced runtime backup state for {state.PhysicalTenants.Count} tenant(s)&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterRuntimeBackupState> SyncRuntimeBackupStateAsClusterAdminAsync(string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -10080,7 +10256,67 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here. Use `POST /v2/backups/runtime` to act as a single physical tenant.
     /// </summary>
-    /// <remarks>Operation: takeRuntimeBackupAsClusterAdmin</remarks>
+    /// <remarks>
+    /// Operation: takeRuntimeBackupAsClusterAdmin
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task TakeRuntimeBackupAsClusterAdminExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Takes a runtime backup across all physical tenants in the cluster.
+    ///     // Omit `BackupId` when continuous backups or a backup/checkpoint schedule is
+    ///     // enabled — the id is then generated per tenant. Otherwise it must be higher
+    ///     // than any existing backup id on every targeted tenant.
+    ///     var backup = await client.TakeRuntimeBackupAsClusterAdminAsync(
+    ///         new TakeRuntimeBackupRequest { BackupId = backupId });
+    /// 
+    ///     Console.WriteLine($&quot;Triggered cluster runtime backup across {backup.PhysicalTenants.Count} tenant(s)&quot;);
+    ///     foreach (var tenant in backup.PhysicalTenants)
+    ///     {
+    ///         if (tenant.BackupId.HasValue)
+    ///         {
+    ///             Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: triggered, backup id {tenant.BackupId.Value}&quot;);
+    ///         }
+    ///         else
+    ///         {
+    ///             Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: {tenant.Outcome}&quot; +
+    ///                 (tenant.Reason != null ? $&quot; — {tenant.Reason}&quot; : &quot;&quot;));
+    ///         }
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task TakeRuntimeBackupAsClusterAdminExample(BackupId backupId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Takes a runtime backup across all physical tenants in the cluster.
+    ///     // Omit `BackupId` when continuous backups or a backup/checkpoint schedule is
+    ///     // enabled — the id is then generated per tenant. Otherwise it must be higher
+    ///     // than any existing backup id on every targeted tenant.
+    ///     var backup = await client.TakeRuntimeBackupAsClusterAdminAsync(
+    ///         new TakeRuntimeBackupRequest { BackupId = backupId });
+    /// 
+    ///     Console.WriteLine($&quot;Triggered cluster runtime backup across {backup.PhysicalTenants.Count} tenant(s)&quot;);
+    ///     foreach (var tenant in backup.PhysicalTenants)
+    ///     {
+    ///         if (tenant.BackupId.HasValue)
+    ///         {
+    ///             Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: triggered, backup id {tenant.BackupId.Value}&quot;);
+    ///         }
+    ///         else
+    ///         {
+    ///             Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: {tenant.Outcome}&quot; +
+    ///                 (tenant.Reason != null ? $&quot; — {tenant.Reason}&quot; : &quot;&quot;));
+    ///         }
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterTakeRuntimeBackupResponse> TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest body, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
