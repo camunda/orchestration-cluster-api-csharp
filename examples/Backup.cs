@@ -266,10 +266,18 @@ public static class BackupExamples
         var backup = await client.TakeRuntimeBackupAsClusterAdminAsync(
             new TakeRuntimeBackupRequest { BackupId = backupId });
 
-        Console.WriteLine($"Scheduled cluster runtime backup across {backup.PhysicalTenants.Count} tenant(s)");
+        Console.WriteLine($"Triggered cluster runtime backup across {backup.PhysicalTenants.Count} tenant(s)");
         foreach (var tenant in backup.PhysicalTenants)
         {
-            Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: backup {tenant.BackupId}");
+            if (tenant.BackupId.HasValue)
+            {
+                Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: triggered, backup id {tenant.BackupId.Value}");
+            }
+            else
+            {
+                Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.Outcome}" +
+                    (tenant.Reason != null ? $" — {tenant.Reason}" : ""));
+            }
         }
     }
     // </TakeRuntimeBackupAsClusterAdmin>
