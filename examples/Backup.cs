@@ -251,4 +251,129 @@ public static class BackupExamples
     }
     // </DeleteHistoryBackupAsClusterAdmin>
     #endregion DeleteHistoryBackupAsClusterAdmin
+
+    #region TakeRuntimeBackupAsClusterAdmin
+
+    // <TakeRuntimeBackupAsClusterAdmin>
+    public static async Task TakeRuntimeBackupAsClusterAdminExample(BackupId backupId)
+    {
+        using var client = CamundaClient.Create();
+
+        // Takes a runtime backup across all physical tenants in the cluster.
+        // Omit `BackupId` when continuous backups or a backup/checkpoint schedule is
+        // enabled — the id is then generated per tenant. Otherwise it must be higher
+        // than any existing backup id on every targeted tenant.
+        var backup = await client.TakeRuntimeBackupAsClusterAdminAsync(
+            new TakeRuntimeBackupRequest { BackupId = backupId });
+
+        Console.WriteLine($"Triggered cluster runtime backup across {backup.PhysicalTenants.Count} tenant(s)");
+        foreach (var tenant in backup.PhysicalTenants)
+        {
+            if (tenant.BackupId.HasValue)
+            {
+                Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: triggered, backup id {tenant.BackupId.Value}");
+            }
+            else
+            {
+                Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.Outcome}" +
+                    (tenant.Reason != null ? $" — {tenant.Reason}" : ""));
+            }
+        }
+    }
+    // </TakeRuntimeBackupAsClusterAdmin>
+    #endregion TakeRuntimeBackupAsClusterAdmin
+
+    #region ListRuntimeBackupsAsClusterAdmin
+
+    // <ListRuntimeBackupsAsClusterAdmin>
+    public static async Task ListRuntimeBackupsAsClusterAdminExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // `prefix` must end in a single '*'. Omit it to list every runtime backup across all tenants.
+        var backups = await client.ListRuntimeBackupsAsClusterAdminAsync(
+            prefix: BackupIdPrefix.AssumeExists("10*"));
+
+        Console.WriteLine($"Cluster runtime backups: {backups}");
+    }
+    // </ListRuntimeBackupsAsClusterAdmin>
+    #endregion ListRuntimeBackupsAsClusterAdmin
+
+    #region GetRuntimeBackupAsClusterAdmin
+
+    // <GetRuntimeBackupAsClusterAdmin>
+    public static async Task GetRuntimeBackupAsClusterAdminExample(BackupId backupId)
+    {
+        using var client = CamundaClient.Create();
+
+        var backup = await client.GetRuntimeBackupAsClusterAdminAsync(backupId);
+
+        Console.WriteLine($"Cluster runtime backup {backup.BackupId}: {backup.State}");
+        if (backup.FailureReason != null)
+        {
+            Console.WriteLine($"  Failure: {backup.FailureReason}");
+        }
+    }
+    // </GetRuntimeBackupAsClusterAdmin>
+    #endregion GetRuntimeBackupAsClusterAdmin
+
+    #region DeleteRuntimeBackupAsClusterAdmin
+
+    // <DeleteRuntimeBackupAsClusterAdmin>
+    public static async Task DeleteRuntimeBackupAsClusterAdminExample(BackupId backupId)
+    {
+        using var client = CamundaClient.Create();
+
+        await client.DeleteRuntimeBackupAsClusterAdminAsync(backupId);
+    }
+    // </DeleteRuntimeBackupAsClusterAdmin>
+    #endregion DeleteRuntimeBackupAsClusterAdmin
+
+    #region GetRuntimeBackupStateAsClusterAdmin
+
+    // <GetRuntimeBackupStateAsClusterAdmin>
+    public static async Task GetRuntimeBackupStateAsClusterAdminExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var state = await client.GetRuntimeBackupStateAsClusterAdminAsync();
+
+        foreach (var tenant in state.PhysicalTenants)
+        {
+            Console.WriteLine($"Tenant {tenant.PhysicalTenantId}: {tenant.State.CheckpointStates?.Count} checkpoint state(s)");
+        }
+    }
+    // </GetRuntimeBackupStateAsClusterAdmin>
+    #endregion GetRuntimeBackupStateAsClusterAdmin
+
+    #region SyncRuntimeBackupStateAsClusterAdmin
+
+    // <SyncRuntimeBackupStateAsClusterAdmin>
+    public static async Task SyncRuntimeBackupStateAsClusterAdminExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // Force-writes checkpoint and backup metadata for every partition of every
+        // physical tenant in the cluster to the backup store, and returns the updated state.
+        var state = await client.SyncRuntimeBackupStateAsClusterAdminAsync();
+
+        Console.WriteLine($"Synced runtime backup state for {state.PhysicalTenants.Count} tenant(s)");
+    }
+    // </SyncRuntimeBackupStateAsClusterAdmin>
+    #endregion SyncRuntimeBackupStateAsClusterAdmin
+
+    #region DeleteRuntimeBackupStateAsClusterAdmin
+
+    // <DeleteRuntimeBackupStateAsClusterAdmin>
+    public static async Task DeleteRuntimeBackupStateAsClusterAdminExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // Clears all checkpoint info, backup info, checkpoint metadata, and backup
+        // ranges on every partition of every physical tenant in the cluster. Used
+        // when switching backup stores.
+        await client.DeleteRuntimeBackupStateAsClusterAdminAsync();
+    }
+    // </DeleteRuntimeBackupStateAsClusterAdmin>
+    #endregion DeleteRuntimeBackupStateAsClusterAdmin
 }

@@ -1523,6 +1523,76 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest,System.Nullable{System.String},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#TakeRuntimeBackupAsClusterAdmin)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync(System.Nullable{System.String},System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#ListRuntimeBackupsAsClusterAdmin)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.Nullable{System.String},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#GetRuntimeBackupAsClusterAdmin)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.Nullable{System.String},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#DeleteRuntimeBackupAsClusterAdmin)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync(System.Nullable{System.String},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#GetRuntimeBackupStateAsClusterAdmin)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync(System.Nullable{System.String},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#SyncRuntimeBackupStateAsClusterAdmin)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync(System.Nullable{System.String},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Backup.cs#DeleteRuntimeBackupStateAsClusterAdmin)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync(System.Threading.CancellationToken)
 example:
 - *content
