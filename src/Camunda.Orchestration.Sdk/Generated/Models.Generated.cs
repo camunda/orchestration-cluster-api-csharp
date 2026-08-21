@@ -4503,18 +4503,54 @@ public sealed class AgentInstanceCreationRequest
     public ElementInstanceKey ElementInstanceKey { get; set; }
 
     /// <summary>
-    /// Static definition set once at creation.
+    /// The agent&apos;s initial definition; model, provider, and systemPrompt can
+    /// all be changed later via a CONFIGURATION history item. Required when
+    /// history is empty or omitted. Must be omitted when history is
+    /// non-empty — supply model, provider, and systemPrompt through a
+    /// CONFIGURATION item in history instead.
+    /// 
     /// </summary>
     [JsonPropertyName("definition")]
-    public AgentInstanceDefinition Definition { get; set; } = null!;
+    public AgentInstanceDefinition? Definition { get; set; }
 
     /// <summary>
     /// Limits for the agent execution. When omitted, all limits default to -1
-    /// (no limit).
+    /// (no limit). Must be omitted when history is non-empty — supply limits
+    /// through a CONFIGURATION item in history instead, if needed.
     /// 
     /// </summary>
     [JsonPropertyName("limits")]
     public AgentInstanceLimits? Limits { get; set; }
+
+    /// <summary>
+    /// The key of the job activation during which this creation is being made.
+    /// Required whenever history is non-empty.
+    /// 
+    /// </summary>
+    [JsonPropertyName("jobKey")]
+    public JobKey? JobKey { get; set; }
+
+    /// <summary>
+    /// Opaque lease token received from the job activation response. Disambiguates
+    /// this activation from any other activation of the same job: if the job is
+    /// later retried, history items submitted under a superseded lease are discarded
+    /// rather than committed.
+    /// 
+    /// </summary>
+    [JsonPropertyName("jobLease")]
+    public string? JobLease { get; set; }
+
+    /// <summary>
+    /// A batch of history items to append to the agent instance&apos;s conversation
+    /// history, in request order. Each created item is echoed back in the
+    /// response&apos;s createdHistory, positionally correlated. When non-empty,
+    /// model, provider, and systemPrompt (and, if needed, limits) must be
+    /// established through a CONFIGURATION item in this batch instead of the
+    /// top-level definition/limits, which must then be omitted.
+    /// 
+    /// </summary>
+    [JsonPropertyName("history")]
+    public List<AgentInstanceHistoryItem>? History { get; set; }
 
 }
 
@@ -4529,10 +4565,22 @@ public sealed class AgentInstanceCreationResult
     [JsonPropertyName("agentInstanceKey")]
     public AgentInstanceKey AgentInstanceKey { get; set; }
 
+    /// <summary>
+    /// One entry per history item submitted in the request, in request order.
+    /// Empty when no history items were submitted.
+    /// 
+    /// </summary>
+    [JsonPropertyName("createdHistory")]
+    public List<AgentInstanceCreatedHistoryItem> CreatedHistory { get; set; } = null!;
+
 }
 
 /// <summary>
-/// The static definition of an agent instance, set once at creation.
+/// The definition of an agent instance, as submitted at creation. The systemPrompt is a plain
+/// string here for backwards compatibility with existing create requests; the read side
+/// (AgentInstanceDefinitionResult) exposes it as content blocks instead. This write-side
+/// string is deprecated and will be removed as part of #58795.
+/// 
 /// </summary>
 public sealed class AgentInstanceDefinition
 {
@@ -4553,6 +4601,33 @@ public sealed class AgentInstanceDefinition
     /// </summary>
     [JsonPropertyName("systemPrompt")]
     public string SystemPrompt { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The definition of an agent instance. Set at creation, but can change later via a
+/// CONFIGURATION history item.
+/// 
+/// </summary>
+public sealed class AgentInstanceDefinitionResult
+{
+    /// <summary>
+    /// The LLM model identifier (for example, gpt-4o).
+    /// </summary>
+    [JsonPropertyName("model")]
+    public string Model { get; set; } = null!;
+
+    /// <summary>
+    /// The LLM provider (for example, openai or anthropic).
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string Provider { get; set; } = null!;
+
+    /// <summary>
+    /// The system prompt configured for this agent instance, as content blocks.
+    /// </summary>
+    [JsonPropertyName("systemPrompt")]
+    public List<AgentInstanceMessageContent> SystemPrompt { get; set; } = null!;
 
 }
 
@@ -5748,10 +5823,12 @@ public sealed class AgentInstanceResult
     public AgentInstanceStatusEnum Status { get; set; }
 
     /// <summary>
-    /// The static definition of the agent, including model, provider, and system prompt.
+    /// The definition of the agent, including model, provider, and system prompt. Set at
+    /// creation, but can change later via a CONFIGURATION history item.
+    /// 
     /// </summary>
     [JsonPropertyName("definition")]
-    public AgentInstanceDefinition Definition { get; set; } = null!;
+    public AgentInstanceDefinitionResult Definition { get; set; } = null!;
 
     /// <summary>
     /// Aggregated metrics across all loopIterations of this agent instance.
@@ -9973,6 +10050,145 @@ public sealed class ClusterRestoreResponse
 }
 
 /// <summary>
+/// A runtime backup id, what each physical tenant reports for it, and the state aggregated over every targeted tenant — folded from the per-tenant states by the same rules a per-tenant state is folded from its partitions.
+/// </summary>
+public sealed class ClusterRuntimeBackupInfo
+{
+    /// <summary>
+    /// The id of the backup.
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId BackupId { get; set; }
+
+    /// <summary>
+    /// The state aggregated over every targeted physical tenant, whether the backup id was looked up directly or listed. A tenant holding nothing for this id counts as `DOES_NOT_EXIST`, so the aggregate is `INCOMPLETE` unless every targeted tenant holds the backup.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public StateCode State { get; set; }
+
+    /// <summary>
+    /// Reason for failure if the aggregated state is &apos;FAILED&apos;.
+    /// </summary>
+    [JsonPropertyName("failureReason")]
+    public string? FailureReason { get; set; }
+
+    /// <summary>
+    /// What each physical tenant reports for this backup id, ordered by physical tenant id. Every targeted tenant is listed, including the ones reporting `DOES_NOT_EXIST`.
+    /// </summary>
+    [JsonPropertyName("physicalTenants")]
+    public List<ClusterRuntimeBackupTenantInfo> PhysicalTenants { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The checkpoint and backup state of each physical tenant. Nothing is aggregated across tenants: checkpoint ids and log positions only mean anything within one tenant&apos;s partitions.
+/// </summary>
+public sealed class ClusterRuntimeBackupState
+{
+    /// <summary>
+    /// The runtime backup state of each targeted physical tenant, ordered by physical tenant id.
+    /// </summary>
+    [JsonPropertyName("physicalTenants")]
+    public List<ClusterRuntimeBackupTenantState> PhysicalTenants { get; set; } = null!;
+
+}
+
+/// <summary>
+/// What a physical tenant did with the trigger. `TRIGGERED` says the backup is running, not that it completed — poll `GET /cluster/v2/backups/runtime/{backupId}` for that. A `FAILED` tenant is running no backup for this request and needs no cleanup. `UNKNOWN` means the broker may or may not have accepted the request — the connection was cut mid-flight, or the gateway timed out waiting — so that tenant&apos;s backups have to be checked before retrying; it is reported separately from `FAILED` precisely because calling it failed would claim nothing is running there. Tenants that were triggered are never rolled back.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterRuntimeBackupTakeOutcome
+{
+    [JsonPropertyName("TRIGGERED")]
+    TRIGGERED,
+    [JsonPropertyName("FAILED")]
+    FAILED,
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN,
+}
+
+/// <summary>
+/// Whether one physical tenant&apos;s runtime backup was triggered, and under which id it can be monitored and deleted.
+/// </summary>
+public sealed class ClusterRuntimeBackupTakeResult
+{
+    /// <summary>
+    /// The id of the physical tenant.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
+    /// The id to monitor or delete this physical tenant&apos;s backup by: the id it is running under when `TRIGGERED` — the requested one, or the one the tenant generated when ids are generated — and the requested id to check when `UNKNOWN`. Null when the tenant is known to be running no backup, and also when an `UNKNOWN` tenant generates its own ids, because the id it may be running under was never reported; list that tenant&apos;s backups to find it.
+    /// </summary>
+    [JsonPropertyName("backupId")]
+    public BackupId? BackupId { get; set; }
+
+    /// <summary>
+    /// What this physical tenant did with the trigger.
+    /// </summary>
+    [JsonPropertyName("outcome")]
+    public ClusterRuntimeBackupTakeOutcome Outcome { get; set; }
+
+    /// <summary>
+    /// Why this physical tenant reported no triggered backup. Null when it was triggered.
+    /// </summary>
+    [JsonPropertyName("reason")]
+    public string? Reason { get; set; }
+
+}
+
+/// <summary>
+/// What a single physical tenant reports for a runtime backup id.
+/// </summary>
+public sealed class ClusterRuntimeBackupTenantInfo
+{
+    /// <summary>
+    /// The id of the physical tenant.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
+    /// The state of the backup on this physical tenant, aggregated over its partitions.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public StateCode State { get; set; }
+
+    /// <summary>
+    /// Reason for failure if the state is &apos;FAILED&apos;.
+    /// </summary>
+    [JsonPropertyName("failureReason")]
+    public string? FailureReason { get; set; }
+
+    /// <summary>
+    /// Detailed status of the backup per partition of this physical tenant. Contains every partition of the tenant when the backup id was looked up directly, including for a tenant that holds no such backup. Empty for a tenant that holds nothing for a listed id: a listing asks each tenant for the backups it has, so there is nothing to report per partition for one it does not.
+    /// </summary>
+    [JsonPropertyName("details")]
+    public List<PartitionBackupInfo> Details { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The checkpoint and backup state of one physical tenant.
+/// </summary>
+public sealed class ClusterRuntimeBackupTenantState
+{
+    /// <summary>
+    /// The id of the physical tenant.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
+    /// The checkpoint and backup state of this physical tenant&apos;s partitions.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public RuntimeBackupState State { get; set; } = null!;
+
+}
+
+/// <summary>
 /// The aggregated status of the whole cluster.
 /// </summary>
 public sealed class ClusterStatusResponse
@@ -10001,6 +10217,19 @@ public sealed class ClusterTakeHistoryBackupResponse
     /// </summary>
     [JsonPropertyName("physicalTenants")]
     public List<ClusterHistoryBackupTakeResult> PhysicalTenants { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.
+/// </summary>
+public sealed class ClusterTakeRuntimeBackupResponse
+{
+    /// <summary>
+    /// The outcome for each targeted physical tenant, ordered by physical tenant id. Carries no cluster-level backup id: in generated-id mode each tenant generates its own.
+    /// </summary>
+    [JsonPropertyName("physicalTenants")]
+    public List<ClusterRuntimeBackupTakeResult> PhysicalTenants { get; set; } = null!;
 
 }
 
@@ -21692,6 +21921,31 @@ internal sealed class OperationTypeFilterPropertyJsonConverter : global::System.
         }
         writer.WriteEndObject();
     }
+}
+
+/// <summary>
+/// OwnAuthorizationSearchResult
+/// </summary>
+public sealed class OwnAuthorizationSearchResult
+{
+    /// <summary>
+    /// Indicates whether authorization checks are enabled for the cluster.
+    /// </summary>
+    [JsonPropertyName("authorizationsEnabled")]
+    public bool AuthorizationsEnabled { get; set; }
+
+    /// <summary>
+    /// The matching authorizations.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<AuthorizationResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
 }
 
 /// <summary>
