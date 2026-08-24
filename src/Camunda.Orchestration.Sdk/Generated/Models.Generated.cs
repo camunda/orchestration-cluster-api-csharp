@@ -4603,32 +4603,12 @@ public sealed class AgentInstanceCreationRequest
     public ElementInstanceKey ElementInstanceKey { get; set; }
 
     /// <summary>
-    /// The agent&apos;s initial definition; model, provider, and systemPrompt can
-    /// all be changed later via a CONFIGURATION history item. Required when
-    /// history is empty or omitted. Must be omitted when history is
-    /// non-empty — supply model, provider, and systemPrompt through a
-    /// CONFIGURATION item in history instead.
-    /// 
-    /// </summary>
-    [JsonPropertyName("definition")]
-    public AgentInstanceDefinition? Definition { get; set; }
-
-    /// <summary>
-    /// Limits for the agent execution. When omitted, all limits default to -1
-    /// (no limit). Must be omitted when history is non-empty — supply limits
-    /// through a CONFIGURATION item in history instead, if needed.
-    /// 
-    /// </summary>
-    [JsonPropertyName("limits")]
-    public AgentInstanceLimits? Limits { get; set; }
-
-    /// <summary>
     /// The key of the job activation during which this creation is being made.
-    /// Required whenever history is non-empty.
+    /// A creation must always be attributed to the active job that produced it.
     /// 
     /// </summary>
     [JsonPropertyName("jobKey")]
-    public JobKey? JobKey { get; set; }
+    public JobKey JobKey { get; set; }
 
     /// <summary>
     /// Opaque lease token received from the job activation response. Disambiguates
@@ -4638,19 +4618,18 @@ public sealed class AgentInstanceCreationRequest
     /// 
     /// </summary>
     [JsonPropertyName("jobLease")]
-    public string? JobLease { get; set; }
+    public string JobLease { get; set; } = null!;
 
     /// <summary>
     /// A batch of history items to append to the agent instance&apos;s conversation
     /// history, in request order. Each created item is echoed back in the
-    /// response&apos;s createdHistory, positionally correlated. When non-empty,
-    /// model, provider, and systemPrompt (and, if needed, limits) must be
-    /// established through a CONFIGURATION item in this batch instead of the
-    /// top-level definition/limits, which must then be omitted.
+    /// response&apos;s createdHistory, positionally correlated. Must include a
+    /// CONFIGURATION item establishing model, provider, and systemPrompt (and,
+    /// if needed, limits).
     /// 
     /// </summary>
     [JsonPropertyName("history")]
-    public List<AgentInstanceHistoryItem>? History { get; set; }
+    public List<AgentInstanceHistoryItem> History { get; set; } = null!;
 
 }
 
@@ -4667,40 +4646,10 @@ public sealed class AgentInstanceCreationResult
 
     /// <summary>
     /// One entry per history item submitted in the request, in request order.
-    /// Empty when no history items were submitted.
     /// 
     /// </summary>
     [JsonPropertyName("createdHistory")]
     public List<AgentInstanceCreatedHistoryItem> CreatedHistory { get; set; } = null!;
-
-}
-
-/// <summary>
-/// The definition of an agent instance, as submitted at creation. The systemPrompt is a plain
-/// string here for backwards compatibility with existing create requests; the read side
-/// (AgentInstanceDefinitionResult) exposes it as content blocks instead. This write-side
-/// string is deprecated and will be removed as part of #58795.
-/// 
-/// </summary>
-public sealed class AgentInstanceDefinition
-{
-    /// <summary>
-    /// The LLM model identifier (for example, gpt-4o).
-    /// </summary>
-    [JsonPropertyName("model")]
-    public string Model { get; set; } = null!;
-
-    /// <summary>
-    /// The LLM provider (for example, openai or anthropic).
-    /// </summary>
-    [JsonPropertyName("provider")]
-    public string Provider { get; set; } = null!;
-
-    /// <summary>
-    /// The system prompt configured for this agent instance.
-    /// </summary>
-    [JsonPropertyName("systemPrompt")]
-    public string SystemPrompt { get; set; } = null!;
 
 }
 
@@ -5145,19 +5094,6 @@ public sealed class AgentInstanceHistoryItem
 }
 
 /// <summary>
-/// Response returned after successfully appending a history item.
-/// </summary>
-public sealed class AgentInstanceHistoryItemCreationResult
-{
-    /// <summary>
-    /// The system-generated key for the created history item.
-    /// </summary>
-    [JsonPropertyName("historyItemKey")]
-    public AgentHistoryItemKey HistoryItemKey { get; set; }
-
-}
-
-/// <summary>
 /// Per-call token and latency metrics for an ASSISTANT history item.
 /// </summary>
 public sealed class AgentInstanceHistoryItemMetrics
@@ -5179,74 +5115,6 @@ public sealed class AgentInstanceHistoryItemMetrics
     /// </summary>
     [JsonPropertyName("durationMs")]
     public long? DurationMs { get; set; }
-
-}
-
-/// <summary>
-/// Request to append a single history item to an agent instance&apos;s conversation history.
-/// </summary>
-public sealed class AgentInstanceHistoryItemRequest
-{
-    /// <summary>
-    /// The key of the currently-active element instance.
-    /// 
-    /// </summary>
-    [JsonPropertyName("elementInstanceKey")]
-    public ElementInstanceKey ElementInstanceKey { get; set; }
-
-    /// <summary>
-    /// The key of the current job activation during which this history item was produced.
-    /// </summary>
-    [JsonPropertyName("jobKey")]
-    public JobKey JobKey { get; set; }
-
-    /// <summary>
-    /// Opaque lease token received from the job activation response.
-    /// </summary>
-    [JsonPropertyName("jobLease")]
-    public string JobLease { get; set; } = null!;
-
-    /// <summary>
-    /// The loop iteration this item belongs to. Omit if not grouping items by
-    /// loopIteration.
-    /// 
-    /// </summary>
-    [JsonPropertyName("loopIteration")]
-    public LoopIterationId? LoopIteration { get; set; }
-
-    /// <summary>
-    /// The role of this history item in the conversation.
-    /// </summary>
-    [JsonPropertyName("role")]
-    public AgentInstanceHistoryRoleEnum Role { get; set; }
-
-    /// <summary>
-    /// The content blocks of this history item.
-    /// </summary>
-    [JsonPropertyName("content")]
-    public List<AgentInstanceMessageContent> Content { get; set; } = null!;
-
-    /// <summary>
-    /// Tool calls associated with this history item.
-    /// For ASSISTANT items: tool calls dispatched by this LLM response.
-    /// For TOOL_RESULT items: single-entry array referencing the originating tool call.
-    /// Omit for USER items.
-    /// 
-    /// </summary>
-    [JsonPropertyName("toolCalls")]
-    public List<AgentInstanceToolCall>? ToolCalls { get; set; }
-
-    /// <summary>
-    /// Per-call token and latency metrics. Present on ASSISTANT items only.
-    /// </summary>
-    [JsonPropertyName("metrics")]
-    public AgentInstanceHistoryItemMetrics? Metrics { get; set; }
-
-    /// <summary>
-    /// The agent-side timestamp of when this message was produced.
-    /// </summary>
-    [JsonPropertyName("producedAt")]
-    public DateTimeOffset ProducedAt { get; set; }
 
 }
 
@@ -5849,40 +5717,6 @@ public sealed class AgentInstanceMetrics
 }
 
 /// <summary>
-/// Metric increments to apply to the agent instance aggregate counters. The engine
-/// accumulates these deltas into running totals on each UPDATED event. All fields
-/// are optional; omit a field to leave the corresponding counter unchanged.
-/// 
-/// </summary>
-public sealed class AgentInstanceMetricsDelta
-{
-    /// <summary>
-    /// Increment to apply to the total input token counter.
-    /// </summary>
-    [JsonPropertyName("inputTokens")]
-    public long? InputTokens { get; set; }
-
-    /// <summary>
-    /// Increment to apply to the total output token counter.
-    /// </summary>
-    [JsonPropertyName("outputTokens")]
-    public long? OutputTokens { get; set; }
-
-    /// <summary>
-    /// Increment to apply to the total model call counter.
-    /// </summary>
-    [JsonPropertyName("modelCalls")]
-    public int? ModelCalls { get; set; }
-
-    /// <summary>
-    /// Increment to apply to the total tool call counter.
-    /// </summary>
-    [JsonPropertyName("toolCalls")]
-    public int? ToolCalls { get; set; }
-
-}
-
-/// <summary>
 /// An arbitrary structured content block. Accepts any valid JSON value:
 /// objects, arrays, numbers, booleans, or strings.
 /// Use TEXT content for human-readable natural language;
@@ -6330,27 +6164,12 @@ public sealed class AgentInstanceUpdateRequest
     public AgentInstanceUpdateStatusEnum? Status { get; set; }
 
     /// <summary>
-    /// Metric increments to apply to the aggregate counters.
-    /// </summary>
-    [JsonPropertyName("metrics")]
-    public AgentInstanceMetricsDelta? Metrics { get; set; }
-
-    /// <summary>
-    /// The complete list of tools available to the agent, replacing any previously
-    /// stored tools. When provided, the engine replaces the existing tool list with
-    /// this value.
-    /// 
-    /// </summary>
-    [JsonPropertyName("tools")]
-    public List<AgentTool>? Tools { get; set; }
-
-    /// <summary>
     /// The key of the job activation during which this update is being made.
-    /// Required whenever history is provided.
+    /// An update must always be attributed to the active job that produced it.
     /// 
     /// </summary>
     [JsonPropertyName("jobKey")]
-    public JobKey? JobKey { get; set; }
+    public JobKey JobKey { get; set; }
 
     /// <summary>
     /// Opaque lease token received from the job activation response. Disambiguates
@@ -6360,7 +6179,7 @@ public sealed class AgentInstanceUpdateRequest
     /// 
     /// </summary>
     [JsonPropertyName("jobLease")]
-    public string? JobLease { get; set; }
+    public string JobLease { get; set; } = null!;
 
     /// <summary>
     /// A batch of history items to append to the agent instance&apos;s conversation
@@ -28615,6 +28434,175 @@ public sealed class UserTaskEffectiveVariableSearchQueryRequest
 /// User task filter request.
 /// </summary>
 public sealed class UserTaskFilter
+{
+    /// <summary>
+    /// The user task state.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public UserTaskStateFilterProperty? State { get; set; }
+
+    /// <summary>
+    /// The assignee of the user task.
+    /// </summary>
+    [JsonPropertyName("assignee")]
+    public StringFilterProperty? Assignee { get; set; }
+
+    /// <summary>
+    /// The business ID of the owning process instance the user task belongs to. This only works for user tasks created with 8.10 and onwards. Tasks from prior versions don&apos;t contain this data and cannot be found.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
+
+    /// <summary>
+    /// The priority of the user task.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public IntegerFilterProperty? Priority { get; set; }
+
+    /// <summary>
+    /// The element ID of the user task.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId? ElementId { get; set; }
+
+    /// <summary>
+    /// The task name. This only works for data created with 8.8 and onwards. Instances from prior versions don&apos;t contain this data and cannot be found.
+    /// 
+    /// </summary>
+    [JsonPropertyName("name")]
+    public StringFilterProperty? Name { get; set; }
+
+    /// <summary>
+    /// The candidate group for this user task.
+    /// </summary>
+    [JsonPropertyName("candidateGroup")]
+    public StringFilterProperty? CandidateGroup { get; set; }
+
+    /// <summary>
+    /// The candidate user for this user task.
+    /// </summary>
+    [JsonPropertyName("candidateUser")]
+    public StringFilterProperty? CandidateUser { get; set; }
+
+    /// <summary>
+    /// Tenant ID of this user task.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public StringFilterProperty? TenantId { get; set; }
+
+    /// <summary>
+    /// The ID of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionIdFilterProperty? ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The user task creation date.
+    /// </summary>
+    [JsonPropertyName("creationDate")]
+    public DateTimeFilterProperty? CreationDate { get; set; }
+
+    /// <summary>
+    /// The user task completion date.
+    /// </summary>
+    [JsonPropertyName("completionDate")]
+    public DateTimeFilterProperty? CompletionDate { get; set; }
+
+    /// <summary>
+    /// The user task follow-up date.
+    /// </summary>
+    [JsonPropertyName("followUpDate")]
+    public DateTimeFilterProperty? FollowUpDate { get; set; }
+
+    /// <summary>
+    /// The user task due date.
+    /// </summary>
+    [JsonPropertyName("dueDate")]
+    public DateTimeFilterProperty? DueDate { get; set; }
+
+    /// <summary>
+    /// The variables of the process instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceVariables")]
+    public List<VariableValueFilterProperty>? ProcessInstanceVariables { get; set; }
+
+    /// <summary>
+    /// The local variables of the user task.
+    /// </summary>
+    [JsonPropertyName("localVariables")]
+    public List<VariableValueFilterProperty>? LocalVariables { get; set; }
+
+    /// <summary>
+    /// The key for this user task.
+    /// </summary>
+    [JsonPropertyName("userTaskKey")]
+    public UserTaskKey? UserTaskKey { get; set; }
+
+    /// <summary>
+    /// The key of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The key of the process instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the element instance.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey? ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+    /// 
+    /// Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+    /// &lt;br&gt;
+    /// &lt;em&gt;Example:&lt;/em&gt;
+    /// 
+    /// ```json
+    /// {
+    ///   &quot;assignee&quot;: &quot;user1&quot;,
+    ///   &quot;$or&quot;: [
+    ///     { &quot;candidateGroup&quot;: &quot;groupA&quot; },
+    ///     { &quot;candidateUser&quot;: &quot;user2&quot; }
+    ///   ]
+    /// }
+    /// ```
+    /// This matches user tasks that:
+    /// 
+    /// &lt;ul style=&quot;padding-left: 20px; margin-left: 20px;&quot;&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;are assigned to &lt;em&gt;user1&lt;/em&gt;&lt;/li&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;and match either:
+    ///     &lt;ul style=&quot;padding-left: 20px; margin-left: 20px;&quot;&gt;
+    ///       &lt;li style=&quot;list-style-type: circle;&quot;&gt;&lt;code&gt;candidateGroup&lt;/code&gt; is &lt;em&gt;groupA&lt;/em&gt;, or&lt;/li&gt;
+    ///       &lt;li style=&quot;list-style-type: circle;&quot;&gt;&lt;code&gt;candidateUser&lt;/code&gt; is &lt;em&gt;user2&lt;/em&gt;&lt;/li&gt;
+    ///     &lt;/ul&gt;
+    ///   &lt;/li&gt;
+    /// &lt;/ul&gt;
+    /// &lt;br&gt;
+    /// &lt;p&gt;Note: Using complex &lt;code&gt;$or&lt;/code&gt; conditions may impact performance, use with caution in high-volume environments.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$or")]
+    public List<UserTaskFilterFields>? Or { get; set; }
+
+}
+
+/// <summary>
+/// User task filter fields.
+/// </summary>
+public sealed class UserTaskFilterFields
 {
     /// <summary>
     /// The user task state.
