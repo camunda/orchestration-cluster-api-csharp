@@ -706,6 +706,21 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Stop the running rebalance
+    /// Asks the running rebalance to stop once the transfer in flight has finished. Partitions already transferred keep their new leaders, and those the rebalance had not yet reached keep their current ones.
+    /// 
+    /// Cancellation requests are idempotent and always accepted. The `wasRunning` response field can be used to distinguish a cancellation that found a running rebalance from one that did not.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
+    /// </summary>
+    /// <remarks>Operation: cancelClusterRebalance</remarks>
+    public async Task<RebalanceCancellationResponse> CancelClusterRebalanceAsync(CancellationToken ct = default)
+    {
+        var path = $"/cluster/v2/rebalance";
+        return await InvokeWithRetryAsync(() => SendAsync<RebalanceCancellationResponse>(HttpMethod.Delete, path, null, ct), "cancelClusterRebalance", false, ct);
+    }
+
+    /// <summary>
     /// Cancel process instance
     /// Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
     /// 
@@ -2461,9 +2476,12 @@ public partial class CamundaClient
     /// 
     /// The two supported types differ in how the history is removed. For a decision requirements
     /// definition the history is deleted asynchronously via a batch operation whose details are
-    /// returned in the `batchOperation` field of the response. For a process definition the
-    /// definition first drains its running instances and its history is deleted asynchronously once
-    /// the definition is fully removed cluster-wide; no batch operation is returned in the response.
+    /// returned in the `batchOperation` field of the response. For a process definition that still
+    /// exists in the runtime state, the definition first drains its running instances and its
+    /// history is deleted asynchronously once the definition is fully removed cluster-wide; no batch
+    /// operation is returned in the response. If the process definition has already been removed
+    /// from the runtime state and the deletion is later re-triggered with `deleteHistory` set to
+    /// `true`, a batch operation is created immediately and returned in the `batchOperation` field.
     /// </summary>
     /// <remarks>
     /// Operation: deleteResource
@@ -3300,6 +3318,19 @@ public partial class CamundaClient
     {
         var path = $"/cluster/v2/exporting";
         return await InvokeWithRetryAsync(() => SendAsync<ExportingStatusResponse>(HttpMethod.Get, path, null, ct), "getClusterExportingStatus", false, ct);
+    }
+
+    /// <summary>
+    /// Report the cluster&apos;s current leadership balance
+    /// Reports whether the cluster is currently balanced, the current leadership state of every partition, and what became of the last rebalance to finish. The last completed rebalance is held in memory by the coordinating broker, so none will be reported if the coordinator has moved or restarted since the last rebalance.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
+    /// </summary>
+    /// <remarks>Operation: getClusterRebalance</remarks>
+    public async Task<ClusterBalanceResponse> GetClusterRebalanceAsync(CancellationToken ct = default)
+    {
+        var path = $"/cluster/v2/rebalance";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterBalanceResponse>(HttpMethod.Get, path, null, ct), "getClusterRebalance", false, ct);
     }
 
     /// <summary>
@@ -10369,6 +10400,23 @@ public partial class CamundaClient
     {
         var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}/error";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "throwJobError", true, ct);
+    }
+
+    /// <summary>
+    /// Trigger a cluster-wide leadership rebalance
+    /// Transfers leadership of every partition that is not led by its highest-priority replica towards that replica, one partition at a time. Returns as soon as the rebalance has been accepted (poll `GET /cluster/v2/rebalance` to monitor progress).
+    /// 
+    /// Each rebalance can specify overrides for the configured rebalance settings (e.g. maximum replication lag to allow). An absent request body means &quot;use the configured settings&quot;.
+    /// 
+    /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
+    /// </summary>
+    /// <remarks>Operation: triggerClusterRebalance</remarks>
+    public async Task<ClusterBalanceResponse> TriggerClusterRebalanceAsync(ClusterRebalanceRequest body, bool? dryRun = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/rebalance?{string.Join("&", queryParts)}" : $"/cluster/v2/rebalance";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterBalanceResponse>(HttpMethod.Post, path, body, ct), "triggerClusterRebalance", false, ct);
     }
 
     /// <summary>
