@@ -1,3 +1,17 @@
+# [10.0.0-alpha.18](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.17...v10.0.0-alpha.18) (2026-08-24)
+
+
+### Bug Fixes
+
+* regenerate SDK for agent-instance spec drift breaking main ([#409](https://github.com/camunda/orchestration-cluster-api-csharp/issues/409)) ([4daa4c1](https://github.com/camunda/orchestration-cluster-api-csharp/commit/4daa4c14c16e7fca52da5628d1b67996bca64981))
+
+
+### Features
+
+* add example coverage for getClusterExportingStatus, pauseClusterExporting, resumeClusterExporting, takeHistoryBackupAsClusterAdmin, listHistoryBackupsAsClusterAdmin, getHistoryBackupAsClusterAdmin, deleteHistoryBackupAsClusterAdmin ([#400](https://github.com/camunda/orchestration-cluster-api-csharp/issues/400)) ([c2c4e3e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/c2c4e3eada7fa53d647d5c6ddecf2fd72cf73987))
+* add example coverage for takeRuntimeBackupAsClusterAdmin, listRuntimeBackupsAsClusterAdmin, getRuntimeBackupStateAsClusterAdmin, deleteRuntimeBackupStateAsClusterAdmin, syncRuntimeBackupStateAsClusterAdmin, getRuntimeBackupAsClusterAdmin, deleteRuntimeBackupAsClusterAdmin ([#404](https://github.com/camunda/orchestration-cluster-api-csharp/issues/404)) ([3f0996b](https://github.com/camunda/orchestration-cluster-api-csharp/commit/3f0996b937599dfed5118c2e03442a8f43a0f9dd)), closes [#403](https://github.com/camunda/orchestration-cluster-api-csharp/issues/403)
+* add example coverage for triggerClusterRebalance, getClusterRebalance, cancelClusterRebalance ([#406](https://github.com/camunda/orchestration-cluster-api-csharp/issues/406)) ([a10eb28](https://github.com/camunda/orchestration-cluster-api-csharp/commit/a10eb28a844a208fb5eb5ac340727cce7df2b9be)), closes [#405](https://github.com/camunda/orchestration-cluster-api-csharp/issues/405)
+
 # [10.0.0-alpha.17](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.16...v10.0.0-alpha.17) (2026-08-19)
 
 
