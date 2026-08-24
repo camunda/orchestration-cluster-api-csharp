@@ -289,16 +289,6 @@ example:
 
 
 ---
-uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync(Camunda.Orchestration.Sdk.AgentInstanceKey,Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest,System.Threading.CancellationToken)
-example:
-- *content
----
-
-
-[!code-csharp[](../../examples/AgentInstance.cs#CreateAgentInstanceHistoryItem)]
-
-
----
 uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationRequest,System.Threading.CancellationToken)
 example:
 - *content

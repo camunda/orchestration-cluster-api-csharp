@@ -36,18 +36,42 @@ public static class AgentInstanceExamples
     #region CreateAgentInstance
 
     // <CreateAgentInstance>
-    public static async Task CreateAgentInstanceExample(ElementInstanceKey elementInstanceKey)
+    public static async Task CreateAgentInstanceExample(
+        ElementInstanceKey elementInstanceKey,
+        JobKey jobKey,
+        string jobLease)
     {
         using var client = CamundaClient.Create();
 
+        // Every new agent instance must start with a CONFIGURATION history item
+        // establishing model, provider, and systemPrompt (and, if needed, limits).
         var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
         {
             ElementInstanceKey = elementInstanceKey,
-            Definition = new AgentInstanceDefinition
+            JobKey = jobKey,
+            JobLease = jobLease,
+            History = new List<AgentInstanceHistoryItem>
             {
-                Model = "gpt-4o",
-                Provider = "openai",
-                SystemPrompt = "You are a helpful assistant.",
+                new AgentInstanceHistoryItem
+                {
+                    HistoryItemId = "config-1",
+                    LoopIteration = LoopIterationId.AssumeExists(0),
+                    Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
+                    Content = new List<AgentInstanceMessageContent>(),
+                    ProducedAt = DateTimeOffset.UtcNow,
+                    Model = "gpt-4o",
+                    Provider = "openai",
+                    SystemPrompt = new List<AgentInstanceMessageContent>
+                    {
+                        new AgentInstanceTextContent { Text = "You are a helpful assistant." },
+                    },
+                    Limits = new AgentInstanceLimits
+                    {
+                        MaxModelCalls = 20,
+                        MaxToolCalls = 20,
+                        MaxTokens = 100_000,
+                    },
+                },
             },
         });
 
@@ -59,33 +83,7 @@ public static class AgentInstanceExamples
     #region UpdateAgentInstance
 
     // <UpdateAgentInstance>
-    public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
-    {
-        using var client = CamundaClient.Create();
-
-        await client.UpdateAgentInstanceAsync(
-            agentInstanceKey,
-            new AgentInstanceUpdateRequest
-            {
-                ElementInstanceKey = elementInstanceKey,
-                Status = AgentInstanceUpdateStatusEnum.THINKING,
-                Metrics = new AgentInstanceMetricsDelta
-                {
-                    InputTokens = 150,
-                    OutputTokens = 50,
-                    ModelCalls = 1,
-                },
-            });
-
-        Console.WriteLine($"Updated agent instance: {agentInstanceKey}");
-    }
-    // </UpdateAgentInstance>
-    #endregion UpdateAgentInstance
-
-    #region CreateAgentInstanceHistoryItem
-
-    // <CreateAgentInstanceHistoryItem>
-    public static async Task CreateAgentInstanceHistoryItemExample(
+    public static async Task UpdateAgentInstanceExample(
         AgentInstanceKey agentInstanceKey,
         ElementInstanceKey elementInstanceKey,
         JobKey jobKey,
@@ -93,25 +91,42 @@ public static class AgentInstanceExamples
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.CreateAgentInstanceHistoryItemAsync(
+        // Additional conversation history (for example, the ASSISTANT response and its
+        // metrics for the LLM call that just completed) is appended via the same
+        // optional history batch used at creation time.
+        await client.UpdateAgentInstanceAsync(
             agentInstanceKey,
-            new AgentInstanceHistoryItemRequest
+            new AgentInstanceUpdateRequest
             {
                 ElementInstanceKey = elementInstanceKey,
+                Status = AgentInstanceUpdateStatusEnum.THINKING,
                 JobKey = jobKey,
                 JobLease = jobLease,
-                Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
-                Content = new List<AgentInstanceMessageContent>
+                History = new List<AgentInstanceHistoryItem>
                 {
-                    new AgentInstanceTextContent { Text = "How can I help you today?" },
+                    new AgentInstanceHistoryItem
+                    {
+                        HistoryItemId = "assistant-1",
+                        LoopIteration = LoopIterationId.AssumeExists(0),
+                        Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
+                        Content = new List<AgentInstanceMessageContent>
+                        {
+                            new AgentInstanceTextContent { Text = "How can I help you today?" },
+                        },
+                        ProducedAt = DateTimeOffset.UtcNow,
+                        Metrics = new AgentInstanceHistoryItemMetrics
+                        {
+                            InputTokens = 150,
+                            OutputTokens = 50,
+                        },
+                    },
                 },
-                ProducedAt = DateTimeOffset.UtcNow,
             });
 
-        Console.WriteLine($"Created history item: {result.HistoryItemKey}");
+        Console.WriteLine($"Updated agent instance: {agentInstanceKey}");
     }
-    // </CreateAgentInstanceHistoryItem>
-    #endregion CreateAgentInstanceHistoryItem
+    // </UpdateAgentInstance>
+    #endregion UpdateAgentInstance
 
     #region SearchAgentInstanceHistory
 
