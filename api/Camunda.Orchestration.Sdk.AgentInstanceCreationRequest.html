@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_AgentInstanceCreationRequest" data-uid="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest" class="text-break">
-Class AgentInstanceCreationRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L4494"><i class="bi bi-code-slash"></i></a>
+Class AgentInstanceCreationRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L4594"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -156,11 +156,6 @@ Class AgentInstanceCreationRequest  <a class="header-action link-secondary" titl
 </h2>
 
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Definition.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_Definition">Definition</a></dt>
-    <dd><p>Static definition set once at creation.</p>
-</dd>
-  </dl>
-  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.ElementInstanceKey.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_ElementInstanceKey">ElementInstanceKey</a></dt>
     <dd><p>The key of the AI Agent Sub-process or AI Agent Task element instance.
 The engine uses this key to infer processInstanceKey, elementId,
@@ -168,9 +163,26 @@ processDefinitionKey, and tenantId.</p>
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Limits.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_Limits">Limits</a></dt>
-    <dd><p>Limits for the agent execution. When omitted, all limits default to -1
-(no limit).</p>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.History.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_History">History</a></dt>
+    <dd><p>A batch of history items to append to the agent instance's conversation
+history, in request order. Each created item is echoed back in the
+response's createdHistory, positionally correlated. Must include a
+CONFIGURATION item establishing model, provider, and systemPrompt (and,
+if needed, limits).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobKey">JobKey</a></dt>
+    <dd><p>The key of the job activation during which this creation is being made.
+A creation must always be attributed to the active job that produced it.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobLease">JobLease</a></dt>
+    <dd><p>Opaque lease token received from the job activation response. Disambiguates
+this activation from any other activation of the same job: if the job is
+later retried, history items submitted under a superseded lease are discarded
+rather than committed.</p>
 </dd>
   </dl>
 
@@ -179,7 +191,7 @@ processDefinitionKey, and tenantId.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L4494" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L4594" class="edit-link">Edit this page</a>
         </div>
 
 

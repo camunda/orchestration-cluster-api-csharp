@@ -442,8 +442,9 @@ history batch.</p>
 </dd>
     </dl>
     <dl class="jumplist">
-      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceDefinition.html">AgentInstanceDefinition</a></dt>
-      <dd><p>The static definition of an agent instance, set once at creation.</p>
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.html">AgentInstanceDefinitionResult</a></dt>
+      <dd><p>The definition of an agent instance. Set at creation, but can change later via a
+CONFIGURATION history item.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -473,18 +474,8 @@ submitted as part of the batch on an agent instance update request.</p>
 </dd>
     </dl>
     <dl class="jumplist">
-      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.html">AgentInstanceHistoryItemCreationResult</a></dt>
-      <dd><p>Response returned after successfully appending a history item.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.html">AgentInstanceHistoryItemMetrics</a></dt>
       <dd><p>Per-call token and latency metrics for an ASSISTANT history item.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.html">AgentInstanceHistoryItemRequest</a></dt>
-      <dd><p>Request to append a single history item to an agent instance's conversation history.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -530,13 +521,6 @@ submitted as part of the batch on an agent instance update request.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceMetrics.html">AgentInstanceMetrics</a></dt>
       <dd><p>Aggregated metrics for an agent instance across all model calls.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.html">AgentInstanceMetricsDelta</a></dt>
-      <dd><p>Metric increments to apply to the agent instance aggregate counters. The engine
-accumulates these deltas into running totals on each UPDATED event. All fields
-are optional; omit a field to leave the corresponding counter unchanged.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -937,8 +921,33 @@ This ensures correct event emission for assignee changes.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterBalanceResponse.html">ClusterBalanceResponse</a></dt>
+      <dd><p>The cluster's current per-partition balance state, the running rebalance, and the last completed rebalance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterBrokerInfo.html">ClusterBrokerInfo</a></dt>
       <dd><p>Provides information on a broker node, independent of any physical tenant.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterCompletedRebalance.html">ClusterCompletedRebalance</a></dt>
+      <dd><p>The last completed rebalance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.html">ClusterHistoryBackupInfo</a></dt>
+      <dd><p>A history backup id and what each physical tenant reports for it. No cluster-level state is aggregated from the per-tenant states.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.html">ClusterHistoryBackupTakeResult</a></dt>
+      <dd><p>The snapshots scheduled on a single physical tenant. Only successfully scheduled tenants are reported: the request fails as a whole if any targeted tenant could not schedule the backup.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.html">ClusterHistoryBackupTenantInfo</a></dt>
+      <dd><p>What a single physical tenant reports for a history backup id.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -954,6 +963,26 @@ This ensures correct event emission for assignee changes.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterModeChangeResponse.html">ClusterModeChangeResponse</a></dt>
       <dd><p>The planned changes resulting from a cluster mode transition request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRebalance.html">ClusterRebalance</a></dt>
+      <dd><p>The fields common to a running and a completed rebalance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.html">ClusterRebalanceOperationPartition</a></dt>
+      <dd><p>One partition's plan, progress, and outcome within a rebalance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRebalancePartition.html">ClusterRebalancePartition</a></dt>
+      <dd><p>One partition's leadership/balance status - its current leader, its desired leader, and whether a rebalance is currently moving it.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRebalanceRequest.html">ClusterRebalanceRequest</a></dt>
+      <dd><p>The settings to run a given rebalance with. Every setting is optional; an absent request body is equivalent to a body with every field absent, and means &quot;use the configured settings&quot;.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -1002,8 +1031,48 @@ This ensures correct event emission for assignee changes.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRunningRebalance.html">ClusterRunningRebalance</a></dt>
+      <dd><p>The rebalance currently running.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.html">ClusterRuntimeBackupInfo</a></dt>
+      <dd><p>A runtime backup id, what each physical tenant reports for it, and the state aggregated over every targeted tenant — folded from the per-tenant states by the same rules a per-tenant state is folded from its partitions.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.html">ClusterRuntimeBackupState</a></dt>
+      <dd><p>The checkpoint and backup state of each physical tenant. Nothing is aggregated across tenants: checkpoint ids and log positions only mean anything within one tenant's partitions.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.html">ClusterRuntimeBackupTakeResult</a></dt>
+      <dd><p>Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.html">ClusterRuntimeBackupTenantInfo</a></dt>
+      <dd><p>What a single physical tenant reports for a runtime backup id.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.html">ClusterRuntimeBackupTenantState</a></dt>
+      <dd><p>The checkpoint and backup state of one physical tenant.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterStatusResponse.html">ClusterStatusResponse</a></dt>
       <dd><p>The aggregated status of the whole cluster.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.html">ClusterTakeHistoryBackupResponse</a></dt>
+      <dd><p>The snapshots scheduled on every targeted physical tenant. No cluster-level state is aggregated from the per-tenant outcomes.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.html">ClusterTakeRuntimeBackupResponse</a></dt>
+      <dd><p>The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -2188,6 +2257,11 @@ correlated with.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.html">OwnAuthorizationSearchResult</a></dt>
+      <dd><p>OwnAuthorizationSearchResult</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.Partition.html">Partition</a></dt>
       <dd><p>Provides information on a partition within a broker node.</p>
 </dd>
@@ -2559,6 +2633,11 @@ at runtime by the given id.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.html">ProcessInstanceWaitStateStatisticsResult</a></dt>
       <dd><p>Process instance wait state statistics response item.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.RebalanceCancellationResponse.html">RebalanceCancellationResponse</a></dt>
+      <dd><p>Response to a rebalance cancellation request.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3126,6 +3205,11 @@ For <b>output</b> (receiving variables), call <a class="xref" href="Camunda.Orch
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.UserTaskFilter.html">UserTaskFilter</a></dt>
       <dd><p>User task filter request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.UserTaskFilterFields.html">UserTaskFilterFields</a></dt>
+      <dd><p>User task filter fields.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -4027,6 +4111,41 @@ DISCARDED: the producing job failed; this item was superseded by a later activat
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.CloudStage.html">CloudStage</a></dt>
       <dd><p>The cloud deployment stage.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterBalanceResponseState.html">ClusterBalanceResponseState</a></dt>
+      <dd><p>The cluster's aggregate balance state as of the time of the request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.html">ClusterCompletedRebalanceResult</a></dt>
+      <dd><p>How the rebalance ended.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.html">ClusterHistoryBackupTenantState</a></dt>
+      <dd><p>What a physical tenant reports for a history backup id: the per-tenant <code>HistoryBackupStateCode</code> extended with <code>NOT_FOUND</code> for a tenant that was read and does not hold the backup. <code>NOT_FOUND</code> is a successful observation, not a failure — a backup that only some physical tenants hold is a supported outcome. There is no state for a tenant that could not be read at all, because such a tenant fails the whole request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.html">ClusterRebalanceOperationPartitionProgress</a></dt>
+      <dd><p>Where this rebalance has reached for the partition.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html">ClusterRebalanceOperationPartitionResult</a></dt>
+      <dd><p>The terminal outcome, present only when progress is COMPLETED.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.html">ClusterRebalancePartitionState</a></dt>
+      <dd><p>Whether this partition is being actively transferred, unbalanced, or balanced.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.html">ClusterRuntimeBackupTakeOutcome</a></dt>
+      <dd><p>What a physical tenant did with the trigger. <code>TRIGGERED</code> says the backup is running, not that it completed — poll <code>GET /cluster/v2/backups/runtime/{backupId}</code> for that. A <code>FAILED</code> tenant is running no backup for this request and needs no cleanup. <code>UNKNOWN</code> means the broker may or may not have accepted the request — the connection was cut mid-flight, or the gateway timed out waiting — so that tenant's backups have to be checked before retrying; it is reported separately from <code>FAILED</code> precisely because calling it failed would claim nothing is running there. Tenants that were triggered are never rolled back.</p>
 </dd>
     </dl>
     <dl class="jumplist">

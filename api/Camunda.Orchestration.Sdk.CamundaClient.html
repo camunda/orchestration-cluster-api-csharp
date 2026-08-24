@@ -317,6 +317,14 @@ This is done asynchronously, the progress can be tracked using the batch operati
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelClusterRebalanceAsync_System_Threading_CancellationToken_">CancelClusterRebalanceAsync(CancellationToken)</a></dt>
+    <dd><p>Stop the running rebalance
+Asks the running rebalance to stop once the transfer in flight has finished. Partitions already transferred keep their new leaders, and those the rebalance had not yet reached keep their current ones.</p>
+<p>Cancellation requests are idempotent and always accepted. The <code>wasRunning</code> response field can be used to distinguish a cancellation that found a running rebalance from one that did not.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_CancelProcessInstanceRequest_System_Threading_CancellationToken_">CancelProcessInstanceAsync(ProcessInstanceKey, CancelProcessInstanceRequest, CancellationToken)</a></dt>
     <dd><p>Cancel process instance
 Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.</p>
@@ -382,15 +390,6 @@ Creates a new user and assigns the admin role to it. This endpoint is only usabl
     <dd><p>Create agent instance
 Creates a new agent instance. The returned key identifies the instance and must
 be used in subsequent update and query calls.</p>
-</dd>
-  </dl>
-  <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAgentInstanceHistoryItemAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_System_Threading_CancellationToken_">CreateAgentInstanceHistoryItemAsync(AgentInstanceKey, AgentInstanceHistoryItemRequest, CancellationToken)</a></dt>
-    <dd><p>Create agent instance history item
-Appends a single history item to an agent instance's conversation history.
-The created item has commitStatus PENDING until the job identified by jobLease
-completes successfully, at which point it transitions to COMMITTED. If the job
-fails or is superseded by a retry, the item is marked DISCARDED.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -581,6 +580,14 @@ Deletes the group with the given ID.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteHistoryBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_BackupId_System_String_System_Threading_CancellationToken_">DeleteHistoryBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)</a></dt>
+    <dd><p>Delete a history backup across physical tenants
+Deletes the history backup with the given id from every physical tenant of the cluster, or from the one named by <code>physicalTenantId</code>. A tenant that does not hold the backup has already reached the requested end state, so it counts as deleted rather than as a failure.</p>
+<p>The request is all-or-nothing: a physical tenant the backup cannot be deleted from fails the whole request, and the deletions that already succeeded on other tenants are not undone. Narrow the request with <code>physicalTenantId</code> to delete from the tenants that can still be reached.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use <code>DELETE /v2/backups/history/{backupId}</code> to act as a single physical tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteHistoryBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_">DeleteHistoryBackupAsync(BackupId, CancellationToken)</a></dt>
     <dd><p>Delete history backup
 Deletes the history backup with the given id, by deleting every snapshot that makes it
@@ -623,9 +630,12 @@ definitions; for other resource types (forms, generic resources) the flag is ign
 history is deleted.</p>
 <p>The two supported types differ in how the history is removed. For a decision requirements
 definition the history is deleted asynchronously via a batch operation whose details are
-returned in the <code>batchOperation</code> field of the response. For a process definition the
-definition first drains its running instances and its history is deleted asynchronously once
-the definition is fully removed cluster-wide; no batch operation is returned in the response.</p>
+returned in the <code>batchOperation</code> field of the response. For a process definition that still
+exists in the runtime state, the definition first drains its running instances and its
+history is deleted asynchronously once the definition is fully removed cluster-wide; no batch
+operation is returned in the response. If the process definition has already been removed
+from the runtime state and the deletion is later re-triggered with <code>deleteHistory</code> set to
+<code>true</code>, a batch operation is created immediately and returned in the <code>batchOperation</code> field.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -635,9 +645,25 @@ Deletes the role with the given ID.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_BackupId_System_String_System_Threading_CancellationToken_">DeleteRuntimeBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)</a></dt>
+    <dd><p>Delete a runtime backup across physical tenants
+Deletes the runtime backup with the given id from every physical tenant of the cluster, or from the one named by <code>physicalTenantId</code>. A tenant that does not hold the backup has already reached the requested end state, so it counts as deleted rather than as a failure — the same as deleting an unknown backup id through the per-physical-tenant endpoint.</p>
+<p>The request is all-or-nothing: a physical tenant the backup cannot be deleted from fails the whole request, and the deletions that already succeeded on other tenants are not undone. Narrow the request with <code>physicalTenantId</code> to delete from the tenants that can still be reached.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use <code>DELETE /v2/backups/runtime/{backupId}</code> to act as a single physical tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_">DeleteRuntimeBackupAsync(BackupId, CancellationToken)</a></dt>
     <dd><p>Delete runtime backup
 Deletes the runtime backup with the given id.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupStateAsClusterAdminAsync_System_String_System_Threading_CancellationToken_">DeleteRuntimeBackupStateAsClusterAdminAsync(string?, CancellationToken)</a></dt>
+    <dd><p>Delete runtime backup state across physical tenants
+Resets the runtime backup state of every partition of every physical tenant of the cluster, or of the one named by <code>physicalTenantId</code>, clearing all checkpoint info, backup info, checkpoint metadata, and backup ranges. Used when switching backup stores.</p>
+<p>The request is all-or-nothing: a physical tenant whose state cannot be reset fails the whole request, and the resets that already succeeded on other tenants are not undone. Narrow the request with <code>physicalTenantId</code> to reset the tenants that can still be reached.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use <code>DELETE /v2/backups/runtime/state</code> to act as a single physical tenant.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -757,6 +783,20 @@ Get batch operation by key.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterExportingStatusAsync_System_Threading_CancellationToken_">GetClusterExportingStatusAsync(CancellationToken)</a></dt>
+    <dd><p>Get exporting status of the whole cluster
+Returns the exporting status of the whole cluster, folded over the exporting status of every physical tenant. Only <code>PAUSED</code> and <code>SOFT_PAUSED</code> confirm that exporting is paused cluster-wide; every other value means at least one physical tenant is not paused, so callers should keep polling. A physical tenant that itself reports <code>MIXED</code> makes the whole cluster <code>MIXED</code>.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterRebalanceAsync_System_Threading_CancellationToken_">GetClusterRebalanceAsync(CancellationToken)</a></dt>
+    <dd><p>Report the cluster's current leadership balance
+Reports whether the cluster is currently balanced, the current leadership state of every partition, and what became of the last rebalance to finish. The last completed rebalance is held in memory by the coordinating broker, so none will be reported if the coordinator has moved or restarted since the last rebalance.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetClusterStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterStatusAsync_System_Threading_CancellationToken_">GetClusterStatusAsync(CancellationToken)</a></dt>
     <dd><p>Get the status of the whole cluster
 Checks the health status of the whole cluster, aggregated over all physical tenants. Returns <code>HEALTHY</code> when every physical tenant is healthy, <code>DOWN</code> when no physical tenant can process work, and <code>DEGRADED</code> in every other case. No per-tenant detail is reported; use <code>GET /cluster/v2/topology</code> for that.</p>
@@ -852,6 +892,14 @@ Get a global user task listener by its id.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_GroupResult__System_Threading_CancellationToken_">GetGroupAsync(GroupId, ConsistencyOptions&lt;GroupResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Get group
 Get a group by its ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetHistoryBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_BackupId_System_String_System_Threading_CancellationToken_">GetHistoryBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)</a></dt>
+    <dd><p>Get a history backup across physical tenants
+Reports what every physical tenant of the cluster, or the one named by <code>physicalTenantId</code>, holds for the given backup id. There is no aggregated cluster-level state: a tenant that was reached and does not hold this backup reports <code>NOT_FOUND</code>, which is a successful observation rather than a failure.</p>
+<p>The request is all-or-nothing: a physical tenant whose state cannot be read fails the whole request. Narrow the request with <code>physicalTenantId</code> to read the tenants that can still be reached.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use <code>GET /v2/backups/history/{backupId}</code> to act as a single physical tenant.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1034,9 +1082,25 @@ Get a role by its ID.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_BackupId_System_String_System_Threading_CancellationToken_">GetRuntimeBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)</a></dt>
+    <dd><p>Get a runtime backup across physical tenants
+Reports what every physical tenant of the cluster, or the one named by <code>physicalTenantId</code>, holds for the given backup id, plus the state aggregated over all of them. A tenant that was reached and does not hold this backup reports <code>DOES_NOT_EXIST</code>, which is a successful observation rather than a failure — so a backup only some tenants hold aggregates to <code>INCOMPLETE</code>, the same way a backup only some partitions hold does within one tenant.</p>
+<p>The request is all-or-nothing: a physical tenant whose state cannot be read fails the whole request. Narrow the request with <code>physicalTenantId</code> to read the tenants that can still be reached.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use <code>GET /v2/backups/runtime/{backupId}</code> to act as a single physical tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_">GetRuntimeBackupAsync(BackupId, CancellationToken)</a></dt>
     <dd><p>Get runtime backup
 Returns detailed status of the runtime backup with the given id.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupStateAsClusterAdminAsync_System_String_System_Threading_CancellationToken_">GetRuntimeBackupStateAsClusterAdminAsync(string?, CancellationToken)</a></dt>
+    <dd><p>Get runtime backup state across physical tenants
+Reports the checkpoint and backup state of every partition of every physical tenant of the cluster, or of the one named by <code>physicalTenantId</code>, grouped by physical tenant. Checkpoint ids and log positions only mean anything within one physical tenant's partitions, so nothing is aggregated across tenants.</p>
+<p>The request is all-or-nothing: a physical tenant whose state cannot be read fails the whole request rather than contributing an empty section, which an operator making a delete or restore decision could not tell apart from &quot;nothing to report yet&quot;. Narrow the request with <code>physicalTenantId</code> to read the tenants that can still be reached.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use <code>GET /v2/backups/runtime/state</code> to act as a single physical tenant.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1128,11 +1192,27 @@ specific element instance.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListHistoryBackupsAsClusterAdminAsync_System_String_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Nullable_System_Boolean__System_Threading_CancellationToken_">ListHistoryBackupsAsClusterAdminAsync(string?, BackupIdPrefix?, bool?, CancellationToken)</a></dt>
+    <dd><p>List history backups across physical tenants
+Lists the history backups of every physical tenant of the cluster, or of the one named by <code>physicalTenantId</code>, grouped by backup id. A backup id that only some physical tenants hold is a supported outcome rather than a degraded one, so only the tenants that hold it are listed under it.</p>
+<p>The request is all-or-nothing: a physical tenant whose backups cannot be read fails the whole request rather than silently dropping out of the listing. Narrow the request with <code>physicalTenantId</code> to list the backups of the tenants that can still be read.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use <code>GET /v2/backups/history</code> to act as a single physical tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListHistoryBackupsAsync_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Nullable_System_Boolean__System_Threading_CancellationToken_">ListHistoryBackupsAsync(BackupIdPrefix?, bool?, CancellationToken)</a></dt>
     <dd><p>List history backups
 Returns a list of all available history backups of the physical tenant, with their state
 and additional info, most recent first by snapshot start time.</p>
 <p>Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListRuntimeBackupsAsClusterAdminAsync_System_String_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Threading_CancellationToken_">ListRuntimeBackupsAsClusterAdminAsync(string?, BackupIdPrefix?, CancellationToken)</a></dt>
+    <dd><p>List runtime backups across physical tenants
+Lists the runtime backups of every physical tenant of the cluster, or of the one named by <code>physicalTenantId</code>, grouped by backup id. Every group reports every targeted tenant, including the ones holding nothing for that id, so a backup only some tenants hold aggregates to <code>INCOMPLETE</code> here exactly as it does when looked up directly — the state of a listed group can be trusted to say whether the cluster can be restored from it. A backup id that only some physical tenants hold is a supported outcome rather than a degraded one; tenants that generate their own backup ids never share one, so in that mode each backup forms its own group and the other tenants report <code>DOES_NOT_EXIST</code> under it.</p>
+<p>The request is all-or-nothing: a physical tenant whose backups cannot be read fails the whole request rather than silently dropping out of the listing. Narrow the request with <code>physicalTenantId</code> to list the backups of the tenants that can still be read.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use <code>GET /v2/backups/runtime</code> to act as a single physical tenant.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1149,9 +1229,13 @@ List the <code>camunda.secrets.*</code> references known for the caller's physic
 <p>Only references the caller holds <code>SECRET:READ</code> on are returned. This endpoint never
 returns secret values, only the reference names.</p>
 <p>The references are read from the secret stores configured for the caller's physical tenant.
-Secret names that cannot form a valid <code>camunda.secrets.&lt;name&gt;</code> reference (for example names
-containing a dot or a dash) are omitted, since they could neither be resolved nor be used in
-a BPMN expression.</p>
+A store may hold names outside the reference name charset (for example one containing a
+dot); those are omitted, since <code>/secrets/resolve</code> would reject them and no permission can
+be granted on them.</p>
+<p>A returned reference is usable verbatim with <code>/secrets/resolve</code>. In a FEEL expression,
+however, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads
+a bare dash as the minus operator: a listed <code>camunda.secrets.db-password</code> is written
+<code>=camunda.secrets.`db-password`</code> in a BPMN input mapping.</p>
 <p>This endpoint is an alpha feature and may be subject to change in future releases.</p>
 </dd>
   </dl>
@@ -1194,6 +1278,13 @@ filters for state are ignored and overridden during this batch operation.
 In contrast to single modification operation, it is not possible to add variable instructions or modify by element key.
 It is only possible to use the element id of the source and target.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_PauseClusterExportingAsync_System_Nullable_System_Boolean__System_Threading_CancellationToken_">PauseClusterExportingAsync(bool?, CancellationToken)</a></dt>
+    <dd><p>Pause exporting across the whole cluster
+Pauses exporting on every physical tenant of the cluster in one call. With <code>soft=true</code>, every physical tenant is soft-paused instead.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1296,6 +1387,13 @@ Restores the cluster from a backup. The restore is described either by a single 
     <dd><p>Resume Batch operation
 Resumes a suspended batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeClusterExportingAsync_System_Threading_CancellationToken_">ResumeClusterExportingAsync(CancellationToken)</a></dt>
+    <dd><p>Resume exporting across the whole cluster
+Resumes exporting on every physical tenant of the cluster in one call, after a pause or soft pause.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1519,7 +1617,7 @@ by filtering for <code>messageSubscriptionType</code> not matching <code>START_E
 </dd>
   </dl>
   <dl class="jumplist">
-    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchOwnAuthorizationsAsync_Camunda_Orchestration_Sdk_AuthorizationSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_AuthorizationSearchResult__System_Threading_CancellationToken_">SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions&lt;AuthorizationSearchResult&gt;?, CancellationToken)</a></dt>
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchOwnAuthorizationsAsync_Camunda_Orchestration_Sdk_AuthorizationSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_OwnAuthorizationSearchResult__System_Threading_CancellationToken_">SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions&lt;OwnAuthorizationSearchResult&gt;?, CancellationToken)</a></dt>
     <dd><p>Search own authorizations
 Search for the current authenticated principal's own authorization records — including authorizations granted directly to the user or client, as well as those granted via a group, role, or mapping rule the principal belongs to.</p>
 </dd>
@@ -1715,11 +1813,27 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SyncRuntimeBackupStateAsClusterAdminAsync_System_String_System_Threading_CancellationToken_">SyncRuntimeBackupStateAsClusterAdminAsync(string?, CancellationToken)</a></dt>
+    <dd><p>Force-write runtime backup state across physical tenants
+Force-writes the checkpoint and backup metadata of every partition of every physical tenant of the cluster, or of the one named by <code>physicalTenantId</code>, to that tenant's backup store, independent of any backup being taken or confirmed, and returns the updated state per physical tenant.</p>
+<p>The request is all-or-nothing: a physical tenant whose metadata cannot be written fails the whole request, and the writes that already succeeded on other tenants are not undone. The operation is idempotent, so retrying the same call is the correct remedy. Narrow the request with <code>physicalTenantId</code> to write the tenants that can still be reached.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use <code>POST /v2/backups/runtime/state/sync</code> to act as a single physical tenant.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SyncRuntimeBackupStateAsync_System_Threading_CancellationToken_">SyncRuntimeBackupStateAsync(CancellationToken)</a></dt>
     <dd><p>Force-write runtime backup state
 Force-writes the checkpoint and backup metadata of every partition of the physical
 tenant to the backup store, independent of any backup being taken or confirmed, and
 returns the updated state.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TakeHistoryBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_TakeHistoryBackupRequest_System_String_System_Threading_CancellationToken_">TakeHistoryBackupAsClusterAdminAsync(TakeHistoryBackupRequest, string?, CancellationToken)</a></dt>
+    <dd><p>Take a history backup on one or every physical tenant
+Triggers a history backup on every physical tenant of the cluster, or on the one named by <code>physicalTenantId</code>. Every targeted tenant uses the same caller-supplied <code>backupId</code>, but the backups are independent: they are neither coordinated nor rolled back together.</p>
+<p>The request is all-or-nothing: the <code>backupId</code> is checked on every targeted tenant before any snapshot is scheduled, so a tenant that already holds this id, or that cannot be reached, fails the whole request and no backup is started anywhere. There is no aggregated cluster-level state in the response.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use <code>POST /v2/backups/history</code> to act as a single physical tenant.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1730,6 +1844,15 @@ secondary storage index it owns.</p>
 <p>Unlike runtime backups, history backups have no generated-id mode: <code>backupId</code> is always
 required.</p>
 <p>Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TakeRuntimeBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_TakeRuntimeBackupRequest_System_String_System_Threading_CancellationToken_">TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest, string?, CancellationToken)</a></dt>
+    <dd><p>Take a runtime backup on one or every physical tenant
+Triggers a runtime backup on every physical tenant of the cluster, or on the one named by <code>physicalTenantId</code>. A cluster-wide backup is a set of independent per-tenant backups, not an atomic snapshot of the cluster: they are neither coordinated nor rolled back together, and each tenant stores its own, so the same <code>backupId</code> can be used for all of them.</p>
+<p>Every targeted physical tenant must be in the same backup-id mode. <code>backupId</code> must be omitted when every targeted tenant generates its own ids (because continuous backups and/or a backup or checkpoint schedule is enabled for it), and is required when none of them does. A cluster whose targeted tenants mix the two modes is rejected with 400 and has to be driven one tenant at a time through <code>POST /v2/backups/runtime</code>. In generated-id mode each tenant generates its own id, so the response reports an id per physical tenant rather than one for the cluster.</p>
+<p>The trigger is all-or-error, and never silent about a partial trigger: if any targeted tenant cannot be triggered the response carries an error status, but its body still lists every targeted tenant — which ones were triggered, under which <code>backupId</code> to monitor or delete them, and why the others failed. Nothing is rolled back, so the backups that were triggered keep running and have to be deleted explicitly. A request rejected before any tenant was triggered answers with a problem detail instead, and nothing is running.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use <code>POST /v2/backups/runtime</code> to act as a single physical tenant.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1745,6 +1868,14 @@ Otherwise, <code>backupId</code> is required.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ThrowJobErrorAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ThrowJobErrorAsync_Camunda_Orchestration_Sdk_JobKey_Camunda_Orchestration_Sdk_JobErrorRequest_System_Threading_CancellationToken_">ThrowJobErrorAsync(JobKey, JobErrorRequest, CancellationToken)</a></dt>
     <dd><p>Throw error for job
 Reports a business error (i.e. non-technical) that occurs while processing a job.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TriggerClusterRebalanceAsync_Camunda_Orchestration_Sdk_ClusterRebalanceRequest_System_Nullable_System_Boolean__System_Threading_CancellationToken_">TriggerClusterRebalanceAsync(ClusterRebalanceRequest, bool?, CancellationToken)</a></dt>
+    <dd><p>Trigger a cluster-wide leadership rebalance
+Transfers leadership of every partition that is not led by its highest-priority replica towards that replica, one partition at a time. Returns as soon as the rebalance has been accepted (poll <code>GET /cluster/v2/rebalance</code> to monitor progress).</p>
+<p>Each rebalance can specify overrides for the configured rebalance settings (e.g. maximum replication lag to allow). An absent request body means &quot;use the configured settings&quot;.</p>
+<p>Requires the cluster-admin security chain. Although this operation lists <code>bearerAuth</code> / <code>basicAuth</code> like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -1835,11 +1966,9 @@ Removes the assignee of a task with the given key. Unassignment waits for blocki
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.UpdateAgentInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UpdateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_System_Threading_CancellationToken_">UpdateAgentInstanceAsync(AgentInstanceKey, AgentInstanceUpdateRequest, CancellationToken)</a></dt>
     <dd><p>Update agent instance
-Updates the mutable fields of an agent instance (status, metric counters, and
-tools) and appends a batch of history items to its conversation history. Metric
-values are treated as deltas and applied immediately to the aggregate counters.
-Tool updates replace the existing tool list. Each history item created for this
-request is echoed back in the response.</p>
+Updates the status of an agent instance and appends a batch of history items
+to its conversation history. Each history item created for this request is
+echoed back in the response.</p>
 </dd>
   </dl>
   <dl class="jumplist">

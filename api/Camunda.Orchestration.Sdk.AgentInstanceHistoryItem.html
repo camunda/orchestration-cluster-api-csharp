@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_AgentInstanceHistoryItem" data-uid="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem" class="text-break">
-Class AgentInstanceHistoryItem  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L4877"><i class="bi bi-code-slash"></i></a>
+Class AgentInstanceHistoryItem  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L5001"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -170,6 +170,12 @@ are flagged via isDuplicate in the response instead. Must be non-blank.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Limits.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Limits">Limits</a></dt>
+    <dd><p>The operational limits as of this entry. CONFIGURATION items only; omit for other
+roles.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.LoopIteration.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_LoopIteration">LoopIteration</a></dt>
     <dd><p>The loop iteration this item belongs to.</p>
 </dd>
@@ -180,13 +186,31 @@ are flagged via isDuplicate in the response instead. Must be non-blank.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Model.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Model">Model</a></dt>
+    <dd><p>The LLM model identifier as of this entry. CONFIGURATION items only; omit for other
+roles.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.ProducedAt.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_ProducedAt">ProducedAt</a></dt>
     <dd><p>The agent-side timestamp of when this message was produced.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Provider.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Provider">Provider</a></dt>
+    <dd><p>The LLM provider as of this entry. CONFIGURATION items only; omit for other roles.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Role.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Role">Role</a></dt>
     <dd><p>The role of this history item in the conversation.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.SystemPrompt.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_SystemPrompt">SystemPrompt</a></dt>
+    <dd><p>The system prompt, as content blocks, as of this entry. CONFIGURATION items only;
+omit for other roles. Omit to leave the system prompt unchanged; when present, must
+be non-empty.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -197,13 +221,20 @@ For TOOL_RESULT items: single-entry array referencing the originating tool call.
 Omit for USER items.</p>
 </dd>
   </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Tools.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Tools">Tools</a></dt>
+    <dd><p>The complete list of tools available to the agent as of this entry. CONFIGURATION
+items only; omit for other roles. Omit to leave the tool list unchanged; send an
+empty array to clear it.</p>
+</dd>
+  </dl>
 
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L4877" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L5001" class="edit-link">Edit this page</a>
         </div>
 
 

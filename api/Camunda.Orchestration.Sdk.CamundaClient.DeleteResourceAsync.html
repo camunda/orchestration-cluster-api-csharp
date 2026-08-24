@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_DeleteResourceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.DeleteResourceAsync*" class="text-break">
-Method DeleteResourceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2456"><i class="bi bi-code-slash"></i></a>
+Method DeleteResourceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2532"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method DeleteResourceAsync  <a class="header-action link-secondary" title="View 
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_DeleteResourceAsync_Camunda_Orchestration_Sdk_ResourceKey_Camunda_Orchestration_Sdk_DeleteResourceRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.DeleteResourceAsync(Camunda.Orchestration.Sdk.ResourceKey,Camunda.Orchestration.Sdk.DeleteResourceRequest,System.Threading.CancellationToken)">
   DeleteResourceAsync(ResourceKey, DeleteResourceRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2456"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2532"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Delete resource
@@ -137,9 +137,12 @@ definitions; for other resource types (forms, generic resources) the flag is ign
 history is deleted.</p>
 <p>The two supported types differ in how the history is removed. For a decision requirements
 definition the history is deleted asynchronously via a batch operation whose details are
-returned in the <code>batchOperation</code> field of the response. For a process definition the
-definition first drains its running instances and its history is deleted asynchronously once
-the definition is fully removed cluster-wide; no batch operation is returned in the response.</p>
+returned in the <code>batchOperation</code> field of the response. For a process definition that still
+exists in the runtime state, the definition first drains its running instances and its
+history is deleted asynchronously once the definition is fully removed cluster-wide; no batch
+operation is returned in the response. If the process definition has already been removed
+from the runtime state and the deletion is later re-triggered with <code>deleteHistory</code> set to
+<code>true</code>, a batch operation is created immediately and returned in the <code>batchOperation</code> field.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -198,7 +201,7 @@ the definition is fully removed cluster-wide; no batch operation is returned in 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2456" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L2532" class="edit-link">Edit this page</a>
         </div>
 
 

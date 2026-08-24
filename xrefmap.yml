@@ -5407,18 +5407,6 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest
   fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest
   nameWithType: AgentInstanceCreationRequest
-- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Definition
-  name: Definition
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Definition.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_Definition
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Definition
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Definition
-  nameWithType: AgentInstanceCreationRequest.Definition
-- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Definition*
-  name: Definition
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Definition.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Definition
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Definition
-  nameWithType: AgentInstanceCreationRequest.Definition
 - uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.ElementInstanceKey
   name: ElementInstanceKey
   href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.ElementInstanceKey.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_ElementInstanceKey
@@ -5431,18 +5419,42 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.ElementInstanceKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.ElementInstanceKey
   nameWithType: AgentInstanceCreationRequest.ElementInstanceKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Limits
-  name: Limits
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Limits.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_Limits
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Limits
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Limits
-  nameWithType: AgentInstanceCreationRequest.Limits
-- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Limits*
-  name: Limits
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Limits.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Limits
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.Limits
-  nameWithType: AgentInstanceCreationRequest.Limits
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.History
+  name: History
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.History.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_History
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.History
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.History
+  nameWithType: AgentInstanceCreationRequest.History
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.History*
+  name: History
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.History.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.History
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.History
+  nameWithType: AgentInstanceCreationRequest.History
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey
+  name: JobKey
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobKey
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey
+  nameWithType: AgentInstanceCreationRequest.JobKey
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey*
+  name: JobKey
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey
+  nameWithType: AgentInstanceCreationRequest.JobKey
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
+  name: JobLease
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobLease
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
+  nameWithType: AgentInstanceCreationRequest.JobLease
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease*
+  name: JobLease
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
+  nameWithType: AgentInstanceCreationRequest.JobLease
 - uid: Camunda.Orchestration.Sdk.AgentInstanceCreationResult
   name: AgentInstanceCreationResult
   href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationResult.html
@@ -5461,48 +5473,60 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationResult.AgentInstanceKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationResult.AgentInstanceKey
   nameWithType: AgentInstanceCreationResult.AgentInstanceKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinition
-  name: AgentInstanceDefinition
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinition.html
-  commentId: T:Camunda.Orchestration.Sdk.AgentInstanceDefinition
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinition
-  nameWithType: AgentInstanceDefinition
-- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinition.Model
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationResult.CreatedHistory
+  name: CreatedHistory
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationResult.CreatedHistory.html#Camunda_Orchestration_Sdk_AgentInstanceCreationResult_CreatedHistory
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceCreationResult.CreatedHistory
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationResult.CreatedHistory
+  nameWithType: AgentInstanceCreationResult.CreatedHistory
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationResult.CreatedHistory*
+  name: CreatedHistory
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationResult.CreatedHistory.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationResult.CreatedHistory
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationResult.CreatedHistory
+  nameWithType: AgentInstanceCreationResult.CreatedHistory
+- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult
+  name: AgentInstanceDefinitionResult
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.html
+  commentId: T:Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult
+  nameWithType: AgentInstanceDefinitionResult
+- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Model
   name: Model
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinition.Model.html#Camunda_Orchestration_Sdk_AgentInstanceDefinition_Model
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceDefinition.Model
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinition.Model
-  nameWithType: AgentInstanceDefinition.Model
-- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinition.Model*
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Model.html#Camunda_Orchestration_Sdk_AgentInstanceDefinitionResult_Model
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Model
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Model
+  nameWithType: AgentInstanceDefinitionResult.Model
+- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Model*
   name: Model
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinition.Model.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceDefinition.Model
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinition.Model
-  nameWithType: AgentInstanceDefinition.Model
-- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinition.Provider
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Model.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Model
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Model
+  nameWithType: AgentInstanceDefinitionResult.Model
+- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Provider
   name: Provider
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinition.Provider.html#Camunda_Orchestration_Sdk_AgentInstanceDefinition_Provider
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceDefinition.Provider
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinition.Provider
-  nameWithType: AgentInstanceDefinition.Provider
-- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinition.Provider*
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Provider.html#Camunda_Orchestration_Sdk_AgentInstanceDefinitionResult_Provider
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Provider
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Provider
+  nameWithType: AgentInstanceDefinitionResult.Provider
+- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Provider*
   name: Provider
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinition.Provider.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceDefinition.Provider
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinition.Provider
-  nameWithType: AgentInstanceDefinition.Provider
-- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinition.SystemPrompt
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Provider.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Provider
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.Provider
+  nameWithType: AgentInstanceDefinitionResult.Provider
+- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.SystemPrompt
   name: SystemPrompt
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinition.SystemPrompt.html#Camunda_Orchestration_Sdk_AgentInstanceDefinition_SystemPrompt
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceDefinition.SystemPrompt
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinition.SystemPrompt
-  nameWithType: AgentInstanceDefinition.SystemPrompt
-- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinition.SystemPrompt*
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.SystemPrompt.html#Camunda_Orchestration_Sdk_AgentInstanceDefinitionResult_SystemPrompt
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.SystemPrompt
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.SystemPrompt
+  nameWithType: AgentInstanceDefinitionResult.SystemPrompt
+- uid: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.SystemPrompt*
   name: SystemPrompt
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinition.SystemPrompt.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceDefinition.SystemPrompt
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinition.SystemPrompt
-  nameWithType: AgentInstanceDefinition.SystemPrompt
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.SystemPrompt.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.SystemPrompt
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceDefinitionResult.SystemPrompt
+  nameWithType: AgentInstanceDefinitionResult.SystemPrompt
 - uid: Camunda.Orchestration.Sdk.AgentInstanceDocumentContent
   name: AgentInstanceDocumentContent
   href: api/Camunda.Orchestration.Sdk.AgentInstanceDocumentContent.html
@@ -5995,6 +6019,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.HistoryItemId
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.HistoryItemId
   nameWithType: AgentInstanceHistoryItem.HistoryItemId
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Limits
+  name: Limits
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Limits.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Limits
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Limits
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Limits
+  nameWithType: AgentInstanceHistoryItem.Limits
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Limits*
+  name: Limits
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Limits.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Limits
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Limits
+  nameWithType: AgentInstanceHistoryItem.Limits
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.LoopIteration
   name: LoopIteration
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.LoopIteration.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_LoopIteration
@@ -6019,6 +6055,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Metrics
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Metrics
   nameWithType: AgentInstanceHistoryItem.Metrics
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Model
+  name: Model
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Model.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Model
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Model
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Model
+  nameWithType: AgentInstanceHistoryItem.Model
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Model*
+  name: Model
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Model.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Model
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Model
+  nameWithType: AgentInstanceHistoryItem.Model
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.ProducedAt
   name: ProducedAt
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.ProducedAt.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_ProducedAt
@@ -6031,6 +6079,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.ProducedAt
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.ProducedAt
   nameWithType: AgentInstanceHistoryItem.ProducedAt
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Provider
+  name: Provider
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Provider.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Provider
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Provider
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Provider
+  nameWithType: AgentInstanceHistoryItem.Provider
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Provider*
+  name: Provider
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Provider.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Provider
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Provider
+  nameWithType: AgentInstanceHistoryItem.Provider
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Role
   name: Role
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Role.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Role
@@ -6043,6 +6103,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Role
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Role
   nameWithType: AgentInstanceHistoryItem.Role
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.SystemPrompt
+  name: SystemPrompt
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.SystemPrompt.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_SystemPrompt
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.SystemPrompt
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.SystemPrompt
+  nameWithType: AgentInstanceHistoryItem.SystemPrompt
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.SystemPrompt*
+  name: SystemPrompt
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.SystemPrompt.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.SystemPrompt
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.SystemPrompt
+  nameWithType: AgentInstanceHistoryItem.SystemPrompt
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.ToolCalls
   name: ToolCalls
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.ToolCalls.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_ToolCalls
@@ -6055,24 +6127,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.ToolCalls
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.ToolCalls
   nameWithType: AgentInstanceHistoryItem.ToolCalls
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult
-  name: AgentInstanceHistoryItemCreationResult
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.html
-  commentId: T:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult
-  nameWithType: AgentInstanceHistoryItemCreationResult
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.HistoryItemKey
-  name: HistoryItemKey
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.HistoryItemKey.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemCreationResult_HistoryItemKey
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.HistoryItemKey
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.HistoryItemKey
-  nameWithType: AgentInstanceHistoryItemCreationResult.HistoryItemKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.HistoryItemKey*
-  name: HistoryItemKey
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.HistoryItemKey.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.HistoryItemKey
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemCreationResult.HistoryItemKey
-  nameWithType: AgentInstanceHistoryItemCreationResult.HistoryItemKey
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Tools
+  name: Tools
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Tools.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItem_Tools
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Tools
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Tools
+  nameWithType: AgentInstanceHistoryItem.Tools
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Tools*
+  name: Tools
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Tools.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Tools
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItem.Tools
+  nameWithType: AgentInstanceHistoryItem.Tools
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics
   name: AgentInstanceHistoryItemMetrics
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.html
@@ -6115,120 +6181,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.OutputTokens
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.OutputTokens
   nameWithType: AgentInstanceHistoryItemMetrics.OutputTokens
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest
-  name: AgentInstanceHistoryItemRequest
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.html
-  commentId: T:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest
-  nameWithType: AgentInstanceHistoryItemRequest
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Content
-  name: Content
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Content.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_Content
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Content
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Content
-  nameWithType: AgentInstanceHistoryItemRequest.Content
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Content*
-  name: Content
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Content.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Content
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Content
-  nameWithType: AgentInstanceHistoryItemRequest.Content
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey
-  name: ElementInstanceKey
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_ElementInstanceKey
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey
-  nameWithType: AgentInstanceHistoryItemRequest.ElementInstanceKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey*
-  name: ElementInstanceKey
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ElementInstanceKey
-  nameWithType: AgentInstanceHistoryItemRequest.ElementInstanceKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey
-  name: JobKey
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_JobKey
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey
-  nameWithType: AgentInstanceHistoryItemRequest.JobKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey*
-  name: JobKey
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobKey
-  nameWithType: AgentInstanceHistoryItemRequest.JobKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease
-  name: JobLease
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_JobLease
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease
-  nameWithType: AgentInstanceHistoryItemRequest.JobLease
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease*
-  name: JobLease
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.JobLease
-  nameWithType: AgentInstanceHistoryItemRequest.JobLease
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
-  name: LoopIteration
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_LoopIteration
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
-  nameWithType: AgentInstanceHistoryItemRequest.LoopIteration
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration*
-  name: LoopIteration
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.LoopIteration
-  nameWithType: AgentInstanceHistoryItemRequest.LoopIteration
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics
-  name: Metrics
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_Metrics
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics
-  nameWithType: AgentInstanceHistoryItemRequest.Metrics
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics*
-  name: Metrics
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Metrics
-  nameWithType: AgentInstanceHistoryItemRequest.Metrics
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ProducedAt
-  name: ProducedAt
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ProducedAt.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_ProducedAt
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ProducedAt
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ProducedAt
-  nameWithType: AgentInstanceHistoryItemRequest.ProducedAt
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ProducedAt*
-  name: ProducedAt
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ProducedAt.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ProducedAt
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ProducedAt
-  nameWithType: AgentInstanceHistoryItemRequest.ProducedAt
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Role
-  name: Role
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Role.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_Role
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Role
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Role
-  nameWithType: AgentInstanceHistoryItemRequest.Role
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Role*
-  name: Role
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Role.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Role
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.Role
-  nameWithType: AgentInstanceHistoryItemRequest.Role
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ToolCalls
-  name: ToolCalls
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ToolCalls.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_ToolCalls
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ToolCalls
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ToolCalls
-  nameWithType: AgentInstanceHistoryItemRequest.ToolCalls
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ToolCalls*
-  name: ToolCalls
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ToolCalls.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ToolCalls
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest.ToolCalls
-  nameWithType: AgentInstanceHistoryItemRequest.ToolCalls
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult
   name: AgentInstanceHistoryItemResult
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.html
@@ -7093,60 +7045,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceMetrics.ToolCalls
   fullName: Camunda.Orchestration.Sdk.AgentInstanceMetrics.ToolCalls
   nameWithType: AgentInstanceMetrics.ToolCalls
-- uid: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta
-  name: AgentInstanceMetricsDelta
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.html
-  commentId: T:Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta
-  nameWithType: AgentInstanceMetricsDelta
-- uid: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.InputTokens
-  name: InputTokens
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.InputTokens.html#Camunda_Orchestration_Sdk_AgentInstanceMetricsDelta_InputTokens
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.InputTokens
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.InputTokens
-  nameWithType: AgentInstanceMetricsDelta.InputTokens
-- uid: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.InputTokens*
-  name: InputTokens
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.InputTokens.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.InputTokens
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.InputTokens
-  nameWithType: AgentInstanceMetricsDelta.InputTokens
-- uid: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ModelCalls
-  name: ModelCalls
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ModelCalls.html#Camunda_Orchestration_Sdk_AgentInstanceMetricsDelta_ModelCalls
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ModelCalls
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ModelCalls
-  nameWithType: AgentInstanceMetricsDelta.ModelCalls
-- uid: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ModelCalls*
-  name: ModelCalls
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ModelCalls.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ModelCalls
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ModelCalls
-  nameWithType: AgentInstanceMetricsDelta.ModelCalls
-- uid: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.OutputTokens
-  name: OutputTokens
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.OutputTokens.html#Camunda_Orchestration_Sdk_AgentInstanceMetricsDelta_OutputTokens
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.OutputTokens
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.OutputTokens
-  nameWithType: AgentInstanceMetricsDelta.OutputTokens
-- uid: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.OutputTokens*
-  name: OutputTokens
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.OutputTokens.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.OutputTokens
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.OutputTokens
-  nameWithType: AgentInstanceMetricsDelta.OutputTokens
-- uid: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ToolCalls
-  name: ToolCalls
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ToolCalls.html#Camunda_Orchestration_Sdk_AgentInstanceMetricsDelta_ToolCalls
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ToolCalls
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ToolCalls
-  nameWithType: AgentInstanceMetricsDelta.ToolCalls
-- uid: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ToolCalls*
-  name: ToolCalls
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ToolCalls.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ToolCalls
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetricsDelta.ToolCalls
-  nameWithType: AgentInstanceMetricsDelta.ToolCalls
 - uid: Camunda.Orchestration.Sdk.AgentInstanceObjectContent
   name: AgentInstanceObjectContent
   href: api/Camunda.Orchestration.Sdk.AgentInstanceObjectContent.html
@@ -7903,18 +7801,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease
   fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease
   nameWithType: AgentInstanceUpdateRequest.JobLease
-- uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Metrics
-  name: Metrics
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Metrics.html#Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_Metrics
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Metrics
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Metrics
-  nameWithType: AgentInstanceUpdateRequest.Metrics
-- uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Metrics*
-  name: Metrics
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Metrics.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Metrics
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Metrics
-  nameWithType: AgentInstanceUpdateRequest.Metrics
 - uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Status
   name: Status
   href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Status.html#Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_Status
@@ -7927,18 +7813,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Status
   fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Status
   nameWithType: AgentInstanceUpdateRequest.Status
-- uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Tools
-  name: Tools
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Tools.html#Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_Tools
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Tools
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Tools
-  nameWithType: AgentInstanceUpdateRequest.Tools
-- uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Tools*
-  name: Tools
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Tools.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Tools
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Tools
-  nameWithType: AgentInstanceUpdateRequest.Tools
 - uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateResult
   name: AgentInstanceUpdateResult
   href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateResult.html
@@ -13471,6 +13345,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelBatchOperationAsync
   nameWithType: CamundaClient.CancelBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync(System.Threading.CancellationToken)
+  name: CancelClusterRebalanceAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelClusterRebalanceAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.CancelClusterRebalanceAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync*
+  name: CancelClusterRebalanceAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync
+  nameWithType: CamundaClient.CancelClusterRebalanceAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.CancelProcessInstanceRequest,System.Threading.CancellationToken)
   name: CancelProcessInstanceAsync(ProcessInstanceKey, CancelProcessInstanceRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_CancelProcessInstanceRequest_System_Threading_CancellationToken_
@@ -13612,18 +13498,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceAsync
   nameWithType: CamundaClient.CreateAgentInstanceAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync(Camunda.Orchestration.Sdk.AgentInstanceKey,Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest,System.Threading.CancellationToken)
-  name: CreateAgentInstanceHistoryItemAsync(AgentInstanceKey, AgentInstanceHistoryItemRequest, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAgentInstanceHistoryItemAsync_Camunda_Orchestration_Sdk_AgentInstanceKey_Camunda_Orchestration_Sdk_AgentInstanceHistoryItemRequest_System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync(Camunda.Orchestration.Sdk.AgentInstanceKey,Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest,System.Threading.CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync(Camunda.Orchestration.Sdk.AgentInstanceKey, Camunda.Orchestration.Sdk.AgentInstanceHistoryItemRequest, System.Threading.CancellationToken)
-  nameWithType: CamundaClient.CreateAgentInstanceHistoryItemAsync(AgentInstanceKey, AgentInstanceHistoryItemRequest, CancellationToken)
-- uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync*
-  name: CreateAgentInstanceHistoryItemAsync
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync.html
-  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceHistoryItemAsync
-  nameWithType: CamundaClient.CreateAgentInstanceHistoryItemAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.CreateAuthorizationAsync(Camunda.Orchestration.Sdk.AuthorizationRequest,System.Threading.CancellationToken)
   name: CreateAuthorizationAsync(AuthorizationRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.CreateAuthorizationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateAuthorizationAsync_Camunda_Orchestration_Sdk_AuthorizationRequest_System_Threading_CancellationToken_
@@ -13921,6 +13795,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteGroupAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteGroupAsync
   nameWithType: CamundaClient.DeleteGroupAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.String,System.Threading.CancellationToken)
+  name: DeleteHistoryBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteHistoryBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_BackupId_System_String_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.String,System.Threading.CancellationToken)
+  name.vb: DeleteHistoryBackupAsClusterAdminAsync(BackupId, String, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId, string?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId, String, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteHistoryBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)
+  nameWithType.vb: CamundaClient.DeleteHistoryBackupAsClusterAdminAsync(BackupId, String, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync*
+  name: DeleteHistoryBackupAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsClusterAdminAsync
+  nameWithType: CamundaClient.DeleteHistoryBackupAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
   name: DeleteHistoryBackupAsync(BackupId, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteHistoryBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteHistoryBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_
@@ -13993,6 +13882,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteRoleAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRoleAsync
   nameWithType: CamundaClient.DeleteRoleAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.String,System.Threading.CancellationToken)
+  name: DeleteRuntimeBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_BackupId_System_String_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.String,System.Threading.CancellationToken)
+  name.vb: DeleteRuntimeBackupAsClusterAdminAsync(BackupId, String, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId, string?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId, String, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)
+  nameWithType.vb: CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync(BackupId, String, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync*
+  name: DeleteRuntimeBackupAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync
+  nameWithType: CamundaClient.DeleteRuntimeBackupAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
   name: DeleteRuntimeBackupAsync(BackupId, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_
@@ -14005,6 +13909,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupAsync
   nameWithType: CamundaClient.DeleteRuntimeBackupAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync(System.String,System.Threading.CancellationToken)
+  name: DeleteRuntimeBackupStateAsClusterAdminAsync(string?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupStateAsClusterAdminAsync_System_String_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync(System.String,System.Threading.CancellationToken)
+  name.vb: DeleteRuntimeBackupStateAsClusterAdminAsync(String, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync(string?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync(String, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync(string?, CancellationToken)
+  nameWithType.vb: CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync(String, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync*
+  name: DeleteRuntimeBackupStateAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync
+  nameWithType: CamundaClient.DeleteRuntimeBackupStateAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync(System.Threading.CancellationToken)
   name: DeleteRuntimeBackupStateAsync(CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.DeleteRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_DeleteRuntimeBackupStateAsync_System_Threading_CancellationToken_
@@ -14239,6 +14158,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetBatchOperationAsync
   nameWithType: CamundaClient.GetBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync(System.Threading.CancellationToken)
+  name: GetClusterExportingStatusAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterExportingStatusAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetClusterExportingStatusAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync*
+  name: GetClusterExportingStatusAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync
+  nameWithType: CamundaClient.GetClusterExportingStatusAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync(System.Threading.CancellationToken)
+  name: GetClusterRebalanceAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterRebalanceAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetClusterRebalanceAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync*
+  name: GetClusterRebalanceAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync
+  nameWithType: CamundaClient.GetClusterRebalanceAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterStatusAsync(System.Threading.CancellationToken)
   name: GetClusterStatusAsync(CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClusterStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterStatusAsync_System_Threading_CancellationToken_
@@ -14455,6 +14398,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetGroupAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetGroupAsync
   nameWithType: CamundaClient.GetGroupAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.String,System.Threading.CancellationToken)
+  name: GetHistoryBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetHistoryBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_BackupId_System_String_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.String,System.Threading.CancellationToken)
+  name.vb: GetHistoryBackupAsClusterAdminAsync(BackupId, String, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId, string?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId, String, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetHistoryBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetHistoryBackupAsClusterAdminAsync(BackupId, String, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync*
+  name: GetHistoryBackupAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsClusterAdminAsync
+  nameWithType: CamundaClient.GetHistoryBackupAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
   name: GetHistoryBackupAsync(BackupId, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetHistoryBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetHistoryBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_
@@ -14836,6 +14794,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRoleAsync
   nameWithType: CamundaClient.GetRoleAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.String,System.Threading.CancellationToken)
+  name: GetRuntimeBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_BackupId_System_String_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId,System.String,System.Threading.CancellationToken)
+  name.vb: GetRuntimeBackupAsClusterAdminAsync(BackupId, String, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId, string?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId, String, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetRuntimeBackupAsClusterAdminAsync(BackupId, string?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetRuntimeBackupAsClusterAdminAsync(BackupId, String, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync*
+  name: GetRuntimeBackupAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsClusterAdminAsync
+  nameWithType: CamundaClient.GetRuntimeBackupAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync(Camunda.Orchestration.Sdk.BackupId,System.Threading.CancellationToken)
   name: GetRuntimeBackupAsync(BackupId, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupAsync_Camunda_Orchestration_Sdk_BackupId_System_Threading_CancellationToken_
@@ -14848,6 +14821,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupAsync
   nameWithType: CamundaClient.GetRuntimeBackupAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync(System.String,System.Threading.CancellationToken)
+  name: GetRuntimeBackupStateAsClusterAdminAsync(string?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupStateAsClusterAdminAsync_System_String_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync(System.String,System.Threading.CancellationToken)
+  name.vb: GetRuntimeBackupStateAsClusterAdminAsync(String, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync(string?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync(String, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync(string?, CancellationToken)
+  nameWithType.vb: CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync(String, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync*
+  name: GetRuntimeBackupStateAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync
+  nameWithType: CamundaClient.GetRuntimeBackupStateAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync(System.Threading.CancellationToken)
   name: GetRuntimeBackupStateAsync(CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupStateAsync_System_Threading_CancellationToken_
@@ -15028,6 +15016,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetWorkers
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetWorkers
   nameWithType: CamundaClient.GetWorkers
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync(System.String,System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name: ListHistoryBackupsAsClusterAdminAsync(string?, BackupIdPrefix?, bool?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListHistoryBackupsAsClusterAdminAsync_System_String_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Nullable_System_Boolean__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync(System.String,System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name.vb: ListHistoryBackupsAsClusterAdminAsync(String, BackupIdPrefix?, Boolean?, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync(string?, Camunda.Orchestration.Sdk.BackupIdPrefix?, bool?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync(String, Camunda.Orchestration.Sdk.BackupIdPrefix?, Boolean?, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ListHistoryBackupsAsClusterAdminAsync(string?, BackupIdPrefix?, bool?, CancellationToken)
+  nameWithType.vb: CamundaClient.ListHistoryBackupsAsClusterAdminAsync(String, BackupIdPrefix?, Boolean?, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync*
+  name: ListHistoryBackupsAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsClusterAdminAsync
+  nameWithType: CamundaClient.ListHistoryBackupsAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsync(System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Nullable{System.Boolean},System.Threading.CancellationToken)
   name: ListHistoryBackupsAsync(BackupIdPrefix?, bool?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListHistoryBackupsAsync_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Nullable_System_Boolean__System_Threading_CancellationToken_
@@ -15043,6 +15046,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ListHistoryBackupsAsync
   nameWithType: CamundaClient.ListHistoryBackupsAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync(System.String,System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Threading.CancellationToken)
+  name: ListRuntimeBackupsAsClusterAdminAsync(string?, BackupIdPrefix?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListRuntimeBackupsAsClusterAdminAsync_System_String_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync(System.String,System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Threading.CancellationToken)
+  name.vb: ListRuntimeBackupsAsClusterAdminAsync(String, BackupIdPrefix?, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync(string?, Camunda.Orchestration.Sdk.BackupIdPrefix?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync(String, Camunda.Orchestration.Sdk.BackupIdPrefix?, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ListRuntimeBackupsAsClusterAdminAsync(string?, BackupIdPrefix?, CancellationToken)
+  nameWithType.vb: CamundaClient.ListRuntimeBackupsAsClusterAdminAsync(String, BackupIdPrefix?, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync*
+  name: ListRuntimeBackupsAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsClusterAdminAsync
+  nameWithType: CamundaClient.ListRuntimeBackupsAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync(System.Nullable{Camunda.Orchestration.Sdk.BackupIdPrefix},System.Threading.CancellationToken)
   name: ListRuntimeBackupsAsync(BackupIdPrefix?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ListRuntimeBackupsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ListRuntimeBackupsAsync_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Threading_CancellationToken_
@@ -15115,6 +15133,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ModifyProcessInstancesBatchOperationAsync
   nameWithType: CamundaClient.ModifyProcessInstancesBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync(System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name: PauseClusterExportingAsync(bool?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_PauseClusterExportingAsync_System_Nullable_System_Boolean__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync(System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name.vb: PauseClusterExportingAsync(Boolean?, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync(bool?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync(Boolean?, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.PauseClusterExportingAsync(bool?, CancellationToken)
+  nameWithType.vb: CamundaClient.PauseClusterExportingAsync(Boolean?, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync*
+  name: PauseClusterExportingAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.PauseClusterExportingAsync
+  nameWithType: CamundaClient.PauseClusterExportingAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync(System.Nullable{System.Boolean},System.Threading.CancellationToken)
   name: PauseExportingAsync(bool?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.PauseExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_PauseExportingAsync_System_Nullable_System_Boolean__System_Threading_CancellationToken_
@@ -15256,6 +15289,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeBatchOperationAsync
   nameWithType: CamundaClient.ResumeBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync(System.Threading.CancellationToken)
+  name: ResumeClusterExportingAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeClusterExportingAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.ResumeClusterExportingAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync*
+  name: ResumeClusterExportingAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.ResumeClusterExportingAsync
+  nameWithType: CamundaClient.ResumeClusterExportingAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync(System.Threading.CancellationToken)
   name: ResumeExportingAsync(CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.ResumeExportingAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeExportingAsync_System_Threading_CancellationToken_
@@ -15739,15 +15784,15 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchMessageSubscriptionsAsync
   nameWithType: CamundaClient.SearchMessageSubscriptionsAsync
-- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.AuthorizationSearchResult},System.Threading.CancellationToken)
-  name: SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions<AuthorizationSearchResult>?, CancellationToken)
-  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchOwnAuthorizationsAsync_Camunda_Orchestration_Sdk_AuthorizationSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_AuthorizationSearchResult__System_Threading_CancellationToken_
-  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.AuthorizationSearchResult},System.Threading.CancellationToken)
-  name.vb: SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions(Of AuthorizationSearchResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.AuthorizationSearchResult>?, System.Threading.CancellationToken)
-  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery, Camunda.Orchestration.Sdk.ConsistencyOptions(Of Camunda.Orchestration.Sdk.AuthorizationSearchResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions<AuthorizationSearchResult>?, CancellationToken)
-  nameWithType.vb: CamundaClient.SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions(Of AuthorizationSearchResult), CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult},System.Threading.CancellationToken)
+  name: SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions<OwnAuthorizationSearchResult>?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchOwnAuthorizationsAsync_Camunda_Orchestration_Sdk_AuthorizationSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_OwnAuthorizationSearchResult__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult},System.Threading.CancellationToken)
+  name.vb: SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions(Of OwnAuthorizationSearchResult), CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult>?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery, Camunda.Orchestration.Sdk.ConsistencyOptions(Of Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult), System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions<OwnAuthorizationSearchResult>?, CancellationToken)
+  nameWithType.vb: CamundaClient.SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions(Of OwnAuthorizationSearchResult), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync*
   name: SearchOwnAuthorizationsAsync
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchOwnAuthorizationsAsync.html
@@ -16093,6 +16138,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync
   nameWithType: CamundaClient.SuspendProcessInstancesBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync(System.String,System.Threading.CancellationToken)
+  name: SyncRuntimeBackupStateAsClusterAdminAsync(string?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SyncRuntimeBackupStateAsClusterAdminAsync_System_String_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync(System.String,System.Threading.CancellationToken)
+  name.vb: SyncRuntimeBackupStateAsClusterAdminAsync(String, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync(string?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync(String, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync(string?, CancellationToken)
+  nameWithType.vb: CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync(String, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync*
+  name: SyncRuntimeBackupStateAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync
+  nameWithType: CamundaClient.SyncRuntimeBackupStateAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync(System.Threading.CancellationToken)
   name: SyncRuntimeBackupStateAsync(CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SyncRuntimeBackupStateAsync_System_Threading_CancellationToken_
@@ -16105,6 +16165,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SyncRuntimeBackupStateAsync
   nameWithType: CamundaClient.SyncRuntimeBackupStateAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeHistoryBackupRequest,System.String,System.Threading.CancellationToken)
+  name: TakeHistoryBackupAsClusterAdminAsync(TakeHistoryBackupRequest, string?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TakeHistoryBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_TakeHistoryBackupRequest_System_String_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeHistoryBackupRequest,System.String,System.Threading.CancellationToken)
+  name.vb: TakeHistoryBackupAsClusterAdminAsync(TakeHistoryBackupRequest, String, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeHistoryBackupRequest, string?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeHistoryBackupRequest, String, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.TakeHistoryBackupAsClusterAdminAsync(TakeHistoryBackupRequest, string?, CancellationToken)
+  nameWithType.vb: CamundaClient.TakeHistoryBackupAsClusterAdminAsync(TakeHistoryBackupRequest, String, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync*
+  name: TakeHistoryBackupAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsClusterAdminAsync
+  nameWithType: CamundaClient.TakeHistoryBackupAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsync(Camunda.Orchestration.Sdk.TakeHistoryBackupRequest,System.Threading.CancellationToken)
   name: TakeHistoryBackupAsync(TakeHistoryBackupRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TakeHistoryBackupAsync_Camunda_Orchestration_Sdk_TakeHistoryBackupRequest_System_Threading_CancellationToken_
@@ -16117,6 +16192,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.TakeHistoryBackupAsync
   nameWithType: CamundaClient.TakeHistoryBackupAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest,System.String,System.Threading.CancellationToken)
+  name: TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest, string?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TakeRuntimeBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_TakeRuntimeBackupRequest_System_String_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest,System.String,System.Threading.CancellationToken)
+  name.vb: TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest, String, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest, string?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest, String, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest, string?, CancellationToken)
+  nameWithType.vb: CamundaClient.TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest, String, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync*
+  name: TakeRuntimeBackupAsClusterAdminAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsClusterAdminAsync
+  nameWithType: CamundaClient.TakeRuntimeBackupAsClusterAdminAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest,System.Threading.CancellationToken)
   name: TakeRuntimeBackupAsync(TakeRuntimeBackupRequest, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.TakeRuntimeBackupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TakeRuntimeBackupAsync_Camunda_Orchestration_Sdk_TakeRuntimeBackupRequest_System_Threading_CancellationToken_
@@ -16141,6 +16231,21 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.ThrowJobErrorAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.ThrowJobErrorAsync
   nameWithType: CamundaClient.ThrowJobErrorAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync(Camunda.Orchestration.Sdk.ClusterRebalanceRequest,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name: TriggerClusterRebalanceAsync(ClusterRebalanceRequest, bool?, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_TriggerClusterRebalanceAsync_Camunda_Orchestration_Sdk_ClusterRebalanceRequest_System_Nullable_System_Boolean__System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync(Camunda.Orchestration.Sdk.ClusterRebalanceRequest,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  name.vb: TriggerClusterRebalanceAsync(ClusterRebalanceRequest, Boolean?, CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync(Camunda.Orchestration.Sdk.ClusterRebalanceRequest, bool?, System.Threading.CancellationToken)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync(Camunda.Orchestration.Sdk.ClusterRebalanceRequest, Boolean?, System.Threading.CancellationToken)
+  nameWithType: CamundaClient.TriggerClusterRebalanceAsync(ClusterRebalanceRequest, bool?, CancellationToken)
+  nameWithType.vb: CamundaClient.TriggerClusterRebalanceAsync(ClusterRebalanceRequest, Boolean?, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync*
+  name: TriggerClusterRebalanceAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync
+  nameWithType: CamundaClient.TriggerClusterRebalanceAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.UnassignClientFromGroupAsync(Camunda.Orchestration.Sdk.GroupId,Camunda.Orchestration.Sdk.ClientId,System.Threading.CancellationToken)
   name: UnassignClientFromGroupAsync(GroupId, ClientId, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.UnassignClientFromGroupAsync.html#Camunda_Orchestration_Sdk_CamundaClient_UnassignClientFromGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_ClientId_System_Threading_CancellationToken_
@@ -17485,6 +17590,84 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.CloudStage.Prod
   fullName: Camunda.Orchestration.Sdk.CloudStage.Prod
   nameWithType: CloudStage.Prod
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponse
+  name: ClusterBalanceResponse
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterBalanceResponse
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponse
+  nameWithType: ClusterBalanceResponse
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponse.LastCompletedRebalance
+  name: LastCompletedRebalance
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponse.LastCompletedRebalance.html#Camunda_Orchestration_Sdk_ClusterBalanceResponse_LastCompletedRebalance
+  commentId: P:Camunda.Orchestration.Sdk.ClusterBalanceResponse.LastCompletedRebalance
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponse.LastCompletedRebalance
+  nameWithType: ClusterBalanceResponse.LastCompletedRebalance
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponse.LastCompletedRebalance*
+  name: LastCompletedRebalance
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponse.LastCompletedRebalance.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterBalanceResponse.LastCompletedRebalance
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponse.LastCompletedRebalance
+  nameWithType: ClusterBalanceResponse.LastCompletedRebalance
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponse.Partitions
+  name: Partitions
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponse.Partitions.html#Camunda_Orchestration_Sdk_ClusterBalanceResponse_Partitions
+  commentId: P:Camunda.Orchestration.Sdk.ClusterBalanceResponse.Partitions
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponse.Partitions
+  nameWithType: ClusterBalanceResponse.Partitions
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponse.Partitions*
+  name: Partitions
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponse.Partitions.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterBalanceResponse.Partitions
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponse.Partitions
+  nameWithType: ClusterBalanceResponse.Partitions
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponse.RunningRebalance
+  name: RunningRebalance
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponse.RunningRebalance.html#Camunda_Orchestration_Sdk_ClusterBalanceResponse_RunningRebalance
+  commentId: P:Camunda.Orchestration.Sdk.ClusterBalanceResponse.RunningRebalance
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponse.RunningRebalance
+  nameWithType: ClusterBalanceResponse.RunningRebalance
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponse.RunningRebalance*
+  name: RunningRebalance
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponse.RunningRebalance.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterBalanceResponse.RunningRebalance
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponse.RunningRebalance
+  nameWithType: ClusterBalanceResponse.RunningRebalance
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponse.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponse.State.html#Camunda_Orchestration_Sdk_ClusterBalanceResponse_State
+  commentId: P:Camunda.Orchestration.Sdk.ClusterBalanceResponse.State
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponse.State
+  nameWithType: ClusterBalanceResponse.State
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponse.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponse.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterBalanceResponse.State
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponse.State
+  nameWithType: ClusterBalanceResponse.State
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponseState
+  name: ClusterBalanceResponseState
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponseState.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterBalanceResponseState
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponseState
+  nameWithType: ClusterBalanceResponseState
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponseState.BALANCED
+  name: BALANCED
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponseState.html#Camunda_Orchestration_Sdk_ClusterBalanceResponseState_BALANCED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterBalanceResponseState.BALANCED
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponseState.BALANCED
+  nameWithType: ClusterBalanceResponseState.BALANCED
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponseState.BALANCING
+  name: BALANCING
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponseState.html#Camunda_Orchestration_Sdk_ClusterBalanceResponseState_BALANCING
+  commentId: F:Camunda.Orchestration.Sdk.ClusterBalanceResponseState.BALANCING
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponseState.BALANCING
+  nameWithType: ClusterBalanceResponseState.BALANCING
+- uid: Camunda.Orchestration.Sdk.ClusterBalanceResponseState.UNBALANCED
+  name: UNBALANCED
+  href: api/Camunda.Orchestration.Sdk.ClusterBalanceResponseState.html#Camunda_Orchestration_Sdk_ClusterBalanceResponseState_UNBALANCED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterBalanceResponseState.UNBALANCED
+  fullName: Camunda.Orchestration.Sdk.ClusterBalanceResponseState.UNBALANCED
+  nameWithType: ClusterBalanceResponseState.UNBALANCED
 - uid: Camunda.Orchestration.Sdk.ClusterBrokerInfo
   name: ClusterBrokerInfo
   href: api/Camunda.Orchestration.Sdk.ClusterBrokerInfo.html
@@ -17539,6 +17722,252 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ClusterBrokerInfo.Version
   fullName: Camunda.Orchestration.Sdk.ClusterBrokerInfo.Version
   nameWithType: ClusterBrokerInfo.Version
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance
+  name: ClusterCompletedRebalance
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterCompletedRebalance
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance
+  nameWithType: ClusterCompletedRebalance
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.FinishedAt
+  name: FinishedAt
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.FinishedAt.html#Camunda_Orchestration_Sdk_ClusterCompletedRebalance_FinishedAt
+  commentId: P:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.FinishedAt
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.FinishedAt
+  nameWithType: ClusterCompletedRebalance.FinishedAt
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.FinishedAt*
+  name: FinishedAt
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.FinishedAt.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.FinishedAt
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.FinishedAt
+  nameWithType: ClusterCompletedRebalance.FinishedAt
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Partitions
+  name: Partitions
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Partitions.html#Camunda_Orchestration_Sdk_ClusterCompletedRebalance_Partitions
+  commentId: P:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Partitions
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Partitions
+  nameWithType: ClusterCompletedRebalance.Partitions
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Partitions*
+  name: Partitions
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Partitions.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Partitions
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Partitions
+  nameWithType: ClusterCompletedRebalance.Partitions
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.RebalanceId
+  name: RebalanceId
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.RebalanceId.html#Camunda_Orchestration_Sdk_ClusterCompletedRebalance_RebalanceId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.RebalanceId
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.RebalanceId
+  nameWithType: ClusterCompletedRebalance.RebalanceId
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.RebalanceId*
+  name: RebalanceId
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.RebalanceId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.RebalanceId
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.RebalanceId
+  nameWithType: ClusterCompletedRebalance.RebalanceId
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Result
+  name: Result
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Result.html#Camunda_Orchestration_Sdk_ClusterCompletedRebalance_Result
+  commentId: P:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Result
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Result
+  nameWithType: ClusterCompletedRebalance.Result
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Result*
+  name: Result
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Result.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Result
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.Result
+  nameWithType: ClusterCompletedRebalance.Result
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.StartedAt
+  name: StartedAt
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.StartedAt.html#Camunda_Orchestration_Sdk_ClusterCompletedRebalance_StartedAt
+  commentId: P:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.StartedAt
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.StartedAt
+  nameWithType: ClusterCompletedRebalance.StartedAt
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.StartedAt*
+  name: StartedAt
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalance.StartedAt.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterCompletedRebalance.StartedAt
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalance.StartedAt
+  nameWithType: ClusterCompletedRebalance.StartedAt
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult
+  name: ClusterCompletedRebalanceResult
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult
+  nameWithType: ClusterCompletedRebalanceResult
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.CANCELLED
+  name: CANCELLED
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.html#Camunda_Orchestration_Sdk_ClusterCompletedRebalanceResult_CANCELLED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.CANCELLED
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.CANCELLED
+  nameWithType: ClusterCompletedRebalanceResult.CANCELLED
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.COMPLETED
+  name: COMPLETED
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.html#Camunda_Orchestration_Sdk_ClusterCompletedRebalanceResult_COMPLETED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.COMPLETED
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.COMPLETED
+  nameWithType: ClusterCompletedRebalanceResult.COMPLETED
+- uid: Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.FAILED
+  name: FAILED
+  href: api/Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.html#Camunda_Orchestration_Sdk_ClusterCompletedRebalanceResult_FAILED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.FAILED
+  fullName: Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult.FAILED
+  nameWithType: ClusterCompletedRebalanceResult.FAILED
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo
+  name: ClusterHistoryBackupInfo
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo
+  nameWithType: ClusterHistoryBackupInfo
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.BackupId
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.BackupId.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupInfo_BackupId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.BackupId
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.BackupId
+  nameWithType: ClusterHistoryBackupInfo.BackupId
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.BackupId*
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.BackupId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.BackupId
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.BackupId
+  nameWithType: ClusterHistoryBackupInfo.BackupId
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.PhysicalTenants
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.PhysicalTenants.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupInfo_PhysicalTenants
+  commentId: P:Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.PhysicalTenants
+  nameWithType: ClusterHistoryBackupInfo.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.PhysicalTenants*
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.PhysicalTenants.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo.PhysicalTenants
+  nameWithType: ClusterHistoryBackupInfo.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult
+  name: ClusterHistoryBackupTakeResult
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult
+  nameWithType: ClusterHistoryBackupTakeResult
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.PhysicalTenantId
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.PhysicalTenantId.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTakeResult_PhysicalTenantId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.PhysicalTenantId
+  nameWithType: ClusterHistoryBackupTakeResult.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.PhysicalTenantId*
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.PhysicalTenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.PhysicalTenantId
+  nameWithType: ClusterHistoryBackupTakeResult.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.ScheduledSnapshots
+  name: ScheduledSnapshots
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.ScheduledSnapshots.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTakeResult_ScheduledSnapshots
+  commentId: P:Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.ScheduledSnapshots
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.ScheduledSnapshots
+  nameWithType: ClusterHistoryBackupTakeResult.ScheduledSnapshots
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.ScheduledSnapshots*
+  name: ScheduledSnapshots
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.ScheduledSnapshots.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.ScheduledSnapshots
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTakeResult.ScheduledSnapshots
+  nameWithType: ClusterHistoryBackupTakeResult.ScheduledSnapshots
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo
+  name: ClusterHistoryBackupTenantInfo
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo
+  nameWithType: ClusterHistoryBackupTenantInfo
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.Details
+  name: Details
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.Details.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantInfo_Details
+  commentId: P:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.Details
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.Details
+  nameWithType: ClusterHistoryBackupTenantInfo.Details
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.Details*
+  name: Details
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.Details.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.Details
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.Details
+  nameWithType: ClusterHistoryBackupTenantInfo.Details
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.FailureReason
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.FailureReason.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantInfo_FailureReason
+  commentId: P:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.FailureReason
+  nameWithType: ClusterHistoryBackupTenantInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.FailureReason*
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.FailureReason.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.FailureReason
+  nameWithType: ClusterHistoryBackupTenantInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.PhysicalTenantId
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.PhysicalTenantId.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantInfo_PhysicalTenantId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.PhysicalTenantId
+  nameWithType: ClusterHistoryBackupTenantInfo.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.PhysicalTenantId*
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.PhysicalTenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.PhysicalTenantId
+  nameWithType: ClusterHistoryBackupTenantInfo.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.State.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantInfo_State
+  commentId: P:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.State
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.State
+  nameWithType: ClusterHistoryBackupTenantInfo.State
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.State
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantInfo.State
+  nameWithType: ClusterHistoryBackupTenantInfo.State
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState
+  name: ClusterHistoryBackupTenantState
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState
+  nameWithType: ClusterHistoryBackupTenantState
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.COMPLETED
+  name: COMPLETED
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantState_COMPLETED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.COMPLETED
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.COMPLETED
+  nameWithType: ClusterHistoryBackupTenantState.COMPLETED
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.FAILED
+  name: FAILED
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantState_FAILED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.FAILED
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.FAILED
+  nameWithType: ClusterHistoryBackupTenantState.FAILED
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.INCOMPATIBLE
+  name: INCOMPATIBLE
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantState_INCOMPATIBLE
+  commentId: F:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.INCOMPATIBLE
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.INCOMPATIBLE
+  nameWithType: ClusterHistoryBackupTenantState.INCOMPATIBLE
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.INCOMPLETE
+  name: INCOMPLETE
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantState_INCOMPLETE
+  commentId: F:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.INCOMPLETE
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.INCOMPLETE
+  nameWithType: ClusterHistoryBackupTenantState.INCOMPLETE
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.INPROGRESS
+  name: INPROGRESS
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantState_INPROGRESS
+  commentId: F:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.INPROGRESS
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.INPROGRESS
+  nameWithType: ClusterHistoryBackupTenantState.INPROGRESS
+- uid: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.NOTFOUND
+  name: NOTFOUND
+  href: api/Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.html#Camunda_Orchestration_Sdk_ClusterHistoryBackupTenantState_NOTFOUND
+  commentId: F:Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.NOTFOUND
+  fullName: Camunda.Orchestration.Sdk.ClusterHistoryBackupTenantState.NOTFOUND
+  nameWithType: ClusterHistoryBackupTenantState.NOTFOUND
 - uid: Camunda.Orchestration.Sdk.ClusterModeChangeOperation
   name: ClusterModeChangeOperation
   href: api/Camunda.Orchestration.Sdk.ClusterModeChangeOperation.html
@@ -17629,6 +18058,408 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges
   fullName: Camunda.Orchestration.Sdk.ClusterModeChangeResponse.PlannedChanges
   nameWithType: ClusterModeChangeResponse.PlannedChanges
+- uid: Camunda.Orchestration.Sdk.ClusterRebalance
+  name: ClusterRebalance
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalance.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRebalance
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalance
+  nameWithType: ClusterRebalance
+- uid: Camunda.Orchestration.Sdk.ClusterRebalance.Partitions
+  name: Partitions
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalance.Partitions.html#Camunda_Orchestration_Sdk_ClusterRebalance_Partitions
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalance.Partitions
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalance.Partitions
+  nameWithType: ClusterRebalance.Partitions
+- uid: Camunda.Orchestration.Sdk.ClusterRebalance.Partitions*
+  name: Partitions
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalance.Partitions.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalance.Partitions
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalance.Partitions
+  nameWithType: ClusterRebalance.Partitions
+- uid: Camunda.Orchestration.Sdk.ClusterRebalance.RebalanceId
+  name: RebalanceId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalance.RebalanceId.html#Camunda_Orchestration_Sdk_ClusterRebalance_RebalanceId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalance.RebalanceId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalance.RebalanceId
+  nameWithType: ClusterRebalance.RebalanceId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalance.RebalanceId*
+  name: RebalanceId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalance.RebalanceId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalance.RebalanceId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalance.RebalanceId
+  nameWithType: ClusterRebalance.RebalanceId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalance.StartedAt
+  name: StartedAt
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalance.StartedAt.html#Camunda_Orchestration_Sdk_ClusterRebalance_StartedAt
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalance.StartedAt
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalance.StartedAt
+  nameWithType: ClusterRebalance.StartedAt
+- uid: Camunda.Orchestration.Sdk.ClusterRebalance.StartedAt*
+  name: StartedAt
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalance.StartedAt.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalance.StartedAt
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalance.StartedAt
+  nameWithType: ClusterRebalance.StartedAt
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition
+  name: ClusterRebalanceOperationPartition
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition
+  nameWithType: ClusterRebalanceOperationPartition
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.CurrentLeader
+  name: CurrentLeader
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.CurrentLeader.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartition_CurrentLeader
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.CurrentLeader
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.CurrentLeader
+  nameWithType: ClusterRebalanceOperationPartition.CurrentLeader
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.CurrentLeader*
+  name: CurrentLeader
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.CurrentLeader.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.CurrentLeader
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.CurrentLeader
+  nameWithType: ClusterRebalanceOperationPartition.CurrentLeader
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.DesiredLeader
+  name: DesiredLeader
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.DesiredLeader.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartition_DesiredLeader
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.DesiredLeader
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.DesiredLeader
+  nameWithType: ClusterRebalanceOperationPartition.DesiredLeader
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.DesiredLeader*
+  name: DesiredLeader
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.DesiredLeader.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.DesiredLeader
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.DesiredLeader
+  nameWithType: ClusterRebalanceOperationPartition.DesiredLeader
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PartitionId
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PartitionId.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartition_PartitionId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PartitionId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PartitionId
+  nameWithType: ClusterRebalanceOperationPartition.PartitionId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PartitionId*
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PartitionId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PartitionId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PartitionId
+  nameWithType: ClusterRebalanceOperationPartition.PartitionId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PhysicalTenantId
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PhysicalTenantId.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartition_PhysicalTenantId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PhysicalTenantId
+  nameWithType: ClusterRebalanceOperationPartition.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PhysicalTenantId*
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PhysicalTenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.PhysicalTenantId
+  nameWithType: ClusterRebalanceOperationPartition.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Progress
+  name: Progress
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Progress.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartition_Progress
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Progress
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Progress
+  nameWithType: ClusterRebalanceOperationPartition.Progress
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Progress*
+  name: Progress
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Progress.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Progress
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Progress
+  nameWithType: ClusterRebalanceOperationPartition.Progress
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Result
+  name: Result
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Result.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartition_Result
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Result
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Result
+  nameWithType: ClusterRebalanceOperationPartition.Result
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Result*
+  name: Result
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Result.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Result
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition.Result
+  nameWithType: ClusterRebalanceOperationPartition.Result
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress
+  name: ClusterRebalanceOperationPartitionProgress
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress
+  nameWithType: ClusterRebalanceOperationPartitionProgress
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.COMPLETED
+  name: COMPLETED
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionProgress_COMPLETED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.COMPLETED
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.COMPLETED
+  nameWithType: ClusterRebalanceOperationPartitionProgress.COMPLETED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.PENDING
+  name: PENDING
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionProgress_PENDING
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.PENDING
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.PENDING
+  nameWithType: ClusterRebalanceOperationPartitionProgress.PENDING
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.TRANSFERRING
+  name: TRANSFERRING
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionProgress_TRANSFERRING
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.TRANSFERRING
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress.TRANSFERRING
+  nameWithType: ClusterRebalanceOperationPartitionProgress.TRANSFERRING
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult
+  name: ClusterRebalanceOperationPartitionResult
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult
+  nameWithType: ClusterRebalanceOperationPartitionResult
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.ALREADYLEADER
+  name: ALREADYLEADER
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_ALREADYLEADER
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.ALREADYLEADER
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.ALREADYLEADER
+  nameWithType: ClusterRebalanceOperationPartitionResult.ALREADYLEADER
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.CANCELLED
+  name: CANCELLED
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_CANCELLED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.CANCELLED
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.CANCELLED
+  nameWithType: ClusterRebalanceOperationPartitionResult.CANCELLED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.CONFIGURATIONCHANGEINPROGRESS
+  name: CONFIGURATIONCHANGEINPROGRESS
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_CONFIGURATIONCHANGEINPROGRESS
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.CONFIGURATIONCHANGEINPROGRESS
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.CONFIGURATIONCHANGEINPROGRESS
+  nameWithType: ClusterRebalanceOperationPartitionResult.CONFIGURATIONCHANGEINPROGRESS
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.LAGTOOHIGH
+  name: LAGTOOHIGH
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_LAGTOOHIGH
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.LAGTOOHIGH
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.LAGTOOHIGH
+  nameWithType: ClusterRebalanceOperationPartitionResult.LAGTOOHIGH
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.LEADERCHANGED
+  name: LEADERCHANGED
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_LEADERCHANGED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.LEADERCHANGED
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.LEADERCHANGED
+  nameWithType: ClusterRebalanceOperationPartitionResult.LEADERCHANGED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.LEADERINITIALIZING
+  name: LEADERINITIALIZING
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_LEADERINITIALIZING
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.LEADERINITIALIZING
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.LEADERINITIALIZING
+  nameWithType: ClusterRebalanceOperationPartitionResult.LEADERINITIALIZING
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOLEADER
+  name: NOLEADER
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_NOLEADER
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOLEADER
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOLEADER
+  nameWithType: ClusterRebalanceOperationPartitionResult.NOLEADER
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NORESPONSE
+  name: NORESPONSE
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_NORESPONSE
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NORESPONSE
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NORESPONSE
+  nameWithType: ClusterRebalanceOperationPartitionResult.NORESPONSE
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOTCOORDINATOR
+  name: NOTCOORDINATOR
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_NOTCOORDINATOR
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOTCOORDINATOR
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOTCOORDINATOR
+  nameWithType: ClusterRebalanceOperationPartitionResult.NOTCOORDINATOR
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOTMEMBER
+  name: NOTMEMBER
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_NOTMEMBER
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOTMEMBER
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOTMEMBER
+  nameWithType: ClusterRebalanceOperationPartitionResult.NOTMEMBER
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOTREPLICATING
+  name: NOTREPLICATING
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_NOTREPLICATING
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOTREPLICATING
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.NOTREPLICATING
+  nameWithType: ClusterRebalanceOperationPartitionResult.NOTREPLICATING
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PAUSEFAILED
+  name: PAUSEFAILED
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_PAUSEFAILED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PAUSEFAILED
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PAUSEFAILED
+  nameWithType: ClusterRebalanceOperationPartitionResult.PAUSEFAILED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.REPLICATIONTIMEDOUT
+  name: REPLICATIONTIMEDOUT
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_REPLICATIONTIMEDOUT
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.REPLICATIONTIMEDOUT
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.REPLICATIONTIMEDOUT
+  nameWithType: ClusterRebalanceOperationPartitionResult.REPLICATIONTIMEDOUT
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.STALECONFIGURATION
+  name: STALECONFIGURATION
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_STALECONFIGURATION
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.STALECONFIGURATION
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.STALECONFIGURATION
+  nameWithType: ClusterRebalanceOperationPartitionResult.STALECONFIGURATION
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.TIMEOUTNOWEXHAUSTED
+  name: TIMEOUTNOWEXHAUSTED
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_TIMEOUTNOWEXHAUSTED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.TIMEOUTNOWEXHAUSTED
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.TIMEOUTNOWEXHAUSTED
+  nameWithType: ClusterRebalanceOperationPartitionResult.TIMEOUTNOWEXHAUSTED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.TRANSFERINPROGRESS
+  name: TRANSFERINPROGRESS
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_TRANSFERINPROGRESS
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.TRANSFERINPROGRESS
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.TRANSFERINPROGRESS
+  nameWithType: ClusterRebalanceOperationPartitionResult.TRANSFERINPROGRESS
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.TRANSFERRED
+  name: TRANSFERRED
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_TRANSFERRED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.TRANSFERRED
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.TRANSFERRED
+  nameWithType: ClusterRebalanceOperationPartitionResult.TRANSFERRED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.UNREACHABLE
+  name: UNREACHABLE
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_UNREACHABLE
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.UNREACHABLE
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.UNREACHABLE
+  nameWithType: ClusterRebalanceOperationPartitionResult.UNREACHABLE
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition
+  name: ClusterRebalancePartition
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRebalancePartition
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition
+  nameWithType: ClusterRebalancePartition
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.CurrentLeader
+  name: CurrentLeader
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.CurrentLeader.html#Camunda_Orchestration_Sdk_ClusterRebalancePartition_CurrentLeader
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalancePartition.CurrentLeader
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.CurrentLeader
+  nameWithType: ClusterRebalancePartition.CurrentLeader
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.CurrentLeader*
+  name: CurrentLeader
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.CurrentLeader.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalancePartition.CurrentLeader
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.CurrentLeader
+  nameWithType: ClusterRebalancePartition.CurrentLeader
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.DesiredLeader
+  name: DesiredLeader
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.DesiredLeader.html#Camunda_Orchestration_Sdk_ClusterRebalancePartition_DesiredLeader
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalancePartition.DesiredLeader
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.DesiredLeader
+  nameWithType: ClusterRebalancePartition.DesiredLeader
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.DesiredLeader*
+  name: DesiredLeader
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.DesiredLeader.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalancePartition.DesiredLeader
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.DesiredLeader
+  nameWithType: ClusterRebalancePartition.DesiredLeader
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.PartitionId
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.PartitionId.html#Camunda_Orchestration_Sdk_ClusterRebalancePartition_PartitionId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalancePartition.PartitionId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.PartitionId
+  nameWithType: ClusterRebalancePartition.PartitionId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.PartitionId*
+  name: PartitionId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.PartitionId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalancePartition.PartitionId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.PartitionId
+  nameWithType: ClusterRebalancePartition.PartitionId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.PhysicalTenantId
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.PhysicalTenantId.html#Camunda_Orchestration_Sdk_ClusterRebalancePartition_PhysicalTenantId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalancePartition.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.PhysicalTenantId
+  nameWithType: ClusterRebalancePartition.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.PhysicalTenantId*
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.PhysicalTenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalancePartition.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.PhysicalTenantId
+  nameWithType: ClusterRebalancePartition.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.State.html#Camunda_Orchestration_Sdk_ClusterRebalancePartition_State
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalancePartition.State
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.State
+  nameWithType: ClusterRebalancePartition.State
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartition.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartition.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalancePartition.State
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartition.State
+  nameWithType: ClusterRebalancePartition.State
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartitionState
+  name: ClusterRebalancePartitionState
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRebalancePartitionState
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartitionState
+  nameWithType: ClusterRebalancePartitionState
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.BALANCED
+  name: BALANCED
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.html#Camunda_Orchestration_Sdk_ClusterRebalancePartitionState_BALANCED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.BALANCED
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.BALANCED
+  nameWithType: ClusterRebalancePartitionState.BALANCED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.TRANSFERRING
+  name: TRANSFERRING
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.html#Camunda_Orchestration_Sdk_ClusterRebalancePartitionState_TRANSFERRING
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.TRANSFERRING
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.TRANSFERRING
+  nameWithType: ClusterRebalancePartitionState.TRANSFERRING
+- uid: Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.UNBALANCED
+  name: UNBALANCED
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.html#Camunda_Orchestration_Sdk_ClusterRebalancePartitionState_UNBALANCED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.UNBALANCED
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalancePartitionState.UNBALANCED
+  nameWithType: ClusterRebalancePartitionState.UNBALANCED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceRequest
+  name: ClusterRebalanceRequest
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRebalanceRequest
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceRequest
+  nameWithType: ClusterRebalanceRequest
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.LeaderWaitTimeout
+  name: LeaderWaitTimeout
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceRequest.LeaderWaitTimeout.html#Camunda_Orchestration_Sdk_ClusterRebalanceRequest_LeaderWaitTimeout
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceRequest.LeaderWaitTimeout
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.LeaderWaitTimeout
+  nameWithType: ClusterRebalanceRequest.LeaderWaitTimeout
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.LeaderWaitTimeout*
+  name: LeaderWaitTimeout
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceRequest.LeaderWaitTimeout.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceRequest.LeaderWaitTimeout
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.LeaderWaitTimeout
+  nameWithType: ClusterRebalanceRequest.LeaderWaitTimeout
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.MaxTransferAttempts
+  name: MaxTransferAttempts
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceRequest.MaxTransferAttempts.html#Camunda_Orchestration_Sdk_ClusterRebalanceRequest_MaxTransferAttempts
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceRequest.MaxTransferAttempts
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.MaxTransferAttempts
+  nameWithType: ClusterRebalanceRequest.MaxTransferAttempts
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.MaxTransferAttempts*
+  name: MaxTransferAttempts
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceRequest.MaxTransferAttempts.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceRequest.MaxTransferAttempts
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.MaxTransferAttempts
+  nameWithType: ClusterRebalanceRequest.MaxTransferAttempts
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationLagThreshold
+  name: ReplicationLagThreshold
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationLagThreshold.html#Camunda_Orchestration_Sdk_ClusterRebalanceRequest_ReplicationLagThreshold
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationLagThreshold
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationLagThreshold
+  nameWithType: ClusterRebalanceRequest.ReplicationLagThreshold
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationLagThreshold*
+  name: ReplicationLagThreshold
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationLagThreshold.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationLagThreshold
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationLagThreshold
+  nameWithType: ClusterRebalanceRequest.ReplicationLagThreshold
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationTimeout
+  name: ReplicationTimeout
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationTimeout.html#Camunda_Orchestration_Sdk_ClusterRebalanceRequest_ReplicationTimeout
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationTimeout
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationTimeout
+  nameWithType: ClusterRebalanceRequest.ReplicationTimeout
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationTimeout*
+  name: ReplicationTimeout
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationTimeout.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationTimeout
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceRequest.ReplicationTimeout
+  nameWithType: ClusterRebalanceRequest.ReplicationTimeout
 - uid: Camunda.Orchestration.Sdk.ClusterRestoreAwaitModeChangeOperation
   name: ClusterRestoreAwaitModeChangeOperation
   href: api/Camunda.Orchestration.Sdk.ClusterRestoreAwaitModeChangeOperation.html
@@ -17899,6 +18730,306 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ClusterRestoreResponse.PlannedChanges
   fullName: Camunda.Orchestration.Sdk.ClusterRestoreResponse.PlannedChanges
   nameWithType: ClusterRestoreResponse.PlannedChanges
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance
+  name: ClusterRunningRebalance
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRunningRebalance
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance
+  nameWithType: ClusterRunningRebalance
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.CancelRequested
+  name: CancelRequested
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.CancelRequested.html#Camunda_Orchestration_Sdk_ClusterRunningRebalance_CancelRequested
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRunningRebalance.CancelRequested
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.CancelRequested
+  nameWithType: ClusterRunningRebalance.CancelRequested
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.CancelRequested*
+  name: CancelRequested
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.CancelRequested.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRunningRebalance.CancelRequested
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.CancelRequested
+  nameWithType: ClusterRunningRebalance.CancelRequested
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.DryRun
+  name: DryRun
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.DryRun.html#Camunda_Orchestration_Sdk_ClusterRunningRebalance_DryRun
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRunningRebalance.DryRun
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.DryRun
+  nameWithType: ClusterRunningRebalance.DryRun
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.DryRun*
+  name: DryRun
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.DryRun.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRunningRebalance.DryRun
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.DryRun
+  nameWithType: ClusterRunningRebalance.DryRun
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.Partitions
+  name: Partitions
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.Partitions.html#Camunda_Orchestration_Sdk_ClusterRunningRebalance_Partitions
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRunningRebalance.Partitions
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.Partitions
+  nameWithType: ClusterRunningRebalance.Partitions
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.Partitions*
+  name: Partitions
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.Partitions.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRunningRebalance.Partitions
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.Partitions
+  nameWithType: ClusterRunningRebalance.Partitions
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.RebalanceId
+  name: RebalanceId
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.RebalanceId.html#Camunda_Orchestration_Sdk_ClusterRunningRebalance_RebalanceId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRunningRebalance.RebalanceId
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.RebalanceId
+  nameWithType: ClusterRunningRebalance.RebalanceId
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.RebalanceId*
+  name: RebalanceId
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.RebalanceId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRunningRebalance.RebalanceId
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.RebalanceId
+  nameWithType: ClusterRunningRebalance.RebalanceId
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.StartedAt
+  name: StartedAt
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.StartedAt.html#Camunda_Orchestration_Sdk_ClusterRunningRebalance_StartedAt
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRunningRebalance.StartedAt
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.StartedAt
+  nameWithType: ClusterRunningRebalance.StartedAt
+- uid: Camunda.Orchestration.Sdk.ClusterRunningRebalance.StartedAt*
+  name: StartedAt
+  href: api/Camunda.Orchestration.Sdk.ClusterRunningRebalance.StartedAt.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRunningRebalance.StartedAt
+  fullName: Camunda.Orchestration.Sdk.ClusterRunningRebalance.StartedAt
+  nameWithType: ClusterRunningRebalance.StartedAt
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo
+  name: ClusterRuntimeBackupInfo
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo
+  nameWithType: ClusterRuntimeBackupInfo
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.BackupId
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.BackupId.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupInfo_BackupId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.BackupId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.BackupId
+  nameWithType: ClusterRuntimeBackupInfo.BackupId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.BackupId*
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.BackupId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.BackupId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.BackupId
+  nameWithType: ClusterRuntimeBackupInfo.BackupId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.FailureReason
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.FailureReason.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupInfo_FailureReason
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.FailureReason
+  nameWithType: ClusterRuntimeBackupInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.FailureReason*
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.FailureReason.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.FailureReason
+  nameWithType: ClusterRuntimeBackupInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.PhysicalTenants
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.PhysicalTenants.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupInfo_PhysicalTenants
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.PhysicalTenants
+  nameWithType: ClusterRuntimeBackupInfo.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.PhysicalTenants*
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.PhysicalTenants.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.PhysicalTenants
+  nameWithType: ClusterRuntimeBackupInfo.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.State.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupInfo_State
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.State
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.State
+  nameWithType: ClusterRuntimeBackupInfo.State
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.State
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo.State
+  nameWithType: ClusterRuntimeBackupInfo.State
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupState
+  name: ClusterRuntimeBackupState
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRuntimeBackupState
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupState
+  nameWithType: ClusterRuntimeBackupState
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.PhysicalTenants
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.PhysicalTenants.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupState_PhysicalTenants
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.PhysicalTenants
+  nameWithType: ClusterRuntimeBackupState.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.PhysicalTenants*
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.PhysicalTenants.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupState.PhysicalTenants
+  nameWithType: ClusterRuntimeBackupState.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome
+  name: ClusterRuntimeBackupTakeOutcome
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome
+  nameWithType: ClusterRuntimeBackupTakeOutcome
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.FAILED
+  name: FAILED
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTakeOutcome_FAILED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.FAILED
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.FAILED
+  nameWithType: ClusterRuntimeBackupTakeOutcome.FAILED
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.TRIGGERED
+  name: TRIGGERED
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTakeOutcome_TRIGGERED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.TRIGGERED
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.TRIGGERED
+  nameWithType: ClusterRuntimeBackupTakeOutcome.TRIGGERED
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.UNKNOWN
+  name: UNKNOWN
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTakeOutcome_UNKNOWN
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.UNKNOWN
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeOutcome.UNKNOWN
+  nameWithType: ClusterRuntimeBackupTakeOutcome.UNKNOWN
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult
+  name: ClusterRuntimeBackupTakeResult
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult
+  nameWithType: ClusterRuntimeBackupTakeResult
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.BackupId
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.BackupId.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTakeResult_BackupId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.BackupId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.BackupId
+  nameWithType: ClusterRuntimeBackupTakeResult.BackupId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.BackupId*
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.BackupId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.BackupId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.BackupId
+  nameWithType: ClusterRuntimeBackupTakeResult.BackupId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Outcome
+  name: Outcome
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Outcome.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTakeResult_Outcome
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Outcome
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Outcome
+  nameWithType: ClusterRuntimeBackupTakeResult.Outcome
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Outcome*
+  name: Outcome
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Outcome.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Outcome
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Outcome
+  nameWithType: ClusterRuntimeBackupTakeResult.Outcome
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.PhysicalTenantId
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.PhysicalTenantId.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTakeResult_PhysicalTenantId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.PhysicalTenantId
+  nameWithType: ClusterRuntimeBackupTakeResult.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.PhysicalTenantId*
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.PhysicalTenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.PhysicalTenantId
+  nameWithType: ClusterRuntimeBackupTakeResult.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Reason
+  name: Reason
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Reason.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTakeResult_Reason
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Reason
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Reason
+  nameWithType: ClusterRuntimeBackupTakeResult.Reason
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Reason*
+  name: Reason
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Reason.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Reason
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTakeResult.Reason
+  nameWithType: ClusterRuntimeBackupTakeResult.Reason
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo
+  name: ClusterRuntimeBackupTenantInfo
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo
+  nameWithType: ClusterRuntimeBackupTenantInfo
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.Details
+  name: Details
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.Details.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTenantInfo_Details
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.Details
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.Details
+  nameWithType: ClusterRuntimeBackupTenantInfo.Details
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.Details*
+  name: Details
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.Details.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.Details
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.Details
+  nameWithType: ClusterRuntimeBackupTenantInfo.Details
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.FailureReason
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.FailureReason.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTenantInfo_FailureReason
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.FailureReason
+  nameWithType: ClusterRuntimeBackupTenantInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.FailureReason*
+  name: FailureReason
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.FailureReason.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.FailureReason
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.FailureReason
+  nameWithType: ClusterRuntimeBackupTenantInfo.FailureReason
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.PhysicalTenantId
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.PhysicalTenantId.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTenantInfo_PhysicalTenantId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.PhysicalTenantId
+  nameWithType: ClusterRuntimeBackupTenantInfo.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.PhysicalTenantId*
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.PhysicalTenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.PhysicalTenantId
+  nameWithType: ClusterRuntimeBackupTenantInfo.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.State.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTenantInfo_State
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.State
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.State
+  nameWithType: ClusterRuntimeBackupTenantInfo.State
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.State
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantInfo.State
+  nameWithType: ClusterRuntimeBackupTenantInfo.State
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState
+  name: ClusterRuntimeBackupTenantState
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState
+  nameWithType: ClusterRuntimeBackupTenantState
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.PhysicalTenantId
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.PhysicalTenantId.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTenantState_PhysicalTenantId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.PhysicalTenantId
+  nameWithType: ClusterRuntimeBackupTenantState.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.PhysicalTenantId*
+  name: PhysicalTenantId
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.PhysicalTenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.PhysicalTenantId
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.PhysicalTenantId
+  nameWithType: ClusterRuntimeBackupTenantState.PhysicalTenantId
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.State.html#Camunda_Orchestration_Sdk_ClusterRuntimeBackupTenantState_State
+  commentId: P:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.State
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.State
+  nameWithType: ClusterRuntimeBackupTenantState.State
+- uid: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.State
+  fullName: Camunda.Orchestration.Sdk.ClusterRuntimeBackupTenantState.State
+  nameWithType: ClusterRuntimeBackupTenantState.State
 - uid: Camunda.Orchestration.Sdk.ClusterStatusResponse
   name: ClusterStatusResponse
   href: api/Camunda.Orchestration.Sdk.ClusterStatusResponse.html
@@ -17941,6 +19072,54 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.ClusterStatusResponseStatus.HEALTHY
   fullName: Camunda.Orchestration.Sdk.ClusterStatusResponseStatus.HEALTHY
   nameWithType: ClusterStatusResponseStatus.HEALTHY
+- uid: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse
+  name: ClusterTakeHistoryBackupResponse
+  href: api/Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse
+  fullName: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse
+  nameWithType: ClusterTakeHistoryBackupResponse
+- uid: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.BackupId
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.BackupId.html#Camunda_Orchestration_Sdk_ClusterTakeHistoryBackupResponse_BackupId
+  commentId: P:Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.BackupId
+  fullName: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.BackupId
+  nameWithType: ClusterTakeHistoryBackupResponse.BackupId
+- uid: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.BackupId*
+  name: BackupId
+  href: api/Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.BackupId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.BackupId
+  fullName: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.BackupId
+  nameWithType: ClusterTakeHistoryBackupResponse.BackupId
+- uid: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.PhysicalTenants
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.PhysicalTenants.html#Camunda_Orchestration_Sdk_ClusterTakeHistoryBackupResponse_PhysicalTenants
+  commentId: P:Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.PhysicalTenants
+  nameWithType: ClusterTakeHistoryBackupResponse.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.PhysicalTenants*
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.PhysicalTenants.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse.PhysicalTenants
+  nameWithType: ClusterTakeHistoryBackupResponse.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse
+  name: ClusterTakeRuntimeBackupResponse
+  href: api/Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse
+  fullName: Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse
+  nameWithType: ClusterTakeRuntimeBackupResponse
+- uid: Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.PhysicalTenants
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.PhysicalTenants.html#Camunda_Orchestration_Sdk_ClusterTakeRuntimeBackupResponse_PhysicalTenants
+  commentId: P:Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.PhysicalTenants
+  nameWithType: ClusterTakeRuntimeBackupResponse.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.PhysicalTenants*
+  name: PhysicalTenants
+  href: api/Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.PhysicalTenants.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.PhysicalTenants
+  fullName: Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse.PhysicalTenants
+  nameWithType: ClusterTakeRuntimeBackupResponse.PhysicalTenants
 - uid: Camunda.Orchestration.Sdk.ClusterTopologyResponse
   name: ClusterTopologyResponse
   href: api/Camunda.Orchestration.Sdk.ClusterTopologyResponse.html
@@ -37747,6 +38926,48 @@ references:
   fullName.vb: Camunda.Orchestration.Sdk.OperationTypeFilterProperty.CType
   nameWithType: OperationTypeFilterProperty.implicit operator
   nameWithType.vb: OperationTypeFilterProperty.CType
+- uid: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult
+  name: OwnAuthorizationSearchResult
+  href: api/Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.html
+  commentId: T:Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult
+  fullName: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult
+  nameWithType: OwnAuthorizationSearchResult
+- uid: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.AuthorizationsEnabled
+  name: AuthorizationsEnabled
+  href: api/Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.AuthorizationsEnabled.html#Camunda_Orchestration_Sdk_OwnAuthorizationSearchResult_AuthorizationsEnabled
+  commentId: P:Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.AuthorizationsEnabled
+  fullName: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.AuthorizationsEnabled
+  nameWithType: OwnAuthorizationSearchResult.AuthorizationsEnabled
+- uid: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.AuthorizationsEnabled*
+  name: AuthorizationsEnabled
+  href: api/Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.AuthorizationsEnabled.html
+  commentId: Overload:Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.AuthorizationsEnabled
+  fullName: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.AuthorizationsEnabled
+  nameWithType: OwnAuthorizationSearchResult.AuthorizationsEnabled
+- uid: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Items
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Items.html#Camunda_Orchestration_Sdk_OwnAuthorizationSearchResult_Items
+  commentId: P:Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Items
+  nameWithType: OwnAuthorizationSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Items*
+  name: Items
+  href: api/Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Items.html
+  commentId: Overload:Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Items
+  fullName: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Items
+  nameWithType: OwnAuthorizationSearchResult.Items
+- uid: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Page
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Page.html#Camunda_Orchestration_Sdk_OwnAuthorizationSearchResult_Page
+  commentId: P:Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Page
+  nameWithType: OwnAuthorizationSearchResult.Page
+- uid: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Page*
+  name: Page
+  href: api/Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Page.html
+  commentId: Overload:Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Page
+  fullName: Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult.Page
+  nameWithType: OwnAuthorizationSearchResult.Page
 - uid: Camunda.Orchestration.Sdk.OwnerTypeEnum
   name: OwnerTypeEnum
   href: api/Camunda.Orchestration.Sdk.OwnerTypeEnum.html
@@ -43258,6 +44479,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.WaitingCount
   nameWithType: ProcessInstanceWaitStateStatisticsResult.WaitingCount
+- uid: Camunda.Orchestration.Sdk.RebalanceCancellationResponse
+  name: RebalanceCancellationResponse
+  href: api/Camunda.Orchestration.Sdk.RebalanceCancellationResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.RebalanceCancellationResponse
+  fullName: Camunda.Orchestration.Sdk.RebalanceCancellationResponse
+  nameWithType: RebalanceCancellationResponse
+- uid: Camunda.Orchestration.Sdk.RebalanceCancellationResponse.WasRunning
+  name: WasRunning
+  href: api/Camunda.Orchestration.Sdk.RebalanceCancellationResponse.WasRunning.html#Camunda_Orchestration_Sdk_RebalanceCancellationResponse_WasRunning
+  commentId: P:Camunda.Orchestration.Sdk.RebalanceCancellationResponse.WasRunning
+  fullName: Camunda.Orchestration.Sdk.RebalanceCancellationResponse.WasRunning
+  nameWithType: RebalanceCancellationResponse.WasRunning
+- uid: Camunda.Orchestration.Sdk.RebalanceCancellationResponse.WasRunning*
+  name: WasRunning
+  href: api/Camunda.Orchestration.Sdk.RebalanceCancellationResponse.WasRunning.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RebalanceCancellationResponse.WasRunning
+  fullName: Camunda.Orchestration.Sdk.RebalanceCancellationResponse.WasRunning
+  nameWithType: RebalanceCancellationResponse.WasRunning
 - uid: Camunda.Orchestration.Sdk.ResolvedSecret
   name: ResolvedSecret
   href: api/Camunda.Orchestration.Sdk.ResolvedSecret.html
@@ -48589,6 +49828,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilter.Name
   fullName: Camunda.Orchestration.Sdk.UserTaskFilter.Name
   nameWithType: UserTaskFilter.Name
+- uid: Camunda.Orchestration.Sdk.UserTaskFilter.Or
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilter.Or.html#Camunda_Orchestration_Sdk_UserTaskFilter_Or
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilter.Or
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilter.Or
+  nameWithType: UserTaskFilter.Or
+- uid: Camunda.Orchestration.Sdk.UserTaskFilter.Or*
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilter.Or.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilter.Or
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilter.Or
+  nameWithType: UserTaskFilter.Or
 - uid: Camunda.Orchestration.Sdk.UserTaskFilter.Priority
   name: Priority
   href: api/Camunda.Orchestration.Sdk.UserTaskFilter.Priority.html#Camunda_Orchestration_Sdk_UserTaskFilter_Priority
@@ -48697,6 +49948,264 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilter.UserTaskKey
   fullName: Camunda.Orchestration.Sdk.UserTaskFilter.UserTaskKey
   nameWithType: UserTaskFilter.UserTaskKey
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields
+  name: UserTaskFilterFields
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.html
+  commentId: T:Camunda.Orchestration.Sdk.UserTaskFilterFields
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields
+  nameWithType: UserTaskFilterFields
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.Assignee
+  name: Assignee
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.Assignee.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_Assignee
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.Assignee
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.Assignee
+  nameWithType: UserTaskFilterFields.Assignee
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.Assignee*
+  name: Assignee
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.Assignee.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.Assignee
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.Assignee
+  nameWithType: UserTaskFilterFields.Assignee
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.BusinessId.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.BusinessId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.BusinessId
+  nameWithType: UserTaskFilterFields.BusinessId
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.BusinessId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.BusinessId
+  nameWithType: UserTaskFilterFields.BusinessId
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateGroup
+  name: CandidateGroup
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateGroup.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_CandidateGroup
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateGroup
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateGroup
+  nameWithType: UserTaskFilterFields.CandidateGroup
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateGroup*
+  name: CandidateGroup
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateGroup.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateGroup
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateGroup
+  nameWithType: UserTaskFilterFields.CandidateGroup
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateUser
+  name: CandidateUser
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateUser.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_CandidateUser
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateUser
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateUser
+  nameWithType: UserTaskFilterFields.CandidateUser
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateUser*
+  name: CandidateUser
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateUser.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateUser
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.CandidateUser
+  nameWithType: UserTaskFilterFields.CandidateUser
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.CompletionDate
+  name: CompletionDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.CompletionDate.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_CompletionDate
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.CompletionDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.CompletionDate
+  nameWithType: UserTaskFilterFields.CompletionDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.CompletionDate*
+  name: CompletionDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.CompletionDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.CompletionDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.CompletionDate
+  nameWithType: UserTaskFilterFields.CompletionDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.CreationDate
+  name: CreationDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.CreationDate.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_CreationDate
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.CreationDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.CreationDate
+  nameWithType: UserTaskFilterFields.CreationDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.CreationDate*
+  name: CreationDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.CreationDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.CreationDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.CreationDate
+  nameWithType: UserTaskFilterFields.CreationDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.DueDate
+  name: DueDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.DueDate.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_DueDate
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.DueDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.DueDate
+  nameWithType: UserTaskFilterFields.DueDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.DueDate*
+  name: DueDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.DueDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.DueDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.DueDate
+  nameWithType: UserTaskFilterFields.DueDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementId
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementId.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_ElementId
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementId
+  nameWithType: UserTaskFilterFields.ElementId
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementId*
+  name: ElementId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementId
+  nameWithType: UserTaskFilterFields.ElementId
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementInstanceKey
+  name: ElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementInstanceKey.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_ElementInstanceKey
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementInstanceKey
+  nameWithType: UserTaskFilterFields.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementInstanceKey*
+  name: ElementInstanceKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementInstanceKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementInstanceKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ElementInstanceKey
+  nameWithType: UserTaskFilterFields.ElementInstanceKey
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate
+  name: FollowUpDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_FollowUpDate
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate
+  nameWithType: UserTaskFilterFields.FollowUpDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate*
+  name: FollowUpDate
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate
+  nameWithType: UserTaskFilterFields.FollowUpDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables
+  name: LocalVariables
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_LocalVariables
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables
+  nameWithType: UserTaskFilterFields.LocalVariables
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables*
+  name: LocalVariables
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables
+  nameWithType: UserTaskFilterFields.LocalVariables
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.Name.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_Name
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.Name
+  nameWithType: UserTaskFilterFields.Name
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.Name*
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.Name.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.Name
+  nameWithType: UserTaskFilterFields.Name
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.Priority
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.Priority.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_Priority
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.Priority
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.Priority
+  nameWithType: UserTaskFilterFields.Priority
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.Priority*
+  name: Priority
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.Priority.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.Priority
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.Priority
+  nameWithType: UserTaskFilterFields.Priority
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionId
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionId.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_ProcessDefinitionId
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionId
+  nameWithType: UserTaskFilterFields.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionId*
+  name: ProcessDefinitionId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionId
+  nameWithType: UserTaskFilterFields.ProcessDefinitionId
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionKey
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionKey.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_ProcessDefinitionKey
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionKey
+  nameWithType: UserTaskFilterFields.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionKey*
+  name: ProcessDefinitionKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessDefinitionKey
+  nameWithType: UserTaskFilterFields.ProcessDefinitionKey
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceKey
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceKey.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_ProcessInstanceKey
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceKey
+  nameWithType: UserTaskFilterFields.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceKey*
+  name: ProcessInstanceKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceKey
+  nameWithType: UserTaskFilterFields.ProcessInstanceKey
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceVariables
+  name: ProcessInstanceVariables
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceVariables.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_ProcessInstanceVariables
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceVariables
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceVariables
+  nameWithType: UserTaskFilterFields.ProcessInstanceVariables
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceVariables*
+  name: ProcessInstanceVariables
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceVariables.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceVariables
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.ProcessInstanceVariables
+  nameWithType: UserTaskFilterFields.ProcessInstanceVariables
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.State
+  name: State
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.State.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_State
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.State
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.State
+  nameWithType: UserTaskFilterFields.State
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.State*
+  name: State
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.State.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.State
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.State
+  nameWithType: UserTaskFilterFields.State
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.Tags
+  name: Tags
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.Tags.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_Tags
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.Tags
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.Tags
+  nameWithType: UserTaskFilterFields.Tags
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.Tags*
+  name: Tags
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.Tags.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.Tags
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.Tags
+  nameWithType: UserTaskFilterFields.Tags
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.TenantId
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.TenantId.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_TenantId
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.TenantId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.TenantId
+  nameWithType: UserTaskFilterFields.TenantId
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.TenantId*
+  name: TenantId
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.TenantId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.TenantId
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.TenantId
+  nameWithType: UserTaskFilterFields.TenantId
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.UserTaskKey
+  name: UserTaskKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.UserTaskKey.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_UserTaskKey
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.UserTaskKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.UserTaskKey
+  nameWithType: UserTaskFilterFields.UserTaskKey
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.UserTaskKey*
+  name: UserTaskKey
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.UserTaskKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.UserTaskKey
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.UserTaskKey
+  nameWithType: UserTaskFilterFields.UserTaskKey
 - uid: Camunda.Orchestration.Sdk.UserTaskKey
   name: UserTaskKey
   href: api/Camunda.Orchestration.Sdk.UserTaskKey.html

@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_CreateAgentInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceAsync*" class="text-break">
-Method CreateAgentInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1154"><i class="bi bi-code-slash"></i></a>
+Method CreateAgentInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1263"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,7 +121,7 @@ Method CreateAgentInstanceAsync  <a class="header-action link-secondary" title="
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_CreateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateAgentInstanceAsync(Camunda.Orchestration.Sdk.AgentInstanceCreationRequest,System.Threading.CancellationToken)">
   CreateAgentInstanceAsync(AgentInstanceCreationRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1154"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1263"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Create agent instance
@@ -154,18 +154,43 @@ be used in subsequent update and query calls.</p>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_System_Threading_CancellationToken__examples">Examples</h4>
-<pre><code class="lang-csharp">public static async Task CreateAgentInstanceExample(ElementInstanceKey elementInstanceKey)
+<pre><code class="lang-csharp">public static async Task CreateAgentInstanceExample(
+    ElementInstanceKey elementInstanceKey,
+    JobKey jobKey,
+    string jobLease)
 {
     using var client = CamundaClient.Create();
 
+    // The agent's model, provider, system prompt and limits are supplied as a
+    // CONFIGURATION history item; a create request must open the conversation
+    // with at least one such item.
     var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
     {
         ElementInstanceKey = elementInstanceKey,
-        Definition = new AgentInstanceDefinition
+        JobKey = jobKey,
+        JobLease = jobLease,
+        History = new List&lt;AgentInstanceHistoryItem&gt;
         {
-            Model = &quot;gpt-4o&quot;,
-            Provider = &quot;openai&quot;,
-            SystemPrompt = &quot;You are a helpful assistant.&quot;,
+            new AgentInstanceHistoryItem
+            {
+                HistoryItemId = &quot;configuration-1&quot;,
+                LoopIteration = LoopIterationId.AssumeExists(1),
+                Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
+                ProducedAt = DateTimeOffset.UtcNow,
+                Content = new List&lt;AgentInstanceMessageContent&gt;(),
+                Model = &quot;gpt-4o&quot;,
+                Provider = &quot;openai&quot;,
+                SystemPrompt = new List&lt;AgentInstanceMessageContent&gt;
+                {
+                    new AgentInstanceTextContent { Text = &quot;You are a helpful assistant.&quot; },
+                },
+                Limits = new AgentInstanceLimits
+                {
+                    MaxModelCalls = 20,
+                    MaxToolCalls = 20,
+                    MaxTokens = 100_000,
+                },
+            },
         },
     });
 
@@ -176,17 +201,42 @@ be used in subsequent update and query calls.</p>
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_CreateAgentInstanceAsync_Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
 <div class="markdown level1 remarks"><p>Operation: createAgentInstance</p>
 <p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task CreateAgentInstanceExample(ElementInstanceKey elementInstanceKey)
+<pre><code class="lang-csharp">public static async Task CreateAgentInstanceExample(
+    ElementInstanceKey elementInstanceKey,
+    JobKey jobKey,
+    string jobLease)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
+<pre><code>// The agent's model, provider, system prompt and limits are supplied as a
+// CONFIGURATION history item; a create request must open the conversation
+// with at least one such item.
+var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
 {
     ElementInstanceKey = elementInstanceKey,
-    Definition = new AgentInstanceDefinition
+    JobKey = jobKey,
+    JobLease = jobLease,
+    History = new List&lt;AgentInstanceHistoryItem&gt;
     {
-        Model = &quot;gpt-4o&quot;,
-        Provider = &quot;openai&quot;,
-        SystemPrompt = &quot;You are a helpful assistant.&quot;,
+        new AgentInstanceHistoryItem
+        {
+            HistoryItemId = &quot;configuration-1&quot;,
+            LoopIteration = LoopIterationId.AssumeExists(1),
+            Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
+            ProducedAt = DateTimeOffset.UtcNow,
+            Content = new List&lt;AgentInstanceMessageContent&gt;(),
+            Model = &quot;gpt-4o&quot;,
+            Provider = &quot;openai&quot;,
+            SystemPrompt = new List&lt;AgentInstanceMessageContent&gt;
+            {
+                new AgentInstanceTextContent { Text = &quot;You are a helpful assistant.&quot; },
+            },
+            Limits = new AgentInstanceLimits
+            {
+                MaxModelCalls = 20,
+                MaxToolCalls = 20,
+                MaxTokens = 100_000,
+            },
+        },
     },
 });
 
@@ -201,7 +251,7 @@ Console.WriteLine($&quot;Created agent instance: {result.AgentInstanceKey}&quot;
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1154" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1263" class="edit-link">Edit this page</a>
         </div>
 
 
