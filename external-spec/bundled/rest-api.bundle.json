@@ -628,7 +628,7 @@
           }
         ],
         "summary": "Update agent instance",
-        "description": "Updates the mutable fields of an agent instance (status, metric counters, and\ntools) and appends a batch of history items to its conversation history. Metric\nvalues are treated as deltas and applied immediately to the aggregate counters.\nTool updates replace the existing tool list. Each history item created for this\nrequest is echoed back in the response.\n",
+        "description": "Updates the status of an agent instance and appends a batch of history items\nto its conversation history. Each history item created for this request is\nechoed back in the response.\n",
         "parameters": [
           {
             "name": "agentInstanceKey",
@@ -806,142 +806,6 @@
           },
           "500": {
             "description": "An internal error occurred while processing the request.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          }
-        },
-        "x-added-in-version": "8.10"
-      }
-    },
-    "/agent-instances/{agentInstanceKey}/history": {
-      "post": {
-        "x-eventually-consistent": false,
-        "security": [
-          {
-            "bearerAuth": []
-          },
-          {
-            "basicAuth": []
-          }
-        ],
-        "tags": [
-          "Agent instance"
-        ],
-        "operationId": "createAgentInstanceHistoryItem",
-        "x-required-permissions": [
-          {
-            "resourceType": "PROCESS_DEFINITION",
-            "permissionType": "UPDATE_PROCESS_INSTANCE"
-          }
-        ],
-        "summary": "Create agent instance history item",
-        "description": "Appends a single history item to an agent instance's conversation history.\nThe created item has commitStatus PENDING until the job identified by jobLease\ncompletes successfully, at which point it transitions to COMMITTED. If the job\nfails or is superseded by a retry, the item is marked DISCARDED.\n",
-        "x-semantic-establishes": {
-          "kind": "AgentInstanceLoopIteration",
-          "identifiedBy": [
-            {
-              "in": "body",
-              "name": "loopIteration",
-              "semanticType": "LoopIterationId"
-            }
-          ]
-        },
-        "parameters": [
-          {
-            "name": "agentInstanceKey",
-            "in": "path",
-            "required": true,
-            "description": "The key of the agent instance to append the history item to.",
-            "schema": {
-              "$ref": "#/components/schemas/AgentInstanceKey"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AgentInstanceHistoryItemRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "The history item was created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentInstanceHistoryItemCreationResult"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The provided data is not valid.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request lacks valid authentication credentials.",
-            "headers": {
-              "WWW-Authenticate": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The request is not allowed.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The agent instance with the given key was not found, or the specified\njobKey does not correspond to an active job.\nMore details are provided in the response body.\n",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An internal error occurred while processing the request.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetail"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -26332,29 +26196,6 @@
           }
         }
       },
-      "AgentInstanceDefinition": {
-        "description": "The definition of an agent instance, as submitted at creation. The systemPrompt is a plain\nstring here for backwards compatibility with existing create requests; the read side\n(AgentInstanceDefinitionResult) exposes it as content blocks instead. This write-side\nstring is deprecated and will be removed as part of #58795.\n",
-        "type": "object",
-        "required": [
-          "model",
-          "provider",
-          "systemPrompt"
-        ],
-        "properties": {
-          "model": {
-            "type": "string",
-            "description": "The LLM model identifier (for example, gpt-4o)."
-          },
-          "provider": {
-            "type": "string",
-            "description": "The LLM provider (for example, openai or anthropic)."
-          },
-          "systemPrompt": {
-            "type": "string",
-            "description": "The system prompt configured for this agent instance."
-          }
-        }
-      },
       "AgentInstanceDefinitionResult": {
         "description": "The definition of an agent instance. Set at creation, but can change later via a\nCONFIGURATION history item.\n",
         "type": "object",
@@ -26491,7 +26332,10 @@
         "description": "Request to create a new agent instance.",
         "type": "object",
         "required": [
-          "elementInstanceKey"
+          "elementInstanceKey",
+          "history",
+          "jobKey",
+          "jobLease"
         ],
         "properties": {
           "elementInstanceKey": {
@@ -26502,25 +26346,8 @@
               }
             ]
           },
-          "definition": {
-            "description": "The agent's initial definition; model, provider, and systemPrompt can\nall be changed later via a CONFIGURATION history item. Required when\nhistory is empty or omitted. Must be omitted when history is\nnon-empty — supply model, provider, and systemPrompt through a\nCONFIGURATION item in history instead.\n",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentInstanceDefinition"
-              }
-            ]
-          },
-          "limits": {
-            "description": "Limits for the agent execution. When omitted, all limits default to -1\n(no limit). Must be omitted when history is non-empty — supply limits\nthrough a CONFIGURATION item in history instead, if needed.\n",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentInstanceLimits"
-              }
-            ]
-          },
           "jobKey": {
-            "description": "The key of the job activation during which this creation is being made.\nRequired whenever history is non-empty.\n",
-            "nullable": true,
+            "description": "The key of the job activation during which this creation is being made.\nA creation must always be attributed to the active job that produced it.\n",
             "allOf": [
               {
                 "$ref": "#/components/schemas/JobKey"
@@ -26529,13 +26356,12 @@
           },
           "jobLease": {
             "description": "Opaque lease token received from the job activation response. Disambiguates\nthis activation from any other activation of the same job: if the job is\nlater retried, history items submitted under a superseded lease are discarded\nrather than committed.\n",
-            "nullable": true,
             "type": "string"
           },
           "history": {
-            "description": "A batch of history items to append to the agent instance's conversation\nhistory, in request order. Each created item is echoed back in the\nresponse's createdHistory, positionally correlated. When non-empty,\nmodel, provider, and systemPrompt (and, if needed, limits) must be\nestablished through a CONFIGURATION item in this batch instead of the\ntop-level definition/limits, which must then be omitted.\n",
-            "nullable": true,
+            "description": "A batch of history items to append to the agent instance's conversation\nhistory, in request order. Each created item is echoed back in the\nresponse's createdHistory, positionally correlated. Must include a\nCONFIGURATION item establishing model, provider, and systemPrompt (and,\nif needed, limits).\n",
             "type": "array",
+            "minItems": 1,
             "items": {
               "$ref": "#/components/schemas/AgentInstanceHistoryItem"
             }
@@ -26562,7 +26388,7 @@
             ]
           },
           "createdHistory": {
-            "description": "One entry per history item submitted in the request, in request order.\nEmpty when no history items were submitted.\n",
+            "description": "One entry per history item submitted in the request, in request order.\n",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AgentInstanceCreatedHistoryItem"
@@ -26570,41 +26396,13 @@
           }
         }
       },
-      "AgentInstanceMetricsDelta": {
-        "description": "Metric increments to apply to the agent instance aggregate counters. The engine\naccumulates these deltas into running totals on each UPDATED event. All fields\nare optional; omit a field to leave the corresponding counter unchanged.\n",
-        "type": "object",
-        "properties": {
-          "inputTokens": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "Increment to apply to the total input token counter."
-          },
-          "outputTokens": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "Increment to apply to the total output token counter."
-          },
-          "modelCalls": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0,
-            "description": "Increment to apply to the total model call counter."
-          },
-          "toolCalls": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0,
-            "description": "Increment to apply to the total tool call counter."
-          }
-        }
-      },
       "AgentInstanceUpdateRequest": {
         "description": "Request to update the mutable state of an agent instance.\n",
         "type": "object",
         "required": [
-          "elementInstanceKey"
+          "elementInstanceKey",
+          "jobKey",
+          "jobLease"
         ],
         "properties": {
           "elementInstanceKey": {
@@ -26624,25 +26422,8 @@
               }
             ]
           },
-          "metrics": {
-            "description": "Metric increments to apply to the aggregate counters.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentInstanceMetricsDelta"
-              }
-            ]
-          },
-          "tools": {
-            "description": "The complete list of tools available to the agent, replacing any previously\nstored tools. When provided, the engine replaces the existing tool list with\nthis value.\n",
-            "nullable": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentTool"
-            }
-          },
           "jobKey": {
-            "description": "The key of the job activation during which this update is being made.\nRequired whenever history is provided.\n",
-            "nullable": true,
+            "description": "The key of the job activation during which this update is being made.\nAn update must always be attributed to the active job that produced it.\n",
             "allOf": [
               {
                 "$ref": "#/components/schemas/JobKey"
@@ -26651,7 +26432,6 @@
           },
           "jobLease": {
             "description": "Opaque lease token received from the job activation response. Disambiguates\nthis activation from any other activation of the same job: if the job is\nlater retried, history items submitted under a superseded lease are discarded\nrather than committed.\n",
-            "nullable": true,
             "type": "string"
           },
           "history": {
@@ -26755,86 +26535,6 @@
           }
         }
       },
-      "AgentInstanceHistoryItemRequest": {
-        "description": "Request to append a single history item to an agent instance's conversation history.",
-        "type": "object",
-        "required": [
-          "content",
-          "elementInstanceKey",
-          "jobKey",
-          "jobLease",
-          "producedAt",
-          "role"
-        ],
-        "properties": {
-          "elementInstanceKey": {
-            "description": "The key of the currently-active element instance.\n",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ElementInstanceKey"
-              }
-            ]
-          },
-          "jobKey": {
-            "description": "The key of the current job activation during which this history item was produced.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/JobKey"
-              }
-            ]
-          },
-          "jobLease": {
-            "description": "Opaque lease token received from the job activation response.",
-            "type": "string"
-          },
-          "loopIteration": {
-            "description": "The loop iteration this item belongs to. Omit if not grouping items by\nloopIteration.\n",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LoopIterationId"
-              }
-            ]
-          },
-          "role": {
-            "description": "The role of this history item in the conversation.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentInstanceHistoryRoleEnum"
-              }
-            ]
-          },
-          "content": {
-            "description": "The content blocks of this history item.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentInstanceMessageContent"
-            }
-          },
-          "toolCalls": {
-            "description": "Tool calls associated with this history item.\nFor ASSISTANT items: tool calls dispatched by this LLM response.\nFor TOOL_RESULT items: single-entry array referencing the originating tool call.\nOmit for USER items.\n",
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/AgentInstanceToolCall"
-            }
-          },
-          "metrics": {
-            "description": "Per-call token and latency metrics. Present on ASSISTANT items only.",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentInstanceHistoryItemMetrics"
-              }
-            ]
-          },
-          "producedAt": {
-            "description": "The agent-side timestamp of when this message was produced.",
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
       "AgentInstanceHistoryItem": {
         "description": "A single history item to append to the agent instance's conversation history,\nsubmitted as part of the batch on an agent instance update request.\n",
         "type": "object",
@@ -26926,26 +26626,6 @@
             "items": {
               "$ref": "#/components/schemas/AgentInstanceMessageContent"
             }
-          }
-        }
-      },
-      "AgentInstanceHistoryItemCreationResult": {
-        "description": "Response returned after successfully appending a history item.",
-        "type": "object",
-        "x-semantic-provider": [
-          "historyItemKey"
-        ],
-        "required": [
-          "historyItemKey"
-        ],
-        "properties": {
-          "historyItemKey": {
-            "description": "The system-generated key for the created history item.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentHistoryItemKey"
-              }
-            ]
           }
         }
       },
@@ -47192,6 +46872,32 @@
       },
       "UserTaskFilter": {
         "description": "User task filter request.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UserTaskFilterFields"
+          },
+          {
+            "type": "object",
+            "x-properties-added-in-version": [
+              {
+                "propertyName": "$or",
+                "addedInVersion": "8.10"
+              }
+            ],
+            "properties": {
+              "$or": {
+                "description": "Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  \"assignee\": \"user1\",\n  \"$or\": [\n    { \"candidateGroup\": \"groupA\" },\n    { \"candidateUser\": \"user2\" }\n  ]\n}\n```\nThis matches user tasks that:\n\n<ul style=\"padding-left: 20px; margin-left: 20px;\">\n  <li style=\"list-style-type: disc;\">are assigned to <em>user1</em></li>\n  <li style=\"list-style-type: disc;\">and match either:\n    <ul style=\"padding-left: 20px; margin-left: 20px;\">\n      <li style=\"list-style-type: circle;\"><code>candidateGroup</code> is <em>groupA</em>, or</li>\n      <li style=\"list-style-type: circle;\"><code>candidateUser</code> is <em>user2</em></li>\n    </ul>\n  </li>\n</ul>\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserTaskFilterFields"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "UserTaskFilterFields": {
+        "description": "User task filter fields.",
         "type": "object",
         "properties": {
           "state": {
