@@ -189,4 +189,78 @@ public static class ClientExamples
     }
     // </GetClusterTopology>
     #endregion GetClusterTopology
+
+    #region TriggerClusterRebalance
+
+    // <TriggerClusterRebalance>
+    public static async Task TriggerClusterRebalanceExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // Transfers leadership of every partition towards its highest-priority replica,
+        // one at a time. Requires cluster-admin credentials, not Orchestration Cluster
+        // user credentials. Poll GetClusterRebalanceAsync to monitor progress.
+        var result = await client.TriggerClusterRebalanceAsync(
+            new ClusterRebalanceRequest
+            {
+                ReplicationLagThreshold = 1_000_000,
+                MaxTransferAttempts = 3,
+            });
+
+        Console.WriteLine($"Rebalance state: {result.State}");
+        foreach (var partition in result.Partitions)
+        {
+            Console.WriteLine($"  Partition {partition.PartitionId}: leader={partition.CurrentLeader}");
+        }
+    }
+    // </TriggerClusterRebalance>
+    #endregion TriggerClusterRebalance
+
+    #region GetClusterRebalance
+
+    // <GetClusterRebalance>
+    public static async Task GetClusterRebalanceExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // Reports whether the cluster is currently balanced and the current leadership
+        // state of each partition. Requires cluster-admin credentials.
+        var result = await client.GetClusterRebalanceAsync();
+
+        Console.WriteLine($"Balance state: {result.State}");
+        foreach (var partition in result.Partitions)
+        {
+            Console.WriteLine($"  Partition {partition.PartitionId}: leader={partition.CurrentLeader}");
+        }
+
+        if (result.RunningRebalance is not null)
+        {
+            Console.WriteLine($"Rebalance in progress: started {result.RunningRebalance.StartedAt}");
+        }
+    }
+    // </GetClusterRebalance>
+    #endregion GetClusterRebalance
+
+    #region CancelClusterRebalance
+
+    // <CancelClusterRebalance>
+    public static async Task CancelClusterRebalanceExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // Asks the running rebalance to stop once the in-flight transfer finishes.
+        // Cancellation is idempotent. Requires cluster-admin credentials.
+        var result = await client.CancelClusterRebalanceAsync();
+
+        if (result.WasRunning)
+        {
+            Console.WriteLine("Cancellation requested; rebalance will stop after the in-flight transfer finishes.");
+        }
+        else
+        {
+            Console.WriteLine("No rebalance was running.");
+        }
+    }
+    // </CancelClusterRebalance>
+    #endregion CancelClusterRebalance
 }

@@ -224,6 +224,106 @@ public enum BatchOperationSearchQuerySortRequestField
 }
 
 /// <summary>
+/// The cluster&apos;s aggregate balance state as of the time of the request.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterBalanceResponseState
+{
+    [JsonPropertyName("BALANCED")]
+    BALANCED,
+    [JsonPropertyName("BALANCING")]
+    BALANCING,
+    [JsonPropertyName("UNBALANCED")]
+    UNBALANCED,
+}
+
+/// <summary>
+/// How the rebalance ended.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterCompletedRebalanceResult
+{
+    [JsonPropertyName("COMPLETED")]
+    COMPLETED,
+    [JsonPropertyName("CANCELLED")]
+    CANCELLED,
+    [JsonPropertyName("FAILED")]
+    FAILED,
+}
+
+/// <summary>
+/// Where this rebalance has reached for the partition.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterRebalanceOperationPartitionProgress
+{
+    [JsonPropertyName("PENDING")]
+    PENDING,
+    [JsonPropertyName("TRANSFERRING")]
+    TRANSFERRING,
+    [JsonPropertyName("COMPLETED")]
+    COMPLETED,
+}
+
+/// <summary>
+/// The terminal outcome, present only when progress is COMPLETED.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterRebalanceOperationPartitionResult
+{
+    [JsonPropertyName("TRANSFERRED")]
+    TRANSFERRED,
+    [JsonPropertyName("ALREADY_LEADER")]
+    ALREADYLEADER,
+    [JsonPropertyName("NOT_MEMBER")]
+    NOTMEMBER,
+    [JsonPropertyName("NOT_REPLICATING")]
+    NOTREPLICATING,
+    [JsonPropertyName("UNREACHABLE")]
+    UNREACHABLE,
+    [JsonPropertyName("NOT_COORDINATOR")]
+    NOTCOORDINATOR,
+    [JsonPropertyName("STALE_CONFIGURATION")]
+    STALECONFIGURATION,
+    [JsonPropertyName("TRANSFER_IN_PROGRESS")]
+    TRANSFERINPROGRESS,
+    [JsonPropertyName("LAG_TOO_HIGH")]
+    LAGTOOHIGH,
+    [JsonPropertyName("LEADER_INITIALIZING")]
+    LEADERINITIALIZING,
+    [JsonPropertyName("CONFIGURATION_CHANGE_IN_PROGRESS")]
+    CONFIGURATIONCHANGEINPROGRESS,
+    [JsonPropertyName("PAUSE_FAILED")]
+    PAUSEFAILED,
+    [JsonPropertyName("REPLICATION_TIMED_OUT")]
+    REPLICATIONTIMEDOUT,
+    [JsonPropertyName("TIMEOUT_NOW_EXHAUSTED")]
+    TIMEOUTNOWEXHAUSTED,
+    [JsonPropertyName("LEADER_CHANGED")]
+    LEADERCHANGED,
+    [JsonPropertyName("NO_LEADER")]
+    NOLEADER,
+    [JsonPropertyName("NO_RESPONSE")]
+    NORESPONSE,
+    [JsonPropertyName("CANCELLED")]
+    CANCELLED,
+}
+
+/// <summary>
+/// Whether this partition is being actively transferred, unbalanced, or balanced.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterRebalancePartitionState
+{
+    [JsonPropertyName("TRANSFERRING")]
+    TRANSFERRING,
+    [JsonPropertyName("UNBALANCED")]
+    UNBALANCED,
+    [JsonPropertyName("BALANCED")]
+    BALANCED,
+}
+
+/// <summary>
 /// `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, `DEGRADED` in every other case.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -9682,6 +9782,37 @@ public enum CloudStage
 }
 
 /// <summary>
+/// The cluster&apos;s current per-partition balance state, the running rebalance, and the last completed rebalance.
+/// </summary>
+public sealed class ClusterBalanceResponse
+{
+    /// <summary>
+    /// The cluster&apos;s aggregate balance state as of the time of the request.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public ClusterBalanceResponseState State { get; set; }
+
+    /// <summary>
+    /// The balance state of each partition as of the time of the request.
+    /// </summary>
+    [JsonPropertyName("partitions")]
+    public List<ClusterRebalancePartition> Partitions { get; set; } = null!;
+
+    /// <summary>
+    /// Normally the rebalance currently running, or absent if no rebalance is running. For a dry-run response, this is instead the unexecuted plan of that dry run.
+    /// </summary>
+    [JsonPropertyName("runningRebalance")]
+    public ClusterRunningRebalance? RunningRebalance { get; set; }
+
+    /// <summary>
+    /// The last completed non-dry-run rebalance this coordinator finished.
+    /// </summary>
+    [JsonPropertyName("lastCompletedRebalance")]
+    public ClusterCompletedRebalance? LastCompletedRebalance { get; set; }
+
+}
+
+/// <summary>
 /// Provides information on a broker node, independent of any physical tenant.
 /// </summary>
 public sealed class ClusterBrokerInfo
@@ -9710,6 +9841,43 @@ public sealed class ClusterBrokerInfo
     /// </summary>
     [JsonPropertyName("version")]
     public string Version { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The last completed rebalance.
+/// </summary>
+public sealed class ClusterCompletedRebalance
+{
+    /// <summary>
+    /// The ID of this rebalance.
+    /// </summary>
+    [JsonPropertyName("rebalanceId")]
+    public long RebalanceId { get; set; }
+
+    /// <summary>
+    /// Every partition in the rebalance plan and its progress within this rebalance.
+    /// </summary>
+    [JsonPropertyName("partitions")]
+    public List<ClusterRebalanceOperationPartition> Partitions { get; set; } = null!;
+
+    /// <summary>
+    /// When this rebalance was created.
+    /// </summary>
+    [JsonPropertyName("startedAt")]
+    public DateTimeOffset StartedAt { get; set; }
+
+    /// <summary>
+    /// When this rebalance finished.
+    /// </summary>
+    [JsonPropertyName("finishedAt")]
+    public DateTimeOffset FinishedAt { get; set; }
+
+    /// <summary>
+    /// How the rebalance ended.
+    /// </summary>
+    [JsonPropertyName("result")]
+    public ClusterCompletedRebalanceResult Result { get; set; }
 
 }
 
@@ -9856,6 +10024,142 @@ public sealed class ClusterModeChangeResponse
     /// </summary>
     [JsonPropertyName("plannedChanges")]
     public List<ClusterModeChangePlannedChange> PlannedChanges { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The fields common to a running and a completed rebalance.
+/// </summary>
+public sealed class ClusterRebalance
+{
+    /// <summary>
+    /// The ID of this rebalance.
+    /// </summary>
+    [JsonPropertyName("rebalanceId")]
+    public long RebalanceId { get; set; }
+
+    /// <summary>
+    /// Every partition in the rebalance plan and its progress within this rebalance.
+    /// </summary>
+    [JsonPropertyName("partitions")]
+    public List<ClusterRebalanceOperationPartition> Partitions { get; set; } = null!;
+
+    /// <summary>
+    /// When this rebalance was created.
+    /// </summary>
+    [JsonPropertyName("startedAt")]
+    public DateTimeOffset StartedAt { get; set; }
+
+}
+
+/// <summary>
+/// One partition&apos;s plan, progress, and outcome within a rebalance.
+/// </summary>
+public sealed class ClusterRebalanceOperationPartition
+{
+    /// <summary>
+    /// The unique ID of this partition, within its physical tenant.
+    /// </summary>
+    [JsonPropertyName("partitionId")]
+    public int PartitionId { get; set; }
+
+    /// <summary>
+    /// The partition group this partition belongs to.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
+    /// The leader last observed by this rebalance, or absent if there was no leader.
+    /// </summary>
+    [JsonPropertyName("currentLeader")]
+    public string? CurrentLeader { get; set; }
+
+    /// <summary>
+    /// The leader selected when this rebalance was planned.
+    /// </summary>
+    [JsonPropertyName("desiredLeader")]
+    public string DesiredLeader { get; set; } = null!;
+
+    /// <summary>
+    /// Where this rebalance has reached for the partition.
+    /// </summary>
+    [JsonPropertyName("progress")]
+    public ClusterRebalanceOperationPartitionProgress Progress { get; set; }
+
+    /// <summary>
+    /// The terminal outcome, present only when progress is COMPLETED.
+    /// </summary>
+    [JsonPropertyName("result")]
+    public ClusterRebalanceOperationPartitionResult? Result { get; set; }
+
+}
+
+/// <summary>
+/// One partition&apos;s leadership/balance status - its current leader, its desired leader, and whether a rebalance is currently moving it.
+/// </summary>
+public sealed class ClusterRebalancePartition
+{
+    /// <summary>
+    /// The unique ID of this partition, within its physical tenant.
+    /// </summary>
+    [JsonPropertyName("partitionId")]
+    public int PartitionId { get; set; }
+
+    /// <summary>
+    /// The partition group this partition belongs to. Partition IDs are unique only within a group, so this is needed to identify the partition.
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
+    /// The broker ID currently leading this partition, or absent if it has no leader.
+    /// </summary>
+    [JsonPropertyName("currentLeader")]
+    public string? CurrentLeader { get; set; }
+
+    /// <summary>
+    /// The broker ID the current configuration wants to lead this partition.
+    /// </summary>
+    [JsonPropertyName("desiredLeader")]
+    public string DesiredLeader { get; set; } = null!;
+
+    /// <summary>
+    /// Whether this partition is being actively transferred, unbalanced, or balanced.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public ClusterRebalancePartitionState State { get; set; }
+
+}
+
+/// <summary>
+/// The settings to run a given rebalance with. Every setting is optional; an absent request body is equivalent to a body with every field absent, and means &quot;use the configured settings&quot;.
+/// </summary>
+public sealed class ClusterRebalanceRequest
+{
+    /// <summary>
+    /// The highest replication lag (in bytes) that a desired leader may have for its transfer to be accepted.
+    /// </summary>
+    [JsonPropertyName("replicationLagThreshold")]
+    public long? ReplicationLagThreshold { get; set; }
+
+    /// <summary>
+    /// How long a partition may stay frozen waiting for its desired leader to catch up (as a positive ISO-8601 duration).
+    /// </summary>
+    [JsonPropertyName("replicationTimeout")]
+    public string? ReplicationTimeout { get; set; }
+
+    /// <summary>
+    /// How many times a current leader may prompt the desired leader to take over leadership before giving up.
+    /// </summary>
+    [JsonPropertyName("maxTransferAttempts")]
+    public int? MaxTransferAttempts { get; set; }
+
+    /// <summary>
+    /// How long the coordinator waits for a partition without a leader to acquire one before reporting `NO_LEADER` and moving on (as a positive ISO-8601 duration).
+    /// </summary>
+    [JsonPropertyName("leaderWaitTimeout")]
+    public string? LeaderWaitTimeout { get; set; }
 
 }
 
@@ -10046,6 +10350,43 @@ public sealed class ClusterRestoreResponse
     /// </summary>
     [JsonPropertyName("plannedChanges")]
     public List<ClusterRestorePlannedChange> PlannedChanges { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The rebalance currently running.
+/// </summary>
+public sealed class ClusterRunningRebalance
+{
+    /// <summary>
+    /// The ID of this rebalance.
+    /// </summary>
+    [JsonPropertyName("rebalanceId")]
+    public long RebalanceId { get; set; }
+
+    /// <summary>
+    /// Every partition in the rebalance plan and its progress within this rebalance.
+    /// </summary>
+    [JsonPropertyName("partitions")]
+    public List<ClusterRebalanceOperationPartition> Partitions { get; set; } = null!;
+
+    /// <summary>
+    /// When this rebalance was created.
+    /// </summary>
+    [JsonPropertyName("startedAt")]
+    public DateTimeOffset StartedAt { get; set; }
+
+    /// <summary>
+    /// Whether this rebalance is a dry run.
+    /// </summary>
+    [JsonPropertyName("dryRun")]
+    public bool DryRun { get; set; }
+
+    /// <summary>
+    /// Whether cancellation has been requested.
+    /// </summary>
+    [JsonPropertyName("cancelRequested")]
+    public bool CancelRequested { get; set; }
 
 }
 
@@ -25270,6 +25611,19 @@ public sealed class ProcessInstanceWaitStateStatisticsResult
     /// </summary>
     [JsonPropertyName("waitingCount")]
     public long WaitingCount { get; set; }
+
+}
+
+/// <summary>
+/// Response to a rebalance cancellation request.
+/// </summary>
+public sealed class RebalanceCancellationResponse
+{
+    /// <summary>
+    /// Whether there was a rebalance to stop.
+    /// </summary>
+    [JsonPropertyName("wasRunning")]
+    public bool WasRunning { get; set; }
 
 }
 

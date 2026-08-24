@@ -1857,6 +1857,8 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationResponse> GetBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult> SearchBatchOperationsAsync(Camunda.Orchestration.Sdk.BatchOperationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CamundaUserResult> GetAuthenticationAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterBalanceResponse> GetClusterRebalanceAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterBalanceResponse> TriggerClusterRebalanceAsync(Camunda.Orchestration.Sdk.ClusterRebalanceRequest body, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo> GetHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId backupId, System.String? physicalTenantId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsClusterAdminAsync(Camunda.Orchestration.Sdk.Mode mode, System.String? physicalTenantId = null, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterModeChangeResponse> ChangeClusterModeAsync(Camunda.Orchestration.Sdk.Mode mode, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
@@ -1948,6 +1950,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[System.IAsyncDi
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(Camunda.Orchestration.Sdk.ProcessInstanceSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowsQueryResult> GetProcessInstanceSequenceFlowsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult> GetProcessInstanceWaitStateStatisticsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RebalanceCancellationResponse> CancelClusterRebalanceAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ResourceResult> GetResourceAsync(Camunda.Orchestration.Sdk.ResourceKey resourceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ResourceResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ResourceSearchQueryResult> SearchResourcesAsync(Camunda.Orchestration.Sdk.ResourceSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ResourceSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.RestoreStatusResponse> GetRestoreStatusAsync(System.Threading.CancellationToken ct = null)
@@ -2144,12 +2147,41 @@ TYPE Camunda.Orchestration.Sdk.CloudStage : enum interfaces=[System.IComparable,
   MEMBER Int = 1 json="int"
   MEMBER Prod = 2 json="prod"
 
+TYPE Camunda.Orchestration.Sdk.ClusterBalanceResponse : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterBalanceResponseState State { get; set; } [JsonPropertyName("state")]
+  PROP Camunda.Orchestration.Sdk.ClusterCompletedRebalance? LastCompletedRebalance { get; set; } [JsonPropertyName("lastCompletedRebalance")]
+  PROP Camunda.Orchestration.Sdk.ClusterRunningRebalance? RunningRebalance { get; set; } [JsonPropertyName("runningRebalance")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterRebalancePartition> Partitions { get; set; } [JsonPropertyName("partitions")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterBalanceResponseState : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER BALANCED = 0 json="BALANCED"
+  MEMBER BALANCING = 1 json="BALANCING"
+  MEMBER UNBALANCED = 2 json="UNBALANCED"
+
 TYPE Camunda.Orchestration.Sdk.ClusterBrokerInfo : sealed class
   CTOR ()
   PROP System.Int32 Port { get; set; } [JsonPropertyName("port")]
   PROP System.String BrokerId { get; set; } [JsonPropertyName("brokerId")]
   PROP System.String Host { get; set; } [JsonPropertyName("host")]
   PROP System.String Version { get; set; } [JsonPropertyName("version")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterCompletedRebalance : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult Result { get; set; } [JsonPropertyName("result")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition> Partitions { get; set; } [JsonPropertyName("partitions")]
+  PROP System.DateTimeOffset FinishedAt { get; set; } [JsonPropertyName("finishedAt")]
+  PROP System.DateTimeOffset StartedAt { get; set; } [JsonPropertyName("startedAt")]
+  PROP System.Int64 RebalanceId { get; set; } [JsonPropertyName("rebalanceId")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterCompletedRebalanceResult : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER COMPLETED = 0 json="COMPLETED"
+  MEMBER CANCELLED = 1 json="CANCELLED"
+  MEMBER FAILED = 2 json="FAILED"
 
 TYPE Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo : sealed class
   CTOR ()
@@ -2192,6 +2224,72 @@ TYPE Camunda.Orchestration.Sdk.ClusterModeChangeResponse : sealed class
   CTOR ()
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterModeChangePlannedChange> PlannedChanges { get; set; } [JsonPropertyName("plannedChanges")]
   PROP System.String ChangeId { get; set; } [JsonPropertyName("changeId")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterRebalance : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition> Partitions { get; set; } [JsonPropertyName("partitions")]
+  PROP System.DateTimeOffset StartedAt { get; set; } [JsonPropertyName("startedAt")]
+  PROP System.Int64 RebalanceId { get; set; } [JsonPropertyName("rebalanceId")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress Progress { get; set; } [JsonPropertyName("progress")]
+  PROP Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult? Result { get; set; } [JsonPropertyName("result")]
+  PROP System.Int32 PartitionId { get; set; } [JsonPropertyName("partitionId")]
+  PROP System.String DesiredLeader { get; set; } [JsonPropertyName("desiredLeader")]
+  PROP System.String PhysicalTenantId { get; set; } [JsonPropertyName("physicalTenantId")]
+  PROP System.String? CurrentLeader { get; set; } [JsonPropertyName("currentLeader")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionProgress : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER PENDING = 0 json="PENDING"
+  MEMBER TRANSFERRING = 1 json="TRANSFERRING"
+  MEMBER COMPLETED = 2 json="COMPLETED"
+
+TYPE Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER TRANSFERRED = 0 json="TRANSFERRED"
+  MEMBER ALREADYLEADER = 1 json="ALREADY_LEADER"
+  MEMBER NOTMEMBER = 2 json="NOT_MEMBER"
+  MEMBER NOTREPLICATING = 3 json="NOT_REPLICATING"
+  MEMBER UNREACHABLE = 4 json="UNREACHABLE"
+  MEMBER NOTCOORDINATOR = 5 json="NOT_COORDINATOR"
+  MEMBER STALECONFIGURATION = 6 json="STALE_CONFIGURATION"
+  MEMBER TRANSFERINPROGRESS = 7 json="TRANSFER_IN_PROGRESS"
+  MEMBER LAGTOOHIGH = 8 json="LAG_TOO_HIGH"
+  MEMBER LEADERINITIALIZING = 9 json="LEADER_INITIALIZING"
+  MEMBER CONFIGURATIONCHANGEINPROGRESS = 10 json="CONFIGURATION_CHANGE_IN_PROGRESS"
+  MEMBER PAUSEFAILED = 11 json="PAUSE_FAILED"
+  MEMBER REPLICATIONTIMEDOUT = 12 json="REPLICATION_TIMED_OUT"
+  MEMBER TIMEOUTNOWEXHAUSTED = 13 json="TIMEOUT_NOW_EXHAUSTED"
+  MEMBER LEADERCHANGED = 14 json="LEADER_CHANGED"
+  MEMBER NOLEADER = 15 json="NO_LEADER"
+  MEMBER NORESPONSE = 16 json="NO_RESPONSE"
+  MEMBER CANCELLED = 17 json="CANCELLED"
+
+TYPE Camunda.Orchestration.Sdk.ClusterRebalancePartition : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterRebalancePartitionState State { get; set; } [JsonPropertyName("state")]
+  PROP System.Int32 PartitionId { get; set; } [JsonPropertyName("partitionId")]
+  PROP System.String DesiredLeader { get; set; } [JsonPropertyName("desiredLeader")]
+  PROP System.String PhysicalTenantId { get; set; } [JsonPropertyName("physicalTenantId")]
+  PROP System.String? CurrentLeader { get; set; } [JsonPropertyName("currentLeader")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterRebalancePartitionState : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER TRANSFERRING = 0 json="TRANSFERRING"
+  MEMBER UNBALANCED = 1 json="UNBALANCED"
+  MEMBER BALANCED = 2 json="BALANCED"
+
+TYPE Camunda.Orchestration.Sdk.ClusterRebalanceRequest : sealed class
+  CTOR ()
+  PROP System.Int32? MaxTransferAttempts { get; set; } [JsonPropertyName("maxTransferAttempts")]
+  PROP System.Int64? ReplicationLagThreshold { get; set; } [JsonPropertyName("replicationLagThreshold")]
+  PROP System.String? LeaderWaitTimeout { get; set; } [JsonPropertyName("leaderWaitTimeout")]
+  PROP System.String? ReplicationTimeout { get; set; } [JsonPropertyName("replicationTimeout")]
 
 TYPE Camunda.Orchestration.Sdk.ClusterRestoreAwaitModeChangeOperation : sealed class base=Camunda.Orchestration.Sdk.ClusterRestoreOperation
   CTOR ()
@@ -2242,6 +2340,14 @@ TYPE Camunda.Orchestration.Sdk.ClusterRestoreResponse : sealed class
   CTOR ()
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterRestorePlannedChange> PlannedChanges { get; set; } [JsonPropertyName("plannedChanges")]
   PROP System.String ChangeId { get; set; } [JsonPropertyName("changeId")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterRunningRebalance : sealed class
+  CTOR ()
+  PROP System.Boolean CancelRequested { get; set; } [JsonPropertyName("cancelRequested")]
+  PROP System.Boolean DryRun { get; set; } [JsonPropertyName("dryRun")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartition> Partitions { get; set; } [JsonPropertyName("partitions")]
+  PROP System.DateTimeOffset StartedAt { get; set; } [JsonPropertyName("startedAt")]
+  PROP System.Int64 RebalanceId { get; set; } [JsonPropertyName("rebalanceId")]
 
 TYPE Camunda.Orchestration.Sdk.ClusterRuntimeBackupInfo : sealed class
   CTOR ()
@@ -5782,6 +5888,10 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult : sealed
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP System.Int64 WaitingCount { get; set; } [JsonPropertyName("waitingCount")]
+
+TYPE Camunda.Orchestration.Sdk.RebalanceCancellationResponse : sealed class
+  CTOR ()
+  PROP System.Boolean WasRunning { get; set; } [JsonPropertyName("wasRunning")]
 
 TYPE Camunda.Orchestration.Sdk.ResolvedSecret : sealed class
   CTOR ()

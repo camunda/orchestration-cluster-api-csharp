@@ -62,6 +62,13 @@
       "label": "Change cluster mode as cluster admin"
     }
   ],
+  "cancelClusterRebalance": [
+    {
+      "file": "Client.cs",
+      "region": "CancelClusterRebalance",
+      "label": "Cancel the running cluster rebalance"
+    }
+  ],
   "restore": [
     {
       "file": "Client.cs",
@@ -1596,6 +1603,20 @@
       "file": "Client.cs",
       "region": "GetClusterTopology",
       "label": "Get the topology of the whole cluster"
+    }
+  ],
+  "getClusterRebalance": [
+    {
+      "file": "Client.cs",
+      "region": "GetClusterRebalance",
+      "label": "Get the cluster's current leadership balance"
+    }
+  ],
+  "triggerClusterRebalance": [
+    {
+      "file": "Client.cs",
+      "region": "TriggerClusterRebalance",
+      "label": "Trigger a cluster-wide leadership rebalance"
     }
   ],
   "getClusterExportingStatus": [

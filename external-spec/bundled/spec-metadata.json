@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:c0b61c0be7d3114128f8b5494ffe8ed1661155f6b0aa6e46177f686a19019ea1",
+  "specHash": "sha256:b4a2f42cc11049ba7a3afb7e2bafd332b5c8160b7a4350814a1a9beac8e1f1d3",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -9097,7 +9097,7 @@
         "Resource"
       ],
       "summary": "Delete resource",
-      "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition the\ndefinition first drains its running instances and its history is deleted asynchronously once\nthe definition is fully removed cluster-wide; no batch operation is returned in the response.",
+      "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition that still\nexists in the runtime state, the definition first drains its running instances and its\nhistory is deleted asynchronously once the definition is fully removed cluster-wide; no batch\noperation is returned in the response. If the process definition has already been removed\nfrom the runtime state and the deletion is later re-triggered with `deleteHistory` set to\n`true`, a batch operation is created immediately and returned in the `batchOperation` field.",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -11739,6 +11739,95 @@
       }
     },
     {
+      "operationId": "getClusterRebalance",
+      "path": "/cluster/v2/rebalance",
+      "method": "get",
+      "tags": [
+        "Cluster"
+      ],
+      "summary": "Report the cluster's current leadership balance",
+      "description": "Reports whether the cluster is currently balanced, the current leadership state of every partition, and what became of the last rebalance to finish. The last completed rebalance is held in memory by the coordinating broker, so none will be reported if the coordinator has moved or restarted since the last rebalance.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "ClusterBalanceResponse",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "triggerClusterRebalance",
+      "path": "/cluster/v2/rebalance",
+      "method": "post",
+      "tags": [
+        "Cluster"
+      ],
+      "summary": "Trigger a cluster-wide leadership rebalance",
+      "description": "Transfers leadership of every partition that is not led by its highest-priority replica towards that replica, one partition at a time. Returns as soon as the rebalance has been accepted (poll `GET /cluster/v2/rebalance` to monitor progress).\n\nEach rebalance can specify overrides for the configured rebalance settings (e.g. maximum replication lag to allow). An absent request body means \"use the configured settings\".\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "dryRun",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ClusterRebalanceRequest",
+      "successResponseSchemaRef": "ClusterBalanceResponse",
+      "successStatus": 202,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
+      "operationId": "cancelClusterRebalance",
+      "path": "/cluster/v2/rebalance",
+      "method": "delete",
+      "tags": [
+        "Cluster"
+      ],
+      "summary": "Stop the running rebalance",
+      "description": "Asks the running rebalance to stop once the transfer in flight has finished. Partitions already transferred keep their new leaders, and those the rebalance had not yet reached keep their current ones.\n\nCancellation requests are idempotent and always accepted. The `wasRunning` response field can be used to distinguish a cancellation that found a running rebalance from one that did not.\n\nRequires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "RebalanceCancellationResponse",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10"
+      }
+    },
+    {
       "operationId": "restoreAsClusterAdmin",
       "path": "/cluster/v2/restore",
       "method": "post",
@@ -12773,7 +12862,7 @@
   "integrity": {
     "totalSemanticKeys": 42,
     "totalUnions": 68,
-    "totalOperations": 241,
+    "totalOperations": 244,
     "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 23

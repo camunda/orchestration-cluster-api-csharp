@@ -209,6 +209,36 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.CancelClusterRebalanceAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#CancelClusterRebalance)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterRebalanceAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#GetClusterRebalance)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.TriggerClusterRebalanceAsync(Camunda.Orchestration.Sdk.ClusterRebalanceRequest,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Client.cs#TriggerClusterRebalance)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.CompleteJobAsync(Camunda.Orchestration.Sdk.JobKey,Camunda.Orchestration.Sdk.JobCompletionRequest,System.Threading.CancellationToken)
 example:
 - *content
