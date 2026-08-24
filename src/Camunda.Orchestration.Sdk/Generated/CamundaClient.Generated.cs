@@ -713,7 +713,51 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
     /// </summary>
-    /// <remarks>Operation: cancelClusterRebalance</remarks>
+    /// <remarks>
+    /// Operation: cancelClusterRebalance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CancelClusterRebalanceExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Asks the running rebalance to stop once the in-flight transfer finishes.
+    ///     // Cancellation is idempotent. Requires cluster-admin credentials.
+    ///     var result = await client.CancelClusterRebalanceAsync();
+    /// 
+    ///     if (result.WasRunning)
+    ///     {
+    ///         Console.WriteLine(&quot;Cancellation requested; rebalance will stop after the in-flight transfer finishes.&quot;);
+    ///     }
+    ///     else
+    ///     {
+    ///         Console.WriteLine(&quot;No rebalance was running.&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CancelClusterRebalanceExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Asks the running rebalance to stop once the in-flight transfer finishes.
+    ///     // Cancellation is idempotent. Requires cluster-admin credentials.
+    ///     var result = await client.CancelClusterRebalanceAsync();
+    /// 
+    ///     if (result.WasRunning)
+    ///     {
+    ///         Console.WriteLine(&quot;Cancellation requested; rebalance will stop after the in-flight transfer finishes.&quot;);
+    ///     }
+    ///     else
+    ///     {
+    ///         Console.WriteLine(&quot;No rebalance was running.&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<RebalanceCancellationResponse> CancelClusterRebalanceAsync(CancellationToken ct = default)
     {
         var path = $"/cluster/v2/rebalance";
@@ -1125,18 +1169,43 @@ public partial class CamundaClient
     /// Operation: createAgentInstance
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateAgentInstanceExample(ElementInstanceKey elementInstanceKey)
+    /// public static async Task CreateAgentInstanceExample(
+    ///     ElementInstanceKey elementInstanceKey,
+    ///     JobKey jobKey,
+    ///     string jobLease)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
+    ///     // The agent&apos;s model, provider, system prompt and limits are supplied as a
+    ///     // CONFIGURATION history item; a create request must open the conversation
+    ///     // with at least one such item.
     ///     var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
     ///     {
     ///         ElementInstanceKey = elementInstanceKey,
-    ///         Definition = new AgentInstanceDefinition
+    ///         JobKey = jobKey,
+    ///         JobLease = jobLease,
+    ///         History = new List&lt;AgentInstanceHistoryItem&gt;
     ///         {
-    ///             Model = &quot;gpt-4o&quot;,
-    ///             Provider = &quot;openai&quot;,
-    ///             SystemPrompt = &quot;You are a helpful assistant.&quot;,
+    ///             new AgentInstanceHistoryItem
+    ///             {
+    ///                 HistoryItemId = &quot;configuration-1&quot;,
+    ///                 LoopIteration = LoopIterationId.AssumeExists(0),
+    ///                 Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
+    ///                 ProducedAt = DateTimeOffset.UtcNow,
+    ///                 Content = new List&lt;AgentInstanceMessageContent&gt;(),
+    ///                 Model = &quot;gpt-4o&quot;,
+    ///                 Provider = &quot;openai&quot;,
+    ///                 SystemPrompt = new List&lt;AgentInstanceMessageContent&gt;
+    ///                 {
+    ///                     new AgentInstanceTextContent { Text = &quot;You are a helpful assistant.&quot; },
+    ///                 },
+    ///                 Limits = new AgentInstanceLimits
+    ///                 {
+    ///                     MaxModelCalls = 20,
+    ///                     MaxToolCalls = 20,
+    ///                     MaxTokens = 100_000,
+    ///                 },
+    ///             },
     ///         },
     ///     });
     /// 
@@ -1147,18 +1216,43 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task CreateAgentInstanceExample(ElementInstanceKey elementInstanceKey)
+    /// public static async Task CreateAgentInstanceExample(
+    ///     ElementInstanceKey elementInstanceKey,
+    ///     JobKey jobKey,
+    ///     string jobLease)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
+    ///     // The agent&apos;s model, provider, system prompt and limits are supplied as a
+    ///     // CONFIGURATION history item; a create request must open the conversation
+    ///     // with at least one such item.
     ///     var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
     ///     {
     ///         ElementInstanceKey = elementInstanceKey,
-    ///         Definition = new AgentInstanceDefinition
+    ///         JobKey = jobKey,
+    ///         JobLease = jobLease,
+    ///         History = new List&lt;AgentInstanceHistoryItem&gt;
     ///         {
-    ///             Model = &quot;gpt-4o&quot;,
-    ///             Provider = &quot;openai&quot;,
-    ///             SystemPrompt = &quot;You are a helpful assistant.&quot;,
+    ///             new AgentInstanceHistoryItem
+    ///             {
+    ///                 HistoryItemId = &quot;configuration-1&quot;,
+    ///                 LoopIteration = LoopIterationId.AssumeExists(0),
+    ///                 Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
+    ///                 ProducedAt = DateTimeOffset.UtcNow,
+    ///                 Content = new List&lt;AgentInstanceMessageContent&gt;(),
+    ///                 Model = &quot;gpt-4o&quot;,
+    ///                 Provider = &quot;openai&quot;,
+    ///                 SystemPrompt = new List&lt;AgentInstanceMessageContent&gt;
+    ///                 {
+    ///                     new AgentInstanceTextContent { Text = &quot;You are a helpful assistant.&quot; },
+    ///                 },
+    ///                 Limits = new AgentInstanceLimits
+    ///                 {
+    ///                     MaxModelCalls = 20,
+    ///                     MaxToolCalls = 20,
+    ///                     MaxTokens = 100_000,
+    ///                 },
+    ///             },
     ///         },
     ///     });
     /// 
@@ -1170,81 +1264,6 @@ public partial class CamundaClient
     {
         var path = $"/agent-instances";
         return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceCreationResult>(HttpMethod.Post, path, body, ct), "createAgentInstance", false, ct);
-    }
-
-    /// <summary>
-    /// Create agent instance history item
-    /// Appends a single history item to an agent instance&apos;s conversation history.
-    /// The created item has commitStatus PENDING until the job identified by jobLease
-    /// completes successfully, at which point it transitions to COMMITTED. If the job
-    /// fails or is superseded by a retry, the item is marked DISCARDED.
-    /// 
-    /// </summary>
-    /// <remarks>
-    /// Operation: createAgentInstanceHistoryItem
-    /// <para><b>Example:</b></para>
-    /// <code>
-    /// public static async Task CreateAgentInstanceHistoryItemExample(
-    ///     AgentInstanceKey agentInstanceKey,
-    ///     ElementInstanceKey elementInstanceKey,
-    ///     JobKey jobKey,
-    ///     string jobLease)
-    /// {
-    ///     using var client = CamundaClient.Create();
-    /// 
-    ///     var result = await client.CreateAgentInstanceHistoryItemAsync(
-    ///         agentInstanceKey,
-    ///         new AgentInstanceHistoryItemRequest
-    ///         {
-    ///             ElementInstanceKey = elementInstanceKey,
-    ///             JobKey = jobKey,
-    ///             JobLease = jobLease,
-    ///             Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
-    ///             Content = new List&lt;AgentInstanceMessageContent&gt;
-    ///             {
-    ///                 new AgentInstanceTextContent { Text = &quot;How can I help you today?&quot; },
-    ///             },
-    ///             ProducedAt = DateTimeOffset.UtcNow,
-    ///         });
-    /// 
-    ///     Console.WriteLine($&quot;Created history item: {result.HistoryItemKey}&quot;);
-    /// }
-    /// </code>
-    /// </remarks>
-    /// <example>
-    /// <para><b>Example:</b></para>
-    /// <code>
-    /// public static async Task CreateAgentInstanceHistoryItemExample(
-    ///     AgentInstanceKey agentInstanceKey,
-    ///     ElementInstanceKey elementInstanceKey,
-    ///     JobKey jobKey,
-    ///     string jobLease)
-    /// {
-    ///     using var client = CamundaClient.Create();
-    /// 
-    ///     var result = await client.CreateAgentInstanceHistoryItemAsync(
-    ///         agentInstanceKey,
-    ///         new AgentInstanceHistoryItemRequest
-    ///         {
-    ///             ElementInstanceKey = elementInstanceKey,
-    ///             JobKey = jobKey,
-    ///             JobLease = jobLease,
-    ///             Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
-    ///             Content = new List&lt;AgentInstanceMessageContent&gt;
-    ///             {
-    ///                 new AgentInstanceTextContent { Text = &quot;How can I help you today?&quot; },
-    ///             },
-    ///             ProducedAt = DateTimeOffset.UtcNow,
-    ///         });
-    /// 
-    ///     Console.WriteLine($&quot;Created history item: {result.HistoryItemKey}&quot;);
-    /// }
-    /// </code>
-    /// </example>
-    public async Task<AgentInstanceHistoryItemCreationResult> CreateAgentInstanceHistoryItemAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistoryItemRequest body, CancellationToken ct = default)
-    {
-        var path = $"/agent-instances/{Uri.EscapeDataString(agentInstanceKey.ToString()!)}/history";
-        return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceHistoryItemCreationResult>(HttpMethod.Post, path, body, ct), "createAgentInstanceHistoryItem", false, ct);
     }
 
     /// <summary>
@@ -3326,7 +3345,55 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
     /// </summary>
-    /// <remarks>Operation: getClusterRebalance</remarks>
+    /// <remarks>
+    /// Operation: getClusterRebalance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClusterRebalanceExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Reports whether the cluster is currently balanced and the current leadership
+    ///     // state of each partition. Requires cluster-admin credentials.
+    ///     var result = await client.GetClusterRebalanceAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Balance state: {result.State}&quot;);
+    ///     foreach (var partition in result.Partitions)
+    ///     {
+    ///         Console.WriteLine($&quot;  Partition {partition.PartitionId}: leader={partition.CurrentLeader}&quot;);
+    ///     }
+    /// 
+    ///     if (result.RunningRebalance is not null)
+    ///     {
+    ///         Console.WriteLine($&quot;Rebalance in progress: started {result.RunningRebalance.StartedAt}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClusterRebalanceExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Reports whether the cluster is currently balanced and the current leadership
+    ///     // state of each partition. Requires cluster-admin credentials.
+    ///     var result = await client.GetClusterRebalanceAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Balance state: {result.State}&quot;);
+    ///     foreach (var partition in result.Partitions)
+    ///     {
+    ///         Console.WriteLine($&quot;  Partition {partition.PartitionId}: leader={partition.CurrentLeader}&quot;);
+    ///     }
+    /// 
+    ///     if (result.RunningRebalance is not null)
+    ///     {
+    ///         Console.WriteLine($&quot;Rebalance in progress: started {result.RunningRebalance.StartedAt}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterBalanceResponse> GetClusterRebalanceAsync(CancellationToken ct = default)
     {
         var path = $"/cluster/v2/rebalance";
@@ -10410,7 +10477,57 @@ public partial class CamundaClient
     /// 
     /// Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user&apos;s credentials — only the separate cluster-admin credentials are valid here.
     /// </summary>
-    /// <remarks>Operation: triggerClusterRebalance</remarks>
+    /// <remarks>
+    /// Operation: triggerClusterRebalance
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task TriggerClusterRebalanceExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Transfers leadership of every partition towards its highest-priority replica,
+    ///     // one at a time. Requires cluster-admin credentials, not Orchestration Cluster
+    ///     // user credentials. Poll GetClusterRebalanceAsync to monitor progress.
+    ///     var result = await client.TriggerClusterRebalanceAsync(
+    ///         new ClusterRebalanceRequest
+    ///         {
+    ///             ReplicationLagThreshold = 1_000_000,
+    ///             MaxTransferAttempts = 3,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Rebalance state: {result.State}&quot;);
+    ///     foreach (var partition in result.Partitions)
+    ///     {
+    ///         Console.WriteLine($&quot;  Partition {partition.PartitionId}: leader={partition.CurrentLeader}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task TriggerClusterRebalanceExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Transfers leadership of every partition towards its highest-priority replica,
+    ///     // one at a time. Requires cluster-admin credentials, not Orchestration Cluster
+    ///     // user credentials. Poll GetClusterRebalanceAsync to monitor progress.
+    ///     var result = await client.TriggerClusterRebalanceAsync(
+    ///         new ClusterRebalanceRequest
+    ///         {
+    ///             ReplicationLagThreshold = 1_000_000,
+    ///             MaxTransferAttempts = 3,
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;Rebalance state: {result.State}&quot;);
+    ///     foreach (var partition in result.Partitions)
+    ///     {
+    ///         Console.WriteLine($&quot;  Partition {partition.PartitionId}: leader={partition.CurrentLeader}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClusterBalanceResponse> TriggerClusterRebalanceAsync(ClusterRebalanceRequest body, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
@@ -10884,32 +11001,52 @@ public partial class CamundaClient
 
     /// <summary>
     /// Update agent instance
-    /// Updates the mutable fields of an agent instance (status, metric counters, and
-    /// tools) and appends a batch of history items to its conversation history. Metric
-    /// values are treated as deltas and applied immediately to the aggregate counters.
-    /// Tool updates replace the existing tool list. Each history item created for this
-    /// request is echoed back in the response.
+    /// Updates the status of an agent instance and appends a batch of history items
+    /// to its conversation history. Each history item created for this request is
+    /// echoed back in the response.
     /// 
     /// </summary>
     /// <remarks>
     /// Operation: updateAgentInstance
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
+    /// public static async Task UpdateAgentInstanceExample(
+    ///     AgentInstanceKey agentInstanceKey,
+    ///     ElementInstanceKey elementInstanceKey,
+    ///     JobKey jobKey,
+    ///     string jobLease)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
+    ///     // Conversation turns are appended through the same history batch used at
+    ///     // creation time; per-item metrics describe the model call that produced them.
     ///     await client.UpdateAgentInstanceAsync(
     ///         agentInstanceKey,
     ///         new AgentInstanceUpdateRequest
     ///         {
     ///             ElementInstanceKey = elementInstanceKey,
+    ///             JobKey = jobKey,
+    ///             JobLease = jobLease,
     ///             Status = AgentInstanceUpdateStatusEnum.THINKING,
-    ///             Metrics = new AgentInstanceMetricsDelta
+    ///             History = new List&lt;AgentInstanceHistoryItem&gt;
     ///             {
-    ///                 InputTokens = 150,
-    ///                 OutputTokens = 50,
-    ///                 ModelCalls = 1,
+    ///                 new AgentInstanceHistoryItem
+    ///                 {
+    ///                     HistoryItemId = &quot;assistant-1&quot;,
+    ///                     LoopIteration = LoopIterationId.AssumeExists(0),
+    ///                     Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
+    ///                     ProducedAt = DateTimeOffset.UtcNow,
+    ///                     Content = new List&lt;AgentInstanceMessageContent&gt;
+    ///                     {
+    ///                         new AgentInstanceTextContent { Text = &quot;How can I help you today?&quot; },
+    ///                     },
+    ///                     Metrics = new AgentInstanceHistoryItemMetrics
+    ///                     {
+    ///                         InputTokens = 150,
+    ///                         OutputTokens = 50,
+    ///                         DurationMs = 1_200,
+    ///                     },
+    ///                 },
     ///             },
     ///         });
     /// 
@@ -10920,21 +11057,43 @@ public partial class CamundaClient
     /// <example>
     /// <para><b>Example:</b></para>
     /// <code>
-    /// public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
+    /// public static async Task UpdateAgentInstanceExample(
+    ///     AgentInstanceKey agentInstanceKey,
+    ///     ElementInstanceKey elementInstanceKey,
+    ///     JobKey jobKey,
+    ///     string jobLease)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
+    ///     // Conversation turns are appended through the same history batch used at
+    ///     // creation time; per-item metrics describe the model call that produced them.
     ///     await client.UpdateAgentInstanceAsync(
     ///         agentInstanceKey,
     ///         new AgentInstanceUpdateRequest
     ///         {
     ///             ElementInstanceKey = elementInstanceKey,
+    ///             JobKey = jobKey,
+    ///             JobLease = jobLease,
     ///             Status = AgentInstanceUpdateStatusEnum.THINKING,
-    ///             Metrics = new AgentInstanceMetricsDelta
+    ///             History = new List&lt;AgentInstanceHistoryItem&gt;
     ///             {
-    ///                 InputTokens = 150,
-    ///                 OutputTokens = 50,
-    ///                 ModelCalls = 1,
+    ///                 new AgentInstanceHistoryItem
+    ///                 {
+    ///                     HistoryItemId = &quot;assistant-1&quot;,
+    ///                     LoopIteration = LoopIterationId.AssumeExists(0),
+    ///                     Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
+    ///                     ProducedAt = DateTimeOffset.UtcNow,
+    ///                     Content = new List&lt;AgentInstanceMessageContent&gt;
+    ///                     {
+    ///                         new AgentInstanceTextContent { Text = &quot;How can I help you today?&quot; },
+    ///                     },
+    ///                     Metrics = new AgentInstanceHistoryItemMetrics
+    ///                     {
+    ///                         InputTokens = 150,
+    ///                         OutputTokens = 50,
+    ///                         DurationMs = 1_200,
+    ///                     },
+    ///                 },
     ///             },
     ///         });
     /// 

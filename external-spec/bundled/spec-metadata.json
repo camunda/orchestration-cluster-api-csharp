@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:b4a2f42cc11049ba7a3afb7e2bafd332b5c8160b7a4350814a1a9beac8e1f1d3",
+  "specHash": "sha256:5fe69d1cdf9ddaa5b090255ed21ff360525f766ffd42895205bbe55a45d4bbf2",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -3266,7 +3266,7 @@
         "Agent instance"
       ],
       "summary": "Update agent instance",
-      "description": "Updates the mutable fields of an agent instance (status, metric counters, and\ntools) and appends a batch of history items to its conversation history. Metric\nvalues are treated as deltas and applied immediately to the aggregate counters.\nTool updates replace the existing tool list. Each history item created for this\nrequest is echoed back in the response.\n",
+      "description": "Updates the status of an agent instance and appends a batch of history items\nto its conversation history. Each history item created for this request is\nechoed back in the response.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -3328,53 +3328,6 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
-      }
-    },
-    {
-      "operationId": "createAgentInstanceHistoryItem",
-      "path": "/agent-instances/{agentInstanceKey}/history",
-      "method": "post",
-      "tags": [
-        "Agent instance"
-      ],
-      "summary": "Create agent instance history item",
-      "description": "Appends a single history item to an agent instance's conversation history.\nThe created item has commitStatus PENDING until the job identified by jobLease\ncompletes successfully, at which point it transitions to COMMITTED. If the job\nfails or is superseded by a retry, the item is marked DISCARDED.\n",
-      "eventuallyConsistent": false,
-      "hasRequestBody": true,
-      "requestBodyUnion": false,
-      "bodyOnly": false,
-      "pathParams": [
-        "agentInstanceKey"
-      ],
-      "queryParams": [],
-      "requestBodyUnionRefs": [],
-      "optionalTenantIdInBody": false,
-      "sourceFile": "agent-instances.yaml",
-      "requestBodyContentTypes": [
-        "application/json"
-      ],
-      "requestBodySchemaRef": "AgentInstanceHistoryItemRequest",
-      "successResponseSchemaRef": "AgentInstanceHistoryItemCreationResult",
-      "successStatus": 201,
-      "vendorExtensions": {
-        "x-eventually-consistent": false,
-        "x-required-permissions": [
-          {
-            "resourceType": "PROCESS_DEFINITION",
-            "permissionType": "UPDATE_PROCESS_INSTANCE"
-          }
-        ],
-        "x-semantic-establishes": {
-          "kind": "AgentInstanceLoopIteration",
-          "identifiedBy": [
-            {
-              "in": "body",
-              "name": "loopIteration",
-              "semanticType": "LoopIterationId"
-            }
-          ]
-        },
         "x-added-in-version": "8.10"
       }
     },
@@ -12704,13 +12657,6 @@
       "stableId": "agent-instance-creation-result"
     },
     {
-      "schemaName": "AgentInstanceHistoryItemCreationResult",
-      "providers": [
-        "historyItemKey"
-      ],
-      "stableId": "agent-instance-history-item-creation-result"
-    },
-    {
       "schemaName": "AuthorizationCreateResult",
       "providers": [
         "authorizationKey"
@@ -12862,9 +12808,9 @@
   "integrity": {
     "totalSemanticKeys": 42,
     "totalUnions": 68,
-    "totalOperations": 244,
+    "totalOperations": 243,
     "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
-    "totalSemanticProviders": 23
+    "totalSemanticProviders": 22
   }
 }
