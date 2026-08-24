@@ -1189,7 +1189,7 @@ public partial class CamundaClient
     ///             new AgentInstanceHistoryItem
     ///             {
     ///                 HistoryItemId = &quot;configuration-1&quot;,
-    ///                 LoopIteration = LoopIterationId.AssumeExists(0),
+    ///                 LoopIteration = LoopIterationId.AssumeExists(1),
     ///                 Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
     ///                 ProducedAt = DateTimeOffset.UtcNow,
     ///                 Content = new List&lt;AgentInstanceMessageContent&gt;(),
@@ -1236,7 +1236,7 @@ public partial class CamundaClient
     ///             new AgentInstanceHistoryItem
     ///             {
     ///                 HistoryItemId = &quot;configuration-1&quot;,
-    ///                 LoopIteration = LoopIterationId.AssumeExists(0),
+    ///                 LoopIteration = LoopIterationId.AssumeExists(1),
     ///                 Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
     ///                 ProducedAt = DateTimeOffset.UtcNow,
     ///                 Content = new List&lt;AgentInstanceMessageContent&gt;(),
@@ -11033,7 +11033,7 @@ public partial class CamundaClient
     ///                 new AgentInstanceHistoryItem
     ///                 {
     ///                     HistoryItemId = &quot;assistant-1&quot;,
-    ///                     LoopIteration = LoopIterationId.AssumeExists(0),
+    ///                     LoopIteration = LoopIterationId.AssumeExists(1),
     ///                     Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
     ///                     ProducedAt = DateTimeOffset.UtcNow,
     ///                     Content = new List&lt;AgentInstanceMessageContent&gt;
@@ -11080,7 +11080,7 @@ public partial class CamundaClient
     ///                 new AgentInstanceHistoryItem
     ///                 {
     ///                     HistoryItemId = &quot;assistant-1&quot;,
-    ///                     LoopIteration = LoopIterationId.AssumeExists(0),
+    ///                     LoopIteration = LoopIterationId.AssumeExists(1),
     ///                     Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
     ///                     ProducedAt = DateTimeOffset.UtcNow,
     ///                     Content = new List&lt;AgentInstanceMessageContent&gt;

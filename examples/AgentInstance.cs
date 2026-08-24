@@ -56,7 +56,7 @@ public static class AgentInstanceExamples
                 new AgentInstanceHistoryItem
                 {
                     HistoryItemId = "configuration-1",
-                    LoopIteration = LoopIterationId.AssumeExists(0),
+                    LoopIteration = LoopIterationId.AssumeExists(1),
                     Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
                     ProducedAt = DateTimeOffset.UtcNow,
                     Content = new List<AgentInstanceMessageContent>(),
@@ -107,7 +107,7 @@ public static class AgentInstanceExamples
                     new AgentInstanceHistoryItem
                     {
                         HistoryItemId = "assistant-1",
-                        LoopIteration = LoopIterationId.AssumeExists(0),
+                        LoopIteration = LoopIterationId.AssumeExists(1),
                         Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
                         ProducedAt = DateTimeOffset.UtcNow,
                         Content = new List<AgentInstanceMessageContent>
