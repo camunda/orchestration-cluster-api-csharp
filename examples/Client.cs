@@ -254,7 +254,7 @@ public static class ClientExamples
 
         if (result.WasRunning)
         {
-            Console.WriteLine("Rebalance was running and has been cancelled.");
+            Console.WriteLine("Cancellation requested; rebalance will stop after the in-flight transfer finishes.");
         }
         else
         {
