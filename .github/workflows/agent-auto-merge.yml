@@ -1,0 +1,55 @@
+# Queues agent-authored example-coverage PRs for auto-merge once their review
+# comments are resolved, no changes are requested, and the diff stays within the
+# paths an example-coverage change is expected to touch. GitHub then merges each
+# one when the required status checks go green.
+#
+# The mechanics live in camunda/sdk-infra so all five SDKs share one implementation;
+# this file supplies only what is genuinely repo-specific: the name of the CI
+# workflow to watch and this repo's expected diff shape.
+#
+# The schedule sweep is not redundant with the workflow_run trigger. Resolving a
+# review thread is usually the last gate to fall, and GitHub parks any run the
+# `Copilot` actor triggers behind manual approval, so no event reliably fires at
+# that moment — see camunda/sdk-infra#42. It is offset from the follow-up agent's
+# :17 sweep so the two do not evaluate the same PR at once.
+
+name: Agent — auto-merge
+
+on:
+  schedule:
+    - cron: '37 * * * *'
+  workflow_run:
+    # Named here rather than in the shared workflow because each SDK repo calls
+    # its CI workflow something different.
+    workflows: ['PR & Branch CI']
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  auto-merge:
+    permissions:
+      contents: read
+      id-token: write        # mint GitHub OIDC token for Vault JWT auth
+      pull-requests: write   # enable/disable auto-merge
+      issues: write          # PR comments go through the Issues API
+    uses: camunda/sdk-infra/.github/workflows/sdk-agent-auto-merge.yml@v1
+    # Explicit rather than `inherit`, matching the other agent workflows.
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_JWT_PATH: ${{ secrets.VAULT_JWT_PATH }}
+      VAULT_JWT_ROLE: ${{ secrets.VAULT_JWT_ROLE }}
+      VAULT_JWT_AUDIENCE: ${{ secrets.VAULT_JWT_AUDIENCE }}
+    with:
+      # Everything an example-coverage PR legitimately touches: the examples
+      # themselves, the spec they were generated from, the regenerated SDK, the
+      # shipped public-API baseline, and the docs overwrite the API reference
+      # renders from. Hand-written source outside `Generated/` is deliberately
+      # excluded — adding an ergonomic helper is a change worth a human reader,
+      # so those PRs stay in the queue instead of merging themselves.
+      allowed-paths: |
+        examples/*
+        external-spec/*
+        src/Camunda.Orchestration.Sdk/Generated/*
+        test/Camunda.Orchestration.Sdk.Tests/PublicApi.shipped.txt
+        docs/overwrite/*
