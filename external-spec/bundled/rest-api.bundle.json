@@ -41954,6 +41954,7 @@
       "MessageSubscriptionResult": {
         "type": "object",
         "required": [
+          "businessId",
           "correlationKey",
           "elementId",
           "elementInstanceKey",
@@ -41974,6 +41975,15 @@
           "toolProperties"
         ],
         "properties": {
+          "businessId": {
+            "description": "The business id inherited from the subscribing process instance when this message\nsubscription was opened. It is `null` when the process instance has no business id, and\nfor message start event subscriptions, which are not tied to a process instance.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessId"
+              }
+            ]
+          },
           "messageSubscriptionKey": {
             "allOf": [
               {
@@ -42114,6 +42124,10 @@
           {
             "propertyName": "inboundConnectorType",
             "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "businessId",
+            "addedInVersion": "8.10"
           }
         ]
       },
@@ -42124,6 +42138,7 @@
             "description": "The field to sort by.",
             "type": "string",
             "enum": [
+              "businessId",
               "messageSubscriptionKey",
               "processDefinitionId",
               "processDefinitionName",
@@ -42179,6 +42194,14 @@
         "description": "Message subscription search filter.",
         "type": "object",
         "properties": {
+          "businessId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ],
+            "description": "Filter by the business id inherited from the subscribing process instance when the\nsubscription was opened. Supports advanced string filtering, including `$like` with\n`*`/`?` wildcards.\n"
+          },
           "messageSubscriptionKey": {
             "allOf": [
               {
@@ -42371,6 +42394,10 @@
           },
           {
             "propertyName": "inboundConnectorType",
+            "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "businessId",
             "addedInVersion": "8.10"
           }
         ]
@@ -46485,12 +46512,18 @@
         "type": "object",
         "properties": {
           "field": {
-            "description": "The field to sort by.",
+            "description": "The field to sort by. `key` is deprecated and should not be used anymore.",
             "type": "string",
             "enum": [
               "key",
               "name",
               "tenantId"
+            ],
+            "x-deprecated-enum-members": [
+              {
+                "name": "key",
+                "deprecatedInVersion": "8.10.0"
+              }
             ]
           },
           "order": {

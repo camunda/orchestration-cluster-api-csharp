@@ -895,6 +895,8 @@ public enum MappingRuleSearchQuerySortRequestField
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum MessageSubscriptionSearchQuerySortRequestField
 {
+    [JsonPropertyName("businessId")]
+    BusinessId,
     [JsonPropertyName("messageSubscriptionKey")]
     MessageSubscriptionKey,
     [JsonPropertyName("processDefinitionId")]
@@ -1221,7 +1223,7 @@ public enum TenantGroupSearchQuerySortRequestField
 }
 
 /// <summary>
-/// The field to sort by.
+/// The field to sort by. `key` is deprecated and should not be used anymore.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum TenantSearchQuerySortRequestField
@@ -21005,6 +21007,15 @@ public sealed class MessagePublicationResult
 public sealed class MessageSubscriptionFilter
 {
     /// <summary>
+    /// Filter by the business id inherited from the subscribing process instance when the
+    /// subscription was opened. Supports advanced string filtering, including `$like` with
+    /// `*`/`?` wildcards.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public StringFilterProperty? BusinessId { get; set; }
+
+    /// <summary>
     /// The message subscription key associated with this message subscription.
     /// </summary>
     [JsonPropertyName("messageSubscriptionKey")]
@@ -21280,6 +21291,15 @@ internal sealed class MessageSubscriptionKeyFilterPropertyJsonConverter : global
 /// </summary>
 public sealed class MessageSubscriptionResult
 {
+    /// <summary>
+    /// The business id inherited from the subscribing process instance when this message
+    /// subscription was opened. It is `null` when the process instance has no business id, and
+    /// for message start event subscriptions, which are not tied to a process instance.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
     /// <summary>
     /// The message subscription key associated with this message subscription.
     /// </summary>
@@ -27785,7 +27805,7 @@ public sealed class TenantSearchQueryResult
 public sealed class TenantSearchQuerySortRequest
 {
     /// <summary>
-    /// The field to sort by.
+    /// The field to sort by. `key` is deprecated and should not be used anymore.
     /// </summary>
     [JsonPropertyName("field")]
     public TenantSearchQuerySortRequestField Field { get; set; }
