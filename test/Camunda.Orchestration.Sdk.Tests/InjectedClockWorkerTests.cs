@@ -133,8 +133,8 @@ public class InjectedClockWorkerTests
     {
         var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
         var served = 0;
-        TimeProvider? observed = null;
-        DateTimeOffset? observedNow = null;
+        var captured = new TaskCompletionSource<(TimeProvider Clock, DateTimeOffset Now)>(
+            TaskCreationOptions.RunContinuationsAsynchronously);
 
         var handler = new StubHandler(req =>
         {
@@ -149,12 +149,12 @@ public class InjectedClockWorkerTests
             new JobWorkerConfig { JobType = "clock-test", JobTimeoutMs = 60_000, PollIntervalMs = 5_000 },
             (job, ct) =>
             {
-                observed = job.Clock;
-                observedNow = job.Clock.GetUtcNow();
+                // Publish both values in one write, so the test cannot observe a torn state.
+                captured.TrySetResult((job.Clock, job.Clock.GetUtcNow()));
                 return Task.FromResult<object?>(null);
             });
 
-        Assert.True(await WaitFor(() => observed != null), "handler never ran");
+        var (observed, observedNow) = await captured.Task.WaitAsync(TimeSpan.FromSeconds(10));
 
         Assert.Same(clock, observed);
         Assert.Equal(DateTimeOffset.UnixEpoch, observedNow);
@@ -169,7 +169,7 @@ public class InjectedClockWorkerTests
     public async Task HandlerReceivesTheLiveClockWhenNoneIsConfigured()
     {
         var served = 0;
-        TimeProvider? observed = null;
+        var captured = new TaskCompletionSource<TimeProvider>(TaskCreationOptions.RunContinuationsAsynchronously);
 
         var handler = new StubHandler(req =>
             req.RequestUri!.ToString().Contains("activation", StringComparison.Ordinal)
@@ -190,11 +190,11 @@ public class InjectedClockWorkerTests
             new JobWorkerConfig { JobType = "clock-test", JobTimeoutMs = 60_000, PollIntervalMs = 5_000 },
             (job, ct) =>
             {
-                observed = job.Clock;
+                captured.TrySetResult(job.Clock);
                 return Task.FromResult<object?>(null);
             });
 
-        Assert.True(await WaitFor(() => observed != null), "handler never ran");
+        var observed = await captured.Task.WaitAsync(TimeSpan.FromSeconds(10));
 
         Assert.Same(CamundaTimeProvider.Live, observed);
     }

@@ -382,6 +382,50 @@ public class InjectedClockRuntimeTests
     }
 
     /// <summary>
+    /// The final wait is clamped to the deadline, so a budget that is not a whole number of
+    /// intervals still times out on time rather than one full interval late.
+    ///
+    /// <para>Not reachable from the other timeout tests: theirs use budgets exactly divisible
+    /// by the interval, or cross the deadline inside <c>invoke</c>. Without the clamp the last
+    /// sleep overshoots and the reported wait exceeds the budget the caller asked for.</para>
+    /// </summary>
+    [Fact]
+    public async Task EventualPollerTimesOutAtTheDeadlineWhenTheBudgetIsNotAWholeNumberOfIntervals()
+    {
+        var clock = new InstrumentedFakeTimeProvider(DateTimeOffset.UnixEpoch);
+
+        // 2.5s of budget against a 1s interval: the third wait has only 500ms left to run.
+        var pending = EventualPoller.PollAsync(
+            "partialIntervalOp",
+            isGet: false,
+            invoke: () => Task.FromResult(0),
+            new ConsistencyOptions<int>
+            {
+                WaitUpToMs = 2_500,
+                PollIntervalMs = 1_000,
+                IsConsistent = _ => false,
+            },
+            NullLogger.Instance,
+            clock);
+
+        await clock.WaitForTimersAsync(1);
+        clock.Advance(TimeSpan.FromSeconds(1));
+
+        await clock.WaitForTimersAsync(2);
+        clock.Advance(TimeSpan.FromSeconds(1));
+
+        // The remaining budget is shorter than the interval. Advancing just that remainder
+        // must be enough to end the poll; an unclamped wait would still be asleep here.
+        await clock.WaitForTimersAsync(3);
+        clock.Advance(TimeSpan.FromMilliseconds(500));
+
+        var ex = await Assert.ThrowsAsync<EventualConsistencyTimeoutException>(
+            () => pending.WaitAsync(TimeSpan.FromSeconds(10)));
+
+        Assert.Equal(2_500, ex.WaitedMs);
+    }
+
+    /// <summary>
     /// The poller previously tracked elapsed time by counting intervals
     /// (<c>elapsed += interval</c>), which ignored how long each invoke took, so the
     /// reported wait understated the real one. Elapsed is now measured from the clock.

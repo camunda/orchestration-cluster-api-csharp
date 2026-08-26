@@ -6,14 +6,18 @@ namespace Camunda.Orchestration.Sdk;
 /// <para>The SDK resolves all runtime cadence — worker poll loops, eventual consistency
 /// polling, retry backoff, backpressure decay, and OAuth refresh — through wall-clock time
 /// rather than a monotonic source, so that pinning the clock in a test also pins the
-/// client's own timing. Wall clocks can jump backwards (NTP correction, VM suspend and
-/// resume, manual adjustment), and a deadline computed against a backwards-moving clock
-/// waits longer than it was asked to. Absorbing the jump recovers that safety without
-/// reintroducing a second notion of time.</para>
+/// client's own timing.</para>
+///
+/// <para>Wall clocks can jump backwards (NTP correction, VM suspend and resume, manual
+/// adjustment), and a deadline computed against a backwards-moving clock waits longer than
+/// it was asked to. A backward step is absorbed and then paid back gradually out of forward
+/// progress, so readings never decrease, keep advancing immediately after a jump, and
+/// converge back to the underlying clock rather than staying ahead of it forever.</para>
 ///
 /// <para>This decorator wraps the <em>live</em> clock only. A test clock such as
 /// <c>FakeTimeProvider</c> is used as supplied, so a test remains free to move time
-/// backwards deliberately.</para>/// </summary>
+/// backwards deliberately.</para>
+/// </summary>
 public sealed class CamundaTimeProvider : TimeProvider
 {
     /// <summary>
