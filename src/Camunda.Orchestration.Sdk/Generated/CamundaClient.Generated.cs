@@ -3083,7 +3083,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getAgentDefinition", true,
                 () => InvokeWithRetryAsync(() => SendAsync<AgentDefinitionResult>(HttpMethod.Get, path, null, ct), "getAgentDefinition", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AgentDefinitionResult>(HttpMethod.Get, path, null, ct), "getAgentDefinition", false, ct);
@@ -3125,7 +3125,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getAgentInstance", true,
                 () => InvokeWithRetryAsync(() => SendAsync<AgentInstanceResult>(HttpMethod.Get, path, null, ct), "getAgentInstance", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceResult>(HttpMethod.Get, path, null, ct), "getAgentInstance", false, ct);
@@ -3167,7 +3167,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getAuditLog", true,
                 () => InvokeWithRetryAsync(() => SendAsync<AuditLogResult>(HttpMethod.Get, path, null, ct), "getAuditLog", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AuditLogResult>(HttpMethod.Get, path, null, ct), "getAuditLog", false, ct);
@@ -3248,7 +3248,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getAuthorization", true,
                 () => InvokeWithRetryAsync(() => SendAsync<AuthorizationResult>(HttpMethod.Get, path, null, ct), "getAuthorization", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AuthorizationResult>(HttpMethod.Get, path, null, ct), "getAuthorization", false, ct);
@@ -3294,7 +3294,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getBatchOperation", true,
                 () => InvokeWithRetryAsync(() => SendAsync<BatchOperationResponse>(HttpMethod.Get, path, null, ct), "getBatchOperation", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationResponse>(HttpMethod.Get, path, null, ct), "getBatchOperation", false, ct);
@@ -3532,7 +3532,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getDecisionDefinition", true,
                 () => InvokeWithRetryAsync(() => SendAsync<DecisionDefinitionResult>(HttpMethod.Get, path, null, ct), "getDecisionDefinition", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<DecisionDefinitionResult>(HttpMethod.Get, path, null, ct), "getDecisionDefinition", false, ct);
@@ -3578,7 +3578,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getDecisionDefinitionXML", true,
                 () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getDecisionDefinitionXML", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getDecisionDefinitionXML", false, ct);
@@ -3624,7 +3624,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getDecisionInstance", true,
                 () => InvokeWithRetryAsync(() => SendAsync<DecisionInstanceGetQueryResult>(HttpMethod.Get, path, null, ct), "getDecisionInstance", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<DecisionInstanceGetQueryResult>(HttpMethod.Get, path, null, ct), "getDecisionInstance", false, ct);
@@ -3670,7 +3670,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getDecisionRequirements", true,
                 () => InvokeWithRetryAsync(() => SendAsync<DecisionRequirementsResult>(HttpMethod.Get, path, null, ct), "getDecisionRequirements", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<DecisionRequirementsResult>(HttpMethod.Get, path, null, ct), "getDecisionRequirements", false, ct);
@@ -3716,7 +3716,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getDecisionRequirementsXML", true,
                 () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getDecisionRequirementsXML", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getDecisionRequirementsXML", false, ct);
@@ -3805,7 +3805,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getElementInstance", true,
                 () => InvokeWithRetryAsync(() => SendAsync<ElementInstanceResult>(HttpMethod.Get, path, null, ct), "getElementInstance", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ElementInstanceResult>(HttpMethod.Get, path, null, ct), "getElementInstance", false, ct);
@@ -3890,7 +3890,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getFormByKey", true,
                 () => InvokeWithRetryAsync(() => SendAsync<FormResult>(HttpMethod.Get, path, null, ct), "getFormByKey", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<FormResult>(HttpMethod.Get, path, null, ct), "getFormByKey", false, ct);
@@ -3932,7 +3932,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getGlobalClusterVariable", true,
                 () => InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Get, path, null, ct), "getGlobalClusterVariable", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Get, path, null, ct), "getGlobalClusterVariable", false, ct);
@@ -3985,7 +3985,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getGlobalJobStatistics", true,
                 () => InvokeWithRetryAsync(() => SendAsync<GlobalJobStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getGlobalJobStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GlobalJobStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getGlobalJobStatistics", false, ct);
@@ -4031,7 +4031,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getGlobalTaskListener", true,
                 () => InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Get, path, null, ct), "getGlobalTaskListener", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Get, path, null, ct), "getGlobalTaskListener", false, ct);
@@ -4073,7 +4073,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getGroup", true,
                 () => InvokeWithRetryAsync(() => SendAsync<GroupResult>(HttpMethod.Get, path, null, ct), "getGroup", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GroupResult>(HttpMethod.Get, path, null, ct), "getGroup", false, ct);
@@ -4209,7 +4209,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getIncident", true,
                 () => InvokeWithRetryAsync(() => SendAsync<IncidentResult>(HttpMethod.Get, path, null, ct), "getIncident", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<IncidentResult>(HttpMethod.Get, path, null, ct), "getIncident", false, ct);
@@ -4262,7 +4262,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getJobErrorStatistics", false,
                 () => InvokeWithRetryAsync(() => SendAsync<JobErrorStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobErrorStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<JobErrorStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobErrorStatistics", false, ct);
@@ -4317,7 +4317,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getJobTimeSeriesStatistics", false,
                 () => InvokeWithRetryAsync(() => SendAsync<JobTimeSeriesStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobTimeSeriesStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<JobTimeSeriesStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobTimeSeriesStatistics", false, ct);
@@ -4370,7 +4370,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getJobTypeStatistics", false,
                 () => InvokeWithRetryAsync(() => SendAsync<JobTypeStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobTypeStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<JobTypeStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobTypeStatistics", false, ct);
@@ -4423,7 +4423,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getJobWorkerStatistics", false,
                 () => InvokeWithRetryAsync(() => SendAsync<JobWorkerStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobWorkerStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<JobWorkerStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getJobWorkerStatistics", false, ct);
@@ -4501,7 +4501,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getMappingRule", true,
                 () => InvokeWithRetryAsync(() => SendAsync<MappingRuleResult>(HttpMethod.Get, path, null, ct), "getMappingRule", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<MappingRuleResult>(HttpMethod.Get, path, null, ct), "getMappingRule", false, ct);
@@ -4547,7 +4547,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessDefinition", true,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionResult>(HttpMethod.Get, path, null, ct), "getProcessDefinition", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionResult>(HttpMethod.Get, path, null, ct), "getProcessDefinition", false, ct);
@@ -4600,7 +4600,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessDefinitionInstanceStatistics", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionInstanceStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionInstanceStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionInstanceStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionInstanceStatistics", false, ct);
@@ -4666,7 +4666,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessDefinitionInstanceVersionStatistics", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionInstanceVersionStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionInstanceVersionStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionInstanceVersionStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionInstanceVersionStatistics", false, ct);
@@ -4719,7 +4719,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessDefinitionMessageSubscriptionStatistics", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionMessageSubscriptionStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionMessageSubscriptionStatistics", false, ct);
@@ -4773,7 +4773,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessDefinitionStatistics", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionElementStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionElementStatisticsQueryResult>(HttpMethod.Post, path, body, ct), "getProcessDefinitionStatistics", false, ct);
@@ -4819,7 +4819,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessDefinitionXML", true,
                 () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getProcessDefinitionXML", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getProcessDefinitionXML", false, ct);
@@ -4861,7 +4861,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessInstance", true,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessInstanceResult>(HttpMethod.Get, path, null, ct), "getProcessInstance", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessInstanceResult>(HttpMethod.Get, path, null, ct), "getProcessInstance", false, ct);
@@ -4907,7 +4907,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessInstanceCallHierarchy", true,
                 () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getProcessInstanceCallHierarchy", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getProcessInstanceCallHierarchy", false, ct);
@@ -4959,7 +4959,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessInstanceSequenceFlows", true,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessInstanceSequenceFlowsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceSequenceFlows", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessInstanceSequenceFlowsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceSequenceFlows", false, ct);
@@ -5011,7 +5011,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessInstanceStatistics", true,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessInstanceElementStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessInstanceElementStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceStatistics", false, ct);
@@ -5066,7 +5066,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessInstanceStatisticsByDefinition", false,
                 () => InvokeWithRetryAsync(() => SendAsync<IncidentProcessInstanceStatisticsByDefinitionQueryResult>(HttpMethod.Post, path, body, ct), "getProcessInstanceStatisticsByDefinition", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<IncidentProcessInstanceStatisticsByDefinitionQueryResult>(HttpMethod.Post, path, body, ct), "getProcessInstanceStatisticsByDefinition", false, ct);
@@ -5120,7 +5120,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessInstanceStatisticsByError", false,
                 () => InvokeWithRetryAsync(() => SendAsync<IncidentProcessInstanceStatisticsByErrorQueryResult>(HttpMethod.Post, path, body, ct), "getProcessInstanceStatisticsByError", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<IncidentProcessInstanceStatisticsByErrorQueryResult>(HttpMethod.Post, path, body, ct), "getProcessInstanceStatisticsByError", false, ct);
@@ -5172,7 +5172,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getProcessInstanceWaitStateStatistics", true,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessInstanceWaitStateStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceWaitStateStatistics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessInstanceWaitStateStatisticsQueryResult>(HttpMethod.Get, path, null, ct), "getProcessInstanceWaitStateStatistics", false, ct);
@@ -5220,7 +5220,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getResource", true,
                 () => InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ResourceResult>(HttpMethod.Get, path, null, ct), "getResource", false, ct);
@@ -5270,7 +5270,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getResourceContent", true,
                 () => InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "getResourceContent", false, ct);
@@ -5318,7 +5318,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getResourceContentBinary", true,
                 () => InvokeWithRetryAsync(() => SendBinaryAsync(HttpMethod.Get, path, null, ct), "getResourceContentBinary", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendBinaryAsync(HttpMethod.Get, path, null, ct), "getResourceContentBinary", false, ct);
@@ -5399,7 +5399,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getRole", true,
                 () => InvokeWithRetryAsync(() => SendAsync<RoleResult>(HttpMethod.Get, path, null, ct), "getRole", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<RoleResult>(HttpMethod.Get, path, null, ct), "getRole", false, ct);
@@ -5651,7 +5651,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getStartProcessForm", true,
                 () => InvokeWithRetryAsync(() => SendAsync<FormResult>(HttpMethod.Get, path, null, ct), "getStartProcessForm", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<FormResult>(HttpMethod.Get, path, null, ct), "getStartProcessForm", false, ct);
@@ -5768,7 +5768,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getTenant", true,
                 () => InvokeWithRetryAsync(() => SendAsync<TenantResult>(HttpMethod.Get, path, null, ct), "getTenant", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<TenantResult>(HttpMethod.Get, path, null, ct), "getTenant", false, ct);
@@ -5816,7 +5816,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getTenantClusterVariable", true,
                 () => InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Get, path, null, ct), "getTenantClusterVariable", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Get, path, null, ct), "getTenantClusterVariable", false, ct);
@@ -5904,7 +5904,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getUsageMetrics", true,
                 () => InvokeWithRetryAsync(() => SendAsync<UsageMetricsResponse>(HttpMethod.Get, path, null, ct), "getUsageMetrics", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<UsageMetricsResponse>(HttpMethod.Get, path, null, ct), "getUsageMetrics", false, ct);
@@ -5946,7 +5946,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getUser", true,
                 () => InvokeWithRetryAsync(() => SendAsync<UserResult>(HttpMethod.Get, path, null, ct), "getUser", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<UserResult>(HttpMethod.Get, path, null, ct), "getUser", false, ct);
@@ -5988,7 +5988,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getUserTask", true,
                 () => InvokeWithRetryAsync(() => SendAsync<UserTaskResult>(HttpMethod.Get, path, null, ct), "getUserTask", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<UserTaskResult>(HttpMethod.Get, path, null, ct), "getUserTask", false, ct);
@@ -6032,7 +6032,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getUserTaskForm", true,
                 () => InvokeWithRetryAsync(() => SendAsync<FormResult>(HttpMethod.Get, path, null, ct), "getUserTaskForm", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<FormResult>(HttpMethod.Get, path, null, ct), "getUserTaskForm", false, ct);
@@ -6078,7 +6078,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("getVariable", true,
                 () => InvokeWithRetryAsync(() => SendAsync<VariableResult>(HttpMethod.Get, path, null, ct), "getVariable", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<VariableResult>(HttpMethod.Get, path, null, ct), "getVariable", false, ct);
@@ -7380,7 +7380,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchAgentDefinitions", false,
                 () => InvokeWithRetryAsync(() => SendAsync<AgentDefinitionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentDefinitions", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AgentDefinitionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentDefinitions", false, ct);
@@ -7458,7 +7458,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchAgentInstanceHistory", false,
                 () => InvokeWithRetryAsync(() => SendAsync<AgentInstanceHistorySearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentInstanceHistory", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceHistorySearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentInstanceHistory", false, ct);
@@ -7508,7 +7508,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchAgentInstances", false,
                 () => InvokeWithRetryAsync(() => SendAsync<AgentInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentInstances", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAgentInstances", false, ct);
@@ -7560,7 +7560,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchAuditLogs", false,
                 () => InvokeWithRetryAsync(() => SendAsync<AuditLogSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAuditLogs", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AuditLogSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchAuditLogs", false, ct);
@@ -7612,7 +7612,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchAuthorizations", false,
                 () => InvokeWithRetryAsync(() => SendAsync<AuthorizationSearchResult>(HttpMethod.Post, path, body, ct), "searchAuthorizations", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AuthorizationSearchResult>(HttpMethod.Post, path, body, ct), "searchAuthorizations", false, ct);
@@ -7664,7 +7664,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchBatchOperationItems", false,
                 () => InvokeWithRetryAsync(() => SendAsync<BatchOperationItemSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchBatchOperationItems", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationItemSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchBatchOperationItems", false, ct);
@@ -7716,7 +7716,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchBatchOperations", false,
                 () => InvokeWithRetryAsync(() => SendAsync<BatchOperationSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchBatchOperations", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchBatchOperations", false, ct);
@@ -7770,7 +7770,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchClientsForGroup", false,
                 () => InvokeWithRetryAsync(() => SendAsync<GroupClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GroupClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForGroup", false, ct);
@@ -7824,7 +7824,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchClientsForRole", false,
                 () => InvokeWithRetryAsync(() => SendAsync<RoleClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<RoleClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForRole", false, ct);
@@ -7878,7 +7878,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchClientsForTenant", false,
                 () => InvokeWithRetryAsync(() => SendAsync<TenantClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<TenantClientSearchResult>(HttpMethod.Post, path, body, ct), "searchClientsForTenant", false, ct);
@@ -7931,7 +7931,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchClusterVariables", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ClusterVariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchClusterVariables", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchClusterVariables", false, ct);
@@ -7983,7 +7983,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchCorrelatedMessageSubscriptions", false,
                 () => InvokeWithRetryAsync(() => SendAsync<CorrelatedMessageSubscriptionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchCorrelatedMessageSubscriptions", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<CorrelatedMessageSubscriptionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchCorrelatedMessageSubscriptions", false, ct);
@@ -8035,7 +8035,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchDecisionDefinitions", false,
                 () => InvokeWithRetryAsync(() => SendAsync<DecisionDefinitionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchDecisionDefinitions", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<DecisionDefinitionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchDecisionDefinitions", false, ct);
@@ -8087,7 +8087,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchDecisionInstances", false,
                 () => InvokeWithRetryAsync(() => SendAsync<DecisionInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchDecisionInstances", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<DecisionInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchDecisionInstances", false, ct);
@@ -8139,7 +8139,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchDecisionRequirements", false,
                 () => InvokeWithRetryAsync(() => SendAsync<DecisionRequirementsSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchDecisionRequirements", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<DecisionRequirementsSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchDecisionRequirements", false, ct);
@@ -8200,7 +8200,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchElementInstanceIncidents", false,
                 () => InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceIncidents", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceIncidents", false, ct);
@@ -8283,7 +8283,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchElementInstanceWaitStates", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ElementInstanceWaitStateQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceWaitStates", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ElementInstanceWaitStateQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstanceWaitStates", false, ct);
@@ -8335,7 +8335,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchElementInstances", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ElementInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstances", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ElementInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchElementInstances", false, ct);
@@ -8387,7 +8387,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchGlobalTaskListeners", false,
                 () => InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchGlobalTaskListeners", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchGlobalTaskListeners", false, ct);
@@ -8441,7 +8441,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchGroupIdsForTenant", false,
                 () => InvokeWithRetryAsync(() => SendAsync<TenantGroupSearchResult>(HttpMethod.Post, path, body, ct), "searchGroupIdsForTenant", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<TenantGroupSearchResult>(HttpMethod.Post, path, body, ct), "searchGroupIdsForTenant", false, ct);
@@ -8491,7 +8491,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchGroups", false,
                 () => InvokeWithRetryAsync(() => SendAsync<GroupSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchGroups", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GroupSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchGroups", false, ct);
@@ -8545,7 +8545,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchGroupsForRole", false,
                 () => InvokeWithRetryAsync(() => SendAsync<RoleGroupSearchResult>(HttpMethod.Post, path, body, ct), "searchGroupsForRole", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<RoleGroupSearchResult>(HttpMethod.Post, path, body, ct), "searchGroupsForRole", false, ct);
@@ -8596,7 +8596,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchIncidents", false,
                 () => InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchIncidents", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchIncidents", false, ct);
@@ -8646,7 +8646,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchJobs", false,
                 () => InvokeWithRetryAsync(() => SendAsync<JobSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchJobs", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<JobSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchJobs", false, ct);
@@ -8699,7 +8699,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchMappingRule", false,
                 () => InvokeWithRetryAsync(() => SendAsync<MappingRuleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<MappingRuleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMappingRule", false, ct);
@@ -8753,7 +8753,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchMappingRulesForGroup", false,
                 () => InvokeWithRetryAsync(() => SendAsync<GroupMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GroupMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForGroup", false, ct);
@@ -8807,7 +8807,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchMappingRulesForRole", false,
                 () => InvokeWithRetryAsync(() => SendAsync<RoleMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<RoleMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForRole", false, ct);
@@ -8861,7 +8861,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchMappingRulesForTenant", false,
                 () => InvokeWithRetryAsync(() => SendAsync<TenantMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<TenantMappingRuleSearchResult>(HttpMethod.Post, path, body, ct), "searchMappingRulesForTenant", false, ct);
@@ -8926,7 +8926,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchMessageSubscriptions", false,
                 () => InvokeWithRetryAsync(() => SendAsync<MessageSubscriptionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMessageSubscriptions", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<MessageSubscriptionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchMessageSubscriptions", false, ct);
@@ -8978,7 +8978,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchOwnAuthorizations", false,
                 () => InvokeWithRetryAsync(() => SendAsync<OwnAuthorizationSearchResult>(HttpMethod.Post, path, body, ct), "searchOwnAuthorizations", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<OwnAuthorizationSearchResult>(HttpMethod.Post, path, body, ct), "searchOwnAuthorizations", false, ct);
@@ -9032,7 +9032,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchProcessDefinitionVariableNames", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionVariableNameSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessDefinitionVariableNames", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionVariableNameSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessDefinitionVariableNames", false, ct);
@@ -9084,7 +9084,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchProcessDefinitions", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessDefinitions", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessDefinitions", false, ct);
@@ -9144,7 +9144,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchProcessInstanceIncidents", false,
                 () => InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessInstanceIncidents", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<IncidentSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessInstanceIncidents", false, ct);
@@ -9194,7 +9194,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchProcessInstances", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ProcessInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessInstances", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ProcessInstanceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchProcessInstances", false, ct);
@@ -9248,7 +9248,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchResources", false,
                 () => InvokeWithRetryAsync(() => SendAsync<ResourceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchResources", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<ResourceSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchResources", false, ct);
@@ -9298,7 +9298,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchRoles", false,
                 () => InvokeWithRetryAsync(() => SendAsync<RoleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchRoles", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<RoleSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchRoles", false, ct);
@@ -9352,7 +9352,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchRolesForGroup", false,
                 () => InvokeWithRetryAsync(() => SendAsync<GroupRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GroupRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForGroup", false, ct);
@@ -9406,7 +9406,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchRolesForTenant", false,
                 () => InvokeWithRetryAsync(() => SendAsync<TenantRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<TenantRoleSearchResult>(HttpMethod.Post, path, body, ct), "searchRolesForTenant", false, ct);
@@ -9456,7 +9456,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchTenants", false,
                 () => InvokeWithRetryAsync(() => SendAsync<TenantSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchTenants", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<TenantSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchTenants", false, ct);
@@ -9510,7 +9510,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchUserTaskAuditLogs", false,
                 () => InvokeWithRetryAsync(() => SendAsync<AuditLogSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskAuditLogs", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<AuditLogSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskAuditLogs", false, ct);
@@ -9572,7 +9572,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchUserTaskEffectiveVariables", false,
                 () => InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskEffectiveVariables", false, ct);
@@ -9635,7 +9635,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchUserTaskVariables", false,
                 () => InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskVariables", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTaskVariables", false, ct);
@@ -9685,7 +9685,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchUserTasks", false,
                 () => InvokeWithRetryAsync(() => SendAsync<UserTaskSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTasks", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<UserTaskSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchUserTasks", false, ct);
@@ -9735,7 +9735,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchUsers", false,
                 () => InvokeWithRetryAsync(() => SendAsync<UserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<UserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsers", false, ct);
@@ -9789,7 +9789,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchUsersForGroup", false,
                 () => InvokeWithRetryAsync(() => SendAsync<GroupUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<GroupUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForGroup", false, ct);
@@ -9843,7 +9843,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchUsersForRole", false,
                 () => InvokeWithRetryAsync(() => SendAsync<RoleUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<RoleUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForRole", false, ct);
@@ -9897,7 +9897,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchUsersForTenant", false,
                 () => InvokeWithRetryAsync(() => SendAsync<TenantUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<TenantUserSearchResult>(HttpMethod.Post, path, body, ct), "searchUsersForTenant", false, ct);
@@ -9957,7 +9957,7 @@ public partial class CamundaClient
         {
             return await EventualPoller.PollAsync("searchVariables", false,
                 () => InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchVariables", false, ct),
-                consistency!, _logger, ct);
+                consistency!, _logger, _timeProvider, ct);
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<VariableSearchQueryResult>(HttpMethod.Post, path, body, ct), "searchVariables", false, ct);
