@@ -195,6 +195,17 @@ Useful for tests (e.g., MockHttpMessageHandler).</p>
     <dd><p>Logger factory for SDK logging.</p>
 </dd>
   </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider.html#Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider">TimeProvider</a></dt>
+    <dd><p>Clock used for all SDK runtime cadence: worker poll loops, eventual consistency
+polling, retry backoff, backpressure decay, and OAuth refresh.</p>
+<p>Defaults to <a class="xref" href="Camunda.Orchestration.Sdk.CamundaTimeProvider.Live.html#Camunda_Orchestration_Sdk_CamundaTimeProvider_Live">Live</a> — the system clock,
+clamped so it cannot move backwards.</p>
+<p>Supply a <code>FakeTimeProvider</code> to make the client's own timing virtual in
+tests. Note that this pins the <em>client</em> clock only; pinning the engine clock
+is a separate, explicit step via <code>PinClockAsync</code>.</p>
+</dd>
+  </dl>
 
 
 

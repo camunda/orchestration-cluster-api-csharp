@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Property ProcessDefinitionVersion | Camunda C# SDK </title>
+      <title>Property TimeProvider | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Property ProcessDefinitionVersion | Camunda C# SDK ">
+      <meta name="title" content="Property TimeProvider | Camunda C# SDK ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_ActivatedJob_ProcessDefinitionVersion_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.ActivatedJob.ProcessDefinitionVersion*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,14 +84,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.ActivatedJob.ProcessDefinitionVersion*">
+        <article data-uid="Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider*">
 
 
 
 
 
-<h1 id="Camunda_Orchestration_Sdk_ActivatedJob_ProcessDefinitionVersion_" data-uid="Camunda.Orchestration.Sdk.ActivatedJob.ProcessDefinitionVersion*" class="text-break">
-Property ProcessDefinitionVersion  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L170"><i class="bi bi-code-slash"></i></a>
+<h1 id="Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider_" data-uid="Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider*" class="text-break">
+Property TimeProvider  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaOptions.cs/#L62"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -117,19 +117,25 @@ Property ProcessDefinitionVersion  <a class="header-action link-secondary" title
 
 
 
-<a id="Camunda_Orchestration_Sdk_ActivatedJob_ProcessDefinitionVersion_" data-uid="Camunda.Orchestration.Sdk.ActivatedJob.ProcessDefinitionVersion*"></a>
+<a id="Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider_" data-uid="Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_ActivatedJob_ProcessDefinitionVersion" data-uid="Camunda.Orchestration.Sdk.ActivatedJob.ProcessDefinitionVersion">
-  ProcessDefinitionVersion
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L170"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider" data-uid="Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider">
+  TimeProvider
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaOptions.cs/#L62"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"><p>The version of the job's process definition.</p>
+<div class="markdown level1 summary"><p>Clock used for all SDK runtime cadence: worker poll loops, eventual consistency
+polling, retry backoff, backpressure decay, and OAuth refresh.</p>
+<p>Defaults to <a class="xref" href="Camunda.Orchestration.Sdk.CamundaTimeProvider.Live.html#Camunda_Orchestration_Sdk_CamundaTimeProvider_Live">Live</a> — the system clock,
+clamped so it cannot move backwards.</p>
+<p>Supply a <code>FakeTimeProvider</code> to make the client's own timing virtual in
+tests. Note that this pins the <em>client</em> clock only; pinning the engine clock
+is a separate, explicit step via <code>PinClockAsync</code>.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public int ProcessDefinitionVersion { get; }</code></pre>
+  <pre><code class="lang-csharp hljs">public TimeProvider? TimeProvider { get; set; }</code></pre>
 </div>
 
 
@@ -138,7 +144,7 @@ Property ProcessDefinitionVersion  <a class="header-action link-secondary" title
 
 <h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timeprovider">TimeProvider</a></dt>
   <dd></dd>
 </dl>
 
@@ -152,7 +158,7 @@ Property ProcessDefinitionVersion  <a class="header-action link-secondary" title
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L170" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaOptions.cs/#L62" class="edit-link">Edit this page</a>
         </div>
 
 

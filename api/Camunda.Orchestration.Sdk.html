@@ -873,6 +873,23 @@ Mirrors the JS SDK's CamundaOptions with idiomatic C# conventions.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaTimeProvider.html">CamundaTimeProvider</a></dt>
+      <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timeprovider">TimeProvider</a> decorator whose <a class="xref" href="Camunda.Orchestration.Sdk.CamundaTimeProvider.GetUtcNow.html#Camunda_Orchestration_Sdk_CamundaTimeProvider_GetUtcNow">GetUtcNow()</a> never moves backwards.</p>
+<p>The SDK resolves all runtime cadence — worker poll loops, eventual consistency
+polling, retry backoff, backpressure decay, and OAuth refresh — through wall-clock time
+rather than a monotonic source, so that pinning the clock in a test also pins the
+client's own timing.</p>
+<p>Wall clocks can jump backwards (NTP correction, VM suspend and resume, manual
+adjustment), and a deadline computed against a backwards-moving clock waits longer than
+it was asked to. A backward step is absorbed and then paid back gradually out of forward
+progress, so readings never decrease, keep advancing immediately after a jump, and
+converge back to the underlying clock rather than staying ahead of it forever.</p>
+<p>This decorator wraps the <em>live</em> clock only. A test clock such as
+<code>FakeTimeProvider</code> is used as supplied, so a test remains free to move time
+backwards deliberately.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaUserResult.html">CamundaUserResult</a></dt>
       <dd><p>CamundaUserResult</p>
 </dd>

@@ -13,6 +13,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.ActivatedJob
   fullName: Camunda.Orchestration.Sdk.ActivatedJob
   nameWithType: ActivatedJob
+- uid: Camunda.Orchestration.Sdk.ActivatedJob.Clock
+  name: Clock
+  href: api/Camunda.Orchestration.Sdk.ActivatedJob.Clock.html#Camunda_Orchestration_Sdk_ActivatedJob_Clock
+  commentId: P:Camunda.Orchestration.Sdk.ActivatedJob.Clock
+  fullName: Camunda.Orchestration.Sdk.ActivatedJob.Clock
+  nameWithType: ActivatedJob.Clock
+- uid: Camunda.Orchestration.Sdk.ActivatedJob.Clock*
+  name: Clock
+  href: api/Camunda.Orchestration.Sdk.ActivatedJob.Clock.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJob.Clock
+  fullName: Camunda.Orchestration.Sdk.ActivatedJob.Clock
+  nameWithType: ActivatedJob.Clock
 - uid: Camunda.Orchestration.Sdk.ActivatedJob.CustomHeaders
   name: CustomHeaders
   href: api/Camunda.Orchestration.Sdk.ActivatedJob.CustomHeaders.html#Camunda_Orchestration_Sdk_ActivatedJob_CustomHeaders
@@ -16930,6 +16942,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaOptions.LoggerFactory
   fullName: Camunda.Orchestration.Sdk.CamundaOptions.LoggerFactory
   nameWithType: CamundaOptions.LoggerFactory
+- uid: Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider
+  name: TimeProvider
+  href: api/Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider.html#Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider
+  commentId: P:Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider
+  fullName: Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider
+  nameWithType: CamundaOptions.TimeProvider
+- uid: Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider*
+  name: TimeProvider
+  href: api/Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider
+  fullName: Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider
+  nameWithType: CamundaOptions.TimeProvider
 - uid: Camunda.Orchestration.Sdk.CamundaSdkException
   name: CamundaSdkException
   href: api/Camunda.Orchestration.Sdk.CamundaSdkException.html
@@ -17011,6 +17035,105 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient
   fullName: Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions.AddCamundaClient
   nameWithType: CamundaServiceCollectionExtensions.AddCamundaClient
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider
+  name: CamundaTimeProvider
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.html
+  commentId: T:Camunda.Orchestration.Sdk.CamundaTimeProvider
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider
+  nameWithType: CamundaTimeProvider
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.#ctor(System.TimeProvider)
+  name: CamundaTimeProvider(TimeProvider)
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.-ctor.html#Camunda_Orchestration_Sdk_CamundaTimeProvider__ctor_System_TimeProvider_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaTimeProvider.#ctor(System.TimeProvider)
+  name.vb: New(TimeProvider)
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.CamundaTimeProvider(System.TimeProvider)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaTimeProvider.New(System.TimeProvider)
+  nameWithType: CamundaTimeProvider.CamundaTimeProvider(TimeProvider)
+  nameWithType.vb: CamundaTimeProvider.New(TimeProvider)
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.#ctor*
+  name: CamundaTimeProvider
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.-ctor.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaTimeProvider.#ctor
+  name.vb: New
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.CamundaTimeProvider
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaTimeProvider.New
+  nameWithType: CamundaTimeProvider.CamundaTimeProvider
+  nameWithType.vb: CamundaTimeProvider.New
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.CreateTimer(System.Threading.TimerCallback,System.Object,System.TimeSpan,System.TimeSpan)
+  name: CreateTimer(TimerCallback, object?, TimeSpan, TimeSpan)
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.CreateTimer.html#Camunda_Orchestration_Sdk_CamundaTimeProvider_CreateTimer_System_Threading_TimerCallback_System_Object_System_TimeSpan_System_TimeSpan_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaTimeProvider.CreateTimer(System.Threading.TimerCallback,System.Object,System.TimeSpan,System.TimeSpan)
+  name.vb: CreateTimer(TimerCallback, Object, TimeSpan, TimeSpan)
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.CreateTimer(System.Threading.TimerCallback, object?, System.TimeSpan, System.TimeSpan)
+  fullName.vb: Camunda.Orchestration.Sdk.CamundaTimeProvider.CreateTimer(System.Threading.TimerCallback, Object, System.TimeSpan, System.TimeSpan)
+  nameWithType: CamundaTimeProvider.CreateTimer(TimerCallback, object?, TimeSpan, TimeSpan)
+  nameWithType.vb: CamundaTimeProvider.CreateTimer(TimerCallback, Object, TimeSpan, TimeSpan)
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.CreateTimer*
+  name: CreateTimer
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.CreateTimer.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaTimeProvider.CreateTimer
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.CreateTimer
+  nameWithType: CamundaTimeProvider.CreateTimer
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.GetTimestamp
+  name: GetTimestamp()
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.GetTimestamp.html#Camunda_Orchestration_Sdk_CamundaTimeProvider_GetTimestamp
+  commentId: M:Camunda.Orchestration.Sdk.CamundaTimeProvider.GetTimestamp
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.GetTimestamp()
+  nameWithType: CamundaTimeProvider.GetTimestamp()
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.GetTimestamp*
+  name: GetTimestamp
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.GetTimestamp.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaTimeProvider.GetTimestamp
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.GetTimestamp
+  nameWithType: CamundaTimeProvider.GetTimestamp
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.GetUtcNow
+  name: GetUtcNow()
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.GetUtcNow.html#Camunda_Orchestration_Sdk_CamundaTimeProvider_GetUtcNow
+  commentId: M:Camunda.Orchestration.Sdk.CamundaTimeProvider.GetUtcNow
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.GetUtcNow()
+  nameWithType: CamundaTimeProvider.GetUtcNow()
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.GetUtcNow*
+  name: GetUtcNow
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.GetUtcNow.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaTimeProvider.GetUtcNow
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.GetUtcNow
+  nameWithType: CamundaTimeProvider.GetUtcNow
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.Live
+  name: Live
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.Live.html#Camunda_Orchestration_Sdk_CamundaTimeProvider_Live
+  commentId: P:Camunda.Orchestration.Sdk.CamundaTimeProvider.Live
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.Live
+  nameWithType: CamundaTimeProvider.Live
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.Live*
+  name: Live
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.Live.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaTimeProvider.Live
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.Live
+  nameWithType: CamundaTimeProvider.Live
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.LocalTimeZone
+  name: LocalTimeZone
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.LocalTimeZone.html#Camunda_Orchestration_Sdk_CamundaTimeProvider_LocalTimeZone
+  commentId: P:Camunda.Orchestration.Sdk.CamundaTimeProvider.LocalTimeZone
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.LocalTimeZone
+  nameWithType: CamundaTimeProvider.LocalTimeZone
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.LocalTimeZone*
+  name: LocalTimeZone
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.LocalTimeZone.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaTimeProvider.LocalTimeZone
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.LocalTimeZone
+  nameWithType: CamundaTimeProvider.LocalTimeZone
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.TimestampFrequency
+  name: TimestampFrequency
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.TimestampFrequency.html#Camunda_Orchestration_Sdk_CamundaTimeProvider_TimestampFrequency
+  commentId: P:Camunda.Orchestration.Sdk.CamundaTimeProvider.TimestampFrequency
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.TimestampFrequency
+  nameWithType: CamundaTimeProvider.TimestampFrequency
+- uid: Camunda.Orchestration.Sdk.CamundaTimeProvider.TimestampFrequency*
+  name: TimestampFrequency
+  href: api/Camunda.Orchestration.Sdk.CamundaTimeProvider.TimestampFrequency.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaTimeProvider.TimestampFrequency
+  fullName: Camunda.Orchestration.Sdk.CamundaTimeProvider.TimestampFrequency
+  nameWithType: CamundaTimeProvider.TimestampFrequency
 - uid: Camunda.Orchestration.Sdk.CamundaUserResult
   name: CamundaUserResult
   href: api/Camunda.Orchestration.Sdk.CamundaUserResult.html
