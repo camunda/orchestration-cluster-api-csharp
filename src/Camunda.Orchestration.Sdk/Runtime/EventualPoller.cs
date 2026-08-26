@@ -103,5 +103,12 @@ internal static class EventualPoller
     }
 
     private static int ElapsedMs(TimeProvider timeProvider, DateTimeOffset started)
-        => (int)(timeProvider.GetUtcNow() - started).TotalMilliseconds;
+    {
+        // WaitUpToMs is an int, so a long enough wait — trivial to reach once the clock is
+        // virtual — would otherwise overflow the cast and report a negative wait.
+        var elapsed = (timeProvider.GetUtcNow() - started).TotalMilliseconds;
+        return elapsed <= 0 ? 0
+            : elapsed >= int.MaxValue ? int.MaxValue
+            : (int)elapsed;
+    }
 }

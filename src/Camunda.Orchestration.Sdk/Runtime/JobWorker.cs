@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 
@@ -358,10 +359,11 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             // Deliberately real time, not the injected clock. This is a liveness bound on
             // shutdown, not cadence: if it ran on a pinned clock, disposing a worker while
             // a job was in flight would block forever waiting for a clock nobody is going
-            // to advance. Exempt from the ambient-time ban for that reason.
+            // to advance. Monotonic rather than wall-clock, so a backward NTP or VM-resume
+            // correction cannot extend the grace period either.
 #pragma warning disable RS0030 // liveness bound: must fire regardless of the injected clock
-            var deadline = DateTimeOffset.UtcNow + gracePeriod.Value;
-            while (ActiveJobs > 0 && DateTimeOffset.UtcNow < deadline)
+            var drained = Stopwatch.StartNew();
+            while (ActiveJobs > 0 && drained.Elapsed < gracePeriod.Value)
                 await Task.Delay(50).ConfigureAwait(false);
 #pragma warning restore RS0030
         }

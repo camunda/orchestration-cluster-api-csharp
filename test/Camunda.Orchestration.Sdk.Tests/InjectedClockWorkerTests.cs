@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 using Microsoft.Extensions.Time.Testing;
@@ -157,5 +158,93 @@ public class InjectedClockWorkerTests
 
         Assert.Same(clock, observed);
         Assert.Equal(DateTimeOffset.UnixEpoch, observedNow);
+    }
+
+    /// <summary>
+    /// With no clock configured the client applies <see cref="CamundaTimeProvider.Live"/>,
+    /// observed on the surface a handler actually sees rather than inferred from successful
+    /// construction.
+    /// </summary>
+    [Fact]
+    public async Task HandlerReceivesTheLiveClockWhenNoneIsConfigured()
+    {
+        var served = 0;
+        TimeProvider? observed = null;
+
+        var handler = new StubHandler(req =>
+            req.RequestUri!.ToString().Contains("activation", StringComparison.Ordinal)
+                ? Json(Interlocked.Increment(ref served) == 1 ? OneJob : """{"jobs":[]}""")
+                : Json("{}"));
+
+        using var client = CamundaClient.Create(new CamundaOptions
+        {
+            Config = new Dictionary<string, string>
+            {
+                ["CAMUNDA_REST_ADDRESS"] = "http://localhost:8080/v2",
+                ["CAMUNDA_AUTH_STRATEGY"] = "NONE",
+            },
+            HttpMessageHandler = handler,
+        });
+
+        await using var worker = client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "clock-test", JobTimeoutMs = 60_000, PollIntervalMs = 5_000 },
+            (job, ct) =>
+            {
+                observed = job.Clock;
+                return Task.FromResult<object?>(null);
+            });
+
+        Assert.True(await WaitFor(() => observed != null), "handler never ran");
+
+        Assert.Same(CamundaTimeProvider.Live, observed);
+    }
+
+    /// <summary>
+    /// Regression guard for the shutdown liveness exemption.
+    ///
+    /// <para>Putting the grace-period drain on the injected clock deadlocked: disposing a
+    /// worker with a job in flight waited forever for a clock nobody was going to advance.
+    /// The drain therefore runs on real monotonic time, and this pins that — the fake clock
+    /// is never advanced, so if the drain ever moves back onto it, this test hangs and then
+    /// fails on its timeout.</para>
+    /// </summary>
+    [Fact]
+    public async Task StopAsyncHonoursItsGracePeriodWhileTheClockIsHeld()
+    {
+        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var served = 0;
+        var handlerEntered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        using var releaseHandler = new CancellationTokenSource();
+
+        var handler = new StubHandler(req =>
+            req.RequestUri!.ToString().Contains("activation", StringComparison.Ordinal)
+                ? Json(Interlocked.Increment(ref served) == 1 ? OneJob : """{"jobs":[]}""")
+                : Json("{}"));
+
+        using var client = CreateClient(clock, handler);
+        var worker = client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "clock-test", JobTimeoutMs = 60_000, PollIntervalMs = 5_000 },
+            async (job, ct) =>
+            {
+                handlerEntered.TrySetResult();
+                // Occupy the worker past the grace period so the drain loop is exercised.
+                try
+                { await Task.Delay(Timeout.Infinite, releaseHandler.Token); }
+                catch (OperationCanceledException) { }
+                return null;
+            });
+
+        await handlerEntered.Task.WaitAsync(TimeSpan.FromSeconds(10));
+
+        var stopping = Stopwatch.StartNew();
+        var result = await worker.StopAsync(TimeSpan.FromMilliseconds(300)).WaitAsync(TimeSpan.FromSeconds(10));
+        stopping.Stop();
+
+        releaseHandler.Cancel();
+
+        Assert.True(result.TimedOut, "expected the in-flight job to outlast the grace period");
+        Assert.True(
+            stopping.Elapsed >= TimeSpan.FromMilliseconds(250),
+            $"grace period was not observed; returned after {stopping.ElapsedMilliseconds}ms");
     }
 }

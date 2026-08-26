@@ -37,7 +37,27 @@ internal sealed class InstrumentedFakeTimeProvider(DateTimeOffset start) : TimeP
 
     public override ITimer CreateTimer(TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)
     {
+        // Register before publishing the count. Incrementing first would let a waiting test
+        // observe the signal and advance the clock before the timer existed, reproducing the
+        // very missed-advance hang this class exists to prevent.
+        var timer = _inner.CreateTimer(callback, state, dueTime, period);
         Interlocked.Increment(ref _timersCreated);
-        return _inner.CreateTimer(callback, state, dueTime, period);
+        return timer;
+    }
+
+    /// <summary>
+    /// Spin until at least <paramref name="count"/> timers have been registered.
+    /// Bounded in real time so a regression fails the test rather than hanging the run.
+    /// </summary>
+    public async Task WaitForTimersAsync(int count, int timeoutMs = 10_000)
+    {
+        var deadline = Environment.TickCount64 + timeoutMs;
+        while (TimersCreated < count)
+        {
+            if (Environment.TickCount64 > deadline)
+                throw new TimeoutException(
+                    $"Expected at least {count} timer registration(s) within {timeoutMs}ms, saw {TimersCreated}.");
+            await Task.Delay(5);
+        }
     }
 }

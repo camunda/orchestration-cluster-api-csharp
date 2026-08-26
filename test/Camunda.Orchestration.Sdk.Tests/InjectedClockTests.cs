@@ -65,12 +65,43 @@ public class CamundaTimeProviderTests
         _ = clock.GetUtcNow();
         inner.Set(DateTimeOffset.UnixEpoch);
 
-        // Still behind the high-water mark — clamped.
+        // Still behind the high-water mark — the jump is absorbed, so time holds.
         Assert.Equal(DateTimeOffset.UnixEpoch.AddHours(1), clock.GetUtcNow());
 
         // Caught up and moved past it — reported again.
         inner.Set(DateTimeOffset.UnixEpoch.AddHours(2));
-        Assert.Equal(DateTimeOffset.UnixEpoch.AddHours(2), clock.GetUtcNow());
+        Assert.Equal(DateTimeOffset.UnixEpoch.AddHours(3), clock.GetUtcNow());
+    }
+
+    /// <summary>
+    /// Forward progress must resume immediately after a backward jump, not stall until the
+    /// underlying clock catches back up.
+    ///
+    /// <para>A max-clamp satisfies "never decreases" but freezes logical time for the whole
+    /// duration of the correction, so an hour-long NTP step would add an hour to every
+    /// deadline in flight — the exact failure this class exists to prevent. Absorbing the
+    /// step into an offset keeps the rate of progress intact.</para>
+    /// </summary>
+    [Fact]
+    public void PreservesForwardProgressAfterABackwardJump()
+    {
+        var inner = new SettableTimeProvider(DateTimeOffset.UnixEpoch.AddHours(1));
+        var clock = new CamundaTimeProvider(inner);
+
+        var before = clock.GetUtcNow();
+
+        // An hour-long backward correction.
+        inner.Set(DateTimeOffset.UnixEpoch);
+        Assert.Equal(before, clock.GetUtcNow());
+
+        // Five seconds of real forward movement, still far below the old high-water mark,
+        // must show up as five seconds. Under a max-clamp this would report no progress at
+        // all for the next hour.
+        inner.Set(DateTimeOffset.UnixEpoch.AddSeconds(5));
+        Assert.Equal(before.AddSeconds(5), clock.GetUtcNow());
+
+        inner.Set(DateTimeOffset.UnixEpoch.AddSeconds(11));
+        Assert.Equal(before.AddSeconds(11), clock.GetUtcNow());
     }
 
     [Fact]
@@ -180,31 +211,36 @@ public class InjectedClockRuntimeTests
 
         // The backoff is minutes long, but no real time passes: the operation only makes
         // progress when the injected clock is advanced.
-        while (!pending.IsCompleted)
-        {
-            await Task.Yield();
-            clock.Advance(TimeSpan.FromSeconds(30));
-        }
+        await DriveVirtualTime(pending, clock.Advance, TimeSpan.FromSeconds(30));
 
         Assert.Equal(42, await pending);
         Assert.Equal(3, attempts);
     }
 
-    [Fact]
-    public void ClientDefaultsToTheClampedLiveClock()
+    /// <summary>
+    /// Advance <paramref name="advance"/> until <paramref name="pending"/> completes,
+    /// bounded in real time so a regression that stalls the task fails the test rather
+    /// than hanging the run.
+    /// </summary>
+    private static async Task DriveVirtualTime(Task pending, Action<TimeSpan> advance, TimeSpan step, int timeoutMs = 10_000)
     {
-        var options = new CamundaOptions();
-
-        Assert.Null(options.TimeProvider);
-
-        // The default is applied at construction, not left null, so runtime code never
-        // has to fall back to an ambient primitive.
-        using var client = CamundaClient.Create(new CamundaOptions
+        var deadline = Environment.TickCount64 + timeoutMs;
+        while (!pending.IsCompleted)
         {
-            Config = new Dictionary<string, string> { ["CAMUNDA_REST_ADDRESS"] = "http://localhost:8080" },
-        });
+            if (Environment.TickCount64 > deadline)
+                throw new TimeoutException($"Task did not complete within {timeoutMs}ms of driving virtual time.");
+            await Task.Yield();
+            advance(step);
+        }
+    }
 
-        Assert.NotNull(client);
+    [Fact]
+    public void CamundaOptionsLeavesTheClockUnsetSoTheClientCanApplyTheDefault()
+    {
+        // The effective default is asserted end-to-end in
+        // InjectedClockWorkerTests.HandlerReceivesTheLiveClockWhenNoneIsConfigured, which
+        // observes it on the handler's ActivatedJob.Clock rather than inferring it here.
+        Assert.Null(new CamundaOptions().TimeProvider);
     }
 
     /// <summary>
@@ -236,8 +272,7 @@ public class InjectedClockRuntimeTests
 
         // Advance only once the poller is parked on the clock, so the jump is observed
         // exactly once and the resulting poll count is deterministic.
-        while (clock.TimersCreated < 1)
-            await Task.Yield();
+        await clock.WaitForTimersAsync(1);
 
         clock.Advance(TimeSpan.FromHours(25));
 
@@ -276,11 +311,7 @@ public class InjectedClockRuntimeTests
             NullLogger.Instance,
             clock);
 
-        while (!pending.IsCompleted)
-        {
-            await Task.Yield();
-            clock.Advance(TimeSpan.FromSeconds(1));
-        }
+        await DriveVirtualTime(pending, clock.Advance, TimeSpan.FromSeconds(1));
 
         var ex = await Assert.ThrowsAsync<EventualConsistencyTimeoutException>(() => pending);
 
@@ -338,6 +369,82 @@ public class InjectedClockRuntimeTests
         Assert.Equal(2, issued);
     }
 
+    /// <summary>
+    /// The OAuth retry backoff is cadence, so it must be virtual: with the clock held the
+    /// retry stays pending, and only an advance lets it proceed.
+    /// </summary>
+    [Fact]
+    public async Task OAuthRetryBackoffWaitsOnTheInjectedClock()
+    {
+        var clock = new InstrumentedFakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var attempts = 0;
+
+        var handler = new StubTokenHandler(() =>
+        {
+            if (Interlocked.Increment(ref attempts) == 1)
+                throw new HttpRequestException("transient");
+            return """{"access_token":"token","expires_in":3600}""";
+        });
+        using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
+
+        // A 60s backoff: on a real clock this test would take a minute.
+        using var oauth = new OAuthManager(
+            CreateOAuthConfig(retryMax: 3, baseDelayMs: 60_000), NullLogger.Instance, clock);
+
+        var pending = oauth.GetTokenAsync(client);
+
+        // Parked on the backoff after the first failure, and going nowhere on its own.
+        await clock.WaitForTimersAsync(1);
+        await Task.Delay(150);
+        Assert.False(pending.IsCompleted, "retry proceeded without the clock advancing");
+        Assert.Equal(1, Volatile.Read(ref attempts));
+
+        // Past the backoff by a clear margin rather than exactly 60s: the delay carries
+        // ±10% jitter from Random.Shared, which is not clock-controlled (deferred to the
+        // seeded-RNG follow-up, camunda/sdk-infra#50). Advancing exactly one nominal
+        // backoff would therefore fire the timer only when the jitter came out negative.
+        clock.Advance(TimeSpan.FromMinutes(2));
+
+        Assert.Equal("token", await pending.WaitAsync(TimeSpan.FromSeconds(10)));
+        Assert.Equal(2, Volatile.Read(ref attempts));
+    }
+
+    /// <summary>
+    /// Regression guard for the OAuth request-timeout liveness exemption: the timeout must
+    /// fire on real time even while the injected clock is held, or a pinned clock would let
+    /// an unresponsive token endpoint hang the caller forever.
+    /// </summary>
+    [Fact]
+    public async Task OAuthRequestTimeoutFiresWhileTheClockIsHeld()
+    {
+        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+
+        using var unresponsive = new NeverRespondingHandler();
+        using var client = new HttpClient(unresponsive) { BaseAddress = new Uri("https://auth.mock/") };
+
+        using var oauth = new OAuthManager(
+            CreateOAuthConfig(retryMax: 1, baseDelayMs: 10, timeoutMs: 200), NullLogger.Instance, clock);
+
+        // The clock is never advanced. Only the real-time liveness bound can end this.
+        var ex = await Assert.ThrowsAsync<CamundaAuthException>(
+            () => oauth.GetTokenAsync(client).WaitAsync(TimeSpan.FromSeconds(10)));
+
+        Assert.Equal(CamundaAuthErrorCode.TokenFetchFailed, ex.Code);
+    }
+
+    private static CamundaConfig CreateOAuthConfig(int retryMax, int baseDelayMs, int timeoutMs = 5000) => new()
+    {
+        OAuth = new OAuthConfig
+        {
+            ClientId = "id",
+            ClientSecret = "secret",
+            OAuthUrl = "https://auth.mock/token",
+            Retry = new OAuthRetryConfig { Max = retryMax, BaseDelayMs = baseDelayMs },
+            TimeoutMs = timeoutMs,
+        },
+        TokenAudience = "aud",
+    };
+
     private sealed class StubTokenHandler(Func<string> body) : HttpMessageHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -345,5 +452,14 @@ public class InjectedClockRuntimeTests
             {
                 Content = new StringContent(body(), System.Text.Encoding.UTF8, "application/json"),
             });
+    }
+
+    private sealed class NeverRespondingHandler : HttpMessageHandler
+    {
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            await Task.Delay(Timeout.Infinite, cancellationToken);
+            throw new InvalidOperationException("unreachable");
+        }
     }
 }

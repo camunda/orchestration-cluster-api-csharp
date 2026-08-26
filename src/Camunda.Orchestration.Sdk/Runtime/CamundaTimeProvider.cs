@@ -8,8 +8,8 @@ namespace Camunda.Orchestration.Sdk;
 /// rather than a monotonic source, so that pinning the clock in a test also pins the
 /// client's own timing. Wall clocks can jump backwards (NTP correction, VM suspend and
 /// resume, manual adjustment), and a deadline computed against a backwards-moving clock
-/// waits longer than it was asked to. Clamping recovers that safety without reintroducing
-/// a second notion of time.</para>
+/// waits longer than it was asked to. Absorbing the jump recovers that safety without
+/// reintroducing a second notion of time.</para>
 ///
 /// <para>This decorator wraps the <em>live</em> clock only. A test clock such as
 /// <c>FakeTimeProvider</c> is used as supplied, so a test remains free to move time
@@ -18,10 +18,12 @@ namespace Camunda.Orchestration.Sdk;
 public sealed class CamundaTimeProvider : TimeProvider
 {
     private readonly TimeProvider _inner;
-    private long _lastUtcTicks;
+    private readonly object _gate = new();
+    private long _lastInnerTicks;
+    private long _offsetTicks;
 
     /// <summary>
-    /// The default live clock: the system clock, clamped so it cannot move backwards.
+    /// The default live clock: the system clock, made non-decreasing.
     /// </summary>
     public static CamundaTimeProvider Live { get; } = new(TimeProvider.System);
 
@@ -37,18 +39,22 @@ public sealed class CamundaTimeProvider : TimeProvider
     /// <inheritdoc />
     public override DateTimeOffset GetUtcNow()
     {
-        var candidateTicks = _inner.GetUtcNow().UtcTicks;
-        var last = Volatile.Read(ref _lastUtcTicks);
-
-        while (candidateTicks > last)
+        lock (_gate)
         {
-            var observed = Interlocked.CompareExchange(ref _lastUtcTicks, candidateTicks, last);
-            if (observed == last)
-                return new DateTimeOffset(candidateTicks, TimeSpan.Zero);
-            last = observed;
-        }
+            var innerTicks = _inner.GetUtcNow().UtcTicks;
 
-        return new DateTimeOffset(last, TimeSpan.Zero);
+            // A backward step is absorbed into a running offset rather than clamped to the
+            // previous high-water mark. Clamping would hold logical time still until the
+            // underlying clock caught back up, so an hour-long correction would add an hour
+            // to every deadline in flight — the very failure this class exists to avoid.
+            // Carrying the offset keeps time non-decreasing while preserving the rate of
+            // forward progress, so a deadline set before the jump still expires on time.
+            if (innerTicks < _lastInnerTicks)
+                _offsetTicks += _lastInnerTicks - innerTicks;
+
+            _lastInnerTicks = innerTicks;
+            return new DateTimeOffset(innerTicks + _offsetTicks, TimeSpan.Zero);
+        }
     }
 
     /// <inheritdoc />
