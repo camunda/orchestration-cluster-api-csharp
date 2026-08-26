@@ -33,7 +33,7 @@ public class OAuthManagerTests : IDisposable
         {
             BaseAddress = new Uri("https://auth.mock/"),
         };
-        _oauth = new OAuthManager(CreateConfig(), NullLogger.Instance);
+        _oauth = new OAuthManager(CreateConfig(), NullLogger.Instance, TimeProvider.System);
     }
 
     public void Dispose()
@@ -130,7 +130,7 @@ public class OAuthManagerTests : IDisposable
             TokenAudience = "test",
         };
 
-        using var oauth = new OAuthManager(config, NullLogger.Instance);
+        using var oauth = new OAuthManager(config, NullLogger.Instance, TimeProvider.System);
 
         var act = async () => await oauth.GetTokenAsync(_tokenClient);
         var ex = await Assert.ThrowsAsync<CamundaAuthException>(act);
@@ -144,7 +144,7 @@ public class OAuthManagerTests : IDisposable
         handler.Enqueue(HttpStatusCode.OK, "{}");
         using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
 
-        using var oauth = new OAuthManager(CreateConfig(), NullLogger.Instance);
+        using var oauth = new OAuthManager(CreateConfig(), NullLogger.Instance, TimeProvider.System);
 
         var act = async () => await oauth.GetTokenAsync(client);
         var ex = await Assert.ThrowsAsync<CamundaAuthException>(act);
@@ -159,7 +159,7 @@ public class OAuthManagerTests : IDisposable
             JsonSerializer.Serialize(new { access_token = "", expires_in = 3600 }));
         using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
 
-        using var oauth = new OAuthManager(CreateConfig(), NullLogger.Instance);
+        using var oauth = new OAuthManager(CreateConfig(), NullLogger.Instance, TimeProvider.System);
 
         var act = async () => await oauth.GetTokenAsync(client);
         var ex = await Assert.ThrowsAsync<CamundaAuthException>(act);
@@ -174,7 +174,7 @@ public class OAuthManagerTests : IDisposable
         handler.Enqueue(HttpStatusCode.OK, TokenJson("recovered-token"));
         using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
 
-        using var oauth = new OAuthManager(CreateConfig(retryMax: 3), NullLogger.Instance);
+        using var oauth = new OAuthManager(CreateConfig(retryMax: 3), NullLogger.Instance, TimeProvider.System);
 
         var token = await oauth.GetTokenAsync(client);
         Assert.Equal("recovered-token", token);
@@ -189,7 +189,7 @@ public class OAuthManagerTests : IDisposable
         handler.Enqueue(HttpStatusCode.InternalServerError, "fail 2");
         using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
 
-        using var oauth = new OAuthManager(CreateConfig(retryMax: 2), NullLogger.Instance);
+        using var oauth = new OAuthManager(CreateConfig(retryMax: 2), NullLogger.Instance, TimeProvider.System);
 
         var act = async () => await oauth.GetTokenAsync(client);
         var ex = await Assert.ThrowsAsync<CamundaAuthException>(act);

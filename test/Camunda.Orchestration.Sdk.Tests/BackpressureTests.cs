@@ -8,7 +8,7 @@ public class BackpressureTests
     [Fact]
     public void InitialStateIsHealthy()
     {
-        var bp = new BackpressureManager(new BackpressureConfig(), Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
+        var bp = new BackpressureManager(new BackpressureConfig(), Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance, TimeProvider.System);
         var state = bp.GetState();
 
         Assert.Equal("healthy", state.Severity);
@@ -19,7 +19,7 @@ public class BackpressureTests
     [Fact]
     public void RecordBackpressureIncrementsConsecutive()
     {
-        var bp = new BackpressureManager(new BackpressureConfig(), Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
+        var bp = new BackpressureManager(new BackpressureConfig(), Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance, TimeProvider.System);
 
         bp.RecordBackpressure();
         Assert.Equal(1, bp.GetState().Consecutive);
@@ -34,7 +34,8 @@ public class BackpressureTests
     {
         var bp = new BackpressureManager(
             new BackpressureConfig { SevereThreshold = 2 },
-            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
 
         bp.RecordBackpressure();
         bp.RecordBackpressure();
@@ -46,7 +47,8 @@ public class BackpressureTests
     {
         var bp = new BackpressureManager(
             new BackpressureConfig { ObserveOnly = true, Enabled = false },
-            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
 
         bp.RecordBackpressure();
         Assert.Null(bp.GetState().PermitsMax);
@@ -57,7 +59,8 @@ public class BackpressureTests
     {
         var bp = new BackpressureManager(
             new BackpressureConfig { InitialMax = 2 },
-            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
 
         await bp.AcquireAsync();
         await bp.AcquireAsync();

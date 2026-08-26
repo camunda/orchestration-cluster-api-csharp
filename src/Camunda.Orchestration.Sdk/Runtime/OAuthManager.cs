@@ -10,6 +10,7 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
 {
     private readonly CamundaConfig _config;
     private readonly ILogger _logger;
+    private readonly TimeProvider _timeProvider;
     private readonly SemaphoreSlim _refreshLock = new(1, 1);
     private OAuthToken? _token;
 
@@ -20,10 +21,11 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
         public required long ObtainedAtEpochMs { get; init; }
     }
 
-    public OAuthManager(CamundaConfig config, ILogger logger)
+    public OAuthManager(CamundaConfig config, ILogger logger, TimeProvider timeProvider)
     {
         _config = config;
         _logger = logger;
+        _timeProvider = timeProvider;
     }
 
     public async Task<string> GetTokenAsync(HttpClient httpClient, CancellationToken ct = default)
@@ -75,9 +77,9 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
         return ValueTask.CompletedTask;
     }
 
-    private static bool ShouldRefresh(OAuthToken token)
+    private bool ShouldRefresh(OAuthToken token)
     {
-        var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        var now = _timeProvider.GetUtcNow().ToUnixTimeMilliseconds();
         const int refreshLeadMs = 5000;
         return now >= token.ExpiresAtEpochMs - refreshLeadMs;
     }
@@ -99,7 +101,12 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
                     _logger.LogDebug("OAuth token attempt {Attempt}/{Max}", attempt + 1, max);
 
                 using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+                // Deliberately real time, not the injected clock: this is a liveness bound
+                // on a network call, and pinning it would let a hung token endpoint block
+                // forever when the caller passes no cancellation token.
+#pragma warning disable RS0030 // liveness bound: must fire regardless of the injected clock
                 cts.CancelAfter(_config.OAuth.TimeoutMs);
+#pragma warning restore RS0030
 
                 var body = new FormUrlEncodedContent(BuildTokenRequestBody());
 
@@ -112,7 +119,7 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
                 if (string.IsNullOrEmpty(json.AccessToken) || json.ExpiresIn <= 0)
                     throw new CamundaAuthException(CamundaAuthErrorCode.TokenParseFailed, "Missing access_token or expires_in in response");
 
-                var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                var now = _timeProvider.GetUtcNow().ToUnixTimeMilliseconds();
                 var lifetimeMs = json.ExpiresIn * 1000L;
                 var skewBuffer = Math.Max(30000, (long)(lifetimeMs * 0.05));
 
@@ -137,7 +144,7 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
 
                 var delay = baseDelay * (int)Math.Pow(2, attempt);
                 var jitter = (int)(delay * 0.2 * (Random.Shared.NextDouble() - 0.5));
-                await Task.Delay(delay + jitter, ct);
+                await Task.Delay(TimeSpan.FromMilliseconds(delay + jitter), _timeProvider, ct);
             }
         }
 

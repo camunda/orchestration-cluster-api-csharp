@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 
@@ -136,10 +137,28 @@ public sealed class ActivatedJob
 {
     private readonly ActivatedJobResult _raw;
 
-    internal ActivatedJob(ActivatedJobResult raw)
+    internal ActivatedJob(ActivatedJobResult raw, TimeProvider timeProvider)
     {
         _raw = raw;
+        Clock = timeProvider;
     }
+
+    /// <summary>
+    /// The clock the worker's own cadence runs on. Handlers should read time and wait
+    /// through this rather than <c>DateTimeOffset.UtcNow</c> or <c>Task.Delay(ms, ct)</c>,
+    /// so that in-handler timing is virtual whenever the client's clock is.
+    ///
+    /// <code>
+    /// var startedAt = job.Clock.GetUtcNow();
+    /// await Task.Delay(TimeSpan.FromMilliseconds(200), job.Clock, ct);
+    /// </code>
+    ///
+    /// <para>This is for short in-handler coordination — poll again shortly, back off
+    /// before a retry, debounce. It is not for business waits: "wait three days, then
+    /// escalate" belongs in the BPMN model as a timer event, which is durable, owned by
+    /// the engine, and survives worker restarts.</para>
+    /// </summary>
+    public TimeProvider Clock { get; }
 
     /// <summary>The job type (matches the BPMN task definition type).</summary>
     public string Type => _raw.Type;
@@ -236,6 +255,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     private readonly long _jobTimeoutMs;
     private readonly int _maxConcurrentJobs;
     private readonly List<TenantId>? _resolvedTenantIds;
+    private readonly TimeProvider _timeProvider;
 
     private CancellationTokenSource? _cts;
     private Task? _pollTask;
@@ -246,12 +266,14 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         JobWorkerConfig config,
         JobHandler handler,
         ILoggerFactory loggerFactory,
-        JsonSerializerOptions jsonOptions)
+        JsonSerializerOptions jsonOptions,
+        TimeProvider timeProvider)
     {
         _client = client;
         _config = config;
         _handler = handler;
         _jsonOptions = jsonOptions;
+        _timeProvider = timeProvider;
 
         if (config.JobTimeoutMs is null)
             throw new ArgumentException(
@@ -334,9 +356,16 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
         if (gracePeriod.HasValue && ActiveJobs > 0)
         {
-            var deadline = DateTimeOffset.UtcNow + gracePeriod.Value;
-            while (ActiveJobs > 0 && DateTimeOffset.UtcNow < deadline)
+            // Deliberately real time, not the injected clock. This is a liveness bound on
+            // shutdown, not cadence: if it ran on a pinned clock, disposing a worker while
+            // a job was in flight would block forever waiting for a clock nobody is going
+            // to advance. Monotonic rather than wall-clock, so a backward NTP or VM-resume
+            // correction cannot extend the grace period either.
+#pragma warning disable RS0030 // liveness bound: must fire regardless of the injected clock
+            var drained = Stopwatch.StartNew();
+            while (ActiveJobs > 0 && drained.Elapsed < gracePeriod.Value)
                 await Task.Delay(50).ConfigureAwait(false);
+#pragma warning restore RS0030
         }
 
         var remaining = ActiveJobs;
@@ -379,7 +408,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 _logger.LogInformation(
                     "JobWorker '{Name}' delaying start by {JitterMs}ms (jitter)",
                     _name, jitterMs);
-            await Task.Delay(jitterMs, ct).ConfigureAwait(false);
+            await Task.Delay(TimeSpan.FromMilliseconds(jitterMs), _timeProvider, ct).ConfigureAwait(false);
         }
 
         try
@@ -389,7 +418,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 var capacity = _maxConcurrentJobs - ActiveJobs;
                 if (capacity <= 0)
                 {
-                    await Task.Delay(_config.PollIntervalMs, ct).ConfigureAwait(false);
+                    await Task.Delay(TimeSpan.FromMilliseconds(_config.PollIntervalMs), _timeProvider, ct).ConfigureAwait(false);
                     continue;
                 }
 
@@ -409,7 +438,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
                     if (response?.Jobs == null || response.Jobs.Count == 0)
                     {
-                        await Task.Delay(_config.PollIntervalMs, ct).ConfigureAwait(false);
+                        await Task.Delay(TimeSpan.FromMilliseconds(_config.PollIntervalMs), _timeProvider, ct).ConfigureAwait(false);
                         continue;
                     }
 
@@ -422,7 +451,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                             continue;
                         }
 
-                        var job = new ActivatedJob(jobResult);
+                        var job = new ActivatedJob(jobResult, _timeProvider);
                         Interlocked.Increment(ref _activeJobs);
 
                         // Fire-and-forget — concurrency is controlled by capacity calculation
@@ -438,7 +467,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "JobWorker '{Name}': error during activation poll", _name);
-                    await Task.Delay(_config.PollIntervalMs, ct).ConfigureAwait(false);
+                    await Task.Delay(TimeSpan.FromMilliseconds(_config.PollIntervalMs), _timeProvider, ct).ConfigureAwait(false);
                 }
             }
         }

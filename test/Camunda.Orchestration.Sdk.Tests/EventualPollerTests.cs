@@ -20,7 +20,8 @@ public class EventualPollerTests
                 return Task.FromResult("immediate");
             },
             new ConsistencyOptions<string> { WaitUpToMs = 0 },
-            NullLogger.Instance);
+            NullLogger.Instance,
+            TimeProvider.System);
 
         Assert.Equal("immediate", result);
         Assert.Equal(1, callCount);
@@ -44,7 +45,8 @@ public class EventualPollerTests
                 PollIntervalMs = 50,
                 IsConsistent = v => v == 42,
             },
-            NullLogger.Instance);
+            NullLogger.Instance,
+            TimeProvider.System);
 
         Assert.Equal(42, result);
         Assert.Equal(1, callCount);
@@ -68,7 +70,8 @@ public class EventualPollerTests
                 PollIntervalMs = 10,
                 IsConsistent = v => v >= 3,
             },
-            NullLogger.Instance);
+            NullLogger.Instance,
+            TimeProvider.System);
 
         Assert.Equal(3, result);
         Assert.Equal(3, callCount);
@@ -87,7 +90,8 @@ public class EventualPollerTests
                 PollIntervalMs = 10,
                 IsConsistent = _ => false, // Never satisfied
             },
-            NullLogger.Instance);
+            NullLogger.Instance,
+            TimeProvider.System);
 
         var ex = await Assert.ThrowsAsync<EventualConsistencyTimeoutException>(act);
         Assert.Equal("slowOp", ex.OperationId);
@@ -113,7 +117,8 @@ public class EventualPollerTests
                 WaitUpToMs = 5000,
                 PollIntervalMs = 10,
             },
-            NullLogger.Instance);
+            NullLogger.Instance,
+            TimeProvider.System);
 
         Assert.Equal("found", result);
         Assert.Equal(3, callCount);
@@ -137,7 +142,8 @@ public class EventualPollerTests
                 WaitUpToMs = 5000,
                 PollIntervalMs = 10,
             },
-            NullLogger.Instance);
+            NullLogger.Instance,
+            TimeProvider.System);
 
         var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
 
@@ -161,7 +167,8 @@ public class EventualPollerTests
                 WaitUpToMs = 5000,
                 PollIntervalMs = 10,
             },
-            NullLogger.Instance);
+            NullLogger.Instance,
+            TimeProvider.System);
 
         Assert.Equal("data", result);
         Assert.Equal(2, callCount);
@@ -183,6 +190,7 @@ public class EventualPollerTests
                 IsConsistent = _ => false,
             },
             NullLogger.Instance,
+            TimeProvider.System,
             cts.Token);
 
         await Assert.ThrowsAnyAsync<OperationCanceledException>(act);
@@ -206,7 +214,8 @@ public class EventualPollerTests
                 WaitUpToMs = 5000,
                 PollIntervalMs = 10,
             },
-            NullLogger.Instance);
+            NullLogger.Instance,
+            TimeProvider.System);
 
         var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
 
