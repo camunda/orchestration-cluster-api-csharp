@@ -41,3 +41,12 @@ P:System.TimeProvider.System;The raw system clock belongs only to CamundaTimePro
 
 T:System.Threading.Timer;Use timeProvider.CreateTimer(...).
 T:System.Timers.Timer;Use timeProvider.CreateTimer(...).
+M:System.Threading.PeriodicTimer.#ctor(System.TimeSpan);Use new PeriodicTimer(TimeSpan, TimeProvider).
+
+M:System.Threading.Tasks.Task.WaitAsync(System.TimeSpan);Ambient deadline. Use WaitAsync(TimeSpan, TimeProvider, CancellationToken).
+M:System.Threading.Tasks.Task.WaitAsync(System.TimeSpan,System.Threading.CancellationToken);Ambient deadline. Use WaitAsync(TimeSpan, TimeProvider, CancellationToken).
+M:System.Threading.Tasks.Task`1.WaitAsync(System.TimeSpan);Ambient deadline. Use WaitAsync(TimeSpan, TimeProvider, CancellationToken).
+M:System.Threading.Tasks.Task`1.WaitAsync(System.TimeSpan,System.Threading.CancellationToken);Ambient deadline. Use WaitAsync(TimeSpan, TimeProvider, CancellationToken).
+
+P:System.Environment.TickCount;Monotonic timing. Ruling 2 is wall-clock only: use timeProvider.GetUtcNow().
+P:System.Environment.TickCount64;Monotonic timing. Ruling 2 is wall-clock only: use timeProvider.GetUtcNow().

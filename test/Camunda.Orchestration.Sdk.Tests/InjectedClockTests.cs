@@ -284,6 +284,69 @@ public class InjectedClockRuntimeTests
     }
 
     /// <summary>
+    /// Ruling 3, resynchronisation branch: after an invoke that outlasts the poll interval,
+    /// the next poll is a full interval away — not immediate.
+    ///
+    /// <para>This is the case the deadline-driven tests cannot reach, because they expire
+    /// before the branch runs. Resynchronising to <c>now</c> rather than <c>now + interval</c>
+    /// would make the loop poll again the instant a slow request returned, which is the
+    /// busy-polling pathology the ruling exists to prevent — and every other test here would
+    /// still pass.</para>
+    /// </summary>
+    [Fact]
+    public async Task EventualPollerWaitsAFullIntervalAfterAnInvokeSlowerThanTheInterval()
+    {
+        var clock = new InstrumentedFakeTimeProvider(DateTimeOffset.UnixEpoch);
+        using var cts = new CancellationTokenSource();
+        var invocations = 0;
+
+        // Deadline far enough out that it never ends the loop; the interval is what matters.
+        var pending = EventualPoller.PollAsync(
+            "slowRequestOp",
+            isGet: false,
+            invoke: () =>
+            {
+                if (Interlocked.Increment(ref invocations) == 1)
+                    clock.Advance(TimeSpan.FromSeconds(5)); // five times the poll interval
+                return Task.FromResult(0);
+            },
+            new ConsistencyOptions<int>
+            {
+                WaitUpToMs = (int)TimeSpan.FromHours(1).TotalMilliseconds,
+                PollIntervalMs = 1_000,
+                IsConsistent = _ => false,
+            },
+            NullLogger.Instance,
+            clock,
+            cts.Token);
+
+        try
+        {
+            // Real time passes but the clock does not. A loop that resynchronised to `now`
+            // would have a zero wait here and spin, so this count would be far above one.
+            await Task.Delay(200);
+            Assert.Equal(1, Volatile.Read(ref invocations));
+
+            await clock.WaitForTimersAsync(1);
+
+            // Just short of a full interval: still parked.
+            clock.Advance(TimeSpan.FromMilliseconds(900));
+            await Task.Delay(100);
+            Assert.Equal(1, Volatile.Read(ref invocations));
+
+            // Completing the interval releases exactly one more poll.
+            clock.Advance(TimeSpan.FromMilliseconds(100));
+            await clock.WaitForTimersAsync(2);
+            Assert.Equal(2, Volatile.Read(ref invocations));
+        }
+        finally
+        {
+            cts.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => pending);
+        }
+    }
+
+    /// <summary>
     /// The poller previously tracked elapsed time by counting intervals
     /// (<c>elapsed += interval</c>), which ignored how long each invoke took, so the
     /// reported wait understated the real one. Elapsed is now measured from the clock.
