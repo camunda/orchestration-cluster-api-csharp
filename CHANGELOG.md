@@ -1,3 +1,10 @@
+# [10.0.0-alpha.19](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.18...v10.0.0-alpha.19) (2026-08-26)
+
+
+### Features
+
+* resolve SDK runtime cadence and handler-facing time through an injected TimeProvider ([#412](https://github.com/camunda/orchestration-cluster-api-csharp/issues/412)) ([3406d54](https://github.com/camunda/orchestration-cluster-api-csharp/commit/3406d54ed8410f9eec3cdb8619b8c2ca1ad4a8a4)), closes [camunda/orchestration-cluster-api-js#450](https://github.com/camunda/orchestration-cluster-api-js/issues/450) [camunda/orchestration-cluster-api-csharp#402](https://github.com/camunda/orchestration-cluster-api-csharp/issues/402) [#pragma](https://github.com/camunda/orchestration-cluster-api-csharp/issues/pragma) [hi#water](https://github.com/hi/issues/water) [hi#water](https://github.com/hi/issues/water) [camunda/sdk-infra#50](https://github.com/camunda/sdk-infra/issues/50) [#450](https://github.com/camunda/orchestration-cluster-api-csharp/issues/450)
+
 # [10.0.0-alpha.18](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.17...v10.0.0-alpha.18) (2026-08-24)
 
 
