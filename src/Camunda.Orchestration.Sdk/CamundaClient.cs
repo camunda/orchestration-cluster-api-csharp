@@ -59,6 +59,8 @@ public partial class CamundaClient : IDisposable
             },
         };
 
+        _timeProvider = options.TimeProvider ?? CamundaTimeProvider.Live;
+
         if (options.HttpClient != null)
         {
             _httpClient = options.HttpClient;
@@ -68,7 +70,7 @@ public partial class CamundaClient : IDisposable
         {
             var tlsHandler = TlsHelper.BuildHandler(_config.Tls);
             var innerHandler = options.HttpMessageHandler ?? tlsHandler;
-            var authHandler = new AuthHandler(_config, innerHandler, _logger);
+            var authHandler = new AuthHandler(_config, innerHandler, _logger, _timeProvider);
             _httpClient = new HttpClient(authHandler)
             {
                 BaseAddress = string.IsNullOrEmpty(_config.RestAddress)
@@ -78,7 +80,6 @@ public partial class CamundaClient : IDisposable
             _ownsHttpClient = true;
         }
 
-        _timeProvider = options.TimeProvider ?? CamundaTimeProvider.Live;
         _bp = new BackpressureManager(_config.Backpressure, _logger, _timeProvider);
 
         if (_logger.IsEnabled(LogLevel.Debug))

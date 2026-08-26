@@ -289,4 +289,60 @@ public class InjectedClockRuntimeTests
             ex.WaitedMs >= 30_000,
             $"expected measured elapsed of at least 30000ms, got {ex.WaitedMs}ms");
     }
+
+    /// <summary>
+    /// Token expiry is evaluated against the injected clock, so a test can age a token
+    /// past its lifetime without waiting for it.
+    /// </summary>
+    [Fact]
+    public async Task OAuthRefreshIsDrivenByTheInjectedClock()
+    {
+        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var issued = 0;
+
+        var handler = new StubTokenHandler(() =>
+        {
+            issued++;
+            // 1h lifetime; the manager subtracts a skew buffer of max(30s, 5%) = 3m.
+            return $$"""{"access_token":"token-{{issued}}","expires_in":3600}""";
+        });
+        using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
+
+        var config = new CamundaConfig
+        {
+            OAuth = new OAuthConfig
+            {
+                ClientId = "id",
+                ClientSecret = "secret",
+                OAuthUrl = "https://auth.mock/token",
+                Retry = new OAuthRetryConfig { Max = 1, BaseDelayMs = 10 },
+                TimeoutMs = 5000,
+            },
+            TokenAudience = "aud",
+        };
+
+        using var oauth = new OAuthManager(config, NullLogger.Instance, clock);
+
+        Assert.Equal("token-1", await oauth.GetTokenAsync(client));
+
+        // Still well inside the lifetime: served from cache.
+        clock.Advance(TimeSpan.FromMinutes(30));
+        Assert.Equal("token-1", await oauth.GetTokenAsync(client));
+        Assert.Equal(1, issued);
+
+        // Past effective expiry (1h minus the 3m skew buffer): refreshed. No real time
+        // has passed at any point.
+        clock.Advance(TimeSpan.FromMinutes(30));
+        Assert.Equal("token-2", await oauth.GetTokenAsync(client));
+        Assert.Equal(2, issued);
+    }
+
+    private sealed class StubTokenHandler(Func<string> body) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            => Task.FromResult(new HttpResponseMessage(System.Net.HttpStatusCode.OK)
+            {
+                Content = new StringContent(body(), System.Text.Encoding.UTF8, "application/json"),
+            });
+    }
 }
