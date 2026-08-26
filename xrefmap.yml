@@ -37279,6 +37279,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.MessageSubscriptionFilter
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter
   nameWithType: MessageSubscriptionFilter
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.BusinessId.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.BusinessId
+  nameWithType: MessageSubscriptionFilter.BusinessId
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionFilter.BusinessId
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.BusinessId
+  nameWithType: MessageSubscriptionFilter.BusinessId
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionFilter.CorrelationKey
   name: CorrelationKey
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionFilter.CorrelationKey.html#Camunda_Orchestration_Sdk_MessageSubscriptionFilter_CorrelationKey
@@ -37693,6 +37705,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.MessageSubscriptionResult
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult
   nameWithType: MessageSubscriptionResult
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.BusinessId.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_BusinessId
+  commentId: P:Camunda.Orchestration.Sdk.MessageSubscriptionResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.BusinessId
+  nameWithType: MessageSubscriptionResult.BusinessId
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.BusinessId*
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.BusinessId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MessageSubscriptionResult.BusinessId
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionResult.BusinessId
+  nameWithType: MessageSubscriptionResult.BusinessId
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionResult.CorrelationKey
   name: CorrelationKey
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionResult.CorrelationKey.html#Camunda_Orchestration_Sdk_MessageSubscriptionResult_CorrelationKey
@@ -38017,6 +38041,12 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField
   fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField
   nameWithType: MessageSubscriptionSearchQuerySortRequestField
+- uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.BusinessId
+  name: BusinessId
+  href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_BusinessId
+  commentId: F:Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.BusinessId
+  fullName: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.BusinessId
+  nameWithType: MessageSubscriptionSearchQuerySortRequestField.BusinessId
 - uid: Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.CorrelationKey
   name: CorrelationKey
   href: api/Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuerySortRequestField.html#Camunda_Orchestration_Sdk_MessageSubscriptionSearchQuerySortRequestField_CorrelationKey
