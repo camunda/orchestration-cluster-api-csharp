@@ -62,15 +62,17 @@ public class CamundaTimeProviderTests
         var inner = new SettableTimeProvider(DateTimeOffset.UnixEpoch.AddHours(1));
         var clock = new CamundaTimeProvider(inner);
 
-        _ = clock.GetUtcNow();
+        var before = clock.GetUtcNow();
         inner.Set(DateTimeOffset.UnixEpoch);
 
-        // Still behind the high-water mark — the jump is absorbed, so time holds.
-        Assert.Equal(DateTimeOffset.UnixEpoch.AddHours(1), clock.GetUtcNow());
+        // The backward step is absorbed, so the reading holds rather than going back.
+        Assert.Equal(before, clock.GetUtcNow());
 
-        // Caught up and moved past it — reported again.
+        // Forward movement is reported again, less the slice used to pay down the offset.
         inner.Set(DateTimeOffset.UnixEpoch.AddHours(2));
-        Assert.Equal(DateTimeOffset.UnixEpoch.AddHours(3), clock.GetUtcNow());
+        var after = clock.GetUtcNow();
+        Assert.True(after > before, "clock did not resume advancing");
+        Assert.True(after < before.AddHours(2), "no correction was paid back");
     }
 
     /// <summary>
@@ -79,8 +81,7 @@ public class CamundaTimeProviderTests
     ///
     /// <para>A max-clamp satisfies "never decreases" but freezes logical time for the whole
     /// duration of the correction, so an hour-long NTP step would add an hour to every
-    /// deadline in flight — the exact failure this class exists to prevent. Absorbing the
-    /// step into an offset keeps the rate of progress intact.</para>
+    /// deadline in flight — the exact failure this class exists to prevent.</para>
     /// </summary>
     [Fact]
     public void PreservesForwardProgressAfterABackwardJump()
@@ -95,13 +96,47 @@ public class CamundaTimeProviderTests
         Assert.Equal(before, clock.GetUtcNow());
 
         // Five seconds of real forward movement, still far below the old high-water mark,
-        // must show up as five seconds. Under a max-clamp this would report no progress at
-        // all for the next hour.
+        // must show up as very nearly five seconds. Under a max-clamp this would report no
+        // progress at all for the next hour.
         inner.Set(DateTimeOffset.UnixEpoch.AddSeconds(5));
-        Assert.Equal(before.AddSeconds(5), clock.GetUtcNow());
+        var advanced = clock.GetUtcNow() - before;
 
-        inner.Set(DateTimeOffset.UnixEpoch.AddSeconds(11));
-        Assert.Equal(before.AddSeconds(11), clock.GetUtcNow());
+        Assert.InRange(advanced, TimeSpan.FromSeconds(4.5), TimeSpan.FromSeconds(5));
+    }
+
+    /// <summary>
+    /// The absorbed correction must be paid back, not carried forever.
+    ///
+    /// <para>A permanent offset keeps reported time ahead of the true clock indefinitely, so
+    /// handler timestamps and any comparison against a server-supplied absolute time — a job
+    /// deadline, say — stay wrong for the life of the process. Slewing converges instead.</para>
+    /// </summary>
+    [Fact]
+    public void ConvergesBackTowardTheUnderlyingClock()
+    {
+        var inner = new SettableTimeProvider(DateTimeOffset.UnixEpoch.AddMinutes(10));
+        var clock = new CamundaTimeProvider(inner);
+
+        _ = clock.GetUtcNow();
+        inner.Set(DateTimeOffset.UnixEpoch);
+
+        // Ten minutes of divergence, then a long stretch of ordinary forward progress.
+        var divergence = clock.GetUtcNow() - inner.GetUtcNow();
+        Assert.Equal(TimeSpan.FromMinutes(10), divergence);
+
+        var t = DateTimeOffset.UnixEpoch;
+        var previous = clock.GetUtcNow();
+        for (var i = 0; i < 400; i++)
+        {
+            t = t.AddSeconds(30);
+            inner.Set(t);
+
+            var reported = clock.GetUtcNow();
+            Assert.True(reported >= previous, "reported time went backwards while slewing");
+            previous = reported;
+        }
+
+        Assert.Equal(TimeSpan.Zero, clock.GetUtcNow() - inner.GetUtcNow());
     }
 
     [Fact]

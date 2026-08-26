@@ -16,6 +16,7 @@
 ;     on real time.
 
 P:System.DateTime.Now;Use the injected TimeProvider: timeProvider.GetUtcNow().
+P:System.DateTime.Today;Use the injected TimeProvider: timeProvider.GetUtcNow().
 P:System.DateTime.UtcNow;Use the injected TimeProvider: timeProvider.GetUtcNow().
 P:System.DateTimeOffset.Now;Use the injected TimeProvider: timeProvider.GetUtcNow().
 P:System.DateTimeOffset.UtcNow;Use the injected TimeProvider: timeProvider.GetUtcNow().

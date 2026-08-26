@@ -13,10 +13,15 @@ namespace Camunda.Orchestration.Sdk;
 ///
 /// <para>This decorator wraps the <em>live</em> clock only. A test clock such as
 /// <c>FakeTimeProvider</c> is used as supplied, so a test remains free to move time
-/// backwards deliberately.</para>
-/// </summary>
+/// backwards deliberately.</para>/// </summary>
 public sealed class CamundaTimeProvider : TimeProvider
 {
+    /// <summary>
+    /// Fraction of forward progress used to pay down an absorbed backward correction:
+    /// 1/16, so reported time runs at 15/16 of the true rate until it has converged.
+    /// </summary>
+    private const int SlewDivisor = 16;
+
     private readonly TimeProvider _inner;
     private readonly object _gate = new();
     private long _lastInnerTicks;
@@ -43,14 +48,24 @@ public sealed class CamundaTimeProvider : TimeProvider
         {
             var innerTicks = _inner.GetUtcNow().UtcTicks;
 
-            // A backward step is absorbed into a running offset rather than clamped to the
-            // previous high-water mark. Clamping would hold logical time still until the
-            // underlying clock caught back up, so an hour-long correction would add an hour
-            // to every deadline in flight — the very failure this class exists to avoid.
-            // Carrying the offset keeps time non-decreasing while preserving the rate of
-            // forward progress, so a deadline set before the jump still expires on time.
             if (innerTicks < _lastInnerTicks)
+            {
+                // Absorb the backward step instead of clamping to the previous high-water
+                // mark. Clamping holds logical time still until the underlying clock catches
+                // back up, so an hour-long correction would add an hour to every deadline in
+                // flight — the failure this class exists to avoid.
                 _offsetTicks += _lastInnerTicks - innerTicks;
+            }
+            else if (_offsetTicks > 0)
+            {
+                // ...but do not carry the correction forever, or reported time would stay
+                // permanently ahead of the true clock and disagree with server-supplied
+                // timestamps. Pay it back out of forward progress instead, the way NTP slews
+                // rather than steps: still strictly non-decreasing, still within a slice of
+                // the true rate, and converging back to the underlying clock.
+                var forwardTicks = innerTicks - _lastInnerTicks;
+                _offsetTicks -= Math.Min(_offsetTicks, forwardTicks / SlewDivisor);
+            }
 
             _lastInnerTicks = innerTicks;
             return new DateTimeOffset(innerTicks + _offsetTicks, TimeSpan.Zero);
