@@ -1555,13 +1555,13 @@ internal static class CSharpClientGenerator
                 {
                     sb.AppendLine($"            await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
                     sb.AppendLine($"                async () => {{ await InvokeWithRetryAsync(() => SendMultipartAsync<object>(path, content, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct); return new object(); }},");
-                    sb.AppendLine($"                consistency!, _logger, ct);");
+                    sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
                 else
                 {
                     sb.AppendLine($"            await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
                     sb.AppendLine($"                async () => {{ await SendVoidAsync({httpMethod}, path, {bodyArg}, ct); return new object(); }},");
-                    sb.AppendLine($"                consistency!, _logger, ct);");
+                    sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
                 sb.AppendLine("            return;");
             }
@@ -1571,19 +1571,19 @@ internal static class CSharpClientGenerator
                 {
                     sb.AppendLine($"            return await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
                     sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendMultipartAsync<{op.ResponseTypeName}>(path, content, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
-                    sb.AppendLine($"                consistency!, _logger, ct);");
+                    sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
                 else if (op.IsBinaryResponse)
                 {
                     sb.AppendLine($"            return await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
                     sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendBinaryAsync({httpMethod}, path, {bodyArg}, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
-                    sb.AppendLine($"                consistency!, _logger, ct);");
+                    sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
                 else
                 {
                     sb.AppendLine($"            return await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
                     sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendAsync<{op.ResponseTypeName}>({httpMethod}, path, {bodyArg}, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
-                    sb.AppendLine($"                consistency!, _logger, ct);");
+                    sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
             }
             sb.AppendLine("        }");

@@ -206,4 +206,87 @@ public class InjectedClockRuntimeTests
 
         Assert.NotNull(client);
     }
+
+    /// <summary>
+    /// Ruling 3: a recurring loop that was due to tick N times during a large time jump
+    /// ticks once and resynchronises, rather than replaying every missed tick.
+    /// </summary>
+    [Fact]
+    public async Task EventualPollerCoalescesMissedTicksAcrossALargeTimeJump()
+    {
+        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var invocations = 0;
+
+        var pending = EventualPoller.PollAsync(
+            "coalesceOp",
+            isGet: false,
+            invoke: () =>
+            {
+                invocations++;
+                return Task.FromResult(0);
+            },
+            new ConsistencyOptions<int>
+            {
+                WaitUpToMs = (int)TimeSpan.FromHours(25).TotalMilliseconds,
+                PollIntervalMs = 5_000,
+                IsConsistent = _ => false,
+            },
+            NullLogger.Instance,
+            clock);
+
+        while (!pending.IsCompleted)
+        {
+            await Task.Yield();
+            clock.Advance(TimeSpan.FromHours(25));
+        }
+
+        await Assert.ThrowsAsync<EventualConsistencyTimeoutException>(() => pending);
+
+        // 25h of 5s ticks is ~18,000. Anything in that region means the loop replayed the
+        // gap instead of resynchronising.
+        Assert.InRange(invocations, 1, 3);
+    }
+
+    /// <summary>
+    /// The poller previously tracked elapsed time by counting intervals
+    /// (<c>elapsed += interval</c>), which ignored how long each invoke took, so the
+    /// reported wait understated the real one. Elapsed is now measured from the clock.
+    /// </summary>
+    [Fact]
+    public async Task EventualPollerReportsMeasuredElapsedNotCountedIntervals()
+    {
+        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+
+        var pending = EventualPoller.PollAsync(
+            "slowInvokeOp",
+            isGet: false,
+            invoke: () =>
+            {
+                // Each attempt takes far longer than the poll interval.
+                clock.Advance(TimeSpan.FromSeconds(30));
+                return Task.FromResult(0);
+            },
+            new ConsistencyOptions<int>
+            {
+                WaitUpToMs = 10_000,
+                PollIntervalMs = 1_000,
+                IsConsistent = _ => false,
+            },
+            NullLogger.Instance,
+            clock);
+
+        while (!pending.IsCompleted)
+        {
+            await Task.Yield();
+            clock.Advance(TimeSpan.FromSeconds(1));
+        }
+
+        var ex = await Assert.ThrowsAsync<EventualConsistencyTimeoutException>(() => pending);
+
+        // A single 30s attempt already blew the 10s budget; interval-counting would have
+        // reported 10000 or less regardless of how long the attempt actually took.
+        Assert.True(
+            ex.WaitedMs >= 30_000,
+            $"expected measured elapsed of at least 30000ms, got {ex.WaitedMs}ms");
+    }
 }

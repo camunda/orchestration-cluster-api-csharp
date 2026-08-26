@@ -36,13 +36,16 @@ internal static class EventualPoller
         Func<Task<T>> invoke,
         ConsistencyOptions<T> options,
         ILogger logger,
+        TimeProvider timeProvider,
         CancellationToken ct = default)
     {
         if (options.WaitUpToMs <= 0)
             return await invoke();
 
-        var elapsed = 0;
-        var interval = options.PollIntervalMs > 0 ? options.PollIntervalMs : 500;
+        var interval = TimeSpan.FromMilliseconds(options.PollIntervalMs > 0 ? options.PollIntervalMs : 500);
+        var started = timeProvider.GetUtcNow();
+        var deadline = started + TimeSpan.FromMilliseconds(options.WaitUpToMs);
+        var nextPoll = started;
 
         while (true)
         {
@@ -57,7 +60,8 @@ internal static class EventualPoller
                     if (options.IsConsistent(result))
                     {
                         if (logger.IsEnabled(LogLevel.Debug))
-                            logger.LogDebug("Eventual consistency satisfied for {Op} after {Elapsed}ms", operationId, elapsed);
+                            logger.LogDebug("Eventual consistency satisfied for {Op} after {Elapsed}ms",
+                                operationId, ElapsedMs(timeProvider, started));
                         return result;
                     }
                 }
@@ -72,16 +76,32 @@ internal static class EventualPoller
                     logger.LogDebug("Eventual consistency: 404 for GET {Op}, will retry", operationId);
             }
 
-            elapsed += interval;
-            if (elapsed >= options.WaitUpToMs)
+            var now = timeProvider.GetUtcNow();
+            if (now >= deadline)
             {
+                var elapsed = ElapsedMs(timeProvider, started);
                 throw new EventualConsistencyTimeoutException(
                     $"Eventual consistency timeout after {elapsed}ms for {operationId}",
                     operationId,
                     elapsed);
             }
 
-            await Task.Delay(interval, ct);
+            // Schedule against the previous tick rather than "now + interval" so a slow
+            // invoke does not stretch the cadence. If ticks were missed entirely — a slow
+            // invoke, or the clock jumping forward — resynchronise to one interval from now
+            // rather than replaying every tick that fell in the gap.
+            nextPoll += interval;
+            if (nextPoll <= now)
+                nextPoll = now + interval;
+            if (nextPoll > deadline)
+                nextPoll = deadline;
+
+            var wait = nextPoll - now;
+            if (wait > TimeSpan.Zero)
+                await Task.Delay(wait, timeProvider, ct);
         }
     }
+
+    private static int ElapsedMs(TimeProvider timeProvider, DateTimeOffset started)
+        => (int)(timeProvider.GetUtcNow() - started).TotalMilliseconds;
 }
