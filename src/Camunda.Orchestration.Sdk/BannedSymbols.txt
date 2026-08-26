@@ -30,6 +30,8 @@ M:System.Threading.Thread.Sleep(System.TimeSpan);Blocking sleep; await Task.Dela
 
 M:System.Threading.CancellationTokenSource.CancelAfter(System.Int32);Use new CancellationTokenSource(TimeSpan, TimeProvider), or exempt it as a liveness bound.
 M:System.Threading.CancellationTokenSource.CancelAfter(System.TimeSpan);Use new CancellationTokenSource(TimeSpan, TimeProvider), or exempt it as a liveness bound.
+M:System.Threading.CancellationTokenSource.#ctor(System.Int32);Ambient deadline. Use new CancellationTokenSource(TimeSpan, TimeProvider), or exempt it as a liveness bound.
+M:System.Threading.CancellationTokenSource.#ctor(System.TimeSpan);Ambient deadline. Use new CancellationTokenSource(TimeSpan, TimeProvider), or exempt it as a liveness bound.
 
 T:System.Diagnostics.Stopwatch;Monotonic timing. Ruling 2 is wall-clock only: subtract two timeProvider.GetUtcNow() readings.
 M:System.TimeProvider.GetTimestamp();Monotonic timing. Ruling 2 is wall-clock only: use GetUtcNow().

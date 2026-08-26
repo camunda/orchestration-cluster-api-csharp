@@ -58,12 +58,12 @@ public class InjectedClockWorkerTests
 
     /// <summary>
     /// Ruling 3: a 25h jump across a 5s poll loop must not replay the ~18,000 polls that
-    /// fell in the gap.
+    /// fell in the gap. It should wake the loop exactly once.
     /// </summary>
     [Fact]
     public async Task PollLoopDoesNotReplayMissedPollsAcrossALargeTimeJump()
     {
-        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var clock = new InstrumentedFakeTimeProvider(DateTimeOffset.UnixEpoch);
         var polls = 0;
 
         var handler = new StubHandler(_ =>
@@ -77,16 +77,18 @@ public class InjectedClockWorkerTests
             new JobWorkerConfig { JobType = "clock-test", JobTimeoutMs = 60_000, PollIntervalMs = 5_000 },
             (job, ct) => Task.FromResult<object?>(null));
 
-        Assert.True(await WaitFor(() => Volatile.Read(ref polls) >= 1), "worker never polled");
+        // Wait for the loop to be parked on the clock, not merely to have polled: it
+        // registers its delay only after handling the response, so advancing on the poll
+        // count would race and could fire nothing.
+        Assert.True(await WaitFor(() => clock.TimersCreated >= 1), "worker never parked on the clock");
         var before = Volatile.Read(ref polls);
 
         clock.Advance(TimeSpan.FromHours(25));
 
-        Assert.True(await WaitFor(() => Volatile.Read(ref polls) > before), "advance did not wake the poll loop");
-        // Give any replayed polls a chance to land before asserting they didn't happen.
-        await Task.Delay(200);
+        // The loop has re-parked, so every poll the jump was going to cause has happened.
+        Assert.True(await WaitFor(() => clock.TimersCreated >= 2), "advance did not wake the poll loop");
 
-        Assert.InRange(Volatile.Read(ref polls) - before, 1, 3);
+        Assert.Equal(1, Volatile.Read(ref polls) - before);
     }
 
     /// <summary>
@@ -96,7 +98,7 @@ public class InjectedClockWorkerTests
     [Fact]
     public async Task PollLoopMakesNoProgressWhileTheClockIsHeld()
     {
-        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var clock = new InstrumentedFakeTimeProvider(DateTimeOffset.UnixEpoch);
         var polls = 0;
 
         var handler = new StubHandler(_ =>
@@ -110,13 +112,15 @@ public class InjectedClockWorkerTests
             new JobWorkerConfig { JobType = "clock-test", JobTimeoutMs = 60_000, PollIntervalMs = 1 },
             (job, ct) => Task.FromResult<object?>(null));
 
-        Assert.True(await WaitFor(() => Volatile.Read(ref polls) >= 1), "worker never polled");
+        Assert.True(await WaitFor(() => clock.TimersCreated >= 1), "worker never parked on the clock");
         var settled = Volatile.Read(ref polls);
+        var timers = clock.TimersCreated;
 
         // A 1ms poll interval would produce hundreds of polls in this window on a real clock.
         await Task.Delay(300);
 
         Assert.Equal(settled, Volatile.Read(ref polls));
+        Assert.Equal(timers, clock.TimersCreated);
     }
 
     /// <summary>

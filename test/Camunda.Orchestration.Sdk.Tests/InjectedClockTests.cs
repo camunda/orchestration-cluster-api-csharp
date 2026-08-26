@@ -214,7 +214,7 @@ public class InjectedClockRuntimeTests
     [Fact]
     public async Task EventualPollerCoalescesMissedTicksAcrossALargeTimeJump()
     {
-        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var clock = new InstrumentedFakeTimeProvider(DateTimeOffset.UnixEpoch);
         var invocations = 0;
 
         var pending = EventualPoller.PollAsync(
@@ -234,17 +234,18 @@ public class InjectedClockRuntimeTests
             NullLogger.Instance,
             clock);
 
-        while (!pending.IsCompleted)
-        {
+        // Advance only once the poller is parked on the clock, so the jump is observed
+        // exactly once and the resulting poll count is deterministic.
+        while (clock.TimersCreated < 1)
             await Task.Yield();
-            clock.Advance(TimeSpan.FromHours(25));
-        }
+
+        clock.Advance(TimeSpan.FromHours(25));
 
         await Assert.ThrowsAsync<EventualConsistencyTimeoutException>(() => pending);
 
-        // 25h of 5s ticks is ~18,000. Anything in that region means the loop replayed the
-        // gap instead of resynchronising.
-        Assert.InRange(invocations, 1, 3);
+        // One poll before the jump, one after it. 25h of 5s ticks is ~18,000, so anything
+        // above two means the loop replayed part of the gap instead of resynchronising.
+        Assert.Equal(2, invocations);
     }
 
     /// <summary>
