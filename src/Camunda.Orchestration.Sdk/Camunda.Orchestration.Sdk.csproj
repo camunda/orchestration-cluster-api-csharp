@@ -55,7 +55,7 @@
        banned in the SDK runtime. Analyzer-only, and scoped to this project so test code
        may still use ambient time. -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="5.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="5.6.0" PrivateAssets="All" />
     <AdditionalFiles Include="BannedSymbols.txt" />
   </ItemGroup>
 
