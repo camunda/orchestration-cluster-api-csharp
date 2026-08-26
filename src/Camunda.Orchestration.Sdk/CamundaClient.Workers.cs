@@ -55,7 +55,7 @@ public partial class CamundaClient : IAsyncDisposable
             TenantId = config.TenantId,
             TenantFilter = config.TenantFilter,
         };
-        var worker = new JobWorker(this, merged, handler, _loggerFactory, _jsonOptions);
+        var worker = new JobWorker(this, merged, handler, _loggerFactory, _jsonOptions, _timeProvider);
         _workers.Add(worker);
         return worker;
     }
@@ -89,7 +89,7 @@ public partial class CamundaClient : IAsyncDisposable
 
         try
         {
-            await Task.Delay(Timeout.Infinite, ct).ConfigureAwait(false);
+            await Task.Delay(Timeout.InfiniteTimeSpan, _timeProvider, ct).ConfigureAwait(false);
         }
         catch (OperationCanceledException)
         {

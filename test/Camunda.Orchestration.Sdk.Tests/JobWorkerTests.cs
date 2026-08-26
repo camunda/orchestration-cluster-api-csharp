@@ -435,7 +435,7 @@ public class JobWorkerTests
         """;
 
         var raw = JsonSerializer.Deserialize<ActivatedJobResult>(jobJson, s_testJsonOptions)!;
-        return new ActivatedJob(raw);
+        return new ActivatedJob(raw, TimeProvider.System);
     }
 
     private static CamundaClient CreateTestClient()

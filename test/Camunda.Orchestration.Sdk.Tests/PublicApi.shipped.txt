@@ -21,6 +21,7 @@ TYPE Camunda.Orchestration.Sdk.ActivatedJob : sealed class
   PROP System.Object Variables { get; }
   PROP System.String Type { get; }
   PROP System.String Worker { get; }
+  PROP System.TimeProvider Clock { get; }
   METHOD T? GetCustomHeaders<T>(System.Text.Json.JsonSerializerOptions? options = null)
   METHOD T? GetVariables<T>(System.Text.Json.JsonSerializerOptions? options = null)
 
