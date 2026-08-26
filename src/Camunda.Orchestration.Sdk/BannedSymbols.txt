@@ -1,0 +1,41 @@
+; Ambient wall-clock and timer primitives, banned in the SDK runtime by the cross-SDK
+; injected-clock contract (camunda/orchestration-cluster-api-js#450).
+;
+; Resolve time through the injected TimeProvider instead: the client's clock is on
+; CamundaClient (_timeProvider) and is handed to handlers as ActivatedJob.Clock.
+;
+; This file applies to the SDK project only. Test projects legitimately use ambient
+; time and do not reference the analyzer.
+;
+; Two exemption categories exist, both applied narrowly with #pragma or a path-scoped
+; .editorconfig entry rather than by widening this list:
+;   - the live clock itself (CamundaTimeProvider), which is the one allowed place the
+;     system clock is read;
+;   - liveness bounds, i.e. timers whose job is to stop something waiting forever. On a
+;     pinned clock those would never fire, so shutdown drains and network timeouts stay
+;     on real time.
+
+P:System.DateTime.Now;Use the injected TimeProvider: timeProvider.GetUtcNow().
+P:System.DateTime.UtcNow;Use the injected TimeProvider: timeProvider.GetUtcNow().
+P:System.DateTimeOffset.Now;Use the injected TimeProvider: timeProvider.GetUtcNow().
+P:System.DateTimeOffset.UtcNow;Use the injected TimeProvider: timeProvider.GetUtcNow().
+
+M:System.Threading.Tasks.Task.Delay(System.Int32);Use Task.Delay(TimeSpan, TimeProvider, CancellationToken).
+M:System.Threading.Tasks.Task.Delay(System.Int32,System.Threading.CancellationToken);Use Task.Delay(TimeSpan, TimeProvider, CancellationToken).
+M:System.Threading.Tasks.Task.Delay(System.TimeSpan);Use Task.Delay(TimeSpan, TimeProvider, CancellationToken).
+M:System.Threading.Tasks.Task.Delay(System.TimeSpan,System.Threading.CancellationToken);Use Task.Delay(TimeSpan, TimeProvider, CancellationToken).
+
+M:System.Threading.Thread.Sleep(System.Int32);Blocking sleep; await Task.Delay(TimeSpan, TimeProvider, CancellationToken).
+M:System.Threading.Thread.Sleep(System.TimeSpan);Blocking sleep; await Task.Delay(TimeSpan, TimeProvider, CancellationToken).
+
+M:System.Threading.CancellationTokenSource.CancelAfter(System.Int32);Use new CancellationTokenSource(TimeSpan, TimeProvider), or exempt it as a liveness bound.
+M:System.Threading.CancellationTokenSource.CancelAfter(System.TimeSpan);Use new CancellationTokenSource(TimeSpan, TimeProvider), or exempt it as a liveness bound.
+
+T:System.Diagnostics.Stopwatch;Monotonic timing. Ruling 2 is wall-clock only: subtract two timeProvider.GetUtcNow() readings.
+M:System.TimeProvider.GetTimestamp();Monotonic timing. Ruling 2 is wall-clock only: use GetUtcNow().
+M:System.TimeProvider.GetElapsedTime(System.Int64,System.Int64);Monotonic timing. Ruling 2 is wall-clock only: subtract two GetUtcNow() readings.
+
+P:System.TimeProvider.System;The raw system clock belongs only to CamundaTimeProvider. Use the injected TimeProvider, or CamundaTimeProvider.Live for a default.
+
+T:System.Threading.Timer;Use timeProvider.CreateTimer(...).
+T:System.Timers.Timer;Use timeProvider.CreateTimer(...).

@@ -104,7 +104,9 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
                 // Deliberately real time, not the injected clock: this is a liveness bound
                 // on a network call, and pinning it would let a hung token endpoint block
                 // forever when the caller passes no cancellation token.
+#pragma warning disable RS0030 // liveness bound: must fire regardless of the injected clock
                 cts.CancelAfter(_config.OAuth.TimeoutMs);
+#pragma warning restore RS0030
 
                 var body = new FormUrlEncodedContent(BuildTokenRequestBody());
 

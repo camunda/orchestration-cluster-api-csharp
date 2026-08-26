@@ -174,6 +174,21 @@ dotnet_naming_style.underscore_camel.capitalization = camel_case
 dotnet_diagnostic.CA1707.severity = none
 
 ###############################################################################
+# Injected-clock contract (camunda/orchestration-cluster-api-js#450)
+#
+# RS0030 flags the ambient wall-clock and timer primitives listed in
+# src/Camunda.Orchestration.Sdk/BannedSymbols.txt. Generated code is deliberately
+# NOT exempt: if a future spec change makes the generator emit ambient time, the
+# build should fail and someone should decide, rather than it passing silently.
+###############################################################################
+[src/**.cs]
+dotnet_diagnostic.RS0030.severity = error
+
+# The live clock is the one place the system clock may be read.
+[src/Camunda.Orchestration.Sdk/Runtime/CamundaTimeProvider.cs]
+dotnet_diagnostic.RS0030.severity = none
+
+###############################################################################
 # Generated code — relaxed rules (formatters fix what they can, rest is OK)
 ###############################################################################
 [src/Camunda.Orchestration.Sdk/Generated/**.cs]
