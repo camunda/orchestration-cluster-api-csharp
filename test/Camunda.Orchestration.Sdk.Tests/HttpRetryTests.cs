@@ -22,7 +22,8 @@ public class HttpRetryTests
                 return Task.FromResult(42);
             },
             config,
-            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
 
         Assert.Equal(42, result);
         Assert.Equal(3, attempt);
@@ -42,7 +43,8 @@ public class HttpRetryTests
 #pragma warning restore CS0162
             },
             config,
-            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
 
         await Assert.ThrowsAsync<HttpRequestException>(act);
     }
@@ -63,7 +65,8 @@ public class HttpRetryTests
 #pragma warning restore CS0162
             },
             config,
-            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
 
         await Assert.ThrowsAsync<HttpRequestException>(act);
         Assert.Equal(1, attempt); // No retry for 404

@@ -12,6 +12,7 @@ internal static class HttpRetryExecutor
         Func<Task<T>> operation,
         HttpRetryConfig config,
         ILogger logger,
+        TimeProvider timeProvider,
         Func<Exception, RetryDecision>? classifier = null,
         CancellationToken ct = default)
     {
@@ -45,7 +46,7 @@ internal static class HttpRetryExecutor
                     logger.LogDebug("Retry attempt {Attempt}/{Max} after {Delay}ms: {Reason}",
                         attempt + 1, config.MaxAttempts, sleepMs, decision.Reason);
 
-                await Task.Delay(sleepMs, ct);
+                await Task.Delay(TimeSpan.FromMilliseconds(sleepMs), timeProvider, ct);
             }
         }
 

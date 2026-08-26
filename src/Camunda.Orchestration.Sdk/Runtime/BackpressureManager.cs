@@ -10,15 +10,17 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
 {
     private readonly ILogger _logger;
     private readonly BackpressureConfig _config;
+    private readonly TimeProvider _timeProvider;
     private readonly SemaphoreSlim? _semaphore;
     private int _permitsMax;
     private int _consecutive;
     private long _lastSignalMs;
 
-    public BackpressureManager(BackpressureConfig config, ILogger logger)
+    public BackpressureManager(BackpressureConfig config, ILogger logger, TimeProvider timeProvider)
     {
         _config = config;
         _logger = logger;
+        _timeProvider = timeProvider;
 
         if (config.Enabled && !config.ObserveOnly)
         {
@@ -53,7 +55,7 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
     public void RecordBackpressure()
     {
         _consecutive++;
-        _lastSignalMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        _lastSignalMs = _timeProvider.GetUtcNow().ToUnixTimeMilliseconds();
 
         if (_config.Enabled && !_config.ObserveOnly && _semaphore != null)
         {
@@ -71,7 +73,7 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
 
     public void RecordHealthy()
     {
-        var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        var now = _timeProvider.GetUtcNow().ToUnixTimeMilliseconds();
         if (_consecutive > 0 && now - _lastSignalMs > _config.DecayQuietMs)
         {
             _consecutive = 0;

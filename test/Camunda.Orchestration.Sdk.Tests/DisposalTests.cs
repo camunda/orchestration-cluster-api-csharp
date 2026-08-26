@@ -10,14 +10,14 @@ public class DisposalTests
     [Fact]
     public void BackpressureManager_Dispose_DoesNotThrow()
     {
-        var bp = new BackpressureManager(new BackpressureConfig(), NullLogger.Instance);
+        var bp = new BackpressureManager(new BackpressureConfig(), NullLogger.Instance, TimeProvider.System);
         bp.Dispose();
     }
 
     [Fact]
     public async Task BackpressureManager_DisposeAsync_DoesNotThrow()
     {
-        var bp = new BackpressureManager(new BackpressureConfig(), NullLogger.Instance);
+        var bp = new BackpressureManager(new BackpressureConfig(), NullLogger.Instance, TimeProvider.System);
         await bp.DisposeAsync();
     }
 
@@ -78,7 +78,7 @@ public class DisposalTests
     [Fact]
     public async Task BackpressureManager_CanBeUsedAfterDispose_ThrowsObjectDisposed()
     {
-        var bp = new BackpressureManager(new BackpressureConfig(), NullLogger.Instance);
+        var bp = new BackpressureManager(new BackpressureConfig(), NullLogger.Instance, TimeProvider.System);
         bp.Dispose();
 
         // SemaphoreSlim.WaitAsync throws ObjectDisposedException after disposal

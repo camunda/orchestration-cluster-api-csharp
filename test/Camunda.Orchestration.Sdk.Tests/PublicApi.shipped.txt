@@ -2016,6 +2016,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaOptions : sealed class
   PROP System.Collections.Generic.Dictionary<System.String,System.String>? Env { get; set; }
   PROP System.Net.Http.HttpClient? HttpClient { get; set; }
   PROP System.Net.Http.HttpMessageHandler? HttpMessageHandler { get; set; }
+  PROP System.TimeProvider? TimeProvider { get; set; }
 
 TYPE Camunda.Orchestration.Sdk.CamundaSdkException : class base=System.Exception interfaces=[System.Runtime.Serialization.ISerializable]
   CTOR (System.String message, System.String? operationId = null, System.Int32? status = null, System.Exception? inner = null)
@@ -2026,6 +2027,15 @@ TYPE Camunda.Orchestration.Sdk.CamundaServiceCollectionExtensions : static class
   METHOD static Microsoft.Extensions.DependencyInjection.IServiceCollection AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
   METHOD static Microsoft.Extensions.DependencyInjection.IServiceCollection AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection services, Microsoft.Extensions.Configuration.IConfiguration configurationSection)
   METHOD static Microsoft.Extensions.DependencyInjection.IServiceCollection AddCamundaClient(Microsoft.Extensions.DependencyInjection.IServiceCollection services, System.Action<Camunda.Orchestration.Sdk.CamundaOptions> configure)
+
+TYPE Camunda.Orchestration.Sdk.CamundaTimeProvider : sealed class base=System.TimeProvider
+  CTOR (System.TimeProvider inner)
+  PROP Camunda.Orchestration.Sdk.CamundaTimeProvider Live { get; }
+  PROP System.Int64 TimestampFrequency { get; }
+  PROP System.TimeZoneInfo LocalTimeZone { get; }
+  METHOD virtual System.DateTimeOffset GetUtcNow()
+  METHOD virtual System.Int64 GetTimestamp()
+  METHOD virtual System.Threading.ITimer CreateTimer(System.Threading.TimerCallback callback, System.Object? state, System.TimeSpan dueTime, System.TimeSpan period)
 
 TYPE Camunda.Orchestration.Sdk.CamundaUserResult : sealed class
   CTOR ()

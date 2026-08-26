@@ -27,6 +27,7 @@ public partial class CamundaClient : IDisposable
     private readonly ILogger _logger;
     private readonly ILoggerFactory _loggerFactory;
     private readonly BackpressureManager _bp;
+    private readonly TimeProvider _timeProvider;
     internal readonly JsonSerializerOptions _jsonOptions;
 
     /// <summary>
@@ -77,7 +78,8 @@ public partial class CamundaClient : IDisposable
             _ownsHttpClient = true;
         }
 
-        _bp = new BackpressureManager(_config.Backpressure, _logger);
+        _timeProvider = options.TimeProvider ?? CamundaTimeProvider.Live;
+        _bp = new BackpressureManager(_config.Backpressure, _logger, _timeProvider);
 
         if (_logger.IsEnabled(LogLevel.Debug))
             _logger.LogDebug("CamundaClient constructed with auth strategy {Strategy}", _config.Auth.Strategy);
@@ -111,6 +113,7 @@ public partial class CamundaClient : IDisposable
                 operation,
                 _config.HttpRetry,
                 _logger,
+                _timeProvider,
                 ex =>
                 {
                     var decision = HttpRetryExecutor.DefaultClassify(ex);

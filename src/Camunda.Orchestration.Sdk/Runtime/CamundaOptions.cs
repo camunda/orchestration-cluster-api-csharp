@@ -47,4 +47,17 @@ public sealed class CamundaOptions
     /// Logger factory for SDK logging.
     /// </summary>
     public ILoggerFactory? LoggerFactory { get; set; }
+
+    /// <summary>
+    /// Clock used for all SDK runtime cadence: worker poll loops, eventual consistency
+    /// polling, retry backoff, backpressure decay, and OAuth refresh.
+    ///
+    /// <para>Defaults to <see cref="CamundaTimeProvider.Live"/> — the system clock,
+    /// clamped so it cannot move backwards.</para>
+    ///
+    /// <para>Supply a <c>FakeTimeProvider</c> to make the client's own timing virtual in
+    /// tests. Note that this pins the <em>client</em> clock only; pinning the engine clock
+    /// is a separate, explicit step via <c>PinClockAsync</c>.</para>
+    /// </summary>
+    public TimeProvider? TimeProvider { get; set; }
 }

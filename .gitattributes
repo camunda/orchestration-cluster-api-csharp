@@ -4,3 +4,8 @@
 # Force LF for C# sources so .editorconfig (end_of_line = lf) and
 # `dotnet format` stay consistent regardless of the checkout platform.
 *.cs text eol=lf
+
+# The public API baseline is rewritten by the test harness via File.WriteAllText,
+# which emits CRLF on Windows. Without this, regenerating it there produces a
+# whole-file diff that buries the actual API change.
+PublicApi.shipped.txt text eol=lf
