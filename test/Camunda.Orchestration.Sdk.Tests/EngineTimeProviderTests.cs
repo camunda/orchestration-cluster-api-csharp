@@ -249,6 +249,62 @@ public class EngineTimeProviderTests
             $"default start should track live time, got {now:O}");
     }
 
+    // Fault reporting is the last line of defence. If it can throw, it takes down the loop it
+    // exists to keep alive.
+    [Fact]
+    public async Task ThrowingFaultHandler_DoesNotEscapeTheTimerLoop()
+    {
+        var engine = new FakeEngine(_ => throw new InvalidOperationException("engine unreachable"));
+        using var provider = new EngineTimeProvider(
+            engine, Start, _ => throw new InvalidOperationException("reporter exploded"));
+
+        // Completes rather than hanging or faulting.
+        await Task.Delay(TimeSpan.FromSeconds(1), provider, CancellationToken.None);
+
+        Assert.Equal(Start, provider.GetUtcNow());
+    }
+
+    [Theory]
+    [InlineData(-1000)]
+    [InlineData(-2)]
+    public void CreateTimer_RejectsNegativeSchedules(int ms)
+    {
+        var engine = new FakeEngine();
+        using var provider = new EngineTimeProvider(engine, Start);
+
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => provider.CreateTimer(_ => { }, null, TimeSpan.FromMilliseconds(ms), Timeout.InfiniteTimeSpan));
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => provider.CreateTimer(_ => { }, null, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(ms)));
+    }
+
+    [Fact]
+    public void Change_RejectsNegativeSchedules()
+    {
+        var engine = new FakeEngine();
+        using var provider = new EngineTimeProvider(engine, Start);
+        using var timer = provider.CreateTimer(
+            _ => { }, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => timer.Change(TimeSpan.FromSeconds(-1), Timeout.InfiniteTimeSpan));
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => timer.Change(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(-1)));
+    }
+
+    // Timeout.InfiniteTimeSpan is negative but means "never", so it must stay legal.
+    [Fact]
+    public void InfiniteTimeSpan_RemainsAValidSchedule()
+    {
+        var engine = new FakeEngine();
+        using var provider = new EngineTimeProvider(engine, Start);
+
+        using var timer = provider.CreateTimer(
+            _ => { }, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+
+        Assert.True(timer.Change(Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan));
+    }
+
     [Fact]
     public void CamundaClient_SatisfiesTheEngineClockTarget()
     {

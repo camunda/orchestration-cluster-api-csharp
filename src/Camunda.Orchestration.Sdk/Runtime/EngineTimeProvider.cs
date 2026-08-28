@@ -170,6 +170,8 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
         TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)
     {
         ArgumentNullException.ThrowIfNull(callback);
+        RequireSchedule(dueTime, nameof(dueTime));
+        RequireSchedule(period, nameof(period));
         return new EnginePinTimer(this, callback, state, dueTime, period);
     }
 
@@ -185,7 +187,33 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
         _gate.Dispose();
     }
 
-    private void ReportFault(Exception ex) => _onFault?.Invoke(ex);
+    private void ReportFault(Exception ex)
+    {
+        try
+        {
+            _onFault?.Invoke(ex);
+        }
+        catch
+        {
+            // Deliberately swallowed. This is the last line of fault reporting, so a throw here
+            // has nowhere to go, and letting it escape would fault the very timer loop the
+            // reporting exists to keep alive.
+        }
+    }
+
+    /// <summary>
+    /// <see cref="Timeout.InfiniteTimeSpan"/> means never; anything else must be non-negative.
+    /// The usual upper bound does not apply, because time here is virtual: a very long delay is
+    /// a legitimate fast-forward rather than an overflow.
+    /// </summary>
+    private static void RequireSchedule(TimeSpan value, string name)
+    {
+        if (value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
+        {
+            throw new ArgumentOutOfRangeException(
+                name, value, "Must be non-negative, or Timeout.InfiniteTimeSpan.");
+        }
+    }
 
     /// <summary>
     /// A timer that advances engine time rather than waiting for it. This is what makes every
@@ -219,6 +247,11 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
 
         public bool Change(TimeSpan dueTime, TimeSpan period)
         {
+            // Framework code reschedules through here, so the same contract applies as on
+            // CreateTimer: bad arguments are rejected rather than silently firing at once.
+            RequireSchedule(dueTime, nameof(dueTime));
+            RequireSchedule(period, nameof(period));
+
             if (_disposed)
             {
                 return false;
