@@ -407,12 +407,23 @@ public class EngineTimeProviderTests
                 _ => Interlocked.Increment(ref fired), null,
                 TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
 
-            await Task.Delay(200);
+            // Wait for the behaviour rather than for a duration: a fixed sleep makes the tick
+            // count a function of machine speed, which is how this failed on one TFM and not
+            // the other. The timeout is a safety net, not the assertion.
+            var deadline = DateTime.UtcNow.AddSeconds(10);
+            while (Volatile.Read(ref fired) < 2 && DateTime.UtcNow < deadline)
+            {
+                await Task.Delay(10);
+            }
+
+            Assert.True(
+                Volatile.Read(ref fired) >= 2,
+                $"expected repeated firing, got {Volatile.Read(ref fired)}");
+
             timer.Dispose();
             var afterDispose = Volatile.Read(ref fired);
             await Task.Delay(150);
 
-            Assert.True(afterDispose > 1, $"expected repeated firing, got {afterDispose}");
             Assert.Equal(afterDispose, Volatile.Read(ref fired));
         }
     }
