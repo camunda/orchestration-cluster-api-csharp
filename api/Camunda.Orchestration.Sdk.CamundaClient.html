@@ -104,7 +104,7 @@ This class provides the infrastructure: configuration, auth, retry, backpressure
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class CamundaClient : IDisposable, IAsyncDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public class CamundaClient : IDisposable, IEngineClockTarget, IAsyncDisposable</code></pre>
   </div>
 
 
@@ -122,6 +122,7 @@ This class provides the infrastructure: configuration, auth, retry, backpressure
     <dt>Implements</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+      <div><a class="xref" href="Camunda.Orchestration.Sdk.IEngineClockTarget.html">IEngineClockTarget</a></div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a></div>
     </dd>
   </dl>

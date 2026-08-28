@@ -27895,6 +27895,105 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.EndCursor.Value
   fullName: Camunda.Orchestration.Sdk.EndCursor.Value
   nameWithType: EndCursor.Value
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider
+  name: EngineTimeProvider
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.html
+  commentId: T:Camunda.Orchestration.Sdk.EngineTimeProvider
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider
+  nameWithType: EngineTimeProvider
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.#ctor(Camunda.Orchestration.Sdk.IEngineClockTarget,System.Nullable{System.DateTimeOffset},System.Action{System.Exception})
+  name: EngineTimeProvider(IEngineClockTarget, DateTimeOffset?, Action<Exception>?)
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.-ctor.html#Camunda_Orchestration_Sdk_EngineTimeProvider__ctor_Camunda_Orchestration_Sdk_IEngineClockTarget_System_Nullable_System_DateTimeOffset__System_Action_System_Exception__
+  commentId: M:Camunda.Orchestration.Sdk.EngineTimeProvider.#ctor(Camunda.Orchestration.Sdk.IEngineClockTarget,System.Nullable{System.DateTimeOffset},System.Action{System.Exception})
+  name.vb: New(IEngineClockTarget, DateTimeOffset?, Action(Of Exception))
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.EngineTimeProvider(Camunda.Orchestration.Sdk.IEngineClockTarget, System.DateTimeOffset?, System.Action<System.Exception>?)
+  fullName.vb: Camunda.Orchestration.Sdk.EngineTimeProvider.New(Camunda.Orchestration.Sdk.IEngineClockTarget, System.DateTimeOffset?, System.Action(Of System.Exception))
+  nameWithType: EngineTimeProvider.EngineTimeProvider(IEngineClockTarget, DateTimeOffset?, Action<Exception>?)
+  nameWithType.vb: EngineTimeProvider.New(IEngineClockTarget, DateTimeOffset?, Action(Of Exception))
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.#ctor*
+  name: EngineTimeProvider
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.-ctor.html
+  commentId: Overload:Camunda.Orchestration.Sdk.EngineTimeProvider.#ctor
+  name.vb: New
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.EngineTimeProvider
+  fullName.vb: Camunda.Orchestration.Sdk.EngineTimeProvider.New
+  nameWithType: EngineTimeProvider.EngineTimeProvider
+  nameWithType.vb: EngineTimeProvider.New
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.AdvanceAsync(System.TimeSpan,System.Threading.CancellationToken)
+  name: AdvanceAsync(TimeSpan, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.AdvanceAsync.html#Camunda_Orchestration_Sdk_EngineTimeProvider_AdvanceAsync_System_TimeSpan_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.EngineTimeProvider.AdvanceAsync(System.TimeSpan,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.AdvanceAsync(System.TimeSpan, System.Threading.CancellationToken)
+  nameWithType: EngineTimeProvider.AdvanceAsync(TimeSpan, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.AdvanceAsync*
+  name: AdvanceAsync
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.AdvanceAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.EngineTimeProvider.AdvanceAsync
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.AdvanceAsync
+  nameWithType: EngineTimeProvider.AdvanceAsync
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.CreateTimer(System.Threading.TimerCallback,System.Object,System.TimeSpan,System.TimeSpan)
+  name: CreateTimer(TimerCallback, object?, TimeSpan, TimeSpan)
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.CreateTimer.html#Camunda_Orchestration_Sdk_EngineTimeProvider_CreateTimer_System_Threading_TimerCallback_System_Object_System_TimeSpan_System_TimeSpan_
+  commentId: M:Camunda.Orchestration.Sdk.EngineTimeProvider.CreateTimer(System.Threading.TimerCallback,System.Object,System.TimeSpan,System.TimeSpan)
+  name.vb: CreateTimer(TimerCallback, Object, TimeSpan, TimeSpan)
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.CreateTimer(System.Threading.TimerCallback, object?, System.TimeSpan, System.TimeSpan)
+  fullName.vb: Camunda.Orchestration.Sdk.EngineTimeProvider.CreateTimer(System.Threading.TimerCallback, Object, System.TimeSpan, System.TimeSpan)
+  nameWithType: EngineTimeProvider.CreateTimer(TimerCallback, object?, TimeSpan, TimeSpan)
+  nameWithType.vb: EngineTimeProvider.CreateTimer(TimerCallback, Object, TimeSpan, TimeSpan)
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.CreateTimer*
+  name: CreateTimer
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.CreateTimer.html
+  commentId: Overload:Camunda.Orchestration.Sdk.EngineTimeProvider.CreateTimer
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.CreateTimer
+  nameWithType: EngineTimeProvider.CreateTimer
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.Dispose
+  name: Dispose()
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.Dispose.html#Camunda_Orchestration_Sdk_EngineTimeProvider_Dispose
+  commentId: M:Camunda.Orchestration.Sdk.EngineTimeProvider.Dispose
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.Dispose()
+  nameWithType: EngineTimeProvider.Dispose()
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.Dispose*
+  name: Dispose
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.Dispose.html
+  commentId: Overload:Camunda.Orchestration.Sdk.EngineTimeProvider.Dispose
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.Dispose
+  nameWithType: EngineTimeProvider.Dispose
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.GetUtcNow
+  name: GetUtcNow()
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.GetUtcNow.html#Camunda_Orchestration_Sdk_EngineTimeProvider_GetUtcNow
+  commentId: M:Camunda.Orchestration.Sdk.EngineTimeProvider.GetUtcNow
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.GetUtcNow()
+  nameWithType: EngineTimeProvider.GetUtcNow()
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.GetUtcNow*
+  name: GetUtcNow
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.GetUtcNow.html
+  commentId: Overload:Camunda.Orchestration.Sdk.EngineTimeProvider.GetUtcNow
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.GetUtcNow
+  nameWithType: EngineTimeProvider.GetUtcNow
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.PinAsync(System.DateTimeOffset,System.Threading.CancellationToken)
+  name: PinAsync(DateTimeOffset, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.PinAsync.html#Camunda_Orchestration_Sdk_EngineTimeProvider_PinAsync_System_DateTimeOffset_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.EngineTimeProvider.PinAsync(System.DateTimeOffset,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.PinAsync(System.DateTimeOffset, System.Threading.CancellationToken)
+  nameWithType: EngineTimeProvider.PinAsync(DateTimeOffset, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.PinAsync*
+  name: PinAsync
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.PinAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.EngineTimeProvider.PinAsync
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.PinAsync
+  nameWithType: EngineTimeProvider.PinAsync
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.ResetAsync(System.Threading.CancellationToken)
+  name: ResetAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.ResetAsync.html#Camunda_Orchestration_Sdk_EngineTimeProvider_ResetAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.EngineTimeProvider.ResetAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.ResetAsync(System.Threading.CancellationToken)
+  nameWithType: EngineTimeProvider.ResetAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.EngineTimeProvider.ResetAsync*
+  name: ResetAsync
+  href: api/Camunda.Orchestration.Sdk.EngineTimeProvider.ResetAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.EngineTimeProvider.ResetAsync
+  fullName: Camunda.Orchestration.Sdk.EngineTimeProvider.ResetAsync
+  nameWithType: EngineTimeProvider.ResetAsync
 - uid: Camunda.Orchestration.Sdk.EntityTypeExactMatch
   name: EntityTypeExactMatch
   href: api/Camunda.Orchestration.Sdk.EntityTypeExactMatch.html
@@ -31174,6 +31273,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ICamundaLongKey.Value
   fullName: Camunda.Orchestration.Sdk.ICamundaLongKey.Value
   nameWithType: ICamundaLongKey.Value
+- uid: Camunda.Orchestration.Sdk.IEngineClockTarget
+  name: IEngineClockTarget
+  href: api/Camunda.Orchestration.Sdk.IEngineClockTarget.html
+  commentId: T:Camunda.Orchestration.Sdk.IEngineClockTarget
+  fullName: Camunda.Orchestration.Sdk.IEngineClockTarget
+  nameWithType: IEngineClockTarget
+- uid: Camunda.Orchestration.Sdk.IEngineClockTarget.PinClockAsync(Camunda.Orchestration.Sdk.ClockPinRequest,System.Threading.CancellationToken)
+  name: PinClockAsync(ClockPinRequest, CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.IEngineClockTarget.PinClockAsync.html#Camunda_Orchestration_Sdk_IEngineClockTarget_PinClockAsync_Camunda_Orchestration_Sdk_ClockPinRequest_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.IEngineClockTarget.PinClockAsync(Camunda.Orchestration.Sdk.ClockPinRequest,System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.IEngineClockTarget.PinClockAsync(Camunda.Orchestration.Sdk.ClockPinRequest, System.Threading.CancellationToken)
+  nameWithType: IEngineClockTarget.PinClockAsync(ClockPinRequest, CancellationToken)
+- uid: Camunda.Orchestration.Sdk.IEngineClockTarget.PinClockAsync*
+  name: PinClockAsync
+  href: api/Camunda.Orchestration.Sdk.IEngineClockTarget.PinClockAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.IEngineClockTarget.PinClockAsync
+  fullName: Camunda.Orchestration.Sdk.IEngineClockTarget.PinClockAsync
+  nameWithType: IEngineClockTarget.PinClockAsync
+- uid: Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync(System.Threading.CancellationToken)
+  name: ResetClockAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync.html#Camunda_Orchestration_Sdk_IEngineClockTarget_ResetClockAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync(System.Threading.CancellationToken)
+  nameWithType: IEngineClockTarget.ResetClockAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync*
+  name: ResetClockAsync
+  href: api/Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync
+  fullName: Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync
+  nameWithType: IEngineClockTarget.ResetClockAsync
 - uid: Camunda.Orchestration.Sdk.ITenantIdSettable
   name: ITenantIdSettable
   href: api/Camunda.Orchestration.Sdk.ITenantIdSettable.html
