@@ -41,7 +41,7 @@ public interface IEngineClockTarget
 public sealed class EngineTimeProvider : TimeProvider, IDisposable
 {
     private readonly IEngineClockTarget _engine;
-    private readonly Action<Exception>? _onPinFailed;
+    private readonly Action<Exception>? _onFault;
 
     // Pins are serialised: the current reading is used to compute the next instant and then
     // replaced, so overlapping callers must not interleave or an earlier pin could land last
@@ -54,22 +54,25 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
     /// Creates a provider that pins <paramref name="engine"/> as time advances.
     /// </summary>
     /// <param name="engine">The client used to pin and reset the engine clock.</param>
-    /// <param name="start">The instant to start from. Defaults to the Unix epoch.</param>
-    /// <param name="onPinFailed">
-    /// Invoked when a pin fails during an implicit delay. A delay cannot surface an exception
-    /// to its awaiter without hanging it, so the delay still completes and the failure is
-    /// reported here. Explicit <see cref="PinAsync"/> and <see cref="AdvanceAsync"/> calls
-    /// throw instead.
+    /// <param name="start">
+    /// The instant to start from. Defaults to the current live time, because the first advance
+    /// pins a real engine to whatever this is: an epoch default would silently send it to 1970.
+    /// </param>
+    /// <param name="onFault">
+    /// Invoked when a tick cannot complete: the engine rejected a pin, or the timer callback
+    /// threw. A timer cannot surface an exception to its awaiter without hanging it, so the
+    /// failure is reported here instead. Explicit <see cref="PinAsync"/> and
+    /// <see cref="AdvanceAsync"/> calls throw.
     /// </param>
     public EngineTimeProvider(
         IEngineClockTarget engine,
         DateTimeOffset? start = null,
-        Action<Exception>? onPinFailed = null)
+        Action<Exception>? onFault = null)
     {
         ArgumentNullException.ThrowIfNull(engine);
         _engine = engine;
-        _onPinFailed = onPinFailed;
-        _currentTicks = (start ?? DateTimeOffset.UnixEpoch).UtcTicks;
+        _onFault = onFault;
+        _currentTicks = (start ?? CamundaTimeProvider.Live.GetUtcNow()).UtcTicks;
     }
 
     /// <inheritdoc />
@@ -182,7 +185,7 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
         _gate.Dispose();
     }
 
-    private void ReportPinFailure(Exception ex) => _onPinFailed?.Invoke(ex);
+    private void ReportFault(Exception ex) => _onFault?.Invoke(ex);
 
     /// <summary>
     /// A timer that advances engine time rather than waiting for it. This is what makes every
@@ -222,7 +225,7 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
             }
 
             // Each Change supersedes the previous schedule. Without this a caller that
-            // reschedules \u2014 CancellationTokenSource.CancelAfter adjusting its deadline, say \u2014
+            // reschedules -- CancellationTokenSource.CancelAfter adjusting its deadline, say --
             // would leave the old loop running: two callbacks, and a disabled timer still
             // advancing engine time.
             CancellationTokenSource? superseded;
@@ -237,11 +240,9 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
                     : next = CancellationTokenSource.CreateLinkedTokenSource(_cts.Token);
             }
 
-            if (superseded is not null)
-            {
-                superseded.Cancel();
-                superseded.Dispose();
-            }
+            // Cancel but do not dispose: the loop that owns this schedule disposes it on the
+            // way out. Disposing here races the loop's own token reads.
+            superseded?.Cancel();
 
             if (next is not null)
             {
@@ -253,59 +254,91 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
 
         private async Task RunAsync(TimeSpan dueTime, CancellationTokenSource schedule)
         {
-            var due = dueTime;
-            while (!_disposed && !schedule.IsCancellationRequested)
+            // This loop owns the schedule, so it disposes it. Change only cancels, which keeps
+            // disposal off the path where this loop is still reading the token.
+            try
             {
-                // Fixed when the delay is scheduled, so overlapping delays settle on the later
-                // wake point instead of stacking their durations.
-                var wakeAt = _owner.GetUtcNow().UtcTicks + due.Ticks;
+                var due = dueTime;
+                while (!_disposed && !schedule.IsCancellationRequested)
+                {
+                    // Fixed when the delay is scheduled, so overlapping delays settle on the
+                    // later wake point instead of stacking their durations.
+                    var wakeAt = _owner.GetUtcNow().UtcTicks + due.Ticks;
 
-                try
-                {
-                    await _owner.PinAtLeastAsync(wakeAt, schedule.Token).ConfigureAwait(false);
-                }
-                catch (OperationCanceledException)
-                {
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    // Swallowing would hang the awaiter forever, which is strictly worse than
-                    // letting it proceed against an engine that is evidently unwell. Report
-                    // and fire, so the caller fails on its next request instead of never
-                    // returning.
-                    _owner.ReportPinFailure(ex);
-                }
+                    try
+                    {
+                        await _owner.PinAtLeastAsync(wakeAt, schedule.Token).ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Swallowing would hang the awaiter forever, which is strictly worse
+                        // than letting it proceed against an engine that is evidently unwell.
+                        // Report and fire, so the caller fails on its next request instead of
+                        // never returning.
+                        _owner.ReportFault(ex);
+                    }
 
-                if (_disposed || schedule.IsCancellationRequested)
-                {
-                    return;
-                }
-
-                _callback(_state);
-
-                TimeSpan period;
-                lock (_sync)
-                {
-                    // A Change from inside the callback has already superseded this loop.
-                    if (!ReferenceEquals(_schedule, schedule))
+                    if (_disposed || schedule.IsCancellationRequested)
                     {
                         return;
                     }
 
-                    period = _period;
-                }
+                    try
+                    {
+                        _callback(_state);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Nothing observes this task, so an escaping callback exception would
+                        // surface later as an unobserved fault and stop the timer with no
+                        // explanation. Report it and stop deliberately.
+                        _owner.ReportFault(ex);
+                        return;
+                    }
 
-                if (period == Timeout.InfiniteTimeSpan || period <= TimeSpan.Zero)
+                    TimeSpan period;
+                    lock (_sync)
+                    {
+                        // A Change from inside the callback has already superseded this loop.
+                        if (!ReferenceEquals(_schedule, schedule))
+                        {
+                            return;
+                        }
+
+                        period = _period;
+                    }
+
+                    if (period == Timeout.InfiniteTimeSpan || period <= TimeSpan.Zero)
+                    {
+                        return;
+                    }
+
+                    // Nothing here waits on real time, so without a yield a periodic timer
+                    // whose pin completes synchronously would monopolise its thread.
+                    await Task.Yield();
+
+                    due = period;
+                }
+            }
+            catch (ObjectDisposedException)
+            {
+                // The timer was disposed underneath us. That is a cancellation, not a fault.
+            }
+            finally
+            {
+                lock (_sync)
                 {
-                    return;
+                    if (ReferenceEquals(_schedule, schedule))
+                    {
+                        _schedule = null;
+                    }
                 }
 
-                // Nothing here waits on real time, so without a yield a periodic timer whose
-                // pin completes synchronously would monopolise its thread.
-                await Task.Yield();
-
-                due = period;
+                schedule.Dispose();
             }
         }
 
@@ -325,8 +358,9 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
                 _schedule = null;
             }
 
+            // Cancel only. The running loop owns its schedule and disposes it on exit, so
+            // disposing here would race its token reads.
             schedule?.Cancel();
-            schedule?.Dispose();
             _cts.Cancel();
             _cts.Dispose();
         }

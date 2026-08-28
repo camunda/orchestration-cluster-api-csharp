@@ -3551,7 +3551,7 @@ TYPE Camunda.Orchestration.Sdk.EndCursor : struct interfaces=[Camunda.Orchestrat
   METHOD virtual System.String ToString()
 
 TYPE Camunda.Orchestration.Sdk.EngineTimeProvider : sealed class base=System.TimeProvider interfaces=[System.IDisposable]
-  CTOR (Camunda.Orchestration.Sdk.IEngineClockTarget engine, System.DateTimeOffset? start = null, System.Action<System.Exception>? onPinFailed = null)
+  CTOR (Camunda.Orchestration.Sdk.IEngineClockTarget engine, System.DateTimeOffset? start = null, System.Action<System.Exception>? onFault = null)
   METHOD System.Threading.Tasks.Task AdvanceAsync(System.TimeSpan duration, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task PinAsync(System.DateTimeOffset instant, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task ResetAsync(System.Threading.CancellationToken ct = null)

@@ -204,6 +204,51 @@ public class EngineTimeProviderTests
         Assert.Equal(Start, provider.GetUtcNow());
     }
 
+    // Nothing observes the timer loop's task, so an escaping callback exception would surface
+    // later as an unobserved fault and stop the timer with no explanation.
+    [Fact]
+    public async Task ThrowingCallback_IsReportedRatherThanLostAsAnUnobservedFault()
+    {
+        var failures = new List<Exception>();
+        var engine = new FakeEngine();
+        using var provider = new EngineTimeProvider(
+            engine, Start, ex =>
+            {
+                lock (failures)
+                {
+                    failures.Add(ex);
+                }
+            });
+
+        var timer = provider.CreateTimer(
+            _ => throw new InvalidOperationException("callback exploded"), null,
+            TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+
+        await Task.Delay(200);
+        timer.Dispose();
+
+        lock (failures)
+        {
+            Assert.Single(failures);
+            Assert.Equal("callback exploded", failures[0].Message);
+        }
+    }
+
+    // An epoch default would silently pin a real engine back to 1970 the first time anything
+    // advanced, for a caller who simply did not pass a start.
+    [Fact]
+    public void DefaultStart_IsLiveTimeNotTheEpoch()
+    {
+        var engine = new FakeEngine();
+        using var provider = new EngineTimeProvider(engine);
+
+        var now = provider.GetUtcNow();
+
+        Assert.True(
+            now > DateTimeOffset.UtcNow.AddMinutes(-5),
+            $"default start should track live time, got {now:O}");
+    }
+
     [Fact]
     public void CamundaClient_SatisfiesTheEngineClockTarget()
     {
@@ -219,7 +264,7 @@ public class EngineTimeProviderTests
         // Change supersedes the previous schedule. Left running, an old loop keeps firing the
         // callback and advancing engine time behind a caller that has moved the deadline.
         [Fact]
-        public async Task Change_SupersedesThepreviousSchedule()
+        public async Task Change_SupersedesThePreviousSchedule()
         {
             var engine = new FakeEngine(_ => Task.Delay(20));
             using var provider = new EngineTimeProvider(engine, Start);
