@@ -13,7 +13,7 @@ namespace Camunda.Orchestration.Sdk;
 /// Auto-generated operation methods are added in the Generated/ partial class files.
 /// This class provides the infrastructure: configuration, auth, retry, backpressure.
 /// </summary>
-public partial class CamundaClient : IDisposable
+public partial class CamundaClient : IDisposable, IEngineClockTarget
 {
     /// <summary>
     /// Create a new CamundaClient.
