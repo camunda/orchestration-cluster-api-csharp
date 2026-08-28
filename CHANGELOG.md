@@ -1,3 +1,10 @@
+# [10.0.0-alpha.20](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.19...v10.0.0-alpha.20) (2026-08-28)
+
+
+### Features
+
+* bind SDK cadence to the engine clock with EngineTimeProvider ([#419](https://github.com/camunda/orchestration-cluster-api-csharp/issues/419)) ([7ab335d](https://github.com/camunda/orchestration-cluster-api-csharp/commit/7ab335d419918bdb59d086611fc60369672a4bad)), closes [#402](https://github.com/camunda/orchestration-cluster-api-csharp/issues/402) [#450](https://github.com/camunda/orchestration-cluster-api-csharp/issues/450) [#450](https://github.com/camunda/orchestration-cluster-api-csharp/issues/450) [#412](https://github.com/camunda/orchestration-cluster-api-csharp/issues/412) [#450](https://github.com/camunda/orchestration-cluster-api-csharp/issues/450)
+
 # [10.0.0-alpha.19](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.18...v10.0.0-alpha.19) (2026-08-26)
 
 
