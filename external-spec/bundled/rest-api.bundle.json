@@ -26407,7 +26407,7 @@
         "properties": {
           "elementInstanceKey": {
             "nullable": false,
-            "description": "The key of the currently-active element instance for this agent instance.\nUsed for ownership/equality validation against the stored agent instance\nand, when the supplied key differs from the previous association (re-entry\nof an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys\nwith the reverse link updated on the supplied element instance.\n",
+            "description": "The key of the currently-active element instance for this agent instance.\nUsed for ownership/equality validation against the stored agent instance\nand, when the supplied key differs from the previous association (re-entry\nof an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys\nwith the reverse link updated on the supplied element instance. Only one\nelement instance may hold this write claim at a time: any update from a\ndifferent element instance is rejected while the current writer's job is\nstill active.\n",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ElementInstanceKey"
@@ -41749,8 +41749,12 @@
             "description": "The value of the claim to match."
           },
           "name": {
-            "type": "string",
-            "description": "The name of the mapping rule."
+            "description": "The name of the mapping rule.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
           },
           "mappingRuleId": {
             "allOf": [
@@ -45471,7 +45475,11 @@
           },
           "name": {
             "description": "The role name search filters.",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
           }
         }
       },
