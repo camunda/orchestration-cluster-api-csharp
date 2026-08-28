@@ -4765,9 +4765,9 @@ TYPE Camunda.Orchestration.Sdk.MappingRuleCreateUpdateResult : sealed class
 TYPE Camunda.Orchestration.Sdk.MappingRuleFilter : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.MappingRuleId? MappingRuleId { get; set; } [JsonPropertyName("mappingRuleId")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
   PROP System.String? ClaimName { get; set; } [JsonPropertyName("claimName")]
   PROP System.String? ClaimValue { get; set; } [JsonPropertyName("claimValue")]
-  PROP System.String? Name { get; set; } [JsonPropertyName("name")]
 
 TYPE Camunda.Orchestration.Sdk.MappingRuleId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.MappingRuleId>]
   PROP System.String Value { get; }
@@ -6074,7 +6074,7 @@ TYPE Camunda.Orchestration.Sdk.RoleCreateResult : sealed class
 TYPE Camunda.Orchestration.Sdk.RoleFilter : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.RoleId? RoleId { get; set; } [JsonPropertyName("roleId")]
-  PROP System.String? Name { get; set; } [JsonPropertyName("name")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
 
 TYPE Camunda.Orchestration.Sdk.RoleGroupResult : sealed class
   CTOR ()
