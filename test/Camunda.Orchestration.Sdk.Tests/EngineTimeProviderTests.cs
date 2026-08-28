@@ -305,6 +305,30 @@ public class EngineTimeProviderTests
         Assert.True(timer.Change(Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan));
     }
 
+    // A failed pin leaves time where it was, so the next wake point is identical and nothing in
+    // the loop waits on real time. Without stopping, a periodic timer spins against an
+    // unreachable engine.
+    [Fact]
+    public async Task PeriodicTimer_StopsAfterAFailedPinRatherThanSpinning()
+    {
+        var faults = 0;
+        var fired = 0;
+        var engine = new FakeEngine(_ => throw new InvalidOperationException("engine unreachable"));
+        using var provider = new EngineTimeProvider(
+            engine, Start, _ => Interlocked.Increment(ref faults));
+
+        using var timer = provider.CreateTimer(
+            _ => Interlocked.Increment(ref fired), null,
+            TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+
+        await Task.Delay(250);
+
+        // One tick: the awaiter is released, the fault is reported, and the loop stops.
+        Assert.Equal(1, Volatile.Read(ref faults));
+        Assert.Equal(1, Volatile.Read(ref fired));
+        Assert.Equal(Start, provider.GetUtcNow());
+    }
+
     [Fact]
     public void CamundaClient_SatisfiesTheEngineClockTarget()
     {

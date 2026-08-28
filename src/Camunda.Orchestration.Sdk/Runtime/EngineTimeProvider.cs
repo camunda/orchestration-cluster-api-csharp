@@ -297,6 +297,7 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
                     // Fixed when the delay is scheduled, so overlapping delays settle on the
                     // later wake point instead of stacking their durations.
                     var wakeAt = _owner.GetUtcNow().UtcTicks + due.Ticks;
+                    var pinFailed = false;
 
                     try
                     {
@@ -312,6 +313,7 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
                         // than letting it proceed against an engine that is evidently unwell.
                         // Report and fire, so the caller fails on its next request instead of
                         // never returning.
+                        pinFailed = true;
                         _owner.ReportFault(ex);
                     }
 
@@ -343,6 +345,15 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
                         }
 
                         period = _period;
+                    }
+
+                    if (pinFailed)
+                    {
+                        // A failed pin leaves time where it was, so the next wake point would be
+                        // identical and nothing here waits on real time: a periodic timer would
+                        // spin, firing callbacks and faults as fast as the scheduler allows. The
+                        // one-shot case has already released its awaiter above.
+                        return;
                     }
 
                     if (period == Timeout.InfiniteTimeSpan || period <= TimeSpan.Zero)
