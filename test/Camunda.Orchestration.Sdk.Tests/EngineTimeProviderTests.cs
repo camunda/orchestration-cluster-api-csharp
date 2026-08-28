@@ -211,4 +211,113 @@ public class EngineTimeProviderTests
         // only pays off if a real client still satisfies it.
         Assert.True(typeof(IEngineClockTarget).IsAssignableFrom(typeof(CamundaClient)));
     }
+
+    public class TimerRescheduling
+    {
+        private static readonly DateTimeOffset Start = DateTimeOffset.UnixEpoch;
+
+        // Change supersedes the previous schedule. Left running, an old loop keeps firing the
+        // callback and advancing engine time behind a caller that has moved the deadline.
+        [Fact]
+        public async Task Change_SupersedesThepreviousSchedule()
+        {
+            var engine = new FakeEngine(_ => Task.Delay(20));
+            using var provider = new EngineTimeProvider(engine, Start);
+            var fired = 0;
+
+            var timer = provider.CreateTimer(
+                _ => Interlocked.Increment(ref fired), null,
+                TimeSpan.FromSeconds(10), Timeout.InfiniteTimeSpan);
+
+            timer.Change(TimeSpan.FromSeconds(1), Timeout.InfiniteTimeSpan);
+            await Task.Delay(300);
+            timer.Dispose();
+
+            Assert.Equal(1, Volatile.Read(ref fired));
+        }
+
+        // Rescheduling to Infinite disables the timer. It must stop the loop, not merely
+        // decline to start another one.
+        //
+        // A pin already in flight when Change is called still lands: the engine has been told,
+        // and pinning back would move time backwards. What must stop is the callback and any
+        // further advancement.
+        [Fact]
+        public async Task Change_ToInfinite_StopsTheTimerAdvancingTime()
+        {
+            var engine = new FakeEngine(_ => Task.Delay(20));
+            using var provider = new EngineTimeProvider(engine, Start);
+            var fired = 0;
+
+            var timer = provider.CreateTimer(
+                _ => Interlocked.Increment(ref fired), null,
+                TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+
+            timer.Change(Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+
+            await Task.Delay(150);
+            var settled = provider.GetUtcNow();
+            await Task.Delay(150);
+            var later = provider.GetUtcNow();
+            timer.Dispose();
+
+            Assert.Equal(0, Volatile.Read(ref fired));
+            Assert.Equal(settled, later);
+            // At most the one pin that was already in flight.
+            Assert.True(
+                later <= Start.AddSeconds(1), $"time ran on after the timer was disabled: {later}");
+        }
+
+        [Fact]
+        public async Task PeriodicTimer_KeepsFiringUntilDisposed()
+        {
+            // The pin must cost something. With an instant engine a periodic timer advances
+            // engine time as fast as it can pin, which is the documented fast-forward but makes
+            // for an unbounded test.
+            var engine = new FakeEngine(_ => Task.Delay(20));
+            using var provider = new EngineTimeProvider(engine, Start);
+            var fired = 0;
+
+            var timer = provider.CreateTimer(
+                _ => Interlocked.Increment(ref fired), null,
+                TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+
+            await Task.Delay(200);
+            timer.Dispose();
+            var afterDispose = Volatile.Read(ref fired);
+            await Task.Delay(150);
+
+            Assert.True(afterDispose > 1, $"expected repeated firing, got {afterDispose}");
+            Assert.Equal(afterDispose, Volatile.Read(ref fired));
+        }
+    }
+
+    // An in-flight pin completing after the reset would leave the engine pinned even though
+    // the caller awaited a reset.
+    [Fact]
+    public async Task ResetAsync_IsSerialisedWithPinning()
+    {
+        var events = new List<string>();
+        var engine = new FakeEngine(async _ =>
+        {
+            await Task.Delay(50).ConfigureAwait(false);
+            lock (events)
+            {
+                events.Add("pin");
+            }
+        });
+        using var provider = new EngineTimeProvider(engine, Start);
+
+        var advancing = provider.AdvanceAsync(TimeSpan.FromSeconds(1));
+        await Task.Delay(10);
+        await provider.ResetAsync();
+        lock (events)
+        {
+            events.Add("reset");
+        }
+
+        await advancing;
+
+        Assert.Equal(["pin", "reset"], events);
+    }
 }

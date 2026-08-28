@@ -103,7 +103,20 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
     /// <summary>
     /// Releases the engine clock back to real time. The local reading stays where it was.
     /// </summary>
-    public Task ResetAsync(CancellationToken ct = default) => _engine.ResetClockAsync(ct);
+    public async Task ResetAsync(CancellationToken ct = default)
+    {
+        // Serialised with pinning: an in-flight pin completing after the reset would leave the
+        // engine pinned even though the caller awaited a reset.
+        await _gate.WaitAsync(ct).ConfigureAwait(false);
+        try
+        {
+            await _engine.ResetClockAsync(ct).ConfigureAwait(false);
+        }
+        finally
+        {
+            _gate.Release();
+        }
+    }
 
     private async Task PinCoreAsync(Func<long, long> target, CancellationToken ct)
     {
@@ -143,6 +156,11 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
     /// <para>A delay fixes its wake instant when it is scheduled, so overlapping delays settle
     /// on the later of their wake points rather than summing — exactly as they would on a real
     /// clock.</para>
+    ///
+    /// <para>A <em>periodic</em> timer has no real-time throttle here: it advances engine time
+    /// by its period on every tick, as fast as the engine can be pinned. That is the intended
+    /// fast-forward, but it means a periodic timer left running will race ahead. Prefer
+    /// one-shot delays, and dispose periodic timers promptly.</para>
     /// </summary>
     /// <inheritdoc />
     public override ITimer CreateTimer(
@@ -177,6 +195,8 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
         private readonly TimerCallback _callback;
         private readonly object? _state;
         private readonly CancellationTokenSource _cts = new();
+        private readonly object _sync = new();
+        private CancellationTokenSource? _schedule;
         private TimeSpan _period;
         private bool _disposed;
 
@@ -201,21 +221,40 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
                 return false;
             }
 
-            _period = period;
+            // Each Change supersedes the previous schedule. Without this a caller that
+            // reschedules \u2014 CancellationTokenSource.CancelAfter adjusting its deadline, say \u2014
+            // would leave the old loop running: two callbacks, and a disabled timer still
+            // advancing engine time.
+            CancellationTokenSource? superseded;
+            CancellationTokenSource? next = null;
 
-            if (dueTime == Timeout.InfiniteTimeSpan)
+            lock (_sync)
             {
-                return true;
+                superseded = _schedule;
+                _period = period;
+                _schedule = dueTime == Timeout.InfiniteTimeSpan
+                    ? null
+                    : next = CancellationTokenSource.CreateLinkedTokenSource(_cts.Token);
             }
 
-            _ = RunAsync(dueTime);
+            if (superseded is not null)
+            {
+                superseded.Cancel();
+                superseded.Dispose();
+            }
+
+            if (next is not null)
+            {
+                _ = RunAsync(dueTime, next);
+            }
+
             return true;
         }
 
-        private async Task RunAsync(TimeSpan dueTime)
+        private async Task RunAsync(TimeSpan dueTime, CancellationTokenSource schedule)
         {
             var due = dueTime;
-            while (!_disposed && !_cts.IsCancellationRequested)
+            while (!_disposed && !schedule.IsCancellationRequested)
             {
                 // Fixed when the delay is scheduled, so overlapping delays settle on the later
                 // wake point instead of stacking their durations.
@@ -223,7 +262,7 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
 
                 try
                 {
-                    await _owner.PinAtLeastAsync(wakeAt, _cts.Token).ConfigureAwait(false);
+                    await _owner.PinAtLeastAsync(wakeAt, schedule.Token).ConfigureAwait(false);
                 }
                 catch (OperationCanceledException)
                 {
@@ -238,19 +277,35 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
                     _owner.ReportPinFailure(ex);
                 }
 
-                if (_disposed || _cts.IsCancellationRequested)
+                if (_disposed || schedule.IsCancellationRequested)
                 {
                     return;
                 }
 
                 _callback(_state);
 
-                if (_period == Timeout.InfiniteTimeSpan || _period <= TimeSpan.Zero)
+                TimeSpan period;
+                lock (_sync)
+                {
+                    // A Change from inside the callback has already superseded this loop.
+                    if (!ReferenceEquals(_schedule, schedule))
+                    {
+                        return;
+                    }
+
+                    period = _period;
+                }
+
+                if (period == Timeout.InfiniteTimeSpan || period <= TimeSpan.Zero)
                 {
                     return;
                 }
 
-                due = _period;
+                // Nothing here waits on real time, so without a yield a periodic timer whose
+                // pin completes synchronously would monopolise its thread.
+                await Task.Yield();
+
+                due = period;
             }
         }
 
@@ -262,6 +317,16 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
             }
 
             _disposed = true;
+
+            CancellationTokenSource? schedule;
+            lock (_sync)
+            {
+                schedule = _schedule;
+                _schedule = null;
+            }
+
+            schedule?.Cancel();
+            schedule?.Dispose();
             _cts.Cancel();
             _cts.Dispose();
         }
