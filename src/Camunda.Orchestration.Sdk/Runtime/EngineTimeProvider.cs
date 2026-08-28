@@ -108,6 +108,8 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
     /// </summary>
     public async Task ResetAsync(CancellationToken ct = default)
     {
+        ObjectDisposedException.ThrowIf(_disposed, this);
+
         // Serialised with pinning: an in-flight pin completing after the reset would leave the
         // engine pinned even though the caller awaited a reset.
         await _gate.WaitAsync(ct).ConfigureAwait(false);
@@ -123,6 +125,8 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
 
     private async Task PinCoreAsync(Func<long, long> target, CancellationToken ct)
     {
+        ObjectDisposedException.ThrowIf(_disposed, this);
+
         await _gate.WaitAsync(ct).ConfigureAwait(false);
         try
         {
@@ -178,13 +182,11 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
     /// <inheritdoc />
     public void Dispose()
     {
-        if (_disposed)
-        {
-            return;
-        }
-
+        // The gate is deliberately not disposed. An operation still in flight releases it in a
+        // finally, and disposing underneath that turns a benign race into an
+        // ObjectDisposedException on the release path. SemaphoreSlim owns nothing that needs
+        // freeing unless AvailableWaitHandle is used, which it is not.
         _disposed = true;
-        _gate.Dispose();
     }
 
     private void ReportFault(Exception ex)
@@ -305,6 +307,11 @@ public sealed class EngineTimeProvider : TimeProvider, IDisposable
                     }
                     catch (OperationCanceledException)
                     {
+                        return;
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        // The provider was disposed underneath us. A shutdown, not a fault.
                         return;
                     }
                     catch (Exception ex)

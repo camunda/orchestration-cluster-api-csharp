@@ -329,6 +329,47 @@ public class EngineTimeProviderTests
         Assert.Equal(Start, provider.GetUtcNow());
     }
 
+    // Disposing must not race an in-flight operation into an ObjectDisposedException on the
+    // gate's release path. After disposal, new operations are rejected deterministically.
+    [Fact]
+    public async Task Dispose_DoesNotBreakAnInFlightOperation()
+    {
+        var engine = new FakeEngine(_ => Task.Delay(60));
+        var provider = new EngineTimeProvider(engine, Start);
+
+        var advancing = provider.AdvanceAsync(TimeSpan.FromSeconds(1));
+        await Task.Delay(10);
+        provider.Dispose();
+
+        // Completes rather than throwing from the release in its finally.
+        await advancing;
+
+        Assert.Equal(Start.AddSeconds(1), provider.GetUtcNow());
+    }
+
+    [Fact]
+    public async Task OperationsAfterDispose_ThrowObjectDisposed()
+    {
+        var engine = new FakeEngine();
+        var provider = new EngineTimeProvider(engine, Start);
+        provider.Dispose();
+
+        await Assert.ThrowsAsync<ObjectDisposedException>(
+            () => provider.AdvanceAsync(TimeSpan.FromSeconds(1)));
+        await Assert.ThrowsAsync<ObjectDisposedException>(() => provider.ResetAsync());
+    }
+
+    [Fact]
+    public void Dispose_IsIdempotent()
+    {
+        var engine = new FakeEngine();
+        var provider = new EngineTimeProvider(engine, Start);
+
+        provider.Dispose();
+
+        Assert.Null(Record.Exception(provider.Dispose));
+    }
+
     [Fact]
     public void CamundaClient_SatisfiesTheEngineClockTarget()
     {
