@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_ElementInstanceKey_" data-uid="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.ElementInstanceKey*" class="text-break">
-Property ElementInstanceKey  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L6159"><i class="bi bi-code-slash"></i></a>
+Property ElementInstanceKey  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L6162"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,14 +121,17 @@ Property ElementInstanceKey  <a class="header-action link-secondary" title="View
 
 <h3 id="Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_ElementInstanceKey" data-uid="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.ElementInstanceKey">
   ElementInstanceKey
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L6159"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L6162"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>The key of the currently-active element instance for this agent instance.
 Used for ownership/equality validation against the stored agent instance
 and, when the supplied key differs from the previous association (re-entry
 of an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys
-with the reverse link updated on the supplied element instance.</p>
+with the reverse link updated on the supplied element instance. Only one
+element instance may hold this write claim at a time: any update from a
+different element instance is rejected while the current writer's job is
+still active.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -157,7 +160,7 @@ public ElementInstanceKey ElementInstanceKey { get; set; }</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L6159" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L6162" class="edit-link">Edit this page</a>
         </div>
 
 
