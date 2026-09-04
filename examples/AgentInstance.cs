@@ -55,7 +55,7 @@ public static class AgentInstanceExamples
             {
                 new AgentInstanceHistoryItem
                 {
-                    HistoryItemId = "configuration-1",
+                    HistoryItemId = HistoryItemId.AssumeExists("configuration-1"),
                     LoopIteration = LoopIterationId.AssumeExists(1),
                     Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
                     ProducedAt = DateTimeOffset.UtcNow,
@@ -106,7 +106,7 @@ public static class AgentInstanceExamples
                 {
                     new AgentInstanceHistoryItem
                     {
-                        HistoryItemId = "assistant-1",
+                        HistoryItemId = HistoryItemId.AssumeExists("assistant-1"),
                         LoopIteration = LoopIterationId.AssumeExists(1),
                         Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
                         ProducedAt = DateTimeOffset.UtcNow,
@@ -114,7 +114,7 @@ public static class AgentInstanceExamples
                         {
                             new AgentInstanceTextContent { Text = "How can I help you today?" },
                         },
-                        Metrics = new AgentInstanceHistoryItemMetrics
+                        Metrics = new AgentInstanceHistoryItemMetricsRequest
                         {
                             InputTokens = 150,
                             OutputTokens = 50,

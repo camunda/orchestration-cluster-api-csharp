@@ -647,8 +647,8 @@ TYPE Camunda.Orchestration.Sdk.AgentHistoryItemKeyFilterProperty : sealed class
 TYPE Camunda.Orchestration.Sdk.AgentInstanceCreatedHistoryItem : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentHistoryItemKey HistoryItemKey { get; set; } [JsonPropertyName("historyItemKey")]
+  PROP Camunda.Orchestration.Sdk.HistoryItemId HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
   PROP System.Boolean IsDuplicate { get; set; } [JsonPropertyName("isDuplicate")]
-  PROP System.String HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceCreationRequest : sealed class
   CTOR ()
@@ -727,24 +727,36 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryFilter : sealed class
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItem : sealed class
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics? Metrics { get; set; } [JsonPropertyName("metrics")]
+  PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest? Metrics { get; set; } [JsonPropertyName("metrics")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceHistoryRoleEnum Role { get; set; } [JsonPropertyName("role")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceLimits? Limits { get; set; } [JsonPropertyName("limits")]
+  PROP Camunda.Orchestration.Sdk.HistoryItemId HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
   PROP Camunda.Orchestration.Sdk.LoopIterationId LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent>? SystemPrompt { get; set; } [JsonPropertyName("systemPrompt")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceToolCall>? ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool>? Tools { get; set; } [JsonPropertyName("tools")]
   PROP System.DateTimeOffset ProducedAt { get; set; } [JsonPropertyName("producedAt")]
-  PROP System.String HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
   PROP System.String? Model { get; set; } [JsonPropertyName("model")]
   PROP System.String? Provider { get; set; } [JsonPropertyName("provider")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics : sealed class
   CTOR ()
+  PROP System.Int64? CacheCreationTokenCount { get; set; } [JsonPropertyName("cacheCreationTokenCount")]
+  PROP System.Int64? CacheReadTokenCount { get; set; } [JsonPropertyName("cacheReadTokenCount")]
   PROP System.Int64? DurationMs { get; set; } [JsonPropertyName("durationMs")]
   PROP System.Int64? InputTokens { get; set; } [JsonPropertyName("inputTokens")]
   PROP System.Int64? OutputTokens { get; set; } [JsonPropertyName("outputTokens")]
+  PROP System.Int64? ReasoningTokenCount { get; set; } [JsonPropertyName("reasoningTokenCount")]
+
+TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest : sealed class
+  CTOR ()
+  PROP System.Int64? CacheCreationTokenCount { get; set; } [JsonPropertyName("cacheCreationTokenCount")]
+  PROP System.Int64? CacheReadTokenCount { get; set; } [JsonPropertyName("cacheReadTokenCount")]
+  PROP System.Int64? DurationMs { get; set; } [JsonPropertyName("durationMs")]
+  PROP System.Int64? InputTokens { get; set; } [JsonPropertyName("inputTokens")]
+  PROP System.Int64? OutputTokens { get; set; } [JsonPropertyName("outputTokens")]
+  PROP System.Int64? ReasoningTokenCount { get; set; } [JsonPropertyName("reasoningTokenCount")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   CTOR ()
@@ -755,6 +767,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   PROP Camunda.Orchestration.Sdk.AgentInstanceKey AgentInstanceKey { get; set; } [JsonPropertyName("agentInstanceKey")]
   PROP Camunda.Orchestration.Sdk.AgentInstanceLimits Limits { get; set; } [JsonPropertyName("limits")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.HistoryItemId HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
   PROP Camunda.Orchestration.Sdk.LoopIterationId LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
@@ -762,7 +775,6 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceToolCall> ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool> Tools { get; set; } [JsonPropertyName("tools")]
   PROP System.DateTimeOffset ProducedAt { get; set; } [JsonPropertyName("producedAt")]
-  PROP System.String HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
   PROP System.String JobLease { get; set; } [JsonPropertyName("jobLease")]
   PROP System.String? Model { get; set; } [JsonPropertyName("model")]
   PROP System.String? Provider { get; set; } [JsonPropertyName("provider")]
@@ -867,8 +879,11 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceMetrics : sealed class
   CTOR ()
   PROP System.Int32 ModelCalls { get; set; } [JsonPropertyName("modelCalls")]
   PROP System.Int32 ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
+  PROP System.Int64 CacheCreationTokenCount { get; set; } [JsonPropertyName("cacheCreationTokenCount")]
+  PROP System.Int64 CacheReadTokenCount { get; set; } [JsonPropertyName("cacheReadTokenCount")]
   PROP System.Int64 InputTokens { get; set; } [JsonPropertyName("inputTokens")]
   PROP System.Int64 OutputTokens { get; set; } [JsonPropertyName("outputTokens")]
+  PROP System.Int64 ReasoningTokenCount { get; set; } [JsonPropertyName("reasoningTokenCount")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceObjectContent : sealed class base=Camunda.Orchestration.Sdk.AgentInstanceMessageContent
   CTOR ()
@@ -2245,6 +2260,7 @@ TYPE Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult : enum i
   MEMBER NOLEADER = 15 json="NO_LEADER"
   MEMBER NORESPONSE = 16 json="NO_RESPONSE"
   MEMBER CANCELLED = 17 json="CANCELLED"
+  MEMBER PHYSICALTENANTDISABLED = 18 json="PHYSICAL_TENANT_DISABLED"
 
 TYPE Camunda.Orchestration.Sdk.ClusterRebalancePartition : sealed class
   CTOR ()
@@ -4004,6 +4020,15 @@ TYPE Camunda.Orchestration.Sdk.HistoryBackupStateCode : enum interfaces=[System.
   MEMBER INCOMPLETE = 3 json="INCOMPLETE"
   MEMBER INCOMPATIBLE = 4 json="INCOMPATIBLE"
 
+TYPE Camunda.Orchestration.Sdk.HistoryItemId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.HistoryItemId>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.HistoryItemId other)
+  METHOD static Camunda.Orchestration.Sdk.HistoryItemId AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
 TYPE Camunda.Orchestration.Sdk.HttpRetryConfig : sealed class
   CTOR ()
   PROP System.Int32 BaseDelayMs { get; init; }
@@ -5196,6 +5221,7 @@ TYPE Camunda.Orchestration.Sdk.PartitionState : enum interfaces=[System.ICompara
   MEMBER Active = 2 json="active"
   MEMBER Leaving = 3 json="leaving"
   MEMBER Recovering = 4 json="recovering"
+  MEMBER Learner = 5 json="learner"
 
 TYPE Camunda.Orchestration.Sdk.PermissionTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
