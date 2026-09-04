@@ -1,3 +1,10 @@
+# [10.0.0-alpha.21](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.20...v10.0.0-alpha.21) (2026-09-04)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts [skip ci] ([2074522](https://github.com/camunda/orchestration-cluster-api-csharp/commit/20745220133c974668d76b66bae78a92011dd026))
+
 # [10.0.0-alpha.20](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.19...v10.0.0-alpha.20) (2026-08-28)
 
 
