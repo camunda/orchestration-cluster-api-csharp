@@ -283,7 +283,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
-        run: npx semantic-release
+        # Retries in place if semantic-release's version-bump push to this
+        # branch loses a race with a concurrent merge (see script for why
+        # this is safe to retry rather than requiring a whole new run).
+        run: bash scripts/publish-with-retry.sh
 
       - name: Build Docs
         if: github.ref_name == 'main'
@@ -303,6 +306,7 @@ jobs:
           name: release-analysis
           path: |
             next-version.out
+            semantic-release-attempt.out
             release-assets/
 
   notify-release-failure:
