@@ -173,7 +173,7 @@ be used in subsequent update and query calls.</p>
         {
             new AgentInstanceHistoryItem
             {
-                HistoryItemId = &quot;configuration-1&quot;,
+                HistoryItemId = HistoryItemId.AssumeExists(&quot;configuration-1&quot;),
                 LoopIteration = LoopIterationId.AssumeExists(1),
                 Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
                 ProducedAt = DateTimeOffset.UtcNow,
@@ -219,7 +219,7 @@ var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequ
     {
         new AgentInstanceHistoryItem
         {
-            HistoryItemId = &quot;configuration-1&quot;,
+            HistoryItemId = HistoryItemId.AssumeExists(&quot;configuration-1&quot;),
             LoopIteration = LoopIterationId.AssumeExists(1),
             Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
             ProducedAt = DateTimeOffset.UtcNow,

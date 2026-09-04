@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_AgentInstanceHistoryItemResult_HistoryItemId_" data-uid="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.HistoryItemId*" class="text-break">
-Property HistoryItemId  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L5139"><i class="bi bi-code-slash"></i></a>
+Property HistoryItemId  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L5210"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,17 +121,20 @@ Property HistoryItemId  <a class="header-action link-secondary" title="View sour
 
 <h3 id="Camunda_Orchestration_Sdk_AgentInstanceHistoryItemResult_HistoryItemId" data-uid="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.HistoryItemId">
   HistoryItemId
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L5139"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L5210"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>The client-supplied identifier this item was created with. Empty for items that don't
-carry one.</p>
+carry one. Not unique: a job can be re-activated under a superseded lease any number
+of times before it completes, so one historyItemId can have zero or more DISCARDED
+records and at most one COMMITTED record, since only historyItemKey is guaranteed
+unique. Filter by commitStatus rather than assuming one record per historyItemId.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
   <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;historyItemId&quot;)]
-public string HistoryItemId { get; set; }</code></pre>
+public HistoryItemId HistoryItemId { get; set; }</code></pre>
 </div>
 
 
@@ -140,7 +143,7 @@ public string HistoryItemId { get; set; }</code></pre>
 
 <h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+  <dt><a class="xref" href="Camunda.Orchestration.Sdk.HistoryItemId.html">HistoryItemId</a></dt>
   <dd></dd>
 </dl>
 
@@ -154,7 +157,7 @@ public string HistoryItemId { get; set; }</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L5139" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L5210" class="edit-link">Edit this page</a>
         </div>
 
 

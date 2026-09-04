@@ -6157,6 +6157,30 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics
   nameWithType: AgentInstanceHistoryItemMetrics
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheCreationTokenCount
+  name: CacheCreationTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheCreationTokenCount.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetrics_CacheCreationTokenCount
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheCreationTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheCreationTokenCount
+  nameWithType: AgentInstanceHistoryItemMetrics.CacheCreationTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheCreationTokenCount*
+  name: CacheCreationTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheCreationTokenCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheCreationTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheCreationTokenCount
+  nameWithType: AgentInstanceHistoryItemMetrics.CacheCreationTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheReadTokenCount
+  name: CacheReadTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheReadTokenCount.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetrics_CacheReadTokenCount
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheReadTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheReadTokenCount
+  nameWithType: AgentInstanceHistoryItemMetrics.CacheReadTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheReadTokenCount*
+  name: CacheReadTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheReadTokenCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheReadTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.CacheReadTokenCount
+  nameWithType: AgentInstanceHistoryItemMetrics.CacheReadTokenCount
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.DurationMs
   name: DurationMs
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.DurationMs.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetrics_DurationMs
@@ -6193,6 +6217,96 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.OutputTokens
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.OutputTokens
   nameWithType: AgentInstanceHistoryItemMetrics.OutputTokens
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.ReasoningTokenCount
+  name: ReasoningTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.ReasoningTokenCount.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetrics_ReasoningTokenCount
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.ReasoningTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.ReasoningTokenCount
+  nameWithType: AgentInstanceHistoryItemMetrics.ReasoningTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.ReasoningTokenCount*
+  name: ReasoningTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.ReasoningTokenCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.ReasoningTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetrics.ReasoningTokenCount
+  nameWithType: AgentInstanceHistoryItemMetrics.ReasoningTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest
+  name: AgentInstanceHistoryItemMetricsRequest
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest
+  nameWithType: AgentInstanceHistoryItemMetricsRequest
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount
+  name: CacheCreationTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetricsRequest_CacheCreationTokenCount
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount*
+  name: CacheCreationTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.CacheCreationTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount
+  name: CacheReadTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetricsRequest_CacheReadTokenCount
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount*
+  name: CacheReadTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.CacheReadTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.DurationMs
+  name: DurationMs
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.DurationMs.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetricsRequest_DurationMs
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.DurationMs
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.DurationMs
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.DurationMs
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.DurationMs*
+  name: DurationMs
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.DurationMs.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.DurationMs
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.DurationMs
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.DurationMs
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.InputTokens
+  name: InputTokens
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.InputTokens.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetricsRequest_InputTokens
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.InputTokens
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.InputTokens
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.InputTokens
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.InputTokens*
+  name: InputTokens
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.InputTokens.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.InputTokens
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.InputTokens
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.InputTokens
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.OutputTokens
+  name: OutputTokens
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.OutputTokens.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetricsRequest_OutputTokens
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.OutputTokens
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.OutputTokens
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.OutputTokens
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.OutputTokens*
+  name: OutputTokens
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.OutputTokens.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.OutputTokens
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.OutputTokens
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.OutputTokens
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount
+  name: ReasoningTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemMetricsRequest_ReasoningTokenCount
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount*
+  name: ReasoningTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount
+  nameWithType: AgentInstanceHistoryItemMetricsRequest.ReasoningTokenCount
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult
   name: AgentInstanceHistoryItemResult
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.html
@@ -7009,6 +7123,30 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.AgentInstanceMetrics
   fullName: Camunda.Orchestration.Sdk.AgentInstanceMetrics
   nameWithType: AgentInstanceMetrics
+- uid: Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheCreationTokenCount
+  name: CacheCreationTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheCreationTokenCount.html#Camunda_Orchestration_Sdk_AgentInstanceMetrics_CacheCreationTokenCount
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheCreationTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheCreationTokenCount
+  nameWithType: AgentInstanceMetrics.CacheCreationTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheCreationTokenCount*
+  name: CacheCreationTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheCreationTokenCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheCreationTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheCreationTokenCount
+  nameWithType: AgentInstanceMetrics.CacheCreationTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheReadTokenCount
+  name: CacheReadTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheReadTokenCount.html#Camunda_Orchestration_Sdk_AgentInstanceMetrics_CacheReadTokenCount
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheReadTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheReadTokenCount
+  nameWithType: AgentInstanceMetrics.CacheReadTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheReadTokenCount*
+  name: CacheReadTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheReadTokenCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheReadTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetrics.CacheReadTokenCount
+  nameWithType: AgentInstanceMetrics.CacheReadTokenCount
 - uid: Camunda.Orchestration.Sdk.AgentInstanceMetrics.InputTokens
   name: InputTokens
   href: api/Camunda.Orchestration.Sdk.AgentInstanceMetrics.InputTokens.html#Camunda_Orchestration_Sdk_AgentInstanceMetrics_InputTokens
@@ -7045,6 +7183,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceMetrics.OutputTokens
   fullName: Camunda.Orchestration.Sdk.AgentInstanceMetrics.OutputTokens
   nameWithType: AgentInstanceMetrics.OutputTokens
+- uid: Camunda.Orchestration.Sdk.AgentInstanceMetrics.ReasoningTokenCount
+  name: ReasoningTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetrics.ReasoningTokenCount.html#Camunda_Orchestration_Sdk_AgentInstanceMetrics_ReasoningTokenCount
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceMetrics.ReasoningTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetrics.ReasoningTokenCount
+  nameWithType: AgentInstanceMetrics.ReasoningTokenCount
+- uid: Camunda.Orchestration.Sdk.AgentInstanceMetrics.ReasoningTokenCount*
+  name: ReasoningTokenCount
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceMetrics.ReasoningTokenCount.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceMetrics.ReasoningTokenCount
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceMetrics.ReasoningTokenCount
+  nameWithType: AgentInstanceMetrics.ReasoningTokenCount
 - uid: Camunda.Orchestration.Sdk.AgentInstanceMetrics.ToolCalls
   name: ToolCalls
   href: api/Camunda.Orchestration.Sdk.AgentInstanceMetrics.ToolCalls.html#Camunda_Orchestration_Sdk_AgentInstanceMetrics_ToolCalls
@@ -18403,6 +18553,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PAUSEFAILED
   fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PAUSEFAILED
   nameWithType: ClusterRebalanceOperationPartitionResult.PAUSEFAILED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PHYSICALTENANTDISABLED
+  name: PHYSICALTENANTDISABLED
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_PHYSICALTENANTDISABLED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PHYSICALTENANTDISABLED
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PHYSICALTENANTDISABLED
+  nameWithType: ClusterRebalanceOperationPartitionResult.PHYSICALTENANTDISABLED
 - uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.REPLICATIONTIMEDOUT
   name: REPLICATIONTIMEDOUT
   href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_REPLICATIONTIMEDOUT
@@ -31111,6 +31267,66 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.HistoryBackupStateCode.INPROGRESS
   fullName: Camunda.Orchestration.Sdk.HistoryBackupStateCode.INPROGRESS
   nameWithType: HistoryBackupStateCode.INPROGRESS
+- uid: Camunda.Orchestration.Sdk.HistoryItemId
+  name: HistoryItemId
+  href: api/Camunda.Orchestration.Sdk.HistoryItemId.html
+  commentId: T:Camunda.Orchestration.Sdk.HistoryItemId
+  fullName: Camunda.Orchestration.Sdk.HistoryItemId
+  nameWithType: HistoryItemId
+- uid: Camunda.Orchestration.Sdk.HistoryItemId.AssumeExists(System.String)
+  name: AssumeExists(string)
+  href: api/Camunda.Orchestration.Sdk.HistoryItemId.AssumeExists.html#Camunda_Orchestration_Sdk_HistoryItemId_AssumeExists_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.HistoryItemId.AssumeExists(System.String)
+  name.vb: AssumeExists(String)
+  fullName: Camunda.Orchestration.Sdk.HistoryItemId.AssumeExists(string)
+  fullName.vb: Camunda.Orchestration.Sdk.HistoryItemId.AssumeExists(String)
+  nameWithType: HistoryItemId.AssumeExists(string)
+  nameWithType.vb: HistoryItemId.AssumeExists(String)
+- uid: Camunda.Orchestration.Sdk.HistoryItemId.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.HistoryItemId.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.HistoryItemId.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.HistoryItemId.AssumeExists
+  nameWithType: HistoryItemId.AssumeExists
+- uid: Camunda.Orchestration.Sdk.HistoryItemId.IsValid(System.String)
+  name: IsValid(string)
+  href: api/Camunda.Orchestration.Sdk.HistoryItemId.IsValid.html#Camunda_Orchestration_Sdk_HistoryItemId_IsValid_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.HistoryItemId.IsValid(System.String)
+  name.vb: IsValid(String)
+  fullName: Camunda.Orchestration.Sdk.HistoryItemId.IsValid(string)
+  fullName.vb: Camunda.Orchestration.Sdk.HistoryItemId.IsValid(String)
+  nameWithType: HistoryItemId.IsValid(string)
+  nameWithType.vb: HistoryItemId.IsValid(String)
+- uid: Camunda.Orchestration.Sdk.HistoryItemId.IsValid*
+  name: IsValid
+  href: api/Camunda.Orchestration.Sdk.HistoryItemId.IsValid.html
+  commentId: Overload:Camunda.Orchestration.Sdk.HistoryItemId.IsValid
+  fullName: Camunda.Orchestration.Sdk.HistoryItemId.IsValid
+  nameWithType: HistoryItemId.IsValid
+- uid: Camunda.Orchestration.Sdk.HistoryItemId.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.HistoryItemId.ToString.html#Camunda_Orchestration_Sdk_HistoryItemId_ToString
+  commentId: M:Camunda.Orchestration.Sdk.HistoryItemId.ToString
+  fullName: Camunda.Orchestration.Sdk.HistoryItemId.ToString()
+  nameWithType: HistoryItemId.ToString()
+- uid: Camunda.Orchestration.Sdk.HistoryItemId.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.HistoryItemId.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.HistoryItemId.ToString
+  fullName: Camunda.Orchestration.Sdk.HistoryItemId.ToString
+  nameWithType: HistoryItemId.ToString
+- uid: Camunda.Orchestration.Sdk.HistoryItemId.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.HistoryItemId.Value.html#Camunda_Orchestration_Sdk_HistoryItemId_Value
+  commentId: P:Camunda.Orchestration.Sdk.HistoryItemId.Value
+  fullName: Camunda.Orchestration.Sdk.HistoryItemId.Value
+  nameWithType: HistoryItemId.Value
+- uid: Camunda.Orchestration.Sdk.HistoryItemId.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.HistoryItemId.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.HistoryItemId.Value
+  fullName: Camunda.Orchestration.Sdk.HistoryItemId.Value
+  nameWithType: HistoryItemId.Value
 - uid: Camunda.Orchestration.Sdk.HttpRetryConfig
   name: HttpRetryConfig
   href: api/Camunda.Orchestration.Sdk.HttpRetryConfig.html
@@ -39769,6 +39985,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.PartitionState.Joining
   fullName: Camunda.Orchestration.Sdk.PartitionState.Joining
   nameWithType: PartitionState.Joining
+- uid: Camunda.Orchestration.Sdk.PartitionState.Learner
+  name: Learner
+  href: api/Camunda.Orchestration.Sdk.PartitionState.html#Camunda_Orchestration_Sdk_PartitionState_Learner
+  commentId: F:Camunda.Orchestration.Sdk.PartitionState.Learner
+  fullName: Camunda.Orchestration.Sdk.PartitionState.Learner
+  nameWithType: PartitionState.Learner
 - uid: Camunda.Orchestration.Sdk.PartitionState.Leaving
   name: Leaving
   href: api/Camunda.Orchestration.Sdk.PartitionState.html#Camunda_Orchestration_Sdk_PartitionState_Leaving

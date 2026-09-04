@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateProcessInstanceAsync*" class="text-break">
-Method CreateProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1849"><i class="bi bi-code-slash"></i></a>
+Method CreateProcessInstanceAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1851"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,13 +121,15 @@ Method CreateProcessInstanceAsync  <a class="header-action link-secondary" title
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_CreateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceCreationInstruction_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CreateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceCreationInstruction,System.Threading.CancellationToken)">
   CreateProcessInstanceAsync(ProcessInstanceCreationInstruction, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1849"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1851"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Create process instance
 Creates and starts an instance of the specified process.
 The process definition to use to create the instance can be specified either using its unique key
-(as returned by Deploy resources), or using the BPMN process id and a version.</p>
+(as returned by Deploy resources), or using the BPMN process id and a version.
+If only the process definition id is given, the latest ACTIVE version is used.
+If no ACTIVE version exists, the request is rejected as not found.</p>
 <p>Waits for the completion of the process instance before returning a result
 when awaitCompletion is enabled.</p>
 </div>
@@ -215,7 +217,7 @@ Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1849" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L1851" class="edit-link">Edit this page</a>
         </div>
 
 

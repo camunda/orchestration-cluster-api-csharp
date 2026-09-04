@@ -479,6 +479,13 @@ submitted as part of the batch on an agent instance update request.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemMetricsRequest.html">AgentInstanceHistoryItemMetricsRequest</a></dt>
+      <dd><p>Per-call token and latency metrics for an ASSISTANT history item, as submitted on a
+create/update request. All fields are optional: omit a field the caller has no value
+for rather than sending it as an explicit null.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.html">AgentInstanceHistoryItemResult</a></dt>
       <dd><p>A single conversation history item belonging to an agent instance.</p>
 </dd>
@@ -3735,6 +3742,11 @@ that evaluation, joined by a hyphen (format: <code>&lt;decisionEvaluationKey&gt;
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.GroupId.html">GroupId</a></dt>
       <dd><p>The unique identifier of a group.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.HistoryItemId.html">HistoryItemId</a></dt>
+      <dd><p>The client-supplied identifier this item was created with.</p>
 </dd>
     </dl>
     <dl class="jumplist">
