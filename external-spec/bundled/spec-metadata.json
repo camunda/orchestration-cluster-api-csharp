@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:d3638a40f5d0c82477c3bceaab0d0a3f9fd2e5804bc363fd39ff7a9d2b9306a8",
+  "specHash": "sha256:c7fae340f72a14fe4591d7d213021ef71b7d57514edd0fca0f131362c688a4f8",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -742,6 +742,34 @@
         "deprecated": false
       },
       "stableId": "group-id"
+    },
+    {
+      "name": "HistoryItemId",
+      "semanticType": "HistoryItemId",
+      "category": "model-id",
+      "description": "The client-supplied identifier this item was created with.",
+      "composition": {
+        "schemaKind": "inline",
+        "refs": [],
+        "inlineFragments": 0
+      },
+      "constraints": {
+        "minLength": 1,
+        "maxLength": 256,
+        "format": "HistoryItemId"
+      },
+      "examples": [
+        "item-1"
+      ],
+      "extensions": {
+        "x-semantic-type": "HistoryItemId"
+      },
+      "flags": {
+        "semanticKey": true,
+        "includesLongKeyRef": false,
+        "deprecated": false
+      },
+      "stableId": "history-item-id"
     },
     {
       "name": "IncidentKey",
@@ -3150,7 +3178,8 @@
             "permissionType": "READ_PROCESS_DEFINITION"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3186,7 +3215,8 @@
             "permissionType": "READ_PROCESS_DEFINITION"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3221,7 +3251,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3255,7 +3286,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3292,7 +3324,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3328,7 +3361,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3365,7 +3399,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3401,7 +3436,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3435,7 +3471,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3462,7 +3499,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3492,7 +3530,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": true,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3530,7 +3569,8 @@
             "permissionType": "CREATE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3566,7 +3606,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3600,7 +3641,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3639,7 +3681,8 @@
             "permissionType": "UPDATE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3672,7 +3715,8 @@
             "permissionType": "DELETE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3708,7 +3752,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3743,7 +3788,8 @@
             "permissionType": "CREATE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3775,7 +3821,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3806,7 +3853,8 @@
             "permissionType": "DELETE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3838,7 +3886,8 @@
             "permissionType": "CREATE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3872,7 +3921,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3905,7 +3955,8 @@
             "permissionType": "DELETE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3945,7 +3996,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -3980,7 +4032,8 @@
             "permissionType": "CREATE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4014,7 +4067,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4047,7 +4101,8 @@
             "permissionType": "DELETE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4083,7 +4138,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4119,7 +4175,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4153,7 +4210,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4188,7 +4246,8 @@
             "permissionType": "UPDATE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4223,7 +4282,8 @@
             "permissionType": "UPDATE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4258,7 +4318,8 @@
             "permissionType": "UPDATE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4292,7 +4353,8 @@
             "permissionType": "UPDATE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4323,7 +4385,8 @@
             "permissionType": "UPDATE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4368,7 +4431,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4411,7 +4475,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4457,7 +4522,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4499,7 +4565,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4539,7 +4606,8 @@
           }
         ],
         "x-eventually-consistent": true,
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4600,7 +4668,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4648,7 +4717,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4699,7 +4769,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4746,7 +4817,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4781,7 +4853,8 @@
             "permissionType": "CREATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4817,7 +4890,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4855,7 +4929,8 @@
             "permissionType": "CREATE_DECISION_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4891,7 +4966,8 @@
             "permissionType": "READ_DECISION_DEFINITION"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4925,7 +5001,8 @@
             "permissionType": "READ_DECISION_DEFINITION"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4958,7 +5035,8 @@
             "permissionType": "READ_DECISION_DEFINITION"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -4994,7 +5072,8 @@
             "permissionType": "READ_DECISION_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5028,7 +5107,8 @@
             "permissionType": "READ_DECISION_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5064,7 +5144,8 @@
             "permissionType": "DELETE_DECISION_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5107,7 +5188,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5143,7 +5225,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5177,7 +5260,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5210,7 +5294,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5244,7 +5329,8 @@
             "permissionType": "CREATE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5287,7 +5373,8 @@
             "permissionType": "CREATE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5326,7 +5413,8 @@
             "permissionType": "CREATE"
           }
         ],
-        "x-added-in-version": "8.7"
+        "x-added-in-version": "8.7",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5368,7 +5456,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5406,7 +5495,8 @@
             "permissionType": "DELETE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5452,7 +5542,8 @@
             "permissionType": "CREATE"
           }
         ],
-        "x-added-in-version": "8.7"
+        "x-added-in-version": "8.7",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5488,7 +5579,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5524,7 +5616,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5560,7 +5653,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5594,7 +5688,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5631,7 +5726,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5668,7 +5764,8 @@
           }
         ],
         "x-added-in-version": "8.6",
-        "x-added-in-version-override": "8.6"
+        "x-added-in-version-override": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5700,7 +5797,8 @@
             "permissionType": "PAUSE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5736,7 +5834,8 @@
             "permissionType": "PAUSE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5767,7 +5866,8 @@
             "permissionType": "PAUSE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5806,7 +5906,8 @@
           }
         ],
         "x-eventually-consistent": false,
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5840,7 +5941,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5885,7 +5987,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5928,7 +6031,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -5974,7 +6078,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6016,7 +6121,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6052,7 +6158,8 @@
             "permissionType": "READ_TASK_LISTENER"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6097,7 +6204,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6133,7 +6241,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6176,7 +6285,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6222,7 +6332,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6264,7 +6375,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6311,7 +6423,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6361,7 +6474,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6408,7 +6522,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6455,7 +6570,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6505,7 +6621,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6552,7 +6669,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6599,7 +6717,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6646,7 +6765,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6696,7 +6816,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6743,7 +6864,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6779,7 +6901,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6813,7 +6936,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6849,7 +6973,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6884,7 +7009,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6919,7 +7045,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6955,7 +7082,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -6991,7 +7119,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7027,7 +7156,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7063,7 +7193,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7099,7 +7230,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7135,7 +7267,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7178,7 +7311,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7224,7 +7358,8 @@
             "permissionType": "READ_JOB_METRIC"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7260,7 +7395,8 @@
             "permissionType": "READ_JOB_METRIC"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7296,7 +7432,8 @@
             "permissionType": "READ_JOB_METRIC"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7332,7 +7469,8 @@
             "permissionType": "READ_JOB_METRIC"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7368,7 +7506,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7395,7 +7534,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7440,7 +7580,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7476,7 +7617,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7519,7 +7661,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7565,7 +7708,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7607,7 +7751,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7643,7 +7788,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7678,7 +7824,8 @@
             "note": "Resolved from the matched subscription — CREATE_PROCESS_INSTANCE (start-event) or UPDATE_PROCESS_INSTANCE (intermediate) on PROCESS_DEFINITION."
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7713,7 +7860,8 @@
             "permissionType": "CREATE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7749,7 +7897,8 @@
             "permissionType": "READ_PROCESS_DEFINITION"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7785,7 +7934,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7821,7 +7971,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7855,7 +8006,8 @@
             "permissionType": "READ_PROCESS_DEFINITION"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7889,7 +8041,8 @@
             "permissionType": "READ_PROCESS_DEFINITION"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7927,7 +8080,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7965,7 +8119,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -7998,7 +8153,8 @@
             "permissionType": "READ_PROCESS_DEFINITION"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8034,7 +8190,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8045,7 +8202,7 @@
         "Process instance"
       ],
       "summary": "Create process instance",
-      "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and a version.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
+      "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and a version.\nIf only the process definition id is given, the latest ACTIVE version is used.\nIf no ACTIVE version exists, the request is rejected as not found.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": true,
@@ -8072,7 +8229,8 @@
             "permissionType": "CREATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8115,7 +8273,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8158,7 +8317,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8201,7 +8361,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8244,7 +8405,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8287,7 +8449,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8298,7 +8461,7 @@
         "Process instance"
       ],
       "summary": "Resume process instances (batch)",
-      "description": "Resumes multiple suspended process instances.\nSince only SUSPENDED root instances can be resumed, any given\nfilters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "description": "Resumes multiple suspended process instances.\nAny given filter for state or parentProcessInstanceKey is ignored and overridden, as only\nSUSPENDED process instances can be resumed and resumption does not cascade between parent\nand child instances, so child instances are resumed independently of their parent or root\ninstance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -8330,7 +8493,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8366,7 +8530,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8377,7 +8542,7 @@
         "Process instance"
       ],
       "summary": "Suspend process instances (batch)",
-      "description": "Suspends multiple running process instances.\nSince only ACTIVE root instances can be suspended, any given\nfilters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "description": "Suspends multiple running process instances.\nAny given filter for state or parentProcessInstanceKey is ignored and overridden, as only\nACTIVE process instances can be suspended and suspension does not cascade between parent\nand child instances, so child instances are suspended independently of their parent or\nroot instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -8409,7 +8574,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8443,7 +8609,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8479,7 +8646,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8512,7 +8680,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8548,7 +8717,8 @@
             "permissionType": "CANCEL_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8584,7 +8754,8 @@
             "permissionType": "DELETE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8618,7 +8789,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8655,7 +8827,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8691,7 +8864,8 @@
             "permissionType": "UPDATE_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8727,7 +8901,8 @@
             "permissionType": "MODIFY_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8738,7 +8913,7 @@
         "Process instance"
       ],
       "summary": "Resume process instance",
-      "description": "Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.\nOnly process instances in the SUSPENDED state can be resumed.\n",
+      "description": "Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.\nOnly process instances in the SUSPENDED state can be resumed.\nA child process instance can be resumed independently of its parent or root process\ninstance; resumption does not cascade to or from related instances.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -8763,7 +8938,8 @@
             "permissionType": "SUSPEND_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8797,7 +8973,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8832,7 +9009,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8867,7 +9045,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8878,7 +9057,7 @@
         "Process instance"
       ],
       "summary": "Suspend process instance",
-      "description": "Suspends a running process instance, pausing further processing until it is resumed.\nOnly process instances in the ACTIVE state can be suspended.\n",
+      "description": "Suspends a running process instance, pausing further processing until it is resumed.\nOnly process instances in the ACTIVE state can be suspended.\nA child process instance can be suspended independently of its parent or root process\ninstance; suspension does not cascade to or from related instances.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -8903,7 +9082,8 @@
             "permissionType": "SUSPEND_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8939,7 +9119,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -8973,7 +9154,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.7"
+        "x-added-in-version": "8.7",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9006,7 +9188,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.7"
+        "x-added-in-version": "8.7",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9039,7 +9222,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9076,7 +9260,8 @@
             "note": "Resolved from the deployed resource type — DELETE_PROCESS, DELETE_DRD, DELETE_FORM or DELETE_RESOURCE on RESOURCE."
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9121,7 +9306,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9157,7 +9343,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9200,7 +9387,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9246,7 +9434,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9288,7 +9477,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9335,7 +9525,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9385,7 +9576,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9432,7 +9624,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9479,7 +9672,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9530,7 +9724,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9577,7 +9772,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9624,7 +9820,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9674,7 +9871,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9721,7 +9919,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9768,7 +9967,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9818,7 +10018,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9865,7 +10066,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9901,7 +10103,8 @@
             "permissionType": "REVEAL"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9937,7 +10140,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -9972,7 +10176,8 @@
             "note": "First-admin bootstrap — allowed anonymously until an initial admin exists; otherwise requires USER CREATE and ROLE UPDATE."
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10007,7 +10212,8 @@
             "note": "Resolved from the matched signal subscription — CREATE_PROCESS_INSTANCE (start-event) or UPDATE_PROCESS_INSTANCE (intermediate) on PROCESS_DEFINITION."
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10033,7 +10239,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10083,7 +10290,8 @@
             "permissionType": "READ_USAGE_METRIC"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10110,7 +10318,8 @@
       "vendorExtensions": {
         "x-required-permissions": [],
         "x-eventually-consistent": false,
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10155,7 +10364,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10191,7 +10401,8 @@
             "permissionType": "READ"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10234,7 +10445,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10280,7 +10492,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10322,7 +10535,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10369,7 +10583,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10419,7 +10634,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10466,7 +10682,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10513,7 +10730,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10564,7 +10782,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10611,7 +10830,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10658,7 +10878,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10708,7 +10929,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10755,7 +10977,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10802,7 +11025,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10852,7 +11076,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10899,7 +11124,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10946,7 +11172,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -10996,7 +11223,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -11043,7 +11271,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -11070,7 +11299,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -11119,7 +11349,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -11151,7 +11382,8 @@
             "permissionType": "RESTORE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -11191,7 +11423,8 @@
             "permissionType": "RESTORE"
           }
         ],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -11218,7 +11451,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11249,7 +11483,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11275,7 +11510,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11310,7 +11546,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11345,7 +11582,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11377,7 +11615,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11408,7 +11647,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11440,7 +11680,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11474,7 +11715,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11507,7 +11749,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11546,7 +11789,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11581,7 +11825,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11615,7 +11860,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11648,7 +11894,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11688,7 +11935,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11715,7 +11963,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11750,7 +11999,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11777,7 +12027,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11816,7 +12067,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11843,7 +12095,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11870,7 +12123,8 @@
       "vendorExtensions": {
         "x-eventually-consistent": false,
         "x-required-permissions": [],
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     {
@@ -11915,7 +12169,8 @@
             }
           ]
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -11952,7 +12207,8 @@
           }
         ],
         "x-added-in-version": "8.8",
-        "x-added-in-version-override": "8.8"
+        "x-added-in-version-override": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -11995,7 +12251,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12041,7 +12298,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12083,7 +12341,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12127,7 +12386,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12169,7 +12429,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12213,7 +12474,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12254,7 +12516,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12298,7 +12561,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12343,7 +12607,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12395,7 +12660,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12438,7 +12704,8 @@
           }
         ],
         "x-added-in-version": "8.8",
-        "x-added-in-version-override": "8.8"
+        "x-added-in-version-override": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12480,7 +12747,8 @@
             ]
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12522,7 +12790,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12563,7 +12832,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     {
@@ -12597,7 +12867,8 @@
             "permissionType": "READ_PROCESS_INSTANCE"
           }
         ],
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     }
   ],
@@ -12806,7 +13077,7 @@
     }
   ],
   "integrity": {
-    "totalSemanticKeys": 42,
+    "totalSemanticKeys": 43,
     "totalUnions": 68,
     "totalOperations": 243,
     "totalEventuallyConsistent": 95,

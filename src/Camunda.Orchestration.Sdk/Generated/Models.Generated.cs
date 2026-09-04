@@ -307,6 +307,8 @@ public enum ClusterRebalanceOperationPartitionResult
     NORESPONSE,
     [JsonPropertyName("CANCELLED")]
     CANCELLED,
+    [JsonPropertyName("PHYSICAL_TENANT_DISABLED")]
+    PHYSICALTENANTDISABLED,
 }
 
 /// <summary>
@@ -974,6 +976,8 @@ public enum PartitionState
     Leaving,
     [JsonPropertyName("recovering")]
     Recovering,
+    [JsonPropertyName("learner")]
+    Learner,
 }
 
 /// <summary>
@@ -4570,7 +4574,7 @@ public sealed class AgentInstanceCreatedHistoryItem
     /// 
     /// </summary>
     [JsonPropertyName("historyItemId")]
-    public string HistoryItemId { get; set; } = null!;
+    public HistoryItemId HistoryItemId { get; set; }
 
     /// <summary>
     /// The system-generated key for the history item. When isDuplicate is true,
@@ -5010,7 +5014,7 @@ public sealed class AgentInstanceHistoryItem
     /// 
     /// </summary>
     [JsonPropertyName("historyItemId")]
-    public string HistoryItemId { get; set; } = null!;
+    public HistoryItemId HistoryItemId { get; set; }
 
     /// <summary>
     /// The loop iteration this item belongs to.
@@ -5044,7 +5048,7 @@ public sealed class AgentInstanceHistoryItem
     /// Per-call token and latency metrics. Present on ASSISTANT items only.
     /// </summary>
     [JsonPropertyName("metrics")]
-    public AgentInstanceHistoryItemMetrics? Metrics { get; set; }
+    public AgentInstanceHistoryItemMetricsRequest? Metrics { get; set; }
 
     /// <summary>
     /// The agent-side timestamp of when this message was produced.
@@ -5113,6 +5117,70 @@ public sealed class AgentInstanceHistoryItemMetrics
     public long? OutputTokens { get; set; }
 
     /// <summary>
+    /// Reasoning tokens consumed by this LLM call. Null when not provided.
+    /// </summary>
+    [JsonPropertyName("reasoningTokenCount")]
+    public long? ReasoningTokenCount { get; set; }
+
+    /// <summary>
+    /// Cache-creation tokens consumed by this LLM call. Null when not provided.
+    /// </summary>
+    [JsonPropertyName("cacheCreationTokenCount")]
+    public long? CacheCreationTokenCount { get; set; }
+
+    /// <summary>
+    /// Cache-read tokens consumed by this LLM call. Null when not provided.
+    /// </summary>
+    [JsonPropertyName("cacheReadTokenCount")]
+    public long? CacheReadTokenCount { get; set; }
+
+    /// <summary>
+    /// Wall-clock duration of the LLM call in milliseconds. Null when not provided.
+    /// </summary>
+    [JsonPropertyName("durationMs")]
+    public long? DurationMs { get; set; }
+
+}
+
+/// <summary>
+/// Per-call token and latency metrics for an ASSISTANT history item, as submitted on a
+/// create/update request. All fields are optional: omit a field the caller has no value
+/// for rather than sending it as an explicit null.
+/// 
+/// </summary>
+public sealed class AgentInstanceHistoryItemMetricsRequest
+{
+    /// <summary>
+    /// Input tokens consumed by this LLM call. Null when not provided.
+    /// </summary>
+    [JsonPropertyName("inputTokens")]
+    public long? InputTokens { get; set; }
+
+    /// <summary>
+    /// Output tokens produced by this LLM call. Null when not provided.
+    /// </summary>
+    [JsonPropertyName("outputTokens")]
+    public long? OutputTokens { get; set; }
+
+    /// <summary>
+    /// Reasoning tokens consumed by this LLM call. Null when not provided.
+    /// </summary>
+    [JsonPropertyName("reasoningTokenCount")]
+    public long? ReasoningTokenCount { get; set; }
+
+    /// <summary>
+    /// Cache-creation tokens consumed by this LLM call. Null when not provided.
+    /// </summary>
+    [JsonPropertyName("cacheCreationTokenCount")]
+    public long? CacheCreationTokenCount { get; set; }
+
+    /// <summary>
+    /// Cache-read tokens consumed by this LLM call. Null when not provided.
+    /// </summary>
+    [JsonPropertyName("cacheReadTokenCount")]
+    public long? CacheReadTokenCount { get; set; }
+
+    /// <summary>
     /// Wall-clock duration of the LLM call in milliseconds. Null when not provided.
     /// </summary>
     [JsonPropertyName("durationMs")]
@@ -5133,11 +5201,14 @@ public sealed class AgentInstanceHistoryItemResult
 
     /// <summary>
     /// The client-supplied identifier this item was created with. Empty for items that don&apos;t
-    /// carry one.
+    /// carry one. Not unique: a job can be re-activated under a superseded lease any number
+    /// of times before it completes, so one historyItemId can have zero or more DISCARDED
+    /// records and at most one COMMITTED record, since only historyItemKey is guaranteed
+    /// unique. Filter by commitStatus rather than assuming one record per historyItemId.
     /// 
     /// </summary>
     [JsonPropertyName("historyItemId")]
-    public string HistoryItemId { get; set; } = null!;
+    public HistoryItemId HistoryItemId { get; set; }
 
     /// <summary>
     /// The key of the agent instance this item belongs to.
@@ -5705,6 +5776,24 @@ public sealed class AgentInstanceMetrics
     public long OutputTokens { get; set; }
 
     /// <summary>
+    /// Total reasoning tokens consumed across all model calls.
+    /// </summary>
+    [JsonPropertyName("reasoningTokenCount")]
+    public long ReasoningTokenCount { get; set; }
+
+    /// <summary>
+    /// Total tokens used to create prompt cache entries across all model calls.
+    /// </summary>
+    [JsonPropertyName("cacheCreationTokenCount")]
+    public long CacheCreationTokenCount { get; set; }
+
+    /// <summary>
+    /// Total tokens read from prompt cache across all model calls.
+    /// </summary>
+    [JsonPropertyName("cacheReadTokenCount")]
+    public long CacheReadTokenCount { get; set; }
+
+    /// <summary>
     /// Total number of LLM calls made.
     /// </summary>
     [JsonPropertyName("modelCalls")]
@@ -5767,7 +5856,10 @@ public sealed class AgentInstanceResult
     public AgentInstanceDefinitionResult Definition { get; set; } = null!;
 
     /// <summary>
-    /// Aggregated metrics across all loopIterations of this agent instance.
+    /// Aggregated metrics across all loopIterations of this agent instance. Includes
+    /// history items later discarded: metrics are counted when an item is accepted,
+    /// not when it&apos;s committed.
+    /// 
     /// </summary>
     [JsonPropertyName("metrics")]
     public AgentInstanceMetrics Metrics { get; set; } = null!;
@@ -17308,6 +17400,34 @@ public enum HistoryBackupStateCode
 }
 
 /// <summary>
+/// The client-supplied identifier this item was created with.
+/// </summary>
+public readonly record struct HistoryItemId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private HistoryItemId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="HistoryItemId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static HistoryItemId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "HistoryItemId", minLength: 1, maxLength: 256);
+        return new HistoryItemId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
 /// Incident error type with a defined set of values.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -23841,7 +23961,7 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
     public ProcessDefinitionId ProcessDefinitionId { get; set; }
 
     /// <summary>
-    /// The version of the process. By default, the latest version of the process is used.
+    /// The version of the process. If omitted, the latest active version is used.
     /// 
     /// </summary>
     [JsonPropertyName("processDefinitionVersion")]

@@ -268,7 +268,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/agent-definitions/search": {
@@ -364,7 +365,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/agent-instances": {
@@ -489,7 +491,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/agent-instances/{agentInstanceKey}": {
@@ -605,7 +608,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       },
       "patch": {
         "x-eventually-consistent": false,
@@ -719,7 +723,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/agent-instances/search": {
@@ -815,7 +820,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/agent-instances/{agentInstanceKey}/history/search": {
@@ -931,7 +937,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/audit-logs/search": {
@@ -1020,7 +1027,8 @@
             "description": "An internal error occurred while processing the request."
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/audit-logs/{auditLogKey}": {
@@ -1116,7 +1124,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/authentication/me": {
@@ -1183,7 +1192,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/authentication/me/authorizations/search": {
@@ -1259,7 +1269,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/authorizations": {
@@ -1374,7 +1385,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/authorizations/search": {
@@ -1469,7 +1481,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/authorizations/{authorizationKey}": {
@@ -1568,7 +1581,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "get": {
         "x-eventually-consistent": true,
@@ -1662,7 +1676,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -1749,7 +1764,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/backups/runtime": {
@@ -1874,7 +1890,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       },
       "get": {
         "x-eventually-consistent": false,
@@ -1981,7 +1998,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/backups/runtime/state": {
@@ -2066,7 +2084,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -2142,7 +2161,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/backups/runtime/state/sync": {
@@ -2237,7 +2257,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/backups/runtime/{backupId}": {
@@ -2343,7 +2364,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -2430,7 +2452,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/backups/history": {
@@ -2545,7 +2568,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       },
       "get": {
         "x-eventually-consistent": false,
@@ -2662,7 +2686,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/backups/history/{backupId}": {
@@ -2768,7 +2793,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -2865,7 +2891,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/batch-operation-items/search": {
@@ -2934,7 +2961,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/batch-operations/search": {
@@ -3003,7 +3031,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/batch-operations/{batchOperationKey}": {
@@ -3082,7 +3111,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/batch-operations/{batchOperationKey}/cancellation": {
@@ -3171,7 +3201,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/batch-operations/{batchOperationKey}/resumption": {
@@ -3270,7 +3301,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/batch-operations/{batchOperationKey}/suspension": {
@@ -3369,7 +3401,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/clock": {
@@ -3440,7 +3473,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/clock/reset": {
@@ -3491,7 +3525,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/cluster-variables/global": {
@@ -3606,7 +3641,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/cluster-variables/global/{name}": {
@@ -3721,7 +3757,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       },
       "put": {
         "operationId": "updateGlobalClusterVariable",
@@ -3844,7 +3881,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "operationId": "deleteGlobalClusterVariable",
@@ -3950,7 +3988,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/cluster-variables/search": {
@@ -4056,7 +4095,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/cluster-variables/tenants/{tenantId}": {
@@ -4206,7 +4246,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/cluster-variables/tenants/{tenantId}/{name}": {
@@ -4334,7 +4375,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       },
       "put": {
         "operationId": "updateTenantClusterVariable",
@@ -4470,7 +4512,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "operationId": "deleteTenantClusterVariable",
@@ -4589,7 +4632,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/conditionals/evaluation": {
@@ -4716,7 +4760,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/correlated-message-subscriptions/search": {
@@ -4812,7 +4857,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-definitions/evaluation": {
@@ -4916,7 +4962,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-definitions/search": {
@@ -5012,7 +5059,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-definitions/{decisionDefinitionKey}": {
@@ -5118,7 +5166,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-definitions/{decisionDefinitionKey}/xml": {
@@ -5224,7 +5273,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-instances/search": {
@@ -5320,7 +5370,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-instances/{decisionEvaluationInstanceKey}": {
@@ -5426,7 +5477,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-instances/{decisionEvaluationKey}/deletion": {
@@ -5535,7 +5587,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-instances/deletion": {
@@ -5638,7 +5691,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-requirements/search": {
@@ -5734,7 +5788,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-requirements/{decisionRequirementsKey}": {
@@ -5840,7 +5895,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/decision-requirements/{decisionRequirementsKey}/xml": {
@@ -5946,7 +6002,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/deployments": {
@@ -6031,7 +6088,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/documents": {
@@ -6137,7 +6195,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/documents/batch": {
@@ -6266,7 +6325,8 @@
             }
           }
         },
-        "x-added-in-version": "8.7"
+        "x-added-in-version": "8.7",
+        "x-scope": "physical-tenant"
       }
     },
     "/documents/{documentId}": {
@@ -6354,7 +6414,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -6423,7 +6484,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/documents/{documentId}/links": {
@@ -6510,7 +6572,8 @@
             }
           }
         },
-        "x-added-in-version": "8.7"
+        "x-added-in-version": "8.7",
+        "x-scope": "physical-tenant"
       }
     },
     "/element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation": {
@@ -6629,7 +6692,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/element-instances/wait-states/search": {
@@ -6725,7 +6789,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/element-instances/search": {
@@ -6821,7 +6886,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/element-instances/{elementInstanceKey}": {
@@ -6927,7 +6993,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/element-instances/{elementInstanceKey}/incidents/search": {
@@ -7043,7 +7110,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/element-instances/{elementInstanceKey}/variables": {
@@ -7147,7 +7215,8 @@
           }
         },
         "x-added-in-version": "8.6",
-        "x-added-in-version-override": "8.6"
+        "x-added-in-version-override": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/exporting": {
@@ -7232,7 +7301,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/exporting/pause": {
@@ -7322,7 +7392,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/exporting/resume": {
@@ -7400,7 +7471,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/expression/evaluation": {
@@ -7499,7 +7571,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/forms/{formKey}": {
@@ -7605,7 +7678,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/global-task-listeners": {
@@ -7730,7 +7804,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/global-task-listeners/{id}": {
@@ -7835,7 +7910,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -7968,7 +8044,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -8084,7 +8161,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/global-task-listeners/search": {
@@ -8179,7 +8257,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups": {
@@ -8303,7 +8382,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups/search": {
@@ -8399,7 +8479,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups/{groupId}": {
@@ -8504,7 +8585,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -8627,7 +8709,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -8723,7 +8806,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups/{groupId}/clients/search": {
@@ -8849,7 +8933,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups/{groupId}/clients/{clientId}": {
@@ -8976,7 +9061,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -9088,7 +9174,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups/{groupId}/mapping-rules/search": {
@@ -9214,7 +9301,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups/{groupId}/mapping-rules/{mappingRuleId}": {
@@ -9341,7 +9429,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -9453,7 +9542,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups/{groupId}/roles/search": {
@@ -9579,7 +9669,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups/{groupId}/users/search": {
@@ -9705,7 +9796,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/groups/{groupId}/users/{username}": {
@@ -9832,7 +9924,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -9944,7 +10037,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/incidents/search": {
@@ -10040,7 +10134,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/incidents/{incidentKey}": {
@@ -10146,7 +10241,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/incidents/{incidentKey}/resolution": {
@@ -10248,7 +10344,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/incidents/statistics/process-instances-by-definition": {
@@ -10343,7 +10440,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/incidents/statistics/process-instances-by-error": {
@@ -10438,7 +10536,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/activation": {
@@ -10534,7 +10633,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/search": {
@@ -10630,7 +10730,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/{jobKey}": {
@@ -10732,7 +10833,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/{jobKey}/completion": {
@@ -10834,7 +10936,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/{jobKey}/error": {
@@ -10936,7 +11039,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/{jobKey}/failure": {
@@ -11038,7 +11142,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/batch-update": {
@@ -11141,7 +11246,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/statistics/global": {
@@ -11261,7 +11367,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/statistics/by-types": {
@@ -11357,7 +11464,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/statistics/by-workers": {
@@ -11453,7 +11561,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/statistics/time-series": {
@@ -11549,7 +11658,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/jobs/statistics/errors": {
@@ -11645,7 +11755,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/license": {
@@ -11681,7 +11792,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/mapping-rules": {
@@ -11788,7 +11900,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/mapping-rules/search": {
@@ -11883,7 +11996,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/mapping-rules/{mappingRuleId}": {
@@ -12000,7 +12114,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -12096,7 +12211,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "get": {
         "x-eventually-consistent": true,
@@ -12189,7 +12305,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/message-subscriptions/search": {
@@ -12285,7 +12402,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/messages/correlation": {
@@ -12383,7 +12501,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/messages/publication": {
@@ -12461,7 +12580,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-definitions/search": {
@@ -12557,7 +12677,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-definitions/statistics/message-subscriptions": {
@@ -12653,7 +12774,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-definitions/statistics/process-instances": {
@@ -12749,7 +12871,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-definitions/{processDefinitionKey}": {
@@ -12855,7 +12978,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-definitions/{processDefinitionKey}/form": {
@@ -12964,7 +13088,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-definitions/{processDefinitionKey}/statistics/element-instances": {
@@ -13071,7 +13196,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-definitions/{processDefinitionKey}/variable-names/search": {
@@ -13178,7 +13304,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-definitions/{processDefinitionKey}/xml": {
@@ -13294,7 +13421,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-definitions/statistics/process-instances-by-version": {
@@ -13390,7 +13518,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances": {
@@ -13415,7 +13544,7 @@
           }
         ],
         "summary": "Create process instance",
-        "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and a version.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
+        "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and a version.\nIf only the process definition id is given, the latest ACTIVE version is used.\nIf no ACTIVE version exists, the request is rejected as not found.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -13505,7 +13634,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/cancellation": {
@@ -13608,7 +13738,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/deletion": {
@@ -13711,7 +13842,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/incident-resolution": {
@@ -13814,7 +13946,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/migration": {
@@ -13917,7 +14050,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/modification": {
@@ -14020,7 +14154,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/resumption": {
@@ -14053,7 +14188,7 @@
           }
         ],
         "summary": "Resume process instances (batch)",
-        "description": "Resumes multiple suspended process instances.\nSince only SUSPENDED root instances can be resumed, any given\nfilters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+        "description": "Resumes multiple suspended process instances.\nAny given filter for state or parentProcessInstanceKey is ignored and overridden, as only\nSUSPENDED process instances can be resumed and resumption does not cascade between parent\nand child instances, so child instances are resumed independently of their parent or root\ninstance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -14123,7 +14258,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/search": {
@@ -14219,7 +14355,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/suspension": {
@@ -14252,7 +14389,7 @@
           }
         ],
         "summary": "Suspend process instances (batch)",
-        "description": "Suspends multiple running process instances.\nSince only ACTIVE root instances can be suspended, any given\nfilters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+        "description": "Suspends multiple running process instances.\nAny given filter for state or parentProcessInstanceKey is ignored and overridden, as only\nACTIVE process instances can be suspended and suspension does not cascade between parent\nand child instances, so child instances are suspended independently of their parent or\nroot instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -14322,7 +14459,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}": {
@@ -14428,7 +14566,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/business-id-assignment": {
@@ -14530,7 +14669,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/call-hierarchy": {
@@ -14639,7 +14779,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/cancellation": {
@@ -14752,7 +14893,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/deletion": {
@@ -14871,7 +15013,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/incident-resolution": {
@@ -14977,7 +15120,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/incidents/search": {
@@ -15093,7 +15237,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/migration": {
@@ -15195,7 +15340,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/modification": {
@@ -15287,7 +15433,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/resumption": {
@@ -15312,7 +15459,7 @@
           }
         ],
         "summary": "Resume process instance",
-        "description": "Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.\nOnly process instances in the SUSPENDED state can be resumed.\n",
+        "description": "Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.\nOnly process instances in the SUSPENDED state can be resumed.\nA child process instance can be resumed independently of its parent or root process\ninstance; resumption does not cascade to or from related instances.\n",
         "parameters": [
           {
             "name": "processInstanceKey",
@@ -15389,7 +15536,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/sequence-flows": {
@@ -15485,7 +15633,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/statistics/element-instances": {
@@ -15582,7 +15731,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/statistics/wait-states": {
@@ -15679,7 +15829,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/process-instances/{processInstanceKey}/suspension": {
@@ -15704,7 +15855,7 @@
           }
         ],
         "summary": "Suspend process instance",
-        "description": "Suspends a running process instance, pausing further processing until it is resumed.\nOnly process instances in the ACTIVE state can be suspended.\n",
+        "description": "Suspends a running process instance, pausing further processing until it is resumed.\nOnly process instances in the ACTIVE state can be suspended.\nA child process instance can be suspended independently of its parent or root process\ninstance; suspension does not cascade to or from related instances.\n",
         "parameters": [
           {
             "name": "processInstanceKey",
@@ -15781,7 +15932,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/resources/search": {
@@ -15877,7 +16029,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/resources/{resourceKey}": {
@@ -15946,7 +16099,8 @@
             }
           }
         },
-        "x-added-in-version": "8.7"
+        "x-added-in-version": "8.7",
+        "x-scope": "physical-tenant"
       }
     },
     "/resources/{resourceKey}/content": {
@@ -16027,7 +16181,8 @@
             }
           }
         },
-        "x-added-in-version": "8.7"
+        "x-added-in-version": "8.7",
+        "x-scope": "physical-tenant"
       }
     },
     "/resources/{resourceKey}/content/binary": {
@@ -16097,7 +16252,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/resources/{resourceKey}/deletion": {
@@ -16196,7 +16352,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles": {
@@ -16320,7 +16477,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/search": {
@@ -16416,7 +16574,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/{roleId}": {
@@ -16521,7 +16680,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -16644,7 +16804,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -16740,7 +16901,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/{roleId}/clients/search": {
@@ -16866,7 +17028,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/{roleId}/clients/{clientId}": {
@@ -16993,7 +17156,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -17105,7 +17269,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/{roleId}/groups/search": {
@@ -17231,7 +17396,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/{roleId}/groups/{groupId}": {
@@ -17359,7 +17525,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -17471,7 +17638,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/{roleId}/mapping-rules/search": {
@@ -17597,7 +17765,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/{roleId}/mapping-rules/{mappingRuleId}": {
@@ -17724,7 +17893,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -17836,7 +18006,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/{roleId}/users/search": {
@@ -17962,7 +18133,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/roles/{roleId}/users/{username}": {
@@ -18089,7 +18261,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -18201,7 +18374,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/secrets/resolve": {
@@ -18297,7 +18471,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/secrets/list": {
@@ -18393,7 +18568,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/setup/user": {
@@ -18484,7 +18660,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/signals/broadcast": {
@@ -18572,7 +18749,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/status": {
@@ -18594,7 +18772,8 @@
             "description": "The default physical tenant is DOWN and does not have any partition with a healthy leader."
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/system/usage-metrics": {
@@ -18754,7 +18933,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/system/configuration": {
@@ -18845,7 +19025,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants": {
@@ -18963,7 +19144,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/search": {
@@ -19069,7 +19251,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}": {
@@ -19184,7 +19367,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -19300,7 +19484,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -19399,7 +19584,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/clients/search": {
@@ -19468,7 +19654,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/clients/{clientId}": {
@@ -19585,7 +19772,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -19697,7 +19885,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/groups/search": {
@@ -19766,7 +19955,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/groups/{groupId}": {
@@ -19884,7 +20074,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -19996,7 +20187,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/mapping-rules/search": {
@@ -20065,7 +20257,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/mapping-rules/{mappingRuleId}": {
@@ -20182,7 +20375,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -20294,7 +20488,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/roles/search": {
@@ -20363,7 +20558,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/roles/{roleId}": {
@@ -20480,7 +20676,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -20592,7 +20789,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/users/search": {
@@ -20661,7 +20859,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/tenants/{tenantId}/users/{username}": {
@@ -20778,7 +20977,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -20890,7 +21090,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/topology": {
@@ -20950,7 +21151,8 @@
             }
           }
         },
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     "/mode": {
@@ -21064,7 +21266,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/restore": {
@@ -21174,7 +21377,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       },
       "get": {
         "x-eventually-consistent": false,
@@ -21250,7 +21454,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "physical-tenant"
       }
     },
     "/cluster/v2/exporting": {
@@ -21349,7 +21554,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/exporting/pause": {
@@ -21453,7 +21659,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/exporting/resume": {
@@ -21545,7 +21752,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/backups/runtime": {
@@ -21716,7 +21924,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       },
       "get": {
         "x-eventually-consistent": false,
@@ -21828,7 +22037,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/backups/runtime/state": {
@@ -21939,7 +22149,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -22022,7 +22233,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/backups/runtime/state/sync": {
@@ -22143,7 +22355,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/backups/runtime/{backupId}": {
@@ -22273,7 +22486,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -22375,7 +22589,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/backups/history": {
@@ -22526,7 +22741,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       },
       "get": {
         "x-eventually-consistent": false,
@@ -22658,7 +22874,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/backups/history/{backupId}": {
@@ -22798,7 +23015,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -22910,7 +23128,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/mode": {
@@ -23043,7 +23262,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/rebalance": {
@@ -23194,7 +23414,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       },
       "get": {
         "x-eventually-consistent": false,
@@ -23282,7 +23503,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -23370,7 +23592,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/restore": {
@@ -23504,7 +23727,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/status": {
@@ -23559,7 +23783,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/cluster/v2/topology": {
@@ -23648,7 +23873,8 @@
             }
           }
         },
-        "x-added-in-version": "8.10"
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
       }
     },
     "/users": {
@@ -23773,7 +23999,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/users/search": {
@@ -23869,7 +24096,8 @@
           }
         },
         "x-added-in-version": "8.8",
-        "x-added-in-version-override": "8.8"
+        "x-added-in-version-override": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/users/{username}": {
@@ -23974,7 +24202,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "put": {
         "x-eventually-consistent": false,
@@ -24090,7 +24319,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "delete": {
         "x-eventually-consistent": false,
@@ -24179,7 +24409,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/user-tasks/search": {
@@ -24283,7 +24514,8 @@
             }
           }
         },
-        "x-added-in-version": "8.6"
+        "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
       }
     },
     "/user-tasks/{userTaskKey}": {
@@ -24397,7 +24629,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       },
       "patch": {
         "x-eventually-consistent": false,
@@ -24526,7 +24759,8 @@
             }
           }
         },
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     "/user-tasks/{userTaskKey}/assignee": {
@@ -24647,7 +24881,8 @@
             }
           }
         },
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     "/user-tasks/{userTaskKey}/assignment": {
@@ -24778,7 +25013,8 @@
             }
           }
         },
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     "/user-tasks/{userTaskKey}/audit-logs/search": {
@@ -24865,7 +25101,8 @@
             }
           }
         },
-        "x-added-in-version": "8.9"
+        "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
       }
     },
     "/user-tasks/{userTaskKey}/completion": {
@@ -25004,7 +25241,8 @@
             }
           }
         },
-        "x-added-in-version": "8.5"
+        "x-added-in-version": "8.5",
+        "x-scope": "physical-tenant"
       }
     },
     "/user-tasks/{userTaskKey}/effective-variables/search": {
@@ -25093,7 +25331,8 @@
           }
         },
         "x-added-in-version": "8.8",
-        "x-added-in-version-override": "8.8"
+        "x-added-in-version-override": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/user-tasks/{userTaskKey}/form": {
@@ -25210,7 +25449,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/user-tasks/{userTaskKey}/variables/search": {
@@ -25298,7 +25538,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/variables/search": {
@@ -25405,7 +25646,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     },
     "/variables/{variableKey}": {
@@ -25511,7 +25753,8 @@
             }
           }
         },
-        "x-added-in-version": "8.8"
+        "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
       }
     }
   },
@@ -26087,7 +26330,7 @@
             ]
           },
           "metrics": {
-            "description": "Aggregated metrics across all loopIterations of this agent instance.",
+            "description": "Aggregated metrics across all loopIterations of this agent instance. Includes\nhistory items later discarded: metrics are counted when an item is accepted,\nnot when it's committed.\n",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentInstanceMetrics"
@@ -26251,9 +26494,12 @@
         "description": "Aggregated metrics for an agent instance across all model calls.",
         "type": "object",
         "required": [
+          "cacheCreationTokenCount",
+          "cacheReadTokenCount",
           "inputTokens",
           "modelCalls",
           "outputTokens",
+          "reasoningTokenCount",
           "toolCalls"
         ],
         "properties": {
@@ -26266,6 +26512,21 @@
             "type": "integer",
             "format": "int64",
             "description": "Total output tokens produced across all model calls."
+          },
+          "reasoningTokenCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total reasoning tokens consumed across all model calls."
+          },
+          "cacheCreationTokenCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total tokens used to create prompt cache entries across all model calls."
+          },
+          "cacheReadTokenCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total tokens read from prompt cache across all model calls."
           },
           "modelCalls": {
             "type": "integer",
@@ -26471,7 +26732,11 @@
         "properties": {
           "historyItemId": {
             "description": "The historyItemId of the corresponding item in the request, echoed back\nso callers can correlate response entries with request items by id.\n",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HistoryItemId"
+              }
+            ]
           },
           "historyItemKey": {
             "description": "The system-generated key for the history item. When isDuplicate is true,\nthis is the key of the original entry, not a new one.\n",
@@ -26548,7 +26813,11 @@
         "properties": {
           "historyItemId": {
             "description": "Caller-assigned identifier used to detect and dedupe retries of the same\nitem. For example, when a retried job activation resubmits history items\nit already sent in an earlier attempt, those items are not rejected; they\nare flagged via isDuplicate in the response instead. Must be non-blank.\n",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HistoryItemId"
+              }
+            ]
           },
           "loopIteration": {
             "description": "The loop iteration this item belongs to.",
@@ -26586,7 +26855,7 @@
             "nullable": true,
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentInstanceHistoryItemMetrics"
+                "$ref": "#/components/schemas/AgentInstanceHistoryItemMetricsRequest"
               }
             ]
           },
@@ -26792,8 +27061,12 @@
             ]
           },
           "historyItemId": {
-            "description": "The client-supplied identifier this item was created with. Empty for items that don't\ncarry one.\n",
-            "type": "string"
+            "description": "The client-supplied identifier this item was created with. Empty for items that don't\ncarry one. Not unique: a job can be re-activated under a superseded lease any number\nof times before it completes, so one historyItemId can have zero or more DISCARDED\nrecords and at most one COMMITTED record, since only historyItemKey is guaranteed\nunique. Filter by commitStatus rather than assuming one record per historyItemId.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HistoryItemId"
+              }
+            ]
           },
           "agentInstanceKey": {
             "description": "The key of the agent instance this item belongs to.",
@@ -27057,13 +27330,58 @@
           }
         }
       },
+      "AgentInstanceHistoryItemMetricsRequest": {
+        "description": "Per-call token and latency metrics for an ASSISTANT history item, as submitted on a\ncreate/update request. All fields are optional: omit a field the caller has no value\nfor rather than sending it as an explicit null.\n",
+        "type": "object",
+        "properties": {
+          "inputTokens": {
+            "description": "Input tokens consumed by this LLM call. Null when not provided.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          "outputTokens": {
+            "description": "Output tokens produced by this LLM call. Null when not provided.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          "reasoningTokenCount": {
+            "description": "Reasoning tokens consumed by this LLM call. Null when not provided.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          "cacheCreationTokenCount": {
+            "description": "Cache-creation tokens consumed by this LLM call. Null when not provided.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          "cacheReadTokenCount": {
+            "description": "Cache-read tokens consumed by this LLM call. Null when not provided.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          "durationMs": {
+            "description": "Wall-clock duration of the LLM call in milliseconds. Null when not provided.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "AgentInstanceHistoryItemMetrics": {
         "description": "Per-call token and latency metrics for an ASSISTANT history item.",
         "type": "object",
         "required": [
+          "cacheCreationTokenCount",
+          "cacheReadTokenCount",
           "durationMs",
           "inputTokens",
-          "outputTokens"
+          "outputTokens",
+          "reasoningTokenCount"
         ],
         "properties": {
           "inputTokens": {
@@ -27074,6 +27392,24 @@
           },
           "outputTokens": {
             "description": "Output tokens produced by this LLM call. Null when not provided.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          "reasoningTokenCount": {
+            "description": "Reasoning tokens consumed by this LLM call. Null when not provided.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          "cacheCreationTokenCount": {
+            "description": "Cache-creation tokens consumed by this LLM call. Null when not provided.",
+            "nullable": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          "cacheReadTokenCount": {
+            "description": "Cache-read tokens consumed by this LLM call. Null when not provided.",
             "nullable": true,
             "type": "integer",
             "format": "int64"
@@ -30999,7 +31335,8 @@
               "LEADER_CHANGED",
               "NO_LEADER",
               "NO_RESPONSE",
-              "CANCELLED"
+              "CANCELLED",
+              "PHYSICAL_TENANT_DISABLED"
             ]
           }
         }
@@ -31742,7 +32079,8 @@
               "joining",
               "active",
               "leaving",
-              "recovering"
+              "recovering",
+              "learner"
             ]
           }
         },
@@ -37402,6 +37740,16 @@
         "x-semantic-type": "LoopIterationId",
         "x-semantic-client-minted": true,
         "example": 1
+      },
+      "HistoryItemId": {
+        "description": "The client-supplied identifier this item was created with.",
+        "type": "string",
+        "format": "HistoryItemId",
+        "x-semantic-type": "HistoryItemId",
+        "x-semantic-client-minted": true,
+        "minLength": 1,
+        "maxLength": 256,
+        "example": "item-1"
       },
       "ElementIdFilterProperty": {
         "description": "ElementId property with full advanced search capabilities.",
@@ -43697,7 +44045,7 @@
             ]
           },
           "processDefinitionVersion": {
-            "description": "The version of the process. By default, the latest version of the process is used.\n",
+            "description": "The version of the process. If omitted, the latest active version is used.\n",
             "type": "integer",
             "format": "int32",
             "default": -1
