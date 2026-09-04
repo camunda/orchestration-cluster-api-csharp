@@ -421,8 +421,24 @@ public class EngineTimeProviderTests
 
             timer.Change(Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
 
-            await Task.Delay(150);
+            // A pin was already in flight when Change ran (the constructor's first Change call
+            // reaches FakeEngine's real await synchronously, before this line), so it always
+            // lands. Wait for that specific, known transition rather than assuming a fixed
+            // wall-clock window covers FakeEngine's real (ThreadPool-dispatched) latency; the
+            // deadline is only a safety net in case that assumption ever stops holding.
+            var deadline = DateTime.UtcNow.AddSeconds(5);
+            while (provider.GetUtcNow() == Start && DateTime.UtcNow < deadline)
+            {
+                await Task.Delay(10);
+            }
+
             var settled = provider.GetUtcNow();
+            Assert.True(
+                settled != Start,
+                $"the in-flight pin never landed within the deadline; time is still at {Start}, " +
+                "so the assertions below would pass without observing the transition they exist " +
+                "to check");
+
             await Task.Delay(150);
             var later = provider.GetUtcNow();
             timer.Dispose();
