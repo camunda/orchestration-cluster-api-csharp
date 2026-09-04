@@ -1,3 +1,10 @@
+# [10.0.0-alpha.22](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.21...v10.0.0-alpha.22) (2026-09-04)
+
+
+### Bug Fixes
+
+* **test:** stop EngineTimeProviderTests timer-cancellation test racing a fixed 150ms window ([#424](https://github.com/camunda/orchestration-cluster-api-csharp/issues/424)) ([173f019](https://github.com/camunda/orchestration-cluster-api-csharp/commit/173f019048f291aa606ae00f1d58c8f9b1138fd0))
+
 # [10.0.0-alpha.21](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.20...v10.0.0-alpha.21) (2026-09-04)
 
 
