@@ -433,6 +433,12 @@ public class EngineTimeProviderTests
             }
 
             var settled = provider.GetUtcNow();
+            Assert.True(
+                settled != Start,
+                $"the in-flight pin never landed within the deadline; time is still at {Start}, " +
+                "so the assertions below would pass without observing the transition they exist " +
+                "to check");
+
             await Task.Delay(150);
             var later = provider.GetUtcNow();
             timer.Dispose();
