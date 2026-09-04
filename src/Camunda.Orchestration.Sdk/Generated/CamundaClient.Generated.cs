@@ -1188,7 +1188,7 @@ public partial class CamundaClient
     ///         {
     ///             new AgentInstanceHistoryItem
     ///             {
-    ///                 HistoryItemId = &quot;configuration-1&quot;,
+    ///                 HistoryItemId = HistoryItemId.AssumeExists(&quot;configuration-1&quot;),
     ///                 LoopIteration = LoopIterationId.AssumeExists(1),
     ///                 Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
     ///                 ProducedAt = DateTimeOffset.UtcNow,
@@ -1235,7 +1235,7 @@ public partial class CamundaClient
     ///         {
     ///             new AgentInstanceHistoryItem
     ///             {
-    ///                 HistoryItemId = &quot;configuration-1&quot;,
+    ///                 HistoryItemId = HistoryItemId.AssumeExists(&quot;configuration-1&quot;),
     ///                 LoopIteration = LoopIterationId.AssumeExists(1),
     ///                 Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
     ///                 ProducedAt = DateTimeOffset.UtcNow,
@@ -11042,7 +11042,7 @@ public partial class CamundaClient
     ///             {
     ///                 new AgentInstanceHistoryItem
     ///                 {
-    ///                     HistoryItemId = &quot;assistant-1&quot;,
+    ///                     HistoryItemId = HistoryItemId.AssumeExists(&quot;assistant-1&quot;),
     ///                     LoopIteration = LoopIterationId.AssumeExists(1),
     ///                     Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
     ///                     ProducedAt = DateTimeOffset.UtcNow,
@@ -11050,7 +11050,7 @@ public partial class CamundaClient
     ///                     {
     ///                         new AgentInstanceTextContent { Text = &quot;How can I help you today?&quot; },
     ///                     },
-    ///                     Metrics = new AgentInstanceHistoryItemMetrics
+    ///                     Metrics = new AgentInstanceHistoryItemMetricsRequest
     ///                     {
     ///                         InputTokens = 150,
     ///                         OutputTokens = 50,
@@ -11089,7 +11089,7 @@ public partial class CamundaClient
     ///             {
     ///                 new AgentInstanceHistoryItem
     ///                 {
-    ///                     HistoryItemId = &quot;assistant-1&quot;,
+    ///                     HistoryItemId = HistoryItemId.AssumeExists(&quot;assistant-1&quot;),
     ///                     LoopIteration = LoopIterationId.AssumeExists(1),
     ///                     Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
     ///                     ProducedAt = DateTimeOffset.UtcNow,
@@ -11097,7 +11097,7 @@ public partial class CamundaClient
     ///                     {
     ///                         new AgentInstanceTextContent { Text = &quot;How can I help you today?&quot; },
     ///                     },
-    ///                     Metrics = new AgentInstanceHistoryItemMetrics
+    ///                     Metrics = new AgentInstanceHistoryItemMetricsRequest
     ///                     {
     ///                         InputTokens = 150,
     ///                         OutputTokens = 50,
