@@ -306,7 +306,7 @@ jobs:
           name: release-analysis
           path: |
             next-version.out
-            semantic-release-attempt.out
+            semantic-release-attempt-*.out
             release-assets/
 
   notify-release-failure:

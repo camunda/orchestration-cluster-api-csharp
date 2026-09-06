@@ -22,10 +22,14 @@ set -euo pipefail
 
 BRANCH="${GITHUB_REF_NAME:-$(git rev-parse --abbrev-ref HEAD)}"
 MAX_ATTEMPTS=3
-LOG="semantic-release-attempt.out"
 
 for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   echo "semantic-release attempt ${attempt}/${MAX_ATTEMPTS}"
+
+  # One log per attempt: a retry must not overwrite the failed attempt's output, or a
+  # post-mortem on a run that succeeds on attempt 2 loses the only record of why attempt 1
+  # failed.
+  LOG="semantic-release-attempt-${attempt}.out"
 
   set +e
   npx semantic-release 2>&1 | tee "$LOG"
@@ -41,7 +45,11 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
     exit "$status"
   fi
 
-  if grep -qE '(non-fast-forward|fetch first|failed to push some refs)' "$LOG"; then
+  # Covers the ref-update status line's own reasons (non-fast-forward, fetch first,
+  # stale info), git's top-level "failed to push some refs" error, and both phrasings of
+  # its "rejected because ..." hint text -- any of which mean the same push race, just
+  # worded differently across git versions and code paths.
+  if grep -qiE '(non-fast-forward|fetch first|stale info|failed to push some refs|rejected because)' "$LOG"; then
     echo "Push to ${BRANCH} was rejected (a concurrent merge landed while releasing); resetting to origin/${BRANCH} and retrying."
     git fetch origin "${BRANCH}"
     # Safe: the only local commit is the version-bump commit semantic-release
