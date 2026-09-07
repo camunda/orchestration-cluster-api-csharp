@@ -1,3 +1,10 @@
+# [10.0.0-alpha.23](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.22...v10.0.0-alpha.23) (2026-09-07)
+
+
+### Bug Fixes
+
+* **release:** retry semantic-release in place on push-race failure ([#423](https://github.com/camunda/orchestration-cluster-api-csharp/issues/423)) ([7c08366](https://github.com/camunda/orchestration-cluster-api-csharp/commit/7c08366bc1c35c4d3f147fd136335e8e4f85581e))
+
 # [10.0.0-alpha.22](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.21...v10.0.0-alpha.22) (2026-09-04)
 
 
