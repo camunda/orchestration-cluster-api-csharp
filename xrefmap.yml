@@ -30649,6 +30649,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.GroupFilter.Name
   fullName: Camunda.Orchestration.Sdk.GroupFilter.Name
   nameWithType: GroupFilter.Name
+- uid: Camunda.Orchestration.Sdk.GroupFilter.Or
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.GroupFilter.Or.html#Camunda_Orchestration_Sdk_GroupFilter_Or
+  commentId: P:Camunda.Orchestration.Sdk.GroupFilter.Or
+  fullName: Camunda.Orchestration.Sdk.GroupFilter.Or
+  nameWithType: GroupFilter.Or
+- uid: Camunda.Orchestration.Sdk.GroupFilter.Or*
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.GroupFilter.Or.html
+  commentId: Overload:Camunda.Orchestration.Sdk.GroupFilter.Or
+  fullName: Camunda.Orchestration.Sdk.GroupFilter.Or
+  nameWithType: GroupFilter.Or
+- uid: Camunda.Orchestration.Sdk.GroupFilterFields
+  name: GroupFilterFields
+  href: api/Camunda.Orchestration.Sdk.GroupFilterFields.html
+  commentId: T:Camunda.Orchestration.Sdk.GroupFilterFields
+  fullName: Camunda.Orchestration.Sdk.GroupFilterFields
+  nameWithType: GroupFilterFields
+- uid: Camunda.Orchestration.Sdk.GroupFilterFields.GroupId
+  name: GroupId
+  href: api/Camunda.Orchestration.Sdk.GroupFilterFields.GroupId.html#Camunda_Orchestration_Sdk_GroupFilterFields_GroupId
+  commentId: P:Camunda.Orchestration.Sdk.GroupFilterFields.GroupId
+  fullName: Camunda.Orchestration.Sdk.GroupFilterFields.GroupId
+  nameWithType: GroupFilterFields.GroupId
+- uid: Camunda.Orchestration.Sdk.GroupFilterFields.GroupId*
+  name: GroupId
+  href: api/Camunda.Orchestration.Sdk.GroupFilterFields.GroupId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.GroupFilterFields.GroupId
+  fullName: Camunda.Orchestration.Sdk.GroupFilterFields.GroupId
+  nameWithType: GroupFilterFields.GroupId
+- uid: Camunda.Orchestration.Sdk.GroupFilterFields.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.GroupFilterFields.Name.html#Camunda_Orchestration_Sdk_GroupFilterFields_Name
+  commentId: P:Camunda.Orchestration.Sdk.GroupFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.GroupFilterFields.Name
+  nameWithType: GroupFilterFields.Name
+- uid: Camunda.Orchestration.Sdk.GroupFilterFields.Name*
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.GroupFilterFields.Name.html
+  commentId: Overload:Camunda.Orchestration.Sdk.GroupFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.GroupFilterFields.Name
+  nameWithType: GroupFilterFields.Name
 - uid: Camunda.Orchestration.Sdk.GroupId
   name: GroupId
   href: api/Camunda.Orchestration.Sdk.GroupId.html
@@ -37039,6 +37081,72 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.MappingRuleFilter.Name
   fullName: Camunda.Orchestration.Sdk.MappingRuleFilter.Name
   nameWithType: MappingRuleFilter.Name
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilter.Or
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilter.Or.html#Camunda_Orchestration_Sdk_MappingRuleFilter_Or
+  commentId: P:Camunda.Orchestration.Sdk.MappingRuleFilter.Or
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilter.Or
+  nameWithType: MappingRuleFilter.Or
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilter.Or*
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilter.Or.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MappingRuleFilter.Or
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilter.Or
+  nameWithType: MappingRuleFilter.Or
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilterFields
+  name: MappingRuleFilterFields
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilterFields.html
+  commentId: T:Camunda.Orchestration.Sdk.MappingRuleFilterFields
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilterFields
+  nameWithType: MappingRuleFilterFields
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimName
+  name: ClaimName
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimName.html#Camunda_Orchestration_Sdk_MappingRuleFilterFields_ClaimName
+  commentId: P:Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimName
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimName
+  nameWithType: MappingRuleFilterFields.ClaimName
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimName*
+  name: ClaimName
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimName.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimName
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimName
+  nameWithType: MappingRuleFilterFields.ClaimName
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimValue
+  name: ClaimValue
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimValue.html#Camunda_Orchestration_Sdk_MappingRuleFilterFields_ClaimValue
+  commentId: P:Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimValue
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimValue
+  nameWithType: MappingRuleFilterFields.ClaimValue
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimValue*
+  name: ClaimValue
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimValue.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimValue
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilterFields.ClaimValue
+  nameWithType: MappingRuleFilterFields.ClaimValue
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilterFields.MappingRuleId
+  name: MappingRuleId
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilterFields.MappingRuleId.html#Camunda_Orchestration_Sdk_MappingRuleFilterFields_MappingRuleId
+  commentId: P:Camunda.Orchestration.Sdk.MappingRuleFilterFields.MappingRuleId
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilterFields.MappingRuleId
+  nameWithType: MappingRuleFilterFields.MappingRuleId
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilterFields.MappingRuleId*
+  name: MappingRuleId
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilterFields.MappingRuleId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MappingRuleFilterFields.MappingRuleId
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilterFields.MappingRuleId
+  nameWithType: MappingRuleFilterFields.MappingRuleId
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilterFields.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilterFields.Name.html#Camunda_Orchestration_Sdk_MappingRuleFilterFields_Name
+  commentId: P:Camunda.Orchestration.Sdk.MappingRuleFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilterFields.Name
+  nameWithType: MappingRuleFilterFields.Name
+- uid: Camunda.Orchestration.Sdk.MappingRuleFilterFields.Name*
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.MappingRuleFilterFields.Name.html
+  commentId: Overload:Camunda.Orchestration.Sdk.MappingRuleFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.MappingRuleFilterFields.Name
+  nameWithType: MappingRuleFilterFields.Name
 - uid: Camunda.Orchestration.Sdk.MappingRuleId
   name: MappingRuleId
   href: api/Camunda.Orchestration.Sdk.MappingRuleId.html
@@ -46390,6 +46498,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.RoleFilter.Name
   fullName: Camunda.Orchestration.Sdk.RoleFilter.Name
   nameWithType: RoleFilter.Name
+- uid: Camunda.Orchestration.Sdk.RoleFilter.Or
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.RoleFilter.Or.html#Camunda_Orchestration_Sdk_RoleFilter_Or
+  commentId: P:Camunda.Orchestration.Sdk.RoleFilter.Or
+  fullName: Camunda.Orchestration.Sdk.RoleFilter.Or
+  nameWithType: RoleFilter.Or
+- uid: Camunda.Orchestration.Sdk.RoleFilter.Or*
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.RoleFilter.Or.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RoleFilter.Or
+  fullName: Camunda.Orchestration.Sdk.RoleFilter.Or
+  nameWithType: RoleFilter.Or
 - uid: Camunda.Orchestration.Sdk.RoleFilter.RoleId
   name: RoleId
   href: api/Camunda.Orchestration.Sdk.RoleFilter.RoleId.html#Camunda_Orchestration_Sdk_RoleFilter_RoleId
@@ -46402,6 +46522,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.RoleFilter.RoleId
   fullName: Camunda.Orchestration.Sdk.RoleFilter.RoleId
   nameWithType: RoleFilter.RoleId
+- uid: Camunda.Orchestration.Sdk.RoleFilterFields
+  name: RoleFilterFields
+  href: api/Camunda.Orchestration.Sdk.RoleFilterFields.html
+  commentId: T:Camunda.Orchestration.Sdk.RoleFilterFields
+  fullName: Camunda.Orchestration.Sdk.RoleFilterFields
+  nameWithType: RoleFilterFields
+- uid: Camunda.Orchestration.Sdk.RoleFilterFields.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.RoleFilterFields.Name.html#Camunda_Orchestration_Sdk_RoleFilterFields_Name
+  commentId: P:Camunda.Orchestration.Sdk.RoleFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.RoleFilterFields.Name
+  nameWithType: RoleFilterFields.Name
+- uid: Camunda.Orchestration.Sdk.RoleFilterFields.Name*
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.RoleFilterFields.Name.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RoleFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.RoleFilterFields.Name
+  nameWithType: RoleFilterFields.Name
+- uid: Camunda.Orchestration.Sdk.RoleFilterFields.RoleId
+  name: RoleId
+  href: api/Camunda.Orchestration.Sdk.RoleFilterFields.RoleId.html#Camunda_Orchestration_Sdk_RoleFilterFields_RoleId
+  commentId: P:Camunda.Orchestration.Sdk.RoleFilterFields.RoleId
+  fullName: Camunda.Orchestration.Sdk.RoleFilterFields.RoleId
+  nameWithType: RoleFilterFields.RoleId
+- uid: Camunda.Orchestration.Sdk.RoleFilterFields.RoleId*
+  name: RoleId
+  href: api/Camunda.Orchestration.Sdk.RoleFilterFields.RoleId.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RoleFilterFields.RoleId
+  fullName: Camunda.Orchestration.Sdk.RoleFilterFields.RoleId
+  nameWithType: RoleFilterFields.RoleId
 - uid: Camunda.Orchestration.Sdk.RoleGroupResult
   name: RoleGroupResult
   href: api/Camunda.Orchestration.Sdk.RoleGroupResult.html
@@ -49726,6 +49876,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserFilter.Name
   fullName: Camunda.Orchestration.Sdk.UserFilter.Name
   nameWithType: UserFilter.Name
+- uid: Camunda.Orchestration.Sdk.UserFilter.Or
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.UserFilter.Or.html#Camunda_Orchestration_Sdk_UserFilter_Or
+  commentId: P:Camunda.Orchestration.Sdk.UserFilter.Or
+  fullName: Camunda.Orchestration.Sdk.UserFilter.Or
+  nameWithType: UserFilter.Or
+- uid: Camunda.Orchestration.Sdk.UserFilter.Or*
+  name: Or
+  href: api/Camunda.Orchestration.Sdk.UserFilter.Or.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserFilter.Or
+  fullName: Camunda.Orchestration.Sdk.UserFilter.Or
+  nameWithType: UserFilter.Or
 - uid: Camunda.Orchestration.Sdk.UserFilter.Username
   name: Username
   href: api/Camunda.Orchestration.Sdk.UserFilter.Username.html#Camunda_Orchestration_Sdk_UserFilter_Username
@@ -49738,6 +49900,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserFilter.Username
   fullName: Camunda.Orchestration.Sdk.UserFilter.Username
   nameWithType: UserFilter.Username
+- uid: Camunda.Orchestration.Sdk.UserFilterFields
+  name: UserFilterFields
+  href: api/Camunda.Orchestration.Sdk.UserFilterFields.html
+  commentId: T:Camunda.Orchestration.Sdk.UserFilterFields
+  fullName: Camunda.Orchestration.Sdk.UserFilterFields
+  nameWithType: UserFilterFields
+- uid: Camunda.Orchestration.Sdk.UserFilterFields.Email
+  name: Email
+  href: api/Camunda.Orchestration.Sdk.UserFilterFields.Email.html#Camunda_Orchestration_Sdk_UserFilterFields_Email
+  commentId: P:Camunda.Orchestration.Sdk.UserFilterFields.Email
+  fullName: Camunda.Orchestration.Sdk.UserFilterFields.Email
+  nameWithType: UserFilterFields.Email
+- uid: Camunda.Orchestration.Sdk.UserFilterFields.Email*
+  name: Email
+  href: api/Camunda.Orchestration.Sdk.UserFilterFields.Email.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserFilterFields.Email
+  fullName: Camunda.Orchestration.Sdk.UserFilterFields.Email
+  nameWithType: UserFilterFields.Email
+- uid: Camunda.Orchestration.Sdk.UserFilterFields.Name
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.UserFilterFields.Name.html#Camunda_Orchestration_Sdk_UserFilterFields_Name
+  commentId: P:Camunda.Orchestration.Sdk.UserFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.UserFilterFields.Name
+  nameWithType: UserFilterFields.Name
+- uid: Camunda.Orchestration.Sdk.UserFilterFields.Name*
+  name: Name
+  href: api/Camunda.Orchestration.Sdk.UserFilterFields.Name.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserFilterFields.Name
+  fullName: Camunda.Orchestration.Sdk.UserFilterFields.Name
+  nameWithType: UserFilterFields.Name
+- uid: Camunda.Orchestration.Sdk.UserFilterFields.Username
+  name: Username
+  href: api/Camunda.Orchestration.Sdk.UserFilterFields.Username.html#Camunda_Orchestration_Sdk_UserFilterFields_Username
+  commentId: P:Camunda.Orchestration.Sdk.UserFilterFields.Username
+  fullName: Camunda.Orchestration.Sdk.UserFilterFields.Username
+  nameWithType: UserFilterFields.Username
+- uid: Camunda.Orchestration.Sdk.UserFilterFields.Username*
+  name: Username
+  href: api/Camunda.Orchestration.Sdk.UserFilterFields.Username.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserFilterFields.Username
+  fullName: Camunda.Orchestration.Sdk.UserFilterFields.Username
+  nameWithType: UserFilterFields.Username
 - uid: Camunda.Orchestration.Sdk.UserRequest
   name: UserRequest
   href: api/Camunda.Orchestration.Sdk.UserRequest.html

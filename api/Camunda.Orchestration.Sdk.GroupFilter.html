@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_GroupFilter" data-uid="Camunda.Orchestration.Sdk.GroupFilter" class="text-break">
-Class GroupFilter  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L17018"><i class="bi bi-code-slash"></i></a>
+Class GroupFilter  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L17021"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -165,13 +165,31 @@ Class GroupFilter  <a class="header-action link-secondary" title="View source" h
     <dd><p>The group name search filters.</p>
 </dd>
   </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.GroupFilter.Or.html#Camunda_Orchestration_Sdk_GroupFilter_Or">Or</a></dt>
+    <dd><p>Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.</p>
+<p>Top-level fields and the <code>$or</code> clause are combined using AND logic — meaning: (top-level filters) AND (any of the <code>$or</code> filters) must match.
+&lt;br&gt;
+&lt;em&gt;Example:&lt;/em&gt;</p>
+<pre><code class="lang-json">{
+  &quot;$or&quot;: [
+    { &quot;groupId&quot;: &quot;group-1&quot; },
+    { &quot;groupId&quot;: &quot;group-2&quot; }
+  ]
+}
+</code></pre>
+<p>This matches groups whose &lt;code&gt;groupId&lt;/code&gt; is &lt;em&gt;group-1&lt;/em&gt; or &lt;em&gt;group-2&lt;/em&gt;.
+&lt;br&gt;
+&lt;p&gt;Note: Using complex &lt;code&gt;$or&lt;/code&gt; conditions may impact performance, use with caution in high-volume environments.</p>
+</dd>
+  </dl>
 
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L17018" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L17021" class="edit-link">Edit this page</a>
         </div>
 
 
