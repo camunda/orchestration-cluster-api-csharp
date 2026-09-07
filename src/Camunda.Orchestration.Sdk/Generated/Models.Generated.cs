@@ -4631,7 +4631,10 @@ public sealed class AgentInstanceCreationRequest
     /// history, in request order. Each created item is echoed back in the
     /// response&apos;s createdHistory, positionally correlated. Must include a
     /// CONFIGURATION item establishing model, provider, and systemPrompt (and,
-    /// if needed, limits).
+    /// if needed, limits). Every item&apos;s role must be CONFIGURATION or USER, and
+    /// no item may carry non-zero usage-token metrics (inputTokens, outputTokens,
+    /// reasoningTokenCount, cacheCreationTokenCount, cacheReadTokenCount);
+    /// durationMs is exempt and may be non-zero.
     /// 
     /// </summary>
     [JsonPropertyName("history")]
@@ -17027,7 +17030,49 @@ public sealed class GroupFilter
     /// The group name search filters.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public StringFilterProperty? Name { get; set; }
+
+    /// <summary>
+    /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+    /// 
+    /// Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+    /// &lt;br&gt;
+    /// &lt;em&gt;Example:&lt;/em&gt;
+    /// 
+    /// ```json
+    /// {
+    ///   &quot;$or&quot;: [
+    ///     { &quot;groupId&quot;: &quot;group-1&quot; },
+    ///     { &quot;groupId&quot;: &quot;group-2&quot; }
+    ///   ]
+    /// }
+    /// ```
+    /// This matches groups whose &lt;code&gt;groupId&lt;/code&gt; is &lt;em&gt;group-1&lt;/em&gt; or &lt;em&gt;group-2&lt;/em&gt;.
+    /// &lt;br&gt;
+    /// &lt;p&gt;Note: Using complex &lt;code&gt;$or&lt;/code&gt; conditions may impact performance, use with caution in high-volume environments.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$or")]
+    public List<GroupFilterFields>? Or { get; set; }
+
+}
+
+/// <summary>
+/// Group filter request
+/// </summary>
+public sealed class GroupFilterFields
+{
+    /// <summary>
+    /// The group ID search filters.
+    /// </summary>
+    [JsonPropertyName("groupId")]
+    public StringFilterProperty? GroupId { get; set; }
+
+    /// <summary>
+    /// The group name search filters.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public StringFilterProperty? Name { get; set; }
 
 }
 
@@ -20738,7 +20783,61 @@ public sealed class MappingRuleFilter
     /// The ID of the mapping rule.
     /// </summary>
     [JsonPropertyName("mappingRuleId")]
-    public MappingRuleId? MappingRuleId { get; set; }
+    public StringFilterProperty? MappingRuleId { get; set; }
+
+    /// <summary>
+    /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+    /// 
+    /// Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+    /// &lt;br&gt;
+    /// &lt;em&gt;Example:&lt;/em&gt;
+    /// 
+    /// ```json
+    /// {
+    ///   &quot;$or&quot;: [
+    ///     { &quot;mappingRuleId&quot;: &quot;rule-1&quot; },
+    ///     { &quot;mappingRuleId&quot;: &quot;rule-2&quot; }
+    ///   ]
+    /// }
+    /// ```
+    /// This matches mapping rules whose &lt;code&gt;mappingRuleId&lt;/code&gt; is &lt;em&gt;rule-1&lt;/em&gt; or &lt;em&gt;rule-2&lt;/em&gt;.
+    /// &lt;br&gt;
+    /// &lt;p&gt;Note: Using complex &lt;code&gt;$or&lt;/code&gt; conditions may impact performance, use with caution in high-volume environments.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$or")]
+    public List<MappingRuleFilterFields>? Or { get; set; }
+
+}
+
+/// <summary>
+/// Mapping rule search filter fields.
+/// </summary>
+public sealed class MappingRuleFilterFields
+{
+    /// <summary>
+    /// The claim name to match against a token.
+    /// </summary>
+    [JsonPropertyName("claimName")]
+    public string? ClaimName { get; set; }
+
+    /// <summary>
+    /// The value of the claim to match.
+    /// </summary>
+    [JsonPropertyName("claimValue")]
+    public string? ClaimValue { get; set; }
+
+    /// <summary>
+    /// The name of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public StringFilterProperty? Name { get; set; }
+
+    /// <summary>
+    /// The ID of the mapping rule.
+    /// </summary>
+    [JsonPropertyName("mappingRuleId")]
+    public StringFilterProperty? MappingRuleId { get; set; }
 
 }
 
@@ -26281,7 +26380,60 @@ public sealed class RoleFilter
     /// The role ID search filters.
     /// </summary>
     [JsonPropertyName("roleId")]
-    public RoleId? RoleId { get; set; }
+    public StringFilterProperty? RoleId { get; set; }
+
+    /// <summary>
+    /// The role name search filters.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public StringFilterProperty? Name { get; set; }
+
+    /// <summary>
+    /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+    /// 
+    /// Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+    /// &lt;br&gt;
+    /// &lt;em&gt;Example:&lt;/em&gt;
+    /// 
+    /// ```json
+    /// {
+    ///   &quot;name&quot;: &quot;Admin&quot;,
+    ///   &quot;$or&quot;: [
+    ///     { &quot;roleId&quot;: &quot;role-1&quot; },
+    ///     { &quot;roleId&quot;: &quot;role-2&quot; }
+    ///   ]
+    /// }
+    /// ```
+    /// This matches roles that:
+    /// 
+    /// &lt;ul style=&quot;padding-left: 20px; margin-left: 20px;&quot;&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;have name equal to &lt;em&gt;Admin&lt;/em&gt;&lt;/li&gt;
+    ///   &lt;li style=&quot;list-style-type: disc;&quot;&gt;and match either:
+    ///     &lt;ul style=&quot;padding-left: 20px; margin-left: 20px;&quot;&gt;
+    ///       &lt;li style=&quot;list-style-type: circle;&quot;&gt;&lt;code&gt;roleId&lt;/code&gt; is &lt;em&gt;role-1&lt;/em&gt;, or&lt;/li&gt;
+    ///       &lt;li style=&quot;list-style-type: circle;&quot;&gt;&lt;code&gt;roleId&lt;/code&gt; is &lt;em&gt;role-2&lt;/em&gt;&lt;/li&gt;
+    ///     &lt;/ul&gt;
+    ///   &lt;/li&gt;
+    /// &lt;/ul&gt;
+    /// &lt;br&gt;
+    /// &lt;p&gt;Note: Using complex &lt;code&gt;$or&lt;/code&gt; conditions may impact performance, use with caution in high-volume environments.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$or")]
+    public List<RoleFilterFields>? Or { get; set; }
+
+}
+
+/// <summary>
+/// Role filter request
+/// </summary>
+public sealed class RoleFilterFields
+{
+    /// <summary>
+    /// The role ID search filters.
+    /// </summary>
+    [JsonPropertyName("roleId")]
+    public StringFilterProperty? RoleId { get; set; }
 
     /// <summary>
     /// The role name search filters.
@@ -28270,6 +28422,54 @@ public sealed class UserCreateResult
 /// User search filter.
 /// </summary>
 public sealed class UserFilter
+{
+    /// <summary>
+    /// The username of the user.
+    /// </summary>
+    [JsonPropertyName("username")]
+    public StringFilterProperty? Username { get; set; }
+
+    /// <summary>
+    /// The name of the user.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public StringFilterProperty? Name { get; set; }
+
+    /// <summary>
+    /// The email of the user.
+    /// </summary>
+    [JsonPropertyName("email")]
+    public StringFilterProperty? Email { get; set; }
+
+    /// <summary>
+    /// Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+    /// 
+    /// Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+    /// &lt;br&gt;
+    /// &lt;em&gt;Example:&lt;/em&gt;
+    /// 
+    /// ```json
+    /// {
+    ///   &quot;$or&quot;: [
+    ///     { &quot;username&quot;: &quot;user-1&quot; },
+    ///     { &quot;username&quot;: &quot;user-2&quot; }
+    ///   ]
+    /// }
+    /// ```
+    /// This matches users whose &lt;code&gt;username&lt;/code&gt; is &lt;em&gt;user-1&lt;/em&gt; or &lt;em&gt;user-2&lt;/em&gt;.
+    /// &lt;br&gt;
+    /// &lt;p&gt;Note: Using complex &lt;code&gt;$or&lt;/code&gt; conditions may impact performance, use with caution in high-volume environments.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$or")]
+    public List<UserFilterFields>? Or { get; set; }
+
+}
+
+/// <summary>
+/// User search filter fields.
+/// </summary>
+public sealed class UserFilterFields
 {
     /// <summary>
     /// The username of the user.
