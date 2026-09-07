@@ -3913,7 +3913,13 @@ TYPE Camunda.Orchestration.Sdk.GroupCreateResult : sealed class
 TYPE Camunda.Orchestration.Sdk.GroupFilter : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? GroupId { get; set; } [JsonPropertyName("groupId")]
-  PROP System.String? Name { get; set; } [JsonPropertyName("name")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.GroupFilterFields>? Or { get; set; } [JsonPropertyName("$or")]
+
+TYPE Camunda.Orchestration.Sdk.GroupFilterFields : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? GroupId { get; set; } [JsonPropertyName("groupId")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
 
 TYPE Camunda.Orchestration.Sdk.GroupId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.GroupId>]
   PROP System.String Value { get; }
@@ -4802,7 +4808,15 @@ TYPE Camunda.Orchestration.Sdk.MappingRuleCreateUpdateResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.MappingRuleFilter : sealed class
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.MappingRuleId? MappingRuleId { get; set; } [JsonPropertyName("mappingRuleId")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? MappingRuleId { get; set; } [JsonPropertyName("mappingRuleId")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.MappingRuleFilterFields>? Or { get; set; } [JsonPropertyName("$or")]
+  PROP System.String? ClaimName { get; set; } [JsonPropertyName("claimName")]
+  PROP System.String? ClaimValue { get; set; } [JsonPropertyName("claimValue")]
+
+TYPE Camunda.Orchestration.Sdk.MappingRuleFilterFields : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? MappingRuleId { get; set; } [JsonPropertyName("mappingRuleId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
   PROP System.String? ClaimName { get; set; } [JsonPropertyName("claimName")]
   PROP System.String? ClaimValue { get; set; } [JsonPropertyName("claimValue")]
@@ -6112,8 +6126,14 @@ TYPE Camunda.Orchestration.Sdk.RoleCreateResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.RoleFilter : sealed class
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.RoleId? RoleId { get; set; } [JsonPropertyName("roleId")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? RoleId { get; set; } [JsonPropertyName("roleId")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.RoleFilterFields>? Or { get; set; } [JsonPropertyName("$or")]
+
+TYPE Camunda.Orchestration.Sdk.RoleFilterFields : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? RoleId { get; set; } [JsonPropertyName("roleId")]
 
 TYPE Camunda.Orchestration.Sdk.RoleGroupResult : sealed class
   CTOR ()
@@ -6657,6 +6677,13 @@ TYPE Camunda.Orchestration.Sdk.UserCreateResult : sealed class
   PROP System.String? Name { get; set; } [JsonPropertyName("name")]
 
 TYPE Camunda.Orchestration.Sdk.UserFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Email { get; set; } [JsonPropertyName("email")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Username { get; set; } [JsonPropertyName("username")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.UserFilterFields>? Or { get; set; } [JsonPropertyName("$or")]
+
+TYPE Camunda.Orchestration.Sdk.UserFilterFields : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? Email { get; set; } [JsonPropertyName("email")]
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
