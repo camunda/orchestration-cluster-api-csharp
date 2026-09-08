@@ -1227,7 +1227,7 @@ public enum TenantGroupSearchQuerySortRequestField
 }
 
 /// <summary>
-/// The field to sort by. `key` is deprecated and should not be used anymore.
+/// The field to sort by.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum TenantSearchQuerySortRequestField
@@ -28080,7 +28080,7 @@ public sealed class TenantSearchQueryResult
 public sealed class TenantSearchQuerySortRequest
 {
     /// <summary>
-    /// The field to sort by. `key` is deprecated and should not be used anymore.
+    /// The field to sort by.
     /// </summary>
     [JsonPropertyName("field")]
     public TenantSearchQuerySortRequestField Field { get; set; }
