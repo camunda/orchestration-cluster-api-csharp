@@ -259,7 +259,7 @@ Set these GitHub repository variables:
 
 | Variable | Value | Purpose |
 |---|---|---|
-| `SPEC_REF_OVERRIDE` | The git ref (e.g. `abc123def`) | Overrides the default `main` for all CI runs |
+| `SPEC_REF_OVERRIDE` | The git ref (e.g. `abc123def`) | Overrides the default `stable/8.10` for all CI runs |
 | `SPEC_REF_OVERRIDE_ACK` | `true` | Acknowledgement that the override is intentional |
 | `SPEC_REF_OVERRIDE_EXPIRES` | `YYYY-MM-DD` | Expiry date — CI fails if today is past this date |
 
