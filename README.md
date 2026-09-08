@@ -1026,7 +1026,8 @@ were renamed, 45 bare-`string` properties became typed enums, and binary respons
 now return `byte[]`. The compiler will point you at every affected call site.
 
 ```xml
-<PackageReference Include="Camunda.Orchestration.Sdk" Version="10.*" />
+<!-- The -* suffix is required while v10 is an alpha prerelease -->
+<PackageReference Include="Camunda.Orchestration.Sdk" Version="10.*-*" />
 ```
 
 ## Contributing

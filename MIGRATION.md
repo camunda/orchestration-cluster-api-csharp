@@ -10,8 +10,8 @@ This section covers breaking changes and new features when upgrading from `Camun
 <!-- Before -->
 <PackageReference Include="Camunda.Orchestration.Sdk" Version="9.*" />
 
-<!-- After -->
-<PackageReference Include="Camunda.Orchestration.Sdk" Version="10.*" />
+<!-- After — note the -* suffix, required while v10 is an alpha prerelease -->
+<PackageReference Include="Camunda.Orchestration.Sdk" Version="10.*-*" />
 ```
 
 Or via the CLI:
@@ -28,10 +28,10 @@ dotnet add package Camunda.Orchestration.Sdk --version "10.*-*"
 change most likely to affect your code — it touches the group, role, mapping-rule,
 client and cluster-variable management methods.
 
-Semantic keys are `readonly record struct` types with an implicit conversion *to*
-`string`, so reading and interpolating them is unchanged. There is no implicit
-conversion *from* `string`, so call sites that pass a bare string no longer compile.
-Construct the key explicitly at your application boundary:
+Semantic keys are `readonly record struct` types. They have **no** conversion to or
+from `string` in either direction, so call sites that pass a bare string no longer
+compile. Create one with the static `AssumeExists` factory, which validates the value
+and throws on a malformed identifier:
 
 <!-- snippet-exempt: migration before/after comparison (v9 code won't compile against v10) -->
 ```csharp
@@ -40,8 +40,19 @@ await client.AssignRoleToGroupAsync("developer", "engineering");
 
 // After (v10) — construct the semantic key
 await client.AssignRoleToGroupAsync(
-    new RoleId("developer"),
-    new GroupId("engineering"));
+    RoleId.AssumeExists("developer"),
+    GroupId.AssumeExists("engineering"));
+```
+
+To read a key back as a string, use the `Value` property. String interpolation and
+`ToString()` work as you would expect, but assignment to a `string` does not:
+
+```csharp
+var roleId = RoleId.AssumeExists("developer");
+
+string raw = roleId.Value;              // OK
+string text = $"role {roleId}";         // OK — ToString() is overridden
+// string bad = roleId;                 // CS0029: cannot implicitly convert
 ```
 
 | Semantic key | Methods affected |
