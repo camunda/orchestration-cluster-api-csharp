@@ -16,20 +16,20 @@ on:
       spec_ref:
         description: 'Git ref (branch/tag/SHA) in camunda/camunda to fetch spec from'
         required: false
-        default: 'main'
+        default: 'stable/8.10'
 
 permissions:
   contents: read
 
 env:
-  SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
+  SPEC_REF: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'stable/8.10' }}
 
 jobs:
   spec-ref-guard:
     uses: camunda/sdk-infra/.github/workflows/sdk-spec-ref-guard.yml@v1
     with:
-      spec-ref: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'main' }}
-      default-ref: 'main'
+      spec-ref: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.spec_ref) || vars.SPEC_REF_OVERRIDE || 'stable/8.10' }}
+      default-ref: 'stable/8.10'
       ack: ${{ vars.SPEC_REF_OVERRIDE_ACK || '' }}
       expires: ${{ vars.SPEC_REF_OVERRIDE_EXPIRES || '' }}
 
