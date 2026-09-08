@@ -28,9 +28,9 @@ dotnet add package Camunda.Orchestration.Sdk --version "10.*-*"
 change most likely to affect your code — it touches the group, role, mapping-rule,
 client and cluster-variable management methods.
 
-Semantic keys are `readonly record struct` types. They have **no** conversion to or
-from `string` in either direction, so call sites that pass a bare string no longer
-compile. Create one with the static `AssumeExists` factory, which validates the value
+Semantic keys are `readonly record struct` types. They define **no implicit conversion
+operators** to or from `string`, which is why call sites passing a bare string stop
+compiling. Create one with the static `AssumeExists` factory, which validates the value
 and throws on a malformed identifier:
 
 <!-- snippet-exempt: migration before/after comparison (v9 code won't compile against v10) -->
@@ -44,8 +44,9 @@ await client.AssignRoleToGroupAsync(
     GroupId.AssumeExists("engineering"));
 ```
 
-To read a key back as a string, use the `Value` property. String interpolation and
-`ToString()` work as you would expect, but assignment to a `string` does not:
+To read a key back as a string, use the `Value` property. `ToString()` is overridden, so
+string interpolation works — but assignment to a `string` does not, because there is no
+implicit conversion operator:
 
 ```csharp
 var roleId = RoleId.AssumeExists("developer");
