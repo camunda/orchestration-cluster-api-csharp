@@ -3417,7 +3417,7 @@
         ],
         "operationId": "createDocument",
         "summary": "Upload document",
-        "description": "Upload a document to the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Upload a document to the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "storeId",
@@ -3509,7 +3509,7 @@
         ],
         "operationId": "createDocuments",
         "summary": "Upload multiple documents",
-        "description": "Upload multiple documents to the Camunda 8 cluster.\n\nThe caller must provide a file name for each document, which will be used in case of a multi-status response\nto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header\nof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These\nare matched with the files based on index, and must have the same length as the files array.\nTo pass homogenous metadata for all files, spread the metadata over the metadata array.\nA filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header\nof the file part.\n\nIn case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,\neach of which contains the file name of the document that failed to upload and the reason for the failure.\nThe client can choose to retry the whole batch or individual documents based on the response.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Upload multiple documents to the Camunda 8 cluster.\n\nThe caller must provide a file name for each document, which will be used in case of a multi-status response\nto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header\nof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These\nare matched with the files based on index, and must have the same length as the files array.\nTo pass homogenous metadata for all files, spread the metadata over the metadata array.\nA filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header\nof the file part.\n\nIn case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,\neach of which contains the file name of the document that failed to upload and the reason for the failure.\nThe client can choose to retry the whole batch or individual documents based on the response.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "storeId",
@@ -3618,7 +3618,7 @@
         ],
         "operationId": "getDocument",
         "summary": "Download document",
-        "description": "Download a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Download a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "documentId",
@@ -3690,7 +3690,7 @@
         ],
         "operationId": "deleteDocument",
         "summary": "Delete document",
-        "description": "Delete a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)\n",
+        "description": "Delete a document from the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)\n",
         "parameters": [
           {
             "name": "documentId",
@@ -3747,7 +3747,7 @@
         ],
         "operationId": "createDocumentLink",
         "summary": "Create document link",
-        "description": "Create a link to a document in the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, GCP\n",
+        "description": "Create a link to a document in the Camunda 8 cluster.\n\nNote that this is currently supported for document stores of type: AWS, Azure, GCP\n",
         "parameters": [
           {
             "name": "documentId",
@@ -9110,7 +9110,7 @@
         ],
         "operationId": "createProcessInstance",
         "summary": "Create process instance",
-        "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and a version.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
+        "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and a version.\nIf only the process definition id is given, the latest ACTIVE version is used.\nIf no ACTIVE version exists, the request is rejected as not found.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -10736,7 +10736,7 @@
         ],
         "operationId": "deleteResource",
         "summary": "Delete resource",
-        "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. The historic data is deleted asynchronously via a batch operation. The details of\nthe created batch operation are included in the response. Note that history deletion is only\nsupported for process resources; for other resource types this flag is ignored and no history\nwill be deleted.",
+        "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition that still\nexists in the runtime state, the definition first drains its running instances and its\nhistory is deleted asynchronously once the definition is fully removed cluster-wide; no batch\noperation is returned in the response. If the process definition has already been removed\nfrom the runtime state and the deletion is later re-triggered with `deleteHistory` set to\n`true`, a batch operation is created immediately and returned in the `batchOperation` field.",
         "parameters": [
           {
             "name": "resourceKey",
@@ -20601,7 +20601,7 @@
             "$ref": "#/components/schemas/OperationReference"
           },
           "deleteHistory": {
-            "description": "Indicates if the historic data of a process resource should be deleted via a\nbatch operation asynchronously.\n\nThis flag is only effective for process resources. For other resource types\n(decisions, forms, generic resources), this flag is ignored and no history\nwill be deleted. In those cases, the `batchOperation` field in the response\nwill not be populated.\n",
+            "description": "Indicates if the historic data associated with the resource should also be deleted\nasynchronously.\n\nThis flag is effective for process definitions and decision requirements definitions.\nFor other resource types (forms, generic resources) it is ignored and no history is\ndeleted. For a decision requirements definition the `batchOperation` field in the\nresponse carries the created batch operation. For a process definition the history is\ndeleted as part of the definition's draining/deletion lifecycle and no batch operation is\nreturned.\n",
             "type": "boolean",
             "default": false
           }
@@ -20629,7 +20629,7 @@
                 "$ref": "#/components/schemas/BatchOperationCreatedResult"
               }
             ],
-            "description": "The batch operation created for asynchronously deleting the historic data.\n\nThis field is only populated when the request `deleteHistory` is set to `true` and the resource\nis a process definition. For other resource types (decisions, forms, generic resources),\nthis field will be `null`.\n"
+            "description": "The batch operation created for asynchronously deleting the historic data.\n\nPopulated when `deleteHistory` is `true` and either the resource is a decision\nrequirements definition, or the resource is a process definition that is already fully\ndeleted from the runtime state (its history is purged directly by a batch operation).\n\nFor a process definition that still exists in the runtime state, deletion first drains\nthe definition and its history is removed asynchronously as part of that lifecycle, so no\nbatch operation is returned and this field is `null`. It is also `null` for forms and\ngeneric resources.\n"
           }
         }
       },
@@ -26959,10 +26959,11 @@
             "type": "boolean"
           },
           "state": {
-            "description": "Filter by the process definition's state.\nWhen not set, process definitions in any state are returned.\nSet to `ACTIVE` to exclude deleted definitions (recommended for most use cases).\nSet to `DELETED` to return only definitions that have been deleted but are still\nretained in secondary storage.\n",
+            "description": "Filter by the process definition's state.\nWhen not set, process definitions in any state are returned.\nSet to `ACTIVE` to exclude draining and deleted definitions (recommended for most use cases).\nSet to `DRAINING` to return only definitions that are being deleted but still have\nactive process instances draining.\nSet to `DELETED` to return only definitions that have been deleted but are still\nretained in secondary storage.\n",
             "type": "string",
             "enum": [
               "ACTIVE",
+              "DRAINING",
               "DELETED"
             ]
           }
@@ -27056,10 +27057,11 @@
             "type": "boolean"
           },
           "state": {
-            "description": "The state of this process definition.",
+            "description": "The state of this process definition.\n`DRAINING` indicates the definition is being deleted but still has active process\ninstances draining before it is removed.\n",
             "type": "string",
             "enum": [
               "ACTIVE",
+              "DRAINING",
               "DELETED"
             ]
           }
@@ -27516,7 +27518,7 @@
             ]
           },
           "processDefinitionVersion": {
-            "description": "The version of the process. By default, the latest version of the process is used.\n",
+            "description": "The version of the process. If omitted, the latest active version is used.\n",
             "type": "integer",
             "format": "int32",
             "default": -1

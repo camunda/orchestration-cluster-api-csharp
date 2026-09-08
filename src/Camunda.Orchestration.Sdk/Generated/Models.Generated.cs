@@ -6496,13 +6496,15 @@ public sealed class DeleteResourceRequest
     public OperationReference? OperationReference { get; set; }
 
     /// <summary>
-    /// Indicates if the historic data of a process resource should be deleted via a
-    /// batch operation asynchronously.
+    /// Indicates if the historic data associated with the resource should also be deleted
+    /// asynchronously.
     /// 
-    /// This flag is only effective for process resources. For other resource types
-    /// (decisions, forms, generic resources), this flag is ignored and no history
-    /// will be deleted. In those cases, the `batchOperation` field in the response
-    /// will not be populated.
+    /// This flag is effective for process definitions and decision requirements definitions.
+    /// For other resource types (forms, generic resources) it is ignored and no history is
+    /// deleted. For a decision requirements definition the `batchOperation` field in the
+    /// response carries the created batch operation. For a process definition the history is
+    /// deleted as part of the definition&apos;s draining/deletion lifecycle and no batch operation is
+    /// returned.
     /// 
     /// </summary>
     [JsonPropertyName("deleteHistory")]
@@ -6524,9 +6526,14 @@ public sealed class DeleteResourceResponse
     /// <summary>
     /// The batch operation created for asynchronously deleting the historic data.
     /// 
-    /// This field is only populated when the request `deleteHistory` is set to `true` and the resource
-    /// is a process definition. For other resource types (decisions, forms, generic resources),
-    /// this field will be `null`.
+    /// Populated when `deleteHistory` is `true` and either the resource is a decision
+    /// requirements definition, or the resource is a process definition that is already fully
+    /// deleted from the runtime state (its history is purged directly by a batch operation).
+    /// 
+    /// For a process definition that still exists in the runtime state, deletion first drains
+    /// the definition and its history is removed asynchronously as part of that lifecycle, so no
+    /// batch operation is returned and this field is `null`. It is also `null` for forms and
+    /// generic resources.
     /// 
     /// </summary>
     [JsonPropertyName("batchOperation")]
@@ -12750,7 +12757,9 @@ public sealed class ProcessDefinitionFilter
     /// <summary>
     /// Filter by the process definition&apos;s state.
     /// When not set, process definitions in any state are returned.
-    /// Set to `ACTIVE` to exclude deleted definitions (recommended for most use cases).
+    /// Set to `ACTIVE` to exclude draining and deleted definitions (recommended for most use cases).
+    /// Set to `DRAINING` to return only definitions that are being deleted but still have
+    /// active process instances draining.
     /// Set to `DELETED` to return only definitions that have been deleted but are still
     /// retained in secondary storage.
     /// 
@@ -13242,6 +13251,9 @@ public sealed class ProcessDefinitionResult
 
     /// <summary>
     /// The state of this process definition.
+    /// `DRAINING` indicates the definition is being deleted but still has active process
+    /// instances draining before it is removed.
+    /// 
     /// </summary>
     [JsonPropertyName("state")]
     public string State { get; set; } = null!;
@@ -13584,7 +13596,7 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
     public ProcessDefinitionId ProcessDefinitionId { get; set; }
 
     /// <summary>
-    /// The version of the process. By default, the latest version of the process is used.
+    /// The version of the process. If omitted, the latest active version is used.
     /// 
     /// </summary>
     [JsonPropertyName("processDefinitionVersion")]
