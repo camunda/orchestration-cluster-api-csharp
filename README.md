@@ -1018,7 +1018,7 @@ await using var disposableClient = CamundaClient.Create();
 
 Upgrading from `Camunda.Orchestration.Sdk` v9 (Camunda 8.9) to v10 (Camunda 8.10)?
 
-**→ See [MIGRATION.md](./MIGRATION.md) for the full guide.**
+**→ See [MIGRATION.md](https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/MIGRATION.md) for the full guide.**
 
 In short: 55 client method parameters moved from `string` to semantic key types
 (`GroupId`, `RoleId`, `MappingRuleId`, `ClientId`, `ClusterVariableName`), 26 types
