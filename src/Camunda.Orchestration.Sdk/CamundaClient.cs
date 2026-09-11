@@ -296,7 +296,7 @@ public partial class CamundaClient : IDisposable
     /// wire-compatible representations. Notably:
     /// <list type="bullet">
     /// <item><see cref="DateTimeOffset"/> and <see cref="DateTime"/> render as ISO 8601 (round-trip "O").</item>
-    /// <item><see cref="DateOnly"/> and <see cref="TimeOnly"/> render as ISO 8601 ("O").</item>
+    /// <item><see cref="DateOnly"/> renders as an ISO 8601 date (<c>yyyy-MM-dd</c>) and <see cref="TimeOnly"/> as ISO 8601 ("O").</item>
     /// <item><see cref="bool"/> renders as lowercase <c>true</c>/<c>false</c>.</item>
     /// <item>All other <see cref="IFormattable"/> values use <see cref="CultureInfo.InvariantCulture"/>.</item>
     /// </list>
@@ -306,7 +306,7 @@ public partial class CamundaClient : IDisposable
     {
         DateTimeOffset dto => dto.ToString("O", CultureInfo.InvariantCulture),
         DateTime dt => dt.ToString("O", CultureInfo.InvariantCulture),
-        DateOnly d => d.ToString("O", CultureInfo.InvariantCulture),
+        DateOnly d => d.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
         TimeOnly t => t.ToString("O", CultureInfo.InvariantCulture),
         bool b => b ? "true" : "false",
         IFormattable f => f.ToString(null, CultureInfo.InvariantCulture),

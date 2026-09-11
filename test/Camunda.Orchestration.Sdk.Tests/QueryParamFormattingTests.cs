@@ -77,9 +77,11 @@ public sealed class QueryParamFormattingTests : IDisposable
     {
         var generated = ReadGeneratedClientSource();
 
-        // Matches Uri.EscapeDataString(<expr>.ToString()!) — the pre-fix pattern for both
+        // Matches Uri.EscapeDataString(<expr>.ToString()) — the pre-fix pattern for both
         // query-parameter (queryParts.Add) and path-parameter (interpolated) serialization.
-        var bareToString = new Regex(@"Uri\.EscapeDataString\([^)]*\.ToString\(\)!\)");
+        // The trailing null-forgiving operator is optional so a regression that drops the `!`
+        // (e.g. Uri.EscapeDataString(value.ToString())) is caught just the same.
+        var bareToString = new Regex(@"Uri\.EscapeDataString\([^)]*\.ToString\(\)!?\)");
         var matches = bareToString.Matches(generated);
 
         Assert.True(
@@ -106,6 +108,26 @@ public sealed class QueryParamFormattingTests : IDisposable
 
         Assert.True(File.Exists(path), $"Generated client not found at {path}");
         return File.ReadAllText(path);
+    }
+
+    /// <summary>
+    /// Locks in the wire format for <see cref="DateOnly"/> parameters: an explicit ISO 8601
+    /// date (<c>yyyy-MM-dd</c>), independent of the runtime's support for the <c>"O"</c>
+    /// round-trip specifier on <see cref="DateOnly"/>. Exercised directly against the private
+    /// <c>FormatParam</c> helper since no generated operation currently exposes a
+    /// <see cref="DateOnly"/> parameter.
+    /// </summary>
+    [Fact]
+    public void FormatParam_SerializesDateOnlyAsIso8601Date()
+    {
+        var formatParam = typeof(CamundaClient).GetMethod(
+            "FormatParam",
+            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        Assert.NotNull(formatParam);
+
+        var result = (string)formatParam!.Invoke(null, new object[] { new DateOnly(2026, 1, 6) })!;
+
+        Assert.Equal("2026-01-06", result);
     }
 
     public void Dispose() => _handler.Dispose();
