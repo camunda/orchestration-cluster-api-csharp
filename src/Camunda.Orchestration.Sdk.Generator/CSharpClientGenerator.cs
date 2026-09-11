@@ -1476,7 +1476,7 @@ internal static class CSharpClientGenerator
         var pathExpr = SafeEmit.SafeCSharpStringLiteral(op.Path);
         foreach (var p in op.PathParams)
         {
-            pathExpr = pathExpr.Replace($"{{{p.Name}}}", $"{{Uri.EscapeDataString({ToCamelCase(p.Name)}.ToString()!)}}");
+            pathExpr = pathExpr.Replace($"{{{p.Name}}}", $"{{Uri.EscapeDataString(FormatParam({ToCamelCase(p.Name)}))}}");
         }
 
         // Add query string
@@ -1487,9 +1487,9 @@ internal static class CSharpClientGenerator
             {
                 var varName = ToCamelCase(q.Name);
                 if (q.Required)
-                    sb.AppendLine($"        queryParts.Add(\"{SafeEmit.SafeCSharpStringLiteral(q.Name)}=\" + Uri.EscapeDataString({varName}.ToString()!));");
+                    sb.AppendLine($"        queryParts.Add(\"{SafeEmit.SafeCSharpStringLiteral(q.Name)}=\" + Uri.EscapeDataString(FormatParam({varName})));");
                 else
-                    sb.AppendLine($"        if ({varName} != null) queryParts.Add(\"{SafeEmit.SafeCSharpStringLiteral(q.Name)}=\" + Uri.EscapeDataString({varName}.ToString()!));");
+                    sb.AppendLine($"        if ({varName} != null) queryParts.Add(\"{SafeEmit.SafeCSharpStringLiteral(q.Name)}=\" + Uri.EscapeDataString(FormatParam({varName})));");
             }
             sb.AppendLine($"        var path = queryParts.Count > 0 ? $\"{pathExpr}?{{string.Join(\"&\", queryParts)}}\" : $\"{pathExpr}\";");
         }
