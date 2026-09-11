@@ -1172,7 +1172,7 @@ public partial class CamundaClient
     /// public static async Task CreateAgentInstanceExample(
     ///     ElementInstanceKey elementInstanceKey,
     ///     JobKey jobKey,
-    ///     string jobLease)
+    ///     JobLeaseToken jobLease)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
@@ -1219,7 +1219,7 @@ public partial class CamundaClient
     /// public static async Task CreateAgentInstanceExample(
     ///     ElementInstanceKey elementInstanceKey,
     ///     JobKey jobKey,
-    ///     string jobLease)
+    ///     JobLeaseToken jobLease)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
@@ -11024,7 +11024,7 @@ public partial class CamundaClient
     ///     AgentInstanceKey agentInstanceKey,
     ///     ElementInstanceKey elementInstanceKey,
     ///     JobKey jobKey,
-    ///     string jobLease)
+    ///     JobLeaseToken jobLease)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 
@@ -11071,7 +11071,7 @@ public partial class CamundaClient
     ///     AgentInstanceKey agentInstanceKey,
     ///     ElementInstanceKey elementInstanceKey,
     ///     JobKey jobKey,
-    ///     string jobLease)
+    ///     JobLeaseToken jobLease)
     /// {
     ///     using var client = CamundaClient.Create();
     /// 

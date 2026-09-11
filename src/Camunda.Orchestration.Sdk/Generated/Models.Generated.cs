@@ -309,6 +309,8 @@ public enum ClusterRebalanceOperationPartitionResult
     CANCELLED,
     [JsonPropertyName("PHYSICAL_TENANT_DISABLED")]
     PHYSICALTENANTDISABLED,
+    [JsonPropertyName("PHYSICAL_TENANT_RECOVERING")]
+    PHYSICALTENANTRECOVERING,
 }
 
 /// <summary>
@@ -1479,7 +1481,7 @@ public sealed class ActivatedJobResult
     /// 
     /// </summary>
     [JsonPropertyName("leaseToken")]
-    public string? LeaseToken { get; set; }
+    public JobLeaseToken? LeaseToken { get; set; }
 
 }
 
@@ -4624,7 +4626,7 @@ public sealed class AgentInstanceCreationRequest
     /// 
     /// </summary>
     [JsonPropertyName("jobLease")]
-    public string JobLease { get; set; } = null!;
+    public JobLeaseToken JobLease { get; set; }
 
     /// <summary>
     /// A batch of history items to append to the agent instance&apos;s conversation
@@ -5235,7 +5237,7 @@ public sealed class AgentInstanceHistoryItemResult
     /// The lease token of the activation that produced this item.
     /// </summary>
     [JsonPropertyName("jobLease")]
-    public string JobLease { get; set; } = null!;
+    public JobLeaseToken JobLease { get; set; }
 
     /// <summary>
     /// The loop iteration this item belongs to.
@@ -6225,7 +6227,7 @@ public sealed class AgentInstanceToolCall
     /// The BPMN element ID handling this tool.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public string? ElementId { get; set; }
+    public ElementId? ElementId { get; set; }
 
     /// <summary>
     /// The tool call arguments as provided by the LLM. May be null or populated on
@@ -6279,7 +6281,7 @@ public sealed class AgentInstanceUpdateRequest
     /// 
     /// </summary>
     [JsonPropertyName("jobLease")]
-    public string JobLease { get; set; } = null!;
+    public JobLeaseToken JobLease { get; set; }
 
     /// <summary>
     /// A batch of history items to append to the agent instance&apos;s conversation
@@ -6345,7 +6347,7 @@ public sealed class AgentTool
     /// The BPMN element ID of the tool element within the ad-hoc sub-process.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public string? ElementId { get; set; }
+    public ElementId? ElementId { get; set; }
 
 }
 
@@ -11338,7 +11340,7 @@ public sealed class CorrelatedMessageSubscriptionResult
     /// The element ID that received the message.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public string ElementId { get; set; } = null!;
+    public ElementId ElementId { get; set; }
 
     /// <summary>
     /// The element instance key that received the message.
@@ -18661,7 +18663,7 @@ public sealed class JobCompletionRequest
     /// 
     /// </summary>
     [JsonPropertyName("leaseToken")]
-    public string? LeaseToken { get; set; }
+    public JobLeaseToken? LeaseToken { get; set; }
 
     /// <summary>
     /// An optional business id to assign to the process instance the job belongs to, as part of completing the job, letting a worker set the identifier from work it just performed.
@@ -18706,7 +18708,7 @@ public sealed class JobErrorRequest
     /// 
     /// </summary>
     [JsonPropertyName("leaseToken")]
-    public string? LeaseToken { get; set; }
+    public JobLeaseToken? LeaseToken { get; set; }
 
 }
 
@@ -18849,7 +18851,7 @@ public sealed class JobFailRequest
     /// 
     /// </summary>
     [JsonPropertyName("leaseToken")]
-    public string? LeaseToken { get; set; }
+    public JobLeaseToken? LeaseToken { get; set; }
 
 }
 
@@ -19333,6 +19335,42 @@ internal sealed class JobKindFilterPropertyJsonConverter : global::System.Text.J
         }
         writer.WriteEndObject();
     }
+}
+
+/// <summary>
+/// An opaque, engine-minted fencing token identifying a single activation of a job.
+/// Returned by Activate Jobs as `ActivatedJobResult.leaseToken` when the job is
+/// activated with a lease, and passed back on fenced job commands — and on
+/// agent-instance creation/updates as `jobLease` — to prove the caller holds the
+/// current lease. The token is opaque: clients may rely on its presence and equality
+/// only, and must never construct, parse, or otherwise interpret it beyond equality
+/// checks. It cannot be minted client-side; only the engine produces it, exactly once
+/// per leased activation, and clients must not depend on any particular internal format.
+/// 
+/// </summary>
+public readonly record struct JobLeaseToken : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private JobLeaseToken(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="JobLeaseToken"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static JobLeaseToken AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "JobLeaseToken", minLength: 1);
+        return new JobLeaseToken(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, minLength: 1);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
 }
 
 /// <summary>
@@ -20363,7 +20401,7 @@ public sealed class JobUpdateRequest
     /// 
     /// </summary>
     [JsonPropertyName("leaseToken")]
-    public string? LeaseToken { get; set; }
+    public JobLeaseToken? LeaseToken { get; set; }
 
 }
 

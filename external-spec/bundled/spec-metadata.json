@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:49822b09e774b93a76793c2ae90dfb1a7cff4e2a827538c5706835c407c32e28",
+  "specHash": "sha256:7f8b6e43fae7b3094186b05555c80a63b9aa0c8dcb687d08ba785319d1075326",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -830,6 +830,33 @@
         "deprecated": false
       },
       "stableId": "job-key"
+    },
+    {
+      "name": "JobLeaseToken",
+      "semanticType": "JobLeaseToken",
+      "category": "other",
+      "description": "An opaque, engine-minted fencing token identifying a single activation of a job.\nReturned by Activate Jobs as `ActivatedJobResult.leaseToken` when the job is\nactivated with a lease, and passed back on fenced job commands — and on\nagent-instance creation/updates as `jobLease` — to prove the caller holds the\ncurrent lease. The token is opaque: clients may rely on its presence and equality\nonly, and must never construct, parse, or otherwise interpret it beyond equality\nchecks. It cannot be minted client-side; only the engine produces it, exactly once\nper leased activation, and clients must not depend on any particular internal format.\n",
+      "composition": {
+        "schemaKind": "inline",
+        "refs": [],
+        "inlineFragments": 0
+      },
+      "constraints": {
+        "minLength": 1,
+        "format": "JobLeaseToken"
+      },
+      "examples": [
+        "550e8400-e29b-41d4-a716-446655440000"
+      ],
+      "extensions": {
+        "x-semantic-type": "JobLeaseToken"
+      },
+      "flags": {
+        "semanticKey": true,
+        "includesLongKeyRef": false,
+        "deprecated": false
+      },
+      "stableId": "job-lease-token"
     },
     {
       "name": "MappingRuleId",
@@ -12916,7 +12943,8 @@
       "providers": [
         "elementId",
         "jobKey",
-        "elementInstanceKey"
+        "elementInstanceKey",
+        "leaseToken"
       ],
       "stableId": "activated-job-result"
     },
@@ -13077,7 +13105,7 @@
     }
   ],
   "integrity": {
-    "totalSemanticKeys": 43,
+    "totalSemanticKeys": 44,
     "totalUnions": 68,
     "totalOperations": 243,
     "totalEventuallyConsistent": 95,
