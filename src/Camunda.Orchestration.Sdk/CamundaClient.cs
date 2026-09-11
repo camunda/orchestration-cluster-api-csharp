@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
@@ -289,6 +290,28 @@ public partial class CamundaClient : IDisposable
         var responseContent = await response.Content.ReadAsStringAsync(ct);
         return JsonSerializer.Deserialize<TResponse>(responseContent, _jsonOptions)!;
     }
+
+    /// <summary>
+    /// Formats a path or query parameter value for the request URL using culture-invariant,
+    /// wire-compatible representations. Notably:
+    /// <list type="bullet">
+    /// <item><see cref="DateTimeOffset"/> and <see cref="DateTime"/> render as ISO 8601 (round-trip "O").</item>
+    /// <item><see cref="DateOnly"/> and <see cref="TimeOnly"/> render as ISO 8601 ("O").</item>
+    /// <item><see cref="bool"/> renders as lowercase <c>true</c>/<c>false</c>.</item>
+    /// <item>All other <see cref="IFormattable"/> values use <see cref="CultureInfo.InvariantCulture"/>.</item>
+    /// </list>
+    /// This prevents locale-dependent formatting (e.g. <c>01/06/2026</c>) from reaching the server.
+    /// </summary>
+    private static string FormatParam(object value) => value switch
+    {
+        DateTimeOffset dto => dto.ToString("O", CultureInfo.InvariantCulture),
+        DateTime dt => dt.ToString("O", CultureInfo.InvariantCulture),
+        DateOnly d => d.ToString("O", CultureInfo.InvariantCulture),
+        TimeOnly t => t.ToString("O", CultureInfo.InvariantCulture),
+        bool b => b ? "true" : "false",
+        IFormattable f => f.ToString(null, CultureInfo.InvariantCulture),
+        _ => value.ToString()!,
+    };
 
     private static HttpSdkException BuildHttpException(HttpStatusCode statusCode, string body, string path)
     {
