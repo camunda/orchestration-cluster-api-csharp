@@ -302,6 +302,7 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
     /// <item><see cref="DateTimeOffset"/> and <see cref="DateTime"/> render as ISO 8601 (round-trip "O").</item>
     /// <item><see cref="DateOnly"/> and <see cref="TimeOnly"/> render as ISO 8601 ("O").</item>
     /// <item><see cref="bool"/> renders as lowercase <c>true</c>/<c>false</c>.</item>
+    /// <item><see cref="ICamundaLongKey"/> renders its numeric <c>Value</c> invariantly.</item>
     /// <item>All other <see cref="IFormattable"/> values use <see cref="CultureInfo.InvariantCulture"/>.</item>
     /// </list>
     /// This prevents locale-dependent formatting (e.g. <c>01/06/2026</c>) from reaching the server.
@@ -313,6 +314,7 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         DateOnly d => d.ToString("O", CultureInfo.InvariantCulture),
         TimeOnly t => t.ToString("O", CultureInfo.InvariantCulture),
         bool b => b ? "true" : "false",
+        ICamundaLongKey k => k.Value.ToString(CultureInfo.InvariantCulture),
         IFormattable f => f.ToString(null, CultureInfo.InvariantCulture),
         _ => value.ToString()!,
     };
