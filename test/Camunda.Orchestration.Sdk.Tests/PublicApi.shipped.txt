@@ -32,6 +32,7 @@ TYPE Camunda.Orchestration.Sdk.ActivatedJobResult : sealed class
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
   PROP Camunda.Orchestration.Sdk.JobKindEnum Kind { get; set; } [JsonPropertyName("kind")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
   PROP Camunda.Orchestration.Sdk.JobListenerEventTypeEnum ListenerEventType { get; set; } [JsonPropertyName("listenerEventType")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
@@ -49,7 +50,6 @@ TYPE Camunda.Orchestration.Sdk.ActivatedJobResult : sealed class
   PROP System.String PhysicalTenantId { get; set; } [JsonPropertyName("physicalTenantId")]
   PROP System.String Type { get; set; } [JsonPropertyName("type")]
   PROP System.String Worker { get; set; } [JsonPropertyName("worker")]
-  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.AdHocSubProcessActivateActivitiesInstruction : sealed class
   CTOR ()
@@ -654,8 +654,8 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceCreationRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken JobLease { get; set; } [JsonPropertyName("jobLease")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceHistoryItem> History { get; set; } [JsonPropertyName("history")]
-  PROP System.String JobLease { get; set; } [JsonPropertyName("jobLease")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceCreationResult : sealed class
   CTOR ()
@@ -769,13 +769,13 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.HistoryItemId HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken JobLease { get; set; } [JsonPropertyName("jobLease")]
   PROP Camunda.Orchestration.Sdk.LoopIterationId LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> SystemPrompt { get; set; } [JsonPropertyName("systemPrompt")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceToolCall> ToolCalls { get; set; } [JsonPropertyName("toolCalls")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentTool> Tools { get; set; } [JsonPropertyName("tools")]
   PROP System.DateTimeOffset ProducedAt { get; set; } [JsonPropertyName("producedAt")]
-  PROP System.String JobLease { get; set; } [JsonPropertyName("jobLease")]
   PROP System.String? Model { get; set; } [JsonPropertyName("model")]
   PROP System.String? Provider { get; set; } [JsonPropertyName("provider")]
 
@@ -978,18 +978,18 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceTextContent : sealed class base=Camu
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceToolCall : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ElementId? ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP System.Object? Arguments { get; set; } [JsonPropertyName("arguments")]
   PROP System.String ToolCallId { get; set; } [JsonPropertyName("toolCallId")]
   PROP System.String ToolName { get; set; } [JsonPropertyName("toolName")]
-  PROP System.String? ElementId { get; set; } [JsonPropertyName("elementId")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.AgentInstanceUpdateStatusEnum? Status { get; set; } [JsonPropertyName("status")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken JobLease { get; set; } [JsonPropertyName("jobLease")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceHistoryItem>? History { get; set; } [JsonPropertyName("history")]
-  PROP System.String JobLease { get; set; } [JsonPropertyName("jobLease")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateResult : sealed class
   CTOR ()
@@ -1005,9 +1005,9 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateStatusEnum : enum interfaces=[
 
 TYPE Camunda.Orchestration.Sdk.AgentTool : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ElementId? ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
   PROP System.String? Description { get; set; } [JsonPropertyName("description")]
-  PROP System.String? ElementId { get; set; } [JsonPropertyName("elementId")]
 
 TYPE Camunda.Orchestration.Sdk.AncestorScopeInstruction : abstract class
   ATTR JsonPolymorphic discriminator=ancestorScopeType
@@ -2261,6 +2261,7 @@ TYPE Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult : enum i
   MEMBER NORESPONSE = 16 json="NO_RESPONSE"
   MEMBER CANCELLED = 17 json="CANCELLED"
   MEMBER PHYSICALTENANTDISABLED = 18 json="PHYSICAL_TENANT_DISABLED"
+  MEMBER PHYSICALTENANTRECOVERING = 19 json="PHYSICAL_TENANT_RECOVERING"
 
 TYPE Camunda.Orchestration.Sdk.ClusterRebalancePartition : sealed class
   CTOR ()
@@ -2595,6 +2596,7 @@ TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionFilter : sealed clas
 TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
+  PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.MessageKey MessageKey { get; set; } [JsonPropertyName("messageKey")]
   PROP Camunda.Orchestration.Sdk.MessageSubscriptionKey SubscriptionKey { get; set; } [JsonPropertyName("subscriptionKey")]
@@ -2605,7 +2607,6 @@ TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult : sealed clas
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.DateTimeOffset CorrelationTime { get; set; } [JsonPropertyName("correlationTime")]
   PROP System.Int32 PartitionId { get; set; } [JsonPropertyName("partitionId")]
-  PROP System.String ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP System.String MessageName { get; set; } [JsonPropertyName("messageName")]
   PROP System.String? CorrelationKey { get; set; } [JsonPropertyName("correlationKey")]
 
@@ -4321,16 +4322,16 @@ TYPE Camunda.Orchestration.Sdk.JobChangeset : sealed class
 TYPE Camunda.Orchestration.Sdk.JobCompletionRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
   PROP Camunda.Orchestration.Sdk.JobResult? Result { get; set; } [JsonPropertyName("result")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
-  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.JobErrorRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
   PROP System.String ErrorCode { get; set; } [JsonPropertyName("errorCode")]
   PROP System.String? ErrorMessage { get; set; } [JsonPropertyName("errorMessage")]
-  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.JobErrorStatisticsFilter : sealed class
   CTOR ()
@@ -4358,11 +4359,11 @@ TYPE Camunda.Orchestration.Sdk.JobErrorStatisticsQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.JobFailRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
   PROP System.Int32? Retries { get; set; } [JsonPropertyName("retries")]
   PROP System.Int64? RetryBackOff { get; set; } [JsonPropertyName("retryBackOff")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
   PROP System.String? ErrorMessage { get; set; } [JsonPropertyName("errorMessage")]
-  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.JobFailureException : sealed class base=System.Exception interfaces=[System.Runtime.Serialization.ISerializable]
   CTOR (System.String message, System.Int32? retries = null, System.Int64? retryBackOffMs = null)
@@ -4455,6 +4456,15 @@ TYPE Camunda.Orchestration.Sdk.JobKindFilterProperty : sealed class
   PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.JobKindEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.JobLeaseToken : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.JobLeaseToken>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.JobLeaseToken other)
+  METHOD static Camunda.Orchestration.Sdk.JobLeaseToken AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
 
 TYPE Camunda.Orchestration.Sdk.JobListenerEventTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -4684,8 +4694,8 @@ TYPE Camunda.Orchestration.Sdk.JobTypeStatisticsQueryResult : sealed class
 TYPE Camunda.Orchestration.Sdk.JobUpdateRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.JobChangeset Changeset { get; set; } [JsonPropertyName("changeset")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
   PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
-  PROP System.String? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
 
 TYPE Camunda.Orchestration.Sdk.JobWaitStateDetails : sealed class base=Camunda.Orchestration.Sdk.WaitStateDetails
   CTOR ()

@@ -44,7 +44,7 @@ public partial class CamundaClient
     /// </example>
     public async Task ActivateAdHocSubProcessActivitiesAsync(ElementInstanceKey adHocSubProcessInstanceKey, AdHocSubProcessActivateActivitiesInstruction body, CancellationToken ct = default)
     {
-        var path = $"/element-instances/ad-hoc-activities/{Uri.EscapeDataString(adHocSubProcessInstanceKey.ToString()!)}/activation";
+        var path = $"/element-instances/ad-hoc-activities/{Uri.EscapeDataString(FormatParam(adHocSubProcessInstanceKey))}/activation";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "activateAdHocSubProcessActivities", false, ct);
     }
 
@@ -136,7 +136,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignClientToGroupAsync(GroupId groupId, ClientId clientId, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/clients/{Uri.EscapeDataString(FormatParam(clientId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignClientToGroup", false, ct);
     }
 
@@ -175,7 +175,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignClientToTenantAsync(TenantId tenantId, ClientId clientId, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/clients/{Uri.EscapeDataString(FormatParam(clientId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignClientToTenant", false, ct);
     }
 
@@ -214,7 +214,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignGroupToTenantAsync(TenantId tenantId, GroupId groupId, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/groups/{Uri.EscapeDataString(FormatParam(groupId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignGroupToTenant", false, ct);
     }
 
@@ -247,7 +247,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignMappingRuleToGroupAsync(GroupId groupId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignMappingRuleToGroup", false, ct);
     }
 
@@ -284,7 +284,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignMappingRuleToTenantAsync(TenantId tenantId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignMappingRuleToTenant", false, ct);
     }
 
@@ -335,7 +335,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignProcessInstanceBusinessIdAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceBusinessIdAssignmentInstruction body, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/business-id-assignment";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/business-id-assignment";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "assignProcessInstanceBusinessId", false, ct);
     }
 
@@ -368,7 +368,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignRoleToClientAsync(RoleId roleId, ClientId clientId, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/clients/{Uri.EscapeDataString(FormatParam(clientId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToClient", false, ct);
     }
 
@@ -401,7 +401,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignRoleToGroupAsync(RoleId roleId, GroupId groupId, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/groups/{Uri.EscapeDataString(FormatParam(groupId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToGroup", false, ct);
     }
 
@@ -434,7 +434,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignRoleToMappingRuleAsync(RoleId roleId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToMappingRule", false, ct);
     }
 
@@ -473,7 +473,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignRoleToTenantAsync(TenantId tenantId, RoleId roleId, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/roles/{Uri.EscapeDataString(FormatParam(roleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToTenant", false, ct);
     }
 
@@ -506,7 +506,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignRoleToUserAsync(RoleId roleId, Username username, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/users/{Uri.EscapeDataString(FormatParam(username))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignRoleToUser", false, ct);
     }
 
@@ -550,7 +550,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignUserTaskAsync(UserTaskKey userTaskKey, UserTaskAssignmentRequest body, CancellationToken ct = default)
     {
-        var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/assignment";
+        var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/assignment";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "assignUserTask", false, ct);
     }
 
@@ -585,7 +585,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignUserToGroupAsync(GroupId groupId, Username username, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/users/{Uri.EscapeDataString(FormatParam(username))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignUserToGroup", false, ct);
     }
 
@@ -622,7 +622,7 @@ public partial class CamundaClient
     /// </example>
     public async Task AssignUserToTenantAsync(TenantId tenantId, Username username, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/users/{Uri.EscapeDataString(FormatParam(username))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, null, ct); return 0; }, "assignUserToTenant", false, ct);
     }
 
@@ -701,7 +701,7 @@ public partial class CamundaClient
     /// </example>
     public async Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
     {
-        var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/cancellation";
+        var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}/cancellation";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "cancelBatchOperation", false, ct);
     }
 
@@ -798,7 +798,7 @@ public partial class CamundaClient
     /// </example>
     public async Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, CancelProcessInstanceRequest body, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/cancellation";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/cancellation";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "cancelProcessInstance", false, ct);
     }
 
@@ -907,8 +907,8 @@ public partial class CamundaClient
     public async Task<ClusterModeChangeResponse> ChangeClusterModeAsync(Mode mode, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        queryParts.Add("mode=" + Uri.EscapeDataString(mode.ToString()!));
-        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        queryParts.Add("mode=" + Uri.EscapeDataString(FormatParam(mode)));
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(FormatParam(dryRun)));
         var path = queryParts.Count > 0 ? $"/mode?{string.Join("&", queryParts)}" : $"/mode";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterModeChangeResponse>(HttpMethod.Patch, path, null, ct), "changeClusterMode", false, ct);
     }
@@ -977,9 +977,9 @@ public partial class CamundaClient
     public async Task<ClusterModeChangeResponse> ChangeClusterModeAsClusterAdminAsync(Mode mode, string? physicalTenantId = null, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        queryParts.Add("mode=" + Uri.EscapeDataString(mode.ToString()!));
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
-        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        queryParts.Add("mode=" + Uri.EscapeDataString(FormatParam(mode)));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(FormatParam(dryRun)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/mode?{string.Join("&", queryParts)}" : $"/cluster/v2/mode";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterModeChangeResponse>(HttpMethod.Patch, path, null, ct), "changeClusterModeAsClusterAdmin", false, ct);
     }
@@ -1018,7 +1018,7 @@ public partial class CamundaClient
     /// </example>
     public async Task CompleteJobAsync(JobKey jobKey, JobCompletionRequest body, CancellationToken ct = default)
     {
-        var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}/completion";
+        var path = $"/jobs/{Uri.EscapeDataString(FormatParam(jobKey))}/completion";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "completeJob", true, ct);
     }
 
@@ -1056,7 +1056,7 @@ public partial class CamundaClient
     /// </example>
     public async Task CompleteUserTaskAsync(UserTaskKey userTaskKey, UserTaskCompletionRequest body, CancellationToken ct = default)
     {
-        var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/completion";
+        var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/completion";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "completeUserTask", true, ct);
     }
 
@@ -1406,8 +1406,8 @@ public partial class CamundaClient
     public async Task<DocumentReference> CreateDocumentAsync(MultipartFormDataContent content, string? storeId = null, DocumentId? documentId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
-        if (documentId != null) queryParts.Add("documentId=" + Uri.EscapeDataString(documentId.ToString()!));
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(FormatParam(storeId)));
+        if (documentId != null) queryParts.Add("documentId=" + Uri.EscapeDataString(FormatParam(documentId)));
         var path = queryParts.Count > 0 ? $"/documents?{string.Join("&", queryParts)}" : $"/documents";
         return await InvokeWithRetryAsync(() => SendMultipartAsync<DocumentReference>(path, content, ct), "createDocument", false, ct);
     }
@@ -1453,9 +1453,9 @@ public partial class CamundaClient
     public async Task<DocumentLink> CreateDocumentLinkAsync(DocumentId documentId, DocumentLinkRequest body, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
-        if (contentHash != null) queryParts.Add("contentHash=" + Uri.EscapeDataString(contentHash.ToString()!));
-        var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}/links?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}/links";
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(FormatParam(storeId)));
+        if (contentHash != null) queryParts.Add("contentHash=" + Uri.EscapeDataString(FormatParam(contentHash)));
+        var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(FormatParam(documentId))}/links?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(FormatParam(documentId))}/links";
         return await InvokeWithRetryAsync(() => SendAsync<DocumentLink>(HttpMethod.Post, path, body, ct), "createDocumentLink", false, ct);
     }
 
@@ -1522,7 +1522,7 @@ public partial class CamundaClient
     public async Task<DocumentCreationBatchResponse> CreateDocumentsAsync(MultipartFormDataContent content, string? storeId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(FormatParam(storeId)));
         var path = queryParts.Count > 0 ? $"/documents/batch?{string.Join("&", queryParts)}" : $"/documents/batch";
         return await InvokeWithRetryAsync(() => SendMultipartAsync<DocumentCreationBatchResponse>(path, content, ct), "createDocuments", false, ct);
     }
@@ -1566,7 +1566,7 @@ public partial class CamundaClient
     /// </example>
     public async Task CreateElementInstanceVariablesAsync(ElementInstanceKey elementInstanceKey, SetVariableRequest body, CancellationToken ct = default)
     {
-        var path = $"/element-instances/{Uri.EscapeDataString(elementInstanceKey.ToString()!)}/variables";
+        var path = $"/element-instances/{Uri.EscapeDataString(FormatParam(elementInstanceKey))}/variables";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, body, ct); return 0; }, "createElementInstanceVariables", false, ct);
     }
 
@@ -1988,7 +1988,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ClusterVariableResult> CreateTenantClusterVariableAsync(TenantId tenantId, CreateClusterVariableRequest body, CancellationToken ct = default)
     {
-        var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}";
+        var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Post, path, body, ct), "createTenantClusterVariable", false, ct);
     }
 
@@ -2070,7 +2070,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteAuthorizationAsync(AuthorizationKey authorizationKey, CancellationToken ct = default)
     {
-        var path = $"/authorizations/{Uri.EscapeDataString(authorizationKey.ToString()!)}";
+        var path = $"/authorizations/{Uri.EscapeDataString(FormatParam(authorizationKey))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteAuthorization", false, ct);
     }
 
@@ -2107,7 +2107,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteDecisionInstanceAsync(DecisionEvaluationKey decisionEvaluationKey, DeleteDecisionInstanceRequest body, CancellationToken ct = default)
     {
-        var path = $"/decision-instances/{Uri.EscapeDataString(decisionEvaluationKey.ToString()!)}/deletion";
+        var path = $"/decision-instances/{Uri.EscapeDataString(FormatParam(decisionEvaluationKey))}/deletion";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "deleteDecisionInstance", false, ct);
     }
 
@@ -2185,8 +2185,8 @@ public partial class CamundaClient
     public async Task DeleteDocumentAsync(DocumentId documentId, string? storeId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
-        var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}";
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(FormatParam(storeId)));
+        var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(FormatParam(documentId))}?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(FormatParam(documentId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteDocument", false, ct);
     }
 
@@ -2219,7 +2219,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteGlobalClusterVariableAsync(ClusterVariableName name, CancellationToken ct = default)
     {
-        var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
+        var path = $"/cluster-variables/global/{Uri.EscapeDataString(FormatParam(name))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteGlobalClusterVariable", false, ct);
     }
 
@@ -2254,7 +2254,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteGlobalTaskListenerAsync(GlobalListenerId id, CancellationToken ct = default)
     {
-        var path = $"/global-task-listeners/{Uri.EscapeDataString(id.ToString()!)}";
+        var path = $"/global-task-listeners/{Uri.EscapeDataString(FormatParam(id))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteGlobalTaskListener", false, ct);
     }
 
@@ -2287,7 +2287,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteGroupAsync(GroupId groupId, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteGroup", false, ct);
     }
 
@@ -2324,7 +2324,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteHistoryBackupAsync(BackupId backupId, CancellationToken ct = default)
     {
-        var path = $"/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}";
+        var path = $"/backups/history/{Uri.EscapeDataString(FormatParam(backupId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteHistoryBackup", false, ct);
     }
 
@@ -2362,8 +2362,8 @@ public partial class CamundaClient
     public async Task DeleteHistoryBackupAsClusterAdminAsync(BackupId backupId, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
-        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}";
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history/{Uri.EscapeDataString(FormatParam(backupId))}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history/{Uri.EscapeDataString(FormatParam(backupId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteHistoryBackupAsClusterAdmin", false, ct);
     }
 
@@ -2397,7 +2397,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteMappingRuleAsync(MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
-        var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
+        var path = $"/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteMappingRule", false, ct);
     }
 
@@ -2434,7 +2434,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/deletion";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/deletion";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "deleteProcessInstance", false, ct);
     }
 
@@ -2533,7 +2533,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<DeleteResourceResponse> DeleteResourceAsync(ResourceKey resourceKey, DeleteResourceRequest body, CancellationToken ct = default)
     {
-        var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/deletion";
+        var path = $"/resources/{Uri.EscapeDataString(FormatParam(resourceKey))}/deletion";
         return await InvokeWithRetryAsync(() => SendAsync<DeleteResourceResponse>(HttpMethod.Post, path, body, ct), "deleteResource", false, ct);
     }
 
@@ -2566,7 +2566,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteRoleAsync(RoleId roleId, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteRole", false, ct);
     }
 
@@ -2599,7 +2599,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteRuntimeBackupAsync(BackupId backupId, CancellationToken ct = default)
     {
-        var path = $"/backups/runtime/{Uri.EscapeDataString(backupId.ToString()!)}";
+        var path = $"/backups/runtime/{Uri.EscapeDataString(FormatParam(backupId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteRuntimeBackup", false, ct);
     }
 
@@ -2637,8 +2637,8 @@ public partial class CamundaClient
     public async Task DeleteRuntimeBackupAsClusterAdminAsync(BackupId backupId, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
-        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/runtime/{Uri.EscapeDataString(backupId.ToString()!)}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/runtime/{Uri.EscapeDataString(backupId.ToString()!)}";
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/runtime/{Uri.EscapeDataString(FormatParam(backupId))}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/runtime/{Uri.EscapeDataString(FormatParam(backupId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteRuntimeBackupAsClusterAdmin", false, ct);
     }
 
@@ -2722,7 +2722,7 @@ public partial class CamundaClient
     public async Task DeleteRuntimeBackupStateAsClusterAdminAsync(string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/backups/runtime/state?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/runtime/state";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteRuntimeBackupStateAsClusterAdmin", false, ct);
     }
@@ -2756,7 +2756,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteTenantAsync(TenantId tenantId, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteTenant", false, ct);
     }
 
@@ -2793,7 +2793,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteTenantClusterVariableAsync(TenantId tenantId, ClusterVariableName name, CancellationToken ct = default)
     {
-        var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
+        var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/{Uri.EscapeDataString(FormatParam(name))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteTenantClusterVariable", false, ct);
     }
 
@@ -2826,7 +2826,7 @@ public partial class CamundaClient
     /// </example>
     public async Task DeleteUserAsync(Username username, CancellationToken ct = default)
     {
-        var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
+        var path = $"/users/{Uri.EscapeDataString(FormatParam(username))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "deleteUser", false, ct);
     }
 
@@ -3045,7 +3045,7 @@ public partial class CamundaClient
     /// </example>
     public async Task FailJobAsync(JobKey jobKey, JobFailRequest body, CancellationToken ct = default)
     {
-        var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}/failure";
+        var path = $"/jobs/{Uri.EscapeDataString(FormatParam(jobKey))}/failure";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "failJob", true, ct);
     }
 
@@ -3080,7 +3080,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<AgentDefinitionResult> GetAgentDefinitionAsync(AgentDefinitionKey agentDefinitionKey, ConsistencyOptions<AgentDefinitionResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/agent-definitions/{Uri.EscapeDataString(agentDefinitionKey.ToString()!)}";
+        var path = $"/agent-definitions/{Uri.EscapeDataString(FormatParam(agentDefinitionKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getAgentDefinition", true,
@@ -3122,7 +3122,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<AgentInstanceResult> GetAgentInstanceAsync(AgentInstanceKey agentInstanceKey, ConsistencyOptions<AgentInstanceResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/agent-instances/{Uri.EscapeDataString(agentInstanceKey.ToString()!)}";
+        var path = $"/agent-instances/{Uri.EscapeDataString(FormatParam(agentInstanceKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getAgentInstance", true,
@@ -3164,7 +3164,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<AuditLogResult> GetAuditLogAsync(AuditLogKey auditLogKey, ConsistencyOptions<AuditLogResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/audit-logs/{Uri.EscapeDataString(auditLogKey.ToString()!)}";
+        var path = $"/audit-logs/{Uri.EscapeDataString(FormatParam(auditLogKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getAuditLog", true,
@@ -3245,7 +3245,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<AuthorizationResult> GetAuthorizationAsync(AuthorizationKey authorizationKey, ConsistencyOptions<AuthorizationResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/authorizations/{Uri.EscapeDataString(authorizationKey.ToString()!)}";
+        var path = $"/authorizations/{Uri.EscapeDataString(FormatParam(authorizationKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getAuthorization", true,
@@ -3291,7 +3291,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<BatchOperationResponse> GetBatchOperationAsync(BatchOperationKey batchOperationKey, ConsistencyOptions<BatchOperationResponse>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}";
+        var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getBatchOperation", true,
@@ -3529,7 +3529,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<DecisionDefinitionResult> GetDecisionDefinitionAsync(DecisionDefinitionKey decisionDefinitionKey, ConsistencyOptions<DecisionDefinitionResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/decision-definitions/{Uri.EscapeDataString(decisionDefinitionKey.ToString()!)}";
+        var path = $"/decision-definitions/{Uri.EscapeDataString(FormatParam(decisionDefinitionKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getDecisionDefinition", true,
@@ -3575,7 +3575,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<object> GetDecisionDefinitionXmlAsync(DecisionDefinitionKey decisionDefinitionKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/decision-definitions/{Uri.EscapeDataString(decisionDefinitionKey.ToString()!)}/xml";
+        var path = $"/decision-definitions/{Uri.EscapeDataString(FormatParam(decisionDefinitionKey))}/xml";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getDecisionDefinitionXML", true,
@@ -3621,7 +3621,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<DecisionInstanceGetQueryResult> GetDecisionInstanceAsync(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/decision-instances/{Uri.EscapeDataString(decisionEvaluationInstanceKey.ToString()!)}";
+        var path = $"/decision-instances/{Uri.EscapeDataString(FormatParam(decisionEvaluationInstanceKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getDecisionInstance", true,
@@ -3667,7 +3667,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<DecisionRequirementsResult> GetDecisionRequirementsAsync(DecisionRequirementsKey decisionRequirementsKey, ConsistencyOptions<DecisionRequirementsResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/decision-requirements/{Uri.EscapeDataString(decisionRequirementsKey.ToString()!)}";
+        var path = $"/decision-requirements/{Uri.EscapeDataString(FormatParam(decisionRequirementsKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getDecisionRequirements", true,
@@ -3713,7 +3713,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<object> GetDecisionRequirementsXmlAsync(DecisionRequirementsKey decisionRequirementsKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/decision-requirements/{Uri.EscapeDataString(decisionRequirementsKey.ToString()!)}/xml";
+        var path = $"/decision-requirements/{Uri.EscapeDataString(FormatParam(decisionRequirementsKey))}/xml";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getDecisionRequirementsXML", true,
@@ -3761,9 +3761,9 @@ public partial class CamundaClient
     public async Task<byte[]> GetDocumentAsync(DocumentId documentId, string? storeId = null, string? contentHash = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(storeId.ToString()!));
-        if (contentHash != null) queryParts.Add("contentHash=" + Uri.EscapeDataString(contentHash.ToString()!));
-        var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(documentId.ToString()!)}";
+        if (storeId != null) queryParts.Add("storeId=" + Uri.EscapeDataString(FormatParam(storeId)));
+        if (contentHash != null) queryParts.Add("contentHash=" + Uri.EscapeDataString(FormatParam(contentHash)));
+        var path = queryParts.Count > 0 ? $"/documents/{Uri.EscapeDataString(FormatParam(documentId))}?{string.Join("&", queryParts)}" : $"/documents/{Uri.EscapeDataString(FormatParam(documentId))}";
         return await InvokeWithRetryAsync(() => SendBinaryAsync(HttpMethod.Get, path, null, ct), "getDocument", false, ct);
     }
 
@@ -3802,7 +3802,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ElementInstanceResult> GetElementInstanceAsync(ElementInstanceKey elementInstanceKey, ConsistencyOptions<ElementInstanceResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/element-instances/{Uri.EscapeDataString(elementInstanceKey.ToString()!)}";
+        var path = $"/element-instances/{Uri.EscapeDataString(FormatParam(elementInstanceKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getElementInstance", true,
@@ -3887,7 +3887,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<FormResult> GetFormByKeyAsync(FormKey formKey, ConsistencyOptions<FormResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/forms/{Uri.EscapeDataString(formKey.ToString()!)}";
+        var path = $"/forms/{Uri.EscapeDataString(FormatParam(formKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getFormByKey", true,
@@ -3929,7 +3929,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ClusterVariableResult> GetGlobalClusterVariableAsync(ClusterVariableName name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
+        var path = $"/cluster-variables/global/{Uri.EscapeDataString(FormatParam(name))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getGlobalClusterVariable", true,
@@ -3979,9 +3979,9 @@ public partial class CamundaClient
     public async Task<GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(DateTimeOffset from, DateTimeOffset to, string? jobType = null, ConsistencyOptions<GlobalJobStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        queryParts.Add("from=" + Uri.EscapeDataString(from.ToString()!));
-        queryParts.Add("to=" + Uri.EscapeDataString(to.ToString()!));
-        if (jobType != null) queryParts.Add("jobType=" + Uri.EscapeDataString(jobType.ToString()!));
+        queryParts.Add("from=" + Uri.EscapeDataString(FormatParam(from)));
+        queryParts.Add("to=" + Uri.EscapeDataString(FormatParam(to)));
+        if (jobType != null) queryParts.Add("jobType=" + Uri.EscapeDataString(FormatParam(jobType)));
         var path = queryParts.Count > 0 ? $"/jobs/statistics/global?{string.Join("&", queryParts)}" : $"/jobs/statistics/global";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
@@ -4028,7 +4028,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<GlobalTaskListenerResult> GetGlobalTaskListenerAsync(GlobalListenerId id, ConsistencyOptions<GlobalTaskListenerResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/global-task-listeners/{Uri.EscapeDataString(id.ToString()!)}";
+        var path = $"/global-task-listeners/{Uri.EscapeDataString(FormatParam(id))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getGlobalTaskListener", true,
@@ -4070,7 +4070,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<GroupResult> GetGroupAsync(GroupId groupId, ConsistencyOptions<GroupResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getGroup", true,
@@ -4119,7 +4119,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<HistoryBackupInfo> GetHistoryBackupAsync(BackupId backupId, CancellationToken ct = default)
     {
-        var path = $"/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}";
+        var path = $"/backups/history/{Uri.EscapeDataString(FormatParam(backupId))}";
         return await InvokeWithRetryAsync(() => SendAsync<HistoryBackupInfo>(HttpMethod.Get, path, null, ct), "getHistoryBackup", false, ct);
     }
 
@@ -4169,8 +4169,8 @@ public partial class CamundaClient
     public async Task<ClusterHistoryBackupInfo> GetHistoryBackupAsClusterAdminAsync(BackupId backupId, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
-        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history/{Uri.EscapeDataString(backupId.ToString()!)}";
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history/{Uri.EscapeDataString(FormatParam(backupId))}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history/{Uri.EscapeDataString(FormatParam(backupId))}";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterHistoryBackupInfo>(HttpMethod.Get, path, null, ct), "getHistoryBackupAsClusterAdmin", false, ct);
     }
 
@@ -4206,7 +4206,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<IncidentResult> GetIncidentAsync(IncidentKey incidentKey, ConsistencyOptions<IncidentResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/incidents/{Uri.EscapeDataString(incidentKey.ToString()!)}";
+        var path = $"/incidents/{Uri.EscapeDataString(FormatParam(incidentKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getIncident", true,
@@ -4498,7 +4498,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<MappingRuleResult> GetMappingRuleAsync(MappingRuleId mappingRuleId, ConsistencyOptions<MappingRuleResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
+        var path = $"/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getMappingRule", true,
@@ -4544,7 +4544,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ProcessDefinitionResult> GetProcessDefinitionAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<ProcessDefinitionResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}";
+        var path = $"/process-definitions/{Uri.EscapeDataString(FormatParam(processDefinitionKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessDefinition", true,
@@ -4770,7 +4770,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionElementStatisticsQuery body, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/statistics/element-instances";
+        var path = $"/process-definitions/{Uri.EscapeDataString(FormatParam(processDefinitionKey))}/statistics/element-instances";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessDefinitionStatistics", false,
@@ -4816,7 +4816,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<object> GetProcessDefinitionXmlAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/xml";
+        var path = $"/process-definitions/{Uri.EscapeDataString(FormatParam(processDefinitionKey))}/xml";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessDefinitionXML", true,
@@ -4858,7 +4858,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ProcessInstanceResult> GetProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessInstance", true,
@@ -4904,7 +4904,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<object> GetProcessInstanceCallHierarchyAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/call-hierarchy";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/call-hierarchy";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessInstanceCallHierarchy", true,
@@ -4956,7 +4956,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ProcessInstanceSequenceFlowsQueryResult> GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/sequence-flows";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/sequence-flows";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessInstanceSequenceFlows", true,
@@ -5008,7 +5008,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ProcessInstanceElementStatisticsQueryResult> GetProcessInstanceStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/statistics/element-instances";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/statistics/element-instances";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessInstanceStatistics", true,
@@ -5169,7 +5169,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ProcessInstanceWaitStateStatisticsQueryResult> GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/statistics/wait-states";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/statistics/wait-states";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getProcessInstanceWaitStateStatistics", true,
@@ -5217,7 +5217,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ResourceResult> GetResourceAsync(ResourceKey resourceKey, ConsistencyOptions<ResourceResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}";
+        var path = $"/resources/{Uri.EscapeDataString(FormatParam(resourceKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getResource", true,
@@ -5267,7 +5267,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<object> GetResourceContentAsync(ResourceKey resourceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/content";
+        var path = $"/resources/{Uri.EscapeDataString(FormatParam(resourceKey))}/content";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getResourceContent", true,
@@ -5315,7 +5315,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<byte[]> GetResourceContentBinaryAsync(ResourceKey resourceKey, ConsistencyOptions<byte[]>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/resources/{Uri.EscapeDataString(resourceKey.ToString()!)}/content/binary";
+        var path = $"/resources/{Uri.EscapeDataString(FormatParam(resourceKey))}/content/binary";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getResourceContentBinary", true,
@@ -5396,7 +5396,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<RoleResult> GetRoleAsync(RoleId roleId, ConsistencyOptions<RoleResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getRole", true,
@@ -5448,7 +5448,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<BackupInfo> GetRuntimeBackupAsync(BackupId backupId, CancellationToken ct = default)
     {
-        var path = $"/backups/runtime/{Uri.EscapeDataString(backupId.ToString()!)}";
+        var path = $"/backups/runtime/{Uri.EscapeDataString(FormatParam(backupId))}";
         return await InvokeWithRetryAsync(() => SendAsync<BackupInfo>(HttpMethod.Get, path, null, ct), "getRuntimeBackup", false, ct);
     }
 
@@ -5498,8 +5498,8 @@ public partial class CamundaClient
     public async Task<ClusterRuntimeBackupInfo> GetRuntimeBackupAsClusterAdminAsync(BackupId backupId, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
-        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/runtime/{Uri.EscapeDataString(backupId.ToString()!)}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/runtime/{Uri.EscapeDataString(backupId.ToString()!)}";
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
+        var path = queryParts.Count > 0 ? $"/cluster/v2/backups/runtime/{Uri.EscapeDataString(FormatParam(backupId))}?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/runtime/{Uri.EscapeDataString(FormatParam(backupId))}";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterRuntimeBackupInfo>(HttpMethod.Get, path, null, ct), "getRuntimeBackupAsClusterAdmin", false, ct);
     }
 
@@ -5606,7 +5606,7 @@ public partial class CamundaClient
     public async Task<ClusterRuntimeBackupState> GetRuntimeBackupStateAsClusterAdminAsync(string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/backups/runtime/state?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/runtime/state";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterRuntimeBackupState>(HttpMethod.Get, path, null, ct), "getRuntimeBackupStateAsClusterAdmin", false, ct);
     }
@@ -5648,7 +5648,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<FormResult> GetStartProcessFormAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<FormResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/form";
+        var path = $"/process-definitions/{Uri.EscapeDataString(FormatParam(processDefinitionKey))}/form";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getStartProcessForm", true,
@@ -5765,7 +5765,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<TenantResult> GetTenantAsync(TenantId tenantId, ConsistencyOptions<TenantResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getTenant", true,
@@ -5813,7 +5813,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ClusterVariableResult> GetTenantClusterVariableAsync(TenantId tenantId, ClusterVariableName name, ConsistencyOptions<ClusterVariableResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
+        var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/{Uri.EscapeDataString(FormatParam(name))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getTenantClusterVariable", true,
@@ -5897,10 +5897,10 @@ public partial class CamundaClient
     public async Task<UsageMetricsResponse> GetUsageMetricsAsync(DateTimeOffset startTime, DateTimeOffset endTime, TenantId? tenantId = null, bool? withTenants = null, ConsistencyOptions<UsageMetricsResponse>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        queryParts.Add("startTime=" + Uri.EscapeDataString(startTime.ToString()!));
-        queryParts.Add("endTime=" + Uri.EscapeDataString(endTime.ToString()!));
-        if (tenantId != null) queryParts.Add("tenantId=" + Uri.EscapeDataString(tenantId.ToString()!));
-        if (withTenants != null) queryParts.Add("withTenants=" + Uri.EscapeDataString(withTenants.ToString()!));
+        queryParts.Add("startTime=" + Uri.EscapeDataString(FormatParam(startTime)));
+        queryParts.Add("endTime=" + Uri.EscapeDataString(FormatParam(endTime)));
+        if (tenantId != null) queryParts.Add("tenantId=" + Uri.EscapeDataString(FormatParam(tenantId)));
+        if (withTenants != null) queryParts.Add("withTenants=" + Uri.EscapeDataString(FormatParam(withTenants)));
         var path = queryParts.Count > 0 ? $"/system/usage-metrics?{string.Join("&", queryParts)}" : $"/system/usage-metrics";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
@@ -5943,7 +5943,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<UserResult> GetUserAsync(Username username, ConsistencyOptions<UserResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
+        var path = $"/users/{Uri.EscapeDataString(FormatParam(username))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getUser", true,
@@ -5985,7 +5985,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<UserTaskResult> GetUserTaskAsync(UserTaskKey userTaskKey, ConsistencyOptions<UserTaskResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}";
+        var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getUserTask", true,
@@ -6029,7 +6029,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<FormResult> GetUserTaskFormAsync(UserTaskKey userTaskKey, ConsistencyOptions<FormResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/form";
+        var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/form";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getUserTaskForm", true,
@@ -6075,7 +6075,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<VariableResult> GetVariableAsync(VariableKey variableKey, ConsistencyOptions<VariableResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/variables/{Uri.EscapeDataString(variableKey.ToString()!)}";
+        var path = $"/variables/{Uri.EscapeDataString(FormatParam(variableKey))}";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("getVariable", true,
@@ -6128,8 +6128,8 @@ public partial class CamundaClient
     public async Task<object> ListHistoryBackupsAsync(BackupIdPrefix? prefix = null, bool? verbose = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(prefix.ToString()!));
-        if (verbose != null) queryParts.Add("verbose=" + Uri.EscapeDataString(verbose.ToString()!));
+        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(FormatParam(prefix)));
+        if (verbose != null) queryParts.Add("verbose=" + Uri.EscapeDataString(FormatParam(verbose)));
         var path = queryParts.Count > 0 ? $"/backups/history?{string.Join("&", queryParts)}" : $"/backups/history";
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "listHistoryBackups", false, ct);
     }
@@ -6176,9 +6176,9 @@ public partial class CamundaClient
     public async Task<object> ListHistoryBackupsAsClusterAdminAsync(string? physicalTenantId = null, BackupIdPrefix? prefix = null, bool? verbose = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
-        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(prefix.ToString()!));
-        if (verbose != null) queryParts.Add("verbose=" + Uri.EscapeDataString(verbose.ToString()!));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
+        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(FormatParam(prefix)));
+        if (verbose != null) queryParts.Add("verbose=" + Uri.EscapeDataString(FormatParam(verbose)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history";
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "listHistoryBackupsAsClusterAdmin", false, ct);
     }
@@ -6223,7 +6223,7 @@ public partial class CamundaClient
     public async Task<object> ListRuntimeBackupsAsync(BackupIdPrefix? prefix = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(prefix.ToString()!));
+        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(FormatParam(prefix)));
         var path = queryParts.Count > 0 ? $"/backups/runtime?{string.Join("&", queryParts)}" : $"/backups/runtime";
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "listRuntimeBackups", false, ct);
     }
@@ -6270,8 +6270,8 @@ public partial class CamundaClient
     public async Task<object> ListRuntimeBackupsAsClusterAdminAsync(string? physicalTenantId = null, BackupIdPrefix? prefix = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
-        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(prefix.ToString()!));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
+        if (prefix != null) queryParts.Add("prefix=" + Uri.EscapeDataString(FormatParam(prefix)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/backups/runtime?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/runtime";
         return await InvokeWithRetryAsync(() => SendAsync<object>(HttpMethod.Get, path, null, ct), "listRuntimeBackupsAsClusterAdmin", false, ct);
     }
@@ -6389,7 +6389,7 @@ public partial class CamundaClient
     /// </example>
     public async Task MigrateProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceMigrationInstruction body, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/migration";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/migration";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "migrateProcessInstance", false, ct);
     }
 
@@ -6489,7 +6489,7 @@ public partial class CamundaClient
     /// </example>
     public async Task ModifyProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceModificationInstruction body, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/modification";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/modification";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "modifyProcessInstance", false, ct);
     }
 
@@ -6576,7 +6576,7 @@ public partial class CamundaClient
     public async Task PauseClusterExportingAsync(bool? soft = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (soft != null) queryParts.Add("soft=" + Uri.EscapeDataString(soft.ToString()!));
+        if (soft != null) queryParts.Add("soft=" + Uri.EscapeDataString(FormatParam(soft)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/exporting/pause?{string.Join("&", queryParts)}" : $"/cluster/v2/exporting/pause";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "pauseClusterExporting", false, ct);
     }
@@ -6624,7 +6624,7 @@ public partial class CamundaClient
     public async Task PauseExportingAsync(bool? soft = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (soft != null) queryParts.Add("soft=" + Uri.EscapeDataString(soft.ToString()!));
+        if (soft != null) queryParts.Add("soft=" + Uri.EscapeDataString(FormatParam(soft)));
         var path = queryParts.Count > 0 ? $"/exporting/pause?{string.Join("&", queryParts)}" : $"/exporting/pause";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "pauseExporting", false, ct);
     }
@@ -6801,7 +6801,7 @@ public partial class CamundaClient
     /// </example>
     public async Task ResolveIncidentAsync(IncidentKey incidentKey, IncidentResolutionRequest body, CancellationToken ct = default)
     {
-        var path = $"/incidents/{Uri.EscapeDataString(incidentKey.ToString()!)}/resolution";
+        var path = $"/incidents/{Uri.EscapeDataString(FormatParam(incidentKey))}/resolution";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "resolveIncident", false, ct);
     }
 
@@ -6883,7 +6883,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/incident-resolution";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/incident-resolution";
         return await InvokeWithRetryAsync(() => SendAsync<BatchOperationCreatedResult>(HttpMethod.Post, path, null, ct), "resolveProcessInstanceIncidents", false, ct);
     }
 
@@ -7041,7 +7041,7 @@ public partial class CamundaClient
     public async Task<ClusterRestoreResponse> RestoreAsync(RestoreRequest body, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(FormatParam(dryRun)));
         var path = queryParts.Count > 0 ? $"/restore?{string.Join("&", queryParts)}" : $"/restore";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterRestoreResponse>(HttpMethod.Post, path, body, ct), "restore", false, ct);
     }
@@ -7120,8 +7120,8 @@ public partial class CamundaClient
     public async Task<ClusterRestoreResponse> RestoreAsClusterAdminAsync(ClusterRestoreRequest body, string? physicalTenantId = null, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
-        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(FormatParam(dryRun)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/restore?{string.Join("&", queryParts)}" : $"/cluster/v2/restore";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterRestoreResponse>(HttpMethod.Post, path, body, ct), "restoreAsClusterAdmin", false, ct);
     }
@@ -7157,7 +7157,7 @@ public partial class CamundaClient
     /// </example>
     public async Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
     {
-        var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/resumption";
+        var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}/resumption";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "resumeBatchOperation", false, ct);
     }
 
@@ -7267,7 +7267,7 @@ public partial class CamundaClient
     /// </example>
     public async Task ResumeProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ResumeProcessInstanceRequest body, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/resumption";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/resumption";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "resumeProcessInstance", false, ct);
     }
 
@@ -7459,7 +7459,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<AgentInstanceHistorySearchQueryResult> SearchAgentInstanceHistoryAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistorySearchQuery body, ConsistencyOptions<AgentInstanceHistorySearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/agent-instances/{Uri.EscapeDataString(agentInstanceKey.ToString()!)}/history/search";
+        var path = $"/agent-instances/{Uri.EscapeDataString(FormatParam(agentInstanceKey))}/history/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchAgentInstanceHistory", false,
@@ -7771,7 +7771,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<GroupClientSearchResult> SearchClientsForGroupAsync(GroupId groupId, GroupClientSearchQueryRequest body, ConsistencyOptions<GroupClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/search";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForGroup", false,
@@ -7825,7 +7825,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<RoleClientSearchResult> SearchClientsForRoleAsync(RoleId roleId, RoleClientSearchQueryRequest body, ConsistencyOptions<RoleClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/search";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForRole", false,
@@ -7879,7 +7879,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<TenantClientSearchResult> SearchClientsForTenantAsync(TenantId tenantId, TenantClientSearchQueryRequest body, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/search";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchClientsForTenant", false,
@@ -7931,7 +7931,7 @@ public partial class CamundaClient
     public async Task<ClusterVariableSearchQueryResult> SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<ClusterVariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(truncateValues.ToString()!));
+        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(FormatParam(truncateValues)));
         var path = queryParts.Count > 0 ? $"/cluster-variables/search?{string.Join("&", queryParts)}" : $"/cluster-variables/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
@@ -8201,7 +8201,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<IncidentSearchQueryResult> SearchElementInstanceIncidentsAsync(ElementInstanceKey elementInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/element-instances/{Uri.EscapeDataString(elementInstanceKey.ToString()!)}/incidents/search";
+        var path = $"/element-instances/{Uri.EscapeDataString(FormatParam(elementInstanceKey))}/incidents/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchElementInstanceIncidents", false,
@@ -8442,7 +8442,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<TenantGroupSearchResult> SearchGroupIdsForTenantAsync(TenantId tenantId, TenantGroupSearchQueryRequest body, ConsistencyOptions<TenantGroupSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/groups/search";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/groups/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchGroupIdsForTenant", false,
@@ -8546,7 +8546,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(RoleId roleId, RoleGroupSearchQueryRequest body, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/groups/search";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/groups/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchGroupsForRole", false,
@@ -8754,7 +8754,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<GroupMappingRuleSearchResult> SearchMappingRulesForGroupAsync(GroupId groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<GroupMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/search";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForGroup", false,
@@ -8808,7 +8808,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<RoleMappingRuleSearchResult> SearchMappingRulesForRoleAsync(RoleId roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<RoleMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/search";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForRole", false,
@@ -8862,7 +8862,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<TenantMappingRuleSearchResult> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<TenantMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/search";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchMappingRulesForTenant", false,
@@ -9033,7 +9033,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ProcessDefinitionVariableNameSearchQueryResult> SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionVariableNameSearchQuery body, ConsistencyOptions<ProcessDefinitionVariableNameSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-definitions/{Uri.EscapeDataString(processDefinitionKey.ToString()!)}/variable-names/search";
+        var path = $"/process-definitions/{Uri.EscapeDataString(FormatParam(processDefinitionKey))}/variable-names/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchProcessDefinitionVariableNames", false,
@@ -9145,7 +9145,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/incidents/search";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/incidents/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchProcessInstanceIncidents", false,
@@ -9353,7 +9353,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<GroupRoleSearchResult> SearchRolesForGroupAsync(GroupId groupId, RoleSearchQueryRequest body, ConsistencyOptions<GroupRoleSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/roles/search";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchRolesForGroup", false,
@@ -9407,7 +9407,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<TenantRoleSearchResult> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<TenantRoleSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/search";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchRolesForTenant", false,
@@ -9511,7 +9511,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<AuditLogSearchQueryResult> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, UserTaskAuditLogSearchQueryRequest body, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/audit-logs/search";
+        var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/audit-logs/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUserTaskAuditLogs", false,
@@ -9572,8 +9572,8 @@ public partial class CamundaClient
     public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, UserTaskEffectiveVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(truncateValues.ToString()!));
-        var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/effective-variables/search";
+        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(FormatParam(truncateValues)));
+        var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/effective-variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/effective-variables/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUserTaskEffectiveVariables", false,
@@ -9635,8 +9635,8 @@ public partial class CamundaClient
     public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, UserTaskVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(truncateValues.ToString()!));
-        var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/variables/search";
+        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(FormatParam(truncateValues)));
+        var path = queryParts.Count > 0 ? $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/variables/search?{string.Join("&", queryParts)}" : $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/variables/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUserTaskVariables", false,
@@ -9790,7 +9790,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<GroupUserSearchResult> SearchUsersForGroupAsync(GroupId groupId, GroupUserSearchQueryRequest body, ConsistencyOptions<GroupUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/search";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForGroup", false,
@@ -9844,7 +9844,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<RoleUserSearchResult> SearchUsersForRoleAsync(RoleId roleId, RoleUserSearchQueryRequest body, ConsistencyOptions<RoleUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/search";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForRole", false,
@@ -9898,7 +9898,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<TenantUserSearchResult> SearchUsersForTenantAsync(TenantId tenantId, TenantUserSearchQueryRequest body, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/users/search";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
             return await EventualPoller.PollAsync("searchUsersForTenant", false,
@@ -9957,7 +9957,7 @@ public partial class CamundaClient
     public async Task<VariableSearchQueryResult> SearchVariablesAsync(VariableSearchQuery body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(truncateValues.ToString()!));
+        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(FormatParam(truncateValues)));
         var path = queryParts.Count > 0 ? $"/variables/search?{string.Join("&", queryParts)}" : $"/variables/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
         {
@@ -10000,7 +10000,7 @@ public partial class CamundaClient
     /// </example>
     public async Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
     {
-        var path = $"/batch-operations/{Uri.EscapeDataString(batchOperationKey.ToString()!)}/suspension";
+        var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}/suspension";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "suspendBatchOperation", false, ct);
     }
 
@@ -10041,7 +10041,7 @@ public partial class CamundaClient
     /// </example>
     public async Task SuspendProcessInstanceAsync(ProcessInstanceKey processInstanceKey, SuspendProcessInstanceRequest body, CancellationToken ct = default)
     {
-        var path = $"/process-instances/{Uri.EscapeDataString(processInstanceKey.ToString()!)}/suspension";
+        var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/suspension";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "suspendProcessInstance", false, ct);
     }
 
@@ -10182,7 +10182,7 @@ public partial class CamundaClient
     public async Task<ClusterRuntimeBackupState> SyncRuntimeBackupStateAsClusterAdminAsync(string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/backups/runtime/state/sync?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/runtime/state/sync";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterRuntimeBackupState>(HttpMethod.Post, path, null, ct), "syncRuntimeBackupStateAsClusterAdmin", false, ct);
     }
@@ -10299,7 +10299,7 @@ public partial class CamundaClient
     public async Task<ClusterTakeHistoryBackupResponse> TakeHistoryBackupAsClusterAdminAsync(TakeHistoryBackupRequest body, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/backups/history?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/history";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterTakeHistoryBackupResponse>(HttpMethod.Post, path, body, ct), "takeHistoryBackupAsClusterAdmin", false, ct);
     }
@@ -10428,7 +10428,7 @@ public partial class CamundaClient
     public async Task<ClusterTakeRuntimeBackupResponse> TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest body, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(physicalTenantId.ToString()!));
+        if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/backups/runtime?{string.Join("&", queryParts)}" : $"/cluster/v2/backups/runtime";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterTakeRuntimeBackupResponse>(HttpMethod.Post, path, body, ct), "takeRuntimeBackupAsClusterAdmin", false, ct);
     }
@@ -10475,7 +10475,7 @@ public partial class CamundaClient
     /// </example>
     public async Task ThrowJobErrorAsync(JobKey jobKey, JobErrorRequest body, CancellationToken ct = default)
     {
-        var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}/error";
+        var path = $"/jobs/{Uri.EscapeDataString(FormatParam(jobKey))}/error";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "throwJobError", true, ct);
     }
 
@@ -10541,7 +10541,7 @@ public partial class CamundaClient
     public async Task<ClusterBalanceResponse> TriggerClusterRebalanceAsync(ClusterRebalanceRequest body, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
-        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(dryRun.ToString()!));
+        if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(FormatParam(dryRun)));
         var path = queryParts.Count > 0 ? $"/cluster/v2/rebalance?{string.Join("&", queryParts)}" : $"/cluster/v2/rebalance";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterBalanceResponse>(HttpMethod.Post, path, body, ct), "triggerClusterRebalance", false, ct);
     }
@@ -10577,7 +10577,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignClientFromGroupAsync(GroupId groupId, ClientId clientId, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/clients/{Uri.EscapeDataString(FormatParam(clientId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignClientFromGroup", false, ct);
     }
 
@@ -10616,7 +10616,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignClientFromTenantAsync(TenantId tenantId, ClientId clientId, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/clients/{Uri.EscapeDataString(FormatParam(clientId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignClientFromTenant", false, ct);
     }
 
@@ -10655,7 +10655,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignGroupFromTenantAsync(TenantId tenantId, GroupId groupId, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/groups/{Uri.EscapeDataString(FormatParam(groupId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignGroupFromTenant", false, ct);
     }
 
@@ -10688,7 +10688,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignMappingRuleFromGroupAsync(GroupId groupId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignMappingRuleFromGroup", false, ct);
     }
 
@@ -10725,7 +10725,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignMappingRuleFromTenantAsync(TenantId tenantId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignMappingRuleFromTenant", false, ct);
     }
 
@@ -10758,7 +10758,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignRoleFromClientAsync(RoleId roleId, ClientId clientId, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/clients/{Uri.EscapeDataString(clientId.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/clients/{Uri.EscapeDataString(FormatParam(clientId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromClient", false, ct);
     }
 
@@ -10791,7 +10791,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignRoleFromGroupAsync(RoleId roleId, GroupId groupId, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/groups/{Uri.EscapeDataString(FormatParam(groupId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromGroup", false, ct);
     }
 
@@ -10824,7 +10824,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignRoleFromMappingRuleAsync(RoleId roleId, MappingRuleId mappingRuleId, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromMappingRule", false, ct);
     }
 
@@ -10864,7 +10864,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignRoleFromTenantAsync(TenantId tenantId, RoleId roleId, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/roles/{Uri.EscapeDataString(FormatParam(roleId))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromTenant", false, ct);
     }
 
@@ -10897,7 +10897,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignRoleFromUserAsync(RoleId roleId, Username username, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/users/{Uri.EscapeDataString(FormatParam(username))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignRoleFromUser", false, ct);
     }
 
@@ -10932,7 +10932,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignUserFromGroupAsync(GroupId groupId, Username username, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/users/{Uri.EscapeDataString(FormatParam(username))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignUserFromGroup", false, ct);
     }
 
@@ -10971,7 +10971,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignUserFromTenantAsync(TenantId tenantId, Username username, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/users/{Uri.EscapeDataString(username.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/users/{Uri.EscapeDataString(FormatParam(username))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignUserFromTenant", false, ct);
     }
 
@@ -11005,7 +11005,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UnassignUserTaskAsync(UserTaskKey userTaskKey, CancellationToken ct = default)
     {
-        var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}/assignee";
+        var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/assignee";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Delete, path, null, ct); return 0; }, "unassignUserTask", false, ct);
     }
 
@@ -11113,7 +11113,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<AgentInstanceUpdateResult> UpdateAgentInstanceAsync(AgentInstanceKey agentInstanceKey, AgentInstanceUpdateRequest body, CancellationToken ct = default)
     {
-        var path = $"/agent-instances/{Uri.EscapeDataString(agentInstanceKey.ToString()!)}";
+        var path = $"/agent-instances/{Uri.EscapeDataString(FormatParam(agentInstanceKey))}";
         return await InvokeWithRetryAsync(() => SendAsync<AgentInstanceUpdateResult>(HttpMethod.Patch, path, body, ct), "updateAgentInstance", false, ct);
     }
 
@@ -11164,7 +11164,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UpdateAuthorizationAsync(AuthorizationKey authorizationKey, AuthorizationRequest body, CancellationToken ct = default)
     {
-        var path = $"/authorizations/{Uri.EscapeDataString(authorizationKey.ToString()!)}";
+        var path = $"/authorizations/{Uri.EscapeDataString(FormatParam(authorizationKey))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Put, path, body, ct); return 0; }, "updateAuthorization", false, ct);
     }
 
@@ -11213,7 +11213,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ClusterVariableResult> UpdateGlobalClusterVariableAsync(ClusterVariableName name, UpdateClusterVariableRequest body, CancellationToken ct = default)
     {
-        var path = $"/cluster-variables/global/{Uri.EscapeDataString(name.ToString()!)}";
+        var path = $"/cluster-variables/global/{Uri.EscapeDataString(FormatParam(name))}";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Put, path, body, ct), "updateGlobalClusterVariable", false, ct);
     }
 
@@ -11262,7 +11262,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<GlobalTaskListenerResult> UpdateGlobalTaskListenerAsync(GlobalListenerId id, UpdateGlobalTaskListenerRequest body, CancellationToken ct = default)
     {
-        var path = $"/global-task-listeners/{Uri.EscapeDataString(id.ToString()!)}";
+        var path = $"/global-task-listeners/{Uri.EscapeDataString(FormatParam(id))}";
         return await InvokeWithRetryAsync(() => SendAsync<GlobalTaskListenerResult>(HttpMethod.Put, path, body, ct), "updateGlobalTaskListener", false, ct);
     }
 
@@ -11301,7 +11301,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<GroupUpdateResult> UpdateGroupAsync(GroupId groupId, GroupUpdateRequest body, CancellationToken ct = default)
     {
-        var path = $"/groups/{Uri.EscapeDataString(groupId.ToString()!)}";
+        var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}";
         return await InvokeWithRetryAsync(() => SendAsync<GroupUpdateResult>(HttpMethod.Put, path, body, ct), "updateGroup", false, ct);
     }
 
@@ -11344,7 +11344,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UpdateJobAsync(JobKey jobKey, JobUpdateRequest body, CancellationToken ct = default)
     {
-        var path = $"/jobs/{Uri.EscapeDataString(jobKey.ToString()!)}";
+        var path = $"/jobs/{Uri.EscapeDataString(FormatParam(jobKey))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Patch, path, body, ct); return 0; }, "updateJob", false, ct);
     }
 
@@ -11442,7 +11442,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<MappingRuleUpdateResult> UpdateMappingRuleAsync(MappingRuleId mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
     {
-        var path = $"/mapping-rules/{Uri.EscapeDataString(mappingRuleId.ToString()!)}";
+        var path = $"/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         return await InvokeWithRetryAsync(() => SendAsync<MappingRuleUpdateResult>(HttpMethod.Put, path, body, ct), "updateMappingRule", false, ct);
     }
 
@@ -11481,7 +11481,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<RoleUpdateResult> UpdateRoleAsync(RoleId roleId, RoleUpdateRequest body, CancellationToken ct = default)
     {
-        var path = $"/roles/{Uri.EscapeDataString(roleId.ToString()!)}";
+        var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}";
         return await InvokeWithRetryAsync(() => SendAsync<RoleUpdateResult>(HttpMethod.Put, path, body, ct), "updateRole", false, ct);
     }
 
@@ -11524,7 +11524,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<TenantUpdateResult> UpdateTenantAsync(TenantId tenantId, TenantUpdateRequest body, CancellationToken ct = default)
     {
-        var path = $"/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}";
+        var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}";
         return await InvokeWithRetryAsync(() => SendAsync<TenantUpdateResult>(HttpMethod.Put, path, body, ct), "updateTenant", false, ct);
     }
 
@@ -11575,7 +11575,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<ClusterVariableResult> UpdateTenantClusterVariableAsync(TenantId tenantId, ClusterVariableName name, UpdateClusterVariableRequest body, CancellationToken ct = default)
     {
-        var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(tenantId.ToString()!)}/{Uri.EscapeDataString(name.ToString()!)}";
+        var path = $"/cluster-variables/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/{Uri.EscapeDataString(FormatParam(name))}";
         return await InvokeWithRetryAsync(() => SendAsync<ClusterVariableResult>(HttpMethod.Put, path, body, ct), "updateTenantClusterVariable", false, ct);
     }
 
@@ -11620,7 +11620,7 @@ public partial class CamundaClient
     /// </example>
     public async Task<UserUpdateResult> UpdateUserAsync(Username username, UserUpdateRequest body, CancellationToken ct = default)
     {
-        var path = $"/users/{Uri.EscapeDataString(username.ToString()!)}";
+        var path = $"/users/{Uri.EscapeDataString(FormatParam(username))}";
         return await InvokeWithRetryAsync(() => SendAsync<UserUpdateResult>(HttpMethod.Put, path, body, ct), "updateUser", false, ct);
     }
 
@@ -11658,7 +11658,7 @@ public partial class CamundaClient
     /// </example>
     public async Task UpdateUserTaskAsync(UserTaskKey userTaskKey, UserTaskUpdateRequest body, CancellationToken ct = default)
     {
-        var path = $"/user-tasks/{Uri.EscapeDataString(userTaskKey.ToString()!)}";
+        var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Patch, path, body, ct); return 0; }, "updateUserTask", false, ct);
     }
 
