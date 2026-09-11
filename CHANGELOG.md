@@ -1,3 +1,11 @@
+## [9.2.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.2.1...v9.2.2) (2026-09-11)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts ([beebccf](https://github.com/camunda/orchestration-cluster-api-csharp/commit/beebccff6db138b16289b5a16f4c234a3013e0a1))
+* serialize query and path params with invariant ISO 8601 format ([#435](https://github.com/camunda/orchestration-cluster-api-csharp/issues/435)) ([379f7a8](https://github.com/camunda/orchestration-cluster-api-csharp/commit/379f7a8d34377d2171150871014927c968e08a09)), closes [#433](https://github.com/camunda/orchestration-cluster-api-csharp/issues/433)
+
 ## [9.2.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.2.0...v9.2.1) (2026-09-08)
 
 
