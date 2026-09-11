@@ -161,7 +161,7 @@ echoed back in the response.</p>
     AgentInstanceKey agentInstanceKey,
     ElementInstanceKey elementInstanceKey,
     JobKey jobKey,
-    string jobLease)
+    JobLeaseToken jobLease)
 {
     using var client = CamundaClient.Create();
 
@@ -208,7 +208,7 @@ echoed back in the response.</p>
     AgentInstanceKey agentInstanceKey,
     ElementInstanceKey elementInstanceKey,
     JobKey jobKey,
-    string jobLease)
+    JobLeaseToken jobLease)
 {
     using var client = CamundaClient.Create();
 <pre><code>// Conversation turns are appended through the same history batch used at

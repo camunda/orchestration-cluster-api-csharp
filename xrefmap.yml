@@ -18559,6 +18559,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PHYSICALTENANTDISABLED
   fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PHYSICALTENANTDISABLED
   nameWithType: ClusterRebalanceOperationPartitionResult.PHYSICALTENANTDISABLED
+- uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PHYSICALTENANTRECOVERING
+  name: PHYSICALTENANTRECOVERING
+  href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_PHYSICALTENANTRECOVERING
+  commentId: F:Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PHYSICALTENANTRECOVERING
+  fullName: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.PHYSICALTENANTRECOVERING
+  nameWithType: ClusterRebalanceOperationPartitionResult.PHYSICALTENANTRECOVERING
 - uid: Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.REPLICATIONTIMEDOUT
   name: REPLICATIONTIMEDOUT
   href: api/Camunda.Orchestration.Sdk.ClusterRebalanceOperationPartitionResult.html#Camunda_Orchestration_Sdk_ClusterRebalanceOperationPartitionResult_REPLICATIONTIMEDOUT
@@ -34468,6 +34474,66 @@ references:
   fullName.vb: Camunda.Orchestration.Sdk.JobKindFilterProperty.CType
   nameWithType: JobKindFilterProperty.implicit operator
   nameWithType.vb: JobKindFilterProperty.CType
+- uid: Camunda.Orchestration.Sdk.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobLeaseToken.html
+  commentId: T:Camunda.Orchestration.Sdk.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobLeaseToken
+  nameWithType: JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.JobLeaseToken.AssumeExists(System.String)
+  name: AssumeExists(string)
+  href: api/Camunda.Orchestration.Sdk.JobLeaseToken.AssumeExists.html#Camunda_Orchestration_Sdk_JobLeaseToken_AssumeExists_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.JobLeaseToken.AssumeExists(System.String)
+  name.vb: AssumeExists(String)
+  fullName: Camunda.Orchestration.Sdk.JobLeaseToken.AssumeExists(string)
+  fullName.vb: Camunda.Orchestration.Sdk.JobLeaseToken.AssumeExists(String)
+  nameWithType: JobLeaseToken.AssumeExists(string)
+  nameWithType.vb: JobLeaseToken.AssumeExists(String)
+- uid: Camunda.Orchestration.Sdk.JobLeaseToken.AssumeExists*
+  name: AssumeExists
+  href: api/Camunda.Orchestration.Sdk.JobLeaseToken.AssumeExists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobLeaseToken.AssumeExists
+  fullName: Camunda.Orchestration.Sdk.JobLeaseToken.AssumeExists
+  nameWithType: JobLeaseToken.AssumeExists
+- uid: Camunda.Orchestration.Sdk.JobLeaseToken.IsValid(System.String)
+  name: IsValid(string)
+  href: api/Camunda.Orchestration.Sdk.JobLeaseToken.IsValid.html#Camunda_Orchestration_Sdk_JobLeaseToken_IsValid_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.JobLeaseToken.IsValid(System.String)
+  name.vb: IsValid(String)
+  fullName: Camunda.Orchestration.Sdk.JobLeaseToken.IsValid(string)
+  fullName.vb: Camunda.Orchestration.Sdk.JobLeaseToken.IsValid(String)
+  nameWithType: JobLeaseToken.IsValid(string)
+  nameWithType.vb: JobLeaseToken.IsValid(String)
+- uid: Camunda.Orchestration.Sdk.JobLeaseToken.IsValid*
+  name: IsValid
+  href: api/Camunda.Orchestration.Sdk.JobLeaseToken.IsValid.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobLeaseToken.IsValid
+  fullName: Camunda.Orchestration.Sdk.JobLeaseToken.IsValid
+  nameWithType: JobLeaseToken.IsValid
+- uid: Camunda.Orchestration.Sdk.JobLeaseToken.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.JobLeaseToken.ToString.html#Camunda_Orchestration_Sdk_JobLeaseToken_ToString
+  commentId: M:Camunda.Orchestration.Sdk.JobLeaseToken.ToString
+  fullName: Camunda.Orchestration.Sdk.JobLeaseToken.ToString()
+  nameWithType: JobLeaseToken.ToString()
+- uid: Camunda.Orchestration.Sdk.JobLeaseToken.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.JobLeaseToken.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobLeaseToken.ToString
+  fullName: Camunda.Orchestration.Sdk.JobLeaseToken.ToString
+  nameWithType: JobLeaseToken.ToString
+- uid: Camunda.Orchestration.Sdk.JobLeaseToken.Value
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.JobLeaseToken.Value.html#Camunda_Orchestration_Sdk_JobLeaseToken_Value
+  commentId: P:Camunda.Orchestration.Sdk.JobLeaseToken.Value
+  fullName: Camunda.Orchestration.Sdk.JobLeaseToken.Value
+  nameWithType: JobLeaseToken.Value
+- uid: Camunda.Orchestration.Sdk.JobLeaseToken.Value*
+  name: Value
+  href: api/Camunda.Orchestration.Sdk.JobLeaseToken.Value.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobLeaseToken.Value
+  fullName: Camunda.Orchestration.Sdk.JobLeaseToken.Value
+  nameWithType: JobLeaseToken.Value
 - uid: Camunda.Orchestration.Sdk.JobListenerEventTypeEnum
   name: JobListenerEventTypeEnum
   href: api/Camunda.Orchestration.Sdk.JobListenerEventTypeEnum.html

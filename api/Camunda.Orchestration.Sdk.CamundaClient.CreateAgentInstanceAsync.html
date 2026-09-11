@@ -157,7 +157,7 @@ be used in subsequent update and query calls.</p>
 <pre><code class="lang-csharp">public static async Task CreateAgentInstanceExample(
     ElementInstanceKey elementInstanceKey,
     JobKey jobKey,
-    string jobLease)
+    JobLeaseToken jobLease)
 {
     using var client = CamundaClient.Create();
 
@@ -204,7 +204,7 @@ be used in subsequent update and query calls.</p>
 <pre><code class="lang-csharp">public static async Task CreateAgentInstanceExample(
     ElementInstanceKey elementInstanceKey,
     JobKey jobKey,
-    string jobLease)
+    JobLeaseToken jobLease)
 {
     using var client = CamundaClient.Create();
 <pre><code>// The agent's model, provider, system prompt and limits are supplied as a
