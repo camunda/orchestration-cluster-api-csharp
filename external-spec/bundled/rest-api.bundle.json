@@ -37420,6 +37420,7 @@
               "$or": {
                 "description": "Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  \"$or\": [\n    { \"groupId\": \"group-1\" },\n    { \"groupId\": \"group-2\" }\n  ]\n}\n```\nThis matches groups whose <code>groupId</code> is <em>group-1</em> or <em>group-2</em>.\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n",
                 "type": "array",
+                "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/GroupFilterFields"
                 }
@@ -42206,6 +42207,7 @@
               "$or": {
                 "description": "Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  \"$or\": [\n    { \"mappingRuleId\": \"rule-1\" },\n    { \"mappingRuleId\": \"rule-2\" }\n  ]\n}\n```\nThis matches mapping rules whose <code>mappingRuleId</code> is <em>rule-1</em> or <em>rule-2</em>.\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n",
                 "type": "array",
+                "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/MappingRuleFilterFields"
                 }
@@ -45953,6 +45955,7 @@
               "$or": {
                 "description": "Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  \"name\": \"Admin\",\n  \"$or\": [\n    { \"roleId\": \"role-1\" },\n    { \"roleId\": \"role-2\" }\n  ]\n}\n```\nThis matches roles that:\n\n<ul style=\"padding-left: 20px; margin-left: 20px;\">\n  <li style=\"list-style-type: disc;\">have name equal to <em>Admin</em></li>\n  <li style=\"list-style-type: disc;\">and match either:\n    <ul style=\"padding-left: 20px; margin-left: 20px;\">\n      <li style=\"list-style-type: circle;\"><code>roleId</code> is <em>role-1</em>, or</li>\n      <li style=\"list-style-type: circle;\"><code>roleId</code> is <em>role-2</em></li>\n    </ul>\n  </li>\n</ul>\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n",
                 "type": "array",
+                "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/RoleFilterFields"
                 }
@@ -48585,6 +48588,7 @@
               "$or": {
                 "description": "Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  \"$or\": [\n    { \"username\": \"user-1\" },\n    { \"username\": \"user-2\" }\n  ]\n}\n```\nThis matches users whose <code>username</code> is <em>user-1</em> or <em>user-2</em>.\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n",
                 "type": "array",
+                "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/UserFilterFields"
                 }
