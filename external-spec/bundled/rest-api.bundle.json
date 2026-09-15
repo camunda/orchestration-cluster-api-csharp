@@ -13668,7 +13668,7 @@
           }
         ],
         "summary": "Cancel process instances (batch)",
-        "description": "Cancels multiple running process instances.\nSince only ACTIVE root instances can be cancelled, any given filters for state and\nparentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+        "description": "Cancels multiple active or suspended process instances.\nSince only ACTIVE and SUSPENDED root instances can be cancelled, any given filters for state and\nparentProcessInstanceKey are ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -39504,6 +39504,10 @@
           "leaseToken": {
             "description": "The lease token identifying this activation. This is `null` when the job was activated without a lease.\n",
             "nullable": true,
+            "x-present-when": {
+              "request": "withLease",
+              "equals": true
+            },
             "allOf": [
               {
                 "$ref": "#/components/schemas/JobLeaseToken"

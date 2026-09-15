@@ -804,8 +804,8 @@ public partial class CamundaClient
 
     /// <summary>
     /// Cancel process instances (batch)
-    /// Cancels multiple running process instances.
-    /// Since only ACTIVE root instances can be cancelled, any given filters for state and
+    /// Cancels multiple active or suspended process instances.
+    /// Since only ACTIVE and SUSPENDED root instances can be cancelled, any given filters for state and
     /// parentProcessInstanceKey are ignored and overridden during this batch operation.
     /// This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
     /// 
