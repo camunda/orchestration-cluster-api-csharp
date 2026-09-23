@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Property LeaseToken | Camunda C# SDK </title>
+      <title>Property JobLeaseToken | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Property LeaseToken | Camunda C# SDK ">
+      <meta name="title" content="Property JobLeaseToken | Camunda C# SDK ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_JobErrorRequest_LeaseToken_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_JobLeaseToken_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,14 +84,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken*">
+        <article data-uid="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken*">
 
 
 
 
 
-<h1 id="Camunda_Orchestration_Sdk_JobErrorRequest_LeaseToken_" data-uid="Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken*" class="text-break">
-Property LeaseToken  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L18710"><i class="bi bi-code-slash"></i></a>
+<h1 id="Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_JobLeaseToken_" data-uid="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken*" class="text-break">
+Property JobLeaseToken  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L6297"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -117,22 +117,23 @@ Property LeaseToken  <a class="header-action link-secondary" title="View source"
 
 
 
-<a id="Camunda_Orchestration_Sdk_JobErrorRequest_LeaseToken_" data-uid="Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken*"></a>
+<a id="Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_JobLeaseToken_" data-uid="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_JobErrorRequest_LeaseToken" data-uid="Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken">
-  LeaseToken
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L18710"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_JobLeaseToken" data-uid="Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken">
+  JobLeaseToken
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L6297"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"><p>The token identifying a leased job's activation, obtained from <code>ActivatedJobResult.leaseToken</code>.
-For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
-A job that was activated without a lease requires no token.</p>
+<div class="markdown level1 summary"><p>Opaque lease token received from the job activation response. Disambiguates
+this activation from any other activation of the same job: if the job is
+later retried, history items submitted under a superseded lease are discarded
+rather than committed.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;leaseToken&quot;)]
-public JobLeaseToken? LeaseToken { get; set; }</code></pre>
+  <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;jobLeaseToken&quot;)]
+public JobLeaseToken JobLeaseToken { get; set; }</code></pre>
 </div>
 
 
@@ -141,7 +142,7 @@ public JobLeaseToken? LeaseToken { get; set; }</code></pre>
 
 <h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobLeaseToken.html">JobLeaseToken</a>?</dt>
+  <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobLeaseToken.html">JobLeaseToken</a></dt>
   <dd></dd>
 </dl>
 
@@ -155,7 +156,7 @@ public JobLeaseToken? LeaseToken { get; set; }</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L18710" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L6297" class="edit-link">Edit this page</a>
         </div>
 
 

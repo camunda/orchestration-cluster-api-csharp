@@ -1105,6 +1105,11 @@ This ensures correct event emission for assignee changes.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.html">ClusterUpgradeStatusResponse</a></dt>
+      <dd><p>The upgrade-readiness status of the whole cluster.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterVariableKindFilterProperty.html">ClusterVariableKindFilterProperty</a></dt>
       <dd><p>ClusterVariableKindEnum property with full advanced search capabilities.</p>
 </dd>
@@ -2910,9 +2915,8 @@ optional: omitting it (or sending an empty object) applies no filters.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretListResult.html">SecretListResult</a></dt>
       <dd><p>The secret references the caller is authorized to see.</p>
-<p>Unbounded for now: the response carries the configured stores' full enumeration for the
-physical tenant. Pagination is expected to land here before GA. This is an alpha endpoint,
-so that is not yet a breaking-contract concern.</p>
+<p>Unbounded: the response carries the configured stores' full enumeration for the physical
+tenant.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3802,9 +3806,9 @@ that evaluation, joined by a hyphen (format: <code>&lt;decisionEvaluationKey&gt;
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobLeaseToken.html">JobLeaseToken</a></dt>
       <dd><p>An opaque, engine-minted fencing token identifying a single activation of a job.
-Returned by Activate Jobs as <code>ActivatedJobResult.leaseToken</code> when the job is
-activated with a lease, and passed back on fenced job commands — and on
-agent-instance creation/updates as <code>jobLease</code> — to prove the caller holds the
+Returned by Activate Jobs as <code>ActivatedJobResult.jobLeaseToken</code> when the job is
+activated with a lease, and passed back under the same name on fenced job
+commands and on agent-instance creation/updates, to prove the caller holds the
 current lease. The token is opaque: clients may rely on its presence and equality
 only, and must never construct, parse, or otherwise interpret it beyond equality
 checks. It cannot be minted client-side; only the engine produces it, exactly once
@@ -4240,6 +4244,11 @@ DISCARDED: the producing job failed; this item was superseded by a later activat
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterStatusResponseStatus.html">ClusterStatusResponseStatus</a></dt>
       <dd><p><code>HEALTHY</code> when every physical tenant is healthy, <code>DOWN</code> when no physical tenant can process work, <code>DEGRADED</code> in every other case.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.html">ClusterUpgradeStatusResponseStatus</a></dt>
+      <dd><p><code>MIGRATED</code> once every known upgrade-readiness condition is met for every known physical tenant; <code>MIGRATION_IN_PROGRESS</code> when at least one is confirmed not yet migrated; <code>UNKNOWN</code> otherwise.</p>
 </dd>
     </dl>
     <dl class="jumplist">

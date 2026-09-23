@@ -349,6 +349,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJobResult.JobKey
   fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.JobKey
   nameWithType: ActivatedJobResult.JobKey
+- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.JobLeaseToken.html#Camunda_Orchestration_Sdk_ActivatedJobResult_JobLeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.ActivatedJobResult.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.JobLeaseToken
+  nameWithType: ActivatedJobResult.JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.JobLeaseToken*
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.JobLeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJobResult.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.JobLeaseToken
+  nameWithType: ActivatedJobResult.JobLeaseToken
 - uid: Camunda.Orchestration.Sdk.ActivatedJobResult.Kind
   name: Kind
   href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.Kind.html#Camunda_Orchestration_Sdk_ActivatedJobResult_Kind
@@ -361,18 +373,6 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJobResult.Kind
   fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.Kind
   nameWithType: ActivatedJobResult.Kind
-- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken.html#Camunda_Orchestration_Sdk_ActivatedJobResult_LeaseToken
-  commentId: P:Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
-  nameWithType: ActivatedJobResult.LeaseToken
-- uid: Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken*
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken.html
-  commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.ActivatedJobResult.LeaseToken
-  nameWithType: ActivatedJobResult.LeaseToken
 - uid: Camunda.Orchestration.Sdk.ActivatedJobResult.ListenerEventType
   name: ListenerEventType
   href: api/Camunda.Orchestration.Sdk.ActivatedJobResult.ListenerEventType.html#Camunda_Orchestration_Sdk_ActivatedJobResult_ListenerEventType
@@ -5455,18 +5455,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobKey
   nameWithType: AgentInstanceCreationRequest.JobKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
-  name: JobLease
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobLease
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
-  nameWithType: AgentInstanceCreationRequest.JobLease
-- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease*
-  name: JobLease
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease
-  nameWithType: AgentInstanceCreationRequest.JobLease
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLeaseToken.html#Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobLeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLeaseToken
+  nameWithType: AgentInstanceCreationRequest.JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLeaseToken*
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLeaseToken
+  nameWithType: AgentInstanceCreationRequest.JobLeaseToken
 - uid: Camunda.Orchestration.Sdk.AgentInstanceCreationResult
   name: AgentInstanceCreationResult
   href: api/Camunda.Orchestration.Sdk.AgentInstanceCreationResult.html
@@ -6397,18 +6397,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobKey
   nameWithType: AgentInstanceHistoryItemResult.JobKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease
-  name: JobLease
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemResult_JobLease
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease
-  nameWithType: AgentInstanceHistoryItemResult.JobLease
-- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease*
-  name: JobLease
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLease
-  nameWithType: AgentInstanceHistoryItemResult.JobLease
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLeaseToken.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemResult_JobLeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLeaseToken
+  nameWithType: AgentInstanceHistoryItemResult.JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLeaseToken*
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.JobLeaseToken
+  nameWithType: AgentInstanceHistoryItemResult.JobLeaseToken
 - uid: Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Limits
   name: Limits
   href: api/Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult.Limits.html#Camunda_Orchestration_Sdk_AgentInstanceHistoryItemResult_Limits
@@ -7951,18 +7951,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobKey
   fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobKey
   nameWithType: AgentInstanceUpdateRequest.JobKey
-- uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease
-  name: JobLease
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease.html#Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_JobLease
-  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease
-  nameWithType: AgentInstanceUpdateRequest.JobLease
-- uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease*
-  name: JobLease
-  href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease.html
-  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease
-  fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLease
-  nameWithType: AgentInstanceUpdateRequest.JobLease
+- uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken.html#Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_JobLeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken
+  nameWithType: AgentInstanceUpdateRequest.JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken*
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.JobLeaseToken
+  nameWithType: AgentInstanceUpdateRequest.JobLeaseToken
 - uid: Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Status
   name: Status
   href: api/Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest.Status.html#Camunda_Orchestration_Sdk_AgentInstanceUpdateRequest_Status
@@ -14368,6 +14368,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetClusterTopologyAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetClusterTopologyAsync
   nameWithType: CamundaClient.GetClusterTopologyAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterUpgradeStatusAsync(System.Threading.CancellationToken)
+  name: GetClusterUpgradeStatusAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClusterUpgradeStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterUpgradeStatusAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetClusterUpgradeStatusAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetClusterUpgradeStatusAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetClusterUpgradeStatusAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterUpgradeStatusAsync*
+  name: GetClusterUpgradeStatusAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClusterUpgradeStatusAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetClusterUpgradeStatusAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetClusterUpgradeStatusAsync
+  nameWithType: CamundaClient.GetClusterUpgradeStatusAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionDefinitionAsync(Camunda.Orchestration.Sdk.DecisionDefinitionKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.DecisionDefinitionResult},System.Threading.CancellationToken)
   name: GetDecisionDefinitionAsync(DecisionDefinitionKey, ConsistencyOptions<DecisionDefinitionResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetDecisionDefinitionAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetDecisionDefinitionAsync_Camunda_Orchestration_Sdk_DecisionDefinitionKey_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_DecisionDefinitionResult__System_Threading_CancellationToken_
@@ -19471,6 +19483,48 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ClusterTopologyResponse.PhysicalTenants
   fullName: Camunda.Orchestration.Sdk.ClusterTopologyResponse.PhysicalTenants
   nameWithType: ClusterTopologyResponse.PhysicalTenants
+- uid: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse
+  name: ClusterUpgradeStatusResponse
+  href: api/Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse
+  fullName: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse
+  nameWithType: ClusterUpgradeStatusResponse
+- uid: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status
+  name: Status
+  href: api/Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status.html#Camunda_Orchestration_Sdk_ClusterUpgradeStatusResponse_Status
+  commentId: P:Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status
+  fullName: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status
+  nameWithType: ClusterUpgradeStatusResponse.Status
+- uid: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status*
+  name: Status
+  href: api/Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status
+  fullName: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status
+  nameWithType: ClusterUpgradeStatusResponse.Status
+- uid: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus
+  name: ClusterUpgradeStatusResponseStatus
+  href: api/Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.html
+  commentId: T:Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus
+  fullName: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus
+  nameWithType: ClusterUpgradeStatusResponseStatus
+- uid: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.MIGRATED
+  name: MIGRATED
+  href: api/Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.html#Camunda_Orchestration_Sdk_ClusterUpgradeStatusResponseStatus_MIGRATED
+  commentId: F:Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.MIGRATED
+  fullName: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.MIGRATED
+  nameWithType: ClusterUpgradeStatusResponseStatus.MIGRATED
+- uid: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.MIGRATIONINPROGRESS
+  name: MIGRATIONINPROGRESS
+  href: api/Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.html#Camunda_Orchestration_Sdk_ClusterUpgradeStatusResponseStatus_MIGRATIONINPROGRESS
+  commentId: F:Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.MIGRATIONINPROGRESS
+  fullName: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.MIGRATIONINPROGRESS
+  nameWithType: ClusterUpgradeStatusResponseStatus.MIGRATIONINPROGRESS
+- uid: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.UNKNOWN
+  name: UNKNOWN
+  href: api/Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.html#Camunda_Orchestration_Sdk_ClusterUpgradeStatusResponseStatus_UNKNOWN
+  commentId: F:Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.UNKNOWN
+  fullName: Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.UNKNOWN
+  nameWithType: ClusterUpgradeStatusResponseStatus.UNKNOWN
 - uid: Camunda.Orchestration.Sdk.ClusterVariableKindEnum
   name: ClusterVariableKindEnum
   href: api/Camunda.Orchestration.Sdk.ClusterVariableKindEnum.html
@@ -33412,18 +33466,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobCompletionRequest.BusinessId
   fullName: Camunda.Orchestration.Sdk.JobCompletionRequest.BusinessId
   nameWithType: JobCompletionRequest.BusinessId
-- uid: Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken.html#Camunda_Orchestration_Sdk_JobCompletionRequest_LeaseToken
-  commentId: P:Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
-  nameWithType: JobCompletionRequest.LeaseToken
-- uid: Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken*
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken.html
-  commentId: Overload:Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.JobCompletionRequest.LeaseToken
-  nameWithType: JobCompletionRequest.LeaseToken
+- uid: Camunda.Orchestration.Sdk.JobCompletionRequest.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobCompletionRequest.JobLeaseToken.html#Camunda_Orchestration_Sdk_JobCompletionRequest_JobLeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.JobCompletionRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobCompletionRequest.JobLeaseToken
+  nameWithType: JobCompletionRequest.JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.JobCompletionRequest.JobLeaseToken*
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobCompletionRequest.JobLeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobCompletionRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobCompletionRequest.JobLeaseToken
+  nameWithType: JobCompletionRequest.JobLeaseToken
 - uid: Camunda.Orchestration.Sdk.JobCompletionRequest.Result
   name: Result
   href: api/Camunda.Orchestration.Sdk.JobCompletionRequest.Result.html#Camunda_Orchestration_Sdk_JobCompletionRequest_Result
@@ -33478,18 +33532,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobErrorRequest.ErrorMessage
   fullName: Camunda.Orchestration.Sdk.JobErrorRequest.ErrorMessage
   nameWithType: JobErrorRequest.ErrorMessage
-- uid: Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken.html#Camunda_Orchestration_Sdk_JobErrorRequest_LeaseToken
-  commentId: P:Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
-  nameWithType: JobErrorRequest.LeaseToken
-- uid: Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken*
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken.html
-  commentId: Overload:Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.JobErrorRequest.LeaseToken
-  nameWithType: JobErrorRequest.LeaseToken
+- uid: Camunda.Orchestration.Sdk.JobErrorRequest.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobErrorRequest.JobLeaseToken.html#Camunda_Orchestration_Sdk_JobErrorRequest_JobLeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.JobErrorRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobErrorRequest.JobLeaseToken
+  nameWithType: JobErrorRequest.JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.JobErrorRequest.JobLeaseToken*
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobErrorRequest.JobLeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobErrorRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobErrorRequest.JobLeaseToken
+  nameWithType: JobErrorRequest.JobLeaseToken
 - uid: Camunda.Orchestration.Sdk.JobErrorRequest.Variables
   name: Variables
   href: api/Camunda.Orchestration.Sdk.JobErrorRequest.Variables.html#Camunda_Orchestration_Sdk_JobErrorRequest_Variables
@@ -33688,18 +33742,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobFailRequest.ErrorMessage
   fullName: Camunda.Orchestration.Sdk.JobFailRequest.ErrorMessage
   nameWithType: JobFailRequest.ErrorMessage
-- uid: Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken.html#Camunda_Orchestration_Sdk_JobFailRequest_LeaseToken
-  commentId: P:Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
-  nameWithType: JobFailRequest.LeaseToken
-- uid: Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken*
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken.html
-  commentId: Overload:Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.JobFailRequest.LeaseToken
-  nameWithType: JobFailRequest.LeaseToken
+- uid: Camunda.Orchestration.Sdk.JobFailRequest.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobFailRequest.JobLeaseToken.html#Camunda_Orchestration_Sdk_JobFailRequest_JobLeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.JobFailRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobFailRequest.JobLeaseToken
+  nameWithType: JobFailRequest.JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.JobFailRequest.JobLeaseToken*
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobFailRequest.JobLeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobFailRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobFailRequest.JobLeaseToken
+  nameWithType: JobFailRequest.JobLeaseToken
 - uid: Camunda.Orchestration.Sdk.JobFailRequest.Retries
   name: Retries
   href: api/Camunda.Orchestration.Sdk.JobFailRequest.Retries.html#Camunda_Orchestration_Sdk_JobFailRequest_Retries
@@ -36166,18 +36220,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobUpdateRequest.Changeset
   fullName: Camunda.Orchestration.Sdk.JobUpdateRequest.Changeset
   nameWithType: JobUpdateRequest.Changeset
-- uid: Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken.html#Camunda_Orchestration_Sdk_JobUpdateRequest_LeaseToken
-  commentId: P:Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
-  nameWithType: JobUpdateRequest.LeaseToken
-- uid: Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken*
-  name: LeaseToken
-  href: api/Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken.html
-  commentId: Overload:Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
-  fullName: Camunda.Orchestration.Sdk.JobUpdateRequest.LeaseToken
-  nameWithType: JobUpdateRequest.LeaseToken
+- uid: Camunda.Orchestration.Sdk.JobUpdateRequest.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobUpdateRequest.JobLeaseToken.html#Camunda_Orchestration_Sdk_JobUpdateRequest_JobLeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.JobUpdateRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobUpdateRequest.JobLeaseToken
+  nameWithType: JobUpdateRequest.JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.JobUpdateRequest.JobLeaseToken*
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.JobUpdateRequest.JobLeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobUpdateRequest.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.JobUpdateRequest.JobLeaseToken
+  nameWithType: JobUpdateRequest.JobLeaseToken
 - uid: Camunda.Orchestration.Sdk.JobUpdateRequest.OperationReference
   name: OperationReference
   href: api/Camunda.Orchestration.Sdk.JobUpdateRequest.OperationReference.html#Camunda_Orchestration_Sdk_JobUpdateRequest_OperationReference

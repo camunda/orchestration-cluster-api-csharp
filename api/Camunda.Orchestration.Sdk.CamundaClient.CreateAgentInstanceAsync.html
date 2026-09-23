@@ -168,7 +168,7 @@ be used in subsequent update and query calls.</p>
     {
         ElementInstanceKey = elementInstanceKey,
         JobKey = jobKey,
-        JobLease = jobLease,
+        JobLeaseToken = jobLease,
         History = new List&lt;AgentInstanceHistoryItem&gt;
         {
             new AgentInstanceHistoryItem
@@ -214,7 +214,7 @@ var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequ
 {
     ElementInstanceKey = elementInstanceKey,
     JobKey = jobKey,
-    JobLease = jobLease,
+    JobLeaseToken = jobLease,
     History = new List&lt;AgentInstanceHistoryItem&gt;
     {
         new AgentInstanceHistoryItem

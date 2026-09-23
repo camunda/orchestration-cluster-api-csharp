@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Property JobLease | Camunda C# SDK </title>
+      <title>Property Status | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Property JobLease | Camunda C# SDK ">
+      <meta name="title" content="Property Status | Camunda C# SDK ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobLease_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_ClusterUpgradeStatusResponse_Status_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,14 +84,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease*">
+        <article data-uid="Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status*">
 
 
 
 
 
-<h1 id="Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobLease_" data-uid="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease*" class="text-break">
-Property JobLease  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L4628"><i class="bi bi-code-slash"></i></a>
+<h1 id="Camunda_Orchestration_Sdk_ClusterUpgradeStatusResponse_Status_" data-uid="Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status*" class="text-break">
+Property Status  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L10560"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -117,23 +117,20 @@ Property JobLease  <a class="header-action link-secondary" title="View source" h
 
 
 
-<a id="Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobLease_" data-uid="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease*"></a>
+<a id="Camunda_Orchestration_Sdk_ClusterUpgradeStatusResponse_Status_" data-uid="Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_AgentInstanceCreationRequest_JobLease" data-uid="Camunda.Orchestration.Sdk.AgentInstanceCreationRequest.JobLease">
-  JobLease
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L4628"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_ClusterUpgradeStatusResponse_Status" data-uid="Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse.Status">
+  Status
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L10560"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"><p>Opaque lease token received from the job activation response. Disambiguates
-this activation from any other activation of the same job: if the job is
-later retried, history items submitted under a superseded lease are discarded
-rather than committed.</p>
+<div class="markdown level1 summary"><p><code>MIGRATED</code> once every known upgrade-readiness condition is met for every known physical tenant; <code>MIGRATION_IN_PROGRESS</code> when at least one is confirmed not yet migrated; <code>UNKNOWN</code> otherwise.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;jobLease&quot;)]
-public JobLeaseToken JobLease { get; set; }</code></pre>
+  <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;status&quot;)]
+public ClusterUpgradeStatusResponseStatus Status { get; set; }</code></pre>
 </div>
 
 
@@ -142,7 +139,7 @@ public JobLeaseToken JobLease { get; set; }</code></pre>
 
 <h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobLeaseToken.html">JobLeaseToken</a></dt>
+  <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus.html">ClusterUpgradeStatusResponseStatus</a></dt>
   <dd></dd>
 </dl>
 
@@ -156,7 +153,7 @@ public JobLeaseToken JobLease { get; set; }</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L4628" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L10560" class="edit-link">Edit this page</a>
         </div>
 
 
