@@ -1183,7 +1183,7 @@ public partial class CamundaClient
     ///     {
     ///         ElementInstanceKey = elementInstanceKey,
     ///         JobKey = jobKey,
-    ///         JobLease = jobLease,
+    ///         JobLeaseToken = jobLease,
     ///         History = new List&lt;AgentInstanceHistoryItem&gt;
     ///         {
     ///             new AgentInstanceHistoryItem
@@ -1230,7 +1230,7 @@ public partial class CamundaClient
     ///     {
     ///         ElementInstanceKey = elementInstanceKey,
     ///         JobKey = jobKey,
-    ///         JobLease = jobLease,
+    ///         JobLeaseToken = jobLease,
     ///         History = new List&lt;AgentInstanceHistoryItem&gt;
     ///         {
     ///             new AgentInstanceHistoryItem
@@ -11077,7 +11077,7 @@ public partial class CamundaClient
     ///         {
     ///             ElementInstanceKey = elementInstanceKey,
     ///             JobKey = jobKey,
-    ///             JobLease = jobLease,
+    ///             JobLeaseToken = jobLease,
     ///             Status = AgentInstanceUpdateStatusEnum.THINKING,
     ///             History = new List&lt;AgentInstanceHistoryItem&gt;
     ///             {
@@ -11124,7 +11124,7 @@ public partial class CamundaClient
     ///         {
     ///             ElementInstanceKey = elementInstanceKey,
     ///             JobKey = jobKey,
-    ///             JobLease = jobLease,
+    ///             JobLeaseToken = jobLease,
     ///             Status = AgentInstanceUpdateStatusEnum.THINKING,
     ///             History = new List&lt;AgentInstanceHistoryItem&gt;
     ///             {
