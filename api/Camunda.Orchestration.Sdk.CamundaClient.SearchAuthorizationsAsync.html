@@ -175,15 +175,15 @@ Search for authorizations based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchAuthorizationsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchAuthorizationsAsync(
-    new AuthorizationSearchQuery());
 
-foreach (var auth in result.Items)
-{
-    Console.WriteLine($&quot;Authorization: {auth.AuthorizationKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchAuthorizationsAsync(
+        new AuthorizationSearchQuery());
+
+    foreach (var auth in result.Items)
+    {
+        Console.WriteLine($"Authorization: {auth.AuthorizationKey}");
+    }
+}</code></pre>
 </div>
 
 

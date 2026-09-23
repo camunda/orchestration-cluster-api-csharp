@@ -175,15 +175,15 @@ Search for audit logs based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchAuditLogsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchAuditLogsAsync(
-    new AuditLogSearchQueryRequest());
 
-foreach (var log in result.Items)
-{
-    Console.WriteLine($&quot;Audit log: {log.AuditLogKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchAuditLogsAsync(
+        new AuditLogSearchQueryRequest());
+
+    foreach (var log in result.Items)
+    {
+        Console.WriteLine($"Audit log: {log.AuditLogKey}");
+    }
+}</code></pre>
 </div>
 
 

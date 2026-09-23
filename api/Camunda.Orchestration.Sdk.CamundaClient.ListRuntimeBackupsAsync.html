@@ -172,13 +172,13 @@ state and additional info, sorted in descending order of backupId.</p>
 <pre><code class="lang-csharp">public static async Task ListRuntimeBackupsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// `prefix` must end in a single '*'. Omit it to list every backup.
-var backups = await client.ListRuntimeBackupsAsync(
-    BackupIdPrefix.AssumeExists(&quot;10*&quot;));
 
-Console.WriteLine($&quot;Runtime backups: {backups}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    // `prefix` must end in a single '*'. Omit it to list every backup.
+    var backups = await client.ListRuntimeBackupsAsync(
+        BackupIdPrefix.AssumeExists("10*"));
+
+    Console.WriteLine($"Runtime backups: {backups}");
+}</code></pre>
 </div>
 
 

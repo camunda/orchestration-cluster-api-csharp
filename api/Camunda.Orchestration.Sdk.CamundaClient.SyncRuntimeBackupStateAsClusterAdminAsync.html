@@ -159,13 +159,13 @@ Force-writes the checkpoint and backup metadata of every partition of every phys
 <pre><code class="lang-csharp">public static async Task SyncRuntimeBackupStateAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Force-writes checkpoint and backup metadata for every partition of every
-// physical tenant in the cluster to the backup store, and returns the updated state.
-var state = await client.SyncRuntimeBackupStateAsClusterAdminAsync();
 
-Console.WriteLine($&quot;Synced runtime backup state for {state.PhysicalTenants.Count} tenant(s)&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    // Force-writes checkpoint and backup metadata for every partition of every
+    // physical tenant in the cluster to the backup store, and returns the updated state.
+    var state = await client.SyncRuntimeBackupStateAsClusterAdminAsync();
+
+    Console.WriteLine($"Synced runtime backup state for {state.PhysicalTenants.Count} tenant(s)");
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SyncRuntimeBackupStateAsClusterAdminAsync_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -174,13 +174,13 @@ Console.WriteLine($&quot;Synced runtime backup state for {state.PhysicalTenants.
 <pre><code class="lang-csharp">public static async Task SyncRuntimeBackupStateAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Force-writes checkpoint and backup metadata for every partition of every
-// physical tenant in the cluster to the backup store, and returns the updated state.
-var state = await client.SyncRuntimeBackupStateAsClusterAdminAsync();
 
-Console.WriteLine($&quot;Synced runtime backup state for {state.PhysicalTenants.Count} tenant(s)&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    // Force-writes checkpoint and backup metadata for every partition of every
+    // physical tenant in the cluster to the backup store, and returns the updated state.
+    var state = await client.SyncRuntimeBackupStateAsClusterAdminAsync();
+
+    Console.WriteLine($"Synced runtime backup state for {state.PhysicalTenants.Count} tenant(s)");
+}</code></pre>
 </div>
 
 

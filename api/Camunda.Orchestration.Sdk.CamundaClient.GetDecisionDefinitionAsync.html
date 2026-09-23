@@ -172,12 +172,12 @@ Returns a decision definition by key.</p>
 <pre><code class="lang-csharp">public static async Task GetDecisionDefinitionExample(DecisionDefinitionKey decisionDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetDecisionDefinitionAsync(
-    decisionDefinitionKey);
 
-Console.WriteLine($&quot;Decision definition: {result.Name}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetDecisionDefinitionAsync(
+        decisionDefinitionKey);
+
+    Console.WriteLine($"Decision definition: {result.Name}");
+}</code></pre>
 </div>
 
 

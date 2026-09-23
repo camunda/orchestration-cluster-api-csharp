@@ -178,20 +178,20 @@ Asks the running rebalance to stop once the transfer in flight has finished. Par
 <pre><code class="lang-csharp">public static async Task CancelClusterRebalanceExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Asks the running rebalance to stop once the in-flight transfer finishes.
-// Cancellation is idempotent. Requires cluster-admin credentials.
-var result = await client.CancelClusterRebalanceAsync();
 
-if (result.WasRunning)
-{
-    Console.WriteLine(&quot;Cancellation requested; rebalance will stop after the in-flight transfer finishes.&quot;);
-}
-else
-{
-    Console.WriteLine(&quot;No rebalance was running.&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    // Asks the running rebalance to stop once the in-flight transfer finishes.
+    // Cancellation is idempotent. Requires cluster-admin credentials.
+    var result = await client.CancelClusterRebalanceAsync();
+
+    if (result.WasRunning)
+    {
+        Console.WriteLine("Cancellation requested; rebalance will stop after the in-flight transfer finishes.");
+    }
+    else
+    {
+        Console.WriteLine("No rebalance was running.");
+    }
+}</code></pre>
 </div>
 
 

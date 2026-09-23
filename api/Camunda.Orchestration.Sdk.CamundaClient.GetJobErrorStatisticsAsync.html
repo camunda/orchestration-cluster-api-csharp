@@ -175,15 +175,15 @@ Returns aggregated metrics per error for the given jobType.</p>
 <pre><code class="lang-csharp">public static async Task GetJobErrorStatisticsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetJobErrorStatisticsAsync(
-    new JobErrorStatisticsQuery());
 
-foreach (var stat in result.Items)
-{
-    Console.WriteLine($&quot;Error: {stat.ErrorCode}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetJobErrorStatisticsAsync(
+        new JobErrorStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Error: {stat.ErrorCode}");
+    }
+}</code></pre>
 </div>
 
 

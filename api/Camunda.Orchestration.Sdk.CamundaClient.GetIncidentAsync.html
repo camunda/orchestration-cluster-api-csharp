@@ -170,10 +170,10 @@ Returns incident as JSON.</p>
 <pre><code class="lang-csharp">public static async Task GetIncidentExample(IncidentKey incidentKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetIncidentAsync(incidentKey);
-Console.WriteLine($&quot;Incident: {result.IncidentKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetIncidentAsync(incidentKey);
+    Console.WriteLine($"Incident: {result.IncidentKey}");
+}</code></pre>
 </div>
 
 

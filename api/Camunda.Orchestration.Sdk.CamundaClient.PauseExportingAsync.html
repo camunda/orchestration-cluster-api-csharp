@@ -175,12 +175,12 @@ such as during a backup.</p>
 <pre><code class="lang-csharp">public static async Task PauseExportingExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// With `soft: true` exporting keeps running but its position is not committed,
-// so the log is still not compacted — use it when exporting must keep
-// progressing, for example while a backup is taken.
-await client.PauseExportingAsync(soft: true);
-</code></pre>
-<p>}</p></code></pre>
+
+    // With `soft: true` exporting keeps running but its position is not committed,
+    // so the log is still not compacted — use it when exporting must keep
+    // progressing, for example while a backup is taken.
+    await client.PauseExportingAsync(soft: true);
+}</code></pre>
 </div>
 
 

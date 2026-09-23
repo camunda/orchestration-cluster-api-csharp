@@ -174,16 +174,16 @@ Create a new global user task listener.</p>
 <pre><code class="lang-csharp">public static async Task CreateGlobalTaskListenerExample(GlobalListenerId id)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateGlobalTaskListenerAsync(
-    new CreateGlobalTaskListenerRequest
-    {
-        EventTypes = new List&lt;GlobalTaskListenerEventTypeEnum&gt; { GlobalTaskListenerEventTypeEnum.Completing },
-        Id = id,
-    });
 
-Console.WriteLine($&quot;Task listener: {result.Id}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateGlobalTaskListenerAsync(
+        new CreateGlobalTaskListenerRequest
+        {
+            EventTypes = new List&lt;GlobalTaskListenerEventTypeEnum&gt; { GlobalTaskListenerEventTypeEnum.Completing },
+            Id = id,
+        });
+
+    Console.WriteLine($"Task listener: {result.Id}");
+}</code></pre>
 </div>
 
 

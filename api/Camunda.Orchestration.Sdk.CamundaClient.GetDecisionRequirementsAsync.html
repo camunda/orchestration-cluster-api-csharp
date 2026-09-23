@@ -172,12 +172,12 @@ Returns Decision Requirements as JSON.</p>
 <pre><code class="lang-csharp">public static async Task GetDecisionRequirementsExample(DecisionRequirementsKey decisionRequirementsKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetDecisionRequirementsAsync(
-    decisionRequirementsKey);
 
-Console.WriteLine($&quot;DRD: {result.DecisionRequirementsName}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetDecisionRequirementsAsync(
+        decisionRequirementsKey);
+
+    Console.WriteLine($"DRD: {result.DecisionRequirementsName}");
+}</code></pre>
 </div>
 
 

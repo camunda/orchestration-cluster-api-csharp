@@ -175,15 +175,15 @@ Get message subscription statistics, grouped by process definition.</p>
 <pre><code class="lang-csharp">public static async Task GetProcessDefinitionMessageSubscriptionStatisticsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessDefinitionMessageSubscriptionStatisticsAsync(
-    new ProcessDefinitionMessageSubscriptionStatisticsQuery());
 
-foreach (var stat in result.Items)
-{
-    Console.WriteLine($&quot;Message subscriptions: {stat.ActiveSubscriptions}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetProcessDefinitionMessageSubscriptionStatisticsAsync(
+        new ProcessDefinitionMessageSubscriptionStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Message subscriptions: {stat.ActiveSubscriptions}");
+    }
+}</code></pre>
 </div>
 
 

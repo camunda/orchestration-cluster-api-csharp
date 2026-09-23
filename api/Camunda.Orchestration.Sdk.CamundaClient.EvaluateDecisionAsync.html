@@ -186,26 +186,26 @@ version of the decision is used.</p>
 <pre><code class="lang-csharp">public static async Task EvaluateDecisionByIdExample(DecisionDefinitionId decisionDefinitionId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
-{
-    DecisionDefinitionId = decisionDefinitionId,
-});
 
-Console.WriteLine($&quot;Decision output: {result.Output}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
+    {
+        DecisionDefinitionId = decisionDefinitionId,
+    });
+
+    Console.WriteLine($"Decision output: {result.Output}");
+}</code></pre>
 <p><b>Example 2:</b></p>
 <pre><code class="lang-csharp">public static async Task EvaluateDecisionByKeyExample(DecisionDefinitionKey decisionDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.EvaluateDecisionAsync(new DecisionEvaluationByKey
-{
-    DecisionDefinitionKey = decisionDefinitionKey,
-});
 
-Console.WriteLine($&quot;Decision output: {result.Output}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.EvaluateDecisionAsync(new DecisionEvaluationByKey
+    {
+        DecisionDefinitionKey = decisionDefinitionKey,
+    });
+
+    Console.WriteLine($"Decision output: {result.Output}");
+}</code></pre>
 </div>
 
 

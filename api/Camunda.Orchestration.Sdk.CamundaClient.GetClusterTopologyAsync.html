@@ -175,18 +175,18 @@ Obtains the topology of the whole cluster, aggregated over all physical tenants.
 <pre><code class="lang-csharp">public static async Task GetClusterTopologyExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Returns the topology of the whole cluster aggregated over all physical
-// tenants. Requires cluster-admin credentials, not Orchestration Cluster
-// user credentials. Use GetTopologyAsync for single-tenant topology.
-var topology = await client.GetClusterTopologyAsync();
 
-Console.WriteLine($&quot;Cluster {topology.ClusterId}: {topology.ClusterSize} broker(s), gateway {topology.GatewayVersion}&quot;);
-foreach (var tenant in topology.PhysicalTenants)
-{
-    Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: {tenant.PartitionsCount} partition(s), replication {tenant.ReplicationFactor}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    // Returns the topology of the whole cluster aggregated over all physical
+    // tenants. Requires cluster-admin credentials, not Orchestration Cluster
+    // user credentials. Use GetTopologyAsync for single-tenant topology.
+    var topology = await client.GetClusterTopologyAsync();
+
+    Console.WriteLine($"Cluster {topology.ClusterId}: {topology.ClusterSize} broker(s), gateway {topology.GatewayVersion}");
+    foreach (var tenant in topology.PhysicalTenants)
+    {
+        Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.PartitionsCount} partition(s), replication {tenant.ReplicationFactor}");
+    }
+}</code></pre>
 </div>
 
 

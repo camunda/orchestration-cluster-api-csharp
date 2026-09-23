@@ -211,41 +211,41 @@ echoed back in the response.</p>
     JobLeaseToken jobLease)
 {
     using var client = CamundaClient.Create();
-<pre><code>// Conversation turns are appended through the same history batch used at
-// creation time; per-item metrics describe the model call that produced them.
-await client.UpdateAgentInstanceAsync(
-    agentInstanceKey,
-    new AgentInstanceUpdateRequest
-    {
-        ElementInstanceKey = elementInstanceKey,
-        JobKey = jobKey,
-        JobLeaseToken = jobLease,
-        Status = AgentInstanceUpdateStatusEnum.THINKING,
-        History = new List&lt;AgentInstanceHistoryItem&gt;
+
+    // Conversation turns are appended through the same history batch used at
+    // creation time; per-item metrics describe the model call that produced them.
+    await client.UpdateAgentInstanceAsync(
+        agentInstanceKey,
+        new AgentInstanceUpdateRequest
         {
-            new AgentInstanceHistoryItem
+            ElementInstanceKey = elementInstanceKey,
+            JobKey = jobKey,
+            JobLeaseToken = jobLease,
+            Status = AgentInstanceUpdateStatusEnum.THINKING,
+            History = new List&lt;AgentInstanceHistoryItem&gt;
             {
-                HistoryItemId = HistoryItemId.AssumeExists(&quot;assistant-1&quot;),
-                LoopIteration = LoopIterationId.AssumeExists(1),
-                Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
-                ProducedAt = DateTimeOffset.UtcNow,
-                Content = new List&lt;AgentInstanceMessageContent&gt;
+                new AgentInstanceHistoryItem
                 {
-                    new AgentInstanceTextContent { Text = &quot;How can I help you today?&quot; },
-                },
-                Metrics = new AgentInstanceHistoryItemMetricsRequest
-                {
-                    InputTokens = 150,
-                    OutputTokens = 50,
-                    DurationMs = 1_200,
+                    HistoryItemId = HistoryItemId.AssumeExists("assistant-1"),
+                    LoopIteration = LoopIterationId.AssumeExists(1),
+                    Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
+                    ProducedAt = DateTimeOffset.UtcNow,
+                    Content = new List&lt;AgentInstanceMessageContent&gt;
+                    {
+                        new AgentInstanceTextContent { Text = "How can I help you today?" },
+                    },
+                    Metrics = new AgentInstanceHistoryItemMetricsRequest
+                    {
+                        InputTokens = 150,
+                        OutputTokens = 50,
+                        DurationMs = 1_200,
+                    },
                 },
             },
-        },
-    });
+        });
 
-Console.WriteLine($&quot;Updated agent instance: {agentInstanceKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    Console.WriteLine($"Updated agent instance: {agentInstanceKey}");
+}</code></pre>
 </div>
 
 

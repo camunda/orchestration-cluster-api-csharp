@@ -174,12 +174,12 @@ in future releases.</p>
 <pre><code class="lang-csharp">public static async Task PinClockExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.PinClockAsync(new ClockPinRequest
-{
-    Timestamp = 1700000000000,
-});
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.PinClockAsync(new ClockPinRequest
+    {
+        Timestamp = 1700000000000,
+    });
+}</code></pre>
 </div>
 
 

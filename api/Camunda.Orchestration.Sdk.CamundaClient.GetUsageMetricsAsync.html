@@ -179,13 +179,13 @@ Retrieve the usage metrics based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task GetUsageMetricsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetUsageMetricsAsync(
-    startTime: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
-    endTime: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
 
-Console.WriteLine($&quot;Metrics: {result}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetUsageMetricsAsync(
+        startTime: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+        endTime: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
+
+    Console.WriteLine($"Metrics: {result}");
+}</code></pre>
 </div>
 
 

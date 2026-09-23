@@ -167,9 +167,9 @@ Deletes the runtime backup with the given id.</p>
 <pre><code class="lang-csharp">public static async Task DeleteRuntimeBackupExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.DeleteRuntimeBackupAsync(backupId);
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.DeleteRuntimeBackupAsync(backupId);
+}</code></pre>
 </div>
 
 

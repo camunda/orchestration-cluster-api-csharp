@@ -171,13 +171,13 @@ returns the updated state.</p>
 <pre><code class="lang-csharp">public static async Task SyncRuntimeBackupStateExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Force-writes checkpoint and backup metadata of every partition to the backup
-// store, independent of any backup being taken, and returns the updated state.
-var state = await client.SyncRuntimeBackupStateAsync();
 
-Console.WriteLine($&quot;Synced {state.BackupStates.Count} partition backup states&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    // Force-writes checkpoint and backup metadata of every partition to the backup
+    // store, independent of any backup being taken, and returns the updated state.
+    var state = await client.SyncRuntimeBackupStateAsync();
+
+    Console.WriteLine($"Synced {state.BackupStates.Count} partition backup states");
+}</code></pre>
 </div>
 
 

@@ -170,10 +170,10 @@ Get the process instance by the process instance key.</p>
 <pre><code class="lang-csharp">public static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessInstanceAsync(processInstanceKey);
-Console.WriteLine($&quot;Process instance: {result.ProcessDefinitionId}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetProcessInstanceAsync(processInstanceKey);
+    Console.WriteLine($"Process instance: {result.ProcessDefinitionId}");
+}</code></pre>
 </div>
 
 

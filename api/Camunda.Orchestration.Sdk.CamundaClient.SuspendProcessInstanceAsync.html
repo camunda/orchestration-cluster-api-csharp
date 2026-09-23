@@ -174,11 +174,11 @@ instance; suspension does not cascade to or from related instances.</p>
 <pre><code class="lang-csharp">public static async Task SuspendProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.SuspendProcessInstanceAsync(
-    processInstanceKey,
-    new SuspendProcessInstanceRequest());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.SuspendProcessInstanceAsync(
+        processInstanceKey,
+        new SuspendProcessInstanceRequest());
+}</code></pre>
 </div>
 
 

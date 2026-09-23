@@ -170,10 +170,10 @@ Returns agent instance as JSON.</p>
 <pre><code class="lang-csharp">public static async Task GetAgentInstanceExample(AgentInstanceKey agentInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetAgentInstanceAsync(agentInstanceKey);
-Console.WriteLine($&quot;Agent instance: {result.AgentInstanceKey}, status: {result.Status}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetAgentInstanceAsync(agentInstanceKey);
+    Console.WriteLine($"Agent instance: {result.AgentInstanceKey}, status: {result.Status}");
+}</code></pre>
 </div>
 
 

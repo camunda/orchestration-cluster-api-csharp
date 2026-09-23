@@ -174,14 +174,14 @@ Updates an existing tenant.</p>
 <pre><code class="lang-csharp">public static async Task UpdateTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UpdateTenantAsync(
-    tenantId,
-    new TenantUpdateRequest
-    {
-        Name = &quot;Acme Corp International&quot;,
-    });
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.UpdateTenantAsync(
+        tenantId,
+        new TenantUpdateRequest
+        {
+            Name = "Acme Corp International",
+        });
+}</code></pre>
 </div>
 
 

@@ -159,10 +159,10 @@ Get a role by its ID.</p>
 <pre><code class="lang-csharp">public static async Task GetRoleExample(RoleId roleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetRoleAsync(roleId);
-Console.WriteLine($&quot;Role: {result.Name}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetRoleAsync(roleId);
+    Console.WriteLine($"Role: {result.Name}");
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetRoleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleResult__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -171,10 +171,10 @@ Console.WriteLine($&quot;Role: {result.Name}&quot;);
 <pre><code class="lang-csharp">public static async Task GetRoleExample(RoleId roleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetRoleAsync(roleId);
-Console.WriteLine($&quot;Role: {result.Name}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetRoleAsync(roleId);
+    Console.WriteLine($"Role: {result.Name}");
+}</code></pre>
 </div>
 
 

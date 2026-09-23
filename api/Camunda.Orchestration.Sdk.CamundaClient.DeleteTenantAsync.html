@@ -167,9 +167,9 @@ Deletes an existing tenant.</p>
 <pre><code class="lang-csharp">public static async Task DeleteTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.DeleteTenantAsync(tenantId);
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.DeleteTenantAsync(tenantId);
+}</code></pre>
 </div>
 
 

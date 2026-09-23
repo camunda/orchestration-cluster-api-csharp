@@ -179,20 +179,20 @@ of silently returning an empty section.</p>
 <pre><code class="lang-csharp">public static async Task GetRuntimeBackupStateExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var state = await client.GetRuntimeBackupStateAsync();
 
-foreach (var checkpoint in state.CheckpointStates)
-{
-    Console.WriteLine(
-        $&quot;Partition {checkpoint.PartitionId} checkpoint {checkpoint.CheckpointId} ({checkpoint.CheckpointType})&quot;);
-}
-foreach (var range in state.Ranges)
-{
-    Console.WriteLine(
-        $&quot;Partition {range.PartitionId} range: {range.Start?.CheckpointId} -&gt; {range.End?.CheckpointId}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var state = await client.GetRuntimeBackupStateAsync();
+
+    foreach (var checkpoint in state.CheckpointStates)
+    {
+        Console.WriteLine(
+            $"Partition {checkpoint.PartitionId} checkpoint {checkpoint.CheckpointId} ({checkpoint.CheckpointType})");
+    }
+    foreach (var range in state.Ranges)
+    {
+        Console.WriteLine(
+            $"Partition {range.PartitionId} range: {range.Start?.CheckpointId} -&gt; {range.End?.CheckpointId}");
+    }
+}</code></pre>
 </div>
 
 

@@ -177,15 +177,15 @@ Each item in the response corresponds to one time bucket of the requested resolu
 <pre><code class="lang-csharp">public static async Task GetJobTimeSeriesStatisticsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetJobTimeSeriesStatisticsAsync(
-    new JobTimeSeriesStatisticsQuery());
 
-foreach (var stat in result.Items)
-{
-    Console.WriteLine($&quot;Time series: {stat}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetJobTimeSeriesStatisticsAsync(
+        new JobTimeSeriesStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Time series: {stat}");
+    }
+}</code></pre>
 </div>
 
 

@@ -174,14 +174,14 @@ Search for process instances based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchProcessInstancesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
 
-foreach (var instance in result.Items)
-{
-    Console.WriteLine($&quot;Process instance: {instance.ProcessInstanceKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
+
+    foreach (var instance in result.Items)
+    {
+        Console.WriteLine($"Process instance: {instance.ProcessInstanceKey}");
+    }
+}</code></pre>
 </div>
 
 

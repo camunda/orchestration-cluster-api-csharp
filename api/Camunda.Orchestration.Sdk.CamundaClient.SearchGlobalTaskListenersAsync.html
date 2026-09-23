@@ -175,15 +175,15 @@ Search for global user task listeners based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchGlobalTaskListenersExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchGlobalTaskListenersAsync(
-    new GlobalTaskListenerSearchQueryRequest());
 
-foreach (var listener in result.Items)
-{
-    Console.WriteLine($&quot;Listener: {listener.Id}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchGlobalTaskListenersAsync(
+        new GlobalTaskListenerSearchQueryRequest());
+
+    foreach (var listener in result.Items)
+    {
+        Console.WriteLine($"Listener: {listener.Id}");
+    }
+}</code></pre>
 </div>
 
 

@@ -167,9 +167,9 @@ Deletes the authorization with the given key.</p>
 <pre><code class="lang-csharp">public static async Task DeleteAuthorizationExample(AuthorizationKey authorizationKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.DeleteAuthorizationAsync(authorizationKey);
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.DeleteAuthorizationAsync(authorizationKey);
+}</code></pre>
 </div>
 
 

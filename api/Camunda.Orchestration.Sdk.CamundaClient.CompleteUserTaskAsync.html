@@ -171,11 +171,11 @@ Completes a user task with the given key. Completion waits for blocking task lis
 <pre><code class="lang-csharp">public static async Task CompleteUserTaskExample(UserTaskKey userTaskKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.CompleteUserTaskAsync(
-    userTaskKey,
-    new UserTaskCompletionRequest());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.CompleteUserTaskAsync(
+        userTaskKey,
+        new UserTaskCompletionRequest());
+}</code></pre>
 </div>
 
 

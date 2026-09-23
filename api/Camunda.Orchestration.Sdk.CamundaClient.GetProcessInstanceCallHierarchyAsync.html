@@ -172,12 +172,12 @@ Returns the call hierarchy for a given process instance, showing its ancestry up
 <pre><code class="lang-csharp">public static async Task GetProcessInstanceCallHierarchyExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessInstanceCallHierarchyAsync(
-    processInstanceKey);
 
-Console.WriteLine($&quot;Call hierarchy: {result}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetProcessInstanceCallHierarchyAsync(
+        processInstanceKey);
+
+    Console.WriteLine($"Call hierarchy: {result}");
+}</code></pre>
 </div>
 
 

@@ -166,10 +166,10 @@ Checks the health status of the default physical tenant by verifying if there's 
 <pre><code class="lang-csharp">public static async Task GetStatusExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.GetStatusAsync();
-Console.WriteLine(&quot;Cluster is healthy&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.GetStatusAsync();
+    Console.WriteLine("Cluster is healthy");
+}</code></pre>
 </div>
 
 

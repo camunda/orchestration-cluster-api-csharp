@@ -174,14 +174,14 @@ Assigns a user task with the given key to the given assignee. Assignment waits f
 <pre><code class="lang-csharp">public static async Task AssignUserTaskExample(UserTaskKey userTaskKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.AssignUserTaskAsync(
-    userTaskKey,
-    new UserTaskAssignmentRequest
-    {
-        Assignee = &quot;user@example.com&quot;,
-    });
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.AssignUserTaskAsync(
+        userTaskKey,
+        new UserTaskAssignmentRequest
+        {
+            Assignee = "user@example.com",
+        });
+}</code></pre>
 </div>
 
 

@@ -174,11 +174,11 @@ This is an atomic call, i.e. either all resources are deployed or none of them a
 <pre><code class="lang-csharp">public static async Task DeployResourcesFromFilesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.DeployResourcesFromFilesAsync(
-    [&quot;process.bpmn&quot;, &quot;decision.dmn&quot;]);
-Console.WriteLine($&quot;Deployment key: {result.DeploymentKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.DeployResourcesFromFilesAsync(
+        ["process.bpmn", "decision.dmn"]);
+    Console.WriteLine($"Deployment key: {result.DeploymentKey}");
+}</code></pre>
 </div>
 
 

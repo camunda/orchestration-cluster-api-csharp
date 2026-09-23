@@ -180,18 +180,18 @@ required.</p>
 <pre><code class="lang-csharp">public static async Task TakeHistoryBackupExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>// Backups are logically ordered by id, so each successive backup must use a
-// higher id than the previous one.
-var backup = await client.TakeHistoryBackupAsync(
-    new TakeHistoryBackupRequest { BackupId = backupId });
 
-Console.WriteLine($&quot;Scheduled history backup {backup.BackupId}&quot;);
-foreach (var snapshot in backup.ScheduledSnapshots)
-{
-    Console.WriteLine($&quot;  {snapshot}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    // Backups are logically ordered by id, so each successive backup must use a
+    // higher id than the previous one.
+    var backup = await client.TakeHistoryBackupAsync(
+        new TakeHistoryBackupRequest { BackupId = backupId });
+
+    Console.WriteLine($"Scheduled history backup {backup.BackupId}");
+    foreach (var snapshot in backup.ScheduledSnapshots)
+    {
+        Console.WriteLine($"  {snapshot}");
+    }
+}</code></pre>
 </div>
 
 

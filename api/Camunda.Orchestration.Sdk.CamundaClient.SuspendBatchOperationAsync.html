@@ -168,9 +168,9 @@ This is done asynchronously, the progress can be tracked using the batch operati
 <pre><code class="lang-csharp">public static async Task SuspendBatchOperationExample(BatchOperationKey batchOperationKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.SuspendBatchOperationAsync(batchOperationKey);
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.SuspendBatchOperationAsync(batchOperationKey);
+}</code></pre>
 </div>
 
 

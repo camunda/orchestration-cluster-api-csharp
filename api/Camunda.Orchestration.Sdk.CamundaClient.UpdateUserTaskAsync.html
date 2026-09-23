@@ -171,11 +171,11 @@ Update a user task with the given key. Updates wait for blocking task listeners 
 <pre><code class="lang-csharp">public static async Task UpdateUserTaskExample(UserTaskKey userTaskKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UpdateUserTaskAsync(
-    userTaskKey,
-    new UserTaskUpdateRequest());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.UpdateUserTaskAsync(
+        userTaskKey,
+        new UserTaskUpdateRequest());
+}</code></pre>
 </div>
 
 

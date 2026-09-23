@@ -175,15 +175,15 @@ Reports a business error (i.e. non-technical) that occurs while processing a job
 <pre><code class="lang-csharp">public static async Task ThrowJobErrorExample(JobKey jobKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.ThrowJobErrorAsync(
-    jobKey,
-    new JobErrorRequest
-    {
-        ErrorCode = &quot;VALIDATION_ERROR&quot;,
-        ErrorMessage = &quot;Input validation failed&quot;,
-    });
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.ThrowJobErrorAsync(
+        jobKey,
+        new JobErrorRequest
+        {
+            ErrorCode = "VALIDATION_ERROR",
+            ErrorMessage = "Input validation failed",
+        });
+}</code></pre>
 </div>
 
 

@@ -161,13 +161,13 @@ Lists the runtime backups of every physical tenant of the cluster, or of the one
 <pre><code class="lang-csharp">public static async Task ListRuntimeBackupsAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// `prefix` must end in a single '*'. Omit it to list every runtime backup across all tenants.
-var backups = await client.ListRuntimeBackupsAsClusterAdminAsync(
-    prefix: BackupIdPrefix.AssumeExists(&quot;10*&quot;));
 
-Console.WriteLine($&quot;Cluster runtime backups: {backups}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    // `prefix` must end in a single '*'. Omit it to list every runtime backup across all tenants.
+    var backups = await client.ListRuntimeBackupsAsClusterAdminAsync(
+        prefix: BackupIdPrefix.AssumeExists("10*"));
+
+    Console.WriteLine($"Cluster runtime backups: {backups}");
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ListRuntimeBackupsAsClusterAdminAsync_System_String_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -176,13 +176,13 @@ Console.WriteLine($&quot;Cluster runtime backups: {backups}&quot;);
 <pre><code class="lang-csharp">public static async Task ListRuntimeBackupsAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// `prefix` must end in a single '*'. Omit it to list every runtime backup across all tenants.
-var backups = await client.ListRuntimeBackupsAsClusterAdminAsync(
-    prefix: BackupIdPrefix.AssumeExists(&quot;10*&quot;));
 
-Console.WriteLine($&quot;Cluster runtime backups: {backups}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    // `prefix` must end in a single '*'. Omit it to list every runtime backup across all tenants.
+    var backups = await client.ListRuntimeBackupsAsClusterAdminAsync(
+        prefix: BackupIdPrefix.AssumeExists("10*"));
+
+    Console.WriteLine($"Cluster runtime backups: {backups}");
+}</code></pre>
 </div>
 
 

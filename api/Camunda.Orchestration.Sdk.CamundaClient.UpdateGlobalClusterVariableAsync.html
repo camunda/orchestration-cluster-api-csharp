@@ -160,16 +160,16 @@ The variable must exist, otherwise a 404 error is returned.</p>
 <pre><code class="lang-csharp">public static async Task UpdateGlobalClusterVariableExample(ClusterVariableName name)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.UpdateGlobalClusterVariableAsync(
-    name,
-    new UpdateClusterVariableRequest
-    {
-        Value = &quot;updated-value&quot;,
-    });
 
-Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.UpdateGlobalClusterVariableAsync(
+        name,
+        new UpdateClusterVariableRequest
+        {
+            Value = "updated-value",
+        });
+
+    Console.WriteLine($"Updated variable: {result.Name}");
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateGlobalClusterVariableAsync_Camunda_Orchestration_Sdk_ClusterVariableName_Camunda_Orchestration_Sdk_UpdateClusterVariableRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -178,16 +178,16 @@ Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
 <pre><code class="lang-csharp">public static async Task UpdateGlobalClusterVariableExample(ClusterVariableName name)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.UpdateGlobalClusterVariableAsync(
-    name,
-    new UpdateClusterVariableRequest
-    {
-        Value = &quot;updated-value&quot;,
-    });
 
-Console.WriteLine($&quot;Updated variable: {result.Name}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.UpdateGlobalClusterVariableAsync(
+        name,
+        new UpdateClusterVariableRequest
+        {
+            Value = "updated-value",
+        });
+
+    Console.WriteLine($"Updated variable: {result.Name}");
+}</code></pre>
 </div>
 
 

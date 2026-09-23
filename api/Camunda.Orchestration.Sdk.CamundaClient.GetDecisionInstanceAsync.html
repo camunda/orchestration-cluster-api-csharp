@@ -172,12 +172,12 @@ Returns a decision instance.</p>
 <pre><code class="lang-csharp">public static async Task GetDecisionInstanceExample(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetDecisionInstanceAsync(
-    decisionEvaluationInstanceKey);
 
-Console.WriteLine($&quot;Decision instance: {result.DecisionDefinitionId}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetDecisionInstanceAsync(
+        decisionEvaluationInstanceKey);
+
+    Console.WriteLine($"Decision instance: {result.DecisionDefinitionId}");
+}</code></pre>
 </div>
 
 

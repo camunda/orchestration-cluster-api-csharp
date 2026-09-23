@@ -159,22 +159,22 @@ Restores the cluster from a backup. The restore is described either by a single 
 <pre><code class="lang-csharp">public static async Task RestoreExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// The cluster must be in recovery mode before a restore is accepted.
-// Provide either a list of backup IDs (one per partition) or a time
-// range (From/To) that selects the backups to restore, but not both.
-var change = await client.RestoreAsync(new RestoreRequest
-{
-    BackupIds = new List&lt;long&gt; { 100, 101 },
-});
 
-Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-foreach (var group in change.PlannedChanges)
-{
-    var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
-    Console.WriteLine($&quot;  {tenant}: {group.Operations.Count} operation(s)&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    // The cluster must be in recovery mode before a restore is accepted.
+    // Provide either a list of backup IDs (one per partition) or a time
+    // range (From/To) that selects the backups to restore, but not both.
+    var change = await client.RestoreAsync(new RestoreRequest
+    {
+        BackupIds = new List&lt;long&gt; { 100, 101 },
+    });
+
+    Console.WriteLine($"Cluster change {change.ChangeId}:");
+    foreach (var group in change.PlannedChanges)
+    {
+        var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+        Console.WriteLine($"  {tenant}: {group.Operations.Count} operation(s)");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_RestoreAsync_Camunda_Orchestration_Sdk_RestoreRequest_System_Nullable_System_Boolean__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -183,22 +183,22 @@ foreach (var group in change.PlannedChanges)
 <pre><code class="lang-csharp">public static async Task RestoreExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// The cluster must be in recovery mode before a restore is accepted.
-// Provide either a list of backup IDs (one per partition) or a time
-// range (From/To) that selects the backups to restore, but not both.
-var change = await client.RestoreAsync(new RestoreRequest
-{
-    BackupIds = new List&lt;long&gt; { 100, 101 },
-});
 
-Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-foreach (var group in change.PlannedChanges)
-{
-    var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
-    Console.WriteLine($&quot;  {tenant}: {group.Operations.Count} operation(s)&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    // The cluster must be in recovery mode before a restore is accepted.
+    // Provide either a list of backup IDs (one per partition) or a time
+    // range (From/To) that selects the backups to restore, but not both.
+    var change = await client.RestoreAsync(new RestoreRequest
+    {
+        BackupIds = new List&lt;long&gt; { 100, 101 },
+    });
+
+    Console.WriteLine($"Cluster change {change.ChangeId}:");
+    foreach (var group in change.PlannedChanges)
+    {
+        var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+        Console.WriteLine($"  {tenant}: {group.Operations.Count} operation(s)");
+    }
+}</code></pre>
 </div>
 
 

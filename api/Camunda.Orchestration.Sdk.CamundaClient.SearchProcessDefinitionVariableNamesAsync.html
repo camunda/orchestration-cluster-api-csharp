@@ -178,16 +178,16 @@ Search for distinct variable names defined on a process definition, optionally n
 <pre><code class="lang-csharp">public static async Task SearchProcessDefinitionVariableNamesExample(ProcessDefinitionKey processDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchProcessDefinitionVariableNamesAsync(
-    processDefinitionKey,
-    new ProcessDefinitionVariableNameSearchQuery());
 
-foreach (var variable in result.Items)
-{
-    Console.WriteLine($&quot;Variable name: {variable.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchProcessDefinitionVariableNamesAsync(
+        processDefinitionKey,
+        new ProcessDefinitionVariableNameSearchQuery());
+
+    foreach (var variable in result.Items)
+    {
+        Console.WriteLine($"Variable name: {variable.Name}");
+    }
+}</code></pre>
 </div>
 
 

@@ -170,10 +170,10 @@ Returns an agent definition by key.</p>
 <pre><code class="lang-csharp">public static async Task GetAgentDefinitionExample(AgentDefinitionKey agentDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetAgentDefinitionAsync(agentDefinitionKey);
-Console.WriteLine($&quot;Agent definition: {result.AgentDefinitionKey}, name: {result.Name}, type: {result.AgentType}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetAgentDefinitionAsync(agentDefinitionKey);
+    Console.WriteLine($"Agent definition: {result.AgentDefinitionKey}, name: {result.Name}, type: {result.AgentType}");
+}</code></pre>
 </div>
 
 

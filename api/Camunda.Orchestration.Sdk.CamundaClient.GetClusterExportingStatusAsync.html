@@ -168,11 +168,11 @@ Returns the exporting status of the whole cluster, folded over the exporting sta
 <pre><code class="lang-csharp">public static async Task GetClusterExportingStatusExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Returns the aggregated exporting status across all physical tenants in the cluster.
-var result = await client.GetClusterExportingStatusAsync();
-Console.WriteLine($&quot;Cluster exporting status: {result.Status}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    // Returns the aggregated exporting status across all physical tenants in the cluster.
+    var result = await client.GetClusterExportingStatusAsync();
+    Console.WriteLine($"Cluster exporting status: {result.Status}");
+}</code></pre>
 </div>
 
 

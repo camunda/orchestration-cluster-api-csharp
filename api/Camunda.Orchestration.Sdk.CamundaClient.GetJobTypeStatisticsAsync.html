@@ -175,15 +175,15 @@ Get statistics about jobs, grouped by job type.</p>
 <pre><code class="lang-csharp">public static async Task GetJobTypeStatisticsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetJobTypeStatisticsAsync(
-    new JobTypeStatisticsQuery());
 
-foreach (var stat in result.Items)
-{
-    Console.WriteLine($&quot;Job type: {stat.JobType}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetJobTypeStatisticsAsync(
+        new JobTypeStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Job type: {stat.JobType}");
+    }
+}</code></pre>
 </div>
 
 

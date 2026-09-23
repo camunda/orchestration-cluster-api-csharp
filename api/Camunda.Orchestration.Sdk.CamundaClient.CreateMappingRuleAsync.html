@@ -174,16 +174,16 @@ Create a new mapping rule</p>
 <pre><code class="lang-csharp">public static async Task CreateMappingRuleExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateMappingRuleAsync(new MappingRuleCreateRequest
-{
-    ClaimName = &quot;groups&quot;,
-    ClaimValue = &quot;engineering&quot;,
-    Name = &quot;Engineering Group Mapping&quot;,
-});
 
-Console.WriteLine($&quot;Mapping rule: {result.MappingRuleId}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateMappingRuleAsync(new MappingRuleCreateRequest
+    {
+        ClaimName = "groups",
+        ClaimValue = "engineering",
+        Name = "Engineering Group Mapping",
+    });
+
+    Console.WriteLine($"Mapping rule: {result.MappingRuleId}");
+}</code></pre>
 </div>
 
 

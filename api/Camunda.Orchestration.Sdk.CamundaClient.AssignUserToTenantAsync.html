@@ -171,11 +171,11 @@ Assign a single user to a specified tenant. The user can then access tenant data
 <pre><code class="lang-csharp">public static async Task AssignUserToTenantExample(TenantId tenantId, Username username)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.AssignUserToTenantAsync(
-    tenantId,
-    username);
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.AssignUserToTenantAsync(
+        tenantId,
+        username);
+}</code></pre>
 </div>
 
 

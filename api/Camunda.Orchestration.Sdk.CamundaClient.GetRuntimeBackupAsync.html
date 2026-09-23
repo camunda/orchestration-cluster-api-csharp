@@ -173,15 +173,15 @@ Returns detailed status of the runtime backup with the given id.</p>
 <pre><code class="lang-csharp">public static async Task GetRuntimeBackupExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var backup = await client.GetRuntimeBackupAsync(backupId);
 
-Console.WriteLine($&quot;Backup {backup.BackupId}: {backup.State}&quot;);
-foreach (var partition in backup.Details)
-{
-    Console.WriteLine($&quot;  Partition {partition.PartitionId}: {partition.State}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var backup = await client.GetRuntimeBackupAsync(backupId);
+
+    Console.WriteLine($"Backup {backup.BackupId}: {backup.State}");
+    foreach (var partition in backup.Details)
+    {
+        Console.WriteLine($"  Partition {partition.PartitionId}: {partition.State}");
+    }
+}</code></pre>
 </div>
 
 

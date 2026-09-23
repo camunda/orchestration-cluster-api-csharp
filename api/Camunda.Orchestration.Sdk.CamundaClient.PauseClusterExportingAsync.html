@@ -171,12 +171,12 @@ Pauses exporting on every physical tenant of the cluster in one call. With <code
 <pre><code class="lang-csharp">public static async Task PauseClusterExportingExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// With `soft: true` exporting keeps running but its position is not committed,
-// so the log is still not compacted — use it when exporting must keep
-// progressing across all physical tenants, for example while a cluster backup is taken.
-await client.PauseClusterExportingAsync(soft: true);
-</code></pre>
-<p>}</p></code></pre>
+
+    // With `soft: true` exporting keeps running but its position is not committed,
+    // so the log is still not compacted — use it when exporting must keep
+    // progressing across all physical tenants, for example while a cluster backup is taken.
+    await client.PauseClusterExportingAsync(soft: true);
+}</code></pre>
 </div>
 
 

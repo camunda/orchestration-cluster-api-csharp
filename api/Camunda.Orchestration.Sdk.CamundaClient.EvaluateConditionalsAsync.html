@@ -172,12 +172,12 @@ Multiple root-level conditional start events of the same process definition can 
 <pre><code class="lang-csharp">public static async Task EvaluateConditionalsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.EvaluateConditionalsAsync(
-    new ConditionalEvaluationInstruction());
 
-Console.WriteLine($&quot;Result: {result}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.EvaluateConditionalsAsync(
+        new ConditionalEvaluationInstruction());
+
+    Console.WriteLine($"Result: {result}");
+}</code></pre>
 </div>
 
 

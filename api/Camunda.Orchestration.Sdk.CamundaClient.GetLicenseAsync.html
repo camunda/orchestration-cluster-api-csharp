@@ -166,10 +166,10 @@ Obtains the status of the current Camunda license.</p>
 <pre><code class="lang-csharp">public static async Task GetLicenseExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetLicenseAsync();
-Console.WriteLine($&quot;License type: {result.LicenseType}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetLicenseAsync();
+    Console.WriteLine($"License type: {result.LicenseType}");
+}</code></pre>
 </div>
 
 

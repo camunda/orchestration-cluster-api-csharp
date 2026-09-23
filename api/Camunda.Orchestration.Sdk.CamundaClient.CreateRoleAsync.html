@@ -172,14 +172,14 @@ Create a new role.</p>
 <pre><code class="lang-csharp">public static async Task CreateRoleExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateRoleAsync(new RoleCreateRequest
-{
-    Name = &quot;developer&quot;,
-});
 
-Console.WriteLine($&quot;Role key: {result.RoleId}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateRoleAsync(new RoleCreateRequest
+    {
+        Name = "developer",
+    });
+
+    Console.WriteLine($"Role key: {result.RoleId}");
+}</code></pre>
 </div>
 
 

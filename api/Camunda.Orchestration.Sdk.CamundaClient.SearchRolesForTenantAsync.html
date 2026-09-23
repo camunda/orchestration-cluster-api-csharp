@@ -161,16 +161,16 @@ Retrieves a filtered and sorted list of roles for a specified tenant.</p>
 <pre><code class="lang-csharp">public static async Task SearchRolesForTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchRolesForTenantAsync(
-    tenantId,
-    new RoleSearchQueryRequest());
 
-foreach (var role in result.Items)
-{
-    Console.WriteLine($&quot;Role: {role.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchRolesForTenantAsync(
+        tenantId,
+        new RoleSearchQueryRequest());
+
+    foreach (var role in result.Items)
+    {
+        Console.WriteLine($"Role: {role.Name}");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchRolesForTenantAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_RoleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_TenantRoleSearchResult__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -179,16 +179,16 @@ foreach (var role in result.Items)
 <pre><code class="lang-csharp">public static async Task SearchRolesForTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchRolesForTenantAsync(
-    tenantId,
-    new RoleSearchQueryRequest());
 
-foreach (var role in result.Items)
-{
-    Console.WriteLine($&quot;Role: {role.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchRolesForTenantAsync(
+        tenantId,
+        new RoleSearchQueryRequest());
+
+    foreach (var role in result.Items)
+    {
+        Console.WriteLine($"Role: {role.Name}");
+    }
+}</code></pre>
 </div>
 
 

@@ -177,14 +177,14 @@ Upload a document to the Camunda 8 cluster.</p>
 <pre><code class="lang-csharp">public static async Task CreateDocumentExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>using var content = new MultipartFormDataContent();
-content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(&quot;Hello, world!&quot;)), &quot;file&quot;, &quot;hello.txt&quot;);
 
-var result = await client.CreateDocumentAsync(content);
+    using var content = new MultipartFormDataContent();
+    content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes("Hello, world!")), "file", "hello.txt");
 
-Console.WriteLine($&quot;Document ID: {result.DocumentId}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateDocumentAsync(content);
+
+    Console.WriteLine($"Document ID: {result.DocumentId}");
+}</code></pre>
 </div>
 
 

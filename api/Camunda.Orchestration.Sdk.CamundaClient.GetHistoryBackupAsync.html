@@ -171,12 +171,12 @@ Returns detailed status of the history backup with the given id.</p>
 <pre><code class="lang-csharp">public static async Task GetHistoryBackupExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var backup = await client.GetHistoryBackupAsync(backupId);
 
-// The aggregated state is derived from the state of every expected snapshot.
-Console.WriteLine($&quot;History backup {backup.BackupId}: {backup.State}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var backup = await client.GetHistoryBackupAsync(backupId);
+
+    // The aggregated state is derived from the state of every expected snapshot.
+    Console.WriteLine($"History backup {backup.BackupId}: {backup.State}");
+}</code></pre>
 </div>
 
 

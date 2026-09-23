@@ -174,14 +174,14 @@ Search for user tasks based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchUserTasksExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
 
-foreach (var task in result.Items)
-{
-    Console.WriteLine($&quot;User task: {task.UserTaskKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
+
+    foreach (var task in result.Items)
+    {
+        Console.WriteLine($"User task: {task.UserTaskKey}");
+    }
+}</code></pre>
 </div>
 
 

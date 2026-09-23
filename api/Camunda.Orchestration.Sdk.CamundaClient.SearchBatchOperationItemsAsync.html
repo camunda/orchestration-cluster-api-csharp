@@ -175,15 +175,15 @@ Search for batch operation items based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchBatchOperationItemsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchBatchOperationItemsAsync(
-    new BatchOperationItemSearchQuery());
 
-foreach (var item in result.Items)
-{
-    Console.WriteLine($&quot;Item: {item.ItemKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchBatchOperationItemsAsync(
+        new BatchOperationItemSearchQuery());
+
+    foreach (var item in result.Items)
+    {
+        Console.WriteLine($"Item: {item.ItemKey}");
+    }
+}</code></pre>
 </div>
 
 

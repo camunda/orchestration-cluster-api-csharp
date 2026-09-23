@@ -163,13 +163,13 @@ Lists the history backups of every physical tenant of the cluster, or of the one
 <pre><code class="lang-csharp">public static async Task ListHistoryBackupsAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// `prefix` must end in a single '*'. Omit it to list every history backup across all tenants.
-var backups = await client.ListHistoryBackupsAsClusterAdminAsync(
-    prefix: BackupIdPrefix.AssumeExists(&quot;10*&quot;));
 
-Console.WriteLine($&quot;Cluster history backups: {backups}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    // `prefix` must end in a single '*'. Omit it to list every history backup across all tenants.
+    var backups = await client.ListHistoryBackupsAsClusterAdminAsync(
+        prefix: BackupIdPrefix.AssumeExists("10*"));
+
+    Console.WriteLine($"Cluster history backups: {backups}");
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ListHistoryBackupsAsClusterAdminAsync_System_String_System_Nullable_Camunda_Orchestration_Sdk_BackupIdPrefix__System_Nullable_System_Boolean__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -178,13 +178,13 @@ Console.WriteLine($&quot;Cluster history backups: {backups}&quot;);
 <pre><code class="lang-csharp">public static async Task ListHistoryBackupsAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// `prefix` must end in a single '*'. Omit it to list every history backup across all tenants.
-var backups = await client.ListHistoryBackupsAsClusterAdminAsync(
-    prefix: BackupIdPrefix.AssumeExists(&quot;10*&quot;));
 
-Console.WriteLine($&quot;Cluster history backups: {backups}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    // `prefix` must end in a single '*'. Omit it to list every history backup across all tenants.
+    var backups = await client.ListHistoryBackupsAsClusterAdminAsync(
+        prefix: BackupIdPrefix.AssumeExists("10*"));
+
+    Console.WriteLine($"Cluster history backups: {backups}");
+}</code></pre>
 </div>
 
 

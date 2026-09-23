@@ -184,24 +184,24 @@ Search for agent definitions based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchAgentDefinitionsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchAgentDefinitionsAsync(new AgentDefinitionSearchQuery
-{
-    Filter = new AgentDefinitionFilter
-    {
-        AgentType = AgentDefinitionTypeEnum.AIAGENTTASK,
-    },
-    Page = new LimitPagination
-    {
-        Limit = 50,
-    },
-});
 
-foreach (var def in result.Items)
-{
-    Console.WriteLine($&quot;Agent definition: {def.AgentDefinitionKey}, name: {def.Name}, type: {def.AgentType}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchAgentDefinitionsAsync(new AgentDefinitionSearchQuery
+    {
+        Filter = new AgentDefinitionFilter
+        {
+            AgentType = AgentDefinitionTypeEnum.AIAGENTTASK,
+        },
+        Page = new LimitPagination
+        {
+            Limit = 50,
+        },
+    });
+
+    foreach (var def in result.Items)
+    {
+        Console.WriteLine($"Agent definition: {def.AgentDefinitionKey}, name: {def.Name}, type: {def.AgentType}");
+    }
+}</code></pre>
 </div>
 
 

@@ -162,28 +162,28 @@ Triggers a runtime backup on every physical tenant of the cluster, or on the one
 <pre><code class="lang-csharp">public static async Task TakeRuntimeBackupAsClusterAdminExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>// Takes a runtime backup across all physical tenants in the cluster.
-// Omit `BackupId` when continuous backups or a backup/checkpoint schedule is
-// enabled — the id is then generated per tenant. Otherwise it must be higher
-// than any existing backup id on every targeted tenant.
-var backup = await client.TakeRuntimeBackupAsClusterAdminAsync(
-    new TakeRuntimeBackupRequest { BackupId = backupId });
 
-Console.WriteLine($&quot;Triggered cluster runtime backup across {backup.PhysicalTenants.Count} tenant(s)&quot;);
-foreach (var tenant in backup.PhysicalTenants)
-{
-    if (tenant.BackupId.HasValue)
+    // Takes a runtime backup across all physical tenants in the cluster.
+    // Omit `BackupId` when continuous backups or a backup/checkpoint schedule is
+    // enabled — the id is then generated per tenant. Otherwise it must be higher
+    // than any existing backup id on every targeted tenant.
+    var backup = await client.TakeRuntimeBackupAsClusterAdminAsync(
+        new TakeRuntimeBackupRequest { BackupId = backupId });
+
+    Console.WriteLine($"Triggered cluster runtime backup across {backup.PhysicalTenants.Count} tenant(s)");
+    foreach (var tenant in backup.PhysicalTenants)
     {
-        Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: triggered, backup id {tenant.BackupId.Value}&quot;);
+        if (tenant.BackupId.HasValue)
+        {
+            Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: triggered, backup id {tenant.BackupId.Value}");
+        }
+        else
+        {
+            Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.Outcome}" +
+                (tenant.Reason != null ? $" — {tenant.Reason}" : ""));
+        }
     }
-    else
-    {
-        Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: {tenant.Outcome}&quot; +
-            (tenant.Reason != null ? $&quot; — {tenant.Reason}&quot; : &quot;&quot;));
-    }
-}
-</code></pre>
-<p>}</p></code></pre>
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_TakeRuntimeBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_TakeRuntimeBackupRequest_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -192,28 +192,28 @@ foreach (var tenant in backup.PhysicalTenants)
 <pre><code class="lang-csharp">public static async Task TakeRuntimeBackupAsClusterAdminExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>// Takes a runtime backup across all physical tenants in the cluster.
-// Omit `BackupId` when continuous backups or a backup/checkpoint schedule is
-// enabled — the id is then generated per tenant. Otherwise it must be higher
-// than any existing backup id on every targeted tenant.
-var backup = await client.TakeRuntimeBackupAsClusterAdminAsync(
-    new TakeRuntimeBackupRequest { BackupId = backupId });
 
-Console.WriteLine($&quot;Triggered cluster runtime backup across {backup.PhysicalTenants.Count} tenant(s)&quot;);
-foreach (var tenant in backup.PhysicalTenants)
-{
-    if (tenant.BackupId.HasValue)
+    // Takes a runtime backup across all physical tenants in the cluster.
+    // Omit `BackupId` when continuous backups or a backup/checkpoint schedule is
+    // enabled — the id is then generated per tenant. Otherwise it must be higher
+    // than any existing backup id on every targeted tenant.
+    var backup = await client.TakeRuntimeBackupAsClusterAdminAsync(
+        new TakeRuntimeBackupRequest { BackupId = backupId });
+
+    Console.WriteLine($"Triggered cluster runtime backup across {backup.PhysicalTenants.Count} tenant(s)");
+    foreach (var tenant in backup.PhysicalTenants)
     {
-        Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: triggered, backup id {tenant.BackupId.Value}&quot;);
+        if (tenant.BackupId.HasValue)
+        {
+            Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: triggered, backup id {tenant.BackupId.Value}");
+        }
+        else
+        {
+            Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.Outcome}" +
+                (tenant.Reason != null ? $" — {tenant.Reason}" : ""));
+        }
     }
-    else
-    {
-        Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: {tenant.Outcome}&quot; +
-            (tenant.Reason != null ? $&quot; — {tenant.Reason}&quot; : &quot;&quot;));
-    }
-}
-</code></pre>
-<p>}</p></code></pre>
+}</code></pre>
 </div>
 
 

@@ -166,10 +166,10 @@ Retrieves the current authenticated user.</p>
 <pre><code class="lang-csharp">public static async Task GetAuthenticationExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetAuthenticationAsync();
-Console.WriteLine($&quot;Authenticated user: {result.Username}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetAuthenticationAsync();
+    Console.WriteLine($"Authenticated user: {result.Username}");
+}</code></pre>
 </div>
 
 

@@ -178,18 +178,18 @@ Update the authorization with the given key.</p>
 <pre><code class="lang-csharp">public static async Task UpdateAuthorizationExample(AuthorizationKey authorizationKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UpdateAuthorizationAsync(
-    authorizationKey,
-    new AuthorizationPropertyBasedRequest
-    {
-        ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
-        PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE, PermissionTypeEnum.DELETE },
-        ResourcePropertyName = &quot;my-process&quot;,
-        OwnerType = OwnerTypeEnum.USER,
-        OwnerId = &quot;user@example.com&quot;,
-    });
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.UpdateAuthorizationAsync(
+        authorizationKey,
+        new AuthorizationPropertyBasedRequest
+        {
+            ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+            PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE, PermissionTypeEnum.DELETE },
+            ResourcePropertyName = "my-process",
+            OwnerType = OwnerTypeEnum.USER,
+            OwnerId = "user@example.com",
+        });
+}</code></pre>
 </div>
 
 

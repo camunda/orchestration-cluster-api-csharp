@@ -176,16 +176,16 @@ Mark the job as failed.</p>
 <pre><code class="lang-csharp">public static async Task FailJobExample(JobKey jobKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.FailJobAsync(
-    jobKey,
-    new JobFailRequest
-    {
-        Retries = 3,
-        RetryBackOff = 5000,
-        ErrorMessage = &quot;Something went wrong&quot;,
-    });
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.FailJobAsync(
+        jobKey,
+        new JobFailRequest
+        {
+            Retries = 3,
+            RetryBackOff = 5000,
+            ErrorMessage = "Something went wrong",
+        });
+}</code></pre>
 </div>
 
 

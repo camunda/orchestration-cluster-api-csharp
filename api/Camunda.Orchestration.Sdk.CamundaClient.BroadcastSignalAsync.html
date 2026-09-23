@@ -172,14 +172,14 @@ Broadcasts a signal.</p>
 <pre><code class="lang-csharp">public static async Task BroadcastSignalExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.BroadcastSignalAsync(new SignalBroadcastRequest
-{
-    SignalName = &quot;orderCancelled&quot;,
-});
 
-Console.WriteLine($&quot;Signal key: {result.SignalKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.BroadcastSignalAsync(new SignalBroadcastRequest
+    {
+        SignalName = "orderCancelled",
+    });
+
+    Console.WriteLine($"Signal key: {result.SignalKey}");
+}</code></pre>
 </div>
 
 

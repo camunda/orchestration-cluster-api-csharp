@@ -171,11 +171,11 @@ Complete a job with the given payload, which allows completing the associated se
 <pre><code class="lang-csharp">public static async Task CompleteJobExample(JobKey jobKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.CompleteJobAsync(
-    jobKey,
-    new JobCompletionRequest());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.CompleteJobAsync(
+        jobKey,
+        new JobCompletionRequest());
+}</code></pre>
 </div>
 
 

@@ -174,14 +174,14 @@ Retrieves a filtered and sorted list of tenants.</p>
 <pre><code class="lang-csharp">public static async Task SearchTenantsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchTenantsAsync(new TenantSearchQueryRequest());
 
-foreach (var tenant in result.Items)
-{
-    Console.WriteLine($&quot;Tenant: {tenant.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchTenantsAsync(new TenantSearchQueryRequest());
+
+    foreach (var tenant in result.Items)
+    {
+        Console.WriteLine($"Tenant: {tenant.Name}");
+    }
+}</code></pre>
 </div>
 
 

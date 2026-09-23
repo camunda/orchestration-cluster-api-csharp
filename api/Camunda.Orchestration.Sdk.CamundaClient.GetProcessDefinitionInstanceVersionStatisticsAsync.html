@@ -182,21 +182,21 @@ The process definition ID must be provided as a required field in the request bo
 <pre><code class="lang-csharp">public static async Task GetProcessDefinitionInstanceVersionStatisticsExample(ProcessDefinitionId processDefinitionId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessDefinitionInstanceVersionStatisticsAsync(
-    new ProcessDefinitionInstanceVersionStatisticsQuery
-    {
-        Filter = new ProcessDefinitionInstanceVersionStatisticsFilter
-        {
-            ProcessDefinitionId = processDefinitionId,
-        },
-    });
 
-foreach (var stat in result.Items)
-{
-    Console.WriteLine($&quot;Version: {stat.ProcessDefinitionVersion}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetProcessDefinitionInstanceVersionStatisticsAsync(
+        new ProcessDefinitionInstanceVersionStatisticsQuery
+        {
+            Filter = new ProcessDefinitionInstanceVersionStatisticsFilter
+            {
+                ProcessDefinitionId = processDefinitionId,
+            },
+        });
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Version: {stat.ProcessDefinitionVersion}");
+    }
+}</code></pre>
 </div>
 
 

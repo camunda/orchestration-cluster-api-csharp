@@ -173,15 +173,15 @@ Creates a new tenant.</p>
 <pre><code class="lang-csharp">public static async Task CreateTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateTenantAsync(new TenantCreateRequest
-{
-    TenantId = tenantId,
-    Name = &quot;Acme Corporation&quot;,
-});
 
-Console.WriteLine($&quot;Tenant key: {result.TenantId}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateTenantAsync(new TenantCreateRequest
+    {
+        TenantId = tenantId,
+        Name = "Acme Corporation",
+    });
+
+    Console.WriteLine($"Tenant key: {result.TenantId}");
+}</code></pre>
 </div>
 
 

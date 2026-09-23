@@ -161,19 +161,19 @@ Triggers a history backup on every physical tenant of the cluster, or on the one
 <pre><code class="lang-csharp">public static async Task TakeHistoryBackupAsClusterAdminExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>// Takes a history backup across all physical tenants in the cluster.
-// Backups are logically ordered by id, so each successive backup must use a
-// higher id than the previous one.
-var backup = await client.TakeHistoryBackupAsClusterAdminAsync(
-    new TakeHistoryBackupRequest { BackupId = backupId });
 
-Console.WriteLine($&quot;Scheduled cluster history backup {backup.BackupId}&quot;);
-foreach (var tenant in backup.PhysicalTenants)
-{
-    Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: scheduled {tenant.ScheduledSnapshots?.Count} snapshot(s)&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    // Takes a history backup across all physical tenants in the cluster.
+    // Backups are logically ordered by id, so each successive backup must use a
+    // higher id than the previous one.
+    var backup = await client.TakeHistoryBackupAsClusterAdminAsync(
+        new TakeHistoryBackupRequest { BackupId = backupId });
+
+    Console.WriteLine($"Scheduled cluster history backup {backup.BackupId}");
+    foreach (var tenant in backup.PhysicalTenants)
+    {
+        Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: scheduled {tenant.ScheduledSnapshots?.Count} snapshot(s)");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_TakeHistoryBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_TakeHistoryBackupRequest_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -182,19 +182,19 @@ foreach (var tenant in backup.PhysicalTenants)
 <pre><code class="lang-csharp">public static async Task TakeHistoryBackupAsClusterAdminExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>// Takes a history backup across all physical tenants in the cluster.
-// Backups are logically ordered by id, so each successive backup must use a
-// higher id than the previous one.
-var backup = await client.TakeHistoryBackupAsClusterAdminAsync(
-    new TakeHistoryBackupRequest { BackupId = backupId });
 
-Console.WriteLine($&quot;Scheduled cluster history backup {backup.BackupId}&quot;);
-foreach (var tenant in backup.PhysicalTenants)
-{
-    Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: scheduled {tenant.ScheduledSnapshots?.Count} snapshot(s)&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    // Takes a history backup across all physical tenants in the cluster.
+    // Backups are logically ordered by id, so each successive backup must use a
+    // higher id than the previous one.
+    var backup = await client.TakeHistoryBackupAsClusterAdminAsync(
+        new TakeHistoryBackupRequest { BackupId = backupId });
+
+    Console.WriteLine($"Scheduled cluster history backup {backup.BackupId}");
+    foreach (var tenant in backup.PhysicalTenants)
+    {
+        Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: scheduled {tenant.ScheduledSnapshots?.Count} snapshot(s)");
+    }
+}</code></pre>
 </div>
 
 

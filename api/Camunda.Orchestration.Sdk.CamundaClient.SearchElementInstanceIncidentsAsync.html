@@ -183,16 +183,16 @@ to the root element itself.</p>
 <pre><code class="lang-csharp">public static async Task SearchElementInstanceIncidentsExample(ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchElementInstanceIncidentsAsync(
-    elementInstanceKey,
-    new IncidentSearchQuery());
 
-foreach (var incident in result.Items)
-{
-    Console.WriteLine($&quot;Incident: {incident.IncidentKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchElementInstanceIncidentsAsync(
+        elementInstanceKey,
+        new IncidentSearchQuery());
+
+    foreach (var incident in result.Items)
+    {
+        Console.WriteLine($"Incident: {incident.IncidentKey}");
+    }
+}</code></pre>
 </div>
 
 

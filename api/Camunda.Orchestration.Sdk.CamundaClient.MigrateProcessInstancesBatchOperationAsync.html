@@ -180,19 +180,19 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 <pre><code class="lang-csharp">public static async Task MigrateProcessInstancesBatchOperationExample(ProcessDefinitionKey targetProcessDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.MigrateProcessInstancesBatchOperationAsync(
-    new ProcessInstanceMigrationBatchOperationRequest
-    {
-        Filter = new ProcessInstanceFilter(),
-        MigrationPlan = new ProcessInstanceMigrationBatchOperationPlan
-        {
-            TargetProcessDefinitionKey = targetProcessDefinitionKey,
-        },
-    });
 
-Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.MigrateProcessInstancesBatchOperationAsync(
+        new ProcessInstanceMigrationBatchOperationRequest
+        {
+            Filter = new ProcessInstanceFilter(),
+            MigrationPlan = new ProcessInstanceMigrationBatchOperationPlan
+            {
+                TargetProcessDefinitionKey = targetProcessDefinitionKey,
+            },
+        });
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}</code></pre>
 </div>
 
 

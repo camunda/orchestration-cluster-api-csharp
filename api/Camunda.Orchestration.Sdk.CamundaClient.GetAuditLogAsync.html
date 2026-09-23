@@ -170,10 +170,10 @@ Get an audit log entry by auditLogKey.</p>
 <pre><code class="lang-csharp">public static async Task GetAuditLogExample(AuditLogKey auditLogKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetAuditLogAsync(auditLogKey);
-Console.WriteLine($&quot;Audit log: {result.AuditLogKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetAuditLogAsync(auditLogKey);
+    Console.WriteLine($"Audit log: {result.AuditLogKey}");
+}</code></pre>
 </div>
 
 

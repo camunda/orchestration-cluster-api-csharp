@@ -166,14 +166,14 @@ BPMN elements like tasks, subprocesses, etc.).</p>
 <pre><code class="lang-csharp">public static async Task SearchVariablesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchVariablesAsync(new VariableSearchQuery());
 
-foreach (var variable in result.Items)
-{
-    Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchVariablesAsync(new VariableSearchQuery());
+
+    foreach (var variable in result.Items)
+    {
+        Console.WriteLine($"Variable: {variable.Name}");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchVariablesAsync_Camunda_Orchestration_Sdk_VariableSearchQuery_System_Nullable_System_Boolean__Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_VariableSearchQueryResult__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -182,14 +182,14 @@ foreach (var variable in result.Items)
 <pre><code class="lang-csharp">public static async Task SearchVariablesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchVariablesAsync(new VariableSearchQuery());
 
-foreach (var variable in result.Items)
-{
-    Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchVariablesAsync(new VariableSearchQuery());
+
+    foreach (var variable in result.Items)
+    {
+        Console.WriteLine($"Variable: {variable.Name}");
+    }
+}</code></pre>
 </div>
 
 

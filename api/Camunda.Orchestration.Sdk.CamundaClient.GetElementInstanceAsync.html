@@ -172,12 +172,12 @@ Returns element instance as JSON.</p>
 <pre><code class="lang-csharp">public static async Task GetElementInstanceExample(ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetElementInstanceAsync(
-    elementInstanceKey);
 
-Console.WriteLine($&quot;Element: {result.ElementId}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetElementInstanceAsync(
+        elementInstanceKey);
+
+    Console.WriteLine($"Element: {result.ElementId}");
+}</code></pre>
 </div>
 
 

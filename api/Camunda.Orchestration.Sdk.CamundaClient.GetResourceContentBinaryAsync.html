@@ -175,10 +175,10 @@ respective APIs.
 <pre><code class="lang-csharp">public static async Task GetResourceContentBinaryExample(ResourceKey resourceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>byte[] content = await client.GetResourceContentBinaryAsync(resourceKey);
-Console.WriteLine($&quot;Binary content length: {content.Length} bytes&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    byte[] content = await client.GetResourceContentBinaryAsync(resourceKey);
+    Console.WriteLine($"Binary content length: {content.Length} bytes");
+}</code></pre>
 </div>
 
 

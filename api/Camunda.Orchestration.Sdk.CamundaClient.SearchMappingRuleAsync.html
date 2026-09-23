@@ -159,15 +159,15 @@ Search for mapping rules based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchMappingRuleExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchMappingRuleAsync(
-    new MappingRuleSearchQueryRequest());
 
-foreach (var rule in result.Items)
-{
-    Console.WriteLine($&quot;Mapping rule: {rule.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchMappingRuleAsync(
+        new MappingRuleSearchQueryRequest());
+
+    foreach (var rule in result.Items)
+    {
+        Console.WriteLine($"Mapping rule: {rule.Name}");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchMappingRuleAsync_Camunda_Orchestration_Sdk_MappingRuleSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_MappingRuleSearchQueryResult__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -176,15 +176,15 @@ foreach (var rule in result.Items)
 <pre><code class="lang-csharp">public static async Task SearchMappingRuleExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchMappingRuleAsync(
-    new MappingRuleSearchQueryRequest());
 
-foreach (var rule in result.Items)
-{
-    Console.WriteLine($&quot;Mapping rule: {rule.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchMappingRuleAsync(
+        new MappingRuleSearchQueryRequest());
+
+    foreach (var rule in result.Items)
+    {
+        Console.WriteLine($"Mapping rule: {rule.Name}");
+    }
+}</code></pre>
 </div>
 
 

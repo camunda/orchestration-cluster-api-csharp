@@ -177,17 +177,17 @@ Updates a global user task listener.</p>
 <pre><code class="lang-csharp">public static async Task UpdateGlobalTaskListenerExample(GlobalListenerId globalListenerId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.UpdateGlobalTaskListenerAsync(
-    globalListenerId,
-    new UpdateGlobalTaskListenerRequest
-    {
-        EventTypes = new List&lt;GlobalTaskListenerEventTypeEnum&gt; { GlobalTaskListenerEventTypeEnum.Completing },
-        Type = &quot;updated-task-listener&quot;,
-    });
 
-Console.WriteLine($&quot;Updated listener: {result.Id}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.UpdateGlobalTaskListenerAsync(
+        globalListenerId,
+        new UpdateGlobalTaskListenerRequest
+        {
+            EventTypes = new List&lt;GlobalTaskListenerEventTypeEnum&gt; { GlobalTaskListenerEventTypeEnum.Completing },
+            Type = "updated-task-listener",
+        });
+
+    Console.WriteLine($"Updated listener: {result.Id}");
+}</code></pre>
 </div>
 
 

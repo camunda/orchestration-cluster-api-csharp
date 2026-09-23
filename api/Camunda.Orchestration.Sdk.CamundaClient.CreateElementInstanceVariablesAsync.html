@@ -176,11 +176,11 @@ repeats.</p>
 <pre><code class="lang-csharp">public static async Task CreateElementInstanceVariablesExample(ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.CreateElementInstanceVariablesAsync(
-    elementInstanceKey,
-    new SetVariableRequest());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.CreateElementInstanceVariablesAsync(
+        elementInstanceKey,
+        new SetVariableRequest());
+}</code></pre>
 </div>
 
 

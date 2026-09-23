@@ -175,15 +175,15 @@ Get statistics about process instances, grouped by process definition and tenant
 <pre><code class="lang-csharp">public static async Task GetProcessDefinitionInstanceStatisticsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessDefinitionInstanceStatisticsAsync(
-    new ProcessDefinitionInstanceStatisticsQuery());
 
-foreach (var stat in result.Items)
-{
-    Console.WriteLine($&quot;Definition: {stat.ProcessDefinitionId}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetProcessDefinitionInstanceStatisticsAsync(
+        new ProcessDefinitionInstanceStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Definition: {stat.ProcessDefinitionId}");
+    }
+}</code></pre>
 </div>
 
 

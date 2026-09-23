@@ -188,11 +188,11 @@ from the runtime state and the deletion is later re-triggered with <code>deleteH
 <pre><code class="lang-csharp">public static async Task DeleteResourceExample(ResourceKey resourceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.DeleteResourceAsync(
-    resourceKey,
-    new DeleteResourceRequest());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.DeleteResourceAsync(
+        resourceKey,
+        new DeleteResourceRequest());
+}</code></pre>
 </div>
 
 

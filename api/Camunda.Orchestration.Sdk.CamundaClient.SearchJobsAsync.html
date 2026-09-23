@@ -174,14 +174,14 @@ Search for jobs based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchJobsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchJobsAsync(new JobSearchQuery());
 
-foreach (var job in result.Items)
-{
-    Console.WriteLine($&quot;Job: {job.JobKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchJobsAsync(new JobSearchQuery());
+
+    foreach (var job in result.Items)
+    {
+        Console.WriteLine($"Job: {job.JobKey}");
+    }
+}</code></pre>
 </div>
 
 

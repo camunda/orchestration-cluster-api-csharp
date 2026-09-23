@@ -170,10 +170,10 @@ Retrieves a single tenant by tenant ID.</p>
 <pre><code class="lang-csharp">public static async Task GetTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetTenantAsync(tenantId);
-Console.WriteLine($&quot;Tenant: {result.Name}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetTenantAsync(tenantId);
+    Console.WriteLine($"Tenant: {result.Name}");
+}</code></pre>
 </div>
 
 

@@ -176,15 +176,15 @@ grouped by incident error hash code.</p>
 <pre><code class="lang-csharp">public static async Task GetProcessInstanceStatisticsByErrorExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessInstanceStatisticsByErrorAsync(
-    new IncidentProcessInstanceStatisticsByErrorQuery());
 
-foreach (var stat in result.Items)
-{
-    Console.WriteLine($&quot;Error: {stat.ErrorMessage}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetProcessInstanceStatisticsByErrorAsync(
+        new IncidentProcessInstanceStatisticsByErrorQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Error: {stat.ErrorMessage}");
+    }
+}</code></pre>
 </div>
 
 

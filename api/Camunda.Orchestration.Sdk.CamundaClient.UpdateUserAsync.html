@@ -175,15 +175,15 @@ Updates a user.</p>
 <pre><code class="lang-csharp">public static async Task UpdateUserExample(Username username)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UpdateUserAsync(
-    username,
-    new UserUpdateRequest
-    {
-        Name = &quot;Jane Smith&quot;,
-        Email = &quot;jsmith@example.com&quot;,
-    });
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.UpdateUserAsync(
+        username,
+        new UserUpdateRequest
+        {
+            Name = "Jane Smith",
+            Email = "jsmith@example.com",
+        });
+}</code></pre>
 </div>
 
 

@@ -175,15 +175,15 @@ Search for batch operations based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchBatchOperationsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchBatchOperationsAsync(
-    new BatchOperationSearchQuery());
 
-foreach (var op in result.Items)
-{
-    Console.WriteLine($&quot;Batch operation: {op.BatchOperationKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchBatchOperationsAsync(
+        new BatchOperationSearchQuery());
+
+    foreach (var op in result.Items)
+    {
+        Console.WriteLine($"Batch operation: {op.BatchOperationKey}");
+    }
+}</code></pre>
 </div>
 
 

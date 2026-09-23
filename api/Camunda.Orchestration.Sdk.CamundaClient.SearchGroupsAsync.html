@@ -174,14 +174,14 @@ Search for groups based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchGroupsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchGroupsAsync(new GroupSearchQueryRequest());
 
-foreach (var group in result.Items)
-{
-    Console.WriteLine($&quot;Group: {group.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchGroupsAsync(new GroupSearchQueryRequest());
+
+    foreach (var group in result.Items)
+    {
+        Console.WriteLine($"Group: {group.Name}");
+    }
+}</code></pre>
 </div>
 
 

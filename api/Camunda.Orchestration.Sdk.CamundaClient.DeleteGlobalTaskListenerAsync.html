@@ -168,10 +168,10 @@ Deletes a global user task listener.</p>
 <pre><code class="lang-csharp">public static async Task DeleteGlobalTaskListenerExample(GlobalListenerId globalListenerId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.DeleteGlobalTaskListenerAsync(
-    globalListenerId);
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.DeleteGlobalTaskListenerAsync(
+        globalListenerId);
+}</code></pre>
 </div>
 
 

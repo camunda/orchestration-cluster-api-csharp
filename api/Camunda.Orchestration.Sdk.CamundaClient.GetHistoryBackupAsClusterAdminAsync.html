@@ -161,15 +161,15 @@ Reports what every physical tenant of the cluster, or the one named by <code>phy
 <pre><code class="lang-csharp">public static async Task GetHistoryBackupAsClusterAdminExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var backup = await client.GetHistoryBackupAsClusterAdminAsync(backupId);
 
-Console.WriteLine($&quot;Cluster history backup {backup.BackupId}&quot;);
-foreach (var tenant in backup.PhysicalTenants)
-{
-    Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: {tenant.State}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var backup = await client.GetHistoryBackupAsClusterAdminAsync(backupId);
+
+    Console.WriteLine($"Cluster history backup {backup.BackupId}");
+    foreach (var tenant in backup.PhysicalTenants)
+    {
+        Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.State}");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetHistoryBackupAsClusterAdminAsync_Camunda_Orchestration_Sdk_BackupId_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -178,15 +178,15 @@ foreach (var tenant in backup.PhysicalTenants)
 <pre><code class="lang-csharp">public static async Task GetHistoryBackupAsClusterAdminExample(BackupId backupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var backup = await client.GetHistoryBackupAsClusterAdminAsync(backupId);
 
-Console.WriteLine($&quot;Cluster history backup {backup.BackupId}&quot;);
-foreach (var tenant in backup.PhysicalTenants)
-{
-    Console.WriteLine($&quot;  Tenant {tenant.PhysicalTenantId}: {tenant.State}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var backup = await client.GetHistoryBackupAsClusterAdminAsync(backupId);
+
+    Console.WriteLine($"Cluster history backup {backup.BackupId}");
+    foreach (var tenant in backup.PhysicalTenants)
+    {
+        Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.State}");
+    }
+}</code></pre>
 </div>
 
 

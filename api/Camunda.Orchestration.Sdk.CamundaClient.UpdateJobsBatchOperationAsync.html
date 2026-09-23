@@ -177,19 +177,19 @@ Creates a batch operation to update jobs matching the given filter. At least one
 <pre><code class="lang-csharp">public static async Task UpdateJobsBatchOperationExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.UpdateJobsBatchOperationAsync(
-    new JobBatchUpdateRequest
-    {
-        Filter = new JobFilter
-        {
-            Type = new StringFilterProperty { Eq = &quot;my-job-type&quot; },
-        },
-        Changeset = new JobChangeset { Retries = 3 },
-    });
 
-Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.UpdateJobsBatchOperationAsync(
+        new JobBatchUpdateRequest
+        {
+            Filter = new JobFilter
+            {
+                Type = new StringFilterProperty { Eq = "my-job-type" },
+            },
+            Changeset = new JobChangeset { Retries = 3 },
+        });
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}</code></pre>
 </div>
 
 

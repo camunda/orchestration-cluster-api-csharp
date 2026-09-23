@@ -180,14 +180,14 @@ response.</p>
 <pre><code class="lang-csharp">public static async Task AssignProcessInstanceBusinessIdExample(ProcessInstanceKey processInstanceKey, BusinessId businessId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.AssignProcessInstanceBusinessIdAsync(
-    processInstanceKey,
-    new ProcessInstanceBusinessIdAssignmentInstruction
-    {
-        BusinessId = businessId,
-    });
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.AssignProcessInstanceBusinessIdAsync(
+        processInstanceKey,
+        new ProcessInstanceBusinessIdAssignmentInstruction
+        {
+            BusinessId = businessId,
+        });
+}</code></pre>
 </div>
 
 

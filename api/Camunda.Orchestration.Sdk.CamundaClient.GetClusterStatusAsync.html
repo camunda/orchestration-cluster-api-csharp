@@ -168,11 +168,11 @@ Checks the health status of the whole cluster, aggregated over all physical tena
 <pre><code class="lang-csharp">public static async Task GetClusterStatusExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var status = await client.GetClusterStatusAsync();
 
-Console.WriteLine($&quot;Cluster status: {status.Status}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var status = await client.GetClusterStatusAsync();
+
+    Console.WriteLine($"Cluster status: {status.Status}");
+}</code></pre>
 </div>
 
 

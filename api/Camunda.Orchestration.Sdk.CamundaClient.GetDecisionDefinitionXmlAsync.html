@@ -172,12 +172,12 @@ Returns decision definition as XML.</p>
 <pre><code class="lang-csharp">public static async Task GetDecisionDefinitionXmlExample(DecisionDefinitionKey decisionDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetDecisionDefinitionXmlAsync(
-    decisionDefinitionKey);
 
-Console.WriteLine($&quot;XML: {result}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetDecisionDefinitionXmlAsync(
+        decisionDefinitionKey);
+
+    Console.WriteLine($"XML: {result}");
+}</code></pre>
 </div>
 
 

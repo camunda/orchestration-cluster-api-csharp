@@ -190,30 +190,30 @@ Returns the wait states for element instances matching the given filter.</p>
 <pre><code class="lang-csharp">public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchElementInstanceWaitStatesAsync(
-    new ElementInstanceWaitStateQuery
-    {
-        Filter = new ElementInstanceWaitStateFilter
-        {
-            ProcessInstanceKey = new ProcessInstanceKeyFilterProperty
-            {
-                Eq = processInstanceKey,
-            },
-        },
-    });
 
-foreach (var waitState in result.Items)
-{
-    var details = waitState.Details switch
+    var result = await client.SearchElementInstanceWaitStatesAsync(
+        new ElementInstanceWaitStateQuery
+        {
+            Filter = new ElementInstanceWaitStateFilter
+            {
+                ProcessInstanceKey = new ProcessInstanceKeyFilterProperty
+                {
+                    Eq = processInstanceKey,
+                },
+            },
+        });
+
+    foreach (var waitState in result.Items)
     {
-        JobWaitStateDetails job =&gt; $&quot;waiting on job '{job.JobType}'&quot;,
-        MessageWaitStateDetails message =&gt; $&quot;waiting for message '{message.MessageName}'&quot;,
-        _ =&gt; &quot;waiting&quot;,
-    };
-    Console.WriteLine($&quot;{waitState.ElementId}: {details}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+        var details = waitState.Details switch
+        {
+            JobWaitStateDetails job =&gt; $"waiting on job '{job.JobType}'",
+            MessageWaitStateDetails message =&gt; $"waiting for message '{message.MessageName}'",
+            _ =&gt; "waiting",
+        };
+        Console.WriteLine($"{waitState.ElementId}: {details}");
+    }
+}</code></pre>
 </div>
 
 

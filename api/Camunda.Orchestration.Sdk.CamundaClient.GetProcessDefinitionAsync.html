@@ -172,12 +172,12 @@ Returns process definition as JSON.</p>
 <pre><code class="lang-csharp">public static async Task GetProcessDefinitionExample(ProcessDefinitionKey processDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessDefinitionAsync(
-    processDefinitionKey);
 
-Console.WriteLine($&quot;Process definition: {result.Name}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetProcessDefinitionAsync(
+        processDefinitionKey);
+
+    Console.WriteLine($"Process definition: {result.Name}");
+}</code></pre>
 </div>
 
 

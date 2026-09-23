@@ -161,16 +161,16 @@ Search clients with assigned role.</p>
 <pre><code class="lang-csharp">public static async Task SearchClientsForRoleExample(RoleId roleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchClientsForRoleAsync(
-    roleId,
-    new RoleClientSearchQueryRequest());
 
-foreach (var c in result.Items)
-{
-    Console.WriteLine($&quot;Client: {c.ClientId}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchClientsForRoleAsync(
+        roleId,
+        new RoleClientSearchQueryRequest());
+
+    foreach (var c in result.Items)
+    {
+        Console.WriteLine($"Client: {c.ClientId}");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchClientsForRoleAsync_Camunda_Orchestration_Sdk_RoleId_Camunda_Orchestration_Sdk_RoleClientSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_RoleClientSearchResult__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -179,16 +179,16 @@ foreach (var c in result.Items)
 <pre><code class="lang-csharp">public static async Task SearchClientsForRoleExample(RoleId roleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchClientsForRoleAsync(
-    roleId,
-    new RoleClientSearchQueryRequest());
 
-foreach (var c in result.Items)
-{
-    Console.WriteLine($&quot;Client: {c.ClientId}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchClientsForRoleAsync(
+        roleId,
+        new RoleClientSearchQueryRequest());
+
+    foreach (var c in result.Items)
+    {
+        Console.WriteLine($"Client: {c.ClientId}");
+    }
+}</code></pre>
 </div>
 
 

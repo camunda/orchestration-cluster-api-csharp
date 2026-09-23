@@ -159,14 +159,14 @@ Search for users based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchUsersExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchUsersAsync(new UserSearchQueryRequest());
 
-foreach (var user in result.Items)
-{
-    Console.WriteLine($&quot;User: {user.Username}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchUsersAsync(new UserSearchQueryRequest());
+
+    foreach (var user in result.Items)
+    {
+        Console.WriteLine($"User: {user.Username}");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUsersAsync_Camunda_Orchestration_Sdk_UserSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_UserSearchResult__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -175,14 +175,14 @@ foreach (var user in result.Items)
 <pre><code class="lang-csharp">public static async Task SearchUsersExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchUsersAsync(new UserSearchQueryRequest());
 
-foreach (var user in result.Items)
-{
-    Console.WriteLine($&quot;User: {user.Username}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchUsersAsync(new UserSearchQueryRequest());
+
+    foreach (var user in result.Items)
+    {
+        Console.WriteLine($"User: {user.Username}");
+    }
+}</code></pre>
 </div>
 
 

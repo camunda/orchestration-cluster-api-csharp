@@ -161,13 +161,13 @@ Get a tenant-scoped cluster variable.</p>
 <pre><code class="lang-csharp">public static async Task GetTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetTenantClusterVariableAsync(
-    tenantId,
-    name);
 
-Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetTenantClusterVariableAsync(
+        tenantId,
+        name);
+
+    Console.WriteLine($"Variable: {result.Name} = {result.Value}");
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetTenantClusterVariableAsync_Camunda_Orchestration_Sdk_TenantId_Camunda_Orchestration_Sdk_ClusterVariableName_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_ClusterVariableResult__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -176,13 +176,13 @@ Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
 <pre><code class="lang-csharp">public static async Task GetTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetTenantClusterVariableAsync(
-    tenantId,
-    name);
 
-Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetTenantClusterVariableAsync(
+        tenantId,
+        name);
+
+    Console.WriteLine($"Variable: {result.Name} = {result.Value}");
+}</code></pre>
 </div>
 
 

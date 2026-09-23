@@ -173,11 +173,11 @@ provided adHocSubProcessInstanceKey.</p>
 <pre><code class="lang-csharp">public static async Task ActivateAdHocSubProcessActivitiesExample(ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.ActivateAdHocSubProcessActivitiesAsync(
-    elementInstanceKey,
-    new AdHocSubProcessActivateActivitiesInstruction());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.ActivateAdHocSubProcessActivitiesAsync(
+        elementInstanceKey,
+        new AdHocSubProcessActivateActivitiesInstruction());
+}</code></pre>
 </div>
 
 

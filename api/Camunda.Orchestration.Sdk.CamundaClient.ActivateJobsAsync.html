@@ -178,20 +178,20 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 <pre><code class="lang-csharp">public static async Task ActivateJobsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.ActivateJobsAsync(new JobActivationRequest
-{
-    Type = &quot;my-job-type&quot;,
-    MaxJobsToActivate = 10,
-    Timeout = 300000,
-    Worker = &quot;my-worker&quot;,
-});
 
-foreach (var job in result.Jobs)
-{
-    Console.WriteLine($&quot;Job: {job.JobKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.ActivateJobsAsync(new JobActivationRequest
+    {
+        Type = "my-job-type",
+        MaxJobsToActivate = 10,
+        Timeout = 300000,
+        Worker = "my-worker",
+    });
+
+    foreach (var job in result.Jobs)
+    {
+        Console.WriteLine($"Job: {job.JobKey}");
+    }
+}</code></pre>
 </div>
 
 

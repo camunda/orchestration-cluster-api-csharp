@@ -174,14 +174,14 @@ Search for agent instances based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchAgentInstancesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchAgentInstancesAsync(new AgentInstanceSearchQuery());
 
-foreach (var instance in result.Items)
-{
-    Console.WriteLine($&quot;Agent instance: {instance.AgentInstanceKey}, status: {instance.Status}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchAgentInstancesAsync(new AgentInstanceSearchQuery());
+
+    foreach (var instance in result.Items)
+    {
+        Console.WriteLine($"Agent instance: {instance.AgentInstanceKey}, status: {instance.Status}");
+    }
+}</code></pre>
 </div>
 
 

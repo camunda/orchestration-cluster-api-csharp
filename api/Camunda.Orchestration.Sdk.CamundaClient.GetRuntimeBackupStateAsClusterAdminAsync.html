@@ -159,14 +159,14 @@ Reports the checkpoint and backup state of every partition of every physical ten
 <pre><code class="lang-csharp">public static async Task GetRuntimeBackupStateAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var state = await client.GetRuntimeBackupStateAsClusterAdminAsync();
 
-foreach (var tenant in state.PhysicalTenants)
-{
-    Console.WriteLine($&quot;Tenant {tenant.PhysicalTenantId}: {tenant.State.CheckpointStates?.Count} checkpoint state(s)&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var state = await client.GetRuntimeBackupStateAsClusterAdminAsync();
+
+    foreach (var tenant in state.PhysicalTenants)
+    {
+        Console.WriteLine($"Tenant {tenant.PhysicalTenantId}: {tenant.State.CheckpointStates?.Count} checkpoint state(s)");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_GetRuntimeBackupStateAsClusterAdminAsync_System_String_System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -175,14 +175,14 @@ foreach (var tenant in state.PhysicalTenants)
 <pre><code class="lang-csharp">public static async Task GetRuntimeBackupStateAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var state = await client.GetRuntimeBackupStateAsClusterAdminAsync();
 
-foreach (var tenant in state.PhysicalTenants)
-{
-    Console.WriteLine($&quot;Tenant {tenant.PhysicalTenantId}: {tenant.State.CheckpointStates?.Count} checkpoint state(s)&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var state = await client.GetRuntimeBackupStateAsClusterAdminAsync();
+
+    foreach (var tenant in state.PhysicalTenants)
+    {
+        Console.WriteLine($"Tenant {tenant.PhysicalTenantId}: {tenant.State.CheckpointStates?.Count} checkpoint state(s)");
+    }
+}</code></pre>
 </div>
 
 

@@ -172,11 +172,11 @@ to reset the job's retries, followed by this call.</p>
 <pre><code class="lang-csharp">public static async Task ResolveIncidentExample(IncidentKey incidentKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.ResolveIncidentAsync(
-    incidentKey,
-    new IncidentResolutionRequest());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.ResolveIncidentAsync(
+        incidentKey,
+        new IncidentResolutionRequest());
+}</code></pre>
 </div>
 
 

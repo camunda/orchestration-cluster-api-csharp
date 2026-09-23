@@ -178,16 +178,16 @@ Retrieves a filtered and sorted list of groups for a specified tenant.</p>
 <pre><code class="lang-csharp">public static async Task SearchGroupIdsForTenantExample(TenantId tenantId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchGroupIdsForTenantAsync(
-    tenantId,
-    new TenantGroupSearchQueryRequest());
 
-foreach (var group in result.Items)
-{
-    Console.WriteLine($&quot;Group: {group.GroupId}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchGroupIdsForTenantAsync(
+        tenantId,
+        new TenantGroupSearchQueryRequest());
+
+    foreach (var group in result.Items)
+    {
+        Console.WriteLine($"Group: {group.GroupId}");
+    }
+}</code></pre>
 </div>
 
 

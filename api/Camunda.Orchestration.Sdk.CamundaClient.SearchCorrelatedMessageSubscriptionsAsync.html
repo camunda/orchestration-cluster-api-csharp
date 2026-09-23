@@ -175,15 +175,15 @@ Search correlated message subscriptions based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchCorrelatedMessageSubscriptionsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchCorrelatedMessageSubscriptionsAsync(
-    new CorrelatedMessageSubscriptionSearchQuery());
 
-foreach (var sub in result.Items)
-{
-    Console.WriteLine($&quot;Correlated subscription: {sub.MessageName}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchCorrelatedMessageSubscriptionsAsync(
+        new CorrelatedMessageSubscriptionSearchQuery());
+
+    foreach (var sub in result.Items)
+    {
+        Console.WriteLine($"Correlated subscription: {sub.MessageName}");
+    }
+}</code></pre>
 </div>
 
 

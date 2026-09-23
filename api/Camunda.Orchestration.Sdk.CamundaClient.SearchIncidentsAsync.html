@@ -174,14 +174,14 @@ Search for incidents based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchIncidentsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchIncidentsAsync(new IncidentSearchQuery());
 
-foreach (var incident in result.Items)
-{
-    Console.WriteLine($&quot;Incident: {incident.IncidentKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchIncidentsAsync(new IncidentSearchQuery());
+
+    foreach (var incident in result.Items)
+    {
+        Console.WriteLine($"Incident: {incident.IncidentKey}");
+    }
+}</code></pre>
 </div>
 
 

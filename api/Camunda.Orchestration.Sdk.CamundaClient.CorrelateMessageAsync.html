@@ -176,15 +176,15 @@ Use the publish message endpoint to send messages that can be buffered.</p>
 <pre><code class="lang-csharp">public static async Task CorrelateMessageExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CorrelateMessageAsync(new MessageCorrelationRequest
-{
-    Name = &quot;paymentReceived&quot;,
-    CorrelationKey = &quot;order-123&quot;,
-});
 
-Console.WriteLine($&quot;Message key: {result.MessageKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CorrelateMessageAsync(new MessageCorrelationRequest
+    {
+        Name = "paymentReceived",
+        CorrelationKey = "order-123",
+    });
+
+    Console.WriteLine($"Message key: {result.MessageKey}");
+}</code></pre>
 </div>
 
 

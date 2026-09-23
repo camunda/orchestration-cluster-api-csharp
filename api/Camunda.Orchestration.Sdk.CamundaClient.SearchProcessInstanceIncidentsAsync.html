@@ -182,16 +182,16 @@ subprocesses or called processes under the root instance while excluding inciden
 <pre><code class="lang-csharp">public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchProcessInstanceIncidentsAsync(
-    processInstanceKey,
-    new IncidentSearchQuery());
 
-foreach (var incident in result.Items)
-{
-    Console.WriteLine($&quot;Incident: {incident.IncidentKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchProcessInstanceIncidentsAsync(
+        processInstanceKey,
+        new IncidentSearchQuery());
+
+    foreach (var incident in result.Items)
+    {
+        Console.WriteLine($"Incident: {incident.IncidentKey}");
+    }
+}</code></pre>
 </div>
 
 

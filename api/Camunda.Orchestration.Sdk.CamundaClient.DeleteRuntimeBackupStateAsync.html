@@ -169,11 +169,11 @@ switching backup stores.</p>
 <pre><code class="lang-csharp">public static async Task DeleteRuntimeBackupStateExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Clears all checkpoint info, backup info, checkpoint metadata, and backup
-// ranges on every partition. Used when switching backup stores.
-await client.DeleteRuntimeBackupStateAsync();
-</code></pre>
-<p>}</p></code></pre>
+
+    // Clears all checkpoint info, backup info, checkpoint metadata, and backup
+    // ranges on every partition. Used when switching backup stores.
+    await client.DeleteRuntimeBackupStateAsync();
+}</code></pre>
 </div>
 
 

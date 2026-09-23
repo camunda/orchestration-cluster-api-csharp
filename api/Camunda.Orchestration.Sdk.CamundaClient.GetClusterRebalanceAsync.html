@@ -179,22 +179,22 @@ Reports whether the cluster is currently balanced, the current leadership state 
 <pre><code class="lang-csharp">public static async Task GetClusterRebalanceExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Reports whether the cluster is currently balanced and the current leadership
-// state of each partition. Requires cluster-admin credentials.
-var result = await client.GetClusterRebalanceAsync();
 
-Console.WriteLine($&quot;Balance state: {result.State}&quot;);
-foreach (var partition in result.Partitions)
-{
-    Console.WriteLine($&quot;  Partition {partition.PartitionId}: leader={partition.CurrentLeader}&quot;);
-}
+    // Reports whether the cluster is currently balanced and the current leadership
+    // state of each partition. Requires cluster-admin credentials.
+    var result = await client.GetClusterRebalanceAsync();
 
-if (result.RunningRebalance is not null)
-{
-    Console.WriteLine($&quot;Rebalance in progress: started {result.RunningRebalance.StartedAt}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    Console.WriteLine($"Balance state: {result.State}");
+    foreach (var partition in result.Partitions)
+    {
+        Console.WriteLine($"  Partition {partition.PartitionId}: leader={partition.CurrentLeader}");
+    }
+
+    if (result.RunningRebalance is not null)
+    {
+        Console.WriteLine($"Rebalance in progress: started {result.RunningRebalance.StartedAt}");
+    }
+}</code></pre>
 </div>
 
 

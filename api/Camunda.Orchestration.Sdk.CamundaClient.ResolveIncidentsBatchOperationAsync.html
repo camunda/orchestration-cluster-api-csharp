@@ -173,12 +173,12 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 <pre><code class="lang-csharp">public static async Task ResolveIncidentsBatchOperationExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.ResolveIncidentsBatchOperationAsync(
-    new ProcessInstanceIncidentResolutionBatchOperationRequest());
 
-Console.WriteLine($&quot;Batch operation key: {result.BatchOperationKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.ResolveIncidentsBatchOperationAsync(
+        new ProcessInstanceIncidentResolutionBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}</code></pre>
 </div>
 
 

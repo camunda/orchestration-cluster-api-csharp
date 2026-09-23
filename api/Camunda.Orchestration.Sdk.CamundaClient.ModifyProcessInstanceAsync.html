@@ -175,11 +175,11 @@ For example, because an external system is not available or doesn't respond as e
 <pre><code class="lang-csharp">public static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.ModifyProcessInstanceAsync(
-    processInstanceKey,
-    new ProcessInstanceModificationInstruction());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.ModifyProcessInstanceAsync(
+        processInstanceKey,
+        new ProcessInstanceModificationInstruction());
+}</code></pre>
 </div>
 
 

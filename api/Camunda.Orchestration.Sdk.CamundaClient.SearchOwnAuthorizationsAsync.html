@@ -159,15 +159,15 @@ Search for the current authenticated principal's own authorization records — i
 <pre><code class="lang-csharp">public static async Task SearchOwnAuthorizationsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchOwnAuthorizationsAsync(
-    new AuthorizationSearchQuery());
 
-foreach (var auth in result.Items)
-{
-    Console.WriteLine($&quot;Authorization: {auth.AuthorizationKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchOwnAuthorizationsAsync(
+        new AuthorizationSearchQuery());
+
+    foreach (var auth in result.Items)
+    {
+        Console.WriteLine($"Authorization: {auth.AuthorizationKey}");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchOwnAuthorizationsAsync_Camunda_Orchestration_Sdk_AuthorizationSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_OwnAuthorizationSearchResult__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -176,15 +176,15 @@ foreach (var auth in result.Items)
 <pre><code class="lang-csharp">public static async Task SearchOwnAuthorizationsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchOwnAuthorizationsAsync(
-    new AuthorizationSearchQuery());
 
-foreach (var auth in result.Items)
-{
-    Console.WriteLine($&quot;Authorization: {auth.AuthorizationKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchOwnAuthorizationsAsync(
+        new AuthorizationSearchQuery());
+
+    foreach (var auth in result.Items)
+    {
+        Console.WriteLine($"Authorization: {auth.AuthorizationKey}");
+    }
+}</code></pre>
 </div>
 
 

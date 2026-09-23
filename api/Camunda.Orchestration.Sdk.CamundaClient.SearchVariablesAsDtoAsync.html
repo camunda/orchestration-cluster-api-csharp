@@ -145,9 +145,10 @@ required member is absent.
 
 <example>
 <pre><code class="lang-csharp">public record OrderVars(string OrderId, decimal? Amount);
-<p>var vars = await client.SearchVariablesAsDtoAsync&lt;OrderVars&gt;(processInstanceKey);
-var amount = vars.Get&lt;decimal&gt;(&quot;amount&quot;);   // lenient
-var typed = vars.Validate();                    // strict: throws if OrderId missing</p></code></pre>
+
+var vars = await client.SearchVariablesAsDtoAsync&lt;OrderVars&gt;(processInstanceKey);
+var amount = vars.Get&lt;decimal&gt;("amount");   // lenient
+var typed = vars.Validate();                    // strict: throws if OrderId missing</code></pre>
 </example>
 </div>
 <div class="markdown level1 conceptual"></div>

@@ -175,15 +175,15 @@ Search for decision instances based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchDecisionInstancesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchDecisionInstancesAsync(
-    new DecisionInstanceSearchQuery());
 
-foreach (var di in result.Items)
-{
-    Console.WriteLine($&quot;Decision instance: {di.DecisionDefinitionId}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchDecisionInstancesAsync(
+        new DecisionInstanceSearchQuery());
+
+    foreach (var di in result.Items)
+    {
+        Console.WriteLine($"Decision instance: {di.DecisionDefinitionId}");
+    }
+}</code></pre>
 </div>
 
 

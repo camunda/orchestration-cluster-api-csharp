@@ -170,9 +170,9 @@ Delete a document from the Camunda 8 cluster.</p>
 <pre><code class="lang-csharp">public static async Task DeleteDocumentExample(DocumentId documentId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.DeleteDocumentAsync(documentId);
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.DeleteDocumentAsync(documentId);
+}</code></pre>
 </div>
 
 

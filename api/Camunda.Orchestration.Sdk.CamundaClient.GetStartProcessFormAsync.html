@@ -173,12 +173,12 @@ Note that this endpoint will only return linked forms. This endpoint does not su
 <pre><code class="lang-csharp">public static async Task GetStartProcessFormExample(ProcessDefinitionKey processDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetStartProcessFormAsync(
-    processDefinitionKey);
 
-Console.WriteLine($&quot;Form: {result.FormKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetStartProcessFormAsync(
+        processDefinitionKey);
+
+    Console.WriteLine($"Form: {result.FormKey}");
+}</code></pre>
 </div>
 
 

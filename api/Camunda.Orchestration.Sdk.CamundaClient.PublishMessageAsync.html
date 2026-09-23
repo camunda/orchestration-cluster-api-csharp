@@ -178,16 +178,16 @@ Use the message correlation endpoint for such use cases.</p>
 <pre><code class="lang-csharp">public static async Task PublishMessageExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.PublishMessageAsync(new MessagePublicationRequest
-{
-    Name = &quot;paymentReceived&quot;,
-    CorrelationKey = &quot;order-123&quot;,
-    TimeToLive = 60000,
-});
 
-Console.WriteLine($&quot;Message key: {result.MessageKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.PublishMessageAsync(new MessagePublicationRequest
+    {
+        Name = "paymentReceived",
+        CorrelationKey = "order-123",
+        TimeToLive = 60000,
+    });
+
+    Console.WriteLine($"Message key: {result.MessageKey}");
+}</code></pre>
 </div>
 
 

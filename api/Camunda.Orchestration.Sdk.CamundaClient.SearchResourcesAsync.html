@@ -178,13 +178,13 @@ respective search APIs.
 <pre><code class="lang-csharp">public static async Task SearchResourcesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchResourcesAsync(new ResourceSearchQuery());
-foreach (var resource in result.Items!)
-{
-    Console.WriteLine($&quot;Resource: {resource.ResourceName}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.SearchResourcesAsync(new ResourceSearchQuery());
+    foreach (var resource in result.Items!)
+    {
+        Console.WriteLine($"Resource: {resource.ResourceName}");
+    }
+}</code></pre>
 </div>
 
 

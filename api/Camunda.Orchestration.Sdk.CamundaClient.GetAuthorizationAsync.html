@@ -172,12 +172,12 @@ Get authorization by the given key.</p>
 <pre><code class="lang-csharp">public static async Task GetAuthorizationExample(AuthorizationKey authorizationKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetAuthorizationAsync(
-    authorizationKey);
 
-Console.WriteLine($&quot;Resource type: {result.ResourceType}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetAuthorizationAsync(
+        authorizationKey);
+
+    Console.WriteLine($"Resource type: {result.ResourceType}");
+}</code></pre>
 </div>
 
 

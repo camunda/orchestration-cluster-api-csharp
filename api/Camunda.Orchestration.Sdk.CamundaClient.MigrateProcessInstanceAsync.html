@@ -179,14 +179,14 @@ latest process improvements.</p>
 <pre><code class="lang-csharp">public static async Task MigrateProcessInstanceExample(ProcessInstanceKey processInstanceKey, ProcessDefinitionKey targetProcessDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.MigrateProcessInstanceAsync(
-    processInstanceKey,
-    new ProcessInstanceMigrationInstruction
-    {
-        TargetProcessDefinitionKey = targetProcessDefinitionKey,
-    });
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.MigrateProcessInstanceAsync(
+        processInstanceKey,
+        new ProcessInstanceMigrationInstruction
+        {
+            TargetProcessDefinitionKey = targetProcessDefinitionKey,
+        });
+}</code></pre>
 </div>
 
 

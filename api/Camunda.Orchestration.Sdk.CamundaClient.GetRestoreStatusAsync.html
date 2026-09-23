@@ -168,12 +168,12 @@ Returns the status of the restore that is currently in progress, reported per br
 <pre><code class="lang-csharp">public static async Task GetRestoreStatusExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Poll this endpoint while the cluster is in recovery mode to track progress.
-var status = await client.GetRestoreStatusAsync();
 
-Console.WriteLine($&quot;Restore {status.ChangeId}: {status.Status}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    // Poll this endpoint while the cluster is in recovery mode to track progress.
+    var status = await client.GetRestoreStatusAsync();
+
+    Console.WriteLine($"Restore {status.ChangeId}: {status.Status}");
+}</code></pre>
 </div>
 
 

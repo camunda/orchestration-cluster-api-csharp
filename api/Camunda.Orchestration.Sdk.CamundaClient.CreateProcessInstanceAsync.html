@@ -189,26 +189,26 @@ when awaitCompletion is enabled.</p>
 <pre><code class="lang-csharp">public static async Task CreateProcessInstanceByIdExample(ProcessDefinitionId processDefinitionId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-{
-    ProcessDefinitionId = processDefinitionId,
-});
 
-Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
+    {
+        ProcessDefinitionId = processDefinitionId,
+    });
+
+    Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+}</code></pre>
 <p><b>Example 2:</b></p>
 <pre><code class="lang-csharp">public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey processDefinitionKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
-{
-    ProcessDefinitionKey = processDefinitionKey,
-});
 
-Console.WriteLine($&quot;Process instance key: {result.ProcessInstanceKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
+    {
+        ProcessDefinitionKey = processDefinitionKey,
+    });
+
+    Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+}</code></pre>
 </div>
 
 

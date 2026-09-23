@@ -170,10 +170,10 @@ Get the user task by the user task key.</p>
 <pre><code class="lang-csharp">public static async Task GetUserTaskExample(UserTaskKey userTaskKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetUserTaskAsync(userTaskKey);
-Console.WriteLine($&quot;User task: {result.UserTaskKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetUserTaskAsync(userTaskKey);
+    Console.WriteLine($"User task: {result.UserTaskKey}");
+}</code></pre>
 </div>
 
 

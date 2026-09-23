@@ -171,10 +171,10 @@ only <code>PAUSED</code> and <code>SOFT_PAUSED</code> as confirmation that expor
 <pre><code class="lang-csharp">public static async Task GetExportingStatusExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetExportingStatusAsync();
-Console.WriteLine($&quot;Status: {result.Status}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetExportingStatusAsync();
+    Console.WriteLine($"Status: {result.Status}");
+}</code></pre>
 </div>
 
 

@@ -185,23 +185,23 @@ Transfers leadership of every partition that is not led by its highest-priority 
 <pre><code class="lang-csharp">public static async Task TriggerClusterRebalanceExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// Transfers leadership of every partition towards its highest-priority replica,
-// one at a time. Requires cluster-admin credentials, not Orchestration Cluster
-// user credentials. Poll GetClusterRebalanceAsync to monitor progress.
-var result = await client.TriggerClusterRebalanceAsync(
-    new ClusterRebalanceRequest
-    {
-        ReplicationLagThreshold = 1_000_000,
-        MaxTransferAttempts = 3,
-    });
 
-Console.WriteLine($&quot;Rebalance state: {result.State}&quot;);
-foreach (var partition in result.Partitions)
-{
-    Console.WriteLine($&quot;  Partition {partition.PartitionId}: leader={partition.CurrentLeader}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    // Transfers leadership of every partition towards its highest-priority replica,
+    // one at a time. Requires cluster-admin credentials, not Orchestration Cluster
+    // user credentials. Poll GetClusterRebalanceAsync to monitor progress.
+    var result = await client.TriggerClusterRebalanceAsync(
+        new ClusterRebalanceRequest
+        {
+            ReplicationLagThreshold = 1_000_000,
+            MaxTransferAttempts = 3,
+        });
+
+    Console.WriteLine($"Rebalance state: {result.State}");
+    foreach (var partition in result.Partitions)
+    {
+        Console.WriteLine($"  Partition {partition.PartitionId}: leader={partition.CurrentLeader}");
+    }
+}</code></pre>
 </div>
 
 

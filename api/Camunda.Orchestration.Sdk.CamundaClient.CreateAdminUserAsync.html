@@ -175,17 +175,17 @@ Creates a new user and assigns the admin role to it. This endpoint is only usabl
 <pre><code class="lang-csharp">public static async Task CreateAdminUserExample(Username username)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateAdminUserAsync(new UserRequest
-{
-    Username = username,
-    Name = &quot;Admin User&quot;,
-    Email = &quot;admin@example.com&quot;,
-    Password = &quot;admin-password&quot;,
-});
 
-Console.WriteLine($&quot;Admin user key: {result.Username}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateAdminUserAsync(new UserRequest
+    {
+        Username = username,
+        Name = "Admin User",
+        Email = "admin@example.com",
+        Password = "admin-password",
+    });
+
+    Console.WriteLine($"Admin user key: {result.Username}");
+}</code></pre>
 </div>
 
 

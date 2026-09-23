@@ -174,16 +174,16 @@ Create a global-scoped cluster variable.</p>
 <pre><code class="lang-csharp">public static async Task CreateGlobalClusterVariableExample(ClusterVariableName name)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateGlobalClusterVariableAsync(
-    new CreateClusterVariableRequest
-    {
-        Name = name,
-        Value = &quot;my-value&quot;,
-    });
 
-Console.WriteLine($&quot;Created variable: {result.Name}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateGlobalClusterVariableAsync(
+        new CreateClusterVariableRequest
+        {
+            Name = name,
+            Value = "my-value",
+        });
+
+    Console.WriteLine($"Created variable: {result.Name}");
+}</code></pre>
 </div>
 
 

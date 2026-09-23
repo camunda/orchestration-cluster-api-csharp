@@ -174,14 +174,14 @@ Search for roles based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchRolesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchRolesAsync(new RoleSearchQueryRequest());
 
-foreach (var role in result.Items)
-{
-    Console.WriteLine($&quot;Role: {role.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchRolesAsync(new RoleSearchQueryRequest());
+
+    foreach (var role in result.Items)
+    {
+        Console.WriteLine($"Role: {role.Name}");
+    }
+}</code></pre>
 </div>
 
 

@@ -170,10 +170,10 @@ Get a form by its unique form key.</p>
 <pre><code class="lang-csharp">public static async Task GetFormByKeyExample(FormKey formKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetFormByKeyAsync(formKey);
-Console.WriteLine($&quot;Form: {result.FormId}, version: {result.Version}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetFormByKeyAsync(formKey);
+    Console.WriteLine($"Form: {result.FormId}, version: {result.Version}");
+}</code></pre>
 </div>
 
 

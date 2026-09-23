@@ -176,15 +176,15 @@ Method SearchClusterVariablesAsync  <a class="header-action link-secondary" titl
 <pre><code class="lang-csharp">public static async Task SearchClusterVariablesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchClusterVariablesAsync(
-    new ClusterVariableSearchQueryRequest());
 
-foreach (var variable in result.Items)
-{
-    Console.WriteLine($&quot;Variable: {variable.Name}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchClusterVariablesAsync(
+        new ClusterVariableSearchQueryRequest());
+
+    foreach (var variable in result.Items)
+    {
+        Console.WriteLine($"Variable: {variable.Name}");
+    }
+}</code></pre>
 </div>
 
 

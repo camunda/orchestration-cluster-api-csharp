@@ -177,13 +177,13 @@ Returns global aggregated counts for jobs. Filter by the creation time window (r
 <pre><code class="lang-csharp">public static async Task GetGlobalJobStatisticsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetGlobalJobStatisticsAsync(
-    from: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
-    to: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
 
-Console.WriteLine($&quot;Global job stats: {result}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetGlobalJobStatisticsAsync(
+        from: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+        to: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
+
+    Console.WriteLine($"Global job stats: {result}");
+}</code></pre>
 </div>
 
 

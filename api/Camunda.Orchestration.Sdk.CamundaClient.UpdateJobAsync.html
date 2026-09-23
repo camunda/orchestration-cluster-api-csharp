@@ -174,14 +174,14 @@ Update a job with the given key.</p>
 <pre><code class="lang-csharp">public static async Task UpdateJobExample(JobKey jobKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UpdateJobAsync(
-    jobKey,
-    new JobUpdateRequest
-    {
-        Changeset = new JobChangeset { Retries = 3 },
-    });
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.UpdateJobAsync(
+        jobKey,
+        new JobUpdateRequest
+        {
+            Changeset = new JobChangeset { Retries = 3 },
+        });
+}</code></pre>
 </div>
 
 

@@ -169,10 +169,10 @@ in future releases.</p>
 <pre><code class="lang-csharp">public static async Task GetSystemConfigurationExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetSystemConfigurationAsync();
-Console.WriteLine($&quot;System config: {result}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetSystemConfigurationAsync();
+    Console.WriteLine($"System config: {result}");
+}</code></pre>
 </div>
 
 

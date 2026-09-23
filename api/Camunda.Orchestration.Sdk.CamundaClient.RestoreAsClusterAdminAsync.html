@@ -193,28 +193,28 @@ Restores physical tenants from backups. The restore is described either by a lis
 <pre><code class="lang-csharp">public static async Task RestoreAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>// The cluster must be in recovery mode before a restore is accepted.
-// Use physicalTenantId to restore a single physical tenant; omit it to
-// restore every physical tenant. Pass dryRun: true to validate the
-// request and inspect the plan without applying it.
-// Provide either a list of backup IDs (one per partition) or a time
-// range (From/To), but not both.
-var change = await client.RestoreAsClusterAdminAsync(
-    new ClusterRestoreRequest
-    {
-        BackupIds = new List&lt;long&gt; { 100, 101 },
-    },
-    physicalTenantId: &quot;default&quot;,
-    dryRun: true);
 
-Console.WriteLine($&quot;Cluster change {change.ChangeId}:&quot;);
-foreach (var group in change.PlannedChanges)
-{
-    var tenant = group.PhysicalTenantId is null ? &quot;cluster-wide&quot; : group.PhysicalTenantId;
-    Console.WriteLine($&quot;  {tenant}: {group.Operations.Count} operation(s)&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    // The cluster must be in recovery mode before a restore is accepted.
+    // Use physicalTenantId to restore a single physical tenant; omit it to
+    // restore every physical tenant. Pass dryRun: true to validate the
+    // request and inspect the plan without applying it.
+    // Provide either a list of backup IDs (one per partition) or a time
+    // range (From/To), but not both.
+    var change = await client.RestoreAsClusterAdminAsync(
+        new ClusterRestoreRequest
+        {
+            BackupIds = new List&lt;long&gt; { 100, 101 },
+        },
+        physicalTenantId: "default",
+        dryRun: true);
+
+    Console.WriteLine($"Cluster change {change.ChangeId}:");
+    foreach (var group in change.PlannedChanges)
+    {
+        var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+        Console.WriteLine($"  {tenant}: {group.Operations.Count} operation(s)");
+    }
+}</code></pre>
 </div>
 
 

@@ -207,42 +207,42 @@ be used in subsequent update and query calls.</p>
     JobLeaseToken jobLease)
 {
     using var client = CamundaClient.Create();
-<pre><code>// The agent's model, provider, system prompt and limits are supplied as a
-// CONFIGURATION history item; a create request must open the conversation
-// with at least one such item.
-var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
-{
-    ElementInstanceKey = elementInstanceKey,
-    JobKey = jobKey,
-    JobLeaseToken = jobLease,
-    History = new List&lt;AgentInstanceHistoryItem&gt;
+
+    // The agent's model, provider, system prompt and limits are supplied as a
+    // CONFIGURATION history item; a create request must open the conversation
+    // with at least one such item.
+    var result = await client.CreateAgentInstanceAsync(new AgentInstanceCreationRequest
     {
-        new AgentInstanceHistoryItem
+        ElementInstanceKey = elementInstanceKey,
+        JobKey = jobKey,
+        JobLeaseToken = jobLease,
+        History = new List&lt;AgentInstanceHistoryItem&gt;
         {
-            HistoryItemId = HistoryItemId.AssumeExists(&quot;configuration-1&quot;),
-            LoopIteration = LoopIterationId.AssumeExists(1),
-            Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
-            ProducedAt = DateTimeOffset.UtcNow,
-            Content = new List&lt;AgentInstanceMessageContent&gt;(),
-            Model = &quot;gpt-4o&quot;,
-            Provider = &quot;openai&quot;,
-            SystemPrompt = new List&lt;AgentInstanceMessageContent&gt;
+            new AgentInstanceHistoryItem
             {
-                new AgentInstanceTextContent { Text = &quot;You are a helpful assistant.&quot; },
-            },
-            Limits = new AgentInstanceLimits
-            {
-                MaxModelCalls = 20,
-                MaxToolCalls = 20,
-                MaxTokens = 100_000,
+                HistoryItemId = HistoryItemId.AssumeExists("configuration-1"),
+                LoopIteration = LoopIterationId.AssumeExists(1),
+                Role = AgentInstanceHistoryRoleEnum.CONFIGURATION,
+                ProducedAt = DateTimeOffset.UtcNow,
+                Content = new List&lt;AgentInstanceMessageContent&gt;(),
+                Model = "gpt-4o",
+                Provider = "openai",
+                SystemPrompt = new List&lt;AgentInstanceMessageContent&gt;
+                {
+                    new AgentInstanceTextContent { Text = "You are a helpful assistant." },
+                },
+                Limits = new AgentInstanceLimits
+                {
+                    MaxModelCalls = 20,
+                    MaxToolCalls = 20,
+                    MaxTokens = 100_000,
+                },
             },
         },
-    },
-});
+    });
 
-Console.WriteLine($&quot;Created agent instance: {result.AgentInstanceKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    Console.WriteLine($"Created agent instance: {result.AgentInstanceKey}");
+}</code></pre>
 </div>
 
 

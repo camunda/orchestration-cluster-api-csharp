@@ -159,14 +159,14 @@ Update a mapping rule.</p>
 <pre><code class="lang-csharp">public static async Task UpdateMappingRuleExample(MappingRuleId mappingRuleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UpdateMappingRuleAsync(mappingRuleId, new MappingRuleUpdateRequest
-{
-    ClaimName = &quot;groups&quot;,
-    ClaimValue = &quot;senior-engineering&quot;,
-    Name = &quot;Senior Engineering Mapping&quot;,
-});
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.UpdateMappingRuleAsync(mappingRuleId, new MappingRuleUpdateRequest
+    {
+        ClaimName = "groups",
+        ClaimValue = "senior-engineering",
+        Name = "Senior Engineering Mapping",
+    });
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_UpdateMappingRuleAsync_Camunda_Orchestration_Sdk_MappingRuleId_Camunda_Orchestration_Sdk_MappingRuleUpdateRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -175,14 +175,14 @@ Update a mapping rule.</p>
 <pre><code class="lang-csharp">public static async Task UpdateMappingRuleExample(MappingRuleId mappingRuleId)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.UpdateMappingRuleAsync(mappingRuleId, new MappingRuleUpdateRequest
-{
-    ClaimName = &quot;groups&quot;,
-    ClaimValue = &quot;senior-engineering&quot;,
-    Name = &quot;Senior Engineering Mapping&quot;,
-});
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.UpdateMappingRuleAsync(mappingRuleId, new MappingRuleUpdateRequest
+    {
+        ClaimName = "groups",
+        ClaimValue = "senior-engineering",
+        Name = "Senior Engineering Mapping",
+    });
+}</code></pre>
 </div>
 
 

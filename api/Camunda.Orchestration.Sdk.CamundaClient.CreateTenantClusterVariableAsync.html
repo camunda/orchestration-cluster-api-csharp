@@ -177,17 +177,17 @@ Create a new cluster variable for the given tenant.</p>
 <pre><code class="lang-csharp">public static async Task CreateTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateTenantClusterVariableAsync(
-    tenantId,
-    new CreateClusterVariableRequest
-    {
-        Name = name,
-        Value = &quot;tenant-value&quot;,
-    });
 
-Console.WriteLine($&quot;Created variable: {result.Name}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateTenantClusterVariableAsync(
+        tenantId,
+        new CreateClusterVariableRequest
+        {
+            Name = name,
+            Value = "tenant-value",
+        });
+
+    Console.WriteLine($"Created variable: {result.Name}");
+}</code></pre>
 </div>
 
 

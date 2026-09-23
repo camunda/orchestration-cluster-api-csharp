@@ -166,10 +166,10 @@ Obtains the current topology of the cluster the gateway is part of.</p>
 <pre><code class="lang-csharp">public static async Task GetTopologyExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var topology = await client.GetTopologyAsync();
-Console.WriteLine($&quot;Cluster size: {topology.ClusterSize}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var topology = await client.GetTopologyAsync();
+    Console.WriteLine($"Cluster size: {topology.ClusterSize}");
+}</code></pre>
 </div>
 
 

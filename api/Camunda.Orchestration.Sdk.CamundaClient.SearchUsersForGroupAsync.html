@@ -161,16 +161,16 @@ Search users assigned to a group.</p>
 <pre><code class="lang-csharp">public static async Task SearchUsersForGroupExample(GroupId groupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchUsersForGroupAsync(
-    groupId,
-    new GroupUserSearchQueryRequest());
 
-foreach (var user in result.Items)
-{
-    Console.WriteLine($&quot;User: {user.Username}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchUsersForGroupAsync(
+        groupId,
+        new GroupUserSearchQueryRequest());
+
+    foreach (var user in result.Items)
+    {
+        Console.WriteLine($"User: {user.Username}");
+    }
+}</code></pre>
 
 
 <h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SearchUsersForGroupAsync_Camunda_Orchestration_Sdk_GroupId_Camunda_Orchestration_Sdk_GroupUserSearchQueryRequest_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_GroupUserSearchResult__System_Threading_CancellationToken__remarks">Remarks</h4>
@@ -179,16 +179,16 @@ foreach (var user in result.Items)
 <pre><code class="lang-csharp">public static async Task SearchUsersForGroupExample(GroupId groupId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchUsersForGroupAsync(
-    groupId,
-    new GroupUserSearchQueryRequest());
 
-foreach (var user in result.Items)
-{
-    Console.WriteLine($&quot;User: {user.Username}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchUsersForGroupAsync(
+        groupId,
+        new GroupUserSearchQueryRequest());
+
+    foreach (var user in result.Items)
+    {
+        Console.WriteLine($"User: {user.Username}");
+    }
+}</code></pre>
 </div>
 
 

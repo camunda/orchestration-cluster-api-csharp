@@ -178,16 +178,16 @@ Search for user task audit logs based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchUserTaskAuditLogsExample(UserTaskKey userTaskKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchUserTaskAuditLogsAsync(
-    userTaskKey,
-    new UserTaskAuditLogSearchQueryRequest());
 
-foreach (var log in result.Items)
-{
-    Console.WriteLine($&quot;Audit log: {log.AuditLogKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchUserTaskAuditLogsAsync(
+        userTaskKey,
+        new UserTaskAuditLogSearchQueryRequest());
+
+    foreach (var log in result.Items)
+    {
+        Console.WriteLine($"Audit log: {log.AuditLogKey}");
+    }
+}</code></pre>
 </div>
 
 

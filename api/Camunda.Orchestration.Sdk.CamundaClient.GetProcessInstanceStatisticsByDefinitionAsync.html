@@ -177,15 +177,15 @@ provided as a filter in the request body.</p>
 <pre><code class="lang-csharp">public static async Task GetProcessInstanceStatisticsByDefinitionExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessInstanceStatisticsByDefinitionAsync(
-    new IncidentProcessInstanceStatisticsByDefinitionQuery());
 
-foreach (var stat in result.Items)
-{
-    Console.WriteLine($&quot;Definition: {stat.ProcessDefinitionKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetProcessInstanceStatisticsByDefinitionAsync(
+        new IncidentProcessInstanceStatisticsByDefinitionQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Definition: {stat.ProcessDefinitionKey}");
+    }
+}</code></pre>
 </div>
 
 

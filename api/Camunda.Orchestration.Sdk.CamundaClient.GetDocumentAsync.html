@@ -174,11 +174,11 @@ Download a document from the Camunda 8 cluster.</p>
 <pre><code class="lang-csharp">public static async Task GetDocumentExample(DocumentId documentId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var content = await client.GetDocumentAsync(documentId);
 
-Console.WriteLine($&quot;Downloaded document: {documentId}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var content = await client.GetDocumentAsync(documentId);
+
+    Console.WriteLine($"Downloaded document: {documentId}");
+}</code></pre>
 </div>
 
 

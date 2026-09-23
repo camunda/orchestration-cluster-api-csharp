@@ -171,11 +171,11 @@ Deletes a process instance. Only instances that are completed or terminated can 
 <pre><code class="lang-csharp">public static async Task DeleteProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>await client.DeleteProcessInstanceAsync(
-    processInstanceKey,
-    new DeleteProcessInstanceRequest());
-</code></pre>
-<p>}</p></code></pre>
+
+    await client.DeleteProcessInstanceAsync(
+        processInstanceKey,
+        new DeleteProcessInstanceRequest());
+}</code></pre>
 </div>
 
 

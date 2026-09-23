@@ -187,15 +187,15 @@ by filtering for <code>messageSubscriptionType</code> not matching <code>START_E
 <pre><code class="lang-csharp">public static async Task SearchMessageSubscriptionsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchMessageSubscriptionsAsync(
-    new MessageSubscriptionSearchQuery());
 
-foreach (var sub in result.Items)
-{
-    Console.WriteLine($&quot;Subscription: {sub.MessageName}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchMessageSubscriptionsAsync(
+        new MessageSubscriptionSearchQuery());
+
+    foreach (var sub in result.Items)
+    {
+        Console.WriteLine($"Subscription: {sub.MessageName}");
+    }
+}</code></pre>
 </div>
 
 

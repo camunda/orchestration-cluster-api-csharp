@@ -178,13 +178,13 @@ Create a link to a document in the Camunda 8 cluster.</p>
 <pre><code class="lang-csharp">public static async Task CreateDocumentLinkExample(DocumentId documentId)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateDocumentLinkAsync(
-    documentId,
-    new DocumentLinkRequest());
 
-Console.WriteLine($&quot;Document link: {result.Url}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateDocumentLinkAsync(
+        documentId,
+        new DocumentLinkRequest());
+
+    Console.WriteLine($"Document link: {result.Url}");
+}</code></pre>
 </div>
 
 

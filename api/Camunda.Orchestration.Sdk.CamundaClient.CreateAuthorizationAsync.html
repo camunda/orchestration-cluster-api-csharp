@@ -176,18 +176,18 @@ Create the authorization.</p>
 <pre><code class="lang-csharp">public static async Task CreateAuthorizationExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.CreateAuthorizationAsync(new AuthorizationPropertyBasedRequest
-{
-    ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
-    PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE },
-    ResourcePropertyName = &quot;my-process&quot;,
-    OwnerType = OwnerTypeEnum.USER,
-    OwnerId = &quot;user@example.com&quot;,
-});
 
-Console.WriteLine($&quot;Authorization key: {result.AuthorizationKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.CreateAuthorizationAsync(new AuthorizationPropertyBasedRequest
+    {
+        ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+        PermissionTypes = new List&lt;PermissionTypeEnum&gt; { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE },
+        ResourcePropertyName = "my-process",
+        OwnerType = OwnerTypeEnum.USER,
+        OwnerId = "user@example.com",
+    });
+
+    Console.WriteLine($"Authorization key: {result.AuthorizationKey}");
+}</code></pre>
 </div>
 
 

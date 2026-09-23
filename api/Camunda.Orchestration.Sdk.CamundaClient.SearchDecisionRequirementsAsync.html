@@ -175,15 +175,15 @@ Search for decision requirements based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchDecisionRequirementsExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchDecisionRequirementsAsync(
-    new DecisionRequirementsSearchQuery());
 
-foreach (var drd in result.Items)
-{
-    Console.WriteLine($&quot;DRD: {drd.DecisionRequirementsName}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchDecisionRequirementsAsync(
+        new DecisionRequirementsSearchQuery());
+
+    foreach (var drd in result.Items)
+    {
+        Console.WriteLine($"DRD: {drd.DecisionRequirementsName}");
+    }
+}</code></pre>
 </div>
 
 

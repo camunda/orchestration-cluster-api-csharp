@@ -176,15 +176,15 @@ expression.</p>
 <pre><code class="lang-csharp">public static async Task EvaluateExpressionExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.EvaluateExpressionAsync(
-    new ExpressionEvaluationRequest
-    {
-        Expression = &quot;= 1 + 2&quot;,
-    });
 
-Console.WriteLine($&quot;Result: {result.Result}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.EvaluateExpressionAsync(
+        new ExpressionEvaluationRequest
+        {
+            Expression = "= 1 + 2",
+        });
+
+    Console.WriteLine($"Result: {result.Result}");
+}</code></pre>
 </div>
 
 

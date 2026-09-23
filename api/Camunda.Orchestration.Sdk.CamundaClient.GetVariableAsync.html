@@ -173,10 +173,10 @@ specific element instance.</p>
 <pre><code class="lang-csharp">public static async Task GetVariableExample(VariableKey variableKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetVariableAsync(variableKey);
-Console.WriteLine($&quot;Variable: {result.Name} = {result.Value}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+
+    var result = await client.GetVariableAsync(variableKey);
+    Console.WriteLine($"Variable: {result.Name} = {result.Value}");
+}</code></pre>
 </div>
 
 

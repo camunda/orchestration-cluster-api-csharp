@@ -190,27 +190,27 @@ are returned by default.</p>
 <pre><code class="lang-csharp">public static async Task SearchAgentInstanceHistoryExample(AgentInstanceKey agentInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchAgentInstanceHistoryAsync(
-    agentInstanceKey,
-    new AgentInstanceHistorySearchQuery
-    {
-        Sort = new List&lt;AgentInstanceHistorySearchQuerySortRequest&gt;
-        {
-            new AgentInstanceHistorySearchQuerySortRequest
-            {
-                Field = AgentInstanceHistorySearchQuerySortRequestField.ProducedAt,
-                Order = SortOrderEnum.ASC,
-            },
-        },
-        Page = new LimitPagination { Limit = 20 },
-    });
 
-foreach (var item in result.Items)
-{
-    Console.WriteLine($&quot;{item.HistoryItemKey} ({item.Role})&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchAgentInstanceHistoryAsync(
+        agentInstanceKey,
+        new AgentInstanceHistorySearchQuery
+        {
+            Sort = new List&lt;AgentInstanceHistorySearchQuerySortRequest&gt;
+            {
+                new AgentInstanceHistorySearchQuerySortRequest
+                {
+                    Field = AgentInstanceHistorySearchQuerySortRequestField.ProducedAt,
+                    Order = SortOrderEnum.ASC,
+                },
+            },
+            Page = new LimitPagination { Limit = 20 },
+        });
+
+    foreach (var item in result.Items)
+    {
+        Console.WriteLine($"{item.HistoryItemKey} ({item.Role})");
+    }
+}</code></pre>
 </div>
 
 

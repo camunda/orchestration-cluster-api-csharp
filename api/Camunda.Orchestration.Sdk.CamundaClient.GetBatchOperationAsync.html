@@ -172,12 +172,12 @@ Get batch operation by key.</p>
 <pre><code class="lang-csharp">public static async Task GetBatchOperationExample(BatchOperationKey batchOperationKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetBatchOperationAsync(
-    batchOperationKey);
 
-Console.WriteLine($&quot;Batch operation: {result.BatchOperationKey}&quot;);
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetBatchOperationAsync(
+        batchOperationKey);
+
+    Console.WriteLine($"Batch operation: {result.BatchOperationKey}");
+}</code></pre>
 </div>
 
 

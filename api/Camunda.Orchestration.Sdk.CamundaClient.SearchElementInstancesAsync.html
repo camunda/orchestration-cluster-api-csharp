@@ -175,15 +175,15 @@ Search for element instances based on given criteria.</p>
 <pre><code class="lang-csharp">public static async Task SearchElementInstancesExample()
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.SearchElementInstancesAsync(
-    new ElementInstanceSearchQuery());
 
-foreach (var ei in result.Items)
-{
-    Console.WriteLine($&quot;Element instance: {ei.ElementInstanceKey}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.SearchElementInstancesAsync(
+        new ElementInstanceSearchQuery());
+
+    foreach (var ei in result.Items)
+    {
+        Console.WriteLine($"Element instance: {ei.ElementInstanceKey}");
+    }
+}</code></pre>
 </div>
 
 

@@ -175,15 +175,15 @@ Get statistics about waiting element instances by the process instance key, grou
 <pre><code class="lang-csharp">public static async Task GetProcessInstanceWaitStateStatisticsExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessInstanceWaitStateStatisticsAsync(
-    processInstanceKey);
 
-foreach (var stat in result.Items)
-{
-    Console.WriteLine($&quot;Element: {stat.ElementId}, waiting: {stat.WaitingCount}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetProcessInstanceWaitStateStatisticsAsync(
+        processInstanceKey);
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Element: {stat.ElementId}, waiting: {stat.WaitingCount}");
+    }
+}</code></pre>
 </div>
 
 

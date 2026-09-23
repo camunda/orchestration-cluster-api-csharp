@@ -175,15 +175,15 @@ Get sequence flows taken by the process instance.</p>
 <pre><code class="lang-csharp">public static async Task GetProcessInstanceSequenceFlowsExample(ProcessInstanceKey processInstanceKey)
 {
     using var client = CamundaClient.Create();
-<pre><code>var result = await client.GetProcessInstanceSequenceFlowsAsync(
-    processInstanceKey);
 
-foreach (var flow in result.Items)
-{
-    Console.WriteLine($&quot;Sequence flow: {flow}&quot;);
-}
-</code></pre>
-<p>}</p></code></pre>
+    var result = await client.GetProcessInstanceSequenceFlowsAsync(
+        processInstanceKey);
+
+    foreach (var flow in result.Items)
+    {
+        Console.WriteLine($"Sequence flow: {flow}");
+    }
+}</code></pre>
 </div>
 
 
