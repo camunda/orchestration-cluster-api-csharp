@@ -1,3 +1,15 @@
+# [10.0.0-alpha.27](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.26...v10.0.0-alpha.27) (2026-09-23)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts [skip ci] ([fc8e59e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/fc8e59e085f839bbb820d5376e4cb0af989efb31))
+
+
+### Features
+
+* add example coverage for getClusterUpgradeStatus ([#444](https://github.com/camunda/orchestration-cluster-api-csharp/issues/444)) ([e6d9e41](https://github.com/camunda/orchestration-cluster-api-csharp/commit/e6d9e415af8133597a423b59e762b519cf4d7bbe))
+
 # [10.0.0-alpha.26](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.25...v10.0.0-alpha.26) (2026-09-15)
 
 
