@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:f0500c81aaeb695997ea023a65e6c4452a2d8db7dc0b1da0bbc9145196683824",
+  "specHash": "sha256:bc827cb3d135b1d3afb62e23ab2c6bb19e3cdd207ccba54465857c2d7be5468a",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -835,7 +835,7 @@
       "name": "JobLeaseToken",
       "semanticType": "JobLeaseToken",
       "category": "other",
-      "description": "An opaque, engine-minted fencing token identifying a single activation of a job.\nReturned by Activate Jobs as `ActivatedJobResult.leaseToken` when the job is\nactivated with a lease, and passed back on fenced job commands — and on\nagent-instance creation/updates as `jobLease` — to prove the caller holds the\ncurrent lease. The token is opaque: clients may rely on its presence and equality\nonly, and must never construct, parse, or otherwise interpret it beyond equality\nchecks. It cannot be minted client-side; only the engine produces it, exactly once\nper leased activation, and clients must not depend on any particular internal format.\n",
+      "description": "An opaque, engine-minted fencing token identifying a single activation of a job.\nReturned by Activate Jobs as `ActivatedJobResult.jobLeaseToken` when the job is\nactivated with a lease, and passed back under the same name on fenced job\ncommands and on agent-instance creation/updates, to prove the caller holds the\ncurrent lease. The token is opaque: clients may rely on its presence and equality\nonly, and must never construct, parse, or otherwise interpret it beyond equality\nchecks. It cannot be minted client-side; only the engine produces it, exactly once\nper leased activation, and clients must not depend on any particular internal format.\n",
       "composition": {
         "schemaKind": "inline",
         "refs": [],
@@ -10104,8 +10104,8 @@
       "tags": [
         "Secret"
       ],
-      "summary": "Resolve secrets (alpha)",
-      "description": "Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's\nphysical tenant in a single round-trip.\n\nEach reference is authorized and resolved independently. For valid requests, the endpoint\nalways responds with HTTP 200: successfully resolved references are returned in `resolved`,\nwhile references that could not be resolved (for example not found, malformed or over-long,\nor the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of\none reference never fails the others. Only structurally invalid requests are rejected with\nHTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.\n\nReferences are resolved against the secret stores configured for the caller's physical\ntenant, served from the gateway's secret cache when the value is already cached and read\nfrom the store otherwise.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
+      "summary": "Resolve secrets",
+      "description": "Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's\nphysical tenant in a single round-trip.\n\nEach reference is authorized and resolved independently. For valid requests, the endpoint\nalways responds with HTTP 200: successfully resolved references are returned in `resolved`,\nwhile references that could not be resolved (for example not found, malformed or over-long,\nor the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of\none reference never fails the others. Only structurally invalid requests are rejected with\nHTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.\n\nReferences are resolved against the secret stores configured for the caller's physical\ntenant, served from the gateway's secret cache when the value is already cached and read\nfrom the store otherwise.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -10141,8 +10141,8 @@
       "tags": [
         "Secret"
       ],
-      "summary": "List secrets (alpha)",
-      "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nA store may hold names outside the reference name charset (for example one containing a\ndot); those are omitted, since `/secrets/resolve` would reject them and no permission can\nbe granted on them.\n\nA returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,\nhowever, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads\na bare dash as the minus operator: a listed `camunda.secrets.db-password` is written\n`` =camunda.secrets.`db-password` `` in a BPMN input mapping.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
+      "summary": "List secrets",
+      "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nA store may hold names outside the reference name charset (for example one containing a\ndot); those are omitted, since `/secrets/resolve` would reject them and no permission can\nbe granted on them.\n\nA returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,\nhowever, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads\na bare dash as the minus operator: a listed `camunda.secrets.db-password` is written\n`` =camunda.secrets.`db-password` `` in a BPMN input mapping.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -12127,6 +12127,34 @@
       }
     },
     {
+      "operationId": "getClusterUpgradeStatus",
+      "path": "/cluster/v2/status/upgrade",
+      "method": "get",
+      "tags": [
+        "Cluster"
+      ],
+      "summary": "Get the upgrade-readiness status of the whole cluster",
+      "description": "Reports one overall upgrade-readiness status for the whole cluster, folded over every physical tenant and condition. `MIGRATED` only once every known condition has migrated for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise (including before anything has been reported yet). No per-tenant or per-condition detail is reported here; see the `upgradeReadiness` actuator endpoint for that.",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "cluster-admin.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "ClusterUpgradeStatusResponse",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [],
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
+      }
+    },
+    {
       "operationId": "getClusterTopology",
       "path": "/cluster/v2/topology",
       "method": "get",
@@ -12944,7 +12972,7 @@
         "elementId",
         "jobKey",
         "elementInstanceKey",
-        "leaseToken"
+        "jobLeaseToken"
       ],
       "stableId": "activated-job-result"
     },
@@ -13107,7 +13135,7 @@
   "integrity": {
     "totalSemanticKeys": 44,
     "totalUnions": 68,
-    "totalOperations": 243,
+    "totalOperations": 244,
     "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 22

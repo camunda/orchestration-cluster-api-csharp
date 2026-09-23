@@ -50,7 +50,7 @@ public static class AgentInstanceExamples
         {
             ElementInstanceKey = elementInstanceKey,
             JobKey = jobKey,
-            JobLease = jobLease,
+            JobLeaseToken = jobLease,
             History = new List<AgentInstanceHistoryItem>
             {
                 new AgentInstanceHistoryItem
@@ -100,7 +100,7 @@ public static class AgentInstanceExamples
             {
                 ElementInstanceKey = elementInstanceKey,
                 JobKey = jobKey,
-                JobLease = jobLease,
+                JobLeaseToken = jobLease,
                 Status = AgentInstanceUpdateStatusEnum.THINKING,
                 History = new List<AgentInstanceHistoryItem>
                 {

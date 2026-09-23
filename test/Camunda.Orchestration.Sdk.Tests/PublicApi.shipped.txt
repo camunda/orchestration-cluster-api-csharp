@@ -32,7 +32,7 @@ TYPE Camunda.Orchestration.Sdk.ActivatedJobResult : sealed class
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
   PROP Camunda.Orchestration.Sdk.JobKindEnum Kind { get; set; } [JsonPropertyName("kind")]
-  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? JobLeaseToken { get; set; } [JsonPropertyName("jobLeaseToken")]
   PROP Camunda.Orchestration.Sdk.JobListenerEventTypeEnum ListenerEventType { get; set; } [JsonPropertyName("listenerEventType")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
@@ -654,7 +654,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceCreationRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
-  PROP Camunda.Orchestration.Sdk.JobLeaseToken JobLease { get; set; } [JsonPropertyName("jobLease")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken JobLeaseToken { get; set; } [JsonPropertyName("jobLeaseToken")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceHistoryItem> History { get; set; } [JsonPropertyName("history")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceCreationResult : sealed class
@@ -769,7 +769,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceHistoryItemResult : sealed class
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.HistoryItemId HistoryItemId { get; set; } [JsonPropertyName("historyItemId")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
-  PROP Camunda.Orchestration.Sdk.JobLeaseToken JobLease { get; set; } [JsonPropertyName("jobLease")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken JobLeaseToken { get; set; } [JsonPropertyName("jobLeaseToken")]
   PROP Camunda.Orchestration.Sdk.LoopIterationId LoopIteration { get; set; } [JsonPropertyName("loopIteration")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> Content { get; set; } [JsonPropertyName("content")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceMessageContent> SystemPrompt { get; set; } [JsonPropertyName("systemPrompt")]
@@ -988,7 +988,7 @@ TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateRequest : sealed class
   PROP Camunda.Orchestration.Sdk.AgentInstanceUpdateStatusEnum? Status { get; set; } [JsonPropertyName("status")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
-  PROP Camunda.Orchestration.Sdk.JobLeaseToken JobLease { get; set; } [JsonPropertyName("jobLease")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken JobLeaseToken { get; set; } [JsonPropertyName("jobLeaseToken")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.AgentInstanceHistoryItem>? History { get; set; } [JsonPropertyName("history")]
 
 TYPE Camunda.Orchestration.Sdk.AgentInstanceUpdateResult : sealed class
@@ -1589,7 +1589,7 @@ TYPE Camunda.Orchestration.Sdk.BatchOperationResponse : sealed class
   PROP Camunda.Orchestration.Sdk.AuditLogActorTypeEnum? ActorType { get; set; } [JsonPropertyName("actorType")]
   PROP Camunda.Orchestration.Sdk.BatchOperationKey BatchOperationKey { get; set; } [JsonPropertyName("batchOperationKey")]
   PROP Camunda.Orchestration.Sdk.BatchOperationStateEnum State { get; set; } [JsonPropertyName("state")]
-  PROP Camunda.Orchestration.Sdk.BatchOperationTypeEnum BatchOperationType { get; set; } [JsonPropertyName("batchOperationType")]
+  PROP Camunda.Orchestration.Sdk.BatchOperationTypeEnum? BatchOperationType { get; set; } [JsonPropertyName("batchOperationType")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.BatchOperationError> Errors { get; set; } [JsonPropertyName("errors")]
   PROP System.DateTimeOffset? EndDate { get; set; } [JsonPropertyName("endDate")]
   PROP System.DateTimeOffset? StartDate { get; set; } [JsonPropertyName("startDate")]
@@ -1853,6 +1853,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[Camunda.Orchest
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterTakeHistoryBackupResponse> TakeHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeHistoryBackupRequest body, System.String? physicalTenantId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterTakeRuntimeBackupResponse> TakeRuntimeBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.TakeRuntimeBackupRequest body, System.String? physicalTenantId = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterTopologyResponse> GetClusterTopologyAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse> GetClusterUpgradeStatusAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> CreateTenantClusterVariableAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.CreateClusterVariableRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterVariableResult> GetGlobalClusterVariableAsync(Camunda.Orchestration.Sdk.ClusterVariableName name, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ClusterVariableResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -2407,6 +2408,17 @@ TYPE Camunda.Orchestration.Sdk.ClusterTopologyResponse : sealed class
   PROP System.Int32 ClusterSize { get; set; } [JsonPropertyName("clusterSize")]
   PROP System.String? ClusterId { get; set; } [JsonPropertyName("clusterId")]
   PROP System.String? GatewayVersion { get; set; } [JsonPropertyName("gatewayVersion")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponse : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus Status { get; set; } [JsonPropertyName("status")]
+
+TYPE Camunda.Orchestration.Sdk.ClusterUpgradeStatusResponseStatus : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER MIGRATED = 0 json="MIGRATED"
+  MEMBER MIGRATIONINPROGRESS = 1 json="MIGRATION_IN_PROGRESS"
+  MEMBER UNKNOWN = 2 json="UNKNOWN"
 
 TYPE Camunda.Orchestration.Sdk.ClusterVariableKindEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
   ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
@@ -4322,13 +4334,13 @@ TYPE Camunda.Orchestration.Sdk.JobChangeset : sealed class
 TYPE Camunda.Orchestration.Sdk.JobCompletionRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
-  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? JobLeaseToken { get; set; } [JsonPropertyName("jobLeaseToken")]
   PROP Camunda.Orchestration.Sdk.JobResult? Result { get; set; } [JsonPropertyName("result")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
 
 TYPE Camunda.Orchestration.Sdk.JobErrorRequest : sealed class
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? JobLeaseToken { get; set; } [JsonPropertyName("jobLeaseToken")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
   PROP System.String ErrorCode { get; set; } [JsonPropertyName("errorCode")]
   PROP System.String? ErrorMessage { get; set; } [JsonPropertyName("errorMessage")]
@@ -4359,7 +4371,7 @@ TYPE Camunda.Orchestration.Sdk.JobErrorStatisticsQueryResult : sealed class
 
 TYPE Camunda.Orchestration.Sdk.JobFailRequest : sealed class
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? JobLeaseToken { get; set; } [JsonPropertyName("jobLeaseToken")]
   PROP System.Int32? Retries { get; set; } [JsonPropertyName("retries")]
   PROP System.Int64? RetryBackOff { get; set; } [JsonPropertyName("retryBackOff")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
@@ -4694,7 +4706,7 @@ TYPE Camunda.Orchestration.Sdk.JobTypeStatisticsQueryResult : sealed class
 TYPE Camunda.Orchestration.Sdk.JobUpdateRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.JobChangeset Changeset { get; set; } [JsonPropertyName("changeset")]
-  PROP Camunda.Orchestration.Sdk.JobLeaseToken? LeaseToken { get; set; } [JsonPropertyName("leaseToken")]
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? JobLeaseToken { get; set; } [JsonPropertyName("jobLeaseToken")]
   PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
 
 TYPE Camunda.Orchestration.Sdk.JobWaitStateDetails : sealed class base=Camunda.Orchestration.Sdk.WaitStateDetails

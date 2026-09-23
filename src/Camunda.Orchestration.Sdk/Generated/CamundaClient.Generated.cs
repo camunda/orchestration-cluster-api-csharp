@@ -3495,6 +3495,51 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get the upgrade-readiness status of the whole cluster
+    /// Reports one overall upgrade-readiness status for the whole cluster, folded over every physical tenant and condition. `MIGRATED` only once every known condition has migrated for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise (including before anything has been reported yet). No per-tenant or per-condition detail is reported here; see the `upgradeReadiness` actuator endpoint for that.
+    /// </summary>
+    /// <remarks>
+    /// Operation: getClusterUpgradeStatus
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClusterUpgradeStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Reports one overall upgrade-readiness status for the whole cluster,
+    ///     // folded over every physical tenant and condition. MIGRATED only once
+    ///     // everything has migrated; MIGRATION_IN_PROGRESS while at least one
+    ///     // condition is confirmed not yet migrated.
+    ///     var status = await client.GetClusterUpgradeStatusAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Cluster upgrade-readiness: {status.Status}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClusterUpgradeStatusExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Reports one overall upgrade-readiness status for the whole cluster,
+    ///     // folded over every physical tenant and condition. MIGRATED only once
+    ///     // everything has migrated; MIGRATION_IN_PROGRESS while at least one
+    ///     // condition is confirmed not yet migrated.
+    ///     var status = await client.GetClusterUpgradeStatusAsync();
+    /// 
+    ///     Console.WriteLine($&quot;Cluster upgrade-readiness: {status.Status}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ClusterUpgradeStatusResponse> GetClusterUpgradeStatusAsync(CancellationToken ct = default)
+    {
+        var path = $"/cluster/v2/status/upgrade";
+        return await InvokeWithRetryAsync(() => SendAsync<ClusterUpgradeStatusResponse>(HttpMethod.Get, path, null, ct), "getClusterUpgradeStatus", false, ct);
+    }
+
+    /// <summary>
     /// Get decision definition
     /// Returns a decision definition by key.
     /// </summary>
@@ -6277,7 +6322,7 @@ public partial class CamundaClient
     }
 
     /// <summary>
-    /// List secrets (alpha)
+    /// List secrets
     /// List the `camunda.secrets.*` references known for the caller&apos;s physical tenant.
     /// 
     /// Only references the caller holds `SECRET:READ` on are returned. This endpoint never
@@ -6292,8 +6337,6 @@ public partial class CamundaClient
     /// however, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads
     /// a bare dash as the minus operator: a listed `camunda.secrets.db-password` is written
     /// `` =camunda.secrets.`db-password` `` in a BPMN input mapping.
-    /// 
-    /// This endpoint is an alpha feature and may be subject to change in future releases.
     /// 
     /// </summary>
     /// <remarks>
@@ -6888,7 +6931,7 @@ public partial class CamundaClient
     }
 
     /// <summary>
-    /// Resolve secrets (alpha)
+    /// Resolve secrets
     /// Resolve a deduplicated batch of `camunda.secrets.*` references for the caller&apos;s
     /// physical tenant in a single round-trip.
     /// 
@@ -6902,8 +6945,6 @@ public partial class CamundaClient
     /// References are resolved against the secret stores configured for the caller&apos;s physical
     /// tenant, served from the gateway&apos;s secret cache when the value is already cached and read
     /// from the store otherwise.
-    /// 
-    /// This endpoint is an alpha feature and may be subject to change in future releases.
     /// 
     /// </summary>
     /// <remarks>

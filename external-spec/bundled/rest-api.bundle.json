@@ -18400,8 +18400,8 @@
             "basicAuth": []
           }
         ],
-        "summary": "Resolve secrets (alpha)",
-        "description": "Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's\nphysical tenant in a single round-trip.\n\nEach reference is authorized and resolved independently. For valid requests, the endpoint\nalways responds with HTTP 200: successfully resolved references are returned in `resolved`,\nwhile references that could not be resolved (for example not found, malformed or over-long,\nor the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of\none reference never fails the others. Only structurally invalid requests are rejected with\nHTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.\n\nReferences are resolved against the secret stores configured for the caller's physical\ntenant, served from the gateway's secret cache when the value is already cached and read\nfrom the store otherwise.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
+        "summary": "Resolve secrets",
+        "description": "Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's\nphysical tenant in a single round-trip.\n\nEach reference is authorized and resolved independently. For valid requests, the endpoint\nalways responds with HTTP 200: successfully resolved references are returned in `resolved`,\nwhile references that could not be resolved (for example not found, malformed or over-long,\nor the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of\none reference never fails the others. Only structurally invalid requests are rejected with\nHTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.\n\nReferences are resolved against the secret stores configured for the caller's physical\ntenant, served from the gateway's secret cache when the value is already cached and read\nfrom the store otherwise.\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -18497,8 +18497,8 @@
             "basicAuth": []
           }
         ],
-        "summary": "List secrets (alpha)",
-        "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nA store may hold names outside the reference name charset (for example one containing a\ndot); those are omitted, since `/secrets/resolve` would reject them and no permission can\nbe granted on them.\n\nA returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,\nhowever, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads\na bare dash as the minus operator: a listed `camunda.secrets.db-password` is written\n`` =camunda.secrets.`db-password` `` in a BPMN input mapping.\n\nThis endpoint is an alpha feature and may be subject to change in future releases.\n",
+        "summary": "List secrets",
+        "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nA store may hold names outside the reference name charset (for example one containing a\ndot); those are omitted, since `/secrets/resolve` would reject them and no permission can\nbe granted on them.\n\nA returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,\nhowever, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads\na bare dash as the minus operator: a listed `camunda.secrets.db-password` is written\n`` =camunda.secrets.`db-password` `` in a BPMN input mapping.\n",
         "requestBody": {
           "required": false,
           "content": {
@@ -23787,6 +23787,52 @@
         "x-scope": "cluster-wide"
       }
     },
+    "/cluster/v2/status/upgrade": {
+      "servers": [
+        {
+          "url": "{schema}://{host}:{port}",
+          "variables": {
+            "host": {
+              "default": "localhost",
+              "description": "The hostname of the Orchestration Cluster REST Gateway."
+            },
+            "port": {
+              "default": "8080",
+              "description": "The port of the Orchestration Cluster REST API server."
+            },
+            "schema": {
+              "default": "http",
+              "description": "The schema of the Orchestration Cluster REST API server."
+            }
+          }
+        }
+      ],
+      "get": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "getClusterUpgradeStatus",
+        "x-required-permissions": [],
+        "security": [],
+        "summary": "Get the upgrade-readiness status of the whole cluster",
+        "description": "Reports one overall upgrade-readiness status for the whole cluster, folded over every physical tenant and condition. `MIGRATED` only once every known condition has migrated for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise (including before anything has been reported yet). No per-tenant or per-condition detail is reported here; see the `upgradeReadiness` actuator endpoint for that.",
+        "responses": {
+          "200": {
+            "description": "The cluster's upgrade-readiness status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterUpgradeStatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.10",
+        "x-scope": "cluster-wide"
+      }
+    },
     "/cluster/v2/topology": {
       "servers": [
         {
@@ -26600,7 +26646,7 @@
           "elementInstanceKey",
           "history",
           "jobKey",
-          "jobLease"
+          "jobLeaseToken"
         ],
         "properties": {
           "elementInstanceKey": {
@@ -26619,7 +26665,7 @@
               }
             ]
           },
-          "jobLease": {
+          "jobLeaseToken": {
             "description": "Opaque lease token received from the job activation response. Disambiguates\nthis activation from any other activation of the same job: if the job is\nlater retried, history items submitted under a superseded lease are discarded\nrather than committed.\n",
             "allOf": [
               {
@@ -26671,7 +26717,7 @@
         "required": [
           "elementInstanceKey",
           "jobKey",
-          "jobLease"
+          "jobLeaseToken"
         ],
         "properties": {
           "elementInstanceKey": {
@@ -26699,7 +26745,7 @@
               }
             ]
           },
-          "jobLease": {
+          "jobLeaseToken": {
             "description": "Opaque lease token received from the job activation response. Disambiguates\nthis activation from any other activation of the same job: if the job is\nlater retried, history items submitted under a superseded lease are discarded\nrather than committed.\n",
             "allOf": [
               {
@@ -27051,7 +27097,7 @@
           "historyItemId",
           "historyItemKey",
           "jobKey",
-          "jobLease",
+          "jobLeaseToken",
           "limits",
           "loopIteration",
           "metrics",
@@ -27104,7 +27150,7 @@
               }
             ]
           },
-          "jobLease": {
+          "jobLeaseToken": {
             "description": "The lease token of the activation that produced this item.",
             "allOf": [
               {
@@ -29850,7 +29896,13 @@
             "$ref": "#/components/schemas/BatchOperationStateEnum"
           },
           "batchOperationType": {
-            "$ref": "#/components/schemas/BatchOperationTypeEnum"
+            "description": "The type of the batch operation.\nThis is `null` for batch operations whose type was never recorded in\nsecondary storage, such as legacy Operate batch operations.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BatchOperationTypeEnum"
+              }
+            ]
           },
           "startDate": {
             "type": "string",
@@ -30633,6 +30685,25 @@
               "HEALTHY",
               "DEGRADED",
               "DOWN"
+            ]
+          }
+        }
+      },
+      "ClusterUpgradeStatusResponse": {
+        "description": "The upgrade-readiness status of the whole cluster.",
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "description": "`MIGRATED` once every known upgrade-readiness condition is met for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise.",
+            "type": "string",
+            "example": "MIGRATED",
+            "enum": [
+              "MIGRATED",
+              "MIGRATION_IN_PROGRESS",
+              "UNKNOWN"
             ]
           }
         }
@@ -37804,7 +37875,7 @@
         "example": "item-1"
       },
       "JobLeaseToken": {
-        "description": "An opaque, engine-minted fencing token identifying a single activation of a job.\nReturned by Activate Jobs as `ActivatedJobResult.leaseToken` when the job is\nactivated with a lease, and passed back on fenced job commands — and on\nagent-instance creation/updates as `jobLease` — to prove the caller holds the\ncurrent lease. The token is opaque: clients may rely on its presence and equality\nonly, and must never construct, parse, or otherwise interpret it beyond equality\nchecks. It cannot be minted client-side; only the engine produces it, exactly once\nper leased activation, and clients must not depend on any particular internal format.\n",
+        "description": "An opaque, engine-minted fencing token identifying a single activation of a job.\nReturned by Activate Jobs as `ActivatedJobResult.jobLeaseToken` when the job is\nactivated with a lease, and passed back under the same name on fenced job\ncommands and on agent-instance creation/updates, to prove the caller holds the\ncurrent lease. The token is opaque: clients may rely on its presence and equality\nonly, and must never construct, parse, or otherwise interpret it beyond equality\nchecks. It cannot be minted client-side; only the engine produces it, exactly once\nper leased activation, and clients must not depend on any particular internal format.\n",
         "type": "string",
         "format": "JobLeaseToken",
         "x-semantic-type": "JobLeaseToken",
@@ -39290,7 +39361,7 @@
             "default": "PROVIDED"
           },
           "withLease": {
-            "description": "Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.leaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.\n",
+            "description": "Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.jobLeaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.\n",
             "type": "boolean",
             "nullable": true
           }
@@ -39332,7 +39403,7 @@
           "elementId",
           "jobKey",
           "elementInstanceKey",
-          "leaseToken"
+          "jobLeaseToken"
         ],
         "type": "object",
         "required": [
@@ -39342,8 +39413,8 @@
           "elementId",
           "elementInstanceKey",
           "jobKey",
+          "jobLeaseToken",
           "kind",
-          "leaseToken",
           "listenerEventType",
           "physicalTenantId",
           "priority",
@@ -39501,7 +39572,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "leaseToken": {
+          "jobLeaseToken": {
             "description": "The lease token identifying this activation. This is `null` when the job was activated without a lease.\n",
             "nullable": true,
             "x-present-when": {
@@ -39549,7 +39620,7 @@
             "addedInVersion": "8.10"
           },
           {
-            "propertyName": "leaseToken",
+            "propertyName": "jobLeaseToken",
             "addedInVersion": "8.10"
           },
           {
@@ -40239,8 +40310,8 @@
             "type": "object",
             "additionalProperties": true
           },
-          "leaseToken": {
-            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
+          "jobLeaseToken": {
+            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.jobLeaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
             "nullable": true,
             "allOf": [
               {
@@ -40251,7 +40322,7 @@
         },
         "x-properties-added-in-version": [
           {
-            "propertyName": "leaseToken",
+            "propertyName": "jobLeaseToken",
             "addedInVersion": "8.10"
           }
         ]
@@ -40275,8 +40346,8 @@
             "type": "object",
             "nullable": true
           },
-          "leaseToken": {
-            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
+          "jobLeaseToken": {
+            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.jobLeaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
             "nullable": true,
             "allOf": [
               {
@@ -40290,7 +40361,7 @@
         ],
         "x-properties-added-in-version": [
           {
-            "propertyName": "leaseToken",
+            "propertyName": "jobLeaseToken",
             "addedInVersion": "8.10"
           }
         ]
@@ -40308,8 +40379,8 @@
           "result": {
             "$ref": "#/components/schemas/JobResult"
           },
-          "leaseToken": {
-            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
+          "jobLeaseToken": {
+            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.jobLeaseToken`.\nFor a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nA job that was activated without a lease requires no token.\n",
             "nullable": true,
             "allOf": [
               {
@@ -40333,7 +40404,7 @@
             "addedInVersion": "8.8"
           },
           {
-            "propertyName": "leaseToken",
+            "propertyName": "jobLeaseToken",
             "addedInVersion": "8.10"
           },
           {
@@ -40494,8 +40565,8 @@
           "operationReference": {
             "$ref": "#/components/schemas/OperationReference"
           },
-          "leaseToken": {
-            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.\nFor a leased job, a supplied token is validated to prove the command comes from the worker that holds the current lease; a command carrying a stale token is rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nAn update without a token always applies to support operator and bulk updates of leased jobs. Note that this is different from lifecycle requests like complete, fail, and throw-error that always require a token for leased jobs.\nA job that was activated without a lease requires no token.\n",
+          "jobLeaseToken": {
+            "description": "The token identifying a leased job's activation, obtained from `ActivatedJobResult.jobLeaseToken`.\nFor a leased job, a supplied token is validated to prove the command comes from the worker that holds the current lease; a command carrying a stale token is rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).\nAn update without a token always applies to support operator and bulk updates of leased jobs. Note that this is different from lifecycle requests like complete, fail, and throw-error that always require a token for leased jobs.\nA job that was activated without a lease requires no token.\n",
             "nullable": true,
             "allOf": [
               {
@@ -40513,7 +40584,7 @@
             "addedInVersion": "8.8"
           },
           {
-            "propertyName": "leaseToken",
+            "propertyName": "jobLeaseToken",
             "addedInVersion": "8.10"
           }
         ]
@@ -46546,7 +46617,7 @@
         "required": [
           "references"
         ],
-        "description": "The secret references the caller is authorized to see.\n\nUnbounded for now: the response carries the configured stores' full enumeration for the\nphysical tenant. Pagination is expected to land here before GA. This is an alpha endpoint,\nso that is not yet a breaking-contract concern.\n",
+        "description": "The secret references the caller is authorized to see.\n\nUnbounded: the response carries the configured stores' full enumeration for the physical\ntenant.\n",
         "properties": {
           "references": {
             "type": "array",
