@@ -1598,6 +1598,13 @@
       "label": "Get the topology of the whole cluster"
     }
   ],
+  "getClusterUpgradeStatus": [
+    {
+      "file": "Client.cs",
+      "region": "GetClusterUpgradeStatus",
+      "label": "Get the upgrade-readiness status of the whole cluster"
+    }
+  ],
   "getClusterRebalance": [
     {
       "file": "Client.cs",

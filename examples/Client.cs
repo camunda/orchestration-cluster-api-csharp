@@ -190,6 +190,24 @@ public static class ClientExamples
     // </GetClusterTopology>
     #endregion GetClusterTopology
 
+    #region GetClusterUpgradeStatus
+
+    // <GetClusterUpgradeStatus>
+    public static async Task GetClusterUpgradeStatusExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // Reports one overall upgrade-readiness status for the whole cluster,
+        // folded over every physical tenant and condition. MIGRATED only once
+        // everything has migrated; MIGRATION_IN_PROGRESS while at least one
+        // condition is confirmed not yet migrated.
+        var status = await client.GetClusterUpgradeStatusAsync();
+
+        Console.WriteLine($"Cluster upgrade-readiness: {status.Status}");
+    }
+    // </GetClusterUpgradeStatus>
+    #endregion GetClusterUpgradeStatus
+
     #region TriggerClusterRebalance
 
     // <TriggerClusterRebalance>
