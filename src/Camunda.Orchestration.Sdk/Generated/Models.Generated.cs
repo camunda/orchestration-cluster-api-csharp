@@ -342,6 +342,20 @@ public enum ClusterStatusResponseStatus
 }
 
 /// <summary>
+/// `MIGRATED` once every known upgrade-readiness condition is met for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ClusterUpgradeStatusResponseStatus
+{
+    [JsonPropertyName("MIGRATED")]
+    MIGRATED,
+    [JsonPropertyName("MIGRATION_IN_PROGRESS")]
+    MIGRATIONINPROGRESS,
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN,
+}
+
+/// <summary>
 /// The field to sort by.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -1480,8 +1494,8 @@ public sealed class ActivatedJobResult
     /// The lease token identifying this activation. This is `null` when the job was activated without a lease.
     /// 
     /// </summary>
-    [JsonPropertyName("leaseToken")]
-    public JobLeaseToken? LeaseToken { get; set; }
+    [JsonPropertyName("jobLeaseToken")]
+    public JobLeaseToken? JobLeaseToken { get; set; }
 
 }
 
@@ -4625,8 +4639,8 @@ public sealed class AgentInstanceCreationRequest
     /// rather than committed.
     /// 
     /// </summary>
-    [JsonPropertyName("jobLease")]
-    public JobLeaseToken JobLease { get; set; }
+    [JsonPropertyName("jobLeaseToken")]
+    public JobLeaseToken JobLeaseToken { get; set; }
 
     /// <summary>
     /// A batch of history items to append to the agent instance&apos;s conversation
@@ -5236,8 +5250,8 @@ public sealed class AgentInstanceHistoryItemResult
     /// <summary>
     /// The lease token of the activation that produced this item.
     /// </summary>
-    [JsonPropertyName("jobLease")]
-    public JobLeaseToken JobLease { get; set; }
+    [JsonPropertyName("jobLeaseToken")]
+    public JobLeaseToken JobLeaseToken { get; set; }
 
     /// <summary>
     /// The loop iteration this item belongs to.
@@ -6280,8 +6294,8 @@ public sealed class AgentInstanceUpdateRequest
     /// rather than committed.
     /// 
     /// </summary>
-    [JsonPropertyName("jobLease")]
-    public JobLeaseToken JobLease { get; set; }
+    [JsonPropertyName("jobLeaseToken")]
+    public JobLeaseToken JobLeaseToken { get; set; }
 
     /// <summary>
     /// A batch of history items to append to the agent instance&apos;s conversation
@@ -8746,9 +8760,12 @@ public sealed class BatchOperationResponse
 
     /// <summary>
     /// The type of the batch operation.
+    /// This is `null` for batch operations whose type was never recorded in
+    /// secondary storage, such as legacy Operate batch operations.
+    /// 
     /// </summary>
     [JsonPropertyName("batchOperationType")]
-    public BatchOperationTypeEnum BatchOperationType { get; set; }
+    public BatchOperationTypeEnum? BatchOperationType { get; set; }
 
     /// <summary>
     /// The start date of the batch operation.
@@ -10529,6 +10546,19 @@ public sealed class ClusterTopologyResponse
     /// </summary>
     [JsonPropertyName("physicalTenants")]
     public List<PhysicalTenantTopology> PhysicalTenants { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The upgrade-readiness status of the whole cluster.
+/// </summary>
+public sealed class ClusterUpgradeStatusResponse
+{
+    /// <summary>
+    /// `MIGRATED` once every known upgrade-readiness condition is met for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public ClusterUpgradeStatusResponseStatus Status { get; set; }
 
 }
 
@@ -18555,7 +18585,7 @@ public sealed class JobActivationRequest : global::Camunda.Orchestration.Sdk.ITe
     public TenantFilterEnum? TenantFilter { get; set; }
 
     /// <summary>
-    /// Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.leaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.
+    /// Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.jobLeaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.
     /// 
     /// </summary>
     [JsonPropertyName("withLease")]
@@ -18657,13 +18687,13 @@ public sealed class JobCompletionRequest
     public JobResult? Result { get; set; }
 
     /// <summary>
-    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.leaseToken`.
+    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.jobLeaseToken`.
     /// For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
     /// A job that was activated without a lease requires no token.
     /// 
     /// </summary>
-    [JsonPropertyName("leaseToken")]
-    public JobLeaseToken? LeaseToken { get; set; }
+    [JsonPropertyName("jobLeaseToken")]
+    public JobLeaseToken? JobLeaseToken { get; set; }
 
     /// <summary>
     /// An optional business id to assign to the process instance the job belongs to, as part of completing the job, letting a worker set the identifier from work it just performed.
@@ -18702,13 +18732,13 @@ public sealed class JobErrorRequest
     public object? Variables { get; set; }
 
     /// <summary>
-    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.leaseToken`.
+    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.jobLeaseToken`.
     /// For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
     /// A job that was activated without a lease requires no token.
     /// 
     /// </summary>
-    [JsonPropertyName("leaseToken")]
-    public JobLeaseToken? LeaseToken { get; set; }
+    [JsonPropertyName("jobLeaseToken")]
+    public JobLeaseToken? JobLeaseToken { get; set; }
 
 }
 
@@ -18845,13 +18875,13 @@ public sealed class JobFailRequest
     public object? Variables { get; set; }
 
     /// <summary>
-    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.leaseToken`.
+    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.jobLeaseToken`.
     /// For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
     /// A job that was activated without a lease requires no token.
     /// 
     /// </summary>
-    [JsonPropertyName("leaseToken")]
-    public JobLeaseToken? LeaseToken { get; set; }
+    [JsonPropertyName("jobLeaseToken")]
+    public JobLeaseToken? JobLeaseToken { get; set; }
 
 }
 
@@ -19339,9 +19369,9 @@ internal sealed class JobKindFilterPropertyJsonConverter : global::System.Text.J
 
 /// <summary>
 /// An opaque, engine-minted fencing token identifying a single activation of a job.
-/// Returned by Activate Jobs as `ActivatedJobResult.leaseToken` when the job is
-/// activated with a lease, and passed back on fenced job commands — and on
-/// agent-instance creation/updates as `jobLease` — to prove the caller holds the
+/// Returned by Activate Jobs as `ActivatedJobResult.jobLeaseToken` when the job is
+/// activated with a lease, and passed back under the same name on fenced job
+/// commands and on agent-instance creation/updates, to prove the caller holds the
 /// current lease. The token is opaque: clients may rely on its presence and equality
 /// only, and must never construct, parse, or otherwise interpret it beyond equality
 /// checks. It cannot be minted client-side; only the engine produces it, exactly once
@@ -20394,14 +20424,14 @@ public sealed class JobUpdateRequest
     public OperationReference? OperationReference { get; set; }
 
     /// <summary>
-    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.leaseToken`.
+    /// The token identifying a leased job&apos;s activation, obtained from `ActivatedJobResult.jobLeaseToken`.
     /// For a leased job, a supplied token is validated to prove the command comes from the worker that holds the current lease; a command carrying a stale token is rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
     /// An update without a token always applies to support operator and bulk updates of leased jobs. Note that this is different from lifecycle requests like complete, fail, and throw-error that always require a token for leased jobs.
     /// A job that was activated without a lease requires no token.
     /// 
     /// </summary>
-    [JsonPropertyName("leaseToken")]
-    public JobLeaseToken? LeaseToken { get; set; }
+    [JsonPropertyName("jobLeaseToken")]
+    public JobLeaseToken? JobLeaseToken { get; set; }
 
 }
 
@@ -27132,9 +27162,8 @@ public sealed class SecretListRequest
 /// <summary>
 /// The secret references the caller is authorized to see.
 /// 
-/// Unbounded for now: the response carries the configured stores&apos; full enumeration for the
-/// physical tenant. Pagination is expected to land here before GA. This is an alpha endpoint,
-/// so that is not yet a breaking-contract concern.
+/// Unbounded: the response carries the configured stores&apos; full enumeration for the physical
+/// tenant.
 /// 
 /// </summary>
 public sealed class SecretListResult
