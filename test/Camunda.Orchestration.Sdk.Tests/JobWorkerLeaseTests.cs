@@ -149,6 +149,31 @@ public class JobWorkerLeaseTests
     }
 
     [Fact]
+    public async Task RunWorkersAsync_surfaces_LeaseNotHonored_when_a_leased_job_arrives_with_a_malformed_token()
+    {
+        var handler = new MockHttpMessageHandler();
+        // Server returns a malformed (empty) lease token; strict JobLeaseToken deserialization
+        // rejects it deep in the client. That must surface as the lease fault, not a silently
+        // retried generic poll error.
+        handler.Enqueue(HttpStatusCode.OK, $"{{\"jobs\":[{JobJson("222", leaseToken: "")}]}}");
+        for (var i = 0; i < 8; i++)
+            handler.Enqueue(HttpStatusCode.OK, "{\"jobs\":[]}");
+
+        using var client = NewClient(handler);
+        var handlerRan = false;
+        client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "lease-test", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = true, WithLease = true },
+            (_, _) => { handlerRan = true; return Task.FromResult<object?>(null); });
+
+        var run = client.RunWorkersAsync(TimeSpan.FromMilliseconds(50));
+
+        var ex = await Assert.ThrowsAsync<LeaseNotHonoredException>(
+            () => run.WaitAsync(TimeSpan.FromSeconds(5)));
+        Assert.Equal("withLease", ex.RequestFlag);
+        Assert.False(handlerRan);
+    }
+
+    [Fact]
     public async Task Completion_carries_the_lease_token_without_mutating_a_caller_owned_request()
     {
         var callerRequest = new JobCompletionRequest { Variables = new { ok = true } };

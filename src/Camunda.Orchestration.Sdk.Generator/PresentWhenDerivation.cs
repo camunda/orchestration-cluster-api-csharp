@@ -133,5 +133,5 @@ internal static class PresentWhenDerivation
     }
 
     private static string Quote(string value) =>
-        "\"" + value.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+        "\"" + SafeEmit.SafeCSharpStringLiteral(value) + "\"";
 }

@@ -456,18 +456,31 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
                 try
                 {
-                    var response = await _client.ActivateJobsAsync(new JobActivationRequest
+                    JobActivationResult response;
+                    try
                     {
-                        Type = _config.JobType,
-                        Worker = _name,
-                        Timeout = _jobTimeoutMs,
-                        MaxJobsToActivate = capacity,
-                        FetchVariable = _config.FetchVariables,
-                        RequestTimeout = _config.PollTimeoutMs ?? 0,
-                        TenantIds = _resolvedTenantIds,
-                        TenantFilter = _config.TenantFilter,
-                        WithLease = _config.WithLease ? true : null,
-                    }, ct: ct).ConfigureAwait(false);
+                        response = await _client.ActivateJobsAsync(new JobActivationRequest
+                        {
+                            Type = _config.JobType,
+                            Worker = _name,
+                            Timeout = _jobTimeoutMs,
+                            MaxJobsToActivate = capacity,
+                            FetchVariable = _config.FetchVariables,
+                            RequestTimeout = _config.PollTimeoutMs ?? 0,
+                            TenantIds = _resolvedTenantIds,
+                            TenantFilter = _config.TenantFilter,
+                            WithLease = _config.WithLease ? true : null,
+                        }, ct: ct).ConfigureAwait(false);
+                    }
+                    catch (Exception ex) when (_config.WithLease && IsLeaseTokenValidationFailure(ex))
+                    {
+                        // A lease was requested and the server returned a malformed token (e.g. an
+                        // empty string), which fails the strict JobLeaseToken deserialization deep
+                        // in the client. Left as a generic poll error it would just be logged and
+                        // retried; surface it as the same lease fault RequireLeasePresence raises
+                        // for a missing token, so the worker stops rather than silently looping.
+                        throw new LeaseNotHonoredException(UnknownJobKey, PresentWhen.LeaseRequestFlag());
+                    }
 
                     if (response?.Jobs == null || response.Jobs.Count == 0)
                     {
@@ -664,6 +677,21 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             _logger.LogWarning(ex, "JobWorker '{Name}': could not deserialize job object", _name);
             return null;
         }
+    }
+
+    // The job key is unavailable when the whole activation batch fails to deserialize, so a
+    // lease fault raised from that failure carries this placeholder rather than a real key.
+    private const string UnknownJobKey = "<unknown>";
+
+    private static bool IsLeaseTokenValidationFailure(Exception ex)
+    {
+        for (var e = ex; e is not null; e = e.InnerException)
+        {
+            if (e is ArgumentException && e.Message.Contains(nameof(JobLeaseToken), StringComparison.Ordinal))
+                return true;
+        }
+
+        return false;
     }
 }
 

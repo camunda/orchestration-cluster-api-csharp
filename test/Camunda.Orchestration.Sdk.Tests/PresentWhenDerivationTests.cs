@@ -123,4 +123,26 @@ public class PresentWhenDerivationTests
         Assert.Contains("\"jobLeaseToken\"", source);
         Assert.Contains("\"withLease\"", source);
     }
+
+    [Fact]
+    public void Render_escapes_hostile_characters_in_spec_names()
+    {
+        // Schema/field/flag names originate in the spec; a control or line-terminator
+        // character in one must be emitted as a \u escape, not a raw literal that would
+        // produce invalid or unsafe generated C#. Uses the same escaping the other
+        // generator emission paths use (SafeEmit.SafeCSharpStringLiteral).
+        var couplings = new[]
+        {
+            new PresentWhenDerivation.Coupling("Sch\u2028ema", "fie\rld", "fl\u0000ag"),
+        };
+
+        var source = PresentWhenDerivation.Render(couplings);
+
+        Assert.DoesNotContain('\u2028', source);
+        Assert.DoesNotContain('\r', source);
+        Assert.DoesNotContain('\0', source);
+        Assert.Contains("\\u2028", source);
+        Assert.Contains("\\r", source);
+        Assert.Contains("\\0", source);
+    }
 }
