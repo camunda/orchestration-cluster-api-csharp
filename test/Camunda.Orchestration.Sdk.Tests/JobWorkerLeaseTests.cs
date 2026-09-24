@@ -243,6 +243,32 @@ public class JobWorkerLeaseTests
         Assert.Equal("lease-ghi", doc.RootElement.GetProperty("jobLeaseToken").GetString());
     }
 
+    [Theory]
+    [InlineData("completion")]
+    [InlineData("failure")]
+    [InlineData("error")]
+    public async Task Commands_omit_jobLeaseToken_entirely_when_the_worker_did_not_opt_in(string command)
+    {
+        // The other side of the token-threading conditional: with WithLease off (the default) an
+        // unleased job's commands must go out byte-identical to before this feature, so the wire
+        // stays backward compatible with a server that does not know the field.
+        JobHandler handler = command switch
+        {
+            "failure" => (_, _) => throw new JobFailureException("boom", retries: 2),
+            "error" => (_, _) => throw new BpmnErrorException("MY_ERR", "nope", variables: null),
+            _ => (_, _) => Task.FromResult<object?>(null),
+        };
+
+        var body = await RunOneJobAndCaptureCommandAsync(
+            leaseToken: null,
+            command: command,
+            handler: handler,
+            withLease: false);
+
+        using var doc = JsonDocument.Parse(body);
+        Assert.False(doc.RootElement.TryGetProperty("jobLeaseToken", out _));
+    }
+
     private static async Task<string> CaptureActivationBodyAsync(bool withLease)
     {
         var handler = new MockHttpMessageHandler();
@@ -270,14 +296,15 @@ public class JobWorkerLeaseTests
     }
 
     private static async Task<string> RunOneJobAndCaptureCommandAsync(
-        string leaseToken,
+        string? leaseToken,
         string command,
-        JobHandler handler)
+        JobHandler handler,
+        bool withLease = true)
     {
         var mock = new MockHttpMessageHandler();
         var commandBody = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
 
-        // 1st poll returns one leased job; the command call captures its body; later polls are empty.
+        // 1st poll returns one job; the command call captures its body; later polls are empty.
         mock.Enqueue(HttpStatusCode.OK, $"{{\"jobs\":[{JobJson("222", leaseToken)}]}}");
         mock.Enqueue(async req =>
         {
@@ -298,7 +325,7 @@ public class JobWorkerLeaseTests
 
         using var client = NewClient(mock);
         var worker = client.CreateJobWorker(
-            new JobWorkerConfig { JobType = "lease-test", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false, WithLease = true },
+            new JobWorkerConfig { JobType = "lease-test", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false, WithLease = withLease },
             handler);
         worker.Start();
 

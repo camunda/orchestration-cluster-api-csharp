@@ -25,6 +25,8 @@ internal static class PresentWhen
     /// </summary>
     internal static readonly string[] EnforcedCouplings = { LeaseCouplingKey };
 
+    private static readonly string s_leaseRequestFlag;
+
     static PresentWhen()
     {
         var enforced = new HashSet<string>(EnforcedCouplings, StringComparer.Ordinal);
@@ -41,6 +43,17 @@ internal static class PresentWhen
                 + "generated table but the runtime enforces none of them. Wire enforcement here and "
                 + "add the key to EnforcedCouplings rather than shipping a coupling the worker ignores.");
         }
+
+        // No hardcoded fallback: the generated table is the ground truth, so an empty or stale
+        // one must fail rather than let the runtime invent the relationship it is meant to read.
+        s_leaseRequestFlag = PresentWhenCouplings.All
+            .Where(c => CouplingKey(c) == LeaseCouplingKey)
+            .Select(c => c.RequestFlag)
+            .FirstOrDefault()
+            ?? throw new InvalidOperationException(
+                $"the generated x-present-when table declares no '{LeaseCouplingKey}' coupling, so the "
+                + "lease request flag cannot be resolved. Regenerate from a spec that carries the "
+                + "marker rather than running against a stale or empty table.");
     }
 
     internal static string CouplingKey(PresentWhenCoupling c) => $"{c.ResponseSchema}.{c.ResponseField}";
@@ -49,16 +62,7 @@ internal static class PresentWhen
     /// The request flag governing the lease coupling, read from the generated table so a
     /// rename upstream is reflected here rather than hardcoded.
     /// </summary>
-    internal static string LeaseRequestFlag()
-    {
-        foreach (var c in PresentWhenCouplings.All)
-        {
-            if (CouplingKey(c) == LeaseCouplingKey)
-                return c.RequestFlag;
-        }
-
-        return "withLease";
-    }
+    internal static string LeaseRequestFlag() => s_leaseRequestFlag;
 
     /// <summary>
     /// Enforce the lease coupling for a single activated job. <paramref name="requested"/>

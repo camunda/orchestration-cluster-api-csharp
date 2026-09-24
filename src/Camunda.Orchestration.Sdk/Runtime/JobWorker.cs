@@ -380,9 +380,10 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             try
             { await _pollTask.ConfigureAwait(false); }
             catch (OperationCanceledException) { }
-            // A terminal lease fault is surfaced through RunWorkersAsync, which observes
-            // Completion directly; swallow it here so the stop path itself does not throw.
+            // Terminal faults are surfaced through RunWorkersAsync, which observes Completion
+            // directly; swallow them here so the stop path itself does not throw.
             catch (LeaseNotHonoredException) { }
+            catch (TypeInitializationException) { }
         }
 
         if (gracePeriod.HasValue && ActiveJobs > 0)
@@ -421,6 +422,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             { _pollTask.GetAwaiter().GetResult(); }
             catch (OperationCanceledException) { }
             catch (LeaseNotHonoredException) { }
+            catch (TypeInitializationException) { }
             catch (AggregateException) { }
         }
 
@@ -524,6 +526,14 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                     // Not a transient poll error: the server is answering a lease request with an
                     // unusable token, so retrying just loses every activated batch to its timeout.
                     // Fault the poll task so the caller sees it (see Completion).
+                    throw;
+                }
+                catch (TypeInitializationException ex) when (ex.TypeName == typeof(PresentWhen).FullName)
+                {
+                    // The coupling table and the runtime disagree, which PresentWhen's static
+                    // constructor rejects. The CLR delivers that as TypeInitializationException, so
+                    // without this it would fall to the generic handler and be retried forever,
+                    // hiding the very fail-fast it exists to provide.
                     throw;
                 }
                 catch (Exception ex)
