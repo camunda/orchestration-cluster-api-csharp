@@ -396,7 +396,17 @@ public class EngineTimeProviderTests
                 TimeSpan.FromSeconds(10), Timeout.InfiniteTimeSpan);
 
             timer.Change(TimeSpan.FromSeconds(1), Timeout.InfiniteTimeSpan);
-            await Task.Delay(300);
+
+            // Wait for the rescheduled 1s timer to fire once rather than assuming a fixed
+            // wall-clock window covers the pin-loop's real (ThreadPool-dispatched) latency; a
+            // loaded runner otherwise misses the window and reads 0. The deadline is a safety
+            // net, not the assertion.
+            var deadline = DateTime.UtcNow.AddSeconds(5);
+            while (Volatile.Read(ref fired) == 0 && DateTime.UtcNow < deadline)
+            {
+                await Task.Delay(10);
+            }
+
             timer.Dispose();
 
             Assert.Equal(1, Volatile.Read(ref fired));

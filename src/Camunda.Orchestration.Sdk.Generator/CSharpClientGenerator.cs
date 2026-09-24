@@ -76,6 +76,16 @@ internal static class CSharpClientGenerator
         SafeEmit.ScanGeneratedSource(specHashPath, specHashCode);
         File.WriteAllText(specHashPath, specHashCode);
         Console.WriteLine($"[generator] Generated SpecHash.Generated.cs (specHash: {metadata.SpecHash})");
+
+        // Derive the x-present-when couplings from the raw spec JSON (Microsoft.OpenApi does
+        // not surface arbitrary x-* vendor extensions first-class). The runtime enforces this
+        // table rather than a relationship hardcoded from memory.
+        var couplings = PresentWhenDerivation.Derive(File.ReadAllText(specPath));
+        var presentWhenCode = PresentWhenDerivation.Render(couplings);
+        var presentWhenPath = Path.Combine(outputDir, "PresentWhen.Generated.cs");
+        SafeEmit.ScanGeneratedSource(presentWhenPath, presentWhenCode);
+        File.WriteAllText(presentWhenPath, presentWhenCode);
+        Console.WriteLine($"[generator] Generated PresentWhen.Generated.cs ({couplings.Count} coupling(s))");
     }
 
     private static List<OperationMeta> CollectOperations(OpenApiDocument doc, SpecMetadata metadata, Dictionary<string, IOpenApiSchema> inlineSchemas)

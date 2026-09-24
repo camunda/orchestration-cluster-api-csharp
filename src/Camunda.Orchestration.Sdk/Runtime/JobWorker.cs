@@ -127,6 +127,19 @@ public sealed class JobWorkerConfig
     /// <para>Requires Camunda 8.9 or later.</para>
     /// </summary>
     public TenantFilterEnum? TenantFilter { get; init; }
+
+    /// <summary>
+    /// Activate jobs with a lease. Each job then carries a lease token that the worker sends
+    /// back on complete, fail, and throw-error, so the engine can fence the command against a
+    /// superseded activation (for example after the job timed out and another worker picked
+    /// it up). Off by default, matching the engine.
+    ///
+    /// <para>Requires a server that returns lease tokens: rather than degrade to unfenced
+    /// commands, a worker that asked for a lease and is handed a job whose token is missing or
+    /// invalid stops with <see cref="LeaseNotHonoredException"/>, surfaced through
+    /// <see cref="CamundaClient.RunWorkersAsync"/>.</para>
+    /// </summary>
+    public bool WithLease { get; init; }
 }
 
 /// <summary>
@@ -192,6 +205,13 @@ public sealed class ActivatedJob
 
     /// <summary>Unique identifier for this job.</summary>
     public JobKey JobKey => _raw.JobKey;
+
+    /// <summary>
+    /// The lease token for this job, or <c>null</c> if it was not activated with a lease.
+    /// Present exactly when the worker set <see cref="JobWorkerConfig.WithLease"/>; the worker
+    /// threads it back onto the fenced commands automatically.
+    /// </summary>
+    public JobLeaseToken? JobLeaseToken => _raw.JobLeaseToken;
 
     /// <summary>The process instance this job belongs to.</summary>
     public ProcessInstanceKey ProcessInstanceKey => _raw.ProcessInstanceKey;
@@ -322,6 +342,14 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     /// <summary>Whether the poll loop is currently running.</summary>
     public bool IsRunning => _pollTask is { IsCompleted: false };
 
+    /// <summary>
+    /// The poll loop task, or <c>null</c> before <see cref="Start"/> has run. Completes when
+    /// the worker stops; faults with <see cref="LeaseNotHonoredException"/> if the server does
+    /// not honor a requested lease. <see cref="CamundaClient.RunWorkersAsync"/> observes this
+    /// so that terminal fault reaches the caller instead of being lost on a background task.
+    /// </summary>
+    public Task? Completion => _pollTask;
+
     /// <summary>The worker's name (auto-generated or from config).</summary>
     public string Name => _name;
 
@@ -352,6 +380,10 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             try
             { await _pollTask.ConfigureAwait(false); }
             catch (OperationCanceledException) { }
+            // Terminal faults are surfaced through RunWorkersAsync, which observes Completion
+            // directly; swallow them here so the stop path itself does not throw.
+            catch (LeaseNotHonoredException) { }
+            catch (TypeInitializationException) { }
         }
 
         if (gracePeriod.HasValue && ActiveJobs > 0)
@@ -389,6 +421,8 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             try
             { _pollTask.GetAwaiter().GetResult(); }
             catch (OperationCanceledException) { }
+            catch (LeaseNotHonoredException) { }
+            catch (TypeInitializationException) { }
             catch (AggregateException) { }
         }
 
@@ -424,17 +458,31 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
                 try
                 {
-                    var response = await _client.ActivateJobsAsync(new JobActivationRequest
+                    JobActivationResult response;
+                    try
                     {
-                        Type = _config.JobType,
-                        Worker = _name,
-                        Timeout = _jobTimeoutMs,
-                        MaxJobsToActivate = capacity,
-                        FetchVariable = _config.FetchVariables,
-                        RequestTimeout = _config.PollTimeoutMs ?? 0,
-                        TenantIds = _resolvedTenantIds,
-                        TenantFilter = _config.TenantFilter,
-                    }, ct: ct).ConfigureAwait(false);
+                        response = await _client.ActivateJobsAsync(new JobActivationRequest
+                        {
+                            Type = _config.JobType,
+                            Worker = _name,
+                            Timeout = _jobTimeoutMs,
+                            MaxJobsToActivate = capacity,
+                            FetchVariable = _config.FetchVariables,
+                            RequestTimeout = _config.PollTimeoutMs ?? 0,
+                            TenantIds = _resolvedTenantIds,
+                            TenantFilter = _config.TenantFilter,
+                            WithLease = _config.WithLease ? true : null,
+                        }, ct: ct).ConfigureAwait(false);
+                    }
+                    catch (Exception ex) when (_config.WithLease && IsLeaseTokenValidationFailure(ex))
+                    {
+                        // A lease was requested and the server returned a malformed token (e.g. an
+                        // empty string), which fails the strict JobLeaseToken deserialization deep
+                        // in the client. Left as a generic poll error it would just be logged and
+                        // retried; surface it as the same lease fault RequireLeasePresence raises
+                        // for a missing token, so the worker stops rather than silently looping.
+                        throw new LeaseNotHonoredException(UnknownJobKey, PresentWhen.LeaseRequestFlag());
+                    }
 
                     if (response?.Jobs == null || response.Jobs.Count == 0)
                     {
@@ -452,6 +500,15 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                         }
 
                         var job = new ActivatedJob(jobResult, _timeProvider);
+
+                        // A lease requested but not returned leaves every fenced command going
+                        // out unfenced. Reject the whole activation on the fault path rather than
+                        // hand the handler an unfenced job.
+                        PresentWhen.RequireLeasePresence(
+                            _config.WithLease,
+                            job.JobKey.Value,
+                            job.JobLeaseToken?.Value);
+
                         Interlocked.Increment(ref _activeJobs);
 
                         // Fire-and-forget — concurrency is controlled by capacity calculation
@@ -463,6 +520,21 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 catch (OperationCanceledException) when (ct.IsCancellationRequested)
                 {
                     break;
+                }
+                catch (LeaseNotHonoredException)
+                {
+                    // Not a transient poll error: the server is answering a lease request with an
+                    // unusable token, so retrying just loses every activated batch to its timeout.
+                    // Fault the poll task so the caller sees it (see Completion).
+                    throw;
+                }
+                catch (TypeInitializationException ex) when (ex.TypeName == typeof(PresentWhen).FullName)
+                {
+                    // The coupling table and the runtime disagree, which PresentWhen's static
+                    // constructor rejects. The CLR delivers that as TypeInitializationException, so
+                    // without this it would fall to the generic handler and be retried forever,
+                    // hiding the very fail-fast it exists to provide.
+                    throw;
                 }
                 catch (Exception ex)
                 {
@@ -492,6 +564,20 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             var completionRequest = result is JobCompletionRequest req
                 ? req
                 : new JobCompletionRequest { Variables = result };
+
+            // A leased job's token must ride the fenced command. Copy first when the request
+            // is the caller's object, so this job's token is never written into a request a
+            // handler might reuse across jobs.
+            if (job.JobLeaseToken is { } lease)
+            {
+                completionRequest = new JobCompletionRequest
+                {
+                    Variables = completionRequest.Variables,
+                    Result = completionRequest.Result,
+                    BusinessId = completionRequest.BusinessId,
+                    JobLeaseToken = lease,
+                };
+            }
 
             await _client.CompleteJobAsync(job.JobKey, completionRequest, ct: ct).ConfigureAwait(false);
 
@@ -533,6 +619,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 ErrorMessage = errorMessage,
                 Retries = retries,
                 RetryBackOff = retryBackOff,
+                JobLeaseToken = job.JobLeaseToken,
             }, ct: CancellationToken.None).ConfigureAwait(false);
         }
         catch (Exception ex)
@@ -551,6 +638,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 ErrorCode = errorCode,
                 ErrorMessage = errorMessage,
                 Variables = variables,
+                JobLeaseToken = job.JobLeaseToken,
             }, ct: CancellationToken.None).ConfigureAwait(false);
         }
         catch (Exception ex)
@@ -599,6 +687,33 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
             _logger.LogWarning(ex, "JobWorker '{Name}': could not deserialize job object", _name);
             return null;
         }
+    }
+
+    // The job key is unavailable when the whole activation batch fails to deserialize, so a
+    // lease fault raised from that failure carries this placeholder rather than a real key.
+    private const string UnknownJobKey = "<unknown>";
+
+    // The wire name of ActivatedJobResult.jobLeaseToken, used to attribute a JSON deserialization
+    // failure (via JsonException.Path) to the lease token.
+    private const string JobLeaseTokenJsonName = "jobLeaseToken";
+
+    private static bool IsLeaseTokenValidationFailure(Exception ex)
+    {
+        for (var e = ex; e is not null; e = e.InnerException)
+        {
+            // Empty/too-short/pattern violation: JobLeaseToken.AssumeExists throws an
+            // ArgumentException naming the type.
+            if (e is ArgumentException && e.Message.Contains(nameof(JobLeaseToken), StringComparison.Ordinal))
+                return true;
+
+            // Wrong JSON type (number, object, …): System.Text.Json wraps the converter failure
+            // in a JsonException whose Path points at the offending property (e.g. $.jobs[0].jobLeaseToken).
+            if (e is JsonException je && je.Path is { } p
+                && p.Contains(JobLeaseTokenJsonName, StringComparison.Ordinal))
+                return true;
+        }
+
+        return false;
     }
 }
 
