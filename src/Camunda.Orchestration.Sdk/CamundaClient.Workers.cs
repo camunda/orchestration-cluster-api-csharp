@@ -153,7 +153,20 @@ public partial class CamundaClient : IAsyncDisposable
             // keep waiting on the remaining workers.
         }
 
+        // No pending worker tasks (none started, or all exited cleanly). RunWorkersAsync must
+        // still honor its wait-until-cancellation contract rather than returning here and
+        // tearing everything down, so block until shutdown.
+        if (!ct.IsCancellationRequested)
+            await WaitForCancellationAsync(ct).ConfigureAwait(false);
+
         return null;
+    }
+
+    private static async Task WaitForCancellationAsync(CancellationToken ct)
+    {
+        var cancelled = new TaskCompletionSource();
+        using var registration = ct.Register(() => cancelled.TrySetResult());
+        await cancelled.Task.ConfigureAwait(false);
     }
 
     /// <summary>

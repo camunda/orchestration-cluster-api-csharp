@@ -101,6 +101,30 @@ public class JobWorkerLeaseTests
     }
 
     [Fact]
+    public async Task RunWorkersAsync_waits_for_cancellation_when_no_worker_is_polling()
+    {
+        // A worker exists but was never started, so there is no poll task to observe. The
+        // wait-until-cancellation contract must still hold rather than returning immediately.
+        var mock = new AlwaysEmptyJobsHandler();
+        using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = mock });
+
+        client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "lease-test", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false },
+            (_, _) => Task.FromResult<object?>(null));
+
+        using var cts = new CancellationTokenSource();
+        var run = client.RunWorkersAsync(TimeSpan.FromMilliseconds(50), cts.Token);
+
+        // A settle window, not a correctness signal: with no pending poll task the buggy path
+        // returns immediately, so run would already have completed by now.
+        await Task.Delay(250);
+        Assert.False(run.IsCompleted);
+
+        cts.Cancel();
+        await run.WaitAsync(TimeSpan.FromSeconds(5));
+    }
+
+    [Fact]
     public async Task RunWorkersAsync_surfaces_LeaseNotHonored_when_a_leased_job_arrives_without_a_token()
     {
         var handler = new MockHttpMessageHandler();
