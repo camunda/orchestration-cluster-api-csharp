@@ -54,6 +54,7 @@ public partial class CamundaClient : IAsyncDisposable
             TenantIds = tenantIds,
             TenantId = config.TenantId,
             TenantFilter = config.TenantFilter,
+            WithLease = config.WithLease,
         };
         var worker = new JobWorker(this, merged, handler, _loggerFactory, _jsonOptions, _timeProvider);
         _workers.Add(worker);
@@ -87,16 +88,44 @@ public partial class CamundaClient : IAsyncDisposable
     {
         gracePeriod ??= TimeSpan.FromSeconds(10);
 
-        try
-        {
-            await Task.Delay(Timeout.InfiniteTimeSpan, _timeProvider, ct).ConfigureAwait(false);
-        }
-        catch (OperationCanceledException)
-        {
-            // Normal shutdown signal
-        }
+        // Wake on either the shutdown signal or the first worker to fault. A worker whose
+        // poll loop faults terminally (e.g. LeaseNotHonoredException) must reach the caller;
+        // without observing its Completion here the fault would die on a background task and
+        // RunWorkersAsync would block forever on the infinite delay.
+        var shutdown = Task.Delay(Timeout.InfiniteTimeSpan, _timeProvider, ct);
+        var faulted = WhenAnyWorkerFaults();
+
+        // Task.WhenAny never throws for a cancelled/faulted child; it returns the completed
+        // task. So cancellation flows through to the stop path below without a catch here.
+        await Task.WhenAny(shutdown, faulted).ConfigureAwait(false);
 
         await StopAllWorkersAsync(gracePeriod.Value).ConfigureAwait(false);
+
+        // Surface the terminal fault after workers are stopped. If shutdown won the race this
+        // is already complete and non-faulted, so awaiting it is a no-op.
+        if (faulted.IsCompleted)
+            await faulted.ConfigureAwait(false);
+    }
+
+    private async Task WhenAnyWorkerFaults()
+    {
+        var completions = new List<Task>(_workers.Count);
+        foreach (var worker in _workers)
+        {
+            if (worker.Completion is { } completion)
+                completions.Add(completion);
+        }
+
+        if (completions.Count == 0)
+        {
+            await Task.Delay(Timeout.InfiniteTimeSpan, _timeProvider).ConfigureAwait(false);
+            return;
+        }
+
+        // Await the first worker whose poll loop ends. A clean stop completes silently; a
+        // terminal fault re-throws here and propagates to RunWorkersAsync's caller.
+        var first = await Task.WhenAny(completions).ConfigureAwait(false);
+        await first.ConfigureAwait(false);
     }
 
     /// <summary>

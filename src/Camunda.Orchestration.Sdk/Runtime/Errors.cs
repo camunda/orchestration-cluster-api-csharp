@@ -56,6 +56,34 @@ public sealed class CancelSdkException : CamundaSdkException
 }
 
 /// <summary>
+/// Thrown when a worker activated jobs with a lease but the server returned a job carrying
+/// no lease token.
+///
+/// <para>The specification declares the token present exactly when the activation sets the
+/// lease flag (see <c>PresentWhen.cs</c>). A server that predates job leases, or one that
+/// ignores the flag, breaks that quietly: the worker would go on to complete, fail, or throw
+/// an error for the job with no token, so the engine could not fence the command against a
+/// superseded activation. The caller asked for fencing and would not be getting it, which is
+/// worth failing over rather than proceeding.</para>
+/// </summary>
+public sealed class LeaseNotHonoredException : CamundaSdkException
+{
+    /// <summary>The key of the job that arrived without a lease token.</summary>
+    public string JobKey { get; }
+
+    /// <summary>The activation flag the specification couples the token to (<c>withLease</c>).</summary>
+    public string RequestFlag { get; }
+
+    public LeaseNotHonoredException(string jobKey, string requestFlag)
+        : base($"activation for job {jobKey} set '{requestFlag}' but the server returned no lease token; "
+            + "the server does not support job leases")
+    {
+        JobKey = jobKey;
+        RequestFlag = requestFlag;
+    }
+}
+
+/// <summary>
 /// Throw from a job handler to trigger a BPMN error boundary event on the job's task.
 /// The error code is matched against error catch events in the process model.
 /// </summary>

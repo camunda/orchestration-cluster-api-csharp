@@ -1,0 +1,137 @@
+using System.Text;
+using System.Text.Json;
+
+namespace Camunda.Orchestration.Sdk.Generator;
+
+/// <summary>
+/// Derives the dependent-presence couplings the specification declares with the field-level
+/// <c>x-present-when</c> vendor extension (upstream camunda/camunda#62777, applied to
+/// <c>ActivatedJobResult.jobLeaseToken</c>).
+///
+/// <para>OpenAPI 3.x cannot say a response field is present only when a request set a
+/// particular flag, so the specification states it out of band. C# cannot express that
+/// dependent presence in the type system either, so the couplings are emitted as data
+/// (<c>PresentWhen.Generated.cs</c>) and the hand-written runtime enforces what the table
+/// declares rather than a relationship hardcoded from memory.</para>
+///
+/// <para>The raw bundled JSON is parsed directly rather than through Microsoft.OpenApi,
+/// whose model does not surface arbitrary <c>x-*</c> vendor extensions in a first-class way.
+/// Generic over the number of markers; a malformed marker fails generation, while the
+/// guarantee that the production spec's marker is still present is enforced by the runtime
+/// coupling tests against the real bundle.</para>
+/// </summary>
+internal static class PresentWhenDerivation
+{
+    internal readonly record struct Coupling(string ResponseSchema, string ResponseField, string RequestFlag);
+
+    /// <summary>
+    /// Extract every <c>x-present-when</c> coupling from the bundled spec JSON, ordered by
+    /// schema then field. Throws on a malformed marker so a coupling that meant something
+    /// cannot be silently mis-shaped; a spec with no markers yields an empty table (the
+    /// synthetic specs the generator's own tests feed it have none). The guarantee that the
+    /// production spec's marker survived is enforced separately, against the real bundle, by
+    /// the runtime coupling tests — which fail if the table comes out empty.
+    /// </summary>
+    internal static IReadOnlyList<Coupling> Derive(string specJson)
+    {
+        using var doc = JsonDocument.Parse(specJson);
+        var couplings = new List<Coupling>();
+
+        if (doc.RootElement.TryGetProperty("components", out var components)
+            && components.TryGetProperty("schemas", out var schemas)
+            && schemas.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var schema in schemas.EnumerateObject())
+            {
+                if (schema.Value.ValueKind != JsonValueKind.Object
+                    || !schema.Value.TryGetProperty("properties", out var props)
+                    || props.ValueKind != JsonValueKind.Object)
+                {
+                    continue;
+                }
+
+                foreach (var field in props.EnumerateObject())
+                {
+                    if (field.Value.ValueKind != JsonValueKind.Object
+                        || !field.Value.TryGetProperty("x-present-when", out var marker))
+                    {
+                        continue;
+                    }
+
+                    couplings.Add(ParseMarker(schema.Name, field.Name, marker));
+                }
+            }
+        }
+
+        couplings.Sort(static (a, b) =>
+        {
+            var s = string.CompareOrdinal(a.ResponseSchema, b.ResponseSchema);
+            return s != 0 ? s : string.CompareOrdinal(a.ResponseField, b.ResponseField);
+        });
+        return couplings;
+    }
+
+    private static Coupling ParseMarker(string schema, string field, JsonElement marker)
+    {
+        // The shape the runtime guards are built on: an object with a non-empty string
+        // `request` and `equals: true`. Anything else (an explicit null, a numeric request,
+        // equals != true) fails loudly rather than being silently dropped, which would
+        // retire the runtime guard for that field.
+        string? request = null;
+        var equalsTrue = false;
+        if (marker.ValueKind == JsonValueKind.Object)
+        {
+            if (marker.TryGetProperty("request", out var r) && r.ValueKind == JsonValueKind.String)
+                request = r.GetString();
+            equalsTrue = marker.TryGetProperty("equals", out var e) && e.ValueKind == JsonValueKind.True;
+        }
+
+        if (string.IsNullOrEmpty(request) || !equalsTrue)
+        {
+            throw new InvalidOperationException(
+                $"[generator] x-present-when on {schema}.{field} is {marker.GetRawText()}, which is "
+                + "not the 'present when <flag> is true' shape the runtime guards are built on. "
+                + "Teach the derivation the new shape rather than dropping the marker.");
+        }
+
+        return new Coupling(schema, field, request!);
+    }
+
+    /// <summary>Render the derived couplings as the generated C# source.</summary>
+    internal static string Render(IReadOnlyList<Coupling> couplings)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("// <auto-generated/>");
+        sb.AppendLine("// Generated by Camunda.Orchestration.Sdk.Generator (PresentWhenDerivation) — DO NOT EDIT.");
+        sb.AppendLine("//");
+        sb.AppendLine("// Dependent-presence couplings the specification declares with `x-present-when`:");
+        sb.AppendLine("// ResponseSchema.ResponseField is present exactly when a request set RequestFlag.");
+        sb.AppendLine("// OpenAPI cannot express this, so the runtime carries it and PresentWhen.cs is the");
+        sb.AppendLine("// evidence it still matches the specification.");
+        sb.AppendLine("#nullable enable");
+        sb.AppendLine();
+        sb.AppendLine("namespace Camunda.Orchestration.Sdk;");
+        sb.AppendLine();
+        sb.AppendLine("/// <summary>A dependent-presence relationship declared by <c>x-present-when</c>.</summary>");
+        sb.AppendLine("internal readonly record struct PresentWhenCoupling(string ResponseSchema, string ResponseField, string RequestFlag);");
+        sb.AppendLine();
+        sb.AppendLine("/// <summary>Every dependent-presence coupling the specification declares.</summary>");
+        sb.AppendLine("internal static class PresentWhenCouplings");
+        sb.AppendLine("{");
+        sb.AppendLine("    /// <summary>Ordered by schema then field, so the table is stable across regenerations.</summary>");
+        sb.AppendLine("    internal static readonly PresentWhenCoupling[] All =");
+        sb.AppendLine("    {");
+        foreach (var c in couplings)
+        {
+            sb.AppendLine(
+                $"        new PresentWhenCoupling({Quote(c.ResponseSchema)}, {Quote(c.ResponseField)}, {Quote(c.RequestFlag)}),");
+        }
+
+        sb.AppendLine("    };");
+        sb.AppendLine("}");
+        return sb.ToString();
+    }
+
+    private static string Quote(string value) =>
+        "\"" + value.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+}

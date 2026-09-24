@@ -7,6 +7,7 @@ TYPE Camunda.Orchestration.Sdk.ActivatedJob : sealed class
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; }
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; }
   PROP Camunda.Orchestration.Sdk.JobKindEnum Kind { get; }
+  PROP Camunda.Orchestration.Sdk.JobLeaseToken? JobLeaseToken { get; }
   PROP Camunda.Orchestration.Sdk.JobListenerEventTypeEnum ListenerEventType { get; }
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; }
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; }
@@ -4721,6 +4722,7 @@ TYPE Camunda.Orchestration.Sdk.JobWorker : sealed class interfaces=[System.IAsyn
   PROP System.Boolean IsRunning { get; }
   PROP System.Int32 ActiveJobs { get; }
   PROP System.String Name { get; }
+  PROP System.Threading.Tasks.Task? Completion { get; }
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.StopResult> StopAsync(System.TimeSpan? gracePeriod = null)
   METHOD System.Threading.Tasks.ValueTask DisposeAsync()
   METHOD System.Void Dispose()
@@ -4730,6 +4732,7 @@ TYPE Camunda.Orchestration.Sdk.JobWorkerConfig : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.TenantFilterEnum? TenantFilter { get; init; }
   PROP System.Boolean AutoStart { get; init; }
+  PROP System.Boolean WithLease { get; init; }
   PROP System.Collections.Generic.IReadOnlyList<System.String>? TenantIds { get; init; }
   PROP System.Collections.Generic.List<System.String>? FetchVariables { get; init; }
   PROP System.Double StartupJitterMaxSeconds { get; init; }
@@ -4763,6 +4766,11 @@ TYPE Camunda.Orchestration.Sdk.JobWorkerStatisticsQueryResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.JobWorkerStatisticsItem> Items { get; set; } [JsonPropertyName("items")]
+
+TYPE Camunda.Orchestration.Sdk.LeaseNotHonoredException : sealed class base=Camunda.Orchestration.Sdk.CamundaSdkException interfaces=[System.Runtime.Serialization.ISerializable]
+  CTOR (System.String jobKey, System.String requestFlag)
+  PROP System.String JobKey { get; }
+  PROP System.String RequestFlag { get; }
 
 TYPE Camunda.Orchestration.Sdk.LicenseResponse : sealed class
   CTOR ()
