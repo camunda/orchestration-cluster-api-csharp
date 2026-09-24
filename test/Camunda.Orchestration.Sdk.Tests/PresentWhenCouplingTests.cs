@@ -71,6 +71,18 @@ public class PresentWhenCouplingTests
     }
 
     [Fact]
+    public void LeaseNotHonored_message_does_not_claim_the_server_lacks_lease_support()
+    {
+        // The same exception is raised for a missing token, an empty token and a wrong-typed
+        // one. Asserting "the server does not support job leases" misdiagnoses the latter two,
+        // so the message must describe the token as missing or invalid instead.
+        var message = new LeaseNotHonoredException("42", "withLease").Message;
+
+        Assert.DoesNotContain("does not support", message, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("invalid", message, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void RequireLeasePresence_throws_on_an_empty_token_the_same_as_a_missing_one()
     {
         Assert.Throws<LeaseNotHonoredException>(

@@ -134,9 +134,9 @@ public sealed class JobWorkerConfig
     /// superseded activation (for example after the job timed out and another worker picked
     /// it up). Off by default, matching the engine.
     ///
-    /// <para>Requires a server that supports job leases: rather than degrade to unfenced
-    /// commands, a worker that asked for a lease and is handed a job without a token stops
-    /// with <see cref="LeaseNotHonoredException"/>, surfaced through
+    /// <para>Requires a server that returns lease tokens: rather than degrade to unfenced
+    /// commands, a worker that asked for a lease and is handed a job whose token is missing or
+    /// invalid stops with <see cref="LeaseNotHonoredException"/>, surfaced through
     /// <see cref="CamundaClient.RunWorkersAsync"/>.</para>
     /// </summary>
     public bool WithLease { get; init; }
@@ -499,9 +499,9 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
                         var job = new ActivatedJob(jobResult, _timeProvider);
 
-                        // A lease requested but not returned means the server does not support
-                        // leases, so every fenced command would go out unfenced. Reject the whole
-                        // activation on the fault path rather than hand the handler an unfenced job.
+                        // A lease requested but not returned leaves every fenced command going
+                        // out unfenced. Reject the whole activation on the fault path rather than
+                        // hand the handler an unfenced job.
                         PresentWhen.RequireLeasePresence(
                             _config.WithLease,
                             job.JobKey.Value,
@@ -521,9 +521,9 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 }
                 catch (LeaseNotHonoredException)
                 {
-                    // A deterministic incompatibility, not a transient poll error: this server
-                    // will never return a token, so retrying just loses every activated batch to
-                    // its timeout. Fault the poll task so the caller sees it (see Completion).
+                    // Not a transient poll error: the server is answering a lease request with an
+                    // unusable token, so retrying just loses every activated batch to its timeout.
+                    // Fault the poll task so the caller sees it (see Completion).
                     throw;
                 }
                 catch (Exception ex)
