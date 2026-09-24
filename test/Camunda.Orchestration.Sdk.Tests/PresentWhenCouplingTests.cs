@@ -29,18 +29,24 @@ public class PresentWhenCouplingTests
             .Select(c => (c.ResponseSchema, c.ResponseField, c.RequestFlag))
             .ToHashSet();
 
-        Assert.Equal(fromSpec, fromTable);
+        // Set equality in both directions, order-independent: the table declares exactly the
+        // markers the spec does — no dropped marker and no invented row.
+        Assert.True(fromTable.SetEquals(fromSpec),
+            $"table [{Format(fromTable)}] != spec [{Format(fromSpec)}]");
     }
 
     [Fact]
-    public void Every_enforced_coupling_key_names_a_row_in_the_generated_table()
+    public void Enforcement_list_and_generated_table_cover_exactly_the_same_couplings()
     {
-        var tableKeys = PresentWhenCouplings.All.Select(PresentWhen.CouplingKey).ToHashSet();
+        var tableKeys = PresentWhenCouplings.All.Select(PresentWhen.CouplingKey).ToHashSet(StringComparer.Ordinal);
+        var enforcedKeys = PresentWhen.EnforcedCouplings.ToHashSet(StringComparer.Ordinal);
 
-        // Reverse direction: the runtime must never enforce a coupling the table does not declare,
-        // which would mean a hardcoded key drifted from the spec.
-        foreach (var enforced in PresentWhen.EnforcedCouplings)
-            Assert.Contains(enforced, tableKeys);
+        // Both directions. Forward: the runtime must not enforce a coupling the table does not
+        // declare (a hardcoded key drifted from the spec). Reverse: the table must not declare a
+        // coupling the runtime ignores — a second x-present-when marker added without wiring
+        // enforcement would otherwise ship a silently-unfenced command path.
+        Assert.True(enforcedKeys.SetEquals(tableKeys),
+            $"enforced [{string.Join(", ", enforcedKeys)}] != table [{string.Join(", ", tableKeys)}]");
     }
 
     [Fact]
@@ -50,6 +56,9 @@ public class PresentWhenCouplingTests
         Assert.Contains(PresentWhenCouplings.All, c => PresentWhen.CouplingKey(c) == PresentWhen.LeaseCouplingKey);
         Assert.Equal("withLease", PresentWhen.LeaseRequestFlag());
     }
+
+    private static string Format(IEnumerable<(string, string, string)> couplings) =>
+        string.Join(", ", couplings.Select(c => $"{c.Item1}.{c.Item2}=>{c.Item3}"));
 
     [Fact]
     public void RequireLeasePresence_throws_when_a_lease_was_requested_but_no_token_returned()

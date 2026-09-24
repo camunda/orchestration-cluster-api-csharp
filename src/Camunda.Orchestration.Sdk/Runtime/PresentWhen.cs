@@ -6,8 +6,9 @@ namespace Camunda.Orchestration.Sdk;
 ///
 /// <para>C# cannot express, in the type system, that a response field is present only when a
 /// request set a runtime flag, so the coupling is enforced here at the activation boundary.
-/// The generated table is the ground truth; the tests assert the runtime still matches it, so
-/// an upstream change to the markers fails the build rather than drifting silently.</para>
+/// The generated table is the ground truth; the static initializer refuses to load if the
+/// table contains a coupling the runtime does not enforce, so a new <c>x-present-when</c>
+/// marker fails fast rather than shipping a coupling the worker silently ignores.</para>
 /// </summary>
 internal static class PresentWhen
 {
@@ -18,11 +19,29 @@ internal static class PresentWhen
     internal const string LeaseCouplingKey = "ActivatedJobResult.jobLeaseToken";
 
     /// <summary>
-    /// Couplings the runtime actively enforces, by <c>Schema.field</c> key. A coupling in
-    /// <see cref="PresentWhenCouplings.All"/> absent here is one the specification declares
-    /// and the worker silently ignores; the guard tests make that visible.
+    /// Couplings the runtime actively enforces, by <c>Schema.field</c> key. This must cover
+    /// every row of <see cref="PresentWhenCouplings.All"/>; the static initializer asserts it,
+    /// so a generated coupling with no enforcement cannot ship.
     /// </summary>
     internal static readonly string[] EnforcedCouplings = { LeaseCouplingKey };
+
+    static PresentWhen()
+    {
+        var enforced = new HashSet<string>(EnforcedCouplings, StringComparer.Ordinal);
+        var unenforced = PresentWhenCouplings.All
+            .Select(CouplingKey)
+            .Where(key => !enforced.Contains(key))
+            .Distinct(StringComparer.Ordinal)
+            .ToArray();
+
+        if (unenforced.Length > 0)
+        {
+            throw new InvalidOperationException(
+                $"x-present-when coupling(s) [{string.Join(", ", unenforced)}] are declared in the "
+                + "generated table but the runtime enforces none of them. Wire enforcement here and "
+                + "add the key to EnforcedCouplings rather than shipping a coupling the worker ignores.");
+        }
+    }
 
     internal static string CouplingKey(PresentWhenCoupling c) => $"{c.ResponseSchema}.{c.ResponseField}";
 

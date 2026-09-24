@@ -88,44 +88,72 @@ public partial class CamundaClient : IAsyncDisposable
     {
         gracePeriod ??= TimeSpan.FromSeconds(10);
 
-        // Wake on either the shutdown signal or the first worker to fault. A worker whose
-        // poll loop faults terminally (e.g. LeaseNotHonoredException) must reach the caller;
-        // without observing its Completion here the fault would die on a background task and
-        // RunWorkersAsync would block forever on the infinite delay.
-        var shutdown = Task.Delay(Timeout.InfiniteTimeSpan, _timeProvider, ct);
-        var faulted = WhenAnyWorkerFaults();
+        // Keep every registered worker alive until either shutdown is signalled or a worker's
+        // poll loop faults terminally (e.g. LeaseNotHonoredException). A terminal fault must
+        // reach the caller; without observing worker Completion here it would die on a
+        // background task while RunWorkersAsync blocked forever on the infinite delay. The
+        // observer is cancelled on shutdown so it does not leak.
+        using var observerStop = CancellationTokenSource.CreateLinkedTokenSource(ct);
+        var shutdown = ShutdownSignalAsync(ct);
+        var fault = ObserveFirstWorkerFaultAsync(observerStop.Token);
 
-        // Task.WhenAny never throws for a cancelled/faulted child; it returns the completed
-        // task. So cancellation flows through to the stop path below without a catch here.
-        await Task.WhenAny(shutdown, faulted).ConfigureAwait(false);
+        var winner = await Task.WhenAny(shutdown, fault).ConfigureAwait(false);
+        observerStop.Cancel();
 
         await StopAllWorkersAsync(gracePeriod.Value).ConfigureAwait(false);
 
-        // Surface the terminal fault after workers are stopped. If shutdown won the race this
-        // is already complete and non-faulted, so awaiting it is a no-op.
-        if (faulted.IsCompleted)
-            await faulted.ConfigureAwait(false);
+        // Only a genuine fault is rethrown. Shutdown and clean/cancelled worker completions
+        // return null. If shutdown won the race, StopAllWorkersAsync already drained the
+        // workers (StopAsync observes and swallows the lease fault on that path).
+        if (winner.IsCompletedSuccessfully && winner.Result is { } ex)
+            System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw(ex);
     }
 
-    private async Task WhenAnyWorkerFaults()
+    private async Task<Exception?> ShutdownSignalAsync(CancellationToken ct)
     {
-        var completions = new List<Task>(_workers.Count);
+        try
+        {
+            await Task.Delay(Timeout.InfiniteTimeSpan, _timeProvider, ct).ConfigureAwait(false);
+        }
+        catch (OperationCanceledException)
+        {
+            // Normal shutdown signal.
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Return the first terminal worker fault, or <c>null</c> if <paramref name="ct"/> is
+    /// cancelled (shutdown) before any worker faults. A clean or cancelled worker completion
+    /// is deliberately ignored: stopping one worker directly must not tear down the rest.
+    /// </summary>
+    private async Task<Exception?> ObserveFirstWorkerFaultAsync(CancellationToken ct)
+    {
+        var pending = new List<Task>();
         foreach (var worker in _workers)
         {
             if (worker.Completion is { } completion)
-                completions.Add(completion);
+                pending.Add(completion);
         }
 
-        if (completions.Count == 0)
+        while (pending.Count > 0 && !ct.IsCancellationRequested)
         {
-            await Task.Delay(Timeout.InfiniteTimeSpan, _timeProvider).ConfigureAwait(false);
-            return;
+            var cancelled = new TaskCompletionSource();
+            using var registration = ct.Register(() => cancelled.TrySetResult());
+
+            var finished = await Task.WhenAny(pending.Append(cancelled.Task)).ConfigureAwait(false);
+            if (finished == cancelled.Task)
+                return null;
+
+            pending.Remove(finished);
+            if (finished.IsFaulted)
+                return finished.Exception?.InnerException ?? finished.Exception;
+            // A clean or cancelled completion — a worker stopped on its own — is not a fault;
+            // keep waiting on the remaining workers.
         }
 
-        // Await the first worker whose poll loop ends. A clean stop completes silently; a
-        // terminal fault re-throws here and propagates to RunWorkersAsync's caller.
-        var first = await Task.WhenAny(completions).ConfigureAwait(false);
-        await first.ConfigureAwait(false);
+        return null;
     }
 
     /// <summary>

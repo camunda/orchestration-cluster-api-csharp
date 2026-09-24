@@ -69,6 +69,38 @@ public class JobWorkerLeaseTests
     }
 
     [Fact]
+    public async Task RunWorkersAsync_keeps_running_when_one_worker_stops_cleanly()
+    {
+        // Regression: RunWorkersAsync must keep every other worker alive until shutdown or a
+        // fault. A worker stopped directly completes its poll task cleanly, which must NOT be
+        // mistaken for a fault and used to tear down the rest.
+        var mock = new AlwaysEmptyJobsHandler();
+        using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = mock });
+
+        var a = client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "lease-test", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = true },
+            (_, _) => Task.FromResult<object?>(null));
+        client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "lease-test", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = true },
+            (_, _) => Task.FromResult<object?>(null));
+
+        using var cts = new CancellationTokenSource();
+        var run = client.RunWorkersAsync(TimeSpan.FromMilliseconds(50), cts.Token);
+
+        // Stop worker A directly; its poll task completes cleanly.
+        await a.StopAsync(TimeSpan.FromSeconds(1));
+
+        // A settle window, not a correctness signal: if the clean completion were treated as a
+        // fault, run would already have completed by now.
+        await Task.Delay(250);
+        Assert.False(run.IsCompleted);
+
+        // Only shutdown ends it.
+        cts.Cancel();
+        await run.WaitAsync(TimeSpan.FromSeconds(5));
+    }
+
+    [Fact]
     public async Task RunWorkersAsync_surfaces_LeaseNotHonored_when_a_leased_job_arrives_without_a_token()
     {
         var handler = new MockHttpMessageHandler();
@@ -195,5 +227,16 @@ public class JobWorkerLeaseTests
         var body = await commandBody.Task.WaitAsync(TimeSpan.FromSeconds(5));
         await worker.StopAsync(TimeSpan.FromSeconds(1));
         return body;
+    }
+
+    /// <summary>Always answers an activation poll with an empty job list, so a worker keeps
+    /// polling indefinitely rather than draining a fixed queue.</summary>
+    private sealed class AlwaysEmptyJobsHandler : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct) =>
+            Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"jobs\":[]}", System.Text.Encoding.UTF8, "application/json"),
+            });
     }
 }

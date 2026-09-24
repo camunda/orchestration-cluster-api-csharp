@@ -137,7 +137,7 @@ public sealed class JobWorkerConfig
     /// <para>Requires a server that supports job leases: rather than degrade to unfenced
     /// commands, a worker that asked for a lease and is handed a job without a token stops
     /// with <see cref="LeaseNotHonoredException"/>, surfaced through
-    /// <see cref="CamundaClient.RunWorkersAsync"/> or <see cref="JobWorker.StopAsync"/>.</para>
+    /// <see cref="CamundaClient.RunWorkersAsync"/>.</para>
     /// </summary>
     public bool WithLease { get; init; }
 }
