@@ -90,8 +90,10 @@ public class JobWorkerLeaseTests
         // Stop worker A directly; its poll task completes cleanly.
         await a.StopAsync(TimeSpan.FromSeconds(1));
 
-        // A settle window, not a correctness signal: if the clean completion were treated as a
-        // fault, run would already have completed by now.
+        // Settle window, not a correctness signal. No worker can fault here (the handler only
+        // ever returns empty job lists), so a correct implementation leaves run pending until
+        // Cancel no matter how loaded the runner is — this can only ever mask the bug, never
+        // report one spuriously. Do not convert it into a deadline on some expected progress.
         await Task.Delay(250);
         Assert.False(run.IsCompleted);
 
@@ -115,8 +117,9 @@ public class JobWorkerLeaseTests
         using var cts = new CancellationTokenSource();
         var run = client.RunWorkersAsync(TimeSpan.FromMilliseconds(50), cts.Token);
 
-        // A settle window, not a correctness signal: with no pending poll task the buggy path
-        // returns immediately, so run would already have completed by now.
+        // Settle window, not a correctness signal — see the note in the sibling test above. The
+        // buggy path returned immediately, so any window at all catches it; a correct one leaves
+        // run pending until Cancel regardless of load, so this cannot fail spuriously.
         await Task.Delay(250);
         Assert.False(run.IsCompleted);
 
