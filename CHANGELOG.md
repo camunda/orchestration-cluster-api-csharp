@@ -1,3 +1,10 @@
+# [10.0.0-alpha.28](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.27...v10.0.0-alpha.28) (2026-09-24)
+
+
+### Features
+
+* honor job leases across worker complete, fail, and throw-error ([#447](https://github.com/camunda/orchestration-cluster-api-csharp/issues/447)) ([a0cfa92](https://github.com/camunda/orchestration-cluster-api-csharp/commit/a0cfa92962f0b13b5e1187daa6dd7f476e306792)), closes [camunda/camunda#62777](https://github.com/camunda/camunda/issues/62777) [#437](https://github.com/camunda/orchestration-cluster-api-csharp/issues/437)
+
 # [10.0.0-alpha.27](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.26...v10.0.0-alpha.27) (2026-09-23)
 
 
