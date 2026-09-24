@@ -252,6 +252,18 @@ variable, comma-separated), then to <code>[CamundaConfig.DefaultTenantId]</code>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.WithLease.html#Camunda_Orchestration_Sdk_JobWorkerConfig_WithLease">WithLease</a></dt>
+    <dd><p>Activate jobs with a lease. Each job then carries a lease token that the worker sends
+back on complete, fail, and throw-error, so the engine can fence the command against a
+superseded activation (for example after the job timed out and another worker picked
+it up). Off by default, matching the engine.</p>
+<p>Requires a server that returns lease tokens: rather than degrade to unfenced
+commands, a worker that asked for a lease and is handed a job whose token is missing or
+invalid stops with <a class="xref" href="Camunda.Orchestration.Sdk.LeaseNotHonoredException.html">LeaseNotHonoredException</a>, surfaced through
+<a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.RunWorkersAsync.html#Camunda_Orchestration_Sdk_CamundaClient_RunWorkersAsync_System_Nullable_System_TimeSpan__System_Threading_CancellationToken_">RunWorkersAsync(TimeSpan?, CancellationToken)</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobWorkerConfig.WorkerName.html#Camunda_Orchestration_Sdk_JobWorkerConfig_WorkerName">WorkerName</a></dt>
     <dd><p>Worker name sent to the broker for logging and diagnostics.
 Auto-generated if not set.</p>

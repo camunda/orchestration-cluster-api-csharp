@@ -115,6 +115,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJob.JobKey
   fullName: Camunda.Orchestration.Sdk.ActivatedJob.JobKey
   nameWithType: ActivatedJob.JobKey
+- uid: Camunda.Orchestration.Sdk.ActivatedJob.JobLeaseToken
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.ActivatedJob.JobLeaseToken.html#Camunda_Orchestration_Sdk_ActivatedJob_JobLeaseToken
+  commentId: P:Camunda.Orchestration.Sdk.ActivatedJob.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.ActivatedJob.JobLeaseToken
+  nameWithType: ActivatedJob.JobLeaseToken
+- uid: Camunda.Orchestration.Sdk.ActivatedJob.JobLeaseToken*
+  name: JobLeaseToken
+  href: api/Camunda.Orchestration.Sdk.ActivatedJob.JobLeaseToken.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ActivatedJob.JobLeaseToken
+  fullName: Camunda.Orchestration.Sdk.ActivatedJob.JobLeaseToken
+  nameWithType: ActivatedJob.JobLeaseToken
 - uid: Camunda.Orchestration.Sdk.ActivatedJob.Kind
   name: Kind
   href: api/Camunda.Orchestration.Sdk.ActivatedJob.Kind.html#Camunda_Orchestration_Sdk_ActivatedJob_Kind
@@ -36328,6 +36340,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobWorker.ActiveJobs
   fullName: Camunda.Orchestration.Sdk.JobWorker.ActiveJobs
   nameWithType: JobWorker.ActiveJobs
+- uid: Camunda.Orchestration.Sdk.JobWorker.Completion
+  name: Completion
+  href: api/Camunda.Orchestration.Sdk.JobWorker.Completion.html#Camunda_Orchestration_Sdk_JobWorker_Completion
+  commentId: P:Camunda.Orchestration.Sdk.JobWorker.Completion
+  fullName: Camunda.Orchestration.Sdk.JobWorker.Completion
+  nameWithType: JobWorker.Completion
+- uid: Camunda.Orchestration.Sdk.JobWorker.Completion*
+  name: Completion
+  href: api/Camunda.Orchestration.Sdk.JobWorker.Completion.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobWorker.Completion
+  fullName: Camunda.Orchestration.Sdk.JobWorker.Completion
+  nameWithType: JobWorker.Completion
 - uid: Camunda.Orchestration.Sdk.JobWorker.Dispose
   name: Dispose()
   href: api/Camunda.Orchestration.Sdk.JobWorker.Dispose.html#Camunda_Orchestration_Sdk_JobWorker_Dispose
@@ -36538,6 +36562,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds
   fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.TenantIds
   nameWithType: JobWorkerConfig.TenantIds
+- uid: Camunda.Orchestration.Sdk.JobWorkerConfig.WithLease
+  name: WithLease
+  href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.WithLease.html#Camunda_Orchestration_Sdk_JobWorkerConfig_WithLease
+  commentId: P:Camunda.Orchestration.Sdk.JobWorkerConfig.WithLease
+  fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.WithLease
+  nameWithType: JobWorkerConfig.WithLease
+- uid: Camunda.Orchestration.Sdk.JobWorkerConfig.WithLease*
+  name: WithLease
+  href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.WithLease.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobWorkerConfig.WithLease
+  fullName: Camunda.Orchestration.Sdk.JobWorkerConfig.WithLease
+  nameWithType: JobWorkerConfig.WithLease
 - uid: Camunda.Orchestration.Sdk.JobWorkerConfig.WorkerName
   name: WorkerName
   href: api/Camunda.Orchestration.Sdk.JobWorkerConfig.WorkerName.html#Camunda_Orchestration_Sdk_JobWorkerConfig_WorkerName
@@ -36706,6 +36742,54 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobWorkerStatisticsQueryResult.Page
   fullName: Camunda.Orchestration.Sdk.JobWorkerStatisticsQueryResult.Page
   nameWithType: JobWorkerStatisticsQueryResult.Page
+- uid: Camunda.Orchestration.Sdk.LeaseNotHonoredException
+  name: LeaseNotHonoredException
+  href: api/Camunda.Orchestration.Sdk.LeaseNotHonoredException.html
+  commentId: T:Camunda.Orchestration.Sdk.LeaseNotHonoredException
+  fullName: Camunda.Orchestration.Sdk.LeaseNotHonoredException
+  nameWithType: LeaseNotHonoredException
+- uid: Camunda.Orchestration.Sdk.LeaseNotHonoredException.#ctor(System.String,System.String)
+  name: LeaseNotHonoredException(string, string)
+  href: api/Camunda.Orchestration.Sdk.LeaseNotHonoredException.-ctor.html#Camunda_Orchestration_Sdk_LeaseNotHonoredException__ctor_System_String_System_String_
+  commentId: M:Camunda.Orchestration.Sdk.LeaseNotHonoredException.#ctor(System.String,System.String)
+  name.vb: New(String, String)
+  fullName: Camunda.Orchestration.Sdk.LeaseNotHonoredException.LeaseNotHonoredException(string, string)
+  fullName.vb: Camunda.Orchestration.Sdk.LeaseNotHonoredException.New(String, String)
+  nameWithType: LeaseNotHonoredException.LeaseNotHonoredException(string, string)
+  nameWithType.vb: LeaseNotHonoredException.New(String, String)
+- uid: Camunda.Orchestration.Sdk.LeaseNotHonoredException.#ctor*
+  name: LeaseNotHonoredException
+  href: api/Camunda.Orchestration.Sdk.LeaseNotHonoredException.-ctor.html
+  commentId: Overload:Camunda.Orchestration.Sdk.LeaseNotHonoredException.#ctor
+  name.vb: New
+  fullName: Camunda.Orchestration.Sdk.LeaseNotHonoredException.LeaseNotHonoredException
+  fullName.vb: Camunda.Orchestration.Sdk.LeaseNotHonoredException.New
+  nameWithType: LeaseNotHonoredException.LeaseNotHonoredException
+  nameWithType.vb: LeaseNotHonoredException.New
+- uid: Camunda.Orchestration.Sdk.LeaseNotHonoredException.JobKey
+  name: JobKey
+  href: api/Camunda.Orchestration.Sdk.LeaseNotHonoredException.JobKey.html#Camunda_Orchestration_Sdk_LeaseNotHonoredException_JobKey
+  commentId: P:Camunda.Orchestration.Sdk.LeaseNotHonoredException.JobKey
+  fullName: Camunda.Orchestration.Sdk.LeaseNotHonoredException.JobKey
+  nameWithType: LeaseNotHonoredException.JobKey
+- uid: Camunda.Orchestration.Sdk.LeaseNotHonoredException.JobKey*
+  name: JobKey
+  href: api/Camunda.Orchestration.Sdk.LeaseNotHonoredException.JobKey.html
+  commentId: Overload:Camunda.Orchestration.Sdk.LeaseNotHonoredException.JobKey
+  fullName: Camunda.Orchestration.Sdk.LeaseNotHonoredException.JobKey
+  nameWithType: LeaseNotHonoredException.JobKey
+- uid: Camunda.Orchestration.Sdk.LeaseNotHonoredException.RequestFlag
+  name: RequestFlag
+  href: api/Camunda.Orchestration.Sdk.LeaseNotHonoredException.RequestFlag.html#Camunda_Orchestration_Sdk_LeaseNotHonoredException_RequestFlag
+  commentId: P:Camunda.Orchestration.Sdk.LeaseNotHonoredException.RequestFlag
+  fullName: Camunda.Orchestration.Sdk.LeaseNotHonoredException.RequestFlag
+  nameWithType: LeaseNotHonoredException.RequestFlag
+- uid: Camunda.Orchestration.Sdk.LeaseNotHonoredException.RequestFlag*
+  name: RequestFlag
+  href: api/Camunda.Orchestration.Sdk.LeaseNotHonoredException.RequestFlag.html
+  commentId: Overload:Camunda.Orchestration.Sdk.LeaseNotHonoredException.RequestFlag
+  fullName: Camunda.Orchestration.Sdk.LeaseNotHonoredException.RequestFlag
+  nameWithType: LeaseNotHonoredException.RequestFlag
 - uid: Camunda.Orchestration.Sdk.LicenseResponse
   name: LicenseResponse
   href: api/Camunda.Orchestration.Sdk.LicenseResponse.html

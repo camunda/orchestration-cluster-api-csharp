@@ -2148,6 +2148,18 @@ to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.environme
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.LeaseNotHonoredException.html">LeaseNotHonoredException</a></dt>
+      <dd><p>Thrown when a worker activated jobs with a lease but the server returned a job whose lease
+token is missing or invalid.</p>
+<p>The specification declares the token present exactly when the activation sets the
+lease flag (see <code>PresentWhen.cs</code>). A server that predates job leases, ignores the flag,
+or returns an unusable token breaks that quietly: the worker would go on to complete, fail,
+or throw an error for the job without a usable token, so the engine could not fence the
+command against a superseded activation. The caller asked for fencing and would not be
+getting it, which is worth failing over rather than proceeding.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.LicenseResponse.html">LicenseResponse</a></dt>
       <dd><p>The response of a license request.</p>
 </dd>
