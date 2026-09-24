@@ -683,11 +683,23 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     // lease fault raised from that failure carries this placeholder rather than a real key.
     private const string UnknownJobKey = "<unknown>";
 
+    // The wire name of ActivatedJobResult.jobLeaseToken, used to attribute a JSON deserialization
+    // failure (via JsonException.Path) to the lease token.
+    private const string JobLeaseTokenJsonName = "jobLeaseToken";
+
     private static bool IsLeaseTokenValidationFailure(Exception ex)
     {
         for (var e = ex; e is not null; e = e.InnerException)
         {
+            // Empty/too-short/pattern violation: JobLeaseToken.AssumeExists throws an
+            // ArgumentException naming the type.
             if (e is ArgumentException && e.Message.Contains(nameof(JobLeaseToken), StringComparison.Ordinal))
+                return true;
+
+            // Wrong JSON type (number, object, …): System.Text.Json wraps the converter failure
+            // in a JsonException whose Path points at the offending property (e.g. $.jobs[0].jobLeaseToken).
+            if (e is JsonException je && je.Path is { } p
+                && p.Contains(JobLeaseTokenJsonName, StringComparison.Ordinal))
                 return true;
         }
 

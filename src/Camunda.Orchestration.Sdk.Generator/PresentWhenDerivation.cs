@@ -24,44 +24,27 @@ internal static class PresentWhenDerivation
 {
     internal readonly record struct Coupling(string ResponseSchema, string ResponseField, string RequestFlag);
 
+    private const string MarkerKey = "x-present-when";
+
     /// <summary>
     /// Extract every <c>x-present-when</c> coupling from the bundled spec JSON, ordered by
-    /// schema then field. Throws on a malformed marker so a coupling that meant something
-    /// cannot be silently mis-shaped; a spec with no markers yields an empty table (the
-    /// synthetic specs the generator's own tests feed it have none). The guarantee that the
-    /// production spec's marker survived is enforced separately, against the real bundle, by
-    /// the runtime coupling tests — which fail if the table comes out empty.
+    /// schema then field. Walks the entire raw spec tree so a marker cannot hide in an inline
+    /// request/response schema or a composed <c>allOf</c>/<c>oneOf</c> fragment and be silently
+    /// omitted from the table. A marker outside the supported location —
+    /// <c>components.schemas.&lt;Schema&gt;.properties.&lt;field&gt;</c>, the only shape the
+    /// runtime can key by schema+field — fails generation rather than being dropped. Throws on a
+    /// malformed marker too; a spec with no markers yields an empty table (the synthetic specs
+    /// the generator's own tests feed it have none). The guarantee that the production spec's
+    /// marker survived is enforced separately, against the real bundle, by the runtime coupling
+    /// tests — which fail if the table comes out empty.
     /// </summary>
     internal static IReadOnlyList<Coupling> Derive(string specJson)
     {
         using var doc = JsonDocument.Parse(specJson);
         var couplings = new List<Coupling>();
+        var path = new List<string>();
 
-        if (doc.RootElement.TryGetProperty("components", out var components)
-            && components.TryGetProperty("schemas", out var schemas)
-            && schemas.ValueKind == JsonValueKind.Object)
-        {
-            foreach (var schema in schemas.EnumerateObject())
-            {
-                if (schema.Value.ValueKind != JsonValueKind.Object
-                    || !schema.Value.TryGetProperty("properties", out var props)
-                    || props.ValueKind != JsonValueKind.Object)
-                {
-                    continue;
-                }
-
-                foreach (var field in props.EnumerateObject())
-                {
-                    if (field.Value.ValueKind != JsonValueKind.Object
-                        || !field.Value.TryGetProperty("x-present-when", out var marker))
-                    {
-                        continue;
-                    }
-
-                    couplings.Add(ParseMarker(schema.Name, field.Name, marker));
-                }
-            }
-        }
+        CollectMarkers(doc.RootElement, path, couplings);
 
         couplings.Sort(static (a, b) =>
         {
@@ -69,6 +52,66 @@ internal static class PresentWhenDerivation
             return s != 0 ? s : string.CompareOrdinal(a.ResponseField, b.ResponseField);
         });
         return couplings;
+    }
+
+    private static void CollectMarkers(JsonElement node, List<string> path, List<Coupling> couplings)
+    {
+        switch (node.ValueKind)
+        {
+            case JsonValueKind.Object:
+                foreach (var prop in node.EnumerateObject())
+                {
+                    if (prop.NameEquals(MarkerKey))
+                    {
+                        // `path` currently addresses the schema object that carries the marker.
+                        var location = ResolveNamedProperty(path)
+                            ?? throw new InvalidOperationException(
+                                $"[generator] x-present-when at #/{string.Join("/", path)} is not on a "
+                                + "named components.schemas.<Schema>.properties.<field>. The runtime keys "
+                                + "couplings by schema and field, so a marker on an inline or composed "
+                                + "(allOf/oneOf/anyOf) schema cannot be enforced. Move it onto a named "
+                                + "component schema property, or teach the derivation and runtime this shape.");
+
+                        couplings.Add(ParseMarker(location.schema, location.field, prop.Value));
+
+                        // Do not descend into the marker's own value; it is not another schema.
+                        continue;
+                    }
+
+                    path.Add(prop.Name);
+                    CollectMarkers(prop.Value, path, couplings);
+                    path.RemoveAt(path.Count - 1);
+                }
+
+                break;
+
+            case JsonValueKind.Array:
+                var index = 0;
+                foreach (var item in node.EnumerateArray())
+                {
+                    path.Add(index.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                    CollectMarkers(item, path, couplings);
+                    path.RemoveAt(path.Count - 1);
+                    index++;
+                }
+
+                break;
+        }
+    }
+
+    // The only marker location the runtime can key by schema+field:
+    // #/components/schemas/<Schema>/properties/<field>.
+    private static (string schema, string field)? ResolveNamedProperty(List<string> path)
+    {
+        if (path.Count == 5
+            && path[0] == "components"
+            && path[1] == "schemas"
+            && path[3] == "properties")
+        {
+            return (path[2], path[4]);
+        }
+
+        return null;
     }
 
     private static Coupling ParseMarker(string schema, string field, JsonElement marker)

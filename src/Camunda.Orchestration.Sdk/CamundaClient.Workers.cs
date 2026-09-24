@@ -91,10 +91,11 @@ public partial class CamundaClient : IAsyncDisposable
         // Keep every registered worker alive until either shutdown is signalled or a worker's
         // poll loop faults terminally (e.g. LeaseNotHonoredException). A terminal fault must
         // reach the caller; without observing worker Completion here it would die on a
-        // background task while RunWorkersAsync blocked forever on the infinite delay. The
-        // observer is cancelled on shutdown so it does not leak.
+        // background task while RunWorkersAsync blocked forever on the infinite delay. Both the
+        // shutdown wait and the fault observer run on the linked token, so whichever loses the
+        // race is cancelled by observerStop.Cancel() rather than leaking a pending delay/timer.
         using var observerStop = CancellationTokenSource.CreateLinkedTokenSource(ct);
-        var shutdown = ShutdownSignalAsync(ct);
+        var shutdown = ShutdownSignalAsync(observerStop.Token);
         var fault = ObserveFirstWorkerFaultAsync(observerStop.Token);
 
         var winner = await Task.WhenAny(shutdown, fault).ConfigureAwait(false);

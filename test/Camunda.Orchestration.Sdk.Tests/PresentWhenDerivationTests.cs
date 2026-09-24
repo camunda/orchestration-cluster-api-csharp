@@ -74,6 +74,83 @@ public class PresentWhenDerivationTests
         Assert.Empty(PresentWhenDerivation.Derive(Spec(noMarker)));
     }
 
+    [Fact]
+    public void Derive_finds_a_marker_nested_below_the_top_level_of_components_schemas()
+    {
+        // The walk must reach every named component schema regardless of declaration order or
+        // surrounding keys — a marker cannot hide behind a schema that appears later or beside
+        // unrelated vendor extensions.
+        var couplings = PresentWhenDerivation.Derive(Spec(
+            Marker("Other", "a", "flagA") + "," +
+            Marker("ActivatedJobResult", "jobLeaseToken", "withLease")));
+
+        Assert.Contains(couplings, c =>
+            c.ResponseSchema == "ActivatedJobResult" && c.ResponseField == "jobLeaseToken" && c.RequestFlag == "withLease");
+    }
+
+    [Fact]
+    public void Derive_rejects_a_marker_on_an_inline_request_or_response_schema()
+    {
+        // An inline schema under paths is not a named component, so the runtime cannot key the
+        // coupling by schema+field. Rejecting beats silently omitting it from the table.
+        var inline = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "t", "version": "1" },
+              "paths": {
+                "/jobs": {
+                  "post": {
+                    "responses": {
+                      "200": {
+                        "content": {
+                          "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                "jobLeaseToken": {
+                                  "type": "string",
+                                  "x-present-when": { "request": "withLease", "equals": true }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "components": { "schemas": {} }
+            }
+            """;
+
+        Assert.Throws<InvalidOperationException>(() => PresentWhenDerivation.Derive(inline));
+    }
+
+    [Fact]
+    public void Derive_rejects_a_marker_on_a_composed_allOf_fragment()
+    {
+        // A marker inside an allOf/oneOf/anyOf fragment is not on the schema's own
+        // properties map, so it is an unsupported location and must fail generation.
+        var composed = Spec("""
+            "Composed": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "jobLeaseToken": {
+                      "type": "string",
+                      "x-present-when": { "request": "withLease", "equals": true }
+                    }
+                  }
+                }
+              ]
+            }
+            """);
+
+        Assert.Throws<InvalidOperationException>(() => PresentWhenDerivation.Derive(composed));
+    }
+
     [Theory]
     // request missing entirely
     [InlineData("""
