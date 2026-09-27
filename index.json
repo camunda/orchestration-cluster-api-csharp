@@ -6582,7 +6582,7 @@
   "api/Camunda.Orchestration.Sdk.CamundaClient.SpecHash.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaClient.SpecHash.html",
     "title": "Field SpecHash | Camunda C# SDK",
-    "summary": "Field SpecHash Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll SHA-256 digest of the OpenAPI spec this SDK was generated from. public const string SpecHash = \"sha256:bc827cb3d135b1d3afb62e23ab2c6bb19e3cdd207ccba54465857c2d7be5468a\" Returns string SHA-256 digest of the OpenAPI spec this SDK was generated from."
+    "summary": "Field SpecHash Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll SHA-256 digest of the OpenAPI spec this SDK was generated from. public const string SpecHash = \"sha256:13e1893288ec479a822b5d820c65df6afa90597f3ce9511645f7fc6154b569b3\" Returns string SHA-256 digest of the OpenAPI spec this SDK was generated from."
   },
   "api/Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync.html",
