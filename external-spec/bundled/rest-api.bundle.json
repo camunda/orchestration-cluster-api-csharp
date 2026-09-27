@@ -46340,7 +46340,7 @@
             "type": "integer",
             "format": "int32",
             "default": 100,
-            "minimum": 1,
+            "minimum": 0,
             "maximum": 10000
           }
         }
@@ -46360,7 +46360,7 @@
             "type": "integer",
             "format": "int32",
             "default": 100,
-            "minimum": 1
+            "minimum": 0
           }
         },
         "x-properties-added-in-version": [
@@ -46391,7 +46391,7 @@
             "type": "integer",
             "format": "int32",
             "default": 100,
-            "minimum": 1,
+            "minimum": 0,
             "maximum": 10000
           }
         },
@@ -46423,7 +46423,7 @@
             "type": "integer",
             "format": "int32",
             "default": 100,
-            "minimum": 1,
+            "minimum": 0,
             "maximum": 10000
           }
         },
