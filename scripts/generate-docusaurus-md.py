@@ -1266,11 +1266,12 @@ def validate_generated_links(output_dir: Path) -> list[str]:
 
     Valid relative links are either:
     - ``../`` prefixed (pointing up into the camunda-docs tree)
-    - Simple filenames without directory separators (sibling links within the
-      same generated directory, e.g. ``models.md`` from ``index.md``)
+    - Simple filenames of a page generated in the same directory (e.g.
+      ``models.md`` from ``index.md``)
 
-    Repo-relative links containing ``/`` (e.g. ``docs/backpressure.md``) will
-    break when the pages are copied into the camunda-docs site.
+    Repo-relative links containing ``/`` (e.g. ``docs/backpressure.md``), or
+    bare filenames of repo files that are not generated (e.g. ``MIGRATION.md``),
+    will break when the pages are copied into the camunda-docs site.
 
     Returns a list of human-readable error strings (empty = all good).
     """
@@ -1284,7 +1285,7 @@ def validate_generated_links(output_dir: Path) -> list[str]:
                     continue  # pure anchor
                 if target.startswith("../"):
                     continue  # valid cross-directory link
-                if "/" not in target:
+                if "/" not in target and (md_file.parent / target).is_file():
                     continue  # valid sibling link (same directory)
                 rel = md_file.relative_to(output_dir)
                 errors.append(

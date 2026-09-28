@@ -342,6 +342,41 @@ def test_load_all_types_formats_summary():
     )
 
 
+# ---------------------------------------------------------------------------
+# Link validation — bare-filename links must resolve to a generated page
+#
+# A README link to a repo-root file (``[MIGRATION.md](MIGRATION.md)``) has no
+# ``/``, so it looked like a sibling page link and passed validation, then broke
+# the camunda-docs build (camunda-docs PR #9608).
+# ---------------------------------------------------------------------------
+
+
+def _validate(pages: dict[str, str]) -> list[str]:
+    with tempfile.TemporaryDirectory() as d:
+        for name, body in pages.items():
+            path = Path(d) / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(body, encoding="utf-8")
+        return gen.validate_generated_links(Path(d))
+
+
+def test_validate_links_rejects_bare_filename_with_no_generated_page():
+    errors = _validate({"sdk/guide.md": "See [the guide](MIGRATION.md) and [x](NOTES.md#a)."})
+    assert len(errors) == 2, errors
+    assert any("MIGRATION.md" in e for e in errors)
+    assert any("NOTES.md#a" in e for e in errors)
+
+
+def test_validate_links_accepts_bare_filename_of_generated_sibling():
+    errors = _validate(
+        {
+            "sdk/configuration.md": "See [resilience](resilience.md#backpressure).",
+            "sdk/resilience.md": "# Resilience",
+        }
+    )
+    assert errors == []
+
+
 def _run() -> None:
     fns = [
         v
