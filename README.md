@@ -68,6 +68,7 @@ Typical environment (example):
 
 ```bash
 CAMUNDA_REST_ADDRESS=https://cluster.example   # SDK appends /v2 automatically
+CAMUNDA_REST_ADDRESS_EXACT=false                # optional: true = use address verbatim (no /v2), e.g. behind a gateway
 CAMUNDA_AUTH_STRATEGY=OAUTH
 CAMUNDA_CLIENT_ID=***
 CAMUNDA_CLIENT_SECRET=***
@@ -172,6 +173,7 @@ CAMUNDA_OAUTH_URL=https://login.cloud.camunda.io/oauth/token
 | appsettings.json key | Maps to env var |
 |---|---|
 | `RestAddress` | `CAMUNDA_REST_ADDRESS` |
+| `RestAddressExact` | `CAMUNDA_REST_ADDRESS_EXACT` (true = use `RestAddress` verbatim, skip the automatic `/v2` suffix) |
 | `TokenAudience` | `CAMUNDA_TOKEN_AUDIENCE` |
 | `DefaultTenantId` | `CAMUNDA_DEFAULT_TENANT_ID` |
 | `TenantIds` | `CAMUNDA_TENANT_IDS` (JSON array or comma-separated string) |
