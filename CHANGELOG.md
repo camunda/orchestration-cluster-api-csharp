@@ -1,3 +1,15 @@
+# [10.0.0-alpha.30](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.29...v10.0.0-alpha.30) (2026-09-30)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts [skip ci] ([d199286](https://github.com/camunda/orchestration-cluster-api-csharp/commit/d19928610241d7d2299ec2e4793c06197617b947))
+
+
+### Features
+
+* opt out of automatic /v2 suffix via CAMUNDA_REST_ADDRESS_EXACT ([#451](https://github.com/camunda/orchestration-cluster-api-csharp/issues/451)) ([367616a](https://github.com/camunda/orchestration-cluster-api-csharp/commit/367616adbfb96c4ed046b03c09e8ab6b92647221)), closes [#430](https://github.com/camunda/orchestration-cluster-api-csharp/issues/430) [#122](https://github.com/camunda/orchestration-cluster-api-csharp/issues/122) [#122](https://github.com/camunda/orchestration-cluster-api-csharp/issues/122)
+
 # [10.0.0-alpha.29](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.28...v10.0.0-alpha.29) (2026-09-27)
 
 
