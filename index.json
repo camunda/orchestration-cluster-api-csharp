@@ -6582,7 +6582,7 @@
   "api/Camunda.Orchestration.Sdk.CamundaClient.SpecHash.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaClient.SpecHash.html",
     "title": "Field SpecHash | Camunda C# SDK",
-    "summary": "Field SpecHash Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll SHA-256 digest of the OpenAPI spec this SDK was generated from. public const string SpecHash = \"sha256:13e1893288ec479a822b5d820c65df6afa90597f3ce9511645f7fc6154b569b3\" Returns string SHA-256 digest of the OpenAPI spec this SDK was generated from."
+    "summary": "Field SpecHash Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll SHA-256 digest of the OpenAPI spec this SDK was generated from. public const string SpecHash = \"sha256:39641c369e00946870689517f5bcbfad75e68c9f86ff99032bf1d0d73767c942\" Returns string SHA-256 digest of the OpenAPI spec this SDK was generated from."
   },
   "api/Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync.html",
@@ -12962,7 +12962,7 @@
   "api/Camunda.Orchestration.Sdk.IncidentFilter.ErrorMessage.html": {
     "href": "api/Camunda.Orchestration.Sdk.IncidentFilter.ErrorMessage.html",
     "title": "Property ErrorMessage | Camunda C# SDK",
-    "summary": "Property ErrorMessage Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll ErrorMessage The error message of this incident. [JsonPropertyName(\"errorMessage\")] public StringFilterProperty? ErrorMessage { get; set; } Property Value StringFilterProperty"
+    "summary": "Property ErrorMessage Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll ErrorMessage The error message of this incident. For $eq, $neq, $in, and $notIn, matching is case-insensitive and matches if the incident's error message contains the given value as a phrase, not necessarily the entire error message. $like matches on individual words of the error message and does not support multi-word patterns. [JsonPropertyName(\"errorMessage\")] public StringFilterProperty? ErrorMessage { get; set; } Property Value StringFilterProperty"
   },
   "api/Camunda.Orchestration.Sdk.IncidentFilter.ErrorType.html": {
     "href": "api/Camunda.Orchestration.Sdk.IncidentFilter.ErrorType.html",
@@ -13007,7 +13007,7 @@
   "api/Camunda.Orchestration.Sdk.IncidentFilter.html": {
     "href": "api/Camunda.Orchestration.Sdk.IncidentFilter.html",
     "title": "Class IncidentFilter | Camunda C# SDK",
-    "summary": "Class IncidentFilter Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll Incident search filter. public sealed class IncidentFilter Inheritance object IncidentFilter Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Properties CreationTime Date of incident creation. ElementId The element ID associated to this incident. ElementInstanceKey The element instance key associated to this incident. ErrorMessage The error message of this incident. ErrorType Incident error type with a defined set of values. IncidentKey The assigned key, which acts as a unique identifier for this incident. JobKey The job key, if exists, associated with this incident. ProcessDefinitionId The process definition ID associated to this incident. ProcessDefinitionKey The process definition key associated to this incident. ProcessInstanceKey The process instance key associated to this incident. State State of this incident with a defined set of values. TenantId The tenant ID of the incident."
+    "summary": "Class IncidentFilter Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll Incident search filter. public sealed class IncidentFilter Inheritance object IncidentFilter Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Properties CreationTime Date of incident creation. ElementId The element ID associated to this incident. ElementInstanceKey The element instance key associated to this incident. ErrorMessage The error message of this incident. For $eq, $neq, $in, and $notIn, matching is case-insensitive and matches if the incident's error message contains the given value as a phrase, not necessarily the entire error message. $like matches on individual words of the error message and does not support multi-word patterns. ErrorType Incident error type with a defined set of values. IncidentKey The assigned key, which acts as a unique identifier for this incident. JobKey The job key, if exists, associated with this incident. ProcessDefinitionId The process definition ID associated to this incident. ProcessDefinitionKey The process definition key associated to this incident. ProcessInstanceKey The process instance key associated to this incident. State State of this incident with a defined set of values. TenantId The tenant ID of the incident."
   },
   "api/Camunda.Orchestration.Sdk.IncidentKey.AssumeExists.html": {
     "href": "api/Camunda.Orchestration.Sdk.IncidentKey.AssumeExists.html",

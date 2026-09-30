@@ -172,7 +172,7 @@ Class IncidentFilter  <a class="header-action link-secondary" title="View source
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.IncidentFilter.ErrorMessage.html#Camunda_Orchestration_Sdk_IncidentFilter_ErrorMessage">ErrorMessage</a></dt>
-    <dd><p>The error message of this incident.</p>
+    <dd><p>The error message of this incident. For <code>$eq</code>, <code>$neq</code>, <code>$in</code>, and <code>$notIn</code>, matching is case-insensitive and matches if the incident's error message contains the given value as a phrase, not necessarily the entire error message. <code>$like</code> matches on individual words of the error message and does not support multi-word patterns.</p>
 </dd>
   </dl>
   <dl class="jumplist">
