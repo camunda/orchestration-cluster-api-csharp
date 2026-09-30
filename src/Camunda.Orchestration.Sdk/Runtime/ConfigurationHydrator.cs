@@ -251,6 +251,33 @@ public static class ConfigurationHydrator
         // Parse an integer key using its schema default as the fallback (no literal duplication).
         int ParseSchemaInt(string key) => ParseInt(key, ConfigSchema.IntDefault(key));
 
+        // Parse a boolean key. Accepts true/false, 1/0, yes/no, on/off (case-insensitive);
+        // anything else is an InvalidBoolean error.
+        bool ParseBool(string key, bool fallback)
+        {
+            var raw = rawMap.GetValueOrDefault(key);
+            if (raw == null)
+                return fallback;
+            switch (raw.Trim().ToLowerInvariant())
+            {
+                case "true" or "1" or "yes" or "on":
+                    return true;
+                case "false" or "0" or "no" or "off":
+                    return false;
+                default:
+                    errors.Add(new ConfigErrorDetail
+                    {
+                        Code = ConfigErrorCode.InvalidBoolean,
+                        Key = key,
+                        Message = $"Invalid boolean '{raw}'. Expected true|false (also 1|0, yes|no, on|off)."
+                    });
+                    return fallback;
+            }
+        }
+
+        // Parse a boolean key using its schema default as the fallback.
+        bool ParseSchemaBool(string key) => ParseBool(key, ConfigSchema.BoolDefault(key));
+
         // Parse validation
         var validation = ParseValidation(rawMap.GetValueOrDefault(ConfigKeys.Validation, ConfigSchema.StringDefault(ConfigKeys.Validation))!, errors);
 
@@ -270,6 +297,9 @@ public static class ConfigurationHydrator
         var oauthRetryMax = ParseSchemaInt(ConfigKeys.OAuthRetryMax);
         var oauthRetryBaseDelayMs = ParseSchemaInt(ConfigKeys.OAuthRetryBaseDelayMs);
         var eventualPollDefaultMs = ParseSchemaInt(ConfigKeys.EventualPollDefaultMs);
+
+        // Whether to use RestAddress verbatim (skip the automatic /v2 suffix).
+        var restAddressExact = ParseSchemaBool(ConfigKeys.RestAddressExact);
 
         // Parse optional worker defaults
         int? workerTimeout = rawMap.ContainsKey(ConfigKeys.WorkerTimeout)
@@ -299,9 +329,11 @@ public static class ConfigurationHydrator
         if (errors.Count > 0)
             throw new CamundaConfigurationException(errors);
 
-        // Normalize restAddress to /v2
+        // Normalize restAddress to /v2, unless the caller opted out via
+        // CAMUNDA_REST_ADDRESS_EXACT (e.g. a gateway-fronted deployment whose base
+        // path does not follow the /v2 convention).
         var restAddress = rawMap.GetValueOrDefault(ConfigKeys.RestAddress, ConfigSchema.StringDefault(ConfigKeys.RestAddress))!;
-        if (!string.IsNullOrEmpty(restAddress) && !restAddress.TrimEnd('/').EndsWith("/v2", StringComparison.OrdinalIgnoreCase))
+        if (!restAddressExact && !string.IsNullOrEmpty(restAddress) && !restAddress.TrimEnd('/').EndsWith("/v2", StringComparison.OrdinalIgnoreCase))
             restAddress = restAddress.TrimEnd('/') + "/v2";
 
         // Backpressure profile

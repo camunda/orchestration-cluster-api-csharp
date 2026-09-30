@@ -82,6 +82,57 @@ public class ConfigurationTests
     }
 
     [Fact]
+    public void RestAddressExactSkipsV2Suffix()
+    {
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>
+            {
+                ["CAMUNDA_REST_ADDRESS"] = "https://gateway.example.com/camunda/api",
+                ["CAMUNDA_REST_ADDRESS_EXACT"] = "true",
+            });
+
+        Assert.Equal("https://gateway.example.com/camunda/api", config.RestAddress);
+    }
+
+    [Fact]
+    public void RestAddressExactDoesNotStripExistingV2()
+    {
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>
+            {
+                ["CAMUNDA_REST_ADDRESS"] = "https://zeebe.example.com/v2",
+                ["CAMUNDA_REST_ADDRESS_EXACT"] = "true",
+            });
+
+        Assert.Equal("https://zeebe.example.com/v2", config.RestAddress);
+    }
+
+    [Fact]
+    public void RestAddressExactDefaultsToFalseAndAppendsV2()
+    {
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>
+            {
+                ["CAMUNDA_REST_ADDRESS"] = "https://zeebe.example.com",
+            });
+
+        Assert.Equal("https://zeebe.example.com/v2", config.RestAddress);
+    }
+
+    [Fact]
+    public void RestAddressExactRejectsInvalidBoolean()
+    {
+        var act = () => ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>
+            {
+                ["CAMUNDA_REST_ADDRESS_EXACT"] = "notabool",
+            });
+
+        var ex = Assert.Throws<CamundaConfigurationException>(act);
+        Assert.Contains(ex.Errors, e => e.Code == ConfigErrorCode.InvalidBoolean);
+    }
+
+    [Fact]
     public void ParsesValidationModeSingleWord()
     {
         var config = ConfigurationHydrator.Hydrate(

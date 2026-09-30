@@ -8,6 +8,7 @@ namespace Camunda.Orchestration.Sdk;
 internal static class ConfigKeys
 {
     public const string RestAddress = "CAMUNDA_REST_ADDRESS";
+    public const string RestAddressExact = "CAMUNDA_REST_ADDRESS_EXACT";
     public const string TokenAudience = "CAMUNDA_TOKEN_AUDIENCE";
     public const string DefaultTenantId = "CAMUNDA_DEFAULT_TENANT_ID";
     public const string TenantIds = "CAMUNDA_TENANT_IDS";
@@ -103,6 +104,7 @@ internal static class ConfigSchema
     public static readonly IReadOnlyList<ConfigKeyDescriptor> All =
     [
         new() { EnvVar = ConfigKeys.RestAddress, Default = "http://localhost:8080/v2", Aliases = ["ZEEBE_REST_ADDRESS"], ConfigPaths = ["RestAddress"], Doc = "Base REST endpoint address." },
+        new() { EnvVar = ConfigKeys.RestAddressExact, Type = ConfigValueType.Bool, Default = "false", ConfigPaths = ["RestAddressExact"], Doc = "When true, use RestAddress exactly as provided and skip the automatic /v2 suffix (for gateway-fronted deployments)." },
         new() { EnvVar = ConfigKeys.TokenAudience, Default = "zeebe.camunda.io", ConfigPaths = ["TokenAudience"], Doc = "Token audience for OAuth flows." },
         new() { EnvVar = ConfigKeys.DefaultTenantId, Default = "<default>", ConfigPaths = ["DefaultTenantId"], Doc = "Default tenant id applied when none is provided." },
         new() { EnvVar = ConfigKeys.TenantIds, ConfigPaths = ["TenantIds"], Doc = "Comma-separated tenant ids job workers activate for; overrides the single default tenant id." },
@@ -183,4 +185,8 @@ internal static class ConfigSchema
     /// <summary>Schema default for an integer key.</summary>
     public static int IntDefault(string envVar) =>
         int.Parse(RequireDefault(envVar), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture);
+
+    /// <summary>Schema default for a boolean key.</summary>
+    public static bool BoolDefault(string envVar) =>
+        RequireDefault(envVar).Trim().ToLowerInvariant() is "true" or "1" or "yes" or "on";
 }

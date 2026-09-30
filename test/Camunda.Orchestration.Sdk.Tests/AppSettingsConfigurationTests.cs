@@ -29,6 +29,31 @@ public class AppSettingsConfigurationTests
     }
 
     /// <summary>
+    /// camunda/orchestration-cluster-api-csharp#430 — `RestAddressExact` is exposed
+    /// through `IConfiguration` (the `Camunda:RestAddressExact` path), so the appsettings
+    /// surface must preserve a non-`/v2` address verbatim just like the env-var path does.
+    /// Guards the `ConfigPaths` mapping and bool binding for this key.
+    /// </summary>
+    [Fact]
+    public void BindsRestAddressExactFromIConfiguration_PreservesAddress()
+    {
+        var configSection = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                ["Camunda:RestAddress"] = "https://gateway.example.com/camunda/api",
+                ["Camunda:RestAddressExact"] = "true",
+            })
+            .Build()
+            .GetSection("Camunda");
+
+        var config = ConfigurationHydrator.Hydrate(
+            env: new Dictionary<string, string?>(),
+            configuration: configSection);
+
+        Assert.Equal("https://gateway.example.com/camunda/api", config.RestAddress);
+    }
+
+    /// <summary>
     /// camunda/orchestration-cluster-api-csharp#122 — `CAMUNDA_TENANT_IDS` binds from
     /// the `TenantIds` path in either idiomatic JSON shape: a comma-separated string or
     /// a JSON array (which `IConfiguration` exposes as indexed children, not a scalar).
