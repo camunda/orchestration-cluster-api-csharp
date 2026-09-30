@@ -29,11 +29,6 @@ public class AppSettingsConfigurationTests
     }
 
     /// <summary>
-    /// camunda/orchestration-cluster-api-csharp#122 — `CAMUNDA_TENANT_IDS` binds from
-    /// the `TenantIds` path in either idiomatic JSON shape: a comma-separated string or
-    /// a JSON array (which `IConfiguration` exposes as indexed children, not a scalar).
-    /// </summary>
-    /// <summary>
     /// camunda/orchestration-cluster-api-csharp#430 — `RestAddressExact` is exposed
     /// through `IConfiguration` (the `Camunda:RestAddressExact` path), so the appsettings
     /// surface must preserve a non-`/v2` address verbatim just like the env-var path does.
@@ -58,6 +53,11 @@ public class AppSettingsConfigurationTests
         Assert.Equal("https://gateway.example.com/camunda/api", config.RestAddress);
     }
 
+    /// <summary>
+    /// camunda/orchestration-cluster-api-csharp#122 — `CAMUNDA_TENANT_IDS` binds from
+    /// the `TenantIds` path in either idiomatic JSON shape: a comma-separated string or
+    /// a JSON array (which `IConfiguration` exposes as indexed children, not a scalar).
+    /// </summary>
     [Fact]
     public void BindsTenantIdsFromIConfiguration_AsCommaSeparatedString()
     {
