@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Property TimedOut | Camunda C# SDK </title>
+      <title>Interface IRandomSource | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Property TimedOut | Camunda C# SDK ">
+      <meta name="title" content="Interface IRandomSource | Camunda C# SDK ">
       
-      
+      <meta name="description" content="Source of the randomness behind SDK runtime jitter: retry backoff, OAuth retry backoff, and worker startup staggering. The randomness counterpart of . Pinning the clock makes cadence virtual; supplying a  as well makes it reproducible, so a timing-dependent failure can be replayed draw for draw. Implementations must be safe to call from multiple threads.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_StopResult_TimedOut_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.StopResult.TimedOut*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_IRandomSource.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.IRandomSource%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,27 +84,31 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.StopResult.TimedOut*">
+        <article data-uid="Camunda.Orchestration.Sdk.IRandomSource">
 
 
 
+  <h1 id="Camunda_Orchestration_Sdk_IRandomSource" data-uid="Camunda.Orchestration.Sdk.IRandomSource" class="text-break">
+Interface IRandomSource  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/IRandomSource.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
 
-
-<h1 id="Camunda_Orchestration_Sdk_StopResult_TimedOut_" data-uid="Camunda.Orchestration.Sdk.StopResult.TimedOut*" class="text-break">
-Property TimedOut  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L731"><i class="bi bi-code-slash"></i></a>
-</h1>
-
-<div class="facts text-secondary">
-  <dl><dt>Namespace</dt><dd><span class="xref">Camunda</span>.<span class="xref">Orchestration</span>.<a class="xref" href="Camunda.Orchestration.Sdk.html">Sdk</a></dd></dl>
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><span class="xref">Camunda</span>.<span class="xref">Orchestration</span>.<a class="xref" href="Camunda.Orchestration.Sdk.html">Sdk</a></dd></dl>
   <dl><dt>Assembly</dt><dd>Camunda.Orchestration.Sdk.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Source of the randomness behind SDK runtime jitter: retry backoff, OAuth retry backoff,
+and worker startup staggering.</p>
+<p>The randomness counterpart of <a class="xref" href="Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider.html#Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider">TimeProvider</a>. Pinning the
+clock makes cadence virtual; supplying a <a class="xref" href="Camunda.Orchestration.Sdk.SeededRandomSource.html">SeededRandomSource</a> as well makes it
+reproducible, so a timing-dependent failure can be replayed draw for draw.</p>
+<p>Implementations must be safe to call from multiple threads.</p>
 </div>
+  <div class="markdown conceptual"></div>
 
-<div class="markdown summary"></div>
-<div class="markdown conceptual"></div>
-
-
-
-
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IRandomSource</code></pre>
+  </div>
 
 
 
@@ -113,46 +117,32 @@ Property TimedOut  <a class="header-action link-secondary" title="View source" h
 
 
 
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Camunda.Orchestration.Sdk.TypedVariables.DeserializeAs.html#Camunda_Orchestration_Sdk_TypedVariables_DeserializeAs__1_System_Object_System_Text_Json_JsonSerializerOptions_">TypedVariables.DeserializeAs&lt;T&gt;(object?, JsonSerializerOptions?)</a>
+  </div>
+  </dd></dl>
 
 
 
 
-<a id="Camunda_Orchestration_Sdk_StopResult_TimedOut_" data-uid="Camunda.Orchestration.Sdk.StopResult.TimedOut*"></a>
+  <h2 class="section" id="methods">Methods
+</h2>
 
-<h3 id="Camunda_Orchestration_Sdk_StopResult_TimedOut" data-uid="Camunda.Orchestration.Sdk.StopResult.TimedOut">
-  TimedOut
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L731"><i class="bi bi-code-slash"></i></a>
-</h3>
-
-<div class="markdown level1 summary"><p>Whether the grace period was exceeded with jobs still active.</p>
-</div>
-<div class="markdown level1 conceptual"></div>
-
-<div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public bool TimedOut { get; init; }</code></pre>
-</div>
-
-
-
-
-
-<h4 class="section">Property Value</h4>
-<dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-  <dd></dd>
-</dl>
-
-
-
-
-
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.IRandomSource.NextDouble.html#Camunda_Orchestration_Sdk_IRandomSource_NextDouble">NextDouble()</a></dt>
+    <dd><p>Returns a uniformly distributed value in [0, 1).</p>
+</dd>
+  </dl>
 
 
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L731" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/IRandomSource.cs/#L13" class="edit-link">Edit this page</a>
         </div>
 
 

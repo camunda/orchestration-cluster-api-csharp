@@ -196,6 +196,17 @@ Useful for tests (e.g., MockHttpMessageHandler).</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaOptions.RandomSource.html#Camunda_Orchestration_Sdk_CamundaOptions_RandomSource">RandomSource</a></dt>
+    <dd><p>Randomness used for all SDK runtime jitter: HTTP retry backoff, OAuth retry backoff,
+and worker startup staggering.</p>
+<p>Defaults to <a class="xref" href="Camunda.Orchestration.Sdk.CamundaRandomSource.Live.html#Camunda_Orchestration_Sdk_CamundaRandomSource_Live">Live</a>, so production jitter stays
+random.</p>
+<p>Supply a <a class="xref" href="Camunda.Orchestration.Sdk.SeededRandomSource.html">SeededRandomSource</a> alongside a fake
+<a class="xref" href="Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider.html#Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider">TimeProvider</a> to make the client's timing reproducible as well as
+virtual.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider.html#Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider">TimeProvider</a></dt>
     <dd><p>Clock used for all SDK runtime cadence: worker poll loops, eventual consistency
 polling, retry backoff, backpressure decay, and OAuth refresh.</p>

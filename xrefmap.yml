@@ -17116,6 +17116,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaOptions.LoggerFactory
   fullName: Camunda.Orchestration.Sdk.CamundaOptions.LoggerFactory
   nameWithType: CamundaOptions.LoggerFactory
+- uid: Camunda.Orchestration.Sdk.CamundaOptions.RandomSource
+  name: RandomSource
+  href: api/Camunda.Orchestration.Sdk.CamundaOptions.RandomSource.html#Camunda_Orchestration_Sdk_CamundaOptions_RandomSource
+  commentId: P:Camunda.Orchestration.Sdk.CamundaOptions.RandomSource
+  fullName: Camunda.Orchestration.Sdk.CamundaOptions.RandomSource
+  nameWithType: CamundaOptions.RandomSource
+- uid: Camunda.Orchestration.Sdk.CamundaOptions.RandomSource*
+  name: RandomSource
+  href: api/Camunda.Orchestration.Sdk.CamundaOptions.RandomSource.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaOptions.RandomSource
+  fullName: Camunda.Orchestration.Sdk.CamundaOptions.RandomSource
+  nameWithType: CamundaOptions.RandomSource
 - uid: Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider
   name: TimeProvider
   href: api/Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider.html#Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider
@@ -17128,6 +17140,36 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider
   fullName: Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider
   nameWithType: CamundaOptions.TimeProvider
+- uid: Camunda.Orchestration.Sdk.CamundaRandomSource
+  name: CamundaRandomSource
+  href: api/Camunda.Orchestration.Sdk.CamundaRandomSource.html
+  commentId: T:Camunda.Orchestration.Sdk.CamundaRandomSource
+  fullName: Camunda.Orchestration.Sdk.CamundaRandomSource
+  nameWithType: CamundaRandomSource
+- uid: Camunda.Orchestration.Sdk.CamundaRandomSource.Live
+  name: Live
+  href: api/Camunda.Orchestration.Sdk.CamundaRandomSource.Live.html#Camunda_Orchestration_Sdk_CamundaRandomSource_Live
+  commentId: P:Camunda.Orchestration.Sdk.CamundaRandomSource.Live
+  fullName: Camunda.Orchestration.Sdk.CamundaRandomSource.Live
+  nameWithType: CamundaRandomSource.Live
+- uid: Camunda.Orchestration.Sdk.CamundaRandomSource.Live*
+  name: Live
+  href: api/Camunda.Orchestration.Sdk.CamundaRandomSource.Live.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaRandomSource.Live
+  fullName: Camunda.Orchestration.Sdk.CamundaRandomSource.Live
+  nameWithType: CamundaRandomSource.Live
+- uid: Camunda.Orchestration.Sdk.CamundaRandomSource.NextDouble
+  name: NextDouble()
+  href: api/Camunda.Orchestration.Sdk.CamundaRandomSource.NextDouble.html#Camunda_Orchestration_Sdk_CamundaRandomSource_NextDouble
+  commentId: M:Camunda.Orchestration.Sdk.CamundaRandomSource.NextDouble
+  fullName: Camunda.Orchestration.Sdk.CamundaRandomSource.NextDouble()
+  nameWithType: CamundaRandomSource.NextDouble()
+- uid: Camunda.Orchestration.Sdk.CamundaRandomSource.NextDouble*
+  name: NextDouble
+  href: api/Camunda.Orchestration.Sdk.CamundaRandomSource.NextDouble.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaRandomSource.NextDouble
+  fullName: Camunda.Orchestration.Sdk.CamundaRandomSource.NextDouble
+  nameWithType: CamundaRandomSource.NextDouble
 - uid: Camunda.Orchestration.Sdk.CamundaSdkException
   name: CamundaSdkException
   href: api/Camunda.Orchestration.Sdk.CamundaSdkException.html
@@ -31633,6 +31675,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync
   fullName: Camunda.Orchestration.Sdk.IEngineClockTarget.ResetClockAsync
   nameWithType: IEngineClockTarget.ResetClockAsync
+- uid: Camunda.Orchestration.Sdk.IRandomSource
+  name: IRandomSource
+  href: api/Camunda.Orchestration.Sdk.IRandomSource.html
+  commentId: T:Camunda.Orchestration.Sdk.IRandomSource
+  fullName: Camunda.Orchestration.Sdk.IRandomSource
+  nameWithType: IRandomSource
+- uid: Camunda.Orchestration.Sdk.IRandomSource.NextDouble
+  name: NextDouble()
+  href: api/Camunda.Orchestration.Sdk.IRandomSource.NextDouble.html#Camunda_Orchestration_Sdk_IRandomSource_NextDouble
+  commentId: M:Camunda.Orchestration.Sdk.IRandomSource.NextDouble
+  fullName: Camunda.Orchestration.Sdk.IRandomSource.NextDouble()
+  nameWithType: IRandomSource.NextDouble()
+- uid: Camunda.Orchestration.Sdk.IRandomSource.NextDouble*
+  name: NextDouble
+  href: api/Camunda.Orchestration.Sdk.IRandomSource.NextDouble.html
+  commentId: Overload:Camunda.Orchestration.Sdk.IRandomSource.NextDouble
+  fullName: Camunda.Orchestration.Sdk.IRandomSource.NextDouble
+  nameWithType: IRandomSource.NextDouble
 - uid: Camunda.Orchestration.Sdk.ITenantIdSettable
   name: ITenantIdSettable
   href: api/Camunda.Orchestration.Sdk.ITenantIdSettable.html
@@ -47899,6 +47959,84 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.SecretResolveResult.Resolved
   fullName: Camunda.Orchestration.Sdk.SecretResolveResult.Resolved
   nameWithType: SecretResolveResult.Resolved
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource
+  name: SeededRandomSource
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.html
+  commentId: T:Camunda.Orchestration.Sdk.SeededRandomSource
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource
+  nameWithType: SeededRandomSource
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.#ctor(System.UInt64)
+  name: SeededRandomSource(ulong)
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.-ctor.html#Camunda_Orchestration_Sdk_SeededRandomSource__ctor_System_UInt64_
+  commentId: M:Camunda.Orchestration.Sdk.SeededRandomSource.#ctor(System.UInt64)
+  name.vb: New(ULong)
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.SeededRandomSource(ulong)
+  fullName.vb: Camunda.Orchestration.Sdk.SeededRandomSource.New(ULong)
+  nameWithType: SeededRandomSource.SeededRandomSource(ulong)
+  nameWithType.vb: SeededRandomSource.New(ULong)
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.#ctor*
+  name: SeededRandomSource
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.-ctor.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SeededRandomSource.#ctor
+  name.vb: New
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.SeededRandomSource
+  fullName.vb: Camunda.Orchestration.Sdk.SeededRandomSource.New
+  nameWithType: SeededRandomSource.SeededRandomSource
+  nameWithType.vb: SeededRandomSource.New
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.FromEnvironment
+  name: FromEnvironment()
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.FromEnvironment.html#Camunda_Orchestration_Sdk_SeededRandomSource_FromEnvironment
+  commentId: M:Camunda.Orchestration.Sdk.SeededRandomSource.FromEnvironment
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.FromEnvironment()
+  nameWithType: SeededRandomSource.FromEnvironment()
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.FromEnvironment*
+  name: FromEnvironment
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.FromEnvironment.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SeededRandomSource.FromEnvironment
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.FromEnvironment
+  nameWithType: SeededRandomSource.FromEnvironment
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.NextDouble
+  name: NextDouble()
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.NextDouble.html#Camunda_Orchestration_Sdk_SeededRandomSource_NextDouble
+  commentId: M:Camunda.Orchestration.Sdk.SeededRandomSource.NextDouble
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.NextDouble()
+  nameWithType: SeededRandomSource.NextDouble()
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.NextDouble*
+  name: NextDouble
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.NextDouble.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SeededRandomSource.NextDouble
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.NextDouble
+  nameWithType: SeededRandomSource.NextDouble
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.Seed
+  name: Seed
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.Seed.html#Camunda_Orchestration_Sdk_SeededRandomSource_Seed
+  commentId: P:Camunda.Orchestration.Sdk.SeededRandomSource.Seed
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.Seed
+  nameWithType: SeededRandomSource.Seed
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.Seed*
+  name: Seed
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.Seed.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SeededRandomSource.Seed
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.Seed
+  nameWithType: SeededRandomSource.Seed
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.SeedEnvironmentVariable
+  name: SeedEnvironmentVariable
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.SeedEnvironmentVariable.html
+  commentId: F:Camunda.Orchestration.Sdk.SeededRandomSource.SeedEnvironmentVariable
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.SeedEnvironmentVariable
+  nameWithType: SeededRandomSource.SeedEnvironmentVariable
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.ToString
+  name: ToString()
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.ToString.html#Camunda_Orchestration_Sdk_SeededRandomSource_ToString
+  commentId: M:Camunda.Orchestration.Sdk.SeededRandomSource.ToString
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.ToString()
+  nameWithType: SeededRandomSource.ToString()
+- uid: Camunda.Orchestration.Sdk.SeededRandomSource.ToString*
+  name: ToString
+  href: api/Camunda.Orchestration.Sdk.SeededRandomSource.ToString.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SeededRandomSource.ToString
+  fullName: Camunda.Orchestration.Sdk.SeededRandomSource.ToString
+  nameWithType: SeededRandomSource.ToString
 - uid: Camunda.Orchestration.Sdk.SetVariableRequest
   name: SetVariableRequest
   href: api/Camunda.Orchestration.Sdk.SetVariableRequest.html

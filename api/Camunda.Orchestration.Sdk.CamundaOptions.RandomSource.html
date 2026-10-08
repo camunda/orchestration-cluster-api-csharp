@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Property TimedOut | Camunda C# SDK </title>
+      <title>Property RandomSource | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Property TimedOut | Camunda C# SDK ">
+      <meta name="title" content="Property RandomSource | Camunda C# SDK ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_StopResult_TimedOut_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.StopResult.TimedOut*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_CamundaOptions_RandomSource_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.CamundaOptions.RandomSource*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,14 +84,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.StopResult.TimedOut*">
+        <article data-uid="Camunda.Orchestration.Sdk.CamundaOptions.RandomSource*">
 
 
 
 
 
-<h1 id="Camunda_Orchestration_Sdk_StopResult_TimedOut_" data-uid="Camunda.Orchestration.Sdk.StopResult.TimedOut*" class="text-break">
-Property TimedOut  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L731"><i class="bi bi-code-slash"></i></a>
+<h1 id="Camunda_Orchestration_Sdk_CamundaOptions_RandomSource_" data-uid="Camunda.Orchestration.Sdk.CamundaOptions.RandomSource*" class="text-break">
+Property RandomSource  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaOptions.cs/#L75"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -117,19 +117,25 @@ Property TimedOut  <a class="header-action link-secondary" title="View source" h
 
 
 
-<a id="Camunda_Orchestration_Sdk_StopResult_TimedOut_" data-uid="Camunda.Orchestration.Sdk.StopResult.TimedOut*"></a>
+<a id="Camunda_Orchestration_Sdk_CamundaOptions_RandomSource_" data-uid="Camunda.Orchestration.Sdk.CamundaOptions.RandomSource*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_StopResult_TimedOut" data-uid="Camunda.Orchestration.Sdk.StopResult.TimedOut">
-  TimedOut
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L731"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaOptions_RandomSource" data-uid="Camunda.Orchestration.Sdk.CamundaOptions.RandomSource">
+  RandomSource
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaOptions.cs/#L75"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"><p>Whether the grace period was exceeded with jobs still active.</p>
+<div class="markdown level1 summary"><p>Randomness used for all SDK runtime jitter: HTTP retry backoff, OAuth retry backoff,
+and worker startup staggering.</p>
+<p>Defaults to <a class="xref" href="Camunda.Orchestration.Sdk.CamundaRandomSource.Live.html#Camunda_Orchestration_Sdk_CamundaRandomSource_Live">Live</a>, so production jitter stays
+random.</p>
+<p>Supply a <a class="xref" href="Camunda.Orchestration.Sdk.SeededRandomSource.html">SeededRandomSource</a> alongside a fake
+<a class="xref" href="Camunda.Orchestration.Sdk.CamundaOptions.TimeProvider.html#Camunda_Orchestration_Sdk_CamundaOptions_TimeProvider">TimeProvider</a> to make the client's timing reproducible as well as
+virtual.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public bool TimedOut { get; init; }</code></pre>
+  <pre><code class="lang-csharp hljs">public IRandomSource? RandomSource { get; set; }</code></pre>
 </div>
 
 
@@ -138,7 +144,7 @@ Property TimedOut  <a class="header-action link-secondary" title="View source" h
 
 <h4 class="section">Property Value</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+  <dt><a class="xref" href="Camunda.Orchestration.Sdk.IRandomSource.html">IRandomSource</a></dt>
   <dd></dd>
 </dl>
 
@@ -152,7 +158,7 @@ Property TimedOut  <a class="header-action link-secondary" title="View source" h
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L731" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/CamundaOptions.cs/#L75" class="edit-link">Edit this page</a>
         </div>
 
 
