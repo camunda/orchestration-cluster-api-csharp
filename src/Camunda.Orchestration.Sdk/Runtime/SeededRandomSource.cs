@@ -50,10 +50,10 @@ public sealed class SeededRandomSource : IRandomSource
     public static SeededRandomSource FromEnvironment()
     {
         var raw = Environment.GetEnvironmentVariable(SeedEnvironmentVariable);
-        if (string.IsNullOrWhiteSpace(raw))
+        if (raw is null)
             return new SeededRandomSource((ulong)(CamundaRandomSource.Live.NextDouble() * (1UL << 53)));
 
-        if (!ulong.TryParse(raw.Trim(), NumberStyles.None, CultureInfo.InvariantCulture, out var seed))
+        if (!ulong.TryParse(raw, NumberStyles.None, CultureInfo.InvariantCulture, out var seed))
             throw new InvalidOperationException(
                 $"{SeedEnvironmentVariable}='{raw}' is not an unsigned 64-bit decimal integer.");
 

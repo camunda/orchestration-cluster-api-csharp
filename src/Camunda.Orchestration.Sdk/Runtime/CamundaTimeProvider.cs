@@ -34,7 +34,9 @@ public sealed class CamundaTimeProvider : TimeProvider
     /// <summary>
     /// The default live clock: the system clock, made non-decreasing.
     /// </summary>
+#pragma warning disable RS0030 // the live clock: the one allowed read of the system clock
     public static CamundaTimeProvider Live { get; } = new(TimeProvider.System);
+#pragma warning restore RS0030
 
     /// <summary>
     /// Wraps <paramref name="inner"/> so that observed time never decreases.
@@ -90,7 +92,9 @@ public sealed class CamundaTimeProvider : TimeProvider
     /// <see cref="GetUtcNow"/> instead, so that pinning the clock affects it; the
     /// override exists only so the decorator stays a faithful <see cref="TimeProvider"/>.
     /// </remarks>
+#pragma warning disable RS0030 // faithful delegation; runtime code never calls it
     public override long GetTimestamp() => _inner.GetTimestamp();
+#pragma warning restore RS0030
 
     /// <inheritdoc />
     public override ITimer CreateTimer(TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)

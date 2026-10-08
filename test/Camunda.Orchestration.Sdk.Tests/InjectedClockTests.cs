@@ -544,13 +544,10 @@ public class InjectedClockRuntimeTests
         Assert.Equal(1, Volatile.Read(ref attempts));
 
         // Seed 42 draws 0.7415... first, so the 60s backoff carries +2898ms of jitter.
-        // Stop one tick short of it, then land on it.
         const int jitteredMs = 62_898;
-        clock.Advance(TimeSpan.FromMilliseconds(jitteredMs - 1));
-        await Task.Delay(150);
-        Assert.False(pending.IsCompleted, $"retry fired before its jittered delay ({random})");
+        Assert.Equal(TimeSpan.FromMilliseconds(jitteredMs), Assert.Single(clock.DueTimes));
 
-        clock.Advance(TimeSpan.FromMilliseconds(1));
+        clock.Advance(TimeSpan.FromMilliseconds(jitteredMs));
 
         Assert.Equal("token", await pending.WaitAsync(TimeSpan.FromSeconds(10)));
         Assert.Equal(2, Volatile.Read(ref attempts));

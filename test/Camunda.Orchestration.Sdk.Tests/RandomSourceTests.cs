@@ -139,6 +139,9 @@ public class SeededRandomSourceEnvironmentTests
     [InlineData("-1")]
     [InlineData("18446744073709551616")]
     [InlineData("0x2A")]
+    [InlineData(" ")]
+    [InlineData(" 42")]
+    [InlineData("42\n")]
     public void RejectsAMalformedSeedRatherThanSilentlyPickingAnother(string raw)
     {
         WithSeedVariable(raw, () =>
@@ -194,17 +197,17 @@ public class InjectedRandomSourceTests(ITestOutputHelper output)
         : Task.FromResult(42);
 
     /// <summary>
-    /// Asserts the retry stays parked until exactly <paramref name="delayMs"/> of virtual time.
+    /// Asserts the retry was scheduled for exactly <paramref name="delayMs"/> and fires on it.
     /// </summary>
     private static async Task AssertRetryFiresAtExactly(int delayMs, InstrumentedFakeTimeProvider clock, Task<int> pending, Func<int> attempts, string context)
     {
         await clock.WaitForTimersAsync(1);
-        clock.Advance(TimeSpan.FromMilliseconds(delayMs - 1));
-        await Task.Delay(150);
-        Assert.False(pending.IsCompleted, $"retry fired before its {delayMs}ms jittered delay ({context})");
+        Assert.True(
+            clock.DueTimes.SequenceEqual([TimeSpan.FromMilliseconds(delayMs)]),
+            $"expected one {delayMs}ms retry timer, saw [{string.Join(", ", clock.DueTimes)}] ({context})");
         Assert.Equal(1, attempts());
 
-        clock.Advance(TimeSpan.FromMilliseconds(1));
+        clock.Advance(TimeSpan.FromMilliseconds(delayMs));
         Assert.Equal(42, await pending.WaitAsync(TimeSpan.FromSeconds(10)));
         Assert.Equal(2, attempts());
     }
@@ -281,19 +284,14 @@ public class InjectedRandomSourceTests(ITestOutputHelper output)
 
         // Draws 0.7415... then 0.1599... of a 10s maximum: 7415ms, then 1599ms.
         await clock.WaitForTimersAsync(2);
+        Assert.True(
+            clock.DueTimes.Take(2).SequenceEqual([TimeSpan.FromMilliseconds(7_415), TimeSpan.FromMilliseconds(1_599)]),
+            $"expected startup timers [7415ms, 1599ms], saw [{string.Join(", ", clock.DueTimes)}] ({random})");
 
-        clock.Advance(TimeSpan.FromMilliseconds(1_598));
-        await Task.Delay(150);
-        Assert.Equal((0, 0), (Polls("first"), Polls("second")));
-
-        clock.Advance(TimeSpan.FromMilliseconds(1));
+        clock.Advance(TimeSpan.FromMilliseconds(1_599));
         Assert.True(await WaitFor(() => Polls("second") == 1), $"second worker did not poll at 1599ms ({random})");
 
-        clock.Advance(TimeSpan.FromMilliseconds(7_414 - 1_599));
-        await Task.Delay(150);
-        Assert.Equal(0, Polls("first"));
-
-        clock.Advance(TimeSpan.FromMilliseconds(1));
+        clock.Advance(TimeSpan.FromMilliseconds(7_415 - 1_599));
         Assert.True(await WaitFor(() => Polls("first") == 1), $"first worker did not poll at 7415ms ({random})");
         Assert.Equal(1, Polls("second"));
     }

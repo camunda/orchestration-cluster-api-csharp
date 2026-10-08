@@ -19,10 +19,17 @@ namespace Camunda.Orchestration.Sdk.Tests;
 internal sealed class InstrumentedFakeTimeProvider(DateTimeOffset start) : TimeProvider
 {
     private readonly FakeTimeProvider _inner = new(start);
+    private readonly System.Collections.Concurrent.ConcurrentQueue<TimeSpan> _dueTimes = new();
     private int _timersCreated;
 
     /// <summary>Number of timers registered so far.</summary>
     public int TimersCreated => Volatile.Read(ref _timersCreated);
+
+    /// <summary>
+    /// Due time of every registered timer, in registration order. Lets a test assert the
+    /// exact delay scheduled rather than infer it from what has not fired yet.
+    /// </summary>
+    public IReadOnlyList<TimeSpan> DueTimes => [.. _dueTimes];
 
     /// <summary>Move the clock forward, firing any timers that fall in the interval.</summary>
     public void Advance(TimeSpan delta) => _inner.Advance(delta);
@@ -41,6 +48,7 @@ internal sealed class InstrumentedFakeTimeProvider(DateTimeOffset start) : TimeP
         // observe the signal and advance the clock before the timer existed, reproducing the
         // very missed-advance hang this class exists to prevent.
         var timer = _inner.CreateTimer(callback, state, dueTime, period);
+        _dueTimes.Enqueue(dueTime);
         Interlocked.Increment(ref _timersCreated);
         return timer;
     }

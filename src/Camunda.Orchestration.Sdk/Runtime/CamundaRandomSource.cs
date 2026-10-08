@@ -17,5 +17,7 @@ public sealed class CamundaRandomSource : IRandomSource
     private CamundaRandomSource() { }
 
     /// <inheritdoc />
+#pragma warning disable RS0030 // the live source: the one allowed read of ambient randomness
     public double NextDouble() => Random.Shared.NextDouble();
+#pragma warning restore RS0030
 }
