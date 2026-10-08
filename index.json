@@ -6582,7 +6582,7 @@
   "api/Camunda.Orchestration.Sdk.CamundaClient.SpecHash.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaClient.SpecHash.html",
     "title": "Field SpecHash | Camunda C# SDK",
-    "summary": "Field SpecHash Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll SHA-256 digest of the OpenAPI spec this SDK was generated from. public const string SpecHash = \"sha256:cd3a6bc273e10d952cf4c4827ff9babd9b13d8cabea400f7ed8be56e7cba9969\" Returns string SHA-256 digest of the OpenAPI spec this SDK was generated from."
+    "summary": "Field SpecHash Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll SHA-256 digest of the OpenAPI spec this SDK was generated from. public const string SpecHash = \"sha256:ef3e3ea3faf064de0df57d4b6d28c8828ca86cbb95a0ea815f38e8ce559ebedd\" Returns string SHA-256 digest of the OpenAPI spec this SDK was generated from."
   },
   "api/Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaClient.StopAllWorkersAsync.html",
@@ -7022,7 +7022,7 @@
   "api/Camunda.Orchestration.Sdk.CamundaUserResult.AuthorizedComponents.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaUserResult.AuthorizedComponents.html",
     "title": "Property AuthorizedComponents | Camunda C# SDK",
-    "summary": "Property AuthorizedComponents Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll AuthorizedComponents The web components the user is authorized to use. [JsonPropertyName(\"authorizedComponents\")] public List<string> AuthorizedComponents { get; set; } Property Value List<string>"
+    "summary": "Property AuthorizedComponents Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll AuthorizedComponents The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns [\"*\"], regardless of the user's actual permissions, since access is not restricted in that case. [JsonPropertyName(\"authorizedComponents\")] public List<string> AuthorizedComponents { get; set; } Property Value List<string>"
   },
   "api/Camunda.Orchestration.Sdk.CamundaUserResult.C8Links.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaUserResult.C8Links.html",
@@ -7072,7 +7072,7 @@
   "api/Camunda.Orchestration.Sdk.CamundaUserResult.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaUserResult.html",
     "title": "Class CamundaUserResult | Camunda C# SDK",
-    "summary": "Class CamundaUserResult Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll CamundaUserResult public sealed class CamundaUserResult Inheritance object CamundaUserResult Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Properties AuthorizedComponents The web components the user is authorized to use. C8Links The links to the components in the C8 stack. CanLogout Flag for understanding if the user is able to perform logout. DisplayName The display name of the user. Email The email of the user. Groups The groups assigned to the user. Roles The roles assigned to the user. SalesPlanType The plan of the user. Tenants The tenants the user is a member of. Username The username of the user."
+    "summary": "Class CamundaUserResult Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll CamundaUserResult public sealed class CamundaUserResult Inheritance object CamundaUserResult Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Properties AuthorizedComponents The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns [\"*\"], regardless of the user's actual permissions, since access is not restricted in that case. C8Links The links to the components in the C8 stack. CanLogout Flag for understanding if the user is able to perform logout. DisplayName The display name of the user. Email The email of the user. Groups The groups assigned to the user. Roles The roles assigned to the user. SalesPlanType The plan of the user. Tenants The tenants the user is a member of. Username The username of the user."
   },
   "api/Camunda.Orchestration.Sdk.CancelProcessInstanceRequest.OperationReference.html": {
     "href": "api/Camunda.Orchestration.Sdk.CancelProcessInstanceRequest.OperationReference.html",
