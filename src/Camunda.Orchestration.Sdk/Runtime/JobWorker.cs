@@ -276,6 +276,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     private readonly int _maxConcurrentJobs;
     private readonly List<TenantId>? _resolvedTenantIds;
     private readonly TimeProvider _timeProvider;
+    private readonly IRandomSource _randomSource;
 
     private CancellationTokenSource? _cts;
     private Task? _pollTask;
@@ -287,13 +288,15 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         JobHandler handler,
         ILoggerFactory loggerFactory,
         JsonSerializerOptions jsonOptions,
-        TimeProvider timeProvider)
+        TimeProvider timeProvider,
+        IRandomSource randomSource)
     {
         _client = client;
         _config = config;
         _handler = handler;
         _jsonOptions = jsonOptions;
         _timeProvider = timeProvider;
+        _randomSource = randomSource;
 
         if (config.JobTimeoutMs is null)
             throw new ArgumentException(
@@ -361,7 +364,11 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         if (_cts != null)
             return;
         _cts = new CancellationTokenSource();
-        _pollTask = PollLoopAsync(_cts.Token);
+        // Drawn synchronously so that sequentially started workers draw in a reproducible order.
+        var startupJitterMs = _config.StartupJitterMaxSeconds > 0
+            ? (int)(_randomSource.NextDouble() * _config.StartupJitterMaxSeconds * 1000)
+            : 0;
+        _pollTask = PollLoopAsync(startupJitterMs, _cts.Token);
     }
 
     /// <summary>
@@ -429,7 +436,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
         _cts?.Dispose();
     }
 
-    private async Task PollLoopAsync(CancellationToken ct)
+    private async Task PollLoopAsync(int jitterMs, CancellationToken ct)
     {
         if (_logger.IsEnabled(LogLevel.Information))
             _logger.LogInformation("JobWorker '{Name}' started for type '{JobType}'",
@@ -437,7 +444,6 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
         if (_config.StartupJitterMaxSeconds > 0)
         {
-            var jitterMs = (int)(Random.Shared.NextDouble() * _config.StartupJitterMaxSeconds * 1000);
             if (_logger.IsEnabled(LogLevel.Information))
                 _logger.LogInformation(
                     "JobWorker '{Name}' delaying start by {JitterMs}ms (jitter)",

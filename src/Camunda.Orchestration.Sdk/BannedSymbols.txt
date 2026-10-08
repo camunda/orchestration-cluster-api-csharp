@@ -51,3 +51,8 @@ M:System.Threading.Tasks.Task`1.WaitAsync(System.TimeSpan,System.Threading.Cance
 
 P:System.Environment.TickCount;Monotonic timing. Ruling 2 is wall-clock only: use timeProvider.GetUtcNow().
 P:System.Environment.TickCount64;Monotonic timing. Ruling 2 is wall-clock only: use timeProvider.GetUtcNow().
+
+; Ambient randomness, banned by the seeded-RNG follow-up to the clock contract
+; (camunda/sdk-infra#50). Draw jitter from the injected IRandomSource instead; the raw
+; generator belongs only to CamundaRandomSource, exempted via .editorconfig.
+T:System.Random;Use the injected IRandomSource, or CamundaRandomSource.Live for a default.

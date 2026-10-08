@@ -11,6 +11,7 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
     private readonly CamundaConfig _config;
     private readonly ILogger _logger;
     private readonly TimeProvider _timeProvider;
+    private readonly IRandomSource _randomSource;
     private readonly SemaphoreSlim _refreshLock = new(1, 1);
     private OAuthToken? _token;
 
@@ -21,11 +22,12 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
         public required long ObtainedAtEpochMs { get; init; }
     }
 
-    public OAuthManager(CamundaConfig config, ILogger logger, TimeProvider timeProvider)
+    public OAuthManager(CamundaConfig config, ILogger logger, TimeProvider timeProvider, IRandomSource randomSource)
     {
         _config = config;
         _logger = logger;
         _timeProvider = timeProvider;
+        _randomSource = randomSource;
     }
 
     public async Task<string> GetTokenAsync(HttpClient httpClient, CancellationToken ct = default)
@@ -143,7 +145,7 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
                     break;
 
                 var delay = baseDelay * (int)Math.Pow(2, attempt);
-                var jitter = (int)(delay * 0.2 * (Random.Shared.NextDouble() - 0.5));
+                var jitter = (int)(delay * 0.2 * (_randomSource.NextDouble() - 0.5));
                 await Task.Delay(TimeSpan.FromMilliseconds(delay + jitter), _timeProvider, ct);
             }
         }

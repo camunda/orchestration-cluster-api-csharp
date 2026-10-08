@@ -23,7 +23,8 @@ public class HttpRetryTests
             },
             config,
             Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
-            TimeProvider.System);
+            TimeProvider.System,
+            CamundaRandomSource.Live);
 
         Assert.Equal(42, result);
         Assert.Equal(3, attempt);
@@ -44,7 +45,8 @@ public class HttpRetryTests
             },
             config,
             Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
-            TimeProvider.System);
+            TimeProvider.System,
+            CamundaRandomSource.Live);
 
         await Assert.ThrowsAsync<HttpRequestException>(act);
     }
@@ -66,7 +68,8 @@ public class HttpRetryTests
             },
             config,
             Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
-            TimeProvider.System);
+            TimeProvider.System,
+            CamundaRandomSource.Live);
 
         await Assert.ThrowsAsync<HttpRequestException>(act);
         Assert.Equal(1, attempt); // No retry for 404

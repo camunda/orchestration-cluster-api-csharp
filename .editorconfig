@@ -188,6 +188,10 @@ dotnet_diagnostic.RS0030.severity = error
 [src/Camunda.Orchestration.Sdk/Runtime/CamundaTimeProvider.cs]
 dotnet_diagnostic.RS0030.severity = none
 
+# The live randomness source is the one place the platform generator may be read.
+[src/Camunda.Orchestration.Sdk/Runtime/CamundaRandomSource.cs]
+dotnet_diagnostic.RS0030.severity = none
+
 ###############################################################################
 # Generated code — relaxed rules (formatters fix what they can, rest is OK)
 ###############################################################################

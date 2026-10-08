@@ -28,7 +28,7 @@ public class DisposalTests
         {
             OAuth = new OAuthConfig { ClientId = "x", ClientSecret = "x" },
         };
-        var oauth = new OAuthManager(config, NullLogger.Instance, TimeProvider.System);
+        var oauth = new OAuthManager(config, NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
         oauth.Dispose();
     }
 
@@ -39,7 +39,7 @@ public class DisposalTests
         {
             OAuth = new OAuthConfig { ClientId = "x", ClientSecret = "x" },
         };
-        var oauth = new OAuthManager(config, NullLogger.Instance, TimeProvider.System);
+        var oauth = new OAuthManager(config, NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
         await oauth.DisposeAsync();
     }
 
