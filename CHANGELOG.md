@@ -1,3 +1,10 @@
+# [10.0.0-alpha.31](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.30...v10.0.0-alpha.31) (2026-10-08)
+
+
+### Features
+
+* draw runtime jitter from an injected, seedable IRandomSource ([#455](https://github.com/camunda/orchestration-cluster-api-csharp/issues/455)) ([6a22f88](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6a22f88e9f5a301b60fd00e208801984130ea8e5)), closes [camunda/sdk-infra#50](https://github.com/camunda/sdk-infra/issues/50) [#pragma](https://github.com/camunda/orchestration-cluster-api-csharp/issues/pragma)
+
 # [10.0.0-alpha.30](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.29...v10.0.0-alpha.30) (2026-09-30)
 
 
