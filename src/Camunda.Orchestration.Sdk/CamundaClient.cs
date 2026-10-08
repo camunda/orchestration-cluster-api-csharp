@@ -29,6 +29,7 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
     private readonly ILoggerFactory _loggerFactory;
     private readonly BackpressureManager _bp;
     private readonly TimeProvider _timeProvider;
+    private readonly IRandomSource _randomSource;
     internal readonly JsonSerializerOptions _jsonOptions;
 
     /// <summary>
@@ -61,6 +62,7 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         };
 
         _timeProvider = options.TimeProvider ?? CamundaTimeProvider.Live;
+        _randomSource = options.RandomSource ?? CamundaRandomSource.Live;
 
         if (options.HttpClient != null)
         {
@@ -71,7 +73,7 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         {
             var tlsHandler = TlsHelper.BuildHandler(_config.Tls);
             var innerHandler = options.HttpMessageHandler ?? tlsHandler;
-            var authHandler = new AuthHandler(_config, innerHandler, _logger, _timeProvider);
+            var authHandler = new AuthHandler(_config, innerHandler, _logger, _timeProvider, _randomSource);
             _httpClient = new HttpClient(authHandler)
             {
                 BaseAddress = string.IsNullOrEmpty(_config.RestAddress)
@@ -116,6 +118,7 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
                 _config.HttpRetry,
                 _logger,
                 _timeProvider,
+                _randomSource,
                 ex =>
                 {
                     var decision = HttpRetryExecutor.DefaultClassify(ex);

@@ -2028,6 +2028,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaLongKeyJsonConverterFactory : sealed class
 
 TYPE Camunda.Orchestration.Sdk.CamundaOptions : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.IRandomSource? RandomSource { get; set; }
   PROP Microsoft.Extensions.Configuration.IConfiguration? Configuration { get; set; }
   PROP Microsoft.Extensions.Logging.ILoggerFactory? LoggerFactory { get; set; }
   PROP System.Collections.Generic.Dictionary<System.String,System.String>? Config { get; set; }
@@ -2035,6 +2036,10 @@ TYPE Camunda.Orchestration.Sdk.CamundaOptions : sealed class
   PROP System.Net.Http.HttpClient? HttpClient { get; set; }
   PROP System.Net.Http.HttpMessageHandler? HttpMessageHandler { get; set; }
   PROP System.TimeProvider? TimeProvider { get; set; }
+
+TYPE Camunda.Orchestration.Sdk.CamundaRandomSource : sealed class interfaces=[Camunda.Orchestration.Sdk.IRandomSource]
+  PROP Camunda.Orchestration.Sdk.CamundaRandomSource Live { get; }
+  METHOD System.Double NextDouble()
 
 TYPE Camunda.Orchestration.Sdk.CamundaSdkException : class base=System.Exception interfaces=[System.Runtime.Serialization.ISerializable]
   CTOR (System.String message, System.String? operationId = null, System.Int32? status = null, System.Exception? inner = null)
@@ -4072,6 +4077,9 @@ TYPE Camunda.Orchestration.Sdk.ICamundaLongKey : interface
 TYPE Camunda.Orchestration.Sdk.IEngineClockTarget : interface
   METHOD abstract System.Threading.Tasks.Task PinClockAsync(Camunda.Orchestration.Sdk.ClockPinRequest body, System.Threading.CancellationToken ct = null)
   METHOD abstract System.Threading.Tasks.Task ResetClockAsync(System.Threading.CancellationToken ct = null)
+
+TYPE Camunda.Orchestration.Sdk.IRandomSource : interface
+  METHOD abstract System.Double NextDouble()
 
 TYPE Camunda.Orchestration.Sdk.ITenantIdSettable : interface
   METHOD abstract System.Void SetDefaultTenantId(System.String tenantId)
@@ -6350,6 +6358,14 @@ TYPE Camunda.Orchestration.Sdk.SecretResolveResult : sealed class
   CTOR ()
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ResolvedSecret> Resolved { get; set; } [JsonPropertyName("resolved")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.SecretResolutionError> Errors { get; set; } [JsonPropertyName("errors")]
+
+TYPE Camunda.Orchestration.Sdk.SeededRandomSource : sealed class interfaces=[Camunda.Orchestration.Sdk.IRandomSource]
+  CTOR (System.UInt64 seed)
+  PROP System.UInt64 Seed { get; }
+  FIELD System.String SeedEnvironmentVariable static const
+  METHOD System.Double NextDouble()
+  METHOD static Camunda.Orchestration.Sdk.SeededRandomSource FromEnvironment()
+  METHOD virtual System.String ToString()
 
 TYPE Camunda.Orchestration.Sdk.SetVariableRequest : sealed class
   CTOR ()

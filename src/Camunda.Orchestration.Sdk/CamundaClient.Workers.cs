@@ -56,7 +56,7 @@ public partial class CamundaClient : IAsyncDisposable
             TenantFilter = config.TenantFilter,
             WithLease = config.WithLease,
         };
-        var worker = new JobWorker(this, merged, handler, _loggerFactory, _jsonOptions, _timeProvider);
+        var worker = new JobWorker(this, merged, handler, _loggerFactory, _jsonOptions, _timeProvider, _randomSource);
         _workers.Add(worker);
         return worker;
     }

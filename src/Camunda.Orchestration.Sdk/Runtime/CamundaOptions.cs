@@ -60,4 +60,17 @@ public sealed class CamundaOptions
     /// is a separate, explicit step via <c>PinClockAsync</c>.</para>
     /// </summary>
     public TimeProvider? TimeProvider { get; set; }
+
+    /// <summary>
+    /// Randomness used for all SDK runtime jitter: HTTP retry backoff, OAuth retry backoff,
+    /// and worker startup staggering.
+    ///
+    /// <para>Defaults to <see cref="CamundaRandomSource.Live"/>, so production jitter stays
+    /// random.</para>
+    ///
+    /// <para>Supply a <see cref="SeededRandomSource"/> alongside a fake
+    /// <see cref="TimeProvider"/> to make the client's timing reproducible as well as
+    /// virtual.</para>
+    /// </summary>
+    public IRandomSource? RandomSource { get; set; }
 }

@@ -242,7 +242,8 @@ public class InjectedClockRuntimeTests
             },
             config,
             NullLogger.Instance,
-            clock);
+            clock,
+            CamundaRandomSource.Live);
 
         // The backoff is minutes long, but no real time passes: the operation only makes
         // progress when the injected clock is advanced.
@@ -495,7 +496,7 @@ public class InjectedClockRuntimeTests
             TokenAudience = "aud",
         };
 
-        using var oauth = new OAuthManager(config, NullLogger.Instance, clock);
+        using var oauth = new OAuthManager(config, NullLogger.Instance, clock, CamundaRandomSource.Live);
 
         Assert.Equal("token-1", await oauth.GetTokenAsync(client));
 
@@ -530,8 +531,9 @@ public class InjectedClockRuntimeTests
         using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
 
         // A 60s backoff: on a real clock this test would take a minute.
+        var random = new SeededRandomSource(42);
         using var oauth = new OAuthManager(
-            CreateOAuthConfig(retryMax: 3, baseDelayMs: 60_000), NullLogger.Instance, clock);
+            CreateOAuthConfig(retryMax: 3, baseDelayMs: 60_000), NullLogger.Instance, clock, random);
 
         var pending = oauth.GetTokenAsync(client);
 
@@ -541,11 +543,11 @@ public class InjectedClockRuntimeTests
         Assert.False(pending.IsCompleted, "retry proceeded without the clock advancing");
         Assert.Equal(1, Volatile.Read(ref attempts));
 
-        // Past the backoff by a clear margin rather than exactly 60s: the delay carries
-        // ±10% jitter from Random.Shared, which is not clock-controlled (deferred to the
-        // seeded-RNG follow-up, camunda/sdk-infra#50). Advancing exactly one nominal
-        // backoff would therefore fire the timer only when the jitter came out negative.
-        clock.Advance(TimeSpan.FromMinutes(2));
+        // Seed 42 draws 0.7415... first, so the 60s backoff carries +2898ms of jitter.
+        const int jitteredMs = 62_898;
+        Assert.Equal(TimeSpan.FromMilliseconds(jitteredMs), Assert.Single(clock.DueTimes));
+
+        clock.Advance(TimeSpan.FromMilliseconds(jitteredMs));
 
         Assert.Equal("token", await pending.WaitAsync(TimeSpan.FromSeconds(10)));
         Assert.Equal(2, Volatile.Read(ref attempts));
@@ -565,7 +567,7 @@ public class InjectedClockRuntimeTests
         using var client = new HttpClient(unresponsive) { BaseAddress = new Uri("https://auth.mock/") };
 
         using var oauth = new OAuthManager(
-            CreateOAuthConfig(retryMax: 1, baseDelayMs: 10, timeoutMs: 200), NullLogger.Instance, clock);
+            CreateOAuthConfig(retryMax: 1, baseDelayMs: 10, timeoutMs: 200), NullLogger.Instance, clock, CamundaRandomSource.Live);
 
         // The clock is never advanced. Only the real-time liveness bound can end this.
         var ex = await Assert.ThrowsAsync<CamundaAuthException>(

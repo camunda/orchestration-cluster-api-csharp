@@ -184,10 +184,6 @@ dotnet_diagnostic.CA1707.severity = none
 [src/**.cs]
 dotnet_diagnostic.RS0030.severity = error
 
-# The live clock is the one place the system clock may be read.
-[src/Camunda.Orchestration.Sdk/Runtime/CamundaTimeProvider.cs]
-dotnet_diagnostic.RS0030.severity = none
-
 ###############################################################################
 # Generated code — relaxed rules (formatters fix what they can, rest is OK)
 ###############################################################################

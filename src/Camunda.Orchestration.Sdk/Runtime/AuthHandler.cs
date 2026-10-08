@@ -18,7 +18,7 @@ internal sealed class AuthHandler : DelegatingHandler
     private readonly string? _basicHeader;
     private readonly ILogger _logger;
 
-    public AuthHandler(CamundaConfig config, HttpMessageHandler? inner, ILogger? logger, TimeProvider timeProvider)
+    public AuthHandler(CamundaConfig config, HttpMessageHandler? inner, ILogger? logger, TimeProvider timeProvider, IRandomSource randomSource)
         : base(inner ?? new HttpClientHandler())
     {
         _config = config;
@@ -27,7 +27,7 @@ internal sealed class AuthHandler : DelegatingHandler
         switch (config.Auth.Strategy)
         {
             case AuthStrategy.OAuth:
-                _oauth = new OAuthManager(config, _logger, timeProvider);
+                _oauth = new OAuthManager(config, _logger, timeProvider, randomSource);
                 break;
             case AuthStrategy.Basic:
                 if (config.Auth.Basic is { Username: not null, Password: not null })

@@ -13,6 +13,7 @@ internal static class HttpRetryExecutor
         HttpRetryConfig config,
         ILogger logger,
         TimeProvider timeProvider,
+        IRandomSource randomSource,
         Func<Exception, RetryDecision>? classifier = null,
         CancellationToken ct = default)
     {
@@ -39,7 +40,7 @@ internal static class HttpRetryExecutor
                 var delay = Math.Min(
                     config.BaseDelayMs * (int)Math.Pow(2, attempt),
                     config.MaxDelayMs);
-                var jitter = (int)(delay * 0.2 * (Random.Shared.NextDouble() - 0.5));
+                var jitter = (int)(delay * 0.2 * (randomSource.NextDouble() - 0.5));
                 var sleepMs = delay + jitter;
 
                 if (logger.IsEnabled(LogLevel.Debug))

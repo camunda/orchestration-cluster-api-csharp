@@ -7,8 +7,8 @@
 ; This file applies to the SDK project only. Test projects legitimately use ambient
 ; time and do not reference the analyzer.
 ;
-; Two exemption categories exist, both applied narrowly with #pragma or a path-scoped
-; .editorconfig entry rather than by widening this list:
+; Two exemption categories exist, both applied narrowly with #pragma at the exact
+; statement rather than by widening this list or exempting whole files:
 ;   - the live clock itself (CamundaTimeProvider), which is the one allowed place the
 ;     system clock is read;
 ;   - liveness bounds, i.e. timers whose job is to stop something waiting forever. On a
@@ -51,3 +51,8 @@ M:System.Threading.Tasks.Task`1.WaitAsync(System.TimeSpan,System.Threading.Cance
 
 P:System.Environment.TickCount;Monotonic timing. Ruling 2 is wall-clock only: use timeProvider.GetUtcNow().
 P:System.Environment.TickCount64;Monotonic timing. Ruling 2 is wall-clock only: use timeProvider.GetUtcNow().
+
+; Ambient randomness, banned by the seeded-RNG follow-up to the clock contract
+; (camunda/sdk-infra#50). Draw jitter from the injected IRandomSource instead; the raw
+; generator belongs only to CamundaRandomSource, exempted by #pragma at its one read.
+T:System.Random;Use the injected IRandomSource, or CamundaRandomSource.Live for a default.
