@@ -9345,7 +9345,7 @@ public sealed class CamundaUserResult
     public string? Email { get; set; }
 
     /// <summary>
-    /// The web components the user is authorized to use.
+    /// The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[&quot;*&quot;]`, regardless of the user&apos;s actual permissions, since access is not restricted in that case.
     /// </summary>
     [JsonPropertyName("authorizedComponents")]
     public List<string> AuthorizedComponents { get; set; } = null!;
