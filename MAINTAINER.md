@@ -368,7 +368,7 @@ When a new Camunda server minor ships (e.g. 8.11), the SDK bumps its major (e.g.
 
 3. **Move `main` to the next major.** Merge a PR into `main` (rebase merge, label `breaking-change-approved`) whose commit carries a `BREAKING CHANGE: SDK major version bumped from 11 to 12` footer. CI publishes `12.0.0-alpha.1`. A prerelease branch computes its major from the last release reachable from it; the `v11.0.0` tag is what makes this `12` rather than another `11.0.0-alpha.*`. With the variable at `11`, `scripts/prepare-release.sh` expects major `12` on `main`.
 
-4. **Release the stable line.** Push a commit to `stable/11` that warrants a release. CI publishes it to NuGet:
+4. **Pin the spec and release the stable line.** On `stable/11`, point the default `SPEC_REF` at the new server branch (`stable/8.11`) in `.github/workflows/*.yml` and `scripts/*.sh`, so the first `11.x` package is generated from the 8.11 API, and make that the commit that warrants a release. If the defaults already point there, use an empty commit. CI publishes it to NuGet:
 
    - To publish `11.0.0`, first delete the tag (`git push origin :refs/tags/v11.0.0`), then push a commit with a `BREAKING CHANGE:` footer.
    - If `11.0.0` must not be used, keep the tag and push a `fix:` commit to publish `11.0.1`. This is what 10.x did, because NuGet already held an unlisted `10.0.0` from an accidental release and NuGet versions can never be reused.
