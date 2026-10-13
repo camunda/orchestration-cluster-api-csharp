@@ -5,12 +5,12 @@
     ":semanticCommitTypeAll(chore)"
   ],
   "semanticCommits": "enabled",
-  "baseBranchPatterns": ["main", "stable/9"],
+  "baseBranchPatterns": ["main", "stable/9", "stable/10"],
   "rebaseWhen": "behind-base-branch",
   "packageRules": [
     {
-      "description": "stable/9 is a maintenance branch: patch updates only.",
-      "matchBaseBranches": ["stable/9"],
+      "description": "stable/9 and stable/10 are maintenance branches: patch updates only.",
+      "matchBaseBranches": ["stable/9", "stable/10"],
       "matchUpdateTypes": ["major", "minor", "pin", "digest", "pinDigest", "rollback", "replacement"],
       "enabled": false
     },
