@@ -281,8 +281,8 @@ Releases are fully automated via [semantic-release](https://github.com/semantic-
 
 ### Branch model
 
-- **`main`** → alpha prereleases (`10.0.0-alpha.1`, `10.0.0-alpha.2`, ...)
-- **`stable/<major>`** (current) → stable releases (`9.0.0`, `9.0.1`, ...)
+- **`main`** → alpha prereleases (`11.0.0-alpha.1`, `11.0.0-alpha.2`, ...)
+- **`stable/<major>`** (current) → stable releases (`10.0.1`, `10.0.2`, ...)
 - **`stable/<major>`** (older) → maintenance releases
 
 The currently promoted stable major is configured via the `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` repo variable (e.g. `9`).
@@ -353,46 +353,37 @@ BREAKING CHANGE: SDK major version bumped from 9 to 10 to track Camunda server 8
 
 ### Releasing a new major version (new stable line)
 
-When a new Camunda server minor ships (e.g. 8.10), the SDK bumps its major (e.g. 9 → 10). Follow these steps **in order**:
+When a new Camunda server minor ships (e.g. 8.11), the SDK bumps its major (e.g. 10 → 11). Follow these steps **in order**. Each one depends on the release state the previous one creates.
 
-1. **Set the repo variable**: GitHub → Settings → Variables → set `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` to the **new** major (e.g. `10`). This must be set before the next `main` CI run, so that `main`'s branch array includes `stable/10` as the release branch. Without it, `main` won't know about the stable line and semantic-release can't reconcile version history across branches.
+1. **Tag the cut point and create the stable branch with the spec pinned.** Put a lightweight `v11.0.0` tag on the current `main` tip. Create `stable/11` from it with one commit that points the default `SPEC_REF` at `stable/8.11` (in `.github/workflows/*.yml` and `scripts/*.sh`), with `[skip ci]` in its message. Every push to `stable/**` starts `release.yml`, which commits any generated drift as a release-worthy `fix(gen)`; skipping CI here means the branch's first release run is the one in step 4, against the pinned spec.
 
-2. **Push a breaking-change commit on `main`**:
    ```bash
-   git checkout main
-   git commit --allow-empty -m "feat: release SDK 10 for Camunda server 8.10
-
-   BREAKING CHANGE: SDK major version bumped from 9 to 10 to track Camunda server 8.10"
-   git push
+   git fetch origin
+   X=$(git rev-parse origin/main)
+   git tag v11.0.0 "$X" && git push origin v11.0.0
+   git checkout -b stable/11 "$X"
+   # Point the SPEC_REF defaults at stable/8.11 (use --allow-empty if they already do).
+   git commit -am "chore: pin the 11.x line to the Camunda 8.11 spec [skip ci]"
+   git push origin stable/11
+   gh run list --workflow release.yml --branch stable/11   # must list no runs
    ```
 
-3. **Wait for main CI** to complete and publish the first alpha (e.g. `v10.0.0-alpha.1`).
+2. **Set the repo variable** `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` to `11` (GitHub → Settings → Variables). Do this only after `stable/11` exists: with the variable set and the branch missing, every `main` release run fails with `ERELEASEBRANCHES`.
 
-4. **Create and push the stable branch** from main:
-   ```bash
-   git checkout -b stable/10
-   git push -u origin stable/10
-   ```
-   CI runs automatically on push and publishes the first stable release (e.g. `10.0.0`).
+3. **Move `main` to the next major.** Merge a PR into `main` (rebase merge, label `breaking-change-approved`) whose commit carries a `BREAKING CHANGE: SDK major version bumped from 11 to 12` footer. CI publishes `12.0.0-alpha.1`. A prerelease branch computes its major from the last release reachable from it; the `v11.0.0` tag is what makes this `12` rather than another `11.0.0-alpha.*`. With the variable at `11`, `scripts/prepare-release.sh` expects major `12` on `main`.
 
-5. **Bump `main` to the next major** so alpha versions don't collide with the stable line:
-   ```bash
-   git checkout main
-   git commit --allow-empty -m "feat: begin SDK 11 development for Camunda server 8.11
+4. **Release the stable line.** Push a commit to `stable/11` that warrants a release; it is the branch's first push without `[skip ci]`, so do not push anything else to `stable/11` before this step. CI generates from the pinned spec and publishes to NuGet:
 
-   BREAKING CHANGE: SDK major version bumped from 10 to 11"
-   git push
-   ```
-   This ensures main publishes `11.0.0-alpha.x` while `stable/10` publishes `10.0.x`.
+   - To publish `11.0.0`, first delete the tag (`git push origin :refs/tags/v11.0.0`), then push a commit with a `BREAKING CHANGE:` footer.
+   - If `11.0.0` must not be used, keep the tag and push a `fix:` commit to publish `11.0.1`. This is what 10.x did, because NuGet already held an unlisted `10.0.0` from an accidental release and NuGet versions can never be reused.
 
-6. **Add the new stable branch to Renovate** in `.github/renovate.json`: append it to `baseBranchPatterns` and mirror the patch-only `packageRules` entry (and any package pins) for it.
+   This only works after step 3: the current stable branch can only release below `main`'s first release that is not on it, so until `main` has `12.0.0-alpha.1` there is no room for an `11.x` release (semantic-release reports `EINVALIDNEXTVERSION`).
 
-7. **Switch back to `main`** for ongoing development:
-   ```bash
-   git checkout main
-   ```
+5. **Add the new stable branch to Renovate** in `.github/renovate.json`: append it to `baseBranchPatterns` and mirror the patch-only `packageRules` entry (and any package pins) for it.
 
 > **Important**: Use a `BREAKING CHANGE:` footer in the commit body — not the `feat!:` shorthand. The `!` convention may not be recognized depending on the `conventional-commits-parser` version bundled with `@semantic-release/commit-analyzer`.
+
+> **NuGet versions are permanent.** `scripts/publish-nuget.sh` pushes with `--skip-duplicate`, so a release whose version already exists on NuGet (even unlisted) reports success without publishing anything. Check `https://api.nuget.org/v3-flatcontainer/camunda.orchestration.sdk/index.json` before cutting a version.
 
 ### Configuration files
 
