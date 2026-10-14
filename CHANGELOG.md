@@ -1,3 +1,10 @@
+## [10.0.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0...v10.0.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* describe the 10.x stable line in the README ([63560bb](https://github.com/camunda/orchestration-cluster-api-csharp/commit/63560bbd7dac2951f3efac6d5a8a21c22d80cfdc))
+
 # [10.0.0-alpha.31](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.30...v10.0.0-alpha.31) (2026-10-08)
 
 
