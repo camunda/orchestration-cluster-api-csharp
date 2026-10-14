@@ -10195,6 +10195,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.CanLogout
   fullName: Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.CanLogout
   nameWithType: AuthenticationConfigurationResponse.CanLogout
+- uid: Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsCamundaGroupsEnabled
+  name: IsCamundaGroupsEnabled
+  href: api/Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsCamundaGroupsEnabled.html#Camunda_Orchestration_Sdk_AuthenticationConfigurationResponse_IsCamundaGroupsEnabled
+  commentId: P:Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsCamundaGroupsEnabled
+  fullName: Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsCamundaGroupsEnabled
+  nameWithType: AuthenticationConfigurationResponse.IsCamundaGroupsEnabled
+- uid: Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsCamundaGroupsEnabled*
+  name: IsCamundaGroupsEnabled
+  href: api/Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsCamundaGroupsEnabled.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsCamundaGroupsEnabled
+  fullName: Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsCamundaGroupsEnabled
+  nameWithType: AuthenticationConfigurationResponse.IsCamundaGroupsEnabled
 - uid: Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsLoginDelegated
   name: IsLoginDelegated
   href: api/Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse.IsLoginDelegated.html#Camunda_Orchestration_Sdk_AuthenticationConfigurationResponse_IsLoginDelegated
@@ -24781,6 +24793,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsMultiTenancyEnabled
   fullName: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsMultiTenancyEnabled
   nameWithType: DeploymentConfigurationResponse.IsMultiTenancyEnabled
+- uid: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled
+  name: IsTenantsApiEnabled
+  href: api/Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled.html#Camunda_Orchestration_Sdk_DeploymentConfigurationResponse_IsTenantsApiEnabled
+  commentId: P:Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled
+  fullName: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled
+  nameWithType: DeploymentConfigurationResponse.IsTenantsApiEnabled
+- uid: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled*
+  name: IsTenantsApiEnabled
+  href: api/Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled
+  fullName: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled
+  nameWithType: DeploymentConfigurationResponse.IsTenantsApiEnabled
 - uid: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.MaxRequestSize
   name: MaxRequestSize
   href: api/Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.MaxRequestSize.html#Camunda_Orchestration_Sdk_DeploymentConfigurationResponse_MaxRequestSize
@@ -47260,6 +47284,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.RoleUpdateResult.RoleId
   fullName: Camunda.Orchestration.Sdk.RoleUpdateResult.RoleId
   nameWithType: RoleUpdateResult.RoleId
+- uid: Camunda.Orchestration.Sdk.RoleUserFilterRequest
+  name: RoleUserFilterRequest
+  href: api/Camunda.Orchestration.Sdk.RoleUserFilterRequest.html
+  commentId: T:Camunda.Orchestration.Sdk.RoleUserFilterRequest
+  fullName: Camunda.Orchestration.Sdk.RoleUserFilterRequest
+  nameWithType: RoleUserFilterRequest
+- uid: Camunda.Orchestration.Sdk.RoleUserFilterRequest.Username
+  name: Username
+  href: api/Camunda.Orchestration.Sdk.RoleUserFilterRequest.Username.html#Camunda_Orchestration_Sdk_RoleUserFilterRequest_Username
+  commentId: P:Camunda.Orchestration.Sdk.RoleUserFilterRequest.Username
+  fullName: Camunda.Orchestration.Sdk.RoleUserFilterRequest.Username
+  nameWithType: RoleUserFilterRequest.Username
+- uid: Camunda.Orchestration.Sdk.RoleUserFilterRequest.Username*
+  name: Username
+  href: api/Camunda.Orchestration.Sdk.RoleUserFilterRequest.Username.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RoleUserFilterRequest.Username
+  fullName: Camunda.Orchestration.Sdk.RoleUserFilterRequest.Username
+  nameWithType: RoleUserFilterRequest.Username
 - uid: Camunda.Orchestration.Sdk.RoleUserResult
   name: RoleUserResult
   href: api/Camunda.Orchestration.Sdk.RoleUserResult.html
@@ -47284,6 +47326,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest
   fullName: Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest
   nameWithType: RoleUserSearchQueryRequest
+- uid: Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Filter
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Filter.html#Camunda_Orchestration_Sdk_RoleUserSearchQueryRequest_Filter
+  commentId: P:Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Filter
+  nameWithType: RoleUserSearchQueryRequest.Filter
+- uid: Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Filter*
+  name: Filter
+  href: api/Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Filter.html
+  commentId: Overload:Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Filter
+  fullName: Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Filter
+  nameWithType: RoleUserSearchQueryRequest.Filter
 - uid: Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Page
   name: Page
   href: api/Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest.Page.html#Camunda_Orchestration_Sdk_RoleUserSearchQueryRequest_Page
@@ -50854,6 +50908,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilter.FollowUpDate
   fullName: Camunda.Orchestration.Sdk.UserTaskFilter.FollowUpDate
   nameWithType: UserTaskFilter.FollowUpDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilter.IsSuspended
+  name: IsSuspended
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilter.IsSuspended.html#Camunda_Orchestration_Sdk_UserTaskFilter_IsSuspended
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilter.IsSuspended
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilter.IsSuspended
+  nameWithType: UserTaskFilter.IsSuspended
+- uid: Camunda.Orchestration.Sdk.UserTaskFilter.IsSuspended*
+  name: IsSuspended
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilter.IsSuspended.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilter.IsSuspended
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilter.IsSuspended
+  nameWithType: UserTaskFilter.IsSuspended
 - uid: Camunda.Orchestration.Sdk.UserTaskFilter.LocalVariables
   name: LocalVariables
   href: api/Camunda.Orchestration.Sdk.UserTaskFilter.LocalVariables.html#Camunda_Orchestration_Sdk_UserTaskFilter_LocalVariables
@@ -51124,6 +51190,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate
   fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.FollowUpDate
   nameWithType: UserTaskFilterFields.FollowUpDate
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.IsSuspended
+  name: IsSuspended
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.IsSuspended.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_IsSuspended
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskFilterFields.IsSuspended
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.IsSuspended
+  nameWithType: UserTaskFilterFields.IsSuspended
+- uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.IsSuspended*
+  name: IsSuspended
+  href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.IsSuspended.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskFilterFields.IsSuspended
+  fullName: Camunda.Orchestration.Sdk.UserTaskFilterFields.IsSuspended
+  nameWithType: UserTaskFilterFields.IsSuspended
 - uid: Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables
   name: LocalVariables
   href: api/Camunda.Orchestration.Sdk.UserTaskFilterFields.LocalVariables.html#Camunda_Orchestration_Sdk_UserTaskFilterFields_LocalVariables
@@ -51604,6 +51682,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.UserTaskResult.FormKey
   fullName: Camunda.Orchestration.Sdk.UserTaskResult.FormKey
   nameWithType: UserTaskResult.FormKey
+- uid: Camunda.Orchestration.Sdk.UserTaskResult.IsSuspended
+  name: IsSuspended
+  href: api/Camunda.Orchestration.Sdk.UserTaskResult.IsSuspended.html#Camunda_Orchestration_Sdk_UserTaskResult_IsSuspended
+  commentId: P:Camunda.Orchestration.Sdk.UserTaskResult.IsSuspended
+  fullName: Camunda.Orchestration.Sdk.UserTaskResult.IsSuspended
+  nameWithType: UserTaskResult.IsSuspended
+- uid: Camunda.Orchestration.Sdk.UserTaskResult.IsSuspended*
+  name: IsSuspended
+  href: api/Camunda.Orchestration.Sdk.UserTaskResult.IsSuspended.html
+  commentId: Overload:Camunda.Orchestration.Sdk.UserTaskResult.IsSuspended
+  fullName: Camunda.Orchestration.Sdk.UserTaskResult.IsSuspended
+  nameWithType: UserTaskResult.IsSuspended
 - uid: Camunda.Orchestration.Sdk.UserTaskResult.Name
   name: Name
   href: api/Camunda.Orchestration.Sdk.UserTaskResult.Name.html#Camunda_Orchestration_Sdk_UserTaskResult_Name
