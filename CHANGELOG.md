@@ -1,3 +1,34 @@
+# [11.0.0-alpha.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0...v11.0.0-alpha.1) (2026-10-14)
+
+
+### Features
+
+* begin SDK 11 development for Camunda server 8.11 ([#460](https://github.com/camunda/orchestration-cluster-api-csharp/issues/460)) ([bdcdf42](https://github.com/camunda/orchestration-cluster-api-csharp/commit/bdcdf42eacbb823fc5b0b3b8273c2acda7b01f9c))
+
+
+### BREAKING CHANGES
+
+* SDK major version bumped from 10 to 11
+
+* docs: pin the spec in the stable release commit
+
+The first release on a new stable line runs the full generation
+pipeline, so the SPEC_REF defaults on that branch must already point at
+the new server branch, or the package is generated from the previous
+server's spec.
+
+* chore: keep the stable branch from releasing before the spec is pinned
+
+Address review on the runbook. Every push to stable/** starts
+release.yml, whose generate job commits any drift as fix(gen), a
+release-worthy commit. Creating the branch at the cut point could
+therefore try to release from the previous server's spec before the
+pin landed, racing the main bump.
+
+The branch is now created with the spec pin as its first commit,
+marked to skip CI, so the first release run is the deliberate release
+commit, against the pinned spec.
+
 # [10.0.0-alpha.31](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0-alpha.30...v10.0.0-alpha.31) (2026-10-08)
 
 
