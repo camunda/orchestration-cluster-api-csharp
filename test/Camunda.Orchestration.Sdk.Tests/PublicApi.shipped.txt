@@ -1297,6 +1297,7 @@ TYPE Camunda.Orchestration.Sdk.AuthStrategy : enum interfaces=[System.IComparabl
 TYPE Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse : sealed class
   CTOR ()
   PROP System.Boolean CanLogout { get; set; } [JsonPropertyName("canLogout")]
+  PROP System.Boolean IsCamundaGroupsEnabled { get; set; } [JsonPropertyName("isCamundaGroupsEnabled")]
   PROP System.Boolean IsLoginDelegated { get; set; } [JsonPropertyName("isLoginDelegated")]
 
 TYPE Camunda.Orchestration.Sdk.AuthorizationCreateResult : sealed class
@@ -3118,6 +3119,7 @@ TYPE Camunda.Orchestration.Sdk.DeleteResourceResponse : sealed class
 TYPE Camunda.Orchestration.Sdk.DeploymentConfigurationResponse : sealed class
   CTOR ()
   PROP System.Boolean IsMultiTenancyEnabled { get; set; } [JsonPropertyName("isMultiTenancyEnabled")]
+  PROP System.Boolean IsTenantsApiEnabled { get; set; } [JsonPropertyName("isTenantsApiEnabled")]
   PROP System.Int64 MaxRequestSize { get; set; } [JsonPropertyName("maxRequestSize")]
 
 TYPE Camunda.Orchestration.Sdk.DeploymentDecisionRequirementsResult : sealed class
@@ -4605,7 +4607,7 @@ TYPE Camunda.Orchestration.Sdk.JobSearchQuerySortRequestField : enum interfaces=
 TYPE Camunda.Orchestration.Sdk.JobSearchResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
-  PROP Camunda.Orchestration.Sdk.ElementId? ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
   PROP Camunda.Orchestration.Sdk.JobKey JobKey { get; set; } [JsonPropertyName("jobKey")]
   PROP Camunda.Orchestration.Sdk.JobKindEnum Kind { get; set; } [JsonPropertyName("kind")]
@@ -6250,12 +6252,17 @@ TYPE Camunda.Orchestration.Sdk.RoleUpdateResult : sealed class
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
   PROP System.String? Description { get; set; } [JsonPropertyName("description")]
 
+TYPE Camunda.Orchestration.Sdk.RoleUserFilterRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Username { get; set; } [JsonPropertyName("username")]
+
 TYPE Camunda.Orchestration.Sdk.RoleUserResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.Username Username { get; set; } [JsonPropertyName("username")]
 
 TYPE Camunda.Orchestration.Sdk.RoleUserSearchQueryRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.RoleUserFilterRequest? Filter { get; set; } [JsonPropertyName("filter")]
   PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.RoleUserSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
 
@@ -6774,8 +6781,8 @@ TYPE Camunda.Orchestration.Sdk.UserSearchResult : sealed class
 TYPE Camunda.Orchestration.Sdk.UserTaskAssignmentRequest : sealed class
   CTOR ()
   PROP System.Boolean? AllowOverride { get; set; } [JsonPropertyName("allowOverride")]
+  PROP System.String Assignee { get; set; } [JsonPropertyName("assignee")]
   PROP System.String? Action { get; set; } [JsonPropertyName("action")]
-  PROP System.String? Assignee { get; set; } [JsonPropertyName("assignee")]
 
 TYPE Camunda.Orchestration.Sdk.UserTaskAuditLogFilter : sealed class
   CTOR ()
@@ -6822,6 +6829,7 @@ TYPE Camunda.Orchestration.Sdk.UserTaskFilter : sealed class
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.UserTaskKey? UserTaskKey { get; set; } [JsonPropertyName("userTaskKey")]
   PROP Camunda.Orchestration.Sdk.UserTaskStateFilterProperty? State { get; set; } [JsonPropertyName("state")]
+  PROP System.Boolean? IsSuspended { get; set; } [JsonPropertyName("isSuspended")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.UserTaskFilterFields>? Or { get; set; } [JsonPropertyName("$or")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableValueFilterProperty>? LocalVariables { get; set; } [JsonPropertyName("localVariables")]
@@ -6847,6 +6855,7 @@ TYPE Camunda.Orchestration.Sdk.UserTaskFilterFields : sealed class
   PROP Camunda.Orchestration.Sdk.StringFilterProperty? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.UserTaskKey? UserTaskKey { get; set; } [JsonPropertyName("userTaskKey")]
   PROP Camunda.Orchestration.Sdk.UserTaskStateFilterProperty? State { get; set; } [JsonPropertyName("state")]
+  PROP System.Boolean? IsSuspended { get; set; } [JsonPropertyName("isSuspended")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableValueFilterProperty>? LocalVariables { get; set; } [JsonPropertyName("localVariables")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableValueFilterProperty>? ProcessInstanceVariables { get; set; } [JsonPropertyName("processInstanceVariables")]
@@ -6886,6 +6895,7 @@ TYPE Camunda.Orchestration.Sdk.UserTaskResult : sealed class
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.UserTaskKey UserTaskKey { get; set; } [JsonPropertyName("userTaskKey")]
   PROP Camunda.Orchestration.Sdk.UserTaskStateEnum State { get; set; } [JsonPropertyName("state")]
+  PROP System.Boolean IsSuspended { get; set; } [JsonPropertyName("isSuspended")]
   PROP System.Collections.Generic.Dictionary<System.String,System.String> CustomHeaders { get; set; } [JsonPropertyName("customHeaders")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag> Tags { get; set; } [JsonPropertyName("tags")]
   PROP System.Collections.Generic.List<System.String> CandidateGroups { get; set; } [JsonPropertyName("candidateGroups")]
