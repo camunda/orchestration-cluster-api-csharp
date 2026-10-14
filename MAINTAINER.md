@@ -355,20 +355,24 @@ BREAKING CHANGE: SDK major version bumped from 9 to 10 to track Camunda server 8
 
 When a new Camunda server minor ships (e.g. 8.11), the SDK bumps its major (e.g. 10 → 11). Follow these steps **in order**. Each one depends on the release state the previous one creates.
 
-1. **Tag the cut point and create the stable branch.** Put a lightweight `v11.0.0` tag on the current `main` tip and create `stable/11` at the same commit:
+1. **Tag the cut point and create the stable branch with the spec pinned.** Put a lightweight `v11.0.0` tag on the current `main` tip. Create `stable/11` from it with one commit that points the default `SPEC_REF` at `stable/8.11` (in `.github/workflows/*.yml` and `scripts/*.sh`), with `[skip ci]` in its message. Every push to `stable/**` starts `release.yml`, which commits any generated drift as a release-worthy `fix(gen)`; skipping CI here means the branch's first release run is the one in step 4, against the pinned spec.
 
    ```bash
    git fetch origin
    X=$(git rev-parse origin/main)
    git tag v11.0.0 "$X" && git push origin v11.0.0
-   git push origin "$X:refs/heads/stable/11"
+   git checkout -b stable/11 "$X"
+   # Point the SPEC_REF defaults at stable/8.11 (use --allow-empty if they already do).
+   git commit -am "chore: pin the 11.x line to the Camunda 8.11 spec [skip ci]"
+   git push origin stable/11
+   gh run list --workflow release.yml --branch stable/11   # must list no runs
    ```
 
 2. **Set the repo variable** `CAMUNDA_SDK_CURRENT_STABLE_MAJOR` to `11` (GitHub → Settings → Variables). Do this only after `stable/11` exists: with the variable set and the branch missing, every `main` release run fails with `ERELEASEBRANCHES`.
 
 3. **Move `main` to the next major.** Merge a PR into `main` (rebase merge, label `breaking-change-approved`) whose commit carries a `BREAKING CHANGE: SDK major version bumped from 11 to 12` footer. CI publishes `12.0.0-alpha.1`. A prerelease branch computes its major from the last release reachable from it; the `v11.0.0` tag is what makes this `12` rather than another `11.0.0-alpha.*`. With the variable at `11`, `scripts/prepare-release.sh` expects major `12` on `main`.
 
-4. **Pin the spec and release the stable line.** On `stable/11`, point the default `SPEC_REF` at the new server branch (`stable/8.11`) in `.github/workflows/*.yml` and `scripts/*.sh`, so the first `11.x` package is generated from the 8.11 API, and make that the commit that warrants a release. If the defaults already point there, use an empty commit. CI publishes it to NuGet:
+4. **Release the stable line.** Push a commit to `stable/11` that warrants a release; it is the branch's first push without `[skip ci]`, so do not push anything else to `stable/11` before this step. CI generates from the pinned spec and publishes to NuGet:
 
    - To publish `11.0.0`, first delete the tag (`git push origin :refs/tags/v11.0.0`), then push a commit with a `BREAKING CHANGE:` footer.
    - If `11.0.0` must not be used, keep the tag and push a `fix:` commit to publish `11.0.1`. This is what 10.x did, because NuGet already held an unlisted `10.0.0` from an accidental release and NuGet versions can never be reused.
