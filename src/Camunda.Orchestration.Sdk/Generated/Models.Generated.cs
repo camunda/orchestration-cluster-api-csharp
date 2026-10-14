@@ -1243,7 +1243,7 @@ public enum TenantGroupSearchQuerySortRequestField
 }
 
 /// <summary>
-/// The field to sort by.
+/// The field to sort by. `key` is deprecated and should not be used anymore.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum TenantSearchQuerySortRequestField
@@ -7630,6 +7630,12 @@ public sealed class AuthenticationConfigurationResponse
     [JsonPropertyName("isLoginDelegated")]
     public bool IsLoginDelegated { get; set; }
 
+    /// <summary>
+    /// Whether Camunda manages group membership locally, as opposed to delegating it to the identity provider via a groups claim.
+    /// </summary>
+    [JsonPropertyName("isCamundaGroupsEnabled")]
+    public bool IsCamundaGroupsEnabled { get; set; }
+
 }
 
 /// <summary>
@@ -13737,6 +13743,12 @@ public sealed class DeploymentConfigurationResponse
     /// </summary>
     [JsonPropertyName("isMultiTenancyEnabled")]
     public bool IsMultiTenancyEnabled { get; set; }
+
+    /// <summary>
+    /// Whether the tenants management API and UI are enabled.
+    /// </summary>
+    [JsonPropertyName("isTenantsApiEnabled")]
+    public bool IsTenantsApiEnabled { get; set; }
 
     /// <summary>
     /// The maximum HTTP request size in bytes.
@@ -19871,10 +19883,10 @@ public sealed class JobSearchResult
     public string? DeniedReason { get; set; }
 
     /// <summary>
-    /// The element ID associated with the job. May be missing on job failure.
+    /// The element ID associated with the job.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public ElementId? ElementId { get; set; }
+    public ElementId ElementId { get; set; }
 
     /// <summary>
     /// The element instance key associated with the job.
@@ -26762,6 +26774,19 @@ public sealed class RoleUpdateResult
 }
 
 /// <summary>
+/// Role user filter request
+/// </summary>
+public sealed class RoleUserFilterRequest
+{
+    /// <summary>
+    /// The username search filters.
+    /// </summary>
+    [JsonPropertyName("username")]
+    public StringFilterProperty? Username { get; set; }
+
+}
+
+/// <summary>
 /// RoleUserResult
 /// </summary>
 public sealed class RoleUserResult
@@ -26779,6 +26804,12 @@ public sealed class RoleUserResult
 /// </summary>
 public sealed class RoleUserSearchQueryRequest
 {
+    /// <summary>
+    /// The user filter criteria.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public RoleUserFilterRequest? Filter { get; set; }
+
     /// <summary>
     /// Sort field criteria.
     /// </summary>
@@ -27859,7 +27890,7 @@ public sealed class TenantCreateRequest
 {
     /// <summary>
     /// The unique ID for the tenant. Must be 31 characters or less and match
-    /// `^[\w.-]{1,31}$` (word characters, `.`, `-`). The literal
+    /// `` ^[\w.-]{1,31}$ `` (word characters, `.`, `-`). The literal
     /// `&lt;default&gt;` is also accepted as the default-tenant alias.
     /// 
     /// </summary>
@@ -28148,7 +28179,7 @@ public sealed class TenantSearchQueryResult
 public sealed class TenantSearchQuerySortRequest
 {
     /// <summary>
-    /// The field to sort by.
+    /// The field to sort by. `key` is deprecated and should not be used anymore.
     /// </summary>
     [JsonPropertyName("field")]
     public TenantSearchQuerySortRequestField Field { get; set; }
@@ -28715,7 +28746,7 @@ public sealed class UserTaskAssignmentRequest
     /// The assignee for the user task. The assignee must not be empty or `null`.
     /// </summary>
     [JsonPropertyName("assignee")]
-    public string? Assignee { get; set; }
+    public string Assignee { get; set; } = null!;
 
     /// <summary>
     /// By default, the task is reassigned if it was already assigned. Set this to `false` to return an error in such cases. The task must then first be unassigned to be assigned again. Use this when you have users picking from group task queues to prevent race conditions.
@@ -28851,6 +28882,13 @@ public sealed class UserTaskFilter
     /// </summary>
     [JsonPropertyName("state")]
     public UserTaskStateFilterProperty? State { get; set; }
+
+    /// <summary>
+    /// Whether the user task is suspended because its owning process instance is suspended.
+    /// 
+    /// </summary>
+    [JsonPropertyName("isSuspended")]
+    public bool? IsSuspended { get; set; }
 
     /// <summary>
     /// The assignee of the user task.
@@ -29020,6 +29058,13 @@ public sealed class UserTaskFilterFields
     /// </summary>
     [JsonPropertyName("state")]
     public UserTaskStateFilterProperty? State { get; set; }
+
+    /// <summary>
+    /// Whether the user task is suspended because its owning process instance is suspended.
+    /// 
+    /// </summary>
+    [JsonPropertyName("isSuspended")]
+    public bool? IsSuspended { get; set; }
 
     /// <summary>
     /// The assignee of the user task.
@@ -29342,6 +29387,13 @@ public sealed class UserTaskResult
     /// </summary>
     [JsonPropertyName("priority")]
     public int Priority { get; set; }
+
+    /// <summary>
+    /// Whether the user task is suspended because its owning process instance is suspended.
+    /// 
+    /// </summary>
+    [JsonPropertyName("isSuspended")]
+    public bool IsSuspended { get; set; }
 
     /// <summary>
     /// The key of the user task.

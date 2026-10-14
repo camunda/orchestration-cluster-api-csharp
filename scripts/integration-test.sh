@@ -8,7 +8,8 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
 
-CAMUNDA_VERSION="${CAMUNDA_VERSION:-latest}"
+# Default to the pin in docker/.env; exporting "latest" would override it.
+CAMUNDA_VERSION="${CAMUNDA_VERSION:-$(sed -n 's/^CAMUNDA_VERSION=//p' docker/.env)}"
 NO_DOCKER=false
 
 for arg in "$@"; do

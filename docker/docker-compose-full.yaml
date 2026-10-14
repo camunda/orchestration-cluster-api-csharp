@@ -38,7 +38,8 @@ services:
     env_file: connector-secrets.txt
     restart: unless-stopped
     healthcheck:
-      test: ['CMD-SHELL', 'curl -f http://localhost:8080/actuator/health/readiness']
+      # Connectors images from 8.10 on ship wget but not curl.
+      test: ['CMD', 'wget', '-qO', '-', 'http://localhost:8080/actuator/health/readiness']
       interval: 30s
       timeout: 1s
       retries: 5
@@ -116,10 +117,11 @@ configs:
                 email: "demo@demo.com"
             defaultRoles.admin.users:
               - "demo"
-        database.index.numberOfReplicas: 0
         data:
           secondary-storage:
             type: elasticsearch
             elasticsearch:
               cluster-name: elasticsearch
               url: "http://elasticsearch:9200"
+              # Single-node Elasticsearch, so no replicas.
+              number-of-replicas: 0

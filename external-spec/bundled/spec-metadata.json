@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:ef3e3ea3faf064de0df57d4b6d28c8828ca86cbb95a0ea815f38e8ce559ebedd",
+  "specHash": "sha256:06287d5f9ab82bc96d9533d975aeae78dfc5c5ecda0871ba6939bc7553da2b7c",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -6197,7 +6197,7 @@
         "Group"
       ],
       "summary": "Create group",
-      "description": "Create a new group.\n\nThe supplied `groupId` is validated against `^[a-zA-Z0-9_~@.+-]+$`\n(max 256 characters) by `IdentifierValidator.validateId` in the\nruntime. This strict validation applies wherever the Groups API\nis available: in OIDC deployments that set\n`camunda.security.authentication.oidc.groupsClaim` the Groups\nAPI (including this endpoint) is disabled entirely, so group\nCRUD never sees externally-minted IdP IDs. The BYOG relaxation\nonly loosens validation when a group is referenced *as a member*\nof a role or tenant (`assignRoleToGroup`,\n`assignGroupToTenant`); group CRUD itself always uses the strict\ndefault-id regex. The constraint is not advertised on the\n`GroupId` schema so that the same schema can be reused at\nmember-reference sites without falsely rejecting\nexternally-minted IdP group IDs there.\n",
+      "description": "Create a new group.\n\nThe supplied `groupId` is validated against `` ^[a-zA-Z0-9_~@.+-]+$ ``\n(max 256 characters) by `IdentifierValidator.validateId` in the\nruntime. This strict validation applies wherever the Groups API\nis available: in OIDC deployments that set\n`camunda.security.authentication.oidc.groupsClaim` the Groups\nAPI (including this endpoint) is disabled entirely, so group\nCRUD never sees externally-minted IdP IDs. The BYOG relaxation\nonly loosens validation when a group is referenced *as a member*\nof a role or tenant (`assignRoleToGroup`,\n`assignGroupToTenant`); group CRUD itself always uses the strict\ndefault-id regex. The constraint is not advertised on the\n`GroupId` schema so that the same schema can be reused at\nmember-reference sites without falsely rejecting\nexternally-minted IdP group IDs there.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,

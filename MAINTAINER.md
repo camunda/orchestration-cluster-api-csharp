@@ -245,7 +245,7 @@ The `scripts/generate-docusaurus-md.py` script resolves these `[!code-csharp]` r
 
 ## Pinning the Upstream Spec (SPEC_REF)
 
-The default upstream ref is `stable/8.10`. If that spec breaks the build, you can pin to a known-good git ref (branch, tag, or commit SHA).
+The default upstream ref is `main` (camunda `main`, the next server minor). If that spec breaks the build, you can pin to a known-good git ref (branch, tag, or commit SHA).
 
 ### Locally
 
@@ -259,7 +259,7 @@ Set these GitHub repository variables:
 
 | Variable | Value | Purpose |
 |---|---|---|
-| `SPEC_REF_OVERRIDE` | The git ref (e.g. `abc123def`) | Overrides the default `stable/8.10` for all CI runs |
+| `SPEC_REF_OVERRIDE` | The git ref (e.g. `abc123def`) | Overrides the default `main` for all CI runs |
 | `SPEC_REF_OVERRIDE_ACK` | `true` | Acknowledgement that the override is intentional |
 | `SPEC_REF_OVERRIDE_EXPIRES` | `YYYY-MM-DD` | Expiry date — CI fails if today is past this date |
 
@@ -273,7 +273,7 @@ Both `ci.yml` and `release.yml` support `workflow_dispatch` with a `spec_ref` in
 
 1. `workflow_dispatch` input `spec_ref` (highest — manual trigger only)
 2. `vars.SPEC_REF_OVERRIDE` repo variable (persistent)
-3. `stable/8.10` (default)
+3. `main` (default)
 
 ## Release Strategy
 
