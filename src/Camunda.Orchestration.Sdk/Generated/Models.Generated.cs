@@ -11412,9 +11412,12 @@ public sealed class CorrelatedMessageSubscriptionResult
 
     /// <summary>
     /// The process definition key associated with this correlated message subscription.
+    /// This field is not present for correlations to message subscriptions of a running
+    /// process instance (catch, boundary and receive task events) written by version 8.8.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// The process instance key associated with this correlated message subscription.
@@ -15046,10 +15049,12 @@ internal sealed class ElementInstanceKeyFilterPropertyJsonConverter : global::Sy
 public sealed class ElementInstanceResult
 {
     /// <summary>
-    /// The process definition ID associated to this element instance.
+    /// The process definition ID associated to this element instance. This field is not
+    /// present for element instances imported by Operate 8.1 or earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
 
     /// <summary>
     /// Date when element instance started.
@@ -15121,10 +15126,12 @@ public sealed class ElementInstanceResult
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// The process definition key associated to this element instance.
+    /// The process definition key associated to this element instance. This field is not
+    /// present for element instances imported by Operate 8.1.7 or earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// Incident key associated with this element instance.
@@ -19883,10 +19890,10 @@ public sealed class JobSearchResult
     public string? DeniedReason { get; set; }
 
     /// <summary>
-    /// The element ID associated with the job.
+    /// The element ID associated with the job. May be missing on job failure.
     /// </summary>
     [JsonPropertyName("elementId")]
-    public ElementId ElementId { get; set; }
+    public ElementId? ElementId { get; set; }
 
     /// <summary>
     /// The element instance key associated with the job.
@@ -19945,16 +19952,20 @@ public sealed class JobSearchResult
     public JobListenerEventTypeEnum ListenerEventType { get; set; }
 
     /// <summary>
-    /// The process definition ID associated with the job.
+    /// The process definition ID associated with the job. This field is not present for
+    /// jobs imported by Operate 8.7 and earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
 
     /// <summary>
-    /// The process definition key associated with the job.
+    /// The process definition key associated with the job. This field is not present for
+    /// jobs imported by Operate 8.7 and earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// The process instance key associated with the job.
@@ -25499,16 +25510,20 @@ public sealed class ProcessInstanceSequenceFlowResult
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// The process definition key.
+    /// The process definition key. This field is not present for sequence flows imported
+    /// by Operate 8.1 or earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
 
     /// <summary>
-    /// The process definition id.
+    /// The process definition id. This field is not present for sequence flows imported by
+    /// Operate 8.1 or earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
 
     /// <summary>
     /// The element id for this sequence flow, as provided in the BPMN process.
