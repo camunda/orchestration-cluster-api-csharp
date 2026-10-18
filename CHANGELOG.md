@@ -1,3 +1,10 @@
+# [11.0.0-alpha.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.1...v11.0.0-alpha.2) (2026-10-18)
+
+
+### Bug Fixes
+
+* **gen:** regenerate for nullable legacy result fields and batch filter docs ([#464](https://github.com/camunda/orchestration-cluster-api-csharp/issues/464)) ([f9ab432](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f9ab4323a0c9861a23d05b0350611df15d487755))
+
 # [11.0.0-alpha.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0...v11.0.0-alpha.1) (2026-10-14)
 
 
