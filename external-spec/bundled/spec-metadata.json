@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:e140ca0dbd4353da6a63dc0cffb08773e4805379b5a7364a4264431b7c0493ef",
+  "specHash": "sha256:ccc4d90f08e64dd80972612453df5715d808b00aeadce516a2bae088f63ccdb9",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -4350,6 +4350,39 @@
       }
     },
     {
+      "operationId": "getClock",
+      "path": "/clock",
+      "method": "get",
+      "tags": [
+        "Clock"
+      ],
+      "summary": "Get internal clock",
+      "description": "Returns the current time of the Zeebe engine's internal clock.\nIf the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time\nand this is the engine's current time.\n\nUse this endpoint to check the time that the engine uses, for example after pinning the\nclock with `PUT /v2/clock` or resetting it with `POST /v2/clock/reset`. A pin or reset\nreaches all partitions shortly after it is accepted, so a request sent right after it may\nstill return the previous time.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": false,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "clock.yaml",
+      "requestBodyContentTypes": [],
+      "successResponseSchemaRef": "ClockResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ"
+          }
+        ],
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    {
       "operationId": "pinClock",
       "path": "/clock",
       "method": "put",
@@ -4357,7 +4390,7 @@
         "Clock"
       ],
       "summary": "Pin internal clock (alpha)",
-      "description": "Set a precise, static time for the Zeebe engine's internal clock.\nWhen the clock is pinned, it remains at the specified time and does not advance.\nTo change the time, the clock must be pinned again with a new timestamp.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+      "description": "Set a precise, static time for the Zeebe engine's internal clock.\nWhen the clock is pinned, it remains at the specified time and does not advance.\nTo change the time, the clock must be pinned again with a new timestamp.\nUse `GET /v2/clock` to read the current time of the clock.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -4392,7 +4425,7 @@
         "Clock"
       ],
       "summary": "Reset internal clock (alpha)",
-      "description": "Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.\nThis operation is useful for returning the clock to\nnormal behavior after it has been pinned to a specific time.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+      "description": "Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.\nThis operation is useful for returning the clock to\nnormal behavior after it has been pinned to a specific time.\nUse `GET /v2/clock` to read the current time of the clock.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": false,
       "requestBodyUnion": false,
@@ -13135,7 +13168,7 @@
   "integrity": {
     "totalSemanticKeys": 44,
     "totalUnions": 68,
-    "totalOperations": 244,
+    "totalOperations": 245,
     "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 22

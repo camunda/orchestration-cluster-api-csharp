@@ -9699,6 +9699,19 @@ public sealed class ClockPinRequest
 }
 
 /// <summary>
+/// ClockResult
+/// </summary>
+public sealed class ClockResult
+{
+    /// <summary>
+    /// The current time of the clock, as an ISO 8601 date-time.
+    /// </summary>
+    [JsonPropertyName("timestamp")]
+    public DateTimeOffset Timestamp { get; set; }
+
+}
+
+/// <summary>
 /// Configuration for SaaS/cloud-specific settings.
 /// </summary>
 public sealed class CloudConfigurationResponse

@@ -3306,6 +3306,25 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Get internal clock
+    /// Returns the current time of the Zeebe engine&apos;s internal clock.
+    /// If the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time
+    /// and this is the engine&apos;s current time.
+    /// 
+    /// Use this endpoint to check the time that the engine uses, for example after pinning the
+    /// clock with `PUT /v2/clock` or resetting it with `POST /v2/clock/reset`. A pin or reset
+    /// reaches all partitions shortly after it is accepted, so a request sent right after it may
+    /// still return the previous time.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: getClock</remarks>
+    public async Task<ClockResult> GetClockAsync(CancellationToken ct = default)
+    {
+        var path = $"/clock";
+        return await InvokeWithRetryAsync(() => SendAsync<ClockResult>(HttpMethod.Get, path, null, ct), "getClock", false, ct);
+    }
+
+    /// <summary>
     /// Get exporting status of the whole cluster
     /// Returns the exporting status of the whole cluster, folded over the exporting status of every physical tenant. Only `PAUSED` and `SOFT_PAUSED` confirm that exporting is paused cluster-wide; every other value means at least one physical tenant is not paused, so callers should keep polling. A physical tenant that itself reports `MIXED` makes the whole cluster `MIXED`.
     /// 
@@ -6678,6 +6697,7 @@ public partial class CamundaClient
     /// Set a precise, static time for the Zeebe engine&apos;s internal clock.
     /// When the clock is pinned, it remains at the specified time and does not advance.
     /// To change the time, the clock must be pinned again with a new timestamp.
+    /// Use `GET /v2/clock` to read the current time of the clock.
     /// 
     /// This endpoint is an alpha feature and may be subject to change
     /// in future releases.
@@ -6776,6 +6796,7 @@ public partial class CamundaClient
     /// Resets the Zeebe engine&apos;s internal clock to the current system time, enabling it to tick in real-time.
     /// This operation is useful for returning the clock to
     /// normal behavior after it has been pinned to a specific time.
+    /// Use `GET /v2/clock` to read the current time of the clock.
     /// 
     /// This endpoint is an alpha feature and may be subject to change
     /// in future releases.
