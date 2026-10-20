@@ -789,6 +789,18 @@ Get batch operation by key.</p>
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClockAsync_System_Threading_CancellationToken_">GetClockAsync(CancellationToken)</a></dt>
+    <dd><p>Get internal clock
+Returns the current time of the Zeebe engine's internal clock.
+If the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time
+and this is the engine's current time.</p>
+<p>Use this endpoint to check the time that the engine uses, for example after pinning the
+clock with <code>PUT /v2/clock</code> or resetting it with <code>POST /v2/clock/reset</code>. A pin or reset
+reaches all partitions shortly after it is accepted, so a request sent right after it may
+still return the previous time.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterExportingStatusAsync_System_Threading_CancellationToken_">GetClusterExportingStatusAsync(CancellationToken)</a></dt>
     <dd><p>Get exporting status of the whole cluster
 Returns the exporting status of the whole cluster, folded over the exporting status of every physical tenant. Only <code>PAUSED</code> and <code>SOFT_PAUSED</code> confirm that exporting is paused cluster-wide; every other value means at least one physical tenant is not paused, so callers should keep polling. A physical tenant that itself reports <code>MIXED</code> makes the whole cluster <code>MIXED</code>.</p>
@@ -1312,7 +1324,8 @@ such as during a backup.</p>
     <dd><p>Pin internal clock (alpha)
 Set a precise, static time for the Zeebe engine's internal clock.
 When the clock is pinned, it remains at the specified time and does not advance.
-To change the time, the clock must be pinned again with a new timestamp.</p>
+To change the time, the clock must be pinned again with a new timestamp.
+Use <code>GET /v2/clock</code> to read the current time of the clock.</p>
 <p>This endpoint is an alpha feature and may be subject to change
 in future releases.</p>
 </dd>
@@ -1332,7 +1345,8 @@ Use the message correlation endpoint for such use cases.</p>
     <dd><p>Reset internal clock (alpha)
 Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.
 This operation is useful for returning the clock to
-normal behavior after it has been pinned to a specific time.</p>
+normal behavior after it has been pinned to a specific time.
+Use <code>GET /v2/clock</code> to read the current time of the clock.</p>
 <p>This endpoint is an alpha feature and may be subject to change
 in future releases.</p>
 </dd>

@@ -14344,6 +14344,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetBatchOperationAsync
   fullName: Camunda.Orchestration.Sdk.CamundaClient.GetBatchOperationAsync
   nameWithType: CamundaClient.GetBatchOperationAsync
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync(System.Threading.CancellationToken)
+  name: GetClockAsync(CancellationToken)
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClockAsync_System_Threading_CancellationToken_
+  commentId: M:Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync(System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync(System.Threading.CancellationToken)
+  nameWithType: CamundaClient.GetClockAsync(CancellationToken)
+- uid: Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync*
+  name: GetClockAsync
+  href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync
+  nameWithType: CamundaClient.GetClockAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync(System.Threading.CancellationToken)
   name: GetClusterExportingStatusAsync(CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.GetClusterExportingStatusAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetClusterExportingStatusAsync_System_Threading_CancellationToken_
@@ -17899,6 +17911,24 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ClockPinRequest.Timestamp
   fullName: Camunda.Orchestration.Sdk.ClockPinRequest.Timestamp
   nameWithType: ClockPinRequest.Timestamp
+- uid: Camunda.Orchestration.Sdk.ClockResult
+  name: ClockResult
+  href: api/Camunda.Orchestration.Sdk.ClockResult.html
+  commentId: T:Camunda.Orchestration.Sdk.ClockResult
+  fullName: Camunda.Orchestration.Sdk.ClockResult
+  nameWithType: ClockResult
+- uid: Camunda.Orchestration.Sdk.ClockResult.Timestamp
+  name: Timestamp
+  href: api/Camunda.Orchestration.Sdk.ClockResult.Timestamp.html#Camunda_Orchestration_Sdk_ClockResult_Timestamp
+  commentId: P:Camunda.Orchestration.Sdk.ClockResult.Timestamp
+  fullName: Camunda.Orchestration.Sdk.ClockResult.Timestamp
+  nameWithType: ClockResult.Timestamp
+- uid: Camunda.Orchestration.Sdk.ClockResult.Timestamp*
+  name: Timestamp
+  href: api/Camunda.Orchestration.Sdk.ClockResult.Timestamp.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ClockResult.Timestamp
+  fullName: Camunda.Orchestration.Sdk.ClockResult.Timestamp
+  nameWithType: ClockResult.Timestamp
 - uid: Camunda.Orchestration.Sdk.CloudConfigurationResponse
   name: CloudConfigurationResponse
   href: api/Camunda.Orchestration.Sdk.CloudConfigurationResponse.html
