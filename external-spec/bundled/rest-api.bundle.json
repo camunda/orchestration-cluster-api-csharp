@@ -3406,6 +3406,90 @@
       }
     },
     "/clock": {
+      "get": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Clock"
+        ],
+        "operationId": "getClock",
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "READ"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get internal clock",
+        "description": "Returns the current time of the Zeebe engine's internal clock.\nIf the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time\nand this is the engine's current time.\n\nUse this endpoint to check the time that the engine uses, for example after pinning the\nclock with `PUT /v2/clock` or resetting it with `POST /v2/clock/reset`. A pin or reset\nreaches all partitions shortly after it is accepted, so a request sent right after it may\nstill return the previous time.\n",
+        "responses": {
+          "200": {
+            "description": "The current time of the clock.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClockResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      },
       "put": {
         "x-eventually-consistent": false,
         "tags": [
@@ -3427,7 +3511,7 @@
           }
         ],
         "summary": "Pin internal clock (alpha)",
-        "description": "Set a precise, static time for the Zeebe engine's internal clock.\nWhen the clock is pinned, it remains at the specified time and does not advance.\nTo change the time, the clock must be pinned again with a new timestamp.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+        "description": "Set a precise, static time for the Zeebe engine's internal clock.\nWhen the clock is pinned, it remains at the specified time and does not advance.\nTo change the time, the clock must be pinned again with a new timestamp.\nUse `GET /v2/clock` to read the current time of the clock.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -3499,7 +3583,7 @@
           }
         ],
         "summary": "Reset internal clock (alpha)",
-        "description": "Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.\nThis operation is useful for returning the clock to\nnormal behavior after it has been pinned to a specific time.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+        "description": "Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.\nThis operation is useful for returning the clock to\nnormal behavior after it has been pinned to a specific time.\nUse `GET /v2/clock` to read the current time of the clock.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
         "responses": {
           "204": {
             "description": "The clock was successfully reset to the system time."
@@ -30676,6 +30760,20 @@
             "description": "The exact time in epoch milliseconds to which the clock should be pinned.",
             "type": "integer",
             "format": "int64"
+          }
+        },
+        "required": [
+          "timestamp"
+        ]
+      },
+      "ClockResult": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "description": "The current time of the clock, as an ISO 8601 date-time.",
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-01-01T12:00:00.000Z"
           }
         },
         "required": [

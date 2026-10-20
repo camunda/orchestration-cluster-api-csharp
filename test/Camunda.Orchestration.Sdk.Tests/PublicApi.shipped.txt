@@ -1841,6 +1841,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[Camunda.Orchest
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationResponse> GetBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult> SearchBatchOperationsAsync(Camunda.Orchestration.Sdk.BatchOperationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CamundaUserResult> GetAuthenticationAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClockResult> GetClockAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterBalanceResponse> GetClusterRebalanceAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterBalanceResponse> TriggerClusterRebalanceAsync(Camunda.Orchestration.Sdk.ClusterRebalanceRequest body, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterHistoryBackupInfo> GetHistoryBackupAsClusterAdminAsync(Camunda.Orchestration.Sdk.BackupId backupId, System.String? physicalTenantId = null, System.Threading.CancellationToken ct = null)
@@ -2135,6 +2136,10 @@ TYPE Camunda.Orchestration.Sdk.ClientId : struct interfaces=[Camunda.Orchestrati
 TYPE Camunda.Orchestration.Sdk.ClockPinRequest : sealed class
   CTOR ()
   PROP System.Int64 Timestamp { get; set; } [JsonPropertyName("timestamp")]
+
+TYPE Camunda.Orchestration.Sdk.ClockResult : sealed class
+  CTOR ()
+  PROP System.DateTimeOffset Timestamp { get; set; } [JsonPropertyName("timestamp")]
 
 TYPE Camunda.Orchestration.Sdk.CloudConfigurationResponse : sealed class
   CTOR ()
