@@ -3317,7 +3317,31 @@ public partial class CamundaClient
     /// still return the previous time.
     /// 
     /// </summary>
-    /// <remarks>Operation: getClock</remarks>
+    /// <remarks>
+    /// Operation: getClock
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var clock = await client.GetClockAsync();
+    ///     Console.WriteLine($&quot;Engine time: {clock.Timestamp:O}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task GetClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var clock = await client.GetClockAsync();
+    ///     Console.WriteLine($&quot;Engine time: {clock.Timestamp:O}&quot;);
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ClockResult> GetClockAsync(CancellationToken ct = default)
     {
         var path = $"/clock";
