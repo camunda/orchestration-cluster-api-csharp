@@ -285,17 +285,8 @@ public static class AdminExamples
     {
         using var client = CamundaClient.Create();
 
-        // Pin the engine clock to a fixed point in time, then read it back to
-        // confirm which time the engine is currently using.
-        await client.PinClockAsync(new ClockPinRequest
-        {
-            Timestamp = 1700000000000,
-        });
-
         var clock = await client.GetClockAsync();
         Console.WriteLine($"Engine time: {clock.Timestamp:O}");
-
-        await client.ResetClockAsync();
     }
     // </GetClock>
     #endregion GetClock
