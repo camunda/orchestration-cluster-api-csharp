@@ -1,3 +1,10 @@
+# [11.0.0-alpha.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.2...v11.0.0-alpha.3) (2026-10-20)
+
+
+### Features
+
+* add example coverage for getClock ([#466](https://github.com/camunda/orchestration-cluster-api-csharp/issues/466)) ([74d6956](https://github.com/camunda/orchestration-cluster-api-csharp/commit/74d6956990df10690be26f9394d66068ed89a226))
+
 # [11.0.0-alpha.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.1...v11.0.0-alpha.2) (2026-10-18)
 
 
