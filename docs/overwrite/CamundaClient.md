@@ -733,6 +733,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.GetClockAsync(System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Admin.cs#GetClock)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.GetDecisionDefinitionAsync(Camunda.Orchestration.Sdk.DecisionDefinitionKey,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.DecisionDefinitionResult},System.Threading.CancellationToken)
 example:
 - *content
