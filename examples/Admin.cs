@@ -291,6 +291,23 @@ public static class AdminExamples
     // </GetClock>
     #endregion GetClock
 
+    #region AddClock
+
+    // <AddClock>
+    public static async Task AddClockExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var clock = await client.AddClockAsync(new ClockAddRequest
+        {
+            Offset = "PT1H",
+        });
+
+        Console.WriteLine($"Engine time after adding one hour: {clock.Timestamp:O}");
+    }
+    // </AddClock>
+    #endregion AddClock
+
     #region PinClock
 
     // <PinClock>
