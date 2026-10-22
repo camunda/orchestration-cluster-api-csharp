@@ -106,6 +106,60 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Add time to internal clock
+    /// Moves the Zeebe engine&apos;s internal clock forward or backward by the given offset.
+    /// Unlike pinning, the clock keeps ticking in real time after the offset is added. If the
+    /// clock is pinned, it stays pinned and moves to the pinned time plus the offset.
+    /// 
+    /// Each request adds to the time of the clock, so adding `PT1H` twice moves the clock two
+    /// hours ahead. Use `POST /v2/clock/reset` to remove all added time and return the clock to
+    /// the system time.
+    /// 
+    /// The response contains the new time of the clock. The change reaches all partitions
+    /// shortly after it is accepted, so a request sent right after it may still use the previous
+    /// time.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: addClock
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AddClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var clock = await client.AddClockAsync(new ClockAddRequest
+    ///     {
+    ///         Offset = &quot;PT1H&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Engine time after adding one hour: {clock.Timestamp:O}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AddClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var clock = await client.AddClockAsync(new ClockAddRequest
+    ///     {
+    ///         Offset = &quot;PT1H&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Engine time after adding one hour: {clock.Timestamp:O}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ClockResult> AddClockAsync(ClockAddRequest body, CancellationToken ct = default)
+    {
+        var path = $"/clock/add";
+        return await InvokeWithRetryAsync(() => SendAsync<ClockResult>(HttpMethod.Post, path, body, ct), "addClock", false, ct);
+    }
+
+    /// <summary>
     /// Assign a client to a group
     /// Assigns a client to a group, making it a member of the group.
     /// Members of the group inherit the group authorizations, roles, and tenant assignments.
@@ -3312,9 +3366,9 @@ public partial class CamundaClient
     /// and this is the engine&apos;s current time.
     /// 
     /// Use this endpoint to check the time that the engine uses, for example after pinning the
-    /// clock with `PUT /v2/clock` or resetting it with `POST /v2/clock/reset`. A pin or reset
-    /// reaches all partitions shortly after it is accepted, so a request sent right after it may
-    /// still return the previous time.
+    /// clock with `PUT /v2/clock`, adding time with `POST /v2/clock/add`, or resetting it with
+    /// `POST /v2/clock/reset`. A pin, add, or reset reaches all partitions shortly after it is
+    /// accepted, so a request sent right after it may still return the previous time.
     /// 
     /// </summary>
     /// <remarks>
@@ -6721,6 +6775,7 @@ public partial class CamundaClient
     /// Set a precise, static time for the Zeebe engine&apos;s internal clock.
     /// When the clock is pinned, it remains at the specified time and does not advance.
     /// To change the time, the clock must be pinned again with a new timestamp.
+    /// To move the clock without stopping it, use `POST /v2/clock/add` instead.
     /// Use `GET /v2/clock` to read the current time of the clock.
     /// 
     /// This endpoint is an alpha feature and may be subject to change
@@ -6819,7 +6874,8 @@ public partial class CamundaClient
     /// Reset internal clock (alpha)
     /// Resets the Zeebe engine&apos;s internal clock to the current system time, enabling it to tick in real-time.
     /// This operation is useful for returning the clock to
-    /// normal behavior after it has been pinned to a specific time.
+    /// normal behavior after it has been pinned to a specific time or moved with
+    /// `POST /v2/clock/add`.
     /// Use `GET /v2/clock` to read the current time of the clock.
     /// 
     /// This endpoint is an alpha feature and may be subject to change

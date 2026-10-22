@@ -1841,6 +1841,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[Camunda.Orchest
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationResponse> GetBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey batchOperationKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationResponse>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult> SearchBatchOperationsAsync(Camunda.Orchestration.Sdk.BatchOperationSearchQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.BatchOperationSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.CamundaUserResult> GetAuthenticationAsync(System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClockResult> AddClockAsync(Camunda.Orchestration.Sdk.ClockAddRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClockResult> GetClockAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterBalanceResponse> GetClusterRebalanceAsync(System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ClusterBalanceResponse> TriggerClusterRebalanceAsync(Camunda.Orchestration.Sdk.ClusterRebalanceRequest body, System.Boolean? dryRun = null, System.Threading.CancellationToken ct = null)
@@ -2132,6 +2133,10 @@ TYPE Camunda.Orchestration.Sdk.ClientId : struct interfaces=[Camunda.Orchestrati
   METHOD virtual System.Boolean Equals(System.Object obj)
   METHOD virtual System.Int32 GetHashCode()
   METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.ClockAddRequest : sealed class
+  CTOR ()
+  PROP System.String Offset { get; set; } [JsonPropertyName("offset")]
 
 TYPE Camunda.Orchestration.Sdk.ClockPinRequest : sealed class
   CTOR ()
