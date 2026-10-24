@@ -155,8 +155,9 @@ public class GeneratorOptionalBodyTests
         Assert.Equal("body", bodyParams[1].Identifier.ValueText);
         Assert.Null(bodyParams[1].Default);
         Assert.Equal("CancellationToken", bodyParams[2].Type?.ToString());
-        // The body overload forwards the caller's body as-is.
-        Assert.Contains("path, body, ct", bodyOverload.Body!.ToString());
+        // The body overload forwards the caller's body as-is (the useRootServer
+        // routing argument sits between the body and the CancellationToken).
+        Assert.Contains("path, body, useRootServer:", bodyOverload.Body!.ToString());
 
         // No-body overload: original `(key, ct = default)` signature, sending `{}`.
         var noBodyOverload = overloads.Single(m => m.ParameterList.Parameters.Count == 2);
@@ -222,7 +223,7 @@ public class GeneratorOptionalBodyTests
         // omits the request content when it is null (JS: no body sent).
         var bodyText = method.Body!.ToString();
         Assert.DoesNotContain("?? new object()", bodyText);
-        Assert.Contains("path, body, ct", bodyText);
+        Assert.Contains("path, body, useRootServer:", bodyText);
     }
 
     [Fact]
