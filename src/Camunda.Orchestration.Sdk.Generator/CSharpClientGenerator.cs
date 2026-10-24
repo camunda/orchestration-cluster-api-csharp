@@ -225,7 +225,7 @@ internal static class CSharpClientGenerator
                     Tags = op.Tags?.Select(t => t.Name ?? string.Empty).ToList() ?? [],
                     IsExemptFromBackpressure = IsExempt(opId),
                     IsBinaryResponse = responseTypeName == "byte[]",
-                    UsesRootServer = UsesRootServer(path),
+                    UsesRootServer = UsesRootServer(doc, pathItem, op),
                 });
             }
         }
@@ -439,17 +439,52 @@ internal static class CSharpClientGenerator
         opId is "CompleteJob" or "FailJob" or "ThrowJobError" or "CompleteUserTask";
 
     /// <summary>
-    /// Returns true when the operation's path-item declares a `servers` override that drops
-    /// the document's `/v2` base path. The upstream spec serves the cluster-admin operations
-    /// (`/cluster/v2/...`) on the bare root — the `/cluster/v2` base lives in the path key and
-    /// each path item overrides `servers` with `{schema}://{host}:{port}` (no `/v2` suffix).
-    /// The bundler does not propagate path-item `servers` into the bundled document, so this
-    /// mirrors the upstream invariant by path prefix: every `/cluster/v2/*` operation resolves
-    /// against the bare root. See
+    /// Returns true when the operation is served on the bare root — i.e. its effective
+    /// `servers` entry drops the document server's base path. The upstream spec serves the
+    /// cluster-admin operations (`/cluster/v2/...`) on the bare root by overriding the
+    /// path-item `servers` with `{schema}://{host}:{port}` (no `/v2` suffix) against a
+    /// document server of `{schema}://{host}:{port}/v2`. The bundler propagates those
+    /// path-item (and any operation-level) `servers` into the bundled document, so this is
+    /// derived from the effective server metadata rather than the path name: resolve the
+    /// effective server by precedence (operation &gt; path-item &gt; document) and compare its
+    /// base path against the document server's. This tracks the spec's routing contract even
+    /// if the path keys or override scope change. See
     /// https://github.com/camunda/orchestration-cluster-api-csharp/issues/470.
     /// </summary>
-    private static bool UsesRootServer(string path) =>
-        path.StartsWith("/cluster/v2/", StringComparison.Ordinal);
+    private static bool UsesRootServer(OpenApiDocument doc, IOpenApiPathItem pathItem, OpenApiOperation op)
+    {
+        var documentServer = doc.Servers?.FirstOrDefault();
+        if (string.IsNullOrEmpty(documentServer?.Url))
+            return false;
+
+        var effectiveServer =
+            op.Servers?.FirstOrDefault()
+            ?? pathItem.Servers?.FirstOrDefault()
+            ?? documentServer;
+
+        return !string.Equals(
+            ServerTemplatePath(effectiveServer.Url),
+            ServerTemplatePath(documentServer.Url),
+            StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Extracts the path component from a (possibly `{variable}`-templated) server URL, so the
+    /// base path can be compared independently of scheme/host/port/variables. For example
+    /// `{schema}://{host}:{port}/v2` → `/v2` and `{schema}://{host}:{port}` → "" (bare root).
+    /// A trailing slash is ignored so `/v2` and `/v2/` compare equal.
+    /// </summary>
+    private static string ServerTemplatePath(string? url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return string.Empty;
+
+        var schemeIdx = url.IndexOf("://", StringComparison.Ordinal);
+        var authorityStart = schemeIdx >= 0 ? schemeIdx + 3 : 0;
+        var pathStart = url.IndexOf('/', authorityStart);
+        var path = pathStart >= 0 ? url[pathStart..] : string.Empty;
+        return path.TrimEnd('/');
+    }
 
     /// <summary>
     /// Check if a type name corresponds to an existing component schema
