@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:ccc4d90f08e64dd80972612453df5715d808b00aeadce516a2bae088f63ccdb9",
+  "specHash": "sha256:cf24fbbd9f4162529bcf49101695b57668fcac8763500a34454e35d2aeaf02d5",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -2102,7 +2102,7 @@
     {
       "name": "ProcessInstanceCreationInstruction",
       "kind": "union-wrapper",
-      "description": "Instructions for creating a process instance. The process definition can be specified\neither by id or by key.\n",
+      "description": "Instructions for creating a process instance. The process definition can be specified\neither by id, by id and version tag, or by key.\n",
       "branches": [
         {
           "branchType": "ref",
@@ -2111,6 +2111,10 @@
         {
           "branchType": "ref",
           "ref": "ProcessInstanceCreationInstructionById"
+        },
+        {
+          "branchType": "ref",
+          "ref": "ProcessInstanceCreationInstructionByVersionTag"
         }
       ],
       "stableId": "process-instance-creation-instruction"
@@ -2173,6 +2177,22 @@
         }
       ],
       "stableId": "process-instance-state-filter-property"
+    },
+    {
+      "name": "ProtectionModeFilterProperty",
+      "kind": "union-wrapper",
+      "description": "ProtectionModeEnum property with the advanced search capability to match any of several values.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "ProtectionModeExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedProtectionModeFilter"
+        }
+      ],
+      "stableId": "protection-mode-filter-property"
     },
     {
       "name": "ResourceKey",
@@ -4357,7 +4377,7 @@
         "Clock"
       ],
       "summary": "Get internal clock",
-      "description": "Returns the current time of the Zeebe engine's internal clock.\nIf the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time\nand this is the engine's current time.\n\nUse this endpoint to check the time that the engine uses, for example after pinning the\nclock with `PUT /v2/clock` or resetting it with `POST /v2/clock/reset`. A pin or reset\nreaches all partitions shortly after it is accepted, so a request sent right after it may\nstill return the previous time.\n",
+      "description": "Returns the current time of the Zeebe engine's internal clock.\nIf the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time\nand this is the engine's current time.\n\nUse this endpoint to check the time that the engine uses, for example after pinning the\nclock with `PUT /v2/clock`, adding time with `POST /v2/clock/add`, or resetting it with\n`POST /v2/clock/reset`. A pin, add, or reset reaches all partitions shortly after it is\naccepted, so a request sent right after it may still return the previous time.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": false,
       "requestBodyUnion": false,
@@ -4390,7 +4410,7 @@
         "Clock"
       ],
       "summary": "Pin internal clock (alpha)",
-      "description": "Set a precise, static time for the Zeebe engine's internal clock.\nWhen the clock is pinned, it remains at the specified time and does not advance.\nTo change the time, the clock must be pinned again with a new timestamp.\nUse `GET /v2/clock` to read the current time of the clock.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+      "description": "Set a precise, static time for the Zeebe engine's internal clock.\nWhen the clock is pinned, it remains at the specified time and does not advance.\nTo change the time, the clock must be pinned again with a new timestamp.\nTo move the clock without stopping it, use `POST /v2/clock/add` instead.\nUse `GET /v2/clock` to read the current time of the clock.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -4418,6 +4438,42 @@
       }
     },
     {
+      "operationId": "addClock",
+      "path": "/clock/add",
+      "method": "post",
+      "tags": [
+        "Clock"
+      ],
+      "summary": "Add time to internal clock",
+      "description": "Moves the Zeebe engine's internal clock forward or backward by the given offset.\nUnlike pinning, the clock keeps ticking in real time after the offset is added. If the\nclock is pinned, it stays pinned and moves to the pinned time plus the offset.\n\nEach request adds to the time of the clock, so adding `PT1H` twice moves the clock two\nhours ahead. Use `POST /v2/clock/reset` to remove all added time and return the clock to\nthe system time.\n\nThe response contains the new time of the clock. The change reaches all partitions\nshortly after it is accepted, so a request sent right after it may still use the previous\ntime.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "clock.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ClockAddRequest",
+      "successResponseSchemaRef": "ClockResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "SYSTEM",
+            "permissionType": "UPDATE"
+          }
+        ],
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    {
       "operationId": "resetClock",
       "path": "/clock/reset",
       "method": "post",
@@ -4425,7 +4481,7 @@
         "Clock"
       ],
       "summary": "Reset internal clock (alpha)",
-      "description": "Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.\nThis operation is useful for returning the clock to\nnormal behavior after it has been pinned to a specific time.\nUse `GET /v2/clock` to read the current time of the clock.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+      "description": "Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.\nThis operation is useful for returning the clock to\nnormal behavior after it has been pinned to a specific time or moved with\n`POST /v2/clock/add`.\nUse `GET /v2/clock` to read the current time of the clock.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": false,
       "requestBodyUnion": false,
@@ -8262,7 +8318,7 @@
         "Process instance"
       ],
       "summary": "Create process instance",
-      "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and a version.\nIf only the process definition id is given, the latest ACTIVE version is used.\nIf no ACTIVE version exists, the request is rejected as not found.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
+      "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and either a version or a version tag.\nIf only the process definition id is given, the latest ACTIVE version is used.\nIf no ACTIVE version exists, the request is rejected as not found.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": true,
@@ -8271,9 +8327,10 @@
       "queryParams": [],
       "requestBodyUnionRefs": [
         "ProcessInstanceCreationInstructionByKey",
-        "ProcessInstanceCreationInstructionById"
+        "ProcessInstanceCreationInstructionById",
+        "ProcessInstanceCreationInstructionByVersionTag"
       ],
-      "optionalTenantIdInBody": true,
+      "optionalTenantIdInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9294,7 +9351,7 @@
         "Resource"
       ],
       "summary": "Delete resource",
-      "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition that still\nexists in the runtime state, the definition first drains its running instances and its\nhistory is deleted asynchronously once the definition is fully removed cluster-wide; no batch\noperation is returned in the response. If the process definition has already been removed\nfrom the runtime state and the deletion is later re-triggered with `deleteHistory` set to\n`true`, a batch operation is created immediately and returned in the `batchOperation` field.",
+      "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nDeleting a process definition that is already draining is accepted again and changes\nnothing: the definition stays `DRAINING` until its running instances finish. The one repeated\ndeletion that is rejected is one with `deleteHistory` set to `true`, because the history\ncannot be deleted before the drain finishes.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition that still\nexists in the runtime state, the definition first drains its running instances and its\nhistory is deleted asynchronously once the definition is fully removed cluster-wide; no batch\noperation is returned in the response. If the process definition has already been removed\nfrom the runtime state and the deletion is later re-triggered with `deleteHistory` set to\n`true`, a batch operation is created immediately and returned in the `batchOperation` field.",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -13167,8 +13224,8 @@
   ],
   "integrity": {
     "totalSemanticKeys": 44,
-    "totalUnions": 68,
-    "totalOperations": 245,
+    "totalUnions": 69,
+    "totalOperations": 246,
     "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 22
