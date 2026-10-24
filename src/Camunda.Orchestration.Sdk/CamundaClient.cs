@@ -330,8 +330,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         // Use the path-only left part: AbsoluteUri would carry any query/fragment of a
         // caller-supplied BaseAddress (e.g. "https://host/v2/?routing=admin"), and
         // concatenating after them would fold the operation path into the query.
+        // Strip only when "/v2" is a trailing *path* segment — never when it is part of
+        // the authority. A host literally named "v2" ("https://v2/") has an empty path, so
+        // checking the path component avoids deleting the hostname and misrouting the
+        // request to "https://cluster/v2/topology".
         var rootBase = baseAddress.GetLeftPart(UriPartial.Path).TrimEnd('/');
-        if (rootBase.EndsWith("/v2", StringComparison.OrdinalIgnoreCase))
+        var basePath = baseAddress.AbsolutePath.TrimEnd('/');
+        if (basePath.EndsWith("/v2", StringComparison.OrdinalIgnoreCase))
             rootBase = rootBase[..^3];
         return new Uri(rootBase + "/" + relativePath, UriKind.Absolute);
     }

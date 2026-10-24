@@ -128,6 +128,51 @@ public class ClusterAdminServerOverrideTests : IDisposable
         Assert.Equal("/v2/topology", uri.AbsolutePath);
     }
 
+    /// <summary>
+    /// Class-of-defect guard: the trailing "/v2" strip must look only at the base address's
+    /// <em>path</em>, never its authority. A host literally named <c>v2</c>
+    /// (<c>https://v2/</c>) has an empty path, so nothing may be stripped — otherwise removing
+    /// the "suffix" would delete the hostname and send cluster-admin requests to the wrong
+    /// host (<c>https://cluster/v2/topology</c>). This sweeps the authority shapes that could
+    /// be mistaken for a trailing path segment.
+    /// </summary>
+    [Theory]
+    [InlineData("https://v2/", "https://v2/cluster/v2/topology")]
+    [InlineData("https://v2", "https://v2/cluster/v2/topology")]
+    [InlineData("https://v2:8080/", "https://v2:8080/cluster/v2/topology")]
+    [InlineData("http://v2/", "http://v2/cluster/v2/topology")]
+    public async Task ClusterAdminOperation_DoesNotStripHostnameV2(string baseAddress, string expectedAbsoluteUri)
+    {
+        _handler.Enqueue(HttpStatusCode.OK, "{}");
+
+        using var httpClient = new HttpClient(_handler) { BaseAddress = new Uri(baseAddress) };
+        using var client = new CamundaClient(new CamundaOptions { HttpClient = httpClient });
+        await client.GetClusterTopologyAsync();
+
+        var uri = _handler.Requests.Single().RequestUri!;
+        Assert.Equal(expectedAbsoluteUri, uri.AbsoluteUri);
+    }
+
+    /// <summary>
+    /// A base address whose <em>path</em> genuinely ends in <c>/v2</c> must still have that
+    /// single segment stripped (the documented override), distinct from the authority case.
+    /// </summary>
+    [Theory]
+    [InlineData("https://mock.local/v2/", "https://mock.local/cluster/v2/topology")]
+    [InlineData("https://mock.local/v2", "https://mock.local/cluster/v2/topology")]
+    [InlineData("https://mock.local:8443/v2/", "https://mock.local:8443/cluster/v2/topology")]
+    public async Task ClusterAdminOperation_StripsTrailingV2PathSegment(string baseAddress, string expectedAbsoluteUri)
+    {
+        _handler.Enqueue(HttpStatusCode.OK, "{}");
+
+        using var httpClient = new HttpClient(_handler) { BaseAddress = new Uri(baseAddress) };
+        using var client = new CamundaClient(new CamundaOptions { HttpClient = httpClient });
+        await client.GetClusterTopologyAsync();
+
+        var uri = _handler.Requests.Single().RequestUri!;
+        Assert.Equal(expectedAbsoluteUri, uri.AbsoluteUri);
+    }
+
     [Fact]
     public async Task ClusterAdminOperation_WorksWithRestAddressExact()
     {
