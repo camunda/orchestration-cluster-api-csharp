@@ -3532,6 +3532,19 @@ public sealed class AdvancedProcessInstanceStateFilter
 }
 
 /// <summary>
+/// Advanced ProtectionModeEnum filter.
+/// </summary>
+public sealed class AdvancedProtectionModeFilter
+{
+    /// <summary>
+    /// Checks if the variable has at least one of the provided protection modes.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ProtectionModeEnum>? In { get; set; }
+
+}
+
+/// <summary>
 /// Advanced ResourceKey filter.
 /// </summary>
 public sealed class AdvancedResourceKeyFilter
@@ -9683,6 +9696,23 @@ public readonly record struct ClientId : global::Camunda.Orchestration.Sdk.ICamu
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// ClockAddRequest
+/// </summary>
+public sealed class ClockAddRequest
+{
+    /// <summary>
+    /// The time to add to the clock, as an ISO 8601 duration in days, hours, minutes, and
+    /// seconds (for example `PT1H` for one hour or `P1D` for one day). Use a negative
+    /// duration such as `-PT1H` to move the clock backward. The request is rejected if the
+    /// new time would be before 1970-01-01T00:00:00Z.
+    /// 
+    /// </summary>
+    [JsonPropertyName("offset")]
+    public string Offset { get; set; } = null!;
+
 }
 
 /// <summary>
@@ -18158,6 +18188,14 @@ public sealed class IncidentResult
     [JsonPropertyName("jobKey")]
     public JobKey? JobKey { get; set; }
 
+    /// <summary>
+    /// The storage ordinal this incident&apos;s data belongs to. This is `null` for
+    /// data exported before storage ordinals were introduced in version 8.11.
+    /// 
+    /// </summary>
+    [JsonPropertyName("storageOrdinal")]
+    public int? StorageOrdinal { get; set; }
+
 }
 
 /// <summary>
@@ -24136,7 +24174,7 @@ public sealed class ProcessInstanceCancellationBatchOperationRequest
 
 /// <summary>
 /// Instructions for creating a process instance. The process definition can be specified
-/// either by id or by key.
+/// either by id, by id and version tag, or by key.
 /// 
 /// </summary>
 /// <remarks>
@@ -24144,13 +24182,111 @@ public sealed class ProcessInstanceCancellationBatchOperationRequest
 /// <list type="bullet">
 /// <item><description><see cref="ProcessInstanceCreationInstructionByKey"/></description></item>
 /// <item><description><see cref="ProcessInstanceCreationInstructionById"/></description></item>
+/// <item><description><see cref="ProcessInstanceCreationInstructionByVersionTag"/></description></item>
 /// </list>
 /// </remarks>
 /// <seealso cref="ProcessInstanceCreationInstructionByKey"/>
 /// <seealso cref="ProcessInstanceCreationInstructionById"/>
+/// <seealso cref="ProcessInstanceCreationInstructionByVersionTag"/>
 [JsonDerivedType(typeof(ProcessInstanceCreationInstructionByKey))]
 [JsonDerivedType(typeof(ProcessInstanceCreationInstructionById))]
+[JsonDerivedType(typeof(ProcessInstanceCreationInstructionByVersionTag))]
 public abstract class ProcessInstanceCreationInstruction { }
+
+/// <summary>
+/// Fields shared by all process instance creation instructions.
+/// </summary>
+public sealed class ProcessInstanceCreationInstructionBase
+{
+    /// <summary>
+    /// JSON object that will instantiate the variables for the root variable scope
+    /// of the process instance.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variables")]
+    public object? Variables { get; set; }
+
+    /// <summary>
+    /// The tenant id of the process definition.
+    /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
+    /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
+
+    /// <summary>
+    /// List of start instructions. By default, the process instance will start at
+    /// the start event. If provided, the process instance will apply start instructions
+    /// after it has been created.
+    /// 
+    /// </summary>
+    [JsonPropertyName("startInstructions")]
+    public List<ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; }
+
+    /// <summary>
+    /// Runtime instructions (alpha). List of instructions that affect the runtime behavior of
+    /// the process instance. Refer to specific instruction types for more details.
+    /// 
+    /// This parameter is an alpha feature and may be subject to change
+    /// in future releases.
+    /// 
+    /// </summary>
+    [JsonPropertyName("runtimeInstructions")]
+    public List<ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; }
+
+    /// <summary>
+    /// Wait for the process instance to complete. If the process instance does not complete
+    /// within the request timeout limit, a 504 response status will be returned. The process
+    /// instance will continue to run in the background regardless of the timeout. Disabled by
+    /// default.
+    /// 
+    /// </summary>
+    [JsonPropertyName("awaitCompletion")]
+    public bool? AwaitCompletion { get; set; }
+
+    /// <summary>
+    /// List of variables by name to be included in the response when awaitCompletion is set to true.
+    /// If empty, all visible variables in the root scope will be returned.
+    /// 
+    /// </summary>
+    [JsonPropertyName("fetchVariables")]
+    public List<string>? FetchVariables { get; set; }
+
+    /// <summary>
+    /// Timeout (in ms) the request waits for the process to complete. By default or
+    /// when set to 0, the generic request timeout configured in the cluster is applied.
+    /// 
+    /// </summary>
+    [JsonPropertyName("requestTimeout")]
+    public long? RequestTimeout { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// An optional, user-defined string identifier that identifies the process instance
+    /// within the scope of a process definition (scoped by tenant). If provided and uniqueness
+    /// enforcement is enabled, the engine will reject creation if another root process instance
+    /// with the same business id is already active for the same process definition.
+    /// Note that any active child process instances with the same business id are not taken into account.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
+}
 
 /// <summary>
 /// ProcessInstanceCreationInstructionById
@@ -24286,12 +24422,29 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public int? ProcessDefinitionVersion { get; set; }
 
     /// <summary>
-    /// Set of variables as JSON object to instantiate in the root variable scope of the process
-    /// instance. Can include nested complex objects.
+    /// JSON object that will instantiate the variables for the root variable scope
+    /// of the process instance.
     /// 
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
+
+    /// <summary>
+    /// The tenant id of the process definition.
+    /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
+    /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
 
     /// <summary>
     /// List of start instructions. By default, the process instance will start at
@@ -24314,6 +24467,82 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public List<ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; }
 
     /// <summary>
+    /// Wait for the process instance to complete. If the process instance does not complete
+    /// within the request timeout limit, a 504 response status will be returned. The process
+    /// instance will continue to run in the background regardless of the timeout. Disabled by
+    /// default.
+    /// 
+    /// </summary>
+    [JsonPropertyName("awaitCompletion")]
+    public bool? AwaitCompletion { get; set; }
+
+    /// <summary>
+    /// List of variables by name to be included in the response when awaitCompletion is set to true.
+    /// If empty, all visible variables in the root scope will be returned.
+    /// 
+    /// </summary>
+    [JsonPropertyName("fetchVariables")]
+    public List<string>? FetchVariables { get; set; }
+
+    /// <summary>
+    /// Timeout (in ms) the request waits for the process to complete. By default or
+    /// when set to 0, the generic request timeout configured in the cluster is applied.
+    /// 
+    /// </summary>
+    [JsonPropertyName("requestTimeout")]
+    public long? RequestTimeout { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// An optional, user-defined string identifier that identifies the process instance
+    /// within the scope of a process definition (scoped by tenant). If provided and uniqueness
+    /// enforcement is enabled, the engine will reject creation if another root process instance
+    /// with the same business id is already active for the same process definition.
+    /// Note that any active child process instances with the same business id are not taken into account.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
+    /// <inheritdoc />
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
+
+}
+
+/// <summary>
+/// ProcessInstanceCreationInstructionByVersionTag
+/// </summary>
+public sealed class ProcessInstanceCreationInstructionByVersionTag : ProcessInstanceCreationInstruction, global::Camunda.Orchestration.Sdk.ITenantIdSettable
+{
+    /// <summary>
+    /// The BPMN process id of the process definition to start an instance of.
+    /// 
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The version tag of the process definition to start an instance of.
+    /// If several deployed versions carry the same tag, the most recently deployed one is used.
+    /// 
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersionTag")]
+    public string ProcessDefinitionVersionTag { get; set; } = null!;
+
+    /// <summary>
+    /// JSON object that will instantiate the variables for the root variable scope
+    /// of the process instance.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variables")]
+    public object? Variables { get; set; }
+
+    /// <summary>
     /// The tenant id of the process definition.
     /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
     /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
@@ -24331,6 +24560,26 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public OperationReference? OperationReference { get; set; }
 
     /// <summary>
+    /// List of start instructions. By default, the process instance will start at
+    /// the start event. If provided, the process instance will apply start instructions
+    /// after it has been created.
+    /// 
+    /// </summary>
+    [JsonPropertyName("startInstructions")]
+    public List<ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; }
+
+    /// <summary>
+    /// Runtime instructions (alpha). List of instructions that affect the runtime behavior of
+    /// the process instance. Refer to specific instruction types for more details.
+    /// 
+    /// This parameter is an alpha feature and may be subject to change
+    /// in future releases.
+    /// 
+    /// </summary>
+    [JsonPropertyName("runtimeInstructions")]
+    public List<ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; }
+
+    /// <summary>
     /// Wait for the process instance to complete. If the process instance does not complete
     /// within the request timeout limit, a 504 response status will be returned. The process
     /// instance will continue to run in the background regardless of the timeout. Disabled by
@@ -24341,20 +24590,20 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public bool? AwaitCompletion { get; set; }
 
     /// <summary>
-    /// Timeout (in ms) the request waits for the process to complete. By default or
-    /// when set to 0, the generic request timeout configured in the cluster is applied.
-    /// 
-    /// </summary>
-    [JsonPropertyName("requestTimeout")]
-    public long? RequestTimeout { get; set; }
-
-    /// <summary>
     /// List of variables by name to be included in the response when awaitCompletion is set to true.
     /// If empty, all visible variables in the root scope will be returned.
     /// 
     /// </summary>
     [JsonPropertyName("fetchVariables")]
     public List<string>? FetchVariables { get; set; }
+
+    /// <summary>
+    /// Timeout (in ms) the request waits for the process to complete. By default or
+    /// when set to 0, the generic request timeout configured in the cluster is applied.
+    /// 
+    /// </summary>
+    [JsonPropertyName("requestTimeout")]
+    public long? RequestTimeout { get; set; }
 
     /// <summary>
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
@@ -25782,6 +26031,112 @@ public sealed class ProcessInstanceWaitStateStatisticsResult
     [JsonPropertyName("waitingCount")]
     public long WaitingCount { get; set; }
 
+}
+
+/// <summary>
+/// The kind of protection applied to a variable value. `REDACT` irrecoverably replaces the
+/// value before it reaches secondary storage.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ProtectionModeEnum
+{
+    [JsonPropertyName("REDACT")]
+    REDACT,
+}
+
+/// <summary>
+/// Matches variables that have this protection mode.
+/// </summary>
+public readonly record struct ProtectionModeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ProtectionModeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ProtectionModeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ProtectionModeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProtectionModeExactMatch");
+        return new ProtectionModeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// ProtectionModeEnum property with the advanced search capability to match any of several values.
+/// </summary>
+[JsonConverter(typeof(ProtectionModeFilterPropertyJsonConverter))]
+public sealed class ProtectionModeFilterProperty
+{
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public ProtectionModeExactMatch? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks if the variable has at least one of the provided protection modes.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<ProtectionModeEnum>? In { get; set; }
+
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator ProtectionModeFilterProperty(ProtectionModeExactMatch value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="ProtectionModeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class ProtectionModeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ProtectionModeFilterProperty>
+{
+    public override ProtectionModeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new ProtectionModeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ProtectionModeExactMatch?>(ref reader, options) };
+        var result = new ProtectionModeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ProtectionModeEnum>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProtectionModeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.In is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("ProtectionModeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -29954,6 +30309,14 @@ public sealed class VariableFilter
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
 
+    /// <summary>
+    /// The protection applied to the variable. A variable matches when it has at least one of
+    /// the given protection modes.
+    /// 
+    /// </summary>
+    [JsonPropertyName("protectionMode")]
+    public ProtectionModeFilterProperty? ProtectionMode { get; set; }
+
 }
 
 /// <summary>
@@ -30127,6 +30490,22 @@ internal sealed class VariableKeyFilterPropertyJsonConverter : global::System.Te
 }
 
 /// <summary>
+/// Metadata describing how a variable is treated.
+/// </summary>
+public sealed class VariableMetadata
+{
+    /// <summary>
+    /// The protections applied to the variable. The value of a variable protected with
+    /// `REDACT` is irrecoverably replaced before it is stored in secondary storage, so it is
+    /// never readable.
+    /// 
+    /// </summary>
+    [JsonPropertyName("protectionModes")]
+    public List<ProtectionModeEnum> ProtectionModes { get; set; } = null!;
+
+}
+
+/// <summary>
 /// Variable search response item.
 /// </summary>
 public sealed class VariableResult
@@ -30180,6 +30559,12 @@ public sealed class VariableResult
     [JsonPropertyName("rootProcessInstanceKey")]
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
+    /// <summary>
+    /// Metadata of this variable. `null` when the variable has no metadata.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public VariableMetadata? Metadata { get; set; }
+
 }
 
 /// <summary>
@@ -30229,6 +30614,12 @@ public sealed class VariableResultBase
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// Metadata of this variable. `null` when the variable has no metadata.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public VariableMetadata? Metadata { get; set; }
 
 }
 
@@ -30354,6 +30745,12 @@ public sealed class VariableSearchResult
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// Metadata of this variable. `null` when the variable has no metadata.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public VariableMetadata? Metadata { get; set; }
 
 }
 

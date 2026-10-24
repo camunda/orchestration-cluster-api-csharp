@@ -106,6 +106,64 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Add time to internal clock
+    /// Moves the Zeebe engine&apos;s internal clock forward or backward by the given offset.
+    /// Unlike pinning, the clock keeps ticking in real time after the offset is added. If the
+    /// clock is pinned, it stays pinned and moves to the pinned time plus the offset.
+    /// 
+    /// Each request adds to the time of the clock, so adding `PT1H` twice moves the clock two
+    /// hours ahead. Use `POST /v2/clock/reset` to remove all added time and return the clock to
+    /// the system time.
+    /// 
+    /// The response contains the new time of the clock. The change reaches all partitions
+    /// shortly after it is accepted, so a request sent right after it may still use the previous
+    /// time.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: addClock
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AddClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Advance the engine&apos;s internal clock by one hour (ISO 8601 duration).
+    ///     // Use a negative duration such as &quot;-PT1H&quot; to move the clock backward.
+    ///     var clock = await client.AddClockAsync(new ClockAddRequest
+    ///     {
+    ///         Offset = &quot;PT1H&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Engine time is now: {clock.Timestamp:O}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AddClockExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     // Advance the engine&apos;s internal clock by one hour (ISO 8601 duration).
+    ///     // Use a negative duration such as &quot;-PT1H&quot; to move the clock backward.
+    ///     var clock = await client.AddClockAsync(new ClockAddRequest
+    ///     {
+    ///         Offset = &quot;PT1H&quot;,
+    ///     });
+    /// 
+    ///     Console.WriteLine($&quot;Engine time is now: {clock.Timestamp:O}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ClockResult> AddClockAsync(ClockAddRequest body, CancellationToken ct = default)
+    {
+        var path = $"/clock/add";
+        return await InvokeWithRetryAsync(() => SendAsync<ClockResult>(HttpMethod.Post, path, body, ct), "addClock", false, ct);
+    }
+
+    /// <summary>
     /// Assign a client to a group
     /// Assigns a client to a group, making it a member of the group.
     /// Members of the group inherit the group authorizations, roles, and tenant assignments.
@@ -699,11 +757,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
+    public async Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}/cancellation";
-        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "cancelBatchOperation", false, ct);
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "cancelBatchOperation", false, ct);
     }
+
+    /// <summary>
+    /// Overload without a request body. Sends an empty JSON object (<c>{}</c>).
+    /// </summary>
+    public Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default) =>
+        CancelBatchOperationAsync(batchOperationKey, new object(), ct);
 
     /// <summary>
     /// Stop the running rebalance
@@ -796,7 +860,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, CancelProcessInstanceRequest body, CancellationToken ct = default)
+    public async Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, CancelProcessInstanceRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/cancellation";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "cancelProcessInstance", false, ct);
@@ -1019,7 +1083,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task CompleteJobAsync(JobKey jobKey, JobCompletionRequest body, CancellationToken ct = default)
+    public async Task CompleteJobAsync(JobKey jobKey, JobCompletionRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/jobs/{Uri.EscapeDataString(FormatParam(jobKey))}/completion";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "completeJob", true, ct);
@@ -1057,7 +1121,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task CompleteUserTaskAsync(UserTaskKey userTaskKey, UserTaskCompletionRequest body, CancellationToken ct = default)
+    public async Task CompleteUserTaskAsync(UserTaskKey userTaskKey, UserTaskCompletionRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/completion";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "completeUserTask", true, ct);
@@ -1722,7 +1786,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GroupCreateResult> CreateGroupAsync(GroupCreateRequest body, CancellationToken ct = default)
+    public async Task<GroupCreateResult> CreateGroupAsync(GroupCreateRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/groups";
         return await InvokeWithRetryAsync(() => SendAsync<GroupCreateResult>(HttpMethod.Post, path, body, ct), "createGroup", false, ct);
@@ -1770,7 +1834,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<MappingRuleCreateResult> CreateMappingRuleAsync(MappingRuleCreateRequest body, CancellationToken ct = default)
+    public async Task<MappingRuleCreateResult> CreateMappingRuleAsync(MappingRuleCreateRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/mapping-rules";
         return await InvokeWithRetryAsync(() => SendAsync<MappingRuleCreateResult>(HttpMethod.Post, path, body, ct), "createMappingRule", false, ct);
@@ -1780,7 +1844,7 @@ public partial class CamundaClient
     /// Create process instance
     /// Creates and starts an instance of the specified process.
     /// The process definition to use to create the instance can be specified either using its unique key
-    /// (as returned by Deploy resources), or using the BPMN process id and a version.
+    /// (as returned by Deploy resources), or using the BPMN process id and either a version or a version tag.
     /// If only the process definition id is given, the latest ACTIVE version is used.
     /// If no ACTIVE version exists, the request is rejected as not found.
     /// 
@@ -1895,7 +1959,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<RoleCreateResult> CreateRoleAsync(RoleCreateRequest body, CancellationToken ct = default)
+    public async Task<RoleCreateResult> CreateRoleAsync(RoleCreateRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/roles";
         return await InvokeWithRetryAsync(() => SendAsync<RoleCreateResult>(HttpMethod.Post, path, body, ct), "createRole", false, ct);
@@ -2108,7 +2172,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task DeleteDecisionInstanceAsync(DecisionEvaluationKey decisionEvaluationKey, DeleteDecisionInstanceRequest body, CancellationToken ct = default)
+    public async Task DeleteDecisionInstanceAsync(DecisionEvaluationKey decisionEvaluationKey, DeleteDecisionInstanceRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/decision-instances/{Uri.EscapeDataString(FormatParam(decisionEvaluationKey))}/deletion";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "deleteDecisionInstance", false, ct);
@@ -2435,7 +2499,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, CancellationToken ct = default)
+    public async Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/deletion";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "deleteProcessInstance", false, ct);
@@ -2498,6 +2562,11 @@ public partial class CamundaClient
     /// definitions; for other resource types (forms, generic resources) the flag is ignored and no
     /// history is deleted.
     /// 
+    /// Deleting a process definition that is already draining is accepted again and changes
+    /// nothing: the definition stays `DRAINING` until its running instances finish. The one repeated
+    /// deletion that is rejected is one with `deleteHistory` set to `true`, because the history
+    /// cannot be deleted before the drain finishes.
+    /// 
     /// The two supported types differ in how the history is removed. For a decision requirements
     /// definition the history is deleted asynchronously via a batch operation whose details are
     /// returned in the `batchOperation` field of the response. For a process definition that still
@@ -2534,7 +2603,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<DeleteResourceResponse> DeleteResourceAsync(ResourceKey resourceKey, DeleteResourceRequest body, CancellationToken ct = default)
+    public async Task<DeleteResourceResponse> DeleteResourceAsync(ResourceKey resourceKey, DeleteResourceRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/resources/{Uri.EscapeDataString(FormatParam(resourceKey))}/deletion";
         return await InvokeWithRetryAsync(() => SendAsync<DeleteResourceResponse>(HttpMethod.Post, path, body, ct), "deleteResource", false, ct);
@@ -3046,7 +3115,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task FailJobAsync(JobKey jobKey, JobFailRequest body, CancellationToken ct = default)
+    public async Task FailJobAsync(JobKey jobKey, JobFailRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/jobs/{Uri.EscapeDataString(FormatParam(jobKey))}/failure";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "failJob", true, ct);
@@ -3312,9 +3381,9 @@ public partial class CamundaClient
     /// and this is the engine&apos;s current time.
     /// 
     /// Use this endpoint to check the time that the engine uses, for example after pinning the
-    /// clock with `PUT /v2/clock` or resetting it with `POST /v2/clock/reset`. A pin or reset
-    /// reaches all partitions shortly after it is accepted, so a request sent right after it may
-    /// still return the previous time.
+    /// clock with `PUT /v2/clock`, adding time with `POST /v2/clock/add`, or resetting it with
+    /// `POST /v2/clock/reset`. A pin, add, or reset reaches all partitions shortly after it is
+    /// accepted, so a request sent right after it may still return the previous time.
     /// 
     /// </summary>
     /// <remarks>
@@ -4686,7 +4755,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ProcessDefinitionInstanceStatisticsQueryResult> GetProcessDefinitionInstanceStatisticsAsync(ProcessDefinitionInstanceStatisticsQuery body, ConsistencyOptions<ProcessDefinitionInstanceStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionInstanceStatisticsQueryResult> GetProcessDefinitionInstanceStatisticsAsync(ProcessDefinitionInstanceStatisticsQuery? body = null, ConsistencyOptions<ProcessDefinitionInstanceStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/statistics/process-instances";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -4805,7 +4874,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ProcessDefinitionMessageSubscriptionStatisticsQueryResult> GetProcessDefinitionMessageSubscriptionStatisticsAsync(ProcessDefinitionMessageSubscriptionStatisticsQuery body, ConsistencyOptions<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionMessageSubscriptionStatisticsQueryResult> GetProcessDefinitionMessageSubscriptionStatisticsAsync(ProcessDefinitionMessageSubscriptionStatisticsQuery? body = null, ConsistencyOptions<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/statistics/message-subscriptions";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -4859,7 +4928,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionElementStatisticsQuery body, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionElementStatisticsQuery? body = null, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/{Uri.EscapeDataString(FormatParam(processDefinitionKey))}/statistics/element-instances";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -5206,7 +5275,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<IncidentProcessInstanceStatisticsByErrorQueryResult> GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery body, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<IncidentProcessInstanceStatisticsByErrorQueryResult> GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery? body = null, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/incidents/statistics/process-instances-by-error";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -6426,7 +6495,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<SecretListResult> ListSecretsAsync(SecretListRequest body, CancellationToken ct = default)
+    public async Task<SecretListResult> ListSecretsAsync(SecretListRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/secrets/list";
         return await InvokeWithRetryAsync(() => SendAsync<SecretListResult>(HttpMethod.Post, path, body, ct), "listSecrets", false, ct);
@@ -6721,6 +6790,7 @@ public partial class CamundaClient
     /// Set a precise, static time for the Zeebe engine&apos;s internal clock.
     /// When the clock is pinned, it remains at the specified time and does not advance.
     /// To change the time, the clock must be pinned again with a new timestamp.
+    /// To move the clock without stopping it, use `POST /v2/clock/add` instead.
     /// Use `GET /v2/clock` to read the current time of the clock.
     /// 
     /// This endpoint is an alpha feature and may be subject to change
@@ -6819,7 +6889,8 @@ public partial class CamundaClient
     /// Reset internal clock (alpha)
     /// Resets the Zeebe engine&apos;s internal clock to the current system time, enabling it to tick in real-time.
     /// This operation is useful for returning the clock to
-    /// normal behavior after it has been pinned to a specific time.
+    /// normal behavior after it has been pinned to a specific time or moved with
+    /// `POST /v2/clock/add`.
     /// Use `GET /v2/clock` to read the current time of the clock.
     /// 
     /// This endpoint is an alpha feature and may be subject to change
@@ -6888,7 +6959,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task ResolveIncidentAsync(IncidentKey incidentKey, IncidentResolutionRequest body, CancellationToken ct = default)
+    public async Task ResolveIncidentAsync(IncidentKey incidentKey, IncidentResolutionRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/incidents/{Uri.EscapeDataString(FormatParam(incidentKey))}/resolution";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "resolveIncident", false, ct);
@@ -7241,11 +7312,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
+    public async Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}/resumption";
-        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "resumeBatchOperation", false, ct);
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "resumeBatchOperation", false, ct);
     }
+
+    /// <summary>
+    /// Overload without a request body. Sends an empty JSON object (<c>{}</c>).
+    /// </summary>
+    public Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default) =>
+        ResumeBatchOperationAsync(batchOperationKey, new object(), ct);
 
     /// <summary>
     /// Resume exporting across the whole cluster
@@ -7351,7 +7428,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task ResumeProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ResumeProcessInstanceRequest body, CancellationToken ct = default)
+    public async Task ResumeProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ResumeProcessInstanceRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/resumption";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "resumeProcessInstance", false, ct);
@@ -7465,7 +7542,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<AgentDefinitionSearchQueryResult> SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery body, ConsistencyOptions<AgentDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<AgentDefinitionSearchQueryResult> SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery? body = null, ConsistencyOptions<AgentDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/agent-definitions/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -7543,7 +7620,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<AgentInstanceHistorySearchQueryResult> SearchAgentInstanceHistoryAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistorySearchQuery body, ConsistencyOptions<AgentInstanceHistorySearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<AgentInstanceHistorySearchQueryResult> SearchAgentInstanceHistoryAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistorySearchQuery? body = null, ConsistencyOptions<AgentInstanceHistorySearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/agent-instances/{Uri.EscapeDataString(FormatParam(agentInstanceKey))}/history/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -7593,7 +7670,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<AgentInstanceSearchQueryResult> SearchAgentInstancesAsync(AgentInstanceSearchQuery body, ConsistencyOptions<AgentInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<AgentInstanceSearchQueryResult> SearchAgentInstancesAsync(AgentInstanceSearchQuery? body = null, ConsistencyOptions<AgentInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/agent-instances/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -7645,7 +7722,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<AuditLogSearchQueryResult> SearchAuditLogsAsync(AuditLogSearchQueryRequest body, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<AuditLogSearchQueryResult> SearchAuditLogsAsync(AuditLogSearchQueryRequest? body = null, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/audit-logs/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -7697,7 +7774,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<AuthorizationSearchResult> SearchAuthorizationsAsync(AuthorizationSearchQuery body, ConsistencyOptions<AuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<AuthorizationSearchResult> SearchAuthorizationsAsync(AuthorizationSearchQuery? body = null, ConsistencyOptions<AuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/authorizations/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -7749,7 +7826,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<BatchOperationItemSearchQueryResult> SearchBatchOperationItemsAsync(BatchOperationItemSearchQuery body, ConsistencyOptions<BatchOperationItemSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationItemSearchQueryResult> SearchBatchOperationItemsAsync(BatchOperationItemSearchQuery? body = null, ConsistencyOptions<BatchOperationItemSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/batch-operation-items/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -7801,7 +7878,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<BatchOperationSearchQueryResult> SearchBatchOperationsAsync(BatchOperationSearchQuery body, ConsistencyOptions<BatchOperationSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<BatchOperationSearchQueryResult> SearchBatchOperationsAsync(BatchOperationSearchQuery? body = null, ConsistencyOptions<BatchOperationSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/batch-operations/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -7855,7 +7932,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GroupClientSearchResult> SearchClientsForGroupAsync(GroupId groupId, GroupClientSearchQueryRequest body, ConsistencyOptions<GroupClientSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupClientSearchResult> SearchClientsForGroupAsync(GroupId groupId, GroupClientSearchQueryRequest? body = null, ConsistencyOptions<GroupClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -7909,7 +7986,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<RoleClientSearchResult> SearchClientsForRoleAsync(RoleId roleId, RoleClientSearchQueryRequest body, ConsistencyOptions<RoleClientSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleClientSearchResult> SearchClientsForRoleAsync(RoleId roleId, RoleClientSearchQueryRequest? body = null, ConsistencyOptions<RoleClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -7963,7 +8040,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<TenantClientSearchResult> SearchClientsForTenantAsync(TenantId tenantId, TenantClientSearchQueryRequest body, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantClientSearchResult> SearchClientsForTenantAsync(TenantId tenantId, TenantClientSearchQueryRequest? body = null, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/clients/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8014,7 +8091,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterVariableSearchQueryResult> SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<ClusterVariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ClusterVariableSearchQueryResult> SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest? body = null, bool? truncateValues = null, ConsistencyOptions<ClusterVariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(FormatParam(truncateValues)));
@@ -8068,7 +8145,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<CorrelatedMessageSubscriptionSearchQueryResult> SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery body, ConsistencyOptions<CorrelatedMessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<CorrelatedMessageSubscriptionSearchQueryResult> SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery? body = null, ConsistencyOptions<CorrelatedMessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/correlated-message-subscriptions/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8120,7 +8197,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<DecisionDefinitionSearchQueryResult> SearchDecisionDefinitionsAsync(DecisionDefinitionSearchQuery body, ConsistencyOptions<DecisionDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<DecisionDefinitionSearchQueryResult> SearchDecisionDefinitionsAsync(DecisionDefinitionSearchQuery? body = null, ConsistencyOptions<DecisionDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-definitions/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8172,7 +8249,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<DecisionInstanceSearchQueryResult> SearchDecisionInstancesAsync(DecisionInstanceSearchQuery body, ConsistencyOptions<DecisionInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<DecisionInstanceSearchQueryResult> SearchDecisionInstancesAsync(DecisionInstanceSearchQuery? body = null, ConsistencyOptions<DecisionInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-instances/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8224,7 +8301,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<DecisionRequirementsSearchQueryResult> SearchDecisionRequirementsAsync(DecisionRequirementsSearchQuery body, ConsistencyOptions<DecisionRequirementsSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<DecisionRequirementsSearchQueryResult> SearchDecisionRequirementsAsync(DecisionRequirementsSearchQuery? body = null, ConsistencyOptions<DecisionRequirementsSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/decision-requirements/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8368,7 +8445,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery body, ConsistencyOptions<ElementInstanceWaitStateQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery? body = null, ConsistencyOptions<ElementInstanceWaitStateQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/wait-states/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8420,7 +8497,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ElementInstanceSearchQueryResult> SearchElementInstancesAsync(ElementInstanceSearchQuery body, ConsistencyOptions<ElementInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ElementInstanceSearchQueryResult> SearchElementInstancesAsync(ElementInstanceSearchQuery? body = null, ConsistencyOptions<ElementInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8472,7 +8549,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GlobalTaskListenerSearchQueryResult> SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest body, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GlobalTaskListenerSearchQueryResult> SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest? body = null, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/global-task-listeners/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8526,7 +8603,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<TenantGroupSearchResult> SearchGroupIdsForTenantAsync(TenantId tenantId, TenantGroupSearchQueryRequest body, ConsistencyOptions<TenantGroupSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantGroupSearchResult> SearchGroupIdsForTenantAsync(TenantId tenantId, TenantGroupSearchQueryRequest? body = null, ConsistencyOptions<TenantGroupSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/groups/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8576,7 +8653,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GroupSearchQueryResult> SearchGroupsAsync(GroupSearchQueryRequest body, ConsistencyOptions<GroupSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupSearchQueryResult> SearchGroupsAsync(GroupSearchQueryRequest? body = null, ConsistencyOptions<GroupSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8630,7 +8707,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(RoleId roleId, RoleGroupSearchQueryRequest body, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(RoleId roleId, RoleGroupSearchQueryRequest? body = null, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/groups/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8681,7 +8758,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<IncidentSearchQueryResult> SearchIncidentsAsync(IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<IncidentSearchQueryResult> SearchIncidentsAsync(IncidentSearchQuery? body = null, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/incidents/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8731,7 +8808,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<JobSearchQueryResult> SearchJobsAsync(JobSearchQuery body, ConsistencyOptions<JobSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<JobSearchQueryResult> SearchJobsAsync(JobSearchQuery? body = null, ConsistencyOptions<JobSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/jobs/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8784,7 +8861,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<MappingRuleSearchQueryResult> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<MappingRuleSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<MappingRuleSearchQueryResult> SearchMappingRuleAsync(MappingRuleSearchQueryRequest? body = null, ConsistencyOptions<MappingRuleSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8838,7 +8915,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GroupMappingRuleSearchResult> SearchMappingRulesForGroupAsync(GroupId groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<GroupMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupMappingRuleSearchResult> SearchMappingRulesForGroupAsync(GroupId groupId, MappingRuleSearchQueryRequest? body = null, ConsistencyOptions<GroupMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8892,7 +8969,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<RoleMappingRuleSearchResult> SearchMappingRulesForRoleAsync(RoleId roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<RoleMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleMappingRuleSearchResult> SearchMappingRulesForRoleAsync(RoleId roleId, MappingRuleSearchQueryRequest? body = null, ConsistencyOptions<RoleMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -8946,7 +9023,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<TenantMappingRuleSearchResult> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<TenantMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantMappingRuleSearchResult> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest? body = null, ConsistencyOptions<TenantMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/mapping-rules/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9011,7 +9088,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<MessageSubscriptionSearchQueryResult> SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery body, ConsistencyOptions<MessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<MessageSubscriptionSearchQueryResult> SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery? body = null, ConsistencyOptions<MessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/message-subscriptions/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9063,7 +9140,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<OwnAuthorizationSearchResult> SearchOwnAuthorizationsAsync(AuthorizationSearchQuery body, ConsistencyOptions<OwnAuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<OwnAuthorizationSearchResult> SearchOwnAuthorizationsAsync(AuthorizationSearchQuery? body = null, ConsistencyOptions<OwnAuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/authentication/me/authorizations/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9117,7 +9194,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ProcessDefinitionVariableNameSearchQueryResult> SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionVariableNameSearchQuery body, ConsistencyOptions<ProcessDefinitionVariableNameSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionVariableNameSearchQueryResult> SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionVariableNameSearchQuery? body = null, ConsistencyOptions<ProcessDefinitionVariableNameSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/{Uri.EscapeDataString(FormatParam(processDefinitionKey))}/variable-names/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9169,7 +9246,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ProcessDefinitionSearchQueryResult> SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery body, ConsistencyOptions<ProcessDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessDefinitionSearchQueryResult> SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery? body = null, ConsistencyOptions<ProcessDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-definitions/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9229,7 +9306,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery? body = null, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/incidents/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9279,7 +9356,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(ProcessInstanceSearchQuery body, ConsistencyOptions<ProcessInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(ProcessInstanceSearchQuery? body = null, ConsistencyOptions<ProcessInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9333,7 +9410,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ResourceSearchQueryResult> SearchResourcesAsync(ResourceSearchQuery body, ConsistencyOptions<ResourceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<ResourceSearchQueryResult> SearchResourcesAsync(ResourceSearchQuery? body = null, ConsistencyOptions<ResourceSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/resources/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9383,7 +9460,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<RoleSearchQueryResult> SearchRolesAsync(RoleSearchQueryRequest body, ConsistencyOptions<RoleSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleSearchQueryResult> SearchRolesAsync(RoleSearchQueryRequest? body = null, ConsistencyOptions<RoleSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9437,7 +9514,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GroupRoleSearchResult> SearchRolesForGroupAsync(GroupId groupId, RoleSearchQueryRequest body, ConsistencyOptions<GroupRoleSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupRoleSearchResult> SearchRolesForGroupAsync(GroupId groupId, RoleSearchQueryRequest? body = null, ConsistencyOptions<GroupRoleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9491,7 +9568,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<TenantRoleSearchResult> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<TenantRoleSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantRoleSearchResult> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest? body = null, ConsistencyOptions<TenantRoleSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/roles/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9541,7 +9618,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<TenantSearchQueryResult> SearchTenantsAsync(TenantSearchQueryRequest body, ConsistencyOptions<TenantSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantSearchQueryResult> SearchTenantsAsync(TenantSearchQueryRequest? body = null, ConsistencyOptions<TenantSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9595,7 +9672,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<AuditLogSearchQueryResult> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, UserTaskAuditLogSearchQueryRequest body, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<AuditLogSearchQueryResult> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, UserTaskAuditLogSearchQueryRequest? body = null, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/audit-logs/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9655,7 +9732,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, UserTaskEffectiveVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, UserTaskEffectiveVariableSearchQueryRequest? body = null, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(FormatParam(truncateValues)));
@@ -9718,7 +9795,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, UserTaskVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, UserTaskVariableSearchQueryRequest? body = null, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(FormatParam(truncateValues)));
@@ -9770,7 +9847,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<UserTaskSearchQueryResult> SearchUserTasksAsync(UserTaskSearchQuery body, ConsistencyOptions<UserTaskSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<UserTaskSearchQueryResult> SearchUserTasksAsync(UserTaskSearchQuery? body = null, ConsistencyOptions<UserTaskSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/user-tasks/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9820,7 +9897,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<UserSearchResult> SearchUsersAsync(UserSearchQueryRequest body, ConsistencyOptions<UserSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<UserSearchResult> SearchUsersAsync(UserSearchQueryRequest? body = null, ConsistencyOptions<UserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9874,7 +9951,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<GroupUserSearchResult> SearchUsersForGroupAsync(GroupId groupId, GroupUserSearchQueryRequest body, ConsistencyOptions<GroupUserSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<GroupUserSearchResult> SearchUsersForGroupAsync(GroupId groupId, GroupUserSearchQueryRequest? body = null, ConsistencyOptions<GroupUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/groups/{Uri.EscapeDataString(FormatParam(groupId))}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9928,7 +10005,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<RoleUserSearchResult> SearchUsersForRoleAsync(RoleId roleId, RoleUserSearchQueryRequest body, ConsistencyOptions<RoleUserSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<RoleUserSearchResult> SearchUsersForRoleAsync(RoleId roleId, RoleUserSearchQueryRequest? body = null, ConsistencyOptions<RoleUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/roles/{Uri.EscapeDataString(FormatParam(roleId))}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -9982,7 +10059,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<TenantUserSearchResult> SearchUsersForTenantAsync(TenantId tenantId, TenantUserSearchQueryRequest body, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
+    public async Task<TenantUserSearchResult> SearchUsersForTenantAsync(TenantId tenantId, TenantUserSearchQueryRequest? body = null, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/tenants/{Uri.EscapeDataString(FormatParam(tenantId))}/users/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
@@ -10040,7 +10117,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<VariableSearchQueryResult> SearchVariablesAsync(VariableSearchQuery body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<VariableSearchQueryResult> SearchVariablesAsync(VariableSearchQuery? body = null, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(FormatParam(truncateValues)));
@@ -10084,11 +10161,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
+    public async Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}/suspension";
-        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, null, ct); return 0; }, "suspendBatchOperation", false, ct);
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "suspendBatchOperation", false, ct);
     }
+
+    /// <summary>
+    /// Overload without a request body. Sends an empty JSON object (<c>{}</c>).
+    /// </summary>
+    public Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default) =>
+        SuspendBatchOperationAsync(batchOperationKey, new object(), ct);
 
     /// <summary>
     /// Suspend process instance
@@ -10125,7 +10208,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task SuspendProcessInstanceAsync(ProcessInstanceKey processInstanceKey, SuspendProcessInstanceRequest body, CancellationToken ct = default)
+    public async Task SuspendProcessInstanceAsync(ProcessInstanceKey processInstanceKey, SuspendProcessInstanceRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/process-instances/{Uri.EscapeDataString(FormatParam(processInstanceKey))}/suspension";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "suspendProcessInstance", false, ct);
@@ -10434,7 +10517,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<TakeRuntimeBackupResponse> TakeRuntimeBackupAsync(TakeRuntimeBackupRequest body, CancellationToken ct = default)
+    public async Task<TakeRuntimeBackupResponse> TakeRuntimeBackupAsync(TakeRuntimeBackupRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/backups/runtime";
         return await InvokeWithRetryAsync(() => SendAsync<TakeRuntimeBackupResponse>(HttpMethod.Post, path, body, ct), "takeRuntimeBackup", false, ct);
@@ -10511,7 +10594,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterTakeRuntimeBackupResponse> TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest body, string? physicalTenantId = null, CancellationToken ct = default)
+    public async Task<ClusterTakeRuntimeBackupResponse> TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest? body = null, string? physicalTenantId = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (physicalTenantId != null) queryParts.Add("physicalTenantId=" + Uri.EscapeDataString(FormatParam(physicalTenantId)));
@@ -10624,7 +10707,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<ClusterBalanceResponse> TriggerClusterRebalanceAsync(ClusterRebalanceRequest body, bool? dryRun = null, CancellationToken ct = default)
+    public async Task<ClusterBalanceResponse> TriggerClusterRebalanceAsync(ClusterRebalanceRequest? body = null, bool? dryRun = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
         if (dryRun != null) queryParts.Add("dryRun=" + Uri.EscapeDataString(FormatParam(dryRun)));
@@ -11526,7 +11609,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<MappingRuleUpdateResult> UpdateMappingRuleAsync(MappingRuleId mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
+    public async Task<MappingRuleUpdateResult> UpdateMappingRuleAsync(MappingRuleId mappingRuleId, MappingRuleUpdateRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/mapping-rules/{Uri.EscapeDataString(FormatParam(mappingRuleId))}";
         return await InvokeWithRetryAsync(() => SendAsync<MappingRuleUpdateResult>(HttpMethod.Put, path, body, ct), "updateMappingRule", false, ct);
@@ -11742,7 +11825,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task UpdateUserTaskAsync(UserTaskKey userTaskKey, UserTaskUpdateRequest body, CancellationToken ct = default)
+    public async Task UpdateUserTaskAsync(UserTaskKey userTaskKey, UserTaskUpdateRequest? body = null, CancellationToken ct = default)
     {
         var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}";
         await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Patch, path, body, ct); return 0; }, "updateUserTask", false, ct);

@@ -67,6 +67,125 @@ public class CamundaClientTests : IDisposable
         Assert.Equal(AuthStrategy.None, client.Config.Auth.Strategy);
     }
 
+    [Fact]
+    public async Task SchemalessOptionalBody_Omitted_SendsEmptyJsonObject()
+    {
+        // Issue #469: cancelBatchOperation's request body is optional and
+        // untyped in the spec. The JS SDK sends `{}` when the caller omits
+        // it — the C# SDK must match on the wire. The request (and its
+        // content) is disposed after sending, so capture inside the handler.
+        string? capturedBody = null;
+        var hadContent = false;
+        _handler.Enqueue(async request =>
+        {
+            hadContent = request.Content != null;
+            capturedBody = request.Content != null ? await request.Content.ReadAsStringAsync() : null;
+            return new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+        });
+
+        await _client.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123"));
+
+        Assert.Single(_handler.Requests);
+        Assert.True(hadContent, "Expected a request content body.");
+        Assert.Equal("{}", capturedBody);
+    }
+
+    [Fact]
+    public async Task SchemalessOptionalBody_Supplied_SendsSerialisedBody()
+    {
+        string? capturedBody = null;
+        _handler.Enqueue(async request =>
+        {
+            capturedBody = await request.Content!.ReadAsStringAsync();
+            return new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+        });
+
+        await _client.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123"), new { reason = "test" });
+
+        Assert.Single(_handler.Requests);
+        Assert.Contains("\"reason\":\"test\"", capturedBody);
+    }
+
+    [Fact]
+    public async Task SchemalessOptionalBody_PositionalCancellationToken_SendsEmptyBodyNotSerialisedToken()
+    {
+        // Regression (issue #469): a schemaless body must NOT be an optional
+        // `object? body = null` positioned before `ct`. If it were, the
+        // positional call `Op(key, cancellationToken)` would box the token into
+        // `body` (serialising the CancellationToken) and leave `ct` at its
+        // default. The no-body overload must claim `(key, ct)` and send `{}`.
+        string? capturedBody = null;
+        _handler.Enqueue(async request =>
+        {
+            capturedBody = request.Content != null ? await request.Content.ReadAsStringAsync() : null;
+            return new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+        });
+
+        using var cts = new CancellationTokenSource();
+        await _client.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123"), cts.Token);
+
+        Assert.Single(_handler.Requests);
+        // The body is an empty JSON object, NOT a serialised CancellationToken.
+        Assert.Equal("{}", capturedBody);
+    }
+
+    [Fact]
+    public async Task SchemalessOptionalBody_PositionalCancellationToken_CancelsInFlightRequest()
+    {
+        // The cancellation token passed positionally must actually cancel the
+        // request — proving it bound to `ct` and not the body parameter.
+        using var cts = new CancellationTokenSource();
+        _handler.Enqueue(async (request, ct) =>
+        {
+            cts.Cancel();
+            await Task.Delay(Timeout.Infinite, ct);
+            return new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+        });
+
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            () => _client.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123"), cts.Token));
+    }
+
+    [Fact]
+    public async Task SchemafulOptionalBody_Omitted_SendsNoContent()
+    {
+        // Issue #469: listSecrets' request body is optional and typed. The JS
+        // SDK sends no body when the caller omits it — the C# SDK must match.
+        var hadContent = false;
+        _handler.Enqueue(request =>
+        {
+            hadContent = request.Content != null;
+            return new HttpResponseMessage(System.Net.HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"references\":[]}", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        await _client.ListSecretsAsync();
+
+        Assert.Single(_handler.Requests);
+        Assert.False(hadContent, "Expected no request content body.");
+    }
+
+    [Fact]
+    public async Task SchemafulOptionalBody_Supplied_SendsSerialisedBody()
+    {
+        string? capturedBody = null;
+        _handler.Enqueue(async request =>
+        {
+            capturedBody = await request.Content!.ReadAsStringAsync();
+            return new HttpResponseMessage(System.Net.HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"references\":[]}", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        await _client.ListSecretsAsync(new SecretListRequest());
+
+        Assert.Single(_handler.Requests);
+        Assert.Equal("{}", capturedBody);
+    }
+
     public void Dispose()
     {
         _client.Dispose();
@@ -79,14 +198,14 @@ public class CamundaClientTests : IDisposable
 /// </summary>
 internal sealed class MockHttpMessageHandler : HttpMessageHandler
 {
-    private readonly Queue<Func<HttpRequestMessage, Task<HttpResponseMessage>>> _responses = new();
+    private readonly Queue<Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>>> _responses = new();
     private readonly List<HttpRequestMessage> _requests = new();
 
     public IReadOnlyList<HttpRequestMessage> Requests => _requests;
 
     public void Enqueue(HttpStatusCode status, string content = "{}", string contentType = "application/json")
     {
-        _responses.Enqueue(_ => Task.FromResult(new HttpResponseMessage(status)
+        _responses.Enqueue((_, _) => Task.FromResult(new HttpResponseMessage(status)
         {
             Content = new StringContent(content, System.Text.Encoding.UTF8, contentType),
         }));
@@ -94,10 +213,15 @@ internal sealed class MockHttpMessageHandler : HttpMessageHandler
 
     public void Enqueue(Func<HttpRequestMessage, HttpResponseMessage> handler)
     {
-        _responses.Enqueue(r => Task.FromResult(handler(r)));
+        _responses.Enqueue((r, _) => Task.FromResult(handler(r)));
     }
 
     public void Enqueue(Func<HttpRequestMessage, Task<HttpResponseMessage>> handler)
+    {
+        _responses.Enqueue((r, _) => handler(r));
+    }
+
+    public void Enqueue(Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler)
     {
         _responses.Enqueue(handler);
     }
@@ -109,7 +233,7 @@ internal sealed class MockHttpMessageHandler : HttpMessageHandler
         if (_responses.Count > 0)
         {
             var handler = _responses.Dequeue();
-            return await handler(request);
+            return await handler(request, ct);
         }
 
         return new HttpResponseMessage(HttpStatusCode.NotFound)
