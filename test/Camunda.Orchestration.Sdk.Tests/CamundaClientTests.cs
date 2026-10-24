@@ -67,6 +67,85 @@ public class CamundaClientTests : IDisposable
         Assert.Equal(AuthStrategy.None, client.Config.Auth.Strategy);
     }
 
+    [Fact]
+    public async Task SchemalessOptionalBody_Omitted_SendsEmptyJsonObject()
+    {
+        // Issue #469: cancelBatchOperation's request body is optional and
+        // untyped in the spec. The JS SDK sends `{}` when the caller omits
+        // it — the C# SDK must match on the wire. The request (and its
+        // content) is disposed after sending, so capture inside the handler.
+        string? capturedBody = null;
+        var hadContent = false;
+        _handler.Enqueue(async request =>
+        {
+            hadContent = request.Content != null;
+            capturedBody = request.Content != null ? await request.Content.ReadAsStringAsync() : null;
+            return new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+        });
+
+        await _client.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123"));
+
+        Assert.Single(_handler.Requests);
+        Assert.True(hadContent, "Expected a request content body.");
+        Assert.Equal("{}", capturedBody);
+    }
+
+    [Fact]
+    public async Task SchemalessOptionalBody_Supplied_SendsSerialisedBody()
+    {
+        string? capturedBody = null;
+        _handler.Enqueue(async request =>
+        {
+            capturedBody = await request.Content!.ReadAsStringAsync();
+            return new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+        });
+
+        await _client.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123"), new { reason = "test" });
+
+        Assert.Single(_handler.Requests);
+        Assert.Contains("\"reason\":\"test\"", capturedBody);
+    }
+
+    [Fact]
+    public async Task SchemafulOptionalBody_Omitted_SendsNoContent()
+    {
+        // Issue #469: listSecrets' request body is optional and typed. The JS
+        // SDK sends no body when the caller omits it — the C# SDK must match.
+        var hadContent = false;
+        _handler.Enqueue(request =>
+        {
+            hadContent = request.Content != null;
+            return new HttpResponseMessage(System.Net.HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"references\":[]}", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        await _client.ListSecretsAsync();
+
+        Assert.Single(_handler.Requests);
+        Assert.False(hadContent, "Expected no request content body.");
+    }
+
+    [Fact]
+    public async Task SchemafulOptionalBody_Supplied_SendsSerialisedBody()
+    {
+        string? capturedBody = null;
+        _handler.Enqueue(async request =>
+        {
+            capturedBody = await request.Content!.ReadAsStringAsync();
+            return new HttpResponseMessage(System.Net.HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"references\":[]}", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        await _client.ListSecretsAsync(new SecretListRequest());
+
+        Assert.Single(_handler.Requests);
+        Assert.Equal("{}", capturedBody);
+    }
+
     public void Dispose()
     {
         _client.Dispose();

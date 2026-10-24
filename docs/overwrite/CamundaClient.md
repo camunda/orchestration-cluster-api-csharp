@@ -9,6 +9,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.AddClockAsync(Camunda.Orchestration.Sdk.ClockAddRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Admin.cs#AddClock)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.ActivateJobsAsync(Camunda.Orchestration.Sdk.JobActivationRequest,System.Threading.CancellationToken)
 example:
 - *content

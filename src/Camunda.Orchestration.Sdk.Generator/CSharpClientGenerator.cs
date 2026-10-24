@@ -114,11 +114,24 @@ internal static class CSharpClientGenerator
                     .Select(p => new ParamMeta(RequireParameterName(p, op.OperationId), MapType(p.Schema), p.Required))
                     .ToList();
 
+                // A body exists when the request declares JSON or multipart
+                // content. A JSON media type *without* a schema still counts:
+                // the spec is declaring an (untyped) body, which the JS SDK
+                // types as `body?: unknown` and sends `{}` for when omitted
+                // (issue #469).
                 var hasBody = op.RequestBody?.Content?.Any(c =>
-                    (c.Key.Contains("json", StringComparison.OrdinalIgnoreCase) && c.Value.Schema != null) ||
+                    c.Key.Contains("json", StringComparison.OrdinalIgnoreCase) ||
                     c.Key.Contains("multipart", StringComparison.OrdinalIgnoreCase)) == true;
 
-                var bodySchemaRef = hasBody ? GetBodySchemaRef(op) : null;
+                // True when no JSON media type carries a schema — the body is
+                // untyped (e.g. cancelBatchOperation), so it is emitted as
+                // `object?` and defaults to `{}` on the wire.
+                var hasSchemalessBody = op.RequestBody?.Content is { } schemalessContent
+                    && schemalessContent.Any(c => c.Key.Contains("json", StringComparison.OrdinalIgnoreCase))
+                    && schemalessContent.All(c =>
+                        !c.Key.Contains("json", StringComparison.OrdinalIgnoreCase) || c.Value.Schema == null);
+
+                var bodySchemaRef = hasBody && !hasSchemalessBody ? GetBodySchemaRef(op) : null;
                 var responseSchemaRef = GetResponseSchemaRef(doc, op);
 
                 // Use pre-computed metadata for behavioral flags
@@ -127,7 +140,9 @@ internal static class CSharpClientGenerator
                 var isMultipart = op.RequestBody?.Content?.Any(c =>
                     c.Key.Contains("multipart", StringComparison.OrdinalIgnoreCase)) == true;
 
-                var bodyTypeName = bodySchemaRef ?? (hasBody ? opId + "Request" : null);
+                var bodyTypeName = hasSchemalessBody
+                    ? "object"
+                    : bodySchemaRef ?? (hasBody ? opId + "Request" : null);
                 var responseTypeName = responseSchemaRef ?? "object";
 
                 // Collect inline request body schema (no $ref → needs a generated class)
@@ -169,11 +184,21 @@ internal static class CSharpClientGenerator
                 // Self-contained here (rather than via spec-metadata) so this fix
                 // does not require a camunda-schema-bundler release. See issue #123.
                 var hasOptionalTenantIdsInBody = false;
+                // Detect optional singular `tenantId` in the request body the
+                // same way: the bundler's optionalTenantIdInBody metadata flag
+                // does not follow allOf composition, so a variant inheriting
+                // tenantId from an allOf-referenced base schema is missed and
+                // the injection is silently dropped. See issue #469.
+                var hasOptionalTenantIdInBody = metaEntry?.OptionalTenantIdInBody ?? false;
                 if (hasBody && !isMultipart)
                 {
                     var bodySchema = ResolveRequestBodySchema(doc, op);
                     if (bodySchema != null)
+                    {
                         hasOptionalTenantIdsInBody = HasOptionalTenantIdsArrayInAnyVariant(bodySchema, doc);
+                        hasOptionalTenantIdInBody = hasOptionalTenantIdInBody
+                            || HasOptionalTenantIdInAnyVariant(bodySchema, doc);
+                    }
                 }
 
                 ops.Add(new OperationMeta
@@ -187,10 +212,12 @@ internal static class CSharpClientGenerator
                     HasBody = hasBody,
                     IsMultipart = isMultipart,
                     BodyTypeName = bodyTypeName,
+                    IsBodyOptional = op.RequestBody?.Required == false,
+                    HasSchemalessBody = hasSchemalessBody,
                     ResponseTypeName = responseTypeName,
                     IsVoidResponse = responseSchemaRef == null && GetSuccessStatusCode(op) is 204 or 202,
                     IsEventuallyConsistent = isEventual,
-                    HasOptionalTenantIdInBody = metaEntry?.OptionalTenantIdInBody ?? false,
+                    HasOptionalTenantIdInBody = hasOptionalTenantIdInBody,
                     HasOptionalTenantIdsInBody = hasOptionalTenantIdsInBody,
                     Summary = op.Summary,
                     Description = op.Description,
@@ -342,6 +369,37 @@ internal static class CSharpClientGenerator
         if (required.Contains("tenantIds"))
             return false;
         return SchemaTypeName(tenantIdsProp) == "array";
+    }
+
+    /// <summary>
+    /// True if the schema (or every variant in a <c>oneOf</c>/<c>anyOf</c>)
+    /// has an optional <c>tenantId</c> property. Self-contained counterpart
+    /// to the bundler's <c>optionalTenantIdInBody</c> metadata flag, which
+    /// does not follow <c>allOf</c> composition — so a variant that inherits
+    /// <c>tenantId</c> from an allOf-referenced base schema (e.g.
+    /// <c>ProcessInstanceCreationInstructionByKey</c> →
+    /// <c>ProcessInstanceCreationInstructionBase</c>) is missed by the
+    /// metadata and the default-tenant injection is silently dropped
+    /// (issue #469).
+    /// </summary>
+    private static bool HasOptionalTenantIdInAnyVariant(IOpenApiSchema schema, OpenApiDocument doc)
+    {
+        var variants = schema.OneOf?.Count > 0 ? schema.OneOf : (schema.AnyOf?.Count > 0 ? schema.AnyOf : null);
+        if (variants is { Count: > 0 })
+        {
+            foreach (var v in variants)
+            {
+                var resolved = GetRefId(v) != null
+                    && doc.Components?.Schemas != null
+                    && doc.Components.Schemas.TryGetValue(GetRefId(v)!, out var r)
+                    ? r
+                    : v;
+                if (GetOptionalTenantIdInfo(resolved, doc) == null)
+                    return false;
+            }
+            return true;
+        }
+        return GetOptionalTenantIdInfo(schema, doc) != null;
     }
 
     private static IOpenApiSchema? GetInlineResponseSchema(OpenApiOperation op)
@@ -1464,7 +1522,14 @@ internal static class CSharpClientGenerator
         foreach (var p in op.PathParams)
             methodParams.Add($"{p.Type} {ToCamelCase(p.Name)}");
         if (op.HasBody && !op.IsMultipart && op.BodyTypeName != null)
-            methodParams.Add($"{op.BodyTypeName} body");
+        {
+            // Optional request bodies (requestBody.required: false) are
+            // nullable and default to null so callers can omit them,
+            // mirroring the JS SDK's `body?: T` (issue #469).
+            methodParams.Add(op.IsBodyOptional
+                ? $"{op.BodyTypeName}? body = null"
+                : $"{op.BodyTypeName} body");
+        }
         if (op.IsMultipart)
             methodParams.Add("MultipartFormDataContent content");
         foreach (var q in op.QueryParams)
@@ -1552,8 +1617,13 @@ internal static class CSharpClientGenerator
         var isGetLiteral = verbUpper == "GET" ? "true" : "false";
         var safeOpId = SafeEmit.SafeCSharpStringLiteral(op.OriginalOperationId);
 
-        // Generate the call
+        // Generate the call. A schemaless body defaults to `{}` on the wire
+        // when the caller omits it — the JS SDK sends an empty JSON object
+        // for these operations (e.g. cancelBatchOperation), and the
+        // conformance suite asserts parity (issue #469).
         var bodyArg = op.IsMultipart ? "null" : (op.HasBody ? "body" : "null");
+        if (op.HasSchemalessBody)
+            bodyArg = "body ?? new object()";
 
         if (op.IsEventuallyConsistent)
         {
@@ -2466,6 +2536,23 @@ internal sealed class OperationMeta
     public required bool HasBody { get; init; }
     public required bool IsMultipart { get; init; }
     public string? BodyTypeName { get; init; }
+
+    /// <summary>
+    /// True when the spec declares the request body optional
+    /// (<c>requestBody.required: false</c>). Optional bodies are emitted as
+    /// nullable parameters with a <c>null</c> default so callers can omit
+    /// them, mirroring the JS SDK's <c>body?: T</c> (issue #469).
+    /// </summary>
+    public required bool IsBodyOptional { get; init; }
+
+    /// <summary>
+    /// True when the request body declares JSON content but no media type
+    /// carries a schema (e.g. <c>cancelBatchOperation</c>). The JS SDK types
+    /// these as <c>body?: unknown</c> and sends <c>{}</c> when the caller
+    /// omits the body, so the generator emits <c>object? body = null</c> and
+    /// defaults the wire payload to an empty JSON object (issue #469).
+    /// </summary>
+    public required bool HasSchemalessBody { get; init; }
     public required string ResponseTypeName { get; init; }
     public required bool IsVoidResponse { get; init; }
     public required bool IsEventuallyConsistent { get; init; }
