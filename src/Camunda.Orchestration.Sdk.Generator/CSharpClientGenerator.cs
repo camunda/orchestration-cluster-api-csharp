@@ -124,8 +124,9 @@ internal static class CSharpClientGenerator
                     c.Key.Contains("multipart", StringComparison.OrdinalIgnoreCase)) == true;
 
                 // True when no JSON media type carries a schema — the body is
-                // untyped (e.g. cancelBatchOperation), so it is emitted as
-                // `object?` and defaults to `{}` on the wire.
+                // untyped (e.g. cancelBatchOperation). It is emitted as a
+                // required `object` overload plus a no-body overload (which
+                // sends `{}` on the wire); see GenerateMethod.
                 var hasSchemalessBody = op.RequestBody?.Content is { } schemalessContent
                     && schemalessContent.Any(c => c.Key.Contains("json", StringComparison.OrdinalIgnoreCase))
                     && schemalessContent.All(c =>
@@ -1523,12 +1524,29 @@ internal static class CSharpClientGenerator
             methodParams.Add($"{p.Type} {ToCamelCase(p.Name)}");
         if (op.HasBody && !op.IsMultipart && op.BodyTypeName != null)
         {
-            // Optional request bodies (requestBody.required: false) are
-            // nullable and default to null so callers can omit them,
-            // mirroring the JS SDK's `body?: T` (issue #469).
-            methodParams.Add(op.IsBodyOptional
-                ? $"{op.BodyTypeName}? body = null"
-                : $"{op.BodyTypeName} body");
+            if (op.HasSchemalessBody)
+            {
+                // A schemaless (untyped) body is `object`. Emitting it as an
+                // *optional* `object? body = null` positioned before `ct`
+                // silently breaks existing positional-token callers: in
+                // `Op(key, cancellationToken)` the token boxes into `object?
+                // body` and `ct` falls back to its default, so cancellation is
+                // serialized as the body instead of being propagated. Make the
+                // body *required* here (a CancellationToken can no longer be a
+                // better match for it than for `ct`) and emit a separate no-body
+                // overload below that restores the original
+                // `(..., CancellationToken ct = default)` signature. Issue #469.
+                methodParams.Add("object body");
+            }
+            else
+            {
+                // Optional request bodies (requestBody.required: false) are
+                // nullable and default to null so callers can omit them,
+                // mirroring the JS SDK's `body?: T` (issue #469).
+                methodParams.Add(op.IsBodyOptional
+                    ? $"{op.BodyTypeName}? body = null"
+                    : $"{op.BodyTypeName} body");
+            }
         }
         if (op.IsMultipart)
             methodParams.Add("MultipartFormDataContent content");
@@ -1617,13 +1635,12 @@ internal static class CSharpClientGenerator
         var isGetLiteral = verbUpper == "GET" ? "true" : "false";
         var safeOpId = SafeEmit.SafeCSharpStringLiteral(op.OriginalOperationId);
 
-        // Generate the call. A schemaless body defaults to `{}` on the wire
-        // when the caller omits it — the JS SDK sends an empty JSON object
-        // for these operations (e.g. cancelBatchOperation), and the
+        // Generate the call. For a schemaless body the no-body overload sends
+        // an empty object (`{}`); the body overload here forwards the caller's
+        // required `object body` directly. The JS SDK sends an empty JSON
+        // object for these operations (e.g. cancelBatchOperation), and the
         // conformance suite asserts parity (issue #469).
         var bodyArg = op.IsMultipart ? "null" : (op.HasBody ? "body" : "null");
-        if (op.HasSchemalessBody)
-            bodyArg = "body ?? new object()";
 
         if (op.IsEventuallyConsistent)
         {
@@ -1691,6 +1708,49 @@ internal static class CSharpClientGenerator
 
         sb.AppendLine("    }");
         sb.AppendLine();
+
+        // For a schemaless (untyped) body the body parameter is required (see
+        // above), so emit a no-body overload that preserves the original
+        // `(pathParams..., CancellationToken ct = default)` signature and sends
+        // an empty JSON object (`{}`) — the JS SDK's behaviour for these
+        // operations (e.g. cancelBatchOperation). This keeps existing
+        // positional-token callers (`Op(key, ct)`) binding to `ct`, since the
+        // no-body overload is an exact, better match than the body overload for
+        // a trailing CancellationToken argument. Guarded by `!IsMultipart` to
+        // mirror the body-parameter emission above (a multipart operation has a
+        // `content` parameter, not an `object body`). Issue #469.
+        if (op.HasSchemalessBody && !op.IsMultipart)
+        {
+            var fwdParams = new List<string>();
+            var fwdArgs = new List<string>();
+            foreach (var p in op.PathParams)
+            {
+                fwdParams.Add($"{p.Type} {ToCamelCase(p.Name)}");
+                fwdArgs.Add(ToCamelCase(p.Name));
+            }
+            // Body position: forward an empty object so the wire payload is `{}`.
+            fwdArgs.Add("new object()");
+            foreach (var q in op.QueryParams)
+            {
+                var type = q.Required ? q.Type : q.Type + "?";
+                fwdParams.Add($"{type} {ToCamelCase(q.Name)}{(q.Required ? "" : " = null")}");
+                fwdArgs.Add(ToCamelCase(q.Name));
+            }
+            if (op.IsEventuallyConsistent)
+            {
+                fwdParams.Add($"ConsistencyOptions<{(op.IsVoidResponse ? "object" : op.ResponseTypeName)}>? consistency = null");
+                fwdArgs.Add("consistency");
+            }
+            fwdParams.Add("CancellationToken ct = default");
+            fwdArgs.Add("ct");
+
+            sb.AppendLine("    /// <summary>");
+            sb.AppendLine("    /// Overload without a request body. Sends an empty JSON object (<c>{}</c>).");
+            sb.AppendLine("    /// </summary>");
+            sb.AppendLine($"    public {returnType} {op.OperationId}Async({string.Join(", ", fwdParams)}) =>");
+            sb.AppendLine($"        {op.OperationId}Async({string.Join(", ", fwdArgs)});");
+            sb.AppendLine();
+        }
     }
 
     /// <summary>
@@ -2549,8 +2609,12 @@ internal sealed class OperationMeta
     /// True when the request body declares JSON content but no media type
     /// carries a schema (e.g. <c>cancelBatchOperation</c>). The JS SDK types
     /// these as <c>body?: unknown</c> and sends <c>{}</c> when the caller
-    /// omits the body, so the generator emits <c>object? body = null</c> and
-    /// defaults the wire payload to an empty JSON object (issue #469).
+    /// omits the body. The generator emits two overloads: a required
+    /// <c>object body</c> overload and a no-body overload (preserving the
+    /// original <c>(..., CancellationToken ct = default)</c> signature) that
+    /// sends an empty JSON object. A required body avoids an optional
+    /// <c>object? body = null</c> silently capturing a positional
+    /// <c>CancellationToken</c> (issue #469).
     /// </summary>
     public required bool HasSchemalessBody { get; init; }
     public required string ResponseTypeName { get; init; }

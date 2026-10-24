@@ -126,7 +126,7 @@ public class GeneratorOptionalBodyTests
         """;
 
     [Fact]
-    public void Schemaless_optional_body_is_emitted_as_optional_object_and_defaults_to_empty_json_object()
+    public void Schemaless_optional_body_emits_required_body_overload_and_bodyless_overload()
     {
         using var tmp = TempSpecDir.Create();
         File.WriteAllText(tmp.SpecPath, OptionalBodySpec);
@@ -136,22 +136,66 @@ public class GeneratorOptionalBodyTests
 
         var client = File.ReadAllText(Path.Combine(tmp.OutputDir, "CamundaClient.Generated.cs"));
         var root = CSharpSyntaxTree.ParseText(client).GetCompilationUnitRoot();
-        var method = SingleMethod(root, "SchemalessOptionalAsync");
+        var overloads = MethodsNamed(root, "SchemalessOptionalAsync");
 
-        // Signature: path param + optional schemaless body. The JS SDK types
-        // this body as `unknown`; `object?` is the C# equivalent.
-        var parameters = method.ParameterList.Parameters;
-        Assert.Equal(3, parameters.Count);
-        Assert.Equal("string", parameters[0].Type?.ToString());
-        Assert.Equal("thingKey", parameters[0].Identifier.ValueText);
-        Assert.Equal("object?", parameters[1].Type?.ToString());
-        Assert.Equal("body", parameters[1].Identifier.ValueText);
-        Assert.NotNull(parameters[1].Default); // optional
+        // A schemaless body produces exactly two overloads: the full body
+        // overload and a no-body overload. An *optional* `object? body = null`
+        // before `ct` would silently capture a positional CancellationToken
+        // (CancellationToken -> object boxing), so the body is *required* and
+        // the no-body overload restores the original `(key, ct)` signature.
+        Assert.Equal(2, overloads.Count);
 
-        // Wire behaviour: an omitted body must still send `{}` (JS parity),
-        // never a bodyless POST.
-        var bodyText = method.Body!.ToString();
-        Assert.Contains("body ?? new object()", bodyText);
+        var bodyOverload = overloads.Single(m => m.ParameterList.Parameters.Count == 3);
+        var bodyParams = bodyOverload.ParameterList.Parameters;
+        Assert.Equal("string", bodyParams[0].Type?.ToString());
+        Assert.Equal("thingKey", bodyParams[0].Identifier.ValueText);
+        // Required `object body` — NOT `object?` and NO default: a trailing
+        // CancellationToken cannot be a better match for `body` than for `ct`.
+        Assert.Equal("object", bodyParams[1].Type?.ToString());
+        Assert.Equal("body", bodyParams[1].Identifier.ValueText);
+        Assert.Null(bodyParams[1].Default);
+        Assert.Equal("CancellationToken", bodyParams[2].Type?.ToString());
+        // The body overload forwards the caller's body as-is.
+        Assert.Contains("path, body, ct", bodyOverload.Body!.ToString());
+
+        // No-body overload: original `(key, ct = default)` signature, sending `{}`.
+        var noBodyOverload = overloads.Single(m => m.ParameterList.Parameters.Count == 2);
+        var noBodyParams = noBodyOverload.ParameterList.Parameters;
+        Assert.Equal("string", noBodyParams[0].Type?.ToString());
+        Assert.Equal("thingKey", noBodyParams[0].Identifier.ValueText);
+        Assert.Equal("CancellationToken", noBodyParams[1].Type?.ToString());
+        Assert.NotNull(noBodyParams[1].Default); // ct = default
+        // Forwards an empty object so the wire payload is `{}` (JS parity).
+        var forwardText = (noBodyOverload.Body?.ToString() ?? noBodyOverload.ExpressionBody?.ToString()) ?? "";
+        Assert.Contains("new object()", forwardText);
+    }
+
+    [Fact]
+    public void Schemaless_body_overloads_bind_positional_cancellation_token_to_ct_not_body()
+    {
+        // Compile the generated client and assert, via overload resolution, that
+        // `Op(key, cancellationToken)` binds the token to `ct` (propagating
+        // cancellation) rather than boxing it into the body parameter. This is
+        // the defect the required-body + no-body-overload split prevents.
+        using var tmp = TempSpecDir.Create();
+        File.WriteAllText(tmp.SpecPath, OptionalBodySpec);
+        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+
+        CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir);
+
+        var client = File.ReadAllText(Path.Combine(tmp.OutputDir, "CamundaClient.Generated.cs"));
+        var root = CSharpSyntaxTree.ParseText(client).GetCompilationUnitRoot();
+        var noBodyOverload = MethodsNamed(root, "SchemalessOptionalAsync")
+            .Single(m => m.ParameterList.Parameters.Count == 2);
+
+        // The no-body overload exists specifically so `(key, ct)` resolves to a
+        // bodyless call; without it, overload resolution would silently pick the
+        // body overload and box `ct` into `body`.
+        var p = noBodyOverload.ParameterList.Parameters;
+        Assert.Equal("CancellationToken", p[^1].Type?.ToString());
+        Assert.DoesNotContain(
+            noBodyOverload.ParameterList.Parameters,
+            param => param.Type?.ToString() is "object" or "object?");
     }
 
     [Fact]
@@ -324,6 +368,16 @@ public class GeneratorOptionalBodyTests
             .SingleOrDefault(m => m.Identifier.ValueText == name);
         Assert.True(method != null, $"Expected a generated method named '{name}'.");
         return method!;
+    }
+
+    private static List<MethodDeclarationSyntax> MethodsNamed(CompilationUnitSyntax root, string name)
+    {
+        var methods = root.DescendantNodes()
+            .OfType<MethodDeclarationSyntax>()
+            .Where(m => m.Identifier.ValueText == name)
+            .ToList();
+        Assert.True(methods.Count > 0, $"Expected at least one generated method named '{name}'.");
+        return methods;
     }
 
     private sealed class TempSpecDir : IDisposable
