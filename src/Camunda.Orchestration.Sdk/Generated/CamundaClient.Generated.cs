@@ -757,11 +757,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, object? body = null, CancellationToken ct = default)
+    public async Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}/cancellation";
-        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body ?? new object(), ct); return 0; }, "cancelBatchOperation", false, ct);
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "cancelBatchOperation", false, ct);
     }
+
+    /// <summary>
+    /// Overload without a request body. Sends an empty JSON object (<c>{}</c>).
+    /// </summary>
+    public Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default) =>
+        CancelBatchOperationAsync(batchOperationKey, new object(), ct);
 
     /// <summary>
     /// Stop the running rebalance
@@ -7306,11 +7312,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, object? body = null, CancellationToken ct = default)
+    public async Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}/resumption";
-        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body ?? new object(), ct); return 0; }, "resumeBatchOperation", false, ct);
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "resumeBatchOperation", false, ct);
     }
+
+    /// <summary>
+    /// Overload without a request body. Sends an empty JSON object (<c>{}</c>).
+    /// </summary>
+    public Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default) =>
+        ResumeBatchOperationAsync(batchOperationKey, new object(), ct);
 
     /// <summary>
     /// Resume exporting across the whole cluster
@@ -10149,11 +10161,17 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, object? body = null, CancellationToken ct = default)
+    public async Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)
     {
         var path = $"/batch-operations/{Uri.EscapeDataString(FormatParam(batchOperationKey))}/suspension";
-        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body ?? new object(), ct); return 0; }, "suspendBatchOperation", false, ct);
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, ct); return 0; }, "suspendBatchOperation", false, ct);
     }
+
+    /// <summary>
+    /// Overload without a request body. Sends an empty JSON object (<c>{}</c>).
+    /// </summary>
+    public Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default) =>
+        SuspendBatchOperationAsync(batchOperationKey, new object(), ct);
 
     /// <summary>
     /// Suspend process instance
