@@ -91,6 +91,43 @@ public class ClusterAdminServerOverrideTests : IDisposable
         Assert.Equal("/v2/topology", uri.AbsolutePath);
     }
 
+    /// <summary>
+    /// Class-of-defect guard: a supplied <see cref="HttpClient"/> whose BaseAddress carries a
+    /// query and/or fragment must not let those components swallow the appended operation
+    /// path. Concatenating <see cref="Uri.AbsoluteUri"/> would produce
+    /// <c>https://mock.local/v2/?routing=admin/cluster/v2/topology</c> — the path becomes part
+    /// of the query and the request targets <c>/v2/</c>. The root-server override must resolve
+    /// against the path-only left part of the base address.
+    /// </summary>
+    [Theory]
+    [InlineData("https://mock.local/v2/?routing=admin")]
+    [InlineData("https://mock.local/v2/#section")]
+    [InlineData("https://mock.local/v2/?routing=admin#section")]
+    public async Task ClusterAdminOperation_IgnoresQueryAndFragmentInBaseAddress(string baseAddress)
+    {
+        _handler.Enqueue(HttpStatusCode.OK, "{}");
+
+        using var httpClient = new HttpClient(_handler) { BaseAddress = new Uri(baseAddress) };
+        using var client = new CamundaClient(new CamundaOptions { HttpClient = httpClient });
+        await client.GetClusterTopologyAsync();
+
+        var uri = _handler.Requests.Single().RequestUri!;
+        Assert.Equal("/cluster/v2/topology", uri.AbsolutePath);
+    }
+
+    [Fact]
+    public async Task RegularOperation_IgnoresQueryAndFragmentInBaseAddress()
+    {
+        _handler.Enqueue(HttpStatusCode.OK, "{}");
+
+        using var httpClient = new HttpClient(_handler) { BaseAddress = new Uri("https://mock.local/v2/?routing=admin") };
+        using var client = new CamundaClient(new CamundaOptions { HttpClient = httpClient });
+        await client.GetTopologyAsync();
+
+        var uri = _handler.Requests.Single().RequestUri!;
+        Assert.Equal("/v2/topology", uri.AbsolutePath);
+    }
+
     [Fact]
     public async Task ClusterAdminOperation_WorksWithRestAddressExact()
     {

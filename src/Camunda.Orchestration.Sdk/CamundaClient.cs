@@ -327,7 +327,10 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
 
         // Root-server override: strip a single trailing "/v2" segment from the base
         // address, then append the (already "/cluster/v2/...-prefixed") path.
-        var rootBase = baseAddress.AbsoluteUri.TrimEnd('/');
+        // Use the path-only left part: AbsoluteUri would carry any query/fragment of a
+        // caller-supplied BaseAddress (e.g. "https://host/v2/?routing=admin"), and
+        // concatenating after them would fold the operation path into the query.
+        var rootBase = baseAddress.GetLeftPart(UriPartial.Path).TrimEnd('/');
         if (rootBase.EndsWith("/v2", StringComparison.OrdinalIgnoreCase))
             rootBase = rootBase[..^3];
         return new Uri(rootBase + "/" + relativePath, UriKind.Absolute);
