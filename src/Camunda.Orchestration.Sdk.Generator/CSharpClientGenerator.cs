@@ -225,6 +225,7 @@ internal static class CSharpClientGenerator
                     Tags = op.Tags?.Select(t => t.Name ?? string.Empty).ToList() ?? [],
                     IsExemptFromBackpressure = IsExempt(opId),
                     IsBinaryResponse = responseTypeName == "byte[]",
+                    UsesRootServer = UsesRootServer(path),
                 });
             }
         }
@@ -436,6 +437,19 @@ internal static class CSharpClientGenerator
 
     private static bool IsExempt(string opId) =>
         opId is "CompleteJob" or "FailJob" or "ThrowJobError" or "CompleteUserTask";
+
+    /// <summary>
+    /// Returns true when the operation's path-item declares a `servers` override that drops
+    /// the document's `/v2` base path. The upstream spec serves the cluster-admin operations
+    /// (`/cluster/v2/...`) on the bare root — the `/cluster/v2` base lives in the path key and
+    /// each path item overrides `servers` with `{schema}://{host}:{port}` (no `/v2` suffix).
+    /// The bundler does not propagate path-item `servers` into the bundled document, so this
+    /// mirrors the upstream invariant by path prefix: every `/cluster/v2/*` operation resolves
+    /// against the bare root. See
+    /// https://github.com/camunda/orchestration-cluster-api-csharp/issues/470.
+    /// </summary>
+    private static bool UsesRootServer(string path) =>
+        path.StartsWith("/cluster/v2/", StringComparison.Ordinal);
 
     /// <summary>
     /// Check if a type name corresponds to an existing component schema
@@ -1641,6 +1655,7 @@ internal static class CSharpClientGenerator
         // object for these operations (e.g. cancelBatchOperation), and the
         // conformance suite asserts parity (issue #469).
         var bodyArg = op.IsMultipart ? "null" : (op.HasBody ? "body" : "null");
+        var rootServerArg = op.UsesRootServer ? "useRootServer: true, " : "useRootServer: false, ";
 
         if (op.IsEventuallyConsistent)
         {
@@ -1651,13 +1666,13 @@ internal static class CSharpClientGenerator
                 if (op.IsMultipart)
                 {
                     sb.AppendLine($"            await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
-                    sb.AppendLine($"                async () => {{ await InvokeWithRetryAsync(() => SendMultipartAsync<object>(path, content, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct); return new object(); }},");
+                    sb.AppendLine($"                async () => {{ await InvokeWithRetryAsync(() => SendMultipartAsync<object>(path, content, {rootServerArg}ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct); return new object(); }},");
                     sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
                 else
                 {
                     sb.AppendLine($"            await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
-                    sb.AppendLine($"                async () => {{ await SendVoidAsync({httpMethod}, path, {bodyArg}, ct); return new object(); }},");
+                    sb.AppendLine($"                async () => {{ await SendVoidAsync({httpMethod}, path, {bodyArg}, {rootServerArg}ct); return new object(); }},");
                     sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
                 sb.AppendLine("            return;");
@@ -1667,19 +1682,19 @@ internal static class CSharpClientGenerator
                 if (op.IsMultipart)
                 {
                     sb.AppendLine($"            return await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
-                    sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendMultipartAsync<{op.ResponseTypeName}>(path, content, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
+                    sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendMultipartAsync<{op.ResponseTypeName}>(path, content, {rootServerArg}ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
                     sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
                 else if (op.IsBinaryResponse)
                 {
                     sb.AppendLine($"            return await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
-                    sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendBinaryAsync({httpMethod}, path, {bodyArg}, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
+                    sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendBinaryAsync({httpMethod}, path, {bodyArg}, {rootServerArg}ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
                     sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
                 else
                 {
                     sb.AppendLine($"            return await EventualPoller.PollAsync(\"{safeOpId}\", {isGetLiteral},");
-                    sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendAsync<{op.ResponseTypeName}>({httpMethod}, path, {bodyArg}, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
+                    sb.AppendLine($"                () => InvokeWithRetryAsync(() => SendAsync<{op.ResponseTypeName}>({httpMethod}, path, {bodyArg}, {rootServerArg}ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct),");
                     sb.AppendLine($"                consistency!, _logger, _timeProvider, ct);");
                 }
             }
@@ -1690,20 +1705,20 @@ internal static class CSharpClientGenerator
         if (op.IsMultipart)
         {
             var returnKw = op.IsVoidResponse ? "" : "return ";
-            sb.AppendLine($"        {returnKw}await InvokeWithRetryAsync(() => SendMultipartAsync<{op.ResponseTypeName}>(path, content, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
+            sb.AppendLine($"        {returnKw}await InvokeWithRetryAsync(() => SendMultipartAsync<{op.ResponseTypeName}>(path, content, {rootServerArg}ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
         }
         else if (op.IsVoidResponse)
         {
-            sb.AppendLine($"        await InvokeWithRetryAsync(async () => {{ await SendVoidAsync({httpMethod}, path, {bodyArg}, ct); return 0; }}, \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
+            sb.AppendLine($"        await InvokeWithRetryAsync(async () => {{ await SendVoidAsync({httpMethod}, path, {bodyArg}, {rootServerArg}ct); return 0; }}, \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
         }
         else if (op.IsBinaryResponse)
         {
-            sb.AppendLine($"        return await InvokeWithRetryAsync(() => SendBinaryAsync({httpMethod}, path, {bodyArg}, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
+            sb.AppendLine($"        return await InvokeWithRetryAsync(() => SendBinaryAsync({httpMethod}, path, {bodyArg}, {rootServerArg}ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
         }
         else
         {
             var returnKw = op.IsEventuallyConsistent ? "return " : "return ";
-            sb.AppendLine($"        {returnKw}await InvokeWithRetryAsync(() => SendAsync<{op.ResponseTypeName}>({httpMethod}, path, {bodyArg}, ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
+            sb.AppendLine($"        {returnKw}await InvokeWithRetryAsync(() => SendAsync<{op.ResponseTypeName}>({httpMethod}, path, {bodyArg}, {rootServerArg}ct), \"{safeOpId}\", {op.IsExemptFromBackpressure.ToString().ToLowerInvariant()}, ct);");
         }
 
         sb.AppendLine("    }");
@@ -2627,6 +2642,7 @@ internal sealed class OperationMeta
     public required bool HasOptionalTenantIdInBody { get; init; }
     public required bool HasOptionalTenantIdsInBody { get; init; }
     public required bool IsBinaryResponse { get; init; }
+    public required bool UsesRootServer { get; init; }
 }
 
 internal readonly record struct ParamMeta(string Name, string Type, bool Required);

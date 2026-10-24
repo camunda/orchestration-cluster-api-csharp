@@ -151,16 +151,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         HttpMethod method,
         string path,
         object? body = null,
+        bool useRootServer = false,
         CancellationToken ct = default)
     {
         if (_logger.IsEnabled(LogLevel.Debug))
             _logger.LogDebug("HTTP {Method} {Path}", method, path);
 
-        // Strip leading '/' so the path resolves relative to BaseAddress.
-        // Without this, "/topology" would be absolute from the host root,
-        // overriding the "/v2" segment of the base address.
-        var relativePath = path.TrimStart('/');
-        using var request = new HttpRequestMessage(method, relativePath);
+        using var request = new HttpRequestMessage(method, ResolveRequestUri(path, useRootServer));
 
         if (body != null)
         {
@@ -202,13 +199,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         HttpMethod method,
         string path,
         object? body = null,
+        bool useRootServer = false,
         CancellationToken ct = default)
     {
         if (_logger.IsEnabled(LogLevel.Debug))
             _logger.LogDebug("HTTP {Method} {Path}", method, path);
 
-        var relativePath = path.TrimStart('/');
-        using var request = new HttpRequestMessage(method, relativePath);
+        using var request = new HttpRequestMessage(method, ResolveRequestUri(path, useRootServer));
 
         if (body != null)
         {
@@ -238,13 +235,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         HttpMethod method,
         string path,
         object? body = null,
+        bool useRootServer = false,
         CancellationToken ct = default)
     {
         if (_logger.IsEnabled(LogLevel.Debug))
             _logger.LogDebug("HTTP {Method} {Path} (binary)", method, path);
 
-        var relativePath = path.TrimStart('/');
-        using var request = new HttpRequestMessage(method, relativePath);
+        using var request = new HttpRequestMessage(method, ResolveRequestUri(path, useRootServer));
 
         if (body != null)
         {
@@ -274,13 +271,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
     internal async Task<TResponse> SendMultipartAsync<TResponse>(
         string path,
         MultipartFormDataContent content,
+        bool useRootServer = false,
         CancellationToken ct = default)
     {
         if (_logger.IsEnabled(LogLevel.Debug))
             _logger.LogDebug("HTTP POST {Path} (multipart)", path);
 
-        var relativePath = path.TrimStart('/');
-        using var request = new HttpRequestMessage(HttpMethod.Post, relativePath) { Content = content };
+        using var request = new HttpRequestMessage(HttpMethod.Post, ResolveRequestUri(path, useRootServer)) { Content = content };
         var response = await _httpClient.SendAsync(request, ct);
 
         if (!response.IsSuccessStatusCode)
@@ -296,6 +293,44 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
 
         var responseContent = await response.Content.ReadAsStringAsync(ct);
         return JsonSerializer.Deserialize<TResponse>(responseContent, _jsonOptions)!;
+    }
+
+    /// <summary>
+    /// Resolves an operation path against the configured base address.
+    /// </summary>
+    /// <param name="path">The operation path from the spec (starts with '/').</param>
+    /// <param name="useRootServer">
+    /// When true, the path-item-level <c>servers</c> override applies: the upstream spec
+    /// declares the cluster-admin operations under <c>/cluster/v2/...</c> with a server URL
+    /// that drops the document's <c>/v2</c> base path (<c>{schema}://{host}:{port}</c>), so
+    /// the request must resolve against the bare root rather than the <c>/v2</c> base.
+    /// See https://github.com/camunda/orchestration-cluster-api-csharp/issues/470.
+    /// </param>
+    private Uri ResolveRequestUri(string path, bool useRootServer)
+    {
+        var relativePath = path.TrimStart('/');
+        var baseAddress = _httpClient.BaseAddress;
+        if (baseAddress == null)
+        {
+            // No BaseAddress configured (custom HttpClient without one): keep the previous
+            // relative-URI behaviour and let the inner handler resolve it.
+            return new Uri(relativePath, UriKind.Relative);
+        }
+
+        if (!useRootServer)
+        {
+            // Relative resolution keeps the "/v2" segment of the base address.
+            // Without this, "/topology" would be absolute from the host root,
+            // overriding the "/v2" segment of the base address.
+            return new Uri(baseAddress, relativePath);
+        }
+
+        // Root-server override: strip a single trailing "/v2" segment from the base
+        // address, then append the (already "/cluster/v2/...-prefixed") path.
+        var rootBase = baseAddress.AbsoluteUri.TrimEnd('/');
+        if (rootBase.EndsWith("/v2", StringComparison.OrdinalIgnoreCase))
+            rootBase = rootBase[..^3];
+        return new Uri(rootBase + "/" + relativePath, UriKind.Absolute);
     }
 
     /// <summary>
