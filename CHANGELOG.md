@@ -1,3 +1,16 @@
+# [11.0.0-alpha.4](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.3...v11.0.0-alpha.4) (2026-10-25)
+
+
+### Bug Fixes
+
+* align optional request bodies with JS SDK and add addClock example ([#472](https://github.com/camunda/orchestration-cluster-api-csharp/issues/472)) ([8d872f7](https://github.com/camunda/orchestration-cluster-api-csharp/commit/8d872f7748152cb07be0fd1c48b5d2c0c27b9e13)), closes [#123](https://github.com/camunda/orchestration-cluster-api-csharp/issues/123) [#469](https://github.com/camunda/orchestration-cluster-api-csharp/issues/469)
+* resolve cluster-admin operations against the bare root server ([#471](https://github.com/camunda/orchestration-cluster-api-csharp/issues/471)) ([43cf56b](https://github.com/camunda/orchestration-cluster-api-csharp/commit/43cf56b2a3d872930546b43ce73082e7e293378b)), closes [#470](https://github.com/camunda/orchestration-cluster-api-csharp/issues/470) [#470](https://github.com/camunda/orchestration-cluster-api-csharp/issues/470)
+
+
+### Features
+
+* add example coverage for addClock ([#468](https://github.com/camunda/orchestration-cluster-api-csharp/issues/468)) ([677cec9](https://github.com/camunda/orchestration-cluster-api-csharp/commit/677cec9f3af67d592f33995cd3c93526579a54b2))
+
 # [11.0.0-alpha.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.2...v11.0.0-alpha.3) (2026-10-20)
 
 
