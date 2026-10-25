@@ -298,12 +298,14 @@ public static class AdminExamples
     {
         using var client = CamundaClient.Create();
 
+        // Advance the engine's internal clock by one hour (ISO 8601 duration).
+        // Use a negative duration such as "-PT1H" to move the clock backward.
         var clock = await client.AddClockAsync(new ClockAddRequest
         {
             Offset = "PT1H",
         });
 
-        Console.WriteLine($"Engine time after adding one hour: {clock.Timestamp:O}");
+        Console.WriteLine($"Engine time is now: {clock.Timestamp:O}");
     }
     // </AddClock>
     #endregion AddClock
