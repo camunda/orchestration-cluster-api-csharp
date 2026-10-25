@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Method AddClockAsync | Camunda C# SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Method AddClockAsync | Camunda C# SDK ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_CamundaClient_AddClockAsync_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.CamundaClient.AddClockAsync*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Camunda.Orchestration.Sdk">
+            Camunda.Orchestration.Sdk
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Camunda.Orchestration.Sdk.CamundaClient.AddClockAsync*">
+
+
+
+
+
+<h1 id="Camunda_Orchestration_Sdk_CamundaClient_AddClockAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AddClockAsync*" class="text-break">
+Method AddClockAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L160"><i class="bi bi-code-slash"></i></a>
+</h1>
+
+<div class="facts text-secondary">
+  <dl><dt>Namespace</dt><dd><span class="xref">Camunda</span>.<span class="xref">Orchestration</span>.<a class="xref" href="Camunda.Orchestration.Sdk.html">Sdk</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Camunda.Orchestration.Sdk.dll</dd></dl>
+</div>
+
+<div class="markdown summary"></div>
+<div class="markdown conceptual"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="Camunda_Orchestration_Sdk_CamundaClient_AddClockAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AddClockAsync*"></a>
+
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_AddClockAsync_Camunda_Orchestration_Sdk_ClockAddRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.AddClockAsync(Camunda.Orchestration.Sdk.ClockAddRequest,System.Threading.CancellationToken)">
+  AddClockAsync(ClockAddRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L160"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Add time to internal clock
+Moves the Zeebe engine's internal clock forward or backward by the given offset.
+Unlike pinning, the clock keeps ticking in real time after the offset is added. If the
+clock is pinned, it stays pinned and moves to the pinned time plus the offset.</p>
+<p>Each request adds to the time of the clock, so adding <code>PT1H</code> twice moves the clock two
+hours ahead. Use <code>POST /v2/clock/reset</code> to remove all added time and return the clock to
+the system time.</p>
+<p>The response contains the new time of the clock. The change reaches all partitions
+shortly after it is accepted, so a request sent right after it may still use the previous
+time.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">public Task&lt;ClockResult&gt; AddClockAsync(ClockAddRequest body, CancellationToken ct = default)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.ClockAddRequest.html">ClockAddRequest</a></dt>
+  <dd></dd>
+  <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+  <dd></dd>
+</dl>
+
+<h4 class="section">Returns</h4>
+<dl class="parameters">
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.ClockResult.html">ClockResult</a>&gt;</dt>
+  <dd></dd>
+</dl>
+
+
+
+
+
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AddClockAsync_Camunda_Orchestration_Sdk_ClockAddRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task AddClockExample()
+{
+    using var client = CamundaClient.Create();
+
+    // Advance the engine's internal clock by one hour (ISO 8601 duration).
+    // Use a negative duration such as &quot;-PT1H&quot; to move the clock backward.
+    var clock = await client.AddClockAsync(new ClockAddRequest
+    {
+        Offset = &quot;PT1H&quot;,
+    });
+
+    Console.WriteLine($&quot;Engine time is now: {clock.Timestamp:O}&quot;);
+}
+</code></pre>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_AddClockAsync_Camunda_Orchestration_Sdk_ClockAddRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+<div class="markdown level1 remarks"><p>Operation: addClock</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task AddClockExample()
+{
+    using var client = CamundaClient.Create();
+
+    // Advance the engine's internal clock by one hour (ISO 8601 duration).
+    // Use a negative duration such as "-PT1H" to move the clock backward.
+    var clock = await client.AddClockAsync(new ClockAddRequest
+    {
+        Offset = "PT1H",
+    });
+
+    Console.WriteLine($"Engine time is now: {clock.Timestamp:O}");
+}</code></pre>
+</div>
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L160" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Camunda 8 Orchestration Cluster API — C# SDK
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

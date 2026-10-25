@@ -346,6 +346,11 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.html">AdvancedProtectionModeFilter</a></dt>
+      <dd><p>Advanced ProtectionModeEnum filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedResourceKeyFilter.html">AdvancedResourceKeyFilter</a></dt>
       <dd><p>Advanced ResourceKey filter.</p>
 </dd>
@@ -940,6 +945,11 @@ will be ignored:</p>
 the persisted attribute's value.</p>
 <p>The assignee cannot be adjusted with this endpoint, use the Assign task endpoint.
 This ensures correct event emission for assignee changes.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ClockAddRequest.html">ClockAddRequest</a></dt>
+      <dd><p>ClockAddRequest</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -2539,7 +2549,12 @@ correlated with.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceCreationInstruction.html">ProcessInstanceCreationInstruction</a></dt>
       <dd><p>Instructions for creating a process instance. The process definition can be specified
-either by id or by key.</p>
+either by id, by id and version tag, or by key.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.html">ProcessInstanceCreationInstructionBase</a></dt>
+      <dd><p>Fields shared by all process instance creation instructions.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -2550,6 +2565,11 @@ either by id or by key.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.html">ProcessInstanceCreationInstructionByKey</a></dt>
       <dd><p>ProcessInstanceCreationInstructionByKey</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.html">ProcessInstanceCreationInstructionByVersionTag</a></dt>
+      <dd><p>ProcessInstanceCreationInstructionByVersionTag</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -2718,6 +2738,11 @@ at runtime by the given id.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceWaitStateStatisticsResult.html">ProcessInstanceWaitStateStatisticsResult</a></dt>
       <dd><p>Process instance wait state statistics response item.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.html">ProtectionModeFilterProperty</a></dt>
+      <dd><p>ProtectionModeEnum property with the advanced search capability to match any of several values.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3429,6 +3454,11 @@ declared DTO and enforces required members.
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableMetadata.html">VariableMetadata</a></dt>
+      <dd><p>Metadata describing how a variable is treated.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableResult.html">VariableResult</a></dt>
       <dd><p>Variable search response item.</p>
 </dd>
@@ -3976,6 +4006,11 @@ Must be &gt; 0 if provided.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceStateExactMatch.html">ProcessInstanceStateExactMatch</a></dt>
       <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProtectionModeExactMatch.html">ProtectionModeExactMatch</a></dt>
+      <dd><p>Matches variables that have this protection mode.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -4582,6 +4617,12 @@ instances draining before it is removed.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessInstanceStateEnum.html">ProcessInstanceStateEnum</a></dt>
       <dd><p>Process instance states</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProtectionModeEnum.html">ProtectionModeEnum</a></dt>
+      <dd><p>The kind of protection applied to a variable value. <code>REDACT</code> irrecoverably replaces the
+value before it reaches secondary storage.</p>
 </dd>
     </dl>
     <dl class="jumplist">

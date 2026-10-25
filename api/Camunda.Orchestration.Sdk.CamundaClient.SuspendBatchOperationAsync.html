@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync*" class="text-break">
-Method SuspendBatchOperationAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L10087"><i class="bi bi-code-slash"></i></a>
+Method SuspendBatchOperationAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L10164"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -119,14 +119,74 @@ Method SuspendBatchOperationAsync  <a class="header-action link-secondary" title
 
 <a id="Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_BatchOperationKey_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey,System.Threading.CancellationToken)">
-  SuspendBatchOperationAsync(BatchOperationKey, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L10087"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_BatchOperationKey_System_Object_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey,System.Object,System.Threading.CancellationToken)">
+  SuspendBatchOperationAsync(BatchOperationKey, object, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L10164"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Suspend Batch operation
 Suspends a running batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">public Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>batchOperationKey</code> <a class="xref" href="Camunda.Orchestration.Sdk.BatchOperationKey.html">BatchOperationKey</a></dt>
+  <dd></dd>
+  <dt><code>body</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+  <dd></dd>
+  <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+  <dd></dd>
+</dl>
+
+<h4 class="section">Returns</h4>
+<dl class="parameters">
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+  <dd></dd>
+</dl>
+
+
+
+
+
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_BatchOperationKey_System_Object_System_Threading_CancellationToken__examples">Examples</h4>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task SuspendBatchOperationExample(BatchOperationKey batchOperationKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.SuspendBatchOperationAsync(batchOperationKey);
+}</code></pre>
+
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_BatchOperationKey_System_Object_System_Threading_CancellationToken__remarks">Remarks</h4>
+<div class="markdown level1 remarks"><p>Operation: suspendBatchOperation</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task SuspendBatchOperationExample(BatchOperationKey batchOperationKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.SuspendBatchOperationAsync(batchOperationKey);
+}</code></pre>
+</div>
+
+
+
+
+<a id="Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync*"></a>
+
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_BatchOperationKey_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync(Camunda.Orchestration.Sdk.BatchOperationKey,System.Threading.CancellationToken)">
+  SuspendBatchOperationAsync(BatchOperationKey, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L10173"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Overload without a request body. Sends an empty JSON object (<code>{}</code>).</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -162,16 +222,6 @@ This is done asynchronously, the progress can be tracked using the batch operati
 }
 </code></pre>
 
-<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_BatchOperationKey_System_Threading_CancellationToken__remarks">Remarks</h4>
-<div class="markdown level1 remarks"><p>Operation: suspendBatchOperation</p>
-<p><b>Example:</b></p>
-<pre><code class="lang-csharp">public static async Task SuspendBatchOperationExample(BatchOperationKey batchOperationKey)
-{
-    using var client = CamundaClient.Create();
-
-    await client.SuspendBatchOperationAsync(batchOperationKey);
-}</code></pre>
-</div>
 
 
 
@@ -179,7 +229,7 @@ This is done asynchronously, the progress can be tracked using the batch operati
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L10087" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L10164" class="edit-link">Edit this page</a>
         </div>
 
 
