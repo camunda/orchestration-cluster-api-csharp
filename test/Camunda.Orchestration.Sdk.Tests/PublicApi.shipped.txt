@@ -2622,7 +2622,7 @@ TYPE Camunda.Orchestration.Sdk.CorrelatedMessageSubscriptionResult : sealed clas
   PROP Camunda.Orchestration.Sdk.MessageKey MessageKey { get; set; } [JsonPropertyName("messageKey")]
   PROP Camunda.Orchestration.Sdk.MessageSubscriptionKey SubscriptionKey { get; set; } [JsonPropertyName("subscriptionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
-  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
@@ -3436,8 +3436,8 @@ TYPE Camunda.Orchestration.Sdk.ElementInstanceResult : sealed class
   PROP Camunda.Orchestration.Sdk.ElementInstanceResultType Type { get; set; } [JsonPropertyName("type")]
   PROP Camunda.Orchestration.Sdk.ElementInstanceStateEnum State { get; set; } [JsonPropertyName("state")]
   PROP Camunda.Orchestration.Sdk.IncidentKey? IncidentKey { get; set; } [JsonPropertyName("incidentKey")]
-  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
-  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId? ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
@@ -4614,8 +4614,8 @@ TYPE Camunda.Orchestration.Sdk.JobSearchResult : sealed class
   PROP Camunda.Orchestration.Sdk.JobKindEnum Kind { get; set; } [JsonPropertyName("kind")]
   PROP Camunda.Orchestration.Sdk.JobListenerEventTypeEnum ListenerEventType { get; set; } [JsonPropertyName("listenerEventType")]
   PROP Camunda.Orchestration.Sdk.JobStateEnum State { get; set; } [JsonPropertyName("state")]
-  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
-  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId? ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
@@ -5639,6 +5639,20 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceCancellationBatchOperationRequest 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationInstruction : abstract class
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById tag=<none>
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey tag=<none>
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag tag=<none>
+
+TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
+  PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
+  PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Boolean? AwaitCompletion { get; set; } [JsonPropertyName("awaitCompletion")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; } [JsonPropertyName("runtimeInstructions")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; } [JsonPropertyName("startInstructions")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
+  PROP System.Collections.Generic.List<System.String>? FetchVariables { get; set; } [JsonPropertyName("fetchVariables")]
+  PROP System.Int64? RequestTimeout { get; set; } [JsonPropertyName("requestTimeout")]
+  PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById : sealed class base=Camunda.Orchestration.Sdk.ProcessInstanceCreationInstruction interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
   CTOR ()
@@ -5670,6 +5684,22 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey : sealed 
   PROP System.Int32? ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
   PROP System.Int64? RequestTimeout { get; set; } [JsonPropertyName("requestTimeout")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
+  METHOD System.Void SetDefaultTenantId(System.String tenantId)
+
+TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag : sealed class base=Camunda.Orchestration.Sdk.ProcessInstanceCreationInstruction interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
+  PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Boolean? AwaitCompletion { get; set; } [JsonPropertyName("awaitCompletion")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; } [JsonPropertyName("runtimeInstructions")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; } [JsonPropertyName("startInstructions")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
+  PROP System.Collections.Generic.List<System.String>? FetchVariables { get; set; } [JsonPropertyName("fetchVariables")]
+  PROP System.Int64? RequestTimeout { get; set; } [JsonPropertyName("requestTimeout")]
+  PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
+  PROP System.String ProcessDefinitionVersionTag { get; set; } [JsonPropertyName("processDefinitionVersionTag")]
   METHOD System.Void SetDefaultTenantId(System.String tenantId)
 
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationRuntimeInstruction : abstract class
@@ -5911,8 +5941,8 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceSearchQuerySortRequestField : enum
 TYPE Camunda.Orchestration.Sdk.ProcessInstanceSequenceFlowResult : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
-  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
-  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId? ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
   PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]

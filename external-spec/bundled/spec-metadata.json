@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:ef3e3ea3faf064de0df57d4b6d28c8828ca86cbb95a0ea815f38e8ce559ebedd",
+  "specHash": "sha256:eba57690d118049a54c27cd2d56cceeb9cd18e26301aa9dae329247a49362651",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -2102,7 +2102,7 @@
     {
       "name": "ProcessInstanceCreationInstruction",
       "kind": "union-wrapper",
-      "description": "Instructions for creating a process instance. The process definition can be specified\neither by id or by key.\n",
+      "description": "Instructions for creating a process instance. The process definition can be specified\neither by id, by id and version tag, or by key.\n",
       "branches": [
         {
           "branchType": "ref",
@@ -2111,6 +2111,10 @@
         {
           "branchType": "ref",
           "ref": "ProcessInstanceCreationInstructionById"
+        },
+        {
+          "branchType": "ref",
+          "ref": "ProcessInstanceCreationInstructionByVersionTag"
         }
       ],
       "stableId": "process-instance-creation-instruction"
@@ -6197,7 +6201,7 @@
         "Group"
       ],
       "summary": "Create group",
-      "description": "Create a new group.\n\nThe supplied `groupId` is validated against `^[a-zA-Z0-9_~@.+-]+$`\n(max 256 characters) by `IdentifierValidator.validateId` in the\nruntime. This strict validation applies wherever the Groups API\nis available: in OIDC deployments that set\n`camunda.security.authentication.oidc.groupsClaim` the Groups\nAPI (including this endpoint) is disabled entirely, so group\nCRUD never sees externally-minted IdP IDs. The BYOG relaxation\nonly loosens validation when a group is referenced *as a member*\nof a role or tenant (`assignRoleToGroup`,\n`assignGroupToTenant`); group CRUD itself always uses the strict\ndefault-id regex. The constraint is not advertised on the\n`GroupId` schema so that the same schema can be reused at\nmember-reference sites without falsely rejecting\nexternally-minted IdP group IDs there.\n",
+      "description": "Create a new group.\n\nThe supplied `groupId` is validated against `` ^[a-zA-Z0-9_~@.+-]+$ ``\n(max 256 characters) by `IdentifierValidator.validateId` in the\nruntime. This strict validation applies wherever the Groups API\nis available: in OIDC deployments that set\n`camunda.security.authentication.oidc.groupsClaim` the Groups\nAPI (including this endpoint) is disabled entirely, so group\nCRUD never sees externally-minted IdP IDs. The BYOG relaxation\nonly loosens validation when a group is referenced *as a member*\nof a role or tenant (`assignRoleToGroup`,\n`assignGroupToTenant`); group CRUD itself always uses the strict\ndefault-id regex. The constraint is not advertised on the\n`GroupId` schema so that the same schema can be reused at\nmember-reference sites without falsely rejecting\nexternally-minted IdP group IDs there.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -8229,7 +8233,7 @@
         "Process instance"
       ],
       "summary": "Create process instance",
-      "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and a version.\nIf only the process definition id is given, the latest ACTIVE version is used.\nIf no ACTIVE version exists, the request is rejected as not found.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
+      "description": "Creates and starts an instance of the specified process.\nThe process definition to use to create the instance can be specified either using its unique key\n(as returned by Deploy resources), or using the BPMN process id and either a version or a version tag.\nIf only the process definition id is given, the latest ACTIVE version is used.\nIf no ACTIVE version exists, the request is rejected as not found.\n\nWaits for the completion of the process instance before returning a result\nwhen awaitCompletion is enabled.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": true,
@@ -8238,9 +8242,10 @@
       "queryParams": [],
       "requestBodyUnionRefs": [
         "ProcessInstanceCreationInstructionByKey",
-        "ProcessInstanceCreationInstructionById"
+        "ProcessInstanceCreationInstructionById",
+        "ProcessInstanceCreationInstructionByVersionTag"
       ],
-      "optionalTenantIdInBody": true,
+      "optionalTenantIdInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9261,7 +9266,7 @@
         "Resource"
       ],
       "summary": "Delete resource",
-      "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition that still\nexists in the runtime state, the definition first drains its running instances and its\nhistory is deleted asynchronously once the definition is fully removed cluster-wide; no batch\noperation is returned in the response. If the process definition has already been removed\nfrom the runtime state and the deletion is later re-triggered with `deleteHistory` set to\n`true`, a batch operation is created immediately and returned in the `batchOperation` field.",
+      "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nDeleting a process definition that is already draining is accepted again and changes\nnothing: the definition stays `DRAINING` until its running instances finish. The one repeated\ndeletion that is rejected is one with `deleteHistory` set to `true`, because the history\ncannot be deleted before the drain finishes.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition that still\nexists in the runtime state, the definition first drains its running instances and its\nhistory is deleted asynchronously once the definition is fully removed cluster-wide; no batch\noperation is returned in the response. If the process definition has already been removed\nfrom the runtime state and the deletion is later re-triggered with `deleteHistory` set to\n`true`, a batch operation is created immediately and returned in the `batchOperation` field.",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
