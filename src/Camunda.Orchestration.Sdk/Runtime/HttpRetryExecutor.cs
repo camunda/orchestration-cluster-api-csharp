@@ -65,6 +65,14 @@ internal static class HttpRetryExecutor
                 return new RetryDecision(true, "http-500");
         }
 
+        // Non-2xx responses surface as HttpSdkException (see CamundaClient.BuildHttpException),
+        // not HttpRequestException — without this branch they were never retried (#479).
+        if (ex is HttpSdkException sdkEx)
+        {
+            if (sdkEx.Status is 429 or 503 or 500)
+                return new RetryDecision(true, $"http-{sdkEx.Status}");
+        }
+
         if (ex is TaskCanceledException or OperationCanceledException)
             return new RetryDecision(true, "timeout");
 

@@ -542,6 +542,17 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                     // hiding the very fail-fast it exists to provide.
                     throw;
                 }
+                catch (Exception ex) when (IsBackpressureRejection(ex))
+                {
+                    // The broker is shedding load (429, or 503/500 RESOURCE_EXHAUSTED).
+                    // The client has already retried and fed the backpressure manager;
+                    // log quietly and back off for the poll interval rather than
+                    // treating it as an error (#479).
+                    if (_logger.IsEnabled(LogLevel.Debug))
+                        _logger.LogDebug("JobWorker '{Name}': activation backpressured ({Message}); backing off",
+                            _name, ex.Message);
+                    await Task.Delay(TimeSpan.FromMilliseconds(_config.PollIntervalMs), _timeProvider, ct).ConfigureAwait(false);
+                }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "JobWorker '{Name}': error during activation poll", _name);
@@ -702,6 +713,20 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     // The wire name of ActivatedJobResult.jobLeaseToken, used to attribute a JSON deserialization
     // failure (via JsonException.Path) to the lease token.
     private const string JobLeaseTokenJsonName = "jobLeaseToken";
+
+    /// <summary>
+    /// An activation failure counts as backpressure when the server explicitly shed load:
+    /// <see cref="HttpSdkException.IsBackpressure"/> (429, or 503/500 RESOURCE_EXHAUSTED),
+    /// or a transport-level 429/503. Anything else stays on the generic error path.
+    /// </summary>
+    private static bool IsBackpressureRejection(Exception ex) => ex switch
+    {
+        HttpSdkException sdkEx => sdkEx.IsBackpressure || sdkEx.Status is 429 or 503,
+        HttpRequestException httpEx => httpEx.StatusCode
+            is System.Net.HttpStatusCode.TooManyRequests
+            or System.Net.HttpStatusCode.ServiceUnavailable,
+        _ => false,
+    };
 
     private static bool IsLeaseTokenValidationFailure(Exception ex)
     {

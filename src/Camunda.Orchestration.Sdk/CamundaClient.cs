@@ -122,7 +122,10 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
                 ex =>
                 {
                     var decision = HttpRetryExecutor.DefaultClassify(ex);
-                    if (decision.Retryable && decision.Reason.Contains("429"))
+                    // Record only signals that will actually be retried; the final,
+                    // non-retried failure is recorded in the catch below so each
+                    // HTTP response feeds the manager exactly once.
+                    if (decision.Retryable && IsBackpressureSignal(ex))
                         _bp.RecordBackpressure();
                     return decision;
                 },
@@ -133,7 +136,9 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            if (ex is HttpRequestException { StatusCode: HttpStatusCode.TooManyRequests })
+            // The final (non-retried) failure never passes through the classifier
+            // callback, so record its backpressure signal here.
+            if (IsBackpressureSignal(ex))
                 _bp.RecordBackpressure();
             throw;
         }
@@ -143,6 +148,22 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
                 _bp.Release();
         }
     }
+
+    /// <summary>
+    /// Whether an exception carries a broker/gateway backpressure signal: HTTP 429,
+    /// or a 503/500 the server marked <c>RESOURCE_EXHAUSTED</c> (surfaced as
+    /// <see cref="HttpSdkException.IsBackpressure"/>). Transport-level
+    /// <see cref="HttpRequestException"/>s match on status code; SDK exceptions match
+    /// on the flag computed when the error response was parsed.
+    /// </summary>
+    private static bool IsBackpressureSignal(Exception ex) => ex switch
+    {
+        HttpSdkException sdkEx => sdkEx.IsBackpressure || sdkEx.Status is 429 or 503,
+        HttpRequestException httpEx => httpEx.StatusCode
+            is HttpStatusCode.TooManyRequests
+            or HttpStatusCode.ServiceUnavailable,
+        _ => false,
+    };
 
     /// <summary>
     /// Execute an HTTP request and deserialize the response.

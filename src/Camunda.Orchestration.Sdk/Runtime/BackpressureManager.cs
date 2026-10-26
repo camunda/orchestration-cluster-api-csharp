@@ -11,10 +11,19 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
     private readonly ILogger _logger;
     private readonly BackpressureConfig _config;
     private readonly TimeProvider _timeProvider;
-    private readonly SemaphoreSlim? _semaphore;
+
+    // The permit gate is a counter plus a FIFO waiter queue rather than a
+    // SemaphoreSlim: a semaphore's capacity is fixed at construction, so it could
+    // never follow the adaptive _permitsMax as backpressure shrinks and recovery
+    // grows it (#479). All mutable state below is guarded by _gate.
+    private readonly object _gate = new();
+    private readonly Queue<TaskCompletionSource<bool>> _waiters = new();
+    private readonly bool _gateEnabled;
     private int _permitsMax;
+    private int _inFlight;
     private int _consecutive;
     private long _lastSignalMs;
+    private bool _disposed;
 
     public BackpressureManager(BackpressureConfig config, ILogger logger, TimeProvider timeProvider)
     {
@@ -25,85 +34,171 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
         if (config.Enabled && !config.ObserveOnly)
         {
             _permitsMax = config.InitialMax;
-            _semaphore = new SemaphoreSlim(config.InitialMax, config.InitialMax);
+            _gateEnabled = true;
         }
     }
 
     public async Task AcquireAsync(CancellationToken ct = default)
     {
-        if (_semaphore != null)
-            await _semaphore.WaitAsync(ct);
+        if (!_gateEnabled)
+            return;
+
+        TaskCompletionSource<bool>? tcs = null;
+        lock (_gate)
+        {
+            ObjectDisposedException.ThrowIf(_disposed, this);
+
+            if (_inFlight < _permitsMax)
+            {
+                _inFlight++;
+                return;
+            }
+
+            tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            _waiters.Enqueue(tcs);
+        }
+
+        // Cancellation unqueues the waiter. Queue<T> has no Remove, so a cancelled
+        // waiter stays enqueued and is discarded lazily when it reaches the head
+        // (see ReleasePermitLocked). Await inside the lock-free path: if the grant
+        // and the cancellation race, the await below throws only when cancellation
+        // actually won, in which case no permit was consumed.
+        try
+        {
+            await tcs.Task.WaitAsync(ct);
+        }
+        catch (OperationCanceledException)
+        {
+            lock (_gate)
+            {
+                // If the permit was granted before cancellation was observed, the
+                // caller must not leak it: hand it straight to the next waiter.
+                if (tcs.Task.IsCompletedSuccessfully)
+                {
+                    _inFlight--;
+                    ReleasePermitLocked();
+                }
+            }
+
+            throw;
+        }
     }
 
     public void Release()
     {
-        if (_semaphore != null)
+        if (!_gateEnabled)
+            return;
+
+        lock (_gate)
         {
-            try
-            { _semaphore.Release(); }
-            catch (SemaphoreFullException)
+            if (_inFlight <= 0)
             {
                 if (_logger.IsEnabled(LogLevel.Warning))
                     _logger.LogWarning(
-                        "Backpressure: semaphore release overflow — a permit was released without a matching acquire. " +
+                        "Backpressure: permit release overflow — a permit was released without a matching acquire. " +
                         "This is usually harmless (e.g. a request was exempt from backpressure but still released). " +
                         "If this appears frequently, check that backpressure-exempt operations are not inadvertently releasing permits.");
+                return;
             }
+
+            _inFlight--;
+            ReleasePermitLocked();
+        }
+    }
+
+    /// <summary>
+    /// Hands freed capacity to queued waiters while there is room under the current
+    /// adaptive cap. Caller must hold <see cref="_gate"/>.
+    /// </summary>
+    private void ReleasePermitLocked()
+    {
+        while (_inFlight < _permitsMax && _waiters.Count > 0)
+        {
+            var waiter = _waiters.Dequeue();
+            if (!waiter.TrySetResult(true))
+                continue; // cancelled while queued — skip it and keep draining
+
+            _inFlight++;
         }
     }
 
     public void RecordBackpressure()
     {
-        _consecutive++;
-        _lastSignalMs = _timeProvider.GetUtcNow().ToUnixTimeMilliseconds();
-
-        if (_config.Enabled && !_config.ObserveOnly && _semaphore != null)
+        lock (_gate)
         {
-            var factor = _consecutive >= _config.SevereThreshold
-                ? _config.SevereFactor
-                : _config.SoftFactor;
+            _consecutive++;
+            _lastSignalMs = _timeProvider.GetUtcNow().ToUnixTimeMilliseconds();
 
-            var newMax = Math.Max(_config.Floor, (int)(_permitsMax * factor));
-            if (_logger.IsEnabled(LogLevel.Debug))
-                _logger.LogDebug("Backpressure: reducing permits {Old} -> {New} (consecutive={Consecutive})",
-                    _permitsMax, newMax, _consecutive);
-            _permitsMax = newMax;
+            if (_gateEnabled)
+            {
+                var factor = _consecutive >= _config.SevereThreshold
+                    ? _config.SevereFactor
+                    : _config.SoftFactor;
+
+                var newMax = Math.Max(_config.Floor, (int)(_permitsMax * factor));
+                if (_logger.IsEnabled(LogLevel.Debug))
+                    _logger.LogDebug("Backpressure: reducing permits {Old} -> {New} (consecutive={Consecutive})",
+                        _permitsMax, newMax, _consecutive);
+                _permitsMax = newMax;
+            }
         }
     }
 
     public void RecordHealthy()
     {
-        var now = _timeProvider.GetUtcNow().ToUnixTimeMilliseconds();
-        if (_consecutive > 0 && now - _lastSignalMs > _config.DecayQuietMs)
+        lock (_gate)
         {
-            _consecutive = 0;
-            if (_config.Enabled && !_config.ObserveOnly)
+            var now = _timeProvider.GetUtcNow().ToUnixTimeMilliseconds();
+            if (_consecutive > 0 && now - _lastSignalMs > _config.DecayQuietMs)
             {
-                var newMax = _permitsMax + _config.RecoveryStep;
-                if (_logger.IsEnabled(LogLevel.Debug))
-                    _logger.LogDebug("Backpressure: recovering permits {Old} -> {New}", _permitsMax, newMax);
-                _permitsMax = newMax;
+                _consecutive = 0;
+                if (_gateEnabled)
+                {
+                    var newMax = _permitsMax + _config.RecoveryStep;
+                    if (_logger.IsEnabled(LogLevel.Debug))
+                        _logger.LogDebug("Backpressure: recovering permits {Old} -> {New}", _permitsMax, newMax);
+                    _permitsMax = newMax;
+                    // A raised cap may admit queued waiters immediately.
+                    ReleasePermitLocked();
+                }
             }
         }
     }
 
     public void Dispose()
     {
-        _semaphore?.Dispose();
+        lock (_gate)
+        {
+            if (_disposed)
+                return;
+            _disposed = true;
+
+            // Fault any queued waiters so a dispose during contention does not hang
+            // them forever; in-flight holders release normally (Release stays a no-op
+            // safe path after disposal).
+            while (_waiters.Count > 0)
+                _waiters.Dequeue().TrySetException(new ObjectDisposedException(nameof(BackpressureManager)));
+        }
     }
 
     public ValueTask DisposeAsync()
     {
-        _semaphore?.Dispose();
+        Dispose();
         return ValueTask.CompletedTask;
     }
 
-    public BackpressureState GetState() => new()
+    public BackpressureState GetState()
     {
-        Severity = _consecutive == 0 ? "healthy" : _consecutive >= _config.SevereThreshold ? "severe" : "soft",
-        PermitsMax = _config.Enabled && !_config.ObserveOnly ? _permitsMax : null,
-        Consecutive = _consecutive,
-    };
+        lock (_gate)
+        {
+            return new()
+            {
+                Severity = _consecutive == 0 ? "healthy" : _consecutive >= _config.SevereThreshold ? "severe" : "soft",
+                PermitsMax = _gateEnabled ? _permitsMax : null,
+                Consecutive = _consecutive,
+            };
+        }
+    }
 }
 
 public sealed class BackpressureState

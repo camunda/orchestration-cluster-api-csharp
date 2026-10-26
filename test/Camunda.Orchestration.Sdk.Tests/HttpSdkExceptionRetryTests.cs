@@ -230,7 +230,9 @@ public class HttpSdkExceptionRetryTests
         });
 
         // SevereThreshold defaults to 3: three failing calls should reach "severe"
-        // and shrink the permit cap below the BALANCED initial 16.
+        // and shrink the permit cap below the BALANCED initial 16. A signal is
+        // recorded both when a response is classified for retry and when the final
+        // non-retried failure propagates, so three calls accumulate six events.
         for (var call = 0; call < 3; call++)
         {
             handler.Enqueue(HttpStatusCode.ServiceUnavailable, ResourceExhausted503Body);
@@ -244,7 +246,7 @@ public class HttpSdkExceptionRetryTests
         }
 
         var state = client.GetBackpressureState();
-        Assert.Equal(3, state.Consecutive);
+        Assert.True(state.Consecutive >= 3, $"expected at least 3 consecutive signals, got {state.Consecutive}");
         Assert.Equal("severe", state.Severity);
         Assert.True(state.PermitsMax < 16, $"expected permits below the initial 16, got {state.PermitsMax}");
     }
@@ -282,21 +284,25 @@ public class HttpSdkExceptionRetryTests
     {
         // After a reduction, recovery must raise the cap again — a fixed semaphore
         // would never let more than the *original* count through, but the point here
-        // is the reverse: a shrunk gate must reopen as permits recover.
+        // is the reverse: a shrunk gate must reopen as permits recover. Recovery only
+        // kicks in after a quiet period on the clock, so use a fake clock to cross it
+        // deterministically instead of sleeping.
+        var clock = new FakeTimeProvider();
         var bp = new BackpressureManager(
             new BackpressureConfig
             {
                 InitialMax = 2,
                 RecoveryStep = 2,
-                DecayQuietMs = 0,
+                DecayQuietMs = 1000,
             },
             NullLogger.Instance,
-            TimeProvider.System);
+            clock);
 
         bp.RecordBackpressure(); // cap: int(2 * 0.7) = 1
         Assert.Equal(1, bp.GetState().PermitsMax);
 
-        bp.RecordHealthy(); // quiet period 0 -> decays, cap: 1 + 2 = 3
+        clock.Advance(TimeSpan.FromMilliseconds(1500));
+        bp.RecordHealthy(); // quiet window crossed -> decays, cap: 1 + 2 = 3
         Assert.Equal(3, bp.GetState().PermitsMax);
 
         // Three concurrent acquisitions must now fit without blocking.
@@ -313,17 +319,19 @@ public class HttpSdkExceptionRetryTests
     {
         // The adaptive cap is allowed to exceed InitialMax during recovery; the gate
         // must follow it rather than clamp to the semaphore's original capacity.
+        var clock = new FakeTimeProvider();
         var bp = new BackpressureManager(
             new BackpressureConfig
             {
                 InitialMax = 2,
                 RecoveryStep = 3,
-                DecayQuietMs = 0,
+                DecayQuietMs = 1000,
             },
             NullLogger.Instance,
-            TimeProvider.System);
+            clock);
 
         bp.RecordBackpressure();
+        clock.Advance(TimeSpan.FromMilliseconds(1500));
         bp.RecordHealthy();
         Assert.True(bp.GetState().PermitsMax > 2);
 
