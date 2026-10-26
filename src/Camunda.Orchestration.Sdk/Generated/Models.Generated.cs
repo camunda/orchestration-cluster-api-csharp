@@ -11406,9 +11406,12 @@ public sealed class CorrelatedMessageSubscriptionResult
 
     /// <summary>
     /// The process definition key associated with this correlated message subscription.
+    /// This field is not present for correlations to message subscriptions of a running
+    /// process instance (catch, boundary and receive task events) written by version 8.8.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// The process instance key associated with this correlated message subscription.
@@ -15034,10 +15037,12 @@ internal sealed class ElementInstanceKeyFilterPropertyJsonConverter : global::Sy
 public sealed class ElementInstanceResult
 {
     /// <summary>
-    /// The process definition ID associated to this element instance.
+    /// The process definition ID associated to this element instance. This field is not
+    /// present for element instances imported by Operate 8.1 or earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
 
     /// <summary>
     /// Date when element instance started.
@@ -15109,10 +15114,12 @@ public sealed class ElementInstanceResult
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// The process definition key associated to this element instance.
+    /// The process definition key associated to this element instance. This field is not
+    /// present for element instances imported by Operate 8.1.7 or earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// Incident key associated with this element instance.
@@ -19933,16 +19940,20 @@ public sealed class JobSearchResult
     public JobListenerEventTypeEnum ListenerEventType { get; set; }
 
     /// <summary>
-    /// The process definition ID associated with the job.
+    /// The process definition ID associated with the job. This field is not present for
+    /// jobs imported by Operate 8.7 and earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
 
     /// <summary>
-    /// The process definition key associated with the job.
+    /// The process definition key associated with the job. This field is not present for
+    /// jobs imported by Operate 8.7 and earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
 
     /// <summary>
     /// The process instance key associated with the job.
@@ -24100,7 +24111,7 @@ public sealed class ProcessInstanceCancellationBatchOperationRequest
 
 /// <summary>
 /// Instructions for creating a process instance. The process definition can be specified
-/// either by id or by key.
+/// either by id, by id and version tag, or by key.
 /// 
 /// </summary>
 /// <remarks>
@@ -24108,13 +24119,111 @@ public sealed class ProcessInstanceCancellationBatchOperationRequest
 /// <list type="bullet">
 /// <item><description><see cref="ProcessInstanceCreationInstructionByKey"/></description></item>
 /// <item><description><see cref="ProcessInstanceCreationInstructionById"/></description></item>
+/// <item><description><see cref="ProcessInstanceCreationInstructionByVersionTag"/></description></item>
 /// </list>
 /// </remarks>
 /// <seealso cref="ProcessInstanceCreationInstructionByKey"/>
 /// <seealso cref="ProcessInstanceCreationInstructionById"/>
+/// <seealso cref="ProcessInstanceCreationInstructionByVersionTag"/>
 [JsonDerivedType(typeof(ProcessInstanceCreationInstructionByKey))]
 [JsonDerivedType(typeof(ProcessInstanceCreationInstructionById))]
+[JsonDerivedType(typeof(ProcessInstanceCreationInstructionByVersionTag))]
 public abstract class ProcessInstanceCreationInstruction { }
+
+/// <summary>
+/// Fields shared by all process instance creation instructions.
+/// </summary>
+public sealed class ProcessInstanceCreationInstructionBase
+{
+    /// <summary>
+    /// JSON object that will instantiate the variables for the root variable scope
+    /// of the process instance.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variables")]
+    public object? Variables { get; set; }
+
+    /// <summary>
+    /// The tenant id of the process definition.
+    /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
+    /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
+
+    /// <summary>
+    /// List of start instructions. By default, the process instance will start at
+    /// the start event. If provided, the process instance will apply start instructions
+    /// after it has been created.
+    /// 
+    /// </summary>
+    [JsonPropertyName("startInstructions")]
+    public List<ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; }
+
+    /// <summary>
+    /// Runtime instructions (alpha). List of instructions that affect the runtime behavior of
+    /// the process instance. Refer to specific instruction types for more details.
+    /// 
+    /// This parameter is an alpha feature and may be subject to change
+    /// in future releases.
+    /// 
+    /// </summary>
+    [JsonPropertyName("runtimeInstructions")]
+    public List<ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; }
+
+    /// <summary>
+    /// Wait for the process instance to complete. If the process instance does not complete
+    /// within the request timeout limit, a 504 response status will be returned. The process
+    /// instance will continue to run in the background regardless of the timeout. Disabled by
+    /// default.
+    /// 
+    /// </summary>
+    [JsonPropertyName("awaitCompletion")]
+    public bool? AwaitCompletion { get; set; }
+
+    /// <summary>
+    /// List of variables by name to be included in the response when awaitCompletion is set to true.
+    /// If empty, all visible variables in the root scope will be returned.
+    /// 
+    /// </summary>
+    [JsonPropertyName("fetchVariables")]
+    public List<string>? FetchVariables { get; set; }
+
+    /// <summary>
+    /// Timeout (in ms) the request waits for the process to complete. By default or
+    /// when set to 0, the generic request timeout configured in the cluster is applied.
+    /// 
+    /// </summary>
+    [JsonPropertyName("requestTimeout")]
+    public long? RequestTimeout { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// An optional, user-defined string identifier that identifies the process instance
+    /// within the scope of a process definition (scoped by tenant). If provided and uniqueness
+    /// enforcement is enabled, the engine will reject creation if another root process instance
+    /// with the same business id is already active for the same process definition.
+    /// Note that any active child process instances with the same business id are not taken into account.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
+}
 
 /// <summary>
 /// ProcessInstanceCreationInstructionById
@@ -24250,12 +24359,29 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public int? ProcessDefinitionVersion { get; set; }
 
     /// <summary>
-    /// Set of variables as JSON object to instantiate in the root variable scope of the process
-    /// instance. Can include nested complex objects.
+    /// JSON object that will instantiate the variables for the root variable scope
+    /// of the process instance.
     /// 
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
+
+    /// <summary>
+    /// The tenant id of the process definition.
+    /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
+    /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// A reference key chosen by the user that will be part of all records resulting from this operation.
+    /// Must be &gt; 0 if provided.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationReference")]
+    public OperationReference? OperationReference { get; set; }
 
     /// <summary>
     /// List of start instructions. By default, the process instance will start at
@@ -24278,6 +24404,82 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public List<ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; }
 
     /// <summary>
+    /// Wait for the process instance to complete. If the process instance does not complete
+    /// within the request timeout limit, a 504 response status will be returned. The process
+    /// instance will continue to run in the background regardless of the timeout. Disabled by
+    /// default.
+    /// 
+    /// </summary>
+    [JsonPropertyName("awaitCompletion")]
+    public bool? AwaitCompletion { get; set; }
+
+    /// <summary>
+    /// List of variables by name to be included in the response when awaitCompletion is set to true.
+    /// If empty, all visible variables in the root scope will be returned.
+    /// 
+    /// </summary>
+    [JsonPropertyName("fetchVariables")]
+    public List<string>? FetchVariables { get; set; }
+
+    /// <summary>
+    /// Timeout (in ms) the request waits for the process to complete. By default or
+    /// when set to 0, the generic request timeout configured in the cluster is applied.
+    /// 
+    /// </summary>
+    [JsonPropertyName("requestTimeout")]
+    public long? RequestTimeout { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<Tag>? Tags { get; set; }
+
+    /// <summary>
+    /// An optional, user-defined string identifier that identifies the process instance
+    /// within the scope of a process definition (scoped by tenant). If provided and uniqueness
+    /// enforcement is enabled, the engine will reject creation if another root process instance
+    /// with the same business id is already active for the same process definition.
+    /// Note that any active child process instances with the same business id are not taken into account.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
+    /// <inheritdoc />
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
+
+}
+
+/// <summary>
+/// ProcessInstanceCreationInstructionByVersionTag
+/// </summary>
+public sealed class ProcessInstanceCreationInstructionByVersionTag : ProcessInstanceCreationInstruction, global::Camunda.Orchestration.Sdk.ITenantIdSettable
+{
+    /// <summary>
+    /// The BPMN process id of the process definition to start an instance of.
+    /// 
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The version tag of the process definition to start an instance of.
+    /// If several deployed versions carry the same tag, the most recently deployed one is used.
+    /// 
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersionTag")]
+    public string ProcessDefinitionVersionTag { get; set; } = null!;
+
+    /// <summary>
+    /// JSON object that will instantiate the variables for the root variable scope
+    /// of the process instance.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variables")]
+    public object? Variables { get; set; }
+
+    /// <summary>
     /// The tenant id of the process definition.
     /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
     /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
@@ -24295,6 +24497,26 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public OperationReference? OperationReference { get; set; }
 
     /// <summary>
+    /// List of start instructions. By default, the process instance will start at
+    /// the start event. If provided, the process instance will apply start instructions
+    /// after it has been created.
+    /// 
+    /// </summary>
+    [JsonPropertyName("startInstructions")]
+    public List<ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; }
+
+    /// <summary>
+    /// Runtime instructions (alpha). List of instructions that affect the runtime behavior of
+    /// the process instance. Refer to specific instruction types for more details.
+    /// 
+    /// This parameter is an alpha feature and may be subject to change
+    /// in future releases.
+    /// 
+    /// </summary>
+    [JsonPropertyName("runtimeInstructions")]
+    public List<ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; }
+
+    /// <summary>
     /// Wait for the process instance to complete. If the process instance does not complete
     /// within the request timeout limit, a 504 response status will be returned. The process
     /// instance will continue to run in the background regardless of the timeout. Disabled by
@@ -24305,20 +24527,20 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public bool? AwaitCompletion { get; set; }
 
     /// <summary>
-    /// Timeout (in ms) the request waits for the process to complete. By default or
-    /// when set to 0, the generic request timeout configured in the cluster is applied.
-    /// 
-    /// </summary>
-    [JsonPropertyName("requestTimeout")]
-    public long? RequestTimeout { get; set; }
-
-    /// <summary>
     /// List of variables by name to be included in the response when awaitCompletion is set to true.
     /// If empty, all visible variables in the root scope will be returned.
     /// 
     /// </summary>
     [JsonPropertyName("fetchVariables")]
     public List<string>? FetchVariables { get; set; }
+
+    /// <summary>
+    /// Timeout (in ms) the request waits for the process to complete. By default or
+    /// when set to 0, the generic request timeout configured in the cluster is applied.
+    /// 
+    /// </summary>
+    [JsonPropertyName("requestTimeout")]
+    public long? RequestTimeout { get; set; }
 
     /// <summary>
     /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
@@ -25487,16 +25709,20 @@ public sealed class ProcessInstanceSequenceFlowResult
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// The process definition key.
+    /// The process definition key. This field is not present for sequence flows imported
+    /// by Operate 8.1 or earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionKey")]
-    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+    public ProcessDefinitionKey? ProcessDefinitionKey { get; set; }
 
     /// <summary>
-    /// The process definition id.
+    /// The process definition id. This field is not present for sequence flows imported by
+    /// Operate 8.1 or earlier.
+    /// 
     /// </summary>
     [JsonPropertyName("processDefinitionId")]
-    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+    public ProcessDefinitionId? ProcessDefinitionId { get; set; }
 
     /// <summary>
     /// The element id for this sequence flow, as provided in the BPMN process.
@@ -27859,7 +28085,7 @@ public sealed class TenantCreateRequest
 {
     /// <summary>
     /// The unique ID for the tenant. Must be 31 characters or less and match
-    /// `^[\w.-]{1,31}$` (word characters, `.`, `-`). The literal
+    /// `` ^[\w.-]{1,31}$ `` (word characters, `.`, `-`). The literal
     /// `&lt;default&gt;` is also accepted as the default-tenant alias.
     /// 
     /// </summary>
