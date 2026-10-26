@@ -1,3 +1,11 @@
+## [10.0.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.1...v10.0.2) (2026-10-26)
+
+
+### Bug Fixes
+
+* refresh public API baseline for stable/8.10 spec drift ([#478](https://github.com/camunda/orchestration-cluster-api-csharp/issues/478)) ([a1ade92](https://github.com/camunda/orchestration-cluster-api-csharp/commit/a1ade927100b4fbfec9d6654dda40a946271172f)), closes [#477](https://github.com/camunda/orchestration-cluster-api-csharp/issues/477)
+* resolve cluster-admin ops at root and align optional bodies with JS SDK ([#474](https://github.com/camunda/orchestration-cluster-api-csharp/issues/474)) ([b4d244c](https://github.com/camunda/orchestration-cluster-api-csharp/commit/b4d244c91d1c58eff2cb466224601b0a5012db5f)), closes [#471](https://github.com/camunda/orchestration-cluster-api-csharp/issues/471) [#472](https://github.com/camunda/orchestration-cluster-api-csharp/issues/472) [#472](https://github.com/camunda/orchestration-cluster-api-csharp/issues/472) [#470](https://github.com/camunda/orchestration-cluster-api-csharp/issues/470) [#469](https://github.com/camunda/orchestration-cluster-api-csharp/issues/469) [#473](https://github.com/camunda/orchestration-cluster-api-csharp/issues/473)
+
 ## [10.0.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.0...v10.0.1) (2026-10-14)
 
 
