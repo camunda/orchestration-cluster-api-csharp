@@ -16,8 +16,13 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
     // SemaphoreSlim: a semaphore's capacity is fixed at construction, so it could
     // never follow the adaptive _permitsMax as backpressure shrinks and recovery
     // grows it (#479). All mutable state below is guarded by _gate.
+    // The waiter queue is a LinkedList so a cancelled acquisition can remove its own
+    // node under _gate: with a plain Queue a cancelled waiter had to stay enqueued until
+    // a release dequeued and discarded it, so repeated cancelled acquisitions under a
+    // held permit grew the queue without bound — retaining completed waiter tasks and
+    // their cancellation tokens after the callers had finished (#479 review).
     private readonly object _gate = new();
-    private readonly Queue<TaskCompletionSource<bool>> _waiters = new();
+    private readonly LinkedList<TaskCompletionSource<bool>> _waiters = new();
     private readonly bool _gateEnabled;
     private int _permitsMax;
     private int _inFlight;
@@ -52,6 +57,7 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
             return;
 
         TaskCompletionSource<bool>? tcs = null;
+        LinkedListNode<TaskCompletionSource<bool>>? node = null;
         lock (_gate)
         {
             ObjectDisposedException.ThrowIf(_disposed, this);
@@ -70,16 +76,15 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
             }
 
             tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
-            _waiters.Enqueue(tcs);
+            node = _waiters.AddLast(tcs);
         }
 
-        // Cancellation unqueues the waiter. Queue<T> has no Remove, so a cancelled
-        // waiter stays enqueued and is discarded lazily when it reaches the head
-        // (see ReleasePermitLocked). WaitAsync(ct) cancels only the wait, not the
-        // source: left untouched, the still-pending source would be granted a permit
-        // by a later release that nobody ever returns — a permit leak that, at a cap
-        // of one, wedges every subsequent non-exempt acquisition. So resolve the
-        // source's fate atomically under _gate below.
+        // Cancellation unqueues the waiter. Resolve the source's fate atomically under
+        // _gate below: a waiter left in the list after its caller cancelled would be
+        // granted a permit by a later release that nobody ever returns — a permit leak
+        // that, at a cap of one, wedges every subsequent non-exempt acquisition. And a
+        // cancelled waiter that simply stayed enqueued would accumulate without bound
+        // under a held permit (#479 review).
         try
         {
             await tcs.Task.WaitAsync(ct);
@@ -90,10 +95,9 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
             {
                 // If the grant won the race (the permit was handed over before
                 // cancellation was observed), the caller must not leak it: hand it
-                // straight to the next waiter. Otherwise cancellation won, so mark
-                // the source cancelled while holding _gate — before any release can
-                // dequeue it — so ReleasePermitLocked's TrySetResult fails and it is
-                // skipped instead of being granted an unreturned permit.
+                // straight to the next waiter. Otherwise cancellation won, so remove the
+                // node now (it is still queued) and mark the source cancelled, so no
+                // later release can grant it an unreturned permit.
                 if (tcs.Task.IsCompletedSuccessfully)
                 {
                     _inFlight--;
@@ -101,6 +105,7 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
                 }
                 else
                 {
+                    _waiters.Remove(node!);
                     tcs.TrySetCanceled(ct);
                 }
             }
@@ -139,7 +144,8 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
     {
         while (_inFlight < _permitsMax && _waiters.Count > 0)
         {
-            var waiter = _waiters.Dequeue();
+            var waiter = _waiters.First!.Value;
+            _waiters.RemoveFirst();
             if (!waiter.TrySetResult(true))
                 continue; // cancelled while queued — skip it and keep draining
 
@@ -218,7 +224,11 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
             // them forever; in-flight holders release normally (Release stays a no-op
             // safe path after disposal).
             while (_waiters.Count > 0)
-                _waiters.Dequeue().TrySetException(new ObjectDisposedException(nameof(BackpressureManager)));
+            {
+                var waiter = _waiters.First!.Value;
+                _waiters.RemoveFirst();
+                waiter.TrySetException(new ObjectDisposedException(nameof(BackpressureManager)));
+            }
         }
     }
 

@@ -268,4 +268,66 @@ public class BackpressureTests
 
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() => bp.AcquireAsync(cts.Token));
     }
+
+    // ---- Cancelled waiters must be removed from the queue, not retained (#479 review) ----
+    // With a plain FIFO queue a cancelled waiter stayed enqueued until a release dequeued
+    // and discarded it, so repeated cancelled acquisitions under a held permit grew the
+    // queue without bound — retaining completed waiter tasks and their tokens after the
+    // callers had finished. Cancelled nodes are now removed under _gate.
+
+    [Fact]
+    public async Task AcquireAsync_CancelledWaiters_DoNotAccumulateOrBlockLaterWaiters()
+    {
+        var bp = new BackpressureManager(
+            new BackpressureConfig { InitialMax = 1 },
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
+
+        await bp.AcquireAsync(); // hold the only permit so every later acquire must queue
+
+        // Cancel many queued acquisitions while the permit stays held. Under the old
+        // queue these stacked up as dead waiters; now each is removed as it cancels.
+        for (var i = 0; i < 50; i++)
+        {
+            using var cts = new CancellationTokenSource();
+            var queued = bp.AcquireAsync(cts.Token);
+            cts.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await queued);
+        }
+
+        // A waiter that is still pending must be granted the released permit — the
+        // cancelled acquisitions must not have consumed capacity or left dead weight
+        // ahead of it.
+        var pending = bp.AcquireAsync();
+        bp.Release();
+        await pending.WaitAsync(TimeSpan.FromSeconds(5));
+
+        // Releasing the pending waiter returns the gate to full capacity: a fresh
+        // acquire is granted immediately (fast path), proving no permit leaked.
+        bp.Release();
+        await bp.AcquireAsync().WaitAsync(TimeSpan.FromSeconds(5));
+    }
+
+    [Fact]
+    public async Task AcquireAsync_DisposeDuringContention_FaultsOnlyLiveWaiters()
+    {
+        var bp = new BackpressureManager(
+            new BackpressureConfig { InitialMax = 1 },
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
+
+        await bp.AcquireAsync(); // hold the only permit
+
+        // A cancelled waiter is removed from the queue, so Dispose must not try to fault
+        // it — only the still-pending waiter is faulted.
+        using var cts = new CancellationTokenSource();
+        var cancelled = bp.AcquireAsync(cts.Token);
+        cts.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await cancelled);
+
+        var pending = bp.AcquireAsync();
+        bp.Dispose();
+
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await pending);
+    }
 }

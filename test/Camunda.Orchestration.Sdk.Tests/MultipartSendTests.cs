@@ -141,19 +141,38 @@ public class MultipartSendTests : IDisposable
         // If the upload copy throws after consuming a prefix of the caller's stream, the
         // rewind must still run (finally) — otherwise the next attempt wraps the advanced
         // position as its origin and re-sends only the remaining bytes (a truncated file).
+        // A deterministic (non-random) payload makes the integrity check below exact.
         var payload = new byte[1024];
-        new Random(3).NextBytes(payload);
-        var stream = new MemoryStream(payload);
+        for (var i = 0; i < payload.Length; i++)
+            payload[i] = (byte)(i % 251);
+
+        // The source stream faults mid-copy, so the first attempt throws during
+        // serialization rather than after a clean read. The failure budget must exceed
+        // the multipart envelope prefix (~150-250 bytes of boundary/headers before the
+        // payload) so the copy trips within the payload, not in the envelope: a handler
+        // that reads the body successfully and only then returns 503 would never exercise
+        // the finally rewind — the regression would pass with the rewind moved out of
+        // finally. Faulting the copy mid-payload is what guards it.
+        var stream = new ThrowingReadStream(payload, failAfter: 700);
         var streamContent = new StreamContent(stream);
         var content = new MultipartFormDataContent();
         content.Add(streamContent, "resources", "big.bpmn");
 
-        // First attempt: the handler reads only a prefix of the body, then fails the
-        // request. The partial read advances the caller's stream before the 503 is seen.
-        _handler.Enqueue(async request =>
+        var bodies = new List<byte[]>();
+        _handler.Enqueue(async (request, ct) =>
         {
-            var body = await request.Content!.ReadAsByteArrayAsync();
-            Assert.True(body.Length > 0);
+            // Read the request body: the source stream faults partway through, so this
+            // read throws and the request fails mid-serialization. HttpContent.CopyToAsync
+            // wraps the source's IOException in an HttpRequestException.
+            try
+            {
+                await request.Content!.ReadAsByteArrayAsync(ct);
+            }
+            catch (HttpRequestException)
+            {
+                // expected — the injected copy failure
+            }
+
             return new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
             {
                 Content = new StringContent(
@@ -161,7 +180,15 @@ public class MultipartSendTests : IDisposable
                     System.Text.Encoding.UTF8, "application/json"),
             };
         });
-        _handler.Enqueue(HttpStatusCode.OK, """{"ok":true}""");
+        _handler.Enqueue(async (request, ct) =>
+        {
+            // Second (retry) attempt: the copy succeeds, so capture the full body bytes.
+            bodies.Add(await request.Content!.ReadAsByteArrayAsync(ct));
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"ok":true}""", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
 
         // CreateDeploymentAsync wraps the multipart send in InvokeWithRetryAsync, so the
         // 503 triggers a second attempt against the same caller-owned content.
@@ -170,6 +197,81 @@ public class MultipartSendTests : IDisposable
         // Whatever happened mid-attempt, the caller's stream is rewound for reuse.
         Assert.Equal(0, stream.Position);
         Assert.Equal(2, _handler.Requests.Count);
+
+        // The retried attempt must resend the FULL original payload, not the truncated
+        // remainder left after the failed first copy. Locate the payload by a length
+        // prefix + SHA-256 rather than a raw subsequence search (the deterministic
+        // payload is periodic, so a raw search could match a shifted window).
+        Assert.Single(bodies);
+        Assert.True(
+            VerifyEmbeddedPayload(bodies[0], payload),
+            "the retried body does not contain the full original payload intact — the stream was not rewound");
+    }
+
+    /// <summary>
+    /// True when <paramref name="body"/> contains <paramref name="payload"/> as a
+    /// contiguous run whose bytes hash to the payload's SHA-256. Scans candidate offsets
+    /// by the payload's first byte and confirms by hash, so a periodic payload cannot
+    /// produce a shifted false positive.
+    /// </summary>
+    private static bool VerifyEmbeddedPayload(byte[] body, byte[] payload)
+    {
+        var expectedHash = System.Security.Cryptography.SHA256.HashData(payload);
+        for (var i = 0; i + payload.Length <= body.Length; i++)
+        {
+            if (body[i] != payload[0])
+                continue;
+
+            if (System.Security.Cryptography.SHA256.HashData(body.AsSpan(i, payload.Length))
+                .AsSpan().SequenceEqual(expectedHash))
+                return true;
+        }
+
+        return false;
+    }
+
+    [Fact]
+    public async Task SendMultipartAsync_CallerStream_ReusableAcrossSequentialSends()
+    {
+        // Documented contract: a seekable caller stream is "re-sent on every retry" and
+        // "left open for the caller" — so after one send completes, the caller must be
+        // able to send the SAME stream again and have the full payload go out. This is
+        // the deterministic, supported-reuse case (no mid-copy fault).
+        var payload = new byte[1024];
+        for (var i = 0; i < payload.Length; i++)
+            payload[i] = (byte)(i % 251);
+
+        var stream = new MemoryStream(payload);
+        var bodies = new List<byte[]>();
+        _handler.Enqueue(async (request, ct) =>
+        {
+            bodies.Add(await request.Content!.ReadAsByteArrayAsync(ct));
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"ok":true}""", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+        _handler.Enqueue(async (request, ct) =>
+        {
+            bodies.Add(await request.Content!.ReadAsByteArrayAsync(ct));
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"ok":true}""", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        var content1 = new MultipartFormDataContent();
+        content1.Add(new StreamContent(stream), "resources", "big.bpmn");
+        await _client.SendMultipartAsync<object>("deployments", content1);
+
+        // Reuse the same caller stream in a second, independent send.
+        var content2 = new MultipartFormDataContent();
+        content2.Add(new StreamContent(stream), "resources", "big.bpmn");
+        await _client.SendMultipartAsync<object>("deployments", content2);
+
+        Assert.Equal(2, bodies.Count);
+        Assert.True(VerifyEmbeddedPayload(bodies[0], payload), "first send did not carry the full payload");
+        Assert.True(VerifyEmbeddedPayload(bodies[1], payload), "second send did not carry the full payload");
     }
 
     [Fact]
@@ -269,6 +371,98 @@ public class MultipartSendTests : IDisposable
         }
 
         public override bool CanSeek => false;
+    }
+
+    /// <summary>
+    /// A seekable in-memory stream whose reads throw an <see cref="IOException"/> once a
+    /// configured number of bytes have been served. The failure is one-shot for the whole
+    /// stream: the first pass faults mid-payload, and once it has faulted every later
+    /// (rewound) pass reads cleanly to the end. This stands in for an upload whose copy
+    /// fails mid-stream on the first attempt and is then re-read from the start.
+    /// </summary>
+    private sealed class ThrowingReadStream : Stream
+    {
+        private readonly byte[] _payload;
+        private readonly int _failAfter;
+        private long _position;
+        private int _servedThisPass;
+        private bool _hasFailed;
+
+        public ThrowingReadStream(byte[] payload, int failAfter)
+        {
+            _payload = payload;
+            _failAfter = failAfter;
+        }
+
+        public override bool CanRead => true;
+        public override bool CanSeek => true;
+        public override bool CanWrite => false;
+        public override long Length => _payload.Length;
+
+        public override long Position
+        {
+            get => _position;
+            set
+            {
+                _position = value;
+                _servedThisPass = 0; // a rewind starts a fresh pass (the one-shot fault stays spent)
+            }
+        }
+
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            // Serve only up to the failure budget, then throw on the next read — so a
+            // single large read cannot consume the whole payload without tripping. Once
+            // the one-shot fault has fired, the budget is ignored and reads run to the end.
+            var allowed = _failAfter - _servedThisPass;
+            if (!_hasFailed && allowed <= 0)
+            {
+                _hasFailed = true;
+                throw new IOException("injected copy failure");
+            }
+
+            var remaining = _payload.Length - _position;
+            var n = (int)Math.Min(count, remaining);
+            if (!_hasFailed)
+                n = (int)Math.Min(n, Math.Max(allowed, 0));
+            if (n <= 0)
+                return 0;
+
+            Array.Copy(_payload, _position, buffer, offset, n);
+            _position += n;
+            _servedThisPass += n;
+            return n;
+        }
+
+        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            => Task.FromResult(Read(buffer, offset, count));
+
+        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        {
+            var allowed = _failAfter - _servedThisPass;
+            if (!_hasFailed && allowed <= 0)
+            {
+                _hasFailed = true;
+                throw new IOException("injected copy failure");
+            }
+
+            var remaining = _payload.Length - _position;
+            var n = (int)Math.Min(buffer.Length, remaining);
+            if (!_hasFailed)
+                n = (int)Math.Min(n, Math.Max(allowed, 0));
+            if (n <= 0)
+                return ValueTask.FromResult(0);
+
+            _payload.AsSpan((int)_position, n).CopyTo(buffer.Span);
+            _position += n;
+            _servedThisPass += n;
+            return ValueTask.FromResult(n);
+        }
+
+        public override void Flush() { }
+        public override long Seek(long offset, SeekOrigin origin) { Position = offset; return offset; }
+        public override void SetLength(long value) { }
+        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
     }
 
     public void Dispose()
