@@ -307,7 +307,6 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
             Content = await CloneMultipartAsync(content, ct),
         };
         var response = await _httpClient.SendAsync(request, ct);
-
         if (!response.IsSuccessStatusCode)
         {
             var errorBody = await response.Content.ReadAsStringAsync(ct);
@@ -400,11 +399,23 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
             _origin = stream.Position;
         }
 
-        protected override async Task SerializeToStreamAsync(Stream target, TransportContext? context)
+        protected override Task SerializeToStreamAsync(Stream target, TransportContext? context)
+            // The tokenless overload is the legacy entry point; forward to the
+            // cancellation-aware one with no token so both paths share one implementation.
+            => SerializeToStreamAsync(target, context, CancellationToken.None);
+
+        protected override async Task SerializeToStreamAsync(
+            Stream target, TransportContext? context, CancellationToken cancellationToken)
         {
             _stream.Position = _origin;
-            await _stream.CopyToAsync(target);
-            _stream.Position = _origin; // leave the caller's stream rewound for reuse
+            try
+            {
+                await _stream.CopyToAsync(target, cancellationToken);
+            }
+            finally
+            {
+                _stream.Position = _origin; // leave the caller's stream rewound for reuse
+            }
         }
 
         protected override bool TryComputeLength(out long length)

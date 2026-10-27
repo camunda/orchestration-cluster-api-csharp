@@ -27,6 +27,12 @@ internal static class HttpRetryExecutor
             }
             catch (Exception ex)
             {
+                // A caller-initiated cancellation is not a transient failure: never
+                // classify or retry it, or a cancelled operation would be re-run (and a
+                // still-blocked attempt would hang forever). Rethrow it immediately.
+                if (ct.IsCancellationRequested)
+                    throw;
+
                 lastError = ex;
                 var decision = classifier?.Invoke(ex) ?? DefaultClassify(ex);
 

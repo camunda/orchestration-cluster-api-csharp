@@ -550,14 +550,25 @@ public class HttpSdkExceptionRetryTests
             handler.Enqueue(HttpStatusCode.ServiceUnavailable, ResourceExhausted503Body);
             worker.Start();
 
-            // Give the poll loop a bounded window to process the rejection. The spin
-            // runs on the real clock; only the worker's poll cadence is faked.
+            // Wait for the worker's own backpressure handling to complete, not merely
+            // for the client's retry classifier: Consecutive is incremented before the
+            // exception reaches the worker's catch block, so spinning on it can pass
+            // while the worker is still between the classifier and its (quiet) log —
+            // letting a generic-path error land after the assertion. The "activation
+            // backpressured" debug entry is emitted only after the worker has chosen the
+            // quiet path, so it is the deterministic signal that handling has finished.
             var deadline = DateTime.UtcNow + TimeSpan.FromSeconds(5);
-            while (client.GetBackpressureState().Consecutive == 0 && DateTime.UtcNow < deadline)
+            while (!loggerFactory.Entries.Any(e =>
+                       e.Level == Microsoft.Extensions.Logging.LogLevel.Debug
+                       && e.Message.Contains("activation backpressured", StringComparison.Ordinal))
+                   && DateTime.UtcNow < deadline)
                 await Task.Delay(10);
 
             Assert.True(client.GetBackpressureState().Consecutive > 0,
                 "the worker's activation rejection should have fed the backpressure manager");
+            Assert.Contains(loggerFactory.Entries,
+                e => e.Level == Microsoft.Extensions.Logging.LogLevel.Debug
+                     && e.Message.Contains("activation backpressured", StringComparison.Ordinal));
             Assert.DoesNotContain(loggerFactory.Entries,
                 e => e.Level == Microsoft.Extensions.Logging.LogLevel.Error);
         }

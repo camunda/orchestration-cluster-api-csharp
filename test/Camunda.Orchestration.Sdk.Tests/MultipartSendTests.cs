@@ -135,6 +135,131 @@ public class MultipartSendTests : IDisposable
         Assert.Single(_handler.Requests);
     }
 
+    [Fact]
+    public async Task SendMultipartAsync_RewindsSeekableStream_WhenSerializationThrows()
+    {
+        // If the upload copy throws after consuming a prefix of the caller's stream, the
+        // rewind must still run (finally) — otherwise the next attempt wraps the advanced
+        // position as its origin and re-sends only the remaining bytes (a truncated file).
+        var payload = new byte[1024];
+        new Random(3).NextBytes(payload);
+        var stream = new MemoryStream(payload);
+        var streamContent = new StreamContent(stream);
+        var content = new MultipartFormDataContent();
+        content.Add(streamContent, "resources", "big.bpmn");
+
+        // First attempt: the handler reads only a prefix of the body, then fails the
+        // request. The partial read advances the caller's stream before the 503 is seen.
+        _handler.Enqueue(async request =>
+        {
+            var body = await request.Content!.ReadAsByteArrayAsync();
+            Assert.True(body.Length > 0);
+            return new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            {
+                Content = new StringContent(
+                    """{"title":"RESOURCE_EXHAUSTED","status":503,"detail":"broker overloaded"}""",
+                    System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+        _handler.Enqueue(HttpStatusCode.OK, """{"ok":true}""");
+
+        // CreateDeploymentAsync wraps the multipart send in InvokeWithRetryAsync, so the
+        // 503 triggers a second attempt against the same caller-owned content.
+        await _client.CreateDeploymentAsync(content);
+
+        // Whatever happened mid-attempt, the caller's stream is rewound for reuse.
+        Assert.Equal(0, stream.Position);
+        Assert.Equal(2, _handler.Requests.Count);
+    }
+
+    [Fact]
+    public async Task SendMultipartAsync_ForwardsCancellation_ToSeekableStreamRead()
+    {
+        // The replayable wrapper must forward the request's cancellation token into the
+        // source stream read. A source read that is still pending when the token is
+        // cancelled must observe it (OperationCanceledException) rather than hang.
+        var readStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var stream = new CancellableReadStream(readStarted);
+        var streamContent = new StreamContent(stream);
+        var content = new MultipartFormDataContent();
+        content.Add(streamContent, "resources", "big.bpmn");
+
+        // Enqueue a handler that reads the request content (serializing the multipart
+        // body) with the request's cancellation token before responding — that read is
+        // what blocks on the source stream. A plain Enqueue(status) returns without
+        // reading the body, so the source stream would never be read and the test could
+        // not observe the cancellation.
+        _handler.Enqueue(async (request, ct) =>
+        {
+            await request.Content!.ReadAsByteArrayAsync(ct);
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"ok":true}""", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        using var cts = new CancellationTokenSource();
+        var send = _client.SendMultipartAsync<object>("deployments", content, ct: cts.Token);
+
+        // Cancel once the upload is actually reading from the (blocked) source stream.
+        // Bound the wait so a serialization path that never reads the source fails fast
+        // instead of hanging the suite.
+        var readObserved = await Task.WhenAny(readStarted.Task, Task.Delay(TimeSpan.FromSeconds(10)));
+        Assert.True(ReferenceEquals(readObserved, readStarted.Task),
+            "the upload never read from the source stream");
+        cts.Cancel();
+
+        // The cancelled read must fault the send with OperationCanceledException. Bound
+        // the wait: if the wrapper drops the token, the source read never completes and
+        // this times out (a deterministic failure) instead of hanging the suite.
+        var completed = await Task.WhenAny(send, Task.Delay(TimeSpan.FromSeconds(10)));
+        Assert.True(ReferenceEquals(completed, send),
+            "cancelling the request did not reach the pending source-stream read");
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await send);
+    }
+
+    /// <summary>
+    /// A seekable stream whose read blocks until cancelled, to prove the request's
+    /// cancellation token reaches the source read. Reports a fixed length and seeks
+    /// freely so it is treated as replayable; the read only completes via cancellation.
+    /// </summary>
+    private sealed class CancellableReadStream : Stream
+    {
+        private readonly TaskCompletionSource _readStarted;
+
+        public CancellableReadStream(TaskCompletionSource readStarted)
+        {
+            _readStarted = readStarted;
+        }
+
+        public override bool CanRead => true;
+        public override bool CanSeek => true;
+        public override bool CanWrite => false;
+        public override long Length => 1024;
+        public override long Position { get; set; }
+
+        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        {
+            _readStarted.TrySetResult();
+            // Block until the request's token is cancelled; a missing token hangs forever.
+            await Task.Delay(Timeout.Infinite, cancellationToken).ConfigureAwait(false);
+            return 0;
+        }
+
+        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        {
+            _readStarted.TrySetResult();
+            await Task.Delay(Timeout.Infinite, cancellationToken).ConfigureAwait(false);
+            return 0;
+        }
+
+        public override void Flush() { }
+        public override int Read(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) { Position = offset; return offset; }
+        public override void SetLength(long value) { }
+        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+    }
+
     /// <summary>A read-only, forward-only stream that reports <see cref="Stream.CanSeek"/> false.</summary>
     private sealed class NonSeekableReadStream : MemoryStream
     {
