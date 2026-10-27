@@ -191,4 +191,81 @@ public class BackpressureTests
         bp.RecordHealthy();
         Assert.Equal(3, bp.GetState().PermitsMax);
     }
+
+    // ---- Recovery must wait for a quiet period (#479 review) ----
+    // Recovery restores capacity only "if the system stays quiet" (README). A success
+    // recorded immediately after a backpressure signal must not raise the cap while
+    // the broker is still shedding load — that would re-admit queued requests into an
+    // overloaded broker. Recovery requires both the recovery interval AND a quiet
+    // period since the last signal.
+
+    [Fact]
+    public void RecordHealthy_DoesNotRecover_ImmediatelyAfterBackpressure()
+    {
+        var clock = new FakeTimeProvider();
+        var bp = new BackpressureManager(
+            new BackpressureConfig
+            {
+                InitialMax = 4,
+                RecoveryStep = 1,
+                DecayQuietMs = 2000,
+                RecoveryIntervalMs = 1000,
+            },
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            clock);
+
+        bp.RecordBackpressure(); // cap: int(4 * 0.7) = 2
+        Assert.Equal(2, bp.GetState().PermitsMax);
+
+        // A success one recovery interval later but still within the quiet window must
+        // NOT recover: the broker signalled pressure only a moment ago.
+        clock.Advance(TimeSpan.FromMilliseconds(1000));
+        bp.RecordHealthy();
+        Assert.Equal(2, bp.GetState().PermitsMax);
+
+        // Once the quiet period has also elapsed, recovery resumes.
+        clock.Advance(TimeSpan.FromMilliseconds(1500)); // now 2500ms past the signal
+        bp.RecordHealthy();
+        Assert.Equal(3, bp.GetState().PermitsMax);
+    }
+
+    // ---- A pre-cancelled token must not be granted a permit (#479 review) ----
+    // With free capacity the fast path returned a permit without observing the
+    // cancellation token, whereas the previous SemaphoreSlim.WaitAsync(ct) rejected an
+    // already-cancelled acquisition. InvokeWithRetryAsync would then start the
+    // operation (and serialize its body) despite cancellation.
+
+    [Fact]
+    public async Task AcquireAsync_Throws_WhenTokenAlreadyCancelled_WithFreeCapacity()
+    {
+        var bp = new BackpressureManager(
+            new BackpressureConfig { InitialMax = 4 },
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
+
+        using var cts = new CancellationTokenSource();
+        cts.Cancel();
+
+        // Free capacity is available, yet the pre-cancelled token must still win.
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => bp.AcquireAsync(cts.Token));
+
+        // No permit may have been consumed by the cancelled acquisition.
+        Assert.Equal(4, bp.GetState().PermitsMax);
+    }
+
+    [Fact]
+    public async Task AcquireAsync_Throws_WhenTokenAlreadyCancelled_WhileQueued()
+    {
+        var bp = new BackpressureManager(
+            new BackpressureConfig { InitialMax = 1 },
+            Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+            TimeProvider.System);
+
+        await bp.AcquireAsync(); // hold the only permit so the next acquire must queue
+
+        using var cts = new CancellationTokenSource();
+        cts.Cancel();
+
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => bp.AcquireAsync(cts.Token));
+    }
 }

@@ -325,11 +325,18 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
 
     /// <summary>
     /// Builds a fresh, independently sendable copy of a multipart payload so the caller's
-    /// content survives being sent (and disposed) on each retry attempt. Each part is
-    /// buffered into bytes and its headers copied verbatim; the original boundary is
-    /// reused so the serialized body is byte-identical across attempts. The caller's
-    /// content is only read, never disposed.
+    /// content survives being sent (and disposed) on each retry attempt. The original
+    /// boundary is reused so the serialized body is byte-identical across attempts, and
+    /// the caller's content is only read, never disposed.
     /// </summary>
+    /// <remarks>
+    /// To avoid buffering large uploads into memory, a part backed by a replayable
+    /// (seekable) stream is cloned as a thin wrapper that re-reads the caller's stream
+    /// from its original position on each attempt and rewinds it afterwards — the stream
+    /// is never buffered wholesale and never disposed (caller ownership is preserved).
+    /// Only a non-seekable part (which cannot be rewound for a retry) is buffered, once,
+    /// into bytes. See https://github.com/camunda/orchestration-cluster-api-csharp/issues/479.
+    /// </remarks>
     private static async Task<MultipartFormDataContent> CloneMultipartAsync(
         MultipartFormDataContent source,
         CancellationToken ct)
@@ -344,11 +351,10 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
 
         foreach (var part in source)
         {
-            var bytes = await part.ReadAsByteArrayAsync(ct);
-            var clonePart = new ByteArrayContent(bytes);
+            var clonePart = await CreateReplayablePartAsync(part, ct);
             foreach (var header in part.Headers)
             {
-                // Content-Length is recomputed by ByteArrayContent; copying it would
+                // Content-Length is recomputed by the cloned part; copying it would
                 // duplicate the header. All other part headers (Content-Type,
                 // Content-Disposition with name/filename) must be preserved verbatim.
                 if (string.Equals(header.Key, "Content-Length", StringComparison.OrdinalIgnoreCase))
@@ -360,6 +366,58 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         }
 
         return copy;
+
+        static async Task<HttpContent> CreateReplayablePartAsync(HttpContent part, CancellationToken ct)
+        {
+            // A seekable stream can be replayed from its original position on each
+            // attempt, so wrap it instead of buffering it. ReadAsStreamAsync returns the
+            // underlying stream for StreamContent without buffering; for content that
+            // has already been buffered (e.g. StringContent, ByteArrayContent) it returns
+            // that in-memory buffer, which is likewise cheap to re-read.
+            var stream = await part.ReadAsStreamAsync(ct);
+            if (stream.CanSeek)
+                return new ReplayableStreamContent(stream);
+
+            // A non-seekable stream cannot be rewound for a retry, so buffer it once.
+            return new ByteArrayContent(await part.ReadAsByteArrayAsync(ct));
+        }
+    }
+
+    /// <summary>
+    /// An <see cref="HttpContent"/> that serializes a seekable stream from a captured
+    /// position and rewinds it afterwards, so the same caller-owned stream can be
+    /// re-sent on every retry without being buffered into memory. Disposing this content
+    /// only detaches it from the stream — it never disposes the caller's stream.
+    /// </summary>
+    private sealed class ReplayableStreamContent : HttpContent
+    {
+        private readonly Stream _stream;
+        private readonly long _origin;
+
+        public ReplayableStreamContent(Stream stream)
+        {
+            _stream = stream;
+            _origin = stream.Position;
+        }
+
+        protected override async Task SerializeToStreamAsync(Stream target, TransportContext? context)
+        {
+            _stream.Position = _origin;
+            await _stream.CopyToAsync(target);
+            _stream.Position = _origin; // leave the caller's stream rewound for reuse
+        }
+
+        protected override bool TryComputeLength(out long length)
+        {
+            length = _stream.Length - _origin;
+            return true;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            // Detach only — never dispose the caller-owned stream.
+            base.Dispose(disposing);
+        }
     }
 
     /// <summary>

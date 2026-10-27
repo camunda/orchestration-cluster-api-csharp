@@ -56,6 +56,13 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
         {
             ObjectDisposedException.ThrowIf(_disposed, this);
 
+            // Honor cancellation before granting or queuing a permit. The free-capacity
+            // fast path below returns without touching the token, so a pre-cancelled
+            // token would otherwise be handed a permit and InvokeWithRetryAsync would
+            // start the operation (serializing its body) despite cancellation — the
+            // previous SemaphoreSlim.WaitAsync(ct) rejected this case (#479).
+            ct.ThrowIfCancellationRequested();
+
             if (_inFlight < _permitsMax)
             {
                 _inFlight++;
@@ -177,8 +184,16 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
 
             // Recovery restores capacity on its own cadence (RecoveryIntervalMs),
             // independent of severity, so healthy completions keep raising the cap
-            // back toward its initial size once the broker has recovered.
-            if (_gateEnabled && now - _lastRecoveryMs >= _config.RecoveryIntervalMs)
+            // back toward its initial size once the broker has recovered. But it must
+            // only fire once the system has stayed quiet: a success recorded
+            // immediately after a backpressure signal must not raise the cap while the
+            // broker is still shedding load, or queued requests would be re-admitted
+            // into an overloaded broker (README: recover "if the system stays quiet").
+            // So require both the recovery interval AND a quiet period since the last
+            // signal. _lastSignalMs starts at 0, so before any signal the quiet window
+            // is trivially satisfied and recovery is unobstructed.
+            var quiet = now - _lastSignalMs >= _config.DecayQuietMs;
+            if (_gateEnabled && quiet && now - _lastRecoveryMs >= _config.RecoveryIntervalMs)
             {
                 _lastRecoveryMs = now;
                 var newMax = _permitsMax + _config.RecoveryStep;

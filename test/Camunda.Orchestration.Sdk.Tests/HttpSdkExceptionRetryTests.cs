@@ -736,6 +736,50 @@ public class HttpSdkExceptionRetryTests
         Assert.All(contentTypes, ct => Assert.Equal("application/xml", ct));
     }
 
+    [Fact]
+    public async Task SendMultipartAsync_Retry_StreamsSeekableContentIdenticallyEachAttempt()
+    {
+        // The seekable clone must re-read the caller's stream from its original position
+        // on every attempt (not buffer it, not leave it at the end), so a retried
+        // StreamContent upload sends byte-identical bodies.
+        var bodies = new List<byte[]>();
+        var handler = new MockHttpMessageHandler();
+        using var client = CreateClient(handler);
+
+        handler.Enqueue(async (request, ctoken) =>
+        {
+            bodies.Add(await request.Content!.ReadAsByteArrayAsync(ctoken));
+            return new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            {
+                Content = new StringContent(ResourceExhausted503Body, System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+        handler.Enqueue(async (request, ctoken) =>
+        {
+            bodies.Add(await request.Content!.ReadAsByteArrayAsync(ctoken));
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"deployments":[]}""", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        var payload = new byte[2048];
+        new Random(3).NextBytes(payload);
+        var stream = new MemoryStream(payload);
+        using var content = new MultipartFormDataContent();
+        content.Add(new StreamContent(stream), "resources", "big.bpmn");
+
+        await Assert.ThrowsAsync<HttpSdkException>(() =>
+            client.SendMultipartAsync<DeploymentResult>("deployments", content));
+        await client.SendMultipartAsync<DeploymentResult>("deployments", content);
+
+        Assert.Equal(2, bodies.Count);
+        Assert.Equal(bodies[0], bodies[1]);
+        // The caller's stream survives both attempts, rewound for any further reuse.
+        Assert.True(stream.CanRead);
+        Assert.Equal(0, stream.Position);
+    }
+
     private sealed class CapturingLoggerFactory : Microsoft.Extensions.Logging.ILoggerFactory
     {
         private readonly List<(string Category, Microsoft.Extensions.Logging.LogLevel Level, string Message)> _entries = new();
