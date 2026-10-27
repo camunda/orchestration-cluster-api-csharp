@@ -514,8 +514,16 @@ public class HttpSdkExceptionRetryTests
         // A 503 RESOURCE_EXHAUSTED on activation must not go through the generic
         // error path (error-level log + PollIntervalMs sleep). It should back off
         // quietly and keep polling.
+        //
+        // The worker's cadence runs on a held FakeTimeProvider so that, after the
+        // single queued 503, the poll loop parks on a fake Task.Delay that never
+        // elapses. That isolates the assertion to the one response under test: with a
+        // real clock a second poll would fire during the assertion window, hit the
+        // mock's default 404, and log an error — failing the DoesNotContain check (or
+        // masking the quiet path) for reasons unrelated to backpressure handling.
         var handler = new MockHttpMessageHandler();
         var loggerFactory = new CapturingLoggerFactory();
+        var clock = new FakeTimeProvider();
         using var client = CreateClient(handler, new Dictionary<string, string>
         {
             ["CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS"] = "1",
@@ -534,7 +542,7 @@ public class HttpSdkExceptionRetryTests
             (job, ct) => Task.FromResult<object?>(null),
             loggerFactory,
             client._jsonOptions,
-            TimeProvider.System,
+            clock,
             CamundaRandomSource.Live);
 
         try
@@ -542,7 +550,8 @@ public class HttpSdkExceptionRetryTests
             handler.Enqueue(HttpStatusCode.ServiceUnavailable, ResourceExhausted503Body);
             worker.Start();
 
-            // Give the poll loop a bounded window to process the rejection.
+            // Give the poll loop a bounded window to process the rejection. The spin
+            // runs on the real clock; only the worker's poll cadence is faked.
             var deadline = DateTime.UtcNow + TimeSpan.FromSeconds(5);
             while (client.GetBackpressureState().Consecutive == 0 && DateTime.UtcNow < deadline)
                 await Task.Delay(10);
@@ -565,9 +574,16 @@ public class HttpSdkExceptionRetryTests
         // A 503 without a RESOURCE_EXHAUSTED marker is an ordinary outage, not the
         // broker shedding load: the worker must keep it on the error path (error-level
         // log) and must not feed the backpressure manager.
+        //
+        // The worker's cadence runs on a held FakeTimeProvider so that, after the
+        // single queued 503, the poll loop parks on a fake Task.Delay that never
+        // elapses. Without that, the next poll would hit the mock's default 404 and
+        // log an error too — so an assertion that merely waits for *any* error log
+        // would pass even if the 503 had wrongly taken the quiet backpressure path.
         const string plain503 = """{"title":"SERVICE_UNAVAILABLE","status":503,"detail":"upstream restarting"}""";
         var handler = new MockHttpMessageHandler();
         var loggerFactory = new CapturingLoggerFactory();
+        var clock = new FakeTimeProvider();
         using var client = CreateClient(handler, new Dictionary<string, string>
         {
             ["CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS"] = "1",
@@ -586,7 +602,7 @@ public class HttpSdkExceptionRetryTests
             (job, ct) => Task.FromResult<object?>(null),
             loggerFactory,
             client._jsonOptions,
-            TimeProvider.System,
+            clock,
             CamundaRandomSource.Live);
 
         try

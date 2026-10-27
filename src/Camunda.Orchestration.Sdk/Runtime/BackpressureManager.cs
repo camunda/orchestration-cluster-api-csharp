@@ -23,6 +23,7 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
     private int _inFlight;
     private int _consecutive;
     private long _lastSignalMs;
+    private long _lastRecoveryMs;
     private bool _disposed;
 
     public BackpressureManager(BackpressureConfig config, ILogger logger, TimeProvider timeProvider)
@@ -33,6 +34,13 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
 
         if (config.Enabled && !config.ObserveOnly)
         {
+            // A nonpositive cap can never admit a request: a zero InitialMax queues
+            // every acquisition forever, and a zero Floor lets the cap degrade to
+            // zero and stall. Reject the misconfiguration here rather than wedge the
+            // gate at runtime (#479).
+            ArgumentOutOfRangeException.ThrowIfLessThan(config.InitialMax, 1);
+            ArgumentOutOfRangeException.ThrowIfLessThan(config.Floor, 1);
+
             _permitsMax = config.InitialMax;
             _gateEnabled = true;
         }
@@ -159,18 +167,26 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
         lock (_gate)
         {
             var now = _timeProvider.GetUtcNow().ToUnixTimeMilliseconds();
+
+            // Severity decay is separate from permit recovery. Decay only clears the
+            // consecutive-signal counter after a quiet period; it must not gate (or be
+            // the only trigger for) recovery, or the cap would rise exactly once and
+            // then stick (#479).
             if (_consecutive > 0 && now - _lastSignalMs > _config.DecayQuietMs)
-            {
                 _consecutive = 0;
-                if (_gateEnabled)
-                {
-                    var newMax = _permitsMax + _config.RecoveryStep;
-                    if (_logger.IsEnabled(LogLevel.Debug))
-                        _logger.LogDebug("Backpressure: recovering permits {Old} -> {New}", _permitsMax, newMax);
-                    _permitsMax = newMax;
-                    // A raised cap may admit queued waiters immediately.
-                    ReleasePermitLocked();
-                }
+
+            // Recovery restores capacity on its own cadence (RecoveryIntervalMs),
+            // independent of severity, so healthy completions keep raising the cap
+            // back toward its initial size once the broker has recovered.
+            if (_gateEnabled && now - _lastRecoveryMs >= _config.RecoveryIntervalMs)
+            {
+                _lastRecoveryMs = now;
+                var newMax = _permitsMax + _config.RecoveryStep;
+                if (_logger.IsEnabled(LogLevel.Debug))
+                    _logger.LogDebug("Backpressure: recovering permits {Old} -> {New}", _permitsMax, newMax);
+                _permitsMax = newMax;
+                // A raised cap may admit queued waiters immediately.
+                ReleasePermitLocked();
             }
         }
     }
