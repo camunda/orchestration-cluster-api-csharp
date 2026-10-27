@@ -230,9 +230,9 @@ public class HttpSdkExceptionRetryTests
         });
 
         // SevereThreshold defaults to 3: three failing calls should reach "severe"
-        // and shrink the permit cap below the BALANCED initial 16. A signal is
-        // recorded both when a response is classified for retry and when the final
-        // non-retried failure propagates, so three calls accumulate six events.
+        // and shrink the permit cap below the BALANCED initial 16. Each HTTP
+        // response must feed the manager exactly once, so three calls accumulate
+        // exactly three events.
         for (var call = 0; call < 3; call++)
         {
             handler.Enqueue(HttpStatusCode.ServiceUnavailable, ResourceExhausted503Body);
@@ -249,6 +249,109 @@ public class HttpSdkExceptionRetryTests
         Assert.True(state.Consecutive >= 3, $"expected at least 3 consecutive signals, got {state.Consecutive}");
         Assert.Equal("severe", state.Severity);
         Assert.True(state.PermitsMax < 16, $"expected permits below the initial 16, got {state.PermitsMax}");
+    }
+
+    [Fact]
+    public async Task SendAsync_RecordsEachBackpressureResponseExactlyOnce()
+    {
+        // MaxAttempts = 1: the single rejection is the final attempt. Recording it
+        // both in the classifier and in the terminal catch would double-count one
+        // HTTP response as two signals (and two permit reductions).
+        var handler = new MockHttpMessageHandler();
+        using var client = CreateClient(handler, new Dictionary<string, string>
+        {
+            ["CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS"] = "1",
+        });
+
+        handler.Enqueue(HttpStatusCode.TooManyRequests, RateLimited429Body);
+        await Assert.ThrowsAsync<HttpSdkException>(() =>
+            client.ActivateJobsAsync(new JobActivationRequest
+            {
+                Type = "t",
+                MaxJobsToActivate = 1,
+                Timeout = 1000,
+            }));
+
+        Assert.Equal(1, client.GetBackpressureState().Consecutive);
+    }
+
+    [Fact]
+    public async Task SendAsync_RetriedExhaustion_RecordsOneSignalPerResponse()
+    {
+        // Default MaxAttempts = 3: three 429 responses must produce exactly three
+        // signals — one per HTTP response, not three retried + one extra for the
+        // final failure.
+        var handler = new MockHttpMessageHandler();
+        using var client = CreateClient(handler, new Dictionary<string, string>
+        {
+            ["CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS"] = "1",
+            ["CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS"] = "5",
+        });
+
+        for (var i = 0; i < 3; i++)
+            handler.Enqueue(HttpStatusCode.TooManyRequests, RateLimited429Body);
+
+        await Assert.ThrowsAsync<HttpSdkException>(() =>
+            client.ActivateJobsAsync(new JobActivationRequest
+            {
+                Type = "t",
+                MaxJobsToActivate = 1,
+                Timeout = 1000,
+            }));
+
+        Assert.Equal(3, client.GetBackpressureState().Consecutive);
+    }
+
+    [Fact]
+    public async Task SendAsync_Plain503Outage_DoesNotShrinkPermitGate()
+    {
+        // An ordinary 503 (no RESOURCE_EXHAUSTED marker) is still retryable, but it
+        // is not the broker shedding load: it must not shrink the adaptive gate.
+        const string plain503 = """{"title":"SERVICE_UNAVAILABLE","status":503,"detail":"upstream restarting"}""";
+        var handler = new MockHttpMessageHandler();
+        using var client = CreateClient(handler, new Dictionary<string, string>
+        {
+            ["CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS"] = "1",
+        });
+
+        handler.Enqueue(HttpStatusCode.ServiceUnavailable, plain503);
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(() =>
+            client.ActivateJobsAsync(new JobActivationRequest
+            {
+                Type = "t",
+                MaxJobsToActivate = 1,
+                Timeout = 1000,
+            }));
+
+        Assert.False(ex.IsBackpressure);
+        var state = client.GetBackpressureState();
+        Assert.Equal(0, state.Consecutive);
+        Assert.Equal(16, state.PermitsMax);
+    }
+
+    [Fact]
+    public async Task SendAsync_500ResourceExhaustedInDetail_RecordsBackpressure()
+    {
+        // The server also surfaces load shedding as a 500 whose detail carries
+        // RESOURCE_EXHAUSTED; that signal must still feed the manager.
+        const string body = """{"title":"Internal Server Error","status":500,"detail":"broker rejected: RESOURCE_EXHAUSTED"}""";
+        var handler = new MockHttpMessageHandler();
+        using var client = CreateClient(handler, new Dictionary<string, string>
+        {
+            ["CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS"] = "1",
+        });
+
+        handler.Enqueue(HttpStatusCode.InternalServerError, body);
+        var ex = await Assert.ThrowsAsync<HttpSdkException>(() =>
+            client.ActivateJobsAsync(new JobActivationRequest
+            {
+                Type = "t",
+                MaxJobsToActivate = 1,
+                Timeout = 1000,
+            }));
+
+        Assert.True(ex.IsBackpressure);
+        Assert.Equal(1, client.GetBackpressureState().Consecutive);
     }
 
     // ---- 3. Permit gate: must actually resize when the adaptive limit changes ----
@@ -276,6 +379,66 @@ public class HttpSdkExceptionRetryTests
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() => third);
 
         bp.Release();
+        bp.Release();
+    }
+
+    [Fact]
+    public async Task PermitGate_CancelledQueuedWaiter_DoesNotLeakPermit()
+    {
+        // Regression: a waiter cancelled while queued must never be granted a permit
+        // later. With a cap of one, an abandoned grant is never returned and would
+        // block every subsequent non-exempt acquisition indefinitely.
+        var bp = new BackpressureManager(
+            new BackpressureConfig { InitialMax = 1 },
+            NullLogger.Instance,
+            TimeProvider.System);
+
+        await bp.AcquireAsync(); // holds the only permit
+
+        using var cts = new CancellationTokenSource();
+        var queued = bp.AcquireAsync(cts.Token);
+        cts.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => queued);
+
+        bp.Release(); // frees the holder's permit; must NOT hand it to the cancelled waiter
+
+        using var reacquireCts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+        await bp.AcquireAsync(reacquireCts.Token); // would hang forever if the permit leaked
+        bp.Release();
+    }
+
+    [Fact]
+    public async Task PermitGate_GrantWinningCancellationRace_IsNotLeaked()
+    {
+        // Race variant: the permit is granted at the same moment the caller's token
+        // fires. The caller observes cancellation, but the granted permit must be
+        // recycled — the next acquisition has to succeed.
+        var bp = new BackpressureManager(
+            new BackpressureConfig { InitialMax = 1 },
+            NullLogger.Instance,
+            TimeProvider.System);
+
+        await bp.AcquireAsync(); // holds the only permit
+
+        using var cts = new CancellationTokenSource();
+        var queued = bp.AcquireAsync(cts.Token);
+
+        bp.Release(); // grant the queued waiter
+        cts.Cancel(); // cancel immediately after the grant
+
+        try
+        {
+            await queued; // grant won the race — the waiter holds the permit now
+            bp.Release(); // so it must be returned here
+        }
+        catch (OperationCanceledException)
+        {
+            // Cancellation won the observation race: the gate must have recycled the
+            // permit internally instead of leaking it.
+        }
+
+        using var reacquireCts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+        await bp.AcquireAsync(reacquireCts.Token); // would hang forever if the permit leaked
         bp.Release();
     }
 
@@ -394,6 +557,167 @@ public class HttpSdkExceptionRetryTests
             await worker.StopAsync();
             await worker.DisposeAsync();
         }
+    }
+
+    [Fact]
+    public async Task JobWorker_Plain503Outage_LogsError_NotQuietBackoff()
+    {
+        // A 503 without a RESOURCE_EXHAUSTED marker is an ordinary outage, not the
+        // broker shedding load: the worker must keep it on the error path (error-level
+        // log) and must not feed the backpressure manager.
+        const string plain503 = """{"title":"SERVICE_UNAVAILABLE","status":503,"detail":"upstream restarting"}""";
+        var handler = new MockHttpMessageHandler();
+        var loggerFactory = new CapturingLoggerFactory();
+        using var client = CreateClient(handler, new Dictionary<string, string>
+        {
+            ["CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS"] = "1",
+        });
+        var config = new JobWorkerConfig
+        {
+            JobType = "t",
+            JobTimeoutMs = 1000,
+            MaxConcurrentJobs = 1,
+            PollIntervalMs = 25,
+            AutoStart = false,
+        };
+        var worker = new JobWorker(
+            client,
+            config,
+            (job, ct) => Task.FromResult<object?>(null),
+            loggerFactory,
+            client._jsonOptions,
+            TimeProvider.System,
+            CamundaRandomSource.Live);
+
+        try
+        {
+            handler.Enqueue(HttpStatusCode.ServiceUnavailable, plain503);
+            worker.Start();
+
+            // Give the poll loop a bounded window to process the failure.
+            var deadline = DateTime.UtcNow + TimeSpan.FromSeconds(5);
+            while (!loggerFactory.Entries.Any(e => e.Level == Microsoft.Extensions.Logging.LogLevel.Error)
+                   && DateTime.UtcNow < deadline)
+                await Task.Delay(10);
+
+            Assert.Contains(loggerFactory.Entries,
+                e => e.Level == Microsoft.Extensions.Logging.LogLevel.Error);
+            Assert.Equal(0, client.GetBackpressureState().Consecutive);
+        }
+        finally
+        {
+            await worker.StopAsync();
+            await worker.DisposeAsync();
+        }
+    }
+
+    // ---- 5. Multipart uploads: the body must survive across retry attempts ----
+
+    [Fact]
+    public async Task SendMultipartAsync_ReusedContentAcrossAttempts_RemainsSendable()
+    {
+        // Regression: InvokeWithRetryAsync re-invokes the multipart delegate with the
+        // SAME caller-owned content on a retry. The first attempt's request disposal
+        // (the mock disposes each request, as HttpClient does) must not destroy that
+        // content — the retried attempt has to send the same bytes again.
+        var handler = new MockHttpMessageHandler();
+        using var client = CreateClient(handler);
+
+        handler.Enqueue(HttpStatusCode.ServiceUnavailable, ResourceExhausted503Body);
+        handler.Enqueue(HttpStatusCode.OK, """{"deployments":[]}""");
+
+        using var content = new MultipartFormDataContent();
+        content.Add(new StringContent("test"), "resources", "test.bpmn");
+
+        // First attempt fails...
+        await Assert.ThrowsAsync<HttpSdkException>(() =>
+            client.SendMultipartAsync<DeploymentResult>("deployments", content));
+        // ...and the SAME content is still sendable on the retried attempt.
+        var result = await client.SendMultipartAsync<DeploymentResult>("deployments", content);
+
+        Assert.NotNull(result);
+        Assert.Equal(2, handler.Requests.Count);
+    }
+
+    [Fact]
+    public async Task SendMultipartAsync_ReusedContent_SendsIdenticalBodyEachAttempt()
+    {
+        // Stronger variant: capture the body each attempt actually receives and require
+        // the replay to be byte-identical (same parts AND same multipart boundary).
+        var bodies = new List<string>();
+        var handler = new MockHttpMessageHandler();
+        using var client = CreateClient(handler);
+
+        handler.Enqueue(async (request, ctoken) =>
+        {
+            bodies.Add(await request.Content!.ReadAsStringAsync(ctoken));
+            return new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            {
+                Content = new StringContent(ResourceExhausted503Body, System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+        handler.Enqueue(async (request, ctoken) =>
+        {
+            bodies.Add(await request.Content!.ReadAsStringAsync(ctoken));
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"deployments":[]}""", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        using var content = new MultipartFormDataContent();
+        content.Add(new StringContent("test"), "resources", "test.bpmn");
+
+        await Assert.ThrowsAsync<HttpSdkException>(() =>
+            client.SendMultipartAsync<DeploymentResult>("deployments", content));
+        await client.SendMultipartAsync<DeploymentResult>("deployments", content);
+
+        Assert.Equal(2, bodies.Count);
+        Assert.Equal(bodies[0], bodies[1]);
+        Assert.Contains("test", bodies[1]);
+    }
+
+    [Fact]
+    public async Task SendMultipartAsync_Retry_PreservesPartHeaders()
+    {
+        // The replay must carry each part's headers (content type, disposition) onto
+        // every attempt, and the request must stay a real multipart payload.
+        var contentTypes = new List<string?>();
+        var handler = new MockHttpMessageHandler();
+        using var client = CreateClient(handler);
+
+        handler.Enqueue(async (request, ctoken) =>
+        {
+            await request.Content!.ReadAsStringAsync(ctoken);
+            var multipart = Assert.IsAssignableFrom<MultipartContent>(request.Content);
+            contentTypes.Add(multipart.First().Headers.ContentType?.ToString());
+            return new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            {
+                Content = new StringContent(ResourceExhausted503Body, System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+        handler.Enqueue(async (request, ctoken) =>
+        {
+            await request.Content!.ReadAsStringAsync(ctoken);
+            var multipart = Assert.IsAssignableFrom<MultipartContent>(request.Content);
+            contentTypes.Add(multipart.First().Headers.ContentType?.ToString());
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"deployments":[]}""", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+
+        using var content = new MultipartFormDataContent();
+        var part = new StringContent("test");
+        part.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/xml");
+        content.Add(part, "resources", "test.bpmn");
+
+        await Assert.ThrowsAsync<HttpSdkException>(() =>
+            client.SendMultipartAsync<DeploymentResult>("deployments", content));
+        await client.SendMultipartAsync<DeploymentResult>("deployments", content);
+
+        Assert.Equal(2, contentTypes.Count);
+        Assert.All(contentTypes, ct => Assert.Equal("application/xml", ct));
     }
 
     private sealed class CapturingLoggerFactory : Microsoft.Extensions.Logging.ILoggerFactory

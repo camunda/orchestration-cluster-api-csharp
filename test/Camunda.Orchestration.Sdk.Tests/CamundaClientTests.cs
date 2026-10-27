@@ -230,15 +230,24 @@ internal sealed class MockHttpMessageHandler : HttpMessageHandler
     {
         _requests.Add(request);
 
-        if (_responses.Count > 0)
+        try
         {
-            var handler = _responses.Dequeue();
-            return await handler(request, ct);
-        }
+            if (_responses.Count > 0)
+            {
+                var handler = _responses.Dequeue();
+                return await handler(request, ct);
+            }
 
-        return new HttpResponseMessage(HttpStatusCode.NotFound)
+            return new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent("{\"title\":\"Not Found\"}", System.Text.Encoding.UTF8, "application/json"),
+            };
+        }
+        finally
         {
-            Content = new StringContent("{\"title\":\"Not Found\"}", System.Text.Encoding.UTF8, "application/json"),
-        };
+            // HttpClient disposes the request (and with it any multipart body) once the
+            // send completes; mirror that here so tests observe the same lifetime.
+            request.Dispose();
+        }
     }
 }

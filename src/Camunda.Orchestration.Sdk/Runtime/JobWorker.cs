@@ -715,13 +715,15 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     private const string JobLeaseTokenJsonName = "jobLeaseToken";
 
     /// <summary>
-    /// An activation failure counts as backpressure when the server explicitly shed load:
-    /// <see cref="HttpSdkException.IsBackpressure"/> (429, or 503/500 RESOURCE_EXHAUSTED),
-    /// or a transport-level 429/503. Anything else stays on the generic error path.
+    /// An activation failure counts as backpressure only when the server explicitly shed
+    /// load: <see cref="HttpSdkException.IsBackpressure"/> (429, or 503/500
+    /// RESOURCE_EXHAUSTED), or an explicit 429. An ordinary 503/500 outage is retried
+    /// but is not load shedding, so it stays on the generic error path. Transport-level
+    /// failures carry no parsed body, so they fall back to a status-only 429/503 match.
     /// </summary>
     private static bool IsBackpressureRejection(Exception ex) => ex switch
     {
-        HttpSdkException sdkEx => sdkEx.IsBackpressure || sdkEx.Status is 429 or 503,
+        HttpSdkException sdkEx => sdkEx.IsBackpressure || sdkEx.Status == 429,
         HttpRequestException httpEx => httpEx.StatusCode
             is System.Net.HttpStatusCode.TooManyRequests
             or System.Net.HttpStatusCode.ServiceUnavailable,

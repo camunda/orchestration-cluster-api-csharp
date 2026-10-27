@@ -122,10 +122,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
                 ex =>
                 {
                     var decision = HttpRetryExecutor.DefaultClassify(ex);
-                    // Record only signals that will actually be retried; the final,
-                    // non-retried failure is recorded in the catch below so each
-                    // HTTP response feeds the manager exactly once.
-                    if (decision.Retryable && IsBackpressureSignal(ex))
+                    // Record every backpressure response exactly once, here in the
+                    // classifier. The executor invokes this callback for every failed
+                    // attempt — including the final one, before it checks the attempt
+                    // budget and rethrows — so recording here (and nowhere else) feeds
+                    // the manager exactly one signal per HTTP response, even when
+                    // MaxAttempts = 1.
+                    if (IsBackpressureSignal(ex))
                         _bp.RecordBackpressure();
                     return decision;
                 },
@@ -133,14 +136,6 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
 
             _bp.RecordHealthy();
             return result;
-        }
-        catch (Exception ex) when (ex is not OperationCanceledException)
-        {
-            // The final (non-retried) failure never passes through the classifier
-            // callback, so record its backpressure signal here.
-            if (IsBackpressureSignal(ex))
-                _bp.RecordBackpressure();
-            throw;
         }
         finally
         {
@@ -152,13 +147,16 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
     /// <summary>
     /// Whether an exception carries a broker/gateway backpressure signal: HTTP 429,
     /// or a 503/500 the server marked <c>RESOURCE_EXHAUSTED</c> (surfaced as
-    /// <see cref="HttpSdkException.IsBackpressure"/>). Transport-level
-    /// <see cref="HttpRequestException"/>s match on status code; SDK exceptions match
-    /// on the flag computed when the error response was parsed.
+    /// <see cref="HttpSdkException.IsBackpressure"/>). An ordinary 503/500 outage is
+    /// still retried, but it is <em>not</em> load shedding, so it must not shrink the
+    /// adaptive gate: SDK exceptions therefore match only on the parsed
+    /// <see cref="HttpSdkException.IsBackpressure"/> flag or an explicit 429. Transport
+    /// <see cref="HttpRequestException"/>s carry no parsed body, so they fall back to a
+    /// status-only match on 429/503.
     /// </summary>
     private static bool IsBackpressureSignal(Exception ex) => ex switch
     {
-        HttpSdkException sdkEx => sdkEx.IsBackpressure || sdkEx.Status is 429 or 503,
+        HttpSdkException sdkEx => sdkEx.IsBackpressure || sdkEx.Status == 429,
         HttpRequestException httpEx => httpEx.StatusCode
             is HttpStatusCode.TooManyRequests
             or HttpStatusCode.ServiceUnavailable,
@@ -298,7 +296,16 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         if (_logger.IsEnabled(LogLevel.Debug))
             _logger.LogDebug("HTTP POST {Path} (multipart)", path);
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, ResolveRequestUri(path, useRootServer)) { Content = content };
+        // This delegate is re-invoked across retry attempts (see InvokeWithRetryAsync),
+        // always with the SAME caller-owned content. HttpClient disposes a request's
+        // content once the send completes, so attaching the caller's content directly
+        // would destroy it after the first attempt and a retried attempt would fail
+        // reading a disposed multipart body. Send a fresh, replayable copy each attempt
+        // and leave the caller's content intact for the next one.
+        using var request = new HttpRequestMessage(HttpMethod.Post, ResolveRequestUri(path, useRootServer))
+        {
+            Content = await CloneMultipartAsync(content, ct),
+        };
         var response = await _httpClient.SendAsync(request, ct);
 
         if (!response.IsSuccessStatusCode)
@@ -314,6 +321,45 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
 
         var responseContent = await response.Content.ReadAsStringAsync(ct);
         return JsonSerializer.Deserialize<TResponse>(responseContent, _jsonOptions)!;
+    }
+
+    /// <summary>
+    /// Builds a fresh, independently sendable copy of a multipart payload so the caller's
+    /// content survives being sent (and disposed) on each retry attempt. Each part is
+    /// buffered into bytes and its headers copied verbatim; the original boundary is
+    /// reused so the serialized body is byte-identical across attempts. The caller's
+    /// content is only read, never disposed.
+    /// </summary>
+    private static async Task<MultipartFormDataContent> CloneMultipartAsync(
+        MultipartFormDataContent source,
+        CancellationToken ct)
+    {
+        // Reuse the source's boundary so every attempt serializes to the same bytes.
+        var boundary = source.Headers.ContentType?.Parameters
+            .FirstOrDefault(p => string.Equals(p.Name, "boundary", StringComparison.OrdinalIgnoreCase))
+            ?.Value?.Trim('"');
+        var copy = string.IsNullOrEmpty(boundary)
+            ? new MultipartFormDataContent()
+            : new MultipartFormDataContent(boundary);
+
+        foreach (var part in source)
+        {
+            var bytes = await part.ReadAsByteArrayAsync(ct);
+            var clonePart = new ByteArrayContent(bytes);
+            foreach (var header in part.Headers)
+            {
+                // Content-Length is recomputed by ByteArrayContent; copying it would
+                // duplicate the header. All other part headers (Content-Type,
+                // Content-Disposition with name/filename) must be preserved verbatim.
+                if (string.Equals(header.Key, "Content-Length", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                clonePart.Headers.TryAddWithoutValidation(header.Key, header.Value);
+            }
+
+            copy.Add(clonePart);
+        }
+
+        return copy;
     }
 
     /// <summary>

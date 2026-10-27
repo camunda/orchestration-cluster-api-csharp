@@ -60,9 +60,11 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
 
         // Cancellation unqueues the waiter. Queue<T> has no Remove, so a cancelled
         // waiter stays enqueued and is discarded lazily when it reaches the head
-        // (see ReleasePermitLocked). Await inside the lock-free path: if the grant
-        // and the cancellation race, the await below throws only when cancellation
-        // actually won, in which case no permit was consumed.
+        // (see ReleasePermitLocked). WaitAsync(ct) cancels only the wait, not the
+        // source: left untouched, the still-pending source would be granted a permit
+        // by a later release that nobody ever returns — a permit leak that, at a cap
+        // of one, wedges every subsequent non-exempt acquisition. So resolve the
+        // source's fate atomically under _gate below.
         try
         {
             await tcs.Task.WaitAsync(ct);
@@ -71,12 +73,20 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
         {
             lock (_gate)
             {
-                // If the permit was granted before cancellation was observed, the
-                // caller must not leak it: hand it straight to the next waiter.
+                // If the grant won the race (the permit was handed over before
+                // cancellation was observed), the caller must not leak it: hand it
+                // straight to the next waiter. Otherwise cancellation won, so mark
+                // the source cancelled while holding _gate — before any release can
+                // dequeue it — so ReleasePermitLocked's TrySetResult fails and it is
+                // skipped instead of being granted an unreturned permit.
                 if (tcs.Task.IsCompletedSuccessfully)
                 {
                     _inFlight--;
                     ReleasePermitLocked();
+                }
+                else
+                {
+                    tcs.TrySetCanceled(ct);
                 }
             }
 
