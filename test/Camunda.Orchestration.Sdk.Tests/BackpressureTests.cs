@@ -330,4 +330,48 @@ public class BackpressureTests
 
         await Assert.ThrowsAsync<ObjectDisposedException>(async () => await pending);
     }
+
+    // ---- Cancellation cleanup racing Dispose must not throw InvalidOperationException ----
+    // WaitAsync(ct)'s cancellation continuation is scheduled asynchronously
+    // (RunContinuationsAsynchronously), so Dispose() can drain the queue — detaching the
+    // node and faulting its source — before the cancellation handler re-acquires _gate.
+    // The handler then found the source not-successfully-completed and ran an
+    // UNCONDITIONAL _waiters.Remove(node) on the already-detached node, throwing
+    // InvalidOperationException and replacing the intended cancellation exception
+    // (#480 review 5677142565). The removal must be guarded by the node still belonging
+    // to the queue.
+
+    [Fact]
+    public async Task AcquireAsync_CancellationRacingDispose_ThrowsCancellationNotInvalidOperation()
+    {
+        // The race window is narrow, so loop to make the interleaving likely. Each
+        // iteration is independent; any InvalidOperationException from the cancellation
+        // path fails the test. Iteration count is a safety net, not a correctness
+        // signal — the assertion is the deterministic guard.
+        for (var iter = 0; iter < 2000; iter++)
+        {
+            var bp = new BackpressureManager(
+                new BackpressureConfig { InitialMax = 1 },
+                Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance,
+                TimeProvider.System);
+
+            await bp.AcquireAsync(); // hold the only permit so the next acquire must queue
+
+            using var cts = new CancellationTokenSource();
+            var queued = bp.AcquireAsync(cts.Token);
+
+            // Race the waiter's cancellation against disposal of the manager.
+            var cancelTask = Task.Run(() => cts.Cancel());
+            var disposeTask = Task.Run(() => bp.Dispose());
+            await Task.WhenAll(cancelTask, disposeTask);
+
+            // The queued acquisition must observe either its cancellation (the caller's
+            // token) or the disposal fault — but never InvalidOperationException, which
+            // would prove the cancellation handler removed a node Dispose had detached.
+            var ex = await Record.ExceptionAsync(async () => await queued);
+            Assert.True(
+                ex is OperationCanceledException or ObjectDisposedException,
+                $"iter {iter}: expected cancellation/disposal but got {(ex == null ? "no exception" : ex.GetType().Name)}: {ex?.Message}");
+        }
+    }
 }

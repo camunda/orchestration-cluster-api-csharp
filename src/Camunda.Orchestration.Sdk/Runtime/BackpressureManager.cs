@@ -96,8 +96,8 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
                 // If the grant won the race (the permit was handed over before
                 // cancellation was observed), the caller must not leak it: hand it
                 // straight to the next waiter. Otherwise cancellation won, so remove the
-                // node now (it is still queued) and mark the source cancelled, so no
-                // later release can grant it an unreturned permit.
+                // node now and mark the source cancelled, so no later release can grant
+                // it an unreturned permit.
                 if (tcs.Task.IsCompletedSuccessfully)
                 {
                     _inFlight--;
@@ -105,8 +105,19 @@ internal sealed class BackpressureManager : IDisposable, IAsyncDisposable
                 }
                 else
                 {
-                    _waiters.Remove(node!);
-                    tcs.TrySetCanceled(ct);
+                    // WaitAsync(ct)'s cancellation continuation is scheduled
+                    // asynchronously, so Dispose() may already have drained the queue —
+                    // detaching this node and faulting the source — before we re-acquire
+                    // _gate. Removing a node that no longer belongs to the list throws
+                    // InvalidOperationException, which would replace the intended
+                    // cancellation exception (#480 review). Only remove a node that is
+                    // still queued; a detached node has already had its fate resolved
+                    // (faulted by Dispose), so there is nothing to clean up.
+                    if (node!.List == _waiters)
+                    {
+                        _waiters.Remove(node);
+                        tcs.TrySetCanceled(ct);
+                    }
                 }
             }
 
