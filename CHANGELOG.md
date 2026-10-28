@@ -1,3 +1,10 @@
+# [11.0.0-alpha.6](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.5...v11.0.0-alpha.6) (2026-10-28)
+
+
+### Bug Fixes
+
+* refresh public API baseline for upstream spec drift ([#483](https://github.com/camunda/orchestration-cluster-api-csharp/issues/483)) ([fdac496](https://github.com/camunda/orchestration-cluster-api-csharp/commit/fdac49672736f8fc6bb03b5342cc43212a80e4ae))
+
 # [11.0.0-alpha.5](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.4...v11.0.0-alpha.5) (2026-10-28)
 
 
