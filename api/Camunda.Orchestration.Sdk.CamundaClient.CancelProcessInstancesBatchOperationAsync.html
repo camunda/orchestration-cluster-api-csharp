@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstancesBatchOperationAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync*" class="text-break">
-Method CancelProcessInstancesBatchOperationAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L909"><i class="bi bi-code-slash"></i></a>
+Method CancelProcessInstancesBatchOperationAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L908"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,16 +121,15 @@ Method CancelProcessInstancesBatchOperationAsync  <a class="header-action link-s
 
 <h3 id="Camunda_Orchestration_Sdk_CamundaClient_CancelProcessInstancesBatchOperationAsync_Camunda_Orchestration_Sdk_ProcessInstanceCancellationBatchOperationRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.CancelProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceCancellationBatchOperationRequest,System.Threading.CancellationToken)">
   CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L909"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L908"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Cancel process instances (batch)
 Cancels multiple active or suspended process instances.
 Only ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled
-together with their root instance. The given filter only narrows the batch, except for
-parentProcessInstanceKey: a top-level filter is ignored, and an <code>$or</code> branch on it matches
-nothing. Other <code>state</code> operators (<code>$neq</code>, <code>$notIn</code>, <code>$exists</code>, <code>$like</code>) are applied as given
-and are not validated.
+together with their root instance. The given filter only narrows the batch, so a filter on
+parentProcessInstanceKey matches no instances. Other <code>state</code> operators (<code>$neq</code>, <code>$notIn</code>,
+<code>$exists</code>, <code>$like</code>) are applied as given and are not validated.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
 </div>
 <div class="markdown level1 conceptual"></div>
@@ -190,7 +189,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L909" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L908" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -3835,6 +3835,30 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter
   fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter
   nameWithType: AdvancedProtectionModeFilter
+- uid: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Eq.html#Camunda_Orchestration_Sdk_AdvancedProtectionModeFilter_Eq
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Eq
+  nameWithType: AdvancedProtectionModeFilter.Eq
+- uid: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Eq
+  fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Eq
+  nameWithType: AdvancedProtectionModeFilter.Eq
+- uid: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Exists.html#Camunda_Orchestration_Sdk_AdvancedProtectionModeFilter_Exists
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Exists
+  nameWithType: AdvancedProtectionModeFilter.Exists
+- uid: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Exists
+  fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Exists
+  nameWithType: AdvancedProtectionModeFilter.Exists
 - uid: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.In
   name: In
   href: api/Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.In.html#Camunda_Orchestration_Sdk_AdvancedProtectionModeFilter_In
@@ -3847,6 +3871,30 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.In
   fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.In
   nameWithType: AdvancedProtectionModeFilter.In
+- uid: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Neq.html#Camunda_Orchestration_Sdk_AdvancedProtectionModeFilter_Neq
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Neq
+  nameWithType: AdvancedProtectionModeFilter.Neq
+- uid: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Neq
+  fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.Neq
+  nameWithType: AdvancedProtectionModeFilter.Neq
+- uid: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.NotIn
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.NotIn.html#Camunda_Orchestration_Sdk_AdvancedProtectionModeFilter_NotIn
+  commentId: P:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.NotIn
+  fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.NotIn
+  nameWithType: AdvancedProtectionModeFilter.NotIn
+- uid: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.NotIn*
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.NotIn.html
+  commentId: Overload:Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.NotIn
+  fullName: Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter.NotIn
+  nameWithType: AdvancedProtectionModeFilter.NotIn
 - uid: Camunda.Orchestration.Sdk.AdvancedResourceKeyFilter
   name: AdvancedResourceKeyFilter
   href: api/Camunda.Orchestration.Sdk.AdvancedResourceKeyFilter.html
@@ -23629,6 +23677,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.State
   fullName: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.State
   nameWithType: DecisionInstanceGetQueryResult.State
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.StorageOrdinal
+  name: StorageOrdinal
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.StorageOrdinal.html#Camunda_Orchestration_Sdk_DecisionInstanceGetQueryResult_StorageOrdinal
+  commentId: P:Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.StorageOrdinal
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.StorageOrdinal
+  nameWithType: DecisionInstanceGetQueryResult.StorageOrdinal
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.StorageOrdinal*
+  name: StorageOrdinal
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.StorageOrdinal.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.StorageOrdinal
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.StorageOrdinal
+  nameWithType: DecisionInstanceGetQueryResult.StorageOrdinal
 - uid: Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.TenantId
   name: TenantId
   href: api/Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult.TenantId.html#Camunda_Orchestration_Sdk_DecisionInstanceGetQueryResult_TenantId
@@ -23911,6 +23971,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceResult.State
   fullName: Camunda.Orchestration.Sdk.DecisionInstanceResult.State
   nameWithType: DecisionInstanceResult.State
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceResult.StorageOrdinal
+  name: StorageOrdinal
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceResult.StorageOrdinal.html#Camunda_Orchestration_Sdk_DecisionInstanceResult_StorageOrdinal
+  commentId: P:Camunda.Orchestration.Sdk.DecisionInstanceResult.StorageOrdinal
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceResult.StorageOrdinal
+  nameWithType: DecisionInstanceResult.StorageOrdinal
+- uid: Camunda.Orchestration.Sdk.DecisionInstanceResult.StorageOrdinal*
+  name: StorageOrdinal
+  href: api/Camunda.Orchestration.Sdk.DecisionInstanceResult.StorageOrdinal.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DecisionInstanceResult.StorageOrdinal
+  fullName: Camunda.Orchestration.Sdk.DecisionInstanceResult.StorageOrdinal
+  nameWithType: DecisionInstanceResult.StorageOrdinal
 - uid: Camunda.Orchestration.Sdk.DecisionInstanceResult.TenantId
   name: TenantId
   href: api/Camunda.Orchestration.Sdk.DecisionInstanceResult.TenantId.html#Camunda_Orchestration_Sdk_DecisionInstanceResult_TenantId
@@ -43165,6 +43237,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.Variables
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.Variables
   nameWithType: ProcessInstanceCreationInstructionBase.Variables
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.VariablesMetadata
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.VariablesMetadata.html#Camunda_Orchestration_Sdk_ProcessInstanceCreationInstructionBase_VariablesMetadata
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.VariablesMetadata
+  nameWithType: ProcessInstanceCreationInstructionBase.VariablesMetadata
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.VariablesMetadata*
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.VariablesMetadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase.VariablesMetadata
+  nameWithType: ProcessInstanceCreationInstructionBase.VariablesMetadata
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById
   name: ProcessInstanceCreationInstructionById
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.html
@@ -43330,6 +43414,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.Variables
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.Variables
   nameWithType: ProcessInstanceCreationInstructionById.Variables
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.VariablesMetadata
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.VariablesMetadata.html#Camunda_Orchestration_Sdk_ProcessInstanceCreationInstructionById_VariablesMetadata
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.VariablesMetadata
+  nameWithType: ProcessInstanceCreationInstructionById.VariablesMetadata
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.VariablesMetadata*
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.VariablesMetadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById.VariablesMetadata
+  nameWithType: ProcessInstanceCreationInstructionById.VariablesMetadata
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey
   name: ProcessInstanceCreationInstructionByKey
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.html
@@ -43495,6 +43591,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.Variables
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.Variables
   nameWithType: ProcessInstanceCreationInstructionByKey.Variables
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.VariablesMetadata
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.VariablesMetadata.html#Camunda_Orchestration_Sdk_ProcessInstanceCreationInstructionByKey_VariablesMetadata
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.VariablesMetadata
+  nameWithType: ProcessInstanceCreationInstructionByKey.VariablesMetadata
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.VariablesMetadata*
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.VariablesMetadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey.VariablesMetadata
+  nameWithType: ProcessInstanceCreationInstructionByKey.VariablesMetadata
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag
   name: ProcessInstanceCreationInstructionByVersionTag
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.html
@@ -43660,6 +43768,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.Variables
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.Variables
   nameWithType: ProcessInstanceCreationInstructionByVersionTag.Variables
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata.html#Camunda_Orchestration_Sdk_ProcessInstanceCreationInstructionByVersionTag_VariablesMetadata
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata
+  nameWithType: ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata*
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata
+  nameWithType: ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceCreationRuntimeInstruction
   name: ProcessInstanceCreationRuntimeInstruction
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceCreationRuntimeInstruction.html
@@ -45202,6 +45322,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceResult.State
   fullName: Camunda.Orchestration.Sdk.ProcessInstanceResult.State
   nameWithType: ProcessInstanceResult.State
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceResult.StorageOrdinal
+  name: StorageOrdinal
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceResult.StorageOrdinal.html#Camunda_Orchestration_Sdk_ProcessInstanceResult_StorageOrdinal
+  commentId: P:Camunda.Orchestration.Sdk.ProcessInstanceResult.StorageOrdinal
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceResult.StorageOrdinal
+  nameWithType: ProcessInstanceResult.StorageOrdinal
+- uid: Camunda.Orchestration.Sdk.ProcessInstanceResult.StorageOrdinal*
+  name: StorageOrdinal
+  href: api/Camunda.Orchestration.Sdk.ProcessInstanceResult.StorageOrdinal.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProcessInstanceResult.StorageOrdinal
+  fullName: Camunda.Orchestration.Sdk.ProcessInstanceResult.StorageOrdinal
+  nameWithType: ProcessInstanceResult.StorageOrdinal
 - uid: Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate
   name: SuspendedDate
   href: api/Camunda.Orchestration.Sdk.ProcessInstanceResult.SuspendedDate.html#Camunda_Orchestration_Sdk_ProcessInstanceResult_SuspendedDate
@@ -45916,6 +46048,18 @@ references:
   commentId: T:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty
   fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty
   nameWithType: ProtectionModeFilterProperty
+- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Eq
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Eq.html#Camunda_Orchestration_Sdk_ProtectionModeFilterProperty_Eq
+  commentId: P:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Eq
+  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Eq
+  nameWithType: ProtectionModeFilterProperty.Eq
+- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Eq*
+  name: Eq
+  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Eq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Eq
+  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Eq
+  nameWithType: ProtectionModeFilterProperty.Eq
 - uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.ExactMatch
   name: ExactMatch
   href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.ExactMatch.html#Camunda_Orchestration_Sdk_ProtectionModeFilterProperty_ExactMatch
@@ -45928,6 +46072,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.ExactMatch
   fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.ExactMatch
   nameWithType: ProtectionModeFilterProperty.ExactMatch
+- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Exists
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Exists.html#Camunda_Orchestration_Sdk_ProtectionModeFilterProperty_Exists
+  commentId: P:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Exists
+  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Exists
+  nameWithType: ProtectionModeFilterProperty.Exists
+- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Exists*
+  name: Exists
+  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Exists.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Exists
+  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Exists
+  nameWithType: ProtectionModeFilterProperty.Exists
 - uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.In
   name: In
   href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.In.html#Camunda_Orchestration_Sdk_ProtectionModeFilterProperty_In
@@ -45940,15 +46096,39 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.In
   fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.In
   nameWithType: ProtectionModeFilterProperty.In
-- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProtectionModeExactMatch)~Camunda.Orchestration.Sdk.ProtectionModeFilterProperty
-  name: implicit operator ProtectionModeFilterProperty(ProtectionModeExactMatch)
-  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ProtectionModeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ProtectionModeExactMatch__Camunda_Orchestration_Sdk_ProtectionModeFilterProperty
-  commentId: M:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProtectionModeExactMatch)~Camunda.Orchestration.Sdk.ProtectionModeFilterProperty
-  name.vb: CType(ProtectionModeExactMatch)
-  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.implicit operator Camunda.Orchestration.Sdk.ProtectionModeFilterProperty(Camunda.Orchestration.Sdk.ProtectionModeExactMatch)
-  fullName.vb: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.CType(Camunda.Orchestration.Sdk.ProtectionModeExactMatch)
-  nameWithType: ProtectionModeFilterProperty.implicit operator ProtectionModeFilterProperty(ProtectionModeExactMatch)
-  nameWithType.vb: ProtectionModeFilterProperty.CType(ProtectionModeExactMatch)
+- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Neq
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Neq.html#Camunda_Orchestration_Sdk_ProtectionModeFilterProperty_Neq
+  commentId: P:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Neq
+  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Neq
+  nameWithType: ProtectionModeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Neq*
+  name: Neq
+  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Neq.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Neq
+  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.Neq
+  nameWithType: ProtectionModeFilterProperty.Neq
+- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.NotIn
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.NotIn.html#Camunda_Orchestration_Sdk_ProtectionModeFilterProperty_NotIn
+  commentId: P:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.NotIn
+  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.NotIn
+  nameWithType: ProtectionModeFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.NotIn*
+  name: NotIn
+  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.NotIn.html
+  commentId: Overload:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.NotIn
+  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.NotIn
+  nameWithType: ProtectionModeFilterProperty.NotIn
+- uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProtectionModeEnum)~Camunda.Orchestration.Sdk.ProtectionModeFilterProperty
+  name: implicit operator ProtectionModeFilterProperty(ProtectionModeEnum)
+  href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.op_Implicit.html#Camunda_Orchestration_Sdk_ProtectionModeFilterProperty_op_Implicit_Camunda_Orchestration_Sdk_ProtectionModeEnum__Camunda_Orchestration_Sdk_ProtectionModeFilterProperty
+  commentId: M:Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.op_Implicit(Camunda.Orchestration.Sdk.ProtectionModeEnum)~Camunda.Orchestration.Sdk.ProtectionModeFilterProperty
+  name.vb: CType(ProtectionModeEnum)
+  fullName: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.implicit operator Camunda.Orchestration.Sdk.ProtectionModeFilterProperty(Camunda.Orchestration.Sdk.ProtectionModeEnum)
+  fullName.vb: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.CType(Camunda.Orchestration.Sdk.ProtectionModeEnum)
+  nameWithType: ProtectionModeFilterProperty.implicit operator ProtectionModeFilterProperty(ProtectionModeEnum)
+  nameWithType.vb: ProtectionModeFilterProperty.CType(ProtectionModeEnum)
 - uid: Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.op_Implicit*
   name: implicit operator
   href: api/Camunda.Orchestration.Sdk.ProtectionModeFilterProperty.op_Implicit.html
@@ -48712,6 +48892,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.SetVariableRequest.Variables
   fullName: Camunda.Orchestration.Sdk.SetVariableRequest.Variables
   nameWithType: SetVariableRequest.Variables
+- uid: Camunda.Orchestration.Sdk.SetVariableRequest.VariablesMetadata
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.SetVariableRequest.VariablesMetadata.html#Camunda_Orchestration_Sdk_SetVariableRequest_VariablesMetadata
+  commentId: P:Camunda.Orchestration.Sdk.SetVariableRequest.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.SetVariableRequest.VariablesMetadata
+  nameWithType: SetVariableRequest.VariablesMetadata
+- uid: Camunda.Orchestration.Sdk.SetVariableRequest.VariablesMetadata*
+  name: VariablesMetadata
+  href: api/Camunda.Orchestration.Sdk.SetVariableRequest.VariablesMetadata.html
+  commentId: Overload:Camunda.Orchestration.Sdk.SetVariableRequest.VariablesMetadata
+  fullName: Camunda.Orchestration.Sdk.SetVariableRequest.VariablesMetadata
+  nameWithType: SetVariableRequest.VariablesMetadata
 - uid: Camunda.Orchestration.Sdk.SignalBroadcastRequest
   name: SignalBroadcastRequest
   href: api/Camunda.Orchestration.Sdk.SignalBroadcastRequest.html

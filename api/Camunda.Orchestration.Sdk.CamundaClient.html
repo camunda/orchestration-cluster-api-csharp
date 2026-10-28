@@ -355,10 +355,9 @@ Cancels a running process instance. As a cancellation includes more than just th
     <dd><p>Cancel process instances (batch)
 Cancels multiple active or suspended process instances.
 Only ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled
-together with their root instance. The given filter only narrows the batch, except for
-parentProcessInstanceKey: a top-level filter is ignored, and an <code>$or</code> branch on it matches
-nothing. Other <code>state</code> operators (<code>$neq</code>, <code>$notIn</code>, <code>$exists</code>, <code>$like</code>) are applied as given
-and are not validated.
+together with their root instance. The given filter only narrows the batch, so a filter on
+parentProcessInstanceKey matches no instances. Other <code>state</code> operators (<code>$neq</code>, <code>$notIn</code>,
+<code>$exists</code>, <code>$like</code>) are applied as given and are not validated.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).</p>
 </dd>
   </dl>
