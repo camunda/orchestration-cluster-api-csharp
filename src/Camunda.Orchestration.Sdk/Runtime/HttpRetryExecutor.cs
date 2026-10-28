@@ -27,6 +27,12 @@ internal static class HttpRetryExecutor
             }
             catch (Exception ex)
             {
+                // A caller-initiated cancellation is not a transient failure: never
+                // classify or retry it, or a cancelled operation would be re-run (and a
+                // still-blocked attempt would hang forever). Rethrow it immediately.
+                if (ct.IsCancellationRequested)
+                    throw;
+
                 lastError = ex;
                 var decision = classifier?.Invoke(ex) ?? DefaultClassify(ex);
 
@@ -63,6 +69,14 @@ internal static class HttpRetryExecutor
                 return new RetryDecision(true, $"http-{(int)status}");
             if (status == HttpStatusCode.InternalServerError)
                 return new RetryDecision(true, "http-500");
+        }
+
+        // Non-2xx responses surface as HttpSdkException (see CamundaClient.BuildHttpException),
+        // not HttpRequestException — without this branch they were never retried (#479).
+        if (ex is HttpSdkException sdkEx)
+        {
+            if (sdkEx.Status is 429 or 503 or 500)
+                return new RetryDecision(true, $"http-{sdkEx.Status}");
         }
 
         if (ex is TaskCanceledException or OperationCanceledException)

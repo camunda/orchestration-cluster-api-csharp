@@ -122,7 +122,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
                 ex =>
                 {
                     var decision = HttpRetryExecutor.DefaultClassify(ex);
-                    if (decision.Retryable && decision.Reason.Contains("429"))
+                    // Record every backpressure response exactly once, here in the
+                    // classifier. The executor invokes this callback for every failed
+                    // attempt — including the final one, before it checks the attempt
+                    // budget and rethrows — so recording here (and nowhere else) feeds
+                    // the manager exactly one signal per HTTP response, even when
+                    // MaxAttempts = 1.
+                    if (IsBackpressureSignal(ex))
                         _bp.RecordBackpressure();
                     return decision;
                 },
@@ -131,18 +137,31 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
             _bp.RecordHealthy();
             return result;
         }
-        catch (Exception ex) when (ex is not OperationCanceledException)
-        {
-            if (ex is HttpRequestException { StatusCode: HttpStatusCode.TooManyRequests })
-                _bp.RecordBackpressure();
-            throw;
-        }
         finally
         {
             if (!exempt)
                 _bp.Release();
         }
     }
+
+    /// <summary>
+    /// Whether an exception carries a broker/gateway backpressure signal: HTTP 429,
+    /// or a 503/500 the server marked <c>RESOURCE_EXHAUSTED</c> (surfaced as
+    /// <see cref="HttpSdkException.IsBackpressure"/>). An ordinary 503/500 outage is
+    /// still retried, but it is <em>not</em> load shedding, so it must not shrink the
+    /// adaptive gate: SDK exceptions therefore match only on the parsed
+    /// <see cref="HttpSdkException.IsBackpressure"/> flag or an explicit 429. Transport
+    /// <see cref="HttpRequestException"/>s carry no parsed body, so they fall back to a
+    /// status-only match on 429/503.
+    /// </summary>
+    private static bool IsBackpressureSignal(Exception ex) => ex switch
+    {
+        HttpSdkException sdkEx => sdkEx.IsBackpressure || sdkEx.Status == 429,
+        HttpRequestException httpEx => httpEx.StatusCode
+            is HttpStatusCode.TooManyRequests
+            or HttpStatusCode.ServiceUnavailable,
+        _ => false,
+    };
 
     /// <summary>
     /// Execute an HTTP request and deserialize the response.
@@ -277,9 +296,17 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         if (_logger.IsEnabled(LogLevel.Debug))
             _logger.LogDebug("HTTP POST {Path} (multipart)", path);
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, ResolveRequestUri(path, useRootServer)) { Content = content };
+        // This delegate is re-invoked across retry attempts (see InvokeWithRetryAsync),
+        // always with the SAME caller-owned content. HttpClient disposes a request's
+        // content once the send completes, so attaching the caller's content directly
+        // would destroy it after the first attempt and a retried attempt would fail
+        // reading a disposed multipart body. Send a fresh, replayable copy each attempt
+        // and leave the caller's content intact for the next one.
+        using var request = new HttpRequestMessage(HttpMethod.Post, ResolveRequestUri(path, useRootServer))
+        {
+            Content = await CloneMultipartAsync(content, ct),
+        };
         var response = await _httpClient.SendAsync(request, ct);
-
         if (!response.IsSuccessStatusCode)
         {
             var errorBody = await response.Content.ReadAsStringAsync(ct);
@@ -293,6 +320,115 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
 
         var responseContent = await response.Content.ReadAsStringAsync(ct);
         return JsonSerializer.Deserialize<TResponse>(responseContent, _jsonOptions)!;
+    }
+
+    /// <summary>
+    /// Builds a fresh, independently sendable copy of a multipart payload so the caller's
+    /// content survives being sent (and disposed) on each retry attempt. The original
+    /// boundary is reused so the serialized body is byte-identical across attempts, and
+    /// the caller's content is only read, never disposed.
+    /// </summary>
+    /// <remarks>
+    /// To avoid buffering large uploads into memory, a part backed by a replayable
+    /// (seekable) stream is cloned as a thin wrapper that re-reads the caller's stream
+    /// from its original position on each attempt and rewinds it afterwards — the stream
+    /// is never buffered wholesale and never disposed (caller ownership is preserved).
+    /// Only a non-seekable part (which cannot be rewound for a retry) is buffered, once,
+    /// into bytes. See https://github.com/camunda/orchestration-cluster-api-csharp/issues/479.
+    /// </remarks>
+    private static async Task<MultipartFormDataContent> CloneMultipartAsync(
+        MultipartFormDataContent source,
+        CancellationToken ct)
+    {
+        // Reuse the source's boundary so every attempt serializes to the same bytes.
+        var boundary = source.Headers.ContentType?.Parameters
+            .FirstOrDefault(p => string.Equals(p.Name, "boundary", StringComparison.OrdinalIgnoreCase))
+            ?.Value?.Trim('"');
+        var copy = string.IsNullOrEmpty(boundary)
+            ? new MultipartFormDataContent()
+            : new MultipartFormDataContent(boundary);
+
+        foreach (var part in source)
+        {
+            var clonePart = await CreateReplayablePartAsync(part, ct);
+            foreach (var header in part.Headers)
+            {
+                // Content-Length is recomputed by the cloned part; copying it would
+                // duplicate the header. All other part headers (Content-Type,
+                // Content-Disposition with name/filename) must be preserved verbatim.
+                if (string.Equals(header.Key, "Content-Length", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                clonePart.Headers.TryAddWithoutValidation(header.Key, header.Value);
+            }
+
+            copy.Add(clonePart);
+        }
+
+        return copy;
+
+        static async Task<HttpContent> CreateReplayablePartAsync(HttpContent part, CancellationToken ct)
+        {
+            // A seekable stream can be replayed from its original position on each
+            // attempt, so wrap it instead of buffering it. ReadAsStreamAsync returns the
+            // underlying stream for StreamContent without buffering; for content that
+            // has already been buffered (e.g. StringContent, ByteArrayContent) it returns
+            // that in-memory buffer, which is likewise cheap to re-read.
+            var stream = await part.ReadAsStreamAsync(ct);
+            if (stream.CanSeek)
+                return new ReplayableStreamContent(stream);
+
+            // A non-seekable stream cannot be rewound for a retry, so buffer it once.
+            return new ByteArrayContent(await part.ReadAsByteArrayAsync(ct));
+        }
+    }
+
+    /// <summary>
+    /// An <see cref="HttpContent"/> that serializes a seekable stream from a captured
+    /// position and rewinds it afterwards, so the same caller-owned stream can be
+    /// re-sent on every retry without being buffered into memory. Disposing this content
+    /// only detaches it from the stream — it never disposes the caller's stream.
+    /// </summary>
+    private sealed class ReplayableStreamContent : HttpContent
+    {
+        private readonly Stream _stream;
+        private readonly long _origin;
+
+        public ReplayableStreamContent(Stream stream)
+        {
+            _stream = stream;
+            _origin = stream.Position;
+        }
+
+        protected override Task SerializeToStreamAsync(Stream target, TransportContext? context)
+            // The tokenless overload is the legacy entry point; forward to the
+            // cancellation-aware one with no token so both paths share one implementation.
+            => SerializeToStreamAsync(target, context, CancellationToken.None);
+
+        protected override async Task SerializeToStreamAsync(
+            Stream target, TransportContext? context, CancellationToken cancellationToken)
+        {
+            _stream.Position = _origin;
+            try
+            {
+                await _stream.CopyToAsync(target, cancellationToken);
+            }
+            finally
+            {
+                _stream.Position = _origin; // leave the caller's stream rewound for reuse
+            }
+        }
+
+        protected override bool TryComputeLength(out long length)
+        {
+            length = _stream.Length - _origin;
+            return true;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            // Detach only — never dispose the caller-owned stream.
+            base.Dispose(disposing);
+        }
     }
 
     /// <summary>

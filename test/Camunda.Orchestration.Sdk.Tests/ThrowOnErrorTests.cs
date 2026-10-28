@@ -81,9 +81,22 @@ public class ThrowOnErrorTests : IDisposable
     [Fact]
     public async Task HttpSdkException_HandlesNonJsonBody()
     {
+        // 500 is retried (#479): exhaust the retry budget with the same response so
+        // the assertion still observes the original status.
+        _handler.Enqueue(HttpStatusCode.InternalServerError, "Gateway Timeout", "text/plain");
+        _handler.Enqueue(HttpStatusCode.InternalServerError, "Gateway Timeout", "text/plain");
         _handler.Enqueue(HttpStatusCode.InternalServerError, "Gateway Timeout", "text/plain");
 
-        using var client = CreateClient();
+        using var client = new CamundaClient(new CamundaOptions
+        {
+            Config = new Dictionary<string, string>
+            {
+                ["CAMUNDA_REST_ADDRESS"] = "https://mock.local",
+                ["CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS"] = "1",
+                ["CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS"] = "5",
+            },
+            HttpMessageHandler = _handler,
+        });
 
         var act = async () => await client.GetTopologyAsync();
         var ex = await Assert.ThrowsAsync<HttpSdkException>(act);
