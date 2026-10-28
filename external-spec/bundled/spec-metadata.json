@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:eba57690d118049a54c27cd2d56cceeb9cd18e26301aa9dae329247a49362651",
+  "specHash": "sha256:99d189158f58b5314c0a45a0a01ea652b72f4c067fc709d113bb75bbc6dcab3f",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -8273,7 +8273,7 @@
         "Process instance"
       ],
       "summary": "Cancel process instances (batch)",
-      "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch\nto the given states. Requesting any state other than ACTIVE or SUSPENDED through the `$eq` or\n`$in` operators is rejected. Other state operators (`$neq`, `$exists`, `$like`) are applied as\ngiven, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter,\nboth ACTIVE and SUSPENDED instances are selected. Any given filter for parentProcessInstanceKey\nis ignored and overridden during this batch operation.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch\nto the given states. Requesting any state other than ACTIVE or SUSPENDED through the `$eq` or\n`$in` operators is rejected. Other state operators (`$neq`, `$exists`, `$like`) are applied as\ngiven, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter,\nboth ACTIVE and SUSPENDED instances are selected. Filters on parentProcessInstanceKey are\npreserved and combined with the root-only restriction. Filters selecting only child instances\ntherefore match no instances, as children are cancelled together with their root instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
