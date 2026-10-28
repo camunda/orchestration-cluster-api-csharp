@@ -1,3 +1,10 @@
+# [11.0.0-alpha.5](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.4...v11.0.0-alpha.5) (2026-10-28)
+
+
+### Bug Fixes
+
+* retry HttpSdkException 429/503/500 and feed adaptive backpressure ([#480](https://github.com/camunda/orchestration-cluster-api-csharp/issues/480)) ([22fb5a3](https://github.com/camunda/orchestration-cluster-api-csharp/commit/22fb5a3447415bf89b5fb0a414a1a658d58f315c)), closes [#479](https://github.com/camunda/orchestration-cluster-api-csharp/issues/479) [#479](https://github.com/camunda/orchestration-cluster-api-csharp/issues/479) [#479](https://github.com/camunda/orchestration-cluster-api-csharp/issues/479)
+
 # [11.0.0-alpha.4](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.3...v11.0.0-alpha.4) (2026-10-25)
 
 
