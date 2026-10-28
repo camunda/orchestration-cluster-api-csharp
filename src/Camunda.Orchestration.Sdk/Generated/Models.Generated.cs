@@ -3537,10 +3537,36 @@ public sealed class AdvancedProcessInstanceStateFilter
 public sealed class AdvancedProtectionModeFilter
 {
     /// <summary>
+    /// Checks if the variable has the provided protection mode.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ProtectionModeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks if the variable does not have the provided protection mode.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ProtectionModeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the variable has any protection mode. Use `false` to match the variables
+    /// that are not protected.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
     /// Checks if the variable has at least one of the provided protection modes.
     /// </summary>
     [JsonPropertyName("$in")]
     public List<ProtectionModeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the variable has none of the provided protection modes.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ProtectionModeEnum>? NotIn { get; set; }
 
 }
 
@@ -12954,6 +12980,14 @@ public sealed class DecisionInstanceGetQueryResult
     public DecisionInstanceStateEnum State { get; set; }
 
     /// <summary>
+    /// The storage ordinal this decision instance&apos;s data belongs to. This is `null` for
+    /// data exported before storage ordinals were introduced in version 8.11.
+    /// 
+    /// </summary>
+    [JsonPropertyName("storageOrdinal")]
+    public int? StorageOrdinal { get; set; }
+
+    /// <summary>
     /// The tenant ID of the decision instance.
     /// </summary>
     [JsonPropertyName("tenantId")]
@@ -13119,6 +13153,14 @@ public sealed class DecisionInstanceResult
     /// </summary>
     [JsonPropertyName("state")]
     public DecisionInstanceStateEnum State { get; set; }
+
+    /// <summary>
+    /// The storage ordinal this decision instance&apos;s data belongs to. This is `null` for
+    /// data exported before storage ordinals were introduced in version 8.11.
+    /// 
+    /// </summary>
+    [JsonPropertyName("storageOrdinal")]
+    public int? StorageOrdinal { get; set; }
 
     /// <summary>
     /// The tenant ID of the decision instance.
@@ -24207,6 +24249,15 @@ public sealed class ProcessInstanceCreationInstructionBase
     public object? Variables { get; set; }
 
     /// <summary>
+    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
+    /// treated, for example to protect its value. A variable without an entry has no
+    /// metadata.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variablesMetadata")]
+    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
+
+    /// <summary>
     /// The tenant id of the process definition.
     /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
     /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
@@ -24314,6 +24365,15 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
+
+    /// <summary>
+    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
+    /// treated, for example to protect its value. A variable without an entry has no
+    /// metadata.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variablesMetadata")]
+    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
 
     /// <summary>
     /// The tenant id of the process definition.
@@ -24430,6 +24490,15 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public object? Variables { get; set; }
 
     /// <summary>
+    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
+    /// treated, for example to protect its value. A variable without an entry has no
+    /// metadata.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variablesMetadata")]
+    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
+
+    /// <summary>
     /// The tenant id of the process definition.
     /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
     /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
@@ -24541,6 +24610,15 @@ public sealed class ProcessInstanceCreationInstructionByVersionTag : ProcessInst
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
+
+    /// <summary>
+    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
+    /// treated, for example to protect its value. A variable without an entry has no
+    /// metadata.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variablesMetadata")]
+    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
 
     /// <summary>
     /// The tenant id of the process definition.
@@ -25659,6 +25737,14 @@ public sealed class ProcessInstanceResult
     [JsonPropertyName("businessId")]
     public BusinessId? BusinessId { get; set; }
 
+    /// <summary>
+    /// The storage ordinal this process instance&apos;s data belongs to. This is `null` for
+    /// data exported before storage ordinals were introduced in version 8.11.
+    /// 
+    /// </summary>
+    [JsonPropertyName("storageOrdinal")]
+    public int? StorageOrdinal { get; set; }
+
 }
 
 /// <summary>
@@ -26074,7 +26160,7 @@ public readonly record struct ProtectionModeExactMatch : global::Camunda.Orchest
 }
 
 /// <summary>
-/// ProtectionModeEnum property with the advanced search capability to match any of several values.
+/// ProtectionModeEnum property with full advanced search capabilities.
 /// </summary>
 [JsonConverter(typeof(ProtectionModeFilterPropertyJsonConverter))]
 public sealed class ProtectionModeFilterProperty
@@ -26083,7 +26169,27 @@ public sealed class ProtectionModeFilterProperty
     /// Matches the value exactly. Serialized as the bare value — the form
     /// servers that predate advanced filtering on this field accept.
     /// </summary>
-    public ProtectionModeExactMatch? ExactMatch { get; set; }
+    public ProtectionModeEnum? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks if the variable has the provided protection mode.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public ProtectionModeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks if the variable does not have the provided protection mode.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public ProtectionModeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the variable has any protection mode. Use `false` to match the variables
+    /// that are not protected.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
 
     /// <summary>
     /// Checks if the variable has at least one of the provided protection modes.
@@ -26091,8 +26197,14 @@ public sealed class ProtectionModeFilterProperty
     [JsonPropertyName("$in")]
     public List<ProtectionModeEnum>? In { get; set; }
 
+    /// <summary>
+    /// Checks if the variable has none of the provided protection modes.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<ProtectionModeEnum>? NotIn { get; set; }
+
     /// <summary>Wraps a bare value as an exact-match filter.</summary>
-    public static implicit operator ProtectionModeFilterProperty(ProtectionModeExactMatch value) => new() { ExactMatch = value };
+    public static implicit operator ProtectionModeFilterProperty(ProtectionModeEnum value) => new() { ExactMatch = value };
 
 }
 
@@ -26103,7 +26215,7 @@ internal sealed class ProtectionModeFilterPropertyJsonConverter : global::System
     {
         if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
         if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
-            return new ProtectionModeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ProtectionModeExactMatch?>(ref reader, options) };
+            return new ProtectionModeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ProtectionModeEnum?>(ref reader, options) };
         var result = new ProtectionModeFilterProperty();
         while (reader.Read())
         {
@@ -26112,7 +26224,11 @@ internal sealed class ProtectionModeFilterPropertyJsonConverter : global::System
             reader.Read();
             switch (prop)
             {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ProtectionModeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ProtectionModeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
                 case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ProtectionModeEnum>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<ProtectionModeEnum>?>(ref reader, options); break;
                 default: reader.Skip(); break;
             }
         }
@@ -26121,7 +26237,7 @@ internal sealed class ProtectionModeFilterPropertyJsonConverter : global::System
 
     public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProtectionModeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
     {
-        var hasAdvanced = value.In is not null;
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
         if (value.ExactMatch is not null && hasAdvanced)
             throw new global::System.Text.Json.JsonException("ProtectionModeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
         if (value.ExactMatch is not null)
@@ -26130,10 +26246,30 @@ internal sealed class ProtectionModeFilterPropertyJsonConverter : global::System
             return;
         }
         writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
         if (value.In is not null)
         {
             writer.WritePropertyName("$in");
             global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
         }
         writer.WriteEndObject();
     }
@@ -27672,6 +27808,15 @@ public sealed class SetVariableRequest
     /// </summary>
     [JsonPropertyName("variables")]
     public object Variables { get; set; } = null!;
+
+    /// <summary>
+    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
+    /// treated, for example to protect its value. A variable without an entry keeps the
+    /// metadata it has, or has none.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variablesMetadata")]
+    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
 
     /// <summary>
     /// If set to `true`, the variables are merged strictly into the local scope (as specified
@@ -30310,9 +30455,7 @@ public sealed class VariableFilter
     public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// The protection applied to the variable. A variable matches when it has at least one of
-    /// the given protection modes.
-    /// 
+    /// The protection modes applied to the variable.
     /// </summary>
     [JsonPropertyName("protectionMode")]
     public ProtectionModeFilterProperty? ProtectionMode { get; set; }
@@ -30560,10 +30703,10 @@ public sealed class VariableResult
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// Metadata of this variable. `null` when the variable has no metadata.
+    /// Metadata of this variable.
     /// </summary>
     [JsonPropertyName("metadata")]
-    public VariableMetadata? Metadata { get; set; }
+    public VariableMetadata Metadata { get; set; } = null!;
 
 }
 
@@ -30616,10 +30759,10 @@ public sealed class VariableResultBase
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// Metadata of this variable. `null` when the variable has no metadata.
+    /// Metadata of this variable.
     /// </summary>
     [JsonPropertyName("metadata")]
-    public VariableMetadata? Metadata { get; set; }
+    public VariableMetadata Metadata { get; set; } = null!;
 
 }
 
@@ -30747,10 +30890,10 @@ public sealed class VariableSearchResult
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
 
     /// <summary>
-    /// Metadata of this variable. `null` when the variable has no metadata.
+    /// Metadata of this variable.
     /// </summary>
     [JsonPropertyName("metadata")]
-    public VariableMetadata? Metadata { get; set; }
+    public VariableMetadata Metadata { get; set; } = null!;
 
 }
 

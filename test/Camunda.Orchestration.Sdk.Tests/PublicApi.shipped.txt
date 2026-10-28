@@ -446,7 +446,11 @@ TYPE Camunda.Orchestration.Sdk.AdvancedProcessInstanceStateFilter : sealed class
 
 TYPE Camunda.Orchestration.Sdk.AdvancedProtectionModeFilter : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProtectionModeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.ProtectionModeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProtectionModeEnum>? In { get; set; } [JsonPropertyName("$in")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProtectionModeEnum>? NotIn { get; set; } [JsonPropertyName("$notIn")]
 
 TYPE Camunda.Orchestration.Sdk.AdvancedResourceKeyFilter : sealed class
   CTOR ()
@@ -2946,6 +2950,7 @@ TYPE Camunda.Orchestration.Sdk.DecisionInstanceGetQueryResult : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.MatchedDecisionRuleItem> MatchedRules { get; set; } [JsonPropertyName("matchedRules")]
   PROP System.DateTimeOffset EvaluationDate { get; set; } [JsonPropertyName("evaluationDate")]
   PROP System.Int32 DecisionDefinitionVersion { get; set; } [JsonPropertyName("decisionDefinitionVersion")]
+  PROP System.Int32? StorageOrdinal { get; set; } [JsonPropertyName("storageOrdinal")]
   PROP System.String DecisionDefinitionName { get; set; } [JsonPropertyName("decisionDefinitionName")]
   PROP System.String Result { get; set; } [JsonPropertyName("result")]
   PROP System.String? EvaluationFailure { get; set; } [JsonPropertyName("evaluationFailure")]
@@ -2976,6 +2981,7 @@ TYPE Camunda.Orchestration.Sdk.DecisionInstanceResult : sealed class
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.DateTimeOffset EvaluationDate { get; set; } [JsonPropertyName("evaluationDate")]
   PROP System.Int32 DecisionDefinitionVersion { get; set; } [JsonPropertyName("decisionDefinitionVersion")]
+  PROP System.Int32? StorageOrdinal { get; set; } [JsonPropertyName("storageOrdinal")]
   PROP System.String DecisionDefinitionName { get; set; } [JsonPropertyName("decisionDefinitionName")]
   PROP System.String Result { get; set; } [JsonPropertyName("result")]
   PROP System.String? EvaluationFailure { get; set; } [JsonPropertyName("evaluationFailure")]
@@ -5664,6 +5670,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionBase : sealed c
   PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Boolean? AwaitCompletion { get; set; } [JsonPropertyName("awaitCompletion")]
+  PROP System.Collections.Generic.Dictionary<System.String,Camunda.Orchestration.Sdk.VariableMetadata>? VariablesMetadata { get; set; } [JsonPropertyName("variablesMetadata")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; } [JsonPropertyName("runtimeInstructions")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; } [JsonPropertyName("startInstructions")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
@@ -5678,6 +5685,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionById : sealed c
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Boolean? AwaitCompletion { get; set; } [JsonPropertyName("awaitCompletion")]
+  PROP System.Collections.Generic.Dictionary<System.String,Camunda.Orchestration.Sdk.VariableMetadata>? VariablesMetadata { get; set; } [JsonPropertyName("variablesMetadata")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; } [JsonPropertyName("runtimeInstructions")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; } [JsonPropertyName("startInstructions")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
@@ -5694,6 +5702,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByKey : sealed 
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Boolean? AwaitCompletion { get; set; } [JsonPropertyName("awaitCompletion")]
+  PROP System.Collections.Generic.Dictionary<System.String,Camunda.Orchestration.Sdk.VariableMetadata>? VariablesMetadata { get; set; } [JsonPropertyName("variablesMetadata")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; } [JsonPropertyName("runtimeInstructions")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; } [JsonPropertyName("startInstructions")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
@@ -5710,6 +5719,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag : 
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Boolean? AwaitCompletion { get; set; } [JsonPropertyName("awaitCompletion")]
+  PROP System.Collections.Generic.Dictionary<System.String,Camunda.Orchestration.Sdk.VariableMetadata>? VariablesMetadata { get; set; } [JsonPropertyName("variablesMetadata")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationRuntimeInstruction>? RuntimeInstructions { get; set; } [JsonPropertyName("runtimeInstructions")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessInstanceCreationStartInstruction>? StartInstructions { get; set; } [JsonPropertyName("startInstructions")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
@@ -5912,6 +5922,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessInstanceResult : sealed class
   PROP System.DateTimeOffset? EndDate { get; set; } [JsonPropertyName("endDate")]
   PROP System.DateTimeOffset? SuspendedDate { get; set; } [JsonPropertyName("suspendedDate")]
   PROP System.Int32 ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
+  PROP System.Int32? StorageOrdinal { get; set; } [JsonPropertyName("storageOrdinal")]
   PROP System.String? ProcessDefinitionName { get; set; } [JsonPropertyName("processDefinitionName")]
   PROP System.String? ProcessDefinitionVersionTag { get; set; } [JsonPropertyName("processDefinitionVersionTag")]
 
@@ -6027,8 +6038,12 @@ TYPE Camunda.Orchestration.Sdk.ProtectionModeExactMatch : struct interfaces=[Cam
 TYPE Camunda.Orchestration.Sdk.ProtectionModeFilterProperty : sealed class
   ATTR JsonConverter Camunda.Orchestration.Sdk.ProtectionModeFilterPropertyJsonConverter
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.ProtectionModeExactMatch? ExactMatch { get; set; }
+  PROP Camunda.Orchestration.Sdk.ProtectionModeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.ProtectionModeEnum? ExactMatch { get; set; }
+  PROP Camunda.Orchestration.Sdk.ProtectionModeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProtectionModeEnum>? In { get; set; } [JsonPropertyName("$in")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProtectionModeEnum>? NotIn { get; set; } [JsonPropertyName("$notIn")]
 
 TYPE Camunda.Orchestration.Sdk.RebalanceCancellationResponse : sealed class
   CTOR ()
@@ -6446,6 +6461,7 @@ TYPE Camunda.Orchestration.Sdk.SetVariableRequest : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.OperationReference? OperationReference { get; set; } [JsonPropertyName("operationReference")]
   PROP System.Boolean? Local { get; set; } [JsonPropertyName("local")]
+  PROP System.Collections.Generic.Dictionary<System.String,Camunda.Orchestration.Sdk.VariableMetadata>? VariablesMetadata { get; set; } [JsonPropertyName("variablesMetadata")]
   PROP System.Object Variables { get; set; } [JsonPropertyName("variables")]
 
 TYPE Camunda.Orchestration.Sdk.SignalBroadcastRequest : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
@@ -7168,7 +7184,7 @@ TYPE Camunda.Orchestration.Sdk.VariableResult : sealed class
   PROP Camunda.Orchestration.Sdk.ScopeKey ScopeKey { get; set; } [JsonPropertyName("scopeKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.VariableKey VariableKey { get; set; } [JsonPropertyName("variableKey")]
-  PROP Camunda.Orchestration.Sdk.VariableMetadata? Metadata { get; set; } [JsonPropertyName("metadata")]
+  PROP Camunda.Orchestration.Sdk.VariableMetadata Metadata { get; set; } [JsonPropertyName("metadata")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
   PROP System.String Value { get; set; } [JsonPropertyName("value")]
 
@@ -7179,7 +7195,7 @@ TYPE Camunda.Orchestration.Sdk.VariableResultBase : sealed class
   PROP Camunda.Orchestration.Sdk.ScopeKey ScopeKey { get; set; } [JsonPropertyName("scopeKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.VariableKey VariableKey { get; set; } [JsonPropertyName("variableKey")]
-  PROP Camunda.Orchestration.Sdk.VariableMetadata? Metadata { get; set; } [JsonPropertyName("metadata")]
+  PROP Camunda.Orchestration.Sdk.VariableMetadata Metadata { get; set; } [JsonPropertyName("metadata")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
 
 TYPE Camunda.Orchestration.Sdk.VariableScopeCollisionException : sealed class base=Camunda.Orchestration.Sdk.TypedVariablesException interfaces=[System.Runtime.Serialization.ISerializable]
@@ -7220,7 +7236,7 @@ TYPE Camunda.Orchestration.Sdk.VariableSearchResult : sealed class
   PROP Camunda.Orchestration.Sdk.ScopeKey ScopeKey { get; set; } [JsonPropertyName("scopeKey")]
   PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.VariableKey VariableKey { get; set; } [JsonPropertyName("variableKey")]
-  PROP Camunda.Orchestration.Sdk.VariableMetadata? Metadata { get; set; } [JsonPropertyName("metadata")]
+  PROP Camunda.Orchestration.Sdk.VariableMetadata Metadata { get; set; } [JsonPropertyName("metadata")]
   PROP System.Boolean IsTruncated { get; set; } [JsonPropertyName("isTruncated")]
   PROP System.String Name { get; set; } [JsonPropertyName("name")]
   PROP System.String Value { get; set; } [JsonPropertyName("value")]

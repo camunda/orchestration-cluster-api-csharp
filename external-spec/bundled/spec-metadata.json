@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:cf24fbbd9f4162529bcf49101695b57668fcac8763500a34454e35d2aeaf02d5",
+  "specHash": "sha256:672b4b5cb1d8f1f8402ab20434ae1f3441df55764e9f65374e91473f96f056e2",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -2181,7 +2181,7 @@
     {
       "name": "ProtectionModeFilterProperty",
       "kind": "union-wrapper",
-      "description": "ProtectionModeEnum property with the advanced search capability to match any of several values.",
+      "description": "ProtectionModeEnum property with full advanced search capabilities.",
       "branches": [
         {
           "branchType": "ref",
@@ -8358,7 +8358,7 @@
         "Process instance"
       ],
       "summary": "Cancel process instances (batch)",
-      "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled\ntogether with their root instance. The given filter only narrows the batch, except for\nparentProcessInstanceKey: a top-level filter is ignored, and an `$or` branch on it matches\nnothing. Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given\nand are not validated.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled\ntogether with their root instance. The given filter only narrows the batch, so a filter on\nparentProcessInstanceKey matches no instances. Other `state` operators (`$neq`, `$notIn`,\n`$exists`, `$like`) are applied as given and are not validated.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
