@@ -13866,7 +13866,7 @@
           }
         ],
         "summary": "Cancel process instances (batch)",
-        "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled\ntogether with their root instance. The given filter only narrows the batch, except for\nparentProcessInstanceKey: a top-level filter is ignored, and an `$or` branch on it matches\nnothing. Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given\nand are not validated.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+        "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled\ntogether with their root instance. The given filter only narrows the batch, so a filter on\nparentProcessInstanceKey matches no instances. Other `state` operators (`$neq`, `$notIn`,\n`$exists`, `$like`) are applied as given and are not validated.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -33849,6 +33849,7 @@
           "rootDecisionDefinitionKey",
           "rootProcessInstanceKey",
           "state",
+          "storageOrdinal",
           "tenantId"
         ],
         "properties": {
@@ -33961,6 +33962,12 @@
           "state": {
             "$ref": "#/components/schemas/DecisionInstanceStateEnum"
           },
+          "storageOrdinal": {
+            "description": "The storage ordinal this decision instance's data belongs to. This is `null` for\ndata exported before storage ordinals were introduced in version 8.11.\n",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "tenantId": {
             "description": "The tenant ID of the decision instance.",
             "allOf": [
@@ -34038,6 +34045,10 @@
           {
             "propertyName": "state",
             "addedInVersion": "8.6"
+          },
+          {
+            "propertyName": "storageOrdinal",
+            "addedInVersion": "8.11"
           },
           {
             "propertyName": "tenantId",
@@ -44489,6 +44500,13 @@
             "type": "object",
             "additionalProperties": true
           },
+          "variablesMetadata": {
+            "description": "Metadata of the variables, keyed by variable name. Use it to set how a variable is\ntreated, for example to protect its value. A variable without an entry has no\nmetadata.\n",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/VariableMetadata"
+            }
+          },
           "tenantId": {
             "description": "The tenant id of the process definition.\nIf multi-tenancy is enabled, provide the tenant id of the process definition to start a\nprocess instance of. If multi-tenancy is disabled, don't provide this parameter.\n",
             "allOf": [
@@ -44552,6 +44570,10 @@
           {
             "propertyName": "businessId",
             "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "variablesMetadata",
+            "addedInVersion": "8.11"
           }
         ]
       },
@@ -45262,6 +45284,7 @@
           "rootProcessInstanceKey",
           "startDate",
           "state",
+          "storageOrdinal",
           "suspendedDate",
           "tags",
           "tenantId"
@@ -45366,6 +45389,12 @@
                 "$ref": "#/components/schemas/BusinessId"
               }
             ]
+          },
+          "storageOrdinal": {
+            "description": "The storage ordinal this process instance's data belongs to. This is `null` for\ndata exported before storage ordinals were introduced in version 8.11.\n",
+            "nullable": true,
+            "type": "integer",
+            "format": "int32"
           }
         },
         "x-properties-added-in-version": [
@@ -45436,6 +45465,10 @@
           {
             "propertyName": "businessId",
             "addedInVersion": "8.9"
+          },
+          {
+            "propertyName": "storageOrdinal",
+            "addedInVersion": "8.11"
           }
         ]
       },
@@ -49160,7 +49193,7 @@
             ]
           },
           "protectionMode": {
-            "description": "The protection applied to the variable. A variable matches when it has at least one of\nthe given protection modes.\n",
+            "description": "The protection modes applied to the variable.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ProtectionModeFilterProperty"
@@ -49296,8 +49329,7 @@
             ]
           },
           "metadata": {
-            "description": "Metadata of this variable. `null` when the variable has no metadata.",
-            "nullable": true,
+            "description": "Metadata of this variable.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/VariableMetadata"
@@ -49340,7 +49372,7 @@
         "description": "The kind of protection applied to a variable value. `REDACT` irrecoverably replaces the\nvalue before it reaches secondary storage.\n"
       },
       "ProtectionModeFilterProperty": {
-        "description": "ProtectionModeEnum property with the advanced search capability to match any of several values.",
+        "description": "ProtectionModeEnum property with full advanced search capabilities.",
         "oneOf": [
           {
             "$ref": "#/components/schemas/ProtectionModeExactMatch"
@@ -49355,8 +49387,35 @@
         "description": "Advanced ProtectionModeEnum filter.",
         "type": "object",
         "properties": {
+          "$eq": {
+            "description": "Checks if the variable has the provided protection mode.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProtectionModeEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks if the variable does not have the provided protection mode.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProtectionModeEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the variable has any protection mode. Use `false` to match the variables\nthat are not protected.\n",
+            "type": "boolean"
+          },
           "$in": {
             "description": "Checks if the variable has at least one of the provided protection modes.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProtectionModeEnum"
+            }
+          },
+          "$notIn": {
+            "description": "Checks if the variable has none of the provided protection modes.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ProtectionModeEnum"
@@ -49394,6 +49453,13 @@
             "additionalProperties": true,
             "type": "object"
           },
+          "variablesMetadata": {
+            "description": "Metadata of the variables, keyed by variable name. Use it to set how a variable is\ntreated, for example to protect its value. A variable without an entry keeps the\nmetadata it has, or has none.\n",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/VariableMetadata"
+            }
+          },
           "local": {
             "description": "If set to `true`, the variables are merged strictly into the local scope (as specified\nby the `elementInstanceKey`). Otherwise, the variables are propagated to upper scopes\nand set at the outermost one.\n\nLet's consider the following example:\nThere are two scopes '1' and '2'. Scope '1' is the parent scope of '2'. The effective\nvariables of the scopes are:\n1 => { \"foo\" : 2 }\n2 => { \"bar\" : 1 }\n\nAn update request with elementInstanceKey as '2', variables { \"foo\": 5 }, and local set\nto `true` leaves scope '1' unchanged and adjusts scope '2' to { \"bar\": 1, \"foo\": 5 }. By\ndefault, with local set to `false`, scope '1' will be { \"foo\": 5 } and scope '2' will be\n{ \"bar\": 1 }.",
             "type": "boolean",
@@ -49418,6 +49484,10 @@
           {
             "propertyName": "operationReference",
             "addedInVersionOverride": "8.6"
+          },
+          {
+            "propertyName": "variablesMetadata",
+            "addedInVersion": "8.11"
           }
         ]
       },
