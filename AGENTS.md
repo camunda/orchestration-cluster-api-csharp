@@ -205,7 +205,7 @@ The release workflow (`.github/workflows/release.yml`) runs on every push to `st
 
 1. Doesn't change `src/Camunda.Orchestration.Sdk/Generated/*` under the **currently pinned** generator dependencies (verify locally — see checklist below).
 2. Lets the next Renovate update of `Microsoft.OpenApi`, `YamlDotNet`, `camunda-schema-bundler` or other generator dependencies succeed where it would otherwise fail. Renovate (`.github/renovate.json`) raises only patch updates on `stable/9` and `stable/10`, and auto-merges minor and patch updates once CI is green, so a generator fix is often what unblocks a stuck stable-branch update. (`stable/9` is held on `camunda-schema-bundler` 1.x.)
-3. Auto-publishes a clean N.x patch with no behavioral change to the SDK.
+3. Publishes a clean N.x patch with no behavioral change to the SDK **only if** a release-triggering commit lands (e.g. the cherry-picked commit is `fix:`/`perf:`). A `chore:` cherry-pick with byte-identical regeneration creates no `fix(gen)` commit, so semantic-release reports "No release required" — that is expected.
 
 ### Backport workflow
 
@@ -224,7 +224,7 @@ The release workflow (`.github/workflows/release.yml`) runs on every push to `st
 
 - Cherry-pick applied cleanly (or document any conflict resolution).
 - The change is generator-class (generator project, runtime, partial-class infrastructure, build scripts) — not generated output and not behavioral.
-- On the backport branch, run the full build `bash scripts/build.sh` (not `build-local.sh`: that reuses whatever spec was last fetched, which may be `main`'s). It builds with that branch's pinned spec and dependencies, checks formatting and runs the unit tests (see the [Pre-push checklist](#pre-push-checklist)).
+- On the backport branch, run `npm ci` first (neither `build.sh` nor `bundle-spec.sh` reinstalls Node dependencies, so a checkout reused from `main` would otherwise bundle with `main`'s `camunda-schema-bundler`). Then run the full build `bash scripts/build.sh` (not `build-local.sh`: that reuses whatever spec was last fetched, which may be `main`'s). It builds with that branch's pinned spec and dependencies, checks formatting and runs the unit tests (see the [Pre-push checklist](#pre-push-checklist)).
 - Confirm `git diff --stat src/Camunda.Orchestration.Sdk/Generated/` is empty (byte-identical output). If it isn't, the change is not generator-only on that branch: say so in the PR rather than committing the drift.
 
 ### Anti-patterns
