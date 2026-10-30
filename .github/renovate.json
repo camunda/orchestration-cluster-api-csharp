@@ -32,8 +32,12 @@
     }
   ],
   "vulnerabilityAlerts": {
+    "description": "Vulnerability fixes are user-facing: commit them as fix(deps) so semantic-release cuts a patch release on main and stable/*, and auto-merge once the required checks are green. Renovate appends this as the last package rule, so it overrides the chore commit type and the automerge/enabled rules above.",
     "enabled": true,
-    "vulnerabilityFixStrategy": "lowest"
+    "vulnerabilityFixStrategy": "lowest",
+    "semanticCommitType": "fix",
+    "automerge": true,
+    "addLabels": ["security"]
   },
   "osvVulnerabilityAlerts": true
 }
