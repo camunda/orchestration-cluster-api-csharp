@@ -852,7 +852,7 @@ TYPE Camunda.Orchestration.Sdk.BatchOperationResponse : sealed class
   PROP Camunda.Orchestration.Sdk.AuditLogActorTypeEnum? ActorType { get; set; } [JsonPropertyName("actorType")]
   PROP Camunda.Orchestration.Sdk.BatchOperationKey BatchOperationKey { get; set; } [JsonPropertyName("batchOperationKey")]
   PROP Camunda.Orchestration.Sdk.BatchOperationStateEnum State { get; set; } [JsonPropertyName("state")]
-  PROP Camunda.Orchestration.Sdk.BatchOperationTypeEnum BatchOperationType { get; set; } [JsonPropertyName("batchOperationType")]
+  PROP Camunda.Orchestration.Sdk.BatchOperationTypeEnum? BatchOperationType { get; set; } [JsonPropertyName("batchOperationType")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.BatchOperationError> Errors { get; set; } [JsonPropertyName("errors")]
   PROP System.DateTimeOffset? EndDate { get; set; } [JsonPropertyName("endDate")]
   PROP System.DateTimeOffset? StartDate { get; set; } [JsonPropertyName("startDate")]
