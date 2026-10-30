@@ -8,7 +8,7 @@ name: Dependency review
 #    are tracked as Dependabot alerts and do not fail unrelated PRs. The static
 #    NuGet graph only sees direct references, so it cannot catch transitive
 #    NuGet packages.
-# 2. nuget-transitive-audit — restores the solution and runs
+# 2. NuGet transitive audit — restores the solution and docs/examples and runs
 #    `dotnet list package --vulnerable --include-transitive`, failing on any
 #    high/critical advisory in the fully resolved graph (direct + transitive).
 #    The base branch is kept clean by this same gate, so any finding here was
@@ -27,6 +27,10 @@ jobs:
   dependency-review:
     name: dependency-review
     runs-on: ubuntu-latest
+    env:
+      # Only high/critical advisories should fail; with TreatWarningsAsErrors,
+      # default (low) NuGet audit level would fail restore on lesser advisories.
+      NuGetAuditLevel: high
     steps:
       - uses: actions/checkout@v6
       - uses: actions/dependency-review-action@v5
@@ -35,12 +39,8 @@ jobs:
           # `unknown` ensures dependencies GitHub cannot classify are still evaluated.
           fail-on-scopes: runtime, development, unknown
 
-  nuget-transitive-audit:
-    name: nuget-transitive-audit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
+      # Both audits run in this single job so the one required status check
+      # (`dependency-review`) blocks merge when either fails.
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
@@ -49,14 +49,17 @@ jobs:
             10.0.x
 
       - name: Restore
-        run: dotnet restore Camunda.Orchestration.Sdk.sln
+        run: |
+          dotnet restore Camunda.Orchestration.Sdk.sln -p:NuGetAuditLevel=high
+          dotnet restore docs/examples/Examples.csproj -p:NuGetAuditLevel=high
 
       - name: Audit resolved NuGet graph (direct + transitive)
         run: |
           set -euo pipefail
-          dotnet list Camunda.Orchestration.Sdk.sln package --vulnerable --include-transitive --format json > vuln.json
-          jq -r '
-            [.projects[]
+          dotnet list Camunda.Orchestration.Sdk.sln package --vulnerable --include-transitive --no-restore --format json > vuln-sln.json
+          dotnet list docs/examples/Examples.csproj package --vulnerable --include-transitive --no-restore --format json > vuln-examples.json
+          jq -rs '
+            [.[].projects[]
               | .path as $p
               | (.frameworks // [])[]
               | ((.topLevelPackages // []) + (.transitivePackages // []))[]
@@ -64,7 +67,7 @@ jobs:
               | (.vulnerabilities // [])[]
               | select(.severity == "High" or .severity == "Critical")
               | "\($p): \($id) \($v) — \(.severity) \(.advisoryurl)"]
-            | unique | .[]' vuln.json > high.txt
+            | unique | .[]' vuln-sln.json vuln-examples.json > high.txt
           if [ -s high.txt ]; then
             echo "::error::High/critical NuGet vulnerabilities found in resolved dependency graph:"
             cat high.txt
