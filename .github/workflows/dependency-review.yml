@@ -1,11 +1,18 @@
 name: Dependency review
 
 # Blocks pull requests that introduce a dependency with a known high or critical
-# vulnerability (runtime or development scope). Uses the GitHub dependency graph,
-# so it covers every ecosystem in the repo without language-specific tooling.
+# vulnerability. Two complementary checks:
 #
-# It gates on the *diff*: vulnerabilities already present on the base branch are
-# tracked as Dependabot alerts and do not fail unrelated PRs.
+# 1. dependency-review-action — gates on the *diff* of the GitHub dependency
+#    graph (all ecosystems). Vulnerabilities already present on the base branch
+#    are tracked as Dependabot alerts and do not fail unrelated PRs. The static
+#    NuGet graph only sees direct references, so it cannot catch transitive
+#    NuGet packages.
+# 2. nuget-transitive-audit — restores the solution and runs
+#    `dotnet list package --vulnerable --include-transitive`, failing on any
+#    high/critical advisory in the fully resolved graph (direct + transitive).
+#    The base branch is kept clean by this same gate, so any finding here was
+#    introduced by the PR (or is a newly published advisory that must be fixed).
 
 on:
   pull_request:
@@ -25,4 +32,42 @@ jobs:
       - uses: actions/dependency-review-action@v5
         with:
           fail-on-severity: high
-          fail-on-scopes: runtime, development
+          # `unknown` ensures dependencies GitHub cannot classify are still evaluated.
+          fail-on-scopes: runtime, development, unknown
+
+  nuget-transitive-audit:
+    name: nuget-transitive-audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Restore
+        run: dotnet restore Camunda.Orchestration.Sdk.sln
+
+      - name: Audit resolved NuGet graph (direct + transitive)
+        run: |
+          set -euo pipefail
+          dotnet list Camunda.Orchestration.Sdk.sln package --vulnerable --include-transitive --format json > vuln.json
+          jq -r '
+            [.projects[]
+              | .path as $p
+              | (.frameworks // [])[]
+              | ((.topLevelPackages // []) + (.transitivePackages // []))[]
+              | .id as $id | .resolvedVersion as $v
+              | (.vulnerabilities // [])[]
+              | select(.severity == "High" or .severity == "Critical")
+              | "\($p): \($id) \($v) — \(.severity) \(.advisoryurl)"]
+            | unique | .[]' vuln.json > high.txt
+          if [ -s high.txt ]; then
+            echo "::error::High/critical NuGet vulnerabilities found in resolved dependency graph:"
+            cat high.txt
+            exit 1
+          fi
+          echo "No high/critical NuGet vulnerabilities (direct or transitive)."
