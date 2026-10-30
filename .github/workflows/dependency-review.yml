@@ -1,0 +1,28 @@
+name: Dependency review
+
+# Blocks pull requests that introduce a dependency with a known high or critical
+# vulnerability (runtime or development scope). Uses the GitHub dependency graph,
+# so it covers every ecosystem in the repo without language-specific tooling.
+#
+# It gates on the *diff*: vulnerabilities already present on the base branch are
+# tracked as Dependabot alerts and do not fail unrelated PRs.
+
+on:
+  pull_request:
+    branches:
+      - main
+      - 'stable/**'
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-review:
+    name: dependency-review
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/dependency-review-action@v5
+        with:
+          fail-on-severity: high
+          fail-on-scopes: runtime, development
