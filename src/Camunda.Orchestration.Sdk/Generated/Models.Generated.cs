@@ -3659,9 +3659,12 @@ public sealed class BatchOperationResponse
 
     /// <summary>
     /// The type of the batch operation.
+    /// This is `null` for batch operations whose type was never recorded in
+    /// secondary storage, such as legacy Operate batch operations.
+    /// 
     /// </summary>
     [JsonPropertyName("batchOperationType")]
-    public BatchOperationTypeEnum BatchOperationType { get; set; }
+    public BatchOperationTypeEnum? BatchOperationType { get; set; }
 
     /// <summary>
     /// The start date of the batch operation.
@@ -4073,7 +4076,7 @@ public sealed class CamundaUserResult
     public string? Email { get; set; }
 
     /// <summary>
-    /// The web components the user is authorized to use.
+    /// The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[&quot;*&quot;]`, regardless of the user&apos;s actual permissions, since access is not restricted in that case.
     /// </summary>
     [JsonPropertyName("authorizedComponents")]
     public List<string> AuthorizedComponents { get; set; } = null!;
@@ -9177,7 +9180,8 @@ public sealed class IncidentFilter
     public IncidentErrorTypeFilterProperty? ErrorType { get; set; }
 
     /// <summary>
-    /// The error message of this incident.
+    /// The error message of this incident. For `$eq`, `$neq`, `$in`, and `$notIn`, matching is case-insensitive and matches if the incident&apos;s error message contains the given value as a phrase, not necessarily the entire error message. `$like` matches on individual words of the error message and does not support multi-word patterns.
+    /// 
     /// </summary>
     [JsonPropertyName("errorMessage")]
     public StringFilterProperty? ErrorMessage { get; set; }
