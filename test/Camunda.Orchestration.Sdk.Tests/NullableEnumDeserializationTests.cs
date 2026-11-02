@@ -62,15 +62,7 @@ public class NullableEnumDeserializationTests
     public void EveryNullableEnumProperty_ExplicitNull_DeserializesToNull(Type type, string prop, string wireName)
     {
         var json = "{\"" + wireName + "\":null}";
-        object? obj;
-        try
-        {
-            obj = JsonSerializer.Deserialize(json, type, s_options);
-        }
-        catch (JsonException)
-        {
-            return; // type has other required members; covered by the targeted tests above
-        }
+        var obj = JsonSerializer.Deserialize(json, type, s_options);
         Assert.NotNull(obj);
         Assert.Null(type.GetProperty(prop)!.GetValue(obj));
     }
