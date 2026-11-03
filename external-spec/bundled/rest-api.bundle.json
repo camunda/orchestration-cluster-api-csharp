@@ -9937,6 +9937,16 @@
               }
             }
           },
+          "409": {
+            "description": "The process instance cannot be canceled, for example because it is already being\nterminated or because it is a child process instance.\nMore details are provided in the response body.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
           "500": {
             "description": "An internal error occurred while processing the request.",
             "content": {
@@ -10736,7 +10746,7 @@
         ],
         "operationId": "deleteResource",
         "summary": "Delete resource",
-        "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition that still\nexists in the runtime state, the definition first drains its running instances and its\nhistory is deleted asynchronously once the definition is fully removed cluster-wide; no batch\noperation is returned in the response. If the process definition has already been removed\nfrom the runtime state and the deletion is later re-triggered with `deleteHistory` set to\n`true`, a batch operation is created immediately and returned in the `batchOperation` field.",
+        "description": "Deletes a deployed resource. This can be a process definition, decision requirements\ndefinition, or form definition deployed using the deploy resources endpoint. Specify the\nresource you want to delete in the `resourceKey` parameter.\n\nOnce a resource has been deleted it cannot be recovered. If the resource needs to be\navailable again, a new deployment of the resource is required.\n\nBy default, only the resource itself is deleted from the runtime state. To also delete the\nhistoric data associated with a resource, set the `deleteHistory` flag in the request body\nto `true`. History deletion is supported for process definitions and decision requirements\ndefinitions; for other resource types (forms, generic resources) the flag is ignored and no\nhistory is deleted.\n\nDeleting a process definition that is already draining is accepted again and changes\nnothing: the definition stays `DRAINING` until its running instances finish. The one repeated\ndeletion that is rejected is one with `deleteHistory` set to `true`, because the history\ncannot be deleted before the drain finishes.\n\nThe two supported types differ in how the history is removed. For a decision requirements\ndefinition the history is deleted asynchronously via a batch operation whose details are\nreturned in the `batchOperation` field of the response. For a process definition that still\nexists in the runtime state, the definition first drains its running instances and its\nhistory is deleted asynchronously once the definition is fully removed cluster-wide; no batch\noperation is returned in the response. If the process definition has already been removed\nfrom the runtime state and the deletion is later re-triggered with `deleteHistory` set to\n`true`, a batch operation is created immediately and returned in the `batchOperation` field.",
         "parameters": [
           {
             "name": "resourceKey",
@@ -10760,7 +10770,7 @@
         },
         "responses": {
           "200": {
-            "description": "The resource is deleted.",
+            "description": "The resource is deleted. For a process definition that is already draining, the repeated deletion is accepted without effect and the definition stays `DRAINING`.",
             "content": {
               "application/json": {
                 "schema": {
@@ -10781,6 +10791,16 @@
           },
           "404": {
             "description": "The resource is not found.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The process definition is still draining, so its history cannot be deleted yet. Retry with `deleteHistory` set to `true` once the definition is fully deleted; the batch operation is then created immediately.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -17333,7 +17353,7 @@
             "nullable": true
           },
           "authorizedComponents": {
-            "description": "The web components the user is authorized to use.",
+            "description": "The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[\"*\"]`, regardless of the user's actual permissions, since access is not restricted in that case.",
             "type": "array",
             "example": [
               "*"
@@ -17925,7 +17945,13 @@
             "$ref": "#/components/schemas/BatchOperationStateEnum"
           },
           "batchOperationType": {
-            "$ref": "#/components/schemas/BatchOperationTypeEnum"
+            "description": "The type of the batch operation.\nThis is `null` for batch operations whose type was never recorded in\nsecondary storage, such as legacy Operate batch operations.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BatchOperationTypeEnum"
+              }
+            ]
           },
           "startDate": {
             "type": "string",
@@ -22674,7 +22700,7 @@
             ]
           },
           "errorMessage": {
-            "description": "The error message of this incident.",
+            "description": "The error message of this incident. For `$eq`, `$neq`, `$in`, and `$notIn`, matching is case-insensitive and matches if the incident's error message contains the given value as a phrase, not necessarily the entire error message. `$like` matches on individual words of the error message and does not support multi-word patterns.\n",
             "allOf": [
               {
                 "$ref": "#/components/schemas/StringFilterProperty"
@@ -29219,7 +29245,7 @@
             "type": "integer",
             "format": "int32",
             "default": 100,
-            "minimum": 1,
+            "minimum": 0,
             "maximum": 10000
           }
         }
@@ -29239,7 +29265,7 @@
             "type": "integer",
             "format": "int32",
             "default": 100,
-            "minimum": 1
+            "minimum": 0
           }
         }
       },
@@ -29263,7 +29289,7 @@
             "type": "integer",
             "format": "int32",
             "default": 100,
-            "minimum": 1,
+            "minimum": 0,
             "maximum": 10000
           }
         }
@@ -29288,7 +29314,7 @@
             "type": "integer",
             "format": "int32",
             "default": 100,
-            "minimum": 1,
+            "minimum": 0,
             "maximum": 10000
           }
         }

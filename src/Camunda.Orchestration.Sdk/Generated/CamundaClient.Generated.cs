@@ -2046,6 +2046,11 @@ public partial class CamundaClient
     /// definitions; for other resource types (forms, generic resources) the flag is ignored and no
     /// history is deleted.
     /// 
+    /// Deleting a process definition that is already draining is accepted again and changes
+    /// nothing: the definition stays `DRAINING` until its running instances finish. The one repeated
+    /// deletion that is rejected is one with `deleteHistory` set to `true`, because the history
+    /// cannot be deleted before the drain finishes.
+    /// 
     /// The two supported types differ in how the history is removed. For a decision requirements
     /// definition the history is deleted asynchronously via a batch operation whose details are
     /// returned in the `batchOperation` field of the response. For a process definition that still
