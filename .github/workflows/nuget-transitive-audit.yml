@@ -1,0 +1,67 @@
+name: NuGet transitive audit
+
+# The static NuGet dependency graph only sees direct references, so the
+# dependency-review gate cannot catch a vulnerable transitive package. This
+# restores the solution and docs/examples and fails on any high/critical
+# advisory in the fully resolved graph (direct + transitive). The base branch is
+# kept clean by this same gate, so a finding here was introduced by the PR (or is
+# a newly published advisory that must be fixed).
+#
+# Unlike dependency-review.yml this must restore (and so evaluate) the PR's
+# projects, which is unsafe under `pull_request_target`, so it runs on
+# `pull_request`. Require `nuget-transitive-audit` alongside `dependency-review`.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+    branches:
+      - main
+      - 'stable/**'
+
+permissions:
+  contents: read
+
+jobs:
+  nuget-transitive-audit:
+    name: nuget-transitive-audit
+    runs-on: ubuntu-latest
+    env:
+      # Only high/critical advisories should fail; with TreatWarningsAsErrors,
+      # default (low) NuGet audit level would fail restore on lesser advisories.
+      NuGetAuditLevel: high
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Restore
+        run: |
+          dotnet restore Camunda.Orchestration.Sdk.sln -p:NuGetAuditLevel=high
+          dotnet restore docs/examples/Examples.csproj -p:NuGetAuditLevel=high
+
+      - name: Audit resolved NuGet graph (direct + transitive)
+        run: |
+          set -euo pipefail
+          dotnet list Camunda.Orchestration.Sdk.sln package --vulnerable --include-transitive --no-restore --format json > vuln-sln.json
+          dotnet list docs/examples/Examples.csproj package --vulnerable --include-transitive --no-restore --format json > vuln-examples.json
+          jq -rs '
+            [.[].projects[]
+              | .path as $p
+              | (.frameworks // [])[]
+              | ((.topLevelPackages // []) + (.transitivePackages // []))[]
+              | .id as $id | .resolvedVersion as $v
+              | (.vulnerabilities // [])[]
+              | select(.severity == "High" or .severity == "Critical")
+              | "\($p): \($id) \($v) — \(.severity) \(.advisoryurl)"]
+            | unique | .[]' vuln-sln.json vuln-examples.json > high.txt
+          if [ -s high.txt ]; then
+            echo "::error::High/critical NuGet vulnerabilities found in resolved dependency graph:"
+            cat high.txt
+            exit 1
+          fi
+          echo "No high/critical NuGet vulnerabilities (direct or transitive)."
