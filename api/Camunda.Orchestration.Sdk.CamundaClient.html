@@ -1285,6 +1285,28 @@ a bare dash as the minus operator: a listed <code>camunda.secrets.db-password</c
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.LookupUserTaskAsync.html#Camunda_Orchestration_Sdk_CamundaClient_LookupUserTaskAsync_Camunda_Orchestration_Sdk_UserTaskKey_Camunda_Orchestration_Sdk_UserTaskLookupRequest_System_Threading_CancellationToken_">LookupUserTaskAsync(UserTaskKey, UserTaskLookupRequest?, CancellationToken)</a></dt>
+    <dd><p>Look up an active user task (alpha)
+Returns an active user task together with the variables visible to it, read from the
+engine's state instead of secondary storage. The task and its variables are read at the
+same point in processing, so they are consistent with each other and with any command the
+engine has already processed, for example the completion of a previous task.</p>
+<p>The response includes the task's lifecycle <code>state</code>. Use it to interpret the returned
+values: while a change to the task is in progress, the task fields and variables are the
+ones from before the change, and <code>state</code> names the pending change. For example, with
+<code>ASSIGNING</code> the returned <code>assignee</code> is still the previous one, because task listeners can
+deny the new assignment; with <code>COMPLETING</code> the variables don't include the ones sent with
+the completion yet.</p>
+<p>Only active tasks can be looked up. The lookup returns 404 when the task doesn't exist,
+when it was already completed or canceled (use the user task search for those), or when it
+belongs to a tenant the caller isn't assigned to. It returns 409 when the task's process
+instance is banned: an instance that hit an unrecoverable error and can only be canceled.</p>
+<p>Each lookup is processed by the engine. Use it when a task is opened, not for polling.</p>
+<p>This endpoint is an alpha feature and may be subject to change
+in future releases.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_MigrateProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ProcessInstanceMigrationInstruction_System_Threading_CancellationToken_">MigrateProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceMigrationInstruction, CancellationToken)</a></dt>
     <dd><p>Migrate process instance
 Migrates a process instance to a new process definition.
