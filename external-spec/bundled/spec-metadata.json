@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:672b4b5cb1d8f1f8402ab20434ae1f3441df55764e9f65374e91473f96f056e2",
+  "specHash": "sha256:5301b35ddb5ad4d3e36e0747702387186ea0b659d33c9968aad3ab0646ff0b97",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -12897,6 +12897,52 @@
       }
     },
     {
+      "operationId": "lookupUserTask",
+      "path": "/user-tasks/{userTaskKey}/lookup",
+      "method": "post",
+      "tags": [
+        "User task"
+      ],
+      "summary": "Look up an active user task (alpha)",
+      "description": "Returns an active user task together with the variables visible to it, read from the\nengine's state instead of secondary storage. The task and its variables are read at the\nsame point in processing, so they are consistent with each other and with any command the\nengine has already processed, for example the completion of a previous task.\n\nThe response includes the task's lifecycle `state`. Use it to interpret the returned\nvalues: while a change to the task is in progress, the task fields and variables are the\nones from before the change, and `state` names the pending change. For example, with\n`ASSIGNING` the returned `assignee` is still the previous one, because task listeners can\ndeny the new assignment; with `COMPLETING` the variables don't include the ones sent with\nthe completion yet.\n\nOnly active tasks can be looked up. The lookup returns 404 when the task doesn't exist,\nwhen it was already completed or canceled (use the user task search for those), or when it\nbelongs to a tenant the caller isn't assigned to. It returns 409 when the task's process\ninstance is banned: an instance that hit an unrecoverable error and can only be canceled.\n\nEach lookup is processed by the engine. Use it when a task is opened, not for polling.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [
+        "userTaskKey"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "user-tasks.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "UserTaskLookupRequest",
+      "successResponseSchemaRef": "UserTaskLookupResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "anyOf": [
+              {
+                "resourceType": "PROCESS_DEFINITION",
+                "permissionType": "READ_USER_TASK"
+              },
+              {
+                "resourceType": "USER_TASK",
+                "permissionType": "READ"
+              }
+            ]
+          }
+        ],
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    {
       "operationId": "searchUserTaskVariables",
       "path": "/user-tasks/{userTaskKey}/variables/search",
       "method": "post",
@@ -13225,7 +13271,7 @@
   "integrity": {
     "totalSemanticKeys": 44,
     "totalUnions": 69,
-    "totalOperations": 246,
+    "totalOperations": 247,
     "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 22

@@ -16083,7 +16083,7 @@ public sealed class ExpressionEvaluationRequest : global::Camunda.Orchestration.
     /// Required when the expression references tenant-scoped cluster variables
     /// </summary>
     [JsonPropertyName("tenantId")]
-    public string? TenantId { get; set; }
+    public TenantId? TenantId { get; set; }
 
     /// <summary>
     /// Key of the process instance or element instance whose variables should be made visible
@@ -16103,7 +16103,7 @@ public sealed class ExpressionEvaluationRequest : global::Camunda.Orchestration.
     public object? Variables { get; set; }
 
     /// <inheritdoc />
-    public void SetDefaultTenantId(string tenantId) { TenantId ??= tenantId; }
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
 
 }
 
@@ -29744,6 +29744,200 @@ public readonly record struct UserTaskKey : global::Camunda.Orchestration.Sdk.IC
 
     /// <inheritdoc />
     public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// UserTaskLookupRequest
+/// </summary>
+public sealed class UserTaskLookupRequest
+{
+    /// <summary>
+    /// The names of the variables to return. If absent or empty, all variables visible to the user task are returned. A name without a matching variable is left out of the response.
+    /// 
+    /// </summary>
+    [JsonPropertyName("fetchVariables")]
+    public List<string>? FetchVariables { get; set; }
+
+}
+
+/// <summary>
+/// UserTaskLookupResult
+/// </summary>
+public sealed class UserTaskLookupResult
+{
+    /// <summary>
+    /// The key of the user task.
+    /// </summary>
+    [JsonPropertyName("userTaskKey")]
+    public UserTaskKey UserTaskKey { get; set; }
+
+    /// <summary>
+    /// The lifecycle state of an active user task. A state ending in `-ING` means a change to the
+    /// task is in progress, for example waiting for task listeners; the task fields still hold
+    /// the values from before the change.
+    /// 
+    /// </summary>
+    [JsonPropertyName("state")]
+    public UserTaskLookupStateEnum State { get; set; }
+
+    /// <summary>
+    /// The element ID of the user task.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId ElementId { get; set; }
+
+    /// <summary>
+    /// The key of the element instance.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the process instance.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The ID of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The key of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The version of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// The unique identifier of the tenant.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// The assignee of the user task. While the task is in the `CREATING` state, the assignee from the process model is not set yet.
+    /// 
+    /// </summary>
+    [JsonPropertyName("assignee")]
+    public string? Assignee { get; set; }
+
+    /// <summary>
+    /// The candidate groups for this user task.
+    /// </summary>
+    [JsonPropertyName("candidateGroups")]
+    public List<string> CandidateGroups { get; set; } = null!;
+
+    /// <summary>
+    /// The candidate users for this user task.
+    /// </summary>
+    [JsonPropertyName("candidateUsers")]
+    public List<string> CandidateUsers { get; set; } = null!;
+
+    /// <summary>
+    /// The due date of the user task.
+    /// </summary>
+    [JsonPropertyName("dueDate")]
+    public DateTimeOffset? DueDate { get; set; }
+
+    /// <summary>
+    /// The follow-up date of the user task.
+    /// </summary>
+    [JsonPropertyName("followUpDate")]
+    public DateTimeOffset? FollowUpDate { get; set; }
+
+    /// <summary>
+    /// The key of the form.
+    /// </summary>
+    [JsonPropertyName("formKey")]
+    public FormKey? FormKey { get; set; }
+
+    /// <summary>
+    /// The external form reference.
+    /// </summary>
+    [JsonPropertyName("externalFormReference")]
+    public string? ExternalFormReference { get; set; }
+
+    /// <summary>
+    /// Custom headers for the user task.
+    /// </summary>
+    [JsonPropertyName("customHeaders")]
+    public Dictionary<string, string> CustomHeaders { get; set; } = null!;
+
+    /// <summary>
+    /// The priority of the user task. The higher the value the higher the priority.
+    /// </summary>
+    [JsonPropertyName("priority")]
+    public int Priority { get; set; }
+
+    /// <summary>
+    /// List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+    /// </summary>
+    [JsonPropertyName("tags")]
+    public List<Tag> Tags { get; set; } = null!;
+
+    /// <summary>
+    /// The business ID of the owning process instance, inherited when the user task was
+    /// created. This is `null` for user tasks whose owning process instance has no business ID.
+    /// 
+    /// </summary>
+    [JsonPropertyName("businessId")]
+    public BusinessId? BusinessId { get; set; }
+
+    /// <summary>
+    /// The creation date of the user task.
+    /// </summary>
+    [JsonPropertyName("creationDate")]
+    public DateTimeOffset CreationDate { get; set; }
+
+    /// <summary>
+    /// The variables visible to the user task, as a JSON object of name and value. If a name exists in several scopes, the value of the innermost scope is returned. Values are never truncated.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variables")]
+    public object Variables { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The lifecycle state of an active user task. A state ending in `-ING` means a change to the
+/// task is in progress, for example waiting for task listeners; the task fields still hold
+/// the values from before the change.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum UserTaskLookupStateEnum
+{
+    [JsonPropertyName("CREATING")]
+    CREATING,
+    [JsonPropertyName("CREATED")]
+    CREATED,
+    [JsonPropertyName("ASSIGNING")]
+    ASSIGNING,
+    [JsonPropertyName("CLAIMING")]
+    CLAIMING,
+    [JsonPropertyName("UPDATING")]
+    UPDATING,
+    [JsonPropertyName("COMPLETING")]
+    COMPLETING,
+    [JsonPropertyName("CANCELING")]
+    CANCELING,
 }
 
 /// <summary>

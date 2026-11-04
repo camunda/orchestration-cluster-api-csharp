@@ -1983,6 +1983,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[Camunda.Orchest
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserCreateResult> CreateUserAsync(Camunda.Orchestration.Sdk.UserRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserResult> GetUserAsync(Camunda.Orchestration.Sdk.Username username, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserSearchResult> SearchUsersAsync(Camunda.Orchestration.Sdk.UserSearchQueryRequest? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserTaskLookupResult> LookupUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskLookupRequest? body = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserTaskResult> GetUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserTaskResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserTaskSearchQueryResult> SearchUserTasksAsync(Camunda.Orchestration.Sdk.UserTaskSearchQuery? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserTaskSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserUpdateResult> UpdateUserAsync(Camunda.Orchestration.Sdk.Username username, Camunda.Orchestration.Sdk.UserUpdateRequest body, System.Threading.CancellationToken ct = null)
@@ -3710,9 +3711,9 @@ TYPE Camunda.Orchestration.Sdk.ExportingStatusResponse : sealed class
 TYPE Camunda.Orchestration.Sdk.ExpressionEvaluationRequest : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ScopeKey? ScopeKey { get; set; } [JsonPropertyName("scopeKey")]
+  PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP System.Object? Variables { get; set; } [JsonPropertyName("variables")]
   PROP System.String Expression { get; set; } [JsonPropertyName("expression")]
-  PROP System.String? TenantId { get; set; } [JsonPropertyName("tenantId")]
   METHOD System.Void SetDefaultTenantId(System.String tenantId)
 
 TYPE Camunda.Orchestration.Sdk.ExpressionEvaluationResult : sealed class
@@ -6952,6 +6953,47 @@ TYPE Camunda.Orchestration.Sdk.UserTaskKey : struct interfaces=[Camunda.Orchestr
   METHOD virtual System.Boolean Equals(System.Object obj)
   METHOD virtual System.Int32 GetHashCode()
   METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.UserTaskLookupRequest : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<System.String>? FetchVariables { get; set; } [JsonPropertyName("fetchVariables")]
+
+TYPE Camunda.Orchestration.Sdk.UserTaskLookupResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BusinessId? BusinessId { get; set; } [JsonPropertyName("businessId")]
+  PROP Camunda.Orchestration.Sdk.ElementId ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKey ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.FormKey? FormKey { get; set; } [JsonPropertyName("formKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP Camunda.Orchestration.Sdk.UserTaskKey UserTaskKey { get; set; } [JsonPropertyName("userTaskKey")]
+  PROP Camunda.Orchestration.Sdk.UserTaskLookupStateEnum State { get; set; } [JsonPropertyName("state")]
+  PROP System.Collections.Generic.Dictionary<System.String,System.String> CustomHeaders { get; set; } [JsonPropertyName("customHeaders")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag> Tags { get; set; } [JsonPropertyName("tags")]
+  PROP System.Collections.Generic.List<System.String> CandidateGroups { get; set; } [JsonPropertyName("candidateGroups")]
+  PROP System.Collections.Generic.List<System.String> CandidateUsers { get; set; } [JsonPropertyName("candidateUsers")]
+  PROP System.DateTimeOffset CreationDate { get; set; } [JsonPropertyName("creationDate")]
+  PROP System.DateTimeOffset? DueDate { get; set; } [JsonPropertyName("dueDate")]
+  PROP System.DateTimeOffset? FollowUpDate { get; set; } [JsonPropertyName("followUpDate")]
+  PROP System.Int32 Priority { get; set; } [JsonPropertyName("priority")]
+  PROP System.Int32 ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
+  PROP System.Object Variables { get; set; } [JsonPropertyName("variables")]
+  PROP System.String? Assignee { get; set; } [JsonPropertyName("assignee")]
+  PROP System.String? ExternalFormReference { get; set; } [JsonPropertyName("externalFormReference")]
+
+TYPE Camunda.Orchestration.Sdk.UserTaskLookupStateEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER CREATING = 0 json="CREATING"
+  MEMBER CREATED = 1 json="CREATED"
+  MEMBER ASSIGNING = 2 json="ASSIGNING"
+  MEMBER CLAIMING = 3 json="CLAIMING"
+  MEMBER UPDATING = 4 json="UPDATING"
+  MEMBER COMPLETING = 5 json="COMPLETING"
+  MEMBER CANCELING = 6 json="CANCELING"
 
 TYPE Camunda.Orchestration.Sdk.UserTaskProperties : sealed class
   CTOR ()
