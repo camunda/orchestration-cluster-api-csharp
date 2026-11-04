@@ -6501,6 +6501,74 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Look up an active user task (alpha)
+    /// Returns an active user task together with the variables visible to it, read from the
+    /// engine&apos;s state instead of secondary storage. The task and its variables are read at the
+    /// same point in processing, so they are consistent with each other and with any command the
+    /// engine has already processed, for example the completion of a previous task.
+    /// 
+    /// The response includes the task&apos;s lifecycle `state`. Use it to interpret the returned
+    /// values: while a change to the task is in progress, the task fields and variables are the
+    /// ones from before the change, and `state` names the pending change. For example, with
+    /// `ASSIGNING` the returned `assignee` is still the previous one, because task listeners can
+    /// deny the new assignment; with `COMPLETING` the variables don&apos;t include the ones sent with
+    /// the completion yet.
+    /// 
+    /// Only active tasks can be looked up. The lookup returns 404 when the task doesn&apos;t exist,
+    /// when it was already completed or canceled (use the user task search for those), or when it
+    /// belongs to a tenant the caller isn&apos;t assigned to. It returns 409 when the task&apos;s process
+    /// instance is banned: an instance that hit an unrecoverable error and can only be canceled.
+    /// 
+    /// Each lookup is processed by the engine. Use it when a task is opened, not for polling.
+    /// 
+    /// This endpoint is an alpha feature and may be subject to change
+    /// in future releases.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: lookupUserTask
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task LookupUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.LookupUserTaskAsync(
+    ///         userTaskKey,
+    ///         new UserTaskLookupRequest
+    ///         {
+    ///             FetchVariables = [&quot;recommendation&quot;, &quot;applicant&quot;],
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;User task {result.UserTaskKey} is {result.State}, assignee: {result.Assignee}&quot;);
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task LookupUserTaskExample(UserTaskKey userTaskKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.LookupUserTaskAsync(
+    ///         userTaskKey,
+    ///         new UserTaskLookupRequest
+    ///         {
+    ///             FetchVariables = [&quot;recommendation&quot;, &quot;applicant&quot;],
+    ///         });
+    /// 
+    ///     Console.WriteLine($&quot;User task {result.UserTaskKey} is {result.State}, assignee: {result.Assignee}&quot;);
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<UserTaskLookupResult> LookupUserTaskAsync(UserTaskKey userTaskKey, UserTaskLookupRequest? body = null, CancellationToken ct = default)
+    {
+        var path = $"/user-tasks/{Uri.EscapeDataString(FormatParam(userTaskKey))}/lookup";
+        return await InvokeWithRetryAsync(() => SendAsync<UserTaskLookupResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "lookupUserTask", false, ct);
+    }
+
+    /// <summary>
     /// Migrate process instance
     /// Migrates a process instance to a new process definition.
     /// This request can contain multiple mapping instructions to define mapping between the active

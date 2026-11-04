@@ -1542,6 +1542,13 @@
       "label": "Search user task effective variables"
     }
   ],
+  "lookupUserTask": [
+    {
+      "file": "UserTask.cs",
+      "region": "LookupUserTask",
+      "label": "Look up an active user task"
+    }
+  ],
   "resolveSecrets": [
     {
       "file": "Secret.cs",
