@@ -1,3 +1,10 @@
+## [9.2.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.2.2...v9.2.3) (2026-11-04)
+
+
+### Bug Fixes
+
+* make BatchOperationType nullable on batch operation responses ([#489](https://github.com/camunda/orchestration-cluster-api-csharp/issues/489)) ([7c9a000](https://github.com/camunda/orchestration-cluster-api-csharp/commit/7c9a000e83f3ce2ccc8e49a7fe01ce837dd8ebb2))
+
 ## [9.2.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.2.1...v9.2.2) (2026-09-11)
 
 
