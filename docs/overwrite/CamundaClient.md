@@ -1283,6 +1283,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.LookupUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey,Camunda.Orchestration.Sdk.UserTaskLookupRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/UserTask.cs#LookupUserTask)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.MigrateProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey,Camunda.Orchestration.Sdk.ProcessInstanceMigrationInstruction,System.Threading.CancellationToken)
 example:
 - *content
