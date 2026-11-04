@@ -1,3 +1,10 @@
+# [11.0.0-alpha.7](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.6...v11.0.0-alpha.7) (2026-11-04)
+
+
+### Features
+
+* support lookupUserTask and typed expression tenantId ([#493](https://github.com/camunda/orchestration-cluster-api-csharp/issues/493)) ([605e8ef](https://github.com/camunda/orchestration-cluster-api-csharp/commit/605e8ef7a36c6abe2ebfcc05850c795afe923753)), closes [camunda/camunda#67949](https://github.com/camunda/camunda/issues/67949)
+
 # [11.0.0-alpha.6](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.5...v11.0.0-alpha.6) (2026-10-28)
 
 
