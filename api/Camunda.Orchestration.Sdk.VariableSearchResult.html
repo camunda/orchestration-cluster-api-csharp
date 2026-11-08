@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_VariableSearchResult" data-uid="Camunda.Orchestration.Sdk.VariableSearchResult" class="text-break">
-Class VariableSearchResult  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L31029"><i class="bi bi-code-slash"></i></a>
+Class VariableSearchResult  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L31041"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -197,7 +197,12 @@ directly defined.</p>
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableSearchResult.Value.html#Camunda_Orchestration_Sdk_VariableSearchResult_Value">Value</a></dt>
-    <dd><p>Value of this variable. Can be truncated.</p>
+    <dd><p>The value of this variable. Can be truncated or redacted.</p>
+<p>If the value is truncated, <code>isTruncated</code> is <code>true</code> and the value contains only the
+beginning of the full value.</p>
+<p>If the variable is redacted, the value is set to <code>&quot;&quot;</code> instead of the real value. Check
+<code>metadata.protectionModes</code> before you use the value: it contains <code>REDACT</code> for a redacted
+variable.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -211,7 +216,7 @@ directly defined.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L31029" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L31041" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -35959,6 +35959,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.JobSearchResult.State
   fullName: Camunda.Orchestration.Sdk.JobSearchResult.State
   nameWithType: JobSearchResult.State
+- uid: Camunda.Orchestration.Sdk.JobSearchResult.StorageOrdinal
+  name: StorageOrdinal
+  href: api/Camunda.Orchestration.Sdk.JobSearchResult.StorageOrdinal.html#Camunda_Orchestration_Sdk_JobSearchResult_StorageOrdinal
+  commentId: P:Camunda.Orchestration.Sdk.JobSearchResult.StorageOrdinal
+  fullName: Camunda.Orchestration.Sdk.JobSearchResult.StorageOrdinal
+  nameWithType: JobSearchResult.StorageOrdinal
+- uid: Camunda.Orchestration.Sdk.JobSearchResult.StorageOrdinal*
+  name: StorageOrdinal
+  href: api/Camunda.Orchestration.Sdk.JobSearchResult.StorageOrdinal.html
+  commentId: Overload:Camunda.Orchestration.Sdk.JobSearchResult.StorageOrdinal
+  fullName: Camunda.Orchestration.Sdk.JobSearchResult.StorageOrdinal
+  nameWithType: JobSearchResult.StorageOrdinal
 - uid: Camunda.Orchestration.Sdk.JobSearchResult.TenantId
   name: TenantId
   href: api/Camunda.Orchestration.Sdk.JobSearchResult.TenantId.html#Camunda_Orchestration_Sdk_JobSearchResult_TenantId
