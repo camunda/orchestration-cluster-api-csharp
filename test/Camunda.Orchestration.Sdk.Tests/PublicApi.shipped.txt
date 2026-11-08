@@ -4652,6 +4652,7 @@ TYPE Camunda.Orchestration.Sdk.JobSearchResult : sealed class
   PROP System.DateTimeOffset? LastUpdateTime { get; set; } [JsonPropertyName("lastUpdateTime")]
   PROP System.Int32 Priority { get; set; } [JsonPropertyName("priority")]
   PROP System.Int32 Retries { get; set; } [JsonPropertyName("retries")]
+  PROP System.Int32? StorageOrdinal { get; set; } [JsonPropertyName("storageOrdinal")]
   PROP System.String Type { get; set; } [JsonPropertyName("type")]
   PROP System.String Worker { get; set; } [JsonPropertyName("worker")]
   PROP System.String? DeniedReason { get; set; } [JsonPropertyName("deniedReason")]

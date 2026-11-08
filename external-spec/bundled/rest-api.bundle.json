@@ -28976,7 +28976,7 @@
         ],
         "properties": {
           "authorizationsEnabled": {
-            "description": "Indicates whether authorization checks are enabled for the cluster.",
+            "description": "Indicates whether authorization checks are enabled for the physical tenant of the request.",
             "type": "boolean"
           }
         }
@@ -40522,6 +40522,7 @@
           "retries",
           "rootProcessInstanceKey",
           "state",
+          "storageOrdinal",
           "tenantId",
           "type",
           "worker"
@@ -40645,6 +40646,12 @@
               }
             ]
           },
+          "storageOrdinal": {
+            "description": "The storage ordinal this job's data belongs to. This is `null` for\ndata exported before storage ordinals were introduced in version 8.11.\n",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "retries": {
             "description": "The amount of retries left to this job.",
             "type": "integer",
@@ -40702,6 +40709,10 @@
           {
             "propertyName": "businessId",
             "addedInVersion": "8.10"
+          },
+          {
+            "propertyName": "storageOrdinal",
+            "addedInVersion": "8.11"
           }
         ]
       },
@@ -44649,7 +44660,7 @@
             "additionalProperties": true
           },
           "variablesMetadata": {
-            "description": "Metadata of the variables, keyed by variable name. Use it to set how a variable is\ntreated, for example to protect its value. A variable without an entry has no\nmetadata.\n",
+            "description": "Metadata of the variables, keyed by variable name. Use it to set how a variable is\ntreated, for example to protect its value. Each key must be the name of a variable in\n`variables`. A variable without an entry has no metadata.\n",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/VariableMetadata"
@@ -49598,7 +49609,7 @@
         ],
         "properties": {
           "value": {
-            "description": "Value of this variable. Can be truncated.",
+            "description": "The value of this variable. Can be truncated or redacted.\n\nIf the value is truncated, `isTruncated` is `true` and the value contains only the\nbeginning of the full value.\n\nIf the variable is redacted, the value is set to `\"\"` instead of the real value. Check\n`metadata.protectionModes` before you use the value: it contains `REDACT` for a redacted\nvariable.\n",
             "type": "string"
           },
           "isTruncated": {
@@ -49620,7 +49631,7 @@
         ],
         "properties": {
           "value": {
-            "description": "Full value of this variable.",
+            "description": "The full value of this variable, or `\"\"` if the variable is redacted.\n\nCheck `metadata.protectionModes` before you use the value: it contains `REDACT` for a\nredacted variable.\n",
             "type": "string"
           }
         }
@@ -49809,7 +49820,7 @@
             "type": "object"
           },
           "variablesMetadata": {
-            "description": "Metadata of the variables, keyed by variable name. Use it to set how a variable is\ntreated, for example to protect its value. A variable without an entry keeps the\nmetadata it has, or has none.\n",
+            "description": "Metadata of the variables, keyed by variable name. Use it to set how a variable is\ntreated, for example to protect its value. Each key must be the name of a variable in\n`variables`. A variable without an entry keeps the metadata it has, or has none.\n",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/VariableMetadata"

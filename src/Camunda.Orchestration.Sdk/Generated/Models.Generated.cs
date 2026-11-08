@@ -20085,6 +20085,14 @@ public sealed class JobSearchResult
     public BusinessId? BusinessId { get; set; }
 
     /// <summary>
+    /// The storage ordinal this job&apos;s data belongs to. This is `null` for
+    /// data exported before storage ordinals were introduced in version 8.11.
+    /// 
+    /// </summary>
+    [JsonPropertyName("storageOrdinal")]
+    public int? StorageOrdinal { get; set; }
+
+    /// <summary>
     /// The amount of retries left to this job.
     /// </summary>
     [JsonPropertyName("retries")]
@@ -22516,7 +22524,7 @@ internal sealed class OperationTypeFilterPropertyJsonConverter : global::System.
 public sealed class OwnAuthorizationSearchResult
 {
     /// <summary>
-    /// Indicates whether authorization checks are enabled for the cluster.
+    /// Indicates whether authorization checks are enabled for the physical tenant of the request.
     /// </summary>
     [JsonPropertyName("authorizationsEnabled")]
     public bool AuthorizationsEnabled { get; set; }
@@ -24250,8 +24258,8 @@ public sealed class ProcessInstanceCreationInstructionBase
 
     /// <summary>
     /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. A variable without an entry has no
-    /// metadata.
+    /// treated, for example to protect its value. Each key must be the name of a variable in
+    /// `variables`. A variable without an entry has no metadata.
     /// 
     /// </summary>
     [JsonPropertyName("variablesMetadata")]
@@ -24368,8 +24376,8 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
 
     /// <summary>
     /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. A variable without an entry has no
-    /// metadata.
+    /// treated, for example to protect its value. Each key must be the name of a variable in
+    /// `variables`. A variable without an entry has no metadata.
     /// 
     /// </summary>
     [JsonPropertyName("variablesMetadata")]
@@ -24491,8 +24499,8 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
 
     /// <summary>
     /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. A variable without an entry has no
-    /// metadata.
+    /// treated, for example to protect its value. Each key must be the name of a variable in
+    /// `variables`. A variable without an entry has no metadata.
     /// 
     /// </summary>
     [JsonPropertyName("variablesMetadata")]
@@ -24613,8 +24621,8 @@ public sealed class ProcessInstanceCreationInstructionByVersionTag : ProcessInst
 
     /// <summary>
     /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. A variable without an entry has no
-    /// metadata.
+    /// treated, for example to protect its value. Each key must be the name of a variable in
+    /// `variables`. A variable without an entry has no metadata.
     /// 
     /// </summary>
     [JsonPropertyName("variablesMetadata")]
@@ -27811,8 +27819,8 @@ public sealed class SetVariableRequest
 
     /// <summary>
     /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. A variable without an entry keeps the
-    /// metadata it has, or has none.
+    /// treated, for example to protect its value. Each key must be the name of a variable in
+    /// `variables`. A variable without an entry keeps the metadata it has, or has none.
     /// 
     /// </summary>
     [JsonPropertyName("variablesMetadata")]
@@ -30848,7 +30856,11 @@ public sealed class VariableMetadata
 public sealed class VariableResult
 {
     /// <summary>
-    /// Full value of this variable.
+    /// The full value of this variable, or `&quot;&quot;` if the variable is redacted.
+    /// 
+    /// Check `metadata.protectionModes` before you use the value: it contains `REDACT` for a
+    /// redacted variable.
+    /// 
     /// </summary>
     [JsonPropertyName("value")]
     public string Value { get; set; } = null!;
@@ -31029,7 +31041,15 @@ public sealed class VariableSearchQuerySortRequest
 public sealed class VariableSearchResult
 {
     /// <summary>
-    /// Value of this variable. Can be truncated.
+    /// The value of this variable. Can be truncated or redacted.
+    /// 
+    /// If the value is truncated, `isTruncated` is `true` and the value contains only the
+    /// beginning of the full value.
+    /// 
+    /// If the variable is redacted, the value is set to `&quot;&quot;` instead of the real value. Check
+    /// `metadata.protectionModes` before you use the value: it contains `REDACT` for a redacted
+    /// variable.
+    /// 
     /// </summary>
     [JsonPropertyName("value")]
     public string Value { get; set; } = null!;
