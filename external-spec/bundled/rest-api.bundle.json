@@ -13676,7 +13676,7 @@
           }
         ],
         "summary": "Cancel process instances (batch)",
-        "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch\nto the given states. Requesting any state other than ACTIVE or SUSPENDED through the `$eq` or\n`$in` operators is rejected. Other state operators (`$neq`, `$exists`, `$like`) are applied as\ngiven, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter,\nboth ACTIVE and SUSPENDED instances are selected. Filters on parentProcessInstanceKey are\npreserved and combined with the root-only restriction. Filters selecting only child instances\ntherefore match no instances, as children are cancelled together with their root instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+        "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled\ntogether with their root instance. The given filter only narrows the batch, so a filter on\nparentProcessInstanceKey matches no instances. Other `state` operators (`$neq`, `$notIn`,\n`$exists`, `$like`) are applied as given and are not validated.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -13699,7 +13699,7 @@
             }
           },
           "400": {
-            "description": "The process instance batch operation failed. More details are provided in the response body.\n",
+            "description": "The process instance batch operation failed, for example because the filter requests a top-level `state` other than ACTIVE or SUSPENDED through `$eq` or `$in`. States inside `$or` branches are not validated. More details are provided in the response body.\n",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14196,7 +14196,7 @@
           }
         ],
         "summary": "Resume process instances (batch)",
-        "description": "Resumes multiple suspended process instances.\nAny given filter for state or parentProcessInstanceKey is ignored and overridden, as only\nSUSPENDED process instances can be resumed and resumption does not cascade between parent\nand child instances, so child instances are resumed independently of their parent or root\ninstance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+        "description": "Resumes multiple suspended process instances.\nOnly SUSPENDED process instances are resumed. The given filter only narrows the batch.\nOther `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are\nnot validated. Resumption does not cascade, so child instances are resumed independently of their parent\nor root instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -14219,7 +14219,7 @@
             }
           },
           "400": {
-            "description": "The process instance batch operation failed. More details are provided in the response body.\n",
+            "description": "The process instance batch operation failed, for example because the filter requests a top-level `state` other than SUSPENDED through `$eq` or `$in`. States inside `$or` branches are not validated. More details are provided in the response body.\n",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -14397,7 +14397,7 @@
           }
         ],
         "summary": "Suspend process instances (batch)",
-        "description": "Suspends multiple running process instances.\nAny given filter for state or parentProcessInstanceKey is ignored and overridden, as only\nACTIVE process instances can be suspended and suspension does not cascade between parent\nand child instances, so child instances are suspended independently of their parent or\nroot instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+        "description": "Suspends multiple running process instances.\nOnly ACTIVE process instances are suspended. The given filter only narrows the batch.\nOther `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are\nnot validated. Suspension does not cascade, so child instances are suspended independently of their parent\nor root instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
         "requestBody": {
           "required": true,
           "content": {
@@ -14420,7 +14420,7 @@
             }
           },
           "400": {
-            "description": "The process instance batch operation failed. More details are provided in the response body.\n",
+            "description": "The process instance batch operation failed, for example because the filter requests a top-level `state` other than ACTIVE through `$eq` or `$in`. States inside `$or` branches are not validated. More details are provided in the response body.\n",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -28639,7 +28639,7 @@
         ],
         "properties": {
           "authorizationsEnabled": {
-            "description": "Indicates whether authorization checks are enabled for the cluster.",
+            "description": "Indicates whether authorization checks are enabled for the physical tenant of the request.",
             "type": "boolean"
           }
         }
@@ -38978,8 +38978,7 @@
         "description": "Job type statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "items"
         ],
         "allOf": [
           {
@@ -39081,8 +39080,7 @@
         "description": "Job worker statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "items"
         ],
         "allOf": [
           {
@@ -39182,8 +39180,7 @@
         "description": "Job time-series statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "items"
         ],
         "allOf": [
           {
@@ -39295,8 +39292,7 @@
         "description": "Job error statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "items"
         ],
         "allOf": [
           {

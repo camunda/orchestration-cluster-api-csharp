@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:99d189158f58b5314c0a45a0a01ea652b72f4c067fc709d113bb75bbc6dcab3f",
+  "specHash": "sha256:4f859bb25976a5cb65013e1576979c4f636052de039093f0c258de6752ccc10d",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -8273,7 +8273,7 @@
         "Process instance"
       ],
       "summary": "Cancel process instances (batch)",
-      "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch\nto the given states. Requesting any state other than ACTIVE or SUSPENDED through the `$eq` or\n`$in` operators is rejected. Other state operators (`$neq`, `$exists`, `$like`) are applied as\ngiven, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter,\nboth ACTIVE and SUSPENDED instances are selected. Filters on parentProcessInstanceKey are\npreserved and combined with the root-only restriction. Filters selecting only child instances\ntherefore match no instances, as children are cancelled together with their root instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "description": "Cancels multiple active or suspended process instances.\nOnly ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled\ntogether with their root instance. The given filter only narrows the batch, so a filter on\nparentProcessInstanceKey matches no instances. Other `state` operators (`$neq`, `$notIn`,\n`$exists`, `$like`) are applied as given and are not validated.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -8493,7 +8493,7 @@
         "Process instance"
       ],
       "summary": "Resume process instances (batch)",
-      "description": "Resumes multiple suspended process instances.\nAny given filter for state or parentProcessInstanceKey is ignored and overridden, as only\nSUSPENDED process instances can be resumed and resumption does not cascade between parent\nand child instances, so child instances are resumed independently of their parent or root\ninstance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "description": "Resumes multiple suspended process instances.\nOnly SUSPENDED process instances are resumed. The given filter only narrows the batch.\nOther `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are\nnot validated. Resumption does not cascade, so child instances are resumed independently of their parent\nor root instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -8574,7 +8574,7 @@
         "Process instance"
       ],
       "summary": "Suspend process instances (batch)",
-      "description": "Suspends multiple running process instances.\nAny given filter for state or parentProcessInstanceKey is ignored and overridden, as only\nACTIVE process instances can be suspended and suspension does not cascade between parent\nand child instances, so child instances are suspended independently of their parent or\nroot instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
+      "description": "Suspends multiple running process instances.\nOnly ACTIVE process instances are suspended. The given filter only narrows the batch.\nOther `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are\nnot validated. Suspension does not cascade, so child instances are suspended independently of their parent\nor root instance.\nThis is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
