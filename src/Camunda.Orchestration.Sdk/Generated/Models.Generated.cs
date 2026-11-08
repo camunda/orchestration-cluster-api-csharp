@@ -22411,7 +22411,7 @@ internal sealed class OperationTypeFilterPropertyJsonConverter : global::System.
 public sealed class OwnAuthorizationSearchResult
 {
     /// <summary>
-    /// Indicates whether authorization checks are enabled for the cluster.
+    /// Indicates whether authorization checks are enabled for the physical tenant of the request.
     /// </summary>
     [JsonPropertyName("authorizationsEnabled")]
     public bool AuthorizationsEnabled { get; set; }
