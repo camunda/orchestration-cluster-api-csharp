@@ -23404,8 +23404,7 @@
         "description": "Job type statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "items"
         ],
         "allOf": [
           {
@@ -23507,8 +23506,7 @@
         "description": "Job worker statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "items"
         ],
         "allOf": [
           {
@@ -23608,8 +23606,7 @@
         "description": "Job time-series statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "items"
         ],
         "allOf": [
           {
@@ -23721,8 +23718,7 @@
         "description": "Job error statistics query result.",
         "type": "object",
         "required": [
-          "items",
-          "page"
+          "items"
         ],
         "allOf": [
           {
