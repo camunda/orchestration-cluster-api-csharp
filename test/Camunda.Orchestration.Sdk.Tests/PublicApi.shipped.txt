@@ -1302,6 +1302,20 @@ TYPE Camunda.Orchestration.Sdk.AuthStrategy : enum interfaces=[System.IComparabl
   MEMBER OAuth = 1
   MEMBER Basic = 2
 
+TYPE Camunda.Orchestration.Sdk.AuthenticatedCamundaUserResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.Username Username { get; set; } [JsonPropertyName("username")]
+  PROP System.Boolean CanLogout { get; set; } [JsonPropertyName("canLogout")]
+  PROP System.Boolean IsAnonymous { get; set; } [JsonPropertyName("isAnonymous")]
+  PROP System.Collections.Generic.Dictionary<System.String,System.String> C8Links { get; set; } [JsonPropertyName("c8Links")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.TenantResult> Tenants { get; set; } [JsonPropertyName("tenants")]
+  PROP System.Collections.Generic.List<System.String> AuthorizedComponents { get; set; } [JsonPropertyName("authorizedComponents")]
+  PROP System.Collections.Generic.List<System.String> Groups { get; set; } [JsonPropertyName("groups")]
+  PROP System.Collections.Generic.List<System.String> Roles { get; set; } [JsonPropertyName("roles")]
+  PROP System.String? DisplayName { get; set; } [JsonPropertyName("displayName")]
+  PROP System.String? Email { get; set; } [JsonPropertyName("email")]
+  PROP System.String? SalesPlanType { get; set; } [JsonPropertyName("salesPlanType")]
+
 TYPE Camunda.Orchestration.Sdk.AuthenticationConfigurationResponse : sealed class
   CTOR ()
   PROP System.Boolean CanLogout { get; set; } [JsonPropertyName("canLogout")]
@@ -2077,8 +2091,9 @@ TYPE Camunda.Orchestration.Sdk.CamundaTimeProvider : sealed class base=System.Ti
 
 TYPE Camunda.Orchestration.Sdk.CamundaUserResult : sealed class
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.Username Username { get; set; } [JsonPropertyName("username")]
+  PROP Camunda.Orchestration.Sdk.Username? Username { get; set; } [JsonPropertyName("username")]
   PROP System.Boolean CanLogout { get; set; } [JsonPropertyName("canLogout")]
+  PROP System.Boolean IsAnonymous { get; set; } [JsonPropertyName("isAnonymous")]
   PROP System.Collections.Generic.Dictionary<System.String,System.String> C8Links { get; set; } [JsonPropertyName("c8Links")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.TenantResult> Tenants { get; set; } [JsonPropertyName("tenants")]
   PROP System.Collections.Generic.List<System.String> AuthorizedComponents { get; set; } [JsonPropertyName("authorizedComponents")]
