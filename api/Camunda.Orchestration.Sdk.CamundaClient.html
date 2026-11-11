@@ -790,7 +790,7 @@ Get an audit log entry by auditLogKey.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.GetAuthenticationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_GetAuthenticationAsync_System_Threading_CancellationToken_">GetAuthenticationAsync(CancellationToken)</a></dt>
     <dd><p>Get current user
-Retrieves the current authenticated user.</p>
+Retrieves the current authenticated user. On an unprotected API (<code>camunda.security.authentication.unprotected-api=true</code>) a caller without an identity gets a result with <code>isAnonymous</code> set to <code>true</code> instead of a <code>401</code>, because no credentials can authenticate it there.</p>
 </dd>
   </dl>
   <dl class="jumplist">

@@ -125,7 +125,7 @@ Method GetAuthenticationAsync  <a class="header-action link-secondary" title="Vi
 </h3>
 
 <div class="markdown level1 summary"><p>Get current user
-Retrieves the current authenticated user.</p>
+Retrieves the current authenticated user. On an unprotected API (<code>camunda.security.authentication.unprotected-api=true</code>) a caller without an identity gets a result with <code>isAnonymous</code> set to <code>true</code> instead of a <code>401</code>, because no credentials can authenticate it there.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
