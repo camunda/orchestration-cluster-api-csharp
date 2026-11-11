@@ -1,3 +1,11 @@
+# [11.0.0-alpha.8](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.7...v11.0.0-alpha.8) (2026-11-11)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts [skip ci] ([30701a8](https://github.com/camunda/orchestration-cluster-api-csharp/commit/30701a8d76ee352a67f7319cc4fc650447d084b4))
+* pass the Vault JWT secrets to sdk-slack-community-notify ( [#498](https://github.com/camunda/orchestration-cluster-api-csharp/issues/498) ) ([32a9d34](https://github.com/camunda/orchestration-cluster-api-csharp/commit/32a9d348c541de0f1a6606d2f6a467c243ea2e62))
+
 # [11.0.0-alpha.7](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.6...v11.0.0-alpha.7) (2026-11-04)
 
 
