@@ -7653,6 +7653,79 @@ public sealed class AuditLogSearchQuerySortRequest
 }
 
 /// <summary>
+/// A `CamundaUserResult` with `isAnonymous` set to `false`, so `username` is always set. `GET /authentication/me` returns `CamundaUserResult`. Clients that only handle a caller with an identity can narrow the result to this schema once they checked `isAnonymous`.
+/// </summary>
+public sealed class AuthenticatedCamundaUserResult
+{
+    /// <summary>
+    /// Always `false`, because the caller has an identity.
+    /// </summary>
+    [JsonPropertyName("isAnonymous")]
+    public bool IsAnonymous { get; set; }
+
+    /// <summary>
+    /// The username of the user.
+    /// </summary>
+    [JsonPropertyName("username")]
+    public Username Username { get; set; }
+
+    /// <summary>
+    /// The display name of the user.
+    /// </summary>
+    [JsonPropertyName("displayName")]
+    public string? DisplayName { get; set; }
+
+    /// <summary>
+    /// The email of the user.
+    /// </summary>
+    [JsonPropertyName("email")]
+    public string? Email { get; set; }
+
+    /// <summary>
+    /// The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[&quot;*&quot;]`, regardless of the user&apos;s actual permissions, since access is not restricted in that case. An anonymous caller of an unprotected API also gets `[&quot;*&quot;]`, for the same reason.
+    /// </summary>
+    [JsonPropertyName("authorizedComponents")]
+    public List<string> AuthorizedComponents { get; set; } = null!;
+
+    /// <summary>
+    /// The tenants the user is a member of.
+    /// </summary>
+    [JsonPropertyName("tenants")]
+    public List<TenantResult> Tenants { get; set; } = null!;
+
+    /// <summary>
+    /// The groups assigned to the user.
+    /// </summary>
+    [JsonPropertyName("groups")]
+    public List<string> Groups { get; set; } = null!;
+
+    /// <summary>
+    /// The roles assigned to the user.
+    /// </summary>
+    [JsonPropertyName("roles")]
+    public List<string> Roles { get; set; } = null!;
+
+    /// <summary>
+    /// The plan of the user.
+    /// </summary>
+    [JsonPropertyName("salesPlanType")]
+    public string? SalesPlanType { get; set; }
+
+    /// <summary>
+    /// The links to the components in the C8 stack.
+    /// </summary>
+    [JsonPropertyName("c8Links")]
+    public Dictionary<string, string> C8Links { get; set; } = null!;
+
+    /// <summary>
+    /// Flag for understanding if the user is able to perform logout.
+    /// </summary>
+    [JsonPropertyName("canLogout")]
+    public bool CanLogout { get; set; }
+
+}
+
+/// <summary>
 /// Configuration for authentication and session management.
 /// </summary>
 public sealed class AuthenticationConfigurationResponse
@@ -9372,10 +9445,16 @@ public readonly record struct BusinessId : global::Camunda.Orchestration.Sdk.ICa
 public sealed class CamundaUserResult
 {
     /// <summary>
-    /// The username of the user.
+    /// Whether the caller has no identity. Only an unprotected API answers an anonymous caller; a protected API returns `401` instead. When `true`, `username`, `displayName` and `email` are `null` and the lists are empty.
+    /// </summary>
+    [JsonPropertyName("isAnonymous")]
+    public bool IsAnonymous { get; set; }
+
+    /// <summary>
+    /// The username of the user. `null` when `isAnonymous` is `true`.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username Username { get; set; }
+    public Username? Username { get; set; }
 
     /// <summary>
     /// The display name of the user.
@@ -9390,7 +9469,7 @@ public sealed class CamundaUserResult
     public string? Email { get; set; }
 
     /// <summary>
-    /// The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[&quot;*&quot;]`, regardless of the user&apos;s actual permissions, since access is not restricted in that case.
+    /// The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[&quot;*&quot;]`, regardless of the user&apos;s actual permissions, since access is not restricted in that case. An anonymous caller of an unprotected API also gets `[&quot;*&quot;]`, for the same reason.
     /// </summary>
     [JsonPropertyName("authorizedComponents")]
     public List<string> AuthorizedComponents { get; set; } = null!;

@@ -1137,7 +1137,7 @@
         "operationId": "getAuthentication",
         "x-required-permissions": [],
         "summary": "Get current user",
-        "description": "Retrieves the current authenticated user.",
+        "description": "Retrieves the current authenticated user. On an unprotected API (`camunda.security.authentication.unprotected-api=true`) a caller without an identity gets a result with `isAnonymous` set to `true` instead of a `401`, because no credentials can authenticate it there.",
         "security": [
           {
             "bearerAuth": []
@@ -26180,30 +26180,33 @@
     }
   },
   "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT",
-        "x-enforcement": "conditional",
-        "x-enforcement-modes": {
-          "auth": [
-            "secured"
-          ]
+    "schemas": {
+      "AuthenticatedCamundaUserResult": {
+        "description": "A `CamundaUserResult` with `isAnonymous` set to `false`, so `username` is always set. `GET /authentication/me` returns `CamundaUserResult`. Clients that only handle a caller with an identity can narrow the result to this schema once they checked `isAnonymous`.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CamundaUserResult"
+          }
+        ],
+        "properties": {
+          "isAnonymous": {
+            "description": "Always `false`, because the caller has an identity.",
+            "type": "boolean",
+            "enum": [
+              false
+            ]
+          },
+          "username": {
+            "description": "The username of the user.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Username"
+              }
+            ]
+          }
         }
       },
-      "basicAuth": {
-        "type": "http",
-        "scheme": "basic",
-        "x-enforcement": "conditional",
-        "x-enforcement-modes": {
-          "auth": [
-            "secured"
-          ]
-        }
-      }
-    },
-    "schemas": {
       "AgentDefinitionSearchQuerySortRequest": {
         "type": "object",
         "required": [
@@ -28990,19 +28993,25 @@
           "displayName",
           "email",
           "groups",
+          "isAnonymous",
           "roles",
           "salesPlanType",
           "tenants",
           "username"
         ],
         "properties": {
+          "isAnonymous": {
+            "description": "Whether the caller has no identity. Only an unprotected API answers an anonymous caller; a protected API returns `401` instead. When `true`, `username`, `displayName` and `email` are `null` and the lists are empty.",
+            "type": "boolean"
+          },
           "username": {
-            "description": "The username of the user.",
+            "description": "The username of the user. `null` when `isAnonymous` is `true`.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Username"
               }
-            ]
+            ],
+            "nullable": true
           },
           "displayName": {
             "description": "The display name of the user.",
@@ -29017,7 +29026,7 @@
             "nullable": true
           },
           "authorizedComponents": {
-            "description": "The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[\"*\"]`, regardless of the user's actual permissions, since access is not restricted in that case.",
+            "description": "The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[\"*\"]`, regardless of the user's actual permissions, since access is not restricted in that case. An anonymous caller of an unprotected API also gets `[\"*\"]`, for the same reason.",
             "type": "array",
             "example": [
               "*"
@@ -29071,7 +29080,13 @@
             "description": "Flag for understanding if the user is able to perform logout.",
             "type": "boolean"
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "isAnonymous",
+            "addedInVersion": "8.11"
+          }
+        ]
       },
       "AuthorizationIdBasedRequest": {
         "type": "object",
@@ -48027,8 +48042,7 @@
           },
           "isSuspended": {
             "description": "Whether the user task is suspended because its owning process instance is suspended.\n",
-            "type": "boolean",
-            "nullable": true
+            "type": "boolean"
           },
           "assignee": {
             "allOf": [
@@ -50367,6 +50381,29 @@
             "$ref": "#/components/schemas/ProtectionModeEnum"
           }
         ]
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "x-enforcement": "conditional",
+        "x-enforcement-modes": {
+          "auth": [
+            "secured"
+          ]
+        }
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "x-enforcement": "conditional",
+        "x-enforcement-modes": {
+          "auth": [
+            "secured"
+          ]
+        }
       }
     }
   }
