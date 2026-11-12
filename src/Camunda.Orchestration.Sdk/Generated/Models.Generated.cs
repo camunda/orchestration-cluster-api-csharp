@@ -3532,45 +3532,6 @@ public sealed class AdvancedProcessInstanceStateFilter
 }
 
 /// <summary>
-/// Advanced ProtectionModeEnum filter.
-/// </summary>
-public sealed class AdvancedProtectionModeFilter
-{
-    /// <summary>
-    /// Checks if the variable has the provided protection mode.
-    /// </summary>
-    [JsonPropertyName("$eq")]
-    public ProtectionModeEnum? Eq { get; set; }
-
-    /// <summary>
-    /// Checks if the variable does not have the provided protection mode.
-    /// </summary>
-    [JsonPropertyName("$neq")]
-    public ProtectionModeEnum? Neq { get; set; }
-
-    /// <summary>
-    /// Checks if the variable has any protection mode. Use `false` to match the variables
-    /// that are not protected.
-    /// 
-    /// </summary>
-    [JsonPropertyName("$exists")]
-    public bool? Exists { get; set; }
-
-    /// <summary>
-    /// Checks if the variable has at least one of the provided protection modes.
-    /// </summary>
-    [JsonPropertyName("$in")]
-    public List<ProtectionModeEnum>? In { get; set; }
-
-    /// <summary>
-    /// Checks if the variable has none of the provided protection modes.
-    /// </summary>
-    [JsonPropertyName("$notIn")]
-    public List<ProtectionModeEnum>? NotIn { get; set; }
-
-}
-
-/// <summary>
 /// Advanced ResourceKey filter.
 /// </summary>
 public sealed class AdvancedResourceKeyFilter
@@ -9698,17 +9659,113 @@ internal sealed class CategoryFilterPropertyJsonConverter : global::System.Text.
 /// </summary>
 public sealed class Changeset
 {
+    private DateTimeOffset? _dueDate;
+    private bool _dueDateCleared;
+
     /// <summary>
     /// The due date of the task. Reset by providing an empty String.
     /// </summary>
+    /// <remarks>
+    /// <c>null</c> (the default) sends no value, which preserves the persisted value.
+    /// To clear it, call <see cref="ClearDueDate"/>; assigning this property
+    /// afterwards replaces the clear.
+    /// </remarks>
+    [JsonIgnore]
+    public DateTimeOffset? DueDate
+    {
+        get => _dueDate;
+        set
+        {
+            _dueDate = value;
+            _dueDateCleared = false;
+        }
+    }
+
+    /// <summary>
+    /// True when <see cref="DueDate"/> is to be cleared, i.e. <see cref="ClearDueDate"/>
+    /// was the last change made to it. A cleared value is sent as an empty string.
+    /// </summary>
+    [JsonIgnore]
+    public bool IsDueDateCleared => _dueDateCleared;
+
+    /// <summary>
+    /// Clears the persisted <c>dueDate</c>: it is sent as an empty string, which the API
+    /// reads as "remove the value" (<c>null</c> or omitting it instead preserves the value).
+    /// Sets <see cref="DueDate"/> to <c>null</c>; assigning it afterwards replaces the clear.
+    /// </summary>
+    /// <returns>This instance, for chaining.</returns>
+    public Changeset ClearDueDate()
+    {
+        _dueDate = null;
+        _dueDateCleared = true;
+        return this;
+    }
+
+    [JsonInclude]
     [JsonPropertyName("dueDate")]
-    public DateTimeOffset? DueDate { get; set; }
+    internal global::Camunda.Orchestration.Sdk.ClearableDateTimeWire? DueDateWire
+    {
+        get => global::Camunda.Orchestration.Sdk.ClearableDateTimeWire.From(_dueDate, _dueDateCleared);
+        set
+        {
+            _dueDate = value?.Value;
+            _dueDateCleared = value?.IsCleared == true;
+        }
+    }
+
+    private DateTimeOffset? _followUpDate;
+    private bool _followUpDateCleared;
 
     /// <summary>
     /// The follow-up date of the task. Reset by providing an empty String.
     /// </summary>
+    /// <remarks>
+    /// <c>null</c> (the default) sends no value, which preserves the persisted value.
+    /// To clear it, call <see cref="ClearFollowUpDate"/>; assigning this property
+    /// afterwards replaces the clear.
+    /// </remarks>
+    [JsonIgnore]
+    public DateTimeOffset? FollowUpDate
+    {
+        get => _followUpDate;
+        set
+        {
+            _followUpDate = value;
+            _followUpDateCleared = false;
+        }
+    }
+
+    /// <summary>
+    /// True when <see cref="FollowUpDate"/> is to be cleared, i.e. <see cref="ClearFollowUpDate"/>
+    /// was the last change made to it. A cleared value is sent as an empty string.
+    /// </summary>
+    [JsonIgnore]
+    public bool IsFollowUpDateCleared => _followUpDateCleared;
+
+    /// <summary>
+    /// Clears the persisted <c>followUpDate</c>: it is sent as an empty string, which the API
+    /// reads as "remove the value" (<c>null</c> or omitting it instead preserves the value).
+    /// Sets <see cref="FollowUpDate"/> to <c>null</c>; assigning it afterwards replaces the clear.
+    /// </summary>
+    /// <returns>This instance, for chaining.</returns>
+    public Changeset ClearFollowUpDate()
+    {
+        _followUpDate = null;
+        _followUpDateCleared = true;
+        return this;
+    }
+
+    [JsonInclude]
     [JsonPropertyName("followUpDate")]
-    public DateTimeOffset? FollowUpDate { get; set; }
+    internal global::Camunda.Orchestration.Sdk.ClearableDateTimeWire? FollowUpDateWire
+    {
+        get => global::Camunda.Orchestration.Sdk.ClearableDateTimeWire.From(_followUpDate, _followUpDateCleared);
+        set
+        {
+            _followUpDate = value?.Value;
+            _followUpDateCleared = value?.IsCleared == true;
+        }
+    }
 
     /// <summary>
     /// The list of candidate users of the task. Reset by providing an empty list.
@@ -19903,17 +19960,113 @@ public sealed class JobResultCorrections
     [JsonPropertyName("assignee")]
     public string? Assignee { get; set; }
 
-    /// <summary>
-    /// The due date of the task.
-    /// </summary>
-    [JsonPropertyName("dueDate")]
-    public DateTimeOffset? DueDate { get; set; }
+    private DateTimeOffset? _dueDate;
+    private bool _dueDateCleared;
 
     /// <summary>
-    /// The follow-up date of the task.
+    /// The due date of the task. Clear by providing an empty String.
     /// </summary>
+    /// <remarks>
+    /// <c>null</c> (the default) sends no value, which preserves the persisted value.
+    /// To clear it, call <see cref="ClearDueDate"/>; assigning this property
+    /// afterwards replaces the clear.
+    /// </remarks>
+    [JsonIgnore]
+    public DateTimeOffset? DueDate
+    {
+        get => _dueDate;
+        set
+        {
+            _dueDate = value;
+            _dueDateCleared = false;
+        }
+    }
+
+    /// <summary>
+    /// True when <see cref="DueDate"/> is to be cleared, i.e. <see cref="ClearDueDate"/>
+    /// was the last change made to it. A cleared value is sent as an empty string.
+    /// </summary>
+    [JsonIgnore]
+    public bool IsDueDateCleared => _dueDateCleared;
+
+    /// <summary>
+    /// Clears the persisted <c>dueDate</c>: it is sent as an empty string, which the API
+    /// reads as "remove the value" (<c>null</c> or omitting it instead preserves the value).
+    /// Sets <see cref="DueDate"/> to <c>null</c>; assigning it afterwards replaces the clear.
+    /// </summary>
+    /// <returns>This instance, for chaining.</returns>
+    public JobResultCorrections ClearDueDate()
+    {
+        _dueDate = null;
+        _dueDateCleared = true;
+        return this;
+    }
+
+    [JsonInclude]
+    [JsonPropertyName("dueDate")]
+    internal global::Camunda.Orchestration.Sdk.ClearableDateTimeWire? DueDateWire
+    {
+        get => global::Camunda.Orchestration.Sdk.ClearableDateTimeWire.From(_dueDate, _dueDateCleared);
+        set
+        {
+            _dueDate = value?.Value;
+            _dueDateCleared = value?.IsCleared == true;
+        }
+    }
+
+    private DateTimeOffset? _followUpDate;
+    private bool _followUpDateCleared;
+
+    /// <summary>
+    /// The follow-up date of the task. Clear by providing an empty String.
+    /// </summary>
+    /// <remarks>
+    /// <c>null</c> (the default) sends no value, which preserves the persisted value.
+    /// To clear it, call <see cref="ClearFollowUpDate"/>; assigning this property
+    /// afterwards replaces the clear.
+    /// </remarks>
+    [JsonIgnore]
+    public DateTimeOffset? FollowUpDate
+    {
+        get => _followUpDate;
+        set
+        {
+            _followUpDate = value;
+            _followUpDateCleared = false;
+        }
+    }
+
+    /// <summary>
+    /// True when <see cref="FollowUpDate"/> is to be cleared, i.e. <see cref="ClearFollowUpDate"/>
+    /// was the last change made to it. A cleared value is sent as an empty string.
+    /// </summary>
+    [JsonIgnore]
+    public bool IsFollowUpDateCleared => _followUpDateCleared;
+
+    /// <summary>
+    /// Clears the persisted <c>followUpDate</c>: it is sent as an empty string, which the API
+    /// reads as "remove the value" (<c>null</c> or omitting it instead preserves the value).
+    /// Sets <see cref="FollowUpDate"/> to <c>null</c>; assigning it afterwards replaces the clear.
+    /// </summary>
+    /// <returns>This instance, for chaining.</returns>
+    public JobResultCorrections ClearFollowUpDate()
+    {
+        _followUpDate = null;
+        _followUpDateCleared = true;
+        return this;
+    }
+
+    [JsonInclude]
     [JsonPropertyName("followUpDate")]
-    public DateTimeOffset? FollowUpDate { get; set; }
+    internal global::Camunda.Orchestration.Sdk.ClearableDateTimeWire? FollowUpDateWire
+    {
+        get => global::Camunda.Orchestration.Sdk.ClearableDateTimeWire.From(_followUpDate, _followUpDateCleared);
+        set
+        {
+            _followUpDate = value?.Value;
+            _followUpDateCleared = value?.IsCleared == true;
+        }
+    }
 
     /// <summary>
     /// The list of candidate users of the task.
@@ -24336,15 +24489,6 @@ public sealed class ProcessInstanceCreationInstructionBase
     public object? Variables { get; set; }
 
     /// <summary>
-    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. Each key must be the name of a variable in
-    /// `variables`. A variable without an entry has no metadata.
-    /// 
-    /// </summary>
-    [JsonPropertyName("variablesMetadata")]
-    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
-
-    /// <summary>
     /// The tenant id of the process definition.
     /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
     /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
@@ -24452,15 +24596,6 @@ public sealed class ProcessInstanceCreationInstructionById : ProcessInstanceCrea
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
-
-    /// <summary>
-    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. Each key must be the name of a variable in
-    /// `variables`. A variable without an entry has no metadata.
-    /// 
-    /// </summary>
-    [JsonPropertyName("variablesMetadata")]
-    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
 
     /// <summary>
     /// The tenant id of the process definition.
@@ -24577,15 +24712,6 @@ public sealed class ProcessInstanceCreationInstructionByKey : ProcessInstanceCre
     public object? Variables { get; set; }
 
     /// <summary>
-    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. Each key must be the name of a variable in
-    /// `variables`. A variable without an entry has no metadata.
-    /// 
-    /// </summary>
-    [JsonPropertyName("variablesMetadata")]
-    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
-
-    /// <summary>
     /// The tenant id of the process definition.
     /// If multi-tenancy is enabled, provide the tenant id of the process definition to start a
     /// process instance of. If multi-tenancy is disabled, don&apos;t provide this parameter.
@@ -24697,15 +24823,6 @@ public sealed class ProcessInstanceCreationInstructionByVersionTag : ProcessInst
     /// </summary>
     [JsonPropertyName("variables")]
     public object? Variables { get; set; }
-
-    /// <summary>
-    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. Each key must be the name of a variable in
-    /// `variables`. A variable without an entry has no metadata.
-    /// 
-    /// </summary>
-    [JsonPropertyName("variablesMetadata")]
-    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
 
     /// <summary>
     /// The tenant id of the process definition.
@@ -26204,162 +26321,6 @@ public sealed class ProcessInstanceWaitStateStatisticsResult
     [JsonPropertyName("waitingCount")]
     public long WaitingCount { get; set; }
 
-}
-
-/// <summary>
-/// The kind of protection applied to a variable value. `REDACT` irrecoverably replaces the
-/// value before it reaches secondary storage.
-/// 
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum ProtectionModeEnum
-{
-    [JsonPropertyName("REDACT")]
-    REDACT,
-}
-
-/// <summary>
-/// Matches variables that have this protection mode.
-/// </summary>
-public readonly record struct ProtectionModeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
-{
-    /// <summary>The underlying string value.</summary>
-    public string Value { get; }
-
-    private ProtectionModeExactMatch(string value) => Value = value;
-
-    /// <summary>
-    /// Creates a <see cref="ProtectionModeExactMatch"/> from a raw string value.
-    /// Use this when side-loading values not received from an API call.
-    /// </summary>
-    public static ProtectionModeExactMatch AssumeExists(string value)
-    {
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProtectionModeExactMatch");
-        return new ProtectionModeExactMatch(value);
-    }
-
-    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
-    public static bool IsValid(string value) =>
-        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
-
-    /// <inheritdoc />
-    public override string ToString() => Value.ToString()!;
-}
-
-/// <summary>
-/// ProtectionModeEnum property with full advanced search capabilities.
-/// </summary>
-[JsonConverter(typeof(ProtectionModeFilterPropertyJsonConverter))]
-public sealed class ProtectionModeFilterProperty
-{
-    /// <summary>
-    /// Matches the value exactly. Serialized as the bare value — the form
-    /// servers that predate advanced filtering on this field accept.
-    /// </summary>
-    public ProtectionModeEnum? ExactMatch { get; set; }
-
-    /// <summary>
-    /// Checks if the variable has the provided protection mode.
-    /// </summary>
-    [JsonPropertyName("$eq")]
-    public ProtectionModeEnum? Eq { get; set; }
-
-    /// <summary>
-    /// Checks if the variable does not have the provided protection mode.
-    /// </summary>
-    [JsonPropertyName("$neq")]
-    public ProtectionModeEnum? Neq { get; set; }
-
-    /// <summary>
-    /// Checks if the variable has any protection mode. Use `false` to match the variables
-    /// that are not protected.
-    /// 
-    /// </summary>
-    [JsonPropertyName("$exists")]
-    public bool? Exists { get; set; }
-
-    /// <summary>
-    /// Checks if the variable has at least one of the provided protection modes.
-    /// </summary>
-    [JsonPropertyName("$in")]
-    public List<ProtectionModeEnum>? In { get; set; }
-
-    /// <summary>
-    /// Checks if the variable has none of the provided protection modes.
-    /// </summary>
-    [JsonPropertyName("$notIn")]
-    public List<ProtectionModeEnum>? NotIn { get; set; }
-
-    /// <summary>Wraps a bare value as an exact-match filter.</summary>
-    public static implicit operator ProtectionModeFilterProperty(ProtectionModeEnum value) => new() { ExactMatch = value };
-
-}
-
-/// <summary>Serializes <see cref="ProtectionModeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
-internal sealed class ProtectionModeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<ProtectionModeFilterProperty>
-{
-    public override ProtectionModeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
-    {
-        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
-        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
-            return new ProtectionModeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<ProtectionModeEnum?>(ref reader, options) };
-        var result = new ProtectionModeFilterProperty();
-        while (reader.Read())
-        {
-            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
-            var prop = reader.GetString();
-            reader.Read();
-            switch (prop)
-            {
-                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<ProtectionModeEnum?>(ref reader, options); break;
-                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<ProtectionModeEnum?>(ref reader, options); break;
-                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
-                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<ProtectionModeEnum>?>(ref reader, options); break;
-                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<ProtectionModeEnum>?>(ref reader, options); break;
-                default: reader.Skip(); break;
-            }
-        }
-        return result;
-    }
-
-    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, ProtectionModeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
-    {
-        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
-        if (value.ExactMatch is not null && hasAdvanced)
-            throw new global::System.Text.Json.JsonException("ProtectionModeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
-        if (value.ExactMatch is not null)
-        {
-            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
-            return;
-        }
-        writer.WriteStartObject();
-        if (value.Eq is not null)
-        {
-            writer.WritePropertyName("$eq");
-            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
-        }
-        if (value.Neq is not null)
-        {
-            writer.WritePropertyName("$neq");
-            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
-        }
-        if (value.Exists is not null)
-        {
-            writer.WritePropertyName("$exists");
-            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
-        }
-        if (value.In is not null)
-        {
-            writer.WritePropertyName("$in");
-            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
-        }
-        if (value.NotIn is not null)
-        {
-            writer.WritePropertyName("$notIn");
-            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
-        }
-        writer.WriteEndObject();
-    }
 }
 
 /// <summary>
@@ -27895,15 +27856,6 @@ public sealed class SetVariableRequest
     /// </summary>
     [JsonPropertyName("variables")]
     public object Variables { get; set; } = null!;
-
-    /// <summary>
-    /// Metadata of the variables, keyed by variable name. Use it to set how a variable is
-    /// treated, for example to protect its value. Each key must be the name of a variable in
-    /// `variables`. A variable without an entry keeps the metadata it has, or has none.
-    /// 
-    /// </summary>
-    [JsonPropertyName("variablesMetadata")]
-    public Dictionary<string, VariableMetadata>? VariablesMetadata { get; set; }
 
     /// <summary>
     /// If set to `true`, the variables are merged strictly into the local scope (as specified
@@ -30735,12 +30687,6 @@ public sealed class VariableFilter
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
 
-    /// <summary>
-    /// The protection modes applied to the variable.
-    /// </summary>
-    [JsonPropertyName("protectionMode")]
-    public ProtectionModeFilterProperty? ProtectionMode { get; set; }
-
 }
 
 /// <summary>
@@ -30914,32 +30860,12 @@ internal sealed class VariableKeyFilterPropertyJsonConverter : global::System.Te
 }
 
 /// <summary>
-/// Metadata describing how a variable is treated.
-/// </summary>
-public sealed class VariableMetadata
-{
-    /// <summary>
-    /// The protections applied to the variable. The value of a variable protected with
-    /// `REDACT` is irrecoverably replaced before it is stored in secondary storage, so it is
-    /// never readable.
-    /// 
-    /// </summary>
-    [JsonPropertyName("protectionModes")]
-    public List<ProtectionModeEnum> ProtectionModes { get; set; } = null!;
-
-}
-
-/// <summary>
 /// Variable search response item.
 /// </summary>
 public sealed class VariableResult
 {
     /// <summary>
-    /// The full value of this variable, or `&quot;&quot;` if the variable is redacted.
-    /// 
-    /// Check `metadata.protectionModes` before you use the value: it contains `REDACT` for a
-    /// redacted variable.
-    /// 
+    /// Full value of this variable.
     /// </summary>
     [JsonPropertyName("value")]
     public string Value { get; set; } = null!;
@@ -30986,12 +30912,6 @@ public sealed class VariableResult
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// Metadata of this variable.
-    /// </summary>
-    [JsonPropertyName("metadata")]
-    public VariableMetadata Metadata { get; set; } = null!;
 
 }
 
@@ -31042,12 +30962,6 @@ public sealed class VariableResultBase
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// Metadata of this variable.
-    /// </summary>
-    [JsonPropertyName("metadata")]
-    public VariableMetadata Metadata { get; set; } = null!;
 
 }
 
@@ -31120,15 +31034,7 @@ public sealed class VariableSearchQuerySortRequest
 public sealed class VariableSearchResult
 {
     /// <summary>
-    /// The value of this variable. Can be truncated or redacted.
-    /// 
-    /// If the value is truncated, `isTruncated` is `true` and the value contains only the
-    /// beginning of the full value.
-    /// 
-    /// If the variable is redacted, the value is set to `&quot;&quot;` instead of the real value. Check
-    /// `metadata.protectionModes` before you use the value: it contains `REDACT` for a redacted
-    /// variable.
-    /// 
+    /// Value of this variable. Can be truncated.
     /// </summary>
     [JsonPropertyName("value")]
     public string Value { get; set; } = null!;
@@ -31181,12 +31087,6 @@ public sealed class VariableSearchResult
     /// </summary>
     [JsonPropertyName("rootProcessInstanceKey")]
     public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
-
-    /// <summary>
-    /// Metadata of this variable.
-    /// </summary>
-    [JsonPropertyName("metadata")]
-    public VariableMetadata Metadata { get; set; } = null!;
 
 }
 
