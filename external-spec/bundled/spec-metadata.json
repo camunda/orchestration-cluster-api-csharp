@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:c2793467a01795ca57c19825f805132a8d005ad24171e5b660c0b359dc64f333",
+  "specHash": "sha256:35e11fe30a0f8b3fcfe05fb58e09a5476b48398efc71b1e36966f2c09b86aab1",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -1579,6 +1579,20 @@
       "stableId": "category-filter-property"
     },
     {
+      "name": "ClearableDateTime",
+      "kind": "hybrid-union",
+      "description": "A date-time in RFC 3339 format, or an empty string to clear the persisted value.\nA `null` value or omitting the property preserves the persisted value.\n",
+      "branches": [
+        {
+          "branchType": "other"
+        },
+        {
+          "branchType": "other"
+        }
+      ],
+      "stableId": "clearable-date-time"
+    },
+    {
       "name": "ClusterRestoreOperation",
       "kind": "union-wrapper",
       "description": "A single operation that is part of a restore. Every operation names the broker that applies it; the rest of its properties depend on what the operation does, so it is reported as one of the variants below, distinguished by `operation`. A property a variant does not declare is absent from the response rather than reported as null.",
@@ -2177,22 +2191,6 @@
         }
       ],
       "stableId": "process-instance-state-filter-property"
-    },
-    {
-      "name": "ProtectionModeFilterProperty",
-      "kind": "union-wrapper",
-      "description": "ProtectionModeEnum property with full advanced search capabilities.",
-      "branches": [
-        {
-          "branchType": "ref",
-          "ref": "ProtectionModeExactMatch"
-        },
-        {
-          "branchType": "ref",
-          "ref": "AdvancedProtectionModeFilter"
-        }
-      ],
-      "stableId": "protection-mode-filter-property"
     },
     {
       "name": "ResourceKey",

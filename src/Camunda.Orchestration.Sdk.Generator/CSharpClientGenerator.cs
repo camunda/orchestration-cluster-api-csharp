@@ -10,7 +10,7 @@ namespace Camunda.Orchestration.Sdk.Generator;
 /// Generates C# model classes and client methods from a bundled OpenAPI spec.
 /// Mirrors the JS SDK's generate-class-methods.ts pipeline.
 /// </summary>
-internal static class CSharpClientGenerator
+internal static partial class CSharpClientGenerator
 {
     /// <summary>
     /// Generate C# source files from the bundled OpenAPI spec.
@@ -891,6 +891,13 @@ internal static class CSharpClientGenerator
             if (orphanUnionBases.Contains(typeName))
                 continue;
 
+            // x-clearable date-times (ClearableDateTime) are not a type of their own: the
+            // properties that use them stay DateTimeOffset? and gain a clear (see
+            // CSharpClientGenerator.ClearableDateTime.cs). Emitting them would yield a
+            // string-valued key struct.
+            if (TryMapClearableDateTime(schema, doc))
+                continue;
+
             // Union of semantic keys — generate with implicit conversion operators and cross-type equality
             if (metadata.IsSemanticKeyUnion(name))
             {
@@ -1109,6 +1116,12 @@ internal static class CSharpClientGenerator
                 if (propName == discriminatorPropToSkip)
                     continue;
 
+                if (IsClearableDateTimeProperty(propSchema, doc, schema.Description, propName, typeName))
+                {
+                    EmitClearableDateTimeProperty(sb, typeName, propName, ToPascalCase(propName), propSchema.Description);
+                    continue;
+                }
+
                 var csharpType = ResolvePropertyType(propSchema, doc, inlineEnums, typeName, propName);
                 var csharpPropName = ToPascalCase(propName);
                 var isRequired = required.Contains(propName);
@@ -1237,6 +1250,12 @@ internal static class CSharpClientGenerator
 
         foreach (var (propName, propSchema) in properties)
         {
+            if (IsClearableDateTimeProperty(propSchema, doc, schema.Description, propName, typeName))
+            {
+                EmitClearableDateTimeProperty(sb, typeName, propName, ToPascalCase(propName), propSchema.Description);
+                continue;
+            }
+
             var csharpType = ResolvePropertyType(propSchema, doc, inlineEnums, typeName, propName);
             var csharpPropName = ToPascalCase(propName);
             var isRequired = required.Contains(propName);
@@ -1933,6 +1952,10 @@ internal static class CSharpClientGenerator
     {
         if (schema == null)
             return "object";
+        // x-clearable date-time (directly, by $ref, or via a single-element allOf): the
+        // empty-string clear is modelled on the owning class, the value stays a date.
+        if (doc != null && TryMapClearableDateTime(schema, doc))
+            return "DateTimeOffset";
         // $ref to a named schema — resolve array-type schemas inline as List<ItemType>
         if (GetRefId(schema) != null)
         {
