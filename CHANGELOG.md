@@ -1,3 +1,10 @@
+# [11.0.0-alpha.9](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.8...v11.0.0-alpha.9) (2026-11-12)
+
+
+### Features
+
+* support clearing x-clearable date-time properties ([#509](https://github.com/camunda/orchestration-cluster-api-csharp/issues/509)) ([f7b7f1a](https://github.com/camunda/orchestration-cluster-api-csharp/commit/f7b7f1ac1649a5654ab1a4c380c94e5f14176dba)), closes [camunda/camunda#68710](https://github.com/camunda/camunda/issues/68710) [camunda/camunda#68710](https://github.com/camunda/camunda/issues/68710) [camunda/camunda#66422](https://github.com/camunda/camunda/issues/66422) [#66678](https://github.com/camunda/orchestration-cluster-api-csharp/issues/66678) [#67591](https://github.com/camunda/orchestration-cluster-api-csharp/issues/67591)
+
 # [11.0.0-alpha.8](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.7...v11.0.0-alpha.8) (2026-11-11)
 
 
