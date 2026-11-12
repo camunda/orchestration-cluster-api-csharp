@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Property VariablesMetadata | Camunda C# SDK </title>
+      <title>Method ClearDueDate | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Property VariablesMetadata | Camunda C# SDK ">
+      <meta name="title" content="Method ClearDueDate | Camunda C# SDK ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_ProcessInstanceCreationInstructionByVersionTag_VariablesMetadata_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_JobResultCorrections_ClearDueDate_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.JobResultCorrections.ClearDueDate*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,14 +84,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata*">
+        <article data-uid="Camunda.Orchestration.Sdk.JobResultCorrections.ClearDueDate*">
 
 
 
 
 
-<h1 id="Camunda_Orchestration_Sdk_ProcessInstanceCreationInstructionByVersionTag_VariablesMetadata_" data-uid="Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata*" class="text-break">
-Property VariablesMetadata  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L24707"><i class="bi bi-code-slash"></i></a>
+<h1 id="Camunda_Orchestration_Sdk_JobResultCorrections_ClearDueDate_" data-uid="Camunda.Orchestration.Sdk.JobResultCorrections.ClearDueDate*" class="text-break">
+Method ClearDueDate  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L19998"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -117,33 +117,33 @@ Property VariablesMetadata  <a class="header-action link-secondary" title="View 
 
 
 
-<a id="Camunda_Orchestration_Sdk_ProcessInstanceCreationInstructionByVersionTag_VariablesMetadata_" data-uid="Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata*"></a>
+<a id="Camunda_Orchestration_Sdk_JobResultCorrections_ClearDueDate_" data-uid="Camunda.Orchestration.Sdk.JobResultCorrections.ClearDueDate*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_ProcessInstanceCreationInstructionByVersionTag_VariablesMetadata" data-uid="Camunda.Orchestration.Sdk.ProcessInstanceCreationInstructionByVersionTag.VariablesMetadata">
-  VariablesMetadata
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L24707"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_JobResultCorrections_ClearDueDate" data-uid="Camunda.Orchestration.Sdk.JobResultCorrections.ClearDueDate">
+  ClearDueDate()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L19998"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"><p>Metadata of the variables, keyed by variable name. Use it to set how a variable is
-treated, for example to protect its value. Each key must be the name of a variable in
-<code>variables</code>. A variable without an entry has no metadata.</p>
+<div class="markdown level1 summary"><p>Clears the persisted <code>dueDate</code>: it is sent as an empty string, which the API
+reads as &quot;remove the value&quot; (<code>null</code> or omitting it instead preserves the value).
+Sets <a class="xref" href="Camunda.Orchestration.Sdk.JobResultCorrections.DueDate.html#Camunda_Orchestration_Sdk_JobResultCorrections_DueDate">DueDate</a> to <code>null</code>; assigning it afterwards replaces the clear.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;variablesMetadata&quot;)]
-public Dictionary&lt;string, VariableMetadata&gt;? VariablesMetadata { get; set; }</code></pre>
+  <pre><code class="lang-csharp hljs">public JobResultCorrections ClearDueDate()</code></pre>
 </div>
 
 
-
-
-
-<h4 class="section">Property Value</h4>
+<h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Camunda.Orchestration.Sdk.VariableMetadata.html">VariableMetadata</a>&gt;</dt>
-  <dd></dd>
+  <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobResultCorrections.html">JobResultCorrections</a></dt>
+  <dd><p>This instance, for chaining.</p>
+</dd>
 </dl>
+
+
+
 
 
 
@@ -155,7 +155,7 @@ public Dictionary&lt;string, VariableMetadata&gt;? VariablesMetadata { get; set;
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L24707" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L19998" class="edit-link">Edit this page</a>
         </div>
 
 

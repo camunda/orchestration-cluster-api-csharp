@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Method AssumeExists | Camunda C# SDK </title>
+      <title>Method ClearFollowUpDate | Camunda C# SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Method AssumeExists | Camunda C# SDK ">
+      <meta name="title" content="Method ClearFollowUpDate | Camunda C# SDK ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_ProtectionModeExactMatch_AssumeExists_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.ProtectionModeExactMatch.AssumeExists*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_JobResultCorrections_ClearFollowUpDate_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.JobResultCorrections.ClearFollowUpDate*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,14 +84,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Camunda.Orchestration.Sdk.ProtectionModeExactMatch.AssumeExists*">
+        <article data-uid="Camunda.Orchestration.Sdk.JobResultCorrections.ClearFollowUpDate*">
 
 
 
 
 
-<h1 id="Camunda_Orchestration_Sdk_ProtectionModeExactMatch_AssumeExists_" data-uid="Camunda.Orchestration.Sdk.ProtectionModeExactMatch.AssumeExists*" class="text-break">
-Method AssumeExists  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L26235"><i class="bi bi-code-slash"></i></a>
+<h1 id="Camunda_Orchestration_Sdk_JobResultCorrections_ClearFollowUpDate_" data-uid="Camunda.Orchestration.Sdk.JobResultCorrections.ClearFollowUpDate*" class="text-break">
+Method ClearFollowUpDate  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L20052"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -117,32 +117,29 @@ Method AssumeExists  <a class="header-action link-secondary" title="View source"
 
 
 
-<a id="Camunda_Orchestration_Sdk_ProtectionModeExactMatch_AssumeExists_" data-uid="Camunda.Orchestration.Sdk.ProtectionModeExactMatch.AssumeExists*"></a>
+<a id="Camunda_Orchestration_Sdk_JobResultCorrections_ClearFollowUpDate_" data-uid="Camunda.Orchestration.Sdk.JobResultCorrections.ClearFollowUpDate*"></a>
 
-<h3 id="Camunda_Orchestration_Sdk_ProtectionModeExactMatch_AssumeExists_System_String_" data-uid="Camunda.Orchestration.Sdk.ProtectionModeExactMatch.AssumeExists(System.String)">
-  AssumeExists(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L26235"><i class="bi bi-code-slash"></i></a>
+<h3 id="Camunda_Orchestration_Sdk_JobResultCorrections_ClearFollowUpDate" data-uid="Camunda.Orchestration.Sdk.JobResultCorrections.ClearFollowUpDate">
+  ClearFollowUpDate()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L20052"><i class="bi bi-code-slash"></i></a>
 </h3>
 
-<div class="markdown level1 summary"><p>Creates a <a class="xref" href="Camunda.Orchestration.Sdk.ProtectionModeExactMatch.html">ProtectionModeExactMatch</a> from a raw string value.
-Use this when side-loading values not received from an API call.</p>
+<div class="markdown level1 summary"><p>Clears the persisted <code>followUpDate</code>: it is sent as an empty string, which the API
+reads as &quot;remove the value&quot; (<code>null</code> or omitting it instead preserves the value).
+Sets <a class="xref" href="Camunda.Orchestration.Sdk.JobResultCorrections.FollowUpDate.html#Camunda_Orchestration_Sdk_JobResultCorrections_FollowUpDate">FollowUpDate</a> to <code>null</code>; assigning it afterwards replaces the clear.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
 <div class="codewrapper">
-  <pre><code class="lang-csharp hljs">public static ProtectionModeExactMatch AssumeExists(string value)</code></pre>
+  <pre><code class="lang-csharp hljs">public JobResultCorrections ClearFollowUpDate()</code></pre>
 </div>
 
-<h4 class="section">Parameters</h4>
-<dl class="parameters">
-  <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-  <dd></dd>
-</dl>
 
 <h4 class="section">Returns</h4>
 <dl class="parameters">
-  <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProtectionModeExactMatch.html">ProtectionModeExactMatch</a></dt>
-  <dd></dd>
+  <dt><a class="xref" href="Camunda.Orchestration.Sdk.JobResultCorrections.html">JobResultCorrections</a></dt>
+  <dd><p>This instance, for chaining.</p>
+</dd>
 </dl>
 
 
@@ -158,7 +155,7 @@ Use this when side-loading values not received from an API call.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L26235" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L20052" class="edit-link">Edit this page</a>
         </div>
 
 
