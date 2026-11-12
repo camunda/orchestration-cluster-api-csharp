@@ -306,18 +306,39 @@ public class MultipartSendTests : IDisposable
         // Cancel once the upload is actually reading from the (blocked) source stream.
         // Bound the wait so a serialization path that never reads the source fails fast
         // instead of hanging the suite.
-        var readObserved = await Task.WhenAny(readStarted.Task, Task.Delay(TimeSpan.FromSeconds(10)));
-        Assert.True(ReferenceEquals(readObserved, readStarted.Task),
+        Assert.True(await CompletesWithinAsync(readStarted.Task, TimeSpan.FromSeconds(10)),
             "the upload never read from the source stream");
         cts.Cancel();
 
         // The cancelled read must fault the send with OperationCanceledException. Bound
         // the wait: if the wrapper drops the token, the source read never completes and
         // this times out (a deterministic failure) instead of hanging the suite.
-        var completed = await Task.WhenAny(send, Task.Delay(TimeSpan.FromSeconds(10)));
-        Assert.True(ReferenceEquals(completed, send),
+        Assert.True(await CompletesWithinAsync(send, TimeSpan.FromSeconds(10)),
             "cancelling the request did not reach the pending source-stream read");
         await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await send);
+    }
+
+    /// <summary>
+    /// Waits for <paramref name="task"/> to finish, in any state, and returns false if
+    /// <paramref name="timeout"/> elapses first. The outcome is left for the caller to
+    /// assert. Uses <see cref="Task.WaitAsync(TimeSpan)"/> rather than racing a
+    /// <c>Task.Delay</c>, so no timer outlives the wait (CA2027).
+    /// </summary>
+    private static async Task<bool> CompletesWithinAsync(Task task, TimeSpan timeout)
+    {
+        try
+        {
+            await task.WaitAsync(timeout);
+        }
+        catch (TimeoutException) when (!task.IsCompleted)
+        {
+            return false;
+        }
+        catch (Exception) when (task.IsCompleted)
+        {
+            // Faulted or cancelled still counts as finished.
+        }
+        return true;
     }
 
     /// <summary>
