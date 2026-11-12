@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using Camunda.Orchestration.Sdk.Tests.Internals;
 
 namespace Camunda.Orchestration.Sdk.Tests;
@@ -159,6 +160,116 @@ public class ClearableDateTimeSerializationTests
         Assert.Equal("", node["followUpDate"]!.GetValue<string>());
         Assert.True(node.ContainsKey("dueDate"));
         Assert.Null(node["dueDate"]);
+    }
+
+    // ── Caller-registered date converters ───────────────────────────────────
+
+    private static readonly DateTimeOffset UnixDate = DateTimeOffset.FromUnixTimeSeconds(1_700_000_000);
+
+    private static JsonSerializerOptions WithConverter(JsonConverter converter)
+    {
+        var options = SdkJsonOptions.Create();
+        options.Converters.Add(converter);
+        return options;
+    }
+
+    [Fact]
+    public void Nullable_date_converter_writes_and_reads_a_set_date()
+    {
+        var options = WithConverter(new UnixSecondsNullableConverter());
+
+        var corrections = new JobResultCorrections { DueDate = UnixDate };
+        Assert.Equal("{\"dueDate\":1700000000}", JsonSerializer.Serialize(corrections, options));
+        Assert.Equal(
+            JsonSerializer.Serialize(new PlainDates { DueDate = UnixDate }, options),
+            JsonSerializer.Serialize(new Changeset { DueDate = UnixDate }, options));
+
+        var read = JsonSerializer.Deserialize<Changeset>("{\"dueDate\":1700000000}", options)!;
+        Assert.Equal(UnixDate, read.DueDate);
+        Assert.False(read.IsDueDateCleared);
+    }
+
+    [Fact]
+    public void Nullable_date_converter_returning_null_preserves()
+    {
+        // The converter maps 0 to null: that is "no value", i.e. preserve, never a clear.
+        var options = WithConverter(new UnixSecondsNullableConverter());
+
+        var read = JsonSerializer.Deserialize<JobResultCorrections>("{\"dueDate\":0}", options)!;
+
+        Assert.Null(read.DueDate);
+        Assert.False(read.IsDueDateCleared);
+        Assert.Equal("{}", JsonSerializer.Serialize(read, options));
+    }
+
+    [Fact]
+    public void Nullable_date_converter_does_not_see_the_clear()
+    {
+        // The converter rejects strings, so "" must be handled before it is consulted.
+        var options = WithConverter(new UnixSecondsNullableConverter());
+
+        Assert.Equal("{\"dueDate\":\"\"}", JsonSerializer.Serialize(new JobResultCorrections().ClearDueDate(), options));
+        var read = JsonSerializer.Deserialize<Changeset>("{\"followUpDate\":\"\"}", options)!;
+        Assert.True(read.IsFollowUpDateCleared);
+        Assert.Null(read.FollowUpDate);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Registered_date_converter_behaves_as_for_a_plain_nullable_date(bool nullableConverter)
+    {
+        // Reference: a plain DateTimeOffset? property, the shape these models had before
+        // they became clearable. Whatever a registered converter does to it, it must do here.
+        var options = WithConverter(nullableConverter
+            ? new UnixSecondsNullableConverter()
+            : new UnixSecondsConverter());
+
+        var expected = JsonSerializer.Serialize(new PlainDates { DueDate = UnixDate, FollowUpDate = UnixDate }, options);
+        var actual = JsonSerializer.Serialize(new JobResultCorrections { DueDate = UnixDate, FollowUpDate = UnixDate }, options);
+        Assert.Equal(expected, actual);
+
+        var plain = JsonSerializer.Deserialize<PlainDates>(expected, options)!;
+        var read = JsonSerializer.Deserialize<JobResultCorrections>(expected, options)!;
+        Assert.Equal(plain.DueDate, read.DueDate);
+        Assert.Equal(plain.FollowUpDate, read.FollowUpDate);
+    }
+
+    private sealed class PlainDates
+    {
+        [JsonPropertyName("dueDate")]
+        public DateTimeOffset? DueDate { get; set; }
+
+        [JsonPropertyName("followUpDate")]
+        public DateTimeOffset? FollowUpDate { get; set; }
+    }
+
+    private sealed class UnixSecondsNullableConverter : JsonConverter<DateTimeOffset?>
+    {
+        public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.Number)
+                throw new JsonException($"Expected Unix seconds, got {reader.TokenType}.");
+            var seconds = reader.GetInt64();
+            return seconds == 0 ? null : DateTimeOffset.FromUnixTimeSeconds(seconds);
+        }
+
+        public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options)
+        {
+            if (value is { } v)
+                writer.WriteNumberValue(v.ToUnixTimeSeconds());
+            else
+                writer.WriteNullValue();
+        }
+    }
+
+    private sealed class UnixSecondsConverter : JsonConverter<DateTimeOffset>
+    {
+        public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+            DateTimeOffset.FromUnixTimeSeconds(reader.GetInt64());
+
+        public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options) =>
+            writer.WriteNumberValue(value.ToUnixTimeSeconds());
     }
 
     // ── Defect-class sweep against the real bundled spec ───────────────────

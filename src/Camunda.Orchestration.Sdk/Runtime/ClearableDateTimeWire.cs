@@ -32,7 +32,10 @@ internal readonly struct ClearableDateTimeWire
     /// <summary>A clear: serialised as <c>""</c>.</summary>
     public static ClearableDateTimeWire Cleared => new(null, true);
 
-    /// <summary>A date-time: serialised exactly as a <see cref="DateTimeOffset"/>.</summary>
+    /// <summary>No value: neither a date nor a clear, so the persisted value is preserved.</summary>
+    public static ClearableDateTimeWire Preserved => new(null, false);
+
+    /// <summary>A date-time: serialised exactly as a <see cref="DateTimeOffset"/>?.</summary>
     public static ClearableDateTimeWire Of(DateTimeOffset value) => new(value, false);
 
     /// <summary>
@@ -44,9 +47,12 @@ internal readonly struct ClearableDateTimeWire
 }
 
 /// <summary>
-/// Writes a <see cref="ClearableDateTimeWire"/> as <c>""</c> when cleared and otherwise
-/// delegates to the configured <see cref="DateTimeOffset"/> converter, so a set date is
-/// written byte-for-byte as before. Reads <c>""</c> back as a clear.
+/// Writes a <see cref="ClearableDateTimeWire"/> as <c>""</c> when cleared and reads <c>""</c>
+/// back as a clear. Every other value is delegated as a <see cref="DateTimeOffset"/>?, the type
+/// these properties had before they became clearable, so whatever converter the options resolve
+/// for it (a caller's <c>JsonConverter&lt;DateTimeOffset?&gt;</c>, a lifted
+/// <c>JsonConverter&lt;DateTimeOffset&gt;</c>, or the default) handles a set date exactly as it
+/// did. A <c>null</c> that converter reads is "no value", which preserves the persisted value.
 /// </summary>
 internal sealed class ClearableDateTimeWireJsonConverter : JsonConverter<ClearableDateTimeWire>
 {
@@ -58,17 +64,19 @@ internal sealed class ClearableDateTimeWireJsonConverter : JsonConverter<Clearab
             return ClearableDateTimeWire.Cleared;
         }
 
-        return ClearableDateTimeWire.Of(JsonSerializer.Deserialize<DateTimeOffset>(ref reader, options));
+        return JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options) is { } date
+            ? ClearableDateTimeWire.Of(date)
+            : ClearableDateTimeWire.Preserved;
     }
 
     public override void Write(Utf8JsonWriter writer, ClearableDateTimeWire value, JsonSerializerOptions options)
     {
-        if (value.IsCleared || value.Value is not { } date)
+        if (value.IsCleared)
         {
             writer.WriteStringValue(string.Empty);
             return;
         }
 
-        JsonSerializer.Serialize(writer, date, options);
+        JsonSerializer.Serialize(writer, value.Value, options);
     }
 }
