@@ -415,6 +415,30 @@ internal static class ReadmeExamples
         // </JobCorrections>
     }
 
+    private static void JobCorrectionsClearDatesExample()
+    {
+        using var client = CamundaClient.Create();
+        var config = new JobWorkerConfig { JobType = "reschedule-task", JobTimeoutMs = 30_000 };
+
+        // <JobCorrectionsClearDates>
+        client.CreateJobWorker(config, async (job, ct) =>
+        {
+            return new JobCompletionRequest
+            {
+                Result = new JobResultUserTask
+                {
+                    // Set the due date and remove the follow-up date. Leaving a date
+                    // unset (null) keeps the task's current value.
+                    Corrections = new JobResultCorrections
+                    {
+                        DueDate = DateTimeOffset.UtcNow.AddDays(7),
+                    }.ClearFollowUpDate(),
+                },
+            };
+        });
+        // </JobCorrectionsClearDates>
+    }
+
     private static void JobCorrectionsDeniedExample()
     {
         using var client = CamundaClient.Create();
