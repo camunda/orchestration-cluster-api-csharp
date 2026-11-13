@@ -218,13 +218,17 @@ public sealed class ActivatedJob
     /// applied to the activation response as a whole (the envelope around the job takes the first
     /// levels of that budget), so a deeply nested payload fails with a <c>JsonException</c> during
     /// activation rather than recursing without bound. The SDK does not log variable payloads —
-    /// with indirect routes: an unhandled handler exception is logged with its message and stack,
-    /// and its message is also sent to the broker as the job's failure message. That includes a
+    /// with indirect routes: an exception that escapes the handler, other than the SDK's own
+    /// <c>JobFailureException</c> and <c>BpmnErrorException</c>, is logged with its message and
+    /// stack and its message is sent to the broker as the job's failure message. That includes a
     /// <c>JsonException</c> thrown by <see cref="GetVariables{T}"/>, which you call from the
-    /// handler and whose message and path can name payload properties. A failure while the
-    /// activation response itself is parsed happens before a handler exists: the poll loop logs
-    /// it, but there is no job to fail, so nothing is sent to the broker. Nothing redacts
-    /// exception contents.</para>
+    /// handler and whose message and path can name payload properties. The two control exceptions
+    /// are not logged, but their messages are still sent to the broker (as the failure message or
+    /// the BPMN error message), and a handler cancelled by worker shutdown is not reported to the
+    /// broker (only a debug line naming the job key is logged). A failure while the activation
+    /// response itself is parsed happens before a handler exists: the poll loop logs it, but there
+    /// is no job to fail, so nothing is sent to the broker. Nothing redacts exception
+    /// contents.</para>
     ///
     /// <para>What the SDK does not do: there is no size cap on a payload, no schema validation,
     /// and no sanitisation. Conversion to a target type is <c>System.Text.Json</c> behaviour: by

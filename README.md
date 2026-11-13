@@ -841,18 +841,23 @@ What the SDK does:
   activation, before the handler runs, rather than recursing without bound.
 - **The SDK does not log variable payloads.** The worker logs job keys, worker names and statuses.
   There are indirect routes, though, and they differ by where the exception is raised:
-  - An exception raised inside your handler is logged with its message and stack trace by the
-    default logger, and its message is also sent to the broker as that job's failure message.
-    That includes the `JsonException` that `job.GetVariables<T>()` throws, because you call it
-    from the handler: on a payload that does not fit `T`, its message and path can name payload
-    properties.
+  - An exception that escapes your handler and is not one of the SDK's own control exceptions is
+    logged with its message and stack trace by the default logger, and its message is also sent to
+    the broker as that job's failure message. That includes the `JsonException` that
+    `job.GetVariables<T>()` throws, because you call it from the handler: on a payload that does
+    not fit `T`, its message and path can name payload properties.
+  - `JobFailureException` and `BpmnErrorException` are not logged by the worker, but their
+    messages are sent to the broker (as the failure message, or as the BPMN error message), so
+    they carry the same risk toward the broker. A handler cancelled by worker shutdown is
+    not reported to the broker, and only a debug line naming the job key is logged; the job is
+    left to time out.
   - A failure while the activation response is parsed (for example, nesting beyond the depth
     limit) happens before any handler exists. It is logged by the worker's poll loop, with the
     exception, but it is not sent to the broker, because there is no job to fail yet.
 
   A variable value or property name that ends up in an exception message therefore reaches the
-  log, and, for handler exceptions, the broker. Nothing redacts exception contents: keep variable
-  values out of the exception messages you throw.
+  broker for handler exceptions, and the log for unexpected ones and activation failures. Nothing
+  redacts exception contents: keep variable values out of the exception messages you throw.
 - **Each job's payload is its own.** Every activated job gets its own wrapper over its own result,
   and `JsonElement` is immutable, so nothing is shared or mutated across concurrent handler tasks.
 
