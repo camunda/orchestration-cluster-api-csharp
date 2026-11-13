@@ -23,15 +23,7 @@ public class JobVariableTrustModelTests
     [InlineData(65, true)]
     public void Variable_payloads_are_bounded_at_the_documented_depth(int depth, bool expectFailure)
     {
-        using var client = new CamundaClient(new CamundaOptions
-        {
-            Config = new Dictionary<string, string>
-            {
-                [ConfigKeys.RestAddress] = "https://mock.local",
-                [ConfigKeys.AuthStrategy] = "NONE",
-            },
-            HttpMessageHandler = new MockHttpMessageHandler(),
-        });
+        using var client = NewClient();
 
         var payload = NestedObjectJson(depth);
 
@@ -55,6 +47,37 @@ public class JobVariableTrustModelTests
                 Assert.Null(exception);
         }
     }
+
+    [Theory]
+    // The envelope is three levels — response object, jobs array, job object — so 61 levels of
+    // variables reach the limit exactly...
+    [InlineData(61, false)]
+    // ...and one more exceeds it, during activation, before any handler runs.
+    [InlineData(62, true)]
+    public void The_activation_envelope_counts_towards_the_same_depth_budget(int variableDepth, bool expectFailure)
+    {
+        using var client = NewClient();
+
+        var response = $"{{\"jobs\":[{{\"variables\":{NestedObjectJson(variableDepth)}}}]}}";
+
+        var exception = Record.Exception(
+            () => JsonSerializer.Deserialize<JsonElement>(response, client._jsonOptions));
+
+        if (expectFailure)
+            Assert.IsAssignableFrom<JsonException>(exception);
+        else
+            Assert.Null(exception);
+    }
+
+    private static CamundaClient NewClient() => new(new CamundaOptions
+    {
+        Config = new Dictionary<string, string>
+        {
+            [ConfigKeys.RestAddress] = "https://mock.local",
+            [ConfigKeys.AuthStrategy] = "NONE",
+        },
+        HttpMessageHandler = new MockHttpMessageHandler(),
+    });
 
     /// <summary>
     /// A payload of <paramref name="depth"/> nested objects: depth 1 is <c>{"a":1}</c>.

@@ -208,12 +208,15 @@ public sealed class ActivatedJob
     /// treat it as you would an HTTP request body, not as configuration.</para>
     ///
     /// <para>What the SDK guarantees: deserialization happens only when you ask for a type, and
-    /// only into the type you name (<see cref="GetVariables{T}"/>), through
-    /// <c>System.Text.Json</c> with a closed set of converters — the payload cannot select a type,
-    /// so no arbitrary class is instantiated from it. Depth is bounded by the
-    /// <c>System.Text.Json</c> default <c>MaxDepth</c> of 64, so a deeply nested payload fails
-    /// with a <c>JsonException</c> rather than recursing without bound. Variable contents are
-    /// never written to the SDK's own logs.</para>
+    /// only into the type you name (<see cref="GetVariables{T}"/>). There is no unrestricted
+    /// type-name resolution — the payload cannot name a type for the SDK to load — though
+    /// <c>System.Text.Json</c> will dispatch to polymorphic subtypes that your own target type
+    /// declares. Depth is bounded by the <c>System.Text.Json</c> default <c>MaxDepth</c> of 64,
+    /// applied to the activation response as a whole (the envelope around the job takes the first
+    /// levels of that budget), so a deeply nested payload fails with a <c>JsonException</c> during
+    /// activation rather than recursing without bound. The SDK does not log variable payloads —
+    /// with one indirect route: an unhandled handler exception is logged with its message and
+    /// stack, so a value your own exception text embeds reaches the log that way.</para>
     ///
     /// <para>What the SDK does not do: there is no size cap on a payload, no schema validation
     /// (properties that do not match the target type are ignored, and missing ones come back as
@@ -261,9 +264,10 @@ public sealed class ActivatedJob
     ///
     /// <para>The payload is untrusted input — see <see cref="Variables"/>. Deserializing into
     /// <typeparamref name="T"/> is a shape conversion, not validation: unmatched properties are
-    /// ignored and absent ones come back as <c>null</c> or default. Pass
-    /// <paramref name="options"/> with your own <c>MaxDepth</c> if you need a tighter bound than
-    /// the <c>System.Text.Json</c> default of 64.</para>
+    /// ignored and absent ones come back as <c>null</c> or default. <paramref name="options"/>
+    /// can only tighten the depth bound on this element: it was parsed off the activation
+    /// response under the <c>System.Text.Json</c> default <c>MaxDepth</c> of 64 already, so a
+    /// larger value here cannot admit a payload that activation rejected.</para>
     /// </summary>
     /// <typeparam name="T">The target DTO type.</typeparam>
     /// <param name="options">Optional JSON serializer options. Uses camelCase by default.</param>

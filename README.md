@@ -819,15 +819,24 @@ What the SDK does:
 
 - **Deserialization is explicit.** Variables reach the handler as `object` (a `JsonElement` at
   runtime) and are only materialised when you ask for a type, via `job.GetVariables<T>()` or
-  `job.GetCustomHeaders<T>()`. The payload cannot choose the type: there is no discriminator
-  handling and no payload-driven type resolution on this path, so no arbitrary class can be
-  instantiated from a variable payload.
-- **`System.Text.Json` with a closed set of converters** does the work — tolerant enums and the
-  SDK's own key types. Nothing else is registered.
-- **Depth is bounded.** The SDK sets no `MaxDepth` of its own, so the `System.Text.Json` default
-  of **64** applies. A payload nested deeper than that fails with a `JsonException` rather than
-  recursing without bound.
-- **Variable contents are not logged.** The worker logs job keys, worker names and statuses only.
+  `job.GetCustomHeaders<T>()`. There is no unrestricted type-name resolution: the payload cannot
+  name a type for the SDK to load and instantiate. `System.Text.Json` will dispatch to
+  polymorphic subtypes that *your own* target type declares (`[JsonDerivedType]`), which is your
+  declaration rather than the payload's choice, and it will use converters you pass yourself.
+- **Two sets of `JsonSerializerOptions` are involved.** The client's options parse the activation
+  response and register a closed set — tolerant enums and the SDK's own key types.
+  `TypedVariables.DefaultOptions`, which `GetVariables<T>()` uses when you pass no options of your
+  own, registers no converters at all. Neither set does payload-driven type resolution.
+- **Depth is bounded, and the bound is on the whole response.** The SDK sets no `MaxDepth` of its
+  own, so the `System.Text.Json` default of **64** applies — to the activation response document
+  as a whole, not to the variable payload in isolation. The envelope around a job (response
+  object → `jobs` array → job object) consumes the first levels of that budget, so a variable
+  payload has the remainder. A response nested deeper fails with a `JsonException` during
+  activation, before the handler runs, rather than recursing without bound.
+- **The SDK does not log variable payloads.** The worker logs job keys, worker names and statuses.
+  Note the one indirect route: an unhandled handler exception is logged with its message and stack
+  trace, so a variable value that your own exception text embeds reaches the log that way. Nothing
+  redacts exception contents.
 - **Each job's payload is its own.** Every activated job gets its own wrapper over its own result,
   and `JsonElement` is immutable, so nothing is shared or mutated across concurrent handler tasks.
 
@@ -843,8 +852,10 @@ What the SDK does **not** do — your handler owns these:
   external input.
 
 Note on depth: 64 is the `System.Text.Json` default rather than a limit this SDK declares. Treat
-it as the limit that applies today, not as a contract; if your handler needs a specific bound,
-pass your own `JsonSerializerOptions` to `GetVariables<T>()` with the `MaxDepth` you want.
+it as the limit that applies today, not as a contract. Passing your own `JsonSerializerOptions`
+to `GetVariables<T>()` can only *tighten* the bound on a job's variables: that element has already
+been parsed off the activation response, so a larger `MaxDepth` there cannot admit a payload the
+activation parse already rejected.
 
 ### Job Corrections (User Task Listeners)
 
