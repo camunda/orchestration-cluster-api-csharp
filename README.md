@@ -810,10 +810,16 @@ throw new JobFailureException("Service unavailable", retries: 2, retryBackOffMs:
 
 ### Job Variables Are Untrusted Input
 
-A job's `variables` and `customHeaders` are **untrusted input**. Their content is whatever was
-written into the process instance — by whoever started it, by an earlier service task, or by a
-form submission — so a handler must treat them the way it would treat an HTTP request body, not
-the way it would treat its own configuration.
+A job's `variables` and `customHeaders` are both **untrusted input**, but they come from different
+places, so they are untrusted for different reasons:
+
+- `variables` carry whatever was written into the process instance — by whoever started it, by an
+  earlier service task, or by a form submission. A handler must treat them the way it would treat
+  an HTTP request body, not the way it would treat its own configuration.
+- `customHeaders` are defined in the process model (during modelling), not written by process
+  starters, service tasks or forms. They are controlled by whoever can deploy or change the model.
+  That is a narrower group than the one that controls `variables`, but it is still not your
+  handler's own code, so validate them before you rely on them for anything sensitive.
 
 What the SDK does:
 
@@ -834,9 +840,13 @@ What the SDK does:
   payload has the remainder. A response nested deeper fails with a `JsonException` during
   activation, before the handler runs, rather than recursing without bound.
 - **The SDK does not log variable payloads.** The worker logs job keys, worker names and statuses.
-  Note the one indirect route: an unhandled handler exception is logged with its message and stack
-  trace, so a variable value that your own exception text embeds reaches the log that way. Nothing
-  redacts exception contents.
+  There are indirect routes, though. An unhandled handler exception is logged with its message and
+  stack trace by the default logger, and its message is also sent to the broker as the job's
+  failure message. That includes exceptions raised before your code runs, such as the
+  `JsonException` that `job.GetVariables<T>()` throws on a payload that does not fit `T`, whose
+  message and path can name payload properties. A variable value or property name that ends up in
+  an exception message therefore reaches both the log and the broker. Nothing redacts exception
+  contents: keep variable values out of the exception messages you throw.
 - **Each job's payload is its own.** Every activated job gets its own wrapper over its own result,
   and `JsonElement` is immutable, so nothing is shared or mutated across concurrent handler tasks.
 
@@ -844,9 +854,14 @@ What the SDK does **not** do — your handler owns these:
 
 - **No size limit.** There is no cap on the byte size of a variable payload, beyond the limits the
   broker itself enforces. A large payload is deserialized as given.
-- **No schema validation.** `GetVariables<T>()` fills what matches `T` and ignores the rest;
-  missing properties come back as `null`/default rather than as an error. Validate the values you
-  depend on — ranges, formats, required fields — in the handler.
+- **No schema validation.** The SDK checks the payload against no schema. `GetVariables<T>()` is
+  a `System.Text.Json` conversion, so what it does with a mismatched payload is `System.Text.Json`
+  behaviour. By default, for an ordinary DTO, properties that do not match `T` are ignored and
+  missing ones keep their initializer or default (`null` for reference types). Members marked
+  `required` or `[JsonRequired]` make an absent property throw a `JsonException`, and options you
+  pass yourself (for example `UnmappedMemberHandling = Disallow`) can reject unmatched properties.
+  Neither is a substitute for validating the values you depend on — ranges, formats, required
+  fields — in the handler.
 - **No sanitisation.** Strings arrive exactly as stored. Anything you pass onward to a shell, a
   SQL statement, a file path or an HTML page needs the same escaping you would apply to any
   external input.

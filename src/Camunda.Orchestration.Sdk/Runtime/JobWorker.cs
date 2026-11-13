@@ -187,8 +187,11 @@ public sealed class ActivatedJob
 
     /// <summary>Raw custom headers (typically a <see cref="JsonElement"/> at runtime).
     ///
-    /// <para><b>Untrusted input.</b> See <see cref="Variables"/> for the trust model that applies
-    /// to this property too.</para>
+    /// <para><b>Untrusted input.</b> Custom headers are defined in the process model, not written by
+    /// process starters, service tasks or forms, so they are controlled by whoever can deploy or
+    /// change the model — a narrower group than the one that controls <see cref="Variables"/>, but
+    /// still not your handler's own code. See <see cref="Variables"/> for the rest of the trust
+    /// model.</para>
     /// </summary>
     public object CustomHeaders => _raw.CustomHeaders;
 
@@ -215,13 +218,19 @@ public sealed class ActivatedJob
     /// applied to the activation response as a whole (the envelope around the job takes the first
     /// levels of that budget), so a deeply nested payload fails with a <c>JsonException</c> during
     /// activation rather than recursing without bound. The SDK does not log variable payloads —
-    /// with one indirect route: an unhandled handler exception is logged with its message and
-    /// stack, so a value your own exception text embeds reaches the log that way.</para>
+    /// with indirect routes: an unhandled handler exception is logged with its message and stack,
+    /// and its message is also sent to the broker as the job's failure message. That includes a
+    /// <c>JsonException</c> thrown by <see cref="GetVariables{T}"/>, whose message and path can
+    /// name payload properties. Nothing redacts exception contents, so a value or property name
+    /// that reaches an exception message reaches both the log and the broker.</para>
     ///
-    /// <para>What the SDK does not do: there is no size cap on a payload, no schema validation
-    /// (properties that do not match the target type are ignored, and missing ones come back as
-    /// <c>null</c> or default), and no sanitisation. Validate what you depend on, and escape
-    /// anything you pass onward to a shell, a query, a path or a page.</para>
+    /// <para>What the SDK does not do: there is no size cap on a payload, no schema validation,
+    /// and no sanitisation. Conversion to a target type is <c>System.Text.Json</c> behaviour: by
+    /// default, for an ordinary DTO, properties that do not match are ignored and missing ones keep
+    /// their initializer or default, while <c>required</c> or <c>[JsonRequired]</c> members make
+    /// an absent property throw and custom options can reject unmatched properties. Validate what
+    /// you depend on, and escape anything you pass onward to a shell, a query, a path or a
+    /// page.</para>
     /// </summary>
     public object Variables => _raw.Variables;
 
@@ -263,8 +272,12 @@ public sealed class ActivatedJob
     /// Deserialize the job's <c>variables</c> payload into a strongly-typed DTO.
     ///
     /// <para>The payload is untrusted input — see <see cref="Variables"/>. Deserializing into
-    /// <typeparamref name="T"/> is a shape conversion, not validation: unmatched properties are
-    /// ignored and absent ones come back as <c>null</c> or default. <paramref name="options"/>
+    /// <typeparamref name="T"/> is a shape conversion, not validation: with the default options,
+    /// unmatched properties are ignored and absent ones keep their initializer or default, unless
+    /// <typeparamref name="T"/> marks them <c>required</c> or you pass options that reject
+    /// unmatched members. A payload that does not fit throws a <c>JsonException</c> whose message
+    /// can name payload properties; see <see cref="Variables"/> for where exception messages
+    /// end up. <paramref name="options"/>
     /// can only tighten the depth bound on this element: it was parsed off the activation
     /// response under the <c>System.Text.Json</c> default <c>MaxDepth</c> of 64 already, so a
     /// larger value here cannot admit a payload that activation rejected.</para>
@@ -277,7 +290,7 @@ public sealed class ActivatedJob
     /// <summary>
     /// Deserialize the job's <c>customHeaders</c> payload into a strongly-typed DTO.
     ///
-    /// <para>The payload is untrusted input — see <see cref="Variables"/>.</para>
+    /// <para>The payload is untrusted input — see <see cref="CustomHeaders"/>.</para>
     /// </summary>
     /// <typeparam name="T">The target DTO type.</typeparam>
     /// <param name="options">Optional JSON serializer options. Uses camelCase by default.</param>
