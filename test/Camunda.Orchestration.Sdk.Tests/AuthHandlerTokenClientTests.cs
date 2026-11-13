@@ -54,26 +54,8 @@ public class AuthHandlerTokenClientTests : IDisposable
     [Fact]
     public async Task Token_transport_is_built_once_per_handler_not_once_per_request()
     {
-        var config = new CamundaConfig
-        {
-            RestAddress = "https://mock.local",
-            TokenAudience = "test-audience",
-            Auth = new AuthConfig { Strategy = AuthStrategy.OAuth },
-            OAuth = new OAuthConfig
-            {
-                ClientId = "test-id",
-                ClientSecret = "test-secret",
-                // Loopback, refused immediately, and bypassed by any configured proxy: the fetch
-                // fails fast and deterministically without reaching the network.
-                OAuthUrl = "https://127.0.0.1:1/token",
-                Retry = new OAuthRetryConfig { Max = 1, BaseDelayMs = 1 },
-                TimeoutMs = 2000,
-            },
-            Tls = new TlsConfig { CaPath = _caCertPath },
-        };
-
         using var handler = new AuthHandler(
-            config, new MockHttpMessageHandler(), NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
+            OAuthConfig(_caCertPath), new MockHttpMessageHandler(), NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
         using var client = new HttpClient(handler) { BaseAddress = new Uri("https://mock.local/") };
 
         var first = await Record.ExceptionAsync(() => client.GetAsync("/topology"));
@@ -91,6 +73,42 @@ public class AuthHandlerTokenClientTests : IDisposable
         // the request stopped reaching the auth path.
         Assert.True(HasInChain<CamundaAuthException>(second), $"second send: {second}");
     }
+
+    [Fact]
+    public async Task Token_transport_is_not_rebuilt_after_the_handler_is_disposed()
+    {
+        // The other half of a single owned transport: a send still in flight when the handler is
+        // disposed must not quietly build a replacement that nothing will ever dispose.
+        var handler = new AuthHandler(
+            OAuthConfig(caPath: null), new MockHttpMessageHandler(), NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
+        using var client = new HttpClient(handler) { BaseAddress = new Uri("https://mock.local/") };
+
+        var first = await Record.ExceptionAsync(() => client.GetAsync("/topology"));
+        Assert.True(HasInChain<CamundaAuthException>(first), $"first send: {first}");
+
+        handler.Dispose();
+
+        var afterDispose = await Record.ExceptionAsync(() => client.GetAsync("/topology"));
+        Assert.True(HasInChain<ObjectDisposedException>(afterDispose), $"after dispose: {afterDispose}");
+    }
+
+    private static CamundaConfig OAuthConfig(string? caPath) => new()
+    {
+        RestAddress = "https://mock.local",
+        TokenAudience = "test-audience",
+        Auth = new AuthConfig { Strategy = AuthStrategy.OAuth },
+        OAuth = new OAuthConfig
+        {
+            ClientId = "test-id",
+            ClientSecret = "test-secret",
+            // Loopback, refused immediately, and bypassed by any configured proxy: the fetch
+            // fails fast and deterministically without reaching the network.
+            OAuthUrl = "https://127.0.0.1:1/token",
+            Retry = new OAuthRetryConfig { Max = 1, BaseDelayMs = 1 },
+            TimeoutMs = 2000,
+        },
+        Tls = caPath == null ? null : new TlsConfig { CaPath = caPath },
+    };
 
     private static bool HasInChain<T>(Exception? exception) where T : Exception
     {

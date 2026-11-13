@@ -19,6 +19,7 @@ internal sealed class AuthHandler : DelegatingHandler
     private readonly ILogger _logger;
     private readonly object _tokenClientGate = new();
     private HttpClient? _tokenClient;
+    private bool _disposed;
 
     public AuthHandler(CamundaConfig config, HttpMessageHandler? inner, ILogger? logger, TimeProvider timeProvider, IRandomSource randomSource)
         : base(inner ?? new HttpClientHandler())
@@ -75,6 +76,10 @@ internal sealed class AuthHandler : DelegatingHandler
     {
         lock (_tokenClientGate)
         {
+            // A send already in flight can reach this gate after Dispose has released the
+            // client. Without this it would build a replacement that nothing ever disposes.
+            ObjectDisposedException.ThrowIf(_disposed, this);
+
             // Left unset when BuildHandler throws (a missing certificate file, say), so the next
             // send retries the build rather than caching the failure for the handler's lifetime.
             if (_tokenClient == null)
@@ -95,6 +100,7 @@ internal sealed class AuthHandler : DelegatingHandler
 
             lock (_tokenClientGate)
             {
+                _disposed = true;
                 _tokenClient?.Dispose();
                 _tokenClient = null;
             }
