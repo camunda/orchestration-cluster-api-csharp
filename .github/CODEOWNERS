@@ -1,0 +1,46 @@
+# Default owners for everything in the repo.
+# To be added as an owner, reach out to the pod in #team-agentic-experience
+# (tag @pod-clients-sdks-ai-first-tooling).
+* @camunda/clients-sdks-ai-first-tooling
+
+# Security-sensitive: CI, release workflows, container builds
+/.github/       @camunda/clients-sdks-ai-first-tooling
+**/Dockerfile   @camunda/clients-sdks-ai-first-tooling
+
+# Dependency manifests and lockfiles are intentionally left without an owner
+# so Renovate can auto-merge dependency updates.
+# See https://github.com/orgs/community/discussions/23064#discussioncomment-8383923
+# Keep these AFTER the rules above: the last matching pattern wins.
+
+# JavaScript / TypeScript
+**/package.json
+**/package-lock.json
+**/pnpm-lock.yaml
+**/yarn.lock
+
+# Python
+**/pyproject.toml
+**/requirements*.txt
+**/uv.lock
+**/poetry.lock
+
+# C#
+**/*.csproj
+**/Directory.Packages.props
+**/packages.lock.json
+
+# Go
+**/go.mod
+**/go.sum
+
+# Java
+**/pom.xml
+.mvn/wrapper/maven-wrapper.properties
+
+# Rust
+**/Cargo.toml
+**/Cargo.lock
+
+# PHP
+**/composer.json
+**/composer.lock
