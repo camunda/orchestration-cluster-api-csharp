@@ -71,6 +71,10 @@ internal sealed class AuthHandler : DelegatingHandler
     /// exhaustion under sustained load), gave the token endpoint a cold TLS handshake every
     /// refresh, and — with mTLS configured — re-read and re-parsed the certificate and key from
     /// disk on the hot path of every single request.</para>
+    ///
+    /// <para>The consequence is that certificate and key files are read on the first token fetch
+    /// and not again: rotating them on disk takes effect when a new client is created, which is
+    /// also how the API connection built in <c>CamundaClient</c> already behaves.</para>
     /// </summary>
     private HttpClient GetTokenClient()
     {
