@@ -881,7 +881,10 @@ Note on depth: 64 is the `System.Text.Json` default rather than a limit this SDK
 it as the limit that applies today, not as a contract. Passing your own `JsonSerializerOptions`
 to `GetVariables<T>()` can only *tighten* the bound on a job's variables: that element has already
 been parsed off the activation response, so a larger `MaxDepth` there cannot admit a payload the
-activation parse already rejected.
+activation parse already rejected. The guarantee is qualified: it holds when no custom `MaxDepth`
+is given and the element came from the activation response. Custom options passed to
+`DeserializeAs` on an element that was parsed elsewhere can raise the limit, and an object that
+is already a typed DTO skips conversion, so no depth bound is applied to it.
 
 ### Job Corrections (User Task Listeners)
 
