@@ -9327,10 +9327,16 @@ public readonly record struct BusinessId : global::Camunda.Orchestration.Sdk.ICa
 public sealed class CamundaUserResult
 {
     /// <summary>
-    /// The username of the user.
+    /// Whether the caller has no identity. Only an unprotected API answers an anonymous caller; a protected API returns `401` instead. When `true`, `username`, `displayName` and `email` are `null` and the lists are empty.
+    /// </summary>
+    [JsonPropertyName("isAnonymous")]
+    public bool IsAnonymous { get; set; }
+
+    /// <summary>
+    /// The username of the user. `null` when `isAnonymous` is `true`.
     /// </summary>
     [JsonPropertyName("username")]
-    public Username Username { get; set; }
+    public Username? Username { get; set; }
 
     /// <summary>
     /// The display name of the user.
@@ -9345,7 +9351,7 @@ public sealed class CamundaUserResult
     public string? Email { get; set; }
 
     /// <summary>
-    /// The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[&quot;*&quot;]`, regardless of the user&apos;s actual permissions, since access is not restricted in that case.
+    /// The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `[&quot;*&quot;]`, regardless of the user&apos;s actual permissions, since access is not restricted in that case. An anonymous caller of an unprotected API also gets `[&quot;*&quot;]`, for the same reason.
     /// </summary>
     [JsonPropertyName("authorizedComponents")]
     public List<string> AuthorizedComponents { get; set; } = null!;
