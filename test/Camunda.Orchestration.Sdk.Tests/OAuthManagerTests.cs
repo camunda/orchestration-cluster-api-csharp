@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.Time.Testing;
 
 namespace Camunda.Orchestration.Sdk.Tests;
 
@@ -208,5 +209,82 @@ public class OAuthManagerTests : IDisposable
 
         Assert.Equal("second", token);
         Assert.Equal(2, _tokenHandler.Requests.Count);
+    }
+
+    // ---- Expiry boundaries ----
+    //
+    // The two boundary computations in OAuthManager are the proactive-refresh lead window and
+    // the skew buffer subtracted from the server-reported lifetime. Both are pinned to the exact
+    // millisecond through the injected clock: a margin-based assertion passes whether the lead
+    // window is 5000 ms, 0 ms or a minute, which is precisely the regression class these cases
+    // exist to catch. The defect class is "a boundary that silently moves", so both sides of each
+    // boundary are asserted, and the skew case covers both branches of max(30 s, 5 % of lifetime)
+    // rather than one example lifetime.
+
+    [Fact]
+    public async Task GetToken_ReusesTheTokenJustOutsideTheRefreshLeadWindow()
+    {
+        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var handler = new MockHttpMessageHandler();
+        handler.Enqueue(HttpStatusCode.OK, TokenJson("lead-window-token"));
+        using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
+        using var oauth = new OAuthManager(CreateConfig(), NullLogger.Instance, clock, CamundaRandomSource.Live);
+
+        await oauth.GetTokenAsync(client);
+
+        // One millisecond earlier than the lead window opens: the token is still presentable.
+        oauth.Debug_SetTokenExpiry(clock.GetUtcNow().ToUnixTimeMilliseconds() + 5001);
+
+        Assert.Equal("lead-window-token", await oauth.GetTokenAsync(client));
+        Assert.Single(handler.Requests);
+    }
+
+    [Fact]
+    public async Task GetToken_RefreshesAtTheRefreshLeadWindowEdge()
+    {
+        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var handler = new MockHttpMessageHandler();
+        handler.Enqueue(HttpStatusCode.OK, TokenJson("stale-token"));
+        handler.Enqueue(HttpStatusCode.OK, TokenJson("lead-window-refresh"));
+        using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
+        using var oauth = new OAuthManager(CreateConfig(), NullLogger.Instance, clock, CamundaRandomSource.Live);
+
+        await oauth.GetTokenAsync(client);
+
+        // Exactly at the lead window: still 5 s of nominal validity left, and the token must
+        // already be replaced. Dropping the lead window would leave workers presenting a token
+        // the server has expired whenever their clock runs slightly ahead of the issuer's.
+        oauth.Debug_SetTokenExpiry(clock.GetUtcNow().ToUnixTimeMilliseconds() + 5000);
+
+        Assert.Equal("lead-window-refresh", await oauth.GetTokenAsync(client));
+        Assert.Equal(2, handler.Requests.Count);
+    }
+
+    [Theory]
+    // expires_in 60 s: 5 % is 3 s, so the 30 s floor applies -> expiry at +30 s.
+    [InlineData(60, 30_000)]
+    // expires_in 3600 s: 5 % is 180 s, above the floor -> expiry at +3 420 s.
+    [InlineData(3600, 3_420_000)]
+    public async Task GetToken_StoresTheExpiryWithTheSkewBufferApplied(int expiresInSeconds, long expectedLifetimeMs)
+    {
+        var clock = new FakeTimeProvider(DateTimeOffset.UnixEpoch);
+        var handler = new MockHttpMessageHandler();
+        handler.Enqueue(HttpStatusCode.OK, TokenJson("skew-token", expiresInSeconds));
+        handler.Enqueue(HttpStatusCode.OK, TokenJson("skew-refresh", expiresInSeconds));
+        using var client = new HttpClient(handler) { BaseAddress = new Uri("https://auth.mock/") };
+        using var oauth = new OAuthManager(CreateConfig(), NullLogger.Instance, clock, CamundaRandomSource.Live);
+
+        Assert.Equal("skew-token", await oauth.GetTokenAsync(client));
+
+        // The stored expiry is private, so it is observed through the boundary it drives: the
+        // refresh must happen at (stored expiry - 5000 ms) to the millisecond. A mis-signed or
+        // dropped skew buffer moves this edge and fails here.
+        clock.Advance(TimeSpan.FromMilliseconds(expectedLifetimeMs - 5001));
+        Assert.Equal("skew-token", await oauth.GetTokenAsync(client));
+        Assert.Single(handler.Requests);
+
+        clock.Advance(TimeSpan.FromMilliseconds(1));
+        Assert.Equal("skew-refresh", await oauth.GetTokenAsync(client));
+        Assert.Equal(2, handler.Requests.Count);
     }
 }
