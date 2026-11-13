@@ -30,6 +30,10 @@ public class SecretLeakageTests
     private const string BasicPasswordSentinel = "sentinel-bbbbbbbbbbbb";
     private const string KeyPassphraseSentinel = "sentinel-cccccccccccc";
 
+    // The issued access token is a bearer credential in its own right, so it carries a
+    // sentinel too: logging the token, or the whole token response, must fail these tests.
+    private const string AccessTokenSentinel = "sentinel-dddddddddddd";
+
     private static CamundaConfig OAuthConfigWithSentinel() => new()
     {
         RestAddress = "https://mock.local",
@@ -57,7 +61,7 @@ public class SecretLeakageTests
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(
-                    JsonSerializer.Serialize(new { access_token = "tok-123", expires_in = 3600 }),
+                    JsonSerializer.Serialize(new { access_token = AccessTokenSentinel, expires_in = 3600 }),
                     Encoding.UTF8,
                     "application/json"),
             };
@@ -71,7 +75,7 @@ public class SecretLeakageTests
             CamundaRandomSource.Live);
 
         var token = await oauth.GetTokenAsync(client);
-        Assert.Equal("tok-123", token);
+        Assert.Equal(AccessTokenSentinel, token);
 
         // Not vacuous: the secret really was presented to the token endpoint.
         Assert.NotNull(tokenRequestBody);
@@ -224,6 +228,7 @@ public class SecretLeakageTests
         Assert.DoesNotContain(ClientSecretSentinel, haystack, StringComparison.Ordinal);
         Assert.DoesNotContain(BasicPasswordSentinel, haystack, StringComparison.Ordinal);
         Assert.DoesNotContain(KeyPassphraseSentinel, haystack, StringComparison.Ordinal);
+        Assert.DoesNotContain(AccessTokenSentinel, haystack, StringComparison.Ordinal);
     }
 
     /// <summary>
