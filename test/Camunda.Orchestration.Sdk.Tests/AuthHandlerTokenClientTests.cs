@@ -79,17 +79,34 @@ public class AuthHandlerTokenClientTests : IDisposable
     {
         // The other half of a single owned transport: a send still in flight when the handler is
         // disposed must not quietly build a replacement that nothing will ever dispose.
+        //
+        // Observing that needs the same trick as the test above. Without the disposed guard the
+        // send would build a replacement and then fail anyway, because OAuthManager's own lock is
+        // already disposed, so "the send fails" cannot tell the two apart. Building the transport
+        // with a CA bundle configured reads the file, though, so with the bundle gone a rebuild
+        // surfaces as FileNotFoundException before anything else can throw, while the guard
+        // refuses the send before the build is even attempted.
         var handler = new AuthHandler(
-            OAuthConfig(caPath: null), new MockHttpMessageHandler(), NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
+            OAuthConfig(_caCertPath), new MockHttpMessageHandler(), NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
         using var client = new HttpClient(handler) { BaseAddress = new Uri("https://mock.local/") };
 
         var first = await Record.ExceptionAsync(() => client.GetAsync("/topology"));
         Assert.True(HasInChain<CamundaAuthException>(first), $"first send: {first}");
+        Assert.False(HasInChain<FileNotFoundException>(first), $"first send: {first}");
 
         handler.Dispose();
+        File.Delete(_caCertPath);
 
         var afterDispose = await Record.ExceptionAsync(() => client.GetAsync("/topology"));
-        Assert.True(HasInChain<ObjectDisposedException>(afterDispose), $"after dispose: {afterDispose}");
+
+        // No rebuild was attempted...
+        Assert.False(HasInChain<FileNotFoundException>(afterDispose), $"after dispose: {afterDispose}");
+
+        // ...and the refusal comes from the handler itself, not from a disposed dependency
+        // further down the send.
+        Assert.True(
+            HasInChain<ObjectDisposedException>(afterDispose, e => e.ObjectName == typeof(AuthHandler).FullName),
+            $"after dispose: {afterDispose}");
     }
 
     private static CamundaConfig OAuthConfig(string? caPath) => new()
@@ -110,13 +127,13 @@ public class AuthHandlerTokenClientTests : IDisposable
         Tls = caPath == null ? null : new TlsConfig { CaPath = caPath },
     };
 
-    private static bool HasInChain<T>(Exception? exception) where T : Exception
+    private static bool HasInChain<T>(Exception? exception, Func<T, bool>? predicate = null) where T : Exception
     {
         for (var current = exception; current != null; current = current.InnerException)
         {
-            if (current is T)
+            if (current is T match && (predicate == null || predicate(match)))
                 return true;
-            if (current is AggregateException aggregate && aggregate.InnerExceptions.Any(HasInChain<T>))
+            if (current is AggregateException aggregate && aggregate.InnerExceptions.Any(e => HasInChain(e, predicate)))
                 return true;
         }
 
