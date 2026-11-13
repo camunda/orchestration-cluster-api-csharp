@@ -2065,8 +2065,9 @@ TYPE Camunda.Orchestration.Sdk.CamundaTimeProvider : sealed class base=System.Ti
 
 TYPE Camunda.Orchestration.Sdk.CamundaUserResult : sealed class
   CTOR ()
-  PROP Camunda.Orchestration.Sdk.Username Username { get; set; } [JsonPropertyName("username")]
+  PROP Camunda.Orchestration.Sdk.Username? Username { get; set; } [JsonPropertyName("username")]
   PROP System.Boolean CanLogout { get; set; } [JsonPropertyName("canLogout")]
+  PROP System.Boolean IsAnonymous { get; set; } [JsonPropertyName("isAnonymous")]
   PROP System.Collections.Generic.Dictionary<System.String,System.String> C8Links { get; set; } [JsonPropertyName("c8Links")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.TenantResult> Tenants { get; set; } [JsonPropertyName("tenants")]
   PROP System.Collections.Generic.List<System.String> AuthorizedComponents { get; set; } [JsonPropertyName("authorizedComponents")]
