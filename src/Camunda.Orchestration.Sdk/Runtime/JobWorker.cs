@@ -220,9 +220,11 @@ public sealed class ActivatedJob
     /// activation rather than recursing without bound. The SDK does not log variable payloads —
     /// with indirect routes: an unhandled handler exception is logged with its message and stack,
     /// and its message is also sent to the broker as the job's failure message. That includes a
-    /// <c>JsonException</c> thrown by <see cref="GetVariables{T}"/>, whose message and path can
-    /// name payload properties. Nothing redacts exception contents, so a value or property name
-    /// that reaches an exception message reaches both the log and the broker.</para>
+    /// <c>JsonException</c> thrown by <see cref="GetVariables{T}"/>, which you call from the
+    /// handler and whose message and path can name payload properties. A failure while the
+    /// activation response itself is parsed happens before a handler exists: the poll loop logs
+    /// it, but there is no job to fail, so nothing is sent to the broker. Nothing redacts
+    /// exception contents.</para>
     ///
     /// <para>What the SDK does not do: there is no size cap on a payload, no schema validation,
     /// and no sanitisation. Conversion to a target type is <c>System.Text.Json</c> behaviour: by
