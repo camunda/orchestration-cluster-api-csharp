@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
@@ -174,6 +175,79 @@ public class SecretLeakageTests
     }
 
     [Fact]
+    public async Task OAuth_client_never_leaks_secrets_on_resource_success_or_failure()
+    {
+        // The two OAuth cases above drive OAuthManager directly. This one goes through the
+        // client, so the OAuth branch of AuthHandler (token fetch plus Bearer injection) and
+        // the client-level diagnostics sit inside the guardrail too.
+        using var tokenEndpoint = new LoopbackTokenEndpoint(_ =>
+            (HttpStatusCode.OK, JsonSerializer.Serialize(new { access_token = AccessTokenSentinel, expires_in = 3600 })));
+        var logs = new CapturingLoggerFactory();
+        var resourceHandler = new MockHttpMessageHandler();
+        var authorizationHeaders = new List<string?>();
+
+        resourceHandler.Enqueue(req =>
+        {
+            authorizationHeaders.Add(req.Headers.TryGetValues("Authorization", out var v) ? string.Join(',', v) : null);
+            return new HttpResponseMessage(HttpStatusCode.NoContent);
+        });
+        resourceHandler.Enqueue(req =>
+        {
+            authorizationHeaders.Add(req.Headers.TryGetValues("Authorization", out var v) ? string.Join(',', v) : null);
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+            {
+                // Generic on purpose, as in the basic-auth case: only what the SDK adds is asserted.
+                Content = new StringContent("{\"title\":\"Unauthorized\"}", Encoding.UTF8, "application/json"),
+            };
+        });
+
+        using var camunda = OAuthClient(tokenEndpoint.Url, resourceHandler, logs);
+
+        await camunda.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123"));
+        var failure = await Record.ExceptionAsync(
+            () => camunda.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123")));
+
+        Assert.NotNull(failure);
+
+        // Not vacuous: the client secret really went to the token endpoint, and both resource
+        // requests really carried the issued token as a Bearer credential.
+        var tokenRequest = Assert.Single(tokenEndpoint.RequestBodies);
+        Assert.Contains(ClientSecretSentinel, tokenRequest, StringComparison.Ordinal);
+        Assert.Equal(2, authorizationHeaders.Count);
+        Assert.All(authorizationHeaders, h => Assert.Equal("Bearer " + AccessTokenSentinel, h));
+
+        AssertNoSentinel(logs.AllOutput);
+        AssertNoSentinel(failure!.ToString());
+    }
+
+    [Fact]
+    public async Task OAuth_client_never_leaks_secrets_when_the_token_endpoint_rejects_the_credentials()
+    {
+        // The token endpoint's 401 body echoes the request it received, sentinel included.
+        using var tokenEndpoint = new LoopbackTokenEndpoint(requestBody =>
+            (HttpStatusCode.Unauthorized, JsonSerializer.Serialize(new { error = "invalid_client", echo = requestBody })));
+        var logs = new CapturingLoggerFactory();
+        var resourceHandler = new MockHttpMessageHandler();
+
+        using var camunda = OAuthClient(tokenEndpoint.Url, resourceHandler, logs);
+
+        var failure = await Record.ExceptionAsync(
+            () => camunda.CancelBatchOperationAsync(BatchOperationKey.AssumeExists("123")));
+
+        Assert.NotNull(failure);
+
+        // Not vacuous: the secret reached the token endpoint, the failure is the auth failure,
+        // and no resource request was sent without a token.
+        var tokenRequest = Assert.Single(tokenEndpoint.RequestBodies);
+        Assert.Contains(ClientSecretSentinel, tokenRequest, StringComparison.Ordinal);
+        Assert.Contains(AuthExceptionsIn(failure!), e => e.Code == CamundaAuthErrorCode.TokenFetchFailed);
+        Assert.Empty(resourceHandler.Requests);
+
+        AssertNoSentinel(logs.AllOutput);
+        AssertNoSentinel(failure!.ToString());
+    }
+
+    [Fact]
     public void No_configuration_object_prints_its_values()
     {
         var config = new CamundaConfig
@@ -263,6 +337,155 @@ public class SecretLeakageTests
         type.IsClass
         && type.Assembly == typeof(CamundaClient).Assembly
         && type.Namespace == typeof(CamundaClient).Namespace;
+
+    private static CamundaClient OAuthClient(string tokenUrl, MockHttpMessageHandler resourceHandler, CapturingLoggerFactory logs) =>
+        new(new CamundaOptions
+        {
+            Config = new Dictionary<string, string>
+            {
+                [ConfigKeys.RestAddress] = "https://mock.local",
+                [ConfigKeys.AuthStrategy] = "OAUTH",
+                [ConfigKeys.ClientId] = "sentinel-client-id",
+                [ConfigKeys.ClientSecret] = ClientSecretSentinel,
+                [ConfigKeys.OAuthUrl] = tokenUrl,
+                [ConfigKeys.TokenAudience] = "test-audience",
+                [ConfigKeys.OAuthRetryMax] = "1",
+                [ConfigKeys.OAuthRetryBaseDelayMs] = "1",
+                [ConfigKeys.OAuthTimeoutMs] = "5000",
+                [ConfigKeys.HttpRetryMaxAttempts] = "1",
+            },
+            HttpMessageHandler = resourceHandler,
+            LoggerFactory = logs,
+        });
+
+    private static IEnumerable<CamundaAuthException> AuthExceptionsIn(Exception root)
+    {
+        for (Exception? e = root; e != null; e = e.InnerException)
+        {
+            if (e is CamundaAuthException auth)
+                yield return auth;
+        }
+    }
+
+    /// <summary>
+    /// A real token endpoint on a loopback port. <c>AuthHandler</c> fetches tokens through its own
+    /// <c>HttpClient</c>, which a test cannot hand a stub handler, so the endpoint has to speak
+    /// HTTP. The listener owns its port (bound to 0), so there is no race for a free one.
+    /// Requests are served one at a time, which is all these tests need.
+    /// </summary>
+    private sealed class LoopbackTokenEndpoint : IDisposable
+    {
+        private readonly TcpListener _listener = new(IPAddress.Loopback, 0);
+        private readonly CancellationTokenSource _stop = new();
+        private readonly Func<string, (HttpStatusCode Status, string Body)> _respond;
+        private readonly List<string> _requestBodies = new();
+        private readonly object _gate = new();
+        private readonly Task _loop;
+
+        public LoopbackTokenEndpoint(Func<string, (HttpStatusCode Status, string Body)> respond)
+        {
+            _respond = respond;
+            _listener.Start();
+            _loop = Task.Run(AcceptLoopAsync);
+        }
+
+        public string Url => $"http://127.0.0.1:{((IPEndPoint)_listener.LocalEndpoint).Port}/token";
+
+        public IReadOnlyList<string> RequestBodies
+        {
+            get { lock (_gate) return _requestBodies.ToList(); }
+        }
+
+        public void Dispose()
+        {
+            _stop.Cancel();
+            _listener.Stop();
+            _loop.GetAwaiter().GetResult();
+            _stop.Dispose();
+        }
+
+        private async Task AcceptLoopAsync()
+        {
+            while (!_stop.IsCancellationRequested)
+            {
+                try
+                {
+                    using var connection = await _listener.AcceptTcpClientAsync(_stop.Token);
+                    await ServeAsync(connection, _stop.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    return;
+                }
+                catch (ObjectDisposedException)
+                {
+                    return;
+                }
+                catch (SocketException)
+                {
+                    // A listener that was stopped, or a client that went away mid-request.
+                    if (_stop.IsCancellationRequested)
+                        return;
+                }
+                catch (IOException)
+                {
+                    // A client that went away mid-request; keep serving.
+                }
+            }
+        }
+
+        private static readonly byte[] HeaderSeparator = "\r\n\r\n"u8.ToArray();
+
+        private static int IndexOfHeaderEnd(MemoryStream received) =>
+            received.GetBuffer().AsSpan(0, (int)received.Length).IndexOf(HeaderSeparator);
+
+        private async Task ServeAsync(TcpClient connection, CancellationToken ct)
+        {
+            var stream = connection.GetStream();
+            var received = new MemoryStream();
+            var chunk = new byte[4096];
+
+            int headerEnd;
+            while ((headerEnd = IndexOfHeaderEnd(received)) < 0)
+            {
+                var read = await stream.ReadAsync(chunk, ct);
+                if (read == 0)
+                    return;
+                received.Write(chunk, 0, read);
+            }
+
+            var headers = Encoding.ASCII.GetString(received.GetBuffer(), 0, headerEnd);
+            var contentLength = 0;
+            foreach (var line in headers.Split("\r\n"))
+            {
+                const string name = "content-length:";
+                if (line.StartsWith(name, StringComparison.OrdinalIgnoreCase))
+                    contentLength = int.Parse(line[name.Length..].Trim());
+            }
+
+            var bodyStart = headerEnd + HeaderSeparator.Length;
+            while (received.Length - bodyStart < contentLength)
+            {
+                var read = await stream.ReadAsync(chunk, ct);
+                if (read == 0)
+                    return;
+                received.Write(chunk, 0, read);
+            }
+
+            var requestBody = Encoding.UTF8.GetString(received.GetBuffer(), bodyStart, contentLength);
+            lock (_gate)
+                _requestBodies.Add(requestBody);
+
+            var (status, body) = _respond(requestBody);
+            var payload = Encoding.UTF8.GetBytes(body);
+            var head = Encoding.ASCII.GetBytes(
+                $"HTTP/1.1 {(int)status} {status}\r\nContent-Type: application/json\r\n" +
+                $"Content-Length: {payload.Length}\r\nConnection: close\r\n\r\n");
+            await stream.WriteAsync(head, ct);
+            await stream.WriteAsync(payload, ct);
+            await stream.FlushAsync(ct);
+        }
+    }
 
     /// <summary>
     /// Records everything the SDK logs, at every level, as one searchable blob. <c>IsEnabled</c>
