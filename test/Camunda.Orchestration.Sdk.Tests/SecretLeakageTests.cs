@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -460,7 +461,7 @@ public class SecretLeakageTests
             {
                 const string name = "content-length:";
                 if (line.StartsWith(name, StringComparison.OrdinalIgnoreCase))
-                    contentLength = int.Parse(line[name.Length..].Trim());
+                    contentLength = int.Parse(line[name.Length..].Trim(), CultureInfo.InvariantCulture);
             }
 
             var bodyStart = headerEnd + HeaderSeparator.Length;
