@@ -41,7 +41,7 @@ public class JobWorkerHandlerFailureTests
         var handler = new WorkerStubHandler(JobJson(jobKey: "222", retries: 3));
         using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
 
-        var worker = client.CreateJobWorker(
+        await using var worker = client.CreateJobWorker(
             new JobWorkerConfig { JobType = "failure-test", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false },
             (_, _) => throw thrown);
         worker.Start();
@@ -49,7 +49,8 @@ public class JobWorkerHandlerFailureTests
         var command = await handler.Command.WaitAsync(TimeSpan.FromSeconds(5));
         await worker.StopAsync(TimeSpan.FromSeconds(1));
 
-        Assert.Equal("/jobs/222/failure", command.Path);
+        // /v2 included: the hydrator normalizes a rest address that does not already end in /v2.
+        Assert.Equal("/v2/jobs/222/failure", command.Path);
 
         using var doc = JsonDocument.Parse(command.Body);
         Assert.Equal(2, doc.RootElement.GetProperty("retries").GetInt32());
@@ -68,7 +69,7 @@ public class JobWorkerHandlerFailureTests
         var handler = new WorkerStubHandler(JobJson(jobKey: "333", retries: jobRetries));
         using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
 
-        var worker = client.CreateJobWorker(
+        await using var worker = client.CreateJobWorker(
             new JobWorkerConfig { JobType = "failure-test", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false },
             (_, _) => throw new InvalidOperationException("handler blew up"));
         worker.Start();
@@ -86,12 +87,13 @@ public class JobWorkerHandlerFailureTests
         var handler = new WorkerStubHandler(JobJson(jobKey: "444", retries: 3));
         using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
 
-        var worker = client.CreateJobWorker(
+        await using var worker = client.CreateJobWorker(
             new JobWorkerConfig { JobType = "failure-test", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false },
             (_, _) => throw new InvalidOperationException("handler blew up"));
         worker.Start();
 
         await handler.Command.WaitAsync(TimeSpan.FromSeconds(5));
+        var pollsWhenFailureReported = handler.ActivationPolls;
 
         // The decrement runs in the handler task's finally, just after the failure command is
         // answered, so the command arriving does not by itself mean the counter has moved yet.
@@ -100,9 +102,14 @@ public class JobWorkerHandlerFailureTests
         await WaitUntilAsync(() => worker.ActiveJobs == 0, TimeSpan.FromSeconds(5));
 
         Assert.Equal(0, worker.ActiveJobs);
-        Assert.True(worker.IsRunning);
 
-        // An auto-failed job must not take the poll loop down with it.
+        // An auto-failed job must not take the poll loop down with it. An incomplete poll task is
+        // not enough on its own — a worker parked forever in a cancellable wait would satisfy
+        // that — so wait for an activation poll issued strictly after the failure was reported.
+        await WaitUntilAsync(
+            () => handler.ActivationPolls > pollsWhenFailureReported, TimeSpan.FromSeconds(5));
+
+        Assert.True(worker.IsRunning);
         Assert.NotNull(worker.Completion);
         Assert.False(worker.Completion!.IsFaulted);
 
@@ -154,6 +161,9 @@ public class JobWorkerHandlerFailureTests
         private int _polls;
 
         public Task<(string Path, string Body)> Command => _command.Task;
+
+        /// <summary>Activation polls answered so far.</summary>
+        public int ActivationPolls => Volatile.Read(ref _polls);
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
         {
