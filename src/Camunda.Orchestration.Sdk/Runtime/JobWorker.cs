@@ -227,8 +227,13 @@ public sealed class ActivatedJob
     /// the BPMN error message), and a handler cancelled by worker shutdown is not reported to the
     /// broker (only a debug line naming the job key is logged). A failure while the activation
     /// response itself is parsed happens before a handler exists: the poll loop logs it, but there
-    /// is no job to fail, so nothing is sent to the broker. Nothing redacts exception
-    /// contents.</para>
+    /// is no job to fail, so nothing is sent to the broker. A single job that cannot be converted
+    /// afterwards is logged at warning level with its exception and skipped, also without a
+    /// report to the broker. The exception to the poll-loop log is a parse failure on a requested
+    /// lease token: it is replaced by a <see cref="LeaseNotHonoredException"/> (naming a
+    /// placeholder job key and the <c>withLease</c> flag, not payload content; the original parse
+    /// exception is not kept) that faults the poll task, so it reaches the caller through
+    /// <see cref="JobWorker.Completion"/> instead. Nothing redacts exception contents.</para>
     ///
     /// <para>What the SDK does not do: there is no size cap on a payload, no schema validation,
     /// and no sanitisation. Conversion to a target type is <c>System.Text.Json</c> behaviour: by

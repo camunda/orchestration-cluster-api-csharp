@@ -853,11 +853,19 @@ What the SDK does:
     left to time out.
   - A failure while the activation response is parsed (for example, nesting beyond the depth
     limit) happens before any handler exists. It is logged by the worker's poll loop, with the
-    exception, but it is not sent to the broker, because there is no job to fail yet.
+    exception, but it is not sent to the broker, because there is no job to fail yet. A single
+    job that cannot be converted after the response was parsed is logged at warning level with its
+    exception and skipped, and is likewise not reported to the broker.
+  - The exception to the poll-loop log is a parse failure on a lease token the worker asked for
+    (`WithLease`). It does not reach that log: it is replaced by a `LeaseNotHonoredException`
+    that faults the poll task, so it surfaces through the worker's `Completion` task (and
+    `RunWorkersAsync`). That exception names a placeholder job key and the `withLease` flag, not
+    payload content, and the original parse exception is not kept.
 
   A variable value or property name that ends up in an exception message therefore reaches the
-  broker for handler exceptions, and the log for unexpected ones and activation failures. Nothing
-  redacts exception contents: keep variable values out of the exception messages you throw.
+  broker for handler exceptions, and the log for unexpected ones and activation failures (a
+  rejected lease token excepted, as above). Nothing redacts exception contents: keep variable
+  values out of the exception messages you throw.
 - **Each job's payload is its own.** Every activated job gets its own wrapper over its own result,
   and `JsonElement` is immutable, so nothing is shared or mutated across concurrent handler tasks.
 
