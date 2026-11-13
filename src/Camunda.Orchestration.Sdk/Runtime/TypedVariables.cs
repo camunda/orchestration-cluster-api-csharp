@@ -39,6 +39,16 @@ namespace Camunda.Orchestration.Sdk;
 /// <c>Variables</c> or <c>CustomHeaders</c> property to deserialize the underlying
 /// <see cref="JsonElement"/> into your DTO type.
 /// </para>
+///
+/// <para>
+/// <b>Received payloads are untrusted input.</b> Their content is set by whoever wrote the
+/// variables into the process instance. Deserialization is explicit — only into the type you
+/// name, with a closed set of converters, so the payload cannot select a type — and depth is
+/// bounded by the <c>System.Text.Json</c> default <c>MaxDepth</c> of 64 (pass your own
+/// <see cref="JsonSerializerOptions"/> for a different bound). There is no size cap, no schema
+/// validation and no sanitisation: deserializing into a DTO converts the shape, it does not
+/// validate the values.
+/// </para>
 /// </summary>
 public static class TypedVariables
 {

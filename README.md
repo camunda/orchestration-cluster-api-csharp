@@ -808,6 +808,44 @@ throw new BpmnErrorException("INVALID_ORDER", "Order not found");
 throw new JobFailureException("Service unavailable", retries: 2, retryBackOffMs: 5000);
 ```
 
+### Job Variables Are Untrusted Input
+
+A job's `variables` and `customHeaders` are **untrusted input**. Their content is whatever was
+written into the process instance — by whoever started it, by an earlier service task, or by a
+form submission — so a handler must treat them the way it would treat an HTTP request body, not
+the way it would treat its own configuration.
+
+What the SDK does:
+
+- **Deserialization is explicit.** Variables reach the handler as `object` (a `JsonElement` at
+  runtime) and are only materialised when you ask for a type, via `job.GetVariables<T>()` or
+  `job.GetCustomHeaders<T>()`. The payload cannot choose the type: there is no discriminator
+  handling and no payload-driven type resolution on this path, so no arbitrary class can be
+  instantiated from a variable payload.
+- **`System.Text.Json` with a closed set of converters** does the work — tolerant enums and the
+  SDK's own key types. Nothing else is registered.
+- **Depth is bounded.** The SDK sets no `MaxDepth` of its own, so the `System.Text.Json` default
+  of **64** applies. A payload nested deeper than that fails with a `JsonException` rather than
+  recursing without bound.
+- **Variable contents are not logged.** The worker logs job keys, worker names and statuses only.
+- **Each job's payload is its own.** Every activated job gets its own wrapper over its own result,
+  and `JsonElement` is immutable, so nothing is shared or mutated across concurrent handler tasks.
+
+What the SDK does **not** do — your handler owns these:
+
+- **No size limit.** There is no cap on the byte size of a variable payload, beyond the limits the
+  broker itself enforces. A large payload is deserialized as given.
+- **No schema validation.** `GetVariables<T>()` fills what matches `T` and ignores the rest;
+  missing properties come back as `null`/default rather than as an error. Validate the values you
+  depend on — ranges, formats, required fields — in the handler.
+- **No sanitisation.** Strings arrive exactly as stored. Anything you pass onward to a shell, a
+  SQL statement, a file path or an HTML page needs the same escaping you would apply to any
+  external input.
+
+Note on depth: 64 is the `System.Text.Json` default rather than a limit this SDK declares. Treat
+it as the limit that applies today, not as a contract; if your handler needs a specific bound,
+pass your own `JsonSerializerOptions` to `GetVariables<T>()` with the `MaxDepth` you want.
+
 ### Job Corrections (User Task Listeners)
 
 When handling jobs from [user task listeners](https://docs.camunda.io/docs/components/concepts/user-task-listeners/), you can return a `JobCompletionRequest` to apply corrections to the task or deny the action. Return a `JobCompletionRequest` from the handler instead of a plain variables object:

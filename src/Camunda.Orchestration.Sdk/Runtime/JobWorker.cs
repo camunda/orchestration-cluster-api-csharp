@@ -185,7 +185,11 @@ public sealed class ActivatedJob
     /// <summary>The associated task element ID.</summary>
     public ElementId ElementId => _raw.ElementId;
 
-    /// <summary>Raw custom headers (typically a <see cref="JsonElement"/> at runtime).</summary>
+    /// <summary>Raw custom headers (typically a <see cref="JsonElement"/> at runtime).
+    ///
+    /// <para><b>Untrusted input.</b> See <see cref="Variables"/> for the trust model that applies
+    /// to this property too.</para>
+    /// </summary>
     public object CustomHeaders => _raw.CustomHeaders;
 
     /// <summary>The name of the worker that activated this job.</summary>
@@ -197,7 +201,25 @@ public sealed class ActivatedJob
     /// <summary>UNIX epoch timestamp (ms) when the job lock expires.</summary>
     public long Deadline => _raw.Deadline;
 
-    /// <summary>Raw variables (typically a <see cref="JsonElement"/> at runtime).</summary>
+    /// <summary>Raw variables (typically a <see cref="JsonElement"/> at runtime).
+    ///
+    /// <para><b>Untrusted input.</b> The content is whatever was written into the process
+    /// instance — by whoever started it, by an earlier service task, or by a form submission — so
+    /// treat it as you would an HTTP request body, not as configuration.</para>
+    ///
+    /// <para>What the SDK guarantees: deserialization happens only when you ask for a type, and
+    /// only into the type you name (<see cref="GetVariables{T}"/>), through
+    /// <c>System.Text.Json</c> with a closed set of converters — the payload cannot select a type,
+    /// so no arbitrary class is instantiated from it. Depth is bounded by the
+    /// <c>System.Text.Json</c> default <c>MaxDepth</c> of 64, so a deeply nested payload fails
+    /// with a <c>JsonException</c> rather than recursing without bound. Variable contents are
+    /// never written to the SDK's own logs.</para>
+    ///
+    /// <para>What the SDK does not do: there is no size cap on a payload, no schema validation
+    /// (properties that do not match the target type are ignored, and missing ones come back as
+    /// <c>null</c> or default), and no sanitisation. Validate what you depend on, and escape
+    /// anything you pass onward to a shell, a query, a path or a page.</para>
+    /// </summary>
     public object Variables => _raw.Variables;
 
     /// <summary>The tenant that owns this job.</summary>
@@ -236,6 +258,12 @@ public sealed class ActivatedJob
 
     /// <summary>
     /// Deserialize the job's <c>variables</c> payload into a strongly-typed DTO.
+    ///
+    /// <para>The payload is untrusted input — see <see cref="Variables"/>. Deserializing into
+    /// <typeparamref name="T"/> is a shape conversion, not validation: unmatched properties are
+    /// ignored and absent ones come back as <c>null</c> or default. Pass
+    /// <paramref name="options"/> with your own <c>MaxDepth</c> if you need a tighter bound than
+    /// the <c>System.Text.Json</c> default of 64.</para>
     /// </summary>
     /// <typeparam name="T">The target DTO type.</typeparam>
     /// <param name="options">Optional JSON serializer options. Uses camelCase by default.</param>
@@ -244,6 +272,8 @@ public sealed class ActivatedJob
 
     /// <summary>
     /// Deserialize the job's <c>customHeaders</c> payload into a strongly-typed DTO.
+    ///
+    /// <para>The payload is untrusted input — see <see cref="Variables"/>.</para>
     /// </summary>
     /// <typeparam name="T">The target DTO type.</typeparam>
     /// <param name="options">Optional JSON serializer options. Uses camelCase by default.</param>
