@@ -21,7 +21,7 @@ public class DefaultTenantConformanceTests
         var config = new Dictionary<string, string> { ["CAMUNDA_REST_ADDRESS"] = "https://mock.local" };
         if (defaultTenant != null)
             config["CAMUNDA_DEFAULT_TENANT_ID"] = defaultTenant;
-        var client = new CamundaClient(new CamundaOptions { Config = config, HttpMessageHandler = handler });
+        var client = new CamundaClient(new CamundaOptions { Config = config, Env = new Dictionary<string, string?>(), HttpMessageHandler = handler });
         return (client, handler);
     }
 
@@ -196,8 +196,26 @@ public class DefaultTenantConformanceTests
         {
         }
         Assert.NotNull(body);
-        Assert.DoesNotContain("configured-tenant", body);
-        Assert.DoesNotContain("<default>", body);
+        AssertNoTenantProperty(JsonDocument.Parse(body!).RootElement);
+    }
+
+    private static void AssertNoTenantProperty(JsonElement element)
+    {
+        if (element.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var prop in element.EnumerateObject())
+            {
+                Assert.False(
+                    prop.Name is "tenantId" or "tenantIds",
+                    $"Search request must not carry a '{prop.Name}' property, got: {prop.Value.GetRawText()}");
+                AssertNoTenantProperty(prop.Value);
+            }
+        }
+        else if (element.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var item in element.EnumerateArray())
+                AssertNoTenantProperty(item);
+        }
     }
 
     private static async Task<JsonElement> CaptureActivateJobsAsync(string? configured, JobActivationRequest request)
