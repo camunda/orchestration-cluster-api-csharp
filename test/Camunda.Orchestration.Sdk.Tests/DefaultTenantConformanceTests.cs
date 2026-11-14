@@ -165,17 +165,19 @@ public class DefaultTenantConformanceTests
     [InlineData(true)]
     public async Task ActivateJobs_AssignedFilter_PreservesCallerTenantIds(bool explicitIds)
     {
-        var ids = explicitIds ? new List<TenantId> { TenantId.AssumeExists(Explicit) } : new List<TenantId>();
+        // Fixed expectations, independent of the mutable list handed to the SDK, so an
+        // in-place clear or default-append under ASSIGNED is detected rather than masked.
+        var expected = explicitIds ? new[] { Explicit } : Array.Empty<string>();
         var body = await CaptureActivateJobsAsync("configured-tenant", new JobActivationRequest
         {
             Type = "t",
             Timeout = 1000,
             MaxJobsToActivate = 1,
             TenantFilter = TenantFilterEnum.ASSIGNED,
-            TenantIds = ids,
+            TenantIds = explicitIds ? new List<TenantId> { TenantId.AssumeExists(Explicit) } : new List<TenantId>(),
         });
         var tenantIds = body.GetProperty("tenantIds").EnumerateArray().Select(x => x.GetString()).ToList();
-        Assert.Equal(ids.Select(x => (string?)x.Value).ToList(), tenantIds);
+        Assert.Equal(expected, tenantIds);
     }
 
     [Fact]
