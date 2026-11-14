@@ -27,7 +27,11 @@ public class DefaultTenantConformanceTests
 
     private static TenantId? Tenant(bool explicitTenant) => explicitTenant ? TenantId.AssumeExists(Explicit) : null;
 
-    /// <summary>Every rule-1 operation, keyed by name, invoked with or without an explicit tenant.</summary>
+    /// <summary>
+    /// Every rule-1 operation, keyed by case name, invoked with or without an explicit tenant.
+    /// Case names are the operationId, optionally followed by <c>:</c> and a body variant.
+    /// <see cref="EveryTenantScopedOperation_IsInTheMatrix"/> fails if an operation is missing.
+    /// </summary>
     private static readonly Dictionary<string, Func<CamundaClient, bool, Task>> TenantScopedOps = new()
     {
         ["createDeployment"] = async (c, e) =>
@@ -40,14 +44,14 @@ public class DefaultTenantConformanceTests
                 content.Add(new StringContent(Explicit), "tenantId");
             await c.CreateDeploymentAsync(content);
         },
-        ["createProcessInstanceById"] = (c, e) => c.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById { TenantId = Tenant(e) }),
-        ["createProcessInstanceByKey"] = (c, e) => c.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey { TenantId = Tenant(e) }),
-        ["createProcessInstanceByVersionTag"] = (c, e) => c.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByVersionTag { TenantId = Tenant(e) }),
+        ["createProcessInstance:ById"] = (c, e) => c.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById { TenantId = Tenant(e) }),
+        ["createProcessInstance:ByKey"] = (c, e) => c.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey { TenantId = Tenant(e) }),
+        ["createProcessInstance:ByVersionTag"] = (c, e) => c.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByVersionTag { TenantId = Tenant(e) }),
         ["publishMessage"] = (c, e) => c.PublishMessageAsync(new MessagePublicationRequest { Name = "m", TenantId = Tenant(e) }),
         ["correlateMessage"] = (c, e) => c.CorrelateMessageAsync(new MessageCorrelationRequest { Name = "m", TenantId = Tenant(e) }),
         ["broadcastSignal"] = (c, e) => c.BroadcastSignalAsync(new SignalBroadcastRequest { SignalName = "s", TenantId = Tenant(e) }),
-        ["evaluateDecisionById"] = (c, e) => c.EvaluateDecisionAsync(new DecisionEvaluationById { TenantId = Tenant(e) }),
-        ["evaluateDecisionByKey"] = (c, e) => c.EvaluateDecisionAsync(new DecisionEvaluationByKey { TenantId = Tenant(e) }),
+        ["evaluateDecision:ById"] = (c, e) => c.EvaluateDecisionAsync(new DecisionEvaluationById { TenantId = Tenant(e) }),
+        ["evaluateDecision:ByKey"] = (c, e) => c.EvaluateDecisionAsync(new DecisionEvaluationByKey { TenantId = Tenant(e) }),
         ["evaluateExpression"] = (c, e) => c.EvaluateExpressionAsync(new ExpressionEvaluationRequest { Expression = "=1", TenantId = Tenant(e) }),
         ["evaluateConditionals"] = (c, e) => c.EvaluateConditionalsAsync(new ConditionalEvaluationInstruction { TenantId = Tenant(e) }),
     };
@@ -122,6 +126,61 @@ public class DefaultTenantConformanceTests
     public async Task ExplicitTenant_OverridesConfiguredDefault(string op)
     {
         Assert.Equal(Explicit, await CaptureTenantAsync(op, configuredDefault: "configured-tenant", explicitTenant: true));
+    }
+
+    /// <summary>
+    /// Guards the matrix against new tenant-scoped operations. The SDK decides by the
+    /// presence of an optional <c>tenantId</c> in the request body, so the expected set
+    /// comes from two places: the bundler's <c>optionalTenantIdInBody</c> flag in
+    /// <c>spec-metadata.json</c> (the flag the JS SDK uses), and every generated client
+    /// method whose body type, or any concrete subtype of it, implements
+    /// <see cref="ITenantIdSettable"/>.
+    /// </summary>
+    [Fact]
+    public void EveryTenantScopedOperation_IsInTheMatrix()
+    {
+        var expected = new SortedSet<string>(StringComparer.Ordinal);
+
+        using (var metadata = JsonDocument.Parse(File.ReadAllText(FindBundledFile("spec-metadata.json"))))
+        {
+            foreach (var op in metadata.RootElement.GetProperty("operations").EnumerateArray())
+            {
+                if (op.TryGetProperty("optionalTenantIdInBody", out var flag) && flag.ValueKind == JsonValueKind.True)
+                    expected.Add(op.GetProperty("operationId").GetString()!);
+            }
+        }
+
+        var sdkTypes = typeof(CamundaClient).Assembly.GetTypes();
+        foreach (var method in typeof(CamundaClient).GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
+        {
+            if (!method.Name.EndsWith("Async", StringComparison.Ordinal))
+                continue;
+            var body = method.GetParameters().FirstOrDefault(p => p.Name == "body")?.ParameterType;
+            // Untyped `object` bodies (schema-less request bodies) cannot carry a defaulted tenant.
+            if (body == null || body == typeof(object))
+                continue;
+            var settable = sdkTypes.Any(t => !t.IsAbstract && body.IsAssignableFrom(t) && typeof(ITenantIdSettable).IsAssignableFrom(t));
+            if (settable)
+                expected.Add(char.ToLowerInvariant(method.Name[0]) + method.Name[1..^"Async".Length]);
+        }
+
+        var covered = new SortedSet<string>(TenantScopedOps.Keys.Select(k => k.Split(':')[0]), StringComparer.Ordinal);
+        Assert.NotEmpty(expected);
+        Assert.True(expected.SetEquals(covered), $"missing from matrix: [{string.Join(", ", expected.Except(covered))}]; not tenant-scoped: [{string.Join(", ", covered.Except(expected))}]");
+    }
+
+    private static string FindBundledFile(string name)
+    {
+        // The test process runs from test/.../bin/<config>/<tfm>/. Walk up to the repo root.
+        var dir = AppContext.BaseDirectory;
+        for (int i = 0; i < 8 && dir != null; i++)
+        {
+            var candidate = Path.Combine(dir, "external-spec", "bundled", name);
+            if (File.Exists(candidate))
+                return candidate;
+            dir = Path.GetDirectoryName(dir);
+        }
+        throw new FileNotFoundException($"Could not locate external-spec/bundled/{name}");
     }
 
     [Theory]
@@ -216,7 +275,7 @@ public class DefaultTenantConformanceTests
         {
         }
         Assert.NotNull(body);
-        AssertNoTenantProperty(JsonDocument.Parse(body!).RootElement);
+        AssertNoTenantProperty(JsonElement.Parse(body!));
     }
 
     private static void AssertNoTenantProperty(JsonElement element)
@@ -259,6 +318,6 @@ public class DefaultTenantConformanceTests
         {
         }
         Assert.NotNull(body);
-        return JsonDocument.Parse(body!).RootElement.Clone();
+        return JsonElement.Parse(body!);
     }
 }
