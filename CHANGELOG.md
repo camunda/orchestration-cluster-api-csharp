@@ -1,3 +1,10 @@
+# [11.0.0-alpha.10](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.9...v11.0.0-alpha.10) (2026-11-14)
+
+
+### Bug Fixes
+
+* **gen:** pin generated enum member values with an append-only ledger ([6bd5c8e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/6bd5c8e939dc0c472b72ead7046b5b14790b38f0)), closes [#535](https://github.com/camunda/orchestration-cluster-api-csharp/issues/535)
+
 # [11.0.0-alpha.9](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.8...v11.0.0-alpha.9) (2026-11-12)
 
 
