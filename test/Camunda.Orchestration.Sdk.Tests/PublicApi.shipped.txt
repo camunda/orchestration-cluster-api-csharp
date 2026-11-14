@@ -5368,6 +5368,7 @@ TYPE Camunda.Orchestration.Sdk.PermissionTypeEnum : enum interfaces=[System.ICom
   MEMBER UPDATEPROCESSINSTANCE = 44 json="UPDATE_PROCESS_INSTANCE"
   MEMBER UPDATEUSERTASK = 45 json="UPDATE_USER_TASK"
   MEMBER UPDATETASKLISTENER = 46 json="UPDATE_TASK_LISTENER"
+  MEMBER ANSWER = 47 json="ANSWER"
 
 TYPE Camunda.Orchestration.Sdk.PhysicalTenantBrokerTopology : sealed class
   CTOR ()
@@ -6143,6 +6144,7 @@ TYPE Camunda.Orchestration.Sdk.ResourceTypeEnum : enum interfaces=[System.ICompa
   MEMBER TENANT = 20 json="TENANT"
   MEMBER USER = 21 json="USER"
   MEMBER USERTASK = 22 json="USER_TASK"
+  MEMBER PROBE = 23 json="PROBE"
 
 TYPE Camunda.Orchestration.Sdk.RestoreBrokerStatus : sealed class
   CTOR ()
@@ -6977,7 +6979,6 @@ TYPE Camunda.Orchestration.Sdk.UserTaskLookupStateEnum : enum interfaces=[System
   MEMBER CREATING = 0 json="CREATING"
   MEMBER CREATED = 1 json="CREATED"
   MEMBER ASSIGNING = 2 json="ASSIGNING"
-  MEMBER CLAIMING = 3 json="CLAIMING"
   MEMBER UPDATING = 4 json="UPDATING"
   MEMBER COMPLETING = 5 json="COMPLETING"
   MEMBER CANCELING = 6 json="CANCELING"

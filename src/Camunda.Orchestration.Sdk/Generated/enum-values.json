@@ -684,6 +684,7 @@
   },
   "PermissionTypeEnum": {
     "ACCESS": 0,
+    "ANSWER": 47,
     "CANCEL_PROCESS_INSTANCE": 1,
     "CLAIM": 2,
     "CLAIM_USER_TASK": 3,
@@ -811,6 +812,7 @@
     "GROUP": 12,
     "MAPPING_RULE": 13,
     "MESSAGE": 14,
+    "PROBE": 23,
     "PROCESS_DEFINITION": 15,
     "RESOURCE": 16,
     "ROLE": 17,
