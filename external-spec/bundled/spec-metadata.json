@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:35e11fe30a0f8b3fcfe05fb58e09a5476b48398efc71b1e36966f2c09b86aab1",
+  "specHash": "sha256:dcfd1b015d1e24c70c3288101ab7cbbab420a4ebda5641d68e787a32eaee0266",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",

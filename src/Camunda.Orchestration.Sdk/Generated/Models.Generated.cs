@@ -23035,6 +23035,8 @@ public enum PermissionTypeEnum
 {
     [JsonPropertyName("ACCESS")]
     ACCESS = 0,
+    [JsonPropertyName("ANSWER")]
+    ANSWER = 47,
     [JsonPropertyName("CANCEL_PROCESS_INSTANCE")]
     CANCELPROCESSINSTANCE = 1,
     [JsonPropertyName("CLAIM")]
@@ -26748,6 +26750,8 @@ public enum ResourceTypeEnum
     MAPPINGRULE = 13,
     [JsonPropertyName("MESSAGE")]
     MESSAGE = 14,
+    [JsonPropertyName("PROBE")]
+    PROBE = 23,
     [JsonPropertyName("PROCESS_DEFINITION")]
     PROCESSDEFINITION = 15,
     [JsonPropertyName("RESOURCE")]
@@ -29813,7 +29817,8 @@ public sealed class UserTaskLookupResult
     /// <summary>
     /// The lifecycle state of an active user task. A state ending in `-ING` means a change to the
     /// task is in progress, for example waiting for task listeners; the task fields still hold
-    /// the values from before the change.
+    /// the values from before the change. A claim in progress is reported as `ASSIGNING`, as in
+    /// the user task search.
     /// 
     /// </summary>
     [JsonPropertyName("state")]
@@ -29957,7 +29962,8 @@ public sealed class UserTaskLookupResult
 /// <summary>
 /// The lifecycle state of an active user task. A state ending in `-ING` means a change to the
 /// task is in progress, for example waiting for task listeners; the task fields still hold
-/// the values from before the change.
+/// the values from before the change. A claim in progress is reported as `ASSIGNING`, as in
+/// the user task search.
 /// 
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -29969,8 +29975,6 @@ public enum UserTaskLookupStateEnum
     CREATED = 1,
     [JsonPropertyName("ASSIGNING")]
     ASSIGNING = 2,
-    [JsonPropertyName("CLAIMING")]
-    CLAIMING = 3,
     [JsonPropertyName("UPDATING")]
     UPDATING = 4,
     [JsonPropertyName("COMPLETING")]
