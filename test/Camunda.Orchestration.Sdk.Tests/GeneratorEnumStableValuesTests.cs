@@ -97,6 +97,31 @@ public class GeneratorEnumStableValuesTests
         }
     }
 
+    [Fact]
+    public void Removed_highest_value_is_not_reused_and_reintroduced_values_keep_their_number()
+    {
+        using var tmp = TempSpecDir.Create();
+        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+
+        var first = Generate(tmp, ["ACCESS", "CLAIM", "ZEBRA"]);
+        // Remove the highest-valued member (ZEBRA = 2) and insert a new one.
+        var dropped = Generate(tmp, ["ACCESS", "CLAIM", "YAK"]);
+        // Reintroduce ZEBRA while dropping CLAIM and YAK, then bring everything back.
+        var restored = Generate(tmp, ["ACCESS", "ZEBRA"]);
+        var all = Generate(tmp, ["ACCESS", "CLAIM", "YAK", "ZEBRA"]);
+
+        foreach (var enumName in first.Keys)
+        {
+            Assert.Equal(2, first[enumName]["ZEBRA"]);
+            Assert.Equal(3, dropped[enumName]["YAK"]);
+            Assert.Equal(2, restored[enumName]["ZEBRA"]);
+            Assert.Equal(0, all[enumName]["ACCESS"]);
+            Assert.Equal(1, all[enumName]["CLAIM"]);
+            Assert.Equal(3, all[enumName]["YAK"]);
+            Assert.Equal(2, all[enumName]["ZEBRA"]);
+        }
+    }
+
     private sealed class TempSpecDir : IDisposable
     {
         public string Root { get; }
