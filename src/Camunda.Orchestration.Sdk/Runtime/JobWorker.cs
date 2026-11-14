@@ -185,7 +185,14 @@ public sealed class ActivatedJob
     /// <summary>The associated task element ID.</summary>
     public ElementId ElementId => _raw.ElementId;
 
-    /// <summary>Raw custom headers (typically a <see cref="JsonElement"/> at runtime).</summary>
+    /// <summary>Raw custom headers (typically a <see cref="JsonElement"/> at runtime).
+    ///
+    /// <para><b>Untrusted input.</b> Custom headers are defined in the process model, not written by
+    /// process starters, service tasks or forms, so they are controlled by whoever can deploy or
+    /// change the model — a narrower group than the one that controls <see cref="Variables"/>, but
+    /// still not your handler's own code. See <see cref="Variables"/> for the rest of the trust
+    /// model.</para>
+    /// </summary>
     public object CustomHeaders => _raw.CustomHeaders;
 
     /// <summary>The name of the worker that activated this job.</summary>
@@ -197,7 +204,45 @@ public sealed class ActivatedJob
     /// <summary>UNIX epoch timestamp (ms) when the job lock expires.</summary>
     public long Deadline => _raw.Deadline;
 
-    /// <summary>Raw variables (typically a <see cref="JsonElement"/> at runtime).</summary>
+    /// <summary>Raw variables (typically a <see cref="JsonElement"/> at runtime).
+    ///
+    /// <para><b>Untrusted input.</b> The content is whatever was written into the process
+    /// instance — by whoever started it, by an earlier service task, or by a form submission — so
+    /// treat it as you would an HTTP request body, not as configuration.</para>
+    ///
+    /// <para>What the SDK guarantees: deserialization happens only when you ask for a type, and
+    /// only into the type you name (<see cref="GetVariables{T}"/>). There is no unrestricted
+    /// type-name resolution — the payload cannot name a type for the SDK to load — though
+    /// <c>System.Text.Json</c> will dispatch to polymorphic subtypes that your own target type
+    /// declares. Depth is bounded by the <c>System.Text.Json</c> default <c>MaxDepth</c> of 64,
+    /// applied to the activation response as a whole (the envelope around the job takes the first
+    /// levels of that budget), so a deeply nested payload fails with a <c>JsonException</c> during
+    /// activation rather than recursing without bound. The SDK does not log variable payloads —
+    /// with indirect routes: an exception that escapes the handler, other than the SDK's own
+    /// <c>JobFailureException</c> and <c>BpmnErrorException</c>, is logged with its message and
+    /// stack and its message is sent to the broker as the job's failure message. That includes a
+    /// <c>JsonException</c> thrown by <see cref="GetVariables{T}"/>, which you call from the
+    /// handler and whose message and path can name payload properties. The two control exceptions
+    /// are not logged, but their messages are still sent to the broker (as the failure message or
+    /// the BPMN error message), and a handler cancelled by worker shutdown is not reported to the
+    /// broker (only a debug line naming the job key is logged). A failure while the activation
+    /// response itself is parsed happens before a handler exists: the poll loop logs it, but there
+    /// is no job to fail, so nothing is sent to the broker. A single job that cannot be converted
+    /// afterwards is logged at warning level with its exception and skipped, also without a
+    /// report to the broker. The exception to the poll-loop log is a parse failure on a requested
+    /// lease token: it is replaced by a <see cref="LeaseNotHonoredException"/> (naming a
+    /// placeholder job key and the <c>withLease</c> flag, not payload content; the original parse
+    /// exception is not kept) that faults the poll task, so it reaches the caller through
+    /// <see cref="JobWorker.Completion"/> instead. Nothing redacts exception contents.</para>
+    ///
+    /// <para>What the SDK does not do: there is no size cap on a payload, no schema validation,
+    /// and no sanitisation. Conversion to a target type is <c>System.Text.Json</c> behaviour: by
+    /// default, for an ordinary DTO, properties that do not match are ignored and missing ones keep
+    /// their initializer or default, while <c>required</c> or <c>[JsonRequired]</c> members make
+    /// an absent property throw and custom options can reject unmatched properties. Validate what
+    /// you depend on, and escape anything you pass onward to a shell, a query, a path or a
+    /// page.</para>
+    /// </summary>
     public object Variables => _raw.Variables;
 
     /// <summary>The tenant that owns this job.</summary>
@@ -236,6 +281,17 @@ public sealed class ActivatedJob
 
     /// <summary>
     /// Deserialize the job's <c>variables</c> payload into a strongly-typed DTO.
+    ///
+    /// <para>The payload is untrusted input — see <see cref="Variables"/>. Deserializing into
+    /// <typeparamref name="T"/> is a shape conversion, not validation: with the default options,
+    /// unmatched properties are ignored and absent ones keep their initializer or default, unless
+    /// <typeparamref name="T"/> marks them <c>required</c> or you pass options that reject
+    /// unmatched members. A payload that does not fit throws a <c>JsonException</c> whose message
+    /// can name payload properties; see <see cref="Variables"/> for where exception messages
+    /// end up. <paramref name="options"/>
+    /// can only tighten the depth bound on this element: it was parsed off the activation
+    /// response under the <c>System.Text.Json</c> default <c>MaxDepth</c> of 64 already, so a
+    /// larger value here cannot admit a payload that activation rejected.</para>
     /// </summary>
     /// <typeparam name="T">The target DTO type.</typeparam>
     /// <param name="options">Optional JSON serializer options. Uses camelCase by default.</param>
@@ -244,6 +300,8 @@ public sealed class ActivatedJob
 
     /// <summary>
     /// Deserialize the job's <c>customHeaders</c> payload into a strongly-typed DTO.
+    ///
+    /// <para>The payload is untrusted input — see <see cref="CustomHeaders"/>.</para>
     /// </summary>
     /// <typeparam name="T">The target DTO type.</typeparam>
     /// <param name="options">Optional JSON serializer options. Uses camelCase by default.</param>
