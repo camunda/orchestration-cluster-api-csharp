@@ -160,6 +160,24 @@ public class DefaultTenantConformanceTests
         Assert.False(body.TryGetProperty("tenantIds", out var t) && t.ValueKind == JsonValueKind.Array);
     }
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task ActivateJobs_AssignedFilter_PreservesCallerTenantIds(bool explicitIds)
+    {
+        var ids = explicitIds ? new List<TenantId> { TenantId.AssumeExists(Explicit) } : new List<TenantId>();
+        var body = await CaptureActivateJobsAsync("configured-tenant", new JobActivationRequest
+        {
+            Type = "t",
+            Timeout = 1000,
+            MaxJobsToActivate = 1,
+            TenantFilter = TenantFilterEnum.ASSIGNED,
+            TenantIds = ids,
+        });
+        var tenantIds = body.GetProperty("tenantIds").EnumerateArray().Select(x => x.GetString()).ToList();
+        Assert.Equal(ids.Select(x => (string?)x.Value).ToList(), tenantIds);
+    }
+
     [Fact]
     public async Task ActivateJobs_ExplicitTenantIds_Win()
     {
