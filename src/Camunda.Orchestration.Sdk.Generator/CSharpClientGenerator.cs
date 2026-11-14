@@ -12,6 +12,10 @@ namespace Camunda.Orchestration.Sdk.Generator;
 /// </summary>
 internal static partial class CSharpClientGenerator
 {
+    /// <summary>File name of the append-only enum value ledger, written into the output directory.</summary>
+    internal const string EnumLedgerFileName = "enum-values.json";
+
+    private static EnumValueLedger s_enumLedger = EnumValueLedger.Load(string.Empty);
     /// <summary>
     /// Generate C# source files from the bundled OpenAPI spec.
     /// </summary>
@@ -36,6 +40,10 @@ internal static partial class CSharpClientGenerator
 
         Directory.CreateDirectory(outputDir);
 
+        // Stable enum member values (append-only ledger kept next to the generated output).
+        var enumLedgerPath = Path.Combine(outputDir, EnumLedgerFileName);
+        s_enumLedger = EnumValueLedger.Load(enumLedgerPath);
+
         // Load operation → example map (optional — generation succeeds without it)
         var examplesDir = Path.GetFullPath(Path.Combine(outputDir, "..", "..", "..", "examples"));
         var operationExamples = LoadOperationExamples(examplesDir);
@@ -54,6 +62,7 @@ internal static partial class CSharpClientGenerator
         var modelsPath = Path.Combine(outputDir, "Models.Generated.cs");
         SafeEmit.ScanGeneratedSource(modelsPath, modelsCode);
         File.WriteAllText(modelsPath, modelsCode);
+        s_enumLedger.Save(enumLedgerPath);
         Console.WriteLine($"[generator] Generated Models.Generated.cs ({doc.Components?.Schemas?.Count ?? 0} component schemas, {inlineSchemas.Count} inline schemas)");
 
         // Generate client methods
@@ -923,8 +932,11 @@ internal static partial class CSharpClientGenerator
                 sb.AppendLine($"[JsonConverter(typeof(JsonStringEnumConverter))]");
                 sb.AppendLine($"public enum {typeName}");
                 sb.AppendLine("{");
-                foreach (var e in EnumStringValues(schema))
+                var wireValues = EnumStringValues(schema).ToList();
+                var numbers = s_enumLedger.Assign(typeName, wireValues);
+                for (var i = 0; i < wireValues.Count; i++)
                 {
+                    var e = wireValues[i];
                     var enumName = ToPascalCase(e);
                     var deprecatedVersion = metadata.GetDeprecatedEnumMemberVersion(name, e);
                     if (deprecatedVersion != null)
@@ -932,7 +944,7 @@ internal static partial class CSharpClientGenerator
                         sb.AppendLine($"    [Obsolete(\"Deprecated since {SafeEmit.SafeCSharpStringLiteral(deprecatedVersion)}\")]");
                     }
                     sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(e)}\")]");
-                    sb.AppendLine($"    {enumName},");
+                    sb.AppendLine($"    {enumName} = {numbers[i]},");
                 }
                 sb.AppendLine("}");
                 sb.AppendLine();
@@ -2629,11 +2641,14 @@ internal static partial class CSharpClientGenerator
         sb.AppendLine($"[JsonConverter(typeof(JsonStringEnumConverter))]");
         sb.AppendLine($"public enum {enumTypeName}");
         sb.AppendLine("{");
-        foreach (var e in EnumStringValues(propSchema))
+        var wireValues = EnumStringValues(propSchema).ToList();
+        var numbers = s_enumLedger.Assign(enumTypeName, wireValues);
+        for (var i = 0; i < wireValues.Count; i++)
         {
+            var e = wireValues[i];
             var enumName = ToPascalCase(e);
             sb.AppendLine($"    [JsonPropertyName(\"{SafeEmit.SafeCSharpStringLiteral(e)}\")]");
-            sb.AppendLine($"    {enumName},");
+            sb.AppendLine($"    {enumName} = {numbers[i]},");
         }
         sb.AppendLine("}");
         sb.AppendLine();
