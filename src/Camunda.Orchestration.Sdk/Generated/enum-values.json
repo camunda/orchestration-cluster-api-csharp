@@ -1,0 +1,977 @@
+{
+  "AgentDefinitionSearchQuerySortRequestField": {
+    "agentDefinitionKey": 0,
+    "agentType": 1,
+    "elementId": 3,
+    "name": 2,
+    "processDefinitionId": 4,
+    "processDefinitionKey": 5,
+    "processDefinitionVersion": 6,
+    "processDefinitionVersionTag": 7,
+    "tenantId": 8
+  },
+  "AgentDefinitionTypeEnum": {
+    "AI_AGENT_SUB_PROCESS": 0,
+    "AI_AGENT_TASK": 1,
+    "EXTERNAL_AGENT": 2
+  },
+  "AgentInstanceHistoryCommitStatusEnum": {
+    "COMMITTED": 0,
+    "DISCARDED": 2,
+    "PENDING": 1
+  },
+  "AgentInstanceHistoryRoleEnum": {
+    "ASSISTANT": 1,
+    "CONFIGURATION": 3,
+    "TOOL_RESULT": 2,
+    "USER": 0
+  },
+  "AgentInstanceHistorySearchQuerySortRequestField": {
+    "historyItemKey": 1,
+    "loopIteration": 2,
+    "producedAt": 0
+  },
+  "AgentInstanceMessageContentTypeEnum": {
+    "DOCUMENT": 1,
+    "OBJECT": 2,
+    "TEXT": 0
+  },
+  "AgentInstanceSearchQuerySortRequestField": {
+    "agentDefinitionKey": 1,
+    "agentInstanceKey": 0,
+    "completionDate": 10,
+    "creationDate": 8,
+    "elementId": 3,
+    "lastUpdatedDate": 9,
+    "processDefinitionKey": 6,
+    "processInstanceKey": 4,
+    "rootProcessInstanceKey": 5,
+    "status": 2,
+    "tenantId": 7
+  },
+  "AgentInstanceStatusEnum": {
+    "COMPLETED": 1,
+    "IDLE": 2,
+    "INITIALIZING": 3,
+    "THINKING": 4,
+    "TOOL_CALLING": 5,
+    "TOOL_DISCOVERY": 6,
+    "UNKNOWN": 0
+  },
+  "AgentInstanceUpdateStatusEnum": {
+    "IDLE": 0,
+    "THINKING": 1,
+    "TOOL_CALLING": 2,
+    "TOOL_DISCOVERY": 3
+  },
+  "AuditLogActorTypeEnum": {
+    "ANONYMOUS": 0,
+    "CLIENT": 1,
+    "UNKNOWN": 2,
+    "USER": 3
+  },
+  "AuditLogCategoryEnum": {
+    "ADMIN": 0,
+    "DEPLOYED_RESOURCES": 1,
+    "USER_TASKS": 2
+  },
+  "AuditLogEntityTypeEnum": {
+    "AUTHORIZATION": 0,
+    "BATCH": 1,
+    "CLIENT": 14,
+    "DECISION": 2,
+    "GROUP": 3,
+    "INCIDENT": 4,
+    "JOB": 5,
+    "MAPPING_RULE": 6,
+    "PROCESS_INSTANCE": 7,
+    "RESOURCE": 8,
+    "ROLE": 9,
+    "TENANT": 10,
+    "USER": 11,
+    "USER_TASK": 12,
+    "VARIABLE": 13
+  },
+  "AuditLogOperationTypeEnum": {
+    "ASSIGN": 0,
+    "CANCEL": 1,
+    "COMPLETE": 2,
+    "CREATE": 3,
+    "DELETE": 4,
+    "EVALUATE": 5,
+    "MIGRATE": 6,
+    "MODIFY": 7,
+    "RESOLVE": 8,
+    "RESUME": 9,
+    "SUSPEND": 10,
+    "UNASSIGN": 11,
+    "UNKNOWN": 12,
+    "UPDATE": 13
+  },
+  "AuditLogResultEnum": {
+    "FAIL": 0,
+    "SUCCESS": 1
+  },
+  "AuditLogSearchQuerySortRequestField": {
+    "actorId": 0,
+    "actorType": 1,
+    "auditLogKey": 2,
+    "batchOperationKey": 3,
+    "batchOperationType": 4,
+    "category": 5,
+    "decisionDefinitionId": 6,
+    "decisionDefinitionKey": 7,
+    "decisionEvaluationKey": 8,
+    "decisionRequirementsId": 9,
+    "decisionRequirementsKey": 10,
+    "elementInstanceKey": 11,
+    "entityKey": 12,
+    "entityType": 13,
+    "inboundChannelToolName": 20,
+    "inboundChannelType": 19,
+    "jobKey": 14,
+    "operationType": 15,
+    "processDefinitionId": 16,
+    "processDefinitionKey": 17,
+    "processInstanceKey": 18,
+    "result": 21,
+    "tenantId": 22,
+    "timestamp": 23,
+    "userTaskKey": 24
+  },
+  "AuthorizationSearchQuerySortRequestField": {
+    "ownerId": 0,
+    "ownerType": 1,
+    "resourceId": 2,
+    "resourcePropertyName": 3,
+    "resourceType": 4
+  },
+  "BackupType": {
+    "MANUAL_BACKUP": 0,
+    "SCHEDULED_BACKUP": 1
+  },
+  "BatchOperationErrorType": {
+    "QUERY_FAILED": 0,
+    "RESULT_BUFFER_SIZE_EXCEEDED": 1
+  },
+  "BatchOperationItemResponseState": {
+    "ACTIVE": 0,
+    "CANCELED": 3,
+    "COMPLETED": 1,
+    "FAILED": 4,
+    "SKIPPED": 2
+  },
+  "BatchOperationItemSearchQuerySortRequestField": {
+    "batchOperationKey": 0,
+    "itemKey": 1,
+    "processInstanceKey": 2,
+    "processedDate": 3,
+    "state": 4
+  },
+  "BatchOperationItemStateEnum": {
+    "ACTIVE": 0,
+    "CANCELED": 2,
+    "COMPLETED": 1,
+    "FAILED": 3
+  },
+  "BatchOperationSearchQuerySortRequestField": {
+    "actorId": 6,
+    "actorType": 5,
+    "batchOperationKey": 0,
+    "endDate": 4,
+    "operationType": 1,
+    "startDate": 3,
+    "state": 2
+  },
+  "BatchOperationStateEnum": {
+    "ACTIVE": 0,
+    "CANCELED": 1,
+    "COMPLETED": 2,
+    "CREATED": 3,
+    "FAILED": 4,
+    "PARTIALLY_COMPLETED": 5,
+    "SUSPENDED": 6
+  },
+  "BatchOperationTypeEnum": {
+    "ADD_VARIABLE": 0,
+    "CANCEL_PROCESS_INSTANCE": 1,
+    "DELETE_DECISION_DEFINITION": 2,
+    "DELETE_DECISION_INSTANCE": 3,
+    "DELETE_PROCESS_DEFINITION": 4,
+    "DELETE_PROCESS_INSTANCE": 5,
+    "MIGRATE_PROCESS_INSTANCE": 6,
+    "MODIFY_PROCESS_INSTANCE": 7,
+    "RESOLVE_INCIDENT": 8,
+    "RESUME_PROCESS_INSTANCE": 9,
+    "SUSPEND_PROCESS_INSTANCE": 10,
+    "UPDATE_JOB": 11,
+    "UPDATE_VARIABLE": 12
+  },
+  "CheckpointType": {
+    "MANUAL_BACKUP": 2,
+    "MARKER": 0,
+    "SCHEDULED_BACKUP": 1
+  },
+  "CloudStage": {
+    "dev": 0,
+    "int": 1,
+    "prod": 2
+  },
+  "ClusterBalanceResponseState": {
+    "BALANCED": 0,
+    "BALANCING": 1,
+    "UNBALANCED": 2
+  },
+  "ClusterCompletedRebalanceResult": {
+    "CANCELLED": 1,
+    "COMPLETED": 0,
+    "FAILED": 2
+  },
+  "ClusterHistoryBackupTenantState": {
+    "COMPLETED": 1,
+    "FAILED": 2,
+    "INCOMPATIBLE": 4,
+    "INCOMPLETE": 3,
+    "IN_PROGRESS": 0,
+    "NOT_FOUND": 5
+  },
+  "ClusterRebalanceOperationPartitionProgress": {
+    "COMPLETED": 2,
+    "PENDING": 0,
+    "TRANSFERRING": 1
+  },
+  "ClusterRebalanceOperationPartitionResult": {
+    "ALREADY_LEADER": 1,
+    "CANCELLED": 17,
+    "CONFIGURATION_CHANGE_IN_PROGRESS": 10,
+    "LAG_TOO_HIGH": 8,
+    "LEADER_CHANGED": 14,
+    "LEADER_INITIALIZING": 9,
+    "NOT_COORDINATOR": 5,
+    "NOT_MEMBER": 2,
+    "NOT_REPLICATING": 3,
+    "NO_LEADER": 15,
+    "NO_RESPONSE": 16,
+    "PAUSE_FAILED": 11,
+    "PHYSICAL_TENANT_DISABLED": 18,
+    "PHYSICAL_TENANT_RECOVERING": 19,
+    "REPLICATION_TIMED_OUT": 12,
+    "STALE_CONFIGURATION": 6,
+    "TIMEOUT_NOW_EXHAUSTED": 13,
+    "TRANSFERRED": 0,
+    "TRANSFER_IN_PROGRESS": 7,
+    "UNREACHABLE": 4
+  },
+  "ClusterRebalancePartitionState": {
+    "BALANCED": 2,
+    "TRANSFERRING": 0,
+    "UNBALANCED": 1
+  },
+  "ClusterRuntimeBackupTakeOutcome": {
+    "FAILED": 1,
+    "TRIGGERED": 0,
+    "UNKNOWN": 2
+  },
+  "ClusterStatusResponseStatus": {
+    "DEGRADED": 1,
+    "DOWN": 2,
+    "HEALTHY": 0
+  },
+  "ClusterUpgradeStatusResponseStatus": {
+    "MIGRATED": 0,
+    "MIGRATION_IN_PROGRESS": 1,
+    "UNKNOWN": 2
+  },
+  "ClusterVariableKindEnum": {
+    "JSON": 0,
+    "SECRET_REFERENCE": 1
+  },
+  "ClusterVariableScopeEnum": {
+    "GLOBAL": 0,
+    "TENANT": 1
+  },
+  "ClusterVariableSearchQuerySortRequestField": {
+    "name": 0,
+    "scope": 3,
+    "tenantId": 2,
+    "value": 1
+  },
+  "CorrelatedMessageSubscriptionSearchQuerySortRequestField": {
+    "businessId": 0,
+    "correlationKey": 1,
+    "correlationTime": 2,
+    "elementId": 3,
+    "elementInstanceKey": 4,
+    "messageKey": 5,
+    "messageName": 6,
+    "partitionId": 7,
+    "processDefinitionId": 8,
+    "processDefinitionKey": 9,
+    "processInstanceKey": 10,
+    "subscriptionKey": 11,
+    "tenantId": 12
+  },
+  "DecisionDefinitionSearchQuerySortRequestField": {
+    "decisionDefinitionId": 1,
+    "decisionDefinitionKey": 0,
+    "decisionRequirementsId": 4,
+    "decisionRequirementsKey": 5,
+    "decisionRequirementsName": 6,
+    "decisionRequirementsVersion": 7,
+    "name": 2,
+    "tenantId": 8,
+    "version": 3
+  },
+  "DecisionDefinitionTypeEnum": {
+    "DECISION_TABLE": 0,
+    "LITERAL_EXPRESSION": 1,
+    "UNKNOWN": 3,
+    "UNSPECIFIED": 2
+  },
+  "DecisionInstanceSearchQuerySortRequestField": {
+    "businessId": 0,
+    "decisionDefinitionId": 1,
+    "decisionDefinitionKey": 2,
+    "decisionDefinitionName": 3,
+    "decisionDefinitionType": 4,
+    "decisionDefinitionVersion": 5,
+    "decisionEvaluationInstanceKey": 6,
+    "decisionEvaluationKey": 7,
+    "elementInstanceKey": 8,
+    "evaluationDate": 9,
+    "evaluationFailure": 10,
+    "processDefinitionKey": 11,
+    "processInstanceKey": 12,
+    "rootDecisionDefinitionKey": 13,
+    "state": 14,
+    "tenantId": 15
+  },
+  "DecisionInstanceStateEnum": {
+    "EVALUATED": 0,
+    "FAILED": 1,
+    "UNKNOWN": 3,
+    "UNSPECIFIED": 2
+  },
+  "DecisionRequirementsSearchQuerySortRequestField": {
+    "decisionRequirementsId": 3,
+    "decisionRequirementsKey": 0,
+    "decisionRequirementsName": 1,
+    "tenantId": 4,
+    "version": 2
+  },
+  "DocumentReferenceCamundaDocumentType": {
+    "camunda": 0
+  },
+  "ElementInstanceFilterFieldsType": {
+    "AD_HOC_SUB_PROCESS": 4,
+    "AD_HOC_SUB_PROCESS_INNER_INSTANCE": 5,
+    "BOUNDARY_EVENT": 9,
+    "BUSINESS_RULE_TASK": 23,
+    "CALL_ACTIVITY": 22,
+    "END_EVENT": 10,
+    "EVENT_BASED_GATEWAY": 19,
+    "EVENT_SUB_PROCESS": 3,
+    "EXCLUSIVE_GATEWAY": 16,
+    "INCLUSIVE_GATEWAY": 17,
+    "INTERMEDIATE_CATCH_EVENT": 7,
+    "INTERMEDIATE_THROW_EVENT": 8,
+    "MANUAL_TASK": 14,
+    "MULTI_INSTANCE_BODY": 21,
+    "PARALLEL_GATEWAY": 18,
+    "PROCESS": 1,
+    "RECEIVE_TASK": 12,
+    "SCRIPT_TASK": 24,
+    "SEND_TASK": 25,
+    "SEQUENCE_FLOW": 20,
+    "SERVICE_TASK": 11,
+    "START_EVENT": 6,
+    "SUB_PROCESS": 2,
+    "TASK": 15,
+    "UNKNOWN": 26,
+    "UNSPECIFIED": 0,
+    "USER_TASK": 13
+  },
+  "ElementInstanceFilterType": {
+    "AD_HOC_SUB_PROCESS": 4,
+    "AD_HOC_SUB_PROCESS_INNER_INSTANCE": 5,
+    "BOUNDARY_EVENT": 9,
+    "BUSINESS_RULE_TASK": 23,
+    "CALL_ACTIVITY": 22,
+    "END_EVENT": 10,
+    "EVENT_BASED_GATEWAY": 19,
+    "EVENT_SUB_PROCESS": 3,
+    "EXCLUSIVE_GATEWAY": 16,
+    "INCLUSIVE_GATEWAY": 17,
+    "INTERMEDIATE_CATCH_EVENT": 7,
+    "INTERMEDIATE_THROW_EVENT": 8,
+    "MANUAL_TASK": 14,
+    "MULTI_INSTANCE_BODY": 21,
+    "PARALLEL_GATEWAY": 18,
+    "PROCESS": 1,
+    "RECEIVE_TASK": 12,
+    "SCRIPT_TASK": 24,
+    "SEND_TASK": 25,
+    "SEQUENCE_FLOW": 20,
+    "SERVICE_TASK": 11,
+    "START_EVENT": 6,
+    "SUB_PROCESS": 2,
+    "TASK": 15,
+    "UNKNOWN": 26,
+    "UNSPECIFIED": 0,
+    "USER_TASK": 13
+  },
+  "ElementInstanceResultType": {
+    "AD_HOC_SUB_PROCESS": 4,
+    "AD_HOC_SUB_PROCESS_INNER_INSTANCE": 5,
+    "BOUNDARY_EVENT": 9,
+    "BUSINESS_RULE_TASK": 23,
+    "CALL_ACTIVITY": 22,
+    "END_EVENT": 10,
+    "EVENT_BASED_GATEWAY": 19,
+    "EVENT_SUB_PROCESS": 3,
+    "EXCLUSIVE_GATEWAY": 16,
+    "INCLUSIVE_GATEWAY": 17,
+    "INTERMEDIATE_CATCH_EVENT": 7,
+    "INTERMEDIATE_THROW_EVENT": 8,
+    "MANUAL_TASK": 14,
+    "MULTI_INSTANCE_BODY": 21,
+    "PARALLEL_GATEWAY": 18,
+    "PROCESS": 1,
+    "RECEIVE_TASK": 12,
+    "SCRIPT_TASK": 24,
+    "SEND_TASK": 25,
+    "SEQUENCE_FLOW": 20,
+    "SERVICE_TASK": 11,
+    "START_EVENT": 6,
+    "SUB_PROCESS": 2,
+    "TASK": 15,
+    "UNKNOWN": 26,
+    "UNSPECIFIED": 0,
+    "USER_TASK": 13
+  },
+  "ElementInstanceSearchQuerySortRequestField": {
+    "elementId": 6,
+    "elementInstanceKey": 0,
+    "elementName": 7,
+    "endDate": 5,
+    "incidentKey": 10,
+    "processDefinitionId": 3,
+    "processDefinitionKey": 2,
+    "processInstanceKey": 1,
+    "startDate": 4,
+    "state": 9,
+    "tenantId": 11,
+    "type": 8
+  },
+  "ElementInstanceStateEnum": {
+    "ACTIVE": 0,
+    "COMPLETED": 1,
+    "TERMINATED": 2
+  },
+  "ElementInstanceWaitStateQuerySortRequestField": {
+    "elementId": 3,
+    "elementInstanceKey": 0,
+    "processInstanceKey": 1,
+    "rootProcessInstanceKey": 2
+  },
+  "ExportingStatusCode": {
+    "EXPORTING": 0,
+    "MIXED": 3,
+    "PAUSED": 1,
+    "SOFT_PAUSED": 2
+  },
+  "GlobalListenerSourceEnum": {
+    "API": 1,
+    "CONFIGURATION": 0
+  },
+  "GlobalTaskListenerEventTypeEnum": {
+    "all": 0,
+    "assigning": 2,
+    "canceling": 5,
+    "completing": 4,
+    "creating": 1,
+    "updating": 3
+  },
+  "GlobalTaskListenerSearchQuerySortRequestField": {
+    "afterNonGlobal": 2,
+    "id": 0,
+    "priority": 3,
+    "source": 4,
+    "type": 1
+  },
+  "GroupClientSearchQuerySortRequestField": {
+    "clientId": 0
+  },
+  "GroupSearchQuerySortRequestField": {
+    "groupId": 1,
+    "name": 0
+  },
+  "GroupUserSearchQuerySortRequestField": {
+    "username": 0
+  },
+  "HistoryBackupStateCode": {
+    "COMPLETED": 1,
+    "FAILED": 2,
+    "INCOMPATIBLE": 4,
+    "INCOMPLETE": 3,
+    "IN_PROGRESS": 0
+  },
+  "IncidentErrorTypeEnum": {
+    "AD_HOC_SUB_PROCESS_NO_RETRIES": 0,
+    "CALLED_DECISION_ERROR": 1,
+    "CALLED_ELEMENT_ERROR": 2,
+    "CONDITION_ERROR": 3,
+    "DECISION_EVALUATION_ERROR": 4,
+    "EXECUTION_LISTENER_NO_RETRIES": 5,
+    "EXTRACT_VALUE_ERROR": 6,
+    "FORM_NOT_FOUND": 7,
+    "IO_MAPPING_ERROR": 8,
+    "JOB_NO_RETRIES": 9,
+    "MESSAGE_SIZE_EXCEEDED": 10,
+    "RESOURCE_NOT_FOUND": 11,
+    "SECRET_RESOLUTION_ERROR": 12,
+    "TASK_LISTENER_NO_RETRIES": 13,
+    "UNHANDLED_ERROR_EVENT": 14,
+    "UNKNOWN": 15,
+    "UNSPECIFIED": 16
+  },
+  "IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField": {
+    "activeInstancesWithErrorCount": 0,
+    "processDefinitionKey": 1,
+    "tenantId": 2
+  },
+  "IncidentProcessInstanceStatisticsByErrorQuerySortRequestField": {
+    "activeInstancesWithErrorCount": 1,
+    "errorMessage": 0
+  },
+  "IncidentSearchQuerySortRequestField": {
+    "creationTime": 7,
+    "elementId": 5,
+    "elementInstanceKey": 6,
+    "errorType": 4,
+    "incidentKey": 0,
+    "jobKey": 9,
+    "processDefinitionId": 2,
+    "processDefinitionKey": 1,
+    "processInstanceKey": 3,
+    "state": 8,
+    "tenantId": 10
+  },
+  "IncidentStateEnum": {
+    "ACTIVE": 0,
+    "MIGRATED": 1,
+    "PENDING": 2,
+    "RESOLVED": 3,
+    "UNKNOWN": 4
+  },
+  "JobKindEnum": {
+    "AD_HOC_SUB_PROCESS": 3,
+    "BPMN_ELEMENT": 0,
+    "EXECUTION_LISTENER": 1,
+    "TASK_LISTENER": 2
+  },
+  "JobListenerEventTypeEnum": {
+    "ASSIGNING": 0,
+    "BEFORE_ALL": 1,
+    "CANCEL": 2,
+    "CANCELING": 3,
+    "COMPLETING": 4,
+    "CREATING": 5,
+    "END": 6,
+    "START": 7,
+    "UNSPECIFIED": 8,
+    "UPDATING": 9
+  },
+  "JobSearchQuerySortRequestField": {
+    "creationTime": 0,
+    "deadline": 1,
+    "deniedReason": 2,
+    "elementId": 3,
+    "elementInstanceKey": 4,
+    "endTime": 5,
+    "errorCode": 6,
+    "errorMessage": 7,
+    "hasFailedWithRetriesLeft": 8,
+    "isDenied": 9,
+    "jobKey": 10,
+    "kind": 11,
+    "listenerEventType": 12,
+    "priority": 13,
+    "processDefinitionId": 14,
+    "processDefinitionKey": 15,
+    "processInstanceKey": 16,
+    "retries": 17,
+    "state": 18,
+    "tenantId": 19,
+    "type": 20,
+    "worker": 21
+  },
+  "JobStateEnum": {
+    "CANCELED": 0,
+    "COMPLETED": 1,
+    "CREATED": 2,
+    "ERROR_THROWN": 3,
+    "FAILED": 4,
+    "MIGRATED": 5,
+    "PRIORITY_UPDATED": 6,
+    "RETRIES_UPDATED": 7,
+    "TIMED_OUT": 9,
+    "TIMEOUT_UPDATED": 8
+  },
+  "MappingRuleSearchQuerySortRequestField": {
+    "claimName": 1,
+    "claimValue": 2,
+    "mappingRuleId": 0,
+    "name": 3
+  },
+  "MessageSubscriptionSearchQuerySortRequestField": {
+    "businessId": 0,
+    "correlationKey": 12,
+    "elementId": 6,
+    "elementInstanceKey": 7,
+    "inboundConnectorType": 15,
+    "lastUpdatedDate": 10,
+    "messageName": 11,
+    "messageSubscriptionKey": 1,
+    "messageSubscriptionState": 8,
+    "messageSubscriptionType": 9,
+    "processDefinitionId": 2,
+    "processDefinitionName": 3,
+    "processDefinitionVersion": 4,
+    "processInstanceKey": 5,
+    "tenantId": 13,
+    "toolName": 14
+  },
+  "MessageSubscriptionStateEnum": {
+    "CORRELATED": 0,
+    "CREATED": 1,
+    "DELETED": 2,
+    "MIGRATED": 3
+  },
+  "MessageSubscriptionTypeEnum": {
+    "PROCESS_EVENT": 1,
+    "START_EVENT": 0
+  },
+  "Mode": {
+    "PROCESSING": 0,
+    "RECOVERING": 1
+  },
+  "OwnerTypeEnum": {
+    "CLIENT": 1,
+    "GROUP": 3,
+    "MAPPING_RULE": 4,
+    "ROLE": 2,
+    "UNSPECIFIED": 5,
+    "USER": 0
+  },
+  "PartitionHealth": {
+    "dead": 2,
+    "healthy": 0,
+    "unhealthy": 1
+  },
+  "PartitionRole": {
+    "follower": 1,
+    "inactive": 2,
+    "leader": 0
+  },
+  "PartitionState": {
+    "active": 2,
+    "joining": 1,
+    "learner": 5,
+    "leaving": 3,
+    "recovering": 4,
+    "unknown": 0
+  },
+  "PermissionTypeEnum": {
+    "ACCESS": 0,
+    "ANSWER": 47,
+    "CANCEL_PROCESS_INSTANCE": 1,
+    "CLAIM": 2,
+    "CLAIM_USER_TASK": 3,
+    "COMPLETE": 4,
+    "COMPLETE_USER_TASK": 5,
+    "CREATE": 6,
+    "CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE": 7,
+    "CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION": 8,
+    "CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE": 9,
+    "CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION": 10,
+    "CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE": 11,
+    "CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE": 12,
+    "CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE": 13,
+    "CREATE_BATCH_OPERATION_RESOLVE_INCIDENT": 14,
+    "CREATE_BATCH_OPERATION_SUSPEND_PROCESS_INSTANCE": 15,
+    "CREATE_BATCH_OPERATION_UPDATE_JOB": 16,
+    "CREATE_DECISION_INSTANCE": 17,
+    "CREATE_PROCESS_INSTANCE": 18,
+    "CREATE_TASK_LISTENER": 19,
+    "DELETE": 20,
+    "DELETE_DECISION_INSTANCE": 21,
+    "DELETE_DRD": 22,
+    "DELETE_FORM": 23,
+    "DELETE_PROCESS": 24,
+    "DELETE_PROCESS_INSTANCE": 25,
+    "DELETE_RESOURCE": 26,
+    "DELETE_TASK_LISTENER": 27,
+    "EVALUATE": 28,
+    "MODIFY_PROCESS_INSTANCE": 29,
+    "PAUSE": 30,
+    "READ": 31,
+    "READ_DECISION_DEFINITION": 32,
+    "READ_DECISION_INSTANCE": 33,
+    "READ_JOB_METRIC": 34,
+    "READ_PROCESS_DEFINITION": 35,
+    "READ_PROCESS_INSTANCE": 36,
+    "READ_TASK_LISTENER": 39,
+    "READ_USAGE_METRIC": 37,
+    "READ_USER_TASK": 38,
+    "RESTORE": 40,
+    "REVEAL": 41,
+    "SUSPEND_PROCESS_INSTANCE": 42,
+    "UPDATE": 43,
+    "UPDATE_PROCESS_INSTANCE": 44,
+    "UPDATE_TASK_LISTENER": 46,
+    "UPDATE_USER_TASK": 45
+  },
+  "ProcessDefinitionFilterState": {
+    "ACTIVE": 0,
+    "DELETED": 2,
+    "DRAINING": 1
+  },
+  "ProcessDefinitionInstanceStatisticsQuerySortRequestField": {
+    "activeInstancesWithIncidentCount": 1,
+    "activeInstancesWithoutIncidentCount": 2,
+    "processDefinitionId": 0
+  },
+  "ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField": {
+    "activeInstancesWithIncidentCount": 4,
+    "activeInstancesWithoutIncidentCount": 5,
+    "processDefinitionId": 0,
+    "processDefinitionKey": 1,
+    "processDefinitionName": 2,
+    "processDefinitionVersion": 3
+  },
+  "ProcessDefinitionResultState": {
+    "ACTIVE": 0,
+    "DELETED": 2,
+    "DRAINING": 1
+  },
+  "ProcessDefinitionSearchQuerySortRequestField": {
+    "name": 1,
+    "processDefinitionId": 5,
+    "processDefinitionKey": 0,
+    "resourceName": 2,
+    "tenantId": 6,
+    "version": 3,
+    "versionTag": 4
+  },
+  "ProcessInstanceSearchQuerySortRequestField": {
+    "businessId": 14,
+    "endDate": 9,
+    "hasIncident": 12,
+    "parentElementInstanceKey": 7,
+    "parentProcessInstanceKey": 6,
+    "processDefinitionId": 1,
+    "processDefinitionKey": 5,
+    "processDefinitionName": 2,
+    "processDefinitionVersion": 3,
+    "processDefinitionVersionTag": 4,
+    "processInstanceKey": 0,
+    "startDate": 8,
+    "state": 11,
+    "suspendedDate": 10,
+    "tenantId": 13
+  },
+  "ProcessInstanceStateEnum": {
+    "ACTIVE": 0,
+    "COMPLETED": 1,
+    "SUSPENDED": 2,
+    "TERMINATED": 3
+  },
+  "ResourceSearchQuerySortRequestField": {
+    "deploymentKey": 5,
+    "resourceId": 2,
+    "resourceKey": 0,
+    "resourceName": 1,
+    "tenantId": 6,
+    "version": 3,
+    "versionTag": 4
+  },
+  "ResourceTypeEnum": {
+    "AUDIT_LOG": 0,
+    "AUTHORIZATION": 1,
+    "BACKUP": 2,
+    "BATCH": 3,
+    "CLUSTER_VARIABLE": 4,
+    "COMPONENT": 5,
+    "DECISION_DEFINITION": 6,
+    "DECISION_REQUIREMENTS_DEFINITION": 7,
+    "DOCUMENT": 8,
+    "EXPORTER": 9,
+    "EXPRESSION": 10,
+    "GLOBAL_LISTENER": 11,
+    "GROUP": 12,
+    "MAPPING_RULE": 13,
+    "MESSAGE": 14,
+    "PROBE": 23,
+    "PROCESS_DEFINITION": 15,
+    "RESOURCE": 16,
+    "ROLE": 17,
+    "SECRET": 18,
+    "SYSTEM": 19,
+    "TENANT": 20,
+    "USER": 21,
+    "USER_TASK": 22
+  },
+  "RestorePartitionStatusState": {
+    "PENDING": 0,
+    "RESTORED": 2,
+    "RESTORING": 1
+  },
+  "RestoreStatusResponseStatus": {
+    "CANCELLED": 3,
+    "COMPLETED": 1,
+    "FAILED": 2,
+    "IN_PROGRESS": 0
+  },
+  "RoleClientSearchQuerySortRequestField": {
+    "clientId": 0
+  },
+  "RoleGroupSearchQuerySortRequestField": {
+    "groupId": 0
+  },
+  "RoleSearchQuerySortRequestField": {
+    "name": 0,
+    "roleId": 1
+  },
+  "RoleUserSearchQuerySortRequestField": {
+    "username": 0
+  },
+  "SecretErrorCode": {
+    "ACCESS_DENIED": 1,
+    "INVALID_REFERENCE": 2,
+    "NOT_FOUND": 0,
+    "UNREADABLE": 3
+  },
+  "SortOrderEnum": {
+    "ASC": 0,
+    "DESC": 1
+  },
+  "StateCode": {
+    "COMPLETED": 2,
+    "DELETED": 5,
+    "DOES_NOT_EXIST": 0,
+    "FAILED": 3,
+    "INCOMPLETE": 4,
+    "IN_PROGRESS": 1
+  },
+  "TenantClientSearchQuerySortRequestField": {
+    "clientId": 0
+  },
+  "TenantFilterEnum": {
+    "ASSIGNED": 1,
+    "PROVIDED": 0
+  },
+  "TenantGroupSearchQuerySortRequestField": {
+    "groupId": 0
+  },
+  "TenantSearchQuerySortRequestField": {
+    "key": 0,
+    "name": 1,
+    "tenantId": 2
+  },
+  "TenantUserSearchQuerySortRequestField": {
+    "username": 0
+  },
+  "UserSearchQuerySortRequestField": {
+    "email": 2,
+    "name": 1,
+    "username": 0
+  },
+  "UserTaskLookupStateEnum": {
+    "ASSIGNING": 2,
+    "CANCELING": 6,
+    "CLAIMING": 3,
+    "COMPLETING": 5,
+    "CREATED": 1,
+    "CREATING": 0,
+    "UPDATING": 4
+  },
+  "UserTaskSearchQuerySortRequestField": {
+    "businessId": 6,
+    "completionDate": 1,
+    "creationDate": 0,
+    "dueDate": 3,
+    "followUpDate": 2,
+    "name": 5,
+    "priority": 4
+  },
+  "UserTaskStateEnum": {
+    "ASSIGNING": 2,
+    "CANCELED": 7,
+    "CANCELING": 6,
+    "COMPLETED": 5,
+    "COMPLETING": 4,
+    "CREATED": 1,
+    "CREATING": 0,
+    "FAILED": 8,
+    "UPDATING": 3
+  },
+  "UserTaskVariableSearchQuerySortRequestField": {
+    "name": 1,
+    "processInstanceKey": 5,
+    "scopeKey": 4,
+    "tenantId": 2,
+    "value": 0,
+    "variableKey": 3
+  },
+  "VariableSearchQuerySortRequestField": {
+    "name": 1,
+    "processInstanceKey": 5,
+    "scopeKey": 4,
+    "tenantId": 2,
+    "value": 0,
+    "variableKey": 3
+  },
+  "WaitStateElementTypeEnum": {
+    "AD_HOC_SUB_PROCESS": 0,
+    "AD_HOC_SUB_PROCESS_INNER_INSTANCE": 1,
+    "BOUNDARY_EVENT": 2,
+    "BUSINESS_RULE_TASK": 3,
+    "CALL_ACTIVITY": 4,
+    "END_EVENT": 5,
+    "EVENT_BASED_GATEWAY": 6,
+    "EVENT_SUB_PROCESS": 7,
+    "EXCLUSIVE_GATEWAY": 8,
+    "INCLUSIVE_GATEWAY": 9,
+    "INTERMEDIATE_CATCH_EVENT": 10,
+    "INTERMEDIATE_THROW_EVENT": 11,
+    "MANUAL_TASK": 12,
+    "MULTI_INSTANCE_BODY": 13,
+    "PARALLEL_GATEWAY": 14,
+    "PROCESS": 15,
+    "RECEIVE_TASK": 16,
+    "SCRIPT_TASK": 17,
+    "SEND_TASK": 18,
+    "SEQUENCE_FLOW": 19,
+    "SERVICE_TASK": 20,
+    "START_EVENT": 21,
+    "SUB_PROCESS": 22,
+    "TASK": 23,
+    "UNKNOWN": 24,
+    "UNSPECIFIED": 25,
+    "USER_TASK": 26
+  },
+  "WaitStateTypeEnum": {
+    "CONDITION": 5,
+    "JOB": 0,
+    "MESSAGE": 1,
+    "SIGNAL": 4,
+    "TIMER": 3,
+    "USER_TASK": 2
+  },
+  "WebappComponent": {
+    "admin": 2,
+    "operate": 0,
+    "tasklist": 1
+  }
+}
