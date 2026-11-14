@@ -40864,6 +40864,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.PermissionTypeEnum.ACCESS
   fullName: Camunda.Orchestration.Sdk.PermissionTypeEnum.ACCESS
   nameWithType: PermissionTypeEnum.ACCESS
+- uid: Camunda.Orchestration.Sdk.PermissionTypeEnum.ANSWER
+  name: ANSWER
+  href: api/Camunda.Orchestration.Sdk.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_PermissionTypeEnum_ANSWER
+  commentId: F:Camunda.Orchestration.Sdk.PermissionTypeEnum.ANSWER
+  fullName: Camunda.Orchestration.Sdk.PermissionTypeEnum.ANSWER
+  nameWithType: PermissionTypeEnum.ANSWER
 - uid: Camunda.Orchestration.Sdk.PermissionTypeEnum.CANCELPROCESSINSTANCE
   name: CANCELPROCESSINSTANCE
   href: api/Camunda.Orchestration.Sdk.PermissionTypeEnum.html#Camunda_Orchestration_Sdk_PermissionTypeEnum_CANCELPROCESSINSTANCE
@@ -46942,6 +46948,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.ResourceTypeEnum.MESSAGE
   fullName: Camunda.Orchestration.Sdk.ResourceTypeEnum.MESSAGE
   nameWithType: ResourceTypeEnum.MESSAGE
+- uid: Camunda.Orchestration.Sdk.ResourceTypeEnum.PROBE
+  name: PROBE
+  href: api/Camunda.Orchestration.Sdk.ResourceTypeEnum.html#Camunda_Orchestration_Sdk_ResourceTypeEnum_PROBE
+  commentId: F:Camunda.Orchestration.Sdk.ResourceTypeEnum.PROBE
+  fullName: Camunda.Orchestration.Sdk.ResourceTypeEnum.PROBE
+  nameWithType: ResourceTypeEnum.PROBE
 - uid: Camunda.Orchestration.Sdk.ResourceTypeEnum.PROCESSDEFINITION
   name: PROCESSDEFINITION
   href: api/Camunda.Orchestration.Sdk.ResourceTypeEnum.html#Camunda_Orchestration_Sdk_ResourceTypeEnum_PROCESSDEFINITION
@@ -52462,12 +52474,6 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.UserTaskLookupStateEnum.CANCELING
   fullName: Camunda.Orchestration.Sdk.UserTaskLookupStateEnum.CANCELING
   nameWithType: UserTaskLookupStateEnum.CANCELING
-- uid: Camunda.Orchestration.Sdk.UserTaskLookupStateEnum.CLAIMING
-  name: CLAIMING
-  href: api/Camunda.Orchestration.Sdk.UserTaskLookupStateEnum.html#Camunda_Orchestration_Sdk_UserTaskLookupStateEnum_CLAIMING
-  commentId: F:Camunda.Orchestration.Sdk.UserTaskLookupStateEnum.CLAIMING
-  fullName: Camunda.Orchestration.Sdk.UserTaskLookupStateEnum.CLAIMING
-  nameWithType: UserTaskLookupStateEnum.CLAIMING
 - uid: Camunda.Orchestration.Sdk.UserTaskLookupStateEnum.COMPLETING
   name: COMPLETING
   href: api/Camunda.Orchestration.Sdk.UserTaskLookupStateEnum.html#Camunda_Orchestration_Sdk_UserTaskLookupStateEnum_COMPLETING

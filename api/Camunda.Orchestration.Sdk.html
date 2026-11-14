@@ -4712,7 +4712,8 @@ not be read. Whether the secret exists is not implied.</li>
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.UserTaskLookupStateEnum.html">UserTaskLookupStateEnum</a></dt>
       <dd><p>The lifecycle state of an active user task. A state ending in <code>-ING</code> means a change to the
 task is in progress, for example waiting for task listeners; the task fields still hold
-the values from before the change.</p>
+the values from before the change. A claim in progress is reported as <code>ASSIGNING</code>, as in
+the user task search.</p>
 </dd>
     </dl>
     <dl class="jumplist">
