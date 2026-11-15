@@ -222,7 +222,7 @@ If regenerating fails, the bot comments on the backport PR. If the change depend
 
 ### Releases
 
-The release workflow (`.github/workflows/release.yml`) runs on every push to `stable/**` and publishes a patch via semantic-release when a release-triggering commit lands (`fix:`/`perf:`). Backports keep the source PR's title, so a `fix:` backport releases a patch; a `chore:` one doesn't, and "No release required" is expected. Renovate raises only patch updates on `stable/9` and `stable/10` (`stable/9` is held on `camunda-schema-bundler` 1.x), and a backported generator fix is often what unblocks a stuck stable-branch update.
+The release workflow (`.github/workflows/release.yml`) runs on every push to `stable/**`. It regenerates `Generated/`, commits any drift as `fix(gen): regenerate artifacts [skip ci]`, and then publishes a patch via semantic-release when a release-triggering commit lands (`fix:`/`perf:`). Backports keep the source PR's title, so a `fix:` backport releases a patch. A `chore:` one releases nothing ("No release required" is expected) *unless* the release-time regeneration finds drift: the `fix(gen)` commit then releases a patch. On `stable/9`, which re-bundles from upstream `stable/8.9`, that happens whenever upstream has moved. Renovate raises only patch updates on `stable/9` and `stable/10` (`stable/9` is held on `camunda-schema-bundler` 1.x), and a backported generator fix is often what unblocks a stuck stable-branch update.
 
 ## API compatibility gate (no breaking changes on stable branches)
 
