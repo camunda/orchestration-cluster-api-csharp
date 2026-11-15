@@ -1,0 +1,14 @@
+# Toolchain for the backport regeneration (sdk-backport.yml): setup-sdk-toolchain
+# (language: csharp) installs .NET 8; the solution also targets .NET 10, as in ci.yml.
+# Read from the backport's TARGET branch. No caches: this job runs the backport
+# branch's code, and a cache it saved would be restored by trusted workflows.
+name: Codegen setup
+description: Install the .NET 8 and 10 SDKs.
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: |
+          8.0.x
+          10.0.x
