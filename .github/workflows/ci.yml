@@ -35,6 +35,71 @@ jobs:
       ack: ${{ vars.SPEC_REF_OVERRIDE_ACK || '' }}
       expires: ${{ vars.SPEC_REF_OVERRIDE_EXPIRES || '' }}
 
+  # Fails when the SDK would break existing customer code compiled against the last
+  # published stable release of this major (see scripts/check-api-compat.sh). An
+  # intentional break is recorded in CompatibilitySuppressions.xml, and changing that
+  # file needs the `breaking-change-approved` label. On main the check skips until the
+  # major has a stable release.
+  api-compat:
+    needs: [spec-ref-guard]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Require approval for new API break suppressions
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          file=src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.xml
+          if git diff --quiet "$BASE_SHA" "$HEAD_SHA" -- "$file"; then
+            echo "No change to $file."
+            exit 0
+          fi
+          # Query labels live so adding the label and re-running the job is enough.
+          labels=$(gh api --paginate "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" --jq '.[].name')
+          if echo "$labels" | grep -qxF 'breaking-change-approved'; then
+            echo "$file changed and the PR has the 'breaking-change-approved' label."
+            exit 0
+          fi
+          echo "::error::This PR changes $file, which approves a breaking API change. Add the 'breaking-change-approved' label if the break is intended."
+          exit 1
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22.x'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Fetch & Bundle spec
+        run: bash scripts/bundle-spec.sh
+
+      - name: Generate SDK
+        run: dotnet run --project src/Camunda.Orchestration.Sdk.Generator
+
+      - name: Format Generated Code
+        run: dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj
+
+      - name: Check API compatibility with the last stable release
+        run: bash scripts/check-api-compat.sh
+
   test:
     needs: [spec-ref-guard]
     runs-on: ubuntu-latest
