@@ -188,6 +188,25 @@ If `bash scripts/build.sh` (or `bash scripts/build-local.sh`) modifies `src/Camu
 
 The pre-push checklist below still applies: always run the full build before pushing, and commit any regenerated drift before the push.
 
+## API compatibility gate (no breaking changes on stable branches)
+
+`scripts/check-api-compat.sh` packs the SDK with .NET package validation (ApiCompat) and compares it with the newest **published** stable NuGet release of the same major (`stable/10` → latest `10.x.y`). It fails on anything that would stop existing customer code compiling or binding: removed or changed members, nullability changes, renumbered enum values, and so on. Additions pass. On `main` it skips until the major has a stable release.
+
+It runs in two places:
+
+- CI, as the `api-compat` job on every PR. It regenerates from the fetched spec first, so it also catches breaks caused by upstream spec drift.
+- `release.yml`, before unit tests and publishing. A regenerated SDK that breaks the API blocks the release instead of shipping.
+
+`PublicApi.shipped.txt` is a different check. It detects *any* API change and gets refreshed whenever the API changes on purpose. Refreshing it does **not** approve a breaking change.
+
+**Approving an intentional break** (for example, a bug fix that needs one):
+
+1. `bash scripts/check-api-compat.sh --generate-suppressions` writes `src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.xml`.
+2. Commit the file. Name the broken member and the reason in the commit message; release notes are built from commit messages.
+3. Add the `breaking-change-approved` label. The `api-compat` job fails any PR that changes the suppression file without it.
+
+Never generate suppressions to get CI green without the user's approval. Prefer restoring the published API.
+
 ## Pre-push checklist
 
 Before pushing any commits, **always** run a full build. This:
