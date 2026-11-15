@@ -1,0 +1,48 @@
+name: Backport
+
+# Opens cherry-pick PRs onto stable branches with camunda/sdk-infra's shared
+# sdk-backport.yml, configured by .github/backport.yml on the target branch.
+#   - Label a PR `backport stable/<N>` before or after merging; the backport
+#     runs when the PR merges (or immediately, if it is already merged).
+#   - Or comment `/backport` on a merged PR to (re)run it for its labels.
+#     PRs from forks get no secrets on `pull_request`: backport those this way.
+# See AGENTS.md "Backporting to stable branches".
+
+on:
+  pull_request:
+    types: [closed, labeled]
+  issue_comment:
+    types: [created]
+
+permissions: {}
+
+jobs:
+  backport:
+    # The same gate as sdk-backport.yml's own, here so that concurrency (below) only
+    # admits backport events: at workflow level, an unrelated comment or label would
+    # replace a pending backport run in the group, and the requested target be lost.
+    if: >-
+      (
+        github.event_name != 'issue_comment' &&
+        github.event.pull_request.merged &&
+        (github.event.action == 'closed' || startsWith(github.event.label.name, 'backport '))
+      ) || (
+        github.event_name == 'issue_comment' &&
+        github.event.issue.pull_request &&
+        github.event.comment.user.id != 290741040 &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association) &&
+        startsWith(github.event.comment.body, '/backport')
+      )
+    concurrency:
+      group: backport-${{ github.event.pull_request.number || github.event.issue.number }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write        # Vault JWT for the App key
+      pull-requests: write  # failure comments when the App token is unavailable
+    uses: camunda/sdk-infra/.github/workflows/sdk-backport.yml@v1
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_JWT_PATH: ${{ secrets.VAULT_JWT_PATH }}
+      VAULT_JWT_ROLE: ${{ secrets.VAULT_JWT_ROLE }}
+      VAULT_JWT_AUDIENCE: ${{ secrets.VAULT_JWT_AUDIENCE }}

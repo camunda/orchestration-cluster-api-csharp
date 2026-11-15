@@ -1,0 +1,18 @@
+# Backport configuration for camunda/sdk-infra's sdk-backport.yml
+# (schema: https://github.com/camunda/sdk-infra/blob/main/schema/backport.schema.json).
+# Read from the TARGET branch: keep a copy on main and on every live stable/N.
+language: csharp
+
+# Derived from the upstream spec or the generator. Restored from the target branch
+# and regenerated there with the TARGET branch's generator.
+generated-paths:
+  - external-spec
+  - src/Camunda.Orchestration.Sdk/Generated
+
+# Regenerates from the committed spec (no bundle-spec.sh), then formats and builds
+# the solution, tests included, as ci.yml does.
+regenerate: >-
+  dotnet restore &&
+  dotnet run --project src/Camunda.Orchestration.Sdk.Generator &&
+  dotnet format src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj --no-restore &&
+  dotnet build --configuration Release --no-restore
