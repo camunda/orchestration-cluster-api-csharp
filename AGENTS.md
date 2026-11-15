@@ -183,7 +183,7 @@ When a change modifies the generator (`src/Camunda.Orchestration.Sdk.Generator/`
 
 Why:
 
-- **Cherry-picks stay clean.** Backports to `stable/*` only need the generator commit; the target branch's release CI regenerates `Generated/*` itself. Mixing the two means the cherry-pick drags generated diff through, which conflicts with whatever generated state the target branch has.
+- **Backports stay clean.** A backport to `stable/*` restores the target's `Generated/*` and regenerates it there (see [Backporting to `stable/*` branches](#backporting-to-stable-branches)). A separate regenerated-output commit keeps the backport's own diff readable.
 - **Reviewers can read the change.** Generator commits are small and meaningful; regenerated commits are large and mechanical. Mixing them makes the review effectively unreadable.
 - **`git blame` stays useful** for both surfaces.
 
@@ -197,50 +197,32 @@ If `bash scripts/build.sh` (or `bash scripts/build-local.sh`) modifies `src/Camu
 
 The pre-push checklist below still applies: always run the full build before pushing, and commit any regenerated drift before the push.
 
-## Backporting generator fixes to `stable/*` branches
+## Backporting to `stable/*` branches
 
-Generator fixes (changes to `src/Camunda.Orchestration.Sdk.Generator/`, `src/Camunda.Orchestration.Sdk/Runtime/`, the partial `src/Camunda.Orchestration.Sdk/CamundaClient.cs`, `scripts/build*.sh`, `scripts/bundle-spec.sh`, or the `camunda-schema-bundler` integration) are **safe and expected to backport** to the maintained `stable/N` branches (currently `stable/9` and `stable/10`; `stable/8.9` is frozen) via cherry-pick.
+Backport generator fixes (changes to `src/Camunda.Orchestration.Sdk.Generator/`, `scripts/build*.sh`, `scripts/bundle-spec.sh`, or the `camunda-schema-bundler` integration) and fixes to the hand-written runtime (`src/Camunda.Orchestration.Sdk/Runtime/`, the partial `CamundaClient.cs`) to the maintained `stable/N` branches (currently `stable/9` and `stable/10`; `stable/8.9` is frozen) when the affected code exists there.
 
-> **Definition (important):** "Generator code" includes everything that produces `src/Camunda.Orchestration.Sdk/Generated/*` from the bundled spec **plus the hand-written runtime under `src/Camunda.Orchestration.Sdk/Runtime/` and partial-class infrastructure (`CamundaClient.cs`)**. Those files are inputs to the build, on the same footing as the generator project. A type fix in `src/Camunda.Orchestration.Sdk/Runtime/OAuthManager.cs` is a generator-class change for backport purposes. A `Runtime/` change that alters behavior (retry, backpressure, auth flow, ...) is not: treat it as a behavioral change below.
+**Don't backport without discussion:** changes that alter the public API surface or published SDK semantics (the [API compatibility gate](#api-compatibility-gate-no-breaking-changes-on-stable-branches) blocks breaking ones on stable branches anyway), behavioral `Runtime/` changes (retry, backpressure, auth flow, ...), and generated output on its own. Land on `main` first, and split generator fixes from unrelated behavioral changes there, so the backport is surgical.
 
-**What is NOT a generator fix** (do not auto-backport without discussion):
+### How
 
-- Changes under `src/Camunda.Orchestration.Sdk/Generated/` directly (regenerated; never hand-edit).
-- Changes that alter the public API surface, runtime behavior of generated clients, or anything that changes the published SDK semantics.
+`.github/workflows/backport.yml` calls camunda/sdk-infra's shared `sdk-backport.yml` (`korthout/backport-action`, running as `camunda-sdk-automation`; the same flow as the other SDKs). It is configured by `.github/backport.yml` and `.github/actions/codegen-setup` (.NET 8 + 10), both read from the **target** branch, so keep them on `main` and on every live `stable/N`.
 
-### Why backporting generator fixes is safe
+- Add the label `backport stable/<N>` to a PR. The backport PR opens when the PR merges, or right away if it is already merged.
+- Or comment `/backport` on a merged PR to re-run it for its labels. PRs from forks can only be backported this way.
 
-The release workflow (`.github/workflows/release.yml`) runs on every push to `stable/**`: it regenerates `Generated/`, auto-commits any drift as `fix(gen): regenerate artifacts [skip ci]`, and then publishes a patch via semantic-release (a `fix:` commit releases a patch; `chore:`/`docs:` alone do not). So a generator-only or untouched-runtime change cherry-picked onto `stable/N`:
+After the cherry-pick, the workflow adds a `chore(gen): regenerate for backport of #N` commit. The derived files (`generated-paths`: `external-spec/`, `src/Camunda.Orchestration.Sdk/Generated/`) are restored from the target branch and regenerated with the **target branch's** generator, then the solution is built in Release (tests included). PRs are squash-merged, so the cherry-pick carries `main`'s copies, but a stable branch must build from its own spec. This also clears cherry-pick conflicts in those files.
 
-1. Doesn't change `src/Camunda.Orchestration.Sdk/Generated/*` under the **currently pinned** generator dependencies (verify locally — see checklist below).
-2. Lets the next Renovate update of `Microsoft.OpenApi`, `YamlDotNet`, `camunda-schema-bundler` or other generator dependencies succeed where it would otherwise fail. Renovate (`.github/renovate.json`) raises only patch updates on `stable/9` and `stable/10`, and auto-merges minor and patch updates once CI is green, so a generator fix is often what unblocks a stuck stable-branch update. (`stable/9` is held on `camunda-schema-bundler` 1.x.)
-3. Publishes a clean N.x patch with no behavioral change to the SDK **only if** a release-triggering commit lands (e.g. the cherry-picked commit is `fix:`/`perf:`). A `chore:` cherry-pick with byte-identical regeneration creates no `fix(gen)` commit, so semantic-release reports "No release required" — that is expected.
+The generator diverged between 9 and 10. Generated output is always produced by the target's generator, so that is handled; but a backport of a **generator change itself** may not apply to `stable/9`'s generator. Then the cherry-pick conflicts (a draft PR) or the build fails: port it by hand on the backport branch, or close the backport PR.
 
-### Backport workflow
+`stable/9` commits only the bundle (`external-spec/**` is gitignored there) and has no committed `spec-metadata.json`, so its `regenerate` runs `npm ci && bash scripts/bundle-spec.sh` first, against upstream `stable/8.9`. If upstream moved, the backport's regeneration commit also carries that spec update. `stable/10` and `main` regenerate offline from the committed bundle.
 
-1. Land the fix on `main` first via a normal PR. Get it reviewed and merged. Keep the generator change and any regenerated output in separate commits (see [Separate generator changes from regenerated output](#separate-generator-changes-from-regenerated-output)); only the generator commit is cherry-picked.
-2. For each `stable/N` branch that needs the fix:
-   ```bash
-   git fetch origin stable/N
-   git checkout -b backport/stable-N/<short-name> origin/stable/N
-   git cherry-pick <commit-sha-from-main>
-   ```
-3. If the cherry-pick is clean (no conflicts), push and open a PR targeting `stable/N`. If conflicts arise, resolve them — but be conservative; if a conflict suggests the fix doesn't apply cleanly to that branch's generator pipeline, ask before forcing it.
-4. PR title convention: `<original-title> (backport #<main-pr> to stable/N)`.
-5. PR body: link the original PR, summarize the cherry-pick, and explicitly state the verification (see below).
+If the cherry-pick conflicts, the action opens a **draft** PR with the conflicts committed. A draft always means a conflict, even without conflict markers: if the source changes a file the target lacks, `main`'s whole file is committed. Resolve it on the backport branch, then comment `/backport` on the source PR to regenerate. If fix B builds on fix A, merge A's backport first, then rebuild B's branch from the updated target (`git switch -C backport-<B>-to-stable/N origin/stable/N && git cherry-pick -x <B's merge commit>`, push with `--force-with-lease`, comment `/backport`).
 
-### Verification before opening the backport PR
+If regenerating fails, the bot comments on the backport PR. If the change depends on spec the stable branch doesn't have, it can't be backported as-is: close the backport PR, or reduce it to what applies to the stable spec.
 
-- Cherry-pick applied cleanly (or document any conflict resolution).
-- The change is generator-class (generator project, runtime, partial-class infrastructure, build scripts) — not generated output and not behavioral.
-- On the backport branch, run `npm ci` first (neither `build.sh` nor `bundle-spec.sh` reinstalls Node dependencies, so a checkout reused from `main` would otherwise bundle with `main`'s `camunda-schema-bundler`). Then run the full build `bash scripts/build.sh` (not `build-local.sh`: that reuses whatever spec was last fetched, which may be `main`'s). It builds with that branch's pinned spec and dependencies, checks formatting and runs the unit tests (see the [Pre-push checklist](#pre-push-checklist)).
-- Confirm `git diff --stat src/Camunda.Orchestration.Sdk/Generated/` is empty (byte-identical output). If it isn't, the change is not generator-only on that branch: say so in the PR rather than committing the drift.
+### Releases
 
-### Anti-patterns
-
-- **Don't** cherry-pick changes that touch `src/Camunda.Orchestration.Sdk/Generated/` directly — those will be overwritten on the next regen.
-- **Don't** cherry-pick generator fixes alongside unrelated runtime/behavioral changes in the same commit. Split them on `main` first so the backport is surgical.
-- **Don't** backport without first landing on `main`, unless the `main` branch itself cannot reproduce the issue (rare; flag explicitly in the PR).
+The release workflow (`.github/workflows/release.yml`) runs on every push to `stable/**` and publishes a patch via semantic-release when a release-triggering commit lands (`fix:`/`perf:`). Backports keep the source PR's title, so a `fix:` backport releases a patch; a `chore:` one doesn't, and "No release required" is expected. Renovate raises only patch updates on `stable/9` and `stable/10` (`stable/9` is held on `camunda-schema-bundler` 1.x), and a backported generator fix is often what unblocks a stuck stable-branch update.
 
 ## API compatibility gate (no breaking changes on stable branches)
 
