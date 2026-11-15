@@ -1,3 +1,10 @@
+## [10.0.4](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.3...v10.0.4) (2026-11-15)
+
+
+### Bug Fixes
+
+* allow a null username for the anonymous current user ([4c9bc58](https://github.com/camunda/orchestration-cluster-api-csharp/commit/4c9bc58d3ae5541dc93c8f8d7d7b770b6753d5c9)), closes [camunda/camunda#68796](https://github.com/camunda/camunda/issues/68796)
+
 ## [10.0.3](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.2...v10.0.3) (2026-10-28)
 
 
