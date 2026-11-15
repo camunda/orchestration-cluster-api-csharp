@@ -37,9 +37,9 @@ jobs:
 
   # Fails when the SDK would break existing customer code compiled against the last
   # published stable release of this major (see scripts/check-api-compat.sh). An
-  # intentional break is recorded in CompatibilitySuppressions.xml, and changing that
-  # file needs the `breaking-change-approved` label. On main the check skips until the
-  # major has a stable release.
+  # intentional break is recorded in CompatibilitySuppressions.<baseline>.xml, and adding
+  # or changing one needs the `breaking-change-approved` label. On main the check skips
+  # until the major has a stable release.
   api-compat:
     needs: [spec-ref-guard]
     runs-on: ubuntu-latest
@@ -59,18 +59,19 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          file=src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.xml
-          if git diff --quiet "$BASE_SHA" "$HEAD_SHA" -- "$file"; then
-            echo "No change to $file."
+          # Deleting a suppression file approves nothing, so it needs no label.
+          changed=$(git diff --name-only --diff-filter=d "$BASE_SHA" "$HEAD_SHA" -- 'src/Camunda.Orchestration.Sdk/CompatibilitySuppressions*.xml')
+          if [ -z "$changed" ]; then
+            echo "No suppression file added or changed."
             exit 0
           fi
           # Query labels live so adding the label and re-running the job is enough.
           labels=$(gh api --paginate "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" --jq '.[].name')
           if echo "$labels" | grep -qxF 'breaking-change-approved'; then
-            echo "$file changed and the PR has the 'breaking-change-approved' label."
+            echo "Suppression files changed and the PR has the 'breaking-change-approved' label: $changed"
             exit 0
           fi
-          echo "::error::This PR changes $file, which approves a breaking API change. Add the 'breaking-change-approved' label if the break is intended."
+          echo "::error::This PR adds or changes $changed, which approves a breaking API change. Add the 'breaking-change-approved' label if the break is intended."
           exit 1
 
       - name: Setup .NET
