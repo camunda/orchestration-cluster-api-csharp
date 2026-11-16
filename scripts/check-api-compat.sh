@@ -7,8 +7,10 @@
 # renumbered enum values, ...) fails the check. Additions pass.
 #
 # An intentional break is recorded in
-# src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.xml. Changing that file in a PR
-# requires the `breaking-change-approved` label (enforced by the api-compat CI job).
+# src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.<baseline>.xml, which only
+# applies while <baseline> is the newest release. Once the break ships, the next release
+# is the baseline and the file is ignored. Adding or changing one in a PR requires the
+# `breaking-change-approved` label (enforced by the api-compat CI job).
 #
 # Usage:
 #   bash scripts/check-api-compat.sh                         # check
@@ -24,7 +26,8 @@ cd "$(dirname "$0")/.."
 
 PROJECT=src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj
 PACKAGE_ID=camunda.orchestration.sdk
-SUPPRESSION_FILE=src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.xml
+# The SDK picks this name up by default, whatever the baseline.
+UNKEYED_SUPPRESSION_FILE=src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.xml
 
 generate=false
 if [ "${1:-}" = "--generate-suppressions" ]; then
@@ -62,10 +65,20 @@ if [ -z "$baseline" ]; then
   exit 0
 fi
 
+if [ -e "$UNKEYED_SUPPRESSION_FILE" ]; then
+  echo "::error::Rename ${UNKEYED_SUPPRESSION_FILE} to CompatibilitySuppressions.<baseline>.xml, or delete it if its break has shipped." >&2
+  exit 1
+fi
+SUPPRESSION_FILE="src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.${baseline}.xml"
+
 echo "Checking API compatibility against Camunda.Orchestration.Sdk ${baseline} (major ${major})."
 
 out_dir=$(mktemp -d)
 trap 'rm -rf "$out_dir"' EXIT
+
+# Package validation is incremental on the package, not the baseline: without this a
+# local rerun against another baseline reports the previous result.
+find "$(dirname "$PROJECT")/obj" -name 'Microsoft.NET.ApiCompat.ValidatePackage.semaphore' -delete 2>/dev/null || true
 
 args=(
   pack "$PROJECT"
@@ -77,7 +90,10 @@ args=(
   -p:Version="${major}.999.0-apicompat"
 )
 if [ "$generate" = true ]; then
-  args+=(-p:ApiCompatGenerateSuppressionFile=true)
+  args+=(-p:ApiCompatGenerateSuppressionFile=true -p:ApiCompatSuppressionOutputFile="$PWD/$SUPPRESSION_FILE")
+elif [ -e "$SUPPRESSION_FILE" ]; then
+  echo "Applying approved breaks from ${SUPPRESSION_FILE}."
+  args+=(-p:CompatibilitySuppressionFilePath="$PWD/$SUPPRESSION_FILE")
 fi
 
 if dotnet "${args[@]}"; then

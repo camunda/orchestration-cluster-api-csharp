@@ -201,9 +201,11 @@ It runs in two places:
 
 **Approving an intentional break** (for example, a bug fix that needs one):
 
-1. `bash scripts/check-api-compat.sh --generate-suppressions` writes `src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.xml`.
+1. `bash scripts/check-api-compat.sh --generate-suppressions` writes `src/Camunda.Orchestration.Sdk/CompatibilitySuppressions.<baseline>.xml`, where `<baseline>` is the release it compares with.
 2. Commit the file. Name the broken member and the reason in the commit message; release notes are built from commit messages.
-3. Add the `breaking-change-approved` label. The `api-compat` job fails any PR that changes the suppression file without it.
+3. Add the `breaking-change-approved` label. The `api-compat` job fails any PR that adds or changes a suppression file without it.
+
+The file only applies while `<baseline>` is the newest release. Once the release with the break ships, it is the new baseline, the file is ignored, and it can be deleted (no label needed). A file named plain `CompatibilitySuppressions.xml` fails the check: .NET would apply it to every baseline, and report it as unnecessary as soon as the break ships.
 
 Never generate suppressions to get CI green without the user's approval. Prefer restoring the published API.
 
