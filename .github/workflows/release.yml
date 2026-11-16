@@ -129,7 +129,7 @@ jobs:
 
       # Blocks the release if the regenerated SDK breaks code compiled against the last
       # stable release of this major, e.g. after upstream spec drift. Approved breaks are
-      # listed in CompatibilitySuppressions.xml. Skips on main until the major is stable.
+      # listed in CompatibilitySuppressions.<baseline>.xml. Skips on main until the major is stable.
       - name: Check API compatibility with the last stable release
         run: bash scripts/check-api-compat.sh
 
