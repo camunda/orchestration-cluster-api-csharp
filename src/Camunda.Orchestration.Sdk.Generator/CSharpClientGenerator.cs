@@ -382,7 +382,7 @@ internal static partial class CSharpClientGenerator
     }
 
     /// <summary>
-    /// True if the schema (or any variant in a <c>oneOf</c>/<c>anyOf</c>)
+    /// True if the schema (or every variant in a <c>oneOf</c>/<c>anyOf</c>)
     /// has an optional <c>tenantId</c> property. Self-contained counterpart
     /// to the bundler's <c>optionalTenantIdInBody</c> metadata flag, which
     /// does not follow <c>allOf</c> composition — so a variant that inherits
@@ -390,9 +390,7 @@ internal static partial class CSharpClientGenerator
     /// <c>ProcessInstanceCreationInstructionByKey</c> →
     /// <c>ProcessInstanceCreationInstructionBase</c>) is missed by the
     /// metadata and the default-tenant injection is silently dropped
-    /// (issue #469). Any variant suffices: the emitted call is guarded by
-    /// <c>is ITenantIdSettable</c>, so variants without <c>tenantId</c>
-    /// (e.g. selection by key) are sent unchanged.
+    /// (issue #469).
     /// </summary>
     private static bool HasOptionalTenantIdInAnyVariant(IOpenApiSchema schema, OpenApiDocument doc)
     {
@@ -406,10 +404,10 @@ internal static partial class CSharpClientGenerator
                     && doc.Components.Schemas.TryGetValue(GetRefId(v)!, out var r)
                     ? r
                     : v;
-                if (GetOptionalTenantIdInfo(resolved, doc) != null)
-                    return true;
+                if (GetOptionalTenantIdInfo(resolved, doc) == null)
+                    return false;
             }
-            return false;
+            return true;
         }
         return GetOptionalTenantIdInfo(schema, doc) != null;
     }
