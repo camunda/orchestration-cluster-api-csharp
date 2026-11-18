@@ -12774,6 +12774,132 @@
         "x-scope": "physical-tenant"
       }
     },
+    "/process-definitions/resumption": {
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Process definition"
+        ],
+        "operationId": "resumeProcessDefinitions",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "SUSPEND_PROCESS_DEFINITION"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Resume process definitions",
+        "description": "Resumes suspended process definitions so that process instances can be created from them again.\nThe definition is selected either by `processDefinitionKey`, which identifies exactly one\nversion, or by `processDefinitionId` with an optional `processDefinitionVersion` and\n`tenantId`. Without a version, all versions of the process definition ID are resumed.\nSet `includeProcessInstances` to also resume the suspended process instances of the affected\nversions; the instances are changed by a batch operation, returned as `batchOperationKey`.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDefinitionResumptionInstruction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The resumption request was accepted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessDefinitionResumptionResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No process definition matches the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The request conflicts with the current state of the process definition, likely because\nthe process definition is in a state that cannot be resumed.\nMore details are provided in the response body.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
     "/process-definitions/search": {
       "post": {
         "x-eventually-consistent": true,
@@ -13062,6 +13188,132 @@
           }
         },
         "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
+      }
+    },
+    "/process-definitions/suspension": {
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Process definition"
+        ],
+        "operationId": "suspendProcessDefinitions",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "SUSPEND_PROCESS_DEFINITION"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Suspend process definitions",
+        "description": "Suspends process definitions so that no new process instances can be created from them.\nThe definition is selected either by `processDefinitionKey`, which identifies exactly one\nversion, or by `processDefinitionId` with an optional `processDefinitionVersion` and\n`tenantId`. Without a version, all versions of the process definition ID are suspended.\nSet `includeProcessInstances` to also suspend the running process instances of the affected\nversions; the instances are changed by a batch operation, returned as `batchOperationKey`.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDefinitionSuspensionInstruction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The suspension request was accepted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessDefinitionSuspensionResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No process definition matches the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The request conflicts with the current state of the process definition, likely because\nthe process definition is in a state that cannot be suspended.\nMore details are provided in the response body.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.11",
         "x-scope": "physical-tenant"
       }
     },
@@ -29468,6 +29720,7 @@
           "READ_TASK_LISTENER",
           "RESTORE",
           "REVEAL",
+          "SUSPEND_PROCESS_DEFINITION",
           "SUSPEND_PROCESS_INSTANCE",
           "UPDATE",
           "UPDATE_PROCESS_INSTANCE",
@@ -43964,6 +44217,264 @@
             "format": "uri-reference",
             "description": "A URI path identifying the origin of the problem.",
             "example": "/v2/jobs/activation"
+          }
+        }
+      },
+      "ProcessDefinitionSuspensionInstruction": {
+        "x-polymorphic-schema": true,
+        "description": "Instruction to suspend process definitions, selected either by key or by ID.\n",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ProcessDefinitionSuspensionInstructionByKey"
+          },
+          {
+            "$ref": "#/components/schemas/ProcessDefinitionSuspensionInstructionById"
+          }
+        ]
+      },
+      "ProcessDefinitionSuspensionInstructionByKey": {
+        "type": "object",
+        "title": "Process definition suspension by key",
+        "required": [
+          "processDefinitionKey"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "processDefinitionKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionKey"
+              }
+            ],
+            "description": "The key of the process definition version to suspend."
+          },
+          "includeProcessInstances": {
+            "description": "Whether to also suspend the process instances of the affected\nprocess definition versions. The instances are changed by a batch operation.\n",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "ProcessDefinitionSuspensionInstructionById": {
+        "type": "object",
+        "title": "Process definition suspension by ID",
+        "required": [
+          "processDefinitionId"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "processDefinitionId": {
+            "description": "The BPMN process ID of the process definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionId"
+              }
+            ]
+          },
+          "processDefinitionVersion": {
+            "description": "The version of the process definition. Must be 1 or greater; `-1` is not accepted.\nIf omitted, all versions are affected.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          "tenantId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ],
+            "description": "The tenant of the process definition. Required when multi-tenancy is enabled;\nif multi-tenancy is disabled, it can be omitted and the default tenant is used.\n"
+          },
+          "includeProcessInstances": {
+            "description": "Whether to also suspend the process instances of the affected\nprocess definition versions. The instances are changed by a batch operation.\n",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "ProcessDefinitionSuspensionResult": {
+        "type": "object",
+        "required": [
+          "batchOperationKey",
+          "processDefinitions"
+        ],
+        "properties": {
+          "processDefinitions": {
+            "description": "The affected process definition versions.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessDefinitionSuspensionVersionResult"
+            }
+          },
+          "batchOperationKey": {
+            "description": "The key of the batch operation that suspends the running process instances.\nNull when `includeProcessInstances` is not set.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BatchOperationKey"
+              }
+            ]
+          }
+        }
+      },
+      "ProcessDefinitionSuspensionVersionResult": {
+        "type": "object",
+        "required": [
+          "outcome",
+          "processDefinitionKey",
+          "processDefinitionVersion"
+        ],
+        "properties": {
+          "processDefinitionKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionKey"
+              }
+            ],
+            "description": "The key of the process definition version."
+          },
+          "processDefinitionVersion": {
+            "description": "The version of the process definition.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "outcome": {
+            "description": "`SUSPENDED` if the version was active and is now suspended. The suspension applies to\nall partitions shortly after the response.\n`ALREADY_SUSPENDED` if the version was already suspended, so its state is unchanged.\nWith `includeProcessInstances`, its process instances are still suspended by the\nbatch operation.\n`DRAINING` if it is being deleted and is left unchanged. This only occurs when the\nrequest selects by ID without a version; selecting a single draining version is rejected\nwith 409.\n",
+            "type": "string",
+            "enum": [
+              "SUSPENDED",
+              "ALREADY_SUSPENDED",
+              "DRAINING"
+            ]
+          }
+        }
+      },
+      "ProcessDefinitionResumptionInstruction": {
+        "x-polymorphic-schema": true,
+        "description": "Instruction to resume process definitions, selected either by key or by ID.\n",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ProcessDefinitionResumptionInstructionByKey"
+          },
+          {
+            "$ref": "#/components/schemas/ProcessDefinitionResumptionInstructionById"
+          }
+        ]
+      },
+      "ProcessDefinitionResumptionInstructionByKey": {
+        "type": "object",
+        "title": "Process definition resumption by key",
+        "required": [
+          "processDefinitionKey"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "processDefinitionKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionKey"
+              }
+            ],
+            "description": "The key of the process definition version to resume."
+          },
+          "includeProcessInstances": {
+            "description": "Whether to also resume the process instances of the affected\nprocess definition versions. The instances are changed by a batch operation.\n",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "ProcessDefinitionResumptionInstructionById": {
+        "type": "object",
+        "title": "Process definition resumption by ID",
+        "required": [
+          "processDefinitionId"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "processDefinitionId": {
+            "description": "The BPMN process ID of the process definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionId"
+              }
+            ]
+          },
+          "processDefinitionVersion": {
+            "description": "The version of the process definition. Must be 1 or greater; `-1` is not accepted.\nIf omitted, all versions are affected.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          "tenantId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ],
+            "description": "The tenant of the process definition. Required when multi-tenancy is enabled;\nif multi-tenancy is disabled, it can be omitted and the default tenant is used.\n"
+          },
+          "includeProcessInstances": {
+            "description": "Whether to also resume the process instances of the affected\nprocess definition versions. The instances are changed by a batch operation.\n",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "ProcessDefinitionResumptionResult": {
+        "type": "object",
+        "required": [
+          "batchOperationKey",
+          "processDefinitions"
+        ],
+        "properties": {
+          "processDefinitions": {
+            "description": "The affected process definition versions.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessDefinitionResumptionVersionResult"
+            }
+          },
+          "batchOperationKey": {
+            "description": "The key of the batch operation that resumes the suspended process instances.\nNull when `includeProcessInstances` is not set.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BatchOperationKey"
+              }
+            ]
+          }
+        }
+      },
+      "ProcessDefinitionResumptionVersionResult": {
+        "type": "object",
+        "required": [
+          "outcome",
+          "processDefinitionKey",
+          "processDefinitionVersion"
+        ],
+        "properties": {
+          "processDefinitionKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionKey"
+              }
+            ],
+            "description": "The key of the process definition version."
+          },
+          "processDefinitionVersion": {
+            "description": "The version of the process definition.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "outcome": {
+            "description": "`RESUMED` if the version was suspended and is now active again. The resumption applies\nto all partitions shortly after the response.\n`ALREADY_RESUMED` if the version was already active, so its state is unchanged.\nWith `includeProcessInstances`, its suspended process instances are still resumed by\nthe batch operation.\n`DRAINING` if it is being deleted and is left unchanged. This only occurs when the\nrequest selects by ID without a version; selecting a single draining version is rejected\nwith 409.\n",
+            "type": "string",
+            "enum": [
+              "RESUMED",
+              "ALREADY_RESUMED",
+              "DRAINING"
+            ]
           }
         }
       },

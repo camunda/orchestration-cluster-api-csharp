@@ -7461,6 +7461,64 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Resume process definitions
+    /// Resumes suspended process definitions so that process instances can be created from them again.
+    /// The definition is selected either by `processDefinitionKey`, which identifies exactly one
+    /// version, or by `processDefinitionId` with an optional `processDefinitionVersion` and
+    /// `tenantId`. Without a version, all versions of the process definition ID are resumed.
+    /// Set `includeProcessInstances` to also resume the suspended process instances of the affected
+    /// versions; the instances are changed by a batch operation, returned as `batchOperationKey`.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: resumeProcessDefinitions
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResumeProcessDefinitionsExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResumeProcessDefinitionsAsync(
+    ///         new ProcessDefinitionResumptionInstructionByKey
+    ///         {
+    ///             ProcessDefinitionKey = processDefinitionKey,
+    ///         });
+    /// 
+    ///     foreach (var pd in result.ProcessDefinitions)
+    ///     {
+    ///         Console.WriteLine($&quot;Version {pd.ProcessDefinitionVersion}: {pd.Outcome}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ResumeProcessDefinitionsExample(ProcessDefinitionKey processDefinitionKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ResumeProcessDefinitionsAsync(
+    ///         new ProcessDefinitionResumptionInstructionByKey
+    ///         {
+    ///             ProcessDefinitionKey = processDefinitionKey,
+    ///         });
+    /// 
+    ///     foreach (var pd in result.ProcessDefinitions)
+    ///     {
+    ///         Console.WriteLine($&quot;Version {pd.ProcessDefinitionVersion}: {pd.Outcome}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ProcessDefinitionResumptionResult> ResumeProcessDefinitionsAsync(ProcessDefinitionResumptionInstruction body, CancellationToken ct = default)
+    {
+        var path = $"/process-definitions/resumption";
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionResumptionResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "resumeProcessDefinitions", false, ct);
+    }
+
+    /// <summary>
     /// Resume process instance
     /// Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.
     /// Only process instances in the SUSPENDED state can be resumed.
@@ -10239,6 +10297,76 @@ public partial class CamundaClient
     /// </summary>
     public Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default) =>
         SuspendBatchOperationAsync(batchOperationKey, new object(), ct);
+
+    /// <summary>
+    /// Suspend process definitions
+    /// Suspends process definitions so that no new process instances can be created from them.
+    /// The definition is selected either by `processDefinitionKey`, which identifies exactly one
+    /// version, or by `processDefinitionId` with an optional `processDefinitionVersion` and
+    /// `tenantId`. Without a version, all versions of the process definition ID are suspended.
+    /// Set `includeProcessInstances` to also suspend the running process instances of the affected
+    /// versions; the instances are changed by a batch operation, returned as `batchOperationKey`.
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Operation: suspendProcessDefinitions
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SuspendProcessDefinitionsExample(ProcessDefinitionId processDefinitionId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SuspendProcessDefinitionsAsync(
+    ///         new ProcessDefinitionSuspensionInstructionById
+    ///         {
+    ///             ProcessDefinitionId = processDefinitionId,
+    ///             IncludeProcessInstances = true,
+    ///         });
+    /// 
+    ///     foreach (var pd in result.ProcessDefinitions)
+    ///     {
+    ///         Console.WriteLine($&quot;Version {pd.ProcessDefinitionVersion}: {pd.Outcome}&quot;);
+    ///     }
+    /// 
+    ///     if (result.BatchOperationKey is { } batchOperationKey)
+    ///     {
+    ///         Console.WriteLine($&quot;Batch operation: {batchOperationKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SuspendProcessDefinitionsExample(ProcessDefinitionId processDefinitionId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SuspendProcessDefinitionsAsync(
+    ///         new ProcessDefinitionSuspensionInstructionById
+    ///         {
+    ///             ProcessDefinitionId = processDefinitionId,
+    ///             IncludeProcessInstances = true,
+    ///         });
+    /// 
+    ///     foreach (var pd in result.ProcessDefinitions)
+    ///     {
+    ///         Console.WriteLine($&quot;Version {pd.ProcessDefinitionVersion}: {pd.Outcome}&quot;);
+    ///     }
+    /// 
+    ///     if (result.BatchOperationKey is { } batchOperationKey)
+    ///     {
+    ///         Console.WriteLine($&quot;Batch operation: {batchOperationKey}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public async Task<ProcessDefinitionSuspensionResult> SuspendProcessDefinitionsAsync(ProcessDefinitionSuspensionInstruction body, CancellationToken ct = default)
+    {
+        var path = $"/process-definitions/suspension";
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionSuspensionResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "suspendProcessDefinitions", false, ct);
+    }
 
     /// <summary>
     /// Suspend process instance

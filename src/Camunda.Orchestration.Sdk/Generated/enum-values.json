@@ -726,6 +726,7 @@
     "READ_USER_TASK": 38,
     "RESTORE": 40,
     "REVEAL": 41,
+    "SUSPEND_PROCESS_DEFINITION": 48,
     "SUSPEND_PROCESS_INSTANCE": 42,
     "UPDATE": 43,
     "UPDATE_PROCESS_INSTANCE": 44,
@@ -755,6 +756,11 @@
     "DELETED": 2,
     "DRAINING": 1
   },
+  "ProcessDefinitionResumptionVersionResultOutcome": {
+    "ALREADY_RESUMED": 1,
+    "DRAINING": 2,
+    "RESUMED": 0
+  },
   "ProcessDefinitionSearchQuerySortRequestField": {
     "name": 1,
     "processDefinitionId": 5,
@@ -763,6 +769,11 @@
     "tenantId": 6,
     "version": 3,
     "versionTag": 4
+  },
+  "ProcessDefinitionSuspensionVersionResultOutcome": {
+    "ALREADY_SUSPENDED": 1,
+    "DRAINING": 2,
+    "SUSPENDED": 0
   },
   "ProcessInstanceSearchQuerySortRequestField": {
     "businessId": 14,

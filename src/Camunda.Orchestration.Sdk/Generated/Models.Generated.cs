@@ -1069,6 +1069,28 @@ public enum ProcessDefinitionResultState
 }
 
 /// <summary>
+/// `RESUMED` if the version was suspended and is now active again. The resumption applies
+/// to all partitions shortly after the response.
+/// `ALREADY_RESUMED` if the version was already active, so its state is unchanged.
+/// With `includeProcessInstances`, its suspended process instances are still resumed by
+/// the batch operation.
+/// `DRAINING` if it is being deleted and is left unchanged. This only occurs when the
+/// request selects by ID without a version; selecting a single draining version is rejected
+/// with 409.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ProcessDefinitionResumptionVersionResultOutcome
+{
+    [JsonPropertyName("RESUMED")]
+    RESUMED = 0,
+    [JsonPropertyName("ALREADY_RESUMED")]
+    ALREADYRESUMED = 1,
+    [JsonPropertyName("DRAINING")]
+    DRAINING = 2,
+}
+
+/// <summary>
 /// The field to sort by.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -1088,6 +1110,28 @@ public enum ProcessDefinitionSearchQuerySortRequestField
     ProcessDefinitionId = 5,
     [JsonPropertyName("tenantId")]
     TenantId = 6,
+}
+
+/// <summary>
+/// `SUSPENDED` if the version was active and is now suspended. The suspension applies to
+/// all partitions shortly after the response.
+/// `ALREADY_SUSPENDED` if the version was already suspended, so its state is unchanged.
+/// With `includeProcessInstances`, its process instances are still suspended by the
+/// batch operation.
+/// `DRAINING` if it is being deleted and is left unchanged. This only occurs when the
+/// request selects by ID without a version; selecting a single draining version is rejected
+/// with 409.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ProcessDefinitionSuspensionVersionResultOutcome
+{
+    [JsonPropertyName("SUSPENDED")]
+    SUSPENDED = 0,
+    [JsonPropertyName("ALREADY_SUSPENDED")]
+    ALREADYSUSPENDED = 1,
+    [JsonPropertyName("DRAINING")]
+    DRAINING = 2,
 }
 
 /// <summary>
@@ -23119,6 +23163,8 @@ public enum PermissionTypeEnum
     RESTORE = 40,
     [JsonPropertyName("REVEAL")]
     REVEAL = 41,
+    [JsonPropertyName("SUSPEND_PROCESS_DEFINITION")]
+    SUSPENDPROCESSDEFINITION = 48,
     [JsonPropertyName("SUSPEND_PROCESS_INSTANCE")]
     SUSPENDPROCESSINSTANCE = 42,
     [JsonPropertyName("UPDATE")]
@@ -24061,6 +24107,138 @@ public sealed class ProcessDefinitionResult
 }
 
 /// <summary>
+/// Instruction to resume process definitions, selected either by key or by ID.
+/// 
+/// </summary>
+/// <remarks>
+/// Use one of the following concrete types:
+/// <list type="bullet">
+/// <item><description><see cref="ProcessDefinitionResumptionInstructionByKey"/></description></item>
+/// <item><description><see cref="ProcessDefinitionResumptionInstructionById"/></description></item>
+/// </list>
+/// </remarks>
+/// <seealso cref="ProcessDefinitionResumptionInstructionByKey"/>
+/// <seealso cref="ProcessDefinitionResumptionInstructionById"/>
+[JsonDerivedType(typeof(ProcessDefinitionResumptionInstructionByKey))]
+[JsonDerivedType(typeof(ProcessDefinitionResumptionInstructionById))]
+public abstract class ProcessDefinitionResumptionInstruction { }
+
+/// <summary>
+/// ProcessDefinitionResumptionInstructionById
+/// </summary>
+public sealed class ProcessDefinitionResumptionInstructionById : ProcessDefinitionResumptionInstruction, global::Camunda.Orchestration.Sdk.ITenantIdSettable
+{
+    /// <summary>
+    /// The BPMN process ID of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The version of the process definition. Must be 1 or greater; `-1` is not accepted.
+    /// If omitted, all versions are affected.
+    /// 
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int? ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// The tenant of the process definition. Required when multi-tenancy is enabled;
+    /// if multi-tenancy is disabled, it can be omitted and the default tenant is used.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// Whether to also resume the process instances of the affected
+    /// process definition versions. The instances are changed by a batch operation.
+    /// 
+    /// </summary>
+    [JsonPropertyName("includeProcessInstances")]
+    public bool? IncludeProcessInstances { get; set; }
+
+    /// <inheritdoc />
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
+
+}
+
+/// <summary>
+/// ProcessDefinitionResumptionInstructionByKey
+/// </summary>
+public sealed class ProcessDefinitionResumptionInstructionByKey : ProcessDefinitionResumptionInstruction
+{
+    /// <summary>
+    /// The key of the process definition version to resume.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// Whether to also resume the process instances of the affected
+    /// process definition versions. The instances are changed by a batch operation.
+    /// 
+    /// </summary>
+    [JsonPropertyName("includeProcessInstances")]
+    public bool? IncludeProcessInstances { get; set; }
+
+}
+
+/// <summary>
+/// ProcessDefinitionResumptionResult
+/// </summary>
+public sealed class ProcessDefinitionResumptionResult
+{
+    /// <summary>
+    /// The affected process definition versions.
+    /// </summary>
+    [JsonPropertyName("processDefinitions")]
+    public List<ProcessDefinitionResumptionVersionResult> ProcessDefinitions { get; set; } = null!;
+
+    /// <summary>
+    /// The key of the batch operation that resumes the suspended process instances.
+    /// Null when `includeProcessInstances` is not set.
+    /// 
+    /// </summary>
+    [JsonPropertyName("batchOperationKey")]
+    public BatchOperationKey? BatchOperationKey { get; set; }
+
+}
+
+/// <summary>
+/// ProcessDefinitionResumptionVersionResult
+/// </summary>
+public sealed class ProcessDefinitionResumptionVersionResult
+{
+    /// <summary>
+    /// The key of the process definition version.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The version of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// `RESUMED` if the version was suspended and is now active again. The resumption applies
+    /// to all partitions shortly after the response.
+    /// `ALREADY_RESUMED` if the version was already active, so its state is unchanged.
+    /// With `includeProcessInstances`, its suspended process instances are still resumed by
+    /// the batch operation.
+    /// `DRAINING` if it is being deleted and is left unchanged. This only occurs when the
+    /// request selects by ID without a version; selecting a single draining version is rejected
+    /// with 409.
+    /// 
+    /// </summary>
+    [JsonPropertyName("outcome")]
+    public ProcessDefinitionResumptionVersionResultOutcome Outcome { get; set; }
+
+}
+
+/// <summary>
 /// ProcessDefinitionSearchQuery
 /// </summary>
 public sealed class ProcessDefinitionSearchQuery
@@ -24287,6 +24465,138 @@ public sealed class ProcessDefinitionStatisticsFilter
     /// </summary>
     [JsonPropertyName("$or")]
     public List<BaseProcessInstanceFilterFields>? Or { get; set; }
+
+}
+
+/// <summary>
+/// Instruction to suspend process definitions, selected either by key or by ID.
+/// 
+/// </summary>
+/// <remarks>
+/// Use one of the following concrete types:
+/// <list type="bullet">
+/// <item><description><see cref="ProcessDefinitionSuspensionInstructionByKey"/></description></item>
+/// <item><description><see cref="ProcessDefinitionSuspensionInstructionById"/></description></item>
+/// </list>
+/// </remarks>
+/// <seealso cref="ProcessDefinitionSuspensionInstructionByKey"/>
+/// <seealso cref="ProcessDefinitionSuspensionInstructionById"/>
+[JsonDerivedType(typeof(ProcessDefinitionSuspensionInstructionByKey))]
+[JsonDerivedType(typeof(ProcessDefinitionSuspensionInstructionById))]
+public abstract class ProcessDefinitionSuspensionInstruction { }
+
+/// <summary>
+/// ProcessDefinitionSuspensionInstructionById
+/// </summary>
+public sealed class ProcessDefinitionSuspensionInstructionById : ProcessDefinitionSuspensionInstruction, global::Camunda.Orchestration.Sdk.ITenantIdSettable
+{
+    /// <summary>
+    /// The BPMN process ID of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The version of the process definition. Must be 1 or greater; `-1` is not accepted.
+    /// If omitted, all versions are affected.
+    /// 
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int? ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// The tenant of the process definition. Required when multi-tenancy is enabled;
+    /// if multi-tenancy is disabled, it can be omitted and the default tenant is used.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// Whether to also suspend the process instances of the affected
+    /// process definition versions. The instances are changed by a batch operation.
+    /// 
+    /// </summary>
+    [JsonPropertyName("includeProcessInstances")]
+    public bool? IncludeProcessInstances { get; set; }
+
+    /// <inheritdoc />
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
+
+}
+
+/// <summary>
+/// ProcessDefinitionSuspensionInstructionByKey
+/// </summary>
+public sealed class ProcessDefinitionSuspensionInstructionByKey : ProcessDefinitionSuspensionInstruction
+{
+    /// <summary>
+    /// The key of the process definition version to suspend.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// Whether to also suspend the process instances of the affected
+    /// process definition versions. The instances are changed by a batch operation.
+    /// 
+    /// </summary>
+    [JsonPropertyName("includeProcessInstances")]
+    public bool? IncludeProcessInstances { get; set; }
+
+}
+
+/// <summary>
+/// ProcessDefinitionSuspensionResult
+/// </summary>
+public sealed class ProcessDefinitionSuspensionResult
+{
+    /// <summary>
+    /// The affected process definition versions.
+    /// </summary>
+    [JsonPropertyName("processDefinitions")]
+    public List<ProcessDefinitionSuspensionVersionResult> ProcessDefinitions { get; set; } = null!;
+
+    /// <summary>
+    /// The key of the batch operation that suspends the running process instances.
+    /// Null when `includeProcessInstances` is not set.
+    /// 
+    /// </summary>
+    [JsonPropertyName("batchOperationKey")]
+    public BatchOperationKey? BatchOperationKey { get; set; }
+
+}
+
+/// <summary>
+/// ProcessDefinitionSuspensionVersionResult
+/// </summary>
+public sealed class ProcessDefinitionSuspensionVersionResult
+{
+    /// <summary>
+    /// The key of the process definition version.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The version of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionVersion")]
+    public int ProcessDefinitionVersion { get; set; }
+
+    /// <summary>
+    /// `SUSPENDED` if the version was active and is now suspended. The suspension applies to
+    /// all partitions shortly after the response.
+    /// `ALREADY_SUSPENDED` if the version was already suspended, so its state is unchanged.
+    /// With `includeProcessInstances`, its process instances are still suspended by the
+    /// batch operation.
+    /// `DRAINING` if it is being deleted and is left unchanged. This only occurs when the
+    /// request selects by ID without a version; selecting a single draining version is rejected
+    /// with 409.
+    /// 
+    /// </summary>
+    [JsonPropertyName("outcome")]
+    public ProcessDefinitionSuspensionVersionResultOutcome Outcome { get; set; }
 
 }
 
