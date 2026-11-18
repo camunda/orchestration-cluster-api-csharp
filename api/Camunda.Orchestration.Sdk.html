@@ -2487,6 +2487,31 @@ correlated with.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstruction.html">ProcessDefinitionResumptionInstruction</a></dt>
+      <dd><p>Instruction to resume process definitions, selected either by key or by ID.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstructionById.html">ProcessDefinitionResumptionInstructionById</a></dt>
+      <dd><p>ProcessDefinitionResumptionInstructionById</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstructionByKey.html">ProcessDefinitionResumptionInstructionByKey</a></dt>
+      <dd><p>ProcessDefinitionResumptionInstructionByKey</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionResumptionResult.html">ProcessDefinitionResumptionResult</a></dt>
+      <dd><p>ProcessDefinitionResumptionResult</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionResumptionVersionResult.html">ProcessDefinitionResumptionVersionResult</a></dt>
+      <dd><p>ProcessDefinitionResumptionVersionResult</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuery.html">ProcessDefinitionSearchQuery</a></dt>
       <dd><p>ProcessDefinitionSearchQuery</p>
 </dd>
@@ -2504,6 +2529,31 @@ correlated with.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter.html">ProcessDefinitionStatisticsFilter</a></dt>
       <dd><p>Process definition statistics search filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstruction.html">ProcessDefinitionSuspensionInstruction</a></dt>
+      <dd><p>Instruction to suspend process definitions, selected either by key or by ID.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstructionById.html">ProcessDefinitionSuspensionInstructionById</a></dt>
+      <dd><p>ProcessDefinitionSuspensionInstructionById</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstructionByKey.html">ProcessDefinitionSuspensionInstructionByKey</a></dt>
+      <dd><p>ProcessDefinitionSuspensionInstructionByKey</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionResult.html">ProcessDefinitionSuspensionResult</a></dt>
+      <dd><p>ProcessDefinitionSuspensionResult</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionVersionResult.html">ProcessDefinitionSuspensionVersionResult</a></dt>
+      <dd><p>ProcessDefinitionSuspensionVersionResult</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -4600,8 +4650,32 @@ instances draining before it is removed.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionResumptionVersionResultOutcome.html">ProcessDefinitionResumptionVersionResultOutcome</a></dt>
+      <dd><p><code>RESUMED</code> if the version was suspended and is now active again. The resumption applies
+to all partitions shortly after the response.
+<code>ALREADY_RESUMED</code> if the version was already active, so its state is unchanged.
+With <code>includeProcessInstances</code>, its suspended process instances are still resumed by
+the batch operation.
+<code>DRAINING</code> if it is being deleted and is left unchanged. This only occurs when the
+request selects by ID without a version; selecting a single draining version is rejected
+with 409.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuerySortRequestField.html">ProcessDefinitionSearchQuerySortRequestField</a></dt>
       <dd><p>The field to sort by.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionVersionResultOutcome.html">ProcessDefinitionSuspensionVersionResultOutcome</a></dt>
+      <dd><p><code>SUSPENDED</code> if the version was active and is now suspended. The suspension applies to
+all partitions shortly after the response.
+<code>ALREADY_SUSPENDED</code> if the version was already suspended, so its state is unchanged.
+With <code>includeProcessInstances</code>, its process instances are still suspended by the
+batch operation.
+<code>DRAINING</code> if it is being deleted and is left unchanged. This only occurs when the
+request selects by ID without a version; selecting a single draining version is rejected
+with 409.</p>
 </dd>
     </dl>
     <dl class="jumplist">

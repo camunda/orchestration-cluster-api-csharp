@@ -1475,6 +1475,17 @@ Resumes exporting on all partitions of the physical tenant after a pause or soft
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessDefinitionsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeProcessDefinitionsAsync_Camunda_Orchestration_Sdk_ProcessDefinitionResumptionInstruction_System_Threading_CancellationToken_">ResumeProcessDefinitionsAsync(ProcessDefinitionResumptionInstruction, CancellationToken)</a></dt>
+    <dd><p>Resume process definitions
+Resumes suspended process definitions so that process instances can be created from them again.
+The definition is selected either by <code>processDefinitionKey</code>, which identifies exactly one
+version, or by <code>processDefinitionId</code> with an optional <code>processDefinitionVersion</code> and
+<code>tenantId</code>. Without a version, all versions of the process definition ID are resumed.
+Set <code>includeProcessInstances</code> to also resume the suspended process instances of the affected
+versions; the instances are changed by a batch operation, returned as <code>batchOperationKey</code>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessInstanceAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ResumeProcessInstanceAsync_Camunda_Orchestration_Sdk_ProcessInstanceKey_Camunda_Orchestration_Sdk_ResumeProcessInstanceRequest_System_Threading_CancellationToken_">ResumeProcessInstanceAsync(ProcessInstanceKey, ResumeProcessInstanceRequest?, CancellationToken)</a></dt>
     <dd><p>Resume process instance
 Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.
@@ -1876,6 +1887,17 @@ This is done asynchronously, the progress can be tracked using the batch operati
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SuspendBatchOperationAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendBatchOperationAsync_Camunda_Orchestration_Sdk_BatchOperationKey_System_Threading_CancellationToken_">SuspendBatchOperationAsync(BatchOperationKey, CancellationToken)</a></dt>
     <dd><p>Overload without a request body. Sends an empty JSON object (<code>{}</code>).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessDefinitionsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SuspendProcessDefinitionsAsync_Camunda_Orchestration_Sdk_ProcessDefinitionSuspensionInstruction_System_Threading_CancellationToken_">SuspendProcessDefinitionsAsync(ProcessDefinitionSuspensionInstruction, CancellationToken)</a></dt>
+    <dd><p>Suspend process definitions
+Suspends process definitions so that no new process instances can be created from them.
+The definition is selected either by <code>processDefinitionKey</code>, which identifies exactly one
+version, or by <code>processDefinitionId</code> with an optional <code>processDefinitionVersion</code> and
+<code>tenantId</code>. Without a version, all versions of the process definition ID are suspended.
+Set <code>includeProcessInstances</code> to also suspend the running process instances of the affected
+versions; the instances are changed by a batch operation, returned as <code>batchOperationKey</code>.</p>
 </dd>
   </dl>
   <dl class="jumplist">
