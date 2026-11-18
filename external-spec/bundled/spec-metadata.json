@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:dcfd1b015d1e24c70c3288101ab7cbbab420a4ebda5641d68e787a32eaee0266",
+  "specHash": "sha256:b3f76640cfd9a8771b984eeb0967bbcd60e2f81b262f82f8ffdf86999b38f4df",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -2112,6 +2112,38 @@
         }
       ],
       "stableId": "process-definition-key-filter-property"
+    },
+    {
+      "name": "ProcessDefinitionResumptionInstruction",
+      "kind": "union-wrapper",
+      "description": "Instruction to resume process definitions, selected either by key or by ID.\n",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "ProcessDefinitionResumptionInstructionByKey"
+        },
+        {
+          "branchType": "ref",
+          "ref": "ProcessDefinitionResumptionInstructionById"
+        }
+      ],
+      "stableId": "process-definition-resumption-instruction"
+    },
+    {
+      "name": "ProcessDefinitionSuspensionInstruction",
+      "kind": "union-wrapper",
+      "description": "Instruction to suspend process definitions, selected either by key or by ID.\n",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "ProcessDefinitionSuspensionInstructionByKey"
+        },
+        {
+          "branchType": "ref",
+          "ref": "ProcessDefinitionSuspensionInstructionById"
+        }
+      ],
+      "stableId": "process-definition-suspension-instruction"
     },
     {
       "name": "ProcessInstanceCreationInstruction",
@@ -7979,6 +8011,45 @@
       }
     },
     {
+      "operationId": "resumeProcessDefinitions",
+      "path": "/process-definitions/resumption",
+      "method": "post",
+      "tags": [
+        "Process definition"
+      ],
+      "summary": "Resume process definitions",
+      "description": "Resumes suspended process definitions so that process instances can be created from them again.\nThe definition is selected either by `processDefinitionKey`, which identifies exactly one\nversion, or by `processDefinitionId` with an optional `processDefinitionVersion` and\n`tenantId`. Without a version, all versions of the process definition ID are resumed.\nSet `includeProcessInstances` to also resume the suspended process instances of the affected\nversions; the instances are changed by a batch operation, returned as `batchOperationKey`.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": true,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [
+        "ProcessDefinitionResumptionInstructionByKey",
+        "ProcessDefinitionResumptionInstructionById"
+      ],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "process-definitions.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ProcessDefinitionResumptionInstruction",
+      "successResponseSchemaRef": "ProcessDefinitionResumptionResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "SUSPEND_PROCESS_DEFINITION"
+          }
+        ],
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    {
       "operationId": "searchProcessDefinitions",
       "path": "/process-definitions/search",
       "method": "post",
@@ -8086,6 +8157,45 @@
           }
         ],
         "x-added-in-version": "8.9",
+        "x-scope": "physical-tenant"
+      }
+    },
+    {
+      "operationId": "suspendProcessDefinitions",
+      "path": "/process-definitions/suspension",
+      "method": "post",
+      "tags": [
+        "Process definition"
+      ],
+      "summary": "Suspend process definitions",
+      "description": "Suspends process definitions so that no new process instances can be created from them.\nThe definition is selected either by `processDefinitionKey`, which identifies exactly one\nversion, or by `processDefinitionId` with an optional `processDefinitionVersion` and\n`tenantId`. Without a version, all versions of the process definition ID are suspended.\nSet `includeProcessInstances` to also suspend the running process instances of the affected\nversions; the instances are changed by a batch operation, returned as `batchOperationKey`.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": true,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [
+        "ProcessDefinitionSuspensionInstructionByKey",
+        "ProcessDefinitionSuspensionInstructionById"
+      ],
+      "optionalTenantIdInBody": false,
+      "sourceFile": "process-definitions.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ProcessDefinitionSuspensionInstruction",
+      "successResponseSchemaRef": "ProcessDefinitionSuspensionResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "SUSPEND_PROCESS_DEFINITION"
+          }
+        ],
+        "x-added-in-version": "8.11",
         "x-scope": "physical-tenant"
       }
     },
@@ -8328,7 +8438,7 @@
         "ProcessInstanceCreationInstructionById",
         "ProcessInstanceCreationInstructionByVersionTag"
       ],
-      "optionalTenantIdInBody": false,
+      "optionalTenantIdInBody": true,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -13268,8 +13378,8 @@
   ],
   "integrity": {
     "totalSemanticKeys": 44,
-    "totalUnions": 69,
-    "totalOperations": 247,
+    "totalUnions": 71,
+    "totalOperations": 249,
     "totalEventuallyConsistent": 95,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 22

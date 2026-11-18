@@ -1947,7 +1947,9 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[Camunda.Orchest
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQueryResult> GetProcessDefinitionInstanceVersionStatisticsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionMessageSubscriptionStatisticsQueryResult> GetProcessDefinitionMessageSubscriptionStatisticsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionMessageSubscriptionStatisticsQuery? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessDefinitionMessageSubscriptionStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionResult> GetProcessDefinitionAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessDefinitionResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionResumptionResult> ResumeProcessDefinitionsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionSearchQueryResult> SearchProcessDefinitionsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuery? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessDefinitionSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionResult> SuspendProcessDefinitionsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstruction body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult> SearchProcessDefinitionVariableNamesAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQuery? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceElementStatisticsQueryResult> GetProcessInstanceStatisticsAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceElementStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessInstanceResult> GetProcessInstanceAsync(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessInstanceResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -5369,6 +5371,7 @@ TYPE Camunda.Orchestration.Sdk.PermissionTypeEnum : enum interfaces=[System.ICom
   MEMBER UPDATEUSERTASK = 45 json="UPDATE_USER_TASK"
   MEMBER UPDATETASKLISTENER = 46 json="UPDATE_TASK_LISTENER"
   MEMBER ANSWER = 47 json="ANSWER"
+  MEMBER SUSPENDPROCESSDEFINITION = 48 json="SUSPEND_PROCESS_DEFINITION"
 
 TYPE Camunda.Orchestration.Sdk.PhysicalTenantBrokerTopology : sealed class
   CTOR ()
@@ -5585,6 +5588,41 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResultState : enum interfaces=[S
   MEMBER DRAINING = 1 json="DRAINING"
   MEMBER DELETED = 2 json="DELETED"
 
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstruction : abstract class
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstructionById tag=<none>
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstructionByKey tag=<none>
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstructionById : sealed class base=Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstruction interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Boolean? IncludeProcessInstances { get; set; } [JsonPropertyName("includeProcessInstances")]
+  PROP System.Int32? ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
+  METHOD System.Void SetDefaultTenantId(System.String tenantId)
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstructionByKey : sealed class base=Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstruction
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP System.Boolean? IncludeProcessInstances { get; set; } [JsonPropertyName("includeProcessInstances")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResumptionResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BatchOperationKey? BatchOperationKey { get; set; } [JsonPropertyName("batchOperationKey")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessDefinitionResumptionVersionResult> ProcessDefinitions { get; set; } [JsonPropertyName("processDefinitions")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResumptionVersionResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionResumptionVersionResultOutcome Outcome { get; set; } [JsonPropertyName("outcome")]
+  PROP System.Int32 ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResumptionVersionResultOutcome : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER RESUMED = 0 json="RESUMED"
+  MEMBER ALREADYRESUMED = 1 json="ALREADY_RESUMED"
+  MEMBER DRAINING = 2 json="DRAINING"
+
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSearchQuery : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.ProcessDefinitionFilter? Filter { get; set; } [JsonPropertyName("filter")]
@@ -5635,6 +5673,41 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionStatisticsFilter : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.BaseProcessInstanceFilterFields>? Or { get; set; } [JsonPropertyName("$or")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.Tag>? Tags { get; set; } [JsonPropertyName("tags")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableValueFilterProperty>? Variables { get; set; } [JsonPropertyName("variables")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstruction : abstract class
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstructionById tag=<none>
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstructionByKey tag=<none>
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstructionById : sealed class base=Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstruction interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Boolean? IncludeProcessInstances { get; set; } [JsonPropertyName("includeProcessInstances")]
+  PROP System.Int32? ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
+  METHOD System.Void SetDefaultTenantId(System.String tenantId)
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstructionByKey : sealed class base=Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstruction
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP System.Boolean? IncludeProcessInstances { get; set; } [JsonPropertyName("includeProcessInstances")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.BatchOperationKey? BatchOperationKey { get; set; } [JsonPropertyName("batchOperationKey")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionVersionResult> ProcessDefinitions { get; set; } [JsonPropertyName("processDefinitions")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionVersionResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionVersionResultOutcome Outcome { get; set; } [JsonPropertyName("outcome")]
+  PROP System.Int32 ProcessDefinitionVersion { get; set; } [JsonPropertyName("processDefinitionVersion")]
+
+TYPE Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionVersionResultOutcome : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER SUSPENDED = 0 json="SUSPENDED"
+  MEMBER ALREADYSUSPENDED = 1 json="ALREADY_SUSPENDED"
+  MEMBER DRAINING = 2 json="DRAINING"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionVariableNameFilter : sealed class
   CTOR ()

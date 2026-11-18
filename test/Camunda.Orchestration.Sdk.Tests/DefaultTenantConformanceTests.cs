@@ -56,6 +56,17 @@ public class DefaultTenantConformanceTests
         ["evaluateConditionals"] = (c, e) => c.EvaluateConditionalsAsync(new ConditionalEvaluationInstruction { TenantId = Tenant(e) }),
     };
 
+    /// <summary>
+    /// Bodies where only some variants carry <c>tenantId</c> (selection by key has none). The
+    /// spec metadata marks them <c>optionalTenantIdInBody: false</c>, and the other SDKs send
+    /// no default tenant for them, so neither does this one.
+    /// </summary>
+    private static readonly HashSet<string> NotDefaulted = new(StringComparer.Ordinal)
+    {
+        "suspendProcessDefinitions",
+        "resumeProcessDefinitions",
+    };
+
     public static TheoryData<string> Operations()
     {
         var data = new TheoryData<string>();
@@ -165,6 +176,7 @@ public class DefaultTenantConformanceTests
         }
 
         var covered = new SortedSet<string>(TenantScopedOps.Keys.Select(k => k.Split(':')[0]), StringComparer.Ordinal);
+        expected.ExceptWith(NotDefaulted);
         Assert.NotEmpty(expected);
         Assert.True(expected.SetEquals(covered), $"missing from matrix: [{string.Join(", ", expected.Except(covered))}]; not tenant-scoped: [{string.Join(", ", covered.Except(expected))}]");
     }
@@ -270,6 +282,40 @@ public class DefaultTenantConformanceTests
         try
         {
             await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
+        }
+        catch (Exception) when (body != null)
+        {
+        }
+        Assert.NotNull(body);
+        AssertNoTenantProperty(JsonElement.Parse(body!));
+    }
+
+    public static TheoryData<string> NotDefaultedOperations() => new(NotDefaulted);
+
+    [Theory]
+    [MemberData(nameof(NotDefaultedOperations))]
+    public async Task NotDefaultedOperations_SendNoTenantById(string op)
+    {
+        var (client, handler) = CreateClient("configured-tenant");
+        using var _ = client;
+        string? body = null;
+        handler.Enqueue(async req =>
+        {
+            body = await req.Content!.ReadAsStringAsync();
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"processDefinitions\":[]}", System.Text.Encoding.UTF8, "application/json"),
+            };
+        });
+        var id = ProcessDefinitionId.AssumeExists("order-process");
+        try
+        {
+            await (op switch
+            {
+                "suspendProcessDefinitions" => (Task)client.SuspendProcessDefinitionsAsync(new ProcessDefinitionSuspensionInstructionById { ProcessDefinitionId = id }),
+                "resumeProcessDefinitions" => client.ResumeProcessDefinitionsAsync(new ProcessDefinitionResumptionInstructionById { ProcessDefinitionId = id }),
+                _ => throw new ArgumentOutOfRangeException(nameof(op), op, "no call for this operation"),
+            });
         }
         catch (Exception) when (body != null)
         {

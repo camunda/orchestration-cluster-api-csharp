@@ -340,6 +340,20 @@
       "label": "Get start process form"
     }
   ],
+  "suspendProcessDefinitions": [
+    {
+      "file": "ProcessDefinition.cs",
+      "region": "SuspendProcessDefinitions",
+      "label": "Suspend process definitions"
+    }
+  ],
+  "resumeProcessDefinitions": [
+    {
+      "file": "ProcessDefinition.cs",
+      "region": "ResumeProcessDefinitions",
+      "label": "Resume process definitions"
+    }
+  ],
   "getFormByKey": [
     {
       "file": "Admin.cs",

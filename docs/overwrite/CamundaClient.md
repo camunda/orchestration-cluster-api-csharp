@@ -1763,6 +1763,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ResumeProcessDefinitionsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstruction,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/ProcessDefinition.cs#ResumeProcessDefinitions)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessInstancesBatchOperationAsync(Camunda.Orchestration.Sdk.ProcessInstanceSuspensionBatchOperationRequest,System.Threading.CancellationToken)
 example:
 - *content
@@ -2280,6 +2290,16 @@ example:
 
 
 [!code-csharp[](../../examples/BatchOperation.cs#SuspendBatchOperation)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SuspendProcessDefinitionsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionSuspensionInstruction,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/ProcessDefinition.cs#SuspendProcessDefinitions)]
 
 
 ---
