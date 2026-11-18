@@ -54,6 +54,8 @@ public class DefaultTenantConformanceTests
         ["evaluateDecision:ByKey"] = (c, e) => c.EvaluateDecisionAsync(new DecisionEvaluationByKey { TenantId = Tenant(e) }),
         ["evaluateExpression"] = (c, e) => c.EvaluateExpressionAsync(new ExpressionEvaluationRequest { Expression = "=1", TenantId = Tenant(e) }),
         ["evaluateConditionals"] = (c, e) => c.EvaluateConditionalsAsync(new ConditionalEvaluationInstruction { TenantId = Tenant(e) }),
+        ["suspendProcessDefinitions:ById"] = (c, e) => c.SuspendProcessDefinitionsAsync(new ProcessDefinitionSuspensionInstructionById { TenantId = Tenant(e) }),
+        ["resumeProcessDefinitions:ById"] = (c, e) => c.ResumeProcessDefinitionsAsync(new ProcessDefinitionResumptionInstructionById { TenantId = Tenant(e) }),
     };
 
     public static TheoryData<string> Operations()
