@@ -17173,6 +17173,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.CamundaConfig.TokenAudience
   fullName: Camunda.Orchestration.Sdk.CamundaConfig.TokenAudience
   nameWithType: CamundaConfig.TokenAudience
+- uid: Camunda.Orchestration.Sdk.CamundaConfig.UserAgent
+  name: UserAgent
+  href: api/Camunda.Orchestration.Sdk.CamundaConfig.UserAgent.html#Camunda_Orchestration_Sdk_CamundaConfig_UserAgent
+  commentId: P:Camunda.Orchestration.Sdk.CamundaConfig.UserAgent
+  fullName: Camunda.Orchestration.Sdk.CamundaConfig.UserAgent
+  nameWithType: CamundaConfig.UserAgent
+- uid: Camunda.Orchestration.Sdk.CamundaConfig.UserAgent*
+  name: UserAgent
+  href: api/Camunda.Orchestration.Sdk.CamundaConfig.UserAgent.html
+  commentId: Overload:Camunda.Orchestration.Sdk.CamundaConfig.UserAgent
+  fullName: Camunda.Orchestration.Sdk.CamundaConfig.UserAgent
+  nameWithType: CamundaConfig.UserAgent
 - uid: Camunda.Orchestration.Sdk.CamundaConfig.Validation
   name: Validation
   href: api/Camunda.Orchestration.Sdk.CamundaConfig.Validation.html#Camunda_Orchestration_Sdk_CamundaConfig_Validation

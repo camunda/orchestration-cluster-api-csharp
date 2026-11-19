@@ -6924,6 +6924,11 @@
     "title": "Property TokenAudience | Camunda C# SDK",
     "summary": "Property TokenAudience Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll TokenAudience public string TokenAudience { get; init; } Property Value string"
   },
+  "api/Camunda.Orchestration.Sdk.CamundaConfig.UserAgent.html": {
+    "href": "api/Camunda.Orchestration.Sdk.CamundaConfig.UserAgent.html",
+    "title": "Property UserAgent | Camunda C# SDK",
+    "summary": "Property UserAgent Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll UserAgent Optional application user agent (CAMUNDA_USER_AGENT). Appended after the SDK identifier camunda-orchestration-sdk-csharp/<version>, never replacing it. public string? UserAgent { get; init; } Property Value string"
+  },
   "api/Camunda.Orchestration.Sdk.CamundaConfig.Validation.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaConfig.Validation.html",
     "title": "Property Validation | Camunda C# SDK",
@@ -6937,7 +6942,7 @@
   "api/Camunda.Orchestration.Sdk.CamundaConfig.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaConfig.html",
     "title": "Class CamundaConfig | Camunda C# SDK",
-    "summary": "Class CamundaConfig Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll Hydrated Camunda configuration. Immutable after construction. public sealed class CamundaConfig Inheritance object CamundaConfig Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Properties Auth Backpressure DefaultTenantId Eventual HttpRetry LogLevel OAuth RestAddress TenantIds Tenant ids job workers activate for, from CAMUNDA_TENANT_IDS (comma-separated) or the TenantIds configuration path. null when unset, in which case activation falls back to DefaultTenantId. Tls TokenAudience Validation WorkerDefaults"
+    "summary": "Class CamundaConfig Namespace Camunda.Orchestration.Sdk Assembly Camunda.Orchestration.Sdk.dll Hydrated Camunda configuration. Immutable after construction. public sealed class CamundaConfig Inheritance object CamundaConfig Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Extension Methods TypedVariables.DeserializeAs<T>(object?, JsonSerializerOptions?) Properties Auth Backpressure DefaultTenantId Eventual HttpRetry LogLevel OAuth RestAddress TenantIds Tenant ids job workers activate for, from CAMUNDA_TENANT_IDS (comma-separated) or the TenantIds configuration path. null when unset, in which case activation falls back to DefaultTenantId. Tls TokenAudience UserAgent Optional application user agent (CAMUNDA_USER_AGENT). Appended after the SDK identifier camunda-orchestration-sdk-csharp/<version>, never replacing it. Validation WorkerDefaults"
   },
   "api/Camunda.Orchestration.Sdk.CamundaConfigurationException.-ctor.html": {
     "href": "api/Camunda.Orchestration.Sdk.CamundaConfigurationException.-ctor.html",
