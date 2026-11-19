@@ -392,6 +392,7 @@ public static class ConfigurationHydrator
             },
             Validation = validation,
             LogLevel = rawMap.GetValueOrDefault(ConfigKeys.LogLevel, ConfigSchema.StringDefault(ConfigKeys.LogLevel))!,
+            UserAgent = rawMap.GetValueOrDefault(ConfigKeys.UserAgent),
             Eventual = new EventualConfig
             {
                 PollDefaultMs = eventualPollDefaultMs,
