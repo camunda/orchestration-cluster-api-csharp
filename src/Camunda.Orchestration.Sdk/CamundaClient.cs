@@ -280,21 +280,8 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         if (_logger.IsEnabled(LogLevel.Debug))
             _logger.LogDebug("HTTP POST {Path} (multipart)", path);
 
-<<<<<<< HEAD
         using var request = new HttpRequestMessage(HttpMethod.Post, ResolveRequestUri(path, useRootServer)) { Content = content };
-=======
-        // This delegate is re-invoked across retry attempts (see InvokeWithRetryAsync),
-        // always with the SAME caller-owned content. HttpClient disposes a request's
-        // content once the send completes, so attaching the caller's content directly
-        // would destroy it after the first attempt and a retried attempt would fail
-        // reading a disposed multipart body. Send a fresh, replayable copy each attempt
-        // and leave the caller's content intact for the next one.
-        using var request = new HttpRequestMessage(HttpMethod.Post, ResolveRequestUri(path, useRootServer))
-        {
-            Content = await CloneMultipartAsync(content, ct),
-        };
         SdkUserAgent.Apply(request, _config.UserAgent, _httpClient.DefaultRequestHeaders.UserAgent);
->>>>>>> b66a07d0a (feat: send attributable user-agent on rest and oauth requests (#556))
         var response = await _httpClient.SendAsync(request, ct);
 
         if (!response.IsSuccessStatusCode)
