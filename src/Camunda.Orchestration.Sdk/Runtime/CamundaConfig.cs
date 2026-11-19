@@ -42,17 +42,13 @@ public sealed class CamundaConfig
     public OAuthConfig OAuth { get; init; } = new();
     public AuthConfig Auth { get; init; } = new();
     public ValidationConfig Validation { get; init; } = new();
-<<<<<<< HEAD
     public string LogLevel { get; init; } = "error";
-=======
-    public string LogLevel { get; init; } = ConfigSchema.StringDefault(ConfigKeys.LogLevel);
 
     /// <summary>
     /// Optional application user agent (<c>CAMUNDA_USER_AGENT</c>). Appended after the SDK
     /// identifier <c>camunda-orchestration-sdk-csharp/&lt;version&gt;</c>, never replacing it.
     /// </summary>
     public string? UserAgent { get; init; }
->>>>>>> b66a07d0a (feat: send attributable user-agent on rest and oauth requests (#556))
     public EventualConfig? Eventual { get; init; }
     public WorkerDefaultsConfig? WorkerDefaults { get; init; }
     public TlsConfig? Tls { get; init; }

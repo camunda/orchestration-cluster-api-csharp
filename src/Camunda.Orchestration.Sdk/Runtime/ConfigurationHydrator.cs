@@ -113,7 +113,7 @@ public static class ConfigurationHydrator
                          "CAMUNDA_MTLS_CERT", "CAMUNDA_MTLS_KEY", "CAMUNDA_MTLS_CA",
                          "CAMUNDA_MTLS_CERT_PATH", "CAMUNDA_MTLS_KEY_PATH", "CAMUNDA_MTLS_CA_PATH",
                          "CAMUNDA_MTLS_KEY_PASSPHRASE",
-                         "CAMUNDA_TENANT_IDS"
+                         "CAMUNDA_TENANT_IDS", "CAMUNDA_USER_AGENT"
                      })
             {
                 var v = Environment.GetEnvironmentVariable(extra);
@@ -373,12 +373,8 @@ public static class ConfigurationHydrator
                     : null,
             },
             Validation = validation,
-<<<<<<< HEAD
             LogLevel = rawMap.GetValueOrDefault("CAMUNDA_SDK_LOG_LEVEL", "error")!,
-=======
-            LogLevel = rawMap.GetValueOrDefault(ConfigKeys.LogLevel, ConfigSchema.StringDefault(ConfigKeys.LogLevel))!,
-            UserAgent = rawMap.GetValueOrDefault(ConfigKeys.UserAgent),
->>>>>>> b66a07d0a (feat: send attributable user-agent on rest and oauth requests (#556))
+            UserAgent = rawMap.GetValueOrDefault("CAMUNDA_USER_AGENT"),
             Eventual = new EventualConfig
             {
                 PollDefaultMs = eventualPollDefaultMs,
@@ -487,6 +483,7 @@ public static class ConfigurationHydrator
         ["TenantIds"] = "CAMUNDA_TENANT_IDS",
         ["LogLevel"] = "CAMUNDA_SDK_LOG_LEVEL",
         ["Validation"] = "CAMUNDA_SDK_VALIDATION",
+        ["UserAgent"] = "CAMUNDA_USER_AGENT",
 
         // Auth section
         ["Auth:Strategy"] = "CAMUNDA_AUTH_STRATEGY",
