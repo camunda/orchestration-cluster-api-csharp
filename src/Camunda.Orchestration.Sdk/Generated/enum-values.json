@@ -736,7 +736,8 @@
   "ProcessDefinitionFilterState": {
     "ACTIVE": 0,
     "DELETED": 2,
-    "DRAINING": 1
+    "DRAINING": 1,
+    "SUSPENDED": 3
   },
   "ProcessDefinitionInstanceStatisticsQuerySortRequestField": {
     "activeInstancesWithIncidentCount": 1,
@@ -754,7 +755,8 @@
   "ProcessDefinitionResultState": {
     "ACTIVE": 0,
     "DELETED": 2,
-    "DRAINING": 1
+    "DRAINING": 1,
+    "SUSPENDED": 3
   },
   "ProcessDefinitionResumptionVersionResultOutcome": {
     "ALREADY_RESUMED": 1,

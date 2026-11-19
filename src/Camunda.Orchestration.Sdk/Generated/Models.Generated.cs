@@ -1000,6 +1000,8 @@ public enum PartitionState
 /// Filter by the process definition&apos;s state.
 /// When not set, process definitions in any state are returned.
 /// Set to `ACTIVE` to exclude draining and deleted definitions (recommended for most use cases).
+/// Set to `SUSPENDED` to return only definitions that are suspended, so that no new
+/// process instances can be created from them.
 /// Set to `DRAINING` to return only definitions that are being deleted but still have
 /// active process instances draining.
 /// Set to `DELETED` to return only definitions that have been deleted but are still
@@ -1015,6 +1017,8 @@ public enum ProcessDefinitionFilterState
     DRAINING = 1,
     [JsonPropertyName("DELETED")]
     DELETED = 2,
+    [JsonPropertyName("SUSPENDED")]
+    SUSPENDED = 3,
 }
 
 /// <summary>
@@ -1055,6 +1059,7 @@ public enum ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField
 /// The state of this process definition.
 /// `DRAINING` indicates the definition is being deleted but still has active process
 /// instances draining before it is removed.
+/// `SUSPENDED` indicates no new process instances can be created from the definition.
 /// 
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -1066,6 +1071,8 @@ public enum ProcessDefinitionResultState
     DRAINING = 1,
     [JsonPropertyName("DELETED")]
     DELETED = 2,
+    [JsonPropertyName("SUSPENDED")]
+    SUSPENDED = 3,
 }
 
 /// <summary>
@@ -14019,6 +14026,12 @@ public sealed class DeploymentConfigurationResponse
     public bool IsTenantsApiEnabled { get; set; }
 
     /// <summary>
+    /// Whether wait-state tracking is enabled.
+    /// </summary>
+    [JsonPropertyName("isWaitStatesEnabled")]
+    public bool IsWaitStatesEnabled { get; set; }
+
+    /// <summary>
     /// The maximum HTTP request size in bytes.
     /// </summary>
     [JsonPropertyName("maxRequestSize")]
@@ -23365,6 +23378,8 @@ public sealed class ProcessDefinitionFilter
     /// Filter by the process definition&apos;s state.
     /// When not set, process definitions in any state are returned.
     /// Set to `ACTIVE` to exclude draining and deleted definitions (recommended for most use cases).
+    /// Set to `SUSPENDED` to return only definitions that are suspended, so that no new
+    /// process instances can be created from them.
     /// Set to `DRAINING` to return only definitions that are being deleted but still have
     /// active process instances draining.
     /// Set to `DELETED` to return only definitions that have been deleted but are still
@@ -24099,6 +24114,7 @@ public sealed class ProcessDefinitionResult
     /// The state of this process definition.
     /// `DRAINING` indicates the definition is being deleted but still has active process
     /// instances draining before it is removed.
+    /// `SUSPENDED` indicates no new process instances can be created from the definition.
     /// 
     /// </summary>
     [JsonPropertyName("state")]
