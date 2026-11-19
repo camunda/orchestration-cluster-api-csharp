@@ -96,7 +96,7 @@ public class UserAgentTests
                 Retry = new OAuthRetryConfig { Max = 1, BaseDelayMs = 1 },
             },
             UserAgent = "my-app/1.2",
-        }, NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
+        }, NullLogger.Instance);
 
         await oauth.GetTokenAsync(tokenClient);
 
@@ -152,7 +152,7 @@ public class UserAgentTests
                 Retry = new OAuthRetryConfig { Max = 1, BaseDelayMs = 1 },
             },
             UserAgent = "my-app/1.2\r\nX-Injected: yes",
-        }, NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
+        }, NullLogger.Instance);
 
         await oauth.GetTokenAsync(tokenClient);
 
