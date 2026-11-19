@@ -174,6 +174,7 @@ CAMUNDA_OAUTH_URL=https://login.cloud.camunda.io/oauth/token
 | `DefaultTenantId` | `CAMUNDA_DEFAULT_TENANT_ID` |
 | `TenantIds` | `CAMUNDA_TENANT_IDS` (JSON array or comma-separated string) |
 | `LogLevel` | `CAMUNDA_SDK_LOG_LEVEL` |
+| `UserAgent` | `CAMUNDA_USER_AGENT` |
 | `Validation` | `CAMUNDA_SDK_VALIDATION` |
 | `Auth:Strategy` | `CAMUNDA_AUTH_STRATEGY` |
 | `Auth:ClientId` | `CAMUNDA_CLIENT_ID` |
@@ -295,6 +296,7 @@ The SDK uses environment variables for configuration, matching the [JS SDK](http
 | `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID | `<default>` |
 | `CAMUNDA_TENANT_IDS` | Comma-separated tenant IDs for job activation (overrides `CAMUNDA_DEFAULT_TENANT_ID` for workers) | — |
 | `CAMUNDA_SDK_LOG_LEVEL` | Log level (`error`, `warn`, `info`, `debug`, `trace`, `silent`) | `error` |
+| `CAMUNDA_USER_AGENT` | Application user agent, appended after the SDK identifier `camunda-orchestration-sdk-csharp/<version>` in every request's `User-Agent` header | — |
 | `CAMUNDA_SDK_VALIDATION` | Validation mode (see below) | `req:none,res:none` |
 | `CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS` | Total HTTP retry attempts (initial + retries) | `3` |
 | `CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS` | HTTP retry base backoff (ms) | `100` |

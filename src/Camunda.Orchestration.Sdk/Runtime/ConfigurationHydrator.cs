@@ -373,7 +373,12 @@ public static class ConfigurationHydrator
                     : null,
             },
             Validation = validation,
+<<<<<<< HEAD
             LogLevel = rawMap.GetValueOrDefault("CAMUNDA_SDK_LOG_LEVEL", "error")!,
+=======
+            LogLevel = rawMap.GetValueOrDefault(ConfigKeys.LogLevel, ConfigSchema.StringDefault(ConfigKeys.LogLevel))!,
+            UserAgent = rawMap.GetValueOrDefault(ConfigKeys.UserAgent),
+>>>>>>> b66a07d0a (feat: send attributable user-agent on rest and oauth requests (#556))
             Eventual = new EventualConfig
             {
                 PollDefaultMs = eventualPollDefaultMs,
