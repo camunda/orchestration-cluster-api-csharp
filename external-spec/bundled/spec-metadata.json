@@ -8438,7 +8438,7 @@
         "ProcessInstanceCreationInstructionById",
         "ProcessInstanceCreationInstructionByVersionTag"
       ],
-      "optionalTenantIdInBody": true,
+      "optionalTenantIdInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
