@@ -161,6 +161,7 @@ public partial class CamundaClient : IDisposable
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
         }
 
+        SdkUserAgent.Apply(request, _config.UserAgent, _httpClient.DefaultRequestHeaders.UserAgent);
         var response = await _httpClient.SendAsync(request, ct);
 
         if (!response.IsSuccessStatusCode)
@@ -209,6 +210,7 @@ public partial class CamundaClient : IDisposable
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
         }
 
+        SdkUserAgent.Apply(request, _config.UserAgent, _httpClient.DefaultRequestHeaders.UserAgent);
         var response = await _httpClient.SendAsync(request, ct);
 
         if (!response.IsSuccessStatusCode)
@@ -245,6 +247,7 @@ public partial class CamundaClient : IDisposable
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
         }
 
+        SdkUserAgent.Apply(request, _config.UserAgent, _httpClient.DefaultRequestHeaders.UserAgent);
         using var response = await _httpClient.SendAsync(request, ct);
 
         if (!response.IsSuccessStatusCode)
@@ -274,6 +277,7 @@ public partial class CamundaClient : IDisposable
 
         var relativePath = path.TrimStart('/');
         using var request = new HttpRequestMessage(HttpMethod.Post, relativePath) { Content = content };
+        SdkUserAgent.Apply(request, _config.UserAgent, _httpClient.DefaultRequestHeaders.UserAgent);
         var response = await _httpClient.SendAsync(request, ct);
 
         if (!response.IsSuccessStatusCode)

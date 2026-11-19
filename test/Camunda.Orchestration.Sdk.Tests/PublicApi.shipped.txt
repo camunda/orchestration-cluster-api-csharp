@@ -1188,6 +1188,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaConfig : sealed class
   PROP System.String LogLevel { get; init; }
   PROP System.String RestAddress { get; init; }
   PROP System.String TokenAudience { get; init; }
+  PROP System.String? UserAgent { get; init; }
 
 TYPE Camunda.Orchestration.Sdk.CamundaConfigurationException : sealed class base=System.Exception interfaces=[System.Runtime.Serialization.ISerializable]
   CTOR (System.Collections.Generic.IReadOnlyList<Camunda.Orchestration.Sdk.ConfigErrorDetail> errors)
