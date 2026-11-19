@@ -35,6 +35,12 @@ internal static class SdkUserAgent
     /// application user agent and then any defaults from the caller-supplied
     /// <paramref name="clientDefaults"/> or already on the request.
     /// </summary>
+    /// <remarks>
+    /// An application user agent that fails <see cref="HttpHeaderValueCollection{T}.TryParseAdd"/>
+    /// is dropped, never added without validation: <c>TryAddWithoutValidation</c> trusts the
+    /// value, so a malformed one (for example containing CR/LF) would allow HTTP header
+    /// injection into REST and OAuth requests.
+    /// </remarks>
     public static void Apply(HttpRequestMessage request, string? appUserAgent, HttpHeaderValueCollection<ProductInfoHeaderValue>? clientDefaults = null)
     {
         var existing = request.Headers.UserAgent.ToList();
@@ -42,10 +48,7 @@ internal static class SdkUserAgent
         ua.Clear();
         ua.ParseAdd(Product);
         if (!string.IsNullOrWhiteSpace(appUserAgent))
-        {
-            if (!ua.TryParseAdd(appUserAgent.Trim()))
-                request.Headers.TryAddWithoutValidation("User-Agent", appUserAgent.Trim());
-        }
+            ua.TryParseAdd(appUserAgent.Trim());
         foreach (var v in existing)
         {
             if (!IsSdkProduct(v))

@@ -109,8 +109,8 @@ public class UserAgentTests
     [InlineData("my-app\nX-Injected: yes")]
     [InlineData("my-app\rX-Injected: yes")]
     // Other values the User-Agent grammar rejects are dropped too, not force-added.
-    [InlineData("my app/1.2")]
     [InlineData("my-app/1.2;")]
+    [InlineData("my-app/1.2\"")]
     public void Apply_DropsUnparseableApplicationUserAgent(string appUserAgent)
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, "https://mock.local");
