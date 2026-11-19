@@ -1,3 +1,10 @@
+# [9.3.0](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.2.4...v9.3.0) (2026-11-19)
+
+
+### Features
+
+* send attributable user-agent on rest and oauth requests (backport [#556](https://github.com/camunda/orchestration-cluster-api-csharp/issues/556) to stable/9) ([#558](https://github.com/camunda/orchestration-cluster-api-csharp/issues/558)) ([3620364](https://github.com/camunda/orchestration-cluster-api-csharp/commit/3620364004b58520df0f1dc02668c1226d4a6bb6))
+
 ## [9.2.4](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.2.3...v9.2.4) (2026-11-10)
 
 
