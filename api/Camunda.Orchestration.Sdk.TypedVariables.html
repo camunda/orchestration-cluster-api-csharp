@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class TypedVariables | Camunda C# SDK ">
       
-      <meta name="description" content="Extension methods for deserializing Camunda variable and custom header payloads from untyped object properties into strongly-typed DTOs.  Camunda API responses return variables and customHeaders as object properties which, at runtime, are  values. These extensions let you opt in to typed deserialization:   // Define your domain DTO public record OrderVars(string OrderId, decimal Amount);  // Deserialize variables from a process instance result var result = await client.CreateProcessInstanceAsync(     new ProcessInstanceCreationInstructionById     {         ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&quot;order-process&quot;),         Variables = new OrderVars(&quot;ord-123&quot;, 99.99m),  // input: just assign your DTO     });  var vars = result.Variables.DeserializeAs&amp;lt;OrderVars&amp;gt;();  // output: typed extraction   For input (sending variables), simply assign your DTO to the Variables property — System.Text.Json serializes the runtime type automatically.   For output (receiving variables), call  on the Variables or CustomHeaders property to deserialize the underlying  into your DTO type.">
+      <meta name="description" content="Extension methods for deserializing Camunda variable and custom header payloads from untyped object properties into strongly-typed DTOs.  Camunda API responses return variables and customHeaders as object properties which, at runtime, are  values. These extensions let you opt in to typed deserialization:   // Define your domain DTO public record OrderVars(string OrderId, decimal Amount);  // Deserialize variables from a process instance result var result = await client.CreateProcessInstanceAsync(     new ProcessInstanceCreationInstructionById     {         ProcessDefinitionId = ProcessDefinitionId.AssumeExists(&quot;order-process&quot;),         Variables = new OrderVars(&quot;ord-123&quot;, 99.99m),  // input: just assign your DTO     });  var vars = result.Variables.DeserializeAs&amp;lt;OrderVars&amp;gt;();  // output: typed extraction   For input (sending variables), simply assign your DTO to the Variables property — System.Text.Json serializes the runtime type automatically.   For output (receiving variables), call  on the Variables or CustomHeaders property to deserialize the underlying  into your DTO type.   Received payloads are untrusted input. The content of Variables is set by whoever wrote the variables into the process instance. CustomHeaders are defined in the process model instead, so they are controlled by whoever can deploy or change the model — a narrower group, but still not your own code. Deserialization is explicit — only into the type you name, with no unrestricted type-name resolution, so the payload cannot name a type for the SDK to load; System.Text.Json will still dispatch to polymorphic subtypes your own target type declares. Depth is bounded by the System.Text.Json default MaxDepth of 64 when no custom MaxDepth is given; for a job&#39;s variables that bound was already applied to the activation response the element came from, so options passed here can tighten it but cannot admit a payload that was rejected earlier. That guarantee is qualified: custom options passed to  on an element that was parsed elsewhere can raise the limit, and an object that is already a typed DTO skips conversion, so no depth bound is applied to it. There is no size cap, no schema validation and no sanitisation: deserializing into a DTO converts the shape, it does not validate the values. By default, for an ordinary DTO, unmatched properties are ignored and missing ones keep their initializer or default; required members and options you pass can make a mismatch throw a JsonException, whose message can name payload properties and, if it goes unhandled inside a job handler, ends up in the worker log and in the failure message sent to the broker.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="Camunda_Orchestration_Sdk_TypedVariables" data-uid="Camunda.Orchestration.Sdk.TypedVariables" class="text-break">
-Class TypedVariables  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/TypedVariables.cs/#L43"><i class="bi bi-code-slash"></i></a>
+Class TypedVariables  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/TypedVariables.cs/#L65"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -126,6 +126,27 @@ property — <code>System.Text.Json</code> serializes the runtime type automatic
 For <b>output</b> (receiving variables), call <a class="xref" href="Camunda.Orchestration.Sdk.TypedVariables.DeserializeAs.html#Camunda_Orchestration_Sdk_TypedVariables_DeserializeAs__1_System_Object_System_Text_Json_JsonSerializerOptions_">DeserializeAs&lt;T&gt;(object?, JsonSerializerOptions?)</a> on the
 <code>Variables</code> or <code>CustomHeaders</code> property to deserialize the underlying
 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a> into your DTO type.
+</p>
+<p>
+<b>Received payloads are untrusted input.</b> The content of <code>Variables</code> is set by
+whoever wrote the variables into the process instance. <code>CustomHeaders</code> are defined in the
+process model instead, so they are controlled by whoever can deploy or change the model — a
+narrower group, but still not your own code. Deserialization is explicit — only into the type
+you name, with no unrestricted type-name resolution, so the payload cannot name a type for the
+SDK to load; <code>System.Text.Json</code> will still dispatch to polymorphic subtypes your own
+target type declares. Depth is bounded by the <code>System.Text.Json</code> default
+<code>MaxDepth</code> of 64 when no custom <code>MaxDepth</code> is given; for a job's variables that
+bound was already applied to the activation response the element came from, so options passed
+here can tighten it but cannot admit a payload that was rejected earlier. That guarantee is
+qualified: custom options passed to <a class="xref" href="Camunda.Orchestration.Sdk.TypedVariables.DeserializeAs.html#Camunda_Orchestration_Sdk_TypedVariables_DeserializeAs__1_System_Object_System_Text_Json_JsonSerializerOptions_">DeserializeAs&lt;T&gt;(object?, JsonSerializerOptions?)</a> on an element that was
+parsed elsewhere can raise the limit, and an object that is already a typed DTO skips
+conversion, so no depth bound is applied to it. There is no size cap, no schema validation and
+no sanitisation: deserializing into a DTO converts the shape, it does not validate the values.
+By default, for an ordinary DTO, unmatched properties are ignored and missing ones keep their
+initializer or default; <code>required</code> members and options you pass can make a mismatch
+throw a <code>JsonException</code>, whose message can name payload properties and, if it goes
+unhandled inside a job handler, ends up in the worker log and in the failure message sent to
+the broker.
 </p>
 </div>
   <div class="markdown conceptual"></div>
@@ -193,7 +214,7 @@ Works on <code>object</code> properties that are <a class="xref" href="https://l
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/TypedVariables.cs/#L43" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/TypedVariables.cs/#L65" class="edit-link">Edit this page</a>
         </div>
 
 

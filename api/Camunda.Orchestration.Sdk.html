@@ -3288,6 +3288,27 @@ For <b>output</b> (receiving variables), call <a class="xref" href="Camunda.Orch
 <code>Variables</code> or <code>CustomHeaders</code> property to deserialize the underlying
 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a> into your DTO type.
 </p>
+<p>
+<b>Received payloads are untrusted input.</b> The content of <code>Variables</code> is set by
+whoever wrote the variables into the process instance. <code>CustomHeaders</code> are defined in the
+process model instead, so they are controlled by whoever can deploy or change the model — a
+narrower group, but still not your own code. Deserialization is explicit — only into the type
+you name, with no unrestricted type-name resolution, so the payload cannot name a type for the
+SDK to load; <code>System.Text.Json</code> will still dispatch to polymorphic subtypes your own
+target type declares. Depth is bounded by the <code>System.Text.Json</code> default
+<code>MaxDepth</code> of 64 when no custom <code>MaxDepth</code> is given; for a job's variables that
+bound was already applied to the activation response the element came from, so options passed
+here can tighten it but cannot admit a payload that was rejected earlier. That guarantee is
+qualified: custom options passed to <a class="xref" href="Camunda.Orchestration.Sdk.TypedVariables.DeserializeAs.html#Camunda_Orchestration_Sdk_TypedVariables_DeserializeAs__1_System_Object_System_Text_Json_JsonSerializerOptions_">DeserializeAs&lt;T&gt;(object?, JsonSerializerOptions?)</a> on an element that was
+parsed elsewhere can raise the limit, and an object that is already a typed DTO skips
+conversion, so no depth bound is applied to it. There is no size cap, no schema validation and
+no sanitisation: deserializing into a DTO converts the shape, it does not validate the values.
+By default, for an ordinary DTO, unmatched properties are ignored and missing ones keep their
+initializer or default; <code>required</code> members and options you pass can make a mismatch
+throw a <code>JsonException</code>, whose message can name payload properties and, if it goes
+unhandled inside a job handler, ends up in the worker log and in the failure message sent to
+the broker.
+</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -4626,6 +4647,8 @@ no value stored; the API returns <code>PROCESS_EVENT</code> as a default for tho
       <dd><p>Filter by the process definition's state.
 When not set, process definitions in any state are returned.
 Set to <code>ACTIVE</code> to exclude draining and deleted definitions (recommended for most use cases).
+Set to <code>SUSPENDED</code> to return only definitions that are suspended, so that no new
+process instances can be created from them.
 Set to <code>DRAINING</code> to return only definitions that are being deleted but still have
 active process instances draining.
 Set to <code>DELETED</code> to return only definitions that have been deleted but are still
@@ -4646,7 +4669,8 @@ retained in secondary storage.</p>
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionResultState.html">ProcessDefinitionResultState</a></dt>
       <dd><p>The state of this process definition.
 <code>DRAINING</code> indicates the definition is being deleted but still has active process
-instances draining before it is removed.</p>
+instances draining before it is removed.
+<code>SUSPENDED</code> indicates no new process instances can be created from the definition.</p>
 </dd>
     </dl>
     <dl class="jumplist">

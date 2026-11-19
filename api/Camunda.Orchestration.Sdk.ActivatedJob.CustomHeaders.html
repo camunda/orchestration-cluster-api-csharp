@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_ActivatedJob_CustomHeaders_" data-uid="Camunda.Orchestration.Sdk.ActivatedJob.CustomHeaders*" class="text-break">
-Property CustomHeaders  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L189"><i class="bi bi-code-slash"></i></a>
+Property CustomHeaders  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L196"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,10 +121,16 @@ Property CustomHeaders  <a class="header-action link-secondary" title="View sour
 
 <h3 id="Camunda_Orchestration_Sdk_ActivatedJob_CustomHeaders" data-uid="Camunda.Orchestration.Sdk.ActivatedJob.CustomHeaders">
   CustomHeaders
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L189"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L196"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Raw custom headers (typically a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a> at runtime).</p>
+<pre><code> &lt;p&gt;&lt;b&gt;Untrusted input.&lt;/b&gt; Custom headers are defined in the process model, not written by
+ process starters, service tasks or forms, so they are controlled by whoever can deploy or
+ change the model — a narrower group than the one that controls &lt;xref href=&quot;Camunda.Orchestration.Sdk.ActivatedJob.Variables&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt;, but
+ still not your handler's own code. See &lt;xref href=&quot;Camunda.Orchestration.Sdk.ActivatedJob.Variables&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt; for the rest of the trust
+ model.&lt;/p&gt;
+</code></pre>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -152,7 +158,7 @@ Property CustomHeaders  <a class="header-action link-secondary" title="View sour
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L189" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L196" class="edit-link">Edit this page</a>
         </div>
 
 

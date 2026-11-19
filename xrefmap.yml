@@ -25216,6 +25216,18 @@ references:
   commentId: Overload:Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled
   fullName: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsTenantsApiEnabled
   nameWithType: DeploymentConfigurationResponse.IsTenantsApiEnabled
+- uid: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsWaitStatesEnabled
+  name: IsWaitStatesEnabled
+  href: api/Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsWaitStatesEnabled.html#Camunda_Orchestration_Sdk_DeploymentConfigurationResponse_IsWaitStatesEnabled
+  commentId: P:Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsWaitStatesEnabled
+  fullName: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsWaitStatesEnabled
+  nameWithType: DeploymentConfigurationResponse.IsWaitStatesEnabled
+- uid: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsWaitStatesEnabled*
+  name: IsWaitStatesEnabled
+  href: api/Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsWaitStatesEnabled.html
+  commentId: Overload:Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsWaitStatesEnabled
+  fullName: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.IsWaitStatesEnabled
+  nameWithType: DeploymentConfigurationResponse.IsWaitStatesEnabled
 - uid: Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.MaxRequestSize
   name: MaxRequestSize
   href: api/Camunda.Orchestration.Sdk.DeploymentConfigurationResponse.MaxRequestSize.html#Camunda_Orchestration_Sdk_DeploymentConfigurationResponse_MaxRequestSize
@@ -41536,6 +41548,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.DRAINING
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.DRAINING
   nameWithType: ProcessDefinitionFilterState.DRAINING
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.SUSPENDED
+  name: SUSPENDED
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.html#Camunda_Orchestration_Sdk_ProcessDefinitionFilterState_SUSPENDED
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.SUSPENDED
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.SUSPENDED
+  nameWithType: ProcessDefinitionFilterState.SUSPENDED
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionId
   name: ProcessDefinitionId
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionId.html
@@ -42700,6 +42718,12 @@ references:
   commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionResultState.DRAINING
   fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResultState.DRAINING
   nameWithType: ProcessDefinitionResultState.DRAINING
+- uid: Camunda.Orchestration.Sdk.ProcessDefinitionResultState.SUSPENDED
+  name: SUSPENDED
+  href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResultState.html#Camunda_Orchestration_Sdk_ProcessDefinitionResultState_SUSPENDED
+  commentId: F:Camunda.Orchestration.Sdk.ProcessDefinitionResultState.SUSPENDED
+  fullName: Camunda.Orchestration.Sdk.ProcessDefinitionResultState.SUSPENDED
+  nameWithType: ProcessDefinitionResultState.SUSPENDED
 - uid: Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstruction
   name: ProcessDefinitionResumptionInstruction
   href: api/Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstruction.html

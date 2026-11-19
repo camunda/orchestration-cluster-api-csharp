@@ -172,6 +172,12 @@ the engine, and survives worker restarts.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.ActivatedJob.CustomHeaders.html#Camunda_Orchestration_Sdk_ActivatedJob_CustomHeaders">CustomHeaders</a></dt>
     <dd><p>Raw custom headers (typically a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a> at runtime).</p>
+<pre><code> &lt;p&gt;&lt;b&gt;Untrusted input.&lt;/b&gt; Custom headers are defined in the process model, not written by
+ process starters, service tasks or forms, so they are controlled by whoever can deploy or
+ change the model — a narrower group than the one that controls &lt;xref href=&quot;Camunda.Orchestration.Sdk.ActivatedJob.Variables&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt;, but
+ still not your handler's own code. See &lt;xref href=&quot;Camunda.Orchestration.Sdk.ActivatedJob.Variables&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt; for the rest of the trust
+ model.&lt;/p&gt;
+</code></pre>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -259,6 +265,43 @@ threads it back onto the fenced commands automatically.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.ActivatedJob.Variables.html#Camunda_Orchestration_Sdk_ActivatedJob_Variables">Variables</a></dt>
     <dd><p>Raw variables (typically a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a> at runtime).</p>
+<pre><code> &lt;p&gt;&lt;b&gt;Untrusted input.&lt;/b&gt; The content is whatever was written into the process
+ instance — by whoever started it, by an earlier service task, or by a form submission — so
+ treat it as you would an HTTP request body, not as configuration.&lt;/p&gt;
+
+ &lt;p&gt;What the SDK guarantees: deserialization happens only when you ask for a type, and
+ only into the type you name (&lt;xref href=&quot;Camunda.Orchestration.Sdk.ActivatedJob.GetVariables%60%601(System.Text.Json.JsonSerializerOptions)&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt;). There is no unrestricted
+ type-name resolution — the payload cannot name a type for the SDK to load — though
+ &lt;code&gt;System.Text.Json&lt;/code&gt; will dispatch to polymorphic subtypes that your own target type
+ declares. Depth is bounded by the &lt;code&gt;System.Text.Json&lt;/code&gt; default &lt;code&gt;MaxDepth&lt;/code&gt; of 64,
+ applied to the activation response as a whole (the envelope around the job takes the first
+ levels of that budget), so a deeply nested payload fails with a &lt;code&gt;JsonException&lt;/code&gt; during
+ activation rather than recursing without bound. The SDK does not log variable payloads —
+ with indirect routes: an exception that escapes the handler, other than the SDK's own
+ &lt;code&gt;JobFailureException&lt;/code&gt; and &lt;code&gt;BpmnErrorException&lt;/code&gt;, is logged with its message and
+ stack and its message is sent to the broker as the job's failure message. That includes a
+ &lt;code&gt;JsonException&lt;/code&gt; thrown by &lt;xref href=&quot;Camunda.Orchestration.Sdk.ActivatedJob.GetVariables%60%601(System.Text.Json.JsonSerializerOptions)&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt;, which you call from the
+ handler and whose message and path can name payload properties. The two control exceptions
+ are not logged, but their messages are still sent to the broker (as the failure message or
+ the BPMN error message), and a handler cancelled by worker shutdown is not reported to the
+ broker (only a debug line naming the job key is logged). A failure while the activation
+ response itself is parsed happens before a handler exists: the poll loop logs it, but there
+ is no job to fail, so nothing is sent to the broker. A single job that cannot be converted
+ afterwards is logged at warning level with its exception and skipped, also without a
+ report to the broker. The exception to the poll-loop log is a parse failure on a requested
+ lease token: it is replaced by a &lt;xref href=&quot;Camunda.Orchestration.Sdk.LeaseNotHonoredException&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt; (naming a
+ placeholder job key and the &lt;code&gt;withLease&lt;/code&gt; flag, not payload content; the original parse
+ exception is not kept) that faults the poll task, so it reaches the caller through
+ &lt;xref href=&quot;Camunda.Orchestration.Sdk.JobWorker.Completion&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt; instead. Nothing redacts exception contents.&lt;/p&gt;
+
+ &lt;p&gt;What the SDK does not do: there is no size cap on a payload, no schema validation,
+ and no sanitisation. Conversion to a target type is &lt;code&gt;System.Text.Json&lt;/code&gt; behaviour: by
+ default, for an ordinary DTO, properties that do not match are ignored and missing ones keep
+ their initializer or default, while &lt;code&gt;required&lt;/code&gt; or &lt;code&gt;[JsonRequired]&lt;/code&gt; members make
+ an absent property throw and custom options can reject unmatched properties. Validate what
+ you depend on, and escape anything you pass onward to a shell, a query, a path or a
+ page.&lt;/p&gt;
+</code></pre>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -273,11 +316,22 @@ threads it back onto the fenced commands automatically.</p>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.ActivatedJob.GetCustomHeaders.html#Camunda_Orchestration_Sdk_ActivatedJob_GetCustomHeaders__1_System_Text_Json_JsonSerializerOptions_">GetCustomHeaders&lt;T&gt;(JsonSerializerOptions?)</a></dt>
     <dd><p>Deserialize the job's <code>customHeaders</code> payload into a strongly-typed DTO.</p>
+<p>The payload is untrusted input — see <a class="xref" href="Camunda.Orchestration.Sdk.ActivatedJob.CustomHeaders.html#Camunda_Orchestration_Sdk_ActivatedJob_CustomHeaders">CustomHeaders</a>.</p>
 </dd>
   </dl>
   <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.ActivatedJob.GetVariables.html#Camunda_Orchestration_Sdk_ActivatedJob_GetVariables__1_System_Text_Json_JsonSerializerOptions_">GetVariables&lt;T&gt;(JsonSerializerOptions?)</a></dt>
     <dd><p>Deserialize the job's <code>variables</code> payload into a strongly-typed DTO.</p>
+<p>The payload is untrusted input — see <a class="xref" href="Camunda.Orchestration.Sdk.ActivatedJob.Variables.html#Camunda_Orchestration_Sdk_ActivatedJob_Variables">Variables</a>. Deserializing into
+<code class="typeparamref">T</code> is a shape conversion, not validation: with the default options,
+unmatched properties are ignored and absent ones keep their initializer or default, unless
+<code class="typeparamref">T</code> marks them <code>required</code> or you pass options that reject
+unmatched members. A payload that does not fit throws a <code>JsonException</code> whose message
+can name payload properties; see <a class="xref" href="Camunda.Orchestration.Sdk.ActivatedJob.Variables.html#Camunda_Orchestration_Sdk_ActivatedJob_Variables">Variables</a> for where exception messages
+end up. <code class="paramref">options</code>
+can only tighten the depth bound on this element: it was parsed off the activation
+response under the <code>System.Text.Json</code> default <code>MaxDepth</code> of 64 already, so a
+larger value here cannot admit a payload that activation rejected.</p>
 </dd>
   </dl>
 

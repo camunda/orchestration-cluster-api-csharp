@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_ActivatedJob_Variables_" data-uid="Camunda.Orchestration.Sdk.ActivatedJob.Variables*" class="text-break">
-Property Variables  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L201"><i class="bi bi-code-slash"></i></a>
+Property Variables  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L246"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,10 +121,47 @@ Property Variables  <a class="header-action link-secondary" title="View source" 
 
 <h3 id="Camunda_Orchestration_Sdk_ActivatedJob_Variables" data-uid="Camunda.Orchestration.Sdk.ActivatedJob.Variables">
   Variables
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L201"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L246"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>Raw variables (typically a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a> at runtime).</p>
+<pre><code> &lt;p&gt;&lt;b&gt;Untrusted input.&lt;/b&gt; The content is whatever was written into the process
+ instance — by whoever started it, by an earlier service task, or by a form submission — so
+ treat it as you would an HTTP request body, not as configuration.&lt;/p&gt;
+
+ &lt;p&gt;What the SDK guarantees: deserialization happens only when you ask for a type, and
+ only into the type you name (&lt;xref href=&quot;Camunda.Orchestration.Sdk.ActivatedJob.GetVariables%60%601(System.Text.Json.JsonSerializerOptions)&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt;). There is no unrestricted
+ type-name resolution — the payload cannot name a type for the SDK to load — though
+ &lt;code&gt;System.Text.Json&lt;/code&gt; will dispatch to polymorphic subtypes that your own target type
+ declares. Depth is bounded by the &lt;code&gt;System.Text.Json&lt;/code&gt; default &lt;code&gt;MaxDepth&lt;/code&gt; of 64,
+ applied to the activation response as a whole (the envelope around the job takes the first
+ levels of that budget), so a deeply nested payload fails with a &lt;code&gt;JsonException&lt;/code&gt; during
+ activation rather than recursing without bound. The SDK does not log variable payloads —
+ with indirect routes: an exception that escapes the handler, other than the SDK's own
+ &lt;code&gt;JobFailureException&lt;/code&gt; and &lt;code&gt;BpmnErrorException&lt;/code&gt;, is logged with its message and
+ stack and its message is sent to the broker as the job's failure message. That includes a
+ &lt;code&gt;JsonException&lt;/code&gt; thrown by &lt;xref href=&quot;Camunda.Orchestration.Sdk.ActivatedJob.GetVariables%60%601(System.Text.Json.JsonSerializerOptions)&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt;, which you call from the
+ handler and whose message and path can name payload properties. The two control exceptions
+ are not logged, but their messages are still sent to the broker (as the failure message or
+ the BPMN error message), and a handler cancelled by worker shutdown is not reported to the
+ broker (only a debug line naming the job key is logged). A failure while the activation
+ response itself is parsed happens before a handler exists: the poll loop logs it, but there
+ is no job to fail, so nothing is sent to the broker. A single job that cannot be converted
+ afterwards is logged at warning level with its exception and skipped, also without a
+ report to the broker. The exception to the poll-loop log is a parse failure on a requested
+ lease token: it is replaced by a &lt;xref href=&quot;Camunda.Orchestration.Sdk.LeaseNotHonoredException&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt; (naming a
+ placeholder job key and the &lt;code&gt;withLease&lt;/code&gt; flag, not payload content; the original parse
+ exception is not kept) that faults the poll task, so it reaches the caller through
+ &lt;xref href=&quot;Camunda.Orchestration.Sdk.JobWorker.Completion&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt; instead. Nothing redacts exception contents.&lt;/p&gt;
+
+ &lt;p&gt;What the SDK does not do: there is no size cap on a payload, no schema validation,
+ and no sanitisation. Conversion to a target type is &lt;code&gt;System.Text.Json&lt;/code&gt; behaviour: by
+ default, for an ordinary DTO, properties that do not match are ignored and missing ones keep
+ their initializer or default, while &lt;code&gt;required&lt;/code&gt; or &lt;code&gt;[JsonRequired]&lt;/code&gt; members make
+ an absent property throw and custom options can reject unmatched properties. Validate what
+ you depend on, and escape anything you pass onward to a shell, a query, a path or a
+ page.&lt;/p&gt;
+</code></pre>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -152,7 +189,7 @@ Property Variables  <a class="header-action link-secondary" title="View source" 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L201" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Runtime/JobWorker.cs/#L246" class="edit-link">Edit this page</a>
         </div>
 
 
