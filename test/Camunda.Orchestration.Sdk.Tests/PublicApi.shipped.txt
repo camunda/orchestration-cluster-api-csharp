@@ -3158,6 +3158,7 @@ TYPE Camunda.Orchestration.Sdk.DeploymentConfigurationResponse : sealed class
   CTOR ()
   PROP System.Boolean IsMultiTenancyEnabled { get; set; } [JsonPropertyName("isMultiTenancyEnabled")]
   PROP System.Boolean IsTenantsApiEnabled { get; set; } [JsonPropertyName("isTenantsApiEnabled")]
+  PROP System.Boolean IsWaitStatesEnabled { get; set; } [JsonPropertyName("isWaitStatesEnabled")]
   PROP System.Int64 MaxRequestSize { get; set; } [JsonPropertyName("maxRequestSize")]
 
 TYPE Camunda.Orchestration.Sdk.DeploymentDecisionRequirementsResult : sealed class
@@ -5422,6 +5423,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionFilterState : enum interfaces=[S
   MEMBER ACTIVE = 0 json="ACTIVE"
   MEMBER DRAINING = 1 json="DRAINING"
   MEMBER DELETED = 2 json="DELETED"
+  MEMBER SUSPENDED = 3 json="SUSPENDED"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ProcessDefinitionId>]
   PROP System.String Value { get; }
@@ -5588,6 +5590,7 @@ TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResultState : enum interfaces=[S
   MEMBER ACTIVE = 0 json="ACTIVE"
   MEMBER DRAINING = 1 json="DRAINING"
   MEMBER DELETED = 2 json="DELETED"
+  MEMBER SUSPENDED = 3 json="SUSPENDED"
 
 TYPE Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstruction : abstract class
   ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProcessDefinitionResumptionInstructionById tag=<none>
