@@ -1,3 +1,15 @@
+# [11.0.0-alpha.11](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.10...v11.0.0-alpha.11) (2026-11-19)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts [skip ci] ([9f8241e](https://github.com/camunda/orchestration-cluster-api-csharp/commit/9f8241e6ad49d56d780ab5ba2ac33569bb4e68cb))
+
+
+### Features
+
+* send attributable user-agent on rest and oauth requests ([#556](https://github.com/camunda/orchestration-cluster-api-csharp/issues/556)) ([b66a07d](https://github.com/camunda/orchestration-cluster-api-csharp/commit/b66a07d0adadc2d4aea4c987d05f5589e42317a8)), closes [#555](https://github.com/camunda/orchestration-cluster-api-csharp/issues/555)
+
 # [11.0.0-alpha.11](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.10...v11.0.0-alpha.11) (2026-11-18)
 
 
