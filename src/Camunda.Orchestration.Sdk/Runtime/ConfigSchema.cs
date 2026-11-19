@@ -25,6 +25,7 @@ internal static class ConfigKeys
     public const string OAuthRetryMax = "CAMUNDA_OAUTH_RETRY_MAX";
     public const string OAuthRetryBaseDelayMs = "CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS";
     public const string LogLevel = "CAMUNDA_SDK_LOG_LEVEL";
+    public const string UserAgent = "CAMUNDA_USER_AGENT";
     public const string Validation = "CAMUNDA_SDK_VALIDATION";
     public const string HttpRetryMaxAttempts = "CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS";
     public const string HttpRetryBaseDelayMs = "CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS";
@@ -121,6 +122,7 @@ internal static class ConfigSchema
         new() { EnvVar = ConfigKeys.OAuthRetryMax, Type = ConfigValueType.Int, Default = "5", ConfigPaths = ["OAuth:RetryMax"], Doc = "Maximum OAuth token fetch attempts." },
         new() { EnvVar = ConfigKeys.OAuthRetryBaseDelayMs, Type = ConfigValueType.Int, Default = "1000", ConfigPaths = ["OAuth:RetryBaseDelayMs"], Doc = "Base delay (ms) for OAuth retry backoff." },
         new() { EnvVar = ConfigKeys.LogLevel, Default = "error", ConfigPaths = ["LogLevel"], Doc = "SDK log level." },
+        new() { EnvVar = ConfigKeys.UserAgent, ConfigPaths = ["UserAgent"], Doc = "Application user agent appended after the SDK identifier (camunda-orchestration-sdk-csharp/<version>) in the User-Agent header." },
         new() { EnvVar = ConfigKeys.Validation, Default = "req:none,res:none", ConfigPaths = ["Validation"], Doc = "Validation mini-language controlling req/res modes." },
         new() { EnvVar = ConfigKeys.HttpRetryMaxAttempts, Type = ConfigValueType.Int, Default = "3", ConfigPaths = ["HttpRetry:MaxAttempts"], Doc = "Maximum total HTTP attempts for transient failures." },
         new() { EnvVar = ConfigKeys.HttpRetryBaseDelayMs, Type = ConfigValueType.Int, Default = "100", ConfigPaths = ["HttpRetry:BaseDelayMs"], Doc = "Base delay (ms) for HTTP retry backoff." },

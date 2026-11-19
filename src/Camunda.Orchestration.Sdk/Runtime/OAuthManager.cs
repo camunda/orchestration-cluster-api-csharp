@@ -112,7 +112,9 @@ internal sealed class OAuthManager : IDisposable, IAsyncDisposable
 
                 var body = new FormUrlEncodedContent(BuildTokenRequestBody());
 
-                var response = await httpClient.PostAsync(_config.OAuth.OAuthUrl, body, cts.Token);
+                using var tokenRequest = new HttpRequestMessage(HttpMethod.Post, _config.OAuth.OAuthUrl) { Content = body };
+                SdkUserAgent.Apply(tokenRequest, _config.UserAgent, httpClient.DefaultRequestHeaders.UserAgent);
+                var response = await httpClient.SendAsync(tokenRequest, cts.Token);
                 response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadFromJsonAsync<TokenResponse>(cts.Token)
