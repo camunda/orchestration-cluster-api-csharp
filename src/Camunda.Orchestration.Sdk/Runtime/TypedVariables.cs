@@ -39,6 +39,28 @@ namespace Camunda.Orchestration.Sdk;
 /// <c>Variables</c> or <c>CustomHeaders</c> property to deserialize the underlying
 /// <see cref="JsonElement"/> into your DTO type.
 /// </para>
+///
+/// <para>
+/// <b>Received payloads are untrusted input.</b> The content of <c>Variables</c> is set by
+/// whoever wrote the variables into the process instance. <c>CustomHeaders</c> are defined in the
+/// process model instead, so they are controlled by whoever can deploy or change the model — a
+/// narrower group, but still not your own code. Deserialization is explicit — only into the type
+/// you name, with no unrestricted type-name resolution, so the payload cannot name a type for the
+/// SDK to load; <c>System.Text.Json</c> will still dispatch to polymorphic subtypes your own
+/// target type declares. Depth is bounded by the <c>System.Text.Json</c> default
+/// <c>MaxDepth</c> of 64 when no custom <c>MaxDepth</c> is given; for a job's variables that
+/// bound was already applied to the activation response the element came from, so options passed
+/// here can tighten it but cannot admit a payload that was rejected earlier. That guarantee is
+/// qualified: custom options passed to <see cref="DeserializeAs{T}"/> on an element that was
+/// parsed elsewhere can raise the limit, and an object that is already a typed DTO skips
+/// conversion, so no depth bound is applied to it. There is no size cap, no schema validation and
+/// no sanitisation: deserializing into a DTO converts the shape, it does not validate the values.
+/// By default, for an ordinary DTO, unmatched properties are ignored and missing ones keep their
+/// initializer or default; <c>required</c> members and options you pass can make a mismatch
+/// throw a <c>JsonException</c>, whose message can name payload properties and, if it goes
+/// unhandled inside a job handler, ends up in the worker log and in the failure message sent to
+/// the broker.
+/// </para>
 /// </summary>
 public static class TypedVariables
 {
