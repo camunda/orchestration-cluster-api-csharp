@@ -102,4 +102,60 @@ public class UserAgentTests
 
         Assert.Equal($"{ExpectedSdkProduct} my-app/1.2", UserAgentOf(Assert.Single(tokenHandler.Requests)));
     }
+
+    [Theory]
+    // CR/LF: a header-injection attempt must never be added without validation.
+    [InlineData("my-app/1.2\r\nX-Injected: yes")]
+    [InlineData("my-app\nX-Injected: yes")]
+    [InlineData("my-app\rX-Injected: yes")]
+    // Other values the User-Agent grammar rejects are dropped too, not force-added.
+    [InlineData("my app/1.2")]
+    [InlineData("my-app/1.2;")]
+    public void Apply_DropsUnparseableApplicationUserAgent(string appUserAgent)
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Get, "https://mock.local");
+
+        SdkUserAgent.Apply(request, appUserAgent);
+
+        Assert.Equal(ExpectedSdkProduct, UserAgentOf(request));
+    }
+
+    [Fact]
+    public async Task RestRequest_DropsMalformedApplicationUserAgent()
+    {
+        var handler = new MockHttpMessageHandler();
+        handler.Enqueue(HttpStatusCode.OK, "{}");
+        using var client = new CamundaClient(new CamundaOptions
+        {
+            Config = BaseConfig("my-app/1.2\r\nX-Injected: yes"),
+            HttpMessageHandler = handler,
+        });
+
+        await client.GetTopologyAsync();
+
+        Assert.Equal(ExpectedSdkProduct, UserAgentOf(Assert.Single(handler.Requests)));
+    }
+
+    [Fact]
+    public async Task TokenRequest_DropsMalformedApplicationUserAgent()
+    {
+        var tokenHandler = new MockHttpMessageHandler();
+        tokenHandler.Enqueue(HttpStatusCode.OK, TokenJson());
+        using var tokenClient = new HttpClient(tokenHandler);
+        using var oauth = new OAuthManager(new CamundaConfig
+        {
+            OAuth = new OAuthConfig
+            {
+                ClientId = "id",
+                ClientSecret = "secret",
+                OAuthUrl = "https://auth.mock/token",
+                Retry = new OAuthRetryConfig { Max = 1, BaseDelayMs = 1 },
+            },
+            UserAgent = "my-app/1.2\r\nX-Injected: yes",
+        }, NullLogger.Instance, TimeProvider.System, CamundaRandomSource.Live);
+
+        await oauth.GetTokenAsync(tokenClient);
+
+        Assert.Equal(ExpectedSdkProduct, UserAgentOf(Assert.Single(tokenHandler.Requests)));
+    }
 }
