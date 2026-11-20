@@ -1916,13 +1916,13 @@ public abstract class AncestorScopeInstruction { }
 public enum AuditLogActorTypeEnum
 {
     [JsonPropertyName("ANONYMOUS")]
-    ANONYMOUS,
+    ANONYMOUS = 0,
     [JsonPropertyName("CLIENT")]
-    CLIENT,
+    CLIENT = 1,
     [JsonPropertyName("UNKNOWN")]
-    UNKNOWN,
+    UNKNOWN = 2,
     [JsonPropertyName("USER")]
-    USER,
+    USER = 3,
 }
 
 /// <summary>
@@ -2005,11 +2005,11 @@ public sealed class AuditLogActorTypeFilterProperty
 public enum AuditLogCategoryEnum
 {
     [JsonPropertyName("ADMIN")]
-    ADMIN,
+    ADMIN = 0,
     [JsonPropertyName("DEPLOYED_RESOURCES")]
-    DEPLOYEDRESOURCES,
+    DEPLOYEDRESOURCES = 1,
     [JsonPropertyName("USER_TASKS")]
-    USERTASKS,
+    USERTASKS = 2,
 }
 
 /// <summary>
@@ -2112,35 +2112,35 @@ public sealed class AuditLogEntityKeyFilterProperty
 public enum AuditLogEntityTypeEnum
 {
     [JsonPropertyName("AUTHORIZATION")]
-    AUTHORIZATION,
+    AUTHORIZATION = 0,
     [JsonPropertyName("BATCH")]
-    BATCH,
+    BATCH = 1,
     [JsonPropertyName("DECISION")]
-    DECISION,
+    DECISION = 2,
     [JsonPropertyName("GROUP")]
-    GROUP,
+    GROUP = 3,
     [JsonPropertyName("INCIDENT")]
-    INCIDENT,
+    INCIDENT = 4,
     [JsonPropertyName("JOB")]
-    JOB,
+    JOB = 5,
     [JsonPropertyName("MAPPING_RULE")]
-    MAPPINGRULE,
+    MAPPINGRULE = 6,
     [JsonPropertyName("PROCESS_INSTANCE")]
-    PROCESSINSTANCE,
+    PROCESSINSTANCE = 7,
     [JsonPropertyName("RESOURCE")]
-    RESOURCE,
+    RESOURCE = 8,
     [JsonPropertyName("ROLE")]
-    ROLE,
+    ROLE = 9,
     [JsonPropertyName("TENANT")]
-    TENANT,
+    TENANT = 10,
     [JsonPropertyName("USER")]
-    USER,
+    USER = 11,
     [JsonPropertyName("USER_TASK")]
-    USERTASK,
+    USERTASK = 12,
     [JsonPropertyName("VARIABLE")]
-    VARIABLE,
+    VARIABLE = 13,
     [JsonPropertyName("CLIENT")]
-    CLIENT,
+    CLIENT = 14,
 }
 
 /// <summary>
@@ -2424,33 +2424,33 @@ public sealed class AuditLogKeyFilterProperty
 public enum AuditLogOperationTypeEnum
 {
     [JsonPropertyName("ASSIGN")]
-    ASSIGN,
+    ASSIGN = 0,
     [JsonPropertyName("CANCEL")]
-    CANCEL,
+    CANCEL = 1,
     [JsonPropertyName("COMPLETE")]
-    COMPLETE,
+    COMPLETE = 2,
     [JsonPropertyName("CREATE")]
-    CREATE,
+    CREATE = 3,
     [JsonPropertyName("DELETE")]
-    DELETE,
+    DELETE = 4,
     [JsonPropertyName("EVALUATE")]
-    EVALUATE,
+    EVALUATE = 5,
     [JsonPropertyName("MIGRATE")]
-    MIGRATE,
+    MIGRATE = 6,
     [JsonPropertyName("MODIFY")]
-    MODIFY,
+    MODIFY = 7,
     [JsonPropertyName("RESOLVE")]
-    RESOLVE,
+    RESOLVE = 8,
     [JsonPropertyName("RESUME")]
-    RESUME,
+    RESUME = 9,
     [JsonPropertyName("SUSPEND")]
-    SUSPEND,
+    SUSPEND = 10,
     [JsonPropertyName("UNASSIGN")]
-    UNASSIGN,
+    UNASSIGN = 11,
     [JsonPropertyName("UNKNOWN")]
-    UNKNOWN,
+    UNKNOWN = 12,
     [JsonPropertyName("UPDATE")]
-    UPDATE,
+    UPDATE = 13,
 }
 
 /// <summary>
@@ -2662,9 +2662,9 @@ public sealed class AuditLogResult
 public enum AuditLogResultEnum
 {
     [JsonPropertyName("FAIL")]
-    FAIL,
+    FAIL = 0,
     [JsonPropertyName("SUCCESS")]
-    SUCCESS,
+    SUCCESS = 1,
 }
 
 /// <summary>
@@ -3530,13 +3530,13 @@ public sealed class BatchOperationItemSearchQuerySortRequest
 public enum BatchOperationItemStateEnum
 {
     [JsonPropertyName("ACTIVE")]
-    ACTIVE,
+    ACTIVE = 0,
     [JsonPropertyName("COMPLETED")]
-    COMPLETED,
+    COMPLETED = 1,
     [JsonPropertyName("CANCELED")]
-    CANCELED,
+    CANCELED = 2,
     [JsonPropertyName("FAILED")]
-    FAILED,
+    FAILED = 3,
 }
 
 /// <summary>
@@ -3793,19 +3793,19 @@ public sealed class BatchOperationSearchQuerySortRequest
 public enum BatchOperationStateEnum
 {
     [JsonPropertyName("ACTIVE")]
-    ACTIVE,
+    ACTIVE = 0,
     [JsonPropertyName("CANCELED")]
-    CANCELED,
+    CANCELED = 1,
     [JsonPropertyName("COMPLETED")]
-    COMPLETED,
+    COMPLETED = 2,
     [JsonPropertyName("CREATED")]
-    CREATED,
+    CREATED = 3,
     [JsonPropertyName("FAILED")]
-    FAILED,
+    FAILED = 4,
     [JsonPropertyName("PARTIALLY_COMPLETED")]
-    PARTIALLYCOMPLETED,
+    PARTIALLYCOMPLETED = 5,
     [JsonPropertyName("SUSPENDED")]
-    SUSPENDED,
+    SUSPENDED = 6,
 }
 
 /// <summary>
@@ -3888,25 +3888,25 @@ public sealed class BatchOperationStateFilterProperty
 public enum BatchOperationTypeEnum
 {
     [JsonPropertyName("ADD_VARIABLE")]
-    ADDVARIABLE,
+    ADDVARIABLE = 0,
     [JsonPropertyName("CANCEL_PROCESS_INSTANCE")]
-    CANCELPROCESSINSTANCE,
+    CANCELPROCESSINSTANCE = 1,
     [JsonPropertyName("DELETE_DECISION_DEFINITION")]
-    DELETEDECISIONDEFINITION,
+    DELETEDECISIONDEFINITION = 2,
     [JsonPropertyName("DELETE_DECISION_INSTANCE")]
-    DELETEDECISIONINSTANCE,
+    DELETEDECISIONINSTANCE = 3,
     [JsonPropertyName("DELETE_PROCESS_DEFINITION")]
-    DELETEPROCESSDEFINITION,
+    DELETEPROCESSDEFINITION = 4,
     [JsonPropertyName("DELETE_PROCESS_INSTANCE")]
-    DELETEPROCESSINSTANCE,
+    DELETEPROCESSINSTANCE = 5,
     [JsonPropertyName("MIGRATE_PROCESS_INSTANCE")]
-    MIGRATEPROCESSINSTANCE,
+    MIGRATEPROCESSINSTANCE = 6,
     [JsonPropertyName("MODIFY_PROCESS_INSTANCE")]
-    MODIFYPROCESSINSTANCE,
+    MODIFYPROCESSINSTANCE = 7,
     [JsonPropertyName("RESOLVE_INCIDENT")]
-    RESOLVEINCIDENT,
+    RESOLVEINCIDENT = 8,
     [JsonPropertyName("UPDATE_VARIABLE")]
-    UPDATEVARIABLE,
+    UPDATEVARIABLE = 9,
 }
 
 /// <summary>
@@ -4336,9 +4336,9 @@ public sealed class ClusterVariableResultBase
 public enum ClusterVariableScopeEnum
 {
     [JsonPropertyName("GLOBAL")]
-    GLOBAL,
+    GLOBAL = 0,
     [JsonPropertyName("TENANT")]
-    TENANT,
+    TENANT = 1,
 }
 
 /// <summary>
@@ -5382,14 +5382,14 @@ public sealed class DecisionDefinitionSearchQuerySortRequest
 public enum DecisionDefinitionTypeEnum
 {
     [JsonPropertyName("DECISION_TABLE")]
-    DECISIONTABLE,
+    DECISIONTABLE = 0,
     [JsonPropertyName("LITERAL_EXPRESSION")]
-    LITERALEXPRESSION,
+    LITERALEXPRESSION = 1,
     [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
-    UNSPECIFIED,
+    UNSPECIFIED = 2,
     [JsonPropertyName("UNKNOWN")]
-    UNKNOWN,
+    UNKNOWN = 3,
 }
 
 /// <summary>
@@ -6123,15 +6123,15 @@ public sealed class DecisionInstanceSearchQuerySortRequest
 public enum DecisionInstanceStateEnum
 {
     [JsonPropertyName("EVALUATED")]
-    EVALUATED,
+    EVALUATED = 0,
     [JsonPropertyName("FAILED")]
-    FAILED,
+    FAILED = 1,
     [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNSPECIFIED")]
-    UNSPECIFIED,
+    UNSPECIFIED = 2,
     [Obsolete("Deprecated since 8.9.0")]
     [JsonPropertyName("UNKNOWN")]
-    UNKNOWN,
+    UNKNOWN = 3,
 }
 
 /// <summary>
@@ -7552,11 +7552,11 @@ public sealed class ElementInstanceSearchQuerySortRequest
 public enum ElementInstanceStateEnum
 {
     [JsonPropertyName("ACTIVE")]
-    ACTIVE,
+    ACTIVE = 0,
     [JsonPropertyName("COMPLETED")]
-    COMPLETED,
+    COMPLETED = 1,
     [JsonPropertyName("TERMINATED")]
-    TERMINATED,
+    TERMINATED = 2,
 }
 
 /// <summary>
@@ -8295,9 +8295,9 @@ public readonly record struct GlobalListenerId : global::Camunda.Orchestration.S
 public enum GlobalListenerSourceEnum
 {
     [JsonPropertyName("CONFIGURATION")]
-    CONFIGURATION,
+    CONFIGURATION = 0,
     [JsonPropertyName("API")]
-    API,
+    API = 1,
 }
 
 /// <summary>
@@ -8417,17 +8417,17 @@ public sealed class GlobalTaskListenerBase
 public enum GlobalTaskListenerEventTypeEnum
 {
     [JsonPropertyName("all")]
-    All,
+    All = 0,
     [JsonPropertyName("creating")]
-    Creating,
+    Creating = 1,
     [JsonPropertyName("assigning")]
-    Assigning,
+    Assigning = 2,
     [JsonPropertyName("updating")]
-    Updating,
+    Updating = 3,
     [JsonPropertyName("completing")]
-    Completing,
+    Completing = 4,
     [JsonPropertyName("canceling")]
-    Canceling,
+    Canceling = 5,
 }
 
 /// <summary>
@@ -9050,37 +9050,37 @@ public sealed class GroupUserSearchResult
 public enum IncidentErrorTypeEnum
 {
     [JsonPropertyName("AD_HOC_SUB_PROCESS_NO_RETRIES")]
-    ADHOCSUBPROCESSNORETRIES,
+    ADHOCSUBPROCESSNORETRIES = 0,
     [JsonPropertyName("CALLED_DECISION_ERROR")]
-    CALLEDDECISIONERROR,
+    CALLEDDECISIONERROR = 1,
     [JsonPropertyName("CALLED_ELEMENT_ERROR")]
-    CALLEDELEMENTERROR,
+    CALLEDELEMENTERROR = 2,
     [JsonPropertyName("CONDITION_ERROR")]
-    CONDITIONERROR,
+    CONDITIONERROR = 3,
     [JsonPropertyName("DECISION_EVALUATION_ERROR")]
-    DECISIONEVALUATIONERROR,
+    DECISIONEVALUATIONERROR = 4,
     [JsonPropertyName("EXECUTION_LISTENER_NO_RETRIES")]
-    EXECUTIONLISTENERNORETRIES,
+    EXECUTIONLISTENERNORETRIES = 5,
     [JsonPropertyName("EXTRACT_VALUE_ERROR")]
-    EXTRACTVALUEERROR,
+    EXTRACTVALUEERROR = 6,
     [JsonPropertyName("FORM_NOT_FOUND")]
-    FORMNOTFOUND,
+    FORMNOTFOUND = 7,
     [JsonPropertyName("IO_MAPPING_ERROR")]
-    IOMAPPINGERROR,
+    IOMAPPINGERROR = 8,
     [JsonPropertyName("JOB_NO_RETRIES")]
-    JOBNORETRIES,
+    JOBNORETRIES = 9,
     [JsonPropertyName("MESSAGE_SIZE_EXCEEDED")]
-    MESSAGESIZEEXCEEDED,
+    MESSAGESIZEEXCEEDED = 10,
     [JsonPropertyName("RESOURCE_NOT_FOUND")]
-    RESOURCENOTFOUND,
+    RESOURCENOTFOUND = 11,
     [JsonPropertyName("TASK_LISTENER_NO_RETRIES")]
-    TASKLISTENERNORETRIES,
+    TASKLISTENERNORETRIES = 12,
     [JsonPropertyName("UNHANDLED_ERROR_EVENT")]
-    UNHANDLEDERROREVENT,
+    UNHANDLEDERROREVENT = 13,
     [JsonPropertyName("UNKNOWN")]
-    UNKNOWN,
+    UNKNOWN = 14,
     [JsonPropertyName("UNSPECIFIED")]
-    UNSPECIFIED,
+    UNSPECIFIED = 15,
 }
 
 /// <summary>
@@ -9652,15 +9652,15 @@ public sealed class IncidentSearchQuerySortRequest
 public enum IncidentStateEnum
 {
     [JsonPropertyName("ACTIVE")]
-    ACTIVE,
+    ACTIVE = 0,
     [JsonPropertyName("MIGRATED")]
-    MIGRATED,
+    MIGRATED = 1,
     [JsonPropertyName("PENDING")]
-    PENDING,
+    PENDING = 2,
     [JsonPropertyName("RESOLVED")]
-    RESOLVED,
+    RESOLVED = 3,
     [JsonPropertyName("UNKNOWN")]
-    UNKNOWN,
+    UNKNOWN = 4,
 }
 
 /// <summary>
@@ -10325,13 +10325,13 @@ public sealed class JobKeyFilterProperty
 public enum JobKindEnum
 {
     [JsonPropertyName("BPMN_ELEMENT")]
-    BPMNELEMENT,
+    BPMNELEMENT = 0,
     [JsonPropertyName("EXECUTION_LISTENER")]
-    EXECUTIONLISTENER,
+    EXECUTIONLISTENER = 1,
     [JsonPropertyName("TASK_LISTENER")]
-    TASKLISTENER,
+    TASKLISTENER = 2,
     [JsonPropertyName("AD_HOC_SUB_PROCESS")]
-    ADHOCSUBPROCESS,
+    ADHOCSUBPROCESS = 3,
 }
 
 /// <summary>
@@ -10414,21 +10414,21 @@ public sealed class JobKindFilterProperty
 public enum JobListenerEventTypeEnum
 {
     [JsonPropertyName("ASSIGNING")]
-    ASSIGNING,
+    ASSIGNING = 0,
     [JsonPropertyName("CANCELING")]
-    CANCELING,
+    CANCELING = 1,
     [JsonPropertyName("COMPLETING")]
-    COMPLETING,
+    COMPLETING = 2,
     [JsonPropertyName("CREATING")]
-    CREATING,
+    CREATING = 3,
     [JsonPropertyName("END")]
-    END,
+    END = 4,
     [JsonPropertyName("START")]
-    START,
+    START = 5,
     [JsonPropertyName("UNSPECIFIED")]
-    UNSPECIFIED,
+    UNSPECIFIED = 6,
     [JsonPropertyName("UPDATING")]
-    UPDATING,
+    UPDATING = 7,
 }
 
 /// <summary>
@@ -10932,21 +10932,21 @@ public sealed class JobSearchResult
 public enum JobStateEnum
 {
     [JsonPropertyName("CANCELED")]
-    CANCELED,
+    CANCELED = 0,
     [JsonPropertyName("COMPLETED")]
-    COMPLETED,
+    COMPLETED = 1,
     [JsonPropertyName("CREATED")]
-    CREATED,
+    CREATED = 2,
     [JsonPropertyName("ERROR_THROWN")]
-    ERRORTHROWN,
+    ERRORTHROWN = 3,
     [JsonPropertyName("FAILED")]
-    FAILED,
+    FAILED = 4,
     [JsonPropertyName("MIGRATED")]
-    MIGRATED,
+    MIGRATED = 5,
     [JsonPropertyName("RETRIES_UPDATED")]
-    RETRIESUPDATED,
+    RETRIESUPDATED = 6,
     [JsonPropertyName("TIMED_OUT")]
-    TIMEDOUT,
+    TIMEDOUT = 7,
 }
 
 /// <summary>
@@ -12254,13 +12254,13 @@ public sealed class MessageSubscriptionSearchQuerySortRequest
 public enum MessageSubscriptionStateEnum
 {
     [JsonPropertyName("CORRELATED")]
-    CORRELATED,
+    CORRELATED = 0,
     [JsonPropertyName("CREATED")]
-    CREATED,
+    CREATED = 1,
     [JsonPropertyName("DELETED")]
-    DELETED,
+    DELETED = 2,
     [JsonPropertyName("MIGRATED")]
-    MIGRATED,
+    MIGRATED = 3,
 }
 
 /// <summary>
@@ -12503,17 +12503,17 @@ public sealed class OperationTypeFilterProperty
 public enum OwnerTypeEnum
 {
     [JsonPropertyName("USER")]
-    USER,
+    USER = 0,
     [JsonPropertyName("CLIENT")]
-    CLIENT,
+    CLIENT = 1,
     [JsonPropertyName("ROLE")]
-    ROLE,
+    ROLE = 2,
     [JsonPropertyName("GROUP")]
-    GROUP,
+    GROUP = 3,
     [JsonPropertyName("MAPPING_RULE")]
-    MAPPINGRULE,
+    MAPPINGRULE = 4,
     [JsonPropertyName("UNSPECIFIED")]
-    UNSPECIFIED,
+    UNSPECIFIED = 5,
 }
 
 /// <summary>
@@ -12548,87 +12548,87 @@ public sealed class Partition
 public enum PermissionTypeEnum
 {
     [JsonPropertyName("ACCESS")]
-    ACCESS,
+    ACCESS = 0,
     [JsonPropertyName("CANCEL_PROCESS_INSTANCE")]
-    CANCELPROCESSINSTANCE,
+    CANCELPROCESSINSTANCE = 1,
     [JsonPropertyName("CLAIM")]
-    CLAIM,
+    CLAIM = 2,
     [JsonPropertyName("CLAIM_USER_TASK")]
-    CLAIMUSERTASK,
+    CLAIMUSERTASK = 3,
     [JsonPropertyName("COMPLETE")]
-    COMPLETE,
+    COMPLETE = 4,
     [JsonPropertyName("COMPLETE_USER_TASK")]
-    COMPLETEUSERTASK,
+    COMPLETEUSERTASK = 5,
     [JsonPropertyName("CREATE")]
-    CREATE,
+    CREATE = 6,
     [JsonPropertyName("CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE")]
-    CREATEBATCHOPERATIONCANCELPROCESSINSTANCE,
+    CREATEBATCHOPERATIONCANCELPROCESSINSTANCE = 7,
     [JsonPropertyName("CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION")]
-    CREATEBATCHOPERATIONDELETEDECISIONDEFINITION,
+    CREATEBATCHOPERATIONDELETEDECISIONDEFINITION = 8,
     [JsonPropertyName("CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE")]
-    CREATEBATCHOPERATIONDELETEDECISIONINSTANCE,
+    CREATEBATCHOPERATIONDELETEDECISIONINSTANCE = 9,
     [JsonPropertyName("CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION")]
-    CREATEBATCHOPERATIONDELETEPROCESSDEFINITION,
+    CREATEBATCHOPERATIONDELETEPROCESSDEFINITION = 10,
     [JsonPropertyName("CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE")]
-    CREATEBATCHOPERATIONDELETEPROCESSINSTANCE,
+    CREATEBATCHOPERATIONDELETEPROCESSINSTANCE = 11,
     [JsonPropertyName("CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE")]
-    CREATEBATCHOPERATIONMIGRATEPROCESSINSTANCE,
+    CREATEBATCHOPERATIONMIGRATEPROCESSINSTANCE = 12,
     [JsonPropertyName("CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE")]
-    CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE,
+    CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE = 13,
     [JsonPropertyName("CREATE_BATCH_OPERATION_RESOLVE_INCIDENT")]
-    CREATEBATCHOPERATIONRESOLVEINCIDENT,
+    CREATEBATCHOPERATIONRESOLVEINCIDENT = 14,
     [JsonPropertyName("CREATE_DECISION_INSTANCE")]
-    CREATEDECISIONINSTANCE,
+    CREATEDECISIONINSTANCE = 15,
     [JsonPropertyName("CREATE_PROCESS_INSTANCE")]
-    CREATEPROCESSINSTANCE,
+    CREATEPROCESSINSTANCE = 16,
     [JsonPropertyName("CREATE_TASK_LISTENER")]
-    CREATETASKLISTENER,
+    CREATETASKLISTENER = 17,
     [JsonPropertyName("DELETE")]
-    DELETE,
+    DELETE = 18,
     [JsonPropertyName("DELETE_DECISION_INSTANCE")]
-    DELETEDECISIONINSTANCE,
+    DELETEDECISIONINSTANCE = 19,
     [JsonPropertyName("DELETE_DRD")]
-    DELETEDRD,
+    DELETEDRD = 20,
     [JsonPropertyName("DELETE_FORM")]
-    DELETEFORM,
+    DELETEFORM = 21,
     [JsonPropertyName("DELETE_PROCESS")]
-    DELETEPROCESS,
+    DELETEPROCESS = 22,
     [JsonPropertyName("DELETE_PROCESS_INSTANCE")]
-    DELETEPROCESSINSTANCE,
+    DELETEPROCESSINSTANCE = 23,
     [JsonPropertyName("DELETE_RESOURCE")]
-    DELETERESOURCE,
+    DELETERESOURCE = 24,
     [JsonPropertyName("DELETE_TASK_LISTENER")]
-    DELETETASKLISTENER,
+    DELETETASKLISTENER = 25,
     [JsonPropertyName("EVALUATE")]
-    EVALUATE,
+    EVALUATE = 26,
     [JsonPropertyName("MODIFY_PROCESS_INSTANCE")]
-    MODIFYPROCESSINSTANCE,
+    MODIFYPROCESSINSTANCE = 27,
     [JsonPropertyName("READ")]
-    READ,
+    READ = 28,
     [JsonPropertyName("READ_DECISION_DEFINITION")]
-    READDECISIONDEFINITION,
+    READDECISIONDEFINITION = 29,
     [JsonPropertyName("READ_DECISION_INSTANCE")]
-    READDECISIONINSTANCE,
+    READDECISIONINSTANCE = 30,
     [JsonPropertyName("READ_JOB_METRIC")]
-    READJOBMETRIC,
+    READJOBMETRIC = 31,
     [JsonPropertyName("READ_PROCESS_DEFINITION")]
-    READPROCESSDEFINITION,
+    READPROCESSDEFINITION = 32,
     [JsonPropertyName("READ_PROCESS_INSTANCE")]
-    READPROCESSINSTANCE,
+    READPROCESSINSTANCE = 33,
     [JsonPropertyName("READ_USAGE_METRIC")]
-    READUSAGEMETRIC,
+    READUSAGEMETRIC = 34,
     [JsonPropertyName("READ_USER_TASK")]
-    READUSERTASK,
+    READUSERTASK = 35,
     [JsonPropertyName("READ_TASK_LISTENER")]
-    READTASKLISTENER,
+    READTASKLISTENER = 36,
     [JsonPropertyName("UPDATE")]
-    UPDATE,
+    UPDATE = 37,
     [JsonPropertyName("UPDATE_PROCESS_INSTANCE")]
-    UPDATEPROCESSINSTANCE,
+    UPDATEPROCESSINSTANCE = 38,
     [JsonPropertyName("UPDATE_USER_TASK")]
-    UPDATEUSERTASK,
+    UPDATEUSERTASK = 39,
     [JsonPropertyName("UPDATE_TASK_LISTENER")]
-    UPDATETASKLISTENER,
+    UPDATETASKLISTENER = 40,
 }
 
 /// <summary>
@@ -14881,11 +14881,11 @@ public sealed class ProcessInstanceSequenceFlowsQueryResult
 public enum ProcessInstanceStateEnum
 {
     [JsonPropertyName("ACTIVE")]
-    ACTIVE,
+    ACTIVE = 0,
     [JsonPropertyName("COMPLETED")]
-    COMPLETED,
+    COMPLETED = 1,
     [JsonPropertyName("TERMINATED")]
-    TERMINATED,
+    TERMINATED = 2,
 }
 
 /// <summary>
@@ -15136,45 +15136,45 @@ public sealed class ResourceResult
 public enum ResourceTypeEnum
 {
     [JsonPropertyName("AUDIT_LOG")]
-    AUDITLOG,
+    AUDITLOG = 0,
     [JsonPropertyName("AUTHORIZATION")]
-    AUTHORIZATION,
+    AUTHORIZATION = 1,
     [JsonPropertyName("BATCH")]
-    BATCH,
+    BATCH = 2,
     [JsonPropertyName("CLUSTER_VARIABLE")]
-    CLUSTERVARIABLE,
+    CLUSTERVARIABLE = 3,
     [JsonPropertyName("COMPONENT")]
-    COMPONENT,
+    COMPONENT = 4,
     [JsonPropertyName("DECISION_DEFINITION")]
-    DECISIONDEFINITION,
+    DECISIONDEFINITION = 5,
     [JsonPropertyName("DECISION_REQUIREMENTS_DEFINITION")]
-    DECISIONREQUIREMENTSDEFINITION,
+    DECISIONREQUIREMENTSDEFINITION = 6,
     [JsonPropertyName("DOCUMENT")]
-    DOCUMENT,
+    DOCUMENT = 7,
     [JsonPropertyName("EXPRESSION")]
-    EXPRESSION,
+    EXPRESSION = 8,
     [JsonPropertyName("GLOBAL_LISTENER")]
-    GLOBALLISTENER,
+    GLOBALLISTENER = 9,
     [JsonPropertyName("GROUP")]
-    GROUP,
+    GROUP = 10,
     [JsonPropertyName("MAPPING_RULE")]
-    MAPPINGRULE,
+    MAPPINGRULE = 11,
     [JsonPropertyName("MESSAGE")]
-    MESSAGE,
+    MESSAGE = 12,
     [JsonPropertyName("PROCESS_DEFINITION")]
-    PROCESSDEFINITION,
+    PROCESSDEFINITION = 13,
     [JsonPropertyName("RESOURCE")]
-    RESOURCE,
+    RESOURCE = 14,
     [JsonPropertyName("ROLE")]
-    ROLE,
+    ROLE = 15,
     [JsonPropertyName("SYSTEM")]
-    SYSTEM,
+    SYSTEM = 16,
     [JsonPropertyName("TENANT")]
-    TENANT,
+    TENANT = 17,
     [JsonPropertyName("USER")]
-    USER,
+    USER = 18,
     [JsonPropertyName("USER_TASK")]
-    USERTASK,
+    USERTASK = 19,
 }
 
 /// <summary>
@@ -15922,9 +15922,9 @@ public readonly record struct SignalKey : global::Camunda.Orchestration.Sdk.ICam
 public enum SortOrderEnum
 {
     [JsonPropertyName("ASC")]
-    ASC,
+    ASC = 0,
     [JsonPropertyName("DESC")]
-    DESC,
+    DESC = 1,
 }
 
 /// <summary>
@@ -16266,9 +16266,9 @@ public sealed class TenantFilter
 public enum TenantFilterEnum
 {
     [JsonPropertyName("PROVIDED")]
-    PROVIDED,
+    PROVIDED = 0,
     [JsonPropertyName("ASSIGNED")]
-    ASSIGNED,
+    ASSIGNED = 1,
 }
 
 /// <summary>
@@ -17555,23 +17555,23 @@ public sealed class UserTaskSearchQuerySortRequest
 public enum UserTaskStateEnum
 {
     [JsonPropertyName("CREATING")]
-    CREATING,
+    CREATING = 0,
     [JsonPropertyName("CREATED")]
-    CREATED,
+    CREATED = 1,
     [JsonPropertyName("ASSIGNING")]
-    ASSIGNING,
+    ASSIGNING = 2,
     [JsonPropertyName("UPDATING")]
-    UPDATING,
+    UPDATING = 3,
     [JsonPropertyName("COMPLETING")]
-    COMPLETING,
+    COMPLETING = 4,
     [JsonPropertyName("COMPLETED")]
-    COMPLETED,
+    COMPLETED = 5,
     [JsonPropertyName("CANCELING")]
-    CANCELING,
+    CANCELING = 6,
     [JsonPropertyName("CANCELED")]
-    CANCELED,
+    CANCELED = 7,
     [JsonPropertyName("FAILED")]
-    FAILED,
+    FAILED = 8,
 }
 
 /// <summary>
