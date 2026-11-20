@@ -1,3 +1,10 @@
+## [9.3.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.3.0...v9.3.1) (2026-11-20)
+
+
+### Bug Fixes
+
+* **gen:** preserve published enum values on stable/9 ([#562](https://github.com/camunda/orchestration-cluster-api-csharp/issues/562)) ([66e31e1](https://github.com/camunda/orchestration-cluster-api-csharp/commit/66e31e1b75ac169640c29b0ece16e06c84f9ecf8)), closes [#535](https://github.com/camunda/orchestration-cluster-api-csharp/issues/535)
+
 # [9.3.0](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.2.4...v9.3.0) (2026-11-19)
 
 
