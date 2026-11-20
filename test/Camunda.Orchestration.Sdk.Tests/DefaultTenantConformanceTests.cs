@@ -54,17 +54,19 @@ public class DefaultTenantConformanceTests
         ["evaluateDecision:ByKey"] = (c, e) => c.EvaluateDecisionAsync(new DecisionEvaluationByKey { TenantId = Tenant(e) }),
         ["evaluateExpression"] = (c, e) => c.EvaluateExpressionAsync(new ExpressionEvaluationRequest { Expression = "=1", TenantId = Tenant(e) }),
         ["evaluateConditionals"] = (c, e) => c.EvaluateConditionalsAsync(new ConditionalEvaluationInstruction { TenantId = Tenant(e) }),
+        ["suspendProcessDefinitions:ById"] = (c, e) => c.SuspendProcessDefinitionsAsync(new ProcessDefinitionSuspensionInstructionById { ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"), TenantId = Tenant(e) }),
+        ["resumeProcessDefinitions:ById"] = (c, e) => c.ResumeProcessDefinitionsAsync(new ProcessDefinitionResumptionInstructionById { ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"), TenantId = Tenant(e) }),
     };
 
     /// <summary>
-    /// Bodies where only some variants carry <c>tenantId</c> (selection by key has none). The
-    /// spec metadata marks them <c>optionalTenantIdInBody: false</c>, and the other SDKs send
-    /// no default tenant for them, so neither does this one.
+    /// Body variants with no <c>tenantId</c> of their own (selection by key). They get
+    /// no default tenant — the runtime <c>ITenantIdSettable</c> check skips them — while
+    /// their sibling by-id variants do (issue #564).
     /// </summary>
-    private static readonly HashSet<string> NotDefaulted = new(StringComparer.Ordinal)
+    private static readonly Dictionary<string, Func<CamundaClient, Task>> NoTenantVariantOps = new()
     {
-        "suspendProcessDefinitions",
-        "resumeProcessDefinitions",
+        ["suspendProcessDefinitions:ByKey"] = c => c.SuspendProcessDefinitionsAsync(new ProcessDefinitionSuspensionInstructionByKey { ProcessDefinitionKey = ProcessDefinitionKey.AssumeExists("1") }),
+        ["resumeProcessDefinitions:ByKey"] = c => c.ResumeProcessDefinitionsAsync(new ProcessDefinitionResumptionInstructionByKey { ProcessDefinitionKey = ProcessDefinitionKey.AssumeExists("1") }),
     };
 
     public static TheoryData<string> Operations()
@@ -140,12 +142,17 @@ public class DefaultTenantConformanceTests
     }
 
     /// <summary>
-    /// Guards the matrix against new tenant-scoped operations. The SDK decides by the
-    /// presence of an optional <c>tenantId</c> in the request body, so the expected set
-    /// comes from two places: the bundler's <c>optionalTenantIdInBody</c> flag in
-    /// <c>spec-metadata.json</c> (the flag the JS SDK uses), and every generated client
-    /// method whose body type, or any concrete subtype of it, implements
-    /// <see cref="ITenantIdSettable"/>.
+    /// Guards the matrix against new tenant-scoped operations. The SDK injects the
+    /// default tenant when the body <em>being sent</em> has an optional top-level
+    /// <c>tenantId</c> (issue #564): the generated method carries the injection
+    /// whenever <em>any</em> union variant does, and the runtime
+    /// <c>ITenantIdSettable</c> check applies it per variant. The expected set is
+    /// therefore derived from the spec, not a list: every generated client method
+    /// whose body type, or any concrete subtype of it, implements
+    /// <see cref="ITenantIdSettable"/>. The bundler's <c>optionalTenantIdInBody</c>
+    /// flag (all-variants semantics) is only a lower bound — it misses mixed
+    /// unions like <c>ProcessDefinitionSuspensionInstruction</c>, where the by-id
+    /// variant has <c>tenantId</c> and the by-key variant does not.
     /// </summary>
     [Fact]
     public void EveryTenantScopedOperation_IsInTheMatrix()
@@ -176,7 +183,6 @@ public class DefaultTenantConformanceTests
         }
 
         var covered = new SortedSet<string>(TenantScopedOps.Keys.Select(k => k.Split(':')[0]), StringComparer.Ordinal);
-        expected.ExceptWith(NotDefaulted);
         Assert.NotEmpty(expected);
         Assert.True(expected.SetEquals(covered), $"missing from matrix: [{string.Join(", ", expected.Except(covered))}]; not tenant-scoped: [{string.Join(", ", covered.Except(expected))}]");
     }
@@ -290,11 +296,16 @@ public class DefaultTenantConformanceTests
         AssertNoTenantProperty(JsonElement.Parse(body!));
     }
 
-    public static TheoryData<string> NotDefaultedOperations() => new(NotDefaulted);
+    public static TheoryData<string> NoTenantVariants() => new(NoTenantVariantOps.Keys);
 
+    /// <summary>
+    /// The by-key variants have no <c>tenantId</c> property, so the runtime
+    /// <c>ITenantIdSettable</c> check must skip them even though their generated
+    /// method carries the injection for the by-id sibling (issue #564).
+    /// </summary>
     [Theory]
-    [MemberData(nameof(NotDefaultedOperations))]
-    public async Task NotDefaultedOperations_SendNoTenantById(string op)
+    [MemberData(nameof(NoTenantVariants))]
+    public async Task VariantsWithoutTenantId_SendNoTenant(string op)
     {
         var (client, handler) = CreateClient("configured-tenant");
         using var _ = client;
@@ -307,15 +318,9 @@ public class DefaultTenantConformanceTests
                 Content = new StringContent("{\"processDefinitions\":[]}", System.Text.Encoding.UTF8, "application/json"),
             };
         });
-        var id = ProcessDefinitionId.AssumeExists("order-process");
         try
         {
-            await (op switch
-            {
-                "suspendProcessDefinitions" => (Task)client.SuspendProcessDefinitionsAsync(new ProcessDefinitionSuspensionInstructionById { ProcessDefinitionId = id }),
-                "resumeProcessDefinitions" => client.ResumeProcessDefinitionsAsync(new ProcessDefinitionResumptionInstructionById { ProcessDefinitionId = id }),
-                _ => throw new ArgumentOutOfRangeException(nameof(op), op, "no call for this operation"),
-            });
+            await NoTenantVariantOps[op](client);
         }
         catch (Exception) when (body != null)
         {
