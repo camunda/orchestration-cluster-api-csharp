@@ -1,3 +1,10 @@
+# [11.0.0-alpha.13](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.12...v11.0.0-alpha.13) (2026-11-20)
+
+
+### Bug Fixes
+
+* reuse one token http client per auth handler ([#526](https://github.com/camunda/orchestration-cluster-api-csharp/issues/526)) ([b416c18](https://github.com/camunda/orchestration-cluster-api-csharp/commit/b416c18354840be34fe43099349a5938a20fb16a)), closes [#521](https://github.com/camunda/orchestration-cluster-api-csharp/issues/521) [#521](https://github.com/camunda/orchestration-cluster-api-csharp/issues/521)
+
 # [11.0.0-alpha.12](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.11...v11.0.0-alpha.12) (2026-11-19)
 
 
