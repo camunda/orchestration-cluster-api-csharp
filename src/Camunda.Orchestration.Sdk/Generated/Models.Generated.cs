@@ -22696,6 +22696,8 @@ public enum PermissionTypeEnum
 {
     [JsonPropertyName("ACCESS")]
     ACCESS = 0,
+    [JsonPropertyName("ANSWER")]
+    ANSWER = 47,
     [JsonPropertyName("CANCEL_PROCESS_INSTANCE")]
     CANCELPROCESSINSTANCE = 1,
     [JsonPropertyName("CLAIM")]
@@ -26401,6 +26403,8 @@ public enum ResourceTypeEnum
     MAPPINGRULE = 13,
     [JsonPropertyName("MESSAGE")]
     MESSAGE = 14,
+    [JsonPropertyName("PROBE")]
+    PROBE = 23,
     [JsonPropertyName("PROCESS_DEFINITION")]
     PROCESSDEFINITION = 15,
     [JsonPropertyName("RESOURCE")]
