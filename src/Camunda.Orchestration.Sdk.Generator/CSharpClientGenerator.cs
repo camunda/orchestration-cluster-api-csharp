@@ -207,6 +207,43 @@ internal static partial class CSharpClientGenerator
                         hasOptionalTenantIdsInBody = HasOptionalTenantIdsArrayInAnyVariant(bodySchema, doc);
                         hasOptionalTenantIdInBody = hasOptionalTenantIdInBody
                             || HasOptionalTenantIdInAnyVariant(bodySchema, doc);
+
+                        // Align injection eligibility with model-generation support.
+                        // The emitted `body is ITenantIdSettable` /
+                        // `body is ITenantIdsSettable` pattern check only compiles when
+                        // the static body type can actually satisfy the interface at
+                        // runtime: either the body type is a oneOf union base
+                        // (generated abstract, with derived variants that carry the
+                        // interface) or it is a concrete type that carries the
+                        // interface itself. For an anyOf union or an unmatched inline
+                        // oneOf, model generation emits a *sealed* class; whether that
+                        // class carries the interface depends on the body's OWN
+                        // properties (a union base has none), so the own-property
+                        // detectors are the supportability signal. When neither holds,
+                        // the pattern check is a CS8121 compile error — suppress the
+                        // injection for those shapes (issue #565 review).
+                        //
+                        // Both gates use the own-property form (GetOptionalTenantIdInfo
+                        // / HasOptionalTenantIdsArrayDirect), NOT the variant-descending
+                        // GetOptionalTenantIdsInfo: the latter would qualify an anyOf
+                        // base whose variants agree on tenantIds, but model generation
+                        // then emits ITenantIdsSettable on a base that has no TenantIds
+                        // property, producing a SetDefaultTenantIds method that does
+                        // not compile. Gating on the own-property shape keeps the
+                        // injection off that unsupported path.
+                        var isOneOfBase = bodyTypeName != null && oneOfParents.ContainsKey(bodyTypeName);
+                        if (hasOptionalTenantIdInBody
+                            && !isOneOfBase
+                            && GetOptionalTenantIdInfo(bodySchema, doc) == null)
+                        {
+                            hasOptionalTenantIdInBody = false;
+                        }
+                        if (hasOptionalTenantIdsInBody
+                            && !isOneOfBase
+                            && !HasOptionalTenantIdsArrayDirect(bodySchema, doc))
+                        {
+                            hasOptionalTenantIdsInBody = false;
+                        }
                     }
                 }
 
@@ -1099,7 +1136,17 @@ internal static partial class CSharpClientGenerator
 
             // Check if this class has an optional tenantId property AND is used as a request body
             var tenantIdInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdInfo(schema, doc) : null;
-            var tenantIdsInfo = requestSchemaNames.Contains(typeName) ? GetOptionalTenantIdsInfo(schema, doc) : null;
+            // The ITenantIdsSettable interface's SetDefaultTenantIds method assigns the
+            // class's own TenantIds property, so it may only be emitted on a class that
+            // actually declares one. GetOptionalTenantIdsInfo descends into oneOf/anyOf
+            // variants, which would qualify a union *base* whose variants agree on
+            // tenantIds — but that base has no own TenantIds property, and the emitted
+            // method would reference a non-existent member (a compile error). Gate on
+            // the own-property shape so only a concrete body class qualifies (the
+            // variant-descending agreement check still applies to the item type).
+            var tenantIdsInfo = requestSchemaNames.Contains(typeName) && HasOptionalTenantIdsArrayDirect(schema, doc)
+                ? GetOptionalTenantIdsInfo(schema, doc)
+                : null;
             var tenantFilterGuard = tenantIdsInfo != null ? GetTenantFilterGuardInfo(schema, doc) : null;
             var ifaceList = new List<string>();
             if (tenantIdInfo != null)
@@ -1246,7 +1293,13 @@ internal static partial class CSharpClientGenerator
     private static void GenerateClass(StringBuilder sb, string typeName, IOpenApiSchema schema, OpenApiDocument? doc = null, Dictionary<string, InlineEnumEntry>? inlineEnums = null, HashSet<string>? inlineEnumTypeNames = null, bool isRequestSchema = false)
     {
         var tenantIdInfo = isRequestSchema ? GetOptionalTenantIdInfo(schema, doc) : null;
-        var tenantIdsInfo = isRequestSchema ? GetOptionalTenantIdsInfo(schema, doc) : null;
+        // See the component-class path: SetDefaultTenantIds assigns the class's own
+        // TenantIds property, so only emit ITenantIdsSettable when the class declares
+        // one (a union base whose variants merely agree on tenantIds has no such
+        // property, and the emitted method would not compile).
+        var tenantIdsInfo = isRequestSchema && HasOptionalTenantIdsArrayDirect(schema, doc)
+            ? GetOptionalTenantIdsInfo(schema, doc)
+            : null;
         var tenantFilterGuard = tenantIdsInfo != null ? GetTenantFilterGuardInfo(schema, doc) : null;
         var ifaceList = new List<string>();
         if (tenantIdInfo != null)
