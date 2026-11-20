@@ -1,0 +1,264 @@
+{
+  "AuditLogActorTypeEnum": {
+    "ANONYMOUS": 0,
+    "CLIENT": 1,
+    "UNKNOWN": 2,
+    "USER": 3
+  },
+  "AuditLogCategoryEnum": {
+    "ADMIN": 0,
+    "DEPLOYED_RESOURCES": 1,
+    "USER_TASKS": 2
+  },
+  "AuditLogEntityTypeEnum": {
+    "AUTHORIZATION": 0,
+    "BATCH": 1,
+    "CLIENT": 14,
+    "DECISION": 2,
+    "GROUP": 3,
+    "INCIDENT": 4,
+    "JOB": 5,
+    "MAPPING_RULE": 6,
+    "PROCESS_INSTANCE": 7,
+    "RESOURCE": 8,
+    "ROLE": 9,
+    "TENANT": 10,
+    "USER": 11,
+    "USER_TASK": 12,
+    "VARIABLE": 13
+  },
+  "AuditLogOperationTypeEnum": {
+    "ASSIGN": 0,
+    "CANCEL": 1,
+    "COMPLETE": 2,
+    "CREATE": 3,
+    "DELETE": 4,
+    "EVALUATE": 5,
+    "MIGRATE": 6,
+    "MODIFY": 7,
+    "RESOLVE": 8,
+    "RESUME": 9,
+    "SUSPEND": 10,
+    "UNASSIGN": 11,
+    "UNKNOWN": 12,
+    "UPDATE": 13
+  },
+  "AuditLogResultEnum": {
+    "FAIL": 0,
+    "SUCCESS": 1
+  },
+  "BatchOperationItemStateEnum": {
+    "ACTIVE": 0,
+    "CANCELED": 2,
+    "COMPLETED": 1,
+    "FAILED": 3
+  },
+  "BatchOperationStateEnum": {
+    "ACTIVE": 0,
+    "CANCELED": 1,
+    "COMPLETED": 2,
+    "CREATED": 3,
+    "FAILED": 4,
+    "PARTIALLY_COMPLETED": 5,
+    "SUSPENDED": 6
+  },
+  "BatchOperationTypeEnum": {
+    "ADD_VARIABLE": 0,
+    "CANCEL_PROCESS_INSTANCE": 1,
+    "DELETE_DECISION_DEFINITION": 2,
+    "DELETE_DECISION_INSTANCE": 3,
+    "DELETE_PROCESS_DEFINITION": 4,
+    "DELETE_PROCESS_INSTANCE": 5,
+    "MIGRATE_PROCESS_INSTANCE": 6,
+    "MODIFY_PROCESS_INSTANCE": 7,
+    "RESOLVE_INCIDENT": 8,
+    "UPDATE_VARIABLE": 9
+  },
+  "ClusterVariableScopeEnum": {
+    "GLOBAL": 0,
+    "TENANT": 1
+  },
+  "DecisionDefinitionTypeEnum": {
+    "DECISION_TABLE": 0,
+    "LITERAL_EXPRESSION": 1,
+    "UNKNOWN": 3,
+    "UNSPECIFIED": 2
+  },
+  "DecisionInstanceStateEnum": {
+    "EVALUATED": 0,
+    "FAILED": 1,
+    "UNKNOWN": 3,
+    "UNSPECIFIED": 2
+  },
+  "ElementInstanceStateEnum": {
+    "ACTIVE": 0,
+    "COMPLETED": 1,
+    "TERMINATED": 2
+  },
+  "GlobalListenerSourceEnum": {
+    "API": 1,
+    "CONFIGURATION": 0
+  },
+  "GlobalTaskListenerEventTypeEnum": {
+    "all": 0,
+    "assigning": 2,
+    "canceling": 5,
+    "completing": 4,
+    "creating": 1,
+    "updating": 3
+  },
+  "IncidentErrorTypeEnum": {
+    "AD_HOC_SUB_PROCESS_NO_RETRIES": 0,
+    "CALLED_DECISION_ERROR": 1,
+    "CALLED_ELEMENT_ERROR": 2,
+    "CONDITION_ERROR": 3,
+    "DECISION_EVALUATION_ERROR": 4,
+    "EXECUTION_LISTENER_NO_RETRIES": 5,
+    "EXTRACT_VALUE_ERROR": 6,
+    "FORM_NOT_FOUND": 7,
+    "IO_MAPPING_ERROR": 8,
+    "JOB_NO_RETRIES": 9,
+    "MESSAGE_SIZE_EXCEEDED": 10,
+    "RESOURCE_NOT_FOUND": 11,
+    "TASK_LISTENER_NO_RETRIES": 12,
+    "UNHANDLED_ERROR_EVENT": 13,
+    "UNKNOWN": 14,
+    "UNSPECIFIED": 15
+  },
+  "IncidentStateEnum": {
+    "ACTIVE": 0,
+    "MIGRATED": 1,
+    "PENDING": 2,
+    "RESOLVED": 3,
+    "UNKNOWN": 4
+  },
+  "JobKindEnum": {
+    "AD_HOC_SUB_PROCESS": 3,
+    "BPMN_ELEMENT": 0,
+    "EXECUTION_LISTENER": 1,
+    "TASK_LISTENER": 2
+  },
+  "JobListenerEventTypeEnum": {
+    "ASSIGNING": 0,
+    "CANCELING": 1,
+    "COMPLETING": 2,
+    "CREATING": 3,
+    "END": 4,
+    "START": 5,
+    "UNSPECIFIED": 6,
+    "UPDATING": 7
+  },
+  "JobStateEnum": {
+    "CANCELED": 0,
+    "COMPLETED": 1,
+    "CREATED": 2,
+    "ERROR_THROWN": 3,
+    "FAILED": 4,
+    "MIGRATED": 5,
+    "RETRIES_UPDATED": 6,
+    "TIMED_OUT": 7
+  },
+  "MessageSubscriptionStateEnum": {
+    "CORRELATED": 0,
+    "CREATED": 1,
+    "DELETED": 2,
+    "MIGRATED": 3
+  },
+  "OwnerTypeEnum": {
+    "CLIENT": 1,
+    "GROUP": 3,
+    "MAPPING_RULE": 4,
+    "ROLE": 2,
+    "UNSPECIFIED": 5,
+    "USER": 0
+  },
+  "PermissionTypeEnum": {
+    "ACCESS": 0,
+    "CANCEL_PROCESS_INSTANCE": 1,
+    "CLAIM": 2,
+    "CLAIM_USER_TASK": 3,
+    "COMPLETE": 4,
+    "COMPLETE_USER_TASK": 5,
+    "CREATE": 6,
+    "CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE": 7,
+    "CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION": 8,
+    "CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE": 9,
+    "CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION": 10,
+    "CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE": 11,
+    "CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE": 12,
+    "CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE": 13,
+    "CREATE_BATCH_OPERATION_RESOLVE_INCIDENT": 14,
+    "CREATE_DECISION_INSTANCE": 15,
+    "CREATE_PROCESS_INSTANCE": 16,
+    "CREATE_TASK_LISTENER": 17,
+    "DELETE": 18,
+    "DELETE_DECISION_INSTANCE": 19,
+    "DELETE_DRD": 20,
+    "DELETE_FORM": 21,
+    "DELETE_PROCESS": 22,
+    "DELETE_PROCESS_INSTANCE": 23,
+    "DELETE_RESOURCE": 24,
+    "DELETE_TASK_LISTENER": 25,
+    "EVALUATE": 26,
+    "MODIFY_PROCESS_INSTANCE": 27,
+    "READ": 28,
+    "READ_DECISION_DEFINITION": 29,
+    "READ_DECISION_INSTANCE": 30,
+    "READ_JOB_METRIC": 31,
+    "READ_PROCESS_DEFINITION": 32,
+    "READ_PROCESS_INSTANCE": 33,
+    "READ_TASK_LISTENER": 36,
+    "READ_USAGE_METRIC": 34,
+    "READ_USER_TASK": 35,
+    "UPDATE": 37,
+    "UPDATE_PROCESS_INSTANCE": 38,
+    "UPDATE_TASK_LISTENER": 40,
+    "UPDATE_USER_TASK": 39
+  },
+  "ProcessInstanceStateEnum": {
+    "ACTIVE": 0,
+    "COMPLETED": 1,
+    "TERMINATED": 2
+  },
+  "ResourceTypeEnum": {
+    "AUDIT_LOG": 0,
+    "AUTHORIZATION": 1,
+    "BATCH": 2,
+    "CLUSTER_VARIABLE": 3,
+    "COMPONENT": 4,
+    "DECISION_DEFINITION": 5,
+    "DECISION_REQUIREMENTS_DEFINITION": 6,
+    "DOCUMENT": 7,
+    "EXPRESSION": 8,
+    "GLOBAL_LISTENER": 9,
+    "GROUP": 10,
+    "MAPPING_RULE": 11,
+    "MESSAGE": 12,
+    "PROCESS_DEFINITION": 13,
+    "RESOURCE": 14,
+    "ROLE": 15,
+    "SYSTEM": 16,
+    "TENANT": 17,
+    "USER": 18,
+    "USER_TASK": 19
+  },
+  "SortOrderEnum": {
+    "ASC": 0,
+    "DESC": 1
+  },
+  "TenantFilterEnum": {
+    "ASSIGNED": 1,
+    "PROVIDED": 0
+  },
+  "UserTaskStateEnum": {
+    "ASSIGNING": 2,
+    "CANCELED": 7,
+    "CANCELING": 6,
+    "COMPLETED": 5,
+    "COMPLETING": 4,
+    "CREATED": 1,
+    "CREATING": 0,
+    "FAILED": 8,
+    "UPDATING": 3
+  }
+}
