@@ -1,3 +1,17 @@
+## [10.1.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.1.0...v10.1.1) (2026-11-20)
+
+
+### Bug Fixes
+
+* **gen:** preserve published enum values on stable/10 ([#561](https://github.com/camunda/orchestration-cluster-api-csharp/issues/561)) ([c10d714](https://github.com/camunda/orchestration-cluster-api-csharp/commit/c10d714b4072b707a191fc6c5ef29e83067a40e0)), closes [#535](https://github.com/camunda/orchestration-cluster-api-csharp/issues/535)
+
+# [10.1.0](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.4...v10.1.0) (2026-11-19)
+
+
+### Features
+
+* send attributable user-agent on rest and oauth requests (backport [#556](https://github.com/camunda/orchestration-cluster-api-csharp/issues/556) to stable/10) ([#557](https://github.com/camunda/orchestration-cluster-api-csharp/issues/557)) ([38f31bd](https://github.com/camunda/orchestration-cluster-api-csharp/commit/38f31bd0574717d1d77aaf95c64f4fa7ea49fa3b))
+
 ## [10.0.4](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v10.0.3...v10.0.4) (2026-11-15)
 
 
