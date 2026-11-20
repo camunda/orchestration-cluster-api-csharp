@@ -7,9 +7,9 @@ namespace Camunda.Orchestration.Sdk.Tests;
 /// Defect-class regression guard for issue #535: generated enum members took their
 /// numeric value from their position in the spec's (alphabetical) value list, so a
 /// mid-list insert (e.g. <c>ANSWER</c> in <c>PermissionTypeEnum</c>) shifted every later
-/// member — a binary-breaking change. The guard covers every generated enum shape
-/// (component enums and inline property enums) across insertions and removals: an
-/// existing wire value must keep its number, and a number must never be reused.
+/// member — a binary-breaking change. The guard covers every generated enum shape on this
+/// branch (component enums) across insertions and removals: an existing wire value must
+/// keep its number, and a number must never be reused.
 /// </summary>
 public class GeneratorEnumStableValuesTests
 {
@@ -67,7 +67,8 @@ public class GeneratorEnumStableValuesTests
         File.WriteAllText(tmp.SpecPath, Spec(values));
         CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir);
         var all = Enums(File.ReadAllText(Path.Combine(tmp.OutputDir, "Models.Generated.cs")));
-        Assert.Equal(2, all.Count);
+        // stable/9 emits inline property enums as strings, so only the component enum is generated.
+        Assert.Equal(["ComponentEnum"], all.Keys);
         return all;
     }
 
