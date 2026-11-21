@@ -1,3 +1,10 @@
+# [11.0.0-alpha.15](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.14...v11.0.0-alpha.15) (2026-11-21)
+
+
+### Features
+
+* **gen:** use bundler 2.5 default-tenant metadata ([#567](https://github.com/camunda/orchestration-cluster-api-csharp/issues/567)) ([c09d6ba](https://github.com/camunda/orchestration-cluster-api-csharp/commit/c09d6ba203be16dbd02a68070060b2d3e2ebf842)), closes [#566](https://github.com/camunda/orchestration-cluster-api-csharp/issues/566)
+
 # [11.0.0-alpha.14](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.13...v11.0.0-alpha.14) (2026-11-21)
 
 
