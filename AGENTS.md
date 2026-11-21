@@ -17,6 +17,24 @@ https://raw.githubusercontent.com/camunda/sdk-infra/refs/heads/main/policies/AGE
 It holds the conventions shared by all Camunda SDK repos (commits, bug fixes, tests, opening issues). Precedence on conflict: this file, then the shared SDK file, then the central Camunda file.
 <!-- sdk-infra-delegation:end -->
 
+## Opening issues
+
+Every issue you open (`gh issue create`, REST or MCP) must carry the SDK defect-metrics fields (https://camunda.github.io/sdk-quality-metrics/). This applies in this repo and to issues you file elsewhere (other SDKs, camunda/sdk-infra, camunda/camunda). Put these lines at the end of the body, or set the matching labels directly:
+
+```
+Type: bug | enhancement | documentation | question
+Found-by: review | ci | conformance-test | performance-test | integration | manual-test | audit | user
+Affects: main | stable | both
+Severity: critical | high | medium | low
+Introduced-by: <commit sha | owner/repo@sha | #PR | release tag>   (optional)
+```
+
+- For a bug, `Found-by`, `Affects` and `Severity` are required. Without them the issue gets `needs-triage`.
+- `Found-by` is the quality layer that caught it, not who typed the issue. `Affects: stable` means a released `stable/N` line.
+- An issue created with a workflow's `GITHUB_TOKEN` does not trigger `sdk-issue-labels.yml`, so the body lines are not turned into labels. Set the labels directly instead: `--label bug --label found-by/<x> --label affects/<main|stable> --label severity/<x>`.
+
+Value definitions: [shared policy, "Opening issues"](https://github.com/camunda/sdk-infra/blob/main/policies/AGENTS.md#opening-issues).
+
 ## Repo-specific instructions
 
 ### Role & boundary
