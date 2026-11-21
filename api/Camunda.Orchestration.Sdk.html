@@ -4646,13 +4646,12 @@ no value stored; the API returns <code>PROCESS_EVENT</code> as a default for tho
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ProcessDefinitionFilterState.html">ProcessDefinitionFilterState</a></dt>
       <dd><p>Filter by the process definition's state.
 When not set, process definitions in any state are returned.
-Set to <code>ACTIVE</code> to exclude draining and deleted definitions (recommended for most use cases).
-Set to <code>SUSPENDED</code> to return only definitions that are suspended, so that no new
-process instances can be created from them.
+Set to <code>ACTIVE</code> to exclude draining, deleted, and suspended definitions (recommended for most use cases).
 Set to <code>DRAINING</code> to return only definitions that are being deleted but still have
 active process instances draining.
 Set to <code>DELETED</code> to return only definitions that have been deleted but are still
-retained in secondary storage.</p>
+retained in secondary storage.
+Set to <code>SUSPENDED</code> to return only definitions that are suspended: no new process instances can be created from them.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -4670,7 +4669,7 @@ retained in secondary storage.</p>
       <dd><p>The state of this process definition.
 <code>DRAINING</code> indicates the definition is being deleted but still has active process
 instances draining before it is removed.
-<code>SUSPENDED</code> indicates no new process instances can be created from the definition.</p>
+<code>SUSPENDED</code> indicates no new process instances can be created from this definition; it returns to <code>ACTIVE</code> when resumed.</p>
 </dd>
     </dl>
     <dl class="jumplist">
