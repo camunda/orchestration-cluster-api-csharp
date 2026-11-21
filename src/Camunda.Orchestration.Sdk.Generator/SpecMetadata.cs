@@ -198,6 +198,22 @@ internal sealed class OperationMetadataEntry
 
     [JsonPropertyName("optionalTenantIdInBody")]
     public bool OptionalTenantIdInBody { get; set; }
+
+    /// <summary>
+    /// Request-body schema names (union variants, or the body schema itself)
+    /// that carry an optional top-level <c>tenantId</c>, following allOf
+    /// composition. Non-empty means at least one body shape can receive the
+    /// effective default tenant (camunda-schema-bundler &gt;= 2.5.0).
+    /// </summary>
+    [JsonPropertyName("optionalTenantIdInBodyVariants")]
+    public List<string> OptionalTenantIdInBodyVariants { get; set; } = [];
+
+    /// <summary>
+    /// True when the request body has an optional <c>tenantIds</c> array
+    /// (camunda-schema-bundler &gt;= 2.5.0).
+    /// </summary>
+    [JsonPropertyName("optionalTenantIdsInBody")]
+    public bool OptionalTenantIdsInBody { get; set; }
 }
 
 internal sealed class QueryParamMeta

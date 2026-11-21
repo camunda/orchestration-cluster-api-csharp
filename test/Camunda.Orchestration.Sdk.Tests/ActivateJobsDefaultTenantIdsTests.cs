@@ -301,6 +301,11 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
         var result = new SortedSet<string>(StringComparer.Ordinal);
         var schemas = spec["components"]!["schemas"]!.AsObject();
         var paths = spec["paths"]!.AsObject();
+        // Eligibility comes from the bundler's spec-metadata.json
+        // (optionalTenantIdsInBody, camunda-schema-bundler >= 2.5.0, issue #566),
+        // the same source the generator reads; the spec only maps each operation
+        // to its generated body type.
+        var tenantIdsOps = LoadOperationsWithOptionalTenantIdsInBody();
 
         foreach (var (_, pathItem) in paths)
         {
@@ -325,7 +330,7 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
                     var (resolved, refName) = Resolve(schema, schemas);
                     if (resolved == null)
                         continue;
-                    if (!HasOptionalTenantIdsArrayInAnyVariant(resolved, schemas))
+                    if (operationId == null || !tenantIdsOps.Contains(operationId))
                         continue;
                     // For $ref bodies the SDK type is the referenced schema name.
                     // For inline bodies the generator names the class
@@ -360,70 +365,26 @@ public class ActivateJobsDefaultTenantIdsTests : IDisposable
         return (obj, null);
     }
 
-    /// <summary>
-    /// True if <paramref name="schema"/> (or every variant in a
-    /// <c>oneOf</c>/<c>anyOf</c>) has an optional <c>tenantIds: array</c>
-    /// property. Mirrors the generator's <c>HasOptionalTenantIdsArrayInAnyVariant</c>
-    /// detection so the structural guard catches the same defect class the
-    /// generator handles.
-    /// </summary>
-    private static bool HasOptionalTenantIdsArrayInAnyVariant(JsonObject schema, JsonObject schemas)
+    private static HashSet<string> LoadOperationsWithOptionalTenantIdsInBody()
     {
-        var variants = (schema["oneOf"] as JsonArray) ?? (schema["anyOf"] as JsonArray);
-        if (variants is { Count: > 0 })
+        var dir = AppContext.BaseDirectory;
+        for (int i = 0; i < 8 && dir != null; i++)
         {
-            foreach (var v in variants)
+            var candidate = Path.Combine(dir, "external-spec", "bundled", "spec-metadata.json");
+            if (File.Exists(candidate))
             {
-                var (resolved, _) = Resolve(v, schemas);
-                if (resolved == null || !HasOptionalTenantIdsArray(resolved, schemas))
-                    return false;
+                var result = new HashSet<string>(StringComparer.Ordinal);
+                using var metadata = JsonDocument.Parse(File.ReadAllText(candidate));
+                foreach (var op in metadata.RootElement.GetProperty("operations").EnumerateArray())
+                {
+                    if (op.TryGetProperty("optionalTenantIdsInBody", out var flag) && flag.ValueKind == JsonValueKind.True)
+                        result.Add(op.GetProperty("operationId").GetString()!);
+                }
+                return result;
             }
-            return true;
+            dir = Path.GetDirectoryName(dir);
         }
-        return HasOptionalTenantIdsArray(schema, schemas);
-    }
-
-    private static bool HasOptionalTenantIdsArray(JsonObject schema, JsonObject schemas)
-    {
-        // Merge own properties/required with allOf fragments, resolving
-        // `allOf: [{$ref: ...}]` against the schemas map. Mirrors the
-        // generator's HasOptionalTenantIdsArrayDirect.
-        var properties = new Dictionary<string, JsonObject>(StringComparer.Ordinal);
-        var required = new HashSet<string>(StringComparer.Ordinal);
-
-        if (schema["properties"] is JsonObject ownProps)
-            foreach (var (k, v) in ownProps)
-                if (v is JsonObject vObj)
-                    properties.TryAdd(k, vObj);
-        if (schema["required"] is JsonArray ownReq)
-            foreach (var n in ownReq)
-                if (n?.GetValue<string>() is string s)
-                    required.Add(s);
-
-        if (schema["allOf"] is JsonArray allOf)
-        {
-            foreach (var fragment in allOf)
-            {
-                if (fragment is not JsonObject fragObj)
-                    continue;
-                var (resolved, _) = Resolve(fragment, schemas);
-                var target = resolved ?? fragObj;
-                if (target["properties"] is JsonObject tProps)
-                    foreach (var (k, v) in tProps)
-                        if (v is JsonObject vObj)
-                            properties.TryAdd(k, vObj);
-                if (target["required"] is JsonArray tReq)
-                    foreach (var n in tReq)
-                        if (n?.GetValue<string>() is string s)
-                            required.Add(s);
-            }
-        }
-
-        if (!properties.TryGetValue("tenantIds", out var tenantIds))
-            return false;
-        if (required.Contains("tenantIds"))
-            return false;
-        return tenantIds["type"]?.GetValue<string>() == "array";
+        throw new FileNotFoundException("Could not locate external-spec/bundled/spec-metadata.json");
     }
 
     public void Dispose()

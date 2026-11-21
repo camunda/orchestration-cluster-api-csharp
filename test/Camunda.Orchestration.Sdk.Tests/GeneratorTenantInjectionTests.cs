@@ -12,7 +12,7 @@ namespace Camunda.Orchestration.Sdk.Tests;
 /// The defect: the generator emitted the
 /// <c>if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(…)</c> line only
 /// when <em>every</em> union variant had an optional <c>tenantId</c>
-/// (<c>HasOptionalTenantIdInAnyVariant</c> returned true only when all variants
+/// (the former <c>HasOptionalTenantIdInAnyVariant</c> returned true only when all variants
 /// did, despite its name). A mixed union — e.g.
 /// <c>ProcessDefinitionSuspensionInstruction</c>, whose by-id variant has an
 /// optional <c>tenantId</c> and whose by-key variant has none — therefore got no
@@ -109,8 +109,9 @@ public class GeneratorTenantInjectionTests
     {
         using var tmp = TempSpecDir.Create();
         File.WriteAllText(tmp.SpecPath, MixedOneOfSpec);
-        // The metadata flag deliberately says false for both operations (the
-        // bundler's all-variants semantics) — detection must come from the spec.
+        // optionalTenantIdInBody says false for both operations (all-variants
+        // semantics); eligibility must come from the any-variant
+        // optionalTenantIdInBodyVariants list (camunda-schema-bundler >= 2.5.0).
         File.WriteAllText(tmp.MetadataPath, """
             {
               "schemaVersion": "1",
@@ -118,8 +119,8 @@ public class GeneratorTenantInjectionTests
               "semanticKeys": [],
               "unions": [],
               "operations": [
-                { "operationId": "suspendThings", "optionalTenantIdInBody": false },
-                { "operationId": "resumeThings", "optionalTenantIdInBody": false }
+                { "operationId": "suspendThings", "optionalTenantIdInBody": false, "optionalTenantIdInBodyVariants": ["InstructionById"] },
+                { "operationId": "resumeThings", "optionalTenantIdInBody": false, "optionalTenantIdInBodyVariants": ["InstructionById"] }
               ],
               "deprecatedEnumMembers": []
             }
@@ -210,7 +211,7 @@ public class GeneratorTenantInjectionTests
               "semanticKeys": [],
               "unions": [],
               "operations": [
-                { "operationId": "suspendThings", "optionalTenantIdInBody": false }
+                { "operationId": "suspendThings", "optionalTenantIdInBody": false, "optionalTenantIdInBodyVariants": ["InstructionById"] }
               ],
               "deprecatedEnumMembers": []
             }
@@ -232,7 +233,7 @@ public class GeneratorTenantInjectionTests
     }
 
     // The plural `tenantIds` operation-level detector
-    // (HasOptionalTenantIdsArrayInAnyVariant) descends into union variants, so an
+    // (the bundler's optionalTenantIdsInBody metadata) descends into union variants, so an
     // anyOf body whose variants all carry an optional `tenantIds` returns true.
     // But the anyOf base is generated as a *sealed* class with no own TenantIds
     // property, and marking it ITenantIdsSettable would emit a SetDefaultTenantIds
@@ -299,7 +300,7 @@ public class GeneratorTenantInjectionTests
               "semanticKeys": [],
               "unions": [],
               "operations": [
-                { "operationId": "activateThings", "optionalTenantIdInBody": false }
+                { "operationId": "activateThings", "optionalTenantIdInBody": false, "optionalTenantIdsInBody": true }
               ],
               "deprecatedEnumMembers": []
             }
@@ -318,7 +319,7 @@ public class GeneratorTenantInjectionTests
 
     // The plural defect class: an anyOf body whose variants all carry an
     // optional `tenantIds` but with DISAGREEING item types. The operation-level
-    // detector (HasOptionalTenantIdsArrayInAnyVariant) only checks each variant
+    // detector (the bundler's optionalTenantIdsInBody metadata) only checks each variant
     // has an optional tenantIds array — not that the item types agree — so it
     // returns true. But model generation's GetOptionalTenantIdsInfo returns null
     // on disagreement, so the sealed body class gets NO ITenantIdsSettable and
@@ -383,7 +384,7 @@ public class GeneratorTenantInjectionTests
               "semanticKeys": [],
               "unions": [],
               "operations": [
-                { "operationId": "activateThings", "optionalTenantIdInBody": false }
+                { "operationId": "activateThings", "optionalTenantIdInBody": false, "optionalTenantIdsInBody": true }
               ],
               "deprecatedEnumMembers": []
             }
@@ -455,7 +456,7 @@ public class GeneratorTenantInjectionTests
               "semanticKeys": [],
               "unions": [],
               "operations": [
-                { "operationId": "suspendThings", "optionalTenantIdInBody": false }
+                { "operationId": "suspendThings", "optionalTenantIdInBody": false, "optionalTenantIdInBodyVariants": ["InstructionById"] }
               ],
               "deprecatedEnumMembers": []
             }
