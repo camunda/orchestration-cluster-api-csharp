@@ -18,7 +18,13 @@ internal static partial class CSharpClientGenerator
     /// <summary>
     /// Generate C# source files from the bundled OpenAPI spec.
     /// </summary>
-    public static void Generate(string specPath, string metadataPath, string outputDir)
+    /// <param name="requireOperationMetadata">
+    /// When true, fail if any spec operation has no entry in the metadata. The CLI sets
+    /// this so a spec paired with mismatched metadata (e.g. a spec override with the
+    /// repository's metadata) is rejected instead of silently dropping metadata-derived
+    /// behaviour such as default-tenant injection.
+    /// </param>
+    public static void Generate(string specPath, string metadataPath, string outputDir, bool requireOperationMetadata = false)
     {
         Console.WriteLine($"[generator] Reading spec from {specPath}");
         Console.WriteLine($"[generator] Reading metadata from {metadataPath}");
@@ -36,6 +42,8 @@ internal static partial class CSharpClientGenerator
 
         var metadata = SpecMetadata.Load(metadataPath);
         Console.WriteLine($"[generator] Metadata: {metadata.Operations.Count} operations, {metadata.SemanticKeys.Count} semantic keys");
+        if (requireOperationMetadata)
+            EnsureMetadataCoversSpec(doc, metadata, specPath, metadataPath);
 
         Directory.CreateDirectory(outputDir);
 
@@ -94,6 +102,27 @@ internal static partial class CSharpClientGenerator
         SafeEmit.ScanGeneratedSource(presentWhenPath, presentWhenCode);
         File.WriteAllText(presentWhenPath, presentWhenCode);
         Console.WriteLine($"[generator] Generated PresentWhen.Generated.cs ({couplings.Count} coupling(s))");
+    }
+
+    /// <summary>
+    /// Reject a spec/metadata pair where the metadata lacks an entry for a spec operation.
+    /// Every metadata-derived flag defaults to false for a missing entry, so a mismatch
+    /// would otherwise generate silently wrong code.
+    /// </summary>
+    internal static void EnsureMetadataCoversSpec(OpenApiDocument doc, SpecMetadata metadata, string specPath, string metadataPath)
+    {
+        var missing = doc.Paths
+            .SelectMany(p => p.Value.Operations ?? new Dictionary<HttpMethod, OpenApiOperation>())
+            .Select(o => o.Value.OperationId)
+            .Where(id => !string.IsNullOrEmpty(id) && metadata.GetOperation(id!) == null)
+            .Distinct()
+            .OrderBy(id => id, StringComparer.Ordinal)
+            .ToList();
+        if (missing.Count > 0)
+            throw new InvalidOperationException(
+                $"[generator] Spec metadata {metadataPath} does not match spec {specPath}: "
+                + $"no metadata for operation(s) {string.Join(", ", missing)}. "
+                + "Pass the spec-metadata.json produced alongside this spec (CAMUNDA_SDK_METADATA_PATH or second argument).");
     }
 
     private static List<OperationMeta> CollectOperations(OpenApiDocument doc, SpecMetadata metadata, Dictionary<string, IOpenApiSchema> inlineSchemas)
