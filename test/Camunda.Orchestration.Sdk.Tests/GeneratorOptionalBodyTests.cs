@@ -336,7 +336,26 @@ public class GeneratorOptionalBodyTests
     {
         using var tmp = TempSpecDir.Create();
         File.WriteAllText(tmp.SpecPath, AllOfTenantIdSpec);
-        File.WriteAllText(tmp.MetadataPath, MinimalBundledSpec.MinimalMetadata);
+        // camunda-schema-bundler >= 2.5.0 follows allOf when listing the body
+        // variants with an optional tenantId (issue #566); the generator reads
+        // eligibility from this metadata instead of re-walking the spec.
+        File.WriteAllText(tmp.MetadataPath, """
+            {
+              "schemaVersion": "1",
+              "specHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "semanticKeys": [],
+              "unions": [],
+              "operations": [
+                {
+                  "operationId": "createInstance",
+                  "optionalTenantIdInBody": true,
+                  "optionalTenantIdInBodyVariants": ["CreateByKey", "CreateById"],
+                  "optionalTenantIdsInBody": false
+                }
+              ],
+              "deprecatedEnumMembers": []
+            }
+            """);
 
         CSharpClientGenerator.Generate(tmp.SpecPath, tmp.MetadataPath, tmp.OutputDir);
 

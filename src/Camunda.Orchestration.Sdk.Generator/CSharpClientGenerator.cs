@@ -189,25 +189,22 @@ internal static partial class CSharpClientGenerator
                         inlineSchemas.TryAdd(responseSchemaRef, inlineRespSchema);
                 }
 
-                // Detect optional plural `tenantIds` array in the request body.
-                // Self-contained here (rather than via spec-metadata) so this fix
-                // does not require a camunda-schema-bundler release. See issue #123.
-                var hasOptionalTenantIdsInBody = false;
-                // Detect optional singular `tenantId` in the request body the
-                // same way: the bundler's optionalTenantIdInBody metadata flag
-                // does not follow allOf composition, so a variant inheriting
-                // tenantId from an allOf-referenced base schema is missed and
-                // the injection is silently dropped. See issue #469.
-                var hasOptionalTenantIdInBody = metaEntry?.OptionalTenantIdInBody ?? false;
+                // Default-tenant eligibility comes from the bundler's spec
+                // metadata (camunda-schema-bundler >= 2.5.0, issue #566):
+                // optionalTenantIdInBodyVariants lists every body shape (union
+                // variant, or the body itself, following allOf) with an optional
+                // tenantId — any-variant semantics, because the emitted injection
+                // is a runtime `body is ITenantIdSettable` check (issues #469,
+                // #564). optionalTenantIdInBody still covers the multipart body
+                // (createDeployment), which has no named schema variant.
+                var hasOptionalTenantIdsInBody = metaEntry?.OptionalTenantIdsInBody ?? false;
+                var hasOptionalTenantIdInBody = (metaEntry?.OptionalTenantIdInBody ?? false)
+                    || (metaEntry?.OptionalTenantIdInBodyVariants?.Count ?? 0) > 0;
                 if (hasBody && !isMultipart)
                 {
                     var bodySchema = ResolveRequestBodySchema(doc, op);
                     if (bodySchema != null)
                     {
-                        hasOptionalTenantIdsInBody = HasOptionalTenantIdsArrayInAnyVariant(bodySchema, doc);
-                        hasOptionalTenantIdInBody = hasOptionalTenantIdInBody
-                            || HasOptionalTenantIdInAnyVariant(bodySchema, doc);
-
                         // Align injection eligibility with model-generation support.
                         // The emitted `body is ITenantIdSettable` /
                         // `body is ITenantIdsSettable` pattern check only compiles when
@@ -376,32 +373,6 @@ internal static partial class CSharpClientGenerator
         return null;
     }
 
-    /// <summary>
-    /// True if the schema (or every variant in a <c>oneOf</c>/<c>anyOf</c>) has
-    /// an optional <c>tenantIds: array</c> property. Mirrors the JS hook
-    /// <c>collectOpsWithOptionalTenantIdsArray</c> introduced in
-    /// orchestration-cluster-api-js#171.
-    /// </summary>
-    private static bool HasOptionalTenantIdsArrayInAnyVariant(IOpenApiSchema schema, OpenApiDocument doc)
-    {
-        var variants = schema.OneOf?.Count > 0 ? schema.OneOf : (schema.AnyOf?.Count > 0 ? schema.AnyOf : null);
-        if (variants is { Count: > 0 })
-        {
-            foreach (var v in variants)
-            {
-                var resolved = GetRefId(v) != null
-                    && doc.Components?.Schemas != null
-                    && doc.Components.Schemas.TryGetValue(GetRefId(v)!, out var r)
-                    ? r
-                    : v;
-                if (!HasOptionalTenantIdsArrayDirect(resolved, doc))
-                    return false;
-            }
-            return true;
-        }
-        return HasOptionalTenantIdsArrayDirect(schema, doc);
-    }
-
     private static bool HasOptionalTenantIdsArrayDirect(IOpenApiSchema schema, OpenApiDocument? doc = null)
     {
         var properties = new Dictionary<string, IOpenApiSchema>(
@@ -416,46 +387,6 @@ internal static partial class CSharpClientGenerator
         if (required.Contains("tenantIds"))
             return false;
         return SchemaTypeName(tenantIdsProp) == "array";
-    }
-
-    /// <summary>
-    /// True if the schema (or <em>any</em> variant in a <c>oneOf</c>/<c>anyOf</c>)
-    /// has an optional <c>tenantId</c> property. Self-contained counterpart
-    /// to the bundler's <c>optionalTenantIdInBody</c> metadata flag, which
-    /// does not follow <c>allOf</c> composition — so a variant that inherits
-    /// <c>tenantId</c> from an allOf-referenced base schema (e.g.
-    /// <c>ProcessInstanceCreationInstructionByKey</c> →
-    /// <c>ProcessInstanceCreationInstructionBase</c>) is missed by the
-    /// metadata and the default-tenant injection is silently dropped
-    /// (issue #469).
-    ///
-    /// Any-variant (not all-variant) semantics: the emitted injection is a
-    /// runtime <c>body is ITenantIdSettable</c> check, which already applies the
-    /// default per variant, so the method only needs to carry the line when at
-    /// least one variant can receive it. Requiring every variant to have
-    /// <c>tenantId</c> drops the injection from mixed unions such as
-    /// <c>ProcessDefinitionSuspensionInstruction</c> (by-id has an optional
-    /// <c>tenantId</c>, by-key has none), sending the by-id body without the
-    /// effective default tenant (issue #564).
-    /// </summary>
-    private static bool HasOptionalTenantIdInAnyVariant(IOpenApiSchema schema, OpenApiDocument doc)
-    {
-        var variants = schema.OneOf?.Count > 0 ? schema.OneOf : (schema.AnyOf?.Count > 0 ? schema.AnyOf : null);
-        if (variants is { Count: > 0 })
-        {
-            foreach (var v in variants)
-            {
-                var resolved = GetRefId(v) != null
-                    && doc.Components?.Schemas != null
-                    && doc.Components.Schemas.TryGetValue(GetRefId(v)!, out var r)
-                    ? r
-                    : v;
-                if (GetOptionalTenantIdInfo(resolved, doc) != null)
-                    return true;
-            }
-            return false;
-        }
-        return GetOptionalTenantIdInfo(schema, doc) != null;
     }
 
     private static IOpenApiSchema? GetInlineResponseSchema(OpenApiOperation op)
@@ -2150,7 +2081,7 @@ internal static partial class CSharpClientGenerator
     /// </summary>
     private static (string ItemCSharpType, bool IsBrandedKey)? GetOptionalTenantIdsInfo(IOpenApiSchema schema, OpenApiDocument? doc = null)
     {
-        // Mirror HasOptionalTenantIdsArrayInAnyVariant: when the schema is a
+        // Mirror the all-variant tenantIds semantics: when the schema is a
         // oneOf/anyOf, every variant must agree on the same optional tenantIds
         // item type. Otherwise the operation-level injection (which IS
         // variant-aware) would emit a SetDefaultTenantIds call against a

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:563b0c89df420cb7fdc1727e47ce10625ff5e3a6bc20f714ec7c18b40fc974f5",
+  "specHash": "sha256:914f89f26245982b7e11d9a3bdcbfccdc228e07fbf7bd7008279ed1d494d70ed",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -3243,6 +3243,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "agent-definitions.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "AgentDefinitionResult",
@@ -3276,6 +3278,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "agent-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3313,6 +3317,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "agent-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3351,6 +3357,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "agent-instances.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "AgentInstanceResult",
@@ -3386,6 +3394,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "agent-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3422,6 +3432,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "agent-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3461,6 +3473,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "agent-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3497,6 +3511,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "audit-logs.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3536,6 +3552,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "audit-logs.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "AuditLogResult",
@@ -3569,6 +3587,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "authentication.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "CamundaUserResult",
@@ -3597,6 +3617,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "authentication.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3631,6 +3653,8 @@
         "AuthorizationPropertyBasedRequest"
       ],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "authorizations.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3667,6 +3691,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "authorizations.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3706,6 +3732,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "authorizations.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "AuthorizationResult",
@@ -3744,6 +3772,8 @@
         "AuthorizationPropertyBasedRequest"
       ],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "authorizations.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3781,6 +3811,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "authorizations.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -3818,6 +3850,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -3850,6 +3884,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -3886,6 +3922,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "RuntimeBackupState",
@@ -3919,6 +3957,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -3951,6 +3991,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "RuntimeBackupState",
@@ -3986,6 +4028,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "BackupInfo",
@@ -4021,6 +4065,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -4062,6 +4108,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -4094,6 +4142,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4132,6 +4182,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "HistoryBackupInfo",
@@ -4167,6 +4219,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "backups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -4199,6 +4253,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "batch-operations.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4236,6 +4292,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "batch-operations.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4275,6 +4333,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "batch-operations.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "BatchOperationResponse",
@@ -4310,6 +4370,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "batch-operations.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4346,6 +4408,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "batch-operations.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4382,6 +4446,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "batch-operations.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4416,6 +4482,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "clock.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClockResult",
@@ -4449,6 +4517,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "clock.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4484,6 +4554,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "clock.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4520,6 +4592,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "clock.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -4552,6 +4626,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-variables.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4600,6 +4676,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-variables.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterVariableResult",
@@ -4644,6 +4722,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-variables.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4691,6 +4771,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-variables.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -4736,6 +4818,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-variables.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4775,6 +4859,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-variables.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4838,6 +4924,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-variables.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterVariableResult",
@@ -4887,6 +4975,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-variables.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -4939,6 +5029,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-variables.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -4984,6 +5076,10 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": true,
+      "optionalTenantIdInBodyVariants": [
+        "ConditionalEvaluationInstruction"
+      ],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "conditionals.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5020,6 +5116,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "messages.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5060,6 +5158,11 @@
         "DecisionEvaluationByKey"
       ],
       "optionalTenantIdInBody": true,
+      "optionalTenantIdInBodyVariants": [
+        "DecisionEvaluationById",
+        "DecisionEvaluationByKey"
+      ],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5096,6 +5199,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5135,6 +5240,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-definitions.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "DecisionDefinitionResult",
@@ -5170,6 +5277,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-definitions.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -5202,6 +5311,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5241,6 +5352,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-instances.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "DecisionInstanceGetQueryResult",
@@ -5276,6 +5389,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5311,6 +5426,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5355,6 +5472,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-requirements.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5394,6 +5513,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-requirements.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "DecisionRequirementsResult",
@@ -5429,6 +5550,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "decision-requirements.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -5461,6 +5584,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": true,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "deployments.yaml",
       "requestBodyContentTypes": [
         "multipart/form-data"
@@ -5505,6 +5630,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "documents.yaml",
       "requestBodyContentTypes": [
         "multipart/form-data"
@@ -5545,6 +5672,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "documents.yaml",
       "requestBodyContentTypes": [
         "multipart/form-data"
@@ -5591,6 +5720,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "documents.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -5630,6 +5761,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "documents.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -5673,6 +5806,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "documents.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5711,6 +5846,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "element-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5746,6 +5883,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "element-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5783,6 +5922,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "element-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5822,6 +5963,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "element-instances.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ElementInstanceResult",
@@ -5857,6 +6000,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "element-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5895,6 +6040,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "element-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -5931,6 +6078,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "exporting.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ExportingStatusResponse",
@@ -5969,6 +6118,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "exporting.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -6001,6 +6152,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "exporting.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -6033,6 +6186,10 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": true,
+      "optionalTenantIdInBodyVariants": [
+        "ExpressionEvaluationRequest"
+      ],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "expression.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6075,6 +6232,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "forms.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "FormResult",
@@ -6108,6 +6267,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "global-listeners.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6156,6 +6317,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "global-listeners.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "GlobalTaskListenerResult",
@@ -6200,6 +6363,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "global-listeners.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6247,6 +6412,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "global-listeners.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -6288,6 +6455,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "global-listeners.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6325,6 +6494,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6371,6 +6542,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6410,6 +6583,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "GroupResult",
@@ -6454,6 +6629,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6501,6 +6678,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -6544,6 +6723,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6593,6 +6774,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -6644,6 +6827,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -6691,6 +6876,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6740,6 +6927,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -6791,6 +6980,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -6838,6 +7029,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6886,6 +7079,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -6935,6 +7130,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -6986,6 +7183,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "groups.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -7031,6 +7230,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "incidents.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7070,6 +7271,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "incidents.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "IncidentResult",
@@ -7105,6 +7308,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "incidents.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7140,6 +7345,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "incidents.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7176,6 +7383,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "incidents.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7212,6 +7421,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": true,
       "sourceFile": "jobs.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7249,6 +7460,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "jobs.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7288,6 +7501,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "jobs.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7325,6 +7540,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "jobs.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7362,6 +7579,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "jobs.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7399,6 +7618,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "jobs.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7434,6 +7655,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "jobs.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7491,6 +7714,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "job-metrics.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "GlobalJobStatisticsQueryResult",
@@ -7525,6 +7750,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "job-metrics.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7562,6 +7789,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "job-metrics.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7599,6 +7828,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "job-metrics.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7636,6 +7867,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "job-metrics.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7673,6 +7906,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "licenses.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "LicenseResponse",
@@ -7701,6 +7936,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "mapping-rules.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7747,6 +7984,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "mapping-rules.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7786,6 +8025,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "mapping-rules.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "MappingRuleResult",
@@ -7830,6 +8071,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "mapping-rules.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7877,6 +8120,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "mapping-rules.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -7918,6 +8163,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "messages.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7955,6 +8202,10 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": true,
+      "optionalTenantIdInBodyVariants": [
+        "MessageCorrelationRequest"
+      ],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "messages.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -7991,6 +8242,10 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": true,
+      "optionalTenantIdInBodyVariants": [
+        "MessagePublicationRequest"
+      ],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "messages.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8030,6 +8285,10 @@
         "ProcessDefinitionResumptionInstructionById"
       ],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [
+        "ProcessDefinitionResumptionInstructionById"
+      ],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8066,6 +8325,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8103,6 +8364,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8140,6 +8403,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8180,6 +8445,10 @@
         "ProcessDefinitionSuspensionInstructionById"
       ],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [
+        "ProcessDefinitionSuspensionInstructionById"
+      ],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8218,6 +8487,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ProcessDefinitionResult",
@@ -8253,6 +8524,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "FormResult",
@@ -8288,6 +8561,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8327,6 +8602,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8366,6 +8643,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -8398,6 +8677,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-definitions.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8438,7 +8719,13 @@
         "ProcessInstanceCreationInstructionById",
         "ProcessInstanceCreationInstructionByVersionTag"
       ],
-      "optionalTenantIdInBody": false,
+      "optionalTenantIdInBody": true,
+      "optionalTenantIdInBodyVariants": [
+        "ProcessInstanceCreationInstructionByKey",
+        "ProcessInstanceCreationInstructionById",
+        "ProcessInstanceCreationInstructionByVersionTag"
+      ],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8475,6 +8762,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8519,6 +8808,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8563,6 +8854,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8607,6 +8900,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8651,6 +8946,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8695,6 +8992,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8739,6 +9038,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8776,6 +9077,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8822,6 +9125,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ProcessInstanceResult",
@@ -8857,6 +9162,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8894,6 +9201,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -8928,6 +9237,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -8965,6 +9276,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9002,6 +9315,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "BatchOperationCreatedResult",
@@ -9037,6 +9352,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9075,6 +9392,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9112,6 +9431,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9149,6 +9470,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9186,6 +9509,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ProcessInstanceSequenceFlowsQueryResult",
@@ -9221,6 +9546,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ProcessInstanceElementStatisticsQueryResult",
@@ -9257,6 +9584,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ProcessInstanceWaitStateStatisticsQueryResult",
@@ -9293,6 +9622,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "process-instances.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9328,6 +9659,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "deployments.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9367,6 +9700,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "deployments.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ResourceResult",
@@ -9402,6 +9737,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "deployments.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -9436,6 +9773,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "deployments.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -9470,6 +9809,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "deployments.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9506,6 +9847,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9552,6 +9895,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9591,6 +9936,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "RoleResult",
@@ -9635,6 +9982,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9682,6 +10031,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -9725,6 +10076,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9774,6 +10127,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -9825,6 +10180,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -9872,6 +10229,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -9921,6 +10280,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -9973,6 +10334,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -10020,6 +10383,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10069,6 +10434,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -10120,6 +10487,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -10167,6 +10536,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10216,6 +10587,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -10267,6 +10640,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "roles.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -10312,6 +10687,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "secrets.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10349,6 +10726,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "secrets.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10386,6 +10765,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "setup.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10422,6 +10803,10 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": true,
+      "optionalTenantIdInBodyVariants": [
+        "SignalBroadcastRequest"
+      ],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "signals.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10458,6 +10843,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -10502,6 +10889,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "system.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "UsageMetricsResponse",
@@ -10536,6 +10925,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "system.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "SystemConfigurationResponse",
@@ -10564,6 +10955,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10610,6 +11003,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10649,6 +11044,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "TenantResult",
@@ -10693,6 +11090,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10740,6 +11139,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -10783,6 +11184,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10832,6 +11235,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -10883,6 +11288,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -10930,6 +11337,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -10979,6 +11388,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11031,6 +11442,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11078,6 +11491,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -11127,6 +11542,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11178,6 +11595,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11225,6 +11644,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -11274,6 +11695,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11325,6 +11748,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11372,6 +11797,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -11421,6 +11848,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11472,6 +11901,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "tenants.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11517,6 +11948,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "TopologyResponse",
@@ -11554,6 +11987,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterModeChangeResponse",
@@ -11595,6 +12030,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "RestoreStatusResponse",
@@ -11633,6 +12070,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -11669,6 +12108,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ExportingStatusResponse",
@@ -11702,6 +12143,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11729,6 +12172,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11765,6 +12210,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -11797,6 +12244,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -11833,6 +12282,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterRuntimeBackupState",
@@ -11866,6 +12317,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -11898,6 +12351,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterRuntimeBackupState",
@@ -11933,6 +12388,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterRuntimeBackupInfo",
@@ -11968,6 +12425,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -12008,6 +12467,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 200,
@@ -12040,6 +12501,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12078,6 +12541,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterHistoryBackupInfo",
@@ -12113,6 +12578,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -12153,6 +12620,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterModeChangeResponse",
@@ -12181,6 +12650,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterBalanceResponse",
@@ -12214,6 +12685,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12245,6 +12718,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "RebalanceCancellationResponse",
@@ -12282,6 +12757,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12313,6 +12790,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterStatusResponse",
@@ -12341,6 +12820,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterUpgradeStatusResponse",
@@ -12369,6 +12850,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "cluster-admin.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "ClusterTopologyResponse",
@@ -12397,6 +12880,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "users.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12443,6 +12928,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "users.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12483,6 +12970,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "users.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "UserResult",
@@ -12527,6 +13016,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "users.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12574,6 +13065,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "users.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -12615,6 +13108,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12662,6 +13157,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "UserTaskResult",
@@ -12705,6 +13202,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12750,6 +13249,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [],
       "successStatus": 204,
@@ -12792,6 +13293,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12837,6 +13340,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12883,6 +13388,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12941,6 +13448,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -12980,6 +13489,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "FormResult",
@@ -13023,6 +13534,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -13074,6 +13587,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "user-tasks.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -13115,6 +13630,8 @@
       ],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "variables.yaml",
       "requestBodyContentTypes": [
         "application/json"
@@ -13154,6 +13671,8 @@
       "queryParams": [],
       "requestBodyUnionRefs": [],
       "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
       "sourceFile": "variables.yaml",
       "requestBodyContentTypes": [],
       "successResponseSchemaRef": "VariableResult",

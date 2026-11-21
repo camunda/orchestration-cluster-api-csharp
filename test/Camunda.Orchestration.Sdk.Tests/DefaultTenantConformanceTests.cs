@@ -149,10 +149,10 @@ public class DefaultTenantConformanceTests
     /// <c>ITenantIdSettable</c> check applies it per variant. The expected set is
     /// therefore derived from the spec, not a list: every generated client method
     /// whose body type, or any concrete subtype of it, implements
-    /// <see cref="ITenantIdSettable"/>. The bundler's <c>optionalTenantIdInBody</c>
-    /// flag (all-variants semantics) is only a lower bound — it misses mixed
-    /// unions like <c>ProcessDefinitionSuspensionInstruction</c>, where the by-id
-    /// variant has <c>tenantId</c> and the by-key variant does not.
+    /// <see cref="ITenantIdSettable"/>, unioned with the bundler metadata
+    /// (<c>optionalTenantIdInBody</c>, and the any-variant
+    /// <c>optionalTenantIdInBodyVariants</c> that covers mixed unions like
+    /// <c>ProcessDefinitionSuspensionInstruction</c>).
     /// </summary>
     [Fact]
     public void EveryTenantScopedOperation_IsInTheMatrix()
@@ -164,6 +164,10 @@ public class DefaultTenantConformanceTests
             foreach (var op in metadata.RootElement.GetProperty("operations").EnumerateArray())
             {
                 if (op.TryGetProperty("optionalTenantIdInBody", out var flag) && flag.ValueKind == JsonValueKind.True)
+                    expected.Add(op.GetProperty("operationId").GetString()!);
+                // Any-variant eligibility (camunda-schema-bundler >= 2.5.0, issue #566).
+                if (op.TryGetProperty("optionalTenantIdInBodyVariants", out var variants)
+                    && variants.ValueKind == JsonValueKind.Array && variants.GetArrayLength() > 0)
                     expected.Add(op.GetProperty("operationId").GetString()!);
             }
         }
