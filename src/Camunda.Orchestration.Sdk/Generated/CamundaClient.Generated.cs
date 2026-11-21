@@ -7514,6 +7514,7 @@ public partial class CamundaClient
     public async Task<ProcessDefinitionResumptionResult> ResumeProcessDefinitionsAsync(ProcessDefinitionResumptionInstruction body, CancellationToken ct = default)
     {
         var path = $"/process-definitions/resumption";
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionResumptionResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "resumeProcessDefinitions", false, ct);
     }
 
@@ -10363,6 +10364,7 @@ public partial class CamundaClient
     public async Task<ProcessDefinitionSuspensionResult> SuspendProcessDefinitionsAsync(ProcessDefinitionSuspensionInstruction body, CancellationToken ct = default)
     {
         var path = $"/process-definitions/suspension";
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
         return await InvokeWithRetryAsync(() => SendAsync<ProcessDefinitionSuspensionResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "suspendProcessDefinitions", false, ct);
     }
 
