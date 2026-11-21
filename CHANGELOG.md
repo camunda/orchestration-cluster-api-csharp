@@ -1,3 +1,11 @@
+# [11.0.0-alpha.14](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.13...v11.0.0-alpha.14) (2026-11-21)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts [skip ci] ([37ff67f](https://github.com/camunda/orchestration-cluster-api-csharp/commit/37ff67fd37af870eb56529cdf1de81471ec18912))
+* inject default tenant when any body variant has an optional tenantId ([#565](https://github.com/camunda/orchestration-cluster-api-csharp/issues/565)) ([baa59b1](https://github.com/camunda/orchestration-cluster-api-csharp/commit/baa59b196a5f227c9dd2c1ebf1139ff2be669ed2)), closes [#564](https://github.com/camunda/orchestration-cluster-api-csharp/issues/564)
+
 # [11.0.0-alpha.13](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.12...v11.0.0-alpha.13) (2026-11-20)
 
 
