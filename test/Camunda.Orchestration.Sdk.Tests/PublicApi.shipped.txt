@@ -5331,6 +5331,7 @@ TYPE Camunda.Orchestration.Sdk.PermissionTypeEnum : enum interfaces=[System.ICom
   MEMBER UPDATEUSERTASK = 45 json="UPDATE_USER_TASK"
   MEMBER UPDATETASKLISTENER = 46 json="UPDATE_TASK_LISTENER"
   MEMBER ANSWER = 47 json="ANSWER"
+  MEMBER SUSPENDPROCESSDEFINITION = 48 json="SUSPEND_PROCESS_DEFINITION"
 
 TYPE Camunda.Orchestration.Sdk.PhysicalTenantBrokerTopology : sealed class
   CTOR ()
