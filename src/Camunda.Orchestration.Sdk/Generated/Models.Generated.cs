@@ -22780,6 +22780,8 @@ public enum PermissionTypeEnum
     RESTORE = 40,
     [JsonPropertyName("REVEAL")]
     REVEAL = 41,
+    [JsonPropertyName("SUSPEND_PROCESS_DEFINITION")]
+    SUSPENDPROCESSDEFINITION = 48,
     [JsonPropertyName("SUSPEND_PROCESS_INSTANCE")]
     SUSPENDPROCESSINSTANCE = 42,
     [JsonPropertyName("UPDATE")]
