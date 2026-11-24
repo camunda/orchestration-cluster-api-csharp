@@ -865,6 +865,12 @@
     "NOT_FOUND": 0,
     "UNREADABLE": 3
   },
+  "SecretStatusEnum": {
+    "ACTIVE": 0,
+    "DISABLED": 1,
+    "EXPIRED": 2,
+    "NOT_YET_ACTIVE": 3
+  },
   "SortOrderEnum": {
     "ASC": 0,
     "DESC": 1
@@ -936,6 +942,47 @@
     "tenantId": 2,
     "value": 0,
     "variableKey": 3
+  },
+  "VariableHistoryItemActorTypeEnum": {
+    "CLIENT": 1,
+    "ENGINE": 2,
+    "UNKNOWN": 3,
+    "USER": 0
+  },
+  "VariableHistoryItemOperationTypeEnum": {
+    "CREATE": 0,
+    "UPDATE": 1
+  },
+  "VariableHistoryItemSearchQuerySortRequestField": {
+    "variableHistoryItemKey": 0
+  },
+  "VariableHistoryItemVariableOperationTypeEnum": {
+    "AD_HOC_SUB_PROCESS_ACTIVATION": 11,
+    "AD_HOC_SUB_PROCESS_METADATA": 22,
+    "AD_HOC_SUB_PROCESS_OUTPUT_COLLECTION": 24,
+    "AD_HOC_SUB_PROCESS_OUTPUT_ELEMENT": 23,
+    "API": 0,
+    "CALL_ACTIVITY_INPUT": 16,
+    "CALL_ACTIVITY_OUTPUT": 17,
+    "CONDITIONAL_EVALUATION": 10,
+    "DECISION_RESULT": 15,
+    "EXECUTION_LISTENER_COMPLETION": 7,
+    "INPUT_MAPPING": 12,
+    "JOB_COMPLETION": 4,
+    "JOB_ERROR": 6,
+    "JOB_FAILURE": 5,
+    "MESSAGE_CORRELATION": 8,
+    "MULTI_INSTANCE_INPUT_ELEMENT": 18,
+    "MULTI_INSTANCE_LOOP_COUNTER": 19,
+    "MULTI_INSTANCE_OUTPUT_COLLECTION": 21,
+    "MULTI_INSTANCE_OUTPUT_ELEMENT": 20,
+    "OUTPUT_MAPPING": 13,
+    "PROCESS_INSTANCE_CREATION": 2,
+    "PROCESS_INSTANCE_MODIFICATION": 3,
+    "SCRIPT_RESULT": 14,
+    "SIGNAL_BROADCAST": 9,
+    "UNKNOWN": 25,
+    "USER_TASK_COMPLETION": 1
   },
   "VariableSearchQuerySortRequestField": {
     "name": 1,
