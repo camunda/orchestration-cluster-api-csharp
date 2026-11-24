@@ -548,6 +548,27 @@
       "label": "Activate and process jobs"
     }
   ],
+  "activateProbes": [
+    {
+      "file": "Probe.cs",
+      "region": "ActivateProbes",
+      "label": "Activate and process probes"
+    }
+  ],
+  "answerProbe": [
+    {
+      "file": "Probe.cs",
+      "region": "AnswerProbe",
+      "label": "Answer a probe"
+    }
+  ],
+  "createProbe": [
+    {
+      "file": "Probe.cs",
+      "region": "CreateProbe",
+      "label": "Create a probe"
+    }
+  ],
   "completeJob": [
     {
       "file": "Job.cs",

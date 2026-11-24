@@ -29,6 +29,26 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.ActivateProbesAsync(Camunda.Orchestration.Sdk.ProbeActivationRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Probe.cs#ActivateProbes)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.AnswerProbeAsync(Camunda.Orchestration.Sdk.ProbeKey,Camunda.Orchestration.Sdk.ProbeAnswerRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Probe.cs#AnswerProbe)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.AssignClientToGroupAsync(System.String,System.String,System.Threading.CancellationToken)
 example:
 - *content
@@ -416,6 +436,16 @@ example:
 
 
 [!code-csharp[](../../examples/MappingRule.cs#CreateMappingRule)]
+
+
+---
+uid: Camunda.Orchestration.Sdk.CamundaClient.CreateProbeAsync(Camunda.Orchestration.Sdk.ProbeCreationRequest,System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/Probe.cs#CreateProbe)]
 
 
 ---
