@@ -125,6 +125,9 @@
       "name": "Message subscription"
     },
     {
+      "name": "Probe"
+    },
+    {
       "name": "Process definition"
     },
     {
@@ -12771,6 +12774,453 @@
           }
         },
         "x-added-in-version": "8.6",
+        "x-scope": "physical-tenant"
+      }
+    },
+    "/probes": {
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Probe"
+        ],
+        "operationId": "createProbe",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROBE",
+            "permissionType": "CREATE"
+          },
+          {
+            "dynamic": true,
+            "note": "SECRET:READ on each secret that the input references."
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Create probe (alpha)",
+        "description": "Asks a worker a short question and waits for its answer in the same request.\n\nThe probe is routed on `probeId`: a worker that polls for this probe ID with\n`POST /v2/probes/activation` collects it and answers with\n`POST /v2/probes/{probeKey}/answer`. The engine evaluates `input` when the probe is\ncreated and injects the values of the secrets it references before a worker collects it.\n\nThe probe ends at its deadline, `requestTimeout` after the gateway received the request.\nWait at least `requestTimeout` plus one second for the HTTP response, so that you get the\nreason the probe ended instead of a client-side timeout. With `requestTimeout` absent or\n`0`, the deadline uses the cluster's request timeout, capped at 30 seconds.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProbeCreationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A worker answered. The body is one of three shapes, chosen by `outcome`: `OK` with the\nworker's `data`, `UNSUPPORTED`, or `ERROR` with a `message`.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProbeResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is invalid, or the probe ended because of its secrets.\n\nThe title of the problem tells the two apart:\n- `INVALID_ARGUMENT`: the body is invalid, for example a blank input, a probe ID that is\n  not valid, a `requestTimeout` out of range, or an input that is not a valid\n  expression or does not evaluate to a context.\n- `SECRET_RESOLUTION_ERROR`: a secret that the input references could not be resolved,\n  or its value could not be injected into the input.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                },
+                "examples": {
+                  "invalidArgument": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "INVALID_ARGUMENT",
+                      "status": 400,
+                      "detail": "Expected a request timeout between 0 and 30000 ms, but it was 60000.",
+                      "instance": "/v2/probes"
+                    }
+                  },
+                  "secretResolutionError": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "SECRET_RESOLUTION_ERROR",
+                      "status": 400,
+                      "detail": "Failed to resolve secret 'awsKey' from the configured secret store.",
+                      "instance": "/v2/probes"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No worker collected the probe before its deadline: no worker polls this probe ID, or\nthe workers that poll it lack the `ANSWER` permission on it. The title is `NO_WORKER`.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                },
+                "examples": {
+                  "noWorker": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "NO_WORKER",
+                      "status": 404,
+                      "detail": "No worker for 'validate-configuration/io.camunda:aws-credential:1' collected the probe within 10000 ms. Check that a worker polls this probe ID and holds PROBE:ANSWER on it, then retry.\n",
+                      "instance": "/v2/probes"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "The request is too large to be written to the log. The title is `PAYLOAD_TOO_LARGE`.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The probe got no answer in time.\n\nThe title of the problem tells why:\n- `WORKER_DID_NOT_ANSWER`: a worker collected the probe but did not answer before its\n  deadline.\n- `SECRET_RESOLUTION_TIMEOUT`: the probe still waited for the values of its secrets at\n  its deadline.\n- `DEADLINE_EXCEEDED`: the gateway timed out before the engine answered, for example\n  after a leader change.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                },
+                "examples": {
+                  "workerDidNotAnswer": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "WORKER_DID_NOT_ANSWER",
+                      "status": 504,
+                      "detail": "The worker 'connectors-runtime' collected the probe but did not answer within 10000 ms.\n",
+                      "instance": "/v2/probes"
+                    }
+                  },
+                  "secretResolutionTimeout": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "SECRET_RESOLUTION_TIMEOUT",
+                      "status": 504,
+                      "detail": "The secrets of the probe were not resolved within 10000 ms.",
+                      "instance": "/v2/probes"
+                    }
+                  },
+                  "deadlineExceeded": {
+                    "value": {
+                      "type": "about:blank",
+                      "title": "DEADLINE_EXCEEDED",
+                      "status": 504,
+                      "detail": "Expected to handle request, but request timed out between gateway and broker",
+                      "instance": "/v2/probes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    "/probes/activation": {
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Probe"
+        ],
+        "operationId": "activateProbes",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROBE",
+            "permissionType": "ANSWER"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Activate probes (alpha)",
+        "description": "Collects probes of the given probe IDs for a worker, up to the requested maximum.\n\nLike job activation, the request goes to every partition. When no probe is waiting, it is\nheld until a probe of one of these probe IDs is created or until `requestTimeout`. Probe\nIDs on which the caller lacks the `ANSWER` permission are skipped. The worker answers each\nprobe with `POST /v2/probes/{probeKey}/answer` before the probe's `deadline`.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProbeActivationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The collected probes, none when the request timed out.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProbeActivationResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    "/probes/{probeKey}/answer": {
+      "post": {
+        "x-eventually-consistent": false,
+        "tags": [
+          "Probe"
+        ],
+        "operationId": "answerProbe",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROBE",
+            "permissionType": "ANSWER"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Answer probe (alpha)",
+        "description": "Sends a worker's answer to a probe it collected, which ends the probe.\n\nThe body is one of three shapes, chosen by `outcome`: `OK` with the result in `data`,\n`UNSUPPORTED`, or `ERROR` with a `message`. The client that created the probe gets this\nanswer with the name of the worker that collected the probe.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+        "parameters": [
+          {
+            "name": "probeKey",
+            "in": "path",
+            "required": true,
+            "description": "The key of the probe to answer.",
+            "schema": {
+              "$ref": "#/components/schemas/ProbeKey"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProbeAnswerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "The answer is accepted."
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The probe with the given key is not found: it ended already, its deadline passed, or it belongs to a tenant the caller is not assigned to.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The probe with the given key is not activated: no worker collected it, or it waits for the values of its secrets.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "The answer is too large to be written to the log. The title is `PAYLOAD_TOO_LARGE`.\nAnswer with a short `ERROR` instead, so that the client does not wait for the deadline.\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.11",
         "x-scope": "physical-tenant"
       }
     },
@@ -38683,6 +39133,17 @@
         "maxLength": 256,
         "example": "item-1"
       },
+      "ProbeId": {
+        "description": "The ID of a probe, as its worker registered it: 1 to 256 characters, without whitespace,\nand not `*`. The engine matches it to the probe IDs of polling workers by exact equality.\n",
+        "type": "string",
+        "format": "ProbeId",
+        "x-semantic-type": "ProbeId",
+        "x-semantic-client-minted": true,
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^\\S+$",
+        "example": "validate-configuration/io.camunda:aws-credential:1"
+      },
       "JobLeaseToken": {
         "description": "An opaque, engine-minted fencing token identifying a single activation of a job.\nReturned by Activate Jobs as `ActivatedJobResult.jobLeaseToken` when the job is\nactivated with a lease, and passed back under the same name on fenced job\ncommands and on agent-instance creation/updates, to prove the caller holds the\ncurrent lease. The token is opaque: clients may rely on its presence and equality\nonly, and must never construct, parse, or otherwise interpret it beyond equality\nchecks. It cannot be minted client-side; only the engine produces it, exactly once\nper leased activation, and clients must not depend on any particular internal format.\n",
         "type": "string",
@@ -41815,6 +42276,18 @@
           }
         ]
       },
+      "ProbeKey": {
+        "description": "System-generated key for a probe.",
+        "format": "ProbeKey",
+        "x-semantic-type": "ProbeKey",
+        "example": "2251799813685464",
+        "type": "string",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LongKey"
+          }
+        ]
+      },
       "DecisionDefinitionKey": {
         "description": "System-generated key for a decision definition.",
         "format": "DecisionDefinitionKey",
@@ -44393,6 +44866,376 @@
         "x-semantic-type": "MessageKey",
         "example": "2251799813683467",
         "type": "string"
+      },
+      "ProbeCreationRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "probeId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProbeId"
+              }
+            ],
+            "description": "The probe ID, as the worker registered it: 1 to 256 characters, without whitespace, and\nnot `*`. The engine matches it to the probe IDs of polling workers by exact equality.\n"
+          },
+          "input": {
+            "description": "A FEEL expression that evaluates to a context: the question for the worker, whose shape\nthe worker of the probe ID defines. References to `camunda.vars` and\n`camunda.secrets` follow the rules of input mappings.\n",
+            "type": "string",
+            "minLength": 1,
+            "example": "={region: \"eu-west-1\", accessKey: camunda.secrets.awsKey}"
+          },
+          "tenantId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ],
+            "description": "The tenant of the probe. Required with multi-tenancy."
+          },
+          "requestTimeout": {
+            "description": "How long to wait for an answer, in milliseconds, from 0 to 30000. With `0` or absent,\nthe cluster's request timeout is used, capped at 30000.\n",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "maximum": 30000,
+            "example": 10000
+          }
+        },
+        "required": [
+          "input",
+          "probeId"
+        ]
+      },
+      "ProbeResult": {
+        "x-polymorphic-schema": true,
+        "description": "The answer of the worker, one of three shapes chosen by `outcome`.\n",
+        "discriminator": {
+          "propertyName": "outcome",
+          "mapping": {
+            "OK": "#/components/schemas/ProbeOkResult",
+            "UNSUPPORTED": "#/components/schemas/ProbeUnsupportedResult",
+            "ERROR": "#/components/schemas/ProbeErrorResult"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ProbeOkResult"
+          },
+          {
+            "$ref": "#/components/schemas/ProbeUnsupportedResult"
+          },
+          {
+            "$ref": "#/components/schemas/ProbeErrorResult"
+          }
+        ]
+      },
+      "ProbeOkResult": {
+        "type": "object",
+        "title": "OK probe result",
+        "description": "The worker produced an answer.",
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "outcome",
+          "worker"
+        ],
+        "properties": {
+          "outcome": {
+            "description": "The outcome of the probe, `OK`.",
+            "type": "string",
+            "example": "OK"
+          },
+          "worker": {
+            "description": "The name of the worker that answered.",
+            "type": "string",
+            "example": "connectors-runtime"
+          },
+          "data": {
+            "description": "The answer, whose shape the worker of the probe ID defines.",
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "ProbeUnsupportedResult": {
+        "type": "object",
+        "title": "Unsupported probe result",
+        "description": "The worker does not support this probe.",
+        "additionalProperties": false,
+        "required": [
+          "outcome",
+          "worker"
+        ],
+        "properties": {
+          "outcome": {
+            "description": "The outcome of the probe, `UNSUPPORTED`.",
+            "type": "string",
+            "example": "UNSUPPORTED"
+          },
+          "worker": {
+            "description": "The name of the worker that answered.",
+            "type": "string",
+            "example": "connectors-runtime"
+          }
+        }
+      },
+      "ProbeErrorResult": {
+        "type": "object",
+        "title": "Error probe result",
+        "description": "The worker failed to produce an answer.",
+        "additionalProperties": false,
+        "required": [
+          "message",
+          "outcome",
+          "worker"
+        ],
+        "properties": {
+          "outcome": {
+            "description": "The outcome of the probe, `ERROR`.",
+            "type": "string",
+            "example": "ERROR"
+          },
+          "worker": {
+            "description": "The name of the worker that answered.",
+            "type": "string",
+            "example": "connectors-runtime"
+          },
+          "message": {
+            "description": "Why the worker failed, at most 500 characters.",
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      },
+      "ProbeActivationRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "probeIds": {
+            "description": "The probe IDs to collect probes for: 1 to 100 distinct values, each 1 to 256\ncharacters, without whitespace, and not `*`. Probe IDs on which the caller lacks the\n`ANSWER` permission are skipped.\n",
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/ProbeId"
+            },
+            "example": [
+              "validate-configuration/io.camunda:aws-credential:1",
+              "validate-configuration/io.camunda:slack:1"
+            ]
+          },
+          "worker": {
+            "description": "The name of the worker, returned to the client in the answer.",
+            "type": "string",
+            "example": "connectors-runtime"
+          },
+          "maxProbesToActivate": {
+            "description": "The maximum number of probes to collect with this request, at least 1.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 10
+          },
+          "requestTimeout": {
+            "description": "How long to hold the request until a probe is collected, in milliseconds. With `0` or\nabsent, the cluster's long polling timeout is used. With a value below `0`, long\npolling is off and the request returns at once, also when it collected no probe.\n",
+            "type": "integer",
+            "format": "int64",
+            "example": 60000
+          },
+          "tenantIds": {
+            "description": "A list of IDs of tenants for which to collect probes.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TenantId"
+            }
+          },
+          "tenantFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantFilterEnum"
+              }
+            ],
+            "description": "The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.\n",
+            "default": "PROVIDED"
+          }
+        },
+        "required": [
+          "maxProbesToActivate",
+          "probeIds"
+        ]
+      },
+      "ProbeActivationResult": {
+        "description": "The collected probes.",
+        "type": "object",
+        "required": [
+          "probes"
+        ],
+        "properties": {
+          "probes": {
+            "description": "The collected probes, none when the request timed out.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivatedProbeResult"
+            }
+          }
+        }
+      },
+      "ActivatedProbeResult": {
+        "x-semantic-provider": [
+          "probeKey"
+        ],
+        "type": "object",
+        "required": [
+          "deadline",
+          "input",
+          "physicalTenantId",
+          "probeId",
+          "probeKey",
+          "secretPointers",
+          "tenantId",
+          "worker"
+        ],
+        "properties": {
+          "probeKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProbeKey"
+              }
+            ],
+            "description": "The key to answer the probe with."
+          },
+          "probeId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProbeId"
+              }
+            ],
+            "description": "The probe ID, to pick the handler when the worker polls several probe IDs."
+          },
+          "worker": {
+            "description": "The name of the worker that collected the probe.",
+            "type": "string",
+            "example": "connectors-runtime"
+          },
+          "deadline": {
+            "description": "The deadline of the probe, as a UNIX epoch timestamp in milliseconds. An answer after\nit gets 404.\n",
+            "type": "integer",
+            "format": "int64",
+            "example": 1794232249291
+          },
+          "tenantId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ],
+            "description": "The ID of the tenant of the probe."
+          },
+          "physicalTenantId": {
+            "type": "string",
+            "description": "The ID of the physical tenant that the activation request was routed to;\nthe default physical tenant when the request did not specify one.\n"
+          },
+          "input": {
+            "description": "The evaluated input, with the values of its secrets injected.",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "secretPointers": {
+            "description": "The JSON pointers (RFC 6901) of the `input` values into which the engine injected a\nsecret value; empty when none. Remove these values from logs and error messages.\n",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "/accessKey"
+            ]
+          }
+        }
+      },
+      "ProbeAnswerRequest": {
+        "x-polymorphic-schema": true,
+        "description": "The answer of the worker, one of three shapes chosen by `outcome`.\n",
+        "discriminator": {
+          "propertyName": "outcome",
+          "mapping": {
+            "OK": "#/components/schemas/ProbeOkAnswerRequest",
+            "UNSUPPORTED": "#/components/schemas/ProbeUnsupportedAnswerRequest",
+            "ERROR": "#/components/schemas/ProbeErrorAnswerRequest"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ProbeOkAnswerRequest"
+          },
+          {
+            "$ref": "#/components/schemas/ProbeUnsupportedAnswerRequest"
+          },
+          {
+            "$ref": "#/components/schemas/ProbeErrorAnswerRequest"
+          }
+        ]
+      },
+      "ProbeOkAnswerRequest": {
+        "type": "object",
+        "title": "OK probe answer",
+        "description": "The worker produced an answer.",
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "outcome"
+        ],
+        "properties": {
+          "outcome": {
+            "description": "The outcome of the probe, `OK`.",
+            "type": "string",
+            "example": "OK"
+          },
+          "data": {
+            "description": "The answer, whose shape the worker of the probe ID defines.",
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "ProbeUnsupportedAnswerRequest": {
+        "type": "object",
+        "title": "Unsupported probe answer",
+        "description": "The worker does not support this probe.",
+        "additionalProperties": false,
+        "required": [
+          "outcome"
+        ],
+        "properties": {
+          "outcome": {
+            "description": "The outcome of the probe, `UNSUPPORTED`.",
+            "type": "string",
+            "example": "UNSUPPORTED"
+          }
+        }
+      },
+      "ProbeErrorAnswerRequest": {
+        "type": "object",
+        "title": "Error probe answer",
+        "description": "The worker failed to produce an answer.",
+        "additionalProperties": false,
+        "required": [
+          "message",
+          "outcome"
+        ],
+        "properties": {
+          "outcome": {
+            "description": "The outcome of the probe, `ERROR`.",
+            "type": "string",
+            "example": "ERROR"
+          },
+          "message": {
+            "description": "Why the worker failed, 1 to 500 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        }
       },
       "ProblemDetail": {
         "description": "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",

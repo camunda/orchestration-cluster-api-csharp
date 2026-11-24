@@ -1560,6 +1560,67 @@ public sealed class ActivatedJobResult
 }
 
 /// <summary>
+/// ActivatedProbeResult
+/// </summary>
+public sealed class ActivatedProbeResult
+{
+    /// <summary>
+    /// The key to answer the probe with.
+    /// </summary>
+    [JsonPropertyName("probeKey")]
+    public ProbeKey ProbeKey { get; set; }
+
+    /// <summary>
+    /// The probe ID, to pick the handler when the worker polls several probe IDs.
+    /// </summary>
+    [JsonPropertyName("probeId")]
+    public ProbeId ProbeId { get; set; }
+
+    /// <summary>
+    /// The name of the worker that collected the probe.
+    /// </summary>
+    [JsonPropertyName("worker")]
+    public string Worker { get; set; } = null!;
+
+    /// <summary>
+    /// The deadline of the probe, as a UNIX epoch timestamp in milliseconds. An answer after
+    /// it gets 404.
+    /// 
+    /// </summary>
+    [JsonPropertyName("deadline")]
+    public long Deadline { get; set; }
+
+    /// <summary>
+    /// The ID of the tenant of the probe.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// The ID of the physical tenant that the activation request was routed to;
+    /// the default physical tenant when the request did not specify one.
+    /// 
+    /// </summary>
+    [JsonPropertyName("physicalTenantId")]
+    public string PhysicalTenantId { get; set; } = null!;
+
+    /// <summary>
+    /// The evaluated input, with the values of its secrets injected.
+    /// </summary>
+    [JsonPropertyName("input")]
+    public object Input { get; set; } = null!;
+
+    /// <summary>
+    /// The JSON pointers (RFC 6901) of the `input` values into which the engine injected a
+    /// secret value; empty when none. Remove these values from logs and error messages.
+    /// 
+    /// </summary>
+    [JsonPropertyName("secretPointers")]
+    public List<string> SecretPointers { get; set; } = null!;
+
+}
+
+/// <summary>
 /// AdHocSubProcessActivateActivitiesInstruction
 /// </summary>
 public sealed class AdHocSubProcessActivateActivitiesInstruction
@@ -23478,6 +23539,303 @@ public sealed class PhysicalTenantTopology
     /// </summary>
     [JsonPropertyName("brokers")]
     public List<PhysicalTenantBrokerTopology> Brokers { get; set; } = null!;
+
+}
+
+/// <summary>
+/// ProbeActivationRequest
+/// </summary>
+public sealed class ProbeActivationRequest : global::Camunda.Orchestration.Sdk.ITenantIdsSettable
+{
+    /// <summary>
+    /// The probe IDs to collect probes for: 1 to 100 distinct values, each 1 to 256
+    /// characters, without whitespace, and not `*`. Probe IDs on which the caller lacks the
+    /// `ANSWER` permission are skipped.
+    /// 
+    /// </summary>
+    [JsonPropertyName("probeIds")]
+    public List<ProbeId> ProbeIds { get; set; } = null!;
+
+    /// <summary>
+    /// The name of the worker, returned to the client in the answer.
+    /// </summary>
+    [JsonPropertyName("worker")]
+    public string? Worker { get; set; }
+
+    /// <summary>
+    /// The maximum number of probes to collect with this request, at least 1.
+    /// </summary>
+    [JsonPropertyName("maxProbesToActivate")]
+    public int MaxProbesToActivate { get; set; }
+
+    /// <summary>
+    /// How long to hold the request until a probe is collected, in milliseconds. With `0` or
+    /// absent, the cluster&apos;s long polling timeout is used. With a value below `0`, long
+    /// polling is off and the request returns at once, also when it collected no probe.
+    /// 
+    /// </summary>
+    [JsonPropertyName("requestTimeout")]
+    public long? RequestTimeout { get; set; }
+
+    /// <summary>
+    /// A list of IDs of tenants for which to collect probes.
+    /// </summary>
+    [JsonPropertyName("tenantIds")]
+    public List<TenantId>? TenantIds { get; set; }
+
+    /// <summary>
+    /// The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal&apos;s authorized tenants.
+    /// 
+    /// </summary>
+    [JsonPropertyName("tenantFilter")]
+    public TenantFilterEnum? TenantFilter { get; set; }
+
+    /// <inheritdoc />
+    public void SetDefaultTenantIds(string tenantId)
+    {
+        if (TenantFilter != null && TenantFilter != TenantFilterEnum.PROVIDED)
+            return;
+        if (TenantIds == null || TenantIds.Count == 0)
+            TenantIds = new List<TenantId> { global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId) };
+    }
+
+}
+
+/// <summary>
+/// The collected probes.
+/// </summary>
+public sealed class ProbeActivationResult
+{
+    /// <summary>
+    /// The collected probes, none when the request timed out.
+    /// </summary>
+    [JsonPropertyName("probes")]
+    public List<ActivatedProbeResult> Probes { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The answer of the worker, one of three shapes chosen by `outcome`.
+/// 
+/// </summary>
+/// <remarks>
+/// Use one of the following concrete types:
+/// <list type="bullet">
+/// <item><description><see cref="ProbeOkAnswerRequest"/></description></item>
+/// <item><description><see cref="ProbeUnsupportedAnswerRequest"/></description></item>
+/// <item><description><see cref="ProbeErrorAnswerRequest"/></description></item>
+/// </list>
+/// </remarks>
+/// <seealso cref="ProbeOkAnswerRequest"/>
+/// <seealso cref="ProbeUnsupportedAnswerRequest"/>
+/// <seealso cref="ProbeErrorAnswerRequest"/>
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "outcome")]
+[JsonDerivedType(typeof(ProbeOkAnswerRequest), "OK")]
+[JsonDerivedType(typeof(ProbeUnsupportedAnswerRequest), "UNSUPPORTED")]
+[JsonDerivedType(typeof(ProbeErrorAnswerRequest), "ERROR")]
+public abstract class ProbeAnswerRequest { }
+
+/// <summary>
+/// ProbeCreationRequest
+/// </summary>
+public sealed class ProbeCreationRequest : global::Camunda.Orchestration.Sdk.ITenantIdSettable
+{
+    /// <summary>
+    /// The probe ID, as the worker registered it: 1 to 256 characters, without whitespace, and
+    /// not `*`. The engine matches it to the probe IDs of polling workers by exact equality.
+    /// 
+    /// </summary>
+    [JsonPropertyName("probeId")]
+    public ProbeId ProbeId { get; set; }
+
+    /// <summary>
+    /// A FEEL expression that evaluates to a context: the question for the worker, whose shape
+    /// the worker of the probe ID defines. References to `camunda.vars` and
+    /// `camunda.secrets` follow the rules of input mappings.
+    /// 
+    /// </summary>
+    [JsonPropertyName("input")]
+    public string Input { get; set; } = null!;
+
+    /// <summary>
+    /// The tenant of the probe. Required with multi-tenancy.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId? TenantId { get; set; }
+
+    /// <summary>
+    /// How long to wait for an answer, in milliseconds, from 0 to 30000. With `0` or absent,
+    /// the cluster&apos;s request timeout is used, capped at 30000.
+    /// 
+    /// </summary>
+    [JsonPropertyName("requestTimeout")]
+    public long? RequestTimeout { get; set; }
+
+    /// <inheritdoc />
+    public void SetDefaultTenantId(string tenantId) { TenantId ??= global::Camunda.Orchestration.Sdk.TenantId.AssumeExists(tenantId); }
+
+}
+
+/// <summary>
+/// The worker failed to produce an answer.
+/// </summary>
+public sealed class ProbeErrorAnswerRequest : ProbeAnswerRequest
+{
+    /// <summary>
+    /// Why the worker failed, 1 to 500 characters.
+    /// </summary>
+    [JsonPropertyName("message")]
+    public string Message { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The worker failed to produce an answer.
+/// </summary>
+public sealed class ProbeErrorResult : ProbeResult
+{
+    /// <summary>
+    /// The name of the worker that answered.
+    /// </summary>
+    [JsonPropertyName("worker")]
+    public string Worker { get; set; } = null!;
+
+    /// <summary>
+    /// Why the worker failed, at most 500 characters.
+    /// </summary>
+    [JsonPropertyName("message")]
+    public string Message { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The ID of a probe, as its worker registered it: 1 to 256 characters, without whitespace,
+/// and not `*`. The engine matches it to the probe IDs of polling workers by exact equality.
+/// 
+/// </summary>
+public readonly record struct ProbeId : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ProbeId(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ProbeId"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ProbeId AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProbeId", pattern: "^\\S+$", minLength: 1, maxLength: 256);
+        return new ProbeId(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^\\S+$", minLength: 1, maxLength: 256);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// System-generated key for a probe.
+/// </summary>
+public readonly record struct ProbeKey : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private ProbeKey(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="ProbeKey"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static ProbeKey AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "ProbeKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new ProbeKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// The worker produced an answer.
+/// </summary>
+public sealed class ProbeOkAnswerRequest : ProbeAnswerRequest
+{
+    /// <summary>
+    /// The answer, whose shape the worker of the probe ID defines.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public object Data { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The worker produced an answer.
+/// </summary>
+public sealed class ProbeOkResult : ProbeResult
+{
+    /// <summary>
+    /// The name of the worker that answered.
+    /// </summary>
+    [JsonPropertyName("worker")]
+    public string Worker { get; set; } = null!;
+
+    /// <summary>
+    /// The answer, whose shape the worker of the probe ID defines.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public object Data { get; set; } = null!;
+
+}
+
+/// <summary>
+/// The answer of the worker, one of three shapes chosen by `outcome`.
+/// 
+/// </summary>
+/// <remarks>
+/// Use one of the following concrete types:
+/// <list type="bullet">
+/// <item><description><see cref="ProbeOkResult"/></description></item>
+/// <item><description><see cref="ProbeUnsupportedResult"/></description></item>
+/// <item><description><see cref="ProbeErrorResult"/></description></item>
+/// </list>
+/// </remarks>
+/// <seealso cref="ProbeOkResult"/>
+/// <seealso cref="ProbeUnsupportedResult"/>
+/// <seealso cref="ProbeErrorResult"/>
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "outcome")]
+[JsonDerivedType(typeof(ProbeOkResult), "OK")]
+[JsonDerivedType(typeof(ProbeUnsupportedResult), "UNSUPPORTED")]
+[JsonDerivedType(typeof(ProbeErrorResult), "ERROR")]
+public abstract class ProbeResult { }
+
+/// <summary>
+/// The worker does not support this probe.
+/// </summary>
+public sealed class ProbeUnsupportedAnswerRequest : ProbeAnswerRequest
+{
+}
+
+/// <summary>
+/// The worker does not support this probe.
+/// </summary>
+public sealed class ProbeUnsupportedResult : ProbeResult
+{
+    /// <summary>
+    /// The name of the worker that answered.
+    /// </summary>
+    [JsonPropertyName("worker")]
+    public string Worker { get; set; } = null!;
 
 }
 

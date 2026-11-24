@@ -106,6 +106,27 @@ public partial class CamundaClient
     }
 
     /// <summary>
+    /// Activate probes (alpha)
+    /// Collects probes of the given probe IDs for a worker, up to the requested maximum.
+    /// 
+    /// Like job activation, the request goes to every partition. When no probe is waiting, it is
+    /// held until a probe of one of these probe IDs is created or until `requestTimeout`. Probe
+    /// IDs on which the caller lacks the `ANSWER` permission are skipped. The worker answers each
+    /// probe with `POST /v2/probes/{probeKey}/answer` before the probe&apos;s `deadline`.
+    /// 
+    /// This endpoint is an alpha feature and may be subject to change
+    /// in future releases.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: activateProbes</remarks>
+    public async Task<ProbeActivationResult> ActivateProbesAsync(ProbeActivationRequest body, CancellationToken ct = default)
+    {
+        var path = $"/probes/activation";
+        if (body is ITenantIdsSettable __ts) __ts.SetDefaultTenantIds(_config.DefaultTenantId);
+        return await InvokeWithRetryAsync(() => SendAsync<ProbeActivationResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "activateProbes", false, ct);
+    }
+
+    /// <summary>
     /// Add time to internal clock
     /// Moves the Zeebe engine&apos;s internal clock forward or backward by the given offset.
     /// Unlike pinning, the clock keeps ticking in real time after the offset is added. If the
@@ -161,6 +182,25 @@ public partial class CamundaClient
     {
         var path = $"/clock/add";
         return await InvokeWithRetryAsync(() => SendAsync<ClockResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "addClock", false, ct);
+    }
+
+    /// <summary>
+    /// Answer probe (alpha)
+    /// Sends a worker&apos;s answer to a probe it collected, which ends the probe.
+    /// 
+    /// The body is one of three shapes, chosen by `outcome`: `OK` with the result in `data`,
+    /// `UNSUPPORTED`, or `ERROR` with a `message`. The client that created the probe gets this
+    /// answer with the name of the worker that collected the probe.
+    /// 
+    /// This endpoint is an alpha feature and may be subject to change
+    /// in future releases.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: answerProbe</remarks>
+    public async Task AnswerProbeAsync(ProbeKey probeKey, ProbeAnswerRequest body, CancellationToken ct = default)
+    {
+        var path = $"/probes/{Uri.EscapeDataString(FormatParam(probeKey))}/answer";
+        await InvokeWithRetryAsync(async () => { await SendVoidAsync(HttpMethod.Post, path, body, useRootServer: false, ct); return 0; }, "answerProbe", false, ct);
     }
 
     /// <summary>
@@ -1837,6 +1877,32 @@ public partial class CamundaClient
     {
         var path = $"/mapping-rules";
         return await InvokeWithRetryAsync(() => SendAsync<MappingRuleCreateResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "createMappingRule", false, ct);
+    }
+
+    /// <summary>
+    /// Create probe (alpha)
+    /// Asks a worker a short question and waits for its answer in the same request.
+    /// 
+    /// The probe is routed on `probeId`: a worker that polls for this probe ID with
+    /// `POST /v2/probes/activation` collects it and answers with
+    /// `POST /v2/probes/{probeKey}/answer`. The engine evaluates `input` when the probe is
+    /// created and injects the values of the secrets it references before a worker collects it.
+    /// 
+    /// The probe ends at its deadline, `requestTimeout` after the gateway received the request.
+    /// Wait at least `requestTimeout` plus one second for the HTTP response, so that you get the
+    /// reason the probe ended instead of a client-side timeout. With `requestTimeout` absent or
+    /// `0`, the deadline uses the cluster&apos;s request timeout, capped at 30 seconds.
+    /// 
+    /// This endpoint is an alpha feature and may be subject to change
+    /// in future releases.
+    /// 
+    /// </summary>
+    /// <remarks>Operation: createProbe</remarks>
+    public async Task<ProbeResult> CreateProbeAsync(ProbeCreationRequest body, CancellationToken ct = default)
+    {
+        var path = $"/probes";
+        if (body is ITenantIdSettable __t) __t.SetDefaultTenantId(_config.DefaultTenantId);
+        return await InvokeWithRetryAsync(() => SendAsync<ProbeResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "createProbe", false, ct);
     }
 
     /// <summary>

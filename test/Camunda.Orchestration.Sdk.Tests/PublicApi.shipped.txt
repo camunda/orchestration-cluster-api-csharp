@@ -52,6 +52,17 @@ TYPE Camunda.Orchestration.Sdk.ActivatedJobResult : sealed class
   PROP System.String Type { get; set; } [JsonPropertyName("type")]
   PROP System.String Worker { get; set; } [JsonPropertyName("worker")]
 
+TYPE Camunda.Orchestration.Sdk.ActivatedProbeResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProbeId ProbeId { get; set; } [JsonPropertyName("probeId")]
+  PROP Camunda.Orchestration.Sdk.ProbeKey ProbeKey { get; set; } [JsonPropertyName("probeKey")]
+  PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Collections.Generic.List<System.String> SecretPointers { get; set; } [JsonPropertyName("secretPointers")]
+  PROP System.Int64 Deadline { get; set; } [JsonPropertyName("deadline")]
+  PROP System.Object Input { get; set; } [JsonPropertyName("input")]
+  PROP System.String PhysicalTenantId { get; set; } [JsonPropertyName("physicalTenantId")]
+  PROP System.String Worker { get; set; } [JsonPropertyName("worker")]
+
 TYPE Camunda.Orchestration.Sdk.AdHocSubProcessActivateActivitiesInstruction : sealed class
   CTOR ()
   PROP System.Boolean? CancelRemainingInstances { get; set; } [JsonPropertyName("cancelRemainingInstances")]
@@ -1797,6 +1808,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[Camunda.Orchest
   METHOD Camunda.Orchestration.Sdk.JobWorker CreateJobWorker(Camunda.Orchestration.Sdk.JobWorkerConfig config, System.Func<Camunda.Orchestration.Sdk.ActivatedJob,System.Threading.CancellationToken,System.Threading.Tasks.Task> handler)
   METHOD System.Collections.Generic.IReadOnlyList<Camunda.Orchestration.Sdk.JobWorker> GetWorkers()
   METHOD System.Threading.Tasks.Task ActivateAdHocSubProcessActivitiesAsync(Camunda.Orchestration.Sdk.ElementInstanceKey adHocSubProcessInstanceKey, Camunda.Orchestration.Sdk.AdHocSubProcessActivateActivitiesInstruction body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task AnswerProbeAsync(Camunda.Orchestration.Sdk.ProbeKey probeKey, Camunda.Orchestration.Sdk.ProbeAnswerRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task AssignClientToGroupAsync(Camunda.Orchestration.Sdk.GroupId groupId, Camunda.Orchestration.Sdk.ClientId clientId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task AssignClientToTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.ClientId clientId, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task AssignGroupToTenantAsync(Camunda.Orchestration.Sdk.TenantId tenantId, Camunda.Orchestration.Sdk.GroupId groupId, System.Threading.CancellationToken ct = null)
@@ -1983,6 +1995,8 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[Camunda.Orchest
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.MessagePublicationResult> PublishMessageAsync(Camunda.Orchestration.Sdk.MessagePublicationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.MessageSubscriptionSearchQueryResult> SearchMessageSubscriptionsAsync(Camunda.Orchestration.Sdk.MessageSubscriptionSearchQuery? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.MessageSubscriptionSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult> SearchOwnAuthorizationsAsync(Camunda.Orchestration.Sdk.AuthorizationSearchQuery? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.OwnAuthorizationSearchResult>? consistency = null, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProbeActivationResult> ActivateProbesAsync(Camunda.Orchestration.Sdk.ProbeActivationRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProbeResult> CreateProbeAsync(Camunda.Orchestration.Sdk.ProbeCreationRequest body, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionKey processDefinitionKey, Camunda.Orchestration.Sdk.ProcessDefinitionElementStatisticsQuery? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessDefinitionElementStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQueryResult> GetProcessDefinitionInstanceStatisticsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQuery? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessDefinitionInstanceStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQueryResult> GetProcessDefinitionInstanceVersionStatisticsAsync(Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQuery body, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.ProcessDefinitionInstanceVersionStatisticsQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -5429,6 +5443,83 @@ TYPE Camunda.Orchestration.Sdk.PhysicalTenantTopology : sealed class
   PROP System.Int32 ReplicationFactor { get; set; } [JsonPropertyName("replicationFactor")]
   PROP System.String LastCompletedChangeId { get; set; } [JsonPropertyName("lastCompletedChangeId")]
   PROP System.String PhysicalTenantId { get; set; } [JsonPropertyName("physicalTenantId")]
+
+TYPE Camunda.Orchestration.Sdk.ProbeActivationRequest : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdsSettable]
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.TenantFilterEnum? TenantFilter { get; set; } [JsonPropertyName("tenantFilter")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ProbeId> ProbeIds { get; set; } [JsonPropertyName("probeIds")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.TenantId>? TenantIds { get; set; } [JsonPropertyName("tenantIds")]
+  PROP System.Int32 MaxProbesToActivate { get; set; } [JsonPropertyName("maxProbesToActivate")]
+  PROP System.Int64? RequestTimeout { get; set; } [JsonPropertyName("requestTimeout")]
+  PROP System.String? Worker { get; set; } [JsonPropertyName("worker")]
+  METHOD System.Void SetDefaultTenantIds(System.String tenantId)
+
+TYPE Camunda.Orchestration.Sdk.ProbeActivationResult : sealed class
+  CTOR ()
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ActivatedProbeResult> Probes { get; set; } [JsonPropertyName("probes")]
+
+TYPE Camunda.Orchestration.Sdk.ProbeAnswerRequest : abstract class
+  ATTR JsonPolymorphic discriminator=outcome
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProbeErrorAnswerRequest tag=ERROR
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProbeOkAnswerRequest tag=OK
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProbeUnsupportedAnswerRequest tag=UNSUPPORTED
+
+TYPE Camunda.Orchestration.Sdk.ProbeCreationRequest : sealed class interfaces=[Camunda.Orchestration.Sdk.ITenantIdSettable]
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ProbeId ProbeId { get; set; } [JsonPropertyName("probeId")]
+  PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP System.Int64? RequestTimeout { get; set; } [JsonPropertyName("requestTimeout")]
+  PROP System.String Input { get; set; } [JsonPropertyName("input")]
+  METHOD System.Void SetDefaultTenantId(System.String tenantId)
+
+TYPE Camunda.Orchestration.Sdk.ProbeErrorAnswerRequest : sealed class base=Camunda.Orchestration.Sdk.ProbeAnswerRequest
+  CTOR ()
+  PROP System.String Message { get; set; } [JsonPropertyName("message")]
+
+TYPE Camunda.Orchestration.Sdk.ProbeErrorResult : sealed class base=Camunda.Orchestration.Sdk.ProbeResult
+  CTOR ()
+  PROP System.String Message { get; set; } [JsonPropertyName("message")]
+  PROP System.String Worker { get; set; } [JsonPropertyName("worker")]
+
+TYPE Camunda.Orchestration.Sdk.ProbeId : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ProbeId>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.ProbeId other)
+  METHOD static Camunda.Orchestration.Sdk.ProbeId AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.ProbeKey : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.ProbeKey>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.ProbeKey other)
+  METHOD static Camunda.Orchestration.Sdk.ProbeKey AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.ProbeOkAnswerRequest : sealed class base=Camunda.Orchestration.Sdk.ProbeAnswerRequest
+  CTOR ()
+  PROP System.Object Data { get; set; } [JsonPropertyName("data")]
+
+TYPE Camunda.Orchestration.Sdk.ProbeOkResult : sealed class base=Camunda.Orchestration.Sdk.ProbeResult
+  CTOR ()
+  PROP System.Object Data { get; set; } [JsonPropertyName("data")]
+  PROP System.String Worker { get; set; } [JsonPropertyName("worker")]
+
+TYPE Camunda.Orchestration.Sdk.ProbeResult : abstract class
+  ATTR JsonPolymorphic discriminator=outcome
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProbeErrorResult tag=ERROR
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProbeOkResult tag=OK
+  ATTR JsonDerivedType Camunda.Orchestration.Sdk.ProbeUnsupportedResult tag=UNSUPPORTED
+
+TYPE Camunda.Orchestration.Sdk.ProbeUnsupportedAnswerRequest : sealed class base=Camunda.Orchestration.Sdk.ProbeAnswerRequest
+  CTOR ()
+
+TYPE Camunda.Orchestration.Sdk.ProbeUnsupportedResult : sealed class base=Camunda.Orchestration.Sdk.ProbeResult
+  CTOR ()
+  PROP System.String Worker { get; set; } [JsonPropertyName("worker")]
 
 TYPE Camunda.Orchestration.Sdk.ProblemDetail : sealed class
   CTOR ()
