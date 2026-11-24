@@ -47,6 +47,12 @@ public class DefaultTenantConformanceTests
         ["createProcessInstance:ById"] = (c, e) => c.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById { TenantId = Tenant(e) }),
         ["createProcessInstance:ByKey"] = (c, e) => c.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey { TenantId = Tenant(e) }),
         ["createProcessInstance:ByVersionTag"] = (c, e) => c.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByVersionTag { TenantId = Tenant(e) }),
+        ["createProbe"] = (c, e) => c.CreateProbeAsync(new ProbeCreationRequest
+        {
+            ProbeId = ProbeId.AssumeExists("health"),
+            Input = "={ question: \"health\" }",
+            TenantId = Tenant(e),
+        }),
         ["publishMessage"] = (c, e) => c.PublishMessageAsync(new MessagePublicationRequest { Name = "m", TenantId = Tenant(e) }),
         ["correlateMessage"] = (c, e) => c.CorrelateMessageAsync(new MessageCorrelationRequest { Name = "m", TenantId = Tenant(e) }),
         ["broadcastSignal"] = (c, e) => c.BroadcastSignalAsync(new SignalBroadcastRequest { SignalName = "s", TenantId = Tenant(e) }),
