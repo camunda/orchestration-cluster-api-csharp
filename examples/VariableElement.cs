@@ -34,11 +34,6 @@ public static class VariableElementExamples
                 {
                     Limit = 20,
                 },
-            },
-            consistency: new ConsistencyOptions<VariableHistoryItemSearchQueryResult>
-            {
-                WaitUpToMs = 5_000,
-                IsConsistent = response => response.Items.Count > 0,
             });
 
         foreach (var change in result.Items)
