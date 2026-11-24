@@ -16,6 +16,39 @@ public static class VariableElementExamples
     // </GetVariable>
     #endregion GetVariable
 
+    #region SearchVariableHistory
+
+    // <SearchVariableHistory>
+    public static async Task SearchVariableHistoryExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchVariableHistoryAsync(
+            new VariableHistoryItemSearchQuery
+            {
+                Filter = new VariableHistoryItemFilter
+                {
+                    Name = "orderStatus",
+                },
+                Page = new LimitPagination
+                {
+                    Limit = 20,
+                },
+            },
+            consistency: new ConsistencyOptions<VariableHistoryItemSearchQueryResult>
+            {
+                WaitUpToMs = 5_000,
+                IsConsistent = response => response.Items.Count > 0,
+            });
+
+        foreach (var change in result.Items)
+        {
+            Console.WriteLine($"{change.Timestamp}: {change.Name} = {change.Value}");
+        }
+    }
+    // </SearchVariableHistory>
+    #endregion SearchVariableHistory
+
     #region SearchVariables
 
     // <SearchVariables>

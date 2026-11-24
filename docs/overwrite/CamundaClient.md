@@ -2253,6 +2253,16 @@ example:
 
 
 ---
+uid: Camunda.Orchestration.Sdk.CamundaClient.SearchVariableHistoryAsync(Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuery,System.Nullable{System.Boolean},Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.VariableHistoryItemSearchQueryResult},System.Threading.CancellationToken)
+example:
+- *content
+---
+
+
+[!code-csharp[](../../examples/VariableElement.cs#SearchVariableHistory)]
+
+
+---
 uid: Camunda.Orchestration.Sdk.CamundaClient.SearchVariablesAsDtoAsync``1(Camunda.Orchestration.Sdk.ProcessInstanceKey,System.Nullable{Camunda.Orchestration.Sdk.ScopeKey},System.Nullable{Camunda.Orchestration.Sdk.TenantId},System.Int32,System.Threading.CancellationToken)
 example:
 - *content
