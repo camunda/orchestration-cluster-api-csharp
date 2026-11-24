@@ -10220,7 +10220,61 @@ public partial class CamundaClient
     /// value at the size limit regardless of the `truncateValues` parameter. The truncation
     /// size limit is configurable.
     /// </summary>
-    /// <remarks>Operation: searchVariableHistory</remarks>
+    /// <remarks>
+    /// Operation: searchVariableHistory
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchVariableHistoryExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchVariableHistoryAsync(
+    ///         new VariableHistoryItemSearchQuery
+    ///         {
+    ///             Filter = new VariableHistoryItemFilter
+    ///             {
+    ///                 Name = &quot;orderStatus&quot;,
+    ///             },
+    ///             Page = new LimitPagination
+    ///             {
+    ///                 Limit = 20,
+    ///             },
+    ///         });
+    /// 
+    ///     foreach (var change in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;{change.Timestamp}: {change.Name} = {change.Value}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task SearchVariableHistoryExample()
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.SearchVariableHistoryAsync(
+    ///         new VariableHistoryItemSearchQuery
+    ///         {
+    ///             Filter = new VariableHistoryItemFilter
+    ///             {
+    ///                 Name = &quot;orderStatus&quot;,
+    ///             },
+    ///             Page = new LimitPagination
+    ///             {
+    ///                 Limit = 20,
+    ///             },
+    ///         });
+    /// 
+    ///     foreach (var change in result.Items)
+    ///     {
+    ///         Console.WriteLine($&quot;{change.Timestamp}: {change.Name} = {change.Value}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<VariableHistoryItemSearchQueryResult> SearchVariableHistoryAsync(VariableHistoryItemSearchQuery? body = null, bool? truncateValues = null, ConsistencyOptions<VariableHistoryItemSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var queryParts = new List<string>();
