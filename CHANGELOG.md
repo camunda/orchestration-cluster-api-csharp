@@ -1,3 +1,15 @@
+# [11.0.0-alpha.16](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.15...v11.0.0-alpha.16) (2026-11-24)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts [skip ci] ([8c0bdda](https://github.com/camunda/orchestration-cluster-api-csharp/commit/8c0bdda5eb9a818e0cbe74146193456c8c11fb29))
+
+
+### Features
+
+* add example coverage for searchVariableHistory ([#572](https://github.com/camunda/orchestration-cluster-api-csharp/issues/572)) ([a4b212f](https://github.com/camunda/orchestration-cluster-api-csharp/commit/a4b212fa48649989f9e22d98defc091c1eb626b4))
+
 # [11.0.0-alpha.15](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.14...v11.0.0-alpha.15) (2026-11-21)
 
 
