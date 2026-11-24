@@ -18968,7 +18968,7 @@
           }
         ],
         "summary": "List secrets",
-        "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nA store may hold names outside the reference name charset (for example one containing a\ndot); those are omitted, since `/secrets/resolve` would reject them and no permission can\nbe granted on them.\n\nA returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,\nhowever, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads\na bare dash as the minus operator: a listed `camunda.secrets.db-password` is written\n`` =camunda.secrets.`db-password` `` in a BPMN input mapping.\n",
+        "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nA store may hold names outside the reference name charset (for example one containing a\ndot); those are omitted, since `/secrets/resolve` would reject them and no permission can\nbe granted on them.\n\nA returned reference is usable verbatim with `/secrets/resolve`, although a secret that its\nstore does not report as `ACTIVE` may fail to resolve there. In a FEEL expression,\nhowever, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads\na bare dash as the minus operator: a listed `camunda.secrets.db-password` is written\n`` =camunda.secrets.`db-password` `` in a BPMN input mapping.\n\nPass `filter.status` to list only the secrets in the matching states, either as a single\nstatus or with the advanced operators (`$in`, `$neq`, ...). A store that does not report\nstates reports every secret as `ACTIVE`, so a filter that excludes `ACTIVE` returns\nnothing from it. The status filter does not widen access: a reference the caller may not read is\nnever returned, with or without a filter.\n",
         "requestBody": {
           "required": false,
           "content": {
@@ -26213,6 +26213,115 @@
           }
         },
         "x-added-in-version": "8.8",
+        "x-scope": "physical-tenant"
+      }
+    },
+    "/variables/history/search": {
+      "post": {
+        "x-eventually-consistent": true,
+        "tags": [
+          "Variable"
+        ],
+        "operationId": "searchVariableHistory",
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Search variable history",
+        "description": "Search for variable history items, which record the changes made to a variable's\nvalue over time. The audit log configuration decides which changes are recorded;\nby default, only changes made by users are.\n\nResults are sorted by `variableHistoryItemKey` ascending by default, which lists the\nchanges of one variable from oldest to newest. Across partitions, the key says nothing\nabout time: a search that spans partitions, for example by process definition, lists the\nchanges of one partition after the other.\n\nBy default, the endpoint truncates long variable values in the response. For the output\ncollection of a multi-instance element or an ad-hoc sub-process, the endpoint cuts the\nvalue at the size limit regardless of the `truncateValues` parameter. The truncation\nsize limit is configurable.",
+        "parameters": [
+          {
+            "name": "truncateValues",
+            "in": "query",
+            "required": false,
+            "description": "When true (default), long variable values in the response are truncated. When false, full variable values are returned where available.",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VariableHistoryItemSearchQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The variable history search result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VariableHistoryItemSearchQueryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided data is not valid.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request lacks valid authentication credentials.",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The request is not allowed.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An internal error occurred while processing the request.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-added-in-version": "8.11",
         "x-scope": "physical-tenant"
       }
     },
@@ -41670,6 +41779,18 @@
           }
         ]
       },
+      "VariableHistoryItemKey": {
+        "description": "System-generated key for a variable history item.",
+        "format": "VariableHistoryItemKey",
+        "x-semantic-type": "VariableHistoryItemKey",
+        "example": "2251799813683999",
+        "type": "string",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LongKey"
+          }
+        ]
+      },
       "IncidentKey": {
         "description": "System-generated key for a incident.",
         "format": "IncidentKey",
@@ -42233,7 +42354,29 @@
               "$ref": "#/components/schemas/ScopeKey"
             }
           }
-        }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.8"
+          }
+        ]
       },
       "VariableKeyFilterProperty": {
         "description": "VariableKey property with full advanced search capabilities.",
@@ -42283,6 +42426,80 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableKey"
+            }
+          }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "$eq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$neq",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$exists",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$in",
+            "addedInVersion": "8.8"
+          },
+          {
+            "propertyName": "$notIn",
+            "addedInVersion": "8.8"
+          }
+        ]
+      },
+      "VariableHistoryItemKeyFilterProperty": {
+        "description": "VariableHistoryItemKey property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VariableHistoryItemKeyExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedVariableHistoryItemKeyFilter"
+          }
+        ]
+      },
+      "AdvancedVariableHistoryItemKeyFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced VariableHistoryItemKey filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemKey"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemKey"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariableHistoryItemKey"
+            }
+          },
+          "$notIn": {
+            "description": "Checks if the property matches none of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariableHistoryItemKey"
             }
           }
         }
@@ -47642,7 +47859,103 @@
       "SecretListRequest": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Reserved for future filtering options. Currently takes no properties. The request body is\noptional: omitting it (or sending an empty object) applies no filters.\n"
+        "description": "Options for listing secrets. The request body is optional: omitting it, or sending an empty\nobject, lists every secret the caller may read.\n",
+        "properties": {
+          "filter": {
+            "description": "Narrows the listed secrets. Omit it to list secrets in every state. Clusters before 8.11\nreject this property with `400`.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SecretListFilter"
+              }
+            ]
+          }
+        },
+        "x-properties-added-in-version": [
+          {
+            "propertyName": "filter",
+            "addedInVersion": "8.11"
+          }
+        ]
+      },
+      "SecretListFilter": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Secret list filter.",
+        "properties": {
+          "status": {
+            "description": "Only list secrets in the matching states. Omit it to list secrets in every state.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SecretStatusFilterProperty"
+              }
+            ]
+          }
+        }
+      },
+      "SecretStatusFilterProperty": {
+        "description": "SecretStatusEnum property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SecretStatusExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedSecretStatusFilter"
+          }
+        ]
+      },
+      "AdvancedSecretStatusFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced SecretStatusEnum filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SecretStatusEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SecretStatusEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists. Every listed secret has a status, so `true`\nmatches every secret and `false` matches none.\n",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecretStatusEnum"
+            }
+          },
+          "$notIn": {
+            "description": "Checks if the property matches none of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecretStatusEnum"
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
+          }
+        }
+      },
+      "SecretStatusEnum": {
+        "type": "string",
+        "description": "The state a secret store reports for a secret.\n\n- `ACTIVE`: the store reports the secret as usable.\n- `DISABLED`: the secret was disabled in its store.\n- `EXPIRED`: the secret's expiry date has passed.\n- `NOT_YET_ACTIVE`: the secret's activation date is in the future.\n\nA secret has exactly one status. When several apply, `DISABLED` wins over `EXPIRED`, and\n`EXPIRED` over `NOT_YET_ACTIVE`: a secret that is both disabled and expired is listed only\nas `DISABLED`, so an `EXPIRED` filter skips it.\n\nA store that cannot report states reports every secret as `ACTIVE`.\n",
+        "enum": [
+          "ACTIVE",
+          "DISABLED",
+          "EXPIRED",
+          "NOT_YET_ACTIVE"
+        ]
       },
       "SecretListResult": {
         "type": "object",
@@ -50298,6 +50611,564 @@
           }
         ]
       },
+      "VariableHistoryItemSearchQuerySortRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "field": {
+            "description": "The field to sort by.",
+            "type": "string",
+            "enum": [
+              "variableHistoryItemKey"
+            ]
+          },
+          "order": {
+            "$ref": "#/components/schemas/SortOrderEnum"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "VariableHistoryItemSearchQuery": {
+        "description": "Variable history item search query request.",
+        "additionalProperties": false,
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryRequest"
+          }
+        ],
+        "properties": {
+          "sort": {
+            "description": "Sort field criteria.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariableHistoryItemSearchQuerySortRequest"
+            }
+          },
+          "filter": {
+            "description": "The variable history item search filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemFilter"
+              }
+            ]
+          }
+        }
+      },
+      "VariableHistoryItemFilter": {
+        "description": "Variable history item filter request.",
+        "type": "object",
+        "properties": {
+          "variableKey": {
+            "description": "The key of the variable this history item belongs to.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableKeyFilterProperty"
+              }
+            ]
+          },
+          "processInstanceKey": {
+            "description": "The key of the process instance of this variable.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKeyFilterProperty"
+              }
+            ]
+          },
+          "name": {
+            "description": "Name of the variable.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          },
+          "scopeKey": {
+            "description": "The key of the scope that defines where this variable is directly defined. This can\nbe a process instance key (for process-level variables) or an element instance key\n(for local variables scoped to tasks, sub-processes, gateways, events, etc.).\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScopeKeyFilterProperty"
+              }
+            ]
+          },
+          "elementId": {
+            "description": "The model-defined id of the element that caused this change, if any.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementIdFilterProperty"
+              }
+            ]
+          },
+          "elementInstanceKey": {
+            "description": "The key of the element instance that caused this change, if any.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementInstanceKeyFilterProperty"
+              }
+            ]
+          },
+          "variableHistoryItemKey": {
+            "description": "The unique key of this variable history item.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemKeyFilterProperty"
+              }
+            ]
+          },
+          "processDefinitionKey": {
+            "description": "The key of the process definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionKeyFilterProperty"
+              }
+            ]
+          },
+          "processDefinitionId": {
+            "description": "The id of the process definition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionIdFilterProperty"
+              }
+            ]
+          },
+          "tenantId": {
+            "description": "The tenant id of this variable.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          },
+          "timestamp": {
+            "description": "The timestamp when this change occurred.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeFilterProperty"
+              }
+            ]
+          },
+          "operationType": {
+            "description": "The type of operation that produced this variable change.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemOperationTypeFilterProperty"
+              }
+            ]
+          },
+          "variableOperationType": {
+            "description": "What wrote this variable value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemVariableOperationTypeFilterProperty"
+              }
+            ]
+          },
+          "actorType": {
+            "description": "The type of the actor who performed the operation.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemActorTypeFilterProperty"
+              }
+            ]
+          },
+          "actorId": {
+            "description": "The id of the user or client that caused this change, if known.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterProperty"
+              }
+            ]
+          },
+          "agentElementId": {
+            "description": "The element id of the agent that caused this change, for example the element id\nof an ad-hoc sub-process, if any.\n",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementIdFilterProperty"
+              }
+            ]
+          }
+        }
+      },
+      "VariableHistoryItemSearchQueryResult": {
+        "description": "Variable history item search query response.",
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SearchQueryResponse"
+          }
+        ],
+        "properties": {
+          "items": {
+            "description": "The matching variable history items.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariableHistoryItemSearchResult"
+            }
+          }
+        }
+      },
+      "VariableHistoryItemSearchResult": {
+        "required": [
+          "isTruncated",
+          "value"
+        ],
+        "description": "Variable history item search response item.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VariableHistoryItemResultBase"
+          }
+        ],
+        "properties": {
+          "value": {
+            "description": "Value of this variable change. Can be truncated, also when `truncateValues` is false, for the output collection of a multi-instance element or an ad-hoc sub-process.",
+            "type": "string"
+          },
+          "isTruncated": {
+            "description": "Indicates if the value is truncated.",
+            "type": "boolean"
+          }
+        }
+      },
+      "VariableHistoryItemResultBase": {
+        "description": "Variable history item response base.",
+        "type": "object",
+        "required": [
+          "actorId",
+          "actorType",
+          "agentElementId",
+          "elementId",
+          "elementInstanceKey",
+          "name",
+          "operationType",
+          "processDefinitionId",
+          "processDefinitionKey",
+          "processInstanceKey",
+          "rootProcessInstanceKey",
+          "scopeKey",
+          "tenantId",
+          "timestamp",
+          "variableHistoryItemKey",
+          "variableKey",
+          "variableOperationType"
+        ],
+        "properties": {
+          "variableHistoryItemKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemKey"
+              }
+            ],
+            "description": "The unique key of this variable history item."
+          },
+          "variableKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableKey"
+              }
+            ],
+            "description": "The key of the variable this history item belongs to."
+          },
+          "name": {
+            "description": "Name of the variable.",
+            "type": "string"
+          },
+          "scopeKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScopeKey"
+              }
+            ],
+            "description": "The key of the scope where this variable is directly defined. For process-level\nvariables, this is the process instance key. For local variables, this is the key\nof the specific element instance where the variable is directly defined.\n"
+          },
+          "elementInstanceKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementInstanceKey"
+              }
+            ],
+            "description": "The key of the element instance that caused this change, if any.",
+            "nullable": true
+          },
+          "elementId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementId"
+              }
+            ],
+            "description": "The model-defined id of the element that caused this change, if any.",
+            "nullable": true
+          },
+          "processInstanceKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ],
+            "description": "The key of the process instance of this variable."
+          },
+          "rootProcessInstanceKey": {
+            "description": "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessInstanceKey"
+              }
+            ]
+          },
+          "processDefinitionKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionKey"
+              }
+            ],
+            "description": "The key of the process definition."
+          },
+          "processDefinitionId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProcessDefinitionId"
+              }
+            ],
+            "description": "The id of the process definition."
+          },
+          "tenantId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ],
+            "description": "The tenant id of this variable."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp when this change occurred."
+          },
+          "operationType": {
+            "$ref": "#/components/schemas/VariableHistoryItemOperationTypeEnum"
+          },
+          "variableOperationType": {
+            "$ref": "#/components/schemas/VariableHistoryItemVariableOperationTypeEnum"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/VariableHistoryItemActorTypeEnum"
+          },
+          "actorId": {
+            "type": "string",
+            "description": "The id of the user or client that caused this change, if known.",
+            "nullable": true
+          },
+          "agentElementId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ElementId"
+              }
+            ],
+            "description": "The element id of the agent that caused this change, for example the element id\nof an ad-hoc sub-process, if any.\n",
+            "nullable": true
+          }
+        }
+      },
+      "VariableHistoryItemOperationTypeEnum": {
+        "type": "string",
+        "description": "The type of operation that produced this variable change. Camunda can add values in later\nversions; clients must handle unknown values gracefully.\n",
+        "enum": [
+          "CREATE",
+          "UPDATE"
+        ]
+      },
+      "VariableHistoryItemVariableOperationTypeEnum": {
+        "type": "string",
+        "description": "What wrote this variable value, for example a job completion, a script result, or a\nmulti-instance output collection. Camunda can add values in later versions; clients must\nhandle unknown values gracefully.\n",
+        "enum": [
+          "API",
+          "USER_TASK_COMPLETION",
+          "PROCESS_INSTANCE_CREATION",
+          "PROCESS_INSTANCE_MODIFICATION",
+          "JOB_COMPLETION",
+          "JOB_FAILURE",
+          "JOB_ERROR",
+          "EXECUTION_LISTENER_COMPLETION",
+          "MESSAGE_CORRELATION",
+          "SIGNAL_BROADCAST",
+          "CONDITIONAL_EVALUATION",
+          "AD_HOC_SUB_PROCESS_ACTIVATION",
+          "INPUT_MAPPING",
+          "OUTPUT_MAPPING",
+          "SCRIPT_RESULT",
+          "DECISION_RESULT",
+          "CALL_ACTIVITY_INPUT",
+          "CALL_ACTIVITY_OUTPUT",
+          "MULTI_INSTANCE_INPUT_ELEMENT",
+          "MULTI_INSTANCE_LOOP_COUNTER",
+          "MULTI_INSTANCE_OUTPUT_ELEMENT",
+          "MULTI_INSTANCE_OUTPUT_COLLECTION",
+          "AD_HOC_SUB_PROCESS_METADATA",
+          "AD_HOC_SUB_PROCESS_OUTPUT_ELEMENT",
+          "AD_HOC_SUB_PROCESS_OUTPUT_COLLECTION",
+          "UNKNOWN"
+        ]
+      },
+      "VariableHistoryItemActorTypeEnum": {
+        "type": "string",
+        "description": "The type of the actor who performed the operation. Camunda can add values in later\nversions; clients must handle unknown values gracefully.\n",
+        "enum": [
+          "USER",
+          "CLIENT",
+          "ENGINE",
+          "UNKNOWN"
+        ]
+      },
+      "VariableHistoryItemOperationTypeFilterProperty": {
+        "description": "VariableHistoryItemOperationTypeEnum property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VariableHistoryItemOperationTypeExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedVariableHistoryItemOperationTypeFilter"
+          }
+        ]
+      },
+      "AdvancedVariableHistoryItemOperationTypeFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced VariableHistoryItemOperationTypeEnum filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemOperationTypeEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemOperationTypeEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariableHistoryItemOperationTypeEnum"
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
+          }
+        }
+      },
+      "VariableHistoryItemVariableOperationTypeFilterProperty": {
+        "description": "VariableHistoryItemVariableOperationTypeEnum property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VariableHistoryItemVariableOperationTypeExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedVariableHistoryItemVariableOperationTypeFilter"
+          }
+        ]
+      },
+      "AdvancedVariableHistoryItemVariableOperationTypeFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced VariableHistoryItemVariableOperationTypeEnum filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemVariableOperationTypeEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemVariableOperationTypeEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariableHistoryItemVariableOperationTypeEnum"
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
+          }
+        }
+      },
+      "VariableHistoryItemActorTypeFilterProperty": {
+        "description": "VariableHistoryItemActorTypeEnum property with full advanced search capabilities.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VariableHistoryItemActorTypeExactMatch"
+          },
+          {
+            "$ref": "#/components/schemas/AdvancedVariableHistoryItemActorTypeFilter"
+          }
+        ]
+      },
+      "AdvancedVariableHistoryItemActorTypeFilter": {
+        "title": "Advanced filter",
+        "description": "Advanced VariableHistoryItemActorTypeEnum filter.",
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "description": "Checks for equality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemActorTypeEnum"
+              }
+            ]
+          },
+          "$neq": {
+            "description": "Checks for inequality with the provided value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableHistoryItemActorTypeEnum"
+              }
+            ]
+          },
+          "$exists": {
+            "description": "Checks if the current property exists.",
+            "type": "boolean"
+          },
+          "$in": {
+            "description": "Checks if the property matches any of the provided values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariableHistoryItemActorTypeEnum"
+            }
+          },
+          "$like": {
+            "$ref": "#/components/schemas/LikeFilter"
+          }
+        }
+      },
       "AgentDefinitionTypeExactMatch": {
         "type": "string",
         "title": "Exact match",
@@ -50669,6 +51540,16 @@
           }
         ]
       },
+      "VariableHistoryItemKeyExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VariableHistoryItemKey"
+          }
+        ]
+      },
       "DecisionEvaluationInstanceKeyExactMatch": {
         "type": "string",
         "title": "Exact match",
@@ -50789,6 +51670,16 @@
           }
         ]
       },
+      "SecretStatusExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SecretStatusEnum"
+          }
+        ]
+      },
       "UserTaskStateExactMatch": {
         "type": "string",
         "title": "Exact match",
@@ -50796,6 +51687,36 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/UserTaskStateEnum"
+          }
+        ]
+      },
+      "VariableHistoryItemOperationTypeExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VariableHistoryItemOperationTypeEnum"
+          }
+        ]
+      },
+      "VariableHistoryItemVariableOperationTypeExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VariableHistoryItemVariableOperationTypeEnum"
+          }
+        ]
+      },
+      "VariableHistoryItemActorTypeExactMatch": {
+        "type": "string",
+        "title": "Exact match",
+        "description": "Matches the value exactly.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VariableHistoryItemActorTypeEnum"
           }
         ]
       }

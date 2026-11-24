@@ -6447,10 +6447,17 @@ public partial class CamundaClient
     /// dot); those are omitted, since `/secrets/resolve` would reject them and no permission can
     /// be granted on them.
     /// 
-    /// A returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,
+    /// A returned reference is usable verbatim with `/secrets/resolve`, although a secret that its
+    /// store does not report as `ACTIVE` may fail to resolve there. In a FEEL expression,
     /// however, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads
     /// a bare dash as the minus operator: a listed `camunda.secrets.db-password` is written
     /// `` =camunda.secrets.`db-password` `` in a BPMN input mapping.
+    /// 
+    /// Pass `filter.status` to list only the secrets in the matching states, either as a single
+    /// status or with the advanced operators (`$in`, `$neq`, ...). A store that does not report
+    /// states reports every secret as `ACTIVE`, so a filter that excludes `ACTIVE` returns
+    /// nothing from it. The status filter does not widen access: a reference the caller may not read is
+    /// never returned, with or without a filter.
     /// 
     /// </summary>
     /// <remarks>
@@ -10195,6 +10202,38 @@ public partial class CamundaClient
         }
 
         return await InvokeWithRetryAsync(() => SendAsync<TenantUserSearchResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "searchUsersForTenant", false, ct);
+    }
+
+    /// <summary>
+    /// Search variable history
+    /// Search for variable history items, which record the changes made to a variable&apos;s
+    /// value over time. The audit log configuration decides which changes are recorded;
+    /// by default, only changes made by users are.
+    /// 
+    /// Results are sorted by `variableHistoryItemKey` ascending by default, which lists the
+    /// changes of one variable from oldest to newest. Across partitions, the key says nothing
+    /// about time: a search that spans partitions, for example by process definition, lists the
+    /// changes of one partition after the other.
+    /// 
+    /// By default, the endpoint truncates long variable values in the response. For the output
+    /// collection of a multi-instance element or an ad-hoc sub-process, the endpoint cuts the
+    /// value at the size limit regardless of the `truncateValues` parameter. The truncation
+    /// size limit is configurable.
+    /// </summary>
+    /// <remarks>Operation: searchVariableHistory</remarks>
+    public async Task<VariableHistoryItemSearchQueryResult> SearchVariableHistoryAsync(VariableHistoryItemSearchQuery? body = null, bool? truncateValues = null, ConsistencyOptions<VariableHistoryItemSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    {
+        var queryParts = new List<string>();
+        if (truncateValues != null) queryParts.Add("truncateValues=" + Uri.EscapeDataString(FormatParam(truncateValues)));
+        var path = queryParts.Count > 0 ? $"/variables/history/search?{string.Join("&", queryParts)}" : $"/variables/history/search";
+        if (consistency != null && consistency.WaitUpToMs > 0)
+        {
+            return await EventualPoller.PollAsync("searchVariableHistory", false,
+                () => InvokeWithRetryAsync(() => SendAsync<VariableHistoryItemSearchQueryResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "searchVariableHistory", false, ct),
+                consistency!, _logger, _timeProvider, ct);
+        }
+
+        return await InvokeWithRetryAsync(() => SendAsync<VariableHistoryItemSearchQueryResult>(HttpMethod.Post, path, body, useRootServer: false, ct), "searchVariableHistory", false, ct);
     }
 
     /// <summary>

@@ -1376,6 +1376,16 @@ public enum UserTaskVariableSearchQuerySortRequestField
 /// The field to sort by.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
+public enum VariableHistoryItemSearchQuerySortRequestField
+{
+    [JsonPropertyName("variableHistoryItemKey")]
+    VariableHistoryItemKey = 0,
+}
+
+/// <summary>
+/// The field to sort by.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum VariableSearchQuerySortRequestField
 {
     [JsonPropertyName("value")]
@@ -3701,6 +3711,59 @@ public sealed class AdvancedScopeKeyFilter
 }
 
 /// <summary>
+/// Advanced SecretStatusEnum filter.
+/// </summary>
+public sealed class AdvancedSecretStatusFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public SecretStatusEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public SecretStatusEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists. Every listed secret has a status, so `true`
+    /// matches every secret and `false` matches none.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<SecretStatusEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<SecretStatusEnum>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
 /// Advanced string filter.
 /// </summary>
 public sealed class AdvancedStringFilter
@@ -3779,6 +3842,178 @@ public sealed class AdvancedUserTaskStateFilter
     /// </summary>
     [JsonPropertyName("$in")]
     public List<UserTaskStateEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced VariableHistoryItemActorTypeEnum filter.
+/// </summary>
+public sealed class AdvancedVariableHistoryItemActorTypeFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public VariableHistoryItemActorTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public VariableHistoryItemActorTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<VariableHistoryItemActorTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced VariableHistoryItemKey filter.
+/// </summary>
+public sealed class AdvancedVariableHistoryItemKeyFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public VariableHistoryItemKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public VariableHistoryItemKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<VariableHistoryItemKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<VariableHistoryItemKey>? NotIn { get; set; }
+
+}
+
+/// <summary>
+/// Advanced VariableHistoryItemOperationTypeEnum filter.
+/// </summary>
+public sealed class AdvancedVariableHistoryItemOperationTypeFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public VariableHistoryItemOperationTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public VariableHistoryItemOperationTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<VariableHistoryItemOperationTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+}
+
+/// <summary>
+/// Advanced VariableHistoryItemVariableOperationTypeEnum filter.
+/// </summary>
+public sealed class AdvancedVariableHistoryItemVariableOperationTypeFilter
+{
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public VariableHistoryItemVariableOperationTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public VariableHistoryItemVariableOperationTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<VariableHistoryItemVariableOperationTypeEnum>? In { get; set; }
 
     /// <summary>
     /// Checks if the property matches the provided like value.
@@ -28078,12 +28313,33 @@ public enum SecretErrorCode
 }
 
 /// <summary>
-/// Reserved for future filtering options. Currently takes no properties. The request body is
-/// optional: omitting it (or sending an empty object) applies no filters.
+/// Secret list filter.
+/// </summary>
+public sealed class SecretListFilter
+{
+    /// <summary>
+    /// Only list secrets in the matching states. Omit it to list secrets in every state.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public SecretStatusFilterProperty? Status { get; set; }
+
+}
+
+/// <summary>
+/// Options for listing secrets. The request body is optional: omitting it, or sending an empty
+/// object, lists every secret the caller may read.
 /// 
 /// </summary>
 public sealed class SecretListRequest
 {
+    /// <summary>
+    /// Narrows the listed secrets. Omit it to list secrets in every state. Clusters before 8.11
+    /// reject this property with `400`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public SecretListFilter? Filter { get; set; }
+
 }
 
 /// <summary>
@@ -28172,6 +28428,198 @@ public sealed class SecretResolveResult
     [JsonPropertyName("errors")]
     public List<SecretResolutionError> Errors { get; set; } = null!;
 
+}
+
+/// <summary>
+/// The state a secret store reports for a secret.
+/// 
+/// - `ACTIVE`: the store reports the secret as usable.
+/// - `DISABLED`: the secret was disabled in its store.
+/// - `EXPIRED`: the secret&apos;s expiry date has passed.
+/// - `NOT_YET_ACTIVE`: the secret&apos;s activation date is in the future.
+/// 
+/// A secret has exactly one status. When several apply, `DISABLED` wins over `EXPIRED`, and
+/// `EXPIRED` over `NOT_YET_ACTIVE`: a secret that is both disabled and expired is listed only
+/// as `DISABLED`, so an `EXPIRED` filter skips it.
+/// 
+/// A store that cannot report states reports every secret as `ACTIVE`.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum SecretStatusEnum
+{
+    [JsonPropertyName("ACTIVE")]
+    ACTIVE = 0,
+    [JsonPropertyName("DISABLED")]
+    DISABLED = 1,
+    [JsonPropertyName("EXPIRED")]
+    EXPIRED = 2,
+    [JsonPropertyName("NOT_YET_ACTIVE")]
+    NOTYETACTIVE = 3,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct SecretStatusExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private SecretStatusExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="SecretStatusExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static SecretStatusExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "SecretStatusExactMatch");
+        return new SecretStatusExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// SecretStatusEnum property with full advanced search capabilities.
+/// </summary>
+[JsonConverter(typeof(SecretStatusFilterPropertyJsonConverter))]
+public sealed class SecretStatusFilterProperty
+{
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public SecretStatusEnum? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public SecretStatusEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public SecretStatusEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists. Every listed secret has a status, so `true`
+    /// matches every secret and `false` matches none.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<SecretStatusEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<SecretStatusEnum>? NotIn { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator SecretStatusFilterProperty(SecretStatusEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="SecretStatusFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class SecretStatusFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<SecretStatusFilterProperty>
+{
+    public override SecretStatusFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new SecretStatusFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<SecretStatusEnum?>(ref reader, options) };
+        var result = new SecretStatusFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<SecretStatusEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<SecretStatusEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<SecretStatusEnum>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<SecretStatusEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, SecretStatusFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("SecretStatusFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>
@@ -31015,6 +31463,1152 @@ public sealed class VariableFilter
     [JsonPropertyName("processInstanceKey")]
     public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
 
+}
+
+/// <summary>
+/// The type of the actor who performed the operation. Camunda can add values in later
+/// versions; clients must handle unknown values gracefully.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum VariableHistoryItemActorTypeEnum
+{
+    [JsonPropertyName("USER")]
+    USER = 0,
+    [JsonPropertyName("CLIENT")]
+    CLIENT = 1,
+    [JsonPropertyName("ENGINE")]
+    ENGINE = 2,
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN = 3,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct VariableHistoryItemActorTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private VariableHistoryItemActorTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="VariableHistoryItemActorTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static VariableHistoryItemActorTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableHistoryItemActorTypeExactMatch");
+        return new VariableHistoryItemActorTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// VariableHistoryItemActorTypeEnum property with full advanced search capabilities.
+/// </summary>
+[JsonConverter(typeof(VariableHistoryItemActorTypeFilterPropertyJsonConverter))]
+public sealed class VariableHistoryItemActorTypeFilterProperty
+{
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public VariableHistoryItemActorTypeEnum? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public VariableHistoryItemActorTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public VariableHistoryItemActorTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<VariableHistoryItemActorTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator VariableHistoryItemActorTypeFilterProperty(VariableHistoryItemActorTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="VariableHistoryItemActorTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class VariableHistoryItemActorTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<VariableHistoryItemActorTypeFilterProperty>
+{
+    public override VariableHistoryItemActorTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new VariableHistoryItemActorTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemActorTypeEnum?>(ref reader, options) };
+        var result = new VariableHistoryItemActorTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemActorTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemActorTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<VariableHistoryItemActorTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, VariableHistoryItemActorTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("VariableHistoryItemActorTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
+}
+
+/// <summary>
+/// Variable history item filter request.
+/// </summary>
+public sealed class VariableHistoryItemFilter
+{
+    /// <summary>
+    /// The key of the variable this history item belongs to.
+    /// </summary>
+    [JsonPropertyName("variableKey")]
+    public VariableKeyFilterProperty? VariableKey { get; set; }
+
+    /// <summary>
+    /// The key of the process instance of this variable.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// Name of the variable.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public StringFilterProperty? Name { get; set; }
+
+    /// <summary>
+    /// The key of the scope that defines where this variable is directly defined. This can
+    /// be a process instance key (for process-level variables) or an element instance key
+    /// (for local variables scoped to tasks, sub-processes, gateways, events, etc.).
+    /// 
+    /// </summary>
+    [JsonPropertyName("scopeKey")]
+    public ScopeKeyFilterProperty? ScopeKey { get; set; }
+
+    /// <summary>
+    /// The model-defined id of the element that caused this change, if any.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementIdFilterProperty? ElementId { get; set; }
+
+    /// <summary>
+    /// The key of the element instance that caused this change, if any.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKeyFilterProperty? ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The unique key of this variable history item.
+    /// </summary>
+    [JsonPropertyName("variableHistoryItemKey")]
+    public VariableHistoryItemKeyFilterProperty? VariableHistoryItemKey { get; set; }
+
+    /// <summary>
+    /// The key of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The id of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionIdFilterProperty? ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The tenant id of this variable.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public StringFilterProperty? TenantId { get; set; }
+
+    /// <summary>
+    /// The timestamp when this change occurred.
+    /// </summary>
+    [JsonPropertyName("timestamp")]
+    public DateTimeFilterProperty? Timestamp { get; set; }
+
+    /// <summary>
+    /// The type of operation that produced this variable change.
+    /// </summary>
+    [JsonPropertyName("operationType")]
+    public VariableHistoryItemOperationTypeFilterProperty? OperationType { get; set; }
+
+    /// <summary>
+    /// What wrote this variable value.
+    /// </summary>
+    [JsonPropertyName("variableOperationType")]
+    public VariableHistoryItemVariableOperationTypeFilterProperty? VariableOperationType { get; set; }
+
+    /// <summary>
+    /// The type of the actor who performed the operation.
+    /// </summary>
+    [JsonPropertyName("actorType")]
+    public VariableHistoryItemActorTypeFilterProperty? ActorType { get; set; }
+
+    /// <summary>
+    /// The id of the user or client that caused this change, if known.
+    /// </summary>
+    [JsonPropertyName("actorId")]
+    public StringFilterProperty? ActorId { get; set; }
+
+    /// <summary>
+    /// The element id of the agent that caused this change, for example the element id
+    /// of an ad-hoc sub-process, if any.
+    /// 
+    /// </summary>
+    [JsonPropertyName("agentElementId")]
+    public ElementIdFilterProperty? AgentElementId { get; set; }
+
+}
+
+/// <summary>
+/// System-generated key for a variable history item.
+/// </summary>
+public readonly record struct VariableHistoryItemKey : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private VariableHistoryItemKey(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="VariableHistoryItemKey"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static VariableHistoryItemKey AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableHistoryItemKey", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new VariableHistoryItemKey(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct VariableHistoryItemKeyExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private VariableHistoryItemKeyExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="VariableHistoryItemKeyExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static VariableHistoryItemKeyExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableHistoryItemKeyExactMatch", pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+        return new VariableHistoryItemKeyExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value, pattern: "^-?[0-9]+$", minLength: 1, maxLength: 25);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// VariableHistoryItemKey property with full advanced search capabilities.
+/// </summary>
+[JsonConverter(typeof(VariableHistoryItemKeyFilterPropertyJsonConverter))]
+public sealed class VariableHistoryItemKeyFilterProperty
+{
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public VariableHistoryItemKey? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public VariableHistoryItemKey? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public VariableHistoryItemKey? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<VariableHistoryItemKey>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches none of the provided values.
+    /// </summary>
+    [JsonPropertyName("$notIn")]
+    public List<VariableHistoryItemKey>? NotIn { get; set; }
+
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator VariableHistoryItemKeyFilterProperty(VariableHistoryItemKey value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="VariableHistoryItemKeyFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class VariableHistoryItemKeyFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<VariableHistoryItemKeyFilterProperty>
+{
+    public override VariableHistoryItemKeyFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new VariableHistoryItemKeyFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemKey?>(ref reader, options) };
+        var result = new VariableHistoryItemKeyFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemKey?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemKey?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<VariableHistoryItemKey>?>(ref reader, options); break;
+                case "$notIn": result.NotIn = global::System.Text.Json.JsonSerializer.Deserialize<List<VariableHistoryItemKey>?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, VariableHistoryItemKeyFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.NotIn is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("VariableHistoryItemKeyFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.NotIn is not null)
+        {
+            writer.WritePropertyName("$notIn");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.NotIn, options);
+        }
+        writer.WriteEndObject();
+    }
+}
+
+/// <summary>
+/// The type of operation that produced this variable change. Camunda can add values in later
+/// versions; clients must handle unknown values gracefully.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum VariableHistoryItemOperationTypeEnum
+{
+    [JsonPropertyName("CREATE")]
+    CREATE = 0,
+    [JsonPropertyName("UPDATE")]
+    UPDATE = 1,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct VariableHistoryItemOperationTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private VariableHistoryItemOperationTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="VariableHistoryItemOperationTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static VariableHistoryItemOperationTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableHistoryItemOperationTypeExactMatch");
+        return new VariableHistoryItemOperationTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// VariableHistoryItemOperationTypeEnum property with full advanced search capabilities.
+/// </summary>
+[JsonConverter(typeof(VariableHistoryItemOperationTypeFilterPropertyJsonConverter))]
+public sealed class VariableHistoryItemOperationTypeFilterProperty
+{
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public VariableHistoryItemOperationTypeEnum? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public VariableHistoryItemOperationTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public VariableHistoryItemOperationTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<VariableHistoryItemOperationTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator VariableHistoryItemOperationTypeFilterProperty(VariableHistoryItemOperationTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="VariableHistoryItemOperationTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class VariableHistoryItemOperationTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<VariableHistoryItemOperationTypeFilterProperty>
+{
+    public override VariableHistoryItemOperationTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new VariableHistoryItemOperationTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemOperationTypeEnum?>(ref reader, options) };
+        var result = new VariableHistoryItemOperationTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemOperationTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemOperationTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<VariableHistoryItemOperationTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, VariableHistoryItemOperationTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("VariableHistoryItemOperationTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
+}
+
+/// <summary>
+/// Variable history item response base.
+/// </summary>
+public sealed class VariableHistoryItemResultBase
+{
+    /// <summary>
+    /// The unique key of this variable history item.
+    /// </summary>
+    [JsonPropertyName("variableHistoryItemKey")]
+    public VariableHistoryItemKey VariableHistoryItemKey { get; set; }
+
+    /// <summary>
+    /// The key of the variable this history item belongs to.
+    /// </summary>
+    [JsonPropertyName("variableKey")]
+    public VariableKey VariableKey { get; set; }
+
+    /// <summary>
+    /// Name of the variable.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = null!;
+
+    /// <summary>
+    /// The key of the scope where this variable is directly defined. For process-level
+    /// variables, this is the process instance key. For local variables, this is the key
+    /// of the specific element instance where the variable is directly defined.
+    /// 
+    /// </summary>
+    [JsonPropertyName("scopeKey")]
+    public ScopeKey ScopeKey { get; set; }
+
+    /// <summary>
+    /// The key of the element instance that caused this change, if any.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey? ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The model-defined id of the element that caused this change, if any.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId? ElementId { get; set; }
+
+    /// <summary>
+    /// The key of the process instance of this variable.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The id of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The tenant id of this variable.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// The timestamp when this change occurred.
+    /// </summary>
+    [JsonPropertyName("timestamp")]
+    public DateTimeOffset Timestamp { get; set; }
+
+    /// <summary>
+    /// The type of operation that produced this variable change. Camunda can add values in later
+    /// versions; clients must handle unknown values gracefully.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationType")]
+    public VariableHistoryItemOperationTypeEnum OperationType { get; set; }
+
+    /// <summary>
+    /// What wrote this variable value, for example a job completion, a script result, or a
+    /// multi-instance output collection. Camunda can add values in later versions; clients must
+    /// handle unknown values gracefully.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variableOperationType")]
+    public VariableHistoryItemVariableOperationTypeEnum VariableOperationType { get; set; }
+
+    /// <summary>
+    /// The type of the actor who performed the operation. Camunda can add values in later
+    /// versions; clients must handle unknown values gracefully.
+    /// 
+    /// </summary>
+    [JsonPropertyName("actorType")]
+    public VariableHistoryItemActorTypeEnum ActorType { get; set; }
+
+    /// <summary>
+    /// The id of the user or client that caused this change, if known.
+    /// </summary>
+    [JsonPropertyName("actorId")]
+    public string? ActorId { get; set; }
+
+    /// <summary>
+    /// The element id of the agent that caused this change, for example the element id
+    /// of an ad-hoc sub-process, if any.
+    /// 
+    /// </summary>
+    [JsonPropertyName("agentElementId")]
+    public ElementId? AgentElementId { get; set; }
+
+}
+
+/// <summary>
+/// Variable history item search query request.
+/// </summary>
+public sealed class VariableHistoryItemSearchQuery
+{
+    /// <summary>
+    /// Sort field criteria.
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public List<VariableHistoryItemSearchQuerySortRequest>? Sort { get; set; }
+
+    /// <summary>
+    /// The variable history item search filters.
+    /// </summary>
+    [JsonPropertyName("filter")]
+    public VariableHistoryItemFilter? Filter { get; set; }
+
+    /// <summary>
+    /// Pagination criteria.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageRequest? Page { get; set; }
+
+}
+
+/// <summary>
+/// Variable history item search query response.
+/// </summary>
+public sealed class VariableHistoryItemSearchQueryResult
+{
+    /// <summary>
+    /// The matching variable history items.
+    /// </summary>
+    [JsonPropertyName("items")]
+    public List<VariableHistoryItemSearchResult> Items { get; set; } = null!;
+
+    /// <summary>
+    /// Pagination information about the search results.
+    /// </summary>
+    [JsonPropertyName("page")]
+    public SearchQueryPageResponse Page { get; set; } = null!;
+
+}
+
+/// <summary>
+/// VariableHistoryItemSearchQuerySortRequest
+/// </summary>
+public sealed class VariableHistoryItemSearchQuerySortRequest
+{
+    /// <summary>
+    /// The field to sort by.
+    /// </summary>
+    [JsonPropertyName("field")]
+    public VariableHistoryItemSearchQuerySortRequestField Field { get; set; }
+
+    /// <summary>
+    /// The order in which to sort the related field.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public SortOrderEnum? Order { get; set; }
+
+}
+
+/// <summary>
+/// Variable history item search response item.
+/// </summary>
+public sealed class VariableHistoryItemSearchResult
+{
+    /// <summary>
+    /// Value of this variable change. Can be truncated, also when `truncateValues` is false, for the output collection of a multi-instance element or an ad-hoc sub-process.
+    /// </summary>
+    [JsonPropertyName("value")]
+    public string Value { get; set; } = null!;
+
+    /// <summary>
+    /// Indicates if the value is truncated.
+    /// </summary>
+    [JsonPropertyName("isTruncated")]
+    public bool IsTruncated { get; set; }
+
+    /// <summary>
+    /// The unique key of this variable history item.
+    /// </summary>
+    [JsonPropertyName("variableHistoryItemKey")]
+    public VariableHistoryItemKey VariableHistoryItemKey { get; set; }
+
+    /// <summary>
+    /// The key of the variable this history item belongs to.
+    /// </summary>
+    [JsonPropertyName("variableKey")]
+    public VariableKey VariableKey { get; set; }
+
+    /// <summary>
+    /// Name of the variable.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = null!;
+
+    /// <summary>
+    /// The key of the scope where this variable is directly defined. For process-level
+    /// variables, this is the process instance key. For local variables, this is the key
+    /// of the specific element instance where the variable is directly defined.
+    /// 
+    /// </summary>
+    [JsonPropertyName("scopeKey")]
+    public ScopeKey ScopeKey { get; set; }
+
+    /// <summary>
+    /// The key of the element instance that caused this change, if any.
+    /// </summary>
+    [JsonPropertyName("elementInstanceKey")]
+    public ElementInstanceKey? ElementInstanceKey { get; set; }
+
+    /// <summary>
+    /// The model-defined id of the element that caused this change, if any.
+    /// </summary>
+    [JsonPropertyName("elementId")]
+    public ElementId? ElementId { get; set; }
+
+    /// <summary>
+    /// The key of the process instance of this variable.
+    /// </summary>
+    [JsonPropertyName("processInstanceKey")]
+    public ProcessInstanceKey ProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the root process instance. The root process instance is the top-level
+    /// ancestor in the process instance hierarchy. This field is only present for data
+    /// belonging to process instance hierarchies created in version 8.9 or later.
+    /// 
+    /// </summary>
+    [JsonPropertyName("rootProcessInstanceKey")]
+    public ProcessInstanceKey? RootProcessInstanceKey { get; set; }
+
+    /// <summary>
+    /// The key of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionKey")]
+    public ProcessDefinitionKey ProcessDefinitionKey { get; set; }
+
+    /// <summary>
+    /// The id of the process definition.
+    /// </summary>
+    [JsonPropertyName("processDefinitionId")]
+    public ProcessDefinitionId ProcessDefinitionId { get; set; }
+
+    /// <summary>
+    /// The tenant id of this variable.
+    /// </summary>
+    [JsonPropertyName("tenantId")]
+    public TenantId TenantId { get; set; }
+
+    /// <summary>
+    /// The timestamp when this change occurred.
+    /// </summary>
+    [JsonPropertyName("timestamp")]
+    public DateTimeOffset Timestamp { get; set; }
+
+    /// <summary>
+    /// The type of operation that produced this variable change. Camunda can add values in later
+    /// versions; clients must handle unknown values gracefully.
+    /// 
+    /// </summary>
+    [JsonPropertyName("operationType")]
+    public VariableHistoryItemOperationTypeEnum OperationType { get; set; }
+
+    /// <summary>
+    /// What wrote this variable value, for example a job completion, a script result, or a
+    /// multi-instance output collection. Camunda can add values in later versions; clients must
+    /// handle unknown values gracefully.
+    /// 
+    /// </summary>
+    [JsonPropertyName("variableOperationType")]
+    public VariableHistoryItemVariableOperationTypeEnum VariableOperationType { get; set; }
+
+    /// <summary>
+    /// The type of the actor who performed the operation. Camunda can add values in later
+    /// versions; clients must handle unknown values gracefully.
+    /// 
+    /// </summary>
+    [JsonPropertyName("actorType")]
+    public VariableHistoryItemActorTypeEnum ActorType { get; set; }
+
+    /// <summary>
+    /// The id of the user or client that caused this change, if known.
+    /// </summary>
+    [JsonPropertyName("actorId")]
+    public string? ActorId { get; set; }
+
+    /// <summary>
+    /// The element id of the agent that caused this change, for example the element id
+    /// of an ad-hoc sub-process, if any.
+    /// 
+    /// </summary>
+    [JsonPropertyName("agentElementId")]
+    public ElementId? AgentElementId { get; set; }
+
+}
+
+/// <summary>
+/// What wrote this variable value, for example a job completion, a script result, or a
+/// multi-instance output collection. Camunda can add values in later versions; clients must
+/// handle unknown values gracefully.
+/// 
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum VariableHistoryItemVariableOperationTypeEnum
+{
+    [JsonPropertyName("API")]
+    API = 0,
+    [JsonPropertyName("USER_TASK_COMPLETION")]
+    USERTASKCOMPLETION = 1,
+    [JsonPropertyName("PROCESS_INSTANCE_CREATION")]
+    PROCESSINSTANCECREATION = 2,
+    [JsonPropertyName("PROCESS_INSTANCE_MODIFICATION")]
+    PROCESSINSTANCEMODIFICATION = 3,
+    [JsonPropertyName("JOB_COMPLETION")]
+    JOBCOMPLETION = 4,
+    [JsonPropertyName("JOB_FAILURE")]
+    JOBFAILURE = 5,
+    [JsonPropertyName("JOB_ERROR")]
+    JOBERROR = 6,
+    [JsonPropertyName("EXECUTION_LISTENER_COMPLETION")]
+    EXECUTIONLISTENERCOMPLETION = 7,
+    [JsonPropertyName("MESSAGE_CORRELATION")]
+    MESSAGECORRELATION = 8,
+    [JsonPropertyName("SIGNAL_BROADCAST")]
+    SIGNALBROADCAST = 9,
+    [JsonPropertyName("CONDITIONAL_EVALUATION")]
+    CONDITIONALEVALUATION = 10,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS_ACTIVATION")]
+    ADHOCSUBPROCESSACTIVATION = 11,
+    [JsonPropertyName("INPUT_MAPPING")]
+    INPUTMAPPING = 12,
+    [JsonPropertyName("OUTPUT_MAPPING")]
+    OUTPUTMAPPING = 13,
+    [JsonPropertyName("SCRIPT_RESULT")]
+    SCRIPTRESULT = 14,
+    [JsonPropertyName("DECISION_RESULT")]
+    DECISIONRESULT = 15,
+    [JsonPropertyName("CALL_ACTIVITY_INPUT")]
+    CALLACTIVITYINPUT = 16,
+    [JsonPropertyName("CALL_ACTIVITY_OUTPUT")]
+    CALLACTIVITYOUTPUT = 17,
+    [JsonPropertyName("MULTI_INSTANCE_INPUT_ELEMENT")]
+    MULTIINSTANCEINPUTELEMENT = 18,
+    [JsonPropertyName("MULTI_INSTANCE_LOOP_COUNTER")]
+    MULTIINSTANCELOOPCOUNTER = 19,
+    [JsonPropertyName("MULTI_INSTANCE_OUTPUT_ELEMENT")]
+    MULTIINSTANCEOUTPUTELEMENT = 20,
+    [JsonPropertyName("MULTI_INSTANCE_OUTPUT_COLLECTION")]
+    MULTIINSTANCEOUTPUTCOLLECTION = 21,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS_METADATA")]
+    ADHOCSUBPROCESSMETADATA = 22,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS_OUTPUT_ELEMENT")]
+    ADHOCSUBPROCESSOUTPUTELEMENT = 23,
+    [JsonPropertyName("AD_HOC_SUB_PROCESS_OUTPUT_COLLECTION")]
+    ADHOCSUBPROCESSOUTPUTCOLLECTION = 24,
+    [JsonPropertyName("UNKNOWN")]
+    UNKNOWN = 25,
+}
+
+/// <summary>
+/// Matches the value exactly.
+/// </summary>
+public readonly record struct VariableHistoryItemVariableOperationTypeExactMatch : global::Camunda.Orchestration.Sdk.ICamundaKey
+{
+    /// <summary>The underlying string value.</summary>
+    public string Value { get; }
+
+    private VariableHistoryItemVariableOperationTypeExactMatch(string value) => Value = value;
+
+    /// <summary>
+    /// Creates a <see cref="VariableHistoryItemVariableOperationTypeExactMatch"/> from a raw string value.
+    /// Use this when side-loading values not received from an API call.
+    /// </summary>
+    public static VariableHistoryItemVariableOperationTypeExactMatch AssumeExists(string value)
+    {
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.AssertConstraints(value, "VariableHistoryItemVariableOperationTypeExactMatch");
+        return new VariableHistoryItemVariableOperationTypeExactMatch(value);
+    }
+
+    /// <summary>Returns true if the value satisfies this type's constraints.</summary>
+    public static bool IsValid(string value) =>
+        global::Camunda.Orchestration.Sdk.CamundaKeyValidation.CheckConstraints(value);
+
+    /// <inheritdoc />
+    public override string ToString() => Value.ToString()!;
+}
+
+/// <summary>
+/// VariableHistoryItemVariableOperationTypeEnum property with full advanced search capabilities.
+/// </summary>
+[JsonConverter(typeof(VariableHistoryItemVariableOperationTypeFilterPropertyJsonConverter))]
+public sealed class VariableHistoryItemVariableOperationTypeFilterProperty
+{
+    /// <summary>
+    /// Matches the value exactly. Serialized as the bare value — the form
+    /// servers that predate advanced filtering on this field accept.
+    /// </summary>
+    public VariableHistoryItemVariableOperationTypeEnum? ExactMatch { get; set; }
+
+    /// <summary>
+    /// Checks for equality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$eq")]
+    public VariableHistoryItemVariableOperationTypeEnum? Eq { get; set; }
+
+    /// <summary>
+    /// Checks for inequality with the provided value.
+    /// </summary>
+    [JsonPropertyName("$neq")]
+    public VariableHistoryItemVariableOperationTypeEnum? Neq { get; set; }
+
+    /// <summary>
+    /// Checks if the current property exists.
+    /// </summary>
+    [JsonPropertyName("$exists")]
+    public bool? Exists { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches any of the provided values.
+    /// </summary>
+    [JsonPropertyName("$in")]
+    public List<VariableHistoryItemVariableOperationTypeEnum>? In { get; set; }
+
+    /// <summary>
+    /// Checks if the property matches the provided like value.
+    /// 
+    /// Supported wildcard characters are:
+    /// 
+    /// * `*`: matches zero, one, or multiple characters.
+    /// * `?`: matches one, single character.
+    /// 
+    /// Wildcard characters can be escaped with backslash, for instance: `\*`.
+    /// 
+    /// </summary>
+    [JsonPropertyName("$like")]
+    public LikeFilter? Like { get; set; }
+
+    /// <summary>Wraps a bare value as an exact-match filter.</summary>
+    public static implicit operator VariableHistoryItemVariableOperationTypeFilterProperty(VariableHistoryItemVariableOperationTypeEnum value) => new() { ExactMatch = value };
+
+}
+
+/// <summary>Serializes <see cref="VariableHistoryItemVariableOperationTypeFilterProperty"/> as a bare exact-match value or an advanced filter object.</summary>
+internal sealed class VariableHistoryItemVariableOperationTypeFilterPropertyJsonConverter : global::System.Text.Json.Serialization.JsonConverter<VariableHistoryItemVariableOperationTypeFilterProperty>
+{
+    public override VariableHistoryItemVariableOperationTypeFilterProperty? Read(ref global::System.Text.Json.Utf8JsonReader reader, global::System.Type typeToConvert, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        if (reader.TokenType == global::System.Text.Json.JsonTokenType.Null) return null;
+        if (reader.TokenType != global::System.Text.Json.JsonTokenType.StartObject)
+            return new VariableHistoryItemVariableOperationTypeFilterProperty { ExactMatch = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemVariableOperationTypeEnum?>(ref reader, options) };
+        var result = new VariableHistoryItemVariableOperationTypeFilterProperty();
+        while (reader.Read())
+        {
+            if (reader.TokenType == global::System.Text.Json.JsonTokenType.EndObject) break;
+            var prop = reader.GetString();
+            reader.Read();
+            switch (prop)
+            {
+                case "$eq": result.Eq = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemVariableOperationTypeEnum?>(ref reader, options); break;
+                case "$neq": result.Neq = global::System.Text.Json.JsonSerializer.Deserialize<VariableHistoryItemVariableOperationTypeEnum?>(ref reader, options); break;
+                case "$exists": result.Exists = global::System.Text.Json.JsonSerializer.Deserialize<bool?>(ref reader, options); break;
+                case "$in": result.In = global::System.Text.Json.JsonSerializer.Deserialize<List<VariableHistoryItemVariableOperationTypeEnum>?>(ref reader, options); break;
+                case "$like": result.Like = global::System.Text.Json.JsonSerializer.Deserialize<LikeFilter?>(ref reader, options); break;
+                default: reader.Skip(); break;
+            }
+        }
+        return result;
+    }
+
+    public override void Write(global::System.Text.Json.Utf8JsonWriter writer, VariableHistoryItemVariableOperationTypeFilterProperty value, global::System.Text.Json.JsonSerializerOptions options)
+    {
+        var hasAdvanced = value.Eq is not null || value.Neq is not null || value.Exists is not null || value.In is not null || value.Like is not null;
+        if (value.ExactMatch is not null && hasAdvanced)
+            throw new global::System.Text.Json.JsonException("VariableHistoryItemVariableOperationTypeFilterProperty: set either ExactMatch (a bare value) or advanced operators, not both.");
+        if (value.ExactMatch is not null)
+        {
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.ExactMatch, options);
+            return;
+        }
+        writer.WriteStartObject();
+        if (value.Eq is not null)
+        {
+            writer.WritePropertyName("$eq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Eq, options);
+        }
+        if (value.Neq is not null)
+        {
+            writer.WritePropertyName("$neq");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Neq, options);
+        }
+        if (value.Exists is not null)
+        {
+            writer.WritePropertyName("$exists");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Exists, options);
+        }
+        if (value.In is not null)
+        {
+            writer.WritePropertyName("$in");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.In, options);
+        }
+        if (value.Like is not null)
+        {
+            writer.WritePropertyName("$like");
+            global::System.Text.Json.JsonSerializer.Serialize(writer, value.Like, options);
+        }
+        writer.WriteEndObject();
+    }
 }
 
 /// <summary>

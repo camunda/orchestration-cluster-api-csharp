@@ -468,6 +468,15 @@ TYPE Camunda.Orchestration.Sdk.AdvancedScopeKeyFilter : sealed class
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ScopeKey>? In { get; set; } [JsonPropertyName("$in")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ScopeKey>? NotIn { get; set; } [JsonPropertyName("$notIn")]
 
+TYPE Camunda.Orchestration.Sdk.AdvancedSecretStatusFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.SecretStatusEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.SecretStatusEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.SecretStatusEnum>? In { get; set; } [JsonPropertyName("$in")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.SecretStatusEnum>? NotIn { get; set; } [JsonPropertyName("$notIn")]
+
 TYPE Camunda.Orchestration.Sdk.AdvancedStringFilter : sealed class
   CTOR ()
   PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
@@ -484,6 +493,38 @@ TYPE Camunda.Orchestration.Sdk.AdvancedUserTaskStateFilter : sealed class
   PROP Camunda.Orchestration.Sdk.UserTaskStateEnum? Neq { get; set; } [JsonPropertyName("$neq")]
   PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.UserTaskStateEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.AdvancedVariableHistoryItemActorTypeFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.AdvancedVariableHistoryItemKeyFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemKey? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemKey? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemKey>? In { get; set; } [JsonPropertyName("$in")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemKey>? NotIn { get; set; } [JsonPropertyName("$notIn")]
+
+TYPE Camunda.Orchestration.Sdk.AdvancedVariableHistoryItemOperationTypeFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.AdvancedVariableHistoryItemVariableOperationTypeFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
 
 TYPE Camunda.Orchestration.Sdk.AdvancedVariableKeyFilter : sealed class
   CTOR ()
@@ -1995,6 +2036,7 @@ TYPE Camunda.Orchestration.Sdk.CamundaClient : class interfaces=[Camunda.Orchest
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserTaskResult> GetUserTaskAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserTaskResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserTaskSearchQueryResult> SearchUserTasksAsync(Camunda.Orchestration.Sdk.UserTaskSearchQuery? body = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.UserTaskSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.UserUpdateResult> UpdateUserAsync(Camunda.Orchestration.Sdk.Username username, Camunda.Orchestration.Sdk.UserUpdateRequest body, System.Threading.CancellationToken ct = null)
+  METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableHistoryItemSearchQueryResult> SearchVariableHistoryAsync(Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuery? body = null, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableHistoryItemSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableMap<T>> SearchVariablesAsDtoAsync<T>(Camunda.Orchestration.Sdk.ProcessInstanceKey processInstanceKey, Camunda.Orchestration.Sdk.ScopeKey? scopeKey = null, Camunda.Orchestration.Sdk.TenantId? tenantId = null, System.Int32 pageSize = 100, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableResult> GetVariableAsync(Camunda.Orchestration.Sdk.VariableKey variableKey, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableResult>? consistency = null, System.Threading.CancellationToken ct = null)
   METHOD System.Threading.Tasks.Task<Camunda.Orchestration.Sdk.VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(Camunda.Orchestration.Sdk.UserTaskKey userTaskKey, Camunda.Orchestration.Sdk.UserTaskEffectiveVariableSearchQueryRequest? body = null, System.Boolean? truncateValues = null, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.VariableSearchQueryResult>? consistency = null, System.Threading.CancellationToken ct = null)
@@ -6495,8 +6537,13 @@ TYPE Camunda.Orchestration.Sdk.SecretErrorCode : enum interfaces=[System.ICompar
   MEMBER INVALIDREFERENCE = 2 json="INVALID_REFERENCE"
   MEMBER UNREADABLE = 3 json="UNREADABLE"
 
+TYPE Camunda.Orchestration.Sdk.SecretListFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.SecretStatusFilterProperty? Status { get; set; } [JsonPropertyName("status")]
+
 TYPE Camunda.Orchestration.Sdk.SecretListRequest : sealed class
   CTOR ()
+  PROP Camunda.Orchestration.Sdk.SecretListFilter? Filter { get; set; } [JsonPropertyName("filter")]
 
 TYPE Camunda.Orchestration.Sdk.SecretListResult : sealed class
   CTOR ()
@@ -6516,6 +6563,34 @@ TYPE Camunda.Orchestration.Sdk.SecretResolveResult : sealed class
   CTOR ()
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.ResolvedSecret> Resolved { get; set; } [JsonPropertyName("resolved")]
   PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.SecretResolutionError> Errors { get; set; } [JsonPropertyName("errors")]
+
+TYPE Camunda.Orchestration.Sdk.SecretStatusEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER ACTIVE = 0 json="ACTIVE"
+  MEMBER DISABLED = 1 json="DISABLED"
+  MEMBER EXPIRED = 2 json="EXPIRED"
+  MEMBER NOTYETACTIVE = 3 json="NOT_YET_ACTIVE"
+
+TYPE Camunda.Orchestration.Sdk.SecretStatusExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.SecretStatusExactMatch>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.SecretStatusExactMatch other)
+  METHOD static Camunda.Orchestration.Sdk.SecretStatusExactMatch AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.SecretStatusFilterProperty : sealed class
+  ATTR JsonConverter Camunda.Orchestration.Sdk.SecretStatusFilterPropertyJsonConverter
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.SecretStatusEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.SecretStatusEnum? ExactMatch { get; set; }
+  PROP Camunda.Orchestration.Sdk.SecretStatusEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.SecretStatusEnum>? In { get; set; } [JsonPropertyName("$in")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.SecretStatusEnum>? NotIn { get; set; } [JsonPropertyName("$notIn")]
 
 TYPE Camunda.Orchestration.Sdk.SeededRandomSource : sealed class interfaces=[Camunda.Orchestration.Sdk.IRandomSource]
   CTOR (System.UInt64 seed)
@@ -7243,6 +7318,217 @@ TYPE Camunda.Orchestration.Sdk.VariableFilter : sealed class
   PROP Camunda.Orchestration.Sdk.TenantId? TenantId { get; set; } [JsonPropertyName("tenantId")]
   PROP Camunda.Orchestration.Sdk.VariableKeyFilterProperty? VariableKey { get; set; } [JsonPropertyName("variableKey")]
   PROP System.Boolean? IsTruncated { get; set; } [JsonPropertyName("isTruncated")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER USER = 0 json="USER"
+  MEMBER CLIENT = 1 json="CLIENT"
+  MEMBER ENGINE = 2 json="ENGINE"
+  MEMBER UNKNOWN = 3 json="UNKNOWN"
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeExactMatch>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeExactMatch other)
+  METHOD static Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeExactMatch AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeFilterProperty : sealed class
+  ATTR JsonConverter Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeFilterPropertyJsonConverter
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum? ExactMatch { get; set; }
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemFilter : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.DateTimeFilterProperty? Timestamp { get; set; } [JsonPropertyName("timestamp")]
+  PROP Camunda.Orchestration.Sdk.ElementIdFilterProperty? AgentElementId { get; set; } [JsonPropertyName("agentElementId")]
+  PROP Camunda.Orchestration.Sdk.ElementIdFilterProperty? ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKeyFilterProperty? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionIdFilterProperty? ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKeyFilterProperty? ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKeyFilterProperty? ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ScopeKeyFilterProperty? ScopeKey { get; set; } [JsonPropertyName("scopeKey")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? ActorId { get; set; } [JsonPropertyName("actorId")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? Name { get; set; } [JsonPropertyName("name")]
+  PROP Camunda.Orchestration.Sdk.StringFilterProperty? TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeFilterProperty? ActorType { get; set; } [JsonPropertyName("actorType")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemKeyFilterProperty? VariableHistoryItemKey { get; set; } [JsonPropertyName("variableHistoryItemKey")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeFilterProperty? OperationType { get; set; } [JsonPropertyName("operationType")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeFilterProperty? VariableOperationType { get; set; } [JsonPropertyName("variableOperationType")]
+  PROP Camunda.Orchestration.Sdk.VariableKeyFilterProperty? VariableKey { get; set; } [JsonPropertyName("variableKey")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemKey : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.VariableHistoryItemKey>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.VariableHistoryItemKey other)
+  METHOD static Camunda.Orchestration.Sdk.VariableHistoryItemKey AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemKeyExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.VariableHistoryItemKeyExactMatch>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.VariableHistoryItemKeyExactMatch other)
+  METHOD static Camunda.Orchestration.Sdk.VariableHistoryItemKeyExactMatch AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemKeyFilterProperty : sealed class
+  ATTR JsonConverter Camunda.Orchestration.Sdk.VariableHistoryItemKeyFilterPropertyJsonConverter
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemKey? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemKey? ExactMatch { get; set; }
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemKey? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemKey>? In { get; set; } [JsonPropertyName("$in")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemKey>? NotIn { get; set; } [JsonPropertyName("$notIn")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER CREATE = 0 json="CREATE"
+  MEMBER UPDATE = 1 json="UPDATE"
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeExactMatch>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeExactMatch other)
+  METHOD static Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeExactMatch AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeFilterProperty : sealed class
+  ATTR JsonConverter Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeFilterPropertyJsonConverter
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum? ExactMatch { get; set; }
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemResultBase : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ElementId? AgentElementId { get; set; } [JsonPropertyName("agentElementId")]
+  PROP Camunda.Orchestration.Sdk.ElementId? ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKey? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ScopeKey ScopeKey { get; set; } [JsonPropertyName("scopeKey")]
+  PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum ActorType { get; set; } [JsonPropertyName("actorType")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemKey VariableHistoryItemKey { get; set; } [JsonPropertyName("variableHistoryItemKey")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum OperationType { get; set; } [JsonPropertyName("operationType")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum VariableOperationType { get; set; } [JsonPropertyName("variableOperationType")]
+  PROP Camunda.Orchestration.Sdk.VariableKey VariableKey { get; set; } [JsonPropertyName("variableKey")]
+  PROP System.DateTimeOffset Timestamp { get; set; } [JsonPropertyName("timestamp")]
+  PROP System.String Name { get; set; } [JsonPropertyName("name")]
+  PROP System.String? ActorId { get; set; } [JsonPropertyName("actorId")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuery : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.SearchQueryPageRequest? Page { get; set; } [JsonPropertyName("page")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemFilter? Filter { get; set; } [JsonPropertyName("filter")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuerySortRequest>? Sort { get; set; } [JsonPropertyName("sort")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemSearchQueryResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.SearchQueryPageResponse Page { get; set; } [JsonPropertyName("page")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemSearchResult> Items { get; set; } [JsonPropertyName("items")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuerySortRequest : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.SortOrderEnum? Order { get; set; } [JsonPropertyName("order")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuerySortRequestField Field { get; set; } [JsonPropertyName("field")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuerySortRequestField : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER VariableHistoryItemKey = 0 json="variableHistoryItemKey"
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemSearchResult : sealed class
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.ElementId? AgentElementId { get; set; } [JsonPropertyName("agentElementId")]
+  PROP Camunda.Orchestration.Sdk.ElementId? ElementId { get; set; } [JsonPropertyName("elementId")]
+  PROP Camunda.Orchestration.Sdk.ElementInstanceKey? ElementInstanceKey { get; set; } [JsonPropertyName("elementInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionId ProcessDefinitionId { get; set; } [JsonPropertyName("processDefinitionId")]
+  PROP Camunda.Orchestration.Sdk.ProcessDefinitionKey ProcessDefinitionKey { get; set; } [JsonPropertyName("processDefinitionKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey ProcessInstanceKey { get; set; } [JsonPropertyName("processInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ProcessInstanceKey? RootProcessInstanceKey { get; set; } [JsonPropertyName("rootProcessInstanceKey")]
+  PROP Camunda.Orchestration.Sdk.ScopeKey ScopeKey { get; set; } [JsonPropertyName("scopeKey")]
+  PROP Camunda.Orchestration.Sdk.TenantId TenantId { get; set; } [JsonPropertyName("tenantId")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum ActorType { get; set; } [JsonPropertyName("actorType")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemKey VariableHistoryItemKey { get; set; } [JsonPropertyName("variableHistoryItemKey")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum OperationType { get; set; } [JsonPropertyName("operationType")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum VariableOperationType { get; set; } [JsonPropertyName("variableOperationType")]
+  PROP Camunda.Orchestration.Sdk.VariableKey VariableKey { get; set; } [JsonPropertyName("variableKey")]
+  PROP System.Boolean IsTruncated { get; set; } [JsonPropertyName("isTruncated")]
+  PROP System.DateTimeOffset Timestamp { get; set; } [JsonPropertyName("timestamp")]
+  PROP System.String Name { get; set; } [JsonPropertyName("name")]
+  PROP System.String Value { get; set; } [JsonPropertyName("value")]
+  PROP System.String? ActorId { get; set; } [JsonPropertyName("actorId")]
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum : enum interfaces=[System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable]
+  ATTR JsonConverter System.Text.Json.Serialization.JsonStringEnumConverter
+  underlying=System.Int32
+  MEMBER API = 0 json="API"
+  MEMBER USERTASKCOMPLETION = 1 json="USER_TASK_COMPLETION"
+  MEMBER PROCESSINSTANCECREATION = 2 json="PROCESS_INSTANCE_CREATION"
+  MEMBER PROCESSINSTANCEMODIFICATION = 3 json="PROCESS_INSTANCE_MODIFICATION"
+  MEMBER JOBCOMPLETION = 4 json="JOB_COMPLETION"
+  MEMBER JOBFAILURE = 5 json="JOB_FAILURE"
+  MEMBER JOBERROR = 6 json="JOB_ERROR"
+  MEMBER EXECUTIONLISTENERCOMPLETION = 7 json="EXECUTION_LISTENER_COMPLETION"
+  MEMBER MESSAGECORRELATION = 8 json="MESSAGE_CORRELATION"
+  MEMBER SIGNALBROADCAST = 9 json="SIGNAL_BROADCAST"
+  MEMBER CONDITIONALEVALUATION = 10 json="CONDITIONAL_EVALUATION"
+  MEMBER ADHOCSUBPROCESSACTIVATION = 11 json="AD_HOC_SUB_PROCESS_ACTIVATION"
+  MEMBER INPUTMAPPING = 12 json="INPUT_MAPPING"
+  MEMBER OUTPUTMAPPING = 13 json="OUTPUT_MAPPING"
+  MEMBER SCRIPTRESULT = 14 json="SCRIPT_RESULT"
+  MEMBER DECISIONRESULT = 15 json="DECISION_RESULT"
+  MEMBER CALLACTIVITYINPUT = 16 json="CALL_ACTIVITY_INPUT"
+  MEMBER CALLACTIVITYOUTPUT = 17 json="CALL_ACTIVITY_OUTPUT"
+  MEMBER MULTIINSTANCEINPUTELEMENT = 18 json="MULTI_INSTANCE_INPUT_ELEMENT"
+  MEMBER MULTIINSTANCELOOPCOUNTER = 19 json="MULTI_INSTANCE_LOOP_COUNTER"
+  MEMBER MULTIINSTANCEOUTPUTELEMENT = 20 json="MULTI_INSTANCE_OUTPUT_ELEMENT"
+  MEMBER MULTIINSTANCEOUTPUTCOLLECTION = 21 json="MULTI_INSTANCE_OUTPUT_COLLECTION"
+  MEMBER ADHOCSUBPROCESSMETADATA = 22 json="AD_HOC_SUB_PROCESS_METADATA"
+  MEMBER ADHOCSUBPROCESSOUTPUTELEMENT = 23 json="AD_HOC_SUB_PROCESS_OUTPUT_ELEMENT"
+  MEMBER ADHOCSUBPROCESSOUTPUTCOLLECTION = 24 json="AD_HOC_SUB_PROCESS_OUTPUT_COLLECTION"
+  MEMBER UNKNOWN = 25 json="UNKNOWN"
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeExactMatch : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeExactMatch>]
+  PROP System.String Value { get; }
+  METHOD System.Boolean Equals(Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeExactMatch other)
+  METHOD static Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeExactMatch AssumeExists(System.String value)
+  METHOD static System.Boolean IsValid(System.String value)
+  METHOD virtual System.Boolean Equals(System.Object obj)
+  METHOD virtual System.Int32 GetHashCode()
+  METHOD virtual System.String ToString()
+
+TYPE Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeFilterProperty : sealed class
+  ATTR JsonConverter Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeFilterPropertyJsonConverter
+  CTOR ()
+  PROP Camunda.Orchestration.Sdk.LikeFilter? Like { get; set; } [JsonPropertyName("$like")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum? Eq { get; set; } [JsonPropertyName("$eq")]
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum? ExactMatch { get; set; }
+  PROP Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum? Neq { get; set; } [JsonPropertyName("$neq")]
+  PROP System.Boolean? Exists { get; set; } [JsonPropertyName("$exists")]
+  PROP System.Collections.Generic.List<Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum>? In { get; set; } [JsonPropertyName("$in")]
 
 TYPE Camunda.Orchestration.Sdk.VariableKey : struct interfaces=[Camunda.Orchestration.Sdk.ICamundaKey,System.IEquatable<Camunda.Orchestration.Sdk.VariableKey>]
   PROP System.String Value { get; }

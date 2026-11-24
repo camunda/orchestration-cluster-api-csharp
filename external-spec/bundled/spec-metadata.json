@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:914f89f26245982b7e11d9a3bdcbfccdc228e07fbf7bd7008279ed1d494d70ed",
+  "specHash": "sha256:f1835f69622ac3d3e861829f27826021facf49db86e4b2c2b775ea5d7eb30afa",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -1236,6 +1236,36 @@
       "stableId": "user-task-key"
     },
     {
+      "name": "VariableHistoryItemKey",
+      "semanticType": "VariableHistoryItemKey",
+      "category": "system-key",
+      "description": "System-generated key for a variable history item.",
+      "composition": {
+        "schemaKind": "allOf",
+        "refs": [
+          "LongKey"
+        ],
+        "inlineFragments": 0
+      },
+      "constraints": {
+        "pattern": "^-?[0-9]+$",
+        "minLength": 1,
+        "maxLength": 25
+      },
+      "examples": [
+        "2251799813683999"
+      ],
+      "extensions": {
+        "x-semantic-type": "VariableHistoryItemKey"
+      },
+      "flags": {
+        "semanticKey": true,
+        "includesLongKeyRef": true,
+        "deprecated": false
+      },
+      "stableId": "variable-history-item-key"
+    },
+    {
       "name": "VariableKey",
       "semanticType": "VariableKey",
       "category": "system-key",
@@ -2321,6 +2351,22 @@
       "stableId": "search-query-page-request"
     },
     {
+      "name": "SecretStatusFilterProperty",
+      "kind": "union-wrapper",
+      "description": "SecretStatusEnum property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "SecretStatusExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedSecretStatusFilter"
+        }
+      ],
+      "stableId": "secret-status-filter-property"
+    },
+    {
       "name": "SourceElementInstruction",
       "kind": "union-wrapper",
       "description": "Defines the source element identifier for the move instruction. It can either be a sourceElementId, or sourceElementInstanceKey.\n",
@@ -2366,6 +2412,70 @@
         }
       ],
       "stableId": "user-task-state-filter-property"
+    },
+    {
+      "name": "VariableHistoryItemActorTypeFilterProperty",
+      "kind": "union-wrapper",
+      "description": "VariableHistoryItemActorTypeEnum property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "VariableHistoryItemActorTypeExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedVariableHistoryItemActorTypeFilter"
+        }
+      ],
+      "stableId": "variable-history-item-actor-type-filter-property"
+    },
+    {
+      "name": "VariableHistoryItemKeyFilterProperty",
+      "kind": "union-wrapper",
+      "description": "VariableHistoryItemKey property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "VariableHistoryItemKeyExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedVariableHistoryItemKeyFilter"
+        }
+      ],
+      "stableId": "variable-history-item-key-filter-property"
+    },
+    {
+      "name": "VariableHistoryItemOperationTypeFilterProperty",
+      "kind": "union-wrapper",
+      "description": "VariableHistoryItemOperationTypeEnum property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "VariableHistoryItemOperationTypeExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedVariableHistoryItemOperationTypeFilter"
+        }
+      ],
+      "stableId": "variable-history-item-operation-type-filter-property"
+    },
+    {
+      "name": "VariableHistoryItemVariableOperationTypeFilterProperty",
+      "kind": "union-wrapper",
+      "description": "VariableHistoryItemVariableOperationTypeEnum property with full advanced search capabilities.",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "VariableHistoryItemVariableOperationTypeExactMatch"
+        },
+        {
+          "branchType": "ref",
+          "ref": "AdvancedVariableHistoryItemVariableOperationTypeFilter"
+        }
+      ],
+      "stableId": "variable-history-item-variable-operation-type-filter-property"
     },
     {
       "name": "VariableKeyFilterProperty",
@@ -3204,6 +3314,14 @@
       "method": "post",
       "tags": [
         "User task"
+      ]
+    },
+    {
+      "operationId": "searchVariableHistory",
+      "path": "/variables/history/search",
+      "method": "post",
+      "tags": [
+        "Variable"
       ]
     },
     {
@@ -10717,7 +10835,7 @@
         "Secret"
       ],
       "summary": "List secrets",
-      "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nA store may hold names outside the reference name charset (for example one containing a\ndot); those are omitted, since `/secrets/resolve` would reject them and no permission can\nbe granted on them.\n\nA returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,\nhowever, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads\na bare dash as the minus operator: a listed `camunda.secrets.db-password` is written\n`` =camunda.secrets.`db-password` `` in a BPMN input mapping.\n",
+      "description": "List the `camunda.secrets.*` references known for the caller's physical tenant.\n\nOnly references the caller holds `SECRET:READ` on are returned. This endpoint never\nreturns secret values, only the reference names.\n\nThe references are read from the secret stores configured for the caller's physical tenant.\nA store may hold names outside the reference name charset (for example one containing a\ndot); those are omitted, since `/secrets/resolve` would reject them and no permission can\nbe granted on them.\n\nA returned reference is usable verbatim with `/secrets/resolve`, although a secret that its\nstore does not report as `ACTIVE` may fail to resolve there. In a FEEL expression,\nhowever, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads\na bare dash as the minus operator: a listed `camunda.secrets.db-password` is written\n`` =camunda.secrets.`db-password` `` in a BPMN input mapping.\n\nPass `filter.status` to list only the secrets in the matching states, either as a single\nstatus or with the advanced operators (`$in`, `$neq`, ...). A store that does not report\nstates reports every secret as `ACTIVE`, so a filter that excludes `ACTIVE` returns\nnothing from it. The status filter does not widen access: a reference the caller may not read is\nnever returned, with or without a filter.\n",
       "eventuallyConsistent": false,
       "hasRequestBody": true,
       "requestBodyUnion": false,
@@ -13609,6 +13727,50 @@
       }
     },
     {
+      "operationId": "searchVariableHistory",
+      "path": "/variables/history/search",
+      "method": "post",
+      "tags": [
+        "Variable"
+      ],
+      "summary": "Search variable history",
+      "description": "Search for variable history items, which record the changes made to a variable's\nvalue over time. The audit log configuration decides which changes are recorded;\nby default, only changes made by users are.\n\nResults are sorted by `variableHistoryItemKey` ascending by default, which lists the\nchanges of one variable from oldest to newest. Across partitions, the key says nothing\nabout time: a search that spans partitions, for example by process definition, lists the\nchanges of one partition after the other.\n\nBy default, the endpoint truncates long variable values in the response. For the output\ncollection of a multi-instance element or an ad-hoc sub-process, the endpoint cuts the\nvalue at the size limit regardless of the `truncateValues` parameter. The truncation\nsize limit is configurable.",
+      "eventuallyConsistent": true,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": false,
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "truncateValues",
+          "required": false
+        }
+      ],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
+      "sourceFile": "variables.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "VariableHistoryItemSearchQuery",
+      "successResponseSchemaRef": "VariableHistoryItemSearchQueryResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": true,
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROCESS_DEFINITION",
+            "permissionType": "READ_PROCESS_INSTANCE"
+          }
+        ],
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    {
       "operationId": "searchVariables",
       "path": "/variables/search",
       "method": "post",
@@ -13896,10 +14058,10 @@
     }
   ],
   "integrity": {
-    "totalSemanticKeys": 44,
-    "totalUnions": 71,
-    "totalOperations": 249,
-    "totalEventuallyConsistent": 95,
+    "totalSemanticKeys": 45,
+    "totalUnions": 76,
+    "totalOperations": 250,
+    "totalEventuallyConsistent": 96,
     "totalDeprecatedEnumSchemas": 2,
     "totalSemanticProviders": 22
   }

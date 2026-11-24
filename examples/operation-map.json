@@ -1234,6 +1234,13 @@
       "label": "Get a variable"
     }
   ],
+  "searchVariableHistory": [
+    {
+      "file": "VariableElement.cs",
+      "region": "SearchVariableHistory",
+      "label": "Search variable history"
+    }
+  ],
   "searchVariables": [
     {
       "file": "VariableElement.cs",
