@@ -361,6 +361,11 @@ This is what job handler functions receive.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedSecretStatusFilter.html">AdvancedSecretStatusFilter</a></dt>
+      <dd><p>Advanced SecretStatusEnum filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedStringFilter.html">AdvancedStringFilter</a></dt>
       <dd><p>Advanced string filter.</p>
 </dd>
@@ -368,6 +373,26 @@ This is what job handler functions receive.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedUserTaskStateFilter.html">AdvancedUserTaskStateFilter</a></dt>
       <dd><p>Advanced UserTaskStateEnum filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedVariableHistoryItemActorTypeFilter.html">AdvancedVariableHistoryItemActorTypeFilter</a></dt>
+      <dd><p>Advanced VariableHistoryItemActorTypeEnum filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedVariableHistoryItemKeyFilter.html">AdvancedVariableHistoryItemKeyFilter</a></dt>
+      <dd><p>Advanced VariableHistoryItemKey filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedVariableHistoryItemOperationTypeFilter.html">AdvancedVariableHistoryItemOperationTypeFilter</a></dt>
+      <dd><p>Advanced VariableHistoryItemOperationTypeEnum filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.AdvancedVariableHistoryItemVariableOperationTypeFilter.html">AdvancedVariableHistoryItemVariableOperationTypeFilter</a></dt>
+      <dd><p>Advanced VariableHistoryItemVariableOperationTypeEnum filter.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3007,9 +3032,14 @@ element instance or process instance that defines the scope of a variable.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretListFilter.html">SecretListFilter</a></dt>
+      <dd><p>Secret list filter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretListRequest.html">SecretListRequest</a></dt>
-      <dd><p>Reserved for future filtering options. Currently takes no properties. The request body is
-optional: omitting it (or sending an empty object) applies no filters.</p>
+      <dd><p>Options for listing secrets. The request body is optional: omitting it, or sending an empty
+object, lists every secret the caller may read.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3032,6 +3062,11 @@ tenant.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretResolveResult.html">SecretResolveResult</a></dt>
       <dd><p>The per-reference outcome of a resolve request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretStatusFilterProperty.html">SecretStatusFilterProperty</a></dt>
+      <dd><p>SecretStatusEnum property with full advanced search capabilities.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -3510,6 +3545,56 @@ value is, and is surfaced here rather than silently dropped.
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableFilter.html">VariableFilter</a></dt>
       <dd><p>Variable filter request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeFilterProperty.html">VariableHistoryItemActorTypeFilterProperty</a></dt>
+      <dd><p>VariableHistoryItemActorTypeEnum property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemFilter.html">VariableHistoryItemFilter</a></dt>
+      <dd><p>Variable history item filter request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemKeyFilterProperty.html">VariableHistoryItemKeyFilterProperty</a></dt>
+      <dd><p>VariableHistoryItemKey property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeFilterProperty.html">VariableHistoryItemOperationTypeFilterProperty</a></dt>
+      <dd><p>VariableHistoryItemOperationTypeEnum property with full advanced search capabilities.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemResultBase.html">VariableHistoryItemResultBase</a></dt>
+      <dd><p>Variable history item response base.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuery.html">VariableHistoryItemSearchQuery</a></dt>
+      <dd><p>Variable history item search query request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemSearchQueryResult.html">VariableHistoryItemSearchQueryResult</a></dt>
+      <dd><p>Variable history item search query response.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuerySortRequest.html">VariableHistoryItemSearchQuerySortRequest</a></dt>
+      <dd><p>VariableHistoryItemSearchQuerySortRequest</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemSearchResult.html">VariableHistoryItemSearchResult</a></dt>
+      <dd><p>Variable history item search response item.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeFilterProperty.html">VariableHistoryItemVariableOperationTypeFilterProperty</a></dt>
+      <dd><p>VariableHistoryItemVariableOperationTypeEnum property with full advanced search capabilities.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -4110,6 +4195,11 @@ element instance in a BPMN process or the process instance itself.</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretStatusExactMatch.html">SecretStatusExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SignalKey.html">SignalKey</a></dt>
       <dd><p>System-generated key for an signal.</p>
 </dd>
@@ -4147,6 +4237,31 @@ element instance in a BPMN process or the process instance itself.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.Username.html">Username</a></dt>
       <dd><p>The unique name of a user.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeExactMatch.html">VariableHistoryItemActorTypeExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemKey.html">VariableHistoryItemKey</a></dt>
+      <dd><p>System-generated key for a variable history item.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemKeyExactMatch.html">VariableHistoryItemKeyExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeExactMatch.html">VariableHistoryItemOperationTypeExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeExactMatch.html">VariableHistoryItemVariableOperationTypeExactMatch</a></dt>
+      <dd><p>Matches the value exactly.</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -4766,6 +4881,21 @@ not be read. Whether the secret exists is not implied.</li>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.SecretStatusEnum.html">SecretStatusEnum</a></dt>
+      <dd><p>The state a secret store reports for a secret.</p>
+<ul>
+<li><code>ACTIVE</code>: the store reports the secret as usable.</li>
+<li><code>DISABLED</code>: the secret was disabled in its store.</li>
+<li><code>EXPIRED</code>: the secret's expiry date has passed.</li>
+<li><code>NOT_YET_ACTIVE</code>: the secret's activation date is in the future.</li>
+</ul>
+<p>A secret has exactly one status. When several apply, <code>DISABLED</code> wins over <code>EXPIRED</code>, and
+<code>EXPIRED</code> over <code>NOT_YET_ACTIVE</code>: a secret that is both disabled and expired is listed only
+as <code>DISABLED</code>, so an <code>EXPIRED</code> filter skips it.</p>
+<p>A store that cannot report states reports every secret as <code>ACTIVE</code>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.SortOrderEnum.html">SortOrderEnum</a></dt>
       <dd><p>The order in which to sort the related field.</p>
 </dd>
@@ -4832,6 +4962,30 @@ Note: FAILED state is only for legacy job-worker-based tasks.</p>
     <dl class="jumplist">
       <dt><a class="xref" href="Camunda.Orchestration.Sdk.ValidationMode.html">ValidationMode</a></dt>
       <dd><p>Validation modes for request/response validation.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemActorTypeEnum.html">VariableHistoryItemActorTypeEnum</a></dt>
+      <dd><p>The type of the actor who performed the operation. Camunda can add values in later
+versions; clients must handle unknown values gracefully.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemOperationTypeEnum.html">VariableHistoryItemOperationTypeEnum</a></dt>
+      <dd><p>The type of operation that produced this variable change. Camunda can add values in later
+versions; clients must handle unknown values gracefully.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemSearchQuerySortRequestField.html">VariableHistoryItemSearchQuerySortRequestField</a></dt>
+      <dd><p>The field to sort by.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Camunda.Orchestration.Sdk.VariableHistoryItemVariableOperationTypeEnum.html">VariableHistoryItemVariableOperationTypeEnum</a></dt>
+      <dd><p>What wrote this variable value, for example a job completion, a script result, or a
+multi-instance output collection. Camunda can add values in later versions; clients must
+handle unknown values gracefully.</p>
 </dd>
     </dl>
     <dl class="jumplist">
