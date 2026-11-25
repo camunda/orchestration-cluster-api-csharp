@@ -15,6 +15,14 @@ namespace Camunda.Orchestration.Sdk;
 /// <c>[JsonPropertyName]</c> on enum members (that was added in .NET 9), so
 /// this converter bridges the gap.
 /// </para>
+///
+/// <para>
+/// It is tolerant of spelling only. A value that is not a member of the enum at all is
+/// rejected with a <see cref="JsonException"/> naming the enum and the value. It must not
+/// fall back to <c>default(TEnum)</c>: that is the first declared member for almost every
+/// enum, so a value this SDK version does not know would silently read as a real one (an
+/// unknown process-instance state as <c>ACTIVE</c>). The other SDKs reject such a response too.
+/// </para>
 /// </summary>
 internal sealed class TolerantEnumConverterFactory : JsonConverterFactory
 {
@@ -70,12 +78,21 @@ internal sealed class TolerantEnumConverterFactory : JsonConverterFactory
             if (_apiNameMap.TryGetValue(str, out var result))
                 return result;
 
-            // Fallback: strip underscores and try case-insensitive parse
-            if (Enum.TryParse<TEnum>(str.Replace("_", ""), ignoreCase: true, out result))
+            // Fallback: strip underscores and try case-insensitive parse. IsDefined keeps out what
+            // TryParse also accepts but the API never sends: a numeric string ("7") or a
+            // comma-joined combination that names no declared member.
+            if (Enum.TryParse<TEnum>(str.Replace("_", ""), ignoreCase: true, out result)
+                && Enum.IsDefined(result))
                 return result;
 
-            return default;
+            throw new JsonException(
+                $"The JSON value '{Truncate(str)}' is not a known {typeof(TEnum).Name}. "
+                + "The server may have added a value that this SDK version does not know; "
+                + "update the SDK.");
         }
+
+        private static string Truncate(string value) =>
+            value.Length <= 100 ? value : value[..100] + "...";
 
         public override void Write(Utf8JsonWriter writer, TEnum value, JsonSerializerOptions options)
         {
