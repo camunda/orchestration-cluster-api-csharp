@@ -15,6 +15,14 @@ namespace Camunda.Orchestration.Sdk;
 /// <c>[JsonPropertyName]</c> on enum members (that was added in .NET 9), so
 /// this converter bridges the gap.
 /// </para>
+///
+/// <para>
+/// It is tolerant of spelling only. A value that is not a member of the enum at all is
+/// rejected with a <see cref="JsonException"/> naming the enum and the value. It must not
+/// fall back to <c>default(TEnum)</c>: that is the first declared member for almost every
+/// enum, so a value this SDK version does not know would silently read as a real one (an
+/// unknown process-instance state as <c>ACTIVE</c>). The other SDKs reject such a response too.
+/// </para>
 /// </summary>
 internal sealed class TolerantEnumConverterFactory : JsonConverterFactory
 {
@@ -31,10 +39,18 @@ internal sealed class TolerantEnumConverterFactory : JsonConverterFactory
     {
         // Build a lookup from UPPER_SNAKE_CASE (API value from [JsonPropertyName])
         // and from normalized (no underscores, case-insensitive) to the enum member.
-        private static readonly Dictionary<string, TEnum> _apiNameMap = BuildApiNameMap();
+        private static readonly Dictionary<string, TEnum> _apiNameMap = BuildApiNameMap(normalize: false);
 
-        private static Dictionary<string, TEnum> BuildApiNameMap()
+        // The same names with underscores removed, for the spelling fallback. Built from the
+        // declared members, so the fallback can only ever reach a declared member. It replaces
+        // Enum.TryParse, which also accepts a number ("0" is the first member), a list ("A,B"
+        // ORs two members into a third) and padding, none of which the API sends.
+        private static readonly Dictionary<string, TEnum> _normalizedNameMap = BuildApiNameMap(normalize: true);
+
+        private static Dictionary<string, TEnum> BuildApiNameMap(bool normalize)
         {
+            static string Key(string name, bool normalize) => normalize ? name.Replace("_", "") : name;
+
             var map = new Dictionary<string, TEnum>(StringComparer.OrdinalIgnoreCase);
             foreach (var member in typeof(TEnum).GetFields(
                 System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
@@ -42,14 +58,14 @@ internal sealed class TolerantEnumConverterFactory : JsonConverterFactory
                 var value = (TEnum)member.GetValue(null)!;
 
                 // Exact member name
-                map.TryAdd(member.Name, value);
+                map.TryAdd(Key(member.Name, normalize), value);
 
                 // [JsonPropertyName] attribute value (e.g. "BPMN_ELEMENT")
                 var jpn = member.GetCustomAttributes(typeof(JsonPropertyNameAttribute), false);
                 if (jpn.Length > 0)
                 {
                     var apiName = ((JsonPropertyNameAttribute)jpn[0]).Name;
-                    map.TryAdd(apiName, value);
+                    map.TryAdd(Key(apiName, normalize), value);
                 }
             }
             return map;
@@ -70,12 +86,18 @@ internal sealed class TolerantEnumConverterFactory : JsonConverterFactory
             if (_apiNameMap.TryGetValue(str, out var result))
                 return result;
 
-            // Fallback: strip underscores and try case-insensitive parse
-            if (Enum.TryParse<TEnum>(str.Replace("_", ""), ignoreCase: true, out result))
+            // Fallback: strip underscores and match a declared member case-insensitively.
+            if (_normalizedNameMap.TryGetValue(str.Replace("_", ""), out result))
                 return result;
 
-            return default;
+            throw new JsonException(
+                $"The JSON value '{Truncate(str)}' is not a known {typeof(TEnum).Name}. "
+                + "The server may have added a value that this SDK version does not know; "
+                + "update the SDK.");
         }
+
+        private static string Truncate(string value) =>
+            value.Length <= 100 ? value : value[..100] + "...";
 
         public override void Write(Utf8JsonWriter writer, TEnum value, JsonSerializerOptions options)
         {
