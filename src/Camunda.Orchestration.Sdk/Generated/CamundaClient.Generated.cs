@@ -118,7 +118,53 @@ public partial class CamundaClient
     /// in future releases.
     /// 
     /// </summary>
-    /// <remarks>Operation: activateProbes</remarks>
+    /// <remarks>
+    /// Operation: activateProbes
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ActivateProbesExample(ProbeId probeId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ActivateProbesAsync(new ProbeActivationRequest
+    ///     {
+    ///         ProbeIds = new List&lt;ProbeId&gt; { probeId },
+    ///         Worker = &quot;health-check-worker&quot;,
+    ///         MaxProbesToActivate = 10,
+    ///         RequestTimeout = 30000,
+    ///     });
+    /// 
+    ///     foreach (var probe in result.Probes)
+    ///     {
+    ///         Console.WriteLine(
+    ///             $&quot;Probe {probe.ProbeKey} ({probe.ProbeId}) must be answered by {probe.Deadline}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task ActivateProbesExample(ProbeId probeId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.ActivateProbesAsync(new ProbeActivationRequest
+    ///     {
+    ///         ProbeIds = new List&lt;ProbeId&gt; { probeId },
+    ///         Worker = &quot;health-check-worker&quot;,
+    ///         MaxProbesToActivate = 10,
+    ///         RequestTimeout = 30000,
+    ///     });
+    /// 
+    ///     foreach (var probe in result.Probes)
+    ///     {
+    ///         Console.WriteLine(
+    ///             $&quot;Probe {probe.ProbeKey} ({probe.ProbeId}) must be answered by {probe.Deadline}&quot;);
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProbeActivationResult> ActivateProbesAsync(ProbeActivationRequest body, CancellationToken ct = default)
     {
         var path = $"/probes/activation";
@@ -196,7 +242,47 @@ public partial class CamundaClient
     /// in future releases.
     /// 
     /// </summary>
-    /// <remarks>Operation: answerProbe</remarks>
+    /// <remarks>
+    /// Operation: answerProbe
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AnswerProbeExample(ProbeKey probeKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AnswerProbeAsync(
+    ///         probeKey,
+    ///         new ProbeOkAnswerRequest
+    ///         {
+    ///             Data = new
+    ///             {
+    ///                 Status = &quot;healthy&quot;,
+    ///                 CheckedAt = DateTimeOffset.UtcNow,
+    ///             },
+    ///         });
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task AnswerProbeExample(ProbeKey probeKey)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     await client.AnswerProbeAsync(
+    ///         probeKey,
+    ///         new ProbeOkAnswerRequest
+    ///         {
+    ///             Data = new
+    ///             {
+    ///                 Status = &quot;healthy&quot;,
+    ///                 CheckedAt = DateTimeOffset.UtcNow,
+    ///             },
+    ///         });
+    /// }
+    /// </code>
+    /// </example>
     public async Task AnswerProbeAsync(ProbeKey probeKey, ProbeAnswerRequest body, CancellationToken ct = default)
     {
         var path = $"/probes/{Uri.EscapeDataString(FormatParam(probeKey))}/answer";
@@ -1897,7 +1983,65 @@ public partial class CamundaClient
     /// in future releases.
     /// 
     /// </summary>
-    /// <remarks>Operation: createProbe</remarks>
+    /// <remarks>
+    /// Operation: createProbe
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateProbeExample(ProbeId probeId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateProbeAsync(new ProbeCreationRequest
+    ///     {
+    ///         ProbeId = probeId,
+    ///         Input = &quot;={ question: \&quot;health\&quot;, includeDetails: true }&quot;,
+    ///         RequestTimeout = 10000,
+    ///     });
+    /// 
+    ///     switch (result)
+    ///     {
+    ///         case ProbeOkResult ok:
+    ///             Console.WriteLine($&quot;Probe answered by {ok.Worker}: {ok.Data}&quot;);
+    ///             break;
+    ///         case ProbeUnsupportedResult unsupported:
+    ///             Console.WriteLine($&quot;Probe is unsupported by {unsupported.Worker}&quot;);
+    ///             break;
+    ///         case ProbeErrorResult error:
+    ///             Console.WriteLine($&quot;Probe failed in {error.Worker}: {error.Message}&quot;);
+    ///             break;
+    ///     }
+    /// }
+    /// </code>
+    /// </remarks>
+    /// <example>
+    /// <para><b>Example:</b></para>
+    /// <code>
+    /// public static async Task CreateProbeExample(ProbeId probeId)
+    /// {
+    ///     using var client = CamundaClient.Create();
+    /// 
+    ///     var result = await client.CreateProbeAsync(new ProbeCreationRequest
+    ///     {
+    ///         ProbeId = probeId,
+    ///         Input = &quot;={ question: \&quot;health\&quot;, includeDetails: true }&quot;,
+    ///         RequestTimeout = 10000,
+    ///     });
+    /// 
+    ///     switch (result)
+    ///     {
+    ///         case ProbeOkResult ok:
+    ///             Console.WriteLine($&quot;Probe answered by {ok.Worker}: {ok.Data}&quot;);
+    ///             break;
+    ///         case ProbeUnsupportedResult unsupported:
+    ///             Console.WriteLine($&quot;Probe is unsupported by {unsupported.Worker}&quot;);
+    ///             break;
+    ///         case ProbeErrorResult error:
+    ///             Console.WriteLine($&quot;Probe failed in {error.Worker}: {error.Message}&quot;);
+    ///             break;
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
     public async Task<ProbeResult> CreateProbeAsync(ProbeCreationRequest body, CancellationToken ct = default)
     {
         var path = $"/probes";
