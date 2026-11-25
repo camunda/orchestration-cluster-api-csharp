@@ -1,3 +1,11 @@
+# [11.0.0-alpha.18](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.17...v11.0.0-alpha.18) (2026-11-25)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts [skip ci] ([7879d9a](https://github.com/camunda/orchestration-cluster-api-csharp/commit/7879d9a967d825ce91f716d71ca780fc5c82104b))
+* reject unknown enum values instead of reading them as the first member ([#575](https://github.com/camunda/orchestration-cluster-api-csharp/issues/575)) ([7ee65c9](https://github.com/camunda/orchestration-cluster-api-csharp/commit/7ee65c902803edbb442d58837d0b57dd135adb3a))
+
 # [11.0.0-alpha.17](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.16...v11.0.0-alpha.17) (2026-11-25)
 
 
