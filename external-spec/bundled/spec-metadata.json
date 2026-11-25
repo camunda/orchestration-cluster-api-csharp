@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "specHash": "sha256:f1835f69622ac3d3e861829f27826021facf49db86e4b2c2b775ea5d7eb30afa",
+  "specHash": "sha256:aaebe938a1573864cae21403b7323b369e4e6e643df8fae8f241dc787718f6a7",
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",
@@ -946,6 +946,65 @@
         "deprecated": false
       },
       "stableId": "message-subscription-key"
+    },
+    {
+      "name": "ProbeId",
+      "semanticType": "ProbeId",
+      "category": "model-id",
+      "description": "The ID of a probe, as its worker registered it: 1 to 256 characters, without whitespace,\nand not `*`. The engine matches it to the probe IDs of polling workers by exact equality.\n",
+      "composition": {
+        "schemaKind": "inline",
+        "refs": [],
+        "inlineFragments": 0
+      },
+      "constraints": {
+        "pattern": "^\\S+$",
+        "minLength": 1,
+        "maxLength": 256,
+        "format": "ProbeId"
+      },
+      "examples": [
+        "validate-configuration/io.camunda:aws-credential:1"
+      ],
+      "extensions": {
+        "x-semantic-type": "ProbeId"
+      },
+      "flags": {
+        "semanticKey": true,
+        "includesLongKeyRef": false,
+        "deprecated": false
+      },
+      "stableId": "probe-id"
+    },
+    {
+      "name": "ProbeKey",
+      "semanticType": "ProbeKey",
+      "category": "system-key",
+      "description": "System-generated key for a probe.",
+      "composition": {
+        "schemaKind": "allOf",
+        "refs": [
+          "LongKey"
+        ],
+        "inlineFragments": 0
+      },
+      "constraints": {
+        "pattern": "^-?[0-9]+$",
+        "minLength": 1,
+        "maxLength": 25
+      },
+      "examples": [
+        "2251799813685464"
+      ],
+      "extensions": {
+        "x-semantic-type": "ProbeKey"
+      },
+      "flags": {
+        "semanticKey": true,
+        "includesLongKeyRef": true,
+        "deprecated": false
+      },
+      "stableId": "probe-key"
     },
     {
       "name": "ProcessDefinitionId",
@@ -2110,6 +2169,46 @@
         }
       ],
       "stableId": "operation-type-filter-property"
+    },
+    {
+      "name": "ProbeAnswerRequest",
+      "kind": "union-wrapper",
+      "description": "The answer of the worker, one of three shapes chosen by `outcome`.\n",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "ProbeOkAnswerRequest"
+        },
+        {
+          "branchType": "ref",
+          "ref": "ProbeUnsupportedAnswerRequest"
+        },
+        {
+          "branchType": "ref",
+          "ref": "ProbeErrorAnswerRequest"
+        }
+      ],
+      "stableId": "probe-answer-request"
+    },
+    {
+      "name": "ProbeResult",
+      "kind": "union-wrapper",
+      "description": "The answer of the worker, one of three shapes chosen by `outcome`.\n",
+      "branches": [
+        {
+          "branchType": "ref",
+          "ref": "ProbeOkResult"
+        },
+        {
+          "branchType": "ref",
+          "ref": "ProbeUnsupportedResult"
+        },
+        {
+          "branchType": "ref",
+          "ref": "ProbeErrorResult"
+        }
+      ],
+      "stableId": "probe-result"
     },
     {
       "name": "ProcessDefinitionIdFilterProperty",
@@ -8384,6 +8483,132 @@
       }
     },
     {
+      "operationId": "createProbe",
+      "path": "/probes",
+      "method": "post",
+      "tags": [
+        "Probe"
+      ],
+      "summary": "Create probe (alpha)",
+      "description": "Asks a worker a short question and waits for its answer in the same request.\n\nThe probe is routed on `probeId`: a worker that polls for this probe ID with\n`POST /v2/probes/activation` collects it and answers with\n`POST /v2/probes/{probeKey}/answer`. The engine evaluates `input` when the probe is\ncreated and injects the values of the secrets it references before a worker collects it.\n\nThe probe ends at its deadline, `requestTimeout` after the gateway received the request.\nWait at least `requestTimeout` plus one second for the HTTP response, so that you get the\nreason the probe ended instead of a client-side timeout. With `requestTimeout` absent or\n`0`, the deadline uses the cluster's request timeout, capped at 30 seconds.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": true,
+      "optionalTenantIdInBodyVariants": [
+        "ProbeCreationRequest"
+      ],
+      "optionalTenantIdsInBody": false,
+      "sourceFile": "probes.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ProbeCreationRequest",
+      "successResponseSchemaRef": "ProbeResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "PROBE",
+            "permissionType": "CREATE"
+          },
+          {
+            "dynamic": true,
+            "note": "SECRET:READ on each secret that the input references."
+          }
+        ],
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    {
+      "operationId": "activateProbes",
+      "path": "/probes/activation",
+      "method": "post",
+      "tags": [
+        "Probe"
+      ],
+      "summary": "Activate probes (alpha)",
+      "description": "Collects probes of the given probe IDs for a worker, up to the requested maximum.\n\nLike job activation, the request goes to every partition. When no probe is waiting, it is\nheld until a probe of one of these probe IDs is created or until `requestTimeout`. Probe\nIDs on which the caller lacks the `ANSWER` permission are skipped. The worker answers each\nprobe with `POST /v2/probes/{probeKey}/answer` before the probe's `deadline`.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": false,
+      "bodyOnly": true,
+      "pathParams": [],
+      "queryParams": [],
+      "requestBodyUnionRefs": [],
+      "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": true,
+      "sourceFile": "probes.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ProbeActivationRequest",
+      "successResponseSchemaRef": "ProbeActivationResult",
+      "successStatus": 200,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-permission-enforcement": "filter",
+        "x-required-permissions": [
+          {
+            "resourceType": "PROBE",
+            "permissionType": "ANSWER"
+          }
+        ],
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    {
+      "operationId": "answerProbe",
+      "path": "/probes/{probeKey}/answer",
+      "method": "post",
+      "tags": [
+        "Probe"
+      ],
+      "summary": "Answer probe (alpha)",
+      "description": "Sends a worker's answer to a probe it collected, which ends the probe.\n\nThe body is one of three shapes, chosen by `outcome`: `OK` with the result in `data`,\n`UNSUPPORTED`, or `ERROR` with a `message`. The client that created the probe gets this\nanswer with the name of the worker that collected the probe.\n\nThis endpoint is an alpha feature and may be subject to change\nin future releases.\n",
+      "eventuallyConsistent": false,
+      "hasRequestBody": true,
+      "requestBodyUnion": true,
+      "bodyOnly": false,
+      "pathParams": [
+        "probeKey"
+      ],
+      "queryParams": [],
+      "requestBodyUnionRefs": [
+        "ProbeOkAnswerRequest",
+        "ProbeUnsupportedAnswerRequest",
+        "ProbeErrorAnswerRequest"
+      ],
+      "optionalTenantIdInBody": false,
+      "optionalTenantIdInBodyVariants": [],
+      "optionalTenantIdsInBody": false,
+      "sourceFile": "probes.yaml",
+      "requestBodyContentTypes": [
+        "application/json"
+      ],
+      "requestBodySchemaRef": "ProbeAnswerRequest",
+      "successStatus": 204,
+      "vendorExtensions": {
+        "x-eventually-consistent": false,
+        "x-required-permissions": [
+          {
+            "resourceType": "PROBE",
+            "permissionType": "ANSWER"
+          }
+        ],
+        "x-added-in-version": "8.11",
+        "x-scope": "physical-tenant"
+      }
+    },
+    {
       "operationId": "resumeProcessDefinitions",
       "path": "/process-definitions/resumption",
       "method": "post",
@@ -13902,6 +14127,13 @@
       "stableId": "activated-job-result"
     },
     {
+      "schemaName": "ActivatedProbeResult",
+      "providers": [
+        "probeKey"
+      ],
+      "stableId": "activated-probe-result"
+    },
+    {
       "schemaName": "AgentInstanceCreationResult",
       "providers": [
         "agentInstanceKey"
@@ -14058,11 +14290,11 @@
     }
   ],
   "integrity": {
-    "totalSemanticKeys": 45,
-    "totalUnions": 76,
-    "totalOperations": 250,
+    "totalSemanticKeys": 47,
+    "totalUnions": 78,
+    "totalOperations": 253,
     "totalEventuallyConsistent": 96,
     "totalDeprecatedEnumSchemas": 2,
-    "totalSemanticProviders": 22
+    "totalSemanticProviders": 23
   }
 }
