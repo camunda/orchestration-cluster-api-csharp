@@ -1,3 +1,10 @@
+## [9.3.2](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.3.1...v9.3.2) (2026-11-25)
+
+
+### Bug Fixes
+
+* reject unknown enum values instead of reading them as the first member ([#575](https://github.com/camunda/orchestration-cluster-api-csharp/issues/575)) ([#577](https://github.com/camunda/orchestration-cluster-api-csharp/issues/577)) ([4ab38b6](https://github.com/camunda/orchestration-cluster-api-csharp/commit/4ab38b6010e780d8a80f1a41775eb0ee3ac63286))
+
 ## [9.3.1](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v9.3.0...v9.3.1) (2026-11-20)
 
 
