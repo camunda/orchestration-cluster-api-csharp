@@ -31117,7 +31117,7 @@
           },
           "endDate": {
             "type": "string",
-            "description": "The end date of the batch operation.\nThis is `null` if the batch operation is still running.\n",
+            "description": "The end date of the batch operation.\nThis is `null` while the batch operation is running or suspended. Once the `state` is\n`COMPLETED`, `PARTIALLY_COMPLETED` or `FAILED`, it is set only after all items have\nbeen processed (completed or failed). Until then it stays `null`, so a finished\n`state` does not guarantee an `endDate`.\nA canceled batch operation gets its end date when it is canceled.\n",
             "format": "date-time",
             "nullable": true
           },

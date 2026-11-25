@@ -9202,7 +9202,11 @@ public sealed class BatchOperationResponse
 
     /// <summary>
     /// The end date of the batch operation.
-    /// This is `null` if the batch operation is still running.
+    /// This is `null` while the batch operation is running or suspended. Once the `state` is
+    /// `COMPLETED`, `PARTIALLY_COMPLETED` or `FAILED`, it is set only after all items have
+    /// been processed (completed or failed). Until then it stays `null`, so a finished
+    /// `state` does not guarantee an `endDate`.
+    /// A canceled batch operation gets its end date when it is canceled.
     /// 
     /// </summary>
     [JsonPropertyName("endDate")]
