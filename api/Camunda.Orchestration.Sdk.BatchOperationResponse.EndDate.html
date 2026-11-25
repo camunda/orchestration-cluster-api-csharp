@@ -91,7 +91,7 @@
 
 
 <h1 id="Camunda_Orchestration_Sdk_BatchOperationResponse_EndDate_" data-uid="Camunda.Orchestration.Sdk.BatchOperationResponse.EndDate*" class="text-break">
-Property EndDate  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9208"><i class="bi bi-code-slash"></i></a>
+Property EndDate  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9212"><i class="bi bi-code-slash"></i></a>
 </h1>
 
 <div class="facts text-secondary">
@@ -121,11 +121,15 @@ Property EndDate  <a class="header-action link-secondary" title="View source" hr
 
 <h3 id="Camunda_Orchestration_Sdk_BatchOperationResponse_EndDate" data-uid="Camunda.Orchestration.Sdk.BatchOperationResponse.EndDate">
   EndDate
-  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9208"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9212"><i class="bi bi-code-slash"></i></a>
 </h3>
 
 <div class="markdown level1 summary"><p>The end date of the batch operation.
-This is <code>null</code> if the batch operation is still running.</p>
+This is <code>null</code> while the batch operation is running or suspended. Once the <code>state</code> is
+<code>COMPLETED</code>, <code>PARTIALLY_COMPLETED</code> or <code>FAILED</code>, it is set only after all items have
+been processed (completed or failed). Until then it stays <code>null</code>, so a finished
+<code>state</code> does not guarantee an <code>endDate</code>.
+A canceled batch operation gets its end date when it is canceled.</p>
 </div>
 <div class="markdown level1 conceptual"></div>
 
@@ -154,7 +158,7 @@ public DateTimeOffset? EndDate { get; set; }</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9208" class="edit-link">Edit this page</a>
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/Models.Generated.cs/#L9212" class="edit-link">Edit this page</a>
         </div>
 
 
