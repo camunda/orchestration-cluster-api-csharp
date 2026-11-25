@@ -1,3 +1,15 @@
+# [11.0.0-alpha.17](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.16...v11.0.0-alpha.17) (2026-11-25)
+
+
+### Bug Fixes
+
+* **gen:** regenerate artifacts [skip ci] ([255bcc3](https://github.com/camunda/orchestration-cluster-api-csharp/commit/255bcc34a6edeb8fa51504cdb3885f2bfda421e4))
+
+
+### Features
+
+* add example coverage for createProbe, activateProbes, answerProbe ([#574](https://github.com/camunda/orchestration-cluster-api-csharp/issues/574)) ([0d57d1b](https://github.com/camunda/orchestration-cluster-api-csharp/commit/0d57d1b5846d1616fcf9c3bfda08411b12ba382e))
+
 # [11.0.0-alpha.16](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.15...v11.0.0-alpha.16) (2026-11-24)
 
 
