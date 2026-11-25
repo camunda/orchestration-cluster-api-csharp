@@ -210,6 +210,18 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 </dd>
   </dl>
   <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.ActivateProbesAsync.html#Camunda_Orchestration_Sdk_CamundaClient_ActivateProbesAsync_Camunda_Orchestration_Sdk_ProbeActivationRequest_System_Threading_CancellationToken_">ActivateProbesAsync(ProbeActivationRequest, CancellationToken)</a></dt>
+    <dd><p>Activate probes (alpha)
+Collects probes of the given probe IDs for a worker, up to the requested maximum.</p>
+<p>Like job activation, the request goes to every partition. When no probe is waiting, it is
+held until a probe of one of these probe IDs is created or until <code>requestTimeout</code>. Probe
+IDs on which the caller lacks the <code>ANSWER</code> permission are skipped. The worker answers each
+probe with <code>POST /v2/probes/{probeKey}/answer</code> before the probe's <code>deadline</code>.</p>
+<p>This endpoint is an alpha feature and may be subject to change
+in future releases.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AddClockAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AddClockAsync_Camunda_Orchestration_Sdk_ClockAddRequest_System_Threading_CancellationToken_">AddClockAsync(ClockAddRequest, CancellationToken)</a></dt>
     <dd><p>Add time to internal clock
 Moves the Zeebe engine's internal clock forward or backward by the given offset.
@@ -221,6 +233,17 @@ the system time.</p>
 <p>The response contains the new time of the clock. The change reaches all partitions
 shortly after it is accepted, so a request sent right after it may still use the previous
 time.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.AnswerProbeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_AnswerProbeAsync_Camunda_Orchestration_Sdk_ProbeKey_Camunda_Orchestration_Sdk_ProbeAnswerRequest_System_Threading_CancellationToken_">AnswerProbeAsync(ProbeKey, ProbeAnswerRequest, CancellationToken)</a></dt>
+    <dd><p>Answer probe (alpha)
+Sends a worker's answer to a probe it collected, which ends the probe.</p>
+<p>The body is one of three shapes, chosen by <code>outcome</code>: <code>OK</code> with the result in <code>data</code>,
+<code>UNSUPPORTED</code>, or <code>ERROR</code> with a <code>message</code>. The client that created the probe gets this
+answer with the name of the worker that collected the probe.</p>
+<p>This endpoint is an alpha feature and may be subject to change
+in future releases.</p>
 </dd>
   </dl>
   <dl class="jumplist">
@@ -521,6 +544,22 @@ The job is auto-completed with no variables on success.</p>
     <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateMappingRuleAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateMappingRuleAsync_Camunda_Orchestration_Sdk_MappingRuleCreateRequest_System_Threading_CancellationToken_">CreateMappingRuleAsync(MappingRuleCreateRequest?, CancellationToken)</a></dt>
     <dd><p>Create mapping rule
 Create a new mapping rule</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="Camunda.Orchestration.Sdk.CamundaClient.CreateProbeAsync.html#Camunda_Orchestration_Sdk_CamundaClient_CreateProbeAsync_Camunda_Orchestration_Sdk_ProbeCreationRequest_System_Threading_CancellationToken_">CreateProbeAsync(ProbeCreationRequest, CancellationToken)</a></dt>
+    <dd><p>Create probe (alpha)
+Asks a worker a short question and waits for its answer in the same request.</p>
+<p>The probe is routed on <code>probeId</code>: a worker that polls for this probe ID with
+<code>POST /v2/probes/activation</code> collects it and answers with
+<code>POST /v2/probes/{probeKey}/answer</code>. The engine evaluates <code>input</code> when the probe is
+created and injects the values of the secrets it references before a worker collects it.</p>
+<p>The probe ends at its deadline, <code>requestTimeout</code> after the gateway received the request.
+Wait at least <code>requestTimeout</code> plus one second for the HTTP response, so that you get the
+reason the probe ended instead of a client-side timeout. With <code>requestTimeout</code> absent or
+<code>0</code>, the deadline uses the cluster's request timeout, capped at 30 seconds.</p>
+<p>This endpoint is an alpha feature and may be subject to change
+in future releases.</p>
 </dd>
   </dl>
   <dl class="jumplist">

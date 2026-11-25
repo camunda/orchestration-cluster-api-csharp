@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Method ActivateProbesAsync | Camunda C# SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Method ActivateProbesAsync | Camunda C# SDK ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/camunda/orchestration-cluster-api-csharp/new/main/apiSpec/new?filename=Camunda_Orchestration_Sdk_CamundaClient_ActivateProbesAsync_.md&amp;value=---%0Auid%3A%20Camunda.Orchestration.Sdk.CamundaClient.ActivateProbesAsync*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Camunda.Orchestration.Sdk">
+            Camunda.Orchestration.Sdk
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateProbesAsync*">
+
+
+
+
+
+<h1 id="Camunda_Orchestration_Sdk_CamundaClient_ActivateProbesAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateProbesAsync*" class="text-break">
+Method ActivateProbesAsync  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L168"><i class="bi bi-code-slash"></i></a>
+</h1>
+
+<div class="facts text-secondary">
+  <dl><dt>Namespace</dt><dd><span class="xref">Camunda</span>.<span class="xref">Orchestration</span>.<a class="xref" href="Camunda.Orchestration.Sdk.html">Sdk</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Camunda.Orchestration.Sdk.dll</dd></dl>
+</div>
+
+<div class="markdown summary"></div>
+<div class="markdown conceptual"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="Camunda_Orchestration_Sdk_CamundaClient_ActivateProbesAsync_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateProbesAsync*"></a>
+
+<h3 id="Camunda_Orchestration_Sdk_CamundaClient_ActivateProbesAsync_Camunda_Orchestration_Sdk_ProbeActivationRequest_System_Threading_CancellationToken_" data-uid="Camunda.Orchestration.Sdk.CamundaClient.ActivateProbesAsync(Camunda.Orchestration.Sdk.ProbeActivationRequest,System.Threading.CancellationToken)">
+  ActivateProbesAsync(ProbeActivationRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L168"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Activate probes (alpha)
+Collects probes of the given probe IDs for a worker, up to the requested maximum.</p>
+<p>Like job activation, the request goes to every partition. When no probe is waiting, it is
+held until a probe of one of these probe IDs is created or until <code>requestTimeout</code>. Probe
+IDs on which the caller lacks the <code>ANSWER</code> permission are skipped. The worker answers each
+probe with <code>POST /v2/probes/{probeKey}/answer</code> before the probe's <code>deadline</code>.</p>
+<p>This endpoint is an alpha feature and may be subject to change
+in future releases.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">public Task&lt;ProbeActivationResult&gt; ActivateProbesAsync(ProbeActivationRequest body, CancellationToken ct = default)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>body</code> <a class="xref" href="Camunda.Orchestration.Sdk.ProbeActivationRequest.html">ProbeActivationRequest</a></dt>
+  <dd></dd>
+  <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+  <dd></dd>
+</dl>
+
+<h4 class="section">Returns</h4>
+<dl class="parameters">
+  <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Camunda.Orchestration.Sdk.ProbeActivationResult.html">ProbeActivationResult</a>&gt;</dt>
+  <dd></dd>
+</dl>
+
+
+
+
+
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ActivateProbesAsync_Camunda_Orchestration_Sdk_ProbeActivationRequest_System_Threading_CancellationToken__examples">Examples</h4>
+<pre><code class="lang-csharp">public static async Task ActivateProbesExample(ProbeId probeId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.ActivateProbesAsync(new ProbeActivationRequest
+    {
+        ProbeIds = new List&lt;ProbeId&gt; { probeId },
+        Worker = &quot;health-check-worker&quot;,
+        MaxProbesToActivate = 10,
+        RequestTimeout = 30000,
+    });
+
+    foreach (var probe in result.Probes)
+    {
+        Console.WriteLine(
+            $&quot;Probe {probe.ProbeKey} ({probe.ProbeId}) must be answered by {probe.Deadline}&quot;);
+    }
+}
+</code></pre>
+
+<h4 class="section" id="Camunda_Orchestration_Sdk_CamundaClient_ActivateProbesAsync_Camunda_Orchestration_Sdk_ProbeActivationRequest_System_Threading_CancellationToken__remarks">Remarks</h4>
+<div class="markdown level1 remarks"><p>Operation: activateProbes</p>
+<p><b>Example:</b></p>
+<pre><code class="lang-csharp">public static async Task ActivateProbesExample(ProbeId probeId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.ActivateProbesAsync(new ProbeActivationRequest
+    {
+        ProbeIds = new List&lt;ProbeId&gt; { probeId },
+        Worker = "health-check-worker",
+        MaxProbesToActivate = 10,
+        RequestTimeout = 30000,
+    });
+
+    foreach (var probe in result.Probes)
+    {
+        Console.WriteLine(
+            $"Probe {probe.ProbeKey} ({probe.ProbeId}) must be answered by {probe.Deadline}");
+    }
+}</code></pre>
+</div>
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/camunda/orchestration-cluster-api-csharp/blob/main/src/Camunda.Orchestration.Sdk/Generated/CamundaClient.Generated.cs/#L168" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Camunda 8 Orchestration Cluster API — C# SDK
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
