@@ -39,10 +39,18 @@ internal sealed class TolerantEnumConverterFactory : JsonConverterFactory
     {
         // Build a lookup from UPPER_SNAKE_CASE (API value from [JsonPropertyName])
         // and from normalized (no underscores, case-insensitive) to the enum member.
-        private static readonly Dictionary<string, TEnum> _apiNameMap = BuildApiNameMap();
+        private static readonly Dictionary<string, TEnum> _apiNameMap = BuildApiNameMap(normalize: false);
 
-        private static Dictionary<string, TEnum> BuildApiNameMap()
+        // The same names with underscores removed, for the spelling fallback. Built from the
+        // declared members, so the fallback can only ever reach a declared member. It replaces
+        // Enum.TryParse, which also accepts a number ("0" is the first member), a list ("A,B"
+        // ORs two members into a third) and padding, none of which the API sends.
+        private static readonly Dictionary<string, TEnum> _normalizedNameMap = BuildApiNameMap(normalize: true);
+
+        private static Dictionary<string, TEnum> BuildApiNameMap(bool normalize)
         {
+            static string Key(string name, bool normalize) => normalize ? name.Replace("_", "") : name;
+
             var map = new Dictionary<string, TEnum>(StringComparer.OrdinalIgnoreCase);
             foreach (var member in typeof(TEnum).GetFields(
                 System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
@@ -50,14 +58,14 @@ internal sealed class TolerantEnumConverterFactory : JsonConverterFactory
                 var value = (TEnum)member.GetValue(null)!;
 
                 // Exact member name
-                map.TryAdd(member.Name, value);
+                map.TryAdd(Key(member.Name, normalize), value);
 
                 // [JsonPropertyName] attribute value (e.g. "BPMN_ELEMENT")
                 var jpn = member.GetCustomAttributes(typeof(JsonPropertyNameAttribute), false);
                 if (jpn.Length > 0)
                 {
                     var apiName = ((JsonPropertyNameAttribute)jpn[0]).Name;
-                    map.TryAdd(apiName, value);
+                    map.TryAdd(Key(apiName, normalize), value);
                 }
             }
             return map;
@@ -78,11 +86,8 @@ internal sealed class TolerantEnumConverterFactory : JsonConverterFactory
             if (_apiNameMap.TryGetValue(str, out var result))
                 return result;
 
-            // Fallback: strip underscores and try case-insensitive parse. IsDefined keeps out what
-            // TryParse also accepts but the API never sends: a numeric string ("7") or a
-            // comma-joined combination that names no declared member.
-            if (Enum.TryParse<TEnum>(str.Replace("_", ""), ignoreCase: true, out result)
-                && Enum.IsDefined(result))
+            // Fallback: strip underscores and match a declared member case-insensitively.
+            if (_normalizedNameMap.TryGetValue(str.Replace("_", ""), out result))
                 return result;
 
             throw new JsonException(

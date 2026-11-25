@@ -53,6 +53,39 @@ public class UnknownEnumValueTests : IDisposable
         Assert.Contains(enumType.Name, ex.Message, StringComparison.Ordinal);
     }
 
+    // Enum.TryParse, which the spelling fallback used to rely on, also accepts forms the API never
+    // sends: a number ("0" is the first member, whatever its name), a list ("A,B" ORs two members
+    // into a third), and padding. Each would read as a real member, so none may be accepted.
+    [Theory]
+    [MemberData(nameof(PublicEnumTypes))]
+    public void NumbersListsAndPadding_AreRejected_ForEveryEnum(Type enumType)
+    {
+        var names = Enum.GetNames(enumType);
+        var values = Enum.GetValues(enumType).Cast<object>().Select(v => Convert.ToInt64(v, System.Globalization.CultureInfo.InvariantCulture)).ToArray();
+        var undeclared = values.Max() + 1000;
+
+        var forms = new List<string>
+        {
+            // a declared number, an undeclared one, and a signed one
+            values[0].ToString(System.Globalization.CultureInfo.InvariantCulture),
+            undeclared.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            "+" + values[0].ToString(System.Globalization.CultureInfo.InvariantCulture),
+            // padding around a valid name
+            " " + names[0] + " ",
+        };
+        if (names.Length > 1)
+            forms.Add(names[0] + "," + names[1]);
+
+        foreach (var form in forms)
+        {
+            var json = JsonSerializer.Serialize(form);
+            var ex = Record.Exception(() => JsonSerializer.Deserialize(json, enumType, s_options));
+            Assert.True(
+                ex is JsonException,
+                $"{enumType.Name} accepted {json} (result: {(ex is null ? JsonSerializer.Deserialize(json, enumType, s_options) : ex.GetType().Name)})");
+        }
+    }
+
     [Fact]
     public void AnUnknownValue_IsRejected_InsideAnObject_WithItsPath()
     {
