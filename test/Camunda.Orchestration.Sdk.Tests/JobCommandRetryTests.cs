@@ -238,6 +238,81 @@ public class JobCommandRetryTests
         Assert.Equal(0, handler.Count("/v2/jobs/222/failure"));
     }
 
+    public static IEnumerable<object[]> UnknownOutcomeTransportFailures() => new[]
+    {
+        new object[] { "timeout" },
+        new object[] { "response-ended" },
+        new object[] { "unknown" },
+    };
+
+    private static Exception TransportFailure(string kind) => kind switch
+    {
+        "timeout" => new TaskCanceledException("timeout", new TimeoutException()),
+        "response-ended" => new HttpRequestException(HttpRequestError.ResponseEnded, "ended"),
+        "unknown" => new HttpRequestException(HttpRequestError.Unknown, "unknown"),
+        _ => throw new ArgumentOutOfRangeException(nameof(kind)),
+    };
+
+    [Theory]
+    [MemberData(nameof(UnknownOutcomeTransportFailures))]
+    public async Task Worker_does_not_fail_job_after_unknown_outcome_transport_failure(string kind)
+    {
+        // The worker's own token stays uncancelled: only the completion request fails.
+        var handler = new StubHandler(path => path.EndsWith("/completion", StringComparison.Ordinal)
+            ? throw TransportFailure(kind)
+            : new HttpResponseMessage(HttpStatusCode.NoContent));
+        using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
+
+        await using var worker = client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "t", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false },
+            (_, _) => Task.FromResult<object?>(null));
+        worker.Start();
+
+        // Safety-net deadline, not a correctness signal.
+        await WaitUntilAsync(() => handler.Count("/v2/jobs/222/completion") == 1 && worker.ActiveJobs == 0);
+        await worker.StopAsync(TimeSpan.FromSeconds(1));
+
+        Assert.Equal(1, handler.Count("/v2/jobs/222/completion"));
+        Assert.Equal(0, handler.Count("/v2/jobs/222/failure"));
+        Assert.Equal(0, worker.ActiveJobs);
+    }
+
+    [Theory]
+    [InlineData("completion")]
+    [InlineData("failure")]
+    public async Task Job_command_without_body_still_sends_content(string command)
+    {
+        // Body-less requests may be transparently resent by SocketsHttpHandler after a lost
+        // response; job commands must therefore always carry content.
+        var withContent = 0;
+        var handler = new StubHandler(_ => new HttpResponseMessage(HttpStatusCode.NoContent), r =>
+        {
+            if (r.Content != null)
+                Interlocked.Increment(ref withContent);
+        });
+        using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
+
+        await (command == "completion"
+            ? client.CompleteJobAsync(JobKey.AssumeExists("1"))
+            : client.FailJobAsync(JobKey.AssumeExists("1")));
+
+        Assert.Equal(1, handler.Count($"/v2/jobs/1/{command}"));
+        Assert.Equal(1, withContent);
+    }
+
+    [Theory]
+    [InlineData("POST", "/jobs/1/completion", true)]
+    [InlineData("POST", "/jobs/1/failure", true)]
+    [InlineData("POST", "/jobs/1/error", true)]
+    [InlineData("GET", "/jobs/1/completion", false)]
+    [InlineData("POST", "/jobs/activation", false)]
+    [InlineData("POST", "/process-instances/1/cancellation", false)]
+    public void Job_command_paths_are_recognised(string method, string path, bool expected)
+    {
+        Assert.Equal(expected, CamundaClient.IsJobCommandPath(new HttpMethod(method), path));
+    }
+
+
     private static HttpResponseMessage Status(int status) => new((HttpStatusCode)status)
     {
         Content = new StringContent(
@@ -264,7 +339,7 @@ public class JobCommandRetryTests
          "listenerEventType":"UNSPECIFIED"}
         """;
 
-    private sealed class StubHandler(Func<string, HttpResponseMessage> respond) : HttpMessageHandler
+    private sealed class StubHandler(Func<string, HttpResponseMessage> respond, Action<HttpRequestMessage>? inspect = null) : HttpMessageHandler
     {
         private readonly ConcurrentDictionary<string, int> _counts = new();
         private int _polls;
@@ -284,6 +359,7 @@ public class JobCommandRetryTests
                 });
             }
             _counts.AddOrUpdate(path, 1, (_, n) => n + 1);
+            inspect?.Invoke(request);
             return Task.FromResult(respond(path));
         }
     }

@@ -189,6 +189,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
             var json = JsonSerializer.Serialize(body, _jsonOptions);
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
         }
+        else if (IsJobCommandPath(method, path))
+        {
+            // A body-less request is one SocketsHttpHandler may transparently resend when the
+            // connection closes before a response arrives, even if the server already applied
+            // it. Job commands are not idempotent (#579), so always give them content.
+            request.Content = new StringContent("{}", Encoding.UTF8, "application/json");
+        }
 
         SdkUserAgent.Apply(request, _config.UserAgent, _httpClient.DefaultRequestHeaders.UserAgent);
         var response = await _httpClient.SendAsync(request, ct);
@@ -219,6 +226,16 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
     }
 
     /// <summary>
+    /// Whether a request is a non-idempotent job command (<c>POST /jobs/{key}/completion|failure|error</c>).
+    /// </summary>
+    internal static bool IsJobCommandPath(HttpMethod method, string path) =>
+        method == HttpMethod.Post
+        && path.StartsWith("/jobs/", StringComparison.Ordinal)
+        && (path.EndsWith("/completion", StringComparison.Ordinal)
+            || path.EndsWith("/failure", StringComparison.Ordinal)
+            || path.EndsWith("/error", StringComparison.Ordinal));
+
+    /// <summary>
     /// Execute an HTTP request that returns no content (void operations like DELETE).
     /// </summary>
     internal async Task SendVoidAsync(
@@ -237,6 +254,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         {
             var json = JsonSerializer.Serialize(body, _jsonOptions);
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+        }
+        else if (IsJobCommandPath(method, path))
+        {
+            // A body-less request is one SocketsHttpHandler may transparently resend when the
+            // connection closes before a response arrives, even if the server already applied
+            // it. Job commands are not idempotent (#579), so always give them content.
+            request.Content = new StringContent("{}", Encoding.UTF8, "application/json");
         }
 
         SdkUserAgent.Apply(request, _config.UserAgent, _httpClient.DefaultRequestHeaders.UserAgent);
@@ -274,6 +298,13 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         {
             var json = JsonSerializer.Serialize(body, _jsonOptions);
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+        }
+        else if (IsJobCommandPath(method, path))
+        {
+            // A body-less request is one SocketsHttpHandler may transparently resend when the
+            // connection closes before a response arrives, even if the server already applied
+            // it. Job commands are not idempotent (#579), so always give them content.
+            request.Content = new StringContent("{}", Encoding.UTF8, "application/json");
         }
 
         SdkUserAgent.Apply(request, _config.UserAgent, _httpClient.DefaultRequestHeaders.UserAgent);
