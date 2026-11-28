@@ -136,7 +136,7 @@ public class JobCommandRetryTests
     [InlineData("completion")]
     [InlineData("failure")]
     [InlineData("error")]
-    public async Task Job_command_500_resource_exhausted_is_retried(string command)
+    public async Task Job_command_500_resource_exhausted_is_not_retried(string command)
     {
         var handler = new StubHandler(_ => new HttpResponseMessage(HttpStatusCode.InternalServerError)
         {
@@ -148,8 +148,8 @@ public class JobCommandRetryTests
 
         var ex = await Assert.ThrowsAnyAsync<Exception>(() => Invoke(client, command));
 
-        Assert.Equal(3, handler.Count($"/v2/jobs/1/{command}"));
-        Assert.False(HttpRetryExecutor.IsOutcomeUnknown(ex));
+        Assert.Equal(1, handler.Count($"/v2/jobs/1/{command}"));
+        Assert.True(HttpRetryExecutor.IsOutcomeUnknown(ex));
     }
 
     [Theory]
@@ -172,6 +172,48 @@ public class JobCommandRetryTests
         await worker.StopAsync(TimeSpan.FromSeconds(1));
 
         Assert.Equal(0, handler.Count("/v2/jobs/222/failure"));
+    }
+
+    [Fact]
+    public async Task Worker_does_not_fail_job_after_404_http_request_exception()
+    {
+        var handler = new StubHandler(path => path.EndsWith("/completion", StringComparison.Ordinal)
+            ? throw new HttpRequestException("not found", null, HttpStatusCode.NotFound)
+            : new HttpResponseMessage(HttpStatusCode.NoContent));
+        using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
+
+        await using var worker = client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "t", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false },
+            (_, _) => Task.FromResult<object?>(null));
+        worker.Start();
+
+        // Safety-net deadline, not a correctness signal.
+        await WaitUntilAsync(() => handler.Count("/v2/jobs/222/completion") == 1 && worker.ActiveJobs == 0);
+        await worker.StopAsync(TimeSpan.FromSeconds(1));
+
+        Assert.Equal(1, handler.Count("/v2/jobs/222/completion"));
+        Assert.Equal(0, handler.Count("/v2/jobs/222/failure"));
+    }
+
+    [Fact]
+    public async Task Worker_fails_job_when_completion_is_rejected_permanently()
+    {
+        var handler = new StubHandler(path => path.EndsWith("/completion", StringComparison.Ordinal)
+            ? Status(400)
+            : new HttpResponseMessage(HttpStatusCode.NoContent));
+        using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
+
+        await using var worker = client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "t", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false },
+            (_, _) => Task.FromResult<object?>(null));
+        worker.Start();
+
+        // Safety-net deadline, not a correctness signal.
+        await WaitUntilAsync(() => handler.Count("/v2/jobs/222/failure") == 1 && worker.ActiveJobs == 0);
+        await worker.StopAsync(TimeSpan.FromSeconds(1));
+
+        Assert.Equal(1, handler.Count("/v2/jobs/222/completion"));
+        Assert.Equal(1, handler.Count("/v2/jobs/222/failure"));
     }
 
     [Fact]

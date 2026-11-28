@@ -114,14 +114,14 @@ internal static class HttpRetryExecutor
     }
 
     /// <summary>
-    /// Whether the failure proves the command was not applied: HTTP 429/503, a backpressure
-    /// rejection (500 RESOURCE_EXHAUSTED), or a connection
-    /// failure before the request was sent.
+    /// Whether the failure proves the command was not applied: HTTP 429/503, or a connection
+    /// failure before the request was sent. Any 500 (including RESOURCE_EXHAUSTED) is treated
+    /// as an unknown outcome and never retried for job commands (#579); it still feeds the
+    /// backpressure manager independently of retry eligibility.
     /// </summary>
     internal static bool IsNotApplied(Exception ex) => ex switch
     {
-        // A 500 RESOURCE_EXHAUSTED is a broker backpressure rejection: not applied.
-        HttpSdkException s => s.Status is 429 or 503 || s.IsBackpressure,
+        HttpSdkException s => s.Status is 429 or 503,
         HttpRequestException { StatusCode: { } code } => code is HttpStatusCode.TooManyRequests or HttpStatusCode.ServiceUnavailable,
         HttpRequestException h => h.HttpRequestError is HttpRequestError.ConnectionError
             or HttpRequestError.NameResolutionError
@@ -135,7 +135,7 @@ internal static class HttpRetryExecutor
     /// </summary>
     internal static bool IsOutcomeUnknown(Exception ex) => ex switch
     {
-        HttpSdkException s => s.Status is >= 500 and not 503 && !s.IsBackpressure,
+        HttpSdkException s => s.Status is >= 500 and not 503,
         HttpRequestException { StatusCode: { } code } => (int)code >= 500 && code != HttpStatusCode.ServiceUnavailable,
         HttpRequestException => !IsNotApplied(ex),
         OperationCanceledException => true,

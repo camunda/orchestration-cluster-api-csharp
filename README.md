@@ -395,6 +395,7 @@ Job commands (`CompleteJobAsync`, `FailJobAsync`, `ThrowJobErrorAsync`) are not 
 - They are **never** retried on `500`, `502`, `504`, a client timeout, or a connection lost after the request was sent. The outcome of these is unknown: the command may have been applied.
 - When a job worker's completion has an unknown outcome, the worker does **not** send a follow-up `failJob`. It logs a warning ("outcome unknown; the job may have completed, otherwise it will time out and be re-activated") and frees the slot. If the command was not applied, the job timeout makes the job available again.
 - A `404` on a job command is logged at warning level as "job not found (already completed, failed or timed out)", without a stack trace.
+- If completion fails with a permanent error (for example HTTP `400`, or variables that cannot be serialized), the worker fails the job as it does for a handler error, so it can reach an incident.
 
 All other operations keep the retry policy above.
 

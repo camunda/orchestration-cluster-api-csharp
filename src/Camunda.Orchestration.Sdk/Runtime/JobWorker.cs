@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 
@@ -664,10 +665,11 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 // Outcome unknown or job not found: never follow up with failJob (#579).
                 return;
             }
-            catch (Exception ex) when (!(ex is OperationCanceledException && ct.IsCancellationRequested))
+            catch (Exception ex) when (HttpRetryExecutor.IsNotApplied(ex))
             {
-                // The handler succeeded; only reporting it failed (e.g. retries exhausted on
-                // 429/503). Never follow up with failJob, which would burn a retry for work that
+                // The handler succeeded; only reporting it failed (retries exhausted on 429/503,
+                // or a connection failure before sending). Any other failure (e.g. HTTP 400 or a
+                // serialization error) is permanent and falls through to the auto-fail path. Never follow up with failJob, which would burn a retry for work that
                 // succeeded: the job times out and is re-activated instead (#579).
                 _logger.LogWarning(ex, "JobWorker '{Name}': failed to complete job {JobKey}; it will be re-activated after its timeout",
                     _name, job.JobKey);
@@ -755,7 +757,7 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
     /// </summary>
     private bool TryLogUnappliedJobCommand(Exception ex, ActivatedJob job, string command)
     {
-        if (ex is HttpSdkException { Status: 404 })
+        if (ex is HttpSdkException { Status: 404 } or HttpRequestException { StatusCode: HttpStatusCode.NotFound })
         {
             _logger.LogWarning(
                 "JobWorker '{Name}': {Command} for job {JobKey}: job not found (already completed, failed or timed out)",
