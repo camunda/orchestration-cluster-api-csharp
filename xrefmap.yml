@@ -16499,13 +16499,13 @@ references:
   fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchDecisionRequirementsAsync
   nameWithType: CamundaClient.SearchDecisionRequirementsAsync
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceIncidentsAsync(Camunda.Orchestration.Sdk.ElementInstanceKey,Camunda.Orchestration.Sdk.IncidentSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.IncidentSearchQueryResult},System.Threading.CancellationToken)
-  name: SearchElementInstanceIncidentsAsync(ElementInstanceKey, IncidentSearchQuery, ConsistencyOptions<IncidentSearchQueryResult>?, CancellationToken)
+  name: SearchElementInstanceIncidentsAsync(ElementInstanceKey, IncidentSearchQuery?, ConsistencyOptions<IncidentSearchQueryResult>?, CancellationToken)
   href: api/Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceIncidentsAsync.html#Camunda_Orchestration_Sdk_CamundaClient_SearchElementInstanceIncidentsAsync_Camunda_Orchestration_Sdk_ElementInstanceKey_Camunda_Orchestration_Sdk_IncidentSearchQuery_Camunda_Orchestration_Sdk_ConsistencyOptions_Camunda_Orchestration_Sdk_IncidentSearchQueryResult__System_Threading_CancellationToken_
   commentId: M:Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceIncidentsAsync(Camunda.Orchestration.Sdk.ElementInstanceKey,Camunda.Orchestration.Sdk.IncidentSearchQuery,Camunda.Orchestration.Sdk.ConsistencyOptions{Camunda.Orchestration.Sdk.IncidentSearchQueryResult},System.Threading.CancellationToken)
   name.vb: SearchElementInstanceIncidentsAsync(ElementInstanceKey, IncidentSearchQuery, ConsistencyOptions(Of IncidentSearchQueryResult), CancellationToken)
-  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceIncidentsAsync(Camunda.Orchestration.Sdk.ElementInstanceKey, Camunda.Orchestration.Sdk.IncidentSearchQuery, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.IncidentSearchQueryResult>?, System.Threading.CancellationToken)
+  fullName: Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceIncidentsAsync(Camunda.Orchestration.Sdk.ElementInstanceKey, Camunda.Orchestration.Sdk.IncidentSearchQuery?, Camunda.Orchestration.Sdk.ConsistencyOptions<Camunda.Orchestration.Sdk.IncidentSearchQueryResult>?, System.Threading.CancellationToken)
   fullName.vb: Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceIncidentsAsync(Camunda.Orchestration.Sdk.ElementInstanceKey, Camunda.Orchestration.Sdk.IncidentSearchQuery, Camunda.Orchestration.Sdk.ConsistencyOptions(Of Camunda.Orchestration.Sdk.IncidentSearchQueryResult), System.Threading.CancellationToken)
-  nameWithType: CamundaClient.SearchElementInstanceIncidentsAsync(ElementInstanceKey, IncidentSearchQuery, ConsistencyOptions<IncidentSearchQueryResult>?, CancellationToken)
+  nameWithType: CamundaClient.SearchElementInstanceIncidentsAsync(ElementInstanceKey, IncidentSearchQuery?, ConsistencyOptions<IncidentSearchQueryResult>?, CancellationToken)
   nameWithType.vb: CamundaClient.SearchElementInstanceIncidentsAsync(ElementInstanceKey, IncidentSearchQuery, ConsistencyOptions(Of IncidentSearchQueryResult), CancellationToken)
 - uid: Camunda.Orchestration.Sdk.CamundaClient.SearchElementInstanceIncidentsAsync*
   name: SearchElementInstanceIncidentsAsync
