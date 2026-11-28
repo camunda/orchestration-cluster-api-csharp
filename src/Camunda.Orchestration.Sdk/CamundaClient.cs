@@ -111,6 +111,10 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
         if (!exempt)
             await _bp.AcquireAsync(ct);
 
+        // Job commands are not idempotent: retry them only when the server says the command
+        // was not applied (429/503, or a pre-send connection failure). See #579.
+        var isJobCommand = HttpRetryExecutor.JobCommandOperationIds.Contains(operationId);
+
         try
         {
             var result = await HttpRetryExecutor.ExecuteWithRetryAsync(
@@ -121,7 +125,9 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
                 _randomSource,
                 ex =>
                 {
-                    var decision = HttpRetryExecutor.DefaultClassify(ex);
+                    var decision = isJobCommand
+                        ? HttpRetryExecutor.ClassifyJobCommand(ex)
+                        : HttpRetryExecutor.DefaultClassify(ex);
                     // Record every backpressure response exactly once, here in the
                     // classifier. The executor invokes this callback for every failed
                     // attempt — including the final one, before it checks the attempt

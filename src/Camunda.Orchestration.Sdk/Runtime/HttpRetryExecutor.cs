@@ -84,6 +84,61 @@ internal static class HttpRetryExecutor
 
         return new RetryDecision(false, ex.GetType().Name);
     }
+
+    /// <summary>
+    /// Operation ids of the job commands. They are not idempotent: a retry of a command that
+    /// was applied but whose response was lost gets 404. They are therefore retried only when
+    /// the server says the command was not applied (#579).
+    /// </summary>
+    internal static readonly IReadOnlySet<string> JobCommandOperationIds =
+        new HashSet<string>(StringComparer.Ordinal) { "completeJob", "failJob", "throwJobError" };
+
+    /// <summary>
+    /// Retry policy for job commands: retry only on 429, 503, or a connection failure before
+    /// the request was sent (connect refused, DNS, TLS handshake). Never on 500/502/504,
+    /// a client timeout, or a connection reset after sending: those leave the outcome unknown.
+    /// </summary>
+    public static RetryDecision ClassifyJobCommand(Exception ex)
+    {
+        if (IsNotApplied(ex))
+        {
+            var status = ex switch
+            {
+                HttpSdkException s => s.Status,
+                HttpRequestException h => (int?)h.StatusCode,
+                _ => null,
+            };
+            return new RetryDecision(true, status is { } code ? $"http-{code}" : "connect-failed");
+        }
+        return new RetryDecision(false, ex is HttpSdkException se ? $"http-{se.Status}" : ex.GetType().Name);
+    }
+
+    /// <summary>
+    /// Whether the failure proves the command was not applied: HTTP 429/503, or a connection
+    /// failure before the request was sent.
+    /// </summary>
+    internal static bool IsNotApplied(Exception ex) => ex switch
+    {
+        HttpSdkException s => s.Status is 429 or 503,
+        HttpRequestException { StatusCode: { } code } => code is HttpStatusCode.TooManyRequests or HttpStatusCode.ServiceUnavailable,
+        HttpRequestException h => h.HttpRequestError is HttpRequestError.ConnectionError
+            or HttpRequestError.NameResolutionError
+            or HttpRequestError.SecureConnectionError,
+        _ => false,
+    };
+
+    /// <summary>
+    /// Whether a failed job command has an unknown outcome (it may have been applied):
+    /// a 5xx other than 503, a client timeout, or a transport failure after the request was sent.
+    /// </summary>
+    internal static bool IsOutcomeUnknown(Exception ex) => ex switch
+    {
+        HttpSdkException s => s.Status is >= 500 and not 503,
+        HttpRequestException { StatusCode: { } code } => (int)code >= 500 && code != HttpStatusCode.ServiceUnavailable,
+        HttpRequestException => !IsNotApplied(ex),
+        OperationCanceledException => true,
+        _ => false,
+    };
 }
 
 public readonly record struct RetryDecision(bool Retryable, string Reason);
