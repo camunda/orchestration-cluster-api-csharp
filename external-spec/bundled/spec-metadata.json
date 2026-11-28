@@ -1,10 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-<<<<<<< HEAD
   "specHash": "sha256:c2753ae1170cba99ba724796cdd1636d678e89d78c7cbbaf98fe1b9f95e448bb",
-=======
-  "specHash": "sha256:a6633f08edb59cae9ee42085e0dd5d933876850f6a4a87f3bdfa66f7dbaf4f1c",
->>>>>>> 916029746 (fix: retry job commands only when not applied (429/503) (#580))
   "semanticKeys": [
     {
       "name": "AgentDefinitionKey",

@@ -97,14 +97,15 @@ public class JobCommandRetryTests
     }
 
     [Fact]
-    public async Task Other_operations_keep_retrying_500()
+    public void Other_operations_keep_retrying_500()
     {
-        var handler = new StubHandler(_ => Status(500));
-        using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
+        // stable/10: non-job operations keep the default classifier, which retries a 500
+        // surfaced as HttpRequestException; only job commands use the stricter rule.
+        var ex = new HttpRequestException("boom", null, HttpStatusCode.InternalServerError);
 
-        await Assert.ThrowsAnyAsync<Exception>(() => client.GetTopologyAsync());
-
-        Assert.Equal(3, handler.Count("/v2/topology"));
+        Assert.True(HttpRetryExecutor.DefaultClassify(ex).Retryable);
+        Assert.False(HttpRetryExecutor.ClassifyJobCommand(ex).Retryable);
+        Assert.DoesNotContain("getTopology", HttpRetryExecutor.JobCommandOperationIds);
     }
 
     [Theory]

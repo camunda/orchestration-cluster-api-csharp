@@ -125,21 +125,10 @@ public partial class CamundaClient : IDisposable, IEngineClockTarget
                 _randomSource,
                 ex =>
                 {
-<<<<<<< HEAD
-                    var decision = HttpRetryExecutor.DefaultClassify(ex);
-                    if (decision.Retryable && decision.Reason.Contains("429"))
-=======
                     var decision = isJobCommand
                         ? HttpRetryExecutor.ClassifyJobCommand(ex)
                         : HttpRetryExecutor.DefaultClassify(ex);
-                    // Record every backpressure response exactly once, here in the
-                    // classifier. The executor invokes this callback for every failed
-                    // attempt — including the final one, before it checks the attempt
-                    // budget and rethrows — so recording here (and nowhere else) feeds
-                    // the manager exactly one signal per HTTP response, even when
-                    // MaxAttempts = 1.
-                    if (IsBackpressureSignal(ex))
->>>>>>> 916029746 (fix: retry job commands only when not applied (429/503) (#580))
+                    if (decision.Retryable && decision.Reason.Contains("429"))
                         _bp.RecordBackpressure();
                     return decision;
                 },
