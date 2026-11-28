@@ -8704,7 +8704,7 @@ public partial class CamundaClient
     /// }
     /// </code>
     /// </example>
-    public async Task<IncidentSearchQueryResult> SearchElementInstanceIncidentsAsync(ElementInstanceKey elementInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
+    public async Task<IncidentSearchQueryResult> SearchElementInstanceIncidentsAsync(ElementInstanceKey elementInstanceKey, IncidentSearchQuery? body = null, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
     {
         var path = $"/element-instances/{Uri.EscapeDataString(FormatParam(elementInstanceKey))}/incidents/search";
         if (consistency != null && consistency.WaitUpToMs > 0)
