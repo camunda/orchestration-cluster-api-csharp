@@ -1,3 +1,10 @@
+# [11.0.0-alpha.19](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.18...v11.0.0-alpha.19) (2026-11-28)
+
+
+### Bug Fixes
+
+* retry job commands only when not applied (429/503) ([#580](https://github.com/camunda/orchestration-cluster-api-csharp/issues/580)) ([9160297](https://github.com/camunda/orchestration-cluster-api-csharp/commit/91602974639cd13b355bdf2b189adb1a262fc28c)), closes [#579](https://github.com/camunda/orchestration-cluster-api-csharp/issues/579) [#579](https://github.com/camunda/orchestration-cluster-api-csharp/issues/579)
+
 # [11.0.0-alpha.18](https://github.com/camunda/orchestration-cluster-api-csharp/compare/v11.0.0-alpha.17...v11.0.0-alpha.18) (2026-11-25)
 
 
