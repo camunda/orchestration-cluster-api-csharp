@@ -664,6 +664,15 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 // Outcome unknown or job not found: never follow up with failJob (#579).
                 return;
             }
+            catch (Exception ex) when (!(ex is OperationCanceledException && ct.IsCancellationRequested))
+            {
+                // The handler succeeded; only reporting it failed (e.g. retries exhausted on
+                // 429/503). Never follow up with failJob, which would burn a retry for work that
+                // succeeded: the job times out and is re-activated instead (#579).
+                _logger.LogWarning(ex, "JobWorker '{Name}': failed to complete job {JobKey}; it will be re-activated after its timeout",
+                    _name, job.JobKey);
+                return;
+            }
 
             if (_logger.IsEnabled(LogLevel.Debug))
                 _logger.LogDebug("JobWorker '{Name}': completed job {JobKey}", _name, job.JobKey);

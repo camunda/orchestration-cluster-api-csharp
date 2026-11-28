@@ -132,6 +132,48 @@ public class JobCommandRetryTests
         Assert.Equal(0, handler.Count("/v2/jobs/222/failure"));
     }
 
+    [Theory]
+    [InlineData("completion")]
+    [InlineData("failure")]
+    [InlineData("error")]
+    public async Task Job_command_500_resource_exhausted_is_retried(string command)
+    {
+        var handler = new StubHandler(_ => new HttpResponseMessage(HttpStatusCode.InternalServerError)
+        {
+            Content = new StringContent(
+                """{"type":"about:blank","title":"x","status":500,"detail":"RESOURCE_EXHAUSTED: busy"}""",
+                Encoding.UTF8, "application/problem+json"),
+        });
+        using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
+
+        var ex = await Assert.ThrowsAnyAsync<Exception>(() => Invoke(client, command));
+
+        Assert.Equal(3, handler.Count($"/v2/jobs/1/{command}"));
+        Assert.False(HttpRetryExecutor.IsOutcomeUnknown(ex));
+    }
+
+    [Theory]
+    [InlineData(429)]
+    [InlineData(503)]
+    public async Task Worker_does_not_fail_job_when_completion_retries_exhausted(int status)
+    {
+        var handler = new StubHandler(path => path.EndsWith("/completion", StringComparison.Ordinal)
+            ? Status(status)
+            : new HttpResponseMessage(HttpStatusCode.NoContent));
+        using var client = new CamundaClient(new CamundaOptions { Config = Config(), HttpMessageHandler = handler });
+
+        await using var worker = client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "t", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false },
+            (_, _) => Task.FromResult<object?>(null));
+        worker.Start();
+
+        // Safety-net deadline, not a correctness signal.
+        await WaitUntilAsync(() => handler.Count("/v2/jobs/222/completion") == 3 && worker.ActiveJobs == 0);
+        await worker.StopAsync(TimeSpan.FromSeconds(1));
+
+        Assert.Equal(0, handler.Count("/v2/jobs/222/failure"));
+    }
+
     [Fact]
     public async Task Worker_retries_completion_on_503()
     {
