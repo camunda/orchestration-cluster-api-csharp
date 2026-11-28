@@ -10,5 +10,9 @@ public partial class CamundaClient
     /// <summary>
     /// SHA-256 digest of the OpenAPI spec this SDK was generated from.
     /// </summary>
+<<<<<<< HEAD
     public const string SpecHash = "sha256:c2753ae1170cba99ba724796cdd1636d678e89d78c7cbbaf98fe1b9f95e448bb";
+=======
+    public const string SpecHash = "sha256:a6633f08edb59cae9ee42085e0dd5d933876850f6a4a87f3bdfa66f7dbaf4f1c";
+>>>>>>> 916029746 (fix: retry job commands only when not applied (429/503) (#580))
 }
