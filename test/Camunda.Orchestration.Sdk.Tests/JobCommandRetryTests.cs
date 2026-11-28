@@ -112,6 +112,7 @@ public class JobCommandRetryTests
     [InlineData(502)]
     [InlineData(504)]
     [InlineData(404)]
+    [InlineData(409)]
     public async Task Worker_does_not_fail_job_after_unknown_outcome_or_not_found(int status)
     {
         var handler = new StubHandler(path => path.EndsWith("/completion", StringComparison.Ordinal)

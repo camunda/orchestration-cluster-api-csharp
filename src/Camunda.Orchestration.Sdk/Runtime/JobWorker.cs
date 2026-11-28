@@ -675,6 +675,14 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                     _name, job.JobKey);
                 return;
             }
+            catch (Exception ex) when (!(ex is OperationCanceledException && ct.IsCancellationRequested))
+            {
+                // Permanent completion failure (e.g. HTTP 400, serialization error): the handler
+                // succeeded but the result cannot be reported, so fail the job with a clear log.
+                _logger.LogError(ex, "JobWorker '{Name}': failed to complete job {JobKey}; failing it", _name, job.JobKey);
+                await SafeFailAsync(job, ex.Message, Math.Max(0, job.Retries - 1), null);
+                return;
+            }
 
             if (_logger.IsEnabled(LogLevel.Debug))
                 _logger.LogDebug("JobWorker '{Name}': completed job {JobKey}", _name, job.JobKey);
@@ -751,16 +759,17 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
 
     /// <summary>
     /// Handles the two job-command failures that must not trigger a follow-up command (#579):
-    /// 404 (job already completed, failed or timed out) and an unknown outcome (500/502/504,
+    /// 404/409 (job already completed, failed, timed out or taken over) and an unknown outcome (500/502/504,
     /// client timeout, connection lost after sending). Logs a warning without a stack trace and
     /// returns true; returns false for any other failure.
     /// </summary>
     private bool TryLogUnappliedJobCommand(Exception ex, ActivatedJob job, string command)
     {
-        if (ex is HttpSdkException { Status: 404 } or HttpRequestException { StatusCode: HttpStatusCode.NotFound })
+        if (ex is HttpSdkException { Status: 404 or 409 }
+            or HttpRequestException { StatusCode: HttpStatusCode.NotFound or HttpStatusCode.Conflict })
         {
             _logger.LogWarning(
-                "JobWorker '{Name}': {Command} for job {JobKey}: job not found (already completed, failed or timed out)",
+                "JobWorker '{Name}': {Command} for job {JobKey}: job not found or not in an activatable state (already completed, failed, timed out or taken over)",
                 _name, command, job.JobKey);
             return true;
         }
