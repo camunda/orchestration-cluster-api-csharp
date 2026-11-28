@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 
@@ -654,7 +655,34 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 };
             }
 
-            await _client.CompleteJobAsync(job.JobKey, completionRequest, ct: ct).ConfigureAwait(false);
+            try
+            {
+                await _client.CompleteJobAsync(job.JobKey, completionRequest, ct: ct).ConfigureAwait(false);
+            }
+            catch (Exception ex) when (!(ex is OperationCanceledException && ct.IsCancellationRequested)
+                && TryLogUnappliedJobCommand(ex, job, "complete"))
+            {
+                // Outcome unknown or job not found: never follow up with failJob (#579).
+                return;
+            }
+            catch (Exception ex) when (HttpRetryExecutor.IsNotApplied(ex))
+            {
+                // The handler succeeded; only reporting it failed (retries exhausted on 429/503,
+                // or a connection failure before sending). Any other failure (e.g. HTTP 400 or a
+                // serialization error) is permanent and falls through to the auto-fail path. Never follow up with failJob, which would burn a retry for work that
+                // succeeded: the job times out and is re-activated instead (#579).
+                _logger.LogWarning(ex, "JobWorker '{Name}': failed to complete job {JobKey}; it will be re-activated after its timeout",
+                    _name, job.JobKey);
+                return;
+            }
+            catch (Exception ex) when (!(ex is OperationCanceledException && ct.IsCancellationRequested))
+            {
+                // Permanent completion failure (e.g. HTTP 400, serialization error): the handler
+                // succeeded but the result cannot be reported, so fail the job with a clear log.
+                _logger.LogError(ex, "JobWorker '{Name}': failed to complete job {JobKey}; failing it", _name, job.JobKey);
+                await SafeFailAsync(job, ex.Message, Math.Max(0, job.Retries - 1), null);
+                return;
+            }
 
             if (_logger.IsEnabled(LogLevel.Debug))
                 _logger.LogDebug("JobWorker '{Name}': completed job {JobKey}", _name, job.JobKey);
@@ -697,6 +725,9 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 JobLeaseToken = job.JobLeaseToken,
             }, ct: CancellationToken.None).ConfigureAwait(false);
         }
+        catch (Exception ex) when (TryLogUnappliedJobCommand(ex, job, "fail"))
+        {
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "JobWorker '{Name}': failed to report job failure for {JobKey}",
@@ -716,11 +747,42 @@ public sealed class JobWorker : IAsyncDisposable, IDisposable
                 JobLeaseToken = job.JobLeaseToken,
             }, ct: CancellationToken.None).ConfigureAwait(false);
         }
+        catch (Exception ex) when (TryLogUnappliedJobCommand(ex, job, "throwError"))
+        {
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "JobWorker '{Name}': failed to throw BPMN error for {JobKey}",
                 _name, job.JobKey);
         }
+    }
+
+    /// <summary>
+    /// Handles the two job-command failures that must not trigger a follow-up command (#579):
+    /// 404/409 (job already completed, failed, timed out or taken over) and an unknown outcome (500/502/504,
+    /// client timeout, connection lost after sending). Logs a warning without a stack trace and
+    /// returns true; returns false for any other failure.
+    /// </summary>
+    private bool TryLogUnappliedJobCommand(Exception ex, ActivatedJob job, string command)
+    {
+        if (ex is HttpSdkException { Status: 404 or 409 }
+            or HttpRequestException { StatusCode: HttpStatusCode.NotFound or HttpStatusCode.Conflict })
+        {
+            _logger.LogWarning(
+                "JobWorker '{Name}': {Command} for job {JobKey}: job not found or not in an activatable state (already completed, failed, timed out or taken over)",
+                _name, command, job.JobKey);
+            return true;
+        }
+
+        if (HttpRetryExecutor.IsOutcomeUnknown(ex))
+        {
+            _logger.LogWarning(
+                "JobWorker '{Name}': {Command} for job {JobKey}: outcome unknown ({Reason}); the job may have completed, otherwise it will time out and be re-activated",
+                _name, command, job.JobKey, ex is HttpSdkException s ? $"HTTP {s.Status}" : ex.GetType().Name);
+            return true;
+        }
+
+        return false;
     }
 
     private static List<TenantId>? ResolveTenantIds(JobWorkerConfig config)
