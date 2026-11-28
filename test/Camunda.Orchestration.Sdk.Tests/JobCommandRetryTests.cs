@@ -300,6 +300,148 @@ public class JobCommandRetryTests
         Assert.Equal(1, withContent);
     }
 
+    public static IEnumerable<object[]> WorkerCommandOutcomes()
+    {
+        foreach (var command in new[] { "completion", "failure", "error" })
+        {
+            foreach (var status in new[] { 404, 409, 500, 502, 504 })
+                yield return new object[] { command, status.ToString(System.Globalization.CultureInfo.InvariantCulture) };
+            foreach (var kind in new[] { "timeout", "response-ended", "unknown" })
+                yield return new object[] { command, kind };
+        }
+    }
+
+    [Theory]
+    [MemberData(nameof(WorkerCommandOutcomes))]
+    public async Task Worker_logs_unapplied_command_as_warning_without_exception(string command, string outcome)
+    {
+        // Every worker command (complete, fail, throwError) must log 404/409 and unknown outcomes
+        // as a warning without a stack trace, never as an error.
+        var handler = new StubHandler(path => !path.EndsWith($"/{command}", StringComparison.Ordinal)
+            ? new HttpResponseMessage(HttpStatusCode.NoContent)
+            : int.TryParse(outcome, out var status) ? Status(status) : throw TransportFailure(outcome));
+        var logs = new LogCapture();
+        using var client = new CamundaClient(new CamundaOptions
+        {
+            Config = Config(),
+            HttpMessageHandler = handler,
+            LoggerFactory = logs,
+        });
+
+        await using var worker = client.CreateJobWorker(
+            new JobWorkerConfig { JobType = "t", JobTimeoutMs = 30_000, MaxConcurrentJobs = 1, AutoStart = false },
+            (_, _) => command switch
+            {
+                "completion" => Task.FromResult<object?>(null),
+                "failure" => throw new JobFailureException("boom", 1),
+                _ => throw new BpmnErrorException("E"),
+            });
+        worker.Start();
+
+        // Safety-net deadline, not a correctness signal.
+        await WaitUntilAsync(() => handler.Count($"/v2/jobs/222/{command}") == 1 && worker.ActiveJobs == 0);
+        await worker.StopAsync(TimeSpan.FromSeconds(1));
+
+        var workerLogs = logs.Entries.Where(e => e.Category.Contains("JobWorker", StringComparison.Ordinal)).ToList();
+        Assert.Contains(workerLogs, e => e.Level == Microsoft.Extensions.Logging.LogLevel.Warning && e.Exception is null);
+        Assert.DoesNotContain(workerLogs, e => e.Level >= Microsoft.Extensions.Logging.LogLevel.Warning && e.Exception is not null);
+        Assert.DoesNotContain(workerLogs, e => e.Level >= Microsoft.Extensions.Logging.LogLevel.Error);
+    }
+
+    [Theory]
+    [InlineData("completion")]
+    [InlineData("failure")]
+    public async Task Body_less_job_command_is_not_resent_after_lost_response(string command)
+    {
+        // Real SocketsHttpHandler over loopback: a request on a reused connection that loses its
+        // response may be transparently resent. Job commands must reach the server exactly once.
+        using var listener = new System.Net.Sockets.TcpListener(IPAddress.Loopback, 0);
+        listener.Start();
+        var port = ((IPEndPoint)listener.LocalEndpoint).Port;
+        var commandRequests = 0;
+        using var serverCts = new CancellationTokenSource();
+        var server = Task.Run(async () =>
+        {
+            while (!serverCts.IsCancellationRequested)
+            {
+                System.Net.Sockets.TcpClient conn;
+                try
+                { conn = await listener.AcceptTcpClientAsync(serverCts.Token); }
+                catch (OperationCanceledException) { return; }
+                catch (System.Net.Sockets.SocketException) { return; }
+                _ = Task.Run(async () =>
+                {
+                    using (conn)
+                    {
+                        var stream = conn.GetStream();
+                        while (await ReadRequestAsync(stream) is { } path)
+                        {
+                            if (path.StartsWith("/v2/jobs/", StringComparison.Ordinal))
+                            {
+                                Interlocked.Increment(ref commandRequests);
+                                return; // Drop the connection without a response.
+                            }
+                            var ok = Encoding.ASCII.GetBytes(
+                                "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 2\r\n\r\n{}");
+                            await stream.WriteAsync(ok);
+                        }
+                    }
+                });
+            }
+        });
+
+        var config = Config();
+        config["CAMUNDA_REST_ADDRESS"] = $"http://127.0.0.1:{port}";
+        using var client = new CamundaClient(new CamundaOptions { Config = config });
+        try
+        {
+            // Establish a reusable keep-alive connection first.
+            try
+            { await client.GetTopologyAsync(); }
+            catch (Exception) { /* response shape is irrelevant */ }
+
+            await Assert.ThrowsAnyAsync<Exception>(() => command == "completion"
+                ? client.CompleteJobAsync(JobKey.AssumeExists("1"))
+                : client.FailJobAsync(JobKey.AssumeExists("1")));
+
+            Assert.Equal(1, Volatile.Read(ref commandRequests));
+        }
+        finally
+        {
+            serverCts.Cancel();
+            listener.Stop();
+            await server;
+        }
+    }
+
+    /// <summary>Reads one HTTP/1.1 request (headers + Content-Length body); returns its path, or null at EOF.</summary>
+    private static async Task<string?> ReadRequestAsync(Stream stream)
+    {
+        var header = new List<byte>();
+        var one = new byte[1];
+        while (header.Count < 4 || header[^4] != '\r' || header[^3] != '\n' || header[^2] != '\r' || header[^1] != '\n')
+        {
+            if (await stream.ReadAsync(one) == 0)
+                return null;
+            header.Add(one[0]);
+        }
+        var lines = Encoding.ASCII.GetString(header.ToArray()).Split("\r\n");
+        var length = lines
+            .Where(l => l.StartsWith("Content-Length:", StringComparison.OrdinalIgnoreCase))
+            .Select(l => int.Parse(l["Content-Length:".Length..].Trim(), System.Globalization.CultureInfo.InvariantCulture))
+            .FirstOrDefault();
+        var body = new byte[length];
+        var read = 0;
+        while (read < length)
+        {
+            var n = await stream.ReadAsync(body.AsMemory(read));
+            if (n == 0)
+                return null;
+            read += n;
+        }
+        return lines[0].Split(' ')[1];
+    }
+
     [Theory]
     [InlineData("POST", "/jobs/1/completion", true)]
     [InlineData("POST", "/jobs/1/failure", true)]
@@ -338,6 +480,30 @@ public class JobCommandRetryTests
          "processDefinitionKey":"345678","elementInstanceKey":"901234","kind":"BPMN_ELEMENT",
          "listenerEventType":"UNSPECIFIED"}
         """;
+
+    private sealed class LogCapture : Microsoft.Extensions.Logging.ILoggerFactory
+    {
+        private readonly ConcurrentQueue<(string Category, Microsoft.Extensions.Logging.LogLevel Level, Exception? Exception)> _entries = new();
+
+        public IReadOnlyList<(string Category, Microsoft.Extensions.Logging.LogLevel Level, Exception? Exception)> Entries => _entries.ToList();
+
+        public Microsoft.Extensions.Logging.ILogger CreateLogger(string categoryName) => new Logger(categoryName, _entries);
+
+        public void AddProvider(Microsoft.Extensions.Logging.ILoggerProvider provider) { }
+
+        public void Dispose() { }
+
+        private sealed class Logger(string category, ConcurrentQueue<(string, Microsoft.Extensions.Logging.LogLevel, Exception?)> sink) : Microsoft.Extensions.Logging.ILogger
+        {
+            public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+
+            public bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel) => true;
+
+            public void Log<TState>(Microsoft.Extensions.Logging.LogLevel logLevel, Microsoft.Extensions.Logging.EventId eventId,
+                TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+                => sink.Enqueue((category, logLevel, exception));
+        }
+    }
 
     private sealed class StubHandler(Func<string, HttpResponseMessage> respond, Action<HttpRequestMessage>? inspect = null) : HttpMessageHandler
     {
